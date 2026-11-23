@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/consulta/lancamento/conta-pcasp/documentos",
+  "json": {
+    "error": true,
+    "message": "Invalid argument supplied for foreach()"
+  },
+  "sha256": "87d84c1dede4a31eb9c355219c17b02051ba50f6efd0d689597ef9d003180dc6",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

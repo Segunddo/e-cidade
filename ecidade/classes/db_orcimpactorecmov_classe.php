@@ -83,18 +83,18 @@ class cl_orcimpactorecmov {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o69_sequen = ($this->o69_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_sequen"]:$this->o69_sequen);
-       $this->o69_exercicio = ($this->o69_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_exercicio"]:$this->o69_exercicio);
-       $this->o69_codfon = ($this->o69_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_codfon"]:$this->o69_codfon);
-       $this->o69_codperiodo = ($this->o69_codperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_codperiodo"]:$this->o69_codperiodo);
-       $this->o69_valor = ($this->o69_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_valor"]:$this->o69_valor);
+       $this->o69_sequen = ($this->o69_sequen === 0 || $this->o69_sequen === 0.0 || $this->o69_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_sequen"]:$this->o69_sequen);
+       $this->o69_exercicio = ($this->o69_exercicio === 0 || $this->o69_exercicio === 0.0 || $this->o69_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_exercicio"]:$this->o69_exercicio);
+       $this->o69_codfon = ($this->o69_codfon === 0 || $this->o69_codfon === 0.0 || $this->o69_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_codfon"]:$this->o69_codfon);
+       $this->o69_codperiodo = ($this->o69_codperiodo === 0 || $this->o69_codperiodo === 0.0 || $this->o69_codperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_codperiodo"]:$this->o69_codperiodo);
+       $this->o69_valor = ($this->o69_valor === 0 || $this->o69_valor === 0.0 || $this->o69_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_valor"]:$this->o69_valor);
        $this->o69_obs = ($this->o69_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_obs"]:$this->o69_obs);
-       $this->o69_proces = ($this->o69_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_proces"]:$this->o69_proces);
-       $this->o69_perc = ($this->o69_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_perc"]:$this->o69_perc);
-       $this->o69_codigo = ($this->o69_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_codigo"]:$this->o69_codigo);
-       $this->o69_codimpger = ($this->o69_codimpger == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_codimpger"]:$this->o69_codimpger);
+       $this->o69_proces = ($this->o69_proces === 0 || $this->o69_proces === 0.0 || $this->o69_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_proces"]:$this->o69_proces);
+       $this->o69_perc = ($this->o69_perc === 0 || $this->o69_perc === 0.0 || $this->o69_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_perc"]:$this->o69_perc);
+       $this->o69_codigo = ($this->o69_codigo === 0 || $this->o69_codigo === 0.0 || $this->o69_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_codigo"]:$this->o69_codigo);
+       $this->o69_codimpger = ($this->o69_codimpger === 0 || $this->o69_codimpger === 0.0 || $this->o69_codimpger == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_codimpger"]:$this->o69_codimpger);
      }else{
-       $this->o69_sequen = ($this->o69_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_sequen"]:$this->o69_sequen);
+       $this->o69_sequen = ($this->o69_sequen === 0 || $this->o69_sequen === 0.0 || $this->o69_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o69_sequen"]:$this->o69_sequen);
      }
    }
    // funcao para inclusao
@@ -196,7 +196,7 @@ class cl_orcimpactorecmov {
          $this->o69_sequen = $o69_sequen;
        }
      }
-     if(($this->o69_sequen == null) || ($this->o69_sequen == "") ){
+     if(($this->o69_sequen == null) || ($this->o69_sequen === 0 || $this->o69_sequen === 0.0 || $this->o69_sequen == "") ){
        $this->erro_sql = " Campo o69_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

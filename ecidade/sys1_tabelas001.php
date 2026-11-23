@@ -103,7 +103,7 @@ if(isset($HTTP_POST_VARS["incluir"])) {
   db_query("END");
   db_redireciona();
 }
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(isset($retorno)) {
   $sql = "select m.codmod,a.codarq,a.nomearq,a.descricao,a.sigla,a.rotulo,aq.codarqpai,a.naolibclass,a.naolibfunc,a.naolibprog,a.naolibform,
           to_char(a.dataincl,'DD') as dataincl_dia,to_char(a.dataincl,'MM') as dataincl_mes,to_char(a.dataincl,'YYYY') as dataincl_ano, a.tipotabela

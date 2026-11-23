@@ -32,7 +32,7 @@ class bver_ant
     protected $arq = null;
     protected $header;
 
-    public function bver_ant($header)
+    public function __construct($header)
     {
 
         $this->header = $header;

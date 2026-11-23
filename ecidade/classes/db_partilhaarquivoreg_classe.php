@@ -69,11 +69,11 @@ class cl_partilhaarquivoreg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v79_sequencial = ($this->v79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_sequencial"]:$this->v79_sequencial);
-       $this->v79_partilhaarquivo = ($this->v79_partilhaarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_partilhaarquivo"]:$this->v79_partilhaarquivo);
-       $this->v79_processoforopartilhacusta = ($this->v79_processoforopartilhacusta == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_processoforopartilhacusta"]:$this->v79_processoforopartilhacusta);
+       $this->v79_sequencial = ($this->v79_sequencial === 0 || $this->v79_sequencial === 0.0 || $this->v79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_sequencial"]:$this->v79_sequencial);
+       $this->v79_partilhaarquivo = ($this->v79_partilhaarquivo === 0 || $this->v79_partilhaarquivo === 0.0 || $this->v79_partilhaarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_partilhaarquivo"]:$this->v79_partilhaarquivo);
+       $this->v79_processoforopartilhacusta = ($this->v79_processoforopartilhacusta === 0 || $this->v79_processoforopartilhacusta === 0.0 || $this->v79_processoforopartilhacusta == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_processoforopartilhacusta"]:$this->v79_processoforopartilhacusta);
      }else{
-       $this->v79_sequencial = ($this->v79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_sequencial"]:$this->v79_sequencial);
+       $this->v79_sequencial = ($this->v79_sequencial === 0 || $this->v79_sequencial === 0.0 || $this->v79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v79_sequencial"]:$this->v79_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_partilhaarquivoreg {
          $this->v79_sequencial = $v79_sequencial;
        }
      }
-     if(($this->v79_sequencial == null) || ($this->v79_sequencial == "") ){
+     if(($this->v79_sequencial == null) || ($this->v79_sequencial === 0 || $this->v79_sequencial === 0.0 || $this->v79_sequencial == "") ){
        $this->erro_sql = " Campo v79_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

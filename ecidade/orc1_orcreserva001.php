@@ -43,13 +43,13 @@ $db_botao = true;
 
 //===
     $dtlan="";  $dtini=""; $dtfim="";
-    if (@checkdate($o80_dtlanc_mes,$o80_dtlanc_dia,$o80_dtlanc_ano)) {
+    if (@checkdate((int)$o80_dtlanc_mes,(int)$o80_dtlanc_dia,(int)$o80_dtlanc_ano)) {
         $dtlan="$o80_dtlanc_ano-$o80_dtlanc_mes-$o80_dtlanc_dia";
     }
-    if (@checkdate($o80_dtini_mes,$o80_dtini_dia,$o80_dtini_ano)) {
+    if (@checkdate((int)$o80_dtini_mes,(int)$o80_dtini_dia,(int)$o80_dtini_ano)) {
         $dtini="$o80_dtini_ano-$o80_dtini_mes-$o80_dtini_dia";
     }
-    if (@checkdate($o80_dtfim_mes,$o80_dtfim_dia,$o80_dtfim_ano)) {
+    if (@checkdate((int)$o80_dtfim_mes,(int)$o80_dtfim_dia,(int)$o80_dtfim_ano)) {
         $dtfim="$o80_dtfim_ano-$o80_dtfim_mes-$o80_dtfim_dia";
     }
      $dtatual= date("Y-m-d",db_getsession("DB_datausu"));

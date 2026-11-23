@@ -73,13 +73,13 @@ class cl_cronogramametadespesa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o131_sequencial = ($this->o131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_sequencial"]:$this->o131_sequencial);
-       $this->o131_cronogramaperspectivadespesa = ($this->o131_cronogramaperspectivadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_cronogramaperspectivadespesa"]:$this->o131_cronogramaperspectivadespesa);
-       $this->o131_mes = ($this->o131_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_mes"]:$this->o131_mes);
-       $this->o131_percentual = ($this->o131_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_percentual"]:$this->o131_percentual);
-       $this->o131_valor = ($this->o131_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_valor"]:$this->o131_valor);
+       $this->o131_sequencial = ($this->o131_sequencial === 0 || $this->o131_sequencial === 0.0 || $this->o131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_sequencial"]:$this->o131_sequencial);
+       $this->o131_cronogramaperspectivadespesa = ($this->o131_cronogramaperspectivadespesa === 0 || $this->o131_cronogramaperspectivadespesa === 0.0 || $this->o131_cronogramaperspectivadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_cronogramaperspectivadespesa"]:$this->o131_cronogramaperspectivadespesa);
+       $this->o131_mes = ($this->o131_mes === 0 || $this->o131_mes === 0.0 || $this->o131_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_mes"]:$this->o131_mes);
+       $this->o131_percentual = ($this->o131_percentual === 0 || $this->o131_percentual === 0.0 || $this->o131_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_percentual"]:$this->o131_percentual);
+       $this->o131_valor = ($this->o131_valor === 0 || $this->o131_valor === 0.0 || $this->o131_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_valor"]:$this->o131_valor);
      }else{
-       $this->o131_sequencial = ($this->o131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_sequencial"]:$this->o131_sequencial);
+       $this->o131_sequencial = ($this->o131_sequencial === 0 || $this->o131_sequencial === 0.0 || $this->o131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o131_sequencial"]:$this->o131_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_cronogramametadespesa {
          $this->o131_sequencial = $o131_sequencial;
        }
      }
-     if(($this->o131_sequencial == null) || ($this->o131_sequencial == "") ){
+     if(($this->o131_sequencial == null) || ($this->o131_sequencial === 0 || $this->o131_sequencial === 0.0 || $this->o131_sequencial == "") ){
        $this->erro_sql = " Campo o131_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

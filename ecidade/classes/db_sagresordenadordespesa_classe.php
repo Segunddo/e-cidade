@@ -84,10 +84,10 @@ class cl_sagresordenadordespesa
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c139_sequencial = ($this->c139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_sequencial"]:$this->c139_sequencial);
-       $this->c139_instit = ($this->c139_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_instit"]:$this->c139_instit);
-       $this->c139_cgm = ($this->c139_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_cgm"]:$this->c139_cgm);
-       $this->c139_cgmsubstituto = ($this->c139_cgmsubstituto == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_cgmsubstituto"]:$this->c139_cgmsubstituto);
+       $this->c139_sequencial = ($this->c139_sequencial === 0 || $this->c139_sequencial === 0.0 || $this->c139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_sequencial"]:$this->c139_sequencial);
+       $this->c139_instit = ($this->c139_instit === 0 || $this->c139_instit === 0.0 || $this->c139_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_instit"]:$this->c139_instit);
+       $this->c139_cgm = ($this->c139_cgm === 0 || $this->c139_cgm === 0.0 || $this->c139_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_cgm"]:$this->c139_cgm);
+       $this->c139_cgmsubstituto = ($this->c139_cgmsubstituto === 0 || $this->c139_cgmsubstituto === 0.0 || $this->c139_cgmsubstituto == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_cgmsubstituto"]:$this->c139_cgmsubstituto);
        $this->c139_principal = ($this->c139_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["c139_principal"]:$this->c139_principal);
        $this->c139_substituto = ($this->c139_substituto == "f"?@$GLOBALS["HTTP_POST_VARS"]["c139_substituto"]:$this->c139_substituto);
        if($this->c139_datainicio == ""){
@@ -106,7 +106,7 @@ class cl_sagresordenadordespesa
             $this->c139_datafim = $this->c139_datafim_ano."-".$this->c139_datafim_mes."-".$this->c139_datafim_dia;
          }
        }
-       $this->c139_tipoatojuridico = ($this->c139_tipoatojuridico == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_tipoatojuridico"]:$this->c139_tipoatojuridico);
+       $this->c139_tipoatojuridico = ($this->c139_tipoatojuridico === 0 || $this->c139_tipoatojuridico === 0.0 || $this->c139_tipoatojuridico == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_tipoatojuridico"]:$this->c139_tipoatojuridico);
        $this->c139_titulo = ($this->c139_titulo == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_titulo"]:$this->c139_titulo);
        $this->c139_ativo = ($this->c139_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["c139_ativo"]:$this->c139_ativo);
        if($this->c139_datainatividade == ""){
@@ -117,7 +117,7 @@ class cl_sagresordenadordespesa
             $this->c139_datainatividade = $this->c139_datainatividade_ano."-".$this->c139_datainatividade_mes."-".$this->c139_datainatividade_dia;
          }
        }
-       $this->c139_idusuario = ($this->c139_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_idusuario"]:$this->c139_idusuario);
+       $this->c139_idusuario = ($this->c139_idusuario === 0 || $this->c139_idusuario === 0.0 || $this->c139_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_idusuario"]:$this->c139_idusuario);
        if($this->c139_datainiciosub == ""){
          $this->c139_datainiciosub_dia = ($this->c139_datainiciosub_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_datainiciosub_dia"]:$this->c139_datainiciosub_dia);
          $this->c139_datainiciosub_mes = ($this->c139_datainiciosub_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_datainiciosub_mes"]:$this->c139_datainiciosub_mes);
@@ -135,7 +135,7 @@ class cl_sagresordenadordespesa
          }
        }
      }else{
-       $this->c139_sequencial = ($this->c139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_sequencial"]:$this->c139_sequencial);
+       $this->c139_sequencial = ($this->c139_sequencial === 0 || $this->c139_sequencial === 0.0 || $this->c139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c139_sequencial"]:$this->c139_sequencial);
      }
    }
 
@@ -247,7 +247,7 @@ class cl_sagresordenadordespesa
          $this->c139_sequencial = $c139_sequencial; 
        }
      }
-     if(($this->c139_sequencial == null) || ($this->c139_sequencial == "") ){ 
+     if(($this->c139_sequencial == null) || ($this->c139_sequencial === 0 || $this->c139_sequencial === 0.0 || $this->c139_sequencial == "") ){ 
        $this->erro_sql = " Campo c139_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

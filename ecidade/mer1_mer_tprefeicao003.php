@@ -36,7 +36,7 @@ include(modification("classes/db_mer_cardapiotipo_classe.php"));
 include(modification("classes/db_mer_cardapiodia_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 require(modification("libs/db_libdicionario.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clmer_tprefeicao   = new cl_mer_tprefeicao;
 $clmer_cardapiotipo = new cl_mer_cardapiotipo;

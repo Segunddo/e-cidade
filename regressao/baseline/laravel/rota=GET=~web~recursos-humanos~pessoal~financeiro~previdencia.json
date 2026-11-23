@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/recursos-humanos/pessoal/financeiro/previdencia",
+  "json": null,
+  "sha256": "a7ae1982a4588ef5edbab93a03eb8bf721bdb920044cb43ad915ba2274c76ee4",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

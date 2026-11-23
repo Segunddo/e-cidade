@@ -89,9 +89,9 @@ class cl_procandam
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->p61_codandam = ($this->p61_codandam == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_codandam"] : $this->p61_codandam);
-            $this->p61_codproc = ($this->p61_codproc == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_codproc"] : $this->p61_codproc);
-            $this->p61_id_usuario = ($this->p61_id_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_id_usuario"] : $this->p61_id_usuario);
+            $this->p61_codandam = ($this->p61_codandam === 0 || $this->p61_codandam === 0.0 || $this->p61_codandam == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_codandam"] : $this->p61_codandam);
+            $this->p61_codproc = ($this->p61_codproc === 0 || $this->p61_codproc === 0.0 || $this->p61_codproc == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_codproc"] : $this->p61_codproc);
+            $this->p61_id_usuario = ($this->p61_id_usuario === 0 || $this->p61_id_usuario === 0.0 || $this->p61_id_usuario == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_id_usuario"] : $this->p61_id_usuario);
             if ($this->p61_dtandam == "") {
                 $this->p61_dtandam_dia = ($this->p61_dtandam_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_dtandam_dia"] : $this->p61_dtandam_dia);
                 $this->p61_dtandam_mes = ($this->p61_dtandam_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_dtandam_mes"] : $this->p61_dtandam_mes);
@@ -101,11 +101,11 @@ class cl_procandam
                 }
             }
             $this->p61_despacho = ($this->p61_despacho == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_despacho"] : $this->p61_despacho);
-            $this->p61_coddepto = ($this->p61_coddepto == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_coddepto"] : $this->p61_coddepto);
+            $this->p61_coddepto = ($this->p61_coddepto === 0 || $this->p61_coddepto === 0.0 || $this->p61_coddepto == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_coddepto"] : $this->p61_coddepto);
             $this->p61_publico = ($this->p61_publico == null ? @$GLOBALS["HTTP_POST_VARS"]["p61_publico"] : $this->p61_publico);
             $this->p61_hora = ($this->p61_hora == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_hora"] : $this->p61_hora);
         } else {
-            $this->p61_codandam = ($this->p61_codandam == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_codandam"] : $this->p61_codandam);
+            $this->p61_codandam = ($this->p61_codandam === 0 || $this->p61_codandam === 0.0 || $this->p61_codandam == "" ? @$GLOBALS["HTTP_POST_VARS"]["p61_codandam"] : $this->p61_codandam);
         }
     }
 
@@ -191,7 +191,7 @@ class cl_procandam
                 $this->p61_codandam = $p61_codandam;
             }
         }
-        if (($this->p61_codandam == null) || ($this->p61_codandam == "")) {
+        if (($this->p61_codandam == null) || ($this->p61_codandam === 0 || $this->p61_codandam === 0.0 || $this->p61_codandam == "")) {
             $this->erro_sql = " Campo p61_codandam nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

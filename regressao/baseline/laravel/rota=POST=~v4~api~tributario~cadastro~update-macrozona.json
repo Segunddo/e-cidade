@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/cadastro/update-macrozona",
+  "json": {
+    "errors": {
+      "localizacao": [
+        "O campo localizacao é obrigatório."
+      ],
+      "sequencial": [
+        "O campo sequencial é obrigatório."
+      ],
+      "sigla": [
+        "O campo sigla é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "e0155398d809c0c058842865f6e256bf2e139a8dec6b295337ae6765b6f0e4fb",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "auth-sem-token",
+  "json": {
+    "error": true,
+    "message": "Unauthenticated."
+  },
+  "sha256": "187e78ab88f469dc25eea7569defb0ffbae35971c672daf679a35de2814d8ad1",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

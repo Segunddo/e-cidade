@@ -101,12 +101,12 @@ class cl_agualeitura {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x21_codleitura = ($this->x21_codleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_codleitura"]:$this->x21_codleitura);
-       $this->x21_codhidrometro = ($this->x21_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_codhidrometro"]:$this->x21_codhidrometro);
-       $this->x21_exerc = ($this->x21_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_exerc"]:$this->x21_exerc);
-       $this->x21_mes = ($this->x21_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_mes"]:$this->x21_mes);
-       $this->x21_situacao = ($this->x21_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_situacao"]:$this->x21_situacao);
-       $this->x21_numcgm = ($this->x21_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_numcgm"]:$this->x21_numcgm);
+       $this->x21_codleitura = ($this->x21_codleitura === 0 || $this->x21_codleitura === 0.0 || $this->x21_codleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_codleitura"]:$this->x21_codleitura);
+       $this->x21_codhidrometro = ($this->x21_codhidrometro === 0 || $this->x21_codhidrometro === 0.0 || $this->x21_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_codhidrometro"]:$this->x21_codhidrometro);
+       $this->x21_exerc = ($this->x21_exerc === 0 || $this->x21_exerc === 0.0 || $this->x21_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_exerc"]:$this->x21_exerc);
+       $this->x21_mes = ($this->x21_mes === 0 || $this->x21_mes === 0.0 || $this->x21_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_mes"]:$this->x21_mes);
+       $this->x21_situacao = ($this->x21_situacao === 0 || $this->x21_situacao === 0.0 || $this->x21_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_situacao"]:$this->x21_situacao);
+       $this->x21_numcgm = ($this->x21_numcgm === 0 || $this->x21_numcgm === 0.0 || $this->x21_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_numcgm"]:$this->x21_numcgm);
        if($this->x21_dtleitura == ""){
          $this->x21_dtleitura_dia = ($this->x21_dtleitura_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_dtleitura_dia"]:$this->x21_dtleitura_dia);
          $this->x21_dtleitura_mes = ($this->x21_dtleitura_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_dtleitura_mes"]:$this->x21_dtleitura_mes);
@@ -115,7 +115,7 @@ class cl_agualeitura {
             $this->x21_dtleitura = $this->x21_dtleitura_ano."-".$this->x21_dtleitura_mes."-".$this->x21_dtleitura_dia;
          }
        }
-       $this->x21_usuario = ($this->x21_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_usuario"]:$this->x21_usuario);
+       $this->x21_usuario = ($this->x21_usuario === 0 || $this->x21_usuario === 0.0 || $this->x21_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_usuario"]:$this->x21_usuario);
        if($this->x21_dtinc == ""){
          $this->x21_dtinc_dia = ($this->x21_dtinc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_dtinc_dia"]:$this->x21_dtinc_dia);
          $this->x21_dtinc_mes = ($this->x21_dtinc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_dtinc_mes"]:$this->x21_dtinc_mes);
@@ -124,15 +124,15 @@ class cl_agualeitura {
             $this->x21_dtinc = $this->x21_dtinc_ano."-".$this->x21_dtinc_mes."-".$this->x21_dtinc_dia;
          }
        }
-       $this->x21_leitura = ($this->x21_leitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_leitura"]:$this->x21_leitura);
-       $this->x21_consumo = ($this->x21_consumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_consumo"]:$this->x21_consumo);
-       $this->x21_excesso = ($this->x21_excesso == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_excesso"]:$this->x21_excesso);
+       $this->x21_leitura = ($this->x21_leitura === 0 || $this->x21_leitura === 0.0 || $this->x21_leitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_leitura"]:$this->x21_leitura);
+       $this->x21_consumo = ($this->x21_consumo === 0 || $this->x21_consumo === 0.0 || $this->x21_consumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_consumo"]:$this->x21_consumo);
+       $this->x21_excesso = ($this->x21_excesso === 0 || $this->x21_excesso === 0.0 || $this->x21_excesso == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_excesso"]:$this->x21_excesso);
        $this->x21_virou = ($this->x21_virou == "f"?@$GLOBALS["HTTP_POST_VARS"]["x21_virou"]:$this->x21_virou);
-       $this->x21_tipo = ($this->x21_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_tipo"]:$this->x21_tipo);
-       $this->x21_status = ($this->x21_status == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_status"]:$this->x21_status);
-       $this->x21_saldo = ($this->x21_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_saldo"]:$this->x21_saldo);
+       $this->x21_tipo = ($this->x21_tipo === 0 || $this->x21_tipo === 0.0 || $this->x21_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_tipo"]:$this->x21_tipo);
+       $this->x21_status = ($this->x21_status === 0 || $this->x21_status === 0.0 || $this->x21_status == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_status"]:$this->x21_status);
+       $this->x21_saldo = ($this->x21_saldo === 0 || $this->x21_saldo === 0.0 || $this->x21_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_saldo"]:$this->x21_saldo);
      }else{
-       $this->x21_codleitura = ($this->x21_codleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_codleitura"]:$this->x21_codleitura);
+       $this->x21_codleitura = ($this->x21_codleitura === 0 || $this->x21_codleitura === 0.0 || $this->x21_codleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x21_codleitura"]:$this->x21_codleitura);
      }
    }
    // funcao para inclusao
@@ -279,7 +279,7 @@ class cl_agualeitura {
          $this->x21_codleitura = $x21_codleitura;
        }
      }
-     if(($this->x21_codleitura == null) || ($this->x21_codleitura == "") ){
+     if(($this->x21_codleitura == null) || ($this->x21_codleitura === 0 || $this->x21_codleitura === 0.0 || $this->x21_codleitura == "") ){
        $this->erro_sql = " Campo x21_codleitura não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

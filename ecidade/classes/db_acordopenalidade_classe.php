@@ -76,7 +76,7 @@ class cl_acordopenalidade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac13_sequencial = ($this->ac13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac13_sequencial"]:$this->ac13_sequencial);
+       $this->ac13_sequencial = ($this->ac13_sequencial === 0 || $this->ac13_sequencial === 0.0 || $this->ac13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac13_sequencial"]:$this->ac13_sequencial);
        $this->ac13_descricao = ($this->ac13_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac13_descricao"]:$this->ac13_descricao);
        $this->ac13_obs = ($this->ac13_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ac13_obs"]:$this->ac13_obs);
        $this->ac13_textopadrao = ($this->ac13_textopadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac13_textopadrao"]:$this->ac13_textopadrao);
@@ -89,7 +89,7 @@ class cl_acordopenalidade {
          }
        }
      }else{
-       $this->ac13_sequencial = ($this->ac13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac13_sequencial"]:$this->ac13_sequencial);
+       $this->ac13_sequencial = ($this->ac13_sequencial === 0 || $this->ac13_sequencial === 0.0 || $this->ac13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac13_sequencial"]:$this->ac13_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_acordopenalidade {
          $this->ac13_sequencial = $ac13_sequencial;
        }
      }
-     if(($this->ac13_sequencial == null) || ($this->ac13_sequencial == "") ){
+     if(($this->ac13_sequencial == null) || ($this->ac13_sequencial === 0 || $this->ac13_sequencial === 0.0 || $this->ac13_sequencial == "") ){
        $this->erro_sql = " Campo ac13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

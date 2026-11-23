@@ -35,7 +35,7 @@ include(modification("classes/db_sau_cgscorreto_classe.php"));
 include(modification("classes/db_sau_cgserrado_classe.php"));
 include(modification("classes/db_cgs_und_classe.php"));
 
-parse_str ( $HTTP_SERVER_VARS ['QUERY_STRING'] );
+parse_str ( $HTTP_SERVER_VARS ['QUERY_STRING'] , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 ?>
 <html>

@@ -69,11 +69,11 @@ class cl_tabdescdepto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k69_sequencial = ($this->k69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k69_sequencial"]:$this->k69_sequencial);
-       $this->k69_coddepto = ($this->k69_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["k69_coddepto"]:$this->k69_coddepto);
-       $this->k69_tabdesc = ($this->k69_tabdesc == ""?@$GLOBALS["HTTP_POST_VARS"]["k69_tabdesc"]:$this->k69_tabdesc);
+       $this->k69_sequencial = ($this->k69_sequencial === 0 || $this->k69_sequencial === 0.0 || $this->k69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k69_sequencial"]:$this->k69_sequencial);
+       $this->k69_coddepto = ($this->k69_coddepto === 0 || $this->k69_coddepto === 0.0 || $this->k69_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["k69_coddepto"]:$this->k69_coddepto);
+       $this->k69_tabdesc = ($this->k69_tabdesc === 0 || $this->k69_tabdesc === 0.0 || $this->k69_tabdesc == ""?@$GLOBALS["HTTP_POST_VARS"]["k69_tabdesc"]:$this->k69_tabdesc);
      }else{
-       $this->k69_sequencial = ($this->k69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k69_sequencial"]:$this->k69_sequencial);
+       $this->k69_sequencial = ($this->k69_sequencial === 0 || $this->k69_sequencial === 0.0 || $this->k69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k69_sequencial"]:$this->k69_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tabdescdepto {
          $this->k69_sequencial = $k69_sequencial;
        }
      }
-     if(($this->k69_sequencial == null) || ($this->k69_sequencial == "") ){
+     if(($this->k69_sequencial == null) || ($this->k69_sequencial === 0 || $this->k69_sequencial === 0.0 || $this->k69_sequencial == "") ){
        $this->erro_sql = " Campo k69_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

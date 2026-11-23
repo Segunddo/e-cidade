@@ -69,11 +69,11 @@ class cl_aguaisencaotipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x29_codisencaotipo = ($this->x29_codisencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_codisencaotipo"]:$this->x29_codisencaotipo);
+       $this->x29_codisencaotipo = ($this->x29_codisencaotipo === 0 || $this->x29_codisencaotipo === 0.0 || $this->x29_codisencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_codisencaotipo"]:$this->x29_codisencaotipo);
        $this->x29_descr = ($this->x29_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_descr"]:$this->x29_descr);
-       $this->x29_tipo = ($this->x29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_tipo"]:$this->x29_tipo);
+       $this->x29_tipo = ($this->x29_tipo === 0 || $this->x29_tipo === 0.0 || $this->x29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_tipo"]:$this->x29_tipo);
      }else{
-       $this->x29_codisencaotipo = ($this->x29_codisencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_codisencaotipo"]:$this->x29_codisencaotipo);
+       $this->x29_codisencaotipo = ($this->x29_codisencaotipo === 0 || $this->x29_codisencaotipo === 0.0 || $this->x29_codisencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x29_codisencaotipo"]:$this->x29_codisencaotipo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aguaisencaotipo {
          $this->x29_codisencaotipo = $x29_codisencaotipo;
        }
      }
-     if(($this->x29_codisencaotipo == null) || ($this->x29_codisencaotipo == "") ){
+     if(($this->x29_codisencaotipo == null) || ($this->x29_codisencaotipo === 0 || $this->x29_codisencaotipo === 0.0 || $this->x29_codisencaotipo == "") ){
        $this->erro_sql = " Campo x29_codisencaotipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

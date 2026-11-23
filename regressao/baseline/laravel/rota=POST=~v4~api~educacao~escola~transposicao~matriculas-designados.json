@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/transposicao/matriculas-designados",
+  "json": {
+    "error": true,
+    "message": "No query results for model [App\\Domain\\Educacao\\Escola\\Models\\Transposicao]."
+  },
+  "sha256": "64622f79583a52fc7bbe52a0bf26b56c2a3c35e408dda2d35ecc922c5641ebac",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

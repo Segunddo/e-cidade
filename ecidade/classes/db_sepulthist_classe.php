@@ -78,9 +78,9 @@ class cl_sepulthist {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm21_i_codigo = ($this->cm21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_i_codigo"]:$this->cm21_i_codigo);
-       $this->cm21_i_sepultamento = ($this->cm21_i_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_i_sepultamento"]:$this->cm21_i_sepultamento);
-       $this->cm21_i_usuario = ($this->cm21_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_i_usuario"]:$this->cm21_i_usuario);
+       $this->cm21_i_codigo = ($this->cm21_i_codigo === 0 || $this->cm21_i_codigo === 0.0 || $this->cm21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_i_codigo"]:$this->cm21_i_codigo);
+       $this->cm21_i_sepultamento = ($this->cm21_i_sepultamento === 0 || $this->cm21_i_sepultamento === 0.0 || $this->cm21_i_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_i_sepultamento"]:$this->cm21_i_sepultamento);
+       $this->cm21_i_usuario = ($this->cm21_i_usuario === 0 || $this->cm21_i_usuario === 0.0 || $this->cm21_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_i_usuario"]:$this->cm21_i_usuario);
        if($this->cm21_d_data == ""){
          $this->cm21_d_data_dia = ($this->cm21_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_d_data_dia"]:$this->cm21_d_data_dia);
          $this->cm21_d_data_mes = ($this->cm21_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_d_data_mes"]:$this->cm21_d_data_mes);
@@ -92,7 +92,7 @@ class cl_sepulthist {
        $this->cm21_c_localnovo = ($this->cm21_c_localnovo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_c_localnovo"]:$this->cm21_c_localnovo);
        $this->cm21_c_localant = ($this->cm21_c_localant == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_c_localant"]:$this->cm21_c_localant);
      }else{
-       $this->cm21_i_codigo = ($this->cm21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_i_codigo"]:$this->cm21_i_codigo);
+       $this->cm21_i_codigo = ($this->cm21_i_codigo === 0 || $this->cm21_i_codigo === 0.0 || $this->cm21_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm21_i_codigo"]:$this->cm21_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_sepulthist {
          $this->cm21_i_codigo = $cm21_i_codigo;
        }
      }
-     if(($this->cm21_i_codigo == null) || ($this->cm21_i_codigo == "") ){
+     if(($this->cm21_i_codigo == null) || ($this->cm21_i_codigo === 0 || $this->cm21_i_codigo === 0.0 || $this->cm21_i_codigo == "") ){
        $this->erro_sql = " Campo cm21_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

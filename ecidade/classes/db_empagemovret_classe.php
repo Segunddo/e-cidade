@@ -74,9 +74,9 @@ class cl_empagemovret {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e77_codmov = ($this->e77_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_codmov"]:$this->e77_codmov);
-       $this->e77_codgera = ($this->e77_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_codgera"]:$this->e77_codgera);
-       $this->e77_codret = ($this->e77_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_codret"]:$this->e77_codret);
+       $this->e77_codmov = ($this->e77_codmov === 0 || $this->e77_codmov === 0.0 || $this->e77_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_codmov"]:$this->e77_codmov);
+       $this->e77_codgera = ($this->e77_codgera === 0 || $this->e77_codgera === 0.0 || $this->e77_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_codgera"]:$this->e77_codgera);
+       $this->e77_codret = ($this->e77_codret === 0 || $this->e77_codret === 0.0 || $this->e77_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_codret"]:$this->e77_codret);
        if($this->e77_dataret == ""){
          $this->e77_dataret_dia = ($this->e77_dataret_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_dataret_dia"]:$this->e77_dataret_dia);
          $this->e77_dataret_mes = ($this->e77_dataret_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_dataret_mes"]:$this->e77_dataret_mes);
@@ -86,8 +86,8 @@ class cl_empagemovret {
          }
        }
      }else{
-       $this->e77_codmov = ($this->e77_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_codmov"]:$this->e77_codmov);
-       $this->e77_codgera = ($this->e77_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_codgera"]:$this->e77_codgera);
+       $this->e77_codmov = ($this->e77_codmov === 0 || $this->e77_codmov === 0.0 || $this->e77_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_codmov"]:$this->e77_codmov);
+       $this->e77_codgera = ($this->e77_codgera === 0 || $this->e77_codgera === 0.0 || $this->e77_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e77_codgera"]:$this->e77_codgera);
      }
    }
    // funcao para inclusao
@@ -107,7 +107,7 @@ class cl_empagemovret {
      }
        $this->e77_codmov = $e77_codmov;
        $this->e77_codgera = $e77_codgera;
-     if(($this->e77_codmov == null) || ($this->e77_codmov == "") ){
+     if(($this->e77_codmov == null) || ($this->e77_codmov === 0 || $this->e77_codmov === 0.0 || $this->e77_codmov == "") ){
        $this->erro_sql = " Campo e77_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -115,7 +115,7 @@ class cl_empagemovret {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e77_codgera == null) || ($this->e77_codgera == "") ){
+     if(($this->e77_codgera == null) || ($this->e77_codgera === 0 || $this->e77_codgera === 0.0 || $this->e77_codgera == "") ){
        $this->erro_sql = " Campo e77_codgera nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

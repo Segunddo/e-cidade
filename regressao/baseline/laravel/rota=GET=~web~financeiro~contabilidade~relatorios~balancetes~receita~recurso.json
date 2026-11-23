@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/relatorios/balancetes/receita/recurso",
+  "json": null,
+  "sha256": "612c054975d7116020c9a4540731fc0113540f5a330c821e43553cb92d3c0fdd",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

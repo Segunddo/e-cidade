@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/rreo/anexo-3-mdf",
+  "json": {
+    "errors": {
+      "codigo_relatorio": [
+        "O campo codigo relatorio é obrigatório."
+      ],
+      "periodo": [
+        "O campo periodo é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "a79bc4a7dbb41b55d42e289a523ff3d4517eaa6ca280676a3112c39145b3d5e3",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

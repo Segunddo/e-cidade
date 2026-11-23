@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/previdenciacomplementar/busca",
+  "json": {
+    "errors": {
+      "matricula": [
+        "Matricula deve ser informada."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "8b454993923a823087b04327867f318f353622380ccb7271605532723d01327e",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

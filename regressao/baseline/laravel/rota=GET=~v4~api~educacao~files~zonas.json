@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/api/educacao/files/zonas",
+  "json": [
+    {
+      "label": "URBANA",
+      "value": 1
+    },
+    {
+      "label": "RURAL",
+      "value": 2
+    },
+    {
+      "label": "URBANA/NORTE",
+      "value": 3
+    },
+    {
+      "label": "URBANA/SUL",
+      "value": 4
+    },
+    {
+      "label": "URBANA/LESTE",
+      "value": 5
+    },
+    {
+      "label": "URBANA/OESTE",
+      "value": 6
+    }
+  ],
+  "sha256": "71f35a27ae4fcbcc5b458630c48230d795a7e60ab4a56b21caf25a731ca292cf",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

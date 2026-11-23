@@ -1,0 +1,59 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/tipos-ruas",
+  "json": {
+    "data": [
+      {
+        "codigo": 2,
+        "nome": "ALAMEDA"
+      },
+      {
+        "codigo": 3,
+        "nome": "RUA"
+      },
+      {
+        "codigo": 4,
+        "nome": "AVENIDA"
+      },
+      {
+        "codigo": 5,
+        "nome": "TRAVESSA"
+      },
+      {
+        "codigo": 6,
+        "nome": "OUTROS"
+      },
+      {
+        "codigo": 9,
+        "nome": "BECO"
+      },
+      {
+        "codigo": 10,
+        "nome": "ESTRADA"
+      },
+      {
+        "codigo": 7,
+        "nome": "PRACA"
+      },
+      {
+        "codigo": 8,
+        "nome": "RODOVIA"
+      },
+      {
+        "codigo": 1,
+        "nome": "NAO INFORMADO"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "98eeeedb217b1365cb2e4588595c00bd9bc449da77bbc7093d15c9e3036b187e",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

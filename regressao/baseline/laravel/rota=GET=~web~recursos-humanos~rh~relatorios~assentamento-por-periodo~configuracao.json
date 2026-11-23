@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/recursos-humanos/rh/relatorios/assentamento-por-periodo/configuracao",
+  "json": null,
+  "sha256": "47766d8c5fd94a76593862baf19d695e60af916ae27d6f18451f817509653a57",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

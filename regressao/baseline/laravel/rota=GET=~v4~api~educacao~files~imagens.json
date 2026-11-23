@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/api/educacao/files/imagens",
+  "json": {
+    "direita": true,
+    "esquerda": true,
+    "topo": false
+  },
+  "sha256": "151909010725121b705e037223f4f1643f6952af44141480fb263c05beb8f19a",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

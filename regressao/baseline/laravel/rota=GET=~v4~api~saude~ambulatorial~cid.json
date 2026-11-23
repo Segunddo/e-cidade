@@ -1,0 +1,219 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/saude/ambulatorial/cid",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "A000 - COLERA DEVIDA A VIBRIO CHOLERAE 01 BIOTIPO CHOLERAE"
+      },
+      {
+        "codigo": 2,
+        "descricao": "A001 - COLERA DEVIDA A VIBRIO CHOLERAE 01 BIOTIPO EL TOR"
+      },
+      {
+        "codigo": 3,
+        "descricao": "A009 - COLERA NAO ESPECIFICADA"
+      },
+      {
+        "codigo": 4,
+        "descricao": "A010 - FEBRE TIFOIDE"
+      },
+      {
+        "codigo": 5,
+        "descricao": "A011 - FEBRE PARATIFOIDE A"
+      },
+      {
+        "codigo": 6,
+        "descricao": "A012 - FEBRE PARATIFOIDE B"
+      },
+      {
+        "codigo": 7,
+        "descricao": "A013 - FEBRE PARATIFOIDE C"
+      },
+      {
+        "codigo": 8,
+        "descricao": "A014 - FEBRE PARATIFOIDE NAO ESPECIFICADA"
+      },
+      {
+        "codigo": 9,
+        "descricao": "A020 - ENTERITE POR SALMONELA"
+      },
+      {
+        "codigo": 10,
+        "descricao": "A021 - SEPTICEMIA POR SALMONELA"
+      },
+      {
+        "codigo": 11,
+        "descricao": "A022 - INFECCOES LOCALIZADAS POR SALMONELA"
+      },
+      {
+        "codigo": 12,
+        "descricao": "A028 - OUTRAS INFECCOES ESPECIFICADAS POR SALMONELA"
+      },
+      {
+        "codigo": 13,
+        "descricao": "A029 - INFECCAO NAO ESPECIFICADA POR SALMONELA"
+      },
+      {
+        "codigo": 14,
+        "descricao": "A030 - SHIGUELOSE DEVIDA A SHIGELLA DYSENTERIAE"
+      },
+      {
+        "codigo": 15,
+        "descricao": "A031 - SHIGUELOSE DEVIDA A SHIGELLA FLEXNERI"
+      },
+      {
+        "codigo": 16,
+        "descricao": "A032 - SHIGUELOSE DEVIDA A SHIGELLA BOYDII"
+      },
+      {
+        "codigo": 17,
+        "descricao": "A033 - SHIGUELOSE DEVIDA A SHIGELLA SONNEI"
+      },
+      {
+        "codigo": 18,
+        "descricao": "A038 - OUTRAS SHIGUELOSES"
+      },
+      {
+        "codigo": 19,
+        "descricao": "A039 - SHIGUELOSE NAO ESPECIFICADA"
+      },
+      {
+        "codigo": 20,
+        "descricao": "A040 - INFECCAO POR ESCHERICHIA COLI ENTEROPATOGENICA"
+      },
+      {
+        "codigo": 21,
+        "descricao": "A041 - INFECCAO POR ESCHERICHIA COLI ENTEROTOXIGENICA"
+      },
+      {
+        "codigo": 22,
+        "descricao": "A042 - INFECCAO POR ESCHERICHIA COLI ENTEROINVASIVA"
+      },
+      {
+        "codigo": 23,
+        "descricao": "A043 - INFECCAO POR ESCHERICHIA COLI ENTEROHEMORRAGICA"
+      },
+      {
+        "codigo": 24,
+        "descricao": "A044 - OUTRAS INFECCOES INTESTINAIS POR ESCHERICHIA COLI"
+      },
+      {
+        "codigo": 25,
+        "descricao": "A045 - ENTERITE POR CAMPYLOBACTER"
+      },
+      {
+        "codigo": 26,
+        "descricao": "A046 - ENTERITE DEVIDA A YERSINIA ENTEROCOLITICA"
+      },
+      {
+        "codigo": 27,
+        "descricao": "A047 - ENTEROCOLITE DEVIDA A CLOSTRIDIUM DIFFICILE"
+      },
+      {
+        "codigo": 28,
+        "descricao": "A048 - OUTRAS INFECCOES BACTERIANAS INTESTINAIS ESPECIFICADAS"
+      },
+      {
+        "codigo": 29,
+        "descricao": "A049 - INFECCAO INTESTINAL BACTERIANA NAO ESPECIFICADA"
+      },
+      {
+        "codigo": 30,
+        "descricao": "A050 - INTOXICACAO ALIMENTAR ESTAFILOCOCICA"
+      },
+      {
+        "codigo": 31,
+        "descricao": "A051 - BOTULISMO"
+      },
+      {
+        "codigo": 32,
+        "descricao": "A052 - INTOXICACAO ALIMENTAR DEVIDA A CLOSTRIDIUM PERFRINGENS(CLOSTRIDIUM WELCHII)"
+      },
+      {
+        "codigo": 33,
+        "descricao": "A053 - INTOXICACAO ALIMENTAR DEVIDA A VIBRIO PARAHEMOLYTICUS"
+      },
+      {
+        "codigo": 34,
+        "descricao": "A054 - INTOXICACAO ALIMENTAR DEVIDA A BACILLUS CEREUS"
+      },
+      {
+        "codigo": 35,
+        "descricao": "A058 - OUTRAS INTOXICACOES ALIMENTARES BACTERIANAS ESPECIFICADAS"
+      },
+      {
+        "codigo": 36,
+        "descricao": "A059 - INTOXICACAO ALIMENTAR BACTERIANA NAO ESPECIFICADA"
+      },
+      {
+        "codigo": 37,
+        "descricao": "A060 - DISENTERIA AMEBIANA AGUDA"
+      },
+      {
+        "codigo": 38,
+        "descricao": "A061 - AMEBIASE INTESTINAL CRONICA"
+      },
+      {
+        "codigo": 39,
+        "descricao": "A062 - COLITE AMEBIANA NAO-DISENTERICA"
+      },
+      {
+        "codigo": 40,
+        "descricao": "A063 - AMEBOMA INTESTINAL"
+      },
+      {
+        "codigo": 41,
+        "descricao": "A064 - ABSCESSO AMEBIANO DO FIGADO"
+      },
+      {
+        "codigo": 42,
+        "descricao": "A065 - ABSCESSO AMEBIANO DO PULMAO"
+      },
+      {
+        "codigo": 43,
+        "descricao": "A066 - ABSCESSO AMEBIANO DO CEREBRO"
+      },
+      {
+        "codigo": 44,
+        "descricao": "A067 - AMEBIASE CUTANEA"
+      },
+      {
+        "codigo": 45,
+        "descricao": "A068 - INFECCAO AMEBIANA DE OUTRAS LOCALIZACOES"
+      },
+      {
+        "codigo": 46,
+        "descricao": "A069 - AMEBIASE NAO ESPECIFICADA"
+      },
+      {
+        "codigo": 47,
+        "descricao": "A070 - BALANTIDIASE"
+      },
+      {
+        "codigo": 48,
+        "descricao": "A071 - GIARDIASE (LAMBLIASE)"
+      },
+      {
+        "codigo": 49,
+        "descricao": "A072 - CRIPTOSPORIDIOSE"
+      },
+      {
+        "codigo": 50,
+        "descricao": "A073 - ISOSPORIASE"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "74a4e51dc84771db69634f898a69d5ec19b4d34241860a4eecdd3233b4d8afa0",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

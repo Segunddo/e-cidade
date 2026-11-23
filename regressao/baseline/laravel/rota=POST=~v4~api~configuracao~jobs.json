@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/jobs",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Configuracao\\Job\\Controller\\JobsController::store does not exist."
+  },
+  "sha256": "9086fcc0da33255b2f2c79e8571670d0eb0cf610c243cb29060cd20bb2e2455b",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

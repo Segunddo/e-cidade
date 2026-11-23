@@ -1,0 +1,20 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/juridico/inclusaoiniciallista/getprocessamento",
+  "json": {
+    "data": {
+      "processamento": false
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "4f07798150a0f7337c42e35c341e92067129d9eb8d0c10a194ae02b2cef59273",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

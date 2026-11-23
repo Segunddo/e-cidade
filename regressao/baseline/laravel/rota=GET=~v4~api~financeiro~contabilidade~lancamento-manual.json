@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/lancamento-manual",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Lançamentos encontrados."
+  },
+  "sha256": "cb946f1cd69a218c6d5373925b4cab6f972d0ad3c836807abae9cd3057fdb6ab",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

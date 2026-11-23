@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_rhfotos_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clrhfotos = new cl_rhfotos;
 $clrhfotos->rotulo->label("rh50_regist");
 $clrhfotos->rotulo->label("rh50_oid");

@@ -1,0 +1,34 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/empenho/retencaosubcontratacao/update",
+  "json": {
+    "data": {
+      "e163_numcgm": [
+        "O campo e163 numcgm é obrigatório."
+      ],
+      "e163_retencaotiporec": [
+        "O campo e163 retencaotiporec é obrigatório."
+      ],
+      "e163_sequencial": [
+        "O campo e163 sequencial é obrigatório."
+      ],
+      "e163_valor": [
+        "O campo e163 valor é obrigatório."
+      ],
+      "e163_valorbase": [
+        "O campo e163 valorbase é obrigatório."
+      ]
+    },
+    "error": true,
+    "message": "Erro ao editar subcontratação (campos inválidos)."
+  },
+  "sha256": "ac89f37fb35173dc1941eb0b6ff479bffb393d31e8826582c1b0d85964f7cd06",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

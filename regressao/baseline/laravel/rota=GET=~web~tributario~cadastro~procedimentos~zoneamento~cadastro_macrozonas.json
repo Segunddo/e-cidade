@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/cadastro/procedimentos/zoneamento/cadastro_macrozonas",
+  "json": null,
+  "sha256": "bd35fee0cd7a3d4384b095be1acda8d256d04b4db75b22dc341a0e4f85bbb6a0",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

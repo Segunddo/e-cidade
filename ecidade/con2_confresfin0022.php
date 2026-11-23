@@ -42,7 +42,7 @@ $clorctiporec = new cl_orctiporec;
 $clempresto   = new cl_empresto;
 
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -54,7 +54,7 @@ $xinstit =explode("-", $db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-', ', ', $db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins ++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins ++) {
 	db_fieldsmemory($resultinst, $xins);
 	$descr_inst .= $xvirg.$nomeinst;
 	$xvirg = ', ';
@@ -116,11 +116,11 @@ $sql = "
 
   ";
 $result = db_query($sql);
-for ($x = 0; $x < pg_numrows($result); $x ++) {
+for ($x = 0; $x < ($result ? pg_numrows($result) : null); $x ++) {
 	  db_fieldsmemory($result, $x);
 	  $sql = "select * from work_rel where recurso = $o15_codigo";
 	  $rr = db_query($sql);
-	  if (pg_numrows($rr) > 0) {
+	  if (($rr ? pg_numrows($rr) : null) > 0) {
 			$sql = " update work_rel
 						            set rp_anterior = coalesce(".$rp_anterior.",0)  ,
 										  rp_atual     = coalesce(".$rp_atual.",0)
@@ -152,13 +152,13 @@ $sql_baldesp = "select o58_codigo as o15_codigo,
                          having o58_codigo > 0
                           ";
 $result_baldesp = db_query($sql_baldesp);
-if (pg_numrows($result_baldesp) > 0) {
-	for ($x = 0; $x < pg_numrows($result_baldesp); $x ++) {
+if (($result_baldesp ? pg_numrows($result_baldesp) : null) > 0) {
+	for ($x = 0; $x < ($result_baldesp ? pg_numrows($result_baldesp) : null); $x ++) {
 	 	 db_fieldsmemory($result_baldesp, $x);
 
          $sql = "select * from work_rel where recurso = $o15_codigo";
 	     $rr = db_query($sql);
-	     if (pg_numrows($rr) > 0) {
+	     if (($rr ? pg_numrows($rr) : null) > 0) {
 			$sql = " update work_rel
 						 set liquidado         = coalesce(".$liquidado.",0)  ,
 							  nao_liquidado  = coalesce(".($empenhado - $liquidado).",0)
@@ -210,13 +210,13 @@ $sql="select
                  group by c61_codigo,c60_codsis,o15_descr
 		 ";
 $result_contas = db_query($sql);
-$nrows = pg_numrows($result_contas);
-if (pg_numrows($result_contas) > 0) {
-	for ($x = 0; $x < pg_numrows($result_contas); $x ++) {
+$nrows = ($result_contas ? pg_numrows($result_contas) : null);
+if (($result_contas ? pg_numrows($result_contas) : null) > 0) {
+	for ($x = 0; $x < ($result_contas ? pg_numrows($result_contas) : null); $x ++) {
 		db_fieldsmemory($result_contas, $x);
 		$sql = "select * from work_rel where recurso = $c61_codigo";
 		$rr = db_query($sql);
-		if (pg_numrows($rr) > 0) {
+		if (($rr ? pg_numrows($rr) : null) > 0) {
 			if ($c60_codsis == 5)
 				$sql = "update work_rel
 				            set caixa = ".$final." ,
@@ -260,13 +260,13 @@ $sql_bver = "select
 				    group by c61_codigo
 				   ";
 $result_bver = db_query($sql_bver);
-if (pg_numrows($result_bver) > 0) {
-	for ($x = 0; $x < pg_numrows($result_bver); $x ++) {
+if (($result_bver ? pg_numrows($result_bver) : null) > 0) {
+	for ($x = 0; $x < ($result_bver ? pg_numrows($result_bver) : null); $x ++) {
 	 	 db_fieldsmemory($result_bver, $x);
 
          $sql = "select * from work_rel where recurso = $c61_codigo";
 	     $rr = db_query($sql);
-	     if (pg_numrows($rr) > 0) {
+	     if (($rr ? pg_numrows($rr) : null) > 0) {
 			$sql = " update work_rel
 						 set receita     = coalesce(".($saldo_anterior_credito).",0)  ,
 							  despesa  = coalesce(".($saldo_anterior_debito).",0)
@@ -287,8 +287,8 @@ if (pg_numrows($result_bver) > 0) {
 $res = db_query("select *  from work_rel order by recurso");
 // db_criatabela($res);exit;
 
-$rows = pg_numrows($res);
-$cols = pg_numfields($res);
+$rows = ($res ? pg_numrows($res) : null);
+$cols = ($res ? pg_numfields($res) : null);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

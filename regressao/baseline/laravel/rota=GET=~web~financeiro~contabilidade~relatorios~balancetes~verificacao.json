@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/relatorios/balancetes/verificacao",
+  "json": null,
+  "sha256": "5983cc6f7f6f7cdaeab41427d6e74147c89288ce5b883da077d20e6330ad11bd",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

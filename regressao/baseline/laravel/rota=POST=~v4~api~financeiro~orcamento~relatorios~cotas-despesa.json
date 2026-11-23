@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/orcamento/relatorios/cotas-despesa",
+  "json": {
+    "error": true,
+    "message": "Malformed UTF-8 characters, possibly incorrectly encoded"
+  },
+  "sha256": "20c8c80ce20082a081e443b3afa144d6b7c109c83a7ef00af27906afdf39bf12",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "auth-token-expirado",
+  "json": {
+    "error": true,
+    "message": "Unauthenticated."
+  },
+  "sha256": "89b237d3c067430692e4f7ce1fa56b4ee05dfb15586d7d3d6f5d2c05a866cc04",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

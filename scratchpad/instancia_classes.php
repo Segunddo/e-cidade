@@ -6,6 +6,23 @@ error_reporting(E_ALL & ~E_DEPRECATED & ~E_NOTICE & ~E_WARNING);
 // Instancia cada classe do universo do modulo e imprime uma assinatura do estado
 // inicializado. Rodado nos DOIS runtimes, o diff prova que os construtores
 // renomeados (PHP4 -> __construct) continuam executando e produzindo o mesmo estado.
+//
+// Usado no passo 6 do guia (docs/migrar-um-modulo.md). Normalmente nao se roda direto:
+// e copiado para o container como /tmp/ic.php e chamado pelo scratchpad/harness_robusto.sh,
+// que sobrevive aos fatais (um fatal aqui mata o processo e o resto da lista).
+//
+// Entrada: arquivo com um caminho por linha, relativo a ecidade/ (ex.: classes/db_x_classe.php).
+// Como faz: para cada arquivo, pega o nome da PRIMEIRA ocorrencia de `class X` no fonte
+// (regex simples, sem diferenciar maiusculas; nao distingue comentario de codigo), inclui
+// o arquivo se a classe ainda nao existe, faz `new X()` SEM argumentos e resume o estado
+// (get_object_vars, ordenado pelo nome) numa assinatura md5.
+// Saida (uma linha por entrada, TAB entre os campos -- o harness_robusto.sh depende disso):
+//   <arquivo>  <classe>  <numero de propriedades>  <md5 da assinatura>
+//   <arquivo>  <classe>  ERRO  <classe do erro>: <mensagem> @ <arquivo>:<linha>
+//   <arquivo>  SEM_CLASSE           (o include nao declarou a classe)
+// Arquivo sem `class` no fonte nao gera linha nenhuma.
+// No 5.6 Throwable nao existe: o catch abaixo nunca casa, e uma excecao do construtor
+// vira fatal (o processo morre) -- no 8.5 ela sai como linha ERRO.
 chdir('/var/www/html');
 // bootstrap.php registra o autoloader do namespace ECidade\, sem o qual
 // modification() falha -- ele nao esta no psr-4 do composer.json.
@@ -20,9 +37,12 @@ foreach (explode("\n", trim(file_get_contents($argv[1]))) as $arq) {
     if (!$arq) continue;
     if (!preg_match('/class\s+(\w+)/i', file_get_contents($arq), $m)) continue;
     $cls = $m[1];
+    // class_exists() aciona o autoloader; so inclui a mao se ele nao achou a classe
     if (!class_exists($cls)) { @include_once(modification($arq)); }
     if (!class_exists($cls)) { echo "$arq\tSEM_CLASSE\n"; continue; }
     try {
+        // sem argumentos: construtor que exige parametro da ArgumentCountError so no 8.5
+        // (artefato conhecido do harness, ver a tabela do passo 6 no guia)
         $o = new $cls();
         $v = get_object_vars($o); ksort($v);
         // Assinatura SEM serialize(): no PHP 8 serializar um objeto interno como

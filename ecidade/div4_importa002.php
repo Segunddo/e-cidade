@@ -28,7 +28,7 @@
 // select k00_numpre,k00_numpar,k00_receit from arrecad where k00_numpre = 11111454;
 set_time_limit(0);
 require(modification("libs/db_stdlib.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //se for submit, ele cria o recibo
   require(modification("libs/db_conecta.php"));
   include(modification("libs/db_sessoes.php"));
@@ -355,7 +355,7 @@ if(isset($tipo)) {
   echo "</tr>\n";
   //verifica se foi clicado no link agrupar e recria as variaveis do QUERY_STRING pra atualizar o agnump e agpar
   if(isset($verificaagrupar)) {
-    parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+    parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   }
 
   //if com 3 partes. Primeiro se é pra agrupar por numpre, segundo se é pra agrupar por parcela e terceiro mostra o default

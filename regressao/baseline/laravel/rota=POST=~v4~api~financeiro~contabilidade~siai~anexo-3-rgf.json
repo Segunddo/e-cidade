@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/siai/anexo-3-rgf",
+  "json": {
+    "errors": {
+      "codigo_relatorio": [
+        "O campo codigo relatorio é obrigatório."
+      ],
+      "instituicoes": [
+        "O campo instituicoes é obrigatório."
+      ],
+      "periodo": [
+        "O campo periodo é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "75ed6bc045aa579a202a2903750d05452d205ea28ff881e63e6d725ef097a29d",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

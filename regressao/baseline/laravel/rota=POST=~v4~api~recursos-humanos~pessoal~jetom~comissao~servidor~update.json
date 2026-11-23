@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/jetom/comissao/servidor/update",
+  "json": {
+    "error": true,
+    "message": "Malformed UTF-8 characters, possibly incorrectly encoded"
+  },
+  "sha256": "a829ccdcc5102d7326ff6cea9e2c2c2df50af8df4533e651401b7df33e7b2001",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -48,8 +48,8 @@ class cl_decendio
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->k230_codigo = ($this->k230_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k230_codigo"] : $this->k230_codigo);
-            $this->k230_slip = ($this->k230_slip == "" ? @$GLOBALS["HTTP_POST_VARS"]["k230_slip"] : $this->k230_slip);
+            $this->k230_codigo = ($this->k230_codigo === 0 || $this->k230_codigo === 0.0 || $this->k230_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k230_codigo"] : $this->k230_codigo);
+            $this->k230_slip = ($this->k230_slip === 0 || $this->k230_slip === 0.0 || $this->k230_slip == "" ? @$GLOBALS["HTTP_POST_VARS"]["k230_slip"] : $this->k230_slip);
 
             if (is_null($this->created_at)) {
                 $this->created_at = date('Y-m-d H:i:s');
@@ -59,7 +59,7 @@ class cl_decendio
                 $this->updated_at = date('Y-m-d H:i:s');
             }
         } else {
-            $this->k230_codigo = ($this->k230_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k230_codigo"] : $this->k230_codigo);
+            $this->k230_codigo = ($this->k230_codigo === 0 || $this->k230_codigo === 0.0 || $this->k230_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k230_codigo"] : $this->k230_codigo);
         }
     }
 
@@ -90,7 +90,7 @@ class cl_decendio
                 $this->k230_codigo = $k230_codigo;
             }
         }
-        if (($this->k230_codigo == null) || ($this->k230_codigo == "")) {
+        if (($this->k230_codigo == null) || ($this->k230_codigo === 0 || $this->k230_codigo === 0.0 || $this->k230_codigo == "")) {
             $this->erro_sql = " Campo k230_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

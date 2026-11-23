@@ -33,7 +33,7 @@ $clrotulo->label('id_usuario');
 $clrotulo->label('nome');
 $clrotulo->label('descrdepto');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $instit         = db_getsession("DB_instit");
 $result_ultdata = db_query("select k22_data from debitos where k22_instit = $instit order by k22_data desc limit 1");

@@ -63,7 +63,7 @@ $clcgmalt           = new cl_cgmalt;
 $cldb_pcforneconpad = new cl_pcforneconpad;
 $clempempitem       = new cl_empempitem;
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $head3 = "CADASTRO DE CÓDIGOS";
@@ -84,7 +84,7 @@ if(isset($e60_numemp) && $e60_numemp != ''){
   $dbwhere     = " e60_numemp = $e60_numemp ";
   $sql         = "select e60_anousu as anousu from empempenho where $dbwhere";
   $res_empenho = @db_query($sql);
-  $numrows_empenho = @pg_numrows($res_empenho);
+  $numrows_empenho = @($res_empenho ? pg_numrows($res_empenho) : null);
   if ($numrows_empenho != 0){
     db_fieldsmemory($res_empenho,0);
   }
@@ -229,7 +229,7 @@ $sqlemp = "
 
 $result = db_query($sqlemp);
 //db_criatabela($result);exit;
-if (pg_numrows($result)==0){
+if (($result ? pg_numrows($result) : null)==0){
   db_redireciona("db_erros.php?fechar=true&db_erro=Nenhum registro encontrado !  ");
 }
 
@@ -259,7 +259,7 @@ $pdf1->dadosbancoemprenho = $e30_dadosbancoempenho;
 
 //db_criatabela($result); exit;
 
-for ($i = 0;$i < pg_numrows($result);$i++) {
+for ($i = 0;$i < ($result ? pg_numrows($result) : null);$i++) {
 
   db_fieldsmemory($result,$i);
 
@@ -291,7 +291,7 @@ for ($i = 0;$i < pg_numrows($result);$i++) {
 
   $o74_descricao       = null;
   $o78_pactoplano      = null;
-  if (@pg_num_rows($rsPacto) > 0) {
+  if (@($rsPacto ? pg_num_rows($rsPacto) : null) > 0) {
 
     $oPacto              = db_utils::fieldsMemory($rsPacto, 0);
     $o74_descricao       = $oPacto->o74_descricao;
@@ -393,7 +393,7 @@ $sqlOrdem = "
 ";
 $rsOp = db_query($sqlOrdem );
 $pdf1->e50_codord = "";
-if (pg_num_rows($rsOp) > 0) {
+if (($rsOp ? pg_num_rows($rsOp) : null) > 0) {
   $pdf1->e50_codord = db_utils::fieldsMemory($rsOp, 0)->e50_codord;
 }
 //echo $sqlOrdem; die();
@@ -523,8 +523,8 @@ if (pg_num_rows($rsOp) > 0) {
 
      //  system("echo '".$sqllic."\n' >> tmp/logsql.txt");
 
-     if (pg_numrows($rpc) > 0 ){
-       $pdf1->descr_licitacao = pg_result($rpc,0,0);
+     if (($rpc ? pg_numrows($rpc) : null) > 0 ){
+       $pdf1->descr_licitacao = ($rpc ? pg_result($rpc,0,0) : null);
      } else {
        $pdf1->descr_licitacao = $pc50_descr;
 
@@ -538,7 +538,7 @@ if (pg_num_rows($rsOp) > 0) {
    //$pdf1->resumo           = $e60_resumo;
    $pdf1->licitacao        = $e60_codtipo;
    $pdf1->recorddositens   = $resultitem;
-   $pdf1->linhasdositens   = pg_numrows($resultitem);
+   $pdf1->linhasdositens   = ($resultitem ? pg_numrows($resultitem) : null);
    $pdf1->quantitem        = "e62_quant";
    $pdf1->valoritem        = "e62_vltot";
    $pdf1->valor            = "e62_vlrun";
@@ -587,7 +587,7 @@ if (pg_num_rows($rsOp) > 0) {
    //system("echo '".$sql."\n' >> tmp/logsql.txt");
 
 	 //die ($sql);
-   if ($result_conta != false && (pg_numrows($result_conta) == 1)) {
+   if ($result_conta != false && (($result_conta ? pg_numrows($result_conta) : null) == 1)) {
 
      db_fieldsmemory($result_conta,0);
      $sqlconta     = "select * from conplanoconta where c63_reduz = {$c61_reduz} and c63_codcon = $c61_codcon and c63_anousu = ".db_getsession("DB_anousu");
@@ -595,7 +595,7 @@ if (pg_num_rows($rsOp) > 0) {
 
      //   system("echo '".$sqlconta."\n' >> tmp/logsql.txt");
 
-     if (pg_result($result_conta,0) == 1) {
+     if (($result_conta ? pg_result($result_conta,0) : null) == 1) {
 
        db_fieldsmemory($result_conta,0);
        $pdf1->banco            = $c63_banco;

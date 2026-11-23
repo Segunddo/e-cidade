@@ -40,7 +40,7 @@ if (! isset($arqinclude)) { // se este arquivo não esta incluido por outro
   require_once(modification("libs/db_utils.php"));
   require_once(modification("model/linhaRelatorioContabil.model.php"));
   require_once(modification("model/relatorioContabil.model.php"));
-  parse_str($HTTP_SERVER_VARS ['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS ['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   db_postmemory($_GET);
 
   $classinatura  = new cl_assinatura();
@@ -156,9 +156,9 @@ for ($iLinha = 0; $iLinha <= 13; $iLinha++) {
     $aColunas  = $rec[$iLinha]->getValoresSomadosColunas($sListaInstituicoes, $anousu);
     foreach ($aColunas as $oLinha) {
 
-      $receitas_previni[$iLinha] += @$oLinha->colunas[1]->o117_valor;
-      $receitas_prevatu[$iLinha] += @$oLinha->colunas[2]->o117_valor;
-      $receitas_atebime[$iLinha] += @$oLinha->colunas[3]->o117_valor;
+      $receitas_previni[$iLinha] += (float) @$oLinha->colunas[1]->o117_valor;
+      $receitas_prevatu[$iLinha] += (float) @$oLinha->colunas[2]->o117_valor;
+      $receitas_atebime[$iLinha] += (float) @$oLinha->colunas[3]->o117_valor;
     }
     $iParam++;
   }
@@ -179,11 +179,11 @@ for ($iLinha = 1; $iLinha <= 6; $iLinha++) {
   $aLinhas = $desp[$iLinha]['linha']->getValoresSomadosColunas($sListaInstituicoes, $anousu);
   foreach ($aLinhas as $oLinha) {
 
-    $desp[$iLinha]['previni']         += @$oLinha->colunas[1]->o117_valor;
-    $desp[$iLinha]['prevatu']         += @$oLinha->colunas[2]->o117_valor;
-    $desp[$iLinha]['bimestre']        += @$oLinha->colunas[3]->o117_valor;
+    $desp[$iLinha]['previni']         += (float) @$oLinha->colunas[1]->o117_valor;
+    $desp[$iLinha]['prevatu']         += (float) @$oLinha->colunas[2]->o117_valor;
+    $desp[$iLinha]['bimestre']        += (float) @$oLinha->colunas[3]->o117_valor;
     if ($lGeraColunaRps) {
-      $desp[$iLinha]['rpNaoProcessado'] += @$oLinha->colunas[4]->o117_valor;
+      $desp[$iLinha]['rpNaoProcessado'] += (float) @$oLinha->colunas[4]->o117_valor;
     }
   }
   $iParam++;
@@ -208,14 +208,14 @@ for ($iLinha = 1; $iLinha <= 5; $iLinha++) {
   $aLinhas = $desp_p[$iLinha]['linha']->getValoresSomadosColunas($sListaInstituicoes, $anousu);
   foreach ($aLinhas as $oLinha) {
 
-    $desp_p[$iLinha]['previni']         += @$oLinha->colunas[1]->o117_valor;
-    $desp_p[$iLinha]['prevatu']         += @$oLinha->colunas[2]->o117_valor;
-    $desp_p[$iLinha]['bimestre']        += @$oLinha->colunas[3]->o117_valor;
+    $desp_p[$iLinha]['previni']         += (float) @$oLinha->colunas[1]->o117_valor;
+    $desp_p[$iLinha]['prevatu']         += (float) @$oLinha->colunas[2]->o117_valor;
+    $desp_p[$iLinha]['bimestre']        += (float) @$oLinha->colunas[3]->o117_valor;
     if ($lGeraColunaRps) {
-      $desp_p[$iLinha]['rpNaoProcessado'] += @$oLinha->colunas[4]->o117_valor;
+      $desp_p[$iLinha]['rpNaoProcessado'] += (float) @$oLinha->colunas[4]->o117_valor;
     }
     if ($iLinha == 5) {
-      $VARIAVEL_COMPENSACAO += @$oLinha->colunas[3]->o117_valor;
+      $VARIAVEL_COMPENSACAO += (float) @$oLinha->colunas[3]->o117_valor;
     }
   }
   $iParam++;
@@ -273,11 +273,11 @@ $dt_ini2 = $anousu . "-01-01";
 
 $sqlperiodo  = $clempresto->sql_rp_novo($anousu, $sele_work, $dt_ini2, $dt_fin, $sele_work1, $sql_where_externo, "$sql_order ");
 $result_restos_mde1 = @db_query($sqlperiodo);
-$numrows_restos_mde1 = @pg_numrows($result_restos_mde1);
+$numrows_restos_mde1 = @($result_restos_mde1 ? pg_numrows($result_restos_mde1) : null);
 
 $saldo     = 0;
 $cancelado = 0;
-for($i = 0; $i < pg_numrows($result_restos_mde1); $i ++) {
+for($i = 0; $i < ($result_restos_mde1 ? pg_numrows($result_restos_mde1) : null); $i ++) {
   db_fieldsmemory($result_restos_mde1, $i);
 
 //  Total de RP processado .....:  ($e91_vlrliq - $e91_vlrpag);
@@ -303,11 +303,11 @@ for ($i = 1; $i <= 7; $i++) {
   $aLinhas = $m_desp_subfunc[$i]['estrut']->getValoresSomadosColunas($sListaInstituicoes, $anousu);
   foreach ($aLinhas as $oLinha) {
 
-    $m_desp_subfunc[$i]['inicial']    += $oLinha->colunas[1]->o117_valor;
-    $m_desp_subfunc[$i]['atualizada'] += $oLinha->colunas[2]->o117_valor;
-    $m_desp_subfunc[$i]['bimestre']   += $oLinha->colunas[3]->o117_valor;
+    $m_desp_subfunc[$i]['inicial']    += (float) $oLinha->colunas[1]->o117_valor;
+    $m_desp_subfunc[$i]['atualizada'] += (float) $oLinha->colunas[2]->o117_valor;
+    $m_desp_subfunc[$i]['bimestre']   += (float) $oLinha->colunas[3]->o117_valor;
     if ($lGeraColunaRps) {
-      $m_desp_subfunc[$i]['restos']   += $oLinha->colunas[4]->o117_valor;
+      $m_desp_subfunc[$i]['restos']   += (float) $oLinha->colunas[4]->o117_valor;
     }
   }
   $iParam++;
@@ -316,7 +316,7 @@ for ($i = 1; $i <= 7; $i++) {
 $total_rec_ini    = 0;
 $total_rec_atu    = 0;
 $total_rec_atebim = 0;
-$iTotalLinhasReceita = pg_num_rows($result_rec);
+$iTotalLinhasReceita = ($result_rec ? pg_num_rows($result_rec) : null);
 // RECEITA DE IMPOSTOS LIQUIDA [1...4] + TOTAL DAS RECEITAS[0]
 
 for ($i = 0; $i < $iTotalLinhasReceita; $i ++) {
@@ -387,7 +387,7 @@ $receitas_nobimes [6] = $receitas_nobimes [7] + $receitas_nobimes [8] + $receita
 //------------------------------------------------- Despesas -----------------------------------------
 
 ///db_criatabela($result_despesa);exit;
-$iTotalLinhasDespesa = pg_num_rows($result_despesa);
+$iTotalLinhasDespesa = ($result_despesa ? pg_num_rows($result_despesa) : null);
 for($i = 0; $i < $iTotalLinhasDespesa; $i ++) {
 
   $oDespesa = db_utils::fieldsmemory($result_despesa, $i);
@@ -462,7 +462,7 @@ $total_ini  = 0;
 $total_atu  = 0;
 $total_rp   = 0;
 
-for($i = 0; $i < pg_numrows($result_despesa); $i ++) {
+for($i = 0; $i < ($result_despesa ? pg_numrows($result_despesa) : null); $i ++) {
 
   $oDespesa = db_utils::fieldsmemory($result_despesa, $i);
   for ($iLinha = 1; $iLinha <= 7; $iLinha++) {
@@ -567,7 +567,7 @@ for($i = 0; $i <= 13; $i ++) {
   $pdf->cell(20, $alt, db_formatar($receitas_prevatu [$i], 'f'), "L", 0, "R", 0);
   $pdf->cell(20, $alt, db_formatar($receitas_atebime [$i], 'f'), "L", 0, "R", 0);
   if ($receitas_prevatu [$i] != 0) {
-    $pdf->cell(20, $alt, db_formatar((($receitas_atebime [$i] / $receitas_prevatu [$i]) * 100), 'f'), "L", 1, "R", 0);
+    $pdf->cell(20, $alt, db_formatar((((float) $receitas_prevatu [$i] == 0 ? (float) $receitas_atebime [$i] > 0 ? INF : ((float) $receitas_atebime [$i] < 0 ? -INF : NAN) : $receitas_atebime [$i] / $receitas_prevatu [$i]) * 100), 'f'), "L", 1, "R", 0);
   } else {
     $pdf->cell(20, $alt, db_formatar(0, 'f'), "L", 1, "R", 0);
   }
@@ -584,7 +584,7 @@ $pdf->cell(20, $alt, db_formatar($total_previni, 'f'), "TBL", 0, "R", 0);
 $pdf->cell(20, $alt, db_formatar($total_prevatu, 'f'), "TBL", 0, "R", 0);
 $pdf->cell(20, $alt, db_formatar($total_atebime, 'f'), "TBL", 0, "R", 0);
 if ($total_prevatu > 0) {
-  $pdf->cell(20, $alt, db_formatar(($total_atebime / $total_prevatu) * 100, 'f'), "TBL", 0, "R", 0);
+  $pdf->cell(20, $alt, db_formatar(((float) $total_prevatu == 0 ? (float) $total_atebime > 0 ? INF : ((float) $total_atebime < 0 ? -INF : NAN) : $total_atebime / $total_prevatu) * 100, 'f'), "TBL", 0, "R", 0);
 } else {
   $pdf->cell(20, $alt, db_formatar(0, 'f'), "TBL", 0, "R", 0);
 }
@@ -642,9 +642,9 @@ $pdf->cell($iLarguraColunaValor, $alt,  db_formatar( $aTotalDespCorrente['prevat
 $pdf->cell($iLarguraColunaValor, $alt,  db_formatar( $aTotalDespCorrente['bimestre'], 'f'), "L", 0, "R", 0);
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt,db_formatar($aTotalDespCorrente['rpNaoProcessado'], 'f'), "L", 0, "R", 0);
-  $nTotalPercCorrente = ( ( ( $aTotalDespCorrente['bimestre'] + $aTotalDespCorrente['rpNaoProcessado'] ) * 100 ) / $aTotalDespCorrente['prevatu'] );
+  $nTotalPercCorrente = ( (float) $aTotalDespCorrente['prevatu'] == 0 ? (float) (($aTotalDespCorrente['bimestre'] + $aTotalDespCorrente['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($aTotalDespCorrente['bimestre'] + $aTotalDespCorrente['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($aTotalDespCorrente['bimestre'] + $aTotalDespCorrente['rpNaoProcessado']) * 100 / $aTotalDespCorrente['prevatu'] );
 }else{
-@  $nTotalPercCorrente = ( ( $aTotalDespCorrente['bimestre'] * 100 ) / @$aTotalDespCorrente['prevatu'] );
+@  $nTotalPercCorrente = ( (float) @$aTotalDespCorrente['prevatu'] == 0 ? (float) ($aTotalDespCorrente['bimestre'] * 100) > 0 ? INF : ((float) ($aTotalDespCorrente['bimestre'] * 100) < 0 ? -INF : NAN) : $aTotalDespCorrente['bimestre'] * 100 / @$aTotalDespCorrente['prevatu'] );
 }
 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar( $nTotalPercCorrente, 'f'), 'L', 1, "R", 0);
@@ -655,9 +655,9 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['1']['prevatu'], 'f'), 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['1']['bimestre'], 'f'), "L", 0, "R", 0);
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['1']['rpNaoProcessado'], 'f'), "L", 0, "R", 0);
-  @$nPercCorPessoalEncargos = ( ( ( $desp ['1']['bimestre'] + $desp['1']['rpNaoProcessado'] ) * 100 ) / $desp['1']['prevatu'] );
+  @$nPercCorPessoalEncargos = ( (float) $desp['1']['prevatu'] == 0 ? (float) (($desp ['1']['bimestre'] + $desp['1']['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($desp ['1']['bimestre'] + $desp['1']['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($desp ['1']['bimestre'] + $desp['1']['rpNaoProcessado']) * 100 / $desp['1']['prevatu'] );
 }else{
-  @$nPercCorPessoalEncargos = ( ($desp ['1']['bimestre'] * 100 ) / $desp['1']['prevatu'] );
+  @$nPercCorPessoalEncargos = ( (float) $desp['1']['prevatu'] == 0 ? (float) ($desp ['1']['bimestre'] * 100) > 0 ? INF : ((float) ($desp ['1']['bimestre'] * 100) < 0 ? -INF : NAN) : $desp ['1']['bimestre'] * 100 / $desp['1']['prevatu'] );
 }
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($nPercCorPessoalEncargos, 'f'), 'L', 1, "R", 0);
 
@@ -667,9 +667,9 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['2']['prevatu'], 'f'), 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['2']['bimestre'], 'f'), "L", 0, "R", 0);
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['2']['rpNaoProcessado'], 'f'), "L", 0, "R", 0);
-  @$nPercJurosEncDivida = ( ( ( $desp['2']['bimestre'] + $desp['2']['rpNaoProcessado'] ) * 100 ) / $desp ['2'] ['prevatu']);
+  @$nPercJurosEncDivida = ( (float) $desp ['2'] ['prevatu'] == 0 ? (float) (($desp['2']['bimestre'] + $desp['2']['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($desp['2']['bimestre'] + $desp['2']['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($desp['2']['bimestre'] + $desp['2']['rpNaoProcessado']) * 100 / $desp ['2'] ['prevatu']);
 }else{
-  @$nPercJurosEncDivida = ( ($desp['2']['bimestre'] * 100 ) / $desp ['2'] ['prevatu']);
+  @$nPercJurosEncDivida = ( (float) $desp ['2'] ['prevatu'] == 0 ? (float) ($desp['2']['bimestre'] * 100) > 0 ? INF : ((float) ($desp['2']['bimestre'] * 100) < 0 ? -INF : NAN) : $desp['2']['bimestre'] * 100 / $desp ['2'] ['prevatu']);
 }
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($nPercJurosEncDivida, 'f'), 'L', 1, "R", 0);
 
@@ -679,9 +679,9 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp ['3'] ['prevatu'], 'f')
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp ['3'] ['bimestre'], 'f'), "L", 0, "R", 0);
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['3']['rpNaoProcessado'], 'f'), "L", 0, "R", 0);
-  @$nPercOutrasDespCor = ( ( ( $desp['3']['bimestre'] + $desp['3']['rpNaoProcessado'] ) * 100 ) / $desp['3']['prevatu'] );
+  @$nPercOutrasDespCor = ( (float) $desp['3']['prevatu'] == 0 ? (float) (($desp['3']['bimestre'] + $desp['3']['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($desp['3']['bimestre'] + $desp['3']['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($desp['3']['bimestre'] + $desp['3']['rpNaoProcessado']) * 100 / $desp['3']['prevatu'] );
 }else{
-  @$nPercOutrasDespCor = ( ($desp['3']['bimestre'] * 100 ) / $desp['3']['prevatu'] );
+  @$nPercOutrasDespCor = ( (float) $desp['3']['prevatu'] == 0 ? (float) ($desp['3']['bimestre'] * 100) > 0 ? INF : ((float) ($desp['3']['bimestre'] * 100) < 0 ? -INF : NAN) : $desp['3']['bimestre'] * 100 / $desp['3']['prevatu'] );
 }
 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($nPercOutrasDespCor, 'f'), 'L', 1, "R", 0);
@@ -697,9 +697,9 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($aTotalDespCapital['prevatu']
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($aTotalDespCapital['bimestre'], 'f'),"L",0,"R",0);
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($aTotalDespCapital['rpNaoProcessado'], 'f'), "L", 0, "R", 0);
-  @$nTotalPercDespCapital = ( ( ( $aTotalDespCapital['bimestre'] + $aTotalDespCapital['rpNaoProcessado'] ) * 100 ) / $aTotalDespCapital['prevatu'] );
+  @$nTotalPercDespCapital = ( (float) $aTotalDespCapital['prevatu'] == 0 ? (float) (($aTotalDespCapital['bimestre'] + $aTotalDespCapital['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($aTotalDespCapital['bimestre'] + $aTotalDespCapital['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($aTotalDespCapital['bimestre'] + $aTotalDespCapital['rpNaoProcessado']) * 100 / $aTotalDespCapital['prevatu'] );
 }else{
-  @$nTotalPercDespCapital = ( ( $aTotalDespCapital['bimestre']  * 100 ) / $aTotalDespCapital['prevatu'] );
+  @$nTotalPercDespCapital = ( (float) $aTotalDespCapital['prevatu'] == 0 ? (float) ($aTotalDespCapital['bimestre'] * 100) > 0 ? INF : ((float) ($aTotalDespCapital['bimestre'] * 100) < 0 ? -INF : NAN) : $aTotalDespCapital['bimestre'] * 100 / $aTotalDespCapital['prevatu'] );
 }
 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar( $nTotalPercDespCapital, 'f'), 'L', 1, "R", 0);
@@ -710,9 +710,9 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['4']['prevatu'], 'f'), 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['4']['bimestre'], 'f'), "L", 0, "R", 0);
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['4']['rpNaoProcessado'], 'f'), "L", 0, "R", 0);
-  @$nPercInvest = ( ( ( $desp['4']['bimestre'] + $desp['4']['rpNaoProcessado'] ) * 100 ) / $desp['4']['prevatu'] );
+  @$nPercInvest = ( (float) $desp['4']['prevatu'] == 0 ? (float) (($desp['4']['bimestre'] + $desp['4']['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($desp['4']['bimestre'] + $desp['4']['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($desp['4']['bimestre'] + $desp['4']['rpNaoProcessado']) * 100 / $desp['4']['prevatu'] );
 }else{
-  @$nPercInvest = ( ( $desp['4']['bimestre'] * 100 ) / $desp['4']['prevatu'] );
+  @$nPercInvest = ( (float) $desp['4']['prevatu'] == 0 ? (float) ($desp['4']['bimestre'] * 100) > 0 ? INF : ((float) ($desp['4']['bimestre'] * 100) < 0 ? -INF : NAN) : $desp['4']['bimestre'] * 100 / $desp['4']['prevatu'] );
 }
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar( $nPercInvest, 'f'), 'L', 1, "R", 0);
 
@@ -722,9 +722,9 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['5']['prevatu'], 'f'), 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['5']['bimestre'], 'f'), "L", 0, "R", 0);
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['5']['rpNaoProcessado'], 'f'), "L", 0, "R", 0);
-  @$nPercInvFin = ( ( ( $desp['5']['bimestre'] + $desp['5']['rpNaoProcessado'] ) * 100 ) / $desp['5']['prevatu'] );
+  @$nPercInvFin = ( (float) $desp['5']['prevatu'] == 0 ? (float) (($desp['5']['bimestre'] + $desp['5']['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($desp['5']['bimestre'] + $desp['5']['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($desp['5']['bimestre'] + $desp['5']['rpNaoProcessado']) * 100 / $desp['5']['prevatu'] );
 }else{
-  @$nPercInvFin = ( ( $desp['5']['bimestre'] * 100 ) / $desp['5']['prevatu'] );
+  @$nPercInvFin = ( (float) $desp['5']['prevatu'] == 0 ? (float) ($desp['5']['bimestre'] * 100) > 0 ? INF : ((float) ($desp['5']['bimestre'] * 100) < 0 ? -INF : NAN) : $desp['5']['bimestre'] * 100 / $desp['5']['prevatu'] );
 }
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($nPercInvFin, 'f'), 'L', 1, "R", 0);
 
@@ -734,9 +734,9 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['6']['prevatu'], 'f'), 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['6']['bimestre'], 'f'), "L", 0, "R", 0);
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp['6']['rpNaoProcessado'], 'f'), "L", 0, "R", 0);
-  @$nPercRpExeFin = ( ( ( $desp['6']['bimestre'] + $desp['6']['rpNaoProcessado'] ) * 100 ) / $desp['6']['prevatu'] );
+  @$nPercRpExeFin = ( (float) $desp['6']['prevatu'] == 0 ? (float) (($desp['6']['bimestre'] + $desp['6']['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($desp['6']['bimestre'] + $desp['6']['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($desp['6']['bimestre'] + $desp['6']['rpNaoProcessado']) * 100 / $desp['6']['prevatu'] );
 }else{
-  @$nPercRpExeFin = ( ( $desp['6']['bimestre'] * 100 ) / $desp['6']['prevatu'] );
+  @$nPercRpExeFin = ( (float) $desp['6']['prevatu'] == 0 ? (float) ($desp['6']['bimestre'] * 100) > 0 ? INF : ((float) ($desp['6']['bimestre'] * 100) < 0 ? -INF : NAN) : $desp['6']['bimestre'] * 100 / $desp['6']['prevatu'] );
 }
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($nPercRpExeFin, 'f'), 'L', 1, "R", 0);
 
@@ -758,7 +758,7 @@ if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, "", "TB", 0, "R", 0);
 }
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($total_IV_atebim+$total_IV_rp, 'f'), "TB", 0, "R", 0);
-@$nPercTotalIV = ( ( $total_IV_atebim * 100 ) / $total_IV_atu+$total_IV_rp );
+@$nPercTotalIV = ( ((float) $total_IV_atu == 0 ? (float) ($total_IV_atebim * 100) > 0 ? INF : ((float) ($total_IV_atebim * 100) < 0 ? -INF : NAN) : $total_IV_atebim * 100 / $total_IV_atu)+$total_IV_rp );
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($nPercTotalIV, 'f'), "LTB", 1, "R", 0);
 
 // ------------------------------- * --------------------------- * ------------------------------- *  --------------
@@ -814,9 +814,9 @@ if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($total_IV_rp, 'f'), "L", 0, "R", 0);
 //  $pdf->cell($iLarguraColunaValor, $alt, "sdfsddsf", "L", 0, "R", 0);
 
-  @$nTotalPercIV = ( ( ( $total_IV_atebim  ) * 100 ) / $total_IV_atebim);
+  @$nTotalPercIV = ( (float) $total_IV_atebim == 0 ? (float) ($total_IV_atebim * 100) > 0 ? INF : ((float) ($total_IV_atebim * 100) < 0 ? -INF : NAN) : $total_IV_atebim * 100 / $total_IV_atebim);
 }else{
-  @$nTotalPercIV = ($total_IV_atebim * 100) / $total_IV_atebim;
+  @$nTotalPercIV = (float) $total_IV_atebim == 0 ? (float) ($total_IV_atebim * 100) > 0 ? INF : ((float) ($total_IV_atebim * 100) < 0 ? -INF : NAN) : $total_IV_atebim * 100 / $total_IV_atebim;
 }
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($nTotalPercIV, 'f'), "L", 1, "R", 0);
 if ($lGeraColunaRps) {
@@ -829,9 +829,9 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[1]['bimestre'],'f'), 
 
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[1]['rpNaoProcessado'], 'f'), "L", 0, "R", 0);
-  @$nPercInatPen = ( ( ( $desp_p[1]['bimestre'] + $desp_p[1]['rpNaoProcessado'] ) * 100 ) / $total_IV_atebim );
+  @$nPercInatPen = ( (float) $total_IV_atebim == 0 ? (float) (($desp_p[1]['bimestre'] + $desp_p[1]['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($desp_p[1]['bimestre'] + $desp_p[1]['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($desp_p[1]['bimestre'] + $desp_p[1]['rpNaoProcessado']) * 100 / $total_IV_atebim );
 }else{
-  @$nPercInatPen = ( ( $desp_p[1]['bimestre'] * 100 ) / $total_IV_atebim );
+  @$nPercInatPen = ( (float) $total_IV_atebim == 0 ? (float) ($desp_p[1]['bimestre'] * 100) > 0 ? INF : ((float) ($desp_p[1]['bimestre'] * 100) < 0 ? -INF : NAN) : $desp_p[1]['bimestre'] * 100 / $total_IV_atebim );
 }
 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($nPercInatPen, 'f'), 'L', 1, "R", 0);
@@ -862,11 +862,11 @@ if ($lGeraColunaRps) {
   //$pdf->cell($iLarguraColunaValor, $alt, db_formatar($aTotalDespCustRecSaude['rpNaoProcessado'], 'f'), "L", 0, "R", 0); // se for semestre
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($iDespCusteadaOutrosRecursosNaoProc, 'f'), "L", 0, "R", 0);
 
-  @$nPercDespCustRecSaude = ( ( ( $aTotalDespCustRecSaude['bimestre'] + $aTotalDespCustRecSaude['rpNaoProcessado'] ) * 100 ) / $total_IV_atebim );
+  @$nPercDespCustRecSaude = ( (float) $total_IV_atebim == 0 ? (float) (($aTotalDespCustRecSaude['bimestre'] + $aTotalDespCustRecSaude['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($aTotalDespCustRecSaude['bimestre'] + $aTotalDespCustRecSaude['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($aTotalDespCustRecSaude['bimestre'] + $aTotalDespCustRecSaude['rpNaoProcessado']) * 100 / $total_IV_atebim );
 
 }else{
 
-  @$nPercDespCustRecSaude = ( ( $aTotalDespCustRecSaude['bimestre'] * 100 ) / $total_IV_atebim );
+  @$nPercDespCustRecSaude = ( (float) $total_IV_atebim == 0 ? (float) ($aTotalDespCustRecSaude['bimestre'] * 100) > 0 ? INF : ((float) ($aTotalDespCustRecSaude['bimestre'] * 100) < 0 ? -INF : NAN) : $aTotalDespCustRecSaude['bimestre'] * 100 / $total_IV_atebim );
 }
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($nPercDespCustRecSaude, 'f'), 'L', 1, "R", 0);           // Total a Verificar
 
@@ -876,9 +876,9 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[2]['prevatu'], 'f'), 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[2]['bimestre'], 'f'), "L", 0, "R", 0);              // Valor A3
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[2]['rpNaoProcessado'], 'f'), "L", 0, "R", 0);   // Valor A4
-  @$nPercTransSUS = ( ( ( $desp_p[2]['bimestre'] + $desp_p[2]['rpNaoProcessado'] ) * 100 ) / $total_IV_atebim );
+  @$nPercTransSUS = ( (float) $total_IV_atebim == 0 ? (float) (($desp_p[2]['bimestre'] + $desp_p[2]['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($desp_p[2]['bimestre'] + $desp_p[2]['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($desp_p[2]['bimestre'] + $desp_p[2]['rpNaoProcessado']) * 100 / $total_IV_atebim );
 }else{
-  @$nPercTransSUS = ( ( $desp_p[2]['bimestre']* 100) / $total_IV_atebim );
+  @$nPercTransSUS = ( (float) $total_IV_atebim == 0 ? (float) ($desp_p[2]['bimestre'] * 100) > 0 ? INF : ((float) ($desp_p[2]['bimestre'] * 100) < 0 ? -INF : NAN) : $desp_p[2]['bimestre'] * 100 / $total_IV_atebim );
 }
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($nPercTransSUS, 'f'), 'L', 1, "R", 0);                    // Valor A5
 
@@ -888,9 +888,9 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[3]['prevatu'], 'f'), 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[3]['bimestre'], 'f'), "L", 0, "R", 0);             // Valor B3
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[3]['rpNaoProcessado'], 'f') , "L", 0, "R", 0);  // Valor B4
-  @$nPercOperCred = ( ( ( $desp_p[3]['bimestre'] + $desp_p[3]['rpNaoProcessado'] ) * 100 ) / $total_IV_atebim );
+  @$nPercOperCred = ( (float) $total_IV_atebim == 0 ? (float) (($desp_p[3]['bimestre'] + $desp_p[3]['rpNaoProcessado']) * 100) > 0 ? INF : ((float) (($desp_p[3]['bimestre'] + $desp_p[3]['rpNaoProcessado']) * 100) < 0 ? -INF : NAN) : ($desp_p[3]['bimestre'] + $desp_p[3]['rpNaoProcessado']) * 100 / $total_IV_atebim );
 }else{
-  @$nPercOperCred = (($desp_p[3]['bimestre'] * 100) / $total_IV_atebim);
+  @$nPercOperCred = ((float) $total_IV_atebim == 0 ? (float) ($desp_p[3]['bimestre'] * 100) > 0 ? INF : ((float) ($desp_p[3]['bimestre'] * 100) < 0 ? -INF : NAN) : $desp_p[3]['bimestre'] * 100 / $total_IV_atebim);
 }
 //echo "({$desp_p[3]['bimestre']} * 100) / {$total_IV_atebim});";
 //exit;
@@ -902,14 +902,14 @@ $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[4]['prevatu'], 'f'), 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[4]['bimestre'], 'f'), "L", 0, "R", 0);            // Valor C3
 if ($lGeraColunaRps) {
   $pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[4]['rpNaoProcessado'], 'f'), "L", 0, "R", 0);   // Valor C4
-  @$nPercOutroRec = ( ( $desp_p[4]['bimestre'] + $desp_p[4]['rpNaoProcessado'] * 100 ) / $total_IV_atebim);
+  @$nPercOutroRec = ( (float) $total_IV_atebim == 0 ? (float) ($desp_p[4]['bimestre'] + $desp_p[4]['rpNaoProcessado'] * 100) > 0 ? INF : ((float) ($desp_p[4]['bimestre'] + $desp_p[4]['rpNaoProcessado'] * 100) < 0 ? -INF : NAN) : ($desp_p[4]['bimestre'] + $desp_p[4]['rpNaoProcessado'] * 100) / $total_IV_atebim);
 }else{
-  @$nPercOutroRec = ( ( $desp_p[4]['bimestre'] * 100 ) / $total_IV_atebim );
+  @$nPercOutroRec = ( (float) $total_IV_atebim == 0 ? (float) ($desp_p[4]['bimestre'] * 100) > 0 ? INF : ((float) ($desp_p[4]['bimestre'] * 100) < 0 ? -INF : NAN) : $desp_p[4]['bimestre'] * 100 / $total_IV_atebim );
 }
-@$pdf->cell($iLarguraColunaValor, $alt, db_formatar($desp_p[4]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0); // Valor C5
+@$pdf->cell($iLarguraColunaValor, $alt, db_formatar((float) $total_IV_atebim == 0 ? (float) ($desp_p[4]['bimestre'] * 100) > 0 ? INF : ((float) ($desp_p[4]['bimestre'] * 100) < 0 ? -INF : NAN) : $desp_p[4]['bimestre'] * 100 / $total_IV_atebim, 'f'), 'L', 1, "R", 0); // Valor C5
 
 $perc_rp = 0;
-@ $perc_rp = ($VARIAVEL_COMPENSACAO) * 100 / $total_IV_atebim;
+@ $perc_rp = (float) $total_IV_atebim == 0 ? (float) ($VARIAVEL_COMPENSACAO * 100) > 0 ? INF : ((float) ($VARIAVEL_COMPENSACAO * 100) < 0 ? -INF : NAN) : $VARIAVEL_COMPENSACAO * 100 / $total_IV_atebim;
 
 $pdf->cell($iLarguraColunaDescr, $alt, "(-)RP INSCRITOS NO EXERCÍCIO SEM DISPONIBILIDADE FINANCEIRA DE REC.PROPRIOS VINCULADOS", "0", 0, "L", 0);
 $pdf->cell($iLarguraColunaValor, $alt, '-', "L", 0, "R", 0);
@@ -936,7 +936,7 @@ if ($lGeraColunaRps) {
 
 $pdf->cell($iLarguraColunaValor, $alt, db_formatar($total_V_atebim, 'f'), "TB", 0, "R", 0);
 
-@$pdf->cell($iLarguraColunaValor, $alt, db_formatar(($total_V_atebim / $total_IV_atebimfinal) * 100, 'f'), "TBL", 1, "R", 0);
+@$pdf->cell($iLarguraColunaValor, $alt, db_formatar(((float) $total_IV_atebimfinal == 0 ? (float) $total_V_atebim > 0 ? INF : ((float) $total_V_atebim < 0 ? -INF : NAN) : $total_V_atebim / $total_IV_atebimfinal) * 100, 'f'), "TBL", 1, "R", 0);
 $pdf->Ln(4);
 
 //-------------------------------------RESTOS APAGAR-------------------------------------------------------------------------------
@@ -964,7 +964,7 @@ $pdf->cell(20, $alt, db_formatar($cancelado, 'f'), "LB", 1, "R", 0);
 
 $pdf->Ln(2);
 
-$t_participacao = @( ( abs($total_V_atebim - $cancelado) / $total_I_atebim ) * 100 );
+$nDivA = abs($total_V_atebim - $cancelado); $t_participacao = @( ( ((float) $total_I_atebim == 0 ? ((float) $nDivA > 0 ? INF : ((float) $nDivA < 0 ? -INF : NAN)) : $nDivA / $total_I_atebim) ) * 100 );
 $t_cancelado_rp = $cancelado;
 $pdf->cell(170,$alt, "PARTICIPAÇÃO DAS DESPESAS COM AÇÕES E SERVIÇOS PÚBLICOS DE SAÚDE NA RECEITA DE IMPOSTOS LÍQUIDA E TRANSFERÊNCIAS", "TR", 0, "L", 0);
 $pdf->cell(20, $alt, "", "TL", 1, "R", 0);
@@ -1007,7 +1007,7 @@ for($i = 1; $i <= 7; $i ++) {
   if ($lGeraColunaRps) {
      $m_desp_subfunc[$i]["bimestre"] += $m_desp_subfunc[$i]["restos"];
   }
-  $nPercentualLinha = @(($m_desp_subfunc[$i]["bimestre"]/$total_acum)*100);
+  $nPercentualLinha = @(((float) $total_acum == 0 ? (float) $m_desp_subfunc[$i]["bimestre"] > 0 ? INF : ((float) $m_desp_subfunc[$i]["bimestre"] < 0 ? -INF : NAN) : $m_desp_subfunc[$i]["bimestre"] / $total_acum)*100);
   @$pdf->cell($iLarguraColunaValor, $alt, db_formatar($nPercentualLinha, 'f'), "L", 1, "R", 0);
 
 }

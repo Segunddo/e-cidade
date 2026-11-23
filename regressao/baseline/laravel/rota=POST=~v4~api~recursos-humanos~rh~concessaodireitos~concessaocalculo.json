@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/concessaodireitos/concessaocalculo",
+  "json": {
+    "error": true,
+    "message": "Undefined index: assentconf"
+  },
+  "sha256": "389d23ce069ae391000f49fb76701719f026cf565fae22e70b68169daea110da",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

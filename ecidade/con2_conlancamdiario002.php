@@ -74,7 +74,7 @@ $sSql .= "where c69_data between '{$data_ini}' and '{$data_fim}'                
 $sSql .= "order by c69_data, c69_codlan                                               ";
 
 $rsLancamentos     = db_query($sSql);
-$iQtdLancamentos   = pg_numrows($rsLancamentos);
+$iQtdLancamentos   = ($rsLancamentos ? pg_numrows($rsLancamentos) : null);
 if ($rsLancamentos==false){
  db_redireciona('db_erros.php?fechar=true&db_erro=Nenhum registro encontrado');     
 }
@@ -87,7 +87,7 @@ $rsInstituicoes = db_query($sSqlInstituicoes);
 
 $sDescricaoInstituicoes = '';
 $sVirgula = '';
-for($xins = 0; $xins < pg_numrows($rsInstituicoes); $xins++){
+for($xins = 0; $xins < ($rsInstituicoes ? pg_numrows($rsInstituicoes) : null); $xins++){
     $oDadosInstit = db_utils::fieldsMemory($rsInstituicoes,$xins);
     $sDescricaoInstituicoes .= $sVirgula.$oDadosInstit->nomeinst ;
     $sVirgula = ',';

@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/consulta/orcamentario/despesa/padrao",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Contas encontradas."
+  },
+  "sha256": "a316cc265ca4a746b2925f36c1b895fac8fc1d02dcfe64237d303c83e51d9e27",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

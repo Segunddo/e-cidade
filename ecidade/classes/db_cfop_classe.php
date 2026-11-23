@@ -71,12 +71,12 @@ class cl_cfop {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e10_sequencial = ($this->e10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e10_sequencial"]:$this->e10_sequencial);
-       $this->e10_cfop = ($this->e10_cfop == ""?@$GLOBALS["HTTP_POST_VARS"]["e10_cfop"]:$this->e10_cfop);
+       $this->e10_sequencial = ($this->e10_sequencial === 0 || $this->e10_sequencial === 0.0 || $this->e10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e10_sequencial"]:$this->e10_sequencial);
+       $this->e10_cfop = ($this->e10_cfop === 0 || $this->e10_cfop === 0.0 || $this->e10_cfop == ""?@$GLOBALS["HTTP_POST_VARS"]["e10_cfop"]:$this->e10_cfop);
        $this->e10_descricao = ($this->e10_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["e10_descricao"]:$this->e10_descricao);
-       $this->e10_tipo = ($this->e10_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e10_tipo"]:$this->e10_tipo);
+       $this->e10_tipo = ($this->e10_tipo === 0 || $this->e10_tipo === 0.0 || $this->e10_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e10_tipo"]:$this->e10_tipo);
      }else{
-       $this->e10_sequencial = ($this->e10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e10_sequencial"]:$this->e10_sequencial);
+       $this->e10_sequencial = ($this->e10_sequencial === 0 || $this->e10_sequencial === 0.0 || $this->e10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e10_sequencial"]:$this->e10_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_cfop {
          $this->e10_sequencial = $e10_sequencial;
        }
      }
-     if(($this->e10_sequencial == null) || ($this->e10_sequencial == "") ){
+     if(($this->e10_sequencial == null) || ($this->e10_sequencial === 0 || $this->e10_sequencial === 0.0 || $this->e10_sequencial == "") ){
        $this->erro_sql = " Campo e10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

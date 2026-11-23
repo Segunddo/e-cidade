@@ -76,7 +76,7 @@ class cl_partilhaarquivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v78_sequencial = ($this->v78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_sequencial"]:$this->v78_sequencial);
+       $this->v78_sequencial = ($this->v78_sequencial === 0 || $this->v78_sequencial === 0.0 || $this->v78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_sequencial"]:$this->v78_sequencial);
        $this->v78_nomearq = ($this->v78_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_nomearq"]:$this->v78_nomearq);
        if($this->v78_dtgeracao == ""){
          $this->v78_dtgeracao_dia = ($this->v78_dtgeracao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_dtgeracao_dia"]:$this->v78_dtgeracao_dia);
@@ -86,10 +86,10 @@ class cl_partilhaarquivo {
             $this->v78_dtgeracao = $this->v78_dtgeracao_ano."-".$this->v78_dtgeracao_mes."-".$this->v78_dtgeracao_dia;
          }
        }
-       $this->v78_tipoarq = ($this->v78_tipoarq == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_tipoarq"]:$this->v78_tipoarq);
-       $this->v78_arquivo = ($this->v78_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_arquivo"]:$this->v78_arquivo);
+       $this->v78_tipoarq = ($this->v78_tipoarq === 0 || $this->v78_tipoarq === 0.0 || $this->v78_tipoarq == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_tipoarq"]:$this->v78_tipoarq);
+       $this->v78_arquivo = ($this->v78_arquivo === 0 || $this->v78_arquivo === 0.0 || $this->v78_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_arquivo"]:$this->v78_arquivo);
      }else{
-       $this->v78_sequencial = ($this->v78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_sequencial"]:$this->v78_sequencial);
+       $this->v78_sequencial = ($this->v78_sequencial === 0 || $this->v78_sequencial === 0.0 || $this->v78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v78_sequencial"]:$this->v78_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_partilhaarquivo {
          $this->v78_sequencial = $v78_sequencial;
        }
      }
-     if(($this->v78_sequencial == null) || ($this->v78_sequencial == "") ){
+     if(($this->v78_sequencial == null) || ($this->v78_sequencial === 0 || $this->v78_sequencial === 0.0 || $this->v78_sequencial == "") ){
        $this->erro_sql = " Campo v78_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

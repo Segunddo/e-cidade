@@ -73,13 +73,13 @@ class cl_db_modulos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
        $this->nome_modulo = ($this->nome_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["nome_modulo"]:$this->nome_modulo);
        $this->descr_modulo = ($this->descr_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["descr_modulo"]:$this->descr_modulo);
        $this->imagem = ($this->imagem == ""?@$GLOBALS["HTTP_POST_VARS"]["imagem"]:$this->imagem);
        $this->temexerc = ($this->temexerc == "f"?@$GLOBALS["HTTP_POST_VARS"]["temexerc"]:$this->temexerc);
      }else{
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
      }
    }
    // funcao para inclusao
@@ -122,7 +122,7 @@ class cl_db_modulos {
        return false;
      }
        $this->id_item = $id_item;
-     if(($this->id_item == null) || ($this->id_item == "") ){
+     if(($this->id_item == null) || ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == "") ){
        $this->erro_sql = " Campo id_item nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

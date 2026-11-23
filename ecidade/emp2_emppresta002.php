@@ -42,7 +42,7 @@ $clrotulo->label('e44_descr');
 $clrotulo->label('z01_nome');
 $clrotulo->label('e60_codemp');
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $valortotal = 0;
@@ -103,7 +103,7 @@ $sql = $clemppresta->sql_query_prest_contas(null, $campos,  null, $where);
 $result = db_query($sql);
 
 //echo $sql; die();
-if (pg_num_rows($result) == 0){
+if (($result ? pg_num_rows($result) : null) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 }
 
@@ -129,7 +129,7 @@ $total = 0;
 $RLe45_acerta = str_replace(['de ', 'da '], '',$RLe45_acerta);
 $RLe45_numemp = "Seq. Empenho";
 
-for($x = 0; $x < pg_num_rows($result);$x++){
+for($x = 0; $x < ($result ? pg_num_rows($result) : null);$x++){
 
    db_fieldsmemory($result,$x);
    $pdf->setfont('arial','b',8);
@@ -186,7 +186,7 @@ for($x = 0; $x < pg_num_rows($result);$x++){
    $result_itens = db_query($sqlItens );
 
    $troca = 1;
-   for($y = 0; $y < pg_num_rows($result_itens);$y++){
+   for($y = 0; $y < ($result_itens ? pg_num_rows($result_itens) : null);$y++){
      db_fieldsmemory($result_itens,$y);
      if ($pdf->gety() > $pdf->h - 30 || $troca!=0) {
         if ($troca==0) {

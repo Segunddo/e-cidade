@@ -1,0 +1,57 @@
+# Catalogo de relatorios por GET (nivel 4). Colunas: tela<TAB>query<TAB>tipo (html|pdf|xls|doc)<TAB>area<TAB>status
+# status (5a coluna, OBRIGATORIA; so 'verificado' ou 'nao-verificado'): 'verificado' = o caso e VALIDO e o veredito e confiavel:
+#   ao vivo, o lado de referencia (PHP 7.4) devolveu 200 com conteudo extraido nao vazio e correto (o caso e de fato exercitado),
+#   seja qual for o veredito final. 'nao-verificado' = nao confiavel (so formulario/cabecalho, vazio, ilegivel, erro tambem na referencia).
+#   Uma linha 'verificado' com veredito DIVERGE e um achado da migracao: e esperado que a bateria saia com codigo 1 ate corrigir.
+# Formatos reais do e-cidade: PDF (FPDF, rodape com hora de emissao); "xls" = CSV ';' em tmp/ servido por db_download.php (text/csv);
+# consulta HTML = func_*.php. Nao ha .xls/.xlsx binario servido por GET fixo (os arquivos de tmp/ tem nome com timestamp).
+# REVERIFICADO AO VIVO na base 7.4 (2026-11-18, dump baseline restaurado, referencia ecidade74_php74 x ecidade74_php85), linha a linha:
+#   37 verificado: 36 DIVERGE (referencia=200 PDF com texto x 8.5=500) + func_orcfuncao IDENTICO. Quase todo PDF cai no 8.5 pela mesma
+#   causa: ParseError em fpdf151/fpdf.php:614 (offset com chaves `$s{i}`, removido no PHP 8); orc2_anexo1002 tambem chama parse_str()
+#   com 1 argumento. Sao achados reais (um conserto mecanico no fpdf151 deve virar muitos destes em IDENTICO).
+#   cem2_renovacoes segue verificado com EVIDENCIA FRACA (o PDF e um modelo em branco, igual com ou sem `cod`).
+#   nao-verificado: os 3 db_download.php (302: os CSVs nao existem em ecidade/tmp/ da base 7.4; as linhas dependiam de arquivos
+#   gerados no ambiente antigo), orc2_despsecretaria002 (500 na propria referencia: "FPDF error: No page has been added yet") e
+#   func_cgm (so a pagina de pesquisa/JS, sem dados do CGM; no 8.5 da 500 por parse_str() com 1 argumento).
+orc2_cadorcsubfuncao002.php		pdf	orcamento	verificado
+orc2_cadorcfuncao002.php		pdf	orcamento	verificado
+com2_pctipocompra002.php		pdf	compras	verificado
+con2_consistenciaplano002.php		pdf	contabilidade	verificado
+iss2_tipcalc002.php		pdf	tributario	verificado
+iss2_cadcal002.php		pdf	tributario	verificado
+iss2_tiponotas002.php		pdf	tributario	verificado
+pro2_andpadrao002.php		pdf	protocolo	verificado
+mat2_cadunidade002.php		pdf	almoxarifado	verificado
+prot2_cadcgm002.php		pdf	configuracao	verificado
+con2_relinstituicoes002.php		pdf	configuracao	verificado
+con2_conhist002.php		pdf	contabilidade	verificado
+con2_conhistdoc002.php		pdf	contabilidade	verificado
+con2_balancrece002.php		pdf	contabilidade	verificado
+cem2_renovacoes.php		pdf	cemiterio	verificado
+db_download.php	arquivo=tmp/con2_balancdespsinteticocsv002.csv	xls	contabilidade	nao-verificado
+db_download.php	arquivo=tmp/balrec.csv	xls	contabilidade	nao-verificado
+db_download.php	arquivo=tmp/con2_balancverificacaocsv002.csv	xls	contabilidade	nao-verificado
+func_orcfuncao.php	funcao_js=x	html	orcamento	verificado
+func_cgm.php	funcao_js=x	html	configuracao	nao-verificado
+con2_balancdespele002.php		pdf	financeiro	verificado
+con2_balancrecu002.php		pdf	financeiro	verificado
+con2_contasrecdesp002.php		pdf	financeiro	verificado
+con2_razaoempenhos002.php		pdf	financeiro	verificado
+con2_relrec002.php		pdf	financeiro	verificado
+emp2_emprelcredor002.php		pdf	financeiro	verificado
+emp2_empnotas002.php		pdf	financeiro	verificado
+orc2_anexo1002.php		pdf	financeiro	verificado
+orc2_desppessoal002.php		pdf	financeiro	verificado
+cai2_relrecdesp002.php		pdf	financeiro	verificado
+orc2_despsecretaria002.php		pdf	financeiro	nao-verificado
+iss2_atividade002.php		pdf	tributario	verificado
+iss2_classes002.php		pdf	tributario	verificado
+iss2_ativtipo002.php		pdf	tributario	verificado
+cad2_loteam002.php		pdf	tributario	verificado
+cad2_carface002.php		pdf	tributario	verificado
+arr2_relatoriodevolucoes002.php		pdf	tributario	verificado
+arr2_relatoriocompensacoes002.php		pdf	tributario	verificado
+div2_resumogeraldivida002.php		pdf	tributario	verificado
+fis2_tipoandamento002.php		pdf	tributario	verificado
+jur2_numproc002.php		pdf	tributario	verificado
+agu2_relconsumo002.php		pdf	tributario	verificado

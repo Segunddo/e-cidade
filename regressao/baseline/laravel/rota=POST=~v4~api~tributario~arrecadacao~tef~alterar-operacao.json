@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/arrecadacao/tef/alterar-operacao",
+  "json": {
+    "errors": {
+      "DB_coddepto": [
+        "Código do departamentro não informado."
+      ],
+      "sequencial": [
+        "Sequencial não informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "c0871407b6f67df47827994ae614a36e5614ff60caf93536a57bb322a08a3ab0",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

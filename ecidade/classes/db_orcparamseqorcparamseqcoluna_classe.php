@@ -85,15 +85,15 @@ class cl_orcparamseqorcparamseqcoluna
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->o116_sequencial = ($this->o116_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_sequencial"] : $this->o116_sequencial);
-            $this->o116_codseq = ($this->o116_codseq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_codseq"] : $this->o116_codseq);
-            $this->o116_codparamrel = ($this->o116_codparamrel == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_codparamrel"] : $this->o116_codparamrel);
-            $this->o116_orcparamseqcoluna = ($this->o116_orcparamseqcoluna == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_orcparamseqcoluna"] : $this->o116_orcparamseqcoluna);
-            $this->o116_ordem = ($this->o116_ordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_ordem"] : $this->o116_ordem);
-            $this->o116_periodo = ($this->o116_periodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_periodo"] : $this->o116_periodo);
+            $this->o116_sequencial = ($this->o116_sequencial === 0 || $this->o116_sequencial === 0.0 || $this->o116_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_sequencial"] : $this->o116_sequencial);
+            $this->o116_codseq = ($this->o116_codseq === 0 || $this->o116_codseq === 0.0 || $this->o116_codseq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_codseq"] : $this->o116_codseq);
+            $this->o116_codparamrel = ($this->o116_codparamrel === 0 || $this->o116_codparamrel === 0.0 || $this->o116_codparamrel == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_codparamrel"] : $this->o116_codparamrel);
+            $this->o116_orcparamseqcoluna = ($this->o116_orcparamseqcoluna === 0 || $this->o116_orcparamseqcoluna === 0.0 || $this->o116_orcparamseqcoluna == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_orcparamseqcoluna"] : $this->o116_orcparamseqcoluna);
+            $this->o116_ordem = ($this->o116_ordem === 0 || $this->o116_ordem === 0.0 || $this->o116_ordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_ordem"] : $this->o116_ordem);
+            $this->o116_periodo = ($this->o116_periodo === 0 || $this->o116_periodo === 0.0 || $this->o116_periodo == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_periodo"] : $this->o116_periodo);
             $this->o116_formula = ($this->o116_formula == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_formula"] : $this->o116_formula);
         } else {
-            $this->o116_sequencial = ($this->o116_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_sequencial"] : $this->o116_sequencial);
+            $this->o116_sequencial = ($this->o116_sequencial === 0 || $this->o116_sequencial === 0.0 || $this->o116_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o116_sequencial"] : $this->o116_sequencial);
         }
     }
 
@@ -174,7 +174,7 @@ class cl_orcparamseqorcparamseqcoluna
         } else {
             $this->o116_sequencial = $o116_sequencial;
         }
-        if (($this->o116_sequencial == null) || ($this->o116_sequencial == "")) {
+        if (($this->o116_sequencial == null) || ($this->o116_sequencial === 0 || $this->o116_sequencial === 0.0 || $this->o116_sequencial == "")) {
             $this->erro_sql = " Campo o116_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

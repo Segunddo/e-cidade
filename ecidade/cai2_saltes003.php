@@ -33,7 +33,7 @@ require_once modification("libs/db_conecta.php");
 require_once modification("libs/db_sessoes.php");
 
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $anousu = db_getsession("DB_anousu");
 $instit = db_getsession("DB_instit");

@@ -1,0 +1,49 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/pessoal/rhfuncao/list-regime",
+  "json": {
+    "data": [
+      {
+        "rh30_codreg": 1,
+        "rh30_descr": "ESTATUTARIO ATIVO",
+        "rh30_instit": 1
+      },
+      {
+        "rh30_codreg": 2,
+        "rh30_descr": "ESTATUTARIO INATIVO",
+        "rh30_instit": 1
+      },
+      {
+        "rh30_codreg": 3,
+        "rh30_descr": "PENSIONISTA",
+        "rh30_instit": 1
+      },
+      {
+        "rh30_codreg": 4,
+        "rh30_descr": "CLT TEMPORARIO",
+        "rh30_instit": 1
+      },
+      {
+        "rh30_codreg": 5,
+        "rh30_descr": "CARGO EM COMISSAO",
+        "rh30_instit": 1
+      },
+      {
+        "rh30_codreg": 6,
+        "rh30_descr": "CONTRATO TEMPORARIO",
+        "rh30_instit": 1
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "151a9aff76851755160029783394c201c3a3ddc45f414131700af6536a0d9213",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

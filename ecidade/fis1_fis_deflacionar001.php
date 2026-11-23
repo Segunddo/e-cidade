@@ -23,14 +23,14 @@ function Deflacionar_valores( $dtVencimento , $dtPagamento , $dValor , $sIntit )
   $cInfla = db_utils::fieldsMemory($rsGetReceita, 0)->k02_corr;
 
   /* -- [Pega Ano do Vencimento e o Ano do Pagamento] -- */
-  $sAnoVenc = substr( $dtVencimento , 6 , 10 );
-  $sAnoPag  = substr( $dtPagamento  , 6 , 10 );
+  $sAnoVenc = (strlen((string)$dtVencimento) < 6 ? false : substr( $dtVencimento , 6 , 10 ));
+  $sAnoPag  = (strlen((string)$dtPagamento) < 6 ? false : substr( $dtPagamento  , 6 , 10 ));
   /* -- [Pega Mes do Vencimento e o Mes do Pagamento] -- */
-  $sMesVenc = substr( $dtVencimento , 3 , 2 );
-  $sMesPag  = substr( $dtPagamento  , 3 , 2 );
+  $sMesVenc = (strlen((string)$dtVencimento) < 3 ? false : substr( $dtVencimento , 3 , 2 ));
+  $sMesPag  = (strlen((string)$dtPagamento) < 3 ? false : substr( $dtPagamento  , 3 , 2 ));
   
   /* -- [ Verifica sempre o mes anterior da competencia ] -- */
-  $sMesPag = ( $sMesPag - 1 );
+  $sMesPag = ( (int)$sMesPag - 1 );
   if( $sMesPag == 0){
     $sMesPag = 12;
     $sAnoPag = ( $sAnoPag - 1 );
@@ -67,7 +67,7 @@ function Deflacionar_valores( $dtVencimento , $dtPagamento , $dValor , $sIntit )
         $sSqlInflator .= "              AND  extract(month from infla.i02_data) = {$i}    ";
         $rsInflator = db_query( $sSqlInflator );
         $cValor     = db_utils::fieldsMemory($rsInflator, 0)->i02_valor;
-        $vDescorrigido = ($vDescorrigido/$cValor);
+        $vDescorrigido = ((float) $cValor == 0 ? (float) $vDescorrigido > 0 ? INF : ((float) $vDescorrigido < 0 ? -INF : NAN) : $vDescorrigido / $cValor);
 
     }
   }

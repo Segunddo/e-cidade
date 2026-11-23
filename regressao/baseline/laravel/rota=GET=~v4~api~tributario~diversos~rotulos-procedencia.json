@@ -1,0 +1,29 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/diversos/rotulos-procedencia",
+  "json": {
+    "data": {
+      "dv09_cobranca": "Tipo de Cobrança",
+      "dv09_descr": "Descrição",
+      "dv09_descra": "Descrição Abreviada",
+      "dv09_dtlimite": "Data limite",
+      "dv09_hist": "Histórico do Cálculo",
+      "dv09_instit": "Instituição",
+      "dv09_procdiver": "Procedência",
+      "dv09_proced": "Procedência da dívida",
+      "dv09_receit": "Receita",
+      "dv09_tipo": "Tipo de Débito"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "ad507203a8f782cee41f3964f5911c895df278155218c2a03925644ed539cd40",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

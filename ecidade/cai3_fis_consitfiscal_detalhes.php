@@ -34,7 +34,7 @@ include(modification("classes/db_fis_auto_classe.php"));
 include(modification("classes/db_fis_fiscal_classe.php"));
 include(modification("classes/db_fis_levanta_classe.php"));
 db_postmemory($HTTP_GET_VARS,0);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clvistorias = new cl_fis_vistorias;
 $clauto = new cl_fis_auto;
 $clfiscal = new cl_fis_fiscal;

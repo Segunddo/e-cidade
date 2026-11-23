@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/processo/processodocumento/documentosPorProcAndamInt",
+  "json": {
+    "errors": {
+      "codigoProcesso": [
+        "O campo codigo processo é obrigatório."
+      ],
+      "procandamint": [
+        "O campo procandamint é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "0b1eff855e8084dcc7d020fc8565ff8d0035f4af3ca067774f5e8e134692a60c",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

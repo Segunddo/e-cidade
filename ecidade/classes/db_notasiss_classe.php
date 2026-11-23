@@ -71,12 +71,12 @@ class cl_notasiss {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q09_codigo = ($this->q09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_codigo"]:$this->q09_codigo);
+       $this->q09_codigo = ($this->q09_codigo === 0 || $this->q09_codigo === 0.0 || $this->q09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_codigo"]:$this->q09_codigo);
        $this->q09_nota = ($this->q09_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_nota"]:$this->q09_nota);
        $this->q09_descr = ($this->q09_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_descr"]:$this->q09_descr);
-       $this->q09_gruponotaiss = ($this->q09_gruponotaiss == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_gruponotaiss"]:$this->q09_gruponotaiss);
+       $this->q09_gruponotaiss = ($this->q09_gruponotaiss === 0 || $this->q09_gruponotaiss === 0.0 || $this->q09_gruponotaiss == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_gruponotaiss"]:$this->q09_gruponotaiss);
      }else{
-       $this->q09_codigo = ($this->q09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_codigo"]:$this->q09_codigo);
+       $this->q09_codigo = ($this->q09_codigo === 0 || $this->q09_codigo === 0.0 || $this->q09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q09_codigo"]:$this->q09_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_notasiss {
          $this->q09_codigo = $q09_codigo;
        }
      }
-     if(($this->q09_codigo == null) || ($this->q09_codigo == "") ){
+     if(($this->q09_codigo == null) || ($this->q09_codigo === 0 || $this->q09_codigo === 0.0 || $this->q09_codigo == "") ){
        $this->erro_sql = " Campo q09_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

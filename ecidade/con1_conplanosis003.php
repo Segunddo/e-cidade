@@ -36,7 +36,7 @@ require(modification("libs/db_libcontabilidade.php"));
 $clestrutura_sistema = new cl_estrutura_sistema;
 $clconparametro = new cl_conparametro;
 $clconplanosis = new cl_conplanosis;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $db_botao = false;
 $db_opcao = 33;

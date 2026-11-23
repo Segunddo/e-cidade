@@ -43,11 +43,11 @@ class cl_juntacomercialprotocoloretorno {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q149_sequencial = ($this->q149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q149_sequencial"]:$this->q149_sequencial);
-       $this->q149_juntacomercialprotocolo = ($this->q149_juntacomercialprotocolo == ""?@$GLOBALS["HTTP_POST_VARS"]["q149_juntacomercialprotocolo"]:$this->q149_juntacomercialprotocolo);
+       $this->q149_sequencial = ($this->q149_sequencial === 0 || $this->q149_sequencial === 0.0 || $this->q149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q149_sequencial"]:$this->q149_sequencial);
+       $this->q149_juntacomercialprotocolo = ($this->q149_juntacomercialprotocolo === 0 || $this->q149_juntacomercialprotocolo === 0.0 || $this->q149_juntacomercialprotocolo == ""?@$GLOBALS["HTTP_POST_VARS"]["q149_juntacomercialprotocolo"]:$this->q149_juntacomercialprotocolo);
        $this->q149_xml = ($this->q149_xml == ""?@$GLOBALS["HTTP_POST_VARS"]["q149_xml"]:$this->q149_xml);
      }else{
-       $this->q149_sequencial = ($this->q149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q149_sequencial"]:$this->q149_sequencial);
+       $this->q149_sequencial = ($this->q149_sequencial === 0 || $this->q149_sequencial === 0.0 || $this->q149_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q149_sequencial"]:$this->q149_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_juntacomercialprotocoloretorno {
          $this->q149_sequencial = $q149_sequencial;
        }
      }
-     if(($this->q149_sequencial == null) || ($this->q149_sequencial == "") ){
+     if(($this->q149_sequencial == null) || ($this->q149_sequencial === 0 || $this->q149_sequencial === 0.0 || $this->q149_sequencial == "") ){
        $this->erro_sql = " Campo q149_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

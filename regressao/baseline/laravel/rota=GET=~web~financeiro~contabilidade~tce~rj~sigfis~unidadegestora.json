@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/tce/rj/sigfis/unidadegestora",
+  "json": null,
+  "sha256": "88dcfa4f38a7ff81c074ab40febee9a1da2deccbd647d5d830ed4a46bc8debde",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

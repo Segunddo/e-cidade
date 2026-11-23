@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/licitacoes/licitacon/obras/sub-familias",
+  "json": {
+    "errors": {
+      "familias": [
+        "O campo familias é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "1faa96d71da007e9fa49b0e856d2bd281611e63711a6a6a1c09940532de39f32",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

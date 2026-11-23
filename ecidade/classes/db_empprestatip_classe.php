@@ -71,13 +71,13 @@ class cl_empprestatip {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e44_tipo = ($this->e44_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e44_tipo"]:$this->e44_tipo);
+       $this->e44_tipo = ($this->e44_tipo === 0 || $this->e44_tipo === 0.0 || $this->e44_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e44_tipo"]:$this->e44_tipo);
        $this->e44_descr = ($this->e44_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e44_descr"]:$this->e44_descr);
-       $this->e44_obriga = ($this->e44_obriga == ""?@$GLOBALS["HTTP_POST_VARS"]["e44_obriga"]:$this->e44_obriga);
-       $this->e44_naturezaevento = ($this->e44_naturezaevento == ""?@$GLOBALS["HTTP_POST_VARS"]["e44_naturezaevento"]:$this->e44_naturezaevento);
+       $this->e44_obriga = ($this->e44_obriga === 0 || $this->e44_obriga === 0.0 || $this->e44_obriga == ""?@$GLOBALS["HTTP_POST_VARS"]["e44_obriga"]:$this->e44_obriga);
+       $this->e44_naturezaevento = ($this->e44_naturezaevento === 0 || $this->e44_naturezaevento === 0.0 || $this->e44_naturezaevento == ""?@$GLOBALS["HTTP_POST_VARS"]["e44_naturezaevento"]:$this->e44_naturezaevento);
        $this->e44_diaria = ($this->e44_diaria == "f"?@$GLOBALS["HTTP_POST_VARS"]["e44_diaria"]:$this->e44_diaria);
      }else{
-       $this->e44_tipo = ($this->e44_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e44_tipo"]:$this->e44_tipo);
+       $this->e44_tipo = ($this->e44_tipo === 0 || $this->e44_tipo === 0.0 || $this->e44_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e44_tipo"]:$this->e44_tipo);
      }
    }
    // funcao para Inclusão
@@ -137,7 +137,7 @@ class cl_empprestatip {
          $this->e44_tipo = $e44_tipo; 
        }
      }
-     if(($this->e44_tipo == null) || ($this->e44_tipo == "") ){ 
+     if(($this->e44_tipo == null) || ($this->e44_tipo === 0 || $this->e44_tipo === 0.0 || $this->e44_tipo == "") ){ 
        $this->erro_sql = " Campo e44_tipo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

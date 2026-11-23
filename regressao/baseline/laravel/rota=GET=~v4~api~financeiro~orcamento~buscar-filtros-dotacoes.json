@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/buscar-filtros-dotacoes",
+  "json": {
+    "error": true,
+    "message": "pg_query(): Query failed: "
+  },
+  "sha256": "1efc2b7135ae313be4ed979e6fce82caa09b4c3825c5435e3bcf9e2fd43f4147",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

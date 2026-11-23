@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/compraEditalAviso/buscarCompra",
+  "json": {
+    "errors": {
+      "ano": [
+        "O campo ano é obrigatório."
+      ],
+      "cnpj": [
+        "O campo cnpj é obrigatório."
+      ],
+      "numero": [
+        "O campo numero é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "7dd94db3ce94819e8498667cff370e20372c50b808a0e06c7165b7df82059d77",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

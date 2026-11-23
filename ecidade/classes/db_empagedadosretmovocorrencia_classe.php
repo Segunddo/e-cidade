@@ -71,12 +71,12 @@ class cl_empagedadosretmovocorrencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e02_sequencial = ($this->e02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_sequencial"]:$this->e02_sequencial);
-       $this->e02_empagedadosret = ($this->e02_empagedadosret == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_empagedadosret"]:$this->e02_empagedadosret);
-       $this->e02_empagedadosretmov = ($this->e02_empagedadosretmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_empagedadosretmov"]:$this->e02_empagedadosretmov);
-       $this->e02_errobanco = ($this->e02_errobanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_errobanco"]:$this->e02_errobanco);
+       $this->e02_sequencial = ($this->e02_sequencial === 0 || $this->e02_sequencial === 0.0 || $this->e02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_sequencial"]:$this->e02_sequencial);
+       $this->e02_empagedadosret = ($this->e02_empagedadosret === 0 || $this->e02_empagedadosret === 0.0 || $this->e02_empagedadosret == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_empagedadosret"]:$this->e02_empagedadosret);
+       $this->e02_empagedadosretmov = ($this->e02_empagedadosretmov === 0 || $this->e02_empagedadosretmov === 0.0 || $this->e02_empagedadosretmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_empagedadosretmov"]:$this->e02_empagedadosretmov);
+       $this->e02_errobanco = ($this->e02_errobanco === 0 || $this->e02_errobanco === 0.0 || $this->e02_errobanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_errobanco"]:$this->e02_errobanco);
      }else{
-       $this->e02_sequencial = ($this->e02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_sequencial"]:$this->e02_sequencial);
+       $this->e02_sequencial = ($this->e02_sequencial === 0 || $this->e02_sequencial === 0.0 || $this->e02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e02_sequencial"]:$this->e02_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_empagedadosretmovocorrencia {
          $this->e02_sequencial = $e02_sequencial;
        }
      }
-     if(($this->e02_sequencial == null) || ($this->e02_sequencial == "") ){
+     if(($this->e02_sequencial == null) || ($this->e02_sequencial === 0 || $this->e02_sequencial === 0.0 || $this->e02_sequencial == "") ){
        $this->erro_sql = " Campo e02_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

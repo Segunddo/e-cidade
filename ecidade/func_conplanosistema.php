@@ -9,7 +9,7 @@ require_once modification('classes/db_conplanosistema_classe.php');
 
 $get = db_utils::postMemory($_GET);
 db_postmemory($_POST);
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clconplanosistema = new cl_conplanosistema();
 $clconplanosistema->rotulo->label('c122_sequencial');
 $clconplanosistema->rotulo->label('c122_descricao');

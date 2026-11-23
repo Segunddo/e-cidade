@@ -39,7 +39,7 @@ require_once(modification("classes/db_conlancamdig_classe.php"));
 require_once(modification("classes/db_conlancamdoc_classe.php"));
 require_once(modification("classes/db_conplano_classe.php"));
 require_once(modification("libs/db_utils.php"));
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 
 $clconplano       = new cl_conplano;

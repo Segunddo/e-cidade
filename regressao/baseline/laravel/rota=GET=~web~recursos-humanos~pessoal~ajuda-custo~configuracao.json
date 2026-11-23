@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/recursos-humanos/pessoal/ajuda-custo/configuracao",
+  "json": null,
+  "sha256": "c54f82b2cbf3aee0280fb537c00331044d38a11c7e6c394dc28b98135bb602ee",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

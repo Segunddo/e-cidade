@@ -27,7 +27,7 @@
 
 require_once(modification("fpdf151/pdf.php"));
 require_once(modification("classes/db_veicabast_classe.php"));
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_SERVER);
 
 function imprimir_cabecalho($pdf,$alt){

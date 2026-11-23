@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/integracoes/efd-reinf/events/checkPeriodIsClosed",
+  "json": {
+    "errors": {
+      "event": [
+        "O campo event é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "1dc5a145a22efc5ced1e5f31bf75c530893eee013fe01dac43f1f029a7b4c695",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

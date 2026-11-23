@@ -1,0 +1,14 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/turmas/usuario",
+  "json": null,
+  "sha256": "a342e0724d48d73e724902db6bb6f160869b8512e961f123fee15a211864996a",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "<script>(window.CurrentWindow || parent.CurrentWindow).alert('Variavel de sess�o nao encontrada: DB_coddepto');</script>\n{\"error\":true,\"message\":\"pg_query(): Query failed: ERRO:  erro de sintaxe em ou pr\\ufffdximo a &quot;)&quot;\\nLINE 11:         ), regencias_normal as (\\n                 ^\"}",
+  "tipos": {}
+}

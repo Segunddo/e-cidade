@@ -80,9 +80,9 @@ class cl_jurpeticoes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v60_peticao = ($this->v60_peticao == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_peticao"]:$this->v60_peticao);
-       $this->v60_inicial = ($this->v60_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_inicial"]:$this->v60_inicial);
-       $this->v60_tipopet = ($this->v60_tipopet == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_tipopet"]:$this->v60_tipopet);
+       $this->v60_peticao = ($this->v60_peticao === 0 || $this->v60_peticao === 0.0 || $this->v60_peticao == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_peticao"]:$this->v60_peticao);
+       $this->v60_inicial = ($this->v60_inicial === 0 || $this->v60_inicial === 0.0 || $this->v60_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_inicial"]:$this->v60_inicial);
+       $this->v60_tipopet = ($this->v60_tipopet === 0 || $this->v60_tipopet === 0.0 || $this->v60_tipopet == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_tipopet"]:$this->v60_tipopet);
        if($this->v60_data == ""){
          $this->v60_data_dia = ($this->v60_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_data_dia"]:$this->v60_data_dia);
          $this->v60_data_mes = ($this->v60_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_data_mes"]:$this->v60_data_mes);
@@ -92,10 +92,10 @@ class cl_jurpeticoes {
          }
        }
        $this->v60_hora = ($this->v60_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_hora"]:$this->v60_hora);
-       $this->v60_usuario = ($this->v60_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_usuario"]:$this->v60_usuario);
-       $this->v60_texto = ($this->v60_texto == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_texto"]:$this->v60_texto);
+       $this->v60_usuario = ($this->v60_usuario === 0 || $this->v60_usuario === 0.0 || $this->v60_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_usuario"]:$this->v60_usuario);
+       $this->v60_texto = ($this->v60_texto === 0 || $this->v60_texto === 0.0 || $this->v60_texto == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_texto"]:$this->v60_texto);
      }else{
-       $this->v60_peticao = ($this->v60_peticao == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_peticao"]:$this->v60_peticao);
+       $this->v60_peticao = ($this->v60_peticao === 0 || $this->v60_peticao === 0.0 || $this->v60_peticao == ""?@$GLOBALS["HTTP_POST_VARS"]["v60_peticao"]:$this->v60_peticao);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_jurpeticoes {
          $this->v60_peticao = $v60_peticao;
        }
      }
-     if(($this->v60_peticao == null) || ($this->v60_peticao == "") ){
+     if(($this->v60_peticao == null) || ($this->v60_peticao === 0 || $this->v60_peticao === 0.0 || $this->v60_peticao == "") ){
        $this->erro_sql = " Campo v60_peticao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

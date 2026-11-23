@@ -37,7 +37,7 @@ $clrotulo->label('t64_descr');
 $clrotulo->label('c60_estrut');
 $clrotulo->label('c60_descr');
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $sCampos = "";
 $sJoin = " inner join clabens         on clabens.t64_codcla          = bens.t52_codcla ";

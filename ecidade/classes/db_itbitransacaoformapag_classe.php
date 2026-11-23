@@ -71,12 +71,12 @@ class cl_itbitransacaoformapag {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it25_sequencial = ($this->it25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it25_sequencial"]:$this->it25_sequencial);
-       $this->it25_itbiformapagamento = ($this->it25_itbiformapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["it25_itbiformapagamento"]:$this->it25_itbiformapagamento);
-       $this->it25_itbitransacao = ($this->it25_itbitransacao == ""?@$GLOBALS["HTTP_POST_VARS"]["it25_itbitransacao"]:$this->it25_itbitransacao);
+       $this->it25_sequencial = ($this->it25_sequencial === 0 || $this->it25_sequencial === 0.0 || $this->it25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it25_sequencial"]:$this->it25_sequencial);
+       $this->it25_itbiformapagamento = ($this->it25_itbiformapagamento === 0 || $this->it25_itbiformapagamento === 0.0 || $this->it25_itbiformapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["it25_itbiformapagamento"]:$this->it25_itbiformapagamento);
+       $this->it25_itbitransacao = ($this->it25_itbitransacao === 0 || $this->it25_itbitransacao === 0.0 || $this->it25_itbitransacao == ""?@$GLOBALS["HTTP_POST_VARS"]["it25_itbitransacao"]:$this->it25_itbitransacao);
        $this->it25_ativo = ($this->it25_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["it25_ativo"]:$this->it25_ativo);
      }else{
-       $this->it25_sequencial = ($this->it25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it25_sequencial"]:$this->it25_sequencial);
+       $this->it25_sequencial = ($this->it25_sequencial === 0 || $this->it25_sequencial === 0.0 || $this->it25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it25_sequencial"]:$this->it25_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_itbitransacaoformapag {
          $this->it25_sequencial = $it25_sequencial;
        }
      }
-     if(($this->it25_sequencial == null) || ($this->it25_sequencial == "") ){
+     if(($this->it25_sequencial == null) || ($this->it25_sequencial === 0 || $this->it25_sequencial === 0.0 || $this->it25_sequencial == "") ){
        $this->erro_sql = " Campo it25_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

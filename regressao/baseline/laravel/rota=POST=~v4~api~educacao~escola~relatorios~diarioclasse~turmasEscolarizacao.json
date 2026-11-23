@@ -1,0 +1,84 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/relatorios/diarioclasse/turmasEscolarizacao",
+  "json": {
+    "errors": {
+      "apenasAlunosAtivos": [
+        "O campo apenas alunos ativos é obrigatório."
+      ],
+      "colunas": [
+        "Campo Colunas deve ser informado."
+      ],
+      "disciplinas": [
+        "Disciplinas não foi informado."
+      ],
+      "etapa": [
+        "Etapa não foi informada."
+      ],
+      "exibirAvaliacoes": [
+        "O campo exibir avaliacoes é obrigatório."
+      ],
+      "exibirCodigo": [
+        "O campo exibir codigo é obrigatório."
+      ],
+      "exibirDataPeriodo": [
+        "O campo exibir data periodo é obrigatório."
+      ],
+      "exibirDiasLetivos": [
+        "O campo exibir dias letivos é obrigatório."
+      ],
+      "exibirFaltasAbonadas": [
+        "O campo exibir faltas abonadas é obrigatório."
+      ],
+      "exibirIdade": [
+        "O campo exibir idade é obrigatório."
+      ],
+      "exibirNascimento": [
+        "O campo exibir nascimento é obrigatório."
+      ],
+      "exibirParecer": [
+        "O campo exibir parecer é obrigatório."
+      ],
+      "exibirPontos": [
+        "O campo exibir pontos é obrigatório."
+      ],
+      "exibirResultadoAnterior": [
+        "O campo exibir resultado anterior é obrigatório."
+      ],
+      "exibirSexo": [
+        "O campo exibir sexo é obrigatório."
+      ],
+      "exibirSituacaoAlunoDiario": [
+        "O campo exibir situacao aluno diario é obrigatório."
+      ],
+      "exibirTotalFaltas": [
+        "O campo exibir total faltas é obrigatório."
+      ],
+      "exibirTrocaTurma": [
+        "O campo exibir troca turma é obrigatório."
+      ],
+      "modelo": [
+        "O campo modelo é obrigatório."
+      ],
+      "periodo": [
+        "Período não foi informado."
+      ],
+      "registroManual": [
+        "O campo registro manual é obrigatório."
+      ],
+      "tipo_turma": [
+        "Tipo da turma não informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "7542e5a435abde43db5792fcf77016cc46946190f7ac3b69a2a5495065bb8105",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

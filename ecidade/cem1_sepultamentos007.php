@@ -35,7 +35,7 @@ require_once(modification("dbforms/db_funcoes.php"));
 
 use App\Domain\Tributario\Cemiterio\Repositories\Cemiterio\Parametros\ParametrosCemiterioRepository;
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 db_postmemory($_GET);
 

@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/cadastro/construcao/lista-principal",
+  "json": {
+    "errors": {
+      "j39_idcons": [
+        "O campo j39 idcons é obrigatório."
+      ],
+      "j39_matric": [
+        "O campo j39 matric é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "35f9ac78024d2a2eac79f2d6c1e87e339417cbcbec9baace6b425354921dc497",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

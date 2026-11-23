@@ -76,7 +76,7 @@ class cl_db_registrosinconsistentes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db136_sequencial = ($this->db136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db136_sequencial"]:$this->db136_sequencial);
+       $this->db136_sequencial = ($this->db136_sequencial === 0 || $this->db136_sequencial === 0.0 || $this->db136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db136_sequencial"]:$this->db136_sequencial);
        if($this->db136_data == ""){
          $this->db136_data_dia = ($this->db136_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db136_data_dia"]:$this->db136_data_dia);
          $this->db136_data_mes = ($this->db136_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db136_data_mes"]:$this->db136_data_mes);
@@ -85,11 +85,11 @@ class cl_db_registrosinconsistentes {
             $this->db136_data = $this->db136_data_ano."-".$this->db136_data_mes."-".$this->db136_data_dia;
          }
        }
-       $this->db136_usuario = ($this->db136_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db136_usuario"]:$this->db136_usuario);
-       $this->db136_tabela = ($this->db136_tabela == ""?@$GLOBALS["HTTP_POST_VARS"]["db136_tabela"]:$this->db136_tabela);
+       $this->db136_usuario = ($this->db136_usuario === 0 || $this->db136_usuario === 0.0 || $this->db136_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db136_usuario"]:$this->db136_usuario);
+       $this->db136_tabela = ($this->db136_tabela === 0 || $this->db136_tabela === 0.0 || $this->db136_tabela == ""?@$GLOBALS["HTTP_POST_VARS"]["db136_tabela"]:$this->db136_tabela);
        $this->db136_processado = ($this->db136_processado == "f"?@$GLOBALS["HTTP_POST_VARS"]["db136_processado"]:$this->db136_processado);
      }else{
-       $this->db136_sequencial = ($this->db136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db136_sequencial"]:$this->db136_sequencial);
+       $this->db136_sequencial = ($this->db136_sequencial === 0 || $this->db136_sequencial === 0.0 || $this->db136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db136_sequencial"]:$this->db136_sequencial);
      }
    }
    // funcao para inclusao
@@ -149,7 +149,7 @@ class cl_db_registrosinconsistentes {
          $this->db136_sequencial = $db136_sequencial;
        }
      }
-     if(($this->db136_sequencial == null) || ($this->db136_sequencial == "") ){
+     if(($this->db136_sequencial == null) || ($this->db136_sequencial === 0 || $this->db136_sequencial === 0.0 || $this->db136_sequencial == "") ){
        $this->erro_sql = " Campo db136_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -140,7 +140,7 @@ final class BalancoFinanceiroDcasp extends RelatoriosLegaisBase {
   /**
    * Retorna os Dados para emissão do Relatório
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $this->calculaValoresRelatorio();
 

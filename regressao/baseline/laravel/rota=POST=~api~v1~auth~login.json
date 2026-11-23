@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:POST:/api/v1/auth/login",
+  "json": null,
+  "sha256": "7af64f765220d98261c3fcce27a77aa0512aabbca26d4d8dfdbb916da0fe53ff",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

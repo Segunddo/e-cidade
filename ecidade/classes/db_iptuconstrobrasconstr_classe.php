@@ -71,12 +71,12 @@ class cl_iptuconstrobrasconstr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j132_sequencial = ($this->j132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j132_sequencial"]:$this->j132_sequencial);
-       $this->j132_matric = ($this->j132_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j132_matric"]:$this->j132_matric);
-       $this->j132_idconstr = ($this->j132_idconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j132_idconstr"]:$this->j132_idconstr);
-       $this->j132_obrasconstr = ($this->j132_obrasconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j132_obrasconstr"]:$this->j132_obrasconstr);
+       $this->j132_sequencial = ($this->j132_sequencial === 0 || $this->j132_sequencial === 0.0 || $this->j132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j132_sequencial"]:$this->j132_sequencial);
+       $this->j132_matric = ($this->j132_matric === 0 || $this->j132_matric === 0.0 || $this->j132_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j132_matric"]:$this->j132_matric);
+       $this->j132_idconstr = ($this->j132_idconstr === 0 || $this->j132_idconstr === 0.0 || $this->j132_idconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j132_idconstr"]:$this->j132_idconstr);
+       $this->j132_obrasconstr = ($this->j132_obrasconstr === 0 || $this->j132_obrasconstr === 0.0 || $this->j132_obrasconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j132_obrasconstr"]:$this->j132_obrasconstr);
      }else{
-       $this->j132_sequencial = ($this->j132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j132_sequencial"]:$this->j132_sequencial);
+       $this->j132_sequencial = ($this->j132_sequencial === 0 || $this->j132_sequencial === 0.0 || $this->j132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j132_sequencial"]:$this->j132_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_iptuconstrobrasconstr {
          $this->j132_sequencial = $j132_sequencial;
        }
      }
-     if(($this->j132_sequencial == null) || ($this->j132_sequencial == "") ){
+     if(($this->j132_sequencial == null) || ($this->j132_sequencial === 0 || $this->j132_sequencial === 0.0 || $this->j132_sequencial == "") ){
        $this->erro_sql = " Campo j132_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

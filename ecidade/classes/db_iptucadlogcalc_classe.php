@@ -69,11 +69,11 @@ class cl_iptucadlogcalc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j62_codigo = ($this->j62_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j62_codigo"]:$this->j62_codigo);
+       $this->j62_codigo = ($this->j62_codigo === 0 || $this->j62_codigo === 0.0 || $this->j62_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j62_codigo"]:$this->j62_codigo);
        $this->j62_descr = ($this->j62_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j62_descr"]:$this->j62_descr);
        $this->j62_erro = ($this->j62_erro == "f"?@$GLOBALS["HTTP_POST_VARS"]["j62_erro"]:$this->j62_erro);
      }else{
-       $this->j62_codigo = ($this->j62_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j62_codigo"]:$this->j62_codigo);
+       $this->j62_codigo = ($this->j62_codigo === 0 || $this->j62_codigo === 0.0 || $this->j62_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j62_codigo"]:$this->j62_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_iptucadlogcalc {
          $this->j62_codigo = $j62_codigo; 
        }
      }
-     if(($this->j62_codigo == null) || ($this->j62_codigo == "") ){ 
+     if(($this->j62_codigo == null) || ($this->j62_codigo === 0 || $this->j62_codigo === 0.0 || $this->j62_codigo == "") ){ 
        $this->erro_sql = " Campo j62_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

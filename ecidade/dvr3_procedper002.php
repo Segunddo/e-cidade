@@ -75,7 +75,7 @@ $pdf->Cell($CoL3,5,"COD.RECEITA",1,0,"C",0);
 $pdf->Cell($CoL4,5,"ARRECADACAO",1,0,"C",0);
 $pdf->Cell($CoL5,5,"ESTORNO",1,1,"C",0);
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 /*
 $result = db_query("

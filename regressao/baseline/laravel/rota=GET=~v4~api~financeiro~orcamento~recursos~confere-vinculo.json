@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/recursos/confere-vinculo",
+  "json": {
+    "error": true,
+    "message": "Undefined index: idRecurso"
+  },
+  "sha256": "e34e2a5ec6a3026b1eac0e777af5a19d09a579c8e15ce2d74ca35d2a4a7262fd",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

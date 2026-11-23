@@ -74,19 +74,19 @@ if ($oParametros->iOrdemIni != "" && $oParametros->iOrdemFim == "") {
     $sWhere .= "and e50_codord between '{$oParametros->iOrdemIni}' and '{$oParametros->iOrdemFim}'";
 }
 
-if (count($oParametros->recursos)) {
+if (count((array)$oParametros->recursos)) {
     $sWhere .= " and o15_codigo in (" . implode(', ', $oParametros->recursos) . ")";
 }
 
-if (count($oParametros->credores)) {
+if (count((array)$oParametros->credores)) {
     $sWhere .= " and e60_numcgm in (" . implode(', ', $oParametros->credores) . ")";
 }
 
-if (count($oParametros->retencoes)) {
+if (count((array)$oParametros->retencoes)) {
     $sWhere .= " and e23_retencaotiporec in (" . implode(', ', $oParametros->retencoes) . ")";
 }
 
-if (count($oParametros->contas)) {
+if (count((array)$oParametros->contas)) {
     $sWhere .= " and corrente.k12_conta in(" . implode(', ', $oParametros->contas) . ")";
 }
 

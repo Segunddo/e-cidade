@@ -80,9 +80,9 @@ class cl_declaracaoquitacaocancelamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar32_sequencial = ($this->ar32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_sequencial"]:$this->ar32_sequencial);
-       $this->ar32_declaracaoquitacao = ($this->ar32_declaracaoquitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_declaracaoquitacao"]:$this->ar32_declaracaoquitacao);
-       $this->ar32_id_usuario = ($this->ar32_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_id_usuario"]:$this->ar32_id_usuario);
+       $this->ar32_sequencial = ($this->ar32_sequencial === 0 || $this->ar32_sequencial === 0.0 || $this->ar32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_sequencial"]:$this->ar32_sequencial);
+       $this->ar32_declaracaoquitacao = ($this->ar32_declaracaoquitacao === 0 || $this->ar32_declaracaoquitacao === 0.0 || $this->ar32_declaracaoquitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_declaracaoquitacao"]:$this->ar32_declaracaoquitacao);
+       $this->ar32_id_usuario = ($this->ar32_id_usuario === 0 || $this->ar32_id_usuario === 0.0 || $this->ar32_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_id_usuario"]:$this->ar32_id_usuario);
        if($this->ar32_datacancelamento == ""){
          $this->ar32_datacancelamento_dia = ($this->ar32_datacancelamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_datacancelamento_dia"]:$this->ar32_datacancelamento_dia);
          $this->ar32_datacancelamento_mes = ($this->ar32_datacancelamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_datacancelamento_mes"]:$this->ar32_datacancelamento_mes);
@@ -95,7 +95,7 @@ class cl_declaracaoquitacaocancelamento {
        $this->ar32_obs = ($this->ar32_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_obs"]:$this->ar32_obs);
        $this->ar32_automatico = ($this->ar32_automatico == "f"?@$GLOBALS["HTTP_POST_VARS"]["ar32_automatico"]:$this->ar32_automatico);
      }else{
-       $this->ar32_sequencial = ($this->ar32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_sequencial"]:$this->ar32_sequencial);
+       $this->ar32_sequencial = ($this->ar32_sequencial === 0 || $this->ar32_sequencial === 0.0 || $this->ar32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar32_sequencial"]:$this->ar32_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_declaracaoquitacaocancelamento {
          $this->ar32_sequencial = $ar32_sequencial;
        }
      }
-     if(($this->ar32_sequencial == null) || ($this->ar32_sequencial == "") ){
+     if(($this->ar32_sequencial == null) || ($this->ar32_sequencial === 0 || $this->ar32_sequencial === 0.0 || $this->ar32_sequencial == "") ){
        $this->erro_sql = " Campo ar32_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/consulta/lancamento/conta-pcasp/recursos",
+  "json": {
+    "error": true,
+    "message": "implode(): Invalid arguments passed"
+  },
+  "sha256": "ca34a88395d022c27908d749b92eb4bc4a832fefec192fbc51b71c8bf3a6a63d",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -86,10 +86,10 @@ class cl_cancdebitos {
        $this->k20_depart = db_getsession("DB_coddepto");
      }
      if($exclusao==false){
-       $this->k20_codigo = ($this->k20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_codigo"]:$this->k20_codigo);
-       $this->k20_cancdebitostipo = ($this->k20_cancdebitostipo == ""?
+       $this->k20_codigo = ($this->k20_codigo === 0 || $this->k20_codigo === 0.0 || $this->k20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_codigo"]:$this->k20_codigo);
+       $this->k20_cancdebitostipo = ($this->k20_cancdebitostipo === 0 || $this->k20_cancdebitostipo === 0.0 || $this->k20_cancdebitostipo == ""?
                            @$GLOBALS["HTTP_POST_VARS"]["k20_cancdebitostipo"]:$this->k20_cancdebitostipo);
-       $this->k20_instit = ($this->k20_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_instit"]:$this->k20_instit);
+       $this->k20_instit = ($this->k20_instit === 0 || $this->k20_instit === 0.0 || $this->k20_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_instit"]:$this->k20_instit);
        $this->k20_descr = ($this->k20_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_descr"]:$this->k20_descr);
        $this->k20_hora = ($this->k20_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_hora"]:$this->k20_hora);
        $this->k20_depart = ($this->k20_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_depart"]:$this->k20_depart);
@@ -104,9 +104,9 @@ class cl_cancdebitos {
             $this->k20_data = $this->k20_data_ano."-".$this->k20_data_mes."-".$this->k20_data_dia;
          }
        }
-       $this->k20_usuario = ($this->k20_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_usuario"]:$this->k20_usuario);
+       $this->k20_usuario = ($this->k20_usuario === 0 || $this->k20_usuario === 0.0 || $this->k20_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_usuario"]:$this->k20_usuario);
      }else{
-       $this->k20_codigo = ($this->k20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_codigo"]:$this->k20_codigo);
+       $this->k20_codigo = ($this->k20_codigo === 0 || $this->k20_codigo === 0.0 || $this->k20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k20_codigo"]:$this->k20_codigo);
      }
    }
    // funcao para inclusao
@@ -199,7 +199,7 @@ class cl_cancdebitos {
          $this->k20_codigo = $k20_codigo;
        }
      }
-     if(($this->k20_codigo == null) || ($this->k20_codigo == "") ){
+     if(($this->k20_codigo == null) || ($this->k20_codigo === 0 || $this->k20_codigo === 0.0 || $this->k20_codigo == "") ){
        $this->erro_sql = " Campo k20_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

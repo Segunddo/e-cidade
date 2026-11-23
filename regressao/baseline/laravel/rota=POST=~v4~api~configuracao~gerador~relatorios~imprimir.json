@@ -1,0 +1,78 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/gerador/relatorios/imprimir",
+  "json": {
+    "errors": {
+      "campos": [
+        "O campo campos deve ser presente."
+      ],
+      "filtros": [
+        "O campo filtros deve ser presente."
+      ],
+      "grupo": [
+        "O campo grupo é obrigatório."
+      ],
+      "layout": [
+        "O campo layout é obrigatório."
+      ],
+      "layout.formato": [
+        "O campo layout.formato é obrigatório."
+      ],
+      "layout.layout": [
+        "O campo layout.layout é obrigatório."
+      ],
+      "layout.margem": [
+        "O campo layout.margem é obrigatório."
+      ],
+      "layout.margem.direita": [
+        "O campo layout.margem.direita é obrigatório."
+      ],
+      "layout.margem.esquerda": [
+        "O campo layout.margem.esquerda é obrigatório."
+      ],
+      "layout.margem.inferior": [
+        "O campo layout.margem.inferior é obrigatório."
+      ],
+      "layout.margem.superior": [
+        "O campo layout.margem.superior é obrigatório."
+      ],
+      "layout.nome": [
+        "O campo layout.nome é obrigatório."
+      ],
+      "layout.orientacao": [
+        "O campo layout.orientacao é obrigatório."
+      ],
+      "layout.tipoSaida": [
+        "O campo layout.tipo saida é obrigatório."
+      ],
+      "layout.versao": [
+        "O campo layout.versao é obrigatório."
+      ],
+      "ordem": [
+        "O campo ordem deve ser presente."
+      ],
+      "origem": [
+        "O campo origem é obrigatório."
+      ],
+      "sql": [
+        "O campo sql é obrigatório."
+      ],
+      "tipo": [
+        "O campo tipo é obrigatório."
+      ],
+      "variaveis": [
+        "O campo variaveis deve ser presente."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "6d4abf987ca0c41940affa568836be45ea49807f6d1e10a0ef40144cad963fd9",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

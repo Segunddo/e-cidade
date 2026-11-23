@@ -34,7 +34,7 @@ require_once(modification("classes/db_orcprojativ_classe.php"));
 require_once(modification("classes/db_orcprojativunidaderesp_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 
 $clorcprojativ            = new cl_orcprojativ();
@@ -132,7 +132,7 @@ if ((isset($_POST["db_opcao"]) && $_POST["db_opcao"])=="Alterar") {
     $result = $clorcprojativ->sql_record($clorcprojativ->sql_query($chavepesquisa, $chavepesquisa1));
     db_fieldsmemory($result, 0);
     $db_botao = true;
-    $digito = ($o55_projativ{0}*1000);
+    $digito = ($o55_projativ[0]*1000);
 }
 ?>
 <html>

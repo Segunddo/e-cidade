@@ -33,7 +33,7 @@ include(modification("classes/db_assenta_classe.php"));
 include(modification("classes/db_assmeio_classe.php"));
 include(modification("classes/db_tipoasse_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $classenta = new cl_assenta;
 $classmeio = new cl_assmeio;

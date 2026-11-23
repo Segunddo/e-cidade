@@ -76,10 +76,10 @@ class cl_propricemit {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm28_i_codigo = ($this->cm28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_i_codigo"]:$this->cm28_i_codigo);
-       $this->cm28_i_processo = ($this->cm28_i_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_i_processo"]:$this->cm28_i_processo);
-       $this->cm28_i_proprietario = ($this->cm28_i_proprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_i_proprietario"]:$this->cm28_i_proprietario);
-       $this->cm28_i_ossoariojazigo = ($this->cm28_i_ossoariojazigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_i_ossoariojazigo"]:$this->cm28_i_ossoariojazigo);
+       $this->cm28_i_codigo = ($this->cm28_i_codigo === 0 || $this->cm28_i_codigo === 0.0 || $this->cm28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_i_codigo"]:$this->cm28_i_codigo);
+       $this->cm28_i_processo = ($this->cm28_i_processo === 0 || $this->cm28_i_processo === 0.0 || $this->cm28_i_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_i_processo"]:$this->cm28_i_processo);
+       $this->cm28_i_proprietario = ($this->cm28_i_proprietario === 0 || $this->cm28_i_proprietario === 0.0 || $this->cm28_i_proprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_i_proprietario"]:$this->cm28_i_proprietario);
+       $this->cm28_i_ossoariojazigo = ($this->cm28_i_ossoariojazigo === 0 || $this->cm28_i_ossoariojazigo === 0.0 || $this->cm28_i_ossoariojazigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_i_ossoariojazigo"]:$this->cm28_i_ossoariojazigo);
        if($this->cm28_d_aquisicao == ""){
          $this->cm28_d_aquisicao_dia = ($this->cm28_d_aquisicao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_d_aquisicao_dia"]:$this->cm28_d_aquisicao_dia);
          $this->cm28_d_aquisicao_mes = ($this->cm28_d_aquisicao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_d_aquisicao_mes"]:$this->cm28_d_aquisicao_mes);
@@ -89,13 +89,13 @@ class cl_propricemit {
          }
        }
      }else{
-       $this->cm28_i_codigo = ($this->cm28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_i_codigo"]:$this->cm28_i_codigo);
+       $this->cm28_i_codigo = ($this->cm28_i_codigo === 0 || $this->cm28_i_codigo === 0.0 || $this->cm28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm28_i_codigo"]:$this->cm28_i_codigo);
      }
    }
    // funcao para inclusao
    public function incluir ($cm28_i_codigo){
       $this->atualizacampos();
-     if($this->cm28_i_processo == null || $this->cm28_i_processo == ''){
+     if($this->cm28_i_processo == null || ($this->cm28_i_processo === 0 || $this->cm28_i_processo === 0.0 || $this->cm28_i_processo == '')){
       $this->cm28_i_processo = 'null';
      }
 
@@ -150,7 +150,7 @@ class cl_propricemit {
          $this->cm28_i_codigo = $cm28_i_codigo;
        }
      }
-     if(($this->cm28_i_codigo == null) || ($this->cm28_i_codigo == "") ){
+     if(($this->cm28_i_codigo == null) || ($this->cm28_i_codigo === 0 || $this->cm28_i_codigo === 0.0 || $this->cm28_i_codigo == "") ){
        $this->erro_sql = " Campo cm28_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

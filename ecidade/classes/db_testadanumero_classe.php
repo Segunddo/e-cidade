@@ -75,14 +75,14 @@ class cl_testadanumero {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j15_codigo = ($this->j15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_codigo"]:$this->j15_codigo);
-       $this->j15_idbql = ($this->j15_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_idbql"]:$this->j15_idbql);
-       $this->j15_face = ($this->j15_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_face"]:$this->j15_face);
-       $this->j15_numero = ($this->j15_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_numero"]:$this->j15_numero);
+       $this->j15_codigo = ($this->j15_codigo === 0 || $this->j15_codigo === 0.0 || $this->j15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_codigo"]:$this->j15_codigo);
+       $this->j15_idbql = ($this->j15_idbql === 0 || $this->j15_idbql === 0.0 || $this->j15_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_idbql"]:$this->j15_idbql);
+       $this->j15_face = ($this->j15_face === 0 || $this->j15_face === 0.0 || $this->j15_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_face"]:$this->j15_face);
+       $this->j15_numero = ($this->j15_numero === 0 || $this->j15_numero === 0.0 || $this->j15_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_numero"]:$this->j15_numero);
        $this->j15_compl = ($this->j15_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_compl"]:$this->j15_compl);
        $this->j15_obs = ($this->j15_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_obs"]:$this->j15_obs);
      }else{
-       $this->j15_codigo = ($this->j15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_codigo"]:$this->j15_codigo);
+       $this->j15_codigo = ($this->j15_codigo === 0 || $this->j15_codigo === 0.0 || $this->j15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j15_codigo"]:$this->j15_codigo);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_testadanumero {
          $this->j15_codigo = $j15_codigo;
        }
      }
-     if(($this->j15_codigo == null) || ($this->j15_codigo == "") ){
+     if(($this->j15_codigo == null) || ($this->j15_codigo === 0 || $this->j15_codigo === 0.0 || $this->j15_codigo == "") ){
        $this->erro_sql = " Campo j15_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

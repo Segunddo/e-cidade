@@ -78,9 +78,9 @@ class cl_prescricaoanula {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k120_sequencial = ($this->k120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_sequencial"]:$this->k120_sequencial);
-       $this->k120_id_usuario = ($this->k120_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_id_usuario"]:$this->k120_id_usuario);
-       $this->k120_instit = ($this->k120_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_instit"]:$this->k120_instit);
+       $this->k120_sequencial = ($this->k120_sequencial === 0 || $this->k120_sequencial === 0.0 || $this->k120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_sequencial"]:$this->k120_sequencial);
+       $this->k120_id_usuario = ($this->k120_id_usuario === 0 || $this->k120_id_usuario === 0.0 || $this->k120_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_id_usuario"]:$this->k120_id_usuario);
+       $this->k120_instit = ($this->k120_instit === 0 || $this->k120_instit === 0.0 || $this->k120_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_instit"]:$this->k120_instit);
        $this->k120_obs = ($this->k120_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_obs"]:$this->k120_obs);
        if($this->k120_data == ""){
          $this->k120_data_dia = ($this->k120_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_data_dia"]:$this->k120_data_dia);
@@ -92,7 +92,7 @@ class cl_prescricaoanula {
        }
        $this->k120_hora = ($this->k120_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_hora"]:$this->k120_hora);
      }else{
-       $this->k120_sequencial = ($this->k120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_sequencial"]:$this->k120_sequencial);
+       $this->k120_sequencial = ($this->k120_sequencial === 0 || $this->k120_sequencial === 0.0 || $this->k120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k120_sequencial"]:$this->k120_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_prescricaoanula {
          $this->k120_sequencial = $k120_sequencial;
        }
      }
-     if(($this->k120_sequencial == null) || ($this->k120_sequencial == "") ){
+     if(($this->k120_sequencial == null) || ($this->k120_sequencial === 0 || $this->k120_sequencial === 0.0 || $this->k120_sequencial == "") ){
        $this->erro_sql = " Campo k120_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

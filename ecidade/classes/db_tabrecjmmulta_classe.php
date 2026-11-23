@@ -71,12 +71,12 @@ class cl_tabrecjmmulta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k140_sequencial = ($this->k140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_sequencial"]:$this->k140_sequencial);
-       $this->k140_tabrecjm = ($this->k140_tabrecjm == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_tabrecjm"]:$this->k140_tabrecjm);
-       $this->k140_multa = ($this->k140_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_multa"]:$this->k140_multa);
-       $this->k140_faixa = ($this->k140_faixa == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_faixa"]:$this->k140_faixa);
+       $this->k140_sequencial = ($this->k140_sequencial === 0 || $this->k140_sequencial === 0.0 || $this->k140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_sequencial"]:$this->k140_sequencial);
+       $this->k140_tabrecjm = ($this->k140_tabrecjm === 0 || $this->k140_tabrecjm === 0.0 || $this->k140_tabrecjm == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_tabrecjm"]:$this->k140_tabrecjm);
+       $this->k140_multa = ($this->k140_multa === 0 || $this->k140_multa === 0.0 || $this->k140_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_multa"]:$this->k140_multa);
+       $this->k140_faixa = ($this->k140_faixa === 0 || $this->k140_faixa === 0.0 || $this->k140_faixa == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_faixa"]:$this->k140_faixa);
      }else{
-       $this->k140_sequencial = ($this->k140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_sequencial"]:$this->k140_sequencial);
+       $this->k140_sequencial = ($this->k140_sequencial === 0 || $this->k140_sequencial === 0.0 || $this->k140_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k140_sequencial"]:$this->k140_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_tabrecjmmulta {
          $this->k140_sequencial = $k140_sequencial;
        }
      }
-     if(($this->k140_sequencial == null) || ($this->k140_sequencial == "") ){
+     if(($this->k140_sequencial == null) || ($this->k140_sequencial === 0 || $this->k140_sequencial === 0.0 || $this->k140_sequencial == "") ){
        $this->erro_sql = " Campo k140_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

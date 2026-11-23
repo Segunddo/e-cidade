@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/orcamentario/despesa/vincular",
+  "json": {
+    "error": true,
+    "message": "Trying to get property 'id' of non-object"
+  },
+  "sha256": "c12f511d25fbd5bf9553e03b64aaefc9f4e0b94b9e88df7444d56684c2ec41bd",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -32,7 +32,7 @@ include(modification("classes/db_orcppa_classe.php"));
 include(modification("classes/db_orcppaval_classe.php"));
 include(modification("classes/db_orcppatiporec_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clorcppa = new cl_orcppa;
 $clorcppaval = new cl_orcppaval;

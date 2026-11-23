@@ -43,7 +43,7 @@ foreach ($aContas as $oConta) {
   $iCodigo     = $oConta->getAttribute("codigo");
   $sDescricao  = $oConta->getAttribute("descricao");
   $iTamanhoPesquisa = strlen($sName);
-  if (strpos(strtolower($sDescricao), strtolower($sName)) !== false) {
+  if ((string)$sName !== "" && strpos(strtolower($sDescricao), strtolower($sName)) !== false) {
     
     $oContaRetorno        = new stdClass();
     $oContaRetorno->cod   = $iCodigo;

@@ -33,7 +33,7 @@ include(modification("classes/db_db_depart_classe.php"));
 
 $cldepartamento = new cl_db_depart();
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_GET_VARS);
 
 //db_redireciona('db_erros.php?fechar=true&db_erro=Nenhum processo encontrado!');

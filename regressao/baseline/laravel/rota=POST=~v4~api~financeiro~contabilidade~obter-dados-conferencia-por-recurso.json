@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/obter-dados-conferencia-por-recurso",
+  "json": {
+    "error": true,
+    "message": "O campo data inicial é obrigatório."
+  },
+  "sha256": "842c485a427622301010b3fe2554289f6d7483b35073a2a443935acc86886b5a",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

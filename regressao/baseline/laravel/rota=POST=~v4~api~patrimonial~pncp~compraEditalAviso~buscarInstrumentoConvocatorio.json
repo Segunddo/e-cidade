@@ -1,0 +1,23 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/compraEditalAviso/buscarInstrumentoConvocatorio",
+  "json": {
+    "data": [
+      {
+        "codigo": 0,
+        "descricao": "Selecione"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "27410b530b57b8df7edf0b82a6cd5553aa696fd3bfcc7b93da919ee284fe6911",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

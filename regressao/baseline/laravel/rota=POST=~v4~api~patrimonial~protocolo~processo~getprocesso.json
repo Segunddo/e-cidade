@@ -1,0 +1,56 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/processo/getprocesso",
+  "json": {
+    "data": {
+      "current_page": 1,
+      "data": [
+        {
+          "p58_ano": 2012,
+          "p58_codproc": 3,
+          "p58_dtproc": "30/07/2012",
+          "p58_obs": "",
+          "p58_requer": "PREFEITURA DBSELLER"
+        }
+      ],
+      "first_page_url": "http://localhost:8074/v4/api/patrimonial/protocolo/processo/getprocesso?page=1",
+      "from": 1,
+      "last_page": 1,
+      "last_page_url": "http://localhost:8074/v4/api/patrimonial/protocolo/processo/getprocesso?page=1",
+      "links": [
+        {
+          "active": false,
+          "label": "&laquo; Anterior",
+          "url": null
+        },
+        {
+          "active": true,
+          "label": "1",
+          "url": "http://localhost:8074/v4/api/patrimonial/protocolo/processo/getprocesso?page=1"
+        },
+        {
+          "active": false,
+          "label": "Próxima &raquo;",
+          "url": null
+        }
+      ],
+      "next_page_url": null,
+      "path": "http://localhost:8074/v4/api/patrimonial/protocolo/processo/getprocesso",
+      "per_page": 10,
+      "prev_page_url": null,
+      "to": 1,
+      "total": 1
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "101c8e949686112b60557727f691fd5098ae37059739a796471e5ed979d158ad",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

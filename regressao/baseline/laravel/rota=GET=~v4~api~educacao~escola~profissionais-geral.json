@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/escola/profissionais-geral",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Educacao\\Escola\\Controllers\\ProfissionalController::profissionais does not exist."
+  },
+  "sha256": "03a682c2a385a5786c76979299748f7873e148341471cf5da2d8eb0dd99729f2",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

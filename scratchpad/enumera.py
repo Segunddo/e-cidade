@@ -1,11 +1,32 @@
 #!/usr/bin/env python3
-"""Passos 1-3 da receita de porte: enumera o universo de um modulo pelas SEIS
-frentes, faz o inventario das categorias conhecidas e grava a lista de alvos.
+"""Passos 1-3 da receita de porte: enumera o universo de um modulo pelas frentes
+(eram seis; hoje sao nove -- ver abaixo), faz o inventario das categorias conhecidas
+e grava a lista de alvos.
 
 Le tudo em BYTES -- 64% da base e LATIN-1 e o grep a pula em silencio.
 
-Uso:  python3 scratchpad/enumera.py <prefixo>
-Saida: tmp/<prefixo>_universo.txt  e  tmp/<prefixo>_alvos.txt
+Como faz:
+  1. telas de partida: os .php da raiz de ecidade/ com o prefixo (<pref>[0-9]*_, sem
+     diferenciar maiusculas) -- ou a lista de TELAS=, quando o lote nao e um prefixo;
+  2. soma os .php citados em string pelas telas (abertos por JavaScript, UM nivel so);
+  3. fecho transitivo pelas frentes de diretas(): include/require, `new cl_X`,
+     getDao('X'), classes de model/ e std/ por autoload, e classes com namespace
+     (src/app/api, via ns_fecho.refs);
+  4. descarta o que ja esta pago (NUCLEO, vazio na base-php74, + commits "Porta ...") e, em cada
+     arquivo restante, conta as categorias que quebram no PHP 8 (CAT, parse_str de 1
+     argumento, construtor PHP 4, `$this->X == "<literal>"`); quem tem alguma vira alvo.
+
+Uso (da raiz do repo):
+  python3 scratchpad/enumera.py <prefixo>
+  TELAS=a.php,b.php python3 scratchpad/enumera.py <nome-do-lote>    # lote que nao e prefixo
+  TELAS=@/caminho/absoluto/lista.txt python3 scratchpad/enumera.py <nome-do-lote>   # uma tela por linha
+  SEM_NS=1 ...  desliga a 9a frente (namespace), para medir o que ela acrescenta
+Entradas: os arquivos de ecidade/, o `git log` (commits "Porta ...") e ns_fecho.py.
+Saida: tmp/<prefixo>_universo.txt  e  tmp/<prefixo>_alvos.txt (relativos a ecidade/);
+  imprime telas, tamanho do universo, quanto ja esta pago, quantos A ALTERAR e a
+  contagem por categoria.
+Usado em: passos 1-3 do guia (docs/migrar-um-modulo.md); tambem chamado pelo
+  dimensiona.py (com TELAS=) para medir as areas.
 """
 import os, re, sys, collections, subprocess
 
@@ -14,14 +35,10 @@ import os, re, sys, collections, subprocess
 os.chdir(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'ecidade'))
 PREF = sys.argv[1]
 
-NUCLEO = {
- "libs/db_stdlib.php","libs/db_conecta.php","libs/db_sessoes.php","libs/db_usuariosonline.php",
- "libs/db_acessa.php","libs/db_calcula.php","libs/db_libpessoal.php","libs/db_utils.php",
- "libs/db_sql.php","libs/db_app.utils.php","libs/JSON.php","dbforms/db_funcoes.php",
- "dbforms/db_classesgenericas.php","std/DBString.php","std/db_stdClass.php",
- "config/ecidade_config.php","fpdf151/fpdf.php","fpdf151/pdf.php",
- "model/pessoal/std/DBPessoal.model.php","model/configuracao/mensagem/DBMensagem.model.php",
- "classes/db_cgm_classe.php"}
+# Arquivos do nucleo ja portados a mao: contam como pagos (nunca viram alvo).
+# base-php74: VAZIO -- o nucleo desta base NAO foi portado (fpdf.php:614 e JSON.php:188 quebram no 8.5).
+# A lista de 21 arquivos da base-php84: git show origin/base-php84:scratchpad/enumera.py
+NUCLEO = set()
 # Os commits anteriores a reorganizacao registram "classes/x.php"; os
 # posteriores registrarao "ecidade/classes/x.php". Como o universo e relativo a
 # ecidade/, normaliza-se o prefixo -- senao o proximo modulo veria tudo como
@@ -29,22 +46,29 @@ NUCLEO = {
 PORTADO = {l.strip().removeprefix("ecidade/") for l in subprocess.run(
     ["git","log","--name-only","--format=","--grep=^Porta "],
     capture_output=True, text=True).stdout.splitlines() if l.strip().endswith(".php")}
-PAGO = NUCLEO | PORTADO
+PAGO = NUCLEO | PORTADO          # o que ja foi portado: entra no universo, mas nunca vira alvo
 
 # re.I nas tres: PHP nao diferencia maiusculas em palavra-chave nem em nome de
 # metodo/classe. 9a lacuna: `db_utils::getdao('atolegal')` (minusculas) -- 781
 # chamadas em 244 arquivos com grafia diferente de getDao, invisiveis a frente.
+# include/require[_once] com caminho literal, com ou sem parenteses e com ou sem o
+# envelope modification(...) do extension/ -- captura o caminho .php.
 RX_INC = re.compile(rb'(?:include|require)(?:_once)?\s*\(?\s*(?:modification\s*\(\s*)?["\']([^"\']+\.php)["\']', re.I)
+# `new cl_x` -> classes/db_x_classe.php (autoload das classes de tabela).
 RX_NEW = re.compile(rb'new\s+(cl_\w+)', re.I)
 # 7a lacuna: db_utils::getDao('x') instancia cl_x por autoload sem citar o
 # nome da classe. Achada no `fis`, em db_cadtipo_classe.php -- cujo construtor
 # PHP4 inicializa $this->rotulo, e sem ele a tela morre com label() on null.
 RX_DAO = re.compile(rb'''getDao\s*\(\s*['"]([A-Za-z0-9_]+)['"]''', re.I)
+# nome de arquivo .php (ou .RPC.php) sem pasta dentro de string: o que o JavaScript abre.
 RX_STR = re.compile(rb'["\']([A-Za-z0-9_]+\.(?:RPC\.)?php)["\']')
 # 13a lacuna: classes de model/ e std/ usadas por `new Classe` ou `Classe::metodo()` sao
 # carregadas pelo AUTOLOADER, sem include -- nenhuma frente as via. Achada porque o calculo
 # da folha morreu em AjustePrevidencia::...; escondia 5 classes de folha com LSP e 6 each().
+# `new Classe` (grupo 1) ou `Classe::` (grupo 2); o nome e procurado em MAPA_CLS.
 RX_CLS = re.compile(rb'\bnew\s+([A-Za-z_]\w*)|\b([A-Za-z_]\w*)::')
+# nome da classe/interface em minusculas -> arquivo de model/ ou std/ que a declara
+# (o primeiro achado vence, como no autoload).
 MAPA_CLS = {}
 for _raiz in ("model", "std"):
     for _d, _, _fs in os.walk(_raiz):
@@ -79,8 +103,11 @@ def classes_php4(b):
             out.append((nome, ini))
     return out
 
-_c = {}
+_c = {}                                                 # cache: arquivo -> dependencias diretas
 def diretas(p):
+    """Dependencias DIRETAS de um arquivo (relativo a ecidade/), pelas frentes de codigo:
+    include/require, `new cl_*`, getDao(), classes de model/std e namespace. Devolve so
+    caminhos que existem em disco. O fecho transitivo e feito por quem chama."""
     if p in _c: return _c[p]
     out = set()
     try: b = open(p, "rb").read()
@@ -105,12 +132,15 @@ def diretas(p):
     return out
 
 def citados(p):                                        # 3a lacuna: aberto por JavaScript
+    """Arquivos .php da raiz citados em string por p (menos o proprio p). So um nivel:
+    e o navegador que os abre, nao um include."""
     try: b = open(p, "rb").read()
     except OSError: return set()
     return {q for q in (m.group(1).decode("latin1") for m in RX_STR.finditer(b))
             if os.path.isfile(q) and q != os.path.basename(p)}
 
 rx = re.compile(r'^' + PREF + r'[0-9]*_', re.IGNORECASE)   # 1a lacuna: maiusculas
+# so a raiz de ecidade/: as telas de menu ficam todas ali
 telas = sorted(f for f in os.listdir(".") if os.path.isfile(f) and f.endswith(".php") and rx.match(f))
 # Lote que nao e um prefixo (ex.: telas de menu soltas): TELAS=a.php,b.php -- o
 # <prefixo> passa a ser so o nome dos arquivos de saida.
@@ -119,6 +149,8 @@ if os.environ.get("TELAS"):
     # TELAS=@<arquivo>: uma por linha -- listas grandes nao cabem numa variavel de ambiente
     if len(telas) == 1 and telas[0].startswith("@"):
         telas = sorted({l.strip() for l in open(telas[0][1:]) if l.strip()})
+# fecho: as telas + o que elas abrem por JavaScript sao a partida; dai segue-se
+# diretas() ate nao aparecer arquivo novo (busca em largura com `universo` como vistos)
 js = set().union(*[citados(f) for f in telas]) - set(telas)
 universo, fila = set(telas) | js, list(telas) + sorted(js)
 while fila:
@@ -126,6 +158,8 @@ while fila:
         if d not in universo: universo.add(d); fila.append(d)
 universo = sorted(universo)
 
+# Categorias contadas por regex sobre bytes. O lookbehind (?<![A-Za-z0-9_>$.]) evita
+# casar metodo (->split), variavel ($each), nome composto (preg_split) e concatenacao.
 CAT = {
  'split(':            re.compile(rb'(?<![A-Za-z0-9_>$.])split\s*\('),
  'each(':             re.compile(rb'(?<![A-Za-z0-9_>$.])each\s*\('),
@@ -155,6 +189,7 @@ def parse_str_1arg(b):
         if not virg: n += 1
     return n
 
+# inventario: so os arquivos NAO pagos; alvo = arquivo com ao menos uma ocorrencia
 alvos, tot = set(), collections.Counter()
 arq = collections.defaultdict(set)
 for p in universo:
@@ -171,6 +206,7 @@ for p in universo:
     # 2 em JSON.php, 34 no jpgraph) sobreviveram a oito portes sem serem renomeadas.
     for nome, _ in classes_php4(b):
         tot['construtor PHP4'] += 1; arq['construtor PHP4'].add(p); alvos.add(p)
+    # propriedades declaradas com valor inteiro (`var $x = 0;`, `public $x = -1;`)
     props = {m.group(1) for m in re.finditer(rb'(?:var|public)\s+\$(\w+)\s*=\s*-?\d+\s*;', b)}
     # Inclui literal NAO-NUMERICO, nao so "". No 5.6 a string nao-numerica era
     # coagida para 0 e casava com a propriedade inteira; no PHP 8 vira comparacao

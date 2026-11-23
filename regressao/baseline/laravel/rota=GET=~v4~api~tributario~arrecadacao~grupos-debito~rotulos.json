@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/arrecadacao/grupos-debito/rotulos",
+  "json": {
+    "data": {
+      "k03_descr": "Descrição do Tipo Débito",
+      "k03_parcano": "Se parcela débito somente no ano atual ou nao",
+      "k03_parcelamento": "Se tipo de débito é parcelamento ou não",
+      "k03_permparc": "Se permite parcelar este tipo de débito",
+      "k03_tipo": "Grupo de  Débito"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "0d01a94323ef4809452b3e6da5ddf75d94c65287be632a4329f39294d8237731",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

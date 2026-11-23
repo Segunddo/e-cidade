@@ -47,7 +47,7 @@ $clbens->rotulo->label("t52_descr");
 $clbens->rotulo->label("t52_ident");
 $clclabens->rotulo->label("t64_class");
 $cldb_depart->rotulo->label("descrdepto");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $result = $clcfpatri->sql_record($clcfpatri->sql_query_file());
 db_fieldsmemory($result,0);
 ?>

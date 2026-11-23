@@ -1,0 +1,82 @@
+{
+ "console": [
+  "Permissions policy violation: unload is not allowed in this document."
+ ],
+ "descricao": "ISSQN: formulario e emissao do relatorio de tipos de calculo (iss2_tipcalc)",
+ "falhas": [],
+ "id": "tributario",
+ "passos": [
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": null,
+   "dom_sha256": null,
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "entrada",
+   "ok": true,
+   "requisicoes": [],
+   "runtime": {},
+   "url": null
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<html>\n<head>\n<title>DBSeller Informática Ltda - Página Inicial</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta http-equiv=\"Expires\" content=\"0\">\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/scripts.js\">\n</script>\n<script>\n</script>\n<link href=\"estilos.css\" rel=\"stylesheet\" type=\"text/css\">\n<script type=\"text/javascript\">\n</script>\n<link href=\"http://localhost:8190/skins/estilos.php?file=widgets/DBModal.css\" rel=\"stylesheet\">\n<link href=\"http://localhost:8190/estilos/widgets/DBModalBase.css\" rel=\"stylesheet\">\n</head>\n<body bgcolor=\"#CCCCCC\" leftmargin=\"0\" topmargin=\"0\" marginwidth=\"0\" marginheight=\"0\" onload=\"a=1\" class=\"no-menu\">\n<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n<tbody>\n<tr>\n<td height=\"100%\" align=\"center\" valign=\"top\" bgcolor=\"#CCCCCC\">\n<table width=\"80%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n</table>\n<table>\n<tbody>\n<tr>\n<td>\n<br>\n<br>\n<br>\n<form name=\"form1\" method=\"post\">\n<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td colspan=\"3\" align=\"center\">\n<table>\n<tbody>\n<tr>\n<td align=\"center\">\n</td>\n</tr>\n<tr id=\"tr_inicio_tipcalc\">\n<td colspan=\"2\">\n<table align=\"center\">\n<tbody>\n<tr>\n<td nowrap=\"\" title=\"\">\n<fieldset id=\"fieldset_tipcalc\">\n<legend>\n<strong>TIPOS DE CÁLCULO</strong>\n</legend>\n<table border=\"0\">\n<tbody>\n<tr>\n<td nowrap=\"\">\n<b>\n<a class=\"DBAncora\" style=\"text-decoration:underline;\" onclick=\"js_BuscaDadosArquivotipcalc(true);\">\n<strong>Codigo do calculo:</strong>\n</a>\n<input title=\"Codigo do calculo Campo:q85_codigo \" name=\"q85_codigo\" type=\"text\" id=\"q85_codigo\" value=\"\" size=\"8\" maxlength=\"4\" onchange=\"js_BuscaDadosArquivotipcalc(false);\" tabindex=\"0\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,0,'Codigo do calculo','','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Codigo do calculo\">\n<input title=\"Descricao do calculo Campo:q85_descr \" name=\"q85_descr\" type=\"text\" id=\"q85_descr\" value=\"\" size=\"25\" maxlength=\"40\" readonly=\"\" style=\"background-color:#DEB887;text-transform:uppercase;\" autocomplete=\"off\" labelvalidacao=\"Descricao do calculo\" ismandatory=\"true\">\n<input id=\"db_lanca\" name=\"db_lanca\" type=\"button\" value=\"Lançar\">\n</b>\n</td>\n</tr>\n<tr>\n<td align=\"center\">\n<select name=\"tipcalc[]\" id=\"tipcalc\" size=\"10\" style=\"width:250px\" multiple=\"\" ondblclick=\"js_excluir_itemtipcalc()\">\n</select>\n</td>\n</tr>\n<tr>\n<td align=\"center\">\n<strong> Dois Cliques sobre o item o exclui.</strong>\n</td>\n</tr>\n</tbody>\n</table>\n</fieldset>\n</td>\n</tr>\n</tbody>\n</table>\n<script>\n</script>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<tr>\n<td align=\"right\">\n<strong>Opção de Seleção :<strong>\n</strong>\n</strong>\n</td>\n<td align=\"left\">&nbsp;&nbsp;&nbsp; <select name=\"param_where\" id=\"param_where\">\n<option value=\"S\">Somente Selecionados</option>\n<option value=\"N\">Menos os Selecionados</option>\n</select>\n</td>\n</tr>\n<tr>\n<td colspan=\"4\">\n<br>\n<br>\n</td>\n</tr>\n<tr>\n<td align=\"center\" colspan=\"4\">\n<input name=\"exibir_relatorio\" type=\"button\" id=\"exibir_relatorio\" value=\"Exibir relatório\" onclick=\"js_AbreJanelaRelatorio()\">\n</td>\n</tr>\n</tbody>\n</table>\n</form>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n</tbody>\n</table>\n<style>\n</style>\n<script>\n</script>\n<div id=\"db-tooltip\" class=\"db-tooltip\">\n</div>\n<script type=\"text/javascript\" src=\"scripts/classes/configuracao/DBViewHelpInline.classe.js\">\n</script>\n<script type=\"text/javascript\">\n</script>\n</body>\n</html>",
+   "dom_sha256": "702001b3330e949f39559c28df56955be3378b6bd52d878c43cab219125ad2e8",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {
+    "campos": [
+     "db_lanca",
+     "exibir_relatorio",
+     "q85_codigo",
+     "q85_descr"
+    ]
+   },
+   "nome": "tela-relatorio",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 //w/1/extension/desktop/menu/getMenuArquivo/?file",
+    "GET 200 /w/1/con4_dbhelp.RPC.php?json",
+    "GET 200 /w/1/extension/desktop/window/bottom",
+    "GET 200 /w/1/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId",
+    "GET 200 /w/1/iss2_tipcalc001.php"
+   ],
+   "runtime": {
+    "//w/1/extension/desktop/menu/getMenuArquivo/?file": "PHP-7.4 (referencia)",
+    "/w/1/con4_dbhelp.RPC.php?json": "PHP-7.4 (referencia)",
+    "/w/1/extension/desktop/window/bottom": "PHP-7.4 (referencia)",
+    "/w/1/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId": "PHP-7.4 (referencia)",
+    "/w/1/iss2_tipcalc001.php": "PHP-7.4 (referencia)"
+   },
+   "url": "/w/1/iss2_tipcalc001.php"
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": null,
+   "dom_sha256": null,
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {
+    "content_type": "application/pdf",
+    "conteudo": "=== pagina 1 === PREFEITURA DBSELLER RUA GENERAL CAMARA, 406 PORTO ALEGRE - RS 05130765101 - CNPJ : 00.000.000/0000-00 www.dbseller.com.br RELATÓRIO DOS TIPOS DE CÁLCULOS Ordem Numérica -- Exercicio Anterior -- -- Exercicio Atual -- Cod Descricao Calculo Int Tp Cod. Qtda Qtda Frm Rec Quantidade Valor ou Rec Quantidade Valor ou Abreviada e Completa Utilizado Vcto Ativ Cad. Inicial / Final Aliquota Inicial / Final Aliquota 1 ISSQN FIXO1 2 S Q 8 S S 2 3 0,00 1,00 3 0,00 1,00 ISSQN FIXO1 9.999.999.999,00 9.999.999.999,00 2 ALVARA 1 S Q 4 S S 2 3 0,00 2,00 3 0,00 3,00 ALVARA 999.999.999,00 999.999.999,00 3 ISSQN VARIAVEL 3 S M 3 S S 2 3 0,00 1,00 3 0,00 999,00 ISSQN VARIAVEL 999.999.999,00 999.999.999,00 4 VISTORIAS TFV 5 S Q 6 S S 2 3 0,00 1,00 3 0,00 10,00 VISTORIAS TFV 999.999,00 999.999,00 8 VISTORIAS TFS 6 S Q 14 S S 2 3 0,00 1,00 3 0,00 10,00 VISTORIAS TFS 999.999.999,00 999.999.999,00 10 TAXA DE EXPEDIENTE 4 S Q 5 S S 2 3 0,00 1,00 3 0,00 10,00 TAXA DE EXPEDIENTE 99.999.999,00 99.999.999,00 Total de Registros 6 Base: ecidade ISSQN>Cadastrais>Tipos de Cálculo iss2_tipcalc002.php Emissor: Prefeitura Dbseller Exerc: 2026 Data: X Pág 1/1",
+    "conteudo_sha256": "3a9d2ecefee0d1b8f57a0a898e7ffe2307d905fbc2abd0366148b90db8f72d2a",
+    "e_pdf": true,
+    "relatorio": "/w/1/iss2_tipcalc002.php?lista&param_where",
+    "status_corpo": 200
+   },
+   "nome": "emitir",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 /w/1/iss2_tipcalc002.php?lista&param_where"
+   ],
+   "runtime": {
+    "/w/1/iss2_tipcalc002.php?lista&param_where": "PHP-7.4 (referencia)"
+   },
+   "url": null
+  }
+ ]
+}

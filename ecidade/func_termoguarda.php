@@ -36,7 +36,7 @@ require_once(modification("classes/db_bensguarda_classe.php"));
 $oGet = db_utils::postMemory($_GET);
 
 db_postmemory($_POST);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clbensguarda = new cl_bensguarda;
 $clbensguarda->rotulo->label("t21_codigo");
 $clbensguarda->rotulo->label("t21_codigo");

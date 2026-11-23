@@ -29,7 +29,7 @@
 require_once(modification("libs/db_stdlib.php"));
 require_once(modification("libs/db_conecta.php"));
 $clrotulo = new rotulocampo;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if(file_exists(base64_decode($arquivo))){
   include(modification(base64_decode($arquivo)));

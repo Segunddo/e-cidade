@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/assinantes",
+  "json": {
+    "error": true,
+    "message": "Verifique os parâmetros informados"
+  },
+  "sha256": "e2eee31caff8d9396c206dab939e691b1c247b3e00efa6c0e8cfc0c7ce062ca2",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -36,7 +36,7 @@ require_once(modification("classes/db_iptubase_classe.php"));
 require_once(modification("classes/db_propri_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 
 $claverbacgm = new cl_averbacgm;
@@ -67,7 +67,7 @@ $result_principal = db_query($sql_principal);
 db_fieldsmemory($result_principal, 0);
 
 // Se houver principal, desabilita select 'Principal'
-if (pg_num_rows($result_principal) > 0) {
+if (($result_principal ? pg_num_rows($result_principal) : null) > 0) {
     $verificaPrincipal = 'false';
 }
 
@@ -83,7 +83,7 @@ if (isset($incluir)) {
 
         $podeIncluirProprietarioAtual = $parametrosCfiptu->j18_validaproprietario == 'f' && $_POST['j76_principal'] == 't';
 
-        if(pg_num_rows($resultGetCgmProprietarioPrincipal) > 0 && !$podeIncluirProprietarioAtual){
+        if(($resultGetCgmProprietarioPrincipal ? pg_num_rows($resultGetCgmProprietarioPrincipal) : null) > 0 && !$podeIncluirProprietarioAtual){
             $erro_msg = "CGM deve ser diferente do proprietário principal atual.";
             $sqlerro = true;
         } else if ($_POST['j76_principal'] == 'f') {
@@ -124,7 +124,7 @@ if (isset($incluir)) {
             db_fieldsmemory($result_principal, 0);
 
             // Se houver principal, desabilita select 'Principal'
-            if (pg_num_rows($result_principal) > 0) {
+            if (($result_principal ? pg_num_rows($result_principal) : null) > 0) {
                 $verificaPrincipal = 'false';
             }
 
@@ -162,7 +162,7 @@ if (isset($incluir)) {
             db_fieldsmemory($result_principal, 0);
 
             // Se houver principal, desabilita select 'Principal'
-            if (pg_num_rows($result_principal) > 0) {
+            if (($result_principal ? pg_num_rows($result_principal) : null) > 0) {
                 $verificaPrincipal = 'false';
             }
             $erro_msg = $claverbacgm->erro_msg;
@@ -184,7 +184,7 @@ if (isset($incluir)) {
         db_fieldsmemory($result_principal, 0);
 
 // Se houver principal, desabilita select 'Principal'
-        if (pg_num_rows($result_principal) > 0) {
+        if (($result_principal ? pg_num_rows($result_principal) : null) > 0) {
             $verificaPrincipal = 'false';
         }
         $erro_msg = $claverbacgm->erro_msg;
@@ -211,7 +211,7 @@ $sqlVerItbi = "select j75_regra,j75_codigo,j103_itbi from averbacao
 									  and j76_codigo is null ";
 
 $rsVerItbi = db_query($sqlVerItbi);
-$linhasVerItbi = pg_num_rows($rsVerItbi);
+$linhasVerItbi = ($rsVerItbi ? pg_num_rows($rsVerItbi) : null);
 if ($linhasVerItbi > 0) {
     // é uma averbação do tipo 6 de itbi com guia do sistema.
     // então grava automatico os cgms dos compradores desta guia itbi. j104_guia
@@ -225,7 +225,7 @@ if ($linhasVerItbi > 0) {
 								   and it03_guia = {$j103_itbi}";
 
     $rsNome = db_query($sqlNome);
-    $linhasNome = pg_num_rows($rsNome);
+    $linhasNome = ($rsNome ? pg_num_rows($rsNome) : null);
     if ($linhasNome > 0) {
         $sqlerro = false;
         db_inicio_transacao();

@@ -71,12 +71,12 @@ class cl_ppaestimativadespesa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o07_sequencial = ($this->o07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o07_sequencial"]:$this->o07_sequencial);
-       $this->o07_ppaestimativa = ($this->o07_ppaestimativa == ""?@$GLOBALS["HTTP_POST_VARS"]["o07_ppaestimativa"]:$this->o07_ppaestimativa);
-       $this->o07_coddot = ($this->o07_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o07_coddot"]:$this->o07_coddot);
-       $this->o07_anousu = ($this->o07_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o07_anousu"]:$this->o07_anousu);
+       $this->o07_sequencial = ($this->o07_sequencial === 0 || $this->o07_sequencial === 0.0 || $this->o07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o07_sequencial"]:$this->o07_sequencial);
+       $this->o07_ppaestimativa = ($this->o07_ppaestimativa === 0 || $this->o07_ppaestimativa === 0.0 || $this->o07_ppaestimativa == ""?@$GLOBALS["HTTP_POST_VARS"]["o07_ppaestimativa"]:$this->o07_ppaestimativa);
+       $this->o07_coddot = ($this->o07_coddot === 0 || $this->o07_coddot === 0.0 || $this->o07_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o07_coddot"]:$this->o07_coddot);
+       $this->o07_anousu = ($this->o07_anousu === 0 || $this->o07_anousu === 0.0 || $this->o07_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o07_anousu"]:$this->o07_anousu);
      }else{
-       $this->o07_sequencial = ($this->o07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o07_sequencial"]:$this->o07_sequencial);
+       $this->o07_sequencial = ($this->o07_sequencial === 0 || $this->o07_sequencial === 0.0 || $this->o07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o07_sequencial"]:$this->o07_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_ppaestimativadespesa {
          $this->o07_sequencial = $o07_sequencial;
        }
      }
-     if(($this->o07_sequencial == null) || ($this->o07_sequencial == "") ){
+     if(($this->o07_sequencial == null) || ($this->o07_sequencial === 0 || $this->o07_sequencial === 0.0 || $this->o07_sequencial == "") ){
        $this->erro_sql = " Campo o07_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

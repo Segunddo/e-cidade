@@ -34,7 +34,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_turma_matriculas_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clturma_matriculas = new cl_turma_matriculas;
 $clturma_matriculas->rotulo->label("ed36_i_turma");
 $clturma_matriculas->rotulo->label("ed36_i_matricula");

@@ -69,11 +69,11 @@ class cl_legista {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm32_i_codigo = ($this->cm32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_codigo"]:$this->cm32_i_codigo);
-       $this->cm32_i_numcgm = ($this->cm32_i_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_numcgm"]:$this->cm32_i_numcgm);
-       $this->cm32_i_crm = ($this->cm32_i_crm == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_crm"]:$this->cm32_i_crm);
+       $this->cm32_i_codigo = ($this->cm32_i_codigo === 0 || $this->cm32_i_codigo === 0.0 || $this->cm32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_codigo"]:$this->cm32_i_codigo);
+       $this->cm32_i_numcgm = ($this->cm32_i_numcgm === 0 || $this->cm32_i_numcgm === 0.0 || $this->cm32_i_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_numcgm"]:$this->cm32_i_numcgm);
+       $this->cm32_i_crm = ($this->cm32_i_crm === 0 || $this->cm32_i_crm === 0.0 || $this->cm32_i_crm == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_crm"]:$this->cm32_i_crm);
      }else{
-       $this->cm32_i_codigo = ($this->cm32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_codigo"]:$this->cm32_i_codigo);
+       $this->cm32_i_codigo = ($this->cm32_i_codigo === 0 || $this->cm32_i_codigo === 0.0 || $this->cm32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm32_i_codigo"]:$this->cm32_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_legista {
          $this->cm32_i_codigo = $cm32_i_codigo;
        }
      }
-     if(($this->cm32_i_codigo == null) || ($this->cm32_i_codigo == "") ){
+     if(($this->cm32_i_codigo == null) || ($this->cm32_i_codigo === 0 || $this->cm32_i_codigo === 0.0 || $this->cm32_i_codigo == "") ){
        $this->erro_sql = " Campo cm32_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

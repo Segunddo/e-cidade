@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/transposicao/vagas",
+  "json": {
+    "error": true,
+    "message": "Invalid argument supplied for foreach()"
+  },
+  "sha256": "fe87a50fa94599dbeef4ef94fed257fc34ea1afa7e8d0066141cbea9210d0b64",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

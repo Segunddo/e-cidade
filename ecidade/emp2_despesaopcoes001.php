@@ -34,7 +34,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_orcdotacao_classe.php"));
 include(modification("classes/db_orcelemento_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 // recebe a variavel db_input_retorno com o nome do objeto que será atualizado com os dados selecionados

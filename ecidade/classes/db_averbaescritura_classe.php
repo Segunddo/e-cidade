@@ -75,14 +75,14 @@ class cl_averbaescritura {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j94_codigo = ($this->j94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j94_codigo"]:$this->j94_codigo);
-       $this->j94_averbacao = ($this->j94_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j94_averbacao"]:$this->j94_averbacao);
+       $this->j94_codigo = ($this->j94_codigo === 0 || $this->j94_codigo === 0.0 || $this->j94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j94_codigo"]:$this->j94_codigo);
+       $this->j94_averbacao = ($this->j94_averbacao === 0 || $this->j94_averbacao === 0.0 || $this->j94_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j94_averbacao"]:$this->j94_averbacao);
        $this->j94_livro = ($this->j94_livro == ""?@$GLOBALS["HTTP_POST_VARS"]["j94_livro"]:$this->j94_livro);
        $this->j94_folha = ($this->j94_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["j94_folha"]:$this->j94_folha);
        $this->j94_numero = ($this->j94_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["j94_numero"]:$this->j94_numero);
        $this->j94_tabelionato = ($this->j94_tabelionato == ""?@$GLOBALS["HTTP_POST_VARS"]["j94_tabelionato"]:$this->j94_tabelionato);
      }else{
-       $this->j94_codigo = ($this->j94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j94_codigo"]:$this->j94_codigo);
+       $this->j94_codigo = ($this->j94_codigo === 0 || $this->j94_codigo === 0.0 || $this->j94_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j94_codigo"]:$this->j94_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_averbaescritura {
          $this->j94_codigo = $j94_codigo;
        }
      }
-     if(($this->j94_codigo == null) || ($this->j94_codigo == "") ){
+     if(($this->j94_codigo == null) || ($this->j94_codigo === 0 || $this->j94_codigo === 0.0 || $this->j94_codigo == "") ){
        $this->erro_sql = " Campo j94_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

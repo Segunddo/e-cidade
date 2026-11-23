@@ -34,7 +34,7 @@ include(modification("classes/db_far_matersaude_classe.php"));
 include(modification("classes/db_far_matersaude_classe_cgs_ext.php"));
 include(modification("classes/db_matmater_classe.php"));
 db_postmemory($_POST);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clfar_matersaude     = new cl_far_matersaude;
 $clfar_matersaude_ext = new cl_far_matersaude_ext;
 $clmatmater           = new cl_matmater;

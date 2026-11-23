@@ -71,12 +71,12 @@ class cl_abatimentorecibo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k127_sequencial = ($this->k127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k127_sequencial"]:$this->k127_sequencial);
-       $this->k127_abatimento = ($this->k127_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k127_abatimento"]:$this->k127_abatimento);
-       $this->k127_numprerecibo = ($this->k127_numprerecibo == ""?@$GLOBALS["HTTP_POST_VARS"]["k127_numprerecibo"]:$this->k127_numprerecibo);
-       $this->k127_numpreoriginal = ($this->k127_numpreoriginal == ""?@$GLOBALS["HTTP_POST_VARS"]["k127_numpreoriginal"]:$this->k127_numpreoriginal);
+       $this->k127_sequencial = ($this->k127_sequencial === 0 || $this->k127_sequencial === 0.0 || $this->k127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k127_sequencial"]:$this->k127_sequencial);
+       $this->k127_abatimento = ($this->k127_abatimento === 0 || $this->k127_abatimento === 0.0 || $this->k127_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k127_abatimento"]:$this->k127_abatimento);
+       $this->k127_numprerecibo = ($this->k127_numprerecibo === 0 || $this->k127_numprerecibo === 0.0 || $this->k127_numprerecibo == ""?@$GLOBALS["HTTP_POST_VARS"]["k127_numprerecibo"]:$this->k127_numprerecibo);
+       $this->k127_numpreoriginal = ($this->k127_numpreoriginal === 0 || $this->k127_numpreoriginal === 0.0 || $this->k127_numpreoriginal == ""?@$GLOBALS["HTTP_POST_VARS"]["k127_numpreoriginal"]:$this->k127_numpreoriginal);
      }else{
-       $this->k127_sequencial = ($this->k127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k127_sequencial"]:$this->k127_sequencial);
+       $this->k127_sequencial = ($this->k127_sequencial === 0 || $this->k127_sequencial === 0.0 || $this->k127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k127_sequencial"]:$this->k127_sequencial);
      }
    }
    // funcao para Inclusão
@@ -127,7 +127,7 @@ class cl_abatimentorecibo {
          $this->k127_sequencial = $k127_sequencial;
        }
      }
-     if(($this->k127_sequencial == null) || ($this->k127_sequencial == "") ){
+     if(($this->k127_sequencial == null) || ($this->k127_sequencial === 0 || $this->k127_sequencial === 0.0 || $this->k127_sequencial == "") ){
        $this->erro_sql = " Campo k127_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

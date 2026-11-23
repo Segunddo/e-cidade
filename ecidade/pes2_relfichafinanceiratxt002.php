@@ -38,7 +38,7 @@ $clrhpescargo = new cl_rhpescargo;
 $clrhrubricas = new cl_rhrubricas;
 $clrotulo = new rotulocampo;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $mesi = str_pad($mesi, 2, "0", STR_PAD_LEFT);

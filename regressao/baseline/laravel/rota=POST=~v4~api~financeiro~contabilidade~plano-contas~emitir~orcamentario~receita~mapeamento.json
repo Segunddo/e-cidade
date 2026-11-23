@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/emitir/orcamentario/receita/mapeamento",
+  "json": {
+    "error": true,
+    "message": "Undefined index: exercicio"
+  },
+  "sha256": "c0340667342129985caf9551f76c4a001748fe71a327f4417018e37ebe1a28a5",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

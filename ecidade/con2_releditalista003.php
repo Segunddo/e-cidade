@@ -27,7 +27,7 @@
 
 include(modification("libs/db_sql.php"));
 include(modification("fpdf151/scpdf.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if ( $d01_codedi == null ) {
   db_redireciona('db_erros.php?fechar=true&db_erro=Código do edital não preenchido!');
 }

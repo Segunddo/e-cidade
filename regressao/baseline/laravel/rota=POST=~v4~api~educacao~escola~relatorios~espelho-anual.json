@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/relatorios/espelho-anual",
+  "json": {
+    "error": true,
+    "message": "Trying to get property 'ed220_i_codigo' of non-object"
+  },
+  "sha256": "9c7472844d09cfa772fd480b71bb5d6e1fd8bccad6ffc98e38d25a90ec4c4ded",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

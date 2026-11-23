@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/matricula-online/vagas/turnos-fases-abertas",
+  "json": {
+    "error": true,
+    "message": "Plugin Matrícula On Line não instalado."
+  },
+  "sha256": "a81eefc28342fa200efe77f8b6d9992e3f7b45509586f7590c65fca2e86cce2e",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

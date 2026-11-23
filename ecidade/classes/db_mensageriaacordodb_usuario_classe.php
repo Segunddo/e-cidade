@@ -43,11 +43,11 @@ class cl_mensageriaacordodb_usuario {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac52_sequencial = ($this->ac52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac52_sequencial"]:$this->ac52_sequencial);
-       $this->ac52_db_usuarios = ($this->ac52_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ac52_db_usuarios"]:$this->ac52_db_usuarios);
-       $this->ac52_dias = ($this->ac52_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["ac52_dias"]:$this->ac52_dias);
+       $this->ac52_sequencial = ($this->ac52_sequencial === 0 || $this->ac52_sequencial === 0.0 || $this->ac52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac52_sequencial"]:$this->ac52_sequencial);
+       $this->ac52_db_usuarios = ($this->ac52_db_usuarios === 0 || $this->ac52_db_usuarios === 0.0 || $this->ac52_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ac52_db_usuarios"]:$this->ac52_db_usuarios);
+       $this->ac52_dias = ($this->ac52_dias === 0 || $this->ac52_dias === 0.0 || $this->ac52_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["ac52_dias"]:$this->ac52_dias);
      }else{
-       $this->ac52_sequencial = ($this->ac52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac52_sequencial"]:$this->ac52_sequencial);
+       $this->ac52_sequencial = ($this->ac52_sequencial === 0 || $this->ac52_sequencial === 0.0 || $this->ac52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac52_sequencial"]:$this->ac52_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_mensageriaacordodb_usuario {
          $this->ac52_sequencial = $ac52_sequencial;
        }
      }
-     if(($this->ac52_sequencial == null) || ($this->ac52_sequencial == "") ){
+     if(($this->ac52_sequencial == null) || ($this->ac52_sequencial === 0 || $this->ac52_sequencial === 0.0 || $this->ac52_sequencial == "") ){
        $this->erro_sql = " Campo ac52_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

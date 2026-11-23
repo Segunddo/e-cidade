@@ -27,7 +27,7 @@
 
 include(modification("libs/db_sql.php"));
 include(modification("fpdf151/pdf.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if ( $d40_codigo == null ) {
   db_redireciona('db_erros.php?fechar=true&db_erro=Código da lista nao preenchido!');
 }

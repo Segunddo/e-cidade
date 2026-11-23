@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/issqn/veiculos/veiculo/getVeiculo",
+  "json": {
+    "errors": {
+      "q172_sequencial": [
+        "O campo q172 sequencial é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "02740d389a35693f8ff748ecf8b012bd9d599b54aae1584e94aa456b4510c393",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

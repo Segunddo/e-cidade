@@ -74,9 +74,9 @@ class cl_levvalorpgtos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y68_sequencia = ($this->y68_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_sequencia"]:$this->y68_sequencia);
-       $this->y68_seq = ($this->y68_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_seq"]:$this->y68_seq);
-       $this->y68_valor = ($this->y68_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_valor"]:$this->y68_valor);
+       $this->y68_sequencia = ($this->y68_sequencia === 0 || $this->y68_sequencia === 0.0 || $this->y68_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_sequencia"]:$this->y68_sequencia);
+       $this->y68_seq = ($this->y68_seq === 0 || $this->y68_seq === 0.0 || $this->y68_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_seq"]:$this->y68_seq);
+       $this->y68_valor = ($this->y68_valor === 0 || $this->y68_valor === 0.0 || $this->y68_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_valor"]:$this->y68_valor);
        if($this->y68_pgto == ""){
          $this->y68_pgto_dia = ($this->y68_pgto_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_pgto_dia"]:$this->y68_pgto_dia);
          $this->y68_pgto_mes = ($this->y68_pgto_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_pgto_mes"]:$this->y68_pgto_mes);
@@ -86,8 +86,8 @@ class cl_levvalorpgtos {
          }
        }
      }else{
-       $this->y68_sequencia = ($this->y68_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_sequencia"]:$this->y68_sequencia);
-       $this->y68_seq = ($this->y68_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_seq"]:$this->y68_seq);
+       $this->y68_sequencia = ($this->y68_sequencia === 0 || $this->y68_sequencia === 0.0 || $this->y68_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_sequencia"]:$this->y68_sequencia);
+       $this->y68_seq = ($this->y68_seq === 0 || $this->y68_seq === 0.0 || $this->y68_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y68_seq"]:$this->y68_seq);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_levvalorpgtos {
      }
        $this->y68_sequencia = $y68_sequencia;
        $this->y68_seq = $y68_seq;
-     if(($this->y68_sequencia == null) || ($this->y68_sequencia == "") ){
+     if(($this->y68_sequencia == null) || ($this->y68_sequencia === 0 || $this->y68_sequencia === 0.0 || $this->y68_sequencia == "") ){
        $this->erro_sql = " Campo y68_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -121,7 +121,7 @@ class cl_levvalorpgtos {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y68_seq == null) || ($this->y68_seq == "") ){
+     if(($this->y68_seq == null) || ($this->y68_seq === 0 || $this->y68_seq === 0.0 || $this->y68_seq == "") ){
        $this->erro_sql = " Campo y68_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/configuracao/salvar",
+  "json": {
+    "error": true,
+    "message": "Undefined index: apenas_valor_analitico"
+  },
+  "sha256": "0c4af619873977a3e8122dff74f1d3b215762554423f6097e4d61b7d8bc22137",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

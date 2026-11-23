@@ -35,7 +35,7 @@ db_postmemory($HTTP_POST_VARS);
 
 $chave_o55_descr = isset($chave_o55_descr) ? stripslashes($chave_o55_descr) : '';
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clorcprojativ = new cl_orcprojativ;
 $clorcprojativ->rotulo->label("o55_anousu");
 $clorcprojativ->rotulo->label("o55_projativ");

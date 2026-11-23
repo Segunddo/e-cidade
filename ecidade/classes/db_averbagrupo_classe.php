@@ -67,10 +67,10 @@ class cl_averbagrupo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j105_sequencial = ($this->j105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j105_sequencial"]:$this->j105_sequencial);
+       $this->j105_sequencial = ($this->j105_sequencial === 0 || $this->j105_sequencial === 0.0 || $this->j105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j105_sequencial"]:$this->j105_sequencial);
        $this->j105_descr = ($this->j105_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j105_descr"]:$this->j105_descr);
      }else{
-       $this->j105_sequencial = ($this->j105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j105_sequencial"]:$this->j105_sequencial);
+       $this->j105_sequencial = ($this->j105_sequencial === 0 || $this->j105_sequencial === 0.0 || $this->j105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j105_sequencial"]:$this->j105_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_averbagrupo {
          $this->j105_sequencial = $j105_sequencial;
        }
      }
-     if(($this->j105_sequencial == null) || ($this->j105_sequencial == "") ){
+     if(($this->j105_sequencial == null) || ($this->j105_sequencial === 0 || $this->j105_sequencial === 0.0 || $this->j105_sequencial == "") ){
        $this->erro_sql = " Campo j105_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

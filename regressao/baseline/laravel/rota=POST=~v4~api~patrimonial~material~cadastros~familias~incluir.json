@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/material/cadastros/familias/incluir",
+  "json": {
+    "errors": {
+      "descricao": [
+        "O campo descricao é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "48211f1bb0926724a5fe04de2ccc45999bf3cb61380414e40c9bed2240c2331b",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

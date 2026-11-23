@@ -71,7 +71,7 @@ db_app::import("exceptions.*");
 $clautenticar = new cl_autenticar();
 $clcfautent = new cl_cfautent();
 
-parse_str($HTTP_SERVER_VARS ["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS ["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $oGet  = db_utils::postMemory($HTTP_GET_VARS);
 $oPost = db_utils::postMemory($HTTP_POST_VARS);
 

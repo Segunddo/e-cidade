@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/empenho/naturezarendimentos/grupo",
+  "json": {
+    "errors": {
+      "grupo": [
+        "O campo grupo é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "6973cc9d09cd2fc0fa91df30a53172a849ba0799f3d481a0a8b953a8636f6f75",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

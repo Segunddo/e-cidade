@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/compraEditalAviso/alterarCompraEditalAviso",
+  "json": {
+    "errors": {
+      "anoCompra": [
+        "O campo ano compra é obrigatório."
+      ],
+      "cnpj": [
+        "O campo cnpj é obrigatório."
+      ],
+      "numeroCompra": [
+        "O campo numero compra é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "b13951ec595658c25add1d1194e39e055dddb600e3d509da5e8f642e968ca3ac",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

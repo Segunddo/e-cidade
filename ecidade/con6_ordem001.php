@@ -43,9 +43,9 @@
   if (isset($HTTP_POST_VARS["incluir"])) {
     db_postmemory($HTTP_POST_VARS); 
     // Verifica se a data digitada é válida e corrigem formato para ser adicionada ao postgres
-	if (!checkdate($dataordem_mes,$dataordem_dia,$dataordem_ano)) db_erro("Erro (11). Data inválida.");
+	if (!checkdate((int)$dataordem_mes,(int)$dataordem_dia,(int)$dataordem_ano)) db_erro("Erro (11). Data inválida.");
     $dataordem = $dataordem_ano."-".$dataordem_mes."-".$dataordem_dia;  // prepara a data no formato a ser gravado no postgres
-	if (!checkdate($dataprev_mes,$dataprev_dia,$dataprev_ano)) db_erro("Erro (13). Data de previsão inválida ou em branco.");
+	if (!checkdate((int)$dataprev_mes,(int)$dataprev_dia,(int)$dataprev_ano)) db_erro("Erro (13). Data de previsão inválida ou em branco.");
     $dataprev = $dataprev_ano."-".$dataprev_mes."-".$dataprev_dia;  // prepara a data no formato a ser gravado no postgres
 	$prevmail = $dataprev_dia."/".$dataprev_mes."/".$dataprev_ano;  // $prevmail é a data a ser exibida no email que será enviado.
     // acha o valor do codigo do novo registro a ser acrescentado

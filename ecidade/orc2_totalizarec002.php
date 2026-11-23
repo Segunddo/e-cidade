@@ -43,7 +43,7 @@ $xinstit =explode("-", $db_selinstit);
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in (" . str_replace('-', ', ', $db_selinstit) . ") ");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_num_rows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_num_rows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg . $nomeinstabrev;
     $xvirg = ', ';
@@ -80,7 +80,7 @@ $total1 = 0;
 $total2 = 0;
 
 $pagina = 1;
-for ($i = 0; $i < pg_num_rows($result); $i++) {
+for ($i = 0; $i < ($result ? pg_num_rows($result) : null); $i++) {
     db_fieldsmemory($result, $i);
 
     if ($pdf->gety() > $pdf->h - 30 || $pagina == 1) {

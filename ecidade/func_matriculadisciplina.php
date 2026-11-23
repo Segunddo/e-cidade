@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_matriculadisciplina_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmatriculadisciplina = new cl_matriculadisciplina;
 $clmatriculadisciplina->rotulo->label("ed298_sequencial");
 $clmatriculadisciplina->rotulo->label("ed298_sequencial");

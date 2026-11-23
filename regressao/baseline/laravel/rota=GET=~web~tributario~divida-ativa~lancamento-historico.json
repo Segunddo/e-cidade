@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/divida-ativa/lancamento-historico",
+  "json": null,
+  "sha256": "f4c2417eae9f0e65e17f1f210925c2f4d9bdef137ad8fab0ccbac0daad421371",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

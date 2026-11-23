@@ -72,7 +72,7 @@ include(modification("libs/db_sql.php"));
 
 $clorctiporec = new cl_orctiporec;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 $pdf = new PDF(); 
 $pdf->Open(); 
@@ -115,7 +115,7 @@ order by g.k02_tipo desc ,g.k02_codigo
 //echo $sql;exit;
 
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
   //db_redireciona('db_erros.php?fechar=true&db_erro=Não existem lançamentos para a receita '.$codrec.' no período de '.db_formatar($datai,'d').' a '.db_formatar($dataf,'d'));
   
@@ -219,8 +219,8 @@ if($tipo=='T' || $tipo =='O'){
         inner join orcfontesdes on o60_anousu = o70_anousu and o60_codfon = o70_codfon
         where o70_anousu = ".db_getsession("DB_anousu")." and o70_codrec = $k02_codrec";
         $result1 = db_query($sql);
-        if($result1!=false && pg_numrows($result1) > 0){
-          $fonte = pg_result($result1,0,0);
+        if($result1!=false && ($result1 ? pg_numrows($result1) : null) > 0){
+          $fonte = ($result1 ? pg_result($result1,0,0) : null);
           $contamae = db_le_mae_rec_sin($fonte,false);
           
           $sql = "select o70_codrec,o57_fonte,o57_descr,o60_perc,o70_codigo
@@ -230,7 +230,7 @@ if($tipo=='T' || $tipo =='O'){
           where o57_fonte like '$contamae%' and o70_anousu = ".db_getsession("DB_anousu") . "
           order by o57_fonte";
           $result1 = db_query($sql);
-          if($result1!=false && pg_numrows($result1) > 0){
+          if($result1!=false && ($result1 ? pg_numrows($result1) : null) > 0){
             $tem_desdobramento = true;
           }
         }
@@ -265,7 +265,7 @@ if($tipo=='T' || $tipo =='O'){
         $multiplica = true;
         $valor = $valor * -1;
       }
-      for($recc=0;$recc<pg_numrows($result1);$recc++){
+      for($recc=0;$recc<($result1 ? pg_numrows($result1) : null);$recc++){
         db_fieldsmemory($result1,$recc);
         // aplica o percentual sobre o valor
         $vlrperc = db_formatar(($valor * ($o60_perc/100)),'p')+0;

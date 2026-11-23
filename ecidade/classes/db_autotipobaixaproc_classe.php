@@ -79,7 +79,7 @@ class cl_autotipobaixaproc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y87_baixaproc = ($this->y87_baixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_baixaproc"]:$this->y87_baixaproc);
+       $this->y87_baixaproc = ($this->y87_baixaproc === 0 || $this->y87_baixaproc === 0.0 || $this->y87_baixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_baixaproc"]:$this->y87_baixaproc);
        if($this->y87_dtbaixa == ""){
          $this->y87_dtbaixa_dia = ($this->y87_dtbaixa_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_dtbaixa_dia"]:$this->y87_dtbaixa_dia);
          $this->y87_dtbaixa_mes = ($this->y87_dtbaixa_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_dtbaixa_mes"]:$this->y87_dtbaixa_mes);
@@ -88,7 +88,7 @@ class cl_autotipobaixaproc {
             $this->y87_dtbaixa = $this->y87_dtbaixa_ano."-".$this->y87_dtbaixa_mes."-".$this->y87_dtbaixa_dia;
          }
        }
-       $this->y87_usuario = ($this->y87_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_usuario"]:$this->y87_usuario);
+       $this->y87_usuario = ($this->y87_usuario === 0 || $this->y87_usuario === 0.0 || $this->y87_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_usuario"]:$this->y87_usuario);
        if($this->y87_data == ""){
          $this->y87_data_dia = ($this->y87_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_data_dia"]:$this->y87_data_dia);
          $this->y87_data_mes = ($this->y87_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_data_mes"]:$this->y87_data_mes);
@@ -99,7 +99,7 @@ class cl_autotipobaixaproc {
        }
        $this->y87_hora = ($this->y87_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_hora"]:$this->y87_hora);
      }else{
-       $this->y87_baixaproc = ($this->y87_baixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_baixaproc"]:$this->y87_baixaproc);
+       $this->y87_baixaproc = ($this->y87_baixaproc === 0 || $this->y87_baixaproc === 0.0 || $this->y87_baixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y87_baixaproc"]:$this->y87_baixaproc);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_autotipobaixaproc {
          $this->y87_baixaproc = $y87_baixaproc;
        }
      }
-     if(($this->y87_baixaproc == null) || ($this->y87_baixaproc == "") ){
+     if(($this->y87_baixaproc == null) || ($this->y87_baixaproc === 0 || $this->y87_baixaproc === 0.0 || $this->y87_baixaproc == "") ){
        $this->erro_sql = " Campo y87_baixaproc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -43,7 +43,8 @@ if (!$rs) {
     $msg = "Acesse: DB:FINANCEIRO > Tesouraria > Procedimentos > Parâmetros > Financeiro e configure os parâmetros ";
 }
 
-if (db_utils::fieldsMemory($rs, 0)->k29_gerarslipautomaticoreceitaretencao != 0) {
+$k29_v = db_utils::fieldsMemory($rs, 0)->k29_gerarslipautomaticoreceitaretencao;
+if ($k29_v != 0 && !(is_string($k29_v) && !is_numeric($k29_v))) {
     $style = "";
     $db_opcao = 3;
     $desabilitaPesquisa = 'disabled';

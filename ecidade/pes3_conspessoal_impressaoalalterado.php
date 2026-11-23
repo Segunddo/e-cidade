@@ -64,7 +64,7 @@ $clrotulo->label('r13_descr');
 $clrotulo->label('r37_descr');
 $clrotulo->label('rh02_lota');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $head3 = "CADASTRO DE CÓDIGOS";
 $head5 = "PERÍODO : ".$mes." / ".$ano;

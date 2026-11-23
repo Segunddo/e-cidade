@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/fundeb/rhparametrosfundeb/showAssentamentos",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "ParÃ¢metros Fundeb encontrado!"
+  },
+  "sha256": "14988dd1c7fefdc0cdb78eed6cffbf37e04c7909ed940f8107e99097d19bbcb1",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

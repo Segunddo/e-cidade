@@ -67,10 +67,10 @@ class cl_averbaprocesso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j77_averbacao = ($this->j77_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j77_averbacao"]:$this->j77_averbacao);
-       $this->j77_codproc = ($this->j77_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j77_codproc"]:$this->j77_codproc);
+       $this->j77_averbacao = ($this->j77_averbacao === 0 || $this->j77_averbacao === 0.0 || $this->j77_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j77_averbacao"]:$this->j77_averbacao);
+       $this->j77_codproc = ($this->j77_codproc === 0 || $this->j77_codproc === 0.0 || $this->j77_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j77_codproc"]:$this->j77_codproc);
      }else{
-       $this->j77_averbacao = ($this->j77_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j77_averbacao"]:$this->j77_averbacao);
+       $this->j77_averbacao = ($this->j77_averbacao === 0 || $this->j77_averbacao === 0.0 || $this->j77_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j77_averbacao"]:$this->j77_averbacao);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_averbaprocesso {
        return false;
      }
        $this->j77_averbacao = $j77_averbacao;
-     if(($this->j77_averbacao == null) || ($this->j77_averbacao == "") ){
+     if(($this->j77_averbacao == null) || ($this->j77_averbacao === 0 || $this->j77_averbacao === 0.0 || $this->j77_averbacao == "") ){
        $this->erro_sql = " Campo j77_averbacao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

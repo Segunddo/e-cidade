@@ -71,12 +71,12 @@ class cl_certidlivrofolha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v26_sequencial = ($this->v26_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v26_sequencial"]:$this->v26_sequencial);
-       $this->v26_certidlivro = ($this->v26_certidlivro == ""?@$GLOBALS["HTTP_POST_VARS"]["v26_certidlivro"]:$this->v26_certidlivro);
-       $this->v26_certid = ($this->v26_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v26_certid"]:$this->v26_certid);
-       $this->v26_numerofolha = ($this->v26_numerofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["v26_numerofolha"]:$this->v26_numerofolha);
+       $this->v26_sequencial = ($this->v26_sequencial === 0 || $this->v26_sequencial === 0.0 || $this->v26_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v26_sequencial"]:$this->v26_sequencial);
+       $this->v26_certidlivro = ($this->v26_certidlivro === 0 || $this->v26_certidlivro === 0.0 || $this->v26_certidlivro == ""?@$GLOBALS["HTTP_POST_VARS"]["v26_certidlivro"]:$this->v26_certidlivro);
+       $this->v26_certid = ($this->v26_certid === 0 || $this->v26_certid === 0.0 || $this->v26_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v26_certid"]:$this->v26_certid);
+       $this->v26_numerofolha = ($this->v26_numerofolha === 0 || $this->v26_numerofolha === 0.0 || $this->v26_numerofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["v26_numerofolha"]:$this->v26_numerofolha);
      }else{
-       $this->v26_sequencial = ($this->v26_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v26_sequencial"]:$this->v26_sequencial);
+       $this->v26_sequencial = ($this->v26_sequencial === 0 || $this->v26_sequencial === 0.0 || $this->v26_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v26_sequencial"]:$this->v26_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_certidlivrofolha {
          $this->v26_sequencial = $v26_sequencial;
        }
      }
-     if(($this->v26_sequencial == null) || ($this->v26_sequencial == "") ){
+     if(($this->v26_sequencial == null) || ($this->v26_sequencial === 0 || $this->v26_sequencial === 0.0 || $this->v26_sequencial == "") ){
        $this->erro_sql = " Campo v26_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

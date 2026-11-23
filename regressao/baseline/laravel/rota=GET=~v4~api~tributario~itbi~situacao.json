@@ -1,0 +1,31 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/itbi/situacao",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "INTERNO"
+      },
+      {
+        "codigo": 2,
+        "descricao": "ENCRAVADO"
+      },
+      {
+        "codigo": 3,
+        "descricao": "ESQUINA"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "e5f07942740ea5e3c0d285e48ace1c5eca0fc939a9d046c80b9d5208b85ecc88",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -28,7 +28,7 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 $pdf = new PDF(); 
 $pdf->Open(); 
@@ -43,7 +43,7 @@ if ( $codsubrec == ''){
    $sql = "select upper(k07_descr) as k07_descr from tabdesc where codsubrec = $codsubrec and k07_instit = $instit";
    $result = db_query($sql);
 
-   $head4 = $codsubrec.' - '.pg_result($result,0,'k07_descr');
+   $head4 = $codsubrec.' - '.($result ? pg_result($result,0,'k07_descr') : null);
    $ordem = ' order by g.codsubrec, a.k00_dtpaga, e.z01_nome ';
    $where = ' f.k00_codsubrec = '.$codsubrec.' and ';
 }
@@ -102,7 +102,7 @@ $sql = "select * from ($sql) as x where codsubrec is not null";
 //echo $sql ; exit;
 
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem lançamentos para a taxa '.$codsubrec.' no período de '.db_formatar($datai,'d').' a '.db_formatar($dataf,'d'));
 }
@@ -152,7 +152,7 @@ if ($agrupar == 't'){
    $pdf->SetFillColor(220);
    $pdf->SetFont('Arial','B',11);
    $pdf->SetFont('Arial','B',7);
-   $receita = pg_result($result,0,'codsubrec').' - '.strtoupper(pg_result($result,0,'k07_descr'));
+   $receita = ($result ? pg_result($result,0,'codsubrec') : null).' - '.strtoupper(($result ? pg_result($result,0,'k07_descr') : null));
    $pdf->multicell(0,6,$receita,0,"L",0);
    $pdf->Cell(12,6,"NUMPRE",1,0,"C",1);
    $pdf->Cell(60,6,"NOME",1,0,"C",1);

@@ -71,12 +71,12 @@ class cl_pactovalormov {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o88_sequencial = ($this->o88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o88_sequencial"]:$this->o88_sequencial);
-       $this->o88_pactovalor = ($this->o88_pactovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["o88_pactovalor"]:$this->o88_pactovalor);
-       $this->o88_quantidade = ($this->o88_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o88_quantidade"]:$this->o88_quantidade);
-       $this->o88_valor = ($this->o88_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o88_valor"]:$this->o88_valor);
+       $this->o88_sequencial = ($this->o88_sequencial === 0 || $this->o88_sequencial === 0.0 || $this->o88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o88_sequencial"]:$this->o88_sequencial);
+       $this->o88_pactovalor = ($this->o88_pactovalor === 0 || $this->o88_pactovalor === 0.0 || $this->o88_pactovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["o88_pactovalor"]:$this->o88_pactovalor);
+       $this->o88_quantidade = ($this->o88_quantidade === 0 || $this->o88_quantidade === 0.0 || $this->o88_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o88_quantidade"]:$this->o88_quantidade);
+       $this->o88_valor = ($this->o88_valor === 0 || $this->o88_valor === 0.0 || $this->o88_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o88_valor"]:$this->o88_valor);
      }else{
-       $this->o88_sequencial = ($this->o88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o88_sequencial"]:$this->o88_sequencial);
+       $this->o88_sequencial = ($this->o88_sequencial === 0 || $this->o88_sequencial === 0.0 || $this->o88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o88_sequencial"]:$this->o88_sequencial);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_pactovalormov {
          $this->o88_sequencial = $o88_sequencial;
        }
      }
-     if(($this->o88_sequencial == null) || ($this->o88_sequencial == "") ){
+     if(($this->o88_sequencial == null) || ($this->o88_sequencial === 0 || $this->o88_sequencial === 0.0 || $this->o88_sequencial == "") ){
        $this->erro_sql = " Campo o88_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

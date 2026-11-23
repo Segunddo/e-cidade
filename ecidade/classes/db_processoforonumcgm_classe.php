@@ -69,11 +69,11 @@ class cl_processoforonumcgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v75_sequencial = ($this->v75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v75_sequencial"]:$this->v75_sequencial);
-       $this->v75_seqprocforo = ($this->v75_seqprocforo == ""?@$GLOBALS["HTTP_POST_VARS"]["v75_seqprocforo"]:$this->v75_seqprocforo);
-       $this->v75_numcgm = ($this->v75_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v75_numcgm"]:$this->v75_numcgm);
+       $this->v75_sequencial = ($this->v75_sequencial === 0 || $this->v75_sequencial === 0.0 || $this->v75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v75_sequencial"]:$this->v75_sequencial);
+       $this->v75_seqprocforo = ($this->v75_seqprocforo === 0 || $this->v75_seqprocforo === 0.0 || $this->v75_seqprocforo == ""?@$GLOBALS["HTTP_POST_VARS"]["v75_seqprocforo"]:$this->v75_seqprocforo);
+       $this->v75_numcgm = ($this->v75_numcgm === 0 || $this->v75_numcgm === 0.0 || $this->v75_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v75_numcgm"]:$this->v75_numcgm);
      }else{
-       $this->v75_sequencial = ($this->v75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v75_sequencial"]:$this->v75_sequencial);
+       $this->v75_sequencial = ($this->v75_sequencial === 0 || $this->v75_sequencial === 0.0 || $this->v75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v75_sequencial"]:$this->v75_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_processoforonumcgm {
          $this->v75_sequencial = $v75_sequencial;
        }
      }
-     if(($this->v75_sequencial == null) || ($this->v75_sequencial == "") ){
+     if(($this->v75_sequencial == null) || ($this->v75_sequencial === 0 || $this->v75_sequencial === 0.0 || $this->v75_sequencial == "") ){
        $this->erro_sql = " Campo v75_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

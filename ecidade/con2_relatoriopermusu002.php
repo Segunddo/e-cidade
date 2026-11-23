@@ -129,7 +129,7 @@ $sql_executa = " select distinct * from (($sql_verifica_permissoesusu) union ($s
 
 /////////////////////////////////////////
 $result_executa = db_query($sql_executa);
-$numrows_executa = pg_numrows($result_executa);
+$numrows_executa = ($result_executa ? pg_numrows($result_executa) : null);
 /////////////////////////////////////////
 
 if($numrows_executa == 0){
@@ -380,7 +380,7 @@ function recGravaMenus($id_usuario, $id_modulo, $id_item){
   $sql_executa_item = " select distinct * from (($sql_itens_pai_usu) union ($sql_itens_pai_per)) as x order by pai, menusequencia, id_item_filho";
   /////////////////////////////////////////
   $result_executa_item = db_query($sql_executa_item);
-  $numrows_executa_item = pg_numrows($result_executa_item);
+  $numrows_executa_item = ($result_executa_item ? pg_numrows($result_executa_item) : null);
   /////////////////////////////////////////
   
   for($b=0; $b<$numrows_executa_item; $b++){
@@ -425,7 +425,7 @@ function verificaPerfilMenu($id_usuario, $id_modulo, $id_item, $id_item_filho, $
                       and u.usuext <> 0 ";
 
 $result_itens_per = db_query($sql_itens_per);
-  $numrows_itens_per = pg_num_rows($result_itens_per);
+  $numrows_itens_per = ($result_itens_per ? pg_num_rows($result_itens_per) : null);
 if ($numrows_itens_per == 0){
 $pdf->cell(70         ,$alt,"" , 0, 1, "L", 0);
 }
@@ -449,7 +449,7 @@ $pdf->cell(70         ,$alt,"" , 0, 1, "L", 0);
                         and m.id_item_filho  = $id_item_filho 
                         and i.itemativo 		 = '1' ";
     $result_itens_usu = db_query($sql_itens_usu);
-    $numrows_itens_usu = pg_num_rows($result_itens_usu);
+    $numrows_itens_usu = ($result_itens_usu ? pg_num_rows($result_itens_usu) : null);
    $pdf->setx(120);
     if($numrows_itens_usu > 0){
       db_fieldsmemory($result_itens_usu, 0);

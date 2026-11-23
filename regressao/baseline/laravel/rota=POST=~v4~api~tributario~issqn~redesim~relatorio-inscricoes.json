@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/redesim/relatorio-inscricoes",
+  "json": {
+    "error": true,
+    "message": "Informe algum filtro."
+  },
+  "sha256": "f73b54b7446a2f4932a7b697f37dce5febc5eb17a34360b03174ec24dc30200f",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

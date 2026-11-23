@@ -51,7 +51,7 @@ if (!isset($arqinclude)){
   $oOrcParamRelopcre = new cl_orcparamrelopcre;
   $clorcparamelemento = new cl_orcparamelemento();
 
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
 
 }
@@ -231,42 +231,42 @@ for ($iParam = 1; $iParam <= 18; $iParam++) {
  * Linhas do relatorio
  */
 $aLinhasRelatorio              = array();
-$aLinhasRelatorio[0]->label  = "SUJEITAS AO LIMITE PARA FINS DE CONTRATAÇÃO (I)";
-$aLinhasRelatorio[1]->label  = "    Mobiliária";
-$aLinhasRelatorio[2]->label  = "       Interna";
-$aLinhasRelatorio[3]->label  = "       Externa";
-$aLinhasRelatorio[4]->label  = "    Contratual";
-$aLinhasRelatorio[5]->label  = "        Interna";
-$aLinhasRelatorio[6]->label  = "            Abertura de Crédito";
-$aLinhasRelatorio[7]->label  = "            Aquisição Financiada de Bens e Arrendamento Mercantil Financeiro";
-$aLinhasRelatorio[8]->label  = "                Derivadas de PPP";
-$aLinhasRelatorio[9]->label  = "                Demais Aquisições Financiadas";
-$aLinhasRelatorio[10]->label = "            Antecipação de Receita";
-$aLinhasRelatorio[11]->label = "                Pela Venda a Termo de Bens e Serviços";
-$aLinhasRelatorio[12]->label = "                Demais Antecipações de Receita";
-$aLinhasRelatorio[13]->label = "            Assunção, Reconhecimento e Confissão de Dívidas (LRF, art. 29, § 1º)";
-$aLinhasRelatorio[14]->label = "            Outras Operações de Crédito";
-$aLinhasRelatorio[15]->label = "        Externa";
+$aLinhasRelatorio[0] = new stdClass(); $aLinhasRelatorio[0]->label  = "SUJEITAS AO LIMITE PARA FINS DE CONTRATAÇÃO (I)";
+$aLinhasRelatorio[1] = new stdClass(); $aLinhasRelatorio[1]->label  = "    Mobiliária";
+$aLinhasRelatorio[2] = new stdClass(); $aLinhasRelatorio[2]->label  = "       Interna";
+$aLinhasRelatorio[3] = new stdClass(); $aLinhasRelatorio[3]->label  = "       Externa";
+$aLinhasRelatorio[4] = new stdClass(); $aLinhasRelatorio[4]->label  = "    Contratual";
+$aLinhasRelatorio[5] = new stdClass(); $aLinhasRelatorio[5]->label  = "        Interna";
+$aLinhasRelatorio[6] = new stdClass(); $aLinhasRelatorio[6]->label  = "            Abertura de Crédito";
+$aLinhasRelatorio[7] = new stdClass(); $aLinhasRelatorio[7]->label  = "            Aquisição Financiada de Bens e Arrendamento Mercantil Financeiro";
+$aLinhasRelatorio[8] = new stdClass(); $aLinhasRelatorio[8]->label  = "                Derivadas de PPP";
+$aLinhasRelatorio[9] = new stdClass(); $aLinhasRelatorio[9]->label  = "                Demais Aquisições Financiadas";
+$aLinhasRelatorio[10] = new stdClass(); $aLinhasRelatorio[10]->label = "            Antecipação de Receita";
+$aLinhasRelatorio[11] = new stdClass(); $aLinhasRelatorio[11]->label = "                Pela Venda a Termo de Bens e Serviços";
+$aLinhasRelatorio[12] = new stdClass(); $aLinhasRelatorio[12]->label = "                Demais Antecipações de Receita";
+$aLinhasRelatorio[13] = new stdClass(); $aLinhasRelatorio[13]->label = "            Assunção, Reconhecimento e Confissão de Dívidas (LRF, art. 29, § 1º)";
+$aLinhasRelatorio[14] = new stdClass(); $aLinhasRelatorio[14]->label = "            Outras Operações de Crédito";
+$aLinhasRelatorio[15] = new stdClass(); $aLinhasRelatorio[15]->label = "        Externa";
 $aLinhasRelatorio[15]->linhas = array();
-$aLinhasRelatorio[16]->label = "NÃO SUJEITAS AO LIMITE PARA FINS DE CONTRATAÇÃO (II)";
-$aLinhasRelatorio[17]->label = "    Parcelamentos de Dívidas";
-$aLinhasRelatorio[18]->label = "        De Tributos";
-$aLinhasRelatorio[19]->label = "        De Contribuições Sociais";
-$aLinhasRelatorio[20]->label = "            Previdenciárias";
-$aLinhasRelatorio[21]->label = "            Demais Contribuições Sociais";
-$aLinhasRelatorio[22]->label = "        Do FGTS";
-$aLinhasRelatorio[23]->label = "    Melhoria da Administração de Receitas e da Gestão Fiscal, Financeira e Patrimonial ";
-$aLinhasRelatorio[24]->label = "    Programa de Iluminação Pública - RELUZ ";
-$aLinhasRelatorio[25]->label = "    Amparadas pelo art 9-N da Resolução nº2.827/01, do CMN ";
-$aLinhasRelatorio[26]->label = "RECEITA CORRENTE LÍQUIDA - RCL ";
-$aLinhasRelatorio[27]->label = "OPERAÇÕES VEDADAS (III)";
-$aLinhasRelatorio[28]->label = "TOTAL CONSIDERADO PARA FINS DA APURAÇÃO DO CUMPRIMENTO DO LIMITE (IV) = (Ia + III)";
-$aLinhasRelatorio[29]->label = "LIMITE GERAL DEFINIDO POR RESOLUÇÃO DO SENADO FED. PARA AS OPERAÇÕES DE CRÉDITO ";
+$aLinhasRelatorio[16] = new stdClass(); $aLinhasRelatorio[16]->label = "NÃO SUJEITAS AO LIMITE PARA FINS DE CONTRATAÇÃO (II)";
+$aLinhasRelatorio[17] = new stdClass(); $aLinhasRelatorio[17]->label = "    Parcelamentos de Dívidas";
+$aLinhasRelatorio[18] = new stdClass(); $aLinhasRelatorio[18]->label = "        De Tributos";
+$aLinhasRelatorio[19] = new stdClass(); $aLinhasRelatorio[19]->label = "        De Contribuições Sociais";
+$aLinhasRelatorio[20] = new stdClass(); $aLinhasRelatorio[20]->label = "            Previdenciárias";
+$aLinhasRelatorio[21] = new stdClass(); $aLinhasRelatorio[21]->label = "            Demais Contribuições Sociais";
+$aLinhasRelatorio[22] = new stdClass(); $aLinhasRelatorio[22]->label = "        Do FGTS";
+$aLinhasRelatorio[23] = new stdClass(); $aLinhasRelatorio[23]->label = "    Melhoria da Administração de Receitas e da Gestão Fiscal, Financeira e Patrimonial ";
+$aLinhasRelatorio[24] = new stdClass(); $aLinhasRelatorio[24]->label = "    Programa de Iluminação Pública - RELUZ ";
+$aLinhasRelatorio[25] = new stdClass(); $aLinhasRelatorio[25]->label = "    Amparadas pelo art 9-N da Resolução nº2.827/01, do CMN ";
+$aLinhasRelatorio[26] = new stdClass(); $aLinhasRelatorio[26]->label = "RECEITA CORRENTE LÍQUIDA - RCL ";
+$aLinhasRelatorio[27] = new stdClass(); $aLinhasRelatorio[27]->label = "OPERAÇÕES VEDADAS (III)";
+$aLinhasRelatorio[28] = new stdClass(); $aLinhasRelatorio[28]->label = "TOTAL CONSIDERADO PARA FINS DA APURAÇÃO DO CUMPRIMENTO DO LIMITE (IV) = (Ia + III)";
+$aLinhasRelatorio[29] = new stdClass(); $aLinhasRelatorio[29]->label = "LIMITE GERAL DEFINIDO POR RESOLUÇÃO DO SENADO FED. PARA AS OPERAÇÕES DE CRÉDITO ";
 $aLinhasRelatorio[29]->label.= "INTERNAS E EXTERNAS";
-$aLinhasRelatorio[30]->label = "OPERAÇÕES DE CRÉDITO POR ANTECIPAÇÃO DA RECEITA ORÇAMENTÁRIA";
-$aLinhasRelatorio[31]->label = "LIMITE DEFINIDO POR RESOLUÇÃO DO SENADO FED. PARA AS OP. DE CRED POR ";
+$aLinhasRelatorio[30] = new stdClass(); $aLinhasRelatorio[30]->label = "OPERAÇÕES DE CRÉDITO POR ANTECIPAÇÃO DA RECEITA ORÇAMENTÁRIA";
+$aLinhasRelatorio[31] = new stdClass(); $aLinhasRelatorio[31]->label = "LIMITE DEFINIDO POR RESOLUÇÃO DO SENADO FED. PARA AS OP. DE CRED POR ";
 $aLinhasRelatorio[31]->label.= "ANTECIPAÇÃO DA REC. ORÇAMENTÁRIA";
-$aLinhasRelatorio[32]->label = "TOTAL CONSIDERADO PARA CONTRATAÇÃO DE NOVAS OPERAÇÕES DE CRÉDITO (V) = (IV + IIa)";
+$aLinhasRelatorio[32] = new stdClass(); $aLinhasRelatorio[32]->label = "TOTAL CONSIDERADO PARA CONTRATAÇÃO DE NOVAS OPERAÇÕES DE CRÉDITO (V) = (IV + IIa)";
 
 for ($i = 0; $i < count($aLinhasRelatorio); $i++) {
 
@@ -400,20 +400,20 @@ $aLinhasRelatorio[27]->nobimestre  = $aParametros[18]->nobimestre;
 $aLinhasRelatorio[27]->atebimestre = $aParametros[18]->atebimestre;
 
 $aLinhasRelatorio[28]->nobimestre  = $aLinhasRelatorio[0]->atebimestre+$aLinhasRelatorio[27]->atebimestre;
-$aLinhasRelatorio[28]->atebimestre = @(($aLinhasRelatorio[28]->nobimestre)/ $nTotalRcl)*100;
+$aLinhasRelatorio[28]->atebimestre = @((float) $nTotalRcl == 0 ? (float) $aLinhasRelatorio[28]->nobimestre > 0 ? INF : ((float) $aLinhasRelatorio[28]->nobimestre < 0 ? -INF : NAN) : $aLinhasRelatorio[28]->nobimestre / $nTotalRcl)*100;
 
 $aLinhasRelatorio[29]->nobimestre  = $nTotalRcl*0.16;
 $aLinhasRelatorio[29]->atebimestre = 16;
 
 $aLinhasRelatorio[30]->nobimestre  = $aLinhasRelatorio[10]->atebimestre;
-$aLinhasRelatorio[30]->atebimestre = @(($aLinhasRelatorio[30]->nobimestre)/$nTotalRcl)*100;
+$aLinhasRelatorio[30]->atebimestre = @((float) $nTotalRcl == 0 ? (float) $aLinhasRelatorio[30]->nobimestre > 0 ? INF : ((float) $aLinhasRelatorio[30]->nobimestre < 0 ? -INF : NAN) : $aLinhasRelatorio[30]->nobimestre / $nTotalRcl)*100;
 
 $aLinhasRelatorio[31]->nobimestre  = $nTotalRcl* 0.07;;
 $aLinhasRelatorio[31]->atebimestre = 7;
 
 
 $aLinhasRelatorio[32]->nobimestre  = $aLinhasRelatorio[16]->atebimestre  + $aLinhasRelatorio[28]->nobimestre;
-$aLinhasRelatorio[32]->atebimestre = (($aLinhasRelatorio[16]->atebimestre  + $aLinhasRelatorio[28]->nobimestre)/$nTotalRcl)*100;
+$aLinhasRelatorio[32]->atebimestre = ((float) $nTotalRcl == 0 ? (float) ($aLinhasRelatorio[16]->atebimestre + $aLinhasRelatorio[28]->nobimestre) > 0 ? INF : ((float) ($aLinhasRelatorio[16]->atebimestre + $aLinhasRelatorio[28]->nobimestre) < 0 ? -INF : NAN) : ($aLinhasRelatorio[16]->atebimestre + $aLinhasRelatorio[28]->nobimestre) / $nTotalRcl)*100;
 
 if (!isset($arqinclude)) {
 
@@ -534,7 +534,7 @@ $perc_total_operacoes_credito = 0;
 
 $total_operacoes_credito = $nTotalExternas+$nTotalInternas;
 if ($nTotalRcl > 0){
-  $perc_total_operacoes_credito	= (($nTotalExternas + $nTotalInternas) / $nTotalRcl)*100;
+  $perc_total_operacoes_credito	= ((float) $nTotalRcl == 0 ? (float) ($nTotalExternas + $nTotalInternas) > 0 ? INF : ((float) ($nTotalExternas + $nTotalInternas) < 0 ? -INF : NAN) : ($nTotalExternas + $nTotalInternas) / $nTotalRcl)*100;
 }
 
 $total_antecipacao_receita = 0;
@@ -542,7 +542,7 @@ $perc_antecipacao_receita  = 0;
 
 $total_antecipacao_receita	= $nTotalOperacoesCredito ;
 if ($nTotalRcl > 0){
-  $perc_antecipacao_receita	= (($nTotalOperacoesCredito)/$nTotalRcl)*100;
+  $perc_antecipacao_receita	= ((float) $nTotalRcl == 0 ? (float) $nTotalOperacoesCredito > 0 ? INF : ((float) $nTotalOperacoesCredito < 0 ? -INF : NAN) : $nTotalOperacoesCredito / $nTotalRcl)*100;
 }
 
 // Variaveis do relatorio

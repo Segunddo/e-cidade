@@ -36,7 +36,7 @@ require_once(modification("classes/db_fis_autoexec_classe.php"));
 require_once(modification("classes/db_fis_procfiscalauto_classe.php"));
 require_once(modification("classes/db_fis_enderecopecas_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if(!isset($abas)){
 

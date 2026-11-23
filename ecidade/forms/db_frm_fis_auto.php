@@ -205,7 +205,7 @@ if(isset($z01_numcgm) && $z01_numcgm != ""){
   			inner join bairro  as bl   on bl.j13_codi   =y12_codi
   			where y13_codnoti = $y30_codnoti";
     $resultnot = db_query ($sqlnot);
-    $linhasnot = pg_num_rows($resultnot);
+    $linhasnot = ($resultnot ? pg_num_rows($resultnot) : null);
     if($linhasnot>0){
        db_fieldsmemory($resultnot,0);
        $notific=true;
@@ -355,7 +355,7 @@ SQL;
                         <?php
                             $pSql  = 'select distinct pl09_paragrafo, pl09_descr from fiscalizacao.fis_paragrafo where pl09_status = true and pl09_tipo = 1  and pl09_coddepto = '.$departamento;
                             $pRs   = db_query($pSql);
-                            $pRows = pg_num_rows($pRs);
+                            $pRows = ($pRs ? pg_num_rows($pRs) : null);
                             for($i=0; $i<$pRows; $i++){
                                 db_fieldsmemory($pRs, $i);
                                 echo '<option value="'.$pl09_paragrafo.'">'.$pl09_descr.'</option>';
@@ -379,8 +379,8 @@ SQL;
 
                        $paSql  = "select * from fiscalizacao.fis_paragrafoauto where pl10_auto = $y50_codauto";
                        $paRs   = db_query($paSql);
-                       if (is_resource($paRs) && pg_num_rows($paRs) > 0) {
-                          $paRows = pg_num_rows($paRs);
+                       if (is_resource($paRs) && ($paRs ? pg_num_rows($paRs) : null) > 0) {
+                          $paRows = ($paRs ? pg_num_rows($paRs) : null);
                           for ($i=0; $i < $paRows; $i++) {
                               db_fieldsmemory($paRs, $i);
                               if($pl10_paragrafo == 1){
@@ -728,7 +728,7 @@ if($db_opcao==1||$db_opcao==2){
 
       $sql_cgm = "select z01_munic from cgm where z01_numcgm = $z01_numcgm";
       $result_cgm = db_query($sql_cgm);
-      if (pg_numrows($result_cgm)>0){
+      if (($result_cgm ? pg_numrows($result_cgm) : null)>0){
 
         db_fieldsmemory($result_cgm,0);
         $sql_munic = "select munic from db_config";

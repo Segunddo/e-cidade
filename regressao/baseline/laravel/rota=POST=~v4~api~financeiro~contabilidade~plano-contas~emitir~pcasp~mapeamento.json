@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/emitir/pcasp/mapeamento",
+  "json": {
+    "error": true,
+    "message": "Undefined index: exercicio"
+  },
+  "sha256": "cab0bd612342ef7cfcf5d214eba4a5e8da931f591dfeeb423cb9c217e4cd476b",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -209,7 +209,7 @@ input {
 <?php
   $result = $cliptuconstr->sql_record($cliptuconstr->sql_query_file($j39_matric,"","j39_idcons","",""));
   $num=$cliptuconstr->numrows;
-  if($num!=""){
+  if($num!="" && $num !== 0 && $num !== 0.0){
     echo "<select name='selid' onchange='js_trocaid(this.value)'  size='".($num>7?8:($num+1))."'>";
     echo "<option value='nova' ".(!isset($j39_idcons)?"selected":"").">Nova</option>";
     $idcons=$j39_idcons;

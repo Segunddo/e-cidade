@@ -87,20 +87,20 @@ class cl_moblevatamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j97_sequen = ($this->j97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sequen"]:$this->j97_sequen);
-       $this->j97_codimporta = ($this->j97_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_codimporta"]:$this->j97_codimporta);
-       $this->j97_matric = ($this->j97_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_matric"]:$this->j97_matric);
+       $this->j97_sequen = ($this->j97_sequen === 0 || $this->j97_sequen === 0.0 || $this->j97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sequen"]:$this->j97_sequen);
+       $this->j97_codimporta = ($this->j97_codimporta === 0 || $this->j97_codimporta === 0.0 || $this->j97_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_codimporta"]:$this->j97_codimporta);
+       $this->j97_matric = ($this->j97_matric === 0 || $this->j97_matric === 0.0 || $this->j97_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_matric"]:$this->j97_matric);
        $this->j97_endcor = ($this->j97_endcor == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_endcor"]:$this->j97_endcor);
        $this->j97_cidade = ($this->j97_cidade == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_cidade"]:$this->j97_cidade);
        $this->j97_profun = ($this->j97_profun == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_profun"]:$this->j97_profun);
-       $this->j97_sitterreno = ($this->j97_sitterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sitterreno"]:$this->j97_sitterreno);
-       $this->j97_pedol = ($this->j97_pedol == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_pedol"]:$this->j97_pedol);
-       $this->j97_topog = ($this->j97_topog == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_topog"]:$this->j97_topog);
-       $this->j97_vistoria = ($this->j97_vistoria == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_vistoria"]:$this->j97_vistoria);
+       $this->j97_sitterreno = ($this->j97_sitterreno === 0 || $this->j97_sitterreno === 0.0 || $this->j97_sitterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sitterreno"]:$this->j97_sitterreno);
+       $this->j97_pedol = ($this->j97_pedol === 0 || $this->j97_pedol === 0.0 || $this->j97_pedol == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_pedol"]:$this->j97_pedol);
+       $this->j97_topog = ($this->j97_topog === 0 || $this->j97_topog === 0.0 || $this->j97_topog == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_topog"]:$this->j97_topog);
+       $this->j97_vistoria = ($this->j97_vistoria === 0 || $this->j97_vistoria === 0.0 || $this->j97_vistoria == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_vistoria"]:$this->j97_vistoria);
        $this->j97_muro = ($this->j97_muro == "f"?@$GLOBALS["HTTP_POST_VARS"]["j97_muro"]:$this->j97_muro);
        $this->j97_calcada = ($this->j97_calcada == "f"?@$GLOBALS["HTTP_POST_VARS"]["j97_calcada"]:$this->j97_calcada);
      }else{
-       $this->j97_sequen = ($this->j97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sequen"]:$this->j97_sequen);
+       $this->j97_sequen = ($this->j97_sequen === 0 || $this->j97_sequen === 0.0 || $this->j97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["j97_sequen"]:$this->j97_sequen);
      }
    }
    // funcao para inclusao
@@ -211,7 +211,7 @@ class cl_moblevatamento {
          $this->j97_sequen = $j97_sequen; 
        }
      }
-     if(($this->j97_sequen == null) || ($this->j97_sequen == "") ){ 
+     if(($this->j97_sequen == null) || ($this->j97_sequen === 0 || $this->j97_sequen === 0.0 || $this->j97_sequen == "") ){ 
        $this->erro_sql = " Campo j97_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

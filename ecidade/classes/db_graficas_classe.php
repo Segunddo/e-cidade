@@ -77,8 +77,8 @@ class cl_graficas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y20_grafica = ($this->y20_grafica == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_grafica"]:$this->y20_grafica);
-       $this->y20_id_usuario = ($this->y20_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_id_usuario"]:$this->y20_id_usuario);
+       $this->y20_grafica = ($this->y20_grafica === 0 || $this->y20_grafica === 0.0 || $this->y20_grafica == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_grafica"]:$this->y20_grafica);
+       $this->y20_id_usuario = ($this->y20_id_usuario === 0 || $this->y20_id_usuario === 0.0 || $this->y20_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_id_usuario"]:$this->y20_id_usuario);
        if($this->y20_data == ""){
          $this->y20_data_dia = ($this->y20_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_data_dia"]:$this->y20_data_dia);
          $this->y20_data_mes = ($this->y20_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_data_mes"]:$this->y20_data_mes);
@@ -96,7 +96,7 @@ class cl_graficas {
          }
        }
      }else{
-       $this->y20_grafica = ($this->y20_grafica == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_grafica"]:$this->y20_grafica);
+       $this->y20_grafica = ($this->y20_grafica === 0 || $this->y20_grafica === 0.0 || $this->y20_grafica == ""?@$GLOBALS["HTTP_POST_VARS"]["y20_grafica"]:$this->y20_grafica);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_graficas {
        $this->y20_datalimiteimpressao = "null";
      }
        $this->y20_grafica = $y20_grafica;
-     if(($this->y20_grafica == null) || ($this->y20_grafica == "") ){
+     if(($this->y20_grafica == null) || ($this->y20_grafica === 0 || $this->y20_grafica === 0.0 || $this->y20_grafica == "") ){
        $this->erro_sql = " Campo y20_grafica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

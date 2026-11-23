@@ -67,10 +67,10 @@ class cl_notisitu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k59_codigo = ($this->k59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k59_codigo"]:$this->k59_codigo);
+       $this->k59_codigo = ($this->k59_codigo === 0 || $this->k59_codigo === 0.0 || $this->k59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k59_codigo"]:$this->k59_codigo);
        $this->k59_descr = ($this->k59_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k59_descr"]:$this->k59_descr);
      }else{
-       $this->k59_codigo = ($this->k59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k59_codigo"]:$this->k59_codigo);
+       $this->k59_codigo = ($this->k59_codigo === 0 || $this->k59_codigo === 0.0 || $this->k59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k59_codigo"]:$this->k59_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_notisitu {
          $this->k59_codigo = $k59_codigo;
        }
      }
-     if(($this->k59_codigo == null) || ($this->k59_codigo == "") ){
+     if(($this->k59_codigo == null) || ($this->k59_codigo === 0 || $this->k59_codigo === 0.0 || $this->k59_codigo == "") ){
        $this->erro_sql = " Campo k59_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

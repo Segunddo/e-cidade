@@ -31,9 +31,9 @@ include(modification("libs/db_sql.php"));
 
 define('FPDF_FONTPATH','fpdf151/font/');
 require(modification('fpdf151/fpdf.php'));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(!isset($DB_login)) {
-  parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+  parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 }
 if(!($conn = pg_connect("host=$DB_SERVIDOR dbname=$DB_BASE port=$DB_PORTA user=$DB_USUARIO password=$DB_SENHA"))) {
   echo "Erro(12) ao tentar conectar no servidor.";
@@ -62,7 +62,7 @@ where c.k12_instit = " . db_getsession('DB_instit') . " and
 c.k12_data = '$data'
 and c.k12_id = $id
 order by c.k12_autent");
-$numrows = pg_numrows($result);
+$numrows = ($result ? pg_numrows($result) : null);
 if($numrows == 0) {
   echo "<script>window.opener.alert('Nenhuma autenticação encontrada.');window.close();</script>\n";
   exit;
@@ -85,18 +85,18 @@ $pdf->SetFont('Arial','',7);
 $pdf->Cell(59,13,"","TB",1,"C",0);
 $pdf->Text(23,8,"Reemissão da Bobina");
 $pdf->Text(23,11,"ID:    ".$id);
-$pdf->Text(23,14,"IP:    ".pg_result($result,0,"k11_ipterm"));
-$pdf->Text(23,17,"Local: ".pg_result($result,0,"k11_local"));
+$pdf->Text(23,14,"IP:    ".($result ? pg_result($result,0,"k11_ipterm") : null));
+$pdf->Text(23,17,"Local: ".($result ? pg_result($result,0,"k11_local") : null));
 $pdf->SetXY(5,20);
 for($i = 0;$i < $numrows;$i++) {
-  $pdf->Cell(5,3,pg_result($result,$i,"k12_autent"),0,0,"L",0);
-  $pdf->Cell(3,3,pg_result($result,$i,"k11_ident1"),0,0,"L",0);
-  $pdf->Cell(3,3,pg_result($result,$i,"k11_ident2"),0,0,"L",0);
-  $pdf->Cell(3,3,pg_result($result,$i,"k11_ident3"),0,0,"L",0);
-  $pdf->Cell(15,3,pg_result($result,$i,"data"),0,0,"L",0);
-  $pdf->Cell(10,3,pg_result($result,$i,"codigo"),0,0,"L",0);
-  $pdf->Cell(5,3,pg_result($result,$i,"k12_conta"),0,0,"L",0);
-  $pdf->Cell(15,3,number_format(pg_result($result,$i,"k12_valor"),2,".",","),0,1,"R",0);
+  $pdf->Cell(5,3,($result ? pg_result($result,$i,"k12_autent") : null),0,0,"L",0);
+  $pdf->Cell(3,3,($result ? pg_result($result,$i,"k11_ident1") : null),0,0,"L",0);
+  $pdf->Cell(3,3,($result ? pg_result($result,$i,"k11_ident2") : null),0,0,"L",0);
+  $pdf->Cell(3,3,($result ? pg_result($result,$i,"k11_ident3") : null),0,0,"L",0);
+  $pdf->Cell(15,3,($result ? pg_result($result,$i,"data") : null),0,0,"L",0);
+  $pdf->Cell(10,3,($result ? pg_result($result,$i,"codigo") : null),0,0,"L",0);
+  $pdf->Cell(5,3,($result ? pg_result($result,$i,"k12_conta") : null),0,0,"L",0);
+  $pdf->Cell(15,3,number_format(($result ? pg_result($result,$i,"k12_valor") : null),2,".",","),0,1,"R",0);
 
 }
 

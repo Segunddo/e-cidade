@@ -67,11 +67,11 @@ class cl_db_menuacesso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db06_m_codigo = ($this->db06_m_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db06_m_codigo"]:$this->db06_m_codigo);
-       $this->db06_idtipo = ($this->db06_idtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db06_idtipo"]:$this->db06_idtipo);
+       $this->db06_m_codigo = ($this->db06_m_codigo === 0 || $this->db06_m_codigo === 0.0 || $this->db06_m_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db06_m_codigo"]:$this->db06_m_codigo);
+       $this->db06_idtipo = ($this->db06_idtipo === 0 || $this->db06_idtipo === 0.0 || $this->db06_idtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db06_idtipo"]:$this->db06_idtipo);
      }else{
-       $this->db06_m_codigo = ($this->db06_m_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db06_m_codigo"]:$this->db06_m_codigo);
-       $this->db06_idtipo = ($this->db06_idtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db06_idtipo"]:$this->db06_idtipo);
+       $this->db06_m_codigo = ($this->db06_m_codigo === 0 || $this->db06_m_codigo === 0.0 || $this->db06_m_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db06_m_codigo"]:$this->db06_m_codigo);
+       $this->db06_idtipo = ($this->db06_idtipo === 0 || $this->db06_idtipo === 0.0 || $this->db06_idtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db06_idtipo"]:$this->db06_idtipo);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_db_menuacesso {
       $this->atualizacampos();
        $this->db06_m_codigo = $db06_m_codigo;
        $this->db06_idtipo = $db06_idtipo;
-     if(($this->db06_m_codigo == null) || ($this->db06_m_codigo == "") ){
+     if(($this->db06_m_codigo == null) || ($this->db06_m_codigo === 0 || $this->db06_m_codigo === 0.0 || $this->db06_m_codigo == "") ){
        $this->erro_sql = " Campo db06_m_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_db_menuacesso {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->db06_idtipo == null) || ($this->db06_idtipo == "") ){
+     if(($this->db06_idtipo == null) || ($this->db06_idtipo === 0 || $this->db06_idtipo === 0.0 || $this->db06_idtipo == "") ){
        $this->erro_sql = " Campo db06_idtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

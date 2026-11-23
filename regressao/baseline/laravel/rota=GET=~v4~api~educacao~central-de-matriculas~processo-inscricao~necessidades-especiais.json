@@ -1,0 +1,74 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/necessidades-especiais",
+  "json": {
+    "data": [
+      {
+        "codigo": 101,
+        "nome": "CEGUEIRA",
+        "subdivisoes": []
+      },
+      {
+        "codigo": 102,
+        "nome": "BAIXA VISAO",
+        "subdivisoes": []
+      },
+      {
+        "codigo": 103,
+        "nome": "SURDEZ",
+        "subdivisoes": []
+      },
+      {
+        "codigo": 104,
+        "nome": "DEFICIENCIA AUDITIVA",
+        "subdivisoes": []
+      },
+      {
+        "codigo": 105,
+        "nome": "SURDOCEGUEIRA",
+        "subdivisoes": []
+      },
+      {
+        "codigo": 106,
+        "nome": "DEFICIENCIA FISICA",
+        "subdivisoes": []
+      },
+      {
+        "codigo": 108,
+        "nome": "DEFICIENCIA MULTIPLA",
+        "subdivisoes": []
+      },
+      {
+        "codigo": 113,
+        "nome": "ALTAS HABILIDADES/SUPERDOTACAO",
+        "subdivisoes": []
+      },
+      {
+        "codigo": 107,
+        "nome": "DEFICIENCIA INTELECTUAL",
+        "subdivisoes": []
+      },
+      {
+        "codigo": 109,
+        "nome": "TRANSTORNO DO ESPECTRO AUTISTA",
+        "subdivisoes": []
+      },
+      {
+        "codigo": 114,
+        "nome": "VISÃO MONOCULAR",
+        "subdivisoes": []
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "969a879a3942083bcfe09832b7a666601aa2335ad95d3574da3cc3e95b190181",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

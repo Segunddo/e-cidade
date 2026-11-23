@@ -130,7 +130,7 @@ if( $data == '0' ){
      where k84_conciliaitem is null
         ";
 	$rsCorrente          = db_query($sSqlBuscaTesouraria);
-	$intNumrows          = pg_num_rows($rsCorrente);
+	$intNumrows          = ($rsCorrente ? pg_num_rows($rsCorrente) : null);
 
   db_criatermometro('termometro','Concluido...','blue',1);
 

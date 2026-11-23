@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/orcamento/relatorios/anexo-3",
+  "json": {
+    "error": true,
+    "message": "Undefined index: instituicoes"
+  },
+  "sha256": "df700db2a184eea6cfa96933da08f8b6a7f98636527325575a481b5af49062c8",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

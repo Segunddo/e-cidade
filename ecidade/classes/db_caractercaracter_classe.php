@@ -77,15 +77,15 @@ class cl_caractercaracter {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j138_sequencial = ($this->j138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_sequencial"]:$this->j138_sequencial);
-       $this->j138_caracterorigem = ($this->j138_caracterorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_caracterorigem"]:$this->j138_caracterorigem);
-       $this->j138_caracterdestino = ($this->j138_caracterdestino == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_caracterdestino"]:$this->j138_caracterdestino);
-       $this->j138_pontuacao = ($this->j138_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_pontuacao"]:$this->j138_pontuacao);
-       $this->j138_aliquota = ($this->j138_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_aliquota"]:$this->j138_aliquota);
-       $this->j138_valor = ($this->j138_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_valor"]:$this->j138_valor);
-       $this->j138_anousu = ($this->j138_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_anousu"]:$this->j138_anousu);
+       $this->j138_sequencial = ($this->j138_sequencial === 0 || $this->j138_sequencial === 0.0 || $this->j138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_sequencial"]:$this->j138_sequencial);
+       $this->j138_caracterorigem = ($this->j138_caracterorigem === 0 || $this->j138_caracterorigem === 0.0 || $this->j138_caracterorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_caracterorigem"]:$this->j138_caracterorigem);
+       $this->j138_caracterdestino = ($this->j138_caracterdestino === 0 || $this->j138_caracterdestino === 0.0 || $this->j138_caracterdestino == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_caracterdestino"]:$this->j138_caracterdestino);
+       $this->j138_pontuacao = ($this->j138_pontuacao === 0 || $this->j138_pontuacao === 0.0 || $this->j138_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_pontuacao"]:$this->j138_pontuacao);
+       $this->j138_aliquota = ($this->j138_aliquota === 0 || $this->j138_aliquota === 0.0 || $this->j138_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_aliquota"]:$this->j138_aliquota);
+       $this->j138_valor = ($this->j138_valor === 0 || $this->j138_valor === 0.0 || $this->j138_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_valor"]:$this->j138_valor);
+       $this->j138_anousu = ($this->j138_anousu === 0 || $this->j138_anousu === 0.0 || $this->j138_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_anousu"]:$this->j138_anousu);
      }else{
-       $this->j138_sequencial = ($this->j138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_sequencial"]:$this->j138_sequencial);
+       $this->j138_sequencial = ($this->j138_sequencial === 0 || $this->j138_sequencial === 0.0 || $this->j138_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j138_sequencial"]:$this->j138_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_caractercaracter {
          $this->j138_sequencial = $j138_sequencial;
        }
      }
-     if(($this->j138_sequencial == null) || ($this->j138_sequencial == "") ){
+     if(($this->j138_sequencial == null) || ($this->j138_sequencial === 0 || $this->j138_sequencial === 0.0 || $this->j138_sequencial == "") ){
        $this->erro_sql = " Campo j138_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

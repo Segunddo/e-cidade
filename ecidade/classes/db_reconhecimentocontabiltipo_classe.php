@@ -71,12 +71,12 @@ class cl_reconhecimentocontabiltipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c111_sequencial = ($this->c111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c111_sequencial"]:$this->c111_sequencial);
+       $this->c111_sequencial = ($this->c111_sequencial === 0 || $this->c111_sequencial === 0.0 || $this->c111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c111_sequencial"]:$this->c111_sequencial);
        $this->c111_descricao = ($this->c111_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["c111_descricao"]:$this->c111_descricao);
-       $this->c111_conhistdoc = ($this->c111_conhistdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c111_conhistdoc"]:$this->c111_conhistdoc);
-       $this->c111_conhistdocestorno = ($this->c111_conhistdocestorno == ""?@$GLOBALS["HTTP_POST_VARS"]["c111_conhistdocestorno"]:$this->c111_conhistdocestorno);
+       $this->c111_conhistdoc = ($this->c111_conhistdoc === 0 || $this->c111_conhistdoc === 0.0 || $this->c111_conhistdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c111_conhistdoc"]:$this->c111_conhistdoc);
+       $this->c111_conhistdocestorno = ($this->c111_conhistdocestorno === 0 || $this->c111_conhistdocestorno === 0.0 || $this->c111_conhistdocestorno == ""?@$GLOBALS["HTTP_POST_VARS"]["c111_conhistdocestorno"]:$this->c111_conhistdocestorno);
      }else{
-       $this->c111_sequencial = ($this->c111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c111_sequencial"]:$this->c111_sequencial);
+       $this->c111_sequencial = ($this->c111_sequencial === 0 || $this->c111_sequencial === 0.0 || $this->c111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c111_sequencial"]:$this->c111_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_reconhecimentocontabiltipo {
          $this->c111_sequencial = $c111_sequencial;
        }
      }
-     if(($this->c111_sequencial == null) || ($this->c111_sequencial == "") ){
+     if(($this->c111_sequencial == null) || ($this->c111_sequencial === 0 || $this->c111_sequencial === 0.0 || $this->c111_sequencial == "") ){
        $this->erro_sql = " Campo c111_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

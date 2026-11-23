@@ -69,11 +69,11 @@ class cl_itbitipoformapag {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it28_sequencial = ($this->it28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it28_sequencial"]:$this->it28_sequencial);
+       $this->it28_sequencial = ($this->it28_sequencial === 0 || $this->it28_sequencial === 0.0 || $this->it28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it28_sequencial"]:$this->it28_sequencial);
        $this->it28_descricao = ($this->it28_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["it28_descricao"]:$this->it28_descricao);
        $this->it28_avista = ($this->it28_avista == "f"?@$GLOBALS["HTTP_POST_VARS"]["it28_avista"]:$this->it28_avista);
      }else{
-       $this->it28_sequencial = ($this->it28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it28_sequencial"]:$this->it28_sequencial);
+       $this->it28_sequencial = ($this->it28_sequencial === 0 || $this->it28_sequencial === 0.0 || $this->it28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it28_sequencial"]:$this->it28_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_itbitipoformapag {
          $this->it28_sequencial = $it28_sequencial;
        }
      }
-     if(($this->it28_sequencial == null) || ($this->it28_sequencial == "") ){
+     if(($this->it28_sequencial == null) || ($this->it28_sequencial === 0 || $this->it28_sequencial === 0.0 || $this->it28_sequencial == "") ){
        $this->erro_sql = " Campo it28_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

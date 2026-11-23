@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio-legal/notas-explicativas",
+  "json": {
+    "errors": {
+      "exercicio": [
+        "O campo exercicio é obrigatório."
+      ],
+      "fonteSize": [
+        "O campo fonte size é obrigatório."
+      ],
+      "instituicao": [
+        "O campo instituicao é obrigatório."
+      ],
+      "nota": [
+        "O campo nota é obrigatório."
+      ],
+      "notaSize": [
+        "O campo nota size é obrigatório."
+      ],
+      "periodo": [
+        "O campo periodo é obrigatório."
+      ],
+      "relatorio": [
+        "O campo relatorio é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "e0fade9164b0cbbc7a8a46724f37c7934fd2f3b94456ae5312c3fc1bb5cff934",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

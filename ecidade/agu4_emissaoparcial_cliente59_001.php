@@ -104,11 +104,11 @@ function js_verificacalculo(){
             <td height="25">
               <?php
 	            $result=db_query("select " . db_getsession("DB_anousu") . "as j18_anousu");
-	            if(pg_numrows($result) > 0){
+	            if(($result ? pg_numrows($result) : null) > 0){
 		          ?>
 		          <select name="anousu">
 		          <?php
-  	          for($i=0;$i<pg_numrows($result);$i++){
+  	          for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
 		            db_fieldsmemory($result,$i);
 	              ?>
 	              <option value='<?=$j18_anousu?>'><?=$j18_anousu?></option>

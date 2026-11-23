@@ -81,7 +81,7 @@ class cl_orclei {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o45_codlei = ($this->o45_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codlei"]:$this->o45_codlei);
+       $this->o45_codlei = ($this->o45_codlei === 0 || $this->o45_codlei === 0.0 || $this->o45_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codlei"]:$this->o45_codlei);
        $this->o45_numlei = ($this->o45_numlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_numlei"]:$this->o45_numlei);
        $this->o45_descr = ($this->o45_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_descr"]:$this->o45_descr);
        if($this->o45_datafim == ""){
@@ -100,9 +100,9 @@ class cl_orclei {
             $this->o45_dataini = $this->o45_dataini_ano."-".$this->o45_dataini_mes."-".$this->o45_dataini_dia;
          }
        }
-       $this->o45_tipolei = ($this->o45_tipolei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_tipolei"]:$this->o45_tipolei);
+       $this->o45_tipolei = ($this->o45_tipolei === 0 || $this->o45_tipolei === 0.0 || $this->o45_tipolei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_tipolei"]:$this->o45_tipolei);
      }else{
-       $this->o45_codlei = ($this->o45_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codlei"]:$this->o45_codlei);
+       $this->o45_codlei = ($this->o45_codlei === 0 || $this->o45_codlei === 0.0 || $this->o45_codlei == ""?@$GLOBALS["HTTP_POST_VARS"]["o45_codlei"]:$this->o45_codlei);
      }
    }
    // funcao para inclusao
@@ -171,7 +171,7 @@ class cl_orclei {
          $this->o45_codlei = $o45_codlei;
        }
      }
-     if(($this->o45_codlei == null) || ($this->o45_codlei == "") ){
+     if(($this->o45_codlei == null) || ($this->o45_codlei === 0 || $this->o45_codlei === 0.0 || $this->o45_codlei == "") ){
        $this->erro_sql = " Campo o45_codlei nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

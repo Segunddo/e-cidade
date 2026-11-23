@@ -1,0 +1,85 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/diversos/pesquisa-procedencias",
+  "json": {
+    "data": {
+      "current_page": 1,
+      "data": [
+        {
+          "dv09_cobranca": false,
+          "dv09_descr": "EMOLUMENTOS",
+          "dv09_descra": "EMOLUMENTOS",
+          "dv09_dtlimite": null,
+          "dv09_hist": 400,
+          "dv09_instit": 1,
+          "dv09_procdiver": 21,
+          "dv09_proced": 1,
+          "dv09_receit": 1,
+          "dv09_tipo": 25
+        },
+        {
+          "dv09_cobranca": false,
+          "dv09_descr": "HONORARIOS",
+          "dv09_descra": "HONORARIOS",
+          "dv09_dtlimite": null,
+          "dv09_hist": 401,
+          "dv09_instit": 1,
+          "dv09_procdiver": 22,
+          "dv09_proced": 2,
+          "dv09_receit": 1,
+          "dv09_tipo": 25
+        },
+        {
+          "dv09_cobranca": false,
+          "dv09_descr": "ISSQN PROPRIO",
+          "dv09_descra": "ISSQN PROPRIO",
+          "dv09_dtlimite": null,
+          "dv09_hist": 4,
+          "dv09_instit": 1,
+          "dv09_procdiver": 23,
+          "dv09_proced": 3,
+          "dv09_receit": 3,
+          "dv09_tipo": 24
+        }
+      ],
+      "first_page_url": "http://localhost:8074/v4/api/tributario/diversos/pesquisa-procedencias?page=1",
+      "from": 1,
+      "last_page": 1,
+      "last_page_url": "http://localhost:8074/v4/api/tributario/diversos/pesquisa-procedencias?page=1",
+      "links": [
+        {
+          "active": false,
+          "label": "&laquo; Anterior",
+          "url": null
+        },
+        {
+          "active": true,
+          "label": "1",
+          "url": "http://localhost:8074/v4/api/tributario/diversos/pesquisa-procedencias?page=1"
+        },
+        {
+          "active": false,
+          "label": "Próxima &raquo;",
+          "url": null
+        }
+      ],
+      "next_page_url": null,
+      "path": "http://localhost:8074/v4/api/tributario/diversos/pesquisa-procedencias",
+      "per_page": 10,
+      "prev_page_url": null,
+      "to": 3,
+      "total": 3
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "ef54545bba054ab87ce4e44c9b06ce277ed262e650928eac629010f0a8b65c10",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

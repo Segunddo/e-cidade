@@ -1,0 +1,29 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, private",
+    "content-type": "application/json; charset=UTF-8"
+  },
+  "id": "auth-refresh-token",
+  "json": {
+    "access_token": "<X>",
+    "expires_in": "<X>",
+    "refresh_token": "<X>",
+    "token_type": "Bearer"
+  },
+  "sha256": "583c8df362a8a34b41ca5ed2324c8cea202cd67e243c72a3efe58de7855889a6",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {
+    "access_token": [
+      "str"
+    ],
+    "expires_in": [
+      "int"
+    ],
+    "refresh_token": [
+      "str"
+    ]
+  }
+}

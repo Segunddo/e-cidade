@@ -31,7 +31,7 @@ include(modification("libs/db_sql.php"));
 $paty       = false;
 $prefeitura = InstituicaoRepository::getInstituicaoByCodigo(db_getsession("DB_instit"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $selects = [
    'o80_codres',
@@ -89,7 +89,7 @@ SQL;
 
 
 $result = pg_exec($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existe Cadastrada ('.$o80_codres.'). Contate suporte.');
 
@@ -109,7 +109,7 @@ $pdf->setfont('arial','b',8);
 $troca = 1;
 $alt = 6;
 
-for($x = 0; $x < pg_numrows($result); $x++){
+for($x = 0; $x < ($result ? pg_numrows($result) : null); $x++){
    db_fieldsmemory($result,$x);
 
    $pdf->ln(10);

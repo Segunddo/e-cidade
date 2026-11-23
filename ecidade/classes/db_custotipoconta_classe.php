@@ -67,10 +67,10 @@ class cl_custotipoconta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc02_sequencial = ($this->cc02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc02_sequencial"]:$this->cc02_sequencial);
+       $this->cc02_sequencial = ($this->cc02_sequencial === 0 || $this->cc02_sequencial === 0.0 || $this->cc02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc02_sequencial"]:$this->cc02_sequencial);
        $this->cc02_descricao = ($this->cc02_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc02_descricao"]:$this->cc02_descricao);
      }else{
-       $this->cc02_sequencial = ($this->cc02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc02_sequencial"]:$this->cc02_sequencial);
+       $this->cc02_sequencial = ($this->cc02_sequencial === 0 || $this->cc02_sequencial === 0.0 || $this->cc02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc02_sequencial"]:$this->cc02_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_custotipoconta {
          $this->cc02_sequencial = $cc02_sequencial;
        }
      }
-     if(($this->cc02_sequencial == null) || ($this->cc02_sequencial == "") ){
+     if(($this->cc02_sequencial == null) || ($this->cc02_sequencial === 0 || $this->cc02_sequencial === 0.0 || $this->cc02_sequencial == "") ){
        $this->erro_sql = " Campo cc02_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

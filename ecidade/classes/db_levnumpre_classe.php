@@ -67,10 +67,10 @@ class cl_levnumpre {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y66_codlev = ($this->y66_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y66_codlev"]:$this->y66_codlev);
-       $this->y66_numpre = ($this->y66_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["y66_numpre"]:$this->y66_numpre);
+       $this->y66_codlev = ($this->y66_codlev === 0 || $this->y66_codlev === 0.0 || $this->y66_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y66_codlev"]:$this->y66_codlev);
+       $this->y66_numpre = ($this->y66_numpre === 0 || $this->y66_numpre === 0.0 || $this->y66_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["y66_numpre"]:$this->y66_numpre);
      }else{
-       $this->y66_codlev = ($this->y66_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y66_codlev"]:$this->y66_codlev);
+       $this->y66_codlev = ($this->y66_codlev === 0 || $this->y66_codlev === 0.0 || $this->y66_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y66_codlev"]:$this->y66_codlev);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_levnumpre {
        return false;
      }
        $this->y66_codlev = $y66_codlev; 
-     if(($this->y66_codlev == null) || ($this->y66_codlev == "") ){ 
+     if(($this->y66_codlev == null) || ($this->y66_codlev === 0 || $this->y66_codlev === 0.0 || $this->y66_codlev == "") ){ 
        $this->erro_sql = " Campo y66_codlev nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -80,8 +80,8 @@ class cl_cancdisbanco {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k124_sequencial = ($this->k124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_sequencial"]:$this->k124_sequencial);
-       $this->k124_usuario = ($this->k124_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_usuario"]:$this->k124_usuario);
+       $this->k124_sequencial = ($this->k124_sequencial === 0 || $this->k124_sequencial === 0.0 || $this->k124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_sequencial"]:$this->k124_sequencial);
+       $this->k124_usuario = ($this->k124_usuario === 0 || $this->k124_usuario === 0.0 || $this->k124_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_usuario"]:$this->k124_usuario);
        if($this->k124_data == ""){
          $this->k124_data_dia = ($this->k124_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_data_dia"]:$this->k124_data_dia);
          $this->k124_data_mes = ($this->k124_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_data_mes"]:$this->k124_data_mes);
@@ -91,11 +91,11 @@ class cl_cancdisbanco {
          }
        }
        $this->k124_ip = ($this->k124_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_ip"]:$this->k124_ip);
-       $this->k124_codret = ($this->k124_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_codret"]:$this->k124_codret);
-       $this->k124_codcla = ($this->k124_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_codcla"]:$this->k124_codcla);
+       $this->k124_codret = ($this->k124_codret === 0 || $this->k124_codret === 0.0 || $this->k124_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_codret"]:$this->k124_codret);
+       $this->k124_codcla = ($this->k124_codcla === 0 || $this->k124_codcla === 0.0 || $this->k124_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_codcla"]:$this->k124_codcla);
        $this->k124_nomearq = ($this->k124_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_nomearq"]:$this->k124_nomearq);
      }else{
-       $this->k124_sequencial = ($this->k124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_sequencial"]:$this->k124_sequencial);
+       $this->k124_sequencial = ($this->k124_sequencial === 0 || $this->k124_sequencial === 0.0 || $this->k124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k124_sequencial"]:$this->k124_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_cancdisbanco {
          $this->k124_sequencial = $k124_sequencial;
        }
      }
-     if(($this->k124_sequencial == null) || ($this->k124_sequencial == "") ){
+     if(($this->k124_sequencial == null) || ($this->k124_sequencial === 0 || $this->k124_sequencial === 0.0 || $this->k124_sequencial == "") ){
        $this->erro_sql = " Campo k124_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

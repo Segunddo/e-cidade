@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/projecao-despesa-agrupado",
+  "json": {
+    "error": true,
+    "message": "Undefined index: planejamento_id"
+  },
+  "sha256": "dbd6a6228cbbe34e0c1406abcef73668fd784f9f5c02579e13ae4c5ec37e15f9",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

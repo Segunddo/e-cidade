@@ -40,7 +40,7 @@ class modeloAutentTermicaEmpenho extends modeloAutentTermicaBasica {
     parent::__construct($sIp,$sPorta,$iId,$sData,$iAutent);
   }
   
-  function imprimir() {
+  function imprimir($sStringCorpo = null) {
   	
   	$iCodOrdem = $this->getOp();
   	

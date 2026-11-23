@@ -67,10 +67,10 @@ class cl_db_ordemcli {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->or13_codigo = ($this->or13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["or13_codigo"]:$this->or13_codigo);
+       $this->or13_codigo = ($this->or13_codigo === 0 || $this->or13_codigo === 0.0 || $this->or13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["or13_codigo"]:$this->or13_codigo);
        $this->or13_nome = ($this->or13_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["or13_nome"]:$this->or13_nome);
      }else{
-       $this->or13_codigo = ($this->or13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["or13_codigo"]:$this->or13_codigo);
+       $this->or13_codigo = ($this->or13_codigo === 0 || $this->or13_codigo === 0.0 || $this->or13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["or13_codigo"]:$this->or13_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_db_ordemcli {
        return false;
      }
        $this->or13_codigo = $or13_codigo;
-     if(($this->or13_codigo == null) || ($this->or13_codigo == "") ){
+     if(($this->or13_codigo == null) || ($this->or13_codigo === 0 || $this->or13_codigo === 0.0 || $this->or13_codigo == "") ){
        $this->erro_sql = " Campo or13_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

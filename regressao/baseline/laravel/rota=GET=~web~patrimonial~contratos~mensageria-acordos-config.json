@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/patrimonial/contratos/mensageria-acordos-config",
+  "json": null,
+  "sha256": "f3bb476ab31040e918a0cc8ce50c3c7e178af1b13745a163c4f8c46676b9e326",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

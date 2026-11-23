@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/procedimento/troca-de-turma",
+  "json": {
+    "errors": {
+      "etapaDestino": [
+        "Código da Etapa de Destino deve ser informado."
+      ],
+      "importarAvaliacoes": [
+        "Importar Avaliacoes deve ser informado."
+      ],
+      "turmaDestino": [
+        "Código da Turma de Destino deve ser informado."
+      ],
+      "turmaOrigem": [
+        "Código da Turma de Origem deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "b46d3fd61942c442af2f3d60494615c26827adc22db1f431575e7c76804002cd",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -44,7 +44,7 @@ if (!isset($arqinclude)){ // se este arquivo no esta incluido por outro
   $orcparamrel = new cl_orcparamrel;
   $clconrelinfo = new cl_conrelinfo;
 
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
 
   //-----------------------------------
@@ -115,17 +115,17 @@ for ($i = 1; $i <= 14; $i++) {
   $oLinhaRelatorio->setPeriodo($iCodigoPeriodo);
 
   $aValoresColunasLinhas            = $oLinhaRelatorio->getValoresSomadosColunas($db_selinstit_sem_rpps, $anousu);
-  $aLinhaRelatorio[$i]->oParametros = $oLinhaRelatorio->getParametros($anousu);
+  $aLinhaRelatorio[$i] = new stdClass(); $aLinhaRelatorio[$i]->oParametros = $oLinhaRelatorio->getParametros($anousu);
   foreach ($aValoresColunasLinhas as $oValorColuna) {
 
     if ($i == 7) {
 
-      $aLinhaRelatorio[7]->valor += $oValorColuna->colunas[1]->o117_valor;
+      $aLinhaRelatorio[7]->valor += (float) $oValorColuna->colunas[1]->o117_valor;
     } else {
 
-      $aLinhaRelatorio[$i]->valorBimestreAnterior += $oValorColuna->colunas[2]->o117_valor;
-      $aLinhaRelatorio[$i]->valorAnterior         += $oValorColuna->colunas[1]->o117_valor;
-      $aLinhaRelatorio[$i]->valorNoBimestre       += $oValorColuna->colunas[3]->o117_valor;
+      $aLinhaRelatorio[$i]->valorBimestreAnterior += (float) $oValorColuna->colunas[2]->o117_valor;
+      $aLinhaRelatorio[$i]->valorAnterior         += (float) $oValorColuna->colunas[1]->o117_valor;
+      $aLinhaRelatorio[$i]->valorNoBimestre       += (float) $oValorColuna->colunas[3]->o117_valor;
 
     }
   }
@@ -281,7 +281,7 @@ if (!isset($arqinclude)){ // se este arquivo no esta incluido por outro
 
   $pdf->ln();
   $pdf->cell(70,$alt,"RREO - ANEXO 5 (LRF, art. 53, inciso III)",'0',0,"L",0);
-  $pdf->cell(120,$alt,"R$ 1,00",0,"R",0);
+  $pdf->cell(120,$alt,"R$ 1,00",0,0,"R",0);
 
   $pdf->ln();
   $pdf->cell(70,($alt*2),"DÍVIDA FISCAL LÍQUIDA",'TBR',0,"C",0);

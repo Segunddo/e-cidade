@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/orcamento/cadastro/especificacao-recurso/salvar",
+  "json": {
+    "error": true,
+    "message": "O campo \"Código\" da Especificação do Recurso não foi informado."
+  },
+  "sha256": "56d051530813b9327fd2bf14bc9410caa359eec0dfe2ae2c9ba816e9876d798f",
+  "sql_negocio": [],
+  "status": 412,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

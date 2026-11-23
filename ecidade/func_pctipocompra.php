@@ -40,7 +40,7 @@ if (empty($chave_pc50_codcom)) {
   $chave_pc50_codcom = null;
 }
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clpctipocompra = new cl_pctipocompra;
 $clpctipocompra->rotulo->label("pc50_codcom");
 $clpctipocompra->rotulo->label("pc50_descr");

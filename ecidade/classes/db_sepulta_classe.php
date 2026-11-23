@@ -74,9 +74,9 @@ class cl_sepulta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm24_i_codigo = ($this->cm24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm24_i_codigo"]:$this->cm24_i_codigo);
-       $this->cm24_i_sepultura = ($this->cm24_i_sepultura == ""?@$GLOBALS["HTTP_POST_VARS"]["cm24_i_sepultura"]:$this->cm24_i_sepultura);
-       $this->cm24_i_sepultamento = ($this->cm24_i_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm24_i_sepultamento"]:$this->cm24_i_sepultamento);
+       $this->cm24_i_codigo = ($this->cm24_i_codigo === 0 || $this->cm24_i_codigo === 0.0 || $this->cm24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm24_i_codigo"]:$this->cm24_i_codigo);
+       $this->cm24_i_sepultura = ($this->cm24_i_sepultura === 0 || $this->cm24_i_sepultura === 0.0 || $this->cm24_i_sepultura == ""?@$GLOBALS["HTTP_POST_VARS"]["cm24_i_sepultura"]:$this->cm24_i_sepultura);
+       $this->cm24_i_sepultamento = ($this->cm24_i_sepultamento === 0 || $this->cm24_i_sepultamento === 0.0 || $this->cm24_i_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm24_i_sepultamento"]:$this->cm24_i_sepultamento);
        if($this->cm24_d_entrada == ""){
          $this->cm24_d_entrada_dia = ($this->cm24_d_entrada_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm24_d_entrada_dia"]:$this->cm24_d_entrada_dia);
          $this->cm24_d_entrada_mes = ($this->cm24_d_entrada_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm24_d_entrada_mes"]:$this->cm24_d_entrada_mes);
@@ -86,7 +86,7 @@ class cl_sepulta {
          }
        }
      }else{
-       $this->cm24_i_codigo = ($this->cm24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm24_i_codigo"]:$this->cm24_i_codigo);
+       $this->cm24_i_codigo = ($this->cm24_i_codigo === 0 || $this->cm24_i_codigo === 0.0 || $this->cm24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm24_i_codigo"]:$this->cm24_i_codigo);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_sepulta {
          $this->cm24_i_codigo = $cm24_i_codigo;
        }
      }
-     if(($this->cm24_i_codigo == null) || ($this->cm24_i_codigo == "") ){
+     if(($this->cm24_i_codigo == null) || ($this->cm24_i_codigo === 0 || $this->cm24_i_codigo === 0.0 || $this->cm24_i_codigo == "") ){
        $this->erro_sql = " Campo cm24_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

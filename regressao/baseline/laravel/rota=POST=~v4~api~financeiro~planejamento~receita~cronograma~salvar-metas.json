@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/receita/cronograma/salvar-metas",
+  "json": {
+    "error": true,
+    "message": "Revise os dados enviados."
+  },
+  "sha256": "ee8b50f4f8427f69e997ae0a387ac4a8b74abd2a4c7cd7598ce897198443f3b5",
+  "sql_negocio": [],
+  "status": 403,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

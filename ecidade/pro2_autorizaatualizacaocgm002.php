@@ -32,7 +32,7 @@ include(modification("classes/db_cidadao_classe.php"));
 
 $clcidado = new cl_cidadao();
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_GET_VARS);
 
 $datausu	 = 	date('Y-m-d',db_getsession('DB_datausu'));

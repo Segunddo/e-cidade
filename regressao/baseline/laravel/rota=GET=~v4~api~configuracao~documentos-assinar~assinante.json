@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/documentos-assinar/assinante",
+  "json": {
+    "error": true,
+    "message": "Informe o CPF/CNPJ"
+  },
+  "sha256": "9dd506579de823ea9bfc5c5285426c13d4a1a7c1ed8ffbf3c56fb894cfb5f918",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

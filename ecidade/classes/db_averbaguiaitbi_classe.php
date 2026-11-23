@@ -69,11 +69,11 @@ class cl_averbaguiaitbi {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j103_sequencial = ($this->j103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_sequencial"]:$this->j103_sequencial);
-       $this->j103_itbi = ($this->j103_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_itbi"]:$this->j103_itbi);
-       $this->j103_averbaguia = ($this->j103_averbaguia == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_averbaguia"]:$this->j103_averbaguia);
+       $this->j103_sequencial = ($this->j103_sequencial === 0 || $this->j103_sequencial === 0.0 || $this->j103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_sequencial"]:$this->j103_sequencial);
+       $this->j103_itbi = ($this->j103_itbi === 0 || $this->j103_itbi === 0.0 || $this->j103_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_itbi"]:$this->j103_itbi);
+       $this->j103_averbaguia = ($this->j103_averbaguia === 0 || $this->j103_averbaguia === 0.0 || $this->j103_averbaguia == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_averbaguia"]:$this->j103_averbaguia);
      }else{
-       $this->j103_sequencial = ($this->j103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_sequencial"]:$this->j103_sequencial);
+       $this->j103_sequencial = ($this->j103_sequencial === 0 || $this->j103_sequencial === 0.0 || $this->j103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j103_sequencial"]:$this->j103_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_averbaguiaitbi {
          $this->j103_sequencial = $j103_sequencial;
        }
      }
-     if(($this->j103_sequencial == null) || ($this->j103_sequencial == "") ){
+     if(($this->j103_sequencial == null) || ($this->j103_sequencial === 0 || $this->j103_sequencial === 0.0 || $this->j103_sequencial == "") ){
        $this->erro_sql = " Campo j103_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

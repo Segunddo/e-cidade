@@ -55,16 +55,16 @@ class cl_conlancamajustesaldoconta
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c155_codigo = ($this->c155_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c155_codigo"]:$this->c155_codigo);
-       $this->c155_conlancam = ($this->c155_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c155_conlancam"]:$this->c155_conlancam);
-       $this->c155_exercicio = ($this->c155_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["c155_exercicio"]:$this->c155_exercicio);
+       $this->c155_codigo = ($this->c155_codigo === 0 || $this->c155_codigo === 0.0 || $this->c155_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c155_codigo"]:$this->c155_codigo);
+       $this->c155_conlancam = ($this->c155_conlancam === 0 || $this->c155_conlancam === 0.0 || $this->c155_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c155_conlancam"]:$this->c155_conlancam);
+       $this->c155_exercicio = ($this->c155_exercicio === 0 || $this->c155_exercicio === 0.0 || $this->c155_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["c155_exercicio"]:$this->c155_exercicio);
        $this->c155_funcao = !empty($this->c155_funcao) ? $this->c155_funcao : 'null';
        $this->c155_subfuncao = !empty($this->c155_subfuncao) ? $this->c155_subfuncao : 'null';
        $this->c155_elemento = !empty($this->c155_elemento) ? $this->c155_elemento : 'null';
        $this->c155_ai = !empty($this->c155_ai) ? $this->c155_ai : 'null';
        $this->c155_receita = !empty($this->c155_receita) ? $this->c155_receita : 'null';
      }else{
-       $this->c155_codigo = ($this->c155_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c155_codigo"]:$this->c155_codigo);
+       $this->c155_codigo = ($this->c155_codigo === 0 || $this->c155_codigo === 0.0 || $this->c155_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c155_codigo"]:$this->c155_codigo);
      }
    }
 
@@ -104,7 +104,7 @@ class cl_conlancamajustesaldoconta
          $this->c155_codigo = $c155_codigo;
        }
      }
-     if(($this->c155_codigo == null) || ($this->c155_codigo == "") ){
+     if(($this->c155_codigo == null) || ($this->c155_codigo === 0 || $this->c155_codigo === 0.0 || $this->c155_codigo == "") ){
        $this->erro_sql = " Campo c155_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

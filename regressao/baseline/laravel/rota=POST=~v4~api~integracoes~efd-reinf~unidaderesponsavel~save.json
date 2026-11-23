@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/integracoes/efd-reinf/unidaderesponsavel/save",
+  "json": {
+    "errors": {
+      "cgm": [
+        "O campo cgm é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "2e53b9777ad9dfa122fcc48e7f5793ad9150463c2927c239080502da216b9176",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

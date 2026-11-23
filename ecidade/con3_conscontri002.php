@@ -39,7 +39,7 @@ $clrotulo->label("j01_matric");
 $clrotulo->label("z01_nome");
 $clrotulo->label("d02_contri");
 $db_opcao = 1;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
    
 if(isset($j01_matric) && $j01_matric!=""){

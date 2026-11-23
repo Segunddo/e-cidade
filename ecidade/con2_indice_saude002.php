@@ -38,7 +38,7 @@ $orcparamrel = new cl_orcparamrel;
 $clconrelinfo = new cl_conrelinfo;
 $clempresto = new cl_empresto;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 // db_postmemory($HTTP_POST_VARS,2); exit;
@@ -62,7 +62,7 @@ $xinstit =explode("-",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst,uf from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
   db_fieldsmemory($resultinst,$xins);
   $descr_inst .= $xvirg.$nomeinst ;
   $xvirg = ', ';
@@ -94,7 +94,7 @@ $result_receita = db_receitasaldo(11,1,3,true,$db_filtro,$anousu,$dataini,$dataf
 //db_criatabela($result_receita);exit;
 @db_query("drop table work_receita");
 
-for ($i = 0; $i < pg_numrows($result_receita); $i ++) {
+for ($i = 0; $i < ($result_receita ? pg_numrows($result_receita) : null); $i ++) {
   db_fieldsmemory($result_receita, $i);
   $estrutural = $o57_fonte;
   for ($p=1;$p<=3;$p++) {
@@ -121,7 +121,7 @@ $desp_asps            = 0;
 // echo "<br>".$dataini;
 // echo "<br>".$datafin;
 
-for ($x=0;$x < pg_numrows($result_deducao);$x++){
+for ($x=0;$x < ($result_deducao ? pg_numrows($result_deducao) : null);$x++){
   db_fieldsmemory($result_deducao,$x);
 
 /*
@@ -235,7 +235,7 @@ $pdf->cell(40,$alt,"Valor",0,1,"C",1);
 $soma_subfuncao_exe = 0;
 $array_subfuncao = array();
 
-for ($x=0;$x < pg_numrows($result_despesa);$x++){
+for ($x=0;$x < ($result_despesa ? pg_numrows($result_despesa) : null);$x++){
   db_fieldsmemory($result_despesa,$x);
 
   // se valor zerado continua na proxima
@@ -294,7 +294,7 @@ $pdf->cell(40,$alt,"Valor",0,1,"C",1);
 $soma_subfuncao_rp = 0;
 $array_subfuncao = array();
 
-for ($x=0;$x < pg_numrows($resultado_rp);$x++) {
+for ($x=0;$x < ($resultado_rp ? pg_numrows($resultado_rp) : null);$x++) {
   db_fieldsmemory($resultado_rp,$x);
 
   // se valor zerado continua na proxima
@@ -358,7 +358,7 @@ $pdf->cell(90,$alt,"Descrição",0,0,"C",1);
 $pdf->cell(40,$alt,"Valor",0,1,"C",1);
 
 $soma_patrimonial = 0;
-for ($x=0;$x < pg_numrows($result_plano);$x++){
+for ($x=0;$x < ($result_plano ? pg_numrows($result_plano) : null);$x++){
   db_fieldsmemory($result_plano,$x);
 
   if (in_array($estrutural,$m_contas)){

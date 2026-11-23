@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/unblock",
+  "json": {
+    "errors": {
+      "password": [
+        "O campo password deve ser presente."
+      ],
+      "refresh_token": [
+        "O campo refresh token é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "417fac46d04595c6d3ea194ce636e44f6ddfda4e10bdc9bf656129cbdcf4fbec",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

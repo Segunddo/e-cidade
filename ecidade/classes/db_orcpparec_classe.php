@@ -81,17 +81,17 @@ class cl_orcpparec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o27_sequen = ($this->o27_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_sequen"]:$this->o27_sequen);
-       $this->o27_exercicio = ($this->o27_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_exercicio"]:$this->o27_exercicio);
-       $this->o27_codfon = ($this->o27_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_codfon"]:$this->o27_codfon);
-       $this->o27_codleippa = ($this->o27_codleippa == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_codleippa"]:$this->o27_codleippa);
-       $this->o27_valor = ($this->o27_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_valor"]:$this->o27_valor);
+       $this->o27_sequen = ($this->o27_sequen === 0 || $this->o27_sequen === 0.0 || $this->o27_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_sequen"]:$this->o27_sequen);
+       $this->o27_exercicio = ($this->o27_exercicio === 0 || $this->o27_exercicio === 0.0 || $this->o27_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_exercicio"]:$this->o27_exercicio);
+       $this->o27_codfon = ($this->o27_codfon === 0 || $this->o27_codfon === 0.0 || $this->o27_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_codfon"]:$this->o27_codfon);
+       $this->o27_codleippa = ($this->o27_codleippa === 0 || $this->o27_codleippa === 0.0 || $this->o27_codleippa == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_codleippa"]:$this->o27_codleippa);
+       $this->o27_valor = ($this->o27_valor === 0 || $this->o27_valor === 0.0 || $this->o27_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_valor"]:$this->o27_valor);
        $this->o27_obs = ($this->o27_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_obs"]:$this->o27_obs);
-       $this->o27_proces = ($this->o27_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_proces"]:$this->o27_proces);
-       $this->o27_perc = ($this->o27_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_perc"]:$this->o27_perc);
+       $this->o27_proces = ($this->o27_proces === 0 || $this->o27_proces === 0.0 || $this->o27_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_proces"]:$this->o27_proces);
+       $this->o27_perc = ($this->o27_perc === 0 || $this->o27_perc === 0.0 || $this->o27_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_perc"]:$this->o27_perc);
        $this->o27_concarpeculiar = ($this->o27_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_concarpeculiar"]:$this->o27_concarpeculiar);
      }else{
-       $this->o27_sequen = ($this->o27_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_sequen"]:$this->o27_sequen);
+       $this->o27_sequen = ($this->o27_sequen === 0 || $this->o27_sequen === 0.0 || $this->o27_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o27_sequen"]:$this->o27_sequen);
      }
    }
    // funcao para inclusao
@@ -184,7 +184,7 @@ class cl_orcpparec {
          $this->o27_sequen = $o27_sequen;
        }
      }
-     if(($this->o27_sequen == null) || ($this->o27_sequen == "") ){
+     if(($this->o27_sequen == null) || ($this->o27_sequen === 0 || $this->o27_sequen === 0.0 || $this->o27_sequen == "") ){
        $this->erro_sql = " Campo o27_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

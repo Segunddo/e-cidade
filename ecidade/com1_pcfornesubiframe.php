@@ -36,7 +36,7 @@ $clpcsubgrupo = new cl_pcsubgrupo;
 $clpcsubgrupo->rotulo->label();
 $clrotulo = new rotulocampo;
 $clrotulo->label("pc76_pcsubgrupo");
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if (isset($atualizar)) {
 	db_inicio_transacao();

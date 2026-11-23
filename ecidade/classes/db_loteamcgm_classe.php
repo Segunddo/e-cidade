@@ -69,11 +69,11 @@ class cl_loteamcgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j120_sequencial = ($this->j120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j120_sequencial"]:$this->j120_sequencial);
-       $this->j120_loteam = ($this->j120_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j120_loteam"]:$this->j120_loteam);
-       $this->j120_cgm = ($this->j120_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j120_cgm"]:$this->j120_cgm);
+       $this->j120_sequencial = ($this->j120_sequencial === 0 || $this->j120_sequencial === 0.0 || $this->j120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j120_sequencial"]:$this->j120_sequencial);
+       $this->j120_loteam = ($this->j120_loteam === 0 || $this->j120_loteam === 0.0 || $this->j120_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j120_loteam"]:$this->j120_loteam);
+       $this->j120_cgm = ($this->j120_cgm === 0 || $this->j120_cgm === 0.0 || $this->j120_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j120_cgm"]:$this->j120_cgm);
      }else{
-       $this->j120_sequencial = ($this->j120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j120_sequencial"]:$this->j120_sequencial);
+       $this->j120_sequencial = ($this->j120_sequencial === 0 || $this->j120_sequencial === 0.0 || $this->j120_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j120_sequencial"]:$this->j120_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_loteamcgm {
          $this->j120_sequencial = $j120_sequencial;
        }
      }
-     if(($this->j120_sequencial == null) || ($this->j120_sequencial == "") ){
+     if(($this->j120_sequencial == null) || ($this->j120_sequencial === 0 || $this->j120_sequencial === 0.0 || $this->j120_sequencial == "") ){
        $this->erro_sql = " Campo j120_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

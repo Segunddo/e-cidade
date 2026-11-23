@@ -33,7 +33,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_mer_nutricionista_classe.php"));
 include(modification("classes/db_mer_cardapionutri_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clmer_nutricionista = new cl_mer_nutricionista;
 $clmer_cardapionutri = new cl_mer_cardapionutri;

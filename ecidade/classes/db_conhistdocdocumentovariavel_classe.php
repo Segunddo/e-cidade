@@ -71,12 +71,12 @@ class cl_conhistdocdocumentovariavel {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c93_sequencial = ($this->c93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c93_sequencial"]:$this->c93_sequencial);
-       $this->c93_conhistdoctipo = ($this->c93_conhistdoctipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c93_conhistdoctipo"]:$this->c93_conhistdoctipo);
+       $this->c93_sequencial = ($this->c93_sequencial === 0 || $this->c93_sequencial === 0.0 || $this->c93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c93_sequencial"]:$this->c93_sequencial);
+       $this->c93_conhistdoctipo = ($this->c93_conhistdoctipo === 0 || $this->c93_conhistdoctipo === 0.0 || $this->c93_conhistdoctipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c93_conhistdoctipo"]:$this->c93_conhistdoctipo);
        $this->c93_descricao = ($this->c93_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["c93_descricao"]:$this->c93_descricao);
        $this->c93_variavel = ($this->c93_variavel == ""?@$GLOBALS["HTTP_POST_VARS"]["c93_variavel"]:$this->c93_variavel);
      }else{
-       $this->c93_sequencial = ($this->c93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c93_sequencial"]:$this->c93_sequencial);
+       $this->c93_sequencial = ($this->c93_sequencial === 0 || $this->c93_sequencial === 0.0 || $this->c93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c93_sequencial"]:$this->c93_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_conhistdocdocumentovariavel {
          $this->c93_sequencial = $c93_sequencial;
        }
      }
-     if(($this->c93_sequencial == null) || ($this->c93_sequencial == "") ){
+     if(($this->c93_sequencial == null) || ($this->c93_sequencial === 0 || $this->c93_sequencial === 0.0 || $this->c93_sequencial == "") ){
        $this->erro_sql = " Campo c93_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

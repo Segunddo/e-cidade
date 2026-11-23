@@ -52,7 +52,7 @@ class cl_termoreparc {
                  v08_parcelorigem = int4 = Código do Parcelamento 
                  ";
    //funcao construtor da classe 
-   public function cl_termoreparc() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termoreparc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_termoreparc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v08_sequencial = ($this->v08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v08_sequencial"]:$this->v08_sequencial);
-       $this->v08_parcel = ($this->v08_parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["v08_parcel"]:$this->v08_parcel);
-       $this->v08_parcelorigem = ($this->v08_parcelorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["v08_parcelorigem"]:$this->v08_parcelorigem);
+       $this->v08_sequencial = ($this->v08_sequencial === 0 || $this->v08_sequencial === 0.0 || $this->v08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v08_sequencial"]:$this->v08_sequencial);
+       $this->v08_parcel = ($this->v08_parcel === 0 || $this->v08_parcel === 0.0 || $this->v08_parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["v08_parcel"]:$this->v08_parcel);
+       $this->v08_parcelorigem = ($this->v08_parcelorigem === 0 || $this->v08_parcelorigem === 0.0 || $this->v08_parcelorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["v08_parcelorigem"]:$this->v08_parcelorigem);
      }else{
-       $this->v08_sequencial = ($this->v08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v08_sequencial"]:$this->v08_sequencial);
+       $this->v08_sequencial = ($this->v08_sequencial === 0 || $this->v08_sequencial === 0.0 || $this->v08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v08_sequencial"]:$this->v08_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_termoreparc {
          $this->v08_sequencial = $v08_sequencial; 
        }
      }
-     if(($this->v08_sequencial == null) || ($this->v08_sequencial == "") ){ 
+     if(($this->v08_sequencial == null) || ($this->v08_sequencial === 0 || $this->v08_sequencial === 0.0 || $this->v08_sequencial == "") ){ 
        $this->erro_sql = " Campo v08_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

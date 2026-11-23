@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/fiscalizacao/vistoria/exercicios-calculados",
+  "json": {
+    "errors": {
+      "numcgm": [
+        "O campo numcgm é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "475bfa3038d5a941aaa637e4bd533f00a8a653a542278ae2e7f93e46995ffa76",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

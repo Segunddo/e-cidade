@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/patrimonial/licitacoes/licitacon/parametros",
+  "json": null,
+  "sha256": "9bd1924b1ef6770b151ef93377abdff04bc22a0bdebf5701b7ae83bf6233a30c",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

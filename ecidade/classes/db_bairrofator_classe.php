@@ -71,12 +71,12 @@ class cl_bairrofator {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j112_sequencial = ($this->j112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j112_sequencial"]:$this->j112_sequencial);
-       $this->j112_bairro = ($this->j112_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["j112_bairro"]:$this->j112_bairro);
-       $this->j112_anousu = ($this->j112_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j112_anousu"]:$this->j112_anousu);
-       $this->j112_fator = ($this->j112_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j112_fator"]:$this->j112_fator);
+       $this->j112_sequencial = ($this->j112_sequencial === 0 || $this->j112_sequencial === 0.0 || $this->j112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j112_sequencial"]:$this->j112_sequencial);
+       $this->j112_bairro = ($this->j112_bairro === 0 || $this->j112_bairro === 0.0 || $this->j112_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["j112_bairro"]:$this->j112_bairro);
+       $this->j112_anousu = ($this->j112_anousu === 0 || $this->j112_anousu === 0.0 || $this->j112_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j112_anousu"]:$this->j112_anousu);
+       $this->j112_fator = ($this->j112_fator === 0 || $this->j112_fator === 0.0 || $this->j112_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j112_fator"]:$this->j112_fator);
      }else{
-       $this->j112_sequencial = ($this->j112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j112_sequencial"]:$this->j112_sequencial);
+       $this->j112_sequencial = ($this->j112_sequencial === 0 || $this->j112_sequencial === 0.0 || $this->j112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j112_sequencial"]:$this->j112_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_bairrofator {
          $this->j112_sequencial = $j112_sequencial;
        }
      }
-     if(($this->j112_sequencial == null) || ($this->j112_sequencial == "") ){
+     if(($this->j112_sequencial == null) || ($this->j112_sequencial === 0 || $this->j112_sequencial === 0.0 || $this->j112_sequencial == "") ){
        $this->erro_sql = " Campo j112_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

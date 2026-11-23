@@ -58,7 +58,7 @@ db_fieldsmemory($resultpref,0);
 $rsParam           = $clpcparam->sql_record($clpcparam->sql_query(null,"*",null,"pc30_instit = ".db_getsession("DB_instit")));
 $oParam            = db_utils::fieldsMemory($rsParam,0);
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 
 // This function was in file com2_procorc002.php

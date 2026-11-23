@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_mer_restricao_classe.php"));
 include(modification("classes/db_aluno_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmer_restricao = new cl_mer_restricao;
 $claluno = new cl_aluno;
 $clmer_restricao->rotulo->label("me24_i_codigo");

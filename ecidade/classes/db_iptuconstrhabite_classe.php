@@ -94,10 +94,10 @@ class cl_iptuconstrhabite {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j131_sequencial = ($this->j131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_sequencial"]:$this->j131_sequencial);
-       $this->j131_idcons = ($this->j131_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_idcons"]:$this->j131_idcons);
-       $this->j131_matric = ($this->j131_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_matric"]:$this->j131_matric);
-       $this->j131_usuario = ($this->j131_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_usuario"]:$this->j131_usuario);
+       $this->j131_sequencial = ($this->j131_sequencial === 0 || $this->j131_sequencial === 0.0 || $this->j131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_sequencial"]:$this->j131_sequencial);
+       $this->j131_idcons = ($this->j131_idcons === 0 || $this->j131_idcons === 0.0 || $this->j131_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_idcons"]:$this->j131_idcons);
+       $this->j131_matric = ($this->j131_matric === 0 || $this->j131_matric === 0.0 || $this->j131_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_matric"]:$this->j131_matric);
+       $this->j131_usuario = ($this->j131_usuario === 0 || $this->j131_usuario === 0.0 || $this->j131_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_usuario"]:$this->j131_usuario);
        $this->j131_codprot = ($this->j131_codprot == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_codprot"]:$this->j131_codprot);
        if($this->j131_dtprot == ""){
          $this->j131_dtprot_dia = ($this->j131_dtprot_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_dtprot_dia"]:$this->j131_dtprot_dia);
@@ -127,7 +127,7 @@ class cl_iptuconstrhabite {
        $this->j131_hora = ($this->j131_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_hora"]:$this->j131_hora);
        $this->j131_obs = ($this->j131_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_obs"]:$this->j131_obs);
      }else{
-       $this->j131_sequencial = ($this->j131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_sequencial"]:$this->j131_sequencial);
+       $this->j131_sequencial = ($this->j131_sequencial === 0 || $this->j131_sequencial === 0.0 || $this->j131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j131_sequencial"]:$this->j131_sequencial);
      }
    }
    // funcao para inclusao
@@ -223,7 +223,7 @@ class cl_iptuconstrhabite {
          $this->j131_sequencial = $j131_sequencial;
        }
      }
-     if(($this->j131_sequencial == null) || ($this->j131_sequencial == "") ){
+     if(($this->j131_sequencial == null) || ($this->j131_sequencial === 0 || $this->j131_sequencial === 0.0 || $this->j131_sequencial == "") ){
        $this->erro_sql = " Campo j131_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

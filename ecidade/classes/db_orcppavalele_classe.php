@@ -67,11 +67,11 @@ class cl_orcppavalele {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o25_codseqppa = ($this->o25_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codseqppa"]:$this->o25_codseqppa);
-       $this->o25_codele = ($this->o25_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codele"]:$this->o25_codele);
+       $this->o25_codseqppa = ($this->o25_codseqppa === 0 || $this->o25_codseqppa === 0.0 || $this->o25_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codseqppa"]:$this->o25_codseqppa);
+       $this->o25_codele = ($this->o25_codele === 0 || $this->o25_codele === 0.0 || $this->o25_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codele"]:$this->o25_codele);
      }else{
-       $this->o25_codseqppa = ($this->o25_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codseqppa"]:$this->o25_codseqppa);
-       $this->o25_codele = ($this->o25_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codele"]:$this->o25_codele);
+       $this->o25_codseqppa = ($this->o25_codseqppa === 0 || $this->o25_codseqppa === 0.0 || $this->o25_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codseqppa"]:$this->o25_codseqppa);
+       $this->o25_codele = ($this->o25_codele === 0 || $this->o25_codele === 0.0 || $this->o25_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_codele"]:$this->o25_codele);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_orcppavalele {
       $this->atualizacampos();
        $this->o25_codseqppa = $o25_codseqppa;
        $this->o25_codele = $o25_codele;
-     if(($this->o25_codseqppa == null) || ($this->o25_codseqppa == "") ){
+     if(($this->o25_codseqppa == null) || ($this->o25_codseqppa === 0 || $this->o25_codseqppa === 0.0 || $this->o25_codseqppa == "") ){
        $this->erro_sql = " Campo o25_codseqppa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_orcppavalele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o25_codele == null) || ($this->o25_codele == "") ){
+     if(($this->o25_codele == null) || ($this->o25_codele === 0 || $this->o25_codele === 0.0 || $this->o25_codele == "") ){
        $this->erro_sql = " Campo o25_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

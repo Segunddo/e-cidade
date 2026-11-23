@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/recursos-humanos/buscar-documento-pos-graducao",
+  "json": {
+    "error": true,
+    "message": "pg_query(): Query failed: ERRO:  erro de sintaxe no fim da entrada\nLINE 2:                             \n                                    ^"
+  },
+  "sha256": "b2381495103da44033bc2df54bb949ef7bdcefa08a5216651819095f8c32cc60",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

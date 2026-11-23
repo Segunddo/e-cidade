@@ -73,14 +73,14 @@ class cl_conrelvalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c83_codigo = ($this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
-       $this->c83_instit = ($this->c83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_instit"]:$this->c83_instit);
+       $this->c83_codigo = ($this->c83_codigo === 0 || $this->c83_codigo === 0.0 || $this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
+       $this->c83_instit = ($this->c83_instit === 0 || $this->c83_instit === 0.0 || $this->c83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_instit"]:$this->c83_instit);
        $this->c83_informacao = ($this->c83_informacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_informacao"]:$this->c83_informacao);
-       $this->c83_anousu = ($this->c83_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_anousu"]:$this->c83_anousu);
+       $this->c83_anousu = ($this->c83_anousu === 0 || $this->c83_anousu === 0.0 || $this->c83_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_anousu"]:$this->c83_anousu);
        $this->c83_periodo = ($this->c83_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_periodo"]:$this->c83_periodo);
      }else{
-       $this->c83_codigo = ($this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
-       $this->c83_instit = ($this->c83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_instit"]:$this->c83_instit);
+       $this->c83_codigo = ($this->c83_codigo === 0 || $this->c83_codigo === 0.0 || $this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
+       $this->c83_instit = ($this->c83_instit === 0 || $this->c83_instit === 0.0 || $this->c83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_instit"]:$this->c83_instit);
        $this->c83_periodo = ($this->c83_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_periodo"]:$this->c83_periodo);
      }
    }
@@ -108,7 +108,7 @@ class cl_conrelvalor {
        $this->c83_codigo = $c83_codigo;
        $this->c83_instit = $c83_instit;
        $this->c83_periodo = $c83_periodo;
-     if(($this->c83_codigo == null) || ($this->c83_codigo == "") ){
+     if(($this->c83_codigo == null) || ($this->c83_codigo === 0 || $this->c83_codigo === 0.0 || $this->c83_codigo == "") ){
        $this->erro_sql = " Campo c83_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -116,7 +116,7 @@ class cl_conrelvalor {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c83_instit == null) || ($this->c83_instit == "") ){
+     if(($this->c83_instit == null) || ($this->c83_instit === 0 || $this->c83_instit === 0.0 || $this->c83_instit == "") ){
        $this->erro_sql = " Campo c83_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

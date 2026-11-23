@@ -67,8 +67,8 @@ class cl_arrecontr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_contr = ($this->k00_contr == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_contr"]:$this->k00_contr);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_contr = ($this->k00_contr === 0 || $this->k00_contr === 0.0 || $this->k00_contr == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_contr"]:$this->k00_contr);
      }else{
      }
    }

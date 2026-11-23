@@ -67,10 +67,10 @@ class cl_cancdebitosprot {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k25_cancdebitos = ($this->k25_cancdebitos == ""?@$GLOBALS["HTTP_POST_VARS"]["k25_cancdebitos"]:$this->k25_cancdebitos);
-       $this->k25_codproc = ($this->k25_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["k25_codproc"]:$this->k25_codproc);
+       $this->k25_cancdebitos = ($this->k25_cancdebitos === 0 || $this->k25_cancdebitos === 0.0 || $this->k25_cancdebitos == ""?@$GLOBALS["HTTP_POST_VARS"]["k25_cancdebitos"]:$this->k25_cancdebitos);
+       $this->k25_codproc = ($this->k25_codproc === 0 || $this->k25_codproc === 0.0 || $this->k25_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["k25_codproc"]:$this->k25_codproc);
      }else{
-       $this->k25_cancdebitos = ($this->k25_cancdebitos == ""?@$GLOBALS["HTTP_POST_VARS"]["k25_cancdebitos"]:$this->k25_cancdebitos);
+       $this->k25_cancdebitos = ($this->k25_cancdebitos === 0 || $this->k25_cancdebitos === 0.0 || $this->k25_cancdebitos == ""?@$GLOBALS["HTTP_POST_VARS"]["k25_cancdebitos"]:$this->k25_cancdebitos);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_cancdebitosprot {
        return false;
      }
        $this->k25_cancdebitos = $k25_cancdebitos;
-     if(($this->k25_cancdebitos == null) || ($this->k25_cancdebitos == "") ){
+     if(($this->k25_cancdebitos == null) || ($this->k25_cancdebitos === 0 || $this->k25_cancdebitos === 0.0 || $this->k25_cancdebitos == "") ){
        $this->erro_sql = " Campo k25_cancdebitos nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

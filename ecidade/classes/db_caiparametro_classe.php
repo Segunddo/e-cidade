@@ -106,10 +106,10 @@ class cl_caiparametro
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->k29_instit = ($this->k29_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_instit"] : $this->k29_instit);
+            $this->k29_instit = ($this->k29_instit === 0 || $this->k29_instit === 0.0 || $this->k29_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_instit"] : $this->k29_instit);
             $this->k29_boletimzerado = ($this->k29_boletimzerado == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k29_boletimzerado"] : $this->k29_boletimzerado);
-            $this->k29_modslipnormal = ($this->k29_modslipnormal == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_modslipnormal"] : $this->k29_modslipnormal);
-            $this->k29_modsliptransf = ($this->k29_modsliptransf == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_modsliptransf"] : $this->k29_modsliptransf);
+            $this->k29_modslipnormal = ($this->k29_modslipnormal === 0 || $this->k29_modslipnormal === 0.0 || $this->k29_modslipnormal == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_modslipnormal"] : $this->k29_modslipnormal);
+            $this->k29_modsliptransf = ($this->k29_modsliptransf === 0 || $this->k29_modsliptransf === 0.0 || $this->k29_modsliptransf == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_modsliptransf"] : $this->k29_modsliptransf);
             $this->k29_chqduplicado = ($this->k29_chqduplicado == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k29_chqduplicado"] : $this->k29_chqduplicado);
             if ($this->k29_chqemitidonaoautent == "") {
                 $this->k29_chqemitidonaoautent_dia = ($this->k29_chqemitidonaoautent_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_chqemitidonaoautent_dia"] : $this->k29_chqemitidonaoautent_dia);
@@ -119,7 +119,7 @@ class cl_caiparametro
                     $this->k29_chqemitidonaoautent = $this->k29_chqemitidonaoautent_ano . "-" . $this->k29_chqemitidonaoautent_mes . "-" . $this->k29_chqemitidonaoautent_dia;
                 }
             }
-            $this->k29_saldoemitechq = ($this->k29_saldoemitechq == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_saldoemitechq"] : $this->k29_saldoemitechq);
+            $this->k29_saldoemitechq = ($this->k29_saldoemitechq === 0 || $this->k29_saldoemitechq === 0.0 || $this->k29_saldoemitechq == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_saldoemitechq"] : $this->k29_saldoemitechq);
             if ($this->k29_datasaldocontasextra == "") {
                 $this->k29_datasaldocontasextra_dia = ($this->k29_datasaldocontasextra_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_datasaldocontasextra_dia"] : $this->k29_datasaldocontasextra_dia);
                 $this->k29_datasaldocontasextra_mes = ($this->k29_datasaldocontasextra_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_datasaldocontasextra_mes"] : $this->k29_datasaldocontasextra_mes);
@@ -130,16 +130,16 @@ class cl_caiparametro
             }
             $this->k29_trazdatacheque = ($this->k29_trazdatacheque == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k29_trazdatacheque"] : $this->k29_trazdatacheque);
             $this->k29_contassemmovimento = ($this->k29_contassemmovimento == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k29_contassemmovimento"] : $this->k29_contassemmovimento);
-            $this->k29_orctiporecfundeb = ($this->k29_orctiporecfundeb == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_orctiporecfundeb"] : $this->k29_orctiporecfundeb);
-            $this->k29_contapadraoslip = ($this->k29_contapadraoslip == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_contapadraoslip"] : $this->k29_contapadraoslip);
-            $this->k29_gerarslipautomaticoreceitaretencao = ($this->k29_gerarslipautomaticoreceitaretencao == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_gerarslipautomaticoreceitaretencao"] : $this->k29_gerarslipautomaticoreceitaretencao);
+            $this->k29_orctiporecfundeb = ($this->k29_orctiporecfundeb === 0 || $this->k29_orctiporecfundeb === 0.0 || $this->k29_orctiporecfundeb == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_orctiporecfundeb"] : $this->k29_orctiporecfundeb);
+            $this->k29_contapadraoslip = ($this->k29_contapadraoslip === 0 || $this->k29_contapadraoslip === 0.0 || $this->k29_contapadraoslip == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_contapadraoslip"] : $this->k29_contapadraoslip);
+            $this->k29_gerarslipautomaticoreceitaretencao = ($this->k29_gerarslipautomaticoreceitaretencao === 0 || $this->k29_gerarslipautomaticoreceitaretencao === 0.0 || $this->k29_gerarslipautomaticoreceitaretencao == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_gerarslipautomaticoreceitaretencao"] : $this->k29_gerarslipautomaticoreceitaretencao);
             $this->k29_filtrocontasdepartamento = ($this->k29_filtrocontasdepartamento == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k29_filtrocontasdepartamento"] : $this->k29_filtrocontasdepartamento);
             $this->k29_validadatacreditobaixabanco = ($this->k29_validadatacreditobaixabanco == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k29_validadatacreditobaixabanco"] : $this->k29_validadatacreditobaixabanco);
-            $this->k29_fr_contapagadora = ($this->k29_fr_contapagadora == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_fr_contapagadora"] : $this->k29_fr_contapagadora);
+            $this->k29_fr_contapagadora = ($this->k29_fr_contapagadora === 0 || $this->k29_fr_contapagadora === 0.0 || $this->k29_fr_contapagadora == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_fr_contapagadora"] : $this->k29_fr_contapagadora);
             $this->k29_utilizarcontaextra = ($this->k29_utilizarcontaextra == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k29_utilizarcontaextra"] : $this->k29_utilizarcontaextra);
             $this->k29_folhautilizarcontaextra = ($this->k29_folhautilizarcontaextra == "f" ? @$GLOBALS["HTTP_POST_VARS"]["k29_folhautilizarcontaextra"] : $this->k29_folhautilizarcontaextra);
         } else {
-            $this->k29_instit = ($this->k29_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_instit"] : $this->k29_instit);
+            $this->k29_instit = ($this->k29_instit === 0 || $this->k29_instit === 0.0 || $this->k29_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["k29_instit"] : $this->k29_instit);
         }
     }
 
@@ -276,7 +276,7 @@ class cl_caiparametro
             return false;
         }
         $this->k29_instit = $k29_instit;
-        if (($this->k29_instit == null) || ($this->k29_instit == "")) {
+        if (($this->k29_instit == null) || ($this->k29_instit === 0 || $this->k29_instit === 0.0 || $this->k29_instit == "")) {
             $this->erro_sql = " Campo k29_instit não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

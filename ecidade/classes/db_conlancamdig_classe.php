@@ -73,7 +73,7 @@ class cl_conlancamdig {
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->c78_chave = ($this->c78_chave == ""?@$GLOBALS["HTTP_POST_VARS"]["c78_chave"]:$this->c78_chave);
-       $this->c78_codlan = ($this->c78_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c78_codlan"]:$this->c78_codlan);
+       $this->c78_codlan = ($this->c78_codlan === 0 || $this->c78_codlan === 0.0 || $this->c78_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c78_codlan"]:$this->c78_codlan);
        if($this->c78_data == ""){
          $this->c78_data_dia = ($this->c78_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c78_data_dia"]:$this->c78_data_dia);
          $this->c78_data_mes = ($this->c78_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c78_data_mes"]:$this->c78_data_mes);
@@ -83,7 +83,7 @@ class cl_conlancamdig {
          }
        }
      }else{
-       $this->c78_codlan = ($this->c78_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c78_codlan"]:$this->c78_codlan);
+       $this->c78_codlan = ($this->c78_codlan === 0 || $this->c78_codlan === 0.0 || $this->c78_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c78_codlan"]:$this->c78_codlan);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_conlancamdig {
        return false;
      }
        $this->c78_codlan = $c78_codlan;
-     if(($this->c78_codlan == null) || ($this->c78_codlan == "") ){
+     if(($this->c78_codlan == null) || ($this->c78_codlan === 0 || $this->c78_codlan === 0.0 || $this->c78_codlan == "") ){
        $this->erro_sql = " Campo c78_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

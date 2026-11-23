@@ -71,13 +71,13 @@ class cl_carfator {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j74_anousu = ($this->j74_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j74_anousu"]:$this->j74_anousu);
-       $this->j74_caract = ($this->j74_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j74_caract"]:$this->j74_caract);
-       $this->j74_fator = ($this->j74_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j74_fator"]:$this->j74_fator);
+       $this->j74_anousu = ($this->j74_anousu === 0 || $this->j74_anousu === 0.0 || $this->j74_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j74_anousu"]:$this->j74_anousu);
+       $this->j74_caract = ($this->j74_caract === 0 || $this->j74_caract === 0.0 || $this->j74_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j74_caract"]:$this->j74_caract);
+       $this->j74_fator = ($this->j74_fator === 0 || $this->j74_fator === 0.0 || $this->j74_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j74_fator"]:$this->j74_fator);
        $this->j74_corrig = ($this->j74_corrig == "f"?@$GLOBALS["HTTP_POST_VARS"]["j74_corrig"]:$this->j74_corrig);
      }else{
-       $this->j74_anousu = ($this->j74_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j74_anousu"]:$this->j74_anousu);
-       $this->j74_caract = ($this->j74_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j74_caract"]:$this->j74_caract);
+       $this->j74_anousu = ($this->j74_anousu === 0 || $this->j74_anousu === 0.0 || $this->j74_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j74_anousu"]:$this->j74_anousu);
+       $this->j74_caract = ($this->j74_caract === 0 || $this->j74_caract === 0.0 || $this->j74_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j74_caract"]:$this->j74_caract);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_carfator {
      }
        $this->j74_anousu = $j74_anousu;
        $this->j74_caract = $j74_caract;
-     if(($this->j74_anousu == null) || ($this->j74_anousu == "") ){
+     if(($this->j74_anousu == null) || ($this->j74_anousu === 0 || $this->j74_anousu === 0.0 || $this->j74_anousu == "") ){
        $this->erro_sql = " Campo j74_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_carfator {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j74_caract == null) || ($this->j74_caract == "") ){
+     if(($this->j74_caract == null) || ($this->j74_caract === 0 || $this->j74_caract === 0.0 || $this->j74_caract == "") ){
        $this->erro_sql = " Campo j74_caract nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

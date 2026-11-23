@@ -101,17 +101,17 @@ class cl_isssimulacalculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q130_sequencial = ($this->q130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_sequencial"]:$this->q130_sequencial);
+       $this->q130_sequencial = ($this->q130_sequencial === 0 || $this->q130_sequencial === 0.0 || $this->q130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_sequencial"]:$this->q130_sequencial);
        $this->q130_cnpjcpf = ($this->q130_cnpjcpf == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_cnpjcpf"]:$this->q130_cnpjcpf);
        $this->q130_razaosocial = ($this->q130_razaosocial == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_razaosocial"]:$this->q130_razaosocial);
        $this->q130_email = ($this->q130_email == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_email"]:$this->q130_email);
-       $this->q130_logradouro = ($this->q130_logradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_logradouro"]:$this->q130_logradouro);
-       $this->q130_bairro = ($this->q130_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_bairro"]:$this->q130_bairro);
-       $this->q130_numero = ($this->q130_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_numero"]:$this->q130_numero);
+       $this->q130_logradouro = ($this->q130_logradouro === 0 || $this->q130_logradouro === 0.0 || $this->q130_logradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_logradouro"]:$this->q130_logradouro);
+       $this->q130_bairro = ($this->q130_bairro === 0 || $this->q130_bairro === 0.0 || $this->q130_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_bairro"]:$this->q130_bairro);
+       $this->q130_numero = ($this->q130_numero === 0 || $this->q130_numero === 0.0 || $this->q130_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_numero"]:$this->q130_numero);
        $this->q130_complemento = ($this->q130_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_complemento"]:$this->q130_complemento);
-       $this->q130_zona = ($this->q130_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_zona"]:$this->q130_zona);
-       $this->q130_empregados = ($this->q130_empregados == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_empregados"]:$this->q130_empregados);
-       $this->q130_area = ($this->q130_area == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_area"]:$this->q130_area);
+       $this->q130_zona = ($this->q130_zona === 0 || $this->q130_zona === 0.0 || $this->q130_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_zona"]:$this->q130_zona);
+       $this->q130_empregados = ($this->q130_empregados === 0 || $this->q130_empregados === 0.0 || $this->q130_empregados == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_empregados"]:$this->q130_empregados);
+       $this->q130_area = ($this->q130_area === 0 || $this->q130_area === 0.0 || $this->q130_area == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_area"]:$this->q130_area);
        if($this->q130_datainicio == ""){
          $this->q130_datainicio_dia = ($this->q130_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_datainicio_dia"]:$this->q130_datainicio_dia);
          $this->q130_datainicio_mes = ($this->q130_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_datainicio_mes"]:$this->q130_datainicio_mes);
@@ -121,8 +121,8 @@ class cl_isssimulacalculo {
          }
        }
        $this->q130_telefone = ($this->q130_telefone == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_telefone"]:$this->q130_telefone);
-       $this->q130_cadescrito = ($this->q130_cadescrito == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_cadescrito"]:$this->q130_cadescrito);
-       $this->q130_multiplicador = ($this->q130_multiplicador == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_multiplicador"]:$this->q130_multiplicador);
+       $this->q130_cadescrito = ($this->q130_cadescrito === 0 || $this->q130_cadescrito === 0.0 || $this->q130_cadescrito == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_cadescrito"]:$this->q130_cadescrito);
+       $this->q130_multiplicador = ($this->q130_multiplicador === 0 || $this->q130_multiplicador === 0.0 || $this->q130_multiplicador == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_multiplicador"]:$this->q130_multiplicador);
        if($this->q130_datacalculo == ""){
          $this->q130_datacalculo_dia = ($this->q130_datacalculo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_datacalculo_dia"]:$this->q130_datacalculo_dia);
          $this->q130_datacalculo_mes = ($this->q130_datacalculo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_datacalculo_mes"]:$this->q130_datacalculo_mes);
@@ -132,7 +132,7 @@ class cl_isssimulacalculo {
          }
        }
      }else{
-       $this->q130_sequencial = ($this->q130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_sequencial"]:$this->q130_sequencial);
+       $this->q130_sequencial = ($this->q130_sequencial === 0 || $this->q130_sequencial === 0.0 || $this->q130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q130_sequencial"]:$this->q130_sequencial);
      }
    }
    // funcao para inclusao
@@ -252,7 +252,7 @@ class cl_isssimulacalculo {
          $this->q130_sequencial = $q130_sequencial;
        }
      }
-     if(($this->q130_sequencial == null) || ($this->q130_sequencial == "") ){
+     if(($this->q130_sequencial == null) || ($this->q130_sequencial === 0 || $this->q130_sequencial === 0.0 || $this->q130_sequencial == "") ){
        $this->erro_sql = " Campo q130_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

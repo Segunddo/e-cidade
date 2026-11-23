@@ -79,7 +79,7 @@ $clmer_cardapiodata = new cl_mer_cardapiodata;
 $clmatparam               = new cl_matparam;
 $cldb_departorg           = new  cl_db_departorg;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmatrequiitem           = new cl_matrequiitem;
 $clmatrequi               = new cl_matrequi;
 $clatendrequiitem         = new cl_atendrequiitem;

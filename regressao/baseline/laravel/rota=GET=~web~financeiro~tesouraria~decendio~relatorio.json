@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/tesouraria/decendio/relatorio",
+  "json": null,
+  "sha256": "210c3ba075145194ceaf0f0f1c465637c429001eba2b7d2efe6d1090e5e65f47",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

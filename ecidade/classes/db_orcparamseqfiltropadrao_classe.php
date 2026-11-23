@@ -80,13 +80,13 @@ class cl_orcparamseqfiltropadrao
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->o132_sequencial = ($this->o132_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_sequencial"] : $this->o132_sequencial);
-            $this->o132_orcparamrel = ($this->o132_orcparamrel == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_orcparamrel"] : $this->o132_orcparamrel);
-            $this->o132_orcparamseq = ($this->o132_orcparamseq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_orcparamseq"] : $this->o132_orcparamseq);
-            $this->o132_anousu = ($this->o132_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_anousu"] : $this->o132_anousu);
+            $this->o132_sequencial = ($this->o132_sequencial === 0 || $this->o132_sequencial === 0.0 || $this->o132_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_sequencial"] : $this->o132_sequencial);
+            $this->o132_orcparamrel = ($this->o132_orcparamrel === 0 || $this->o132_orcparamrel === 0.0 || $this->o132_orcparamrel == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_orcparamrel"] : $this->o132_orcparamrel);
+            $this->o132_orcparamseq = ($this->o132_orcparamseq === 0 || $this->o132_orcparamseq === 0.0 || $this->o132_orcparamseq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_orcparamseq"] : $this->o132_orcparamseq);
+            $this->o132_anousu = ($this->o132_anousu === 0 || $this->o132_anousu === 0.0 || $this->o132_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_anousu"] : $this->o132_anousu);
             $this->o132_filtro = ($this->o132_filtro == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_filtro"] : $this->o132_filtro);
         } else {
-            $this->o132_sequencial = ($this->o132_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_sequencial"] : $this->o132_sequencial);
+            $this->o132_sequencial = ($this->o132_sequencial === 0 || $this->o132_sequencial === 0.0 || $this->o132_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o132_sequencial"] : $this->o132_sequencial);
         }
     }
 
@@ -154,7 +154,7 @@ class cl_orcparamseqfiltropadrao
         } else {
             $this->o132_sequencial = $o132_sequencial;
         }
-        if (($this->o132_sequencial == null) || ($this->o132_sequencial == "")) {
+        if (($this->o132_sequencial == null) || ($this->o132_sequencial === 0 || $this->o132_sequencial === 0.0 || $this->o132_sequencial == "")) {
             $this->erro_sql = " Campo o132_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

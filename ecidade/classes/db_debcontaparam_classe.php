@@ -73,14 +73,14 @@ class cl_debcontaparam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d62_instituicao = ($this->d62_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_instituicao"]:$this->d62_instituicao);
-       $this->d62_banco = ($this->d62_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_banco"]:$this->d62_banco);
+       $this->d62_instituicao = ($this->d62_instituicao === 0 || $this->d62_instituicao === 0.0 || $this->d62_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_instituicao"]:$this->d62_instituicao);
+       $this->d62_banco = ($this->d62_banco === 0 || $this->d62_banco === 0.0 || $this->d62_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_banco"]:$this->d62_banco);
        $this->d62_convenio = ($this->d62_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_convenio"]:$this->d62_convenio);
-       $this->d62_ultimonsa = ($this->d62_ultimonsa == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_ultimonsa"]:$this->d62_ultimonsa);
+       $this->d62_ultimonsa = ($this->d62_ultimonsa === 0 || $this->d62_ultimonsa === 0.0 || $this->d62_ultimonsa == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_ultimonsa"]:$this->d62_ultimonsa);
        $this->d62_mascara = ($this->d62_mascara == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_mascara"]:$this->d62_mascara);
      }else{
-       $this->d62_instituicao = ($this->d62_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_instituicao"]:$this->d62_instituicao);
-       $this->d62_banco = ($this->d62_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_banco"]:$this->d62_banco);
+       $this->d62_instituicao = ($this->d62_instituicao === 0 || $this->d62_instituicao === 0.0 || $this->d62_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_instituicao"]:$this->d62_instituicao);
+       $this->d62_banco = ($this->d62_banco === 0 || $this->d62_banco === 0.0 || $this->d62_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d62_banco"]:$this->d62_banco);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_debcontaparam {
      }
        $this->d62_instituicao = $d62_instituicao;
        $this->d62_banco = $d62_banco;
-     if(($this->d62_instituicao == null) || ($this->d62_instituicao == "") ){
+     if(($this->d62_instituicao == null) || ($this->d62_instituicao === 0 || $this->d62_instituicao === 0.0 || $this->d62_instituicao == "") ){
        $this->erro_sql = " Campo d62_instituicao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -123,7 +123,7 @@ class cl_debcontaparam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d62_banco == null) || ($this->d62_banco == "") ){
+     if(($this->d62_banco == null) || ($this->d62_banco === 0 || $this->d62_banco === 0.0 || $this->d62_banco == "") ){
        $this->erro_sql = " Campo d62_banco nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

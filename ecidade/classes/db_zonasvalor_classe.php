@@ -71,13 +71,13 @@ class cl_zonasvalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j51_zona = ($this->j51_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_zona"]:$this->j51_zona);
-       $this->j51_anousu = ($this->j51_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_anousu"]:$this->j51_anousu);
-       $this->j51_valorm2t = ($this->j51_valorm2t == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_valorm2t"]:$this->j51_valorm2t);
-       $this->j51_valorm2c = ($this->j51_valorm2c == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_valorm2c"]:$this->j51_valorm2c);
+       $this->j51_zona = ($this->j51_zona === 0 || $this->j51_zona === 0.0 || $this->j51_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_zona"]:$this->j51_zona);
+       $this->j51_anousu = ($this->j51_anousu === 0 || $this->j51_anousu === 0.0 || $this->j51_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_anousu"]:$this->j51_anousu);
+       $this->j51_valorm2t = ($this->j51_valorm2t === 0 || $this->j51_valorm2t === 0.0 || $this->j51_valorm2t == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_valorm2t"]:$this->j51_valorm2t);
+       $this->j51_valorm2c = ($this->j51_valorm2c === 0 || $this->j51_valorm2c === 0.0 || $this->j51_valorm2c == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_valorm2c"]:$this->j51_valorm2c);
      }else{
-       $this->j51_zona = ($this->j51_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_zona"]:$this->j51_zona);
-       $this->j51_anousu = ($this->j51_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_anousu"]:$this->j51_anousu);
+       $this->j51_zona = ($this->j51_zona === 0 || $this->j51_zona === 0.0 || $this->j51_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_zona"]:$this->j51_zona);
+       $this->j51_anousu = ($this->j51_anousu === 0 || $this->j51_anousu === 0.0 || $this->j51_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j51_anousu"]:$this->j51_anousu);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_zonasvalor {
      }
        $this->j51_zona = $j51_zona;
        $this->j51_anousu = $j51_anousu;
-     if(($this->j51_zona == null) || ($this->j51_zona == "") ){
+     if(($this->j51_zona == null) || ($this->j51_zona === 0 || $this->j51_zona === 0.0 || $this->j51_zona == "") ){
        $this->erro_sql = " Campo j51_zona nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_zonasvalor {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j51_anousu == null) || ($this->j51_anousu == "") ){
+     if(($this->j51_anousu == null) || ($this->j51_anousu === 0 || $this->j51_anousu === 0.0 || $this->j51_anousu == "") ){
        $this->erro_sql = " Campo j51_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

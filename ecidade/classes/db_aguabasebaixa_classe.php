@@ -74,7 +74,7 @@ class cl_aguabasebaixa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x08_matric = ($this->x08_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x08_matric"]:$this->x08_matric);
+       $this->x08_matric = ($this->x08_matric === 0 || $this->x08_matric === 0.0 || $this->x08_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x08_matric"]:$this->x08_matric);
        if($this->x08_data == ""){
          $this->x08_data_dia = ($this->x08_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x08_data_dia"]:$this->x08_data_dia);
          $this->x08_data_mes = ($this->x08_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x08_data_mes"]:$this->x08_data_mes);
@@ -84,9 +84,9 @@ class cl_aguabasebaixa {
          }
        }
        $this->x08_obs = ($this->x08_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["x08_obs"]:$this->x08_obs);
-       $this->x08_usuario = ($this->x08_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x08_usuario"]:$this->x08_usuario);
+       $this->x08_usuario = ($this->x08_usuario === 0 || $this->x08_usuario === 0.0 || $this->x08_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x08_usuario"]:$this->x08_usuario);
      }else{
-       $this->x08_matric = ($this->x08_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x08_matric"]:$this->x08_matric);
+       $this->x08_matric = ($this->x08_matric === 0 || $this->x08_matric === 0.0 || $this->x08_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x08_matric"]:$this->x08_matric);
      }
    }
    // funcao para inclusao
@@ -120,7 +120,7 @@ class cl_aguabasebaixa {
        return false;
      }
        $this->x08_matric = $x08_matric;
-     if(($this->x08_matric == null) || ($this->x08_matric == "") ){
+     if(($this->x08_matric == null) || ($this->x08_matric === 0 || $this->x08_matric === 0.0 || $this->x08_matric == "") ){
        $this->erro_sql = " Campo x08_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

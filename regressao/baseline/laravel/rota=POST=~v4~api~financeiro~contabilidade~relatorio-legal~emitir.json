@@ -1,0 +1,33 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio-legal/emitir",
+  "json": {
+    "errors": {
+      "DB_coddepto": [
+        "O campo d b coddepto é obrigatório."
+      ],
+      "anexo": [
+        "O campo anexo é obrigatório."
+      ],
+      "periodo": [
+        "O campo periodo é obrigatório."
+      ],
+      "relatorio": [
+        "O campo relatorio é obrigatório."
+      ],
+      "tipo": [
+        "O campo tipo é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "3e2ff066d3102095cd06a0042e462553bfd47ff028f6d430a48094984fce05e8",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -67,10 +67,10 @@ class cl_vistsanitario {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y74_codvist = ($this->y74_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y74_codvist"]:$this->y74_codvist);
-       $this->y74_codsani = ($this->y74_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y74_codsani"]:$this->y74_codsani);
+       $this->y74_codvist = ($this->y74_codvist === 0 || $this->y74_codvist === 0.0 || $this->y74_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y74_codvist"]:$this->y74_codvist);
+       $this->y74_codsani = ($this->y74_codsani === 0 || $this->y74_codsani === 0.0 || $this->y74_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y74_codsani"]:$this->y74_codsani);
      }else{
-       $this->y74_codvist = ($this->y74_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y74_codvist"]:$this->y74_codvist);
+       $this->y74_codvist = ($this->y74_codvist === 0 || $this->y74_codvist === 0.0 || $this->y74_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y74_codvist"]:$this->y74_codvist);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_vistsanitario {
        return false;
      }
        $this->y74_codvist = $y74_codvist;
-     if(($this->y74_codvist == null) || ($this->y74_codvist == "") ){
+     if(($this->y74_codvist == null) || ($this->y74_codvist === 0 || $this->y74_codvist === 0.0 || $this->y74_codvist == "") ){
        $this->erro_sql = " Campo y74_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

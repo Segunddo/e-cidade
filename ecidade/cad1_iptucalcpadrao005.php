@@ -102,7 +102,7 @@ if (isset($alterar)) {
                     where j10_matric = $j10_matric
                       and j10_anousu = ".db_getsession("DB_anousu");
     $resultpadrao = db_query($sqlpadrao);
-    $linhaspadrao = pg_num_rows($resultpadrao);
+    $linhaspadrao = ($resultpadrao ? pg_num_rows($resultpadrao) : null);
     if($linhaspadrao>0){
       db_fieldsmemory($resultpadrao,0);
     }
@@ -116,7 +116,7 @@ if (isset($alterar)) {
      */
     $sqliptucalcpadrao    = "select j10_vlrter, j10_aliq from iptucalcpadrao where j10_matric = $j10_matric and j10_anousu =".db_getsession("DB_anousu");
     $resultiptucalcpadrao = db_query($sqliptucalcpadrao);
-    $linhasiptucalcpadrao = pg_num_rows($resultiptucalcpadrao);
+    $linhasiptucalcpadrao = ($resultiptucalcpadrao ? pg_num_rows($resultiptucalcpadrao) : null);
     if($linhasiptucalcpadrao>0){
 
       echo "<script>
@@ -148,7 +148,7 @@ if (isset($alterar)) {
                      and j10_anousu = ".db_getsession("DB_anousu");
 
  $resultpadrao = db_query($sqlpadrao);
- $linhaspadrao = pg_num_rows($resultpadrao);
+ $linhaspadrao = ($resultpadrao ? pg_num_rows($resultpadrao) : null);
  if($linhaspadrao > 0){
   db_fieldsmemory($resultpadrao,0);
  }

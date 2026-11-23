@@ -79,8 +79,8 @@ class cl_taxaservval {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm35_sequencial = ($this->cm35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm35_sequencial"]:$this->cm35_sequencial);
-       $this->cm35_taxaserv = ($this->cm35_taxaserv == ""?@$GLOBALS["HTTP_POST_VARS"]["cm35_taxaserv"]:$this->cm35_taxaserv);
+       $this->cm35_sequencial = ($this->cm35_sequencial === 0 || $this->cm35_sequencial === 0.0 || $this->cm35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm35_sequencial"]:$this->cm35_sequencial);
+       $this->cm35_taxaserv = ($this->cm35_taxaserv === 0 || $this->cm35_taxaserv === 0.0 || $this->cm35_taxaserv == ""?@$GLOBALS["HTTP_POST_VARS"]["cm35_taxaserv"]:$this->cm35_taxaserv);
        if($this->cm35_dataini == ""){
          $this->cm35_dataini_dia = ($this->cm35_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm35_dataini_dia"]:$this->cm35_dataini_dia);
          $this->cm35_dataini_mes = ($this->cm35_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm35_dataini_mes"]:$this->cm35_dataini_mes);
@@ -97,9 +97,9 @@ class cl_taxaservval {
             $this->cm35_datafin = $this->cm35_datafin_ano."-".$this->cm35_datafin_mes."-".$this->cm35_datafin_dia;
          }
        }
-       $this->cm35_valor = ($this->cm35_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["cm35_valor"]:$this->cm35_valor);
+       $this->cm35_valor = ($this->cm35_valor === 0 || $this->cm35_valor === 0.0 || $this->cm35_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["cm35_valor"]:$this->cm35_valor);
      }else{
-       $this->cm35_sequencial = ($this->cm35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm35_sequencial"]:$this->cm35_sequencial);
+       $this->cm35_sequencial = ($this->cm35_sequencial === 0 || $this->cm35_sequencial === 0.0 || $this->cm35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm35_sequencial"]:$this->cm35_sequencial);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_taxaservval {
          $this->cm35_sequencial = $cm35_sequencial;
        }
      }
-     if(($this->cm35_sequencial == null) || ($this->cm35_sequencial == "") ){
+     if(($this->cm35_sequencial == null) || ($this->cm35_sequencial === 0 || $this->cm35_sequencial === 0.0 || $this->cm35_sequencial == "") ){
        $this->erro_sql = " Campo cm35_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

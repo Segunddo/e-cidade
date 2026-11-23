@@ -1,0 +1,23 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/pessoal/tabelaprevidencia/list",
+  "json": {
+    "data": [
+      {
+        "codigo": 3,
+        "descricao": "INSS           "
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "2a173f5e0ef4fe1c559dae6011b7f717a216d0afc320d89b79f8d45a2c40146c",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

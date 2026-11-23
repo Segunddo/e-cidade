@@ -65,9 +65,9 @@ class cl_cemiterio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm14_i_codigo = ($this->cm14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm14_i_codigo"]:$this->cm14_i_codigo);
+       $this->cm14_i_codigo = ($this->cm14_i_codigo === 0 || $this->cm14_i_codigo === 0.0 || $this->cm14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm14_i_codigo"]:$this->cm14_i_codigo);
      }else{
-       $this->cm14_i_codigo = ($this->cm14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm14_i_codigo"]:$this->cm14_i_codigo);
+       $this->cm14_i_codigo = ($this->cm14_i_codigo === 0 || $this->cm14_i_codigo === 0.0 || $this->cm14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm14_i_codigo"]:$this->cm14_i_codigo);
      }
    }
    // funcao para inclusao
@@ -97,7 +97,7 @@ class cl_cemiterio {
          $this->cm14_i_codigo = $cm14_i_codigo;
        }
      }
-     if(($this->cm14_i_codigo == null) || ($this->cm14_i_codigo == "") ){
+     if(($this->cm14_i_codigo == null) || ($this->cm14_i_codigo === 0 || $this->cm14_i_codigo === 0.0 || $this->cm14_i_codigo == "") ){
        $this->erro_sql = " Campo cm14_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

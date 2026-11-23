@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/recursos-humanos/pessoal/ajuda-custo/lancamento",
+  "json": null,
+  "sha256": "37a1a149107c4caac16453fb2716073c16e0b2102068c460f3d5087d5a1d8707",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

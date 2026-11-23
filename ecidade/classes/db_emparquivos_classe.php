@@ -68,7 +68,7 @@ class cl_emparquivos {
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->e84_arquivo = ($this->e84_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_arquivo"]:$this->e84_arquivo);
-       $this->e84_codgera = ($this->e84_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_codgera"]:$this->e84_codgera);
+       $this->e84_codgera = ($this->e84_codgera === 0 || $this->e84_codgera === 0.0 || $this->e84_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_codgera"]:$this->e84_codgera);
      }else{
      }
    }

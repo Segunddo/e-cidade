@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/configuracoes/cores",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Educacao\\CentralMatriculas\\Controllers\\ConfiguracoesController::getCores does not exist."
+  },
+  "sha256": "00b948a452791cb193e85bfe7346c01b759a7081ec8a479bbcee966ba08b804b",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

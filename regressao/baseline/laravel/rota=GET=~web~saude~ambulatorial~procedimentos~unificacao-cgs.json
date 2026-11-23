@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/saude/ambulatorial/procedimentos/unificacao-cgs",
+  "json": null,
+  "sha256": "0aacaea5bb7bcea739c2b57eaf5e3e462a4d5aa8fc8de03fe9306e1110c215c9",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

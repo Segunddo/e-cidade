@@ -45,7 +45,7 @@ $rsInstituicoes = db_query("select codigo, nomeinst, nomeinstabrev
 $descr_inst = '';
 $xvirg      = '';
 $flag_abrev = false;
-for ($xins = 0; $xins < pg_numrows($rsInstituicoes); $xins++) {
+for ($xins = 0; $xins < ($rsInstituicoes ? pg_numrows($rsInstituicoes) : null); $xins++) {
 
   db_fieldsmemory($rsInstituicoes, $xins);
   if (strlen(trim($nomeinstabrev)) > 0) {

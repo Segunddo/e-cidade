@@ -569,13 +569,13 @@ if ($sinana == 'S1' or $sinana == 'S3') {
     $pdf->cell(110, 4, "DEMONSTRATIVO DO DESDOBRAMENTO DA RECEITA LIVRE", 1, 1, "L", 0);
 
     $totalrecursos = 0;
-    while (list ($key, $valor) = each($valatu)) {
+    foreach ($valatu as $key => $valor) {
         $totalrecursos += $valor;
     }
 
     reset($valatu);
 
-    while (list ($key, $valor) = each($valatu)) {
+    foreach ($valatu as $key => $valor) {
         $pdf->cell(70, 5, $key, 0, 0, "L", 0, 0, ".");
         $pdf->cell(20, 5, db_formatar($valor, 'f'), 0, 0, "R", 0);
         $pdf->cell(20, 5, db_formatar($valor / $totalrecursos * 100, 'p') . "%", 0, 1, "R", 0);

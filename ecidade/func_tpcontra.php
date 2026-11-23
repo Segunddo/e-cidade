@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_tpcontra_classe.php"));
 include(modification("classes/db_rhregime_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cltpcontra = new cl_tpcontra;
 $clrhregime = new cl_rhregime;
 $cltpcontra->rotulo->label("h13_codigo");

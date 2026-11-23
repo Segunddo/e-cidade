@@ -71,12 +71,12 @@ class cl_empprestarecibo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e170_sequencial = ($this->e170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_sequencial"]:$this->e170_sequencial);
-       $this->e170_numpre = ($this->e170_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_numpre"]:$this->e170_numpre);
-       $this->e170_numpar = ($this->e170_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_numpar"]:$this->e170_numpar);
-       $this->e170_emppresta = ($this->e170_emppresta == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_emppresta"]:$this->e170_emppresta);
+       $this->e170_sequencial = ($this->e170_sequencial === 0 || $this->e170_sequencial === 0.0 || $this->e170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_sequencial"]:$this->e170_sequencial);
+       $this->e170_numpre = ($this->e170_numpre === 0 || $this->e170_numpre === 0.0 || $this->e170_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_numpre"]:$this->e170_numpre);
+       $this->e170_numpar = ($this->e170_numpar === 0 || $this->e170_numpar === 0.0 || $this->e170_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_numpar"]:$this->e170_numpar);
+       $this->e170_emppresta = ($this->e170_emppresta === 0 || $this->e170_emppresta === 0.0 || $this->e170_emppresta == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_emppresta"]:$this->e170_emppresta);
      }else{
-       $this->e170_sequencial = ($this->e170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_sequencial"]:$this->e170_sequencial);
+       $this->e170_sequencial = ($this->e170_sequencial === 0 || $this->e170_sequencial === 0.0 || $this->e170_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e170_sequencial"]:$this->e170_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_empprestarecibo {
          $this->e170_sequencial = $e170_sequencial;
        }
      }
-     if(($this->e170_sequencial == null) || ($this->e170_sequencial == "") ){
+     if(($this->e170_sequencial == null) || ($this->e170_sequencial === 0 || $this->e170_sequencial === 0.0 || $this->e170_sequencial == "") ){
        $this->erro_sql = " Campo e170_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

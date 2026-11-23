@@ -75,7 +75,7 @@ function verificaPessoa($q07_inscr){
     inner join issqn.issbase i on i.q02_numcgm = c.z01_numcgm 
     where i.q02_inscr = {$q07_inscr};"
   );
-  switch(strlen(pg_fetch_result($verificaPessoa,0,"z01_cgccpf"))){
+  switch(strlen(($verificaPessoa ? pg_fetch_result($verificaPessoa,0,"z01_cgccpf") : null))){
     case 14:
       $pessoa = 'j';
     break;
@@ -112,10 +112,10 @@ function verificaRisco($q07_inscr){
 
   
   //Atualiza o risco da issquant e adiciona no historico
-  if(isset($sqlRiscoCNAE) && pg_fetch_result($sqlRiscoCNAE,0,"q71_classificacaorisco") != null){
-    $risco = strtoupper(pg_fetch_result($sqlRiscoCNAE,0,"q71_classificacaorisco"));
-  }elseif(isset($sqlRiscoCBO) && pg_fetch_result($sqlRiscoCBO,0,"rh70_classificacaorisco") != null){
-    $risco = strtoupper(pg_fetch_result($sqlRiscoCBO,0,"rh70_classificacaorisco"));
+  if(isset($sqlRiscoCNAE) && ($sqlRiscoCNAE ? pg_fetch_result($sqlRiscoCNAE,0,"q71_classificacaorisco") : null) != null){
+    $risco = strtoupper(($sqlRiscoCNAE ? pg_fetch_result($sqlRiscoCNAE,0,"q71_classificacaorisco") : null));
+  }elseif(isset($sqlRiscoCBO) && ($sqlRiscoCBO ? pg_fetch_result($sqlRiscoCBO,0,"rh70_classificacaorisco") : null) != null){
+    $risco = strtoupper(($sqlRiscoCBO ? pg_fetch_result($sqlRiscoCBO,0,"rh70_classificacaorisco") : null));
   }else{
     $risco = null;
   }
@@ -259,7 +259,7 @@ if (isset($incluir) && !$sqlerro) {
     $clativprinc->q88_inscr = $q07_inscr;
     $clativprinc->q88_seq   = $q07_seq;
     $clativprinc->incluir($q07_inscr);
-    if(pg_fetch_result($riscoAutomatico,0,"q60_riscoautomatico")=="t"){
+    if(($riscoAutomatico ? pg_fetch_result($riscoAutomatico,0,"q60_riscoautomatico") : null)=="t"){
       $risco = verificaRisco($q07_inscr);
     }  
     if ($clativprinc->erro_status==0) {
@@ -275,7 +275,7 @@ if (isset($incluir) && !$sqlerro) {
       $clativprinc->q88_inscr = $q07_inscr;
       $clativprinc->q88_seq   = $q07_seq;
       $clativprinc->incluir($q07_inscr);
-      if(pg_fetch_result($riscoAutomatico,0,"q60_riscoautomatico")=="t"){
+      if(($riscoAutomatico ? pg_fetch_result($riscoAutomatico,0,"q60_riscoautomatico") : null)=="t"){
         $risco = verificaRisco($q07_inscr);
       }  
       if ($clativprinc->erro_status==0) {
@@ -385,7 +385,7 @@ if (isset($incluir) && !$sqlerro) {
     if (isset($incluiativ) && $incluiativ = 't') {
       $sqlrua = "select * from issruas where q02_inscr= $q07_inscr";
       $resultrua = db_query($sqlrua);
-      $linhasrua = pg_num_rows($resultrua);
+      $linhasrua = ($resultrua ? pg_num_rows($resultrua) : null);
       if($linhasrua==0){
         $erromsg = "Inscrição sem logradouro cadastrado.";
         $sqlerro = true;
@@ -393,7 +393,7 @@ if (isset($incluir) && !$sqlerro) {
 
       $sqlbairro = "select * from issbairro where q13_inscr =  $q07_inscr";
       $resultbairro = db_query($sqlbairro);
-      $linhasbairro = pg_num_rows($resultbairro);
+      $linhasbairro = ($resultbairro ? pg_num_rows($resultbairro) : null);
       if($linhasbairro==0){
         $erromsg = "Inscrição sem Bairro cadastrado.";
         $sqlerro = true;
@@ -606,7 +606,7 @@ if($sqlerro==false){
        $clativprinc->q88_seq=$q07_seq;
        $clativprinc->incluir($q07_inscr);
 
-       if(pg_fetch_result($riscoAutomatico,0,"q60_riscoautomatico")=="t"){
+       if(($riscoAutomatico ? pg_fetch_result($riscoAutomatico,0,"q60_riscoautomatico") : null)=="t"){
           $risco = verificaRisco($q07_inscr);
        }  
         
@@ -795,7 +795,7 @@ $sSqlAlvaraAuto .= "         inner join classe on q82_classe = q12_classe       
 $sSqlAlvaraAuto .= "    where q07_inscr = {$q07_inscr}                                           ";
 
 $rsAlvaraAuto      = db_query($sSqlAlvaraAuto);
-$iLinhasAlvaraAuto = pg_num_rows($rsAlvaraAuto);
+$iLinhasAlvaraAuto = ($rsAlvaraAuto ? pg_num_rows($rsAlvaraAuto) : null);
 $aAlvaraAuto       = array();
 $lGeraAutomatico   = 'true';
 $lPermanente       = 'false';
@@ -994,9 +994,9 @@ if ($lInserirAlvara == 'true' && $lAtivPrinc == 't' && isset($incluir)){
 
   $alertaCNAE = 'nEmitir';
   $alertaCBO = 'nEmitir';
-  if(isset($RiscoCNAE) && pg_num_rows($RiscoCNAE) > 0 && pg_fetch_result($RiscoCNAE,0,"q71_classificacaorisco") == null){
+  if(isset($RiscoCNAE) && ($RiscoCNAE ? pg_num_rows($RiscoCNAE) : null) > 0 && ($RiscoCNAE ? pg_fetch_result($RiscoCNAE,0,"q71_classificacaorisco") : null) == null){
     $alertaCNAE = 'emitir';
-  }elseif(isset($RiscoCBO) && pg_num_rows($RiscoCBO) > 0 && pg_fetch_result($RiscoCBO,0,"rh70_classificacaorisco") == null){
+  }elseif(isset($RiscoCBO) && ($RiscoCBO ? pg_num_rows($RiscoCBO) : null) > 0 && ($RiscoCBO ? pg_fetch_result($RiscoCBO,0,"rh70_classificacaorisco") : null) == null){
     $alertaCBO = 'emitir';
   }
 ?>

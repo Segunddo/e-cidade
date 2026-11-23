@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/arrecadacao/data-lancamento-debito/incluir-registro",
+  "json": {
+    "errors": {
+      "dataLancamento": [
+        "O campo data lancamento é obrigatório."
+      ],
+      "numpre": [
+        "O campo numpre é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "3615ab95a82934589d619b0522ea1a4592dde28dbb1b641dbbf795e447be1eab",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -93,7 +93,7 @@ $oRotulo->label('login');
             </td>
           </tr>
 
-          <?php for($iLotacao = 0; $iLotacao < pg_num_rows($rsInstituicoes); $iLotacao++) { 
+          <?php for($iLotacao = 0; $iLotacao < ($rsInstituicoes ? pg_num_rows($rsInstituicoes) : null); $iLotacao++) { 
                   
             $oLotacao = db_utils::fieldsMemory($rsInstituicoes, $iLotacao);
           ?>

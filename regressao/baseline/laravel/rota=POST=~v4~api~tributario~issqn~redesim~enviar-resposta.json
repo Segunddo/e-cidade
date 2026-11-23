@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/redesim/enviar-resposta",
+  "json": {
+    "error": true,
+    "message": "Informe a resposta"
+  },
+  "sha256": "a2abc0b2667c33b9e86614d858a47d80c48df755aa80e6cb82c73f804201f65d",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

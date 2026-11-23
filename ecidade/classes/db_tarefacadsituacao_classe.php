@@ -67,10 +67,10 @@ class cl_tarefacadsituacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at46_codigo = ($this->at46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at46_codigo"]:$this->at46_codigo);
+       $this->at46_codigo = ($this->at46_codigo === 0 || $this->at46_codigo === 0.0 || $this->at46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at46_codigo"]:$this->at46_codigo);
        $this->at46_descr = ($this->at46_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at46_descr"]:$this->at46_descr);
      }else{
-       $this->at46_codigo = ($this->at46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at46_codigo"]:$this->at46_codigo);
+       $this->at46_codigo = ($this->at46_codigo === 0 || $this->at46_codigo === 0.0 || $this->at46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at46_codigo"]:$this->at46_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tarefacadsituacao {
          $this->at46_codigo = $at46_codigo;
        }
      }
-     if(($this->at46_codigo == null) || ($this->at46_codigo == "") ){
+     if(($this->at46_codigo == null) || ($this->at46_codigo === 0 || $this->at46_codigo === 0.0 || $this->at46_codigo == "") ){
        $this->erro_sql = " Campo at46_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_db_syscampodep {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codcam = ($this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
-       $this->codcampai = ($this->codcampai == ""?@$GLOBALS["HTTP_POST_VARS"]["codcampai"]:$this->codcampai);
+       $this->codcam = ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
+       $this->codcampai = ($this->codcampai === 0 || $this->codcampai === 0.0 || $this->codcampai == ""?@$GLOBALS["HTTP_POST_VARS"]["codcampai"]:$this->codcampai);
      }else{
-       $this->codcam = ($this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
+       $this->codcam = ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_db_syscampodep {
        return false;
      }
        $this->codcam = $codcam;
-     if(($this->codcam == null) || ($this->codcam == "") ){
+     if(($this->codcam == null) || ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == "") ){
        $this->erro_sql = " Campo codcam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

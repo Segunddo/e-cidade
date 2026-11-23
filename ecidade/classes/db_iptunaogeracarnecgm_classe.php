@@ -69,11 +69,11 @@ class cl_iptunaogeracarnecgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j68_sequencial = ($this->j68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_sequencial"]:$this->j68_sequencial);
-       $this->j68_naogeracarne = ($this->j68_naogeracarne == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_naogeracarne"]:$this->j68_naogeracarne);
-       $this->j68_numcgm = ($this->j68_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_numcgm"]:$this->j68_numcgm);
+       $this->j68_sequencial = ($this->j68_sequencial === 0 || $this->j68_sequencial === 0.0 || $this->j68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_sequencial"]:$this->j68_sequencial);
+       $this->j68_naogeracarne = ($this->j68_naogeracarne === 0 || $this->j68_naogeracarne === 0.0 || $this->j68_naogeracarne == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_naogeracarne"]:$this->j68_naogeracarne);
+       $this->j68_numcgm = ($this->j68_numcgm === 0 || $this->j68_numcgm === 0.0 || $this->j68_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_numcgm"]:$this->j68_numcgm);
      }else{
-       $this->j68_sequencial = ($this->j68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_sequencial"]:$this->j68_sequencial);
+       $this->j68_sequencial = ($this->j68_sequencial === 0 || $this->j68_sequencial === 0.0 || $this->j68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j68_sequencial"]:$this->j68_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_iptunaogeracarnecgm {
          $this->j68_sequencial = $j68_sequencial;
        }
      }
-     if(($this->j68_sequencial == null) || ($this->j68_sequencial == "") ){
+     if(($this->j68_sequencial == null) || ($this->j68_sequencial === 0 || $this->j68_sequencial === 0.0 || $this->j68_sequencial == "") ){
        $this->erro_sql = " Campo j68_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

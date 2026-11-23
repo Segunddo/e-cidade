@@ -80,9 +80,9 @@ class cl_aguacoletorexportasituacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x48_sequencial = ($this->x48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_sequencial"]:$this->x48_sequencial);
-       $this->x48_aguacoletorexporta = ($this->x48_aguacoletorexporta == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_aguacoletorexporta"]:$this->x48_aguacoletorexporta);
-       $this->x48_usuario = ($this->x48_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_usuario"]:$this->x48_usuario);
+       $this->x48_sequencial = ($this->x48_sequencial === 0 || $this->x48_sequencial === 0.0 || $this->x48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_sequencial"]:$this->x48_sequencial);
+       $this->x48_aguacoletorexporta = ($this->x48_aguacoletorexporta === 0 || $this->x48_aguacoletorexporta === 0.0 || $this->x48_aguacoletorexporta == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_aguacoletorexporta"]:$this->x48_aguacoletorexporta);
+       $this->x48_usuario = ($this->x48_usuario === 0 || $this->x48_usuario === 0.0 || $this->x48_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_usuario"]:$this->x48_usuario);
        if($this->x48_data == ""){
          $this->x48_data_dia = ($this->x48_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_data_dia"]:$this->x48_data_dia);
          $this->x48_data_mes = ($this->x48_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_data_mes"]:$this->x48_data_mes);
@@ -93,9 +93,9 @@ class cl_aguacoletorexportasituacao {
        }
        $this->x48_hora = ($this->x48_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_hora"]:$this->x48_hora);
        $this->x48_motivo = ($this->x48_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_motivo"]:$this->x48_motivo);
-       $this->x48_situacao = ($this->x48_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_situacao"]:$this->x48_situacao);
+       $this->x48_situacao = ($this->x48_situacao === 0 || $this->x48_situacao === 0.0 || $this->x48_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_situacao"]:$this->x48_situacao);
      }else{
-       $this->x48_sequencial = ($this->x48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_sequencial"]:$this->x48_sequencial);
+       $this->x48_sequencial = ($this->x48_sequencial === 0 || $this->x48_sequencial === 0.0 || $this->x48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x48_sequencial"]:$this->x48_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_aguacoletorexportasituacao {
          $this->x48_sequencial = $x48_sequencial;
        }
      }
-     if(($this->x48_sequencial == null) || ($this->x48_sequencial == "") ){
+     if(($this->x48_sequencial == null) || ($this->x48_sequencial === 0 || $this->x48_sequencial === 0.0 || $this->x48_sequencial == "") ){
        $this->erro_sql = " Campo x48_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

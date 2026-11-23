@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/simples-nacional/definir-parametros-atualizacoes",
+  "json": {
+    "errors": {
+      "frequenciaAtualizacoes": [
+        "O campo frequencia atualizacoes é obrigatório."
+      ],
+      "horario": [
+        "O campo horario é obrigatório."
+      ],
+      "idUsuario": [
+        "O campo id usuario é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "d93ecab9994f882d46dd34c2d10ef7871037e6b48b0604528d9166e32034ba4b",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

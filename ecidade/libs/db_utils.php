@@ -67,8 +67,8 @@ class db_utils
     static function fieldsMemory($rs, $idx, $formata = false, $mostra = false, $lEncode = false)
     {
         $oFields = new stdClass();
-        $numFields = pg_num_fields($rs);
-        $iTotalLinhas = pg_num_rows($rs);
+        $numFields = $rs ? pg_num_fields($rs) : null;
+        $iTotalLinhas = $rs ? pg_num_rows($rs) : null;
         for ($i = 0; $i < $numFields; $i++) {
             $sValor = "";
             $sFieldName = @pg_field_name($rs, $i);
@@ -183,7 +183,7 @@ class db_utils
      */
     static function getCollectionByRecord($rsRecordset, $lFormata = false, $lMostra = false, $lEncode = false)
     {
-        $iINumRows = @pg_num_rows($rsRecordset);
+        $iINumRows = $rsRecordset ? @pg_num_rows($rsRecordset) : null;
         $aDButils = array();
 
         if ($iINumRows > 0) {
@@ -328,7 +328,7 @@ class db_utils
     public static function makeCollectionFromRecord($rsRecord, Closure $fRetorno)
     {
         $aRetorno = array();
-        $iTotalLinhas = pg_num_rows($rsRecord);
+        $iTotalLinhas = $rsRecord ? pg_num_rows($rsRecord) : null;
 
         // Vou deixar só para questão de conferência.
         // $soma = 0;

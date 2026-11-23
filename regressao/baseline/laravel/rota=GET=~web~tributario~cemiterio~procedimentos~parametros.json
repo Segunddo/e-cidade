@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/cemiterio/procedimentos/parametros",
+  "json": null,
+  "sha256": "8c1233580c8d18b13250c67d5e5ad53111c20f2dbb8328eabf3e6c7dc52ded45",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

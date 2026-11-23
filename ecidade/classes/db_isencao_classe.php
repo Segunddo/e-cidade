@@ -63,7 +63,7 @@ class cl_isencao {
                  v10_observacao = text = Observação isenção
                  ";
    //funcao construtor da classe 
-   public function cl_isencao() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isencao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -80,8 +80,8 @@ class cl_isencao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v10_sequencial = ($this->v10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_sequencial"]:$this->v10_sequencial);
-       $this->v10_isencaotipo = ($this->v10_isencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_isencaotipo"]:$this->v10_isencaotipo);
+       $this->v10_sequencial = ($this->v10_sequencial === 0 || $this->v10_sequencial === 0.0 || $this->v10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_sequencial"]:$this->v10_sequencial);
+       $this->v10_isencaotipo = ($this->v10_isencaotipo === 0 || $this->v10_isencaotipo === 0.0 || $this->v10_isencaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_isencaotipo"]:$this->v10_isencaotipo);
        if($this->v10_dtlan == ""){
          $this->v10_dtlan_dia = ($this->v10_dtlan_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_dtlan_dia"]:$this->v10_dtlan_dia);
          $this->v10_dtlan_mes = ($this->v10_dtlan_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_dtlan_mes"]:$this->v10_dtlan_mes);
@@ -90,12 +90,12 @@ class cl_isencao {
             $this->v10_dtlan = $this->v10_dtlan_ano."-".$this->v10_dtlan_mes."-".$this->v10_dtlan_dia;
          }
        }
-       $this->v10_usuario = ($this->v10_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_usuario"]:$this->v10_usuario);
+       $this->v10_usuario = ($this->v10_usuario === 0 || $this->v10_usuario === 0.0 || $this->v10_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_usuario"]:$this->v10_usuario);
        $this->v10_anoinicial = ($this->v10_anoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_anoinicial"]:$this->v10_anoinicial);
        $this->v10_anofinal = ($this->v10_anofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_anofinal"]:$this->v10_anofinal);
        $this->v10_observacao = ($this->v10_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_observacao"]:$this->v10_observacao);
      }else{
-       $this->v10_sequencial = ($this->v10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_sequencial"]:$this->v10_sequencial);
+       $this->v10_sequencial = ($this->v10_sequencial === 0 || $this->v10_sequencial === 0.0 || $this->v10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v10_sequencial"]:$this->v10_sequencial);
      }
    }
    // funcao para inclusao
@@ -175,7 +175,7 @@ class cl_isencao {
          $this->v10_sequencial = $v10_sequencial;
        }
      }
-     if(($this->v10_sequencial == null) || ($this->v10_sequencial == "") ){
+     if(($this->v10_sequencial == null) || ($this->v10_sequencial === 0 || $this->v10_sequencial === 0.0 || $this->v10_sequencial == "") ){
        $this->erro_sql = " Campo v10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

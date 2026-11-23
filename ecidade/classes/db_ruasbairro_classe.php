@@ -54,7 +54,7 @@ class cl_ruasbairro {
                  j16_cep    = char(8) = CEP
                  ";
    //funcao construtor da classe
-   function cl_ruasbairro() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ruasbairro");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -71,12 +71,12 @@ class cl_ruasbairro {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j16_codigo = ($this->j16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j16_codigo"]:$this->j16_codigo);
-       $this->j16_lograd = ($this->j16_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["j16_lograd"]:$this->j16_lograd);
-       $this->j16_bairro = ($this->j16_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["j16_bairro"]:$this->j16_bairro);
-       $this->j16_cep    = ($this->j16_cep    == ""?@$GLOBALS["HTTP_POST_VARS"]["j16_cep"]:$this->j16_cep);
+       $this->j16_codigo = ($this->j16_codigo === 0 || $this->j16_codigo === 0.0 || $this->j16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j16_codigo"]:$this->j16_codigo);
+       $this->j16_lograd = ($this->j16_lograd === 0 || $this->j16_lograd === 0.0 || $this->j16_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["j16_lograd"]:$this->j16_lograd);
+       $this->j16_bairro = ($this->j16_bairro === 0 || $this->j16_bairro === 0.0 || $this->j16_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["j16_bairro"]:$this->j16_bairro);
+       $this->j16_cep    = ($this->j16_cep === 0 || $this->j16_cep === 0.0 || $this->j16_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["j16_cep"]:$this->j16_cep);
      }else{
-       $this->j16_codigo = ($this->j16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j16_codigo"]:$this->j16_codigo);
+       $this->j16_codigo = ($this->j16_codigo === 0 || $this->j16_codigo === 0.0 || $this->j16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j16_codigo"]:$this->j16_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_ruasbairro {
          $this->j16_codigo = $j16_codigo;
        }
      }
-     if(($this->j16_codigo == null) || ($this->j16_codigo == "") ){
+     if(($this->j16_codigo == null) || ($this->j16_codigo === 0 || $this->j16_codigo === 0.0 || $this->j16_codigo == "") ){
        $this->erro_sql = " Campo j16_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -65,7 +65,7 @@ class modeloAutentTermicaArrecadacao extends modeloAutentTermicaBasica {
 
   }
 
-  function imprimir() {
+  function imprimir($sStringCorpo = null) {
 
     $this->sBuffer .= $this->getResumo();
 

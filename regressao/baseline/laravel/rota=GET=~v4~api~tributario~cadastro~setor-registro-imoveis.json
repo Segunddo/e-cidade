@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/setor-registro-imoveis",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "REGISTRO PADRAO"
+      },
+      {
+        "codigo": 2,
+        "descricao": "REGISTRO DE IMOVEIS 2"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "96d4927fd3fbc8866572021d0a3be1ddffdb147be8429f11ce7b992d962231b9",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

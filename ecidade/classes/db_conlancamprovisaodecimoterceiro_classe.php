@@ -75,14 +75,14 @@ class cl_conlancamprovisaodecimoterceiro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c100_sequencial = ($this->c100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_sequencial"]:$this->c100_sequencial);
-       $this->c100_codlan = ($this->c100_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_codlan"]:$this->c100_codlan);
-       $this->c100_instit = ($this->c100_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_instit"]:$this->c100_instit);
-       $this->c100_mes = ($this->c100_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_mes"]:$this->c100_mes);
-       $this->c100_ano = ($this->c100_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_ano"]:$this->c100_ano);
-       $this->c100_escrituraprovisao = ($this->c100_escrituraprovisao == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_escrituraprovisao"]:$this->c100_escrituraprovisao);
+       $this->c100_sequencial = ($this->c100_sequencial === 0 || $this->c100_sequencial === 0.0 || $this->c100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_sequencial"]:$this->c100_sequencial);
+       $this->c100_codlan = ($this->c100_codlan === 0 || $this->c100_codlan === 0.0 || $this->c100_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_codlan"]:$this->c100_codlan);
+       $this->c100_instit = ($this->c100_instit === 0 || $this->c100_instit === 0.0 || $this->c100_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_instit"]:$this->c100_instit);
+       $this->c100_mes = ($this->c100_mes === 0 || $this->c100_mes === 0.0 || $this->c100_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_mes"]:$this->c100_mes);
+       $this->c100_ano = ($this->c100_ano === 0 || $this->c100_ano === 0.0 || $this->c100_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_ano"]:$this->c100_ano);
+       $this->c100_escrituraprovisao = ($this->c100_escrituraprovisao === 0 || $this->c100_escrituraprovisao === 0.0 || $this->c100_escrituraprovisao == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_escrituraprovisao"]:$this->c100_escrituraprovisao);
      }else{
-       $this->c100_sequencial = ($this->c100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_sequencial"]:$this->c100_sequencial);
+       $this->c100_sequencial = ($this->c100_sequencial === 0 || $this->c100_sequencial === 0.0 || $this->c100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c100_sequencial"]:$this->c100_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_conlancamprovisaodecimoterceiro {
          $this->c100_sequencial = $c100_sequencial;
        }
      }
-     if(($this->c100_sequencial == null) || ($this->c100_sequencial == "") ){
+     if(($this->c100_sequencial == null) || ($this->c100_sequencial === 0 || $this->c100_sequencial === 0.0 || $this->c100_sequencial == "") ){
        $this->erro_sql = " Campo c100_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

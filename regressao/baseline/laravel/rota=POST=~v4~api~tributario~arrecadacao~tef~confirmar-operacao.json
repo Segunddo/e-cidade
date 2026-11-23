@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/arrecadacao/tef/confirmar-operacao",
+  "json": {
+    "errors": {
+      "DB_coddepto": [
+        "Código do departamentro não informado."
+      ],
+      "sequencial": [
+        "Sequencial não informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "c2ba819da4bd42aff6845e70f95bb7103af6fe53ebb90e4fd132a06ec2ea1080",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

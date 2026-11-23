@@ -1,0 +1,31 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/zonas",
+  "json": {
+    "data": [
+      {
+        "descricao": "ZONA FISCAL 1",
+        "id": 1
+      },
+      {
+        "descricao": "ZONA FISCAL 2",
+        "id": 2
+      },
+      {
+        "descricao": "ZONA FISCAL 3",
+        "id": 3
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "9285383986fce2bab9f32a0359211697cbdd2401dd1707e4a38d479f209ef7fc",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

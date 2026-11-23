@@ -34,7 +34,7 @@ include(modification("classes/db_empresto_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("libs/db_libcontabilidade.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $classinatura = new cl_assinatura;
@@ -46,7 +46,7 @@ $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config wher
 $descr_inst = '';
 $xvirg = '';
 $flag_abrev = false;
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
     if (strlen(trim($nomeinstabrev)) > 0){
          $descr_inst .= $xvirg.$nomeinstabrev;
@@ -253,7 +253,7 @@ $tot_09 =0;
 $a_pagar_processado     = 0;
 $a_pagar_nao_processado = 0;
 
-for ($x=0;$x<pg_numrows($result);$x++){
+for ($x=0;$x<($result ? pg_numrows($result) : null);$x++){
      db_fieldsmemory($result,$x);
 
 

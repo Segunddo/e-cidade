@@ -69,11 +69,11 @@ class cl_clientedebito {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j98_sequencia = ($this->j98_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_sequencia"]:$this->j98_sequencia);
-       $this->j98_codigo_cliente = ($this->j98_codigo_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_codigo_cliente"]:$this->j98_codigo_cliente);
-       $this->j98_valor = ($this->j98_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_valor"]:$this->j98_valor);
+       $this->j98_sequencia = ($this->j98_sequencia === 0 || $this->j98_sequencia === 0.0 || $this->j98_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_sequencia"]:$this->j98_sequencia);
+       $this->j98_codigo_cliente = ($this->j98_codigo_cliente === 0 || $this->j98_codigo_cliente === 0.0 || $this->j98_codigo_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_codigo_cliente"]:$this->j98_codigo_cliente);
+       $this->j98_valor = ($this->j98_valor === 0 || $this->j98_valor === 0.0 || $this->j98_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_valor"]:$this->j98_valor);
      }else{
-       $this->j98_sequencia = ($this->j98_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_sequencia"]:$this->j98_sequencia);
+       $this->j98_sequencia = ($this->j98_sequencia === 0 || $this->j98_sequencia === 0.0 || $this->j98_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j98_sequencia"]:$this->j98_sequencia);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_clientedebito {
          $this->j98_sequencia = $j98_sequencia; 
        }
      }
-     if(($this->j98_sequencia == null) || ($this->j98_sequencia == "") ){ 
+     if(($this->j98_sequencia == null) || ($this->j98_sequencia === 0 || $this->j98_sequencia === 0.0 || $this->j98_sequencia == "") ){ 
        $this->erro_sql = " Campo j98_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

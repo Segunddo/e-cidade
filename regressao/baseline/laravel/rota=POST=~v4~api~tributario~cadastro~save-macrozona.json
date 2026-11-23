@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/cadastro/save-macrozona",
+  "json": {
+    "errors": {
+      "localizacao": [
+        "O campo localizacao é obrigatório."
+      ],
+      "sigla": [
+        "O campo sigla é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "659877c0cc01923c0f879e0b073a033fe538de8c87babd79c6691b3be5ca08a6",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

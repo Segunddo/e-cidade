@@ -50,7 +50,7 @@ class cl_datadebitos
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->k115_sequencial = ($this->k115_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k115_sequencial"]:$this->k115_sequencial);
+            $this->k115_sequencial = ($this->k115_sequencial === 0 || $this->k115_sequencial === 0.0 || $this->k115_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k115_sequencial"]:$this->k115_sequencial);
             if ($this->k115_data == "") {
                 $this->k115_data_dia = ($this->k115_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k115_data_dia"]:$this->k115_data_dia);
                 $this->k115_data_mes = ($this->k115_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k115_data_mes"]:$this->k115_data_mes);
@@ -59,10 +59,10 @@ class cl_datadebitos
                     $this->k115_data = $this->k115_data_ano."-".$this->k115_data_mes."-".$this->k115_data_dia;
                 }
             }
-            $this->k115_instit = ($this->k115_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k115_instit"]:$this->k115_instit);
+            $this->k115_instit = ($this->k115_instit === 0 || $this->k115_instit === 0.0 || $this->k115_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k115_instit"]:$this->k115_instit);
             $this->k115_completa = ($this->k115_completa == "f"?@$GLOBALS["HTTP_POST_VARS"]["k115_completa"]:$this->k115_completa);
         } else {
-            $this->k115_sequencial = ($this->k115_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k115_sequencial"]:$this->k115_sequencial);
+            $this->k115_sequencial = ($this->k115_sequencial === 0 || $this->k115_sequencial === 0.0 || $this->k115_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k115_sequencial"]:$this->k115_sequencial);
         }
     }
 

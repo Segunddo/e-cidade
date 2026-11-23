@@ -67,10 +67,10 @@ class cl_automatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y53_codauto = ($this->y53_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y53_codauto"]:$this->y53_codauto);
-       $this->y53_matric = ($this->y53_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y53_matric"]:$this->y53_matric);
+       $this->y53_codauto = ($this->y53_codauto === 0 || $this->y53_codauto === 0.0 || $this->y53_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y53_codauto"]:$this->y53_codauto);
+       $this->y53_matric = ($this->y53_matric === 0 || $this->y53_matric === 0.0 || $this->y53_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y53_matric"]:$this->y53_matric);
      }else{
-       $this->y53_codauto = ($this->y53_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y53_codauto"]:$this->y53_codauto);
+       $this->y53_codauto = ($this->y53_codauto === 0 || $this->y53_codauto === 0.0 || $this->y53_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y53_codauto"]:$this->y53_codauto);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_automatric {
        return false;
      }
        $this->y53_codauto = $y53_codauto;
-     if(($this->y53_codauto == null) || ($this->y53_codauto == "") ){
+     if(($this->y53_codauto == null) || ($this->y53_codauto === 0 || $this->y53_codauto === 0.0 || $this->y53_codauto == "") ){
        $this->erro_sql = " Campo y53_codauto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

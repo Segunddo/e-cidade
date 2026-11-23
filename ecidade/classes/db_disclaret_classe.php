@@ -67,11 +67,11 @@ class cl_disclaret {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codcla = ($this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
-       $this->codret = ($this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
+       $this->codcla = ($this->codcla === 0 || $this->codcla === 0.0 || $this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
+       $this->codret = ($this->codret === 0 || $this->codret === 0.0 || $this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
      }else{
-       $this->codcla = ($this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
-       $this->codret = ($this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
+       $this->codcla = ($this->codcla === 0 || $this->codcla === 0.0 || $this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
+       $this->codret = ($this->codret === 0 || $this->codret === 0.0 || $this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_disclaret {
       $this->atualizacampos();
        $this->codcla = $codcla; 
        $this->codret = $codret; 
-     if(($this->codcla == null) || ($this->codcla == "") ){ 
+     if(($this->codcla == null) || ($this->codcla === 0 || $this->codcla === 0.0 || $this->codcla == "") ){ 
        $this->erro_sql = " Campo codcla nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_disclaret {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->codret == null) || ($this->codret == "") ){ 
+     if(($this->codret == null) || ($this->codret === 0 || $this->codret === 0.0 || $this->codret == "") ){ 
        $this->erro_sql = " Campo codret nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

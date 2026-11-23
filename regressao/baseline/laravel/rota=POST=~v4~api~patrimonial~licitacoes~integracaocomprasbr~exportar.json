@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/licitacoes/integracaocomprasbr/exportar",
+  "json": {
+    "errors": {
+      "casas_decimais": [
+        "O campo casas decimais é obrigatório."
+      ],
+      "licitacao": [
+        "O campo licitacao é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "c8dcf71cc94f2f8f2739f476d4e0ae6a814c2dfe0a23cf4bc303a4d0fbc55a1a",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

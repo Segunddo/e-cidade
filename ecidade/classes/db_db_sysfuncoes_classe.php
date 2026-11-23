@@ -75,14 +75,14 @@ class cl_db_sysfuncoes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codfuncao = ($this->codfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["codfuncao"]:$this->codfuncao);
+       $this->codfuncao = ($this->codfuncao === 0 || $this->codfuncao === 0.0 || $this->codfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["codfuncao"]:$this->codfuncao);
        $this->nomefuncao = ($this->nomefuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["nomefuncao"]:$this->nomefuncao);
        $this->nomearquivo = ($this->nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["nomearquivo"]:$this->nomearquivo);
        $this->obsfuncao = ($this->obsfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["obsfuncao"]:$this->obsfuncao);
        $this->corpofuncao = ($this->corpofuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["corpofuncao"]:$this->corpofuncao);
        $this->triggerfuncao = ($this->triggerfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["triggerfuncao"]:$this->triggerfuncao);
      }else{
-       $this->codfuncao = ($this->codfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["codfuncao"]:$this->codfuncao);
+       $this->codfuncao = ($this->codfuncao === 0 || $this->codfuncao === 0.0 || $this->codfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["codfuncao"]:$this->codfuncao);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_db_sysfuncoes {
          $this->codfuncao = $codfuncao;
        }
      }
-     if(($this->codfuncao == null) || ($this->codfuncao == "") ){
+     if(($this->codfuncao == null) || ($this->codfuncao === 0 || $this->codfuncao === 0.0 || $this->codfuncao == "") ){
        $this->erro_sql = " Campo codfuncao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -75,14 +75,14 @@ class cl_conlancamprovisaoferias {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c101_sequencial = ($this->c101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_sequencial"]:$this->c101_sequencial);
-       $this->c101_codlan = ($this->c101_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_codlan"]:$this->c101_codlan);
-       $this->c101_instit = ($this->c101_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_instit"]:$this->c101_instit);
-       $this->c101_mes = ($this->c101_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_mes"]:$this->c101_mes);
-       $this->c101_ano = ($this->c101_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_ano"]:$this->c101_ano);
-       $this->c101_escrituraprovisao = ($this->c101_escrituraprovisao == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_escrituraprovisao"]:$this->c101_escrituraprovisao);
+       $this->c101_sequencial = ($this->c101_sequencial === 0 || $this->c101_sequencial === 0.0 || $this->c101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_sequencial"]:$this->c101_sequencial);
+       $this->c101_codlan = ($this->c101_codlan === 0 || $this->c101_codlan === 0.0 || $this->c101_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_codlan"]:$this->c101_codlan);
+       $this->c101_instit = ($this->c101_instit === 0 || $this->c101_instit === 0.0 || $this->c101_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_instit"]:$this->c101_instit);
+       $this->c101_mes = ($this->c101_mes === 0 || $this->c101_mes === 0.0 || $this->c101_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_mes"]:$this->c101_mes);
+       $this->c101_ano = ($this->c101_ano === 0 || $this->c101_ano === 0.0 || $this->c101_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_ano"]:$this->c101_ano);
+       $this->c101_escrituraprovisao = ($this->c101_escrituraprovisao === 0 || $this->c101_escrituraprovisao === 0.0 || $this->c101_escrituraprovisao == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_escrituraprovisao"]:$this->c101_escrituraprovisao);
      }else{
-       $this->c101_sequencial = ($this->c101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_sequencial"]:$this->c101_sequencial);
+       $this->c101_sequencial = ($this->c101_sequencial === 0 || $this->c101_sequencial === 0.0 || $this->c101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c101_sequencial"]:$this->c101_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_conlancamprovisaoferias {
          $this->c101_sequencial = $c101_sequencial;
        }
      }
-     if(($this->c101_sequencial == null) || ($this->c101_sequencial == "") ){
+     if(($this->c101_sequencial == null) || ($this->c101_sequencial === 0 || $this->c101_sequencial === 0.0 || $this->c101_sequencial == "") ){
        $this->erro_sql = " Campo c101_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

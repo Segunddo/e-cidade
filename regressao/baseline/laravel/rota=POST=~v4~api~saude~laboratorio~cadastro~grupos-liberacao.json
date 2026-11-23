@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/laboratorio/cadastro/grupos-liberacao",
+  "json": {
+    "errors": {
+      "nomeGrupo": [
+        "Obrigatório informar um nome para o grupo!"
+      ],
+      "usuario": [
+        "Obrigatório informar o usuário!"
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "984d8b80ec159fbf982dc35b5cda55d2c39f9ea577f54c38874e17f8770bbd74",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

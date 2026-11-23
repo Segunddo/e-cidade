@@ -67,10 +67,10 @@ class cl_orctiporecconveniosituacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o100_sequencial = ($this->o100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o100_sequencial"]:$this->o100_sequencial);
+       $this->o100_sequencial = ($this->o100_sequencial === 0 || $this->o100_sequencial === 0.0 || $this->o100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o100_sequencial"]:$this->o100_sequencial);
        $this->o100_descricao = ($this->o100_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o100_descricao"]:$this->o100_descricao);
      }else{
-       $this->o100_sequencial = ($this->o100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o100_sequencial"]:$this->o100_sequencial);
+       $this->o100_sequencial = ($this->o100_sequencial === 0 || $this->o100_sequencial === 0.0 || $this->o100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o100_sequencial"]:$this->o100_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_orctiporecconveniosituacao {
          $this->o100_sequencial = $o100_sequencial;
        }
      }
-     if(($this->o100_sequencial == null) || ($this->o100_sequencial == "") ){
+     if(($this->o100_sequencial == null) || ($this->o100_sequencial === 0 || $this->o100_sequencial === 0.0 || $this->o100_sequencial == "") ){
        $this->erro_sql = " Campo o100_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

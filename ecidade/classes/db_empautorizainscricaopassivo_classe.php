@@ -67,8 +67,8 @@ class cl_empautorizainscricaopassivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e16_empautoriza = ($this->e16_empautoriza == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_empautoriza"]:$this->e16_empautoriza);
-       $this->e16_inscricaopassivo = ($this->e16_inscricaopassivo == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_inscricaopassivo"]:$this->e16_inscricaopassivo);
+       $this->e16_empautoriza = ($this->e16_empautoriza === 0 || $this->e16_empautoriza === 0.0 || $this->e16_empautoriza == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_empautoriza"]:$this->e16_empautoriza);
+       $this->e16_inscricaopassivo = ($this->e16_inscricaopassivo === 0 || $this->e16_inscricaopassivo === 0.0 || $this->e16_inscricaopassivo == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_inscricaopassivo"]:$this->e16_inscricaopassivo);
      }else{
      }
    }

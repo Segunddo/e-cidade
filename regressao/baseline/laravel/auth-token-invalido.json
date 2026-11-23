@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "auth-token-invalido",
+  "json": {
+    "error": true,
+    "message": "Unauthenticated."
+  },
+  "sha256": "bba148e32b5e04a112618bcbd6a02eae4d102fad29cdb3cb60d75d47af4d8489",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -35,7 +35,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_serie_classe.php"));
 include(modification("classes/db_baseserie_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clserie = new cl_serie;
 $clbaseserie = new cl_baseserie;
 $clserie->rotulo->label("ed11_i_codigo");

@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/escola/relatorios/alunos/atestado-frequencia",
+  "json": null,
+  "sha256": "b34f9fc641a40c944cb3ffa3ca3c74124d30fd113129b25743effd00590b763a",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

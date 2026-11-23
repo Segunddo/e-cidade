@@ -69,11 +69,11 @@ class cl_db_textos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_instit = ($this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
+       $this->id_instit = ($this->id_instit === 0 || $this->id_instit === 0.0 || $this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
        $this->descrtexto = ($this->descrtexto == ""?@$GLOBALS["HTTP_POST_VARS"]["descrtexto"]:$this->descrtexto);
        $this->conteudotexto = ($this->conteudotexto == ""?@$GLOBALS["HTTP_POST_VARS"]["conteudotexto"]:$this->conteudotexto);
      }else{
-       $this->id_instit = ($this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
+       $this->id_instit = ($this->id_instit === 0 || $this->id_instit === 0.0 || $this->id_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["id_instit"]:$this->id_instit);
        $this->descrtexto = ($this->descrtexto == ""?@$GLOBALS["HTTP_POST_VARS"]["descrtexto"]:$this->descrtexto);
      }
    }
@@ -82,7 +82,7 @@ class cl_db_textos {
       $this->atualizacampos();
        $this->id_instit = $id_instit;
        $this->descrtexto = $descrtexto;
-     if(($this->id_instit == null) || ($this->id_instit == "") ){
+     if(($this->id_instit == null) || ($this->id_instit === 0 || $this->id_instit === 0.0 || $this->id_instit == "") ){
        $this->erro_sql = " Campo id_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

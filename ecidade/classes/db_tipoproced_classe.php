@@ -67,10 +67,10 @@ class cl_tipoproced {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v07_sequencial = ($this->v07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_sequencial"]:$this->v07_sequencial);
+       $this->v07_sequencial = ($this->v07_sequencial === 0 || $this->v07_sequencial === 0.0 || $this->v07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_sequencial"]:$this->v07_sequencial);
        $this->v07_descricao = ($this->v07_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_descricao"]:$this->v07_descricao);
      }else{
-       $this->v07_sequencial = ($this->v07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_sequencial"]:$this->v07_sequencial);
+       $this->v07_sequencial = ($this->v07_sequencial === 0 || $this->v07_sequencial === 0.0 || $this->v07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v07_sequencial"]:$this->v07_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tipoproced {
          $this->v07_sequencial = $v07_sequencial;
        }
      }
-     if(($this->v07_sequencial == null) || ($this->v07_sequencial == "") ){
+     if(($this->v07_sequencial == null) || ($this->v07_sequencial === 0 || $this->v07_sequencial === 0.0 || $this->v07_sequencial == "") ){
        $this->erro_sql = " Campo v07_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

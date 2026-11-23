@@ -43,7 +43,7 @@ $clprojmelhoriasmatric->rotulo->label();
 $cltestada = new cl_testada;
 $clface = new cl_face;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if (isset($codproj)) {
     $sql = "
         select j01_matric,j40_refant,z01_nome,j34_setor,j34_quadra,j34_lote,j34_zona,projmelhoriasmatric.*

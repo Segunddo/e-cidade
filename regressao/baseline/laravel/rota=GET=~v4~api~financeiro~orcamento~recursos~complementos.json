@@ -1,0 +1,75 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/recursos/complementos",
+  "json": {
+    "data": [
+      {
+        "apresentaMSC": false,
+        "apresentaPAD": false,
+        "apresentar": "0 - NÃO SE APLICA",
+        "codigo": 0,
+        "descricao": "NÃO SE APLICA"
+      },
+      {
+        "apresentaMSC": false,
+        "apresentaPAD": false,
+        "apresentar": "1001 - Identificação das despesas com manutenção e desenvolvimento do ensino",
+        "codigo": 1001,
+        "descricao": "Identificação das despesas com manutenção e desenvolvimento do ensino"
+      },
+      {
+        "apresentaMSC": false,
+        "apresentaPAD": false,
+        "apresentar": "1070 - Identificação do percentual aplicado no pagamento da remuneração dos profissionais da educação básica em efetivo exercício",
+        "codigo": 1070,
+        "descricao": "Identificação do percentual aplicado no pagamento da remuneração dos profissionais da educação básica em efetivo exercício"
+      },
+      {
+        "apresentaMSC": true,
+        "apresentaPAD": false,
+        "apresentar": "3110 - Emendas Parlamentares Individuais",
+        "codigo": 3110,
+        "descricao": "Emendas Parlamentares Individuais"
+      },
+      {
+        "apresentaMSC": true,
+        "apresentaPAD": false,
+        "apresentar": "3120 - Emendas Parlamentares Bancada",
+        "codigo": 3120,
+        "descricao": "Emendas Parlamentares Bancada"
+      },
+      {
+        "apresentaMSC": false,
+        "apresentaPAD": false,
+        "apresentar": "3140 - Emendas Parlamentares Individuais - COVID 19",
+        "codigo": 3140,
+        "descricao": "Emendas Parlamentares Individuais - COVID 19"
+      },
+      {
+        "apresentaMSC": false,
+        "apresentaPAD": false,
+        "apresentar": "3150 - Emendas Parlamentares Bancada - COVID 19",
+        "codigo": 3150,
+        "descricao": "Emendas Parlamentares Bancada - COVID 19"
+      },
+      {
+        "apresentaMSC": false,
+        "apresentaPAD": false,
+        "apresentar": "3160 - COVID 19",
+        "codigo": 3160,
+        "descricao": "COVID 19"
+      }
+    ],
+    "error": false,
+    "message": "Complementos encontrados."
+  },
+  "sha256": "0e1b5bc831a5abfa2b5367173d2614c1e551ff9049d51757e6d837fdef10c0f6",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

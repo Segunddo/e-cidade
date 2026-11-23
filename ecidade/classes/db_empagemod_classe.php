@@ -71,12 +71,12 @@ class cl_empagemod {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e84_codmod = ($this->e84_codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_codmod"]:$this->e84_codmod);
+       $this->e84_codmod = ($this->e84_codmod === 0 || $this->e84_codmod === 0.0 || $this->e84_codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_codmod"]:$this->e84_codmod);
        $this->e84_descr = ($this->e84_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_descr"]:$this->e84_descr);
-       $this->e84_layout = ($this->e84_layout == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_layout"]:$this->e84_layout);
-       $this->e84_sequencia = ($this->e84_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_sequencia"]:$this->e84_sequencia);
+       $this->e84_layout = ($this->e84_layout === 0 || $this->e84_layout === 0.0 || $this->e84_layout == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_layout"]:$this->e84_layout);
+       $this->e84_sequencia = ($this->e84_sequencia === 0 || $this->e84_sequencia === 0.0 || $this->e84_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_sequencia"]:$this->e84_sequencia);
      }else{
-       $this->e84_codmod = ($this->e84_codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_codmod"]:$this->e84_codmod);
+       $this->e84_codmod = ($this->e84_codmod === 0 || $this->e84_codmod === 0.0 || $this->e84_codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["e84_codmod"]:$this->e84_codmod);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_empagemod {
          $this->e84_codmod = $e84_codmod;
        }
      }
-     if(($this->e84_codmod == null) || ($this->e84_codmod == "") ){
+     if(($this->e84_codmod == null) || ($this->e84_codmod === 0 || $this->e84_codmod === 0.0 || $this->e84_codmod == "") ){
        $this->erro_sql = " Campo e84_codmod nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

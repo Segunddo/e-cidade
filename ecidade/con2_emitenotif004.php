@@ -33,7 +33,7 @@ $cldb_config     = new cl_db_config;
 $clnotificacao   = new cl_notificacao;
 
 db_postmemory($HTTP_SERVER_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if ( $contribuicao == '' ) {
      db_redireciona('db_erros.php?fechar=true&db_erro=Contribuição não encontrada!');
         exit;

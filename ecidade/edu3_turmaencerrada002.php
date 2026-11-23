@@ -35,7 +35,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_matricula_classe.php"));
 db_postmemory($_POST);
 db_postmemory($_GET);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmatricula = new cl_matricula;
 $camp = "ed60_d_datasaida as datasaida,
          turma.ed57_c_descr,serie.ed11_c_descr,calendario.ed52_c_descr,cursoedu.ed29_c_descr,ed60_i_numaluno,

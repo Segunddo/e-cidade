@@ -81,14 +81,14 @@ class cl_movrel {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r54_instit = ($this->r54_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_instit"]:$this->r54_instit);
+       $this->r54_instit = ($this->r54_instit === 0 || $this->r54_instit === 0.0 || $this->r54_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_instit"]:$this->r54_instit);
        $this->r54_anomes = ($this->r54_anomes == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_anomes"]:$this->r54_anomes);
        $this->r54_codrel = ($this->r54_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_codrel"]:$this->r54_codrel);
-       $this->r54_regist = ($this->r54_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_regist"]:$this->r54_regist);
+       $this->r54_regist = ($this->r54_regist === 0 || $this->r54_regist === 0.0 || $this->r54_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_regist"]:$this->r54_regist);
        $this->r54_codeve = ($this->r54_codeve == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_codeve"]:$this->r54_codeve);
-       $this->r54_quant1 = ($this->r54_quant1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant1"]:$this->r54_quant1);
-       $this->r54_quant2 = ($this->r54_quant2 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant2"]:$this->r54_quant2);
-       $this->r54_quant3 = ($this->r54_quant3 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant3"]:$this->r54_quant3);
+       $this->r54_quant1 = ($this->r54_quant1 === 0 || $this->r54_quant1 === 0.0 || $this->r54_quant1 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant1"]:$this->r54_quant1);
+       $this->r54_quant2 = ($this->r54_quant2 === 0 || $this->r54_quant2 === 0.0 || $this->r54_quant2 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant2"]:$this->r54_quant2);
+       $this->r54_quant3 = ($this->r54_quant3 === 0 || $this->r54_quant3 === 0.0 || $this->r54_quant3 == ""?@$GLOBALS["HTTP_POST_VARS"]["r54_quant3"]:$this->r54_quant3);
        $this->r54_lancad = ($this->r54_lancad == "f"?@$GLOBALS["HTTP_POST_VARS"]["r54_lancad"]:$this->r54_lancad);
      }else{
      }

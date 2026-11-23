@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/despesa/detalhamento/buscar",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Detalhamentos encontrados."
+  },
+  "sha256": "11387da62e8aa956b05ac3a2670a2ccc2100eb328d1a81939a91d135a2746405",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

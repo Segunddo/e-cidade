@@ -33,7 +33,7 @@ include(modification("classes/db_fis_auto_classe.php"));
 include(modification("classes/db_fis_autolocal_classe.php"));
 include(modification("classes/db_fis_autoexec_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clauto = new cl_fis_auto;
 $clautolocal = new cl_fis_autolocal;
@@ -56,7 +56,7 @@ $sql .= "WHERE y50_codauto = $codauto and y50_instit = ".db_getsession('DB_insti
 $sql .= " ";
 $result = db_query($sql);
 //$result = $clauto->sql_record($clauto->sql_query($codauto,"*",null," y50_codauto = $codauto and y50_instit = ".db_getsession('DB_instit') ));
-$num = pg_num_rows($result);
+$num = ($result ? pg_num_rows($result) : null);
 
 $sql2 = "select data_ciencia from fiscalizacao.fis_autoandam
 LEFT JOIN fiscalizacao.fis_fandam ON y58_codandam = y39_codandam
@@ -183,7 +183,7 @@ $result2 = db_query($sql2);
   }else{
     $rs2EndPecas = db_query( "select end01_rua as j14_nome, end01_numero as y14_numero,end01_compl as  y14_compl,end01_bairro as j13_descr
                                 from fiscalizacao.fis_enderecopecas where end01_codpeca = {$codauto} and end01_tipopeca = 'A' " );
-   if( pg_num_rows( $rs2EndPecas ) > 0 ){
+   if( ($rs2EndPecas ? pg_num_rows( $rs2EndPecas ) : null) > 0 ){
       db_fieldsmemory( $rs2EndPecas,0 );
    }
   }
@@ -253,7 +253,7 @@ $result2 = db_query($sql2);
       where pl10_auto = {$codauto} and pl09_status = true order by 3;";
 
     $resultauto = db_query($sqlauto);
-    $ln = pg_fetch_all($resultauto);
+    $ln = ($resultauto ? pg_fetch_all($resultauto) : null);
   
 ?>
 <table  align="center"  style="margin-top: 2%;">

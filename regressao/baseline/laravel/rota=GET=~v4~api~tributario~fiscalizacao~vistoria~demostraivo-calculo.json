@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/fiscalizacao/vistoria/demostraivo-calculo",
+  "json": {
+    "errors": {
+      "exercicio": [
+        "O campo exercicio é obrigatório."
+      ],
+      "numcgm": [
+        "O campo numcgm é obrigatório."
+      ],
+      "tipoVistoria": [
+        "O campo tipo vistoria é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "9219d57192c25ebdcc650bb183887b8bc5eec3276778fa27fb319a16baa28500",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

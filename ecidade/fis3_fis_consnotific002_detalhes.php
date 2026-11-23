@@ -78,7 +78,7 @@ if ($solicitacao == "Proced") {
 }
 if ($pesquisaLocalizada==true) {
   $result = db_query($sql);
-  if(pg_num_rows($result) == 0){
+  if(($result ? pg_num_rows($result) : null) == 0){
     echo "<br><br><b>Nenhum Registro Cadastrado!!<b>";
   }else{
 

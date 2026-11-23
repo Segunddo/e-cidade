@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/censo/tabelas-censo/unidades-curriculares/salvar",
+  "json": {
+    "error": true,
+    "message": "Undefined index: nome"
+  },
+  "sha256": "0165c210cda6ccc8c47ff176ac45ba2eda3596fe3409674bf08707c3ce780e71",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

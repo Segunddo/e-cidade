@@ -66,12 +66,12 @@ class cl_aguacortesituacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x43_codsituacao = ($this->x43_codsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x43_codsituacao"]:$this->x43_codsituacao);
+       $this->x43_codsituacao = ($this->x43_codsituacao === 0 || $this->x43_codsituacao === 0.0 || $this->x43_codsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x43_codsituacao"]:$this->x43_codsituacao);
        $this->x43_descr = ($this->x43_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["x43_descr"]:$this->x43_descr);
-       $this->x43_regra = ($this->x43_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["x43_regra"]:$this->x43_regra);
+       $this->x43_regra = ($this->x43_regra === 0 || $this->x43_regra === 0.0 || $this->x43_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["x43_regra"]:$this->x43_regra);
        $this->x43_realizacobranca = ($this->x43_realizacobranca == "1"?@$GLOBALS["HTTP_POST_VARS"]["x43_realizacobranca"]:$this->x43_realizacobranca);
      }else{
-       $this->x43_codsituacao = ($this->x43_codsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x43_codsituacao"]:$this->x43_codsituacao);
+       $this->x43_codsituacao = ($this->x43_codsituacao === 0 || $this->x43_codsituacao === 0.0 || $this->x43_codsituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x43_codsituacao"]:$this->x43_codsituacao);
      }
    }
    // funcao para inclusao
@@ -122,7 +122,7 @@ class cl_aguacortesituacao {
          $this->x43_codsituacao = $x43_codsituacao;
        }
      }
-     if(($this->x43_codsituacao == null) || ($this->x43_codsituacao == "") ){
+     if(($this->x43_codsituacao == null) || ($this->x43_codsituacao === 0 || $this->x43_codsituacao === 0.0 || $this->x43_codsituacao == "") ){
        $this->erro_sql = " Campo x43_codsituacao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

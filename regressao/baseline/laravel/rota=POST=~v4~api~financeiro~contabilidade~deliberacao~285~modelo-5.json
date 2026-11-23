@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/deliberacao/285/modelo-5",
+  "json": {
+    "error": true,
+    "message": "Undefined index: dataInicial"
+  },
+  "sha256": "5dc5b125ead8b080349853d64909fb986f6f66dd2601902e3ff9fb3b8aa03bba",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

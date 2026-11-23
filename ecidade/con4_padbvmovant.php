@@ -30,7 +30,7 @@ class bvmovant
 {
     public $arq = null;
 
-    public function bvmovant($header)
+    public function __construct($header)
     {
         umask(74);
         $this->arq = fopen("tmp/BVMOVANT.TXT", 'w+');

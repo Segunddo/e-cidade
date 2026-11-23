@@ -41,7 +41,7 @@ $clempnotaele = new cl_empnotaele;
 $clempelemento = new cl_empelemento;
 $clempempenho = new cl_empempenho;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if(isset($e69_numemp)){
   $result = $clempempenho->sql_record($clempempenho->sql_query_empnome($e69_numemp,"z01_nome,z01_numcgm"));

@@ -34,7 +34,7 @@ include(modification("classes/db_medicos_classe.php"));
 include(modification("classes/db_unidademedicos_classe.php"));
 include(modification("classes/db_ausencias_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clmedicos = new cl_medicos;
 $clunidademedicos = new cl_unidademedicos;

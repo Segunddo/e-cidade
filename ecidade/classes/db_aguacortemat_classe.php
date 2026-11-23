@@ -74,9 +74,9 @@ class cl_aguacortemat {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x41_codcortemat = ($this->x41_codcortemat == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_codcortemat"]:$this->x41_codcortemat);
-       $this->x41_matric = ($this->x41_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_matric"]:$this->x41_matric);
-       $this->x41_codcorte = ($this->x41_codcorte == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_codcorte"]:$this->x41_codcorte);
+       $this->x41_codcortemat = ($this->x41_codcortemat === 0 || $this->x41_codcortemat === 0.0 || $this->x41_codcortemat == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_codcortemat"]:$this->x41_codcortemat);
+       $this->x41_matric = ($this->x41_matric === 0 || $this->x41_matric === 0.0 || $this->x41_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_matric"]:$this->x41_matric);
+       $this->x41_codcorte = ($this->x41_codcorte === 0 || $this->x41_codcorte === 0.0 || $this->x41_codcorte == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_codcorte"]:$this->x41_codcorte);
        if($this->x41_dtprazo == ""){
          $this->x41_dtprazo_dia = ($this->x41_dtprazo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_dtprazo_dia"]:$this->x41_dtprazo_dia);
          $this->x41_dtprazo_mes = ($this->x41_dtprazo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_dtprazo_mes"]:$this->x41_dtprazo_mes);
@@ -86,8 +86,8 @@ class cl_aguacortemat {
          }
        }
      }else{
-       $this->x41_codcortemat = ($this->x41_codcortemat == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_codcortemat"]:$this->x41_codcortemat);
-       $this->x41_codcorte = ($this->x41_codcorte == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_codcorte"]:$this->x41_codcorte);
+       $this->x41_codcortemat = ($this->x41_codcortemat === 0 || $this->x41_codcortemat === 0.0 || $this->x41_codcortemat == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_codcortemat"]:$this->x41_codcortemat);
+       $this->x41_codcorte = ($this->x41_codcorte === 0 || $this->x41_codcorte === 0.0 || $this->x41_codcorte == ""?@$GLOBALS["HTTP_POST_VARS"]["x41_codcorte"]:$this->x41_codcorte);
      }
    }
    // funcao para inclusao
@@ -135,7 +135,7 @@ class cl_aguacortemat {
          $this->x41_codcortemat = $x41_codcortemat;
        }
      }
-     if(($this->x41_codcortemat == null) || ($this->x41_codcortemat == "") ){
+     if(($this->x41_codcortemat == null) || ($this->x41_codcortemat === 0 || $this->x41_codcortemat === 0.0 || $this->x41_codcortemat == "") ){
        $this->erro_sql = " Campo x41_codcortemat nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

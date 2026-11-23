@@ -1,0 +1,20 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/procedimento/escrituracao-contabil/virada-rp",
+  "json": {
+    "data": {
+      "processado": false
+    },
+    "error": false,
+    "message": "Verificação da virada de Restos a Pagar realizada com sucesso."
+  },
+  "sha256": "eb9cd5db895f2a76bfa4a829e8053d862a995d18a6b1ec656c3228d7ab79dd38",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

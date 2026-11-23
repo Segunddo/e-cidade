@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/recursos-humanos/pessoal/historico-rubrica",
+  "json": null,
+  "sha256": "5758308d480b3e1715eab582b59dd9e9853f859b4b7ca52b306a0d295e553ac2",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

@@ -61,9 +61,9 @@ $SQLTotLinhas .= "  from issnotaavulsaservico ";
 $SQLTotLinhas .= " where q62_issnotaavulsa = {$get->q51_sequencial}";
 $rsTotLInhas  = db_query($SQLTotLinhas);
 $totlinhas    = 0;
-if (pg_num_rows($rsTotLInhas) > 0){
+if (($rsTotLInhas ? pg_num_rows($rsTotLInhas) : null) > 0){
 
-  for ($i = 0; $i < pg_num_rows($rsTotLInhas); $i++){
+  for ($i = 0; $i < ($rsTotLInhas ? pg_num_rows($rsTotLInhas) : null); $i++){
     
     $oLinha     = db_utils::fieldsMemory($rsTotLInhas,$i);
     $totlinhas += db_calculaLinhasTexto22($oLinha->q62_discriminacao);

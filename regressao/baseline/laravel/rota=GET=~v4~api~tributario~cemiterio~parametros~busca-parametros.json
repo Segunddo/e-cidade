@@ -1,0 +1,14 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cemiterio/parametros/busca-parametros",
+  "json": [],
+  "sha256": "3b4fe93fae14267b75037809fe2f6d7d8d1ccd519d0230c655f0ed0929fae518",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

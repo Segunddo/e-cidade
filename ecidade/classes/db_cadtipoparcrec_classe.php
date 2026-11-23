@@ -68,11 +68,11 @@ class cl_cadtipoparcrec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k180_cadtipoparc = ($this->k180_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k180_cadtipoparc"]:$this->k180_cadtipoparc);
-       $this->k180_estorc = ($this->k180_estorc == ""?@$GLOBALS["HTTP_POST_VARS"]["k180_estorc"]:$this->k180_estorc);
+       $this->k180_cadtipoparc = ($this->k180_cadtipoparc === 0 || $this->k180_cadtipoparc === 0.0 || $this->k180_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k180_cadtipoparc"]:$this->k180_cadtipoparc);
+       $this->k180_estorc = ($this->k180_estorc === 0 || $this->k180_estorc === 0.0 || $this->k180_estorc == ""?@$GLOBALS["HTTP_POST_VARS"]["k180_estorc"]:$this->k180_estorc);
      }else{
-       $this->k180_cadtipoparc = ($this->k180_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k180_cadtipoparc"]:$this->k180_cadtipoparc);
-       $this->k180_estorc = ($this->k180_estorc == ""?@$GLOBALS["HTTP_POST_VARS"]["k180_estorc"]:$this->k180_estorc);
+       $this->k180_cadtipoparc = ($this->k180_cadtipoparc === 0 || $this->k180_cadtipoparc === 0.0 || $this->k180_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k180_cadtipoparc"]:$this->k180_cadtipoparc);
+       $this->k180_estorc = ($this->k180_estorc === 0 || $this->k180_estorc === 0.0 || $this->k180_estorc == ""?@$GLOBALS["HTTP_POST_VARS"]["k180_estorc"]:$this->k180_estorc);
      }
    }
    // funcao para inclusao
@@ -80,7 +80,7 @@ class cl_cadtipoparcrec {
       $this->atualizacampos();
       $this->k180_cadtipoparc = $k180_cadtipoparc;
       $this->k180_estorc = $k180_estorc;
-     if(($this->k180_cadtipoparc == null) || ($this->k180_cadtipoparc == "") ){
+     if(($this->k180_cadtipoparc == null) || ($this->k180_cadtipoparc === 0 || $this->k180_cadtipoparc === 0.0 || $this->k180_cadtipoparc == "") ){
        $this->erro_sql = " Campo k180_cadtipoparc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -88,7 +88,7 @@ class cl_cadtipoparcrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k180_estorc == null) || ($this->k180_estorc == "") ){
+     if(($this->k180_estorc == null) || ($this->k180_estorc === 0 || $this->k180_estorc === 0.0 || $this->k180_estorc == "") ){
        $this->erro_sql = " Campo k180_estorc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

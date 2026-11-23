@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/objetivos-estrategicos/filtros",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Objetivos Estratégicos encontrados."
+  },
+  "sha256": "c9a93829643d4ebd69958a9b75a4b0bccdaabceeca403f333bd755dc30082bae",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

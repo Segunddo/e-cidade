@@ -67,10 +67,10 @@ class cl_matparaminstit {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m10_instit = ($this->m10_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m10_instit"]:$this->m10_instit);
-       $this->m10_controlapit = ($this->m10_controlapit == ""?@$GLOBALS["HTTP_POST_VARS"]["m10_controlapit"]:$this->m10_controlapit);
+       $this->m10_instit = ($this->m10_instit === 0 || $this->m10_instit === 0.0 || $this->m10_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m10_instit"]:$this->m10_instit);
+       $this->m10_controlapit = ($this->m10_controlapit === 0 || $this->m10_controlapit === 0.0 || $this->m10_controlapit == ""?@$GLOBALS["HTTP_POST_VARS"]["m10_controlapit"]:$this->m10_controlapit);
      }else{
-       $this->m10_instit = ($this->m10_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m10_instit"]:$this->m10_instit);
+       $this->m10_instit = ($this->m10_instit === 0 || $this->m10_instit === 0.0 || $this->m10_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m10_instit"]:$this->m10_instit);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_matparaminstit {
        return false;
      }
        $this->m10_instit = $m10_instit;
-     if(($this->m10_instit == null) || ($this->m10_instit == "") ){
+     if(($this->m10_instit == null) || ($this->m10_instit === 0 || $this->m10_instit === 0.0 || $this->m10_instit == "") ){
        $this->erro_sql = " Campo m10_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

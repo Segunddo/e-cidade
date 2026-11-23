@@ -67,10 +67,10 @@ class cl_imobil {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j44_matric = ($this->j44_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j44_matric"]:$this->j44_matric);
-       $this->j44_numcgm = ($this->j44_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j44_numcgm"]:$this->j44_numcgm);
+       $this->j44_matric = ($this->j44_matric === 0 || $this->j44_matric === 0.0 || $this->j44_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j44_matric"]:$this->j44_matric);
+       $this->j44_numcgm = ($this->j44_numcgm === 0 || $this->j44_numcgm === 0.0 || $this->j44_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j44_numcgm"]:$this->j44_numcgm);
      }else{
-       $this->j44_matric = ($this->j44_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j44_matric"]:$this->j44_matric);
+       $this->j44_matric = ($this->j44_matric === 0 || $this->j44_matric === 0.0 || $this->j44_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j44_matric"]:$this->j44_matric);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_imobil {
        return false;
      }
        $this->j44_matric = $j44_matric;
-     if(($this->j44_matric == null) || ($this->j44_matric == "") ){
+     if(($this->j44_matric == null) || ($this->j44_matric === 0 || $this->j44_matric === 0.0 || $this->j44_matric == "") ){
        $this->erro_sql = " Campo j44_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

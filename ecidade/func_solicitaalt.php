@@ -34,7 +34,7 @@ require_once(modification("classes/db_solicita_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
 db_postmemory($HTTP_GET_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clsolicita = new cl_solicita;
 $clsolicita->rotulo->label("pc10_numero");

@@ -75,14 +75,14 @@ class cl_db_menupref {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m_codigo = ($this->m_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m_codigo"]:$this->m_codigo);
+       $this->m_codigo = ($this->m_codigo === 0 || $this->m_codigo === 0.0 || $this->m_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m_codigo"]:$this->m_codigo);
        $this->m_descricao = ($this->m_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["m_descricao"]:$this->m_descricao);
        $this->m_arquivo = ($this->m_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["m_arquivo"]:$this->m_arquivo);
        $this->m_imgs = ($this->m_imgs == ""?@$GLOBALS["HTTP_POST_VARS"]["m_imgs"]:$this->m_imgs);
        $this->m_ativo = ($this->m_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["m_ativo"]:$this->m_ativo);
        $this->m_publico = ($this->m_publico == "f"?@$GLOBALS["HTTP_POST_VARS"]["m_publico"]:$this->m_publico);
      }else{
-       $this->m_codigo = ($this->m_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m_codigo"]:$this->m_codigo);
+       $this->m_codigo = ($this->m_codigo === 0 || $this->m_codigo === 0.0 || $this->m_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m_codigo"]:$this->m_codigo);
      }
    }
    // funcao para inclusao
@@ -134,7 +134,7 @@ class cl_db_menupref {
        return false;
      }
        $this->m_codigo = $m_codigo;
-     if(($this->m_codigo == null) || ($this->m_codigo == "") ){
+     if(($this->m_codigo == null) || ($this->m_codigo === 0 || $this->m_codigo === 0.0 || $this->m_codigo == "") ){
        $this->erro_sql = " Campo m_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

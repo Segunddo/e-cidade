@@ -67,11 +67,11 @@ class cl_db_itenshelp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
-       $this->id_help = ($this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_help = ($this->id_help === 0 || $this->id_help === 0.0 || $this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
      }else{
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
-       $this->id_help = ($this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_help = ($this->id_help === 0 || $this->id_help === 0.0 || $this->id_help == ""?@$GLOBALS["HTTP_POST_VARS"]["id_help"]:$this->id_help);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_db_itenshelp {
       $this->atualizacampos();
        $this->id_item = $id_item;
        $this->id_help = $id_help;
-     if(($this->id_item == null) || ($this->id_item == "") ){
+     if(($this->id_item == null) || ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == "") ){
        $this->erro_sql = " Campo id_item nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_db_itenshelp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->id_help == null) || ($this->id_help == "") ){
+     if(($this->id_help == null) || ($this->id_help === 0 || $this->id_help === 0.0 || $this->id_help == "") ){
        $this->erro_sql = " Campo id_help nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

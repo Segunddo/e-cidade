@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/relatorios/emitirRelatorioTurmasAee",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42601]: Syntax error: 7 ERRO:  erro de sintaxe em ou próximo a \"UNION\"\nLINE 1: ...m.ed285_i_cgm            where  ed346_turmaac =   UNION   SE...\n                                                             ^ (SQL: select  distinct ed346_sequencial, ed20_i_codigo, case    when ed20_i_tiposervidor = 1      then trim(cgmrh.z01_nome)    else trim(cgmcgm.z01_nome) end as profissional, ed119_sequencial, ed119_descricao as atividade, ed32_i_codigo, ed32_c_descr as dia, ed346_horainicial as inicio, ed346_horafinal as fim from turmaachorarioprofissional       inner join turmaac  on  turmaac.ed268_i_codigo = turmaachorarioprofissional.ed346_turmaac      inner join funcaoatividade  on  funcaoatividade.ed119_sequencial = turmaachorarioprofissional.ed346_funcaoatividade      inner join diasemana  on  diasemana.ed32_i_codigo = turmaachorarioprofissional.ed346_diasemana      inner join escola  on  escola.ed18_i_codigo = turmaac.ed268_i_escola      inner join turno  on  turno.ed15_i_codigo = turmaac.ed268_i_turno      left  join sala  on  sala.ed16_i_codigo = turmaac.ed268_i_sala      inner join calendario  on  calendario.ed52_i_codigo = turmaac.ed268_i_calendario      inner join rechumano  on  rechumano.ed20_i_codigo = turmaachorarioprofissional.ed346_rechumano      inner join pais  on  pais.ed228_i_codigo = rechumano.ed20_i_pais       left join rechumanopessoal on rechumanopessoal.ed284_i_rechumano = rechumano.ed20_i_codigo                   left join rhpessoal        on rhpessoal.rh01_regist              = rechumanopessoal.ed284_i_rhpessoal        left join cgm as cgmrh     on cgmrh.z01_numcgm                   = rhpessoal.rh01_numcgm                     left join rechumanocgm     on rechumanocgm.ed285_i_rechumano     = rechumano.ed20_i_codigo                   left join cgm as cgmcgm    on cgmcgm.z01_numcgm                  = rechumanocgm.ed285_i_cgm            where  ed346_turmaac =   UNION   SELECT DISTINCT ed176_sequencial,  ed176_rechumano,  ed119_descricao as profissional,  ed119_sequencial,  ed119_descricao,  ed32_i_codigo,  ed32_c_descr,  ed176_horainicial,  ed176_horafinal  FROM turmaachorarioprofissionalsemrec  INNER JOIN turmaac ON turmaac.ed268_i_codigo = turmaachorarioprofissionalsemrec.ed176_turmaac  LEFT JOIN funcaoatividade ON funcaoatividade.ed119_sequencial = turmaachorarioprofissionalsemrec.ed176_funcaoatividade  INNER JOIN diasemana ON diasemana.ed32_i_codigo = turmaachorarioprofissionalsemrec.ed176_diasemana  INNER JOIN escola ON escola.ed18_i_codigo = turmaac.ed268_i_escola  INNER JOIN turno ON turno.ed15_i_codigo = turmaac.ed268_i_turno  LEFT JOIN sala ON sala.ed16_i_codigo = turmaac.ed268_i_sala  INNER JOIN calendario ON calendario.ed52_i_codigo = turmaac.ed268_i_calendario where  ed176_turmaac =  )"
+  },
+  "sha256": "ff07cd3928a0768565d1f32eb61cadffa32e35a390b33cbe1c2684e638139d7b",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

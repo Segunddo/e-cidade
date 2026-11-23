@@ -85,17 +85,17 @@ class cl_issvarold {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q22_codlev = ($this->q22_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_codlev"]:$this->q22_codlev);
-       $this->q22_codigo = ($this->q22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_codigo"]:$this->q22_codigo);
-       $this->q22_numpre = ($this->q22_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_numpre"]:$this->q22_numpre);
-       $this->q22_numpar = ($this->q22_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_numpar"]:$this->q22_numpar);
-       $this->q22_valor = ($this->q22_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_valor"]:$this->q22_valor);
-       $this->q22_ano = ($this->q22_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_ano"]:$this->q22_ano);
-       $this->q22_mes = ($this->q22_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_mes"]:$this->q22_mes);
+       $this->q22_codlev = ($this->q22_codlev === 0 || $this->q22_codlev === 0.0 || $this->q22_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_codlev"]:$this->q22_codlev);
+       $this->q22_codigo = ($this->q22_codigo === 0 || $this->q22_codigo === 0.0 || $this->q22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_codigo"]:$this->q22_codigo);
+       $this->q22_numpre = ($this->q22_numpre === 0 || $this->q22_numpre === 0.0 || $this->q22_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_numpre"]:$this->q22_numpre);
+       $this->q22_numpar = ($this->q22_numpar === 0 || $this->q22_numpar === 0.0 || $this->q22_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_numpar"]:$this->q22_numpar);
+       $this->q22_valor = ($this->q22_valor === 0 || $this->q22_valor === 0.0 || $this->q22_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_valor"]:$this->q22_valor);
+       $this->q22_ano = ($this->q22_ano === 0 || $this->q22_ano === 0.0 || $this->q22_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_ano"]:$this->q22_ano);
+       $this->q22_mes = ($this->q22_mes === 0 || $this->q22_mes === 0.0 || $this->q22_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_mes"]:$this->q22_mes);
        $this->q22_histor = ($this->q22_histor == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_histor"]:$this->q22_histor);
-       $this->q22_aliq = ($this->q22_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_aliq"]:$this->q22_aliq);
-       $this->q22_bruto = ($this->q22_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_bruto"]:$this->q22_bruto);
-       $this->q22_vlrinf = ($this->q22_vlrinf == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_vlrinf"]:$this->q22_vlrinf);
+       $this->q22_aliq = ($this->q22_aliq === 0 || $this->q22_aliq === 0.0 || $this->q22_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_aliq"]:$this->q22_aliq);
+       $this->q22_bruto = ($this->q22_bruto === 0 || $this->q22_bruto === 0.0 || $this->q22_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_bruto"]:$this->q22_bruto);
+       $this->q22_vlrinf = ($this->q22_vlrinf === 0 || $this->q22_vlrinf === 0.0 || $this->q22_vlrinf == ""?@$GLOBALS["HTTP_POST_VARS"]["q22_vlrinf"]:$this->q22_vlrinf);
      }else{
      }
    }

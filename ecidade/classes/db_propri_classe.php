@@ -55,7 +55,7 @@ class cl_propri {
                  j42_arealoteproprietario = float8 = Área do lote por proprietário 
                  ";
    //funcao construtor da classe 
-   public function cl_propri() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("propri"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -72,14 +72,14 @@ class cl_propri {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j42_matric = ($this->j42_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_matric"]:$this->j42_matric);
-       $this->j42_numcgm = ($this->j42_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_numcgm"]:$this->j42_numcgm);
-       $this->j42_fracaoproprietario = ($this->j42_fracaoproprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_fracaoproprietario"]:$this->j42_fracaoproprietario);
-       $this->j42_arealoteproprietario = ($this->j42_arealoteproprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_arealoteproprietario"]:$this->j42_arealoteproprietario);
+       $this->j42_matric = ($this->j42_matric === 0 || $this->j42_matric === 0.0 || $this->j42_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_matric"]:$this->j42_matric);
+       $this->j42_numcgm = ($this->j42_numcgm === 0 || $this->j42_numcgm === 0.0 || $this->j42_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_numcgm"]:$this->j42_numcgm);
+       $this->j42_fracaoproprietario = ($this->j42_fracaoproprietario === 0 || $this->j42_fracaoproprietario === 0.0 || $this->j42_fracaoproprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_fracaoproprietario"]:$this->j42_fracaoproprietario);
+       $this->j42_arealoteproprietario = ($this->j42_arealoteproprietario === 0 || $this->j42_arealoteproprietario === 0.0 || $this->j42_arealoteproprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_arealoteproprietario"]:$this->j42_arealoteproprietario);
      }else{
-       $this->j42_matric = ($this->j42_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_matric"]:$this->j42_matric);
-       $this->j42_numcgm = ($this->j42_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_numcgm"]:$this->j42_numcgm);
-       $this->j42_tipoproprietario = ($this->j42_tipoproprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_tipoproprietario"]:$this->j42_tipoproprietario);
+       $this->j42_matric = ($this->j42_matric === 0 || $this->j42_matric === 0.0 || $this->j42_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_matric"]:$this->j42_matric);
+       $this->j42_numcgm = ($this->j42_numcgm === 0 || $this->j42_numcgm === 0.0 || $this->j42_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_numcgm"]:$this->j42_numcgm);
+       $this->j42_tipoproprietario = ($this->j42_tipoproprietario === 0 || $this->j42_tipoproprietario === 0.0 || $this->j42_tipoproprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["j42_tipoproprietario"]:$this->j42_tipoproprietario);
      }
    }
    // funcao para inclusao
@@ -87,7 +87,7 @@ class cl_propri {
       $this->atualizacampos();
        $this->j42_matric = $j42_matric; 
        $this->j42_numcgm = $j42_numcgm; 
-     if(($this->j42_matric == null) || ($this->j42_matric == "") ){ 
+     if(($this->j42_matric == null) || ($this->j42_matric === 0 || $this->j42_matric === 0.0 || $this->j42_matric == "") ){ 
        $this->erro_sql = " Campo j42_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -95,7 +95,7 @@ class cl_propri {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j42_numcgm == null) || ($this->j42_numcgm == "") ){ 
+     if(($this->j42_numcgm == null) || ($this->j42_numcgm === 0 || $this->j42_numcgm === 0.0 || $this->j42_numcgm == "") ){ 
        $this->erro_sql = " Campo j42_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

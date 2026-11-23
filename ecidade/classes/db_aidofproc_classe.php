@@ -69,11 +69,11 @@ class cl_aidofproc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y02_codigo = ($this->y02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
-       $this->y02_aidof = ($this->y02_aidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_aidof"]:$this->y02_aidof);
-       $this->y02_codproc = ($this->y02_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codproc"]:$this->y02_codproc);
+       $this->y02_codigo = ($this->y02_codigo === 0 || $this->y02_codigo === 0.0 || $this->y02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
+       $this->y02_aidof = ($this->y02_aidof === 0 || $this->y02_aidof === 0.0 || $this->y02_aidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_aidof"]:$this->y02_aidof);
+       $this->y02_codproc = ($this->y02_codproc === 0 || $this->y02_codproc === 0.0 || $this->y02_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codproc"]:$this->y02_codproc);
      }else{
-       $this->y02_codigo = ($this->y02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
+       $this->y02_codigo = ($this->y02_codigo === 0 || $this->y02_codigo === 0.0 || $this->y02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aidofproc {
          $this->y02_codigo = $y02_codigo;
        }
      }
-     if(($this->y02_codigo == null) || ($this->y02_codigo == "") ){
+     if(($this->y02_codigo == null) || ($this->y02_codigo === 0 || $this->y02_codigo === 0.0 || $this->y02_codigo == "") ){
        $this->erro_sql = " Campo y02_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

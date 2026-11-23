@@ -1,0 +1,14 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/orcamento/relatorios/siconfi-recursos-2022",
+  "json": null,
+  "sha256": "ef01547e2b3fa473dc332c21f016d8f6b2f62343a93aac0ac9d7becc5aff3096",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "<script>(window.CurrentWindow || parent.CurrentWindow).alert('Variavel de sess�o nao encontrada: DB_itemmenu_acessado');</script>\n{\"error\":true,\"message\":\"pg_query(): Query failed: ERRO:  erro de sintaxe em ou pr\\ufffdximo a &quot;and&quot;\\nLINE 8:                and modulo = 1\\n                       ^\"}",
+  "tipos": {}
+}

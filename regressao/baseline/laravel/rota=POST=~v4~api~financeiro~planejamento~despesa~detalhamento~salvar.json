@@ -1,0 +1,57 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/despesa/detalhamento/salvar",
+  "json": {
+    "errors": {
+      "pl20_anoorcamento": [
+        "O campo \"Exercício do Orçamento\" deve ser informado."
+      ],
+      "pl20_concarpeculiar": [
+        "O campo \"Caracteristica Peculiar\" deve ser informado."
+      ],
+      "pl20_esferaorcamentaria": [
+        "O campo \"Esfera Orçamentária\" deve ser informado."
+      ],
+      "pl20_iniciativaprojativ": [
+        "O campo \"Código da Iniciativa\" deve ser informado."
+      ],
+      "pl20_instituicao": [
+        "O campo \"Código da Instituição\" deve ser informado."
+      ],
+      "pl20_orcelemento": [
+        "O campo \"Código da Natureza de Despesa\" deve ser informado."
+      ],
+      "pl20_orcfuncao": [
+        "O campo \"Código da Função\" deve ser informado."
+      ],
+      "pl20_orcorgao": [
+        "O campo \"Código do Órgão\" deve ser informado."
+      ],
+      "pl20_orcsubfuncao": [
+        "O campo \"Código da Subfunção\" deve ser informado."
+      ],
+      "pl20_orcunidade": [
+        "O campo \"Código da unidade\" deve ser informado."
+      ],
+      "pl20_recurso": [
+        "O campo \"Código do Recurso\" deve ser informado."
+      ],
+      "pl20_subtitulo": [
+        "O campo \"Código do Subtítulo\" deve ser informado."
+      ],
+      "valores": [
+        "Deve ser informado uma coleção de valores."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "baa6ea0802767828b750f9f8d497e5c9c2b7fb0e26a28b3e1cd91ebca4d2d2cf",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

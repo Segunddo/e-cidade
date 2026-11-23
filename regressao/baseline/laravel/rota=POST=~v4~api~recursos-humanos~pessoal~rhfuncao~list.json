@@ -1,0 +1,34 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/rhfuncao/list",
+  "json": {
+    "data": [
+      {
+        "rh37_descr": "ENCARREGADO ADMINISTRATIVO",
+        "rh37_funcao": 2,
+        "rh37_instit": 1
+      },
+      {
+        "rh37_descr": "AUXILIAR ADMINISTRATIVO1",
+        "rh37_funcao": 3,
+        "rh37_instit": 1
+      },
+      {
+        "rh37_descr": "CARGO",
+        "rh37_funcao": 1,
+        "rh37_instit": 1
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "3c08a9e34188dc3a96190dc6da856f50402fdcb1724e736afd007de191f062e7",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

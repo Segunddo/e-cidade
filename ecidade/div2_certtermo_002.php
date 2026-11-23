@@ -41,7 +41,7 @@ require_once(modification("model/cda.model.php"));
 require_once(modification("libs/db_conecta.php"));
 use ECidade\Tributario\Divida\Service\TermoInscricaoService;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if( empty($proced) ){
   $proced = 0;

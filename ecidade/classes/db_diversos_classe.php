@@ -92,7 +92,7 @@ class cl_diversos {
                 dv05_depto = int4 = Departamento
                 ";
    //funcao construtor da classe 
-   public function cl_diversos() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("diversos");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -109,8 +109,8 @@ class cl_diversos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->dv05_coddiver = ($this->dv05_coddiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_coddiver"]:$this->dv05_coddiver);
-       $this->dv05_numcgm = ($this->dv05_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_numcgm"]:$this->dv05_numcgm);
+       $this->dv05_coddiver = ($this->dv05_coddiver === 0 || $this->dv05_coddiver === 0.0 || $this->dv05_coddiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_coddiver"]:$this->dv05_coddiver);
+       $this->dv05_numcgm = ($this->dv05_numcgm === 0 || $this->dv05_numcgm === 0.0 || $this->dv05_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_numcgm"]:$this->dv05_numcgm);
        if($this->dv05_dtinsc == ""){
          $this->dv05_dtinsc_dia = ($this->dv05_dtinsc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_dtinsc_dia"]:$this->dv05_dtinsc_dia);
          $this->dv05_dtinsc_mes = ($this->dv05_dtinsc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_dtinsc_mes"]:$this->dv05_dtinsc_mes);
@@ -119,11 +119,11 @@ class cl_diversos {
             $this->dv05_dtinsc = $this->dv05_dtinsc_ano."-".$this->dv05_dtinsc_mes."-".$this->dv05_dtinsc_dia;
          }
        }
-       $this->dv05_exerc = ($this->dv05_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_exerc"]:$this->dv05_exerc);
-       $this->dv05_numpre = ($this->dv05_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_numpre"]:$this->dv05_numpre);
-       $this->dv05_vlrhis = ($this->dv05_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_vlrhis"]:$this->dv05_vlrhis);
-       $this->dv05_procdiver = ($this->dv05_procdiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_procdiver"]:$this->dv05_procdiver);
-       $this->dv05_numtot = ($this->dv05_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_numtot"]:$this->dv05_numtot);
+       $this->dv05_exerc = ($this->dv05_exerc === 0 || $this->dv05_exerc === 0.0 || $this->dv05_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_exerc"]:$this->dv05_exerc);
+       $this->dv05_numpre = ($this->dv05_numpre === 0 || $this->dv05_numpre === 0.0 || $this->dv05_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_numpre"]:$this->dv05_numpre);
+       $this->dv05_vlrhis = ($this->dv05_vlrhis === 0 || $this->dv05_vlrhis === 0.0 || $this->dv05_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_vlrhis"]:$this->dv05_vlrhis);
+       $this->dv05_procdiver = ($this->dv05_procdiver === 0 || $this->dv05_procdiver === 0.0 || $this->dv05_procdiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_procdiver"]:$this->dv05_procdiver);
+       $this->dv05_numtot = ($this->dv05_numtot === 0 || $this->dv05_numtot === 0.0 || $this->dv05_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_numtot"]:$this->dv05_numtot);
        if($this->dv05_privenc == ""){
          $this->dv05_privenc_dia = ($this->dv05_privenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_privenc_dia"]:$this->dv05_privenc_dia);
          $this->dv05_privenc_mes = ($this->dv05_privenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_privenc_mes"]:$this->dv05_privenc_mes);
@@ -140,7 +140,7 @@ class cl_diversos {
             $this->dv05_provenc = $this->dv05_provenc_ano."-".$this->dv05_provenc_mes."-".$this->dv05_provenc_dia;
          }
        }
-       $this->dv05_diaprox = ($this->dv05_diaprox == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_diaprox"]:$this->dv05_diaprox);
+       $this->dv05_diaprox = ($this->dv05_diaprox === 0 || $this->dv05_diaprox === 0.0 || $this->dv05_diaprox == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_diaprox"]:$this->dv05_diaprox);
        if($this->dv05_oper == ""){
          $this->dv05_oper_dia = ($this->dv05_oper_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_oper_dia"]:$this->dv05_oper_dia);
          $this->dv05_oper_mes = ($this->dv05_oper_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_oper_mes"]:$this->dv05_oper_mes);
@@ -149,13 +149,13 @@ class cl_diversos {
             $this->dv05_oper = $this->dv05_oper_ano."-".$this->dv05_oper_mes."-".$this->dv05_oper_dia;
          }
        }
-       $this->dv05_valor = ($this->dv05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_valor"]:$this->dv05_valor);
+       $this->dv05_valor = ($this->dv05_valor === 0 || $this->dv05_valor === 0.0 || $this->dv05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_valor"]:$this->dv05_valor);
        $this->dv05_obs = ($this->dv05_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_obs"]:$this->dv05_obs);
-       $this->dv05_instit = ($this->dv05_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_instit"]:$this->dv05_instit);
+       $this->dv05_instit = ($this->dv05_instit === 0 || $this->dv05_instit === 0.0 || $this->dv05_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_instit"]:$this->dv05_instit);
        $this->dv05_login = ($this->dv05_login == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_login"]:$this->dv05_login);
        $this->dv05_depto = ($this->dv05_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_depto"]:$this->dv05_depto);
      }else{
-       $this->dv05_coddiver = ($this->dv05_coddiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_coddiver"]:$this->dv05_coddiver);
+       $this->dv05_coddiver = ($this->dv05_coddiver === 0 || $this->dv05_coddiver === 0.0 || $this->dv05_coddiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv05_coddiver"]:$this->dv05_coddiver);
      }
    }
    // funcao para inclusao
@@ -334,7 +334,7 @@ class cl_diversos {
          $this->dv05_coddiver = $dv05_coddiver;
        }
      }
-     if(($this->dv05_coddiver == null) || ($this->dv05_coddiver == "") ){
+     if(($this->dv05_coddiver == null) || ($this->dv05_coddiver === 0 || $this->dv05_coddiver === 0.0 || $this->dv05_coddiver == "") ){
        $this->erro_sql = " Campo dv05_coddiver nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -187,7 +187,7 @@ $data_lancamento_final_dia  = '';
             
             //echo $sSqlCreditosDisponiveis; die;
             $rsCreditosDisponiveis    = db_query($sSqlCreditosDisponiveis);
-            $iLinhasCreditos          = pg_num_rows($rsCreditosDisponiveis);
+            $iLinhasCreditos          = ($rsCreditosDisponiveis ? pg_num_rows($rsCreditosDisponiveis) : null);
 
             ?>
             <form action="" method="GET">
@@ -322,7 +322,7 @@ $data_lancamento_final_dia  = '';
                                                 WHERE c.k00_numpre = {$oCredito->k00_numpre}";
                         $rsSqlOrigemCredito = db_query($sqlOrigemCredito);
                         if($rsSqlOrigemCredito) {
-                            $iLinhasOrigemCredito = pg_num_rows($rsSqlOrigemCredito);
+                            $iLinhasOrigemCredito = ($rsSqlOrigemCredito ? pg_num_rows($rsSqlOrigemCredito) : null);
                             $aCreditos = array();
                             for ( $xInd=0; $xInd < $iLinhasOrigemCredito; $xInd++ ) {
                                 $oOrigemCredito = db_utils::fieldsMemory($rsSqlOrigemCredito,$xInd);

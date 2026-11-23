@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/get-all",
+  "json": {
+    "errors": {
+      "q202_inscr": [
+        "O campo q202 inscr é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "de9651c2452d676f932601001dcae7334be3fe78fd44bc6fa11ef808b4ef3479",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

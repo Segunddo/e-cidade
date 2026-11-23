@@ -93,13 +93,13 @@ class cl_tabrec
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->k02_codigo = ($this->k02_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_codigo"] : $this->k02_codigo);
+            $this->k02_codigo = ($this->k02_codigo === 0 || $this->k02_codigo === 0.0 || $this->k02_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_codigo"] : $this->k02_codigo);
             $this->k02_tipo = ($this->k02_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_tipo"] : $this->k02_tipo);
             $this->k02_descr = ($this->k02_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_descr"] : $this->k02_descr);
             $this->k02_drecei = ($this->k02_drecei == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_drecei"] : $this->k02_drecei);
-            $this->k02_codjm = ($this->k02_codjm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_codjm"] : $this->k02_codjm);
-            $this->k02_recjur = ($this->k02_recjur == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_recjur"] : $this->k02_recjur);
-            $this->k02_recmul = ($this->k02_recmul == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_recmul"] : $this->k02_recmul);
+            $this->k02_codjm = ($this->k02_codjm === 0 || $this->k02_codjm === 0.0 || $this->k02_codjm == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_codjm"] : $this->k02_codjm);
+            $this->k02_recjur = ($this->k02_recjur === 0 || $this->k02_recjur === 0.0 || $this->k02_recjur == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_recjur"] : $this->k02_recjur);
+            $this->k02_recmul = ($this->k02_recmul === 0 || $this->k02_recmul === 0.0 || $this->k02_recmul == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_recmul"] : $this->k02_recmul);
             if ($this->k02_limite == "") {
                 $this->k02_limite_dia = ($this->k02_limite_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_limite_dia"] : $this->k02_limite_dia);
                 $this->k02_limite_mes = ($this->k02_limite_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_limite_mes"] : $this->k02_limite_mes);
@@ -108,10 +108,10 @@ class cl_tabrec
                     $this->k02_limite = $this->k02_limite_ano . "-" . $this->k02_limite_mes . "-" . $this->k02_limite_dia;
                 }
             }
-            $this->k02_tabrectipo = ($this->k02_tabrectipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_tabrectipo"] : $this->k02_tabrectipo);
+            $this->k02_tabrectipo = ($this->k02_tabrectipo === 0 || $this->k02_tabrectipo === 0.0 || $this->k02_tabrectipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_tabrectipo"] : $this->k02_tabrectipo);
             $this->k02_reccredito = ($this->k02_reccredito == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_reccredito"] : $this->k02_reccredito);
         } else {
-            $this->k02_codigo = ($this->k02_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_codigo"] : $this->k02_codigo);
+            $this->k02_codigo = ($this->k02_codigo === 0 || $this->k02_codigo === 0.0 || $this->k02_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k02_codigo"] : $this->k02_codigo);
         }
     }
 
@@ -207,7 +207,7 @@ class cl_tabrec
                 $this->k02_codigo = $k02_codigo;
             }
         }
-        if (($this->k02_codigo == null) || ($this->k02_codigo == "")) {
+        if (($this->k02_codigo == null) || ($this->k02_codigo === 0 || $this->k02_codigo === 0.0 || $this->k02_codigo == "")) {
             $this->erro_sql = " Campo k02_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

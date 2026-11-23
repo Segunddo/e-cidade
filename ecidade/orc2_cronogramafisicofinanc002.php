@@ -90,6 +90,7 @@ $iTotalProgramas  = count($aProgramas);
 /*
  * Pesquisamos todos os projetos para o programa e o pacto 
  */
+$oTotal = new stdClass();
 $oTotal->janeiro   = 0; 
 $oTotal->fevereiro = 0; 
 $oTotal->marco     = 0; 

@@ -38,7 +38,7 @@ $clrotulo->label('x03_sigla   ');
 $clrotulo->label('x04_dtinst  ');
 $clrotulo->label('x28_dttroca ');
 $clrotulo->label('x28_obs     ');            
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $where = "";
 $info = "";
 if (($data != "--") && ($data1 != "--")) {

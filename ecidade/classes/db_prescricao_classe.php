@@ -80,7 +80,7 @@ class cl_prescricao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k31_codigo = ($this->k31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_codigo"]:$this->k31_codigo);
+       $this->k31_codigo = ($this->k31_codigo === 0 || $this->k31_codigo === 0.0 || $this->k31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_codigo"]:$this->k31_codigo);
        if($this->k31_data == ""){
          $this->k31_data_dia = ($this->k31_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_data_dia"]:$this->k31_data_dia);
          $this->k31_data_mes = ($this->k31_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_data_mes"]:$this->k31_data_mes);
@@ -90,12 +90,12 @@ class cl_prescricao {
          }
        }
        $this->k31_hora = ($this->k31_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_hora"]:$this->k31_hora);
-       $this->k31_usuario = ($this->k31_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_usuario"]:$this->k31_usuario);
+       $this->k31_usuario = ($this->k31_usuario === 0 || $this->k31_usuario === 0.0 || $this->k31_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_usuario"]:$this->k31_usuario);
        $this->k31_obs = ($this->k31_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_obs"]:$this->k31_obs);
-       $this->k31_instit = ($this->k31_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_instit"]:$this->k31_instit);
-       $this->k31_situacao = ($this->k31_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_situacao"]:$this->k31_situacao);
+       $this->k31_instit = ($this->k31_instit === 0 || $this->k31_instit === 0.0 || $this->k31_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_instit"]:$this->k31_instit);
+       $this->k31_situacao = ($this->k31_situacao === 0 || $this->k31_situacao === 0.0 || $this->k31_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_situacao"]:$this->k31_situacao);
      }else{
-       $this->k31_codigo = ($this->k31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_codigo"]:$this->k31_codigo);
+       $this->k31_codigo = ($this->k31_codigo === 0 || $this->k31_codigo === 0.0 || $this->k31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k31_codigo"]:$this->k31_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_prescricao {
          $this->k31_codigo = $k31_codigo;
        }
      }
-     if(($this->k31_codigo == null) || ($this->k31_codigo == "") ){
+     if(($this->k31_codigo == null) || ($this->k31_codigo === 0 || $this->k31_codigo === 0.0 || $this->k31_codigo == "") ){
        $this->erro_sql = " Campo k31_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

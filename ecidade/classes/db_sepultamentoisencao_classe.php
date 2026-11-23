@@ -90,10 +90,10 @@ class cl_sepultamentoisencao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm33_sequencial = ($this->cm33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_sequencial"]:$this->cm33_sequencial);
-       $this->cm33_processo = ($this->cm33_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_processo"]:$this->cm33_processo);
-       $this->cm33_sepultamento = ($this->cm33_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_sepultamento"]:$this->cm33_sepultamento);
-       $this->cm33_isencao = ($this->cm33_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_isencao"]:$this->cm33_isencao);
+       $this->cm33_sequencial = ($this->cm33_sequencial === 0 || $this->cm33_sequencial === 0.0 || $this->cm33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_sequencial"]:$this->cm33_sequencial);
+       $this->cm33_processo = ($this->cm33_processo === 0 || $this->cm33_processo === 0.0 || $this->cm33_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_processo"]:$this->cm33_processo);
+       $this->cm33_sepultamento = ($this->cm33_sepultamento === 0 || $this->cm33_sepultamento === 0.0 || $this->cm33_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_sepultamento"]:$this->cm33_sepultamento);
+       $this->cm33_isencao = ($this->cm33_isencao === 0 || $this->cm33_isencao === 0.0 || $this->cm33_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_isencao"]:$this->cm33_isencao);
        if($this->cm33_datalanc == ""){
          $this->cm33_datalanc_dia = ($this->cm33_datalanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_datalanc_dia"]:$this->cm33_datalanc_dia);
          $this->cm33_datalanc_mes = ($this->cm33_datalanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_datalanc_mes"]:$this->cm33_datalanc_mes);
@@ -118,10 +118,10 @@ class cl_sepultamentoisencao {
             $this->cm33_datafim = $this->cm33_datafim_ano."-".$this->cm33_datafim_mes."-".$this->cm33_datafim_dia;
          }
        }
-       $this->cm33_percentual = ($this->cm33_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_percentual"]:$this->cm33_percentual);
+       $this->cm33_percentual = ($this->cm33_percentual === 0 || $this->cm33_percentual === 0.0 || $this->cm33_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_percentual"]:$this->cm33_percentual);
        $this->cm33_obs = ($this->cm33_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_obs"]:$this->cm33_obs);
      }else{
-       $this->cm33_sequencial = ($this->cm33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_sequencial"]:$this->cm33_sequencial);
+       $this->cm33_sequencial = ($this->cm33_sequencial === 0 || $this->cm33_sequencial === 0.0 || $this->cm33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm33_sequencial"]:$this->cm33_sequencial);
      }
    }
    // funcao para inclusao
@@ -196,7 +196,7 @@ class cl_sepultamentoisencao {
          $this->cm33_sequencial = $cm33_sequencial;
        }
      }
-     if(($this->cm33_sequencial == null) || ($this->cm33_sequencial == "") ){
+     if(($this->cm33_sequencial == null) || ($this->cm33_sequencial === 0 || $this->cm33_sequencial === 0.0 || $this->cm33_sequencial == "") ){
        $this->erro_sql = " Campo cm33_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

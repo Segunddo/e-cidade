@@ -71,12 +71,12 @@ class cl_procfiscalfiscais {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y106_sequencial = ($this->y106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_sequencial"]:$this->y106_sequencial);
-       $this->y106_procfiscal = ($this->y106_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_procfiscal"]:$this->y106_procfiscal);
-       $this->y106_cadfiscais = ($this->y106_cadfiscais == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_cadfiscais"]:$this->y106_cadfiscais);
+       $this->y106_sequencial = ($this->y106_sequencial === 0 || $this->y106_sequencial === 0.0 || $this->y106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_sequencial"]:$this->y106_sequencial);
+       $this->y106_procfiscal = ($this->y106_procfiscal === 0 || $this->y106_procfiscal === 0.0 || $this->y106_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_procfiscal"]:$this->y106_procfiscal);
+       $this->y106_cadfiscais = ($this->y106_cadfiscais === 0 || $this->y106_cadfiscais === 0.0 || $this->y106_cadfiscais == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_cadfiscais"]:$this->y106_cadfiscais);
        $this->y106_principal = ($this->y106_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["y106_principal"]:$this->y106_principal);
      }else{
-       $this->y106_sequencial = ($this->y106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_sequencial"]:$this->y106_sequencial);
+       $this->y106_sequencial = ($this->y106_sequencial === 0 || $this->y106_sequencial === 0.0 || $this->y106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_sequencial"]:$this->y106_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_procfiscalfiscais {
          $this->y106_sequencial = $y106_sequencial;
        }
      }
-     if(($this->y106_sequencial == null) || ($this->y106_sequencial == "") ){
+     if(($this->y106_sequencial == null) || ($this->y106_sequencial === 0 || $this->y106_sequencial === 0.0 || $this->y106_sequencial == "") ){
        $this->erro_sql = " Campo y106_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -83,34 +83,36 @@ Critérios de sucesso sólidos permitem que você trabalhe de forma independente
 
 ## ⏱ ESTADO ATUAL — leia primeiro ao retomar
 
-**Onde paramos:** **ÁREAS TRIBUTÁRIO, EDUCAÇÃO, RECURSOS HUMANOS, PATRIMONIAL, FINANCEIRO, SAÚDE E CONFIGURAÇÃO CONCLUÍDAS** — Configuração com **204/204 telas de menu no 8.5** pelo proxy (branch `7configuracao-migrado`, enviada em 03/11/2026; ver `area-configuracao.md`) — Saúde com **493/493 telas de menu no 8.5** pelo proxy (branch `6saude-migrado`, enviada em 01/11/2026; ver `area-saude.md`) — Financeiro com **992/992 telas de menu no 8.5** pelo proxy (branch `5financeiro-migrado`, enviada em 30/10/2026; ver `area-financeiro.md`) — Patrimonial com
-**743/743 telas de menu no 8.5** conferidas pelo proxy (branch `4patrimonial-migrado`, 29/10/2026; ver `area-patrimonial.md`).
-RH com 701/701 (branch `3recursoshumanos-migrado`; cálculo da folha verificado; 13ª lacuna fechada).
-Conferido pelo proxy, tela de menu por tela de menu (15/10/2026): **Tributário 1.059/1.059** e **Educação
-480/480** arquivos de menu existentes servidos pelo PHP 8.5 — depois de fechar a *10ª LACUNA* (14 telas
-que o `map` não roteava). Ver *🏁 ÁREA EDUCAÇÃO CONCLUÍDA*.
-**Comparação com o TCC de referência FEITA** — ver *⚖️ COMPARAÇÃO MEDIDA COM O TCC DE REFERÊNCIA*. Portados e roteados `tre`, `esc`, `rel`, `sec`, `bib`, `mer` (+ 20 telas `mat`/`pro` por
-`map`) `edu3_` + variantes `edu0x_`/`edu_`, `edu2_`, `edu4_` e os 4 sublotes do `edu1_` — todo o prefixo `edu` (1.211 arquivos). Ver *ÁREA EDUCAÇÃO*.
+**Onde paramos (18/11/2026): na `base-php74`, NENHUM módulo foi adaptado ao PHP 8.5 ainda.** O código em `ecidade/`
+é o 7.4 da DBSeller (PR #8), e o proxy manda **tudo** ao 7.4. A migração das áreas precisa ser **refeita** sobre esta
+base. O que a `base-php84` concluiu (as 7 áreas, 16 de 16 módulos) **não vale aqui**: é histórico e guia (ver abaixo).
 
 | | |
 |---|---|
-| Módulos portados | **16 de 16** — todos com 100% das telas de menu servidas pelo PHP 8.5 |
-| Também portado | `tra` — órfão no menu; as 62 telas só ficaram idênticas no lote à parte de 30/10/2026 (`area-financeiro.md`) |
-| Núcleo (24 arq.) | portado, com guardas `pg_*` acrescentadas conforme os defeitos aparecem |
-| Bibliotecas | **`dbagata/` portado** (211 arquivos executáveis, 213 construtores) — ver seção própria |
-| Rota no nginx | `location ~* ^(?:/w/[0-9]+)?/(?:cem\|itbi?\|agua?\|jur\|div\|mar\|not\|fis\|iss\|dvr\|arr\|tri\|inf\|tra\|tre\|esc\|rel\|sec\|bib\|mer\|edu\|rh\|eso\|rec\|pes\|ac\|aco\|ouv\|lic\|vei\|pat\|com\|cus\|pla\|pl\|tes\|emp\|orc\|cai\|fum\|hip\|age\|amb\|tfd\|vac\|lab\|far\|sau\|sys)[0-9]*_)` — **9.344 arquivos** + 1.312 por `map` (962 telas de menu + 363 abas e destinos da 14ª lacuna, `faseb_map_abas.txt`) |
-| **Próximo passo** | **Área FINANCEIRO dimensionada e dividida em 6 lotes** (branch `5financeiro-migrado`; ver `area-financeiro.md`). **ÁREA FINANCEIRO CONCLUÍDA** (30/10/2026): 6 lotes + o `tra`, bateria do fim da área (`map` 1.112/1.112; `location` 7.966/7.994, as 28 registradas), **992/992 telas de menu pelo proxy** (+ 13 fantasmas). **Enviada ao GitHub** (`origin/5financeiro-migrado`, 30/10/2026). **ÁREA SAÚDE dimensionada e dividida em 7 lotes** (branch `6saude-migrado`, 31/10/2026; ver `area-saude.md`): **lotes 1 (`fum`/`hip`/`age`/`amb`, 71/71) 2 (`tfd`/`vac`, 164/164) 3 (`lab`, 193/195 + 2 caracterizadas) 4 (`far`, 192/192) 5 (`sau1_`, 355/355) 6 (`sau2_`/`sau3_`/`sau4_`/`sau_`, 273/274 + 1 caracterizada) e 7 (3 telas `mat`, 3/3) concluídos — os 7 lotes; bateria completa feita (`map` 1.108/1.108; `location` 9.213/9.245, todas caracterizadas). **493/493 telas de menu pelo proxy — ÁREA SAÚDE CONCLUÍDA.** Enviada ao GitHub (`origin/6saude-migrado`, 01/11/2026)**. **ÁREA CONFIGURAÇÃO dimensionada e dividida em 3 lotes** (branch `7configuracao-migrado`, 03/11/2026; ver `area-configuracao.md`): **lotes 1 (`sys` inteiro + 7 soltas, 91/93 + 2 caracterizadas) 2 (156 telas `con`, 156/156) e 3 (42 abas, 42/42) concluídos — os 3 lotes; bateria completa feita (`map` 1.312/1.312; `location` 9.298/9.331, todas caracterizadas). **204/204 telas de menu pelo proxy — ÁREA CONFIGURAÇÃO CONCLUÍDA.** Enviada ao GitHub (`origin/7configuracao-migrado`, 03/11/2026)** — um lote por vez. **Disco: 1,3 GB livres; truncar o log do `ecidade_database` antes da próxima bateria.** |
-| **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual ao 5.6. Ver *CATEGORIA NOVA: AMBIENTE*. |
-| **Dívida técnica aberta** | `fpdf151/` da raiz (28 arquivos, ver *6ª LACUNA*). O `dbagata/` **saiu da lista**. |
+| Base | `base-php74` = PR #8 da DBSeller (PHP 7.4 + Laravel 8) + ferramentas e documentação trazidas da `base-php84` (PR #12, 17/11/2026) |
+| Módulos adaptados ao 8.5 nesta base | **0 de 16** |
+| Rota no nginx | **nenhuma**: o bloco do `location` está comentado e o `faseb_map.conf` está vazio; tudo vai ao `ecidade_php74` |
+| Referência (gabarito) | o **PHP 7.4** (`ecidade_php74`, porta 8080), no papel que era do 5.6 |
+| Tamanho do trabalho (medido em 16/11/2026 no código do PR #8, com os detectores do `enumera.py`) | **11.726 arquivos a alterar**. Por categoria: guarda `0 == ""` **22.954** ocorrências (intacta: no 7.4 ainda funciona); `parse_str` de 1 argumento **7.645**; `each(` 85; construtor PHP 4 **252** (o PR #8 já tinha resolvido 3.528 de 3.780); `split(` **368** em 86 arquivos |
+| Atenção | os **86 arquivos que ainda chamam `split()`** quebram no **próprio 7.4** (a função não existe desde o PHP 7.0): divergências que aparecerem neles são do gabarito, não da migração (ex.: `classes/db_disciplina_classe.php:441`) |
+| Ferramentas | `scratchpad/` (lista e o que cada uma altera: `scratchpad/README.md`); ainda **não exercitadas** com o 7.4 em Docker |
+| **Próximo passo** | subir 7.4 + 8.5 + proxy e validar as ferramentas no 7.4; depois dimensionar as áreas nesta base (`scratchpad/dimensiona.py`, `prefixos_area.py`) e refazer a migração por área e lote, como no guia (`docs/migrar-um-modulo.md`) — um lote por vez |
+| **php.ini do 8.5** | `docker/php85-apache/paridade-56.ini`, montado pelo compose: **`output_buffering = 4096`**, igual à referência. Ver *CATEGORIA NOVA: AMBIENTE*. |
 | Frentes de enumeração | **nove** — a 8ª (classes de `model/`/`std/`, 13ª lacuna) e a 9ª (classes com namespace em `src/`/`app/`/`api/` e serviços do `bootstrap.php`, **15ª lacuna**, `scratchpad/ns_fecho.py`); todas insensíveis a maiúsculas desde a 9ª lacuna (`getdao`) |
-| **Instrumento do passo 4** | **MUDOU: Rector** (`scratchpad/rector-curado.php` + 2 regras próprias) substituiu o `porta.py` a partir do `iss`. Ver *DECISÃO: Rector adotado*. |
+| **Instrumento do passo 4** | **Rector** (`scratchpad/rector-curado.php` + 2 regras próprias; em um comando: `scratchpad/rector_lote.py`). Ver *DECISÃO: Rector adotado*. |
 
-**Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 5.6):
+**Histórico: o que a `base-php84` concluiu (até 03/11/2026).** Sobre o código antigo (PHP 5.6), as áreas Tributário,
+Educação, Recursos Humanos, Patrimonial, Financeiro, Saúde e Configuração foram migradas — 16 de 16 módulos com 100% das
+telas de menu servidas pelo 8.5, 9.344 arquivos pelo `location` e 1.312 pelo `map`. Os números de cada área, as lacunas
+e as decisões estão em `docs/registro/` e valem como **guia**: o que deu certo, as categorias de defeito e as correções
+que reproduzem o comportamento antigo. O estado completo daquela base: `git show origin/base-php84:CLAUDE.md`.
+
+**Como subir o ambiente** (a ordem importa — 8.5 e proxy dependem da rede criada pelo 7.4):
 
 ```bash
 docker volume create ecidade_sessions && docker volume create ecidade_tmp
 docker compose -f docker-compose.yml -f docker-compose.sessions.yml up -d
-docker exec ecidade_php56 chmod 1777 /tmp      # o volume nasce root:root 755
+docker exec ecidade_php74 chmod 1777 /tmp      # o volume nasce root:root 755
 chmod -R 777 ecidade/storage ecidade/bootstrap/cache 2>/dev/null; chmod 777 ecidade/extension/log   # SEM && : o -R falha em cache do container e abortaria o resto
 chmod 666 ecidade/extension/log/*.log   # os ARQUIVOS, nao so a pasta -- senao TODA tela autenticada da 500
 chmod 777 ecidade/tmp ecidade/arquivos        # SEM isto, 11% das telas falham antes de executar
@@ -132,14 +134,9 @@ nenhum container conseguia escrever, o que fazia **11% das telas da área falhar
 executar** — e aparecerem como "idênticas" nas baterias por falharem igual. Toda medição
 anterior a esta mudança carrega esse ponto cego; as posteriores, não.
 
-**Pendências conhecidas:** todas as divergências de `cem`, `itb` e `agu` estão caracterizadas
-(ver as seções de cada módulo). As que restam são de três tipos, nenhum deles defeito de
-migração: telas que quebram **no 5.6** e funcionam no 8.5 (defeito pré-existente da
-referência), fragmentos de include que não são telas, e relatórios que falham **igualmente**
-nos dois runtimes por `tmp/` não ser gravável. A dívida real aberta é `dbagata/`.
-
-**Fora de escopo até aqui:** Laravel continua 5.4 (não roda em PHP 8, por isso o login fica
-no runtime 5.6) e PostgreSQL continua 16 em LATIN1. São as Fases 1-3 do workflow.
+**Fora de escopo até aqui:** o Laravel do PR #8 é o **8** (a `base-php84` tinha o 5.4) e o PostgreSQL continua 16 em
+LATIN1. A migração do Laravel tem registro próprio (`docs/registro/laravel.md`, `docs/migrar-laravel.md`), escrito
+sobre o 5.4: confira o que mudou antes de seguir.
 
 ## Princípios ao trabalhar neste repositório
 
@@ -163,9 +160,9 @@ no runtime 5.6) e PostgreSQL continua 16 em LATIN1. São as Fases 1-3 do workflo
 
 | | Referência | Migração |
 |---|---|---|
-| Arquivo | `docker-compose.yml` (**não alterar**) | `docker-compose.php85.yml` |
-| Imagem | `docker/php56-apache` | `docker/php85-apache` |
-| PHP | 5.6 | **8.5.10** |
+| Arquivo | `docker-compose.yml` (**não alterar**; é o da DBSeller) | `docker-compose.php85.yml` |
+| Imagem | `docker/php74-apache` (container `ecidade_php74`) | `docker/php85-apache` |
+| PHP | 7.4 | **8.5.10** |
 | URL | http://localhost:8080 | http://localhost:8085 |
 | Banco | `ecidade_database` (PG 16 / LATIN1) | o **mesmo** `ecidade_database` |
 
@@ -245,3 +242,14 @@ Registro (o que antes ficava todo aqui), em `docs/registro/`:
 
 Referências cruzadas antigas do tipo "ver *Seção X*" continuam valendo: a seção existe com o mesmo
 título num desses arquivos (`grep -rn "Seção X" docs/registro/`).
+
+## Suíte de regressão e servidor MCP (base 7.4)
+
+- **Suíte de regressão** (`regressao/`): compara a referência PHP 7.4/Laravel 8 com o PHP 8.5 (telas, POSTs,
+  relatórios, rotas `/v4`, fluxos de navegador). Como usar, em português simples: `regressao/COMO-USAR.md`;
+  detalhe técnico: `regressao/README.md`. Roda num ambiente próprio (projeto compose `e74`, contêineres
+  `ecidade74_*`, portas 8074/8185/8190/8187), que não mexe na pilha da raiz (8080/8085/8090).
+- **Servidor MCP** (`.mcp/`): regras do grupo, busca de padrões legados, validação no 7.4 e no 8.5, regressão e
+  coordenação de quem mexe em qual arquivo, para qualquer IA. Instalação em 3 passos: `.mcp/README.md`.
+- As regras do grupo (`CONTRIBUINDO.md`) valem igual para a suíte e o MCP: arquivo por arquivo no `git add`,
+  ISO-8859-1, cada um na sua área. Um veredito INCONCLUSIVO ou ERRO_AMBIENTE da suíte nunca conta como aprovação.

@@ -1,0 +1,42 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/protocolo/processo/processo",
+  "json": {
+    "data": [
+      {
+        "p58_ano": 2012,
+        "p58_codandam": 0,
+        "p58_coddepto": 1,
+        "p58_codigo": 164,
+        "p58_codproc": 3,
+        "p58_codproc_crypt": "77de68daecd823babbb58edb1c8e14d7106e83bb",
+        "p58_despacho": "",
+        "p58_dtproc": "2012-07-30",
+        "p58_hora": "11:21",
+        "p58_id_usuario": 1,
+        "p58_instit": 1,
+        "p58_interno": false,
+        "p58_numcgm": 1,
+        "p58_numero": "1",
+        "p58_obs": "",
+        "p58_orgao": 0,
+        "p58_processopai": 0,
+        "p58_publico": false,
+        "p58_requer": "PREFEITURA DBSELLER",
+        "p58_tipoprocesso": 1,
+        "p58_volume": 0
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "d71d70d6c34f3366a0d48915c7f4188c94b045c5a08506226a65c605abd039f8",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

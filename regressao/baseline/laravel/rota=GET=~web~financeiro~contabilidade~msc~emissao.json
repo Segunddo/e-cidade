@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/msc/emissao",
+  "json": null,
+  "sha256": "6278047e287006f038a28ae5da1a503c71fb73235b6e9f169f2901c970d887d4",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

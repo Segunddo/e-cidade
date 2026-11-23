@@ -75,14 +75,14 @@ class cl_cronogramabasecalculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o125_sequencial = ($this->o125_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_sequencial"]:$this->o125_sequencial);
-       $this->o125_cronogramaperspectiva = ($this->o125_cronogramaperspectiva == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_cronogramaperspectiva"]:$this->o125_cronogramaperspectiva);
-       $this->o125_mes = ($this->o125_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_mes"]:$this->o125_mes);
-       $this->o125_ano = ($this->o125_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_ano"]:$this->o125_ano);
-       $this->o125_percentual = ($this->o125_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_percentual"]:$this->o125_percentual);
-       $this->o125_valor = ($this->o125_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_valor"]:$this->o125_valor);
+       $this->o125_sequencial = ($this->o125_sequencial === 0 || $this->o125_sequencial === 0.0 || $this->o125_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_sequencial"]:$this->o125_sequencial);
+       $this->o125_cronogramaperspectiva = ($this->o125_cronogramaperspectiva === 0 || $this->o125_cronogramaperspectiva === 0.0 || $this->o125_cronogramaperspectiva == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_cronogramaperspectiva"]:$this->o125_cronogramaperspectiva);
+       $this->o125_mes = ($this->o125_mes === 0 || $this->o125_mes === 0.0 || $this->o125_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_mes"]:$this->o125_mes);
+       $this->o125_ano = ($this->o125_ano === 0 || $this->o125_ano === 0.0 || $this->o125_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_ano"]:$this->o125_ano);
+       $this->o125_percentual = ($this->o125_percentual === 0 || $this->o125_percentual === 0.0 || $this->o125_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_percentual"]:$this->o125_percentual);
+       $this->o125_valor = ($this->o125_valor === 0 || $this->o125_valor === 0.0 || $this->o125_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_valor"]:$this->o125_valor);
      }else{
-       $this->o125_sequencial = ($this->o125_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_sequencial"]:$this->o125_sequencial);
+       $this->o125_sequencial = ($this->o125_sequencial === 0 || $this->o125_sequencial === 0.0 || $this->o125_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o125_sequencial"]:$this->o125_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_cronogramabasecalculo {
          $this->o125_sequencial = $o125_sequencial;
        }
      }
-     if(($this->o125_sequencial == null) || ($this->o125_sequencial == "") ){
+     if(($this->o125_sequencial == null) || ($this->o125_sequencial === 0 || $this->o125_sequencial === 0.0 || $this->o125_sequencial == "") ){
        $this->erro_sql = " Campo o125_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

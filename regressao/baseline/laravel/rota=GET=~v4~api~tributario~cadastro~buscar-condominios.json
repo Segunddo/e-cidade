@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/buscar-condominios",
+  "json": {
+    "data": null,
+    "error": true,
+    "message": "Erro Interno ao buscar condominios."
+  },
+  "sha256": "be4fae11c0c648e274b4554cfce0eaf5c0d83d09ad25659807b6a6b6f9744d9c",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

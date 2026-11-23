@@ -88,7 +88,7 @@ class cl_db_sysregrasacesso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db46_idacesso = ($this->db46_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_idacesso"]:$this->db46_idacesso);
+       $this->db46_idacesso = ($this->db46_idacesso === 0 || $this->db46_idacesso === 0.0 || $this->db46_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_idacesso"]:$this->db46_idacesso);
        if($this->db46_dtinicio == ""){
          $this->db46_dtinicio_dia = ($this->db46_dtinicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_dtinicio_dia"]:$this->db46_dtinicio_dia);
          $this->db46_dtinicio_mes = ($this->db46_dtinicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_dtinicio_mes"]:$this->db46_dtinicio_mes);
@@ -107,7 +107,7 @@ class cl_db_sysregrasacesso {
          }
        }
        $this->db46_horafinal = ($this->db46_horafinal == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_horafinal"]:$this->db46_horafinal);
-       $this->db46_id_usuario = ($this->db46_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_id_usuario"]:$this->db46_id_usuario);
+       $this->db46_id_usuario = ($this->db46_id_usuario === 0 || $this->db46_id_usuario === 0.0 || $this->db46_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_id_usuario"]:$this->db46_id_usuario);
        if($this->db46_datacadastd == ""){
          $this->db46_datacadastd_dia = ($this->db46_datacadastd_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_datacadastd_dia"]:$this->db46_datacadastd_dia);
          $this->db46_datacadastd_mes = ($this->db46_datacadastd_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_datacadastd_mes"]:$this->db46_datacadastd_mes);
@@ -118,7 +118,7 @@ class cl_db_sysregrasacesso {
        }
        $this->db46_observ = ($this->db46_observ == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_observ"]:$this->db46_observ);
      }else{
-       $this->db46_idacesso = ($this->db46_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_idacesso"]:$this->db46_idacesso);
+       $this->db46_idacesso = ($this->db46_idacesso === 0 || $this->db46_idacesso === 0.0 || $this->db46_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db46_idacesso"]:$this->db46_idacesso);
      }
    }
    // funcao para inclusao
@@ -202,7 +202,7 @@ class cl_db_sysregrasacesso {
          $this->db46_idacesso = $db46_idacesso;
        }
      }
-     if(($this->db46_idacesso == null) || ($this->db46_idacesso == "") ){
+     if(($this->db46_idacesso == null) || ($this->db46_idacesso === 0 || $this->db46_idacesso === 0.0 || $this->db46_idacesso == "") ){
        $this->erro_sql = " Campo db46_idacesso nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

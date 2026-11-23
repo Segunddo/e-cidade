@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/matricula-online/relatorios/previsao-vagas-parciais",
+  "json": null,
+  "sha256": "d158ea3151312f0542a0b0d4273f3a6da1dd96c1f06f9c4a20374d7dec4b9bb8",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

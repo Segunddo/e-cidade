@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/notificacoes/lista/verificalista",
+  "json": {
+    "data": [],
+    "error": true,
+    "message": "informe o codigo da lista"
+  },
+  "sha256": "f52717603b32a9027311ece4442f5d17cb3d03602a89291c586f79f4ea51eeac",
+  "sql_negocio": [],
+  "status": 400,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

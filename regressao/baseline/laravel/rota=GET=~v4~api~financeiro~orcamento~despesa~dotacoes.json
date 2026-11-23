@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/despesa/dotacoes",
+  "json": {
+    "error": true,
+    "message": "Undefined index: rows"
+  },
+  "sha256": "2aa013e47f60060456dc6f635c1f5a7ad4fd8fb4148b14586f1522bde760d771",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

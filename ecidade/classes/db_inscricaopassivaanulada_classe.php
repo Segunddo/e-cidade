@@ -76,9 +76,9 @@ class cl_inscricaopassivaanulada {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c39_sequencial = ($this->c39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_sequencial"]:$this->c39_sequencial);
-       $this->c39_inscricaopassivo = ($this->c39_inscricaopassivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_inscricaopassivo"]:$this->c39_inscricaopassivo);
-       $this->c39_db_usuarios = ($this->c39_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_db_usuarios"]:$this->c39_db_usuarios);
+       $this->c39_sequencial = ($this->c39_sequencial === 0 || $this->c39_sequencial === 0.0 || $this->c39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_sequencial"]:$this->c39_sequencial);
+       $this->c39_inscricaopassivo = ($this->c39_inscricaopassivo === 0 || $this->c39_inscricaopassivo === 0.0 || $this->c39_inscricaopassivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_inscricaopassivo"]:$this->c39_inscricaopassivo);
+       $this->c39_db_usuarios = ($this->c39_db_usuarios === 0 || $this->c39_db_usuarios === 0.0 || $this->c39_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_db_usuarios"]:$this->c39_db_usuarios);
        if($this->c39_data == ""){
          $this->c39_data_dia = ($this->c39_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_data_dia"]:$this->c39_data_dia);
          $this->c39_data_mes = ($this->c39_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_data_mes"]:$this->c39_data_mes);
@@ -89,7 +89,7 @@ class cl_inscricaopassivaanulada {
        }
        $this->c39_observacao = ($this->c39_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_observacao"]:$this->c39_observacao);
      }else{
-       $this->c39_sequencial = ($this->c39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_sequencial"]:$this->c39_sequencial);
+       $this->c39_sequencial = ($this->c39_sequencial === 0 || $this->c39_sequencial === 0.0 || $this->c39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c39_sequencial"]:$this->c39_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_inscricaopassivaanulada {
          $this->c39_sequencial = $c39_sequencial;
        }
      }
-     if(($this->c39_sequencial == null) || ($this->c39_sequencial == "") ){
+     if(($this->c39_sequencial == null) || ($this->c39_sequencial === 0 || $this->c39_sequencial === 0.0 || $this->c39_sequencial == "") ){
        $this->erro_sql = " Campo c39_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

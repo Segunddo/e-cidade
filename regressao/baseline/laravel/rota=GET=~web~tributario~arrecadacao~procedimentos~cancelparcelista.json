@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/arrecadacao/procedimentos/cancelparcelista",
+  "json": null,
+  "sha256": "5a69b4fc80072741fc8ee62c2dd2d6e06e365b6fe609ebd2abda1790728c7b23",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

@@ -67,10 +67,10 @@ class cl_cfautentconta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k16_id = ($this->k16_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_id"]:$this->k16_id);
-       $this->k16_conta = ($this->k16_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_conta"]:$this->k16_conta);
+       $this->k16_id = ($this->k16_id === 0 || $this->k16_id === 0.0 || $this->k16_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_id"]:$this->k16_id);
+       $this->k16_conta = ($this->k16_conta === 0 || $this->k16_conta === 0.0 || $this->k16_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_conta"]:$this->k16_conta);
      }else{
-       $this->k16_id = ($this->k16_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_id"]:$this->k16_id);
+       $this->k16_id = ($this->k16_id === 0 || $this->k16_id === 0.0 || $this->k16_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k16_id"]:$this->k16_id);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_cfautentconta {
        return false;
      }
        $this->k16_id = $k16_id;
-     if(($this->k16_id == null) || ($this->k16_id == "") ){
+     if(($this->k16_id == null) || ($this->k16_id === 0 || $this->k16_id === 0.0 || $this->k16_id == "") ){
        $this->erro_sql = " Campo k16_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

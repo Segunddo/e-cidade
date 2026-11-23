@@ -73,13 +73,13 @@ class cl_db_syscadproced {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codproced = ($this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
+       $this->codproced = ($this->codproced === 0 || $this->codproced === 0.0 || $this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
        $this->descrproced = ($this->descrproced == ""?@$GLOBALS["HTTP_POST_VARS"]["descrproced"]:$this->descrproced);
        $this->obsproced = ($this->obsproced == ""?@$GLOBALS["HTTP_POST_VARS"]["obsproced"]:$this->obsproced);
-       $this->codmod = ($this->codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["codmod"]:$this->codmod);
-       $this->codarea = ($this->codarea == ""?@$GLOBALS["HTTP_POST_VARS"]["codarea"]:$this->codarea);
+       $this->codmod = ($this->codmod === 0 || $this->codmod === 0.0 || $this->codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["codmod"]:$this->codmod);
+       $this->codarea = ($this->codarea === 0 || $this->codarea === 0.0 || $this->codarea == ""?@$GLOBALS["HTTP_POST_VARS"]["codarea"]:$this->codarea);
      }else{
-       $this->codproced = ($this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
+       $this->codproced = ($this->codproced === 0 || $this->codproced === 0.0 || $this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_db_syscadproced {
          $this->codproced = $codproced;
        }
      }
-     if(($this->codproced == null) || ($this->codproced == "") ){
+     if(($this->codproced == null) || ($this->codproced === 0 || $this->codproced === 0.0 || $this->codproced == "") ){
        $this->erro_sql = " Campo codproced nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

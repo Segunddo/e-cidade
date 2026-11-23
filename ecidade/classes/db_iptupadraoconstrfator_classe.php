@@ -71,12 +71,12 @@ class cl_iptupadraoconstrfator {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j117_sequencial = ($this->j117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j117_sequencial"]:$this->j117_sequencial);
-       $this->j117_iptupadraoconstr = ($this->j117_iptupadraoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j117_iptupadraoconstr"]:$this->j117_iptupadraoconstr);
-       $this->j117_fator = ($this->j117_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j117_fator"]:$this->j117_fator);
-       $this->j117_anousu = ($this->j117_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j117_anousu"]:$this->j117_anousu);
+       $this->j117_sequencial = ($this->j117_sequencial === 0 || $this->j117_sequencial === 0.0 || $this->j117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j117_sequencial"]:$this->j117_sequencial);
+       $this->j117_iptupadraoconstr = ($this->j117_iptupadraoconstr === 0 || $this->j117_iptupadraoconstr === 0.0 || $this->j117_iptupadraoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j117_iptupadraoconstr"]:$this->j117_iptupadraoconstr);
+       $this->j117_fator = ($this->j117_fator === 0 || $this->j117_fator === 0.0 || $this->j117_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j117_fator"]:$this->j117_fator);
+       $this->j117_anousu = ($this->j117_anousu === 0 || $this->j117_anousu === 0.0 || $this->j117_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j117_anousu"]:$this->j117_anousu);
      }else{
-       $this->j117_sequencial = ($this->j117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j117_sequencial"]:$this->j117_sequencial);
+       $this->j117_sequencial = ($this->j117_sequencial === 0 || $this->j117_sequencial === 0.0 || $this->j117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j117_sequencial"]:$this->j117_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_iptupadraoconstrfator {
          $this->j117_sequencial = $j117_sequencial;
        }
      }
-     if(($this->j117_sequencial == null) || ($this->j117_sequencial == "") ){
+     if(($this->j117_sequencial == null) || ($this->j117_sequencial === 0 || $this->j117_sequencial === 0.0 || $this->j117_sequencial == "") ){
        $this->erro_sql = " Campo j117_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

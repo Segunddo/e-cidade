@@ -73,13 +73,13 @@ class cl_iptucalcpadraoconstr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j11_sequencial = ($this->j11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_sequencial"]:$this->j11_sequencial);
-       $this->j11_iptucalcpadrao = ($this->j11_iptucalcpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_iptucalcpadrao"]:$this->j11_iptucalcpadrao);
-       $this->j11_matric = ($this->j11_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_matric"]:$this->j11_matric);
-       $this->j11_idcons = ($this->j11_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_idcons"]:$this->j11_idcons);
-       $this->j11_vlrcons = ($this->j11_vlrcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_vlrcons"]:$this->j11_vlrcons);
+       $this->j11_sequencial = ($this->j11_sequencial === 0 || $this->j11_sequencial === 0.0 || $this->j11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_sequencial"]:$this->j11_sequencial);
+       $this->j11_iptucalcpadrao = ($this->j11_iptucalcpadrao === 0 || $this->j11_iptucalcpadrao === 0.0 || $this->j11_iptucalcpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_iptucalcpadrao"]:$this->j11_iptucalcpadrao);
+       $this->j11_matric = ($this->j11_matric === 0 || $this->j11_matric === 0.0 || $this->j11_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_matric"]:$this->j11_matric);
+       $this->j11_idcons = ($this->j11_idcons === 0 || $this->j11_idcons === 0.0 || $this->j11_idcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_idcons"]:$this->j11_idcons);
+       $this->j11_vlrcons = ($this->j11_vlrcons === 0 || $this->j11_vlrcons === 0.0 || $this->j11_vlrcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_vlrcons"]:$this->j11_vlrcons);
      }else{
-       $this->j11_sequencial = ($this->j11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_sequencial"]:$this->j11_sequencial);
+       $this->j11_sequencial = ($this->j11_sequencial === 0 || $this->j11_sequencial === 0.0 || $this->j11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j11_sequencial"]:$this->j11_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_iptucalcpadraoconstr {
          $this->j11_sequencial = $j11_sequencial;
        }
      }
-     if(($this->j11_sequencial == null) || ($this->j11_sequencial == "") ){
+     if(($this->j11_sequencial == null) || ($this->j11_sequencial === 0 || $this->j11_sequencial === 0.0 || $this->j11_sequencial == "") ){
        $this->erro_sql = " Campo j11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/matricula-online/relatorios/geral-inscricoes",
+  "json": {
+    "error": true,
+    "message": "Plugin Matrícula On Line não instalado."
+  },
+  "sha256": "1511493c8885df7608a85739e023fdf99ad9ab617cfe9ad362edfb989668e601",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

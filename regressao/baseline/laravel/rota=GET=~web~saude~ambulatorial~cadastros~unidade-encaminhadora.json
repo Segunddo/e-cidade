@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/saude/ambulatorial/cadastros/unidade-encaminhadora",
+  "json": null,
+  "sha256": "ccc7e977cf1e3a6d5665d15f1ca7b06394df39210df9373c544ff54a86a2bba0",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

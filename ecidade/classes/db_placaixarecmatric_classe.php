@@ -69,11 +69,11 @@ class cl_placaixarecmatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k77_sequencial = ($this->k77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_sequencial"]:$this->k77_sequencial);
-       $this->k77_placaixarec = ($this->k77_placaixarec == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_placaixarec"]:$this->k77_placaixarec);
-       $this->k77_matric = ($this->k77_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_matric"]:$this->k77_matric);
+       $this->k77_sequencial = ($this->k77_sequencial === 0 || $this->k77_sequencial === 0.0 || $this->k77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_sequencial"]:$this->k77_sequencial);
+       $this->k77_placaixarec = ($this->k77_placaixarec === 0 || $this->k77_placaixarec === 0.0 || $this->k77_placaixarec == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_placaixarec"]:$this->k77_placaixarec);
+       $this->k77_matric = ($this->k77_matric === 0 || $this->k77_matric === 0.0 || $this->k77_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_matric"]:$this->k77_matric);
      }else{
-       $this->k77_sequencial = ($this->k77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_sequencial"]:$this->k77_sequencial);
+       $this->k77_sequencial = ($this->k77_sequencial === 0 || $this->k77_sequencial === 0.0 || $this->k77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k77_sequencial"]:$this->k77_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_placaixarecmatric {
          $this->k77_sequencial = $k77_sequencial;
        }
      }
-     if(($this->k77_sequencial == null) || ($this->k77_sequencial == "") ){
+     if(($this->k77_sequencial == null) || ($this->k77_sequencial === 0 || $this->k77_sequencial === 0.0 || $this->k77_sequencial == "") ){
        $this->erro_sql = " Campo k77_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

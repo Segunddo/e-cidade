@@ -1,0 +1,29 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/ambulatorial/procedimento/unificacao-cgs/listar-cgs",
+  "json": {
+    "data": [
+      {
+        "cgs": 0,
+        "cpf": null,
+        "data_nascimento": null,
+        "endereco": null,
+        "errado": false,
+        "municipio": null,
+        "nome": "NAO INFORMADO",
+        "nome_mae": ""
+      }
+    ],
+    "error": false,
+    "message": "CGS listado com sucesso"
+  },
+  "sha256": "3f8ebf89886af5ad650c19f238514b6600c0de3022f9d38b5fcb74f587e5544f",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

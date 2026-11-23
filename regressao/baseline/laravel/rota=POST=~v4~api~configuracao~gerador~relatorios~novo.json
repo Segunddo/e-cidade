@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/gerador/relatorios/novo",
+  "json": {
+    "error": true,
+    "message": "Undefined index: Principal"
+  },
+  "sha256": "b2edecffc1c6312ba43b56f6af02c5924586ed4bb77a1d58bddd3666560ec680",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

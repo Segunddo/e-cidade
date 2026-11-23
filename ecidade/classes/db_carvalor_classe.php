@@ -81,17 +81,17 @@ class cl_carvalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j71_codigo = ($this->j71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_codigo"]:$this->j71_codigo);
-       $this->j71_anousu = ($this->j71_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_anousu"]:$this->j71_anousu);
-       $this->j71_caract = ($this->j71_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_caract"]:$this->j71_caract);
+       $this->j71_codigo = ($this->j71_codigo === 0 || $this->j71_codigo === 0.0 || $this->j71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_codigo"]:$this->j71_codigo);
+       $this->j71_anousu = ($this->j71_anousu === 0 || $this->j71_anousu === 0.0 || $this->j71_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_anousu"]:$this->j71_anousu);
+       $this->j71_caract = ($this->j71_caract === 0 || $this->j71_caract === 0.0 || $this->j71_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_caract"]:$this->j71_caract);
        $this->j71_descr = ($this->j71_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_descr"]:$this->j71_descr);
-       $this->j71_valor = ($this->j71_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_valor"]:$this->j71_valor);
-       $this->j71_ini = ($this->j71_ini == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_ini"]:$this->j71_ini);
-       $this->j71_fim = ($this->j71_fim == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_fim"]:$this->j71_fim);
-       $this->j71_quantini = ($this->j71_quantini == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_quantini"]:$this->j71_quantini);
-       $this->j71_quantfim = ($this->j71_quantfim == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_quantfim"]:$this->j71_quantfim);
+       $this->j71_valor = ($this->j71_valor === 0 || $this->j71_valor === 0.0 || $this->j71_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_valor"]:$this->j71_valor);
+       $this->j71_ini = ($this->j71_ini === 0 || $this->j71_ini === 0.0 || $this->j71_ini == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_ini"]:$this->j71_ini);
+       $this->j71_fim = ($this->j71_fim === 0 || $this->j71_fim === 0.0 || $this->j71_fim == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_fim"]:$this->j71_fim);
+       $this->j71_quantini = ($this->j71_quantini === 0 || $this->j71_quantini === 0.0 || $this->j71_quantini == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_quantini"]:$this->j71_quantini);
+       $this->j71_quantfim = ($this->j71_quantfim === 0 || $this->j71_quantfim === 0.0 || $this->j71_quantfim == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_quantfim"]:$this->j71_quantfim);
      }else{
-       $this->j71_codigo = ($this->j71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_codigo"]:$this->j71_codigo);
+       $this->j71_codigo = ($this->j71_codigo === 0 || $this->j71_codigo === 0.0 || $this->j71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j71_codigo"]:$this->j71_codigo);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_carvalor {
          $this->j71_codigo = $j71_codigo;
        }
      }
-     if(($this->j71_codigo == null) || ($this->j71_codigo == "") ){
+     if(($this->j71_codigo == null) || ($this->j71_codigo === 0 || $this->j71_codigo === 0.0 || $this->j71_codigo == "") ){
        $this->erro_sql = " Campo j71_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

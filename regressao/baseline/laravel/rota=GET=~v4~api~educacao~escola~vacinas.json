@@ -1,0 +1,69 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/escola/vacinas",
+  "json": {
+    "data": [
+      {
+        "ed178_codigo": 8,
+        "ed178_descricao": "Covid-19 - BioNTech/Fosun Pharma/Pfizer",
+        "ed178_sigla": "COV19 Biontech - Pfizer"
+      },
+      {
+        "ed178_codigo": 7,
+        "ed178_descricao": "Covid-19 - Coronavac - Sinovac/Butantan",
+        "ed178_sigla": "COV19 Coronavac - Sinovac/Butantan"
+      },
+      {
+        "ed178_codigo": 6,
+        "ed178_descricao": "Covid-19 - Covishield - Oxford/AstraZeneca",
+        "ed178_sigla": "COV19 Oxford - AstraZeneca"
+      },
+      {
+        "ed178_codigo": 9,
+        "ed178_descricao": "Covid-19 - Janssen-Cilag",
+        "ed178_sigla": "COV19 Janssen - Cilag"
+      },
+      {
+        "ed178_codigo": 5,
+        "ed178_descricao": "Dengue 1, 2, 3 e 4",
+        "ed178_sigla": "Dengue"
+      },
+      {
+        "ed178_codigo": 4,
+        "ed178_descricao": "Dupla Adulto - Difeteria e Tétano",
+        "ed178_sigla": "dT"
+      },
+      {
+        "ed178_codigo": 2,
+        "ed178_descricao": "Febre Amarela",
+        "ed178_sigla": "FA"
+      },
+      {
+        "ed178_codigo": 1,
+        "ed178_descricao": "Hepatite B",
+        "ed178_sigla": "HB"
+      },
+      {
+        "ed178_codigo": 10,
+        "ed178_descricao": "Influenza Trivalente",
+        "ed178_sigla": "FLU3V"
+      },
+      {
+        "ed178_codigo": 3,
+        "ed178_descricao": "Tríplice Viral  - Sarampo, Caxumba, Rubéola",
+        "ed178_sigla": "SCR"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "c4b301aa4790772007ab0ef9dc814bcbbb4a78a86bc6bd2f9895360620cf8bf0",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/central-de-matriculas/processo-inscricao/inscricao",
+  "json": {
+    "error": true,
+    "message": "Class 'ECidade\\Educacao\\MatriculaOnline\\Service\\InscricaoService' not found"
+  },
+  "sha256": "53815e184f60ce6c2645e93fa3b63ecb858068911c25f593de5b92d1ebc2b5c1",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

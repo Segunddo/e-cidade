@@ -76,8 +76,8 @@ class cl_corgrupocorrente {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k105_sequencial = ($this->k105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_sequencial"]:$this->k105_sequencial);
-       $this->k105_corgrupo = ($this->k105_corgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_corgrupo"]:$this->k105_corgrupo);
+       $this->k105_sequencial = ($this->k105_sequencial === 0 || $this->k105_sequencial === 0.0 || $this->k105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_sequencial"]:$this->k105_sequencial);
+       $this->k105_corgrupo = ($this->k105_corgrupo === 0 || $this->k105_corgrupo === 0.0 || $this->k105_corgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_corgrupo"]:$this->k105_corgrupo);
        if($this->k105_data == ""){
          $this->k105_data_dia = ($this->k105_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_data_dia"]:$this->k105_data_dia);
          $this->k105_data_mes = ($this->k105_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_data_mes"]:$this->k105_data_mes);
@@ -86,10 +86,10 @@ class cl_corgrupocorrente {
             $this->k105_data = $this->k105_data_ano."-".$this->k105_data_mes."-".$this->k105_data_dia;
          }
        }
-       $this->k105_autent = ($this->k105_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_autent"]:$this->k105_autent);
-       $this->k105_id = ($this->k105_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_id"]:$this->k105_id);
+       $this->k105_autent = ($this->k105_autent === 0 || $this->k105_autent === 0.0 || $this->k105_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_autent"]:$this->k105_autent);
+       $this->k105_id = ($this->k105_id === 0 || $this->k105_id === 0.0 || $this->k105_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_id"]:$this->k105_id);
      }else{
-       $this->k105_sequencial = ($this->k105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_sequencial"]:$this->k105_sequencial);
+       $this->k105_sequencial = ($this->k105_sequencial === 0 || $this->k105_sequencial === 0.0 || $this->k105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k105_sequencial"]:$this->k105_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_corgrupocorrente {
          $this->k105_sequencial = $k105_sequencial;
        }
      }
-     if(($this->k105_sequencial == null) || ($this->k105_sequencial == "") ){
+     if(($this->k105_sequencial == null) || ($this->k105_sequencial === 0 || $this->k105_sequencial === 0.0 || $this->k105_sequencial == "") ){
        $this->erro_sql = " Campo k105_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

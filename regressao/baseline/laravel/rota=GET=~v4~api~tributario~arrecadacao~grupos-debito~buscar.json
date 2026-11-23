@@ -1,0 +1,173 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/arrecadacao/grupos-debito/buscar",
+  "json": {
+    "data": [
+      {
+        "descricao": "NAO INFORMADO",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "f",
+        "sequencial": "0"
+      },
+      {
+        "descricao": "IPTU",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "t",
+        "permiteParcelar": "f",
+        "sequencial": "1"
+      },
+      {
+        "descricao": "ISSQN FIXO",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "t",
+        "permiteParcelar": "f",
+        "sequencial": "2"
+      },
+      {
+        "descricao": "ISSQN VARIAVEL",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "f",
+        "sequencial": "3"
+      },
+      {
+        "descricao": "CONTRIBUICAO DE MELHORIA",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "t",
+        "sequencial": "4"
+      },
+      {
+        "descricao": "DIVIDA ATIVA",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "t",
+        "sequencial": "5"
+      },
+      {
+        "descricao": "PARCELAMENTO DIVIDA ATIVA",
+        "isParcelamento": "t",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "t",
+        "sequencial": "6"
+      },
+      {
+        "descricao": "DIVERSOS",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "t",
+        "permiteParcelar": "t",
+        "sequencial": "7"
+      },
+      {
+        "descricao": "ITBI",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "t",
+        "permiteParcelar": "f",
+        "sequencial": "8"
+      },
+      {
+        "descricao": "ALVARA",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "t",
+        "permiteParcelar": "f",
+        "sequencial": "9"
+      },
+      {
+        "descricao": "NOTIFICACAO FISCAL",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "f",
+        "sequencial": "10"
+      },
+      {
+        "descricao": "AUTO DE INFRACAO FISCAL",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "f",
+        "sequencial": "11"
+      },
+      {
+        "descricao": "INICIAL DE DIVIDA ATIVA",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "t",
+        "sequencial": "12"
+      },
+      {
+        "descricao": "PARCELAMENTO DE INICIAL DIV ATIVA",
+        "isParcelamento": "t",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "t",
+        "sequencial": "13"
+      },
+      {
+        "descricao": "PROTOCOLO GERAL",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "f",
+        "sequencial": "14"
+      },
+      {
+        "descricao": "CERTIDAO DO FORO",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "f",
+        "sequencial": "15"
+      },
+      {
+        "descricao": "PARCELAMENTO DIVERSO",
+        "isParcelamento": "t",
+        "parelaSomanteAnoAtual": "t",
+        "permiteParcelar": "t",
+        "sequencial": "16"
+      },
+      {
+        "descricao": "PARCELAMENTO DE CONTRIB MELHORIA",
+        "isParcelamento": "t",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "t",
+        "sequencial": "17"
+      },
+      {
+        "descricao": "INICIAL FORO",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "t",
+        "sequencial": "18"
+      },
+      {
+        "descricao": "VISTORIAS",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "t",
+        "permiteParcelar": "f",
+        "sequencial": "19"
+      },
+      {
+        "descricao": "SANEAMENTO BASICO",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "f",
+        "permiteParcelar": "f",
+        "sequencial": "20"
+      },
+      {
+        "descricao": "CEMITERIO",
+        "isParcelamento": "f",
+        "parelaSomanteAnoAtual": "t",
+        "permiteParcelar": "f",
+        "sequencial": "21"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "7bb757149188e10f9a9adb3a571626b68bff2146056b23fbe348dd0ce167bb84",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

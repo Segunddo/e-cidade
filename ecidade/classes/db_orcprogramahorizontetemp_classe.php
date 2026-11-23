@@ -81,9 +81,9 @@ class cl_orcprogramahorizontetemp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o17_sequencial = ($this->o17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_sequencial"]:$this->o17_sequencial);
-       $this->o17_programa = ($this->o17_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_programa"]:$this->o17_programa);
-       $this->o17_anousu = ($this->o17_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_anousu"]:$this->o17_anousu);
+       $this->o17_sequencial = ($this->o17_sequencial === 0 || $this->o17_sequencial === 0.0 || $this->o17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_sequencial"]:$this->o17_sequencial);
+       $this->o17_programa = ($this->o17_programa === 0 || $this->o17_programa === 0.0 || $this->o17_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_programa"]:$this->o17_programa);
+       $this->o17_anousu = ($this->o17_anousu === 0 || $this->o17_anousu === 0.0 || $this->o17_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_anousu"]:$this->o17_anousu);
        if($this->o17_dataini == ""){
          $this->o17_dataini_dia = ($this->o17_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_dataini_dia"]:$this->o17_dataini_dia);
          $this->o17_dataini_mes = ($this->o17_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_dataini_mes"]:$this->o17_dataini_mes);
@@ -100,9 +100,9 @@ class cl_orcprogramahorizontetemp {
             $this->o17_datafin = $this->o17_datafin_ano."-".$this->o17_datafin_mes."-".$this->o17_datafin_dia;
          }
        }
-       $this->o17_valor = ($this->o17_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_valor"]:$this->o17_valor);
+       $this->o17_valor = ($this->o17_valor === 0 || $this->o17_valor === 0.0 || $this->o17_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_valor"]:$this->o17_valor);
      }else{
-       $this->o17_sequencial = ($this->o17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_sequencial"]:$this->o17_sequencial);
+       $this->o17_sequencial = ($this->o17_sequencial === 0 || $this->o17_sequencial === 0.0 || $this->o17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o17_sequencial"]:$this->o17_sequencial);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_orcprogramahorizontetemp {
          $this->o17_sequencial = $o17_sequencial;
        }
      }
-     if(($this->o17_sequencial == null) || ($this->o17_sequencial == "") ){
+     if(($this->o17_sequencial == null) || ($this->o17_sequencial === 0 || $this->o17_sequencial === 0.0 || $this->o17_sequencial == "") ){
        $this->erro_sql = " Campo o17_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

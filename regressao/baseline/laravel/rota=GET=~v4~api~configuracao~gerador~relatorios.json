@@ -1,0 +1,87 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/gerador/relatorios",
+  "json": {
+    "data": [
+      {
+        "codigo": 1000001,
+        "nome": "Empenhos Sem Justificativa"
+      },
+      {
+        "codigo": 1000000,
+        "nome": "Cubo Alunos Matriculados"
+      },
+      {
+        "codigo": 29,
+        "nome": "Contratos Emergenciais"
+      },
+      {
+        "codigo": 28,
+        "nome": "Relatório de Servidores por Tipo de Reajuste"
+      },
+      {
+        "codigo": 26,
+        "nome": "Líquidos da folha por Recurso/Banco - CSV"
+      },
+      {
+        "codigo": 25,
+        "nome": "Líquidos da folha por Recurso/Banco - PDF"
+      },
+      {
+        "codigo": 20,
+        "nome": "Líquidos da folha por Recurso - Sintetico - CSV"
+      },
+      {
+        "codigo": 19,
+        "nome": "Líquidos da folha por Recurso - Sintetico - PDF"
+      },
+      {
+        "codigo": 18,
+        "nome": "Líquidos da folha por Recurso - Analitico - CSV"
+      },
+      {
+        "codigo": 17,
+        "nome": "Líquidos da folha por Recurso - Analitico - PDF"
+      },
+      {
+        "codigo": 16,
+        "nome": "Relatório Paralisação"
+      },
+      {
+        "codigo": 10,
+        "nome": "MEI Processados"
+      },
+      {
+        "codigo": 9,
+        "nome": "Condomínio"
+      },
+      {
+        "codigo": 7,
+        "nome": "Resumo Tarefas Release por Motivo"
+      },
+      {
+        "codigo": 6,
+        "nome": "Relatório Tarefas Prontas para Release"
+      },
+      {
+        "codigo": 5,
+        "nome": "Relatório Movimentos SQL Tarefa"
+      },
+      {
+        "codigo": 4,
+        "nome": "Relatório de Mensagens Release"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "638da3abe9b876c5a42d9002b3032bcfef0dbd12f1d1e21898b47d3980678ec6",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

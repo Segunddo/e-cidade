@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/lancamento-manual/proximo-lote",
+  "json": {
+    "data": "0000001",
+    "error": false,
+    "message": "Número do próximo Lote"
+  },
+  "sha256": "599e801f3324a86d8ab1d1cd893a3ac43999096bf6d62a3132c2a75952b6ca64",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -67,11 +67,11 @@ class cl_pagordemval {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e51_codord = ($this->e51_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e51_codord"]:$this->e51_codord);
-       $this->e51_codlan = ($this->e51_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["e51_codlan"]:$this->e51_codlan);
+       $this->e51_codord = ($this->e51_codord === 0 || $this->e51_codord === 0.0 || $this->e51_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e51_codord"]:$this->e51_codord);
+       $this->e51_codlan = ($this->e51_codlan === 0 || $this->e51_codlan === 0.0 || $this->e51_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["e51_codlan"]:$this->e51_codlan);
      }else{
-       $this->e51_codord = ($this->e51_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e51_codord"]:$this->e51_codord);
-       $this->e51_codlan = ($this->e51_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["e51_codlan"]:$this->e51_codlan);
+       $this->e51_codord = ($this->e51_codord === 0 || $this->e51_codord === 0.0 || $this->e51_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e51_codord"]:$this->e51_codord);
+       $this->e51_codlan = ($this->e51_codlan === 0 || $this->e51_codlan === 0.0 || $this->e51_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["e51_codlan"]:$this->e51_codlan);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_pagordemval {
       $this->atualizacampos();
        $this->e51_codord = $e51_codord;
        $this->e51_codlan = $e51_codlan;
-     if(($this->e51_codord == null) || ($this->e51_codord == "") ){
+     if(($this->e51_codord == null) || ($this->e51_codord === 0 || $this->e51_codord === 0.0 || $this->e51_codord == "") ){
        $this->erro_sql = " Campo e51_codord nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_pagordemval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e51_codlan == null) || ($this->e51_codlan == "") ){
+     if(($this->e51_codlan == null) || ($this->e51_codlan === 0 || $this->e51_codlan === 0.0 || $this->e51_codlan == "") ){
        $this->erro_sql = " Campo e51_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

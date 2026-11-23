@@ -82,12 +82,12 @@ class cl_iptucalv
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->j21_anousu = ($this->j21_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_anousu"] : $this->j21_anousu);
-            $this->j21_matric = ($this->j21_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_matric"] : $this->j21_matric);
-            $this->j21_receit = ($this->j21_receit == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_receit"] : $this->j21_receit);
-            $this->j21_valor = ($this->j21_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_valor"] : $this->j21_valor);
-            $this->j21_quant = ($this->j21_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_quant"] : $this->j21_quant);
-            $this->j21_codhis = ($this->j21_codhis == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_codhis"] : $this->j21_codhis);
+            $this->j21_anousu = ($this->j21_anousu === 0 || $this->j21_anousu === 0.0 || $this->j21_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_anousu"] : $this->j21_anousu);
+            $this->j21_matric = ($this->j21_matric === 0 || $this->j21_matric === 0.0 || $this->j21_matric == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_matric"] : $this->j21_matric);
+            $this->j21_receit = ($this->j21_receit === 0 || $this->j21_receit === 0.0 || $this->j21_receit == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_receit"] : $this->j21_receit);
+            $this->j21_valor = ($this->j21_valor === 0 || $this->j21_valor === 0.0 || $this->j21_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_valor"] : $this->j21_valor);
+            $this->j21_quant = ($this->j21_quant === 0 || $this->j21_quant === 0.0 || $this->j21_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_quant"] : $this->j21_quant);
+            $this->j21_codhis = ($this->j21_codhis === 0 || $this->j21_codhis === 0.0 || $this->j21_codhis == "" ? @$GLOBALS["HTTP_POST_VARS"]["j21_codhis"] : $this->j21_codhis);
         } else {
         }
     }

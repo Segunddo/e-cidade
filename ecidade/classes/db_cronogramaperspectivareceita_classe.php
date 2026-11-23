@@ -71,12 +71,12 @@ class cl_cronogramaperspectivareceita {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o126_sequencial = ($this->o126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_sequencial"]:$this->o126_sequencial);
-       $this->o126_codrec = ($this->o126_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_codrec"]:$this->o126_codrec);
-       $this->o126_anousu = ($this->o126_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_anousu"]:$this->o126_anousu);
-       $this->o126_cronogramaperspectiva = ($this->o126_cronogramaperspectiva == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_cronogramaperspectiva"]:$this->o126_cronogramaperspectiva);
+       $this->o126_sequencial = ($this->o126_sequencial === 0 || $this->o126_sequencial === 0.0 || $this->o126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_sequencial"]:$this->o126_sequencial);
+       $this->o126_codrec = ($this->o126_codrec === 0 || $this->o126_codrec === 0.0 || $this->o126_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_codrec"]:$this->o126_codrec);
+       $this->o126_anousu = ($this->o126_anousu === 0 || $this->o126_anousu === 0.0 || $this->o126_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_anousu"]:$this->o126_anousu);
+       $this->o126_cronogramaperspectiva = ($this->o126_cronogramaperspectiva === 0 || $this->o126_cronogramaperspectiva === 0.0 || $this->o126_cronogramaperspectiva == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_cronogramaperspectiva"]:$this->o126_cronogramaperspectiva);
      }else{
-       $this->o126_sequencial = ($this->o126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_sequencial"]:$this->o126_sequencial);
+       $this->o126_sequencial = ($this->o126_sequencial === 0 || $this->o126_sequencial === 0.0 || $this->o126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o126_sequencial"]:$this->o126_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_cronogramaperspectivareceita {
          $this->o126_sequencial = $o126_sequencial;
        }
      }
-     if(($this->o126_sequencial == null) || ($this->o126_sequencial == "") ){
+     if(($this->o126_sequencial == null) || ($this->o126_sequencial === 0 || $this->o126_sequencial === 0.0 || $this->o126_sequencial == "") ){
        $this->erro_sql = " Campo o126_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

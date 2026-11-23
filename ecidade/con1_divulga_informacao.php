@@ -28,7 +28,7 @@
 require(modification("libs/db_stdlib.php"));
 require(modification("libs/db_conecta.php"));
 include(modification("libs/db_usuariosonline.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //$divulgacao_codigo = 1;
 ?>
 <html>
@@ -67,16 +67,16 @@ p {
  
     $sql = "select demodescr from db_itensmenudemonstracao where id_item = $divulgacao_codigo";
     $result = db_query($sql);
-    $numrows = pg_numrows($result);
+    $numrows = ($result ? pg_numrows($result) : null);
     if( $numrows > 0 ){
-      $descricao = pg_result($result,0,0); 
+      $descricao = ($result ? pg_result($result,0,0) : null); 
     }else{
       $descricao = "";
     }
 
     $sql = "select desctec from db_itensmenu where id_item = $divulgacao_codigo";
     $result = db_query($sql);
-    $descricao_item = pg_result($result,0,0); 
+    $descricao_item = ($result ? pg_result($result,0,0) : null); 
 
 
   }

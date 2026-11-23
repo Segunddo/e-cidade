@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/escola/diario-classe/registro-aula/get-habilidades-bncc",
+  "json": {
+    "error": true,
+    "message": "Trying to get property 'disciplinaEnsino' of non-object"
+  },
+  "sha256": "2dc4fc35b36cf47a523c3416641d81c53213e39f46297f1b15235ad56e24fac8",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

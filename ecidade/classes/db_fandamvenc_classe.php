@@ -70,7 +70,7 @@ class cl_fandamvenc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y44_codandam = ($this->y44_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y44_codandam"]:$this->y44_codandam);
+       $this->y44_codandam = ($this->y44_codandam === 0 || $this->y44_codandam === 0.0 || $this->y44_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y44_codandam"]:$this->y44_codandam);
        if($this->y44_dtvenc == ""){
          $this->y44_dtvenc_dia = ($this->y44_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y44_dtvenc_dia"]:$this->y44_dtvenc_dia);
          $this->y44_dtvenc_mes = ($this->y44_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y44_dtvenc_mes"]:$this->y44_dtvenc_mes);
@@ -80,7 +80,7 @@ class cl_fandamvenc {
          }
        }
      }else{
-       $this->y44_codandam = ($this->y44_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y44_codandam"]:$this->y44_codandam);
+       $this->y44_codandam = ($this->y44_codandam === 0 || $this->y44_codandam === 0.0 || $this->y44_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y44_codandam"]:$this->y44_codandam);
      }
    }
    // funcao para inclusao
@@ -96,7 +96,7 @@ class cl_fandamvenc {
        return false;
      }
        $this->y44_codandam = $y44_codandam; 
-     if(($this->y44_codandam == null) || ($this->y44_codandam == "") ){ 
+     if(($this->y44_codandam == null) || ($this->y44_codandam === 0 || $this->y44_codandam === 0.0 || $this->y44_codandam == "") ){ 
        $this->erro_sql = " Campo y44_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

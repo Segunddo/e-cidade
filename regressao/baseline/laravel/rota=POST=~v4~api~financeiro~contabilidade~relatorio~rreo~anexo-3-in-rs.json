@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/rreo/anexo-3-in-rs",
+  "json": {
+    "errors": {
+      "codigo_relatorio": [
+        "O campo codigo relatorio é obrigatório."
+      ],
+      "periodo": [
+        "O campo periodo é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "ec1a578bdb1c9f731235a38a2b97fd58d4e43e1caa9056bf2fa59eeb6741ed35",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/plano-contas/mapeamento/vinculo-automatico",
+  "json": null,
+  "sha256": "30ce2f1243435d7d9d41d7a22de32163512d4c30ce1cf682498bdbcbc79aa7f5",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/empenho/relatorio/retencoesEfdReinf",
+  "json": {
+    "error": true,
+    "message": "Undefined index: dataInicial"
+  },
+  "sha256": "c0e531fd2c6907a3ee0df81f5df6453313fa77391c43e359ae94c1c54e62127e",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

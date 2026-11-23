@@ -352,7 +352,7 @@ if ((isset($HTTP_POST_VARS["db_opcao"]) && $HTTP_POST_VARS["db_opcao"]) == "Incl
             }
             $sqltip = "select k00_tipo,k00_descr from arretipo where k00_tipo in($tipodeb1)";
                 $resulttip = db_query($sqltip);
-                $linhastip = pg_num_rows($resulttip);
+                $linhastip = ($resulttip ? pg_num_rows($resulttip) : null);
                 $virgula = "";
             for ($x = 0; $x < $linhastip; $x ++) {
                 db_fieldsmemory($resulttip, $x);
@@ -934,14 +934,14 @@ select 	sum(k22_vlrcor)+sum(k22_juros)+sum(k22_multa)-sum(k22_desconto) as total
 
     if ($opcaofiltro == 1) {
         $resultlistadeb = db_query("select * from listadeb where k61_codigo = ".$cllista->k60_codigo." limit 1");
-        if (pg_num_rows($resultlistadeb) == 0) {
+        if (($resultlistadeb ? pg_num_rows($resultlistadeb) : null) == 0) {
             echo "<script>alert('Não existem devedores para as opções escolhidas')</script>";
             db_redireciona("cai1_lista001.php");
             exit;
         }
     }
     if (1 == 2) {
-        for ($ii = 0; $ii < pg_num_rows($resultlistadeb); $ii ++) {
+        for ($ii = 0; $ii < ($resultlistadeb ? pg_num_rows($resultlistadeb) : null); $ii ++) {
             db_fieldsmemory($resultlistadeb, $ii);
             $cllistadeb->k61_codigo = $cllista->k60_codigo;
             $cllistadeb->k61_numpre = $k22_numpre;
@@ -1239,7 +1239,7 @@ function js_emite1(){
             $sSqlDataDebitos .= "order by k115_data desc ";
 
             $rsDataDebitos    = db_query($sSqlDataDebitos);
-            $iNroDatas        = pg_num_rows($rsDataDebitos);
+            $iNroDatas        = ($rsDataDebitos ? pg_num_rows($rsDataDebitos) : null);
 
             $aDatas[''] = 'SELECIONE';
             for ($iInd=0; $iInd < $iNroDatas; $iInd++) {

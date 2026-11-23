@@ -44,7 +44,7 @@ $tipo_impressao = 1;
 // 1 = orcamento
 // 2 = balanco
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $xinstit = explode("-", $_GET['db_selinstit']);
 $resultinst = db_query(
@@ -52,7 +52,7 @@ $resultinst = db_query(
 );
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_num_rows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_num_rows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg . $nomeinstabrev;
     $xvirg = ', ';
@@ -105,7 +105,7 @@ if (EMENTARIO_RECEITA) {
 $pagina = 1;
 $xx = 1;
 
-for ($i = 0; $i < pg_num_rows($result); $i++) {
+for ($i = 0; $i < ($result ? pg_num_rows($result) : null); $i++) {
     db_fieldsmemory($result, $i);
     $elemento = $o57_fonte;
     $descr = $o57_descr;
@@ -211,7 +211,7 @@ $pdf->cell(40, $alt, "Resumo", 0, 1, "L", 0);
 
 $rec_cor = 0;
 $rec_cap = 0;
-for ($i = 0; $i < pg_num_rows($result); $i++) {
+for ($i = 0; $i < ($result ? pg_num_rows($result) : null); $i++) {
     db_fieldsmemory($result, $i);
     $elemento = $o57_fonte;
     $descr = $o57_descr;
@@ -246,7 +246,7 @@ $pdf->cell(20, $alt, db_formatar($rec_cor, 'f'), "T", 0, "R", 0);
 $pdf->cell(20, $alt, "", 0, 1, "R", 0);
 $pdf->ln(3);
 
-for ($i = 0; $i < pg_num_rows($result); $i++) {
+for ($i = 0; $i < ($result ? pg_num_rows($result) : null); $i++) {
     db_fieldsmemory($result, $i);
     $elemento = $o57_fonte;
     $descr = $o57_descr;

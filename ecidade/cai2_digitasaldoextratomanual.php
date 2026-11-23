@@ -48,7 +48,7 @@ $clconciliaextrato = new cl_conciliaextrato;
 $clconciliapendextrato = new cl_conciliapendextrato;
 $clextratolinha = new cl_extratolinha;
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 
 $clrotulo = new rotulocampo;

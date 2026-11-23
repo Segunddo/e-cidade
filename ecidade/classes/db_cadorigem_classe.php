@@ -67,10 +67,10 @@ class cl_cadorigem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k33_sequencial = ($this->k33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k33_sequencial"]:$this->k33_sequencial);
+       $this->k33_sequencial = ($this->k33_sequencial === 0 || $this->k33_sequencial === 0.0 || $this->k33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k33_sequencial"]:$this->k33_sequencial);
        $this->k33_descr = ($this->k33_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k33_descr"]:$this->k33_descr);
      }else{
-       $this->k33_sequencial = ($this->k33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k33_sequencial"]:$this->k33_sequencial);
+       $this->k33_sequencial = ($this->k33_sequencial === 0 || $this->k33_sequencial === 0.0 || $this->k33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k33_sequencial"]:$this->k33_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_cadorigem {
          $this->k33_sequencial = $k33_sequencial;
        }
      }
-     if(($this->k33_sequencial == null) || ($this->k33_sequencial == "") ){
+     if(($this->k33_sequencial == null) || ($this->k33_sequencial === 0 || $this->k33_sequencial === 0.0 || $this->k33_sequencial == "") ){
        $this->erro_sql = " Campo k33_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

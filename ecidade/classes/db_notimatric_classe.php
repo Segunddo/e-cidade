@@ -67,11 +67,11 @@ class cl_notimatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k55_notifica = ($this->k55_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_notifica"]:$this->k55_notifica);
-       $this->k55_matric = ($this->k55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_matric"]:$this->k55_matric);
+       $this->k55_notifica = ($this->k55_notifica === 0 || $this->k55_notifica === 0.0 || $this->k55_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_notifica"]:$this->k55_notifica);
+       $this->k55_matric = ($this->k55_matric === 0 || $this->k55_matric === 0.0 || $this->k55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_matric"]:$this->k55_matric);
      }else{
-       $this->k55_notifica = ($this->k55_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_notifica"]:$this->k55_notifica);
-       $this->k55_matric = ($this->k55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_matric"]:$this->k55_matric);
+       $this->k55_notifica = ($this->k55_notifica === 0 || $this->k55_notifica === 0.0 || $this->k55_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_notifica"]:$this->k55_notifica);
+       $this->k55_matric = ($this->k55_matric === 0 || $this->k55_matric === 0.0 || $this->k55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k55_matric"]:$this->k55_matric);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_notimatric {
       $this->atualizacampos();
        $this->k55_notifica = $k55_notifica;
        $this->k55_matric = $k55_matric;
-     if(($this->k55_notifica == null) || ($this->k55_notifica == "") ){
+     if(($this->k55_notifica == null) || ($this->k55_notifica === 0 || $this->k55_notifica === 0.0 || $this->k55_notifica == "") ){
        $this->erro_sql = " Campo k55_notifica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_notimatric {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k55_matric == null) || ($this->k55_matric == "") ){
+     if(($this->k55_matric == null) || ($this->k55_matric === 0 || $this->k55_matric === 0.0 || $this->k55_matric == "") ){
        $this->erro_sql = " Campo k55_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

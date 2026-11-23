@@ -39,7 +39,7 @@ require_once(modification("classes/db_orcfontes_classe.php"));
 $nameBotao = 'excluir';
 $labelBotao = 'Excluir';
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 $clorcreceita = new cl_orcreceita;
 $clorcfontes = new cl_orcfontes;

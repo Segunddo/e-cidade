@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/compraEditalAviso/buscarSolicitacao",
+  "json": {
+    "error": true,
+    "message": "Número da solicitação não informado."
+  },
+  "sha256": "437d15c5733292f3b70b0dc978c121e90379316b2b1a247860ce35ba1d3663be",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

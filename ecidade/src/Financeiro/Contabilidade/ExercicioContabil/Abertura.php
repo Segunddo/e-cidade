@@ -99,7 +99,7 @@ class Abertura extends ExercicioContabil
      * @return boolean true
      * @throws Exception
      */
-    public function cancelar(array $documentos)
+    public function cancelar(?array $documentos = null)
     {
         foreach ($documentos as $codigoDocumento) {
             $this->cancelarDocumento($codigoDocumento);

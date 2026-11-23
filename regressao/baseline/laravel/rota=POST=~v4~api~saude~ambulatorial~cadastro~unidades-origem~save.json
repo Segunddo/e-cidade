@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/ambulatorial/cadastro/unidades-origem/save",
+  "json": {
+    "errors": {
+      "ativo": [
+        "O campo ativo é obrigatório."
+      ],
+      "descricao": [
+        "O campo descricao é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "a33f8f4b141a442068750df401f56d2aedafe2b0861d0623353a56d8e4e5da3e",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

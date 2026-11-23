@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/patrimonial/pncp/procedimentos/contratacao-edital-aviso/exclusao-documento",
+  "json": null,
+  "sha256": "e1f932b10fdc4750162bb598b2fc3203c88c23a7227add12ed27d032a600d975",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

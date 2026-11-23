@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/tesouraria/decendio/tipo-desdobramento",
+  "json": {
+    "error": true,
+    "message": "Undefined index: desdobramentos"
+  },
+  "sha256": "b59e1c3fb9c528fc8ac41a51b8a79059b469c48090297f6d8bc29557d09b7f25",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

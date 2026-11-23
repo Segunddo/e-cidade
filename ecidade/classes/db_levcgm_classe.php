@@ -67,10 +67,10 @@ class cl_levcgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y93_codlev = ($this->y93_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y93_codlev"]:$this->y93_codlev);
-       $this->y93_numcgm = ($this->y93_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y93_numcgm"]:$this->y93_numcgm);
+       $this->y93_codlev = ($this->y93_codlev === 0 || $this->y93_codlev === 0.0 || $this->y93_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y93_codlev"]:$this->y93_codlev);
+       $this->y93_numcgm = ($this->y93_numcgm === 0 || $this->y93_numcgm === 0.0 || $this->y93_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y93_numcgm"]:$this->y93_numcgm);
      }else{
-       $this->y93_codlev = ($this->y93_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y93_codlev"]:$this->y93_codlev);
+       $this->y93_codlev = ($this->y93_codlev === 0 || $this->y93_codlev === 0.0 || $this->y93_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y93_codlev"]:$this->y93_codlev);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_levcgm {
        return false;
      }
        $this->y93_codlev = $y93_codlev;
-     if(($this->y93_codlev == null) || ($this->y93_codlev == "") ){
+     if(($this->y93_codlev == null) || ($this->y93_codlev === 0 || $this->y93_codlev === 0.0 || $this->y93_codlev == "") ){
        $this->erro_sql = " Campo y93_codlev nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

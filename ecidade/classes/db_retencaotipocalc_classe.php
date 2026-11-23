@@ -67,10 +67,10 @@ class cl_retencaotipocalc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e32_sequencial = ($this->e32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e32_sequencial"]:$this->e32_sequencial);
+       $this->e32_sequencial = ($this->e32_sequencial === 0 || $this->e32_sequencial === 0.0 || $this->e32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e32_sequencial"]:$this->e32_sequencial);
        $this->e32_descricao = ($this->e32_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["e32_descricao"]:$this->e32_descricao);
      }else{
-       $this->e32_sequencial = ($this->e32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e32_sequencial"]:$this->e32_sequencial);
+       $this->e32_sequencial = ($this->e32_sequencial === 0 || $this->e32_sequencial === 0.0 || $this->e32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e32_sequencial"]:$this->e32_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_retencaotipocalc {
          $this->e32_sequencial = $e32_sequencial;
        }
      }
-     if(($this->e32_sequencial == null) || ($this->e32_sequencial == "") ){
+     if(($this->e32_sequencial == null) || ($this->e32_sequencial === 0 || $this->e32_sequencial === 0.0 || $this->e32_sequencial == "") ){
        $this->erro_sql = " Campo e32_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

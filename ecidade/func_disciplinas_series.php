@@ -34,7 +34,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_disciplinas_series_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldisciplinas_series = new cl_disciplinas_series;
 $cldisciplinas_series->rotulo->label("ed31_i_codigo");
 $cldisciplinas_series->rotulo->label("ed31_i_codigo");

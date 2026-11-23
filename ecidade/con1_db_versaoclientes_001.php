@@ -33,7 +33,7 @@ include(modification("classes/db_db_versaoclientes_classe.php"));
 include(modification("classes/db_clientes_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldb_versaoclientes = new cl_db_versaoclientes;
 $clclientes = new cl_clientes;
 
@@ -50,7 +50,7 @@ if(isset($atualiza)){
    
   $dberro = false;
 
-  for($i=0;$i<pg_numrows($result);$i++){
+  for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   
      db_fieldsmemory($result,$i);
      
@@ -163,7 +163,7 @@ $result = db_query($sql);
   
       //$result = $clclientes->sql_record($clclientes->sql_query(null,"at01_codcli,at01_nomecli,at01_cidade,at01_base,at01_obs","at01_nomecli"," at01_status = true"));
      //db_criatabela($result);
-      for($i=0;$i<pg_numrows($result);$i++){
+      for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
         db_fieldsmemory($result,$i); 
         echo "<tr>";
         echo "<td align=\"left\" valign=\"top\">$at01_codcli</td>"; 
@@ -176,7 +176,7 @@ $result = db_query($sql);
 
         $sql = "select db19_data,db19_obs from db_versaoclientes where db19_codver = $db29_codver and db19_codcli = $at01_codcli";
         $resu = db_query($sql);
-        if(pg_numrows($resu)>0){
+        if(($resu ? pg_numrows($resu) : null)>0){
           db_fieldsmemory($resu,0);
           $data_ano = substr($db19_data,0,4);
           $data_mes = substr($db19_data,5,2);

@@ -1,0 +1,107 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/saude/ambulatorial/consulta/problemas",
+  "json": {
+    "data": [
+      {
+        "descricao": "Asma",
+        "id": 1
+      },
+      {
+        "descricao": "Câncer de colo de útero",
+        "id": 2
+      },
+      {
+        "descricao": "Câncer de mama",
+        "id": 3
+      },
+      {
+        "descricao": "Dengue",
+        "id": 4
+      },
+      {
+        "descricao": "Desnutrição",
+        "id": 5
+      },
+      {
+        "descricao": "Diabetes",
+        "id": 6
+      },
+      {
+        "descricao": "DPOC",
+        "id": 7
+      },
+      {
+        "descricao": "DST",
+        "id": 8
+      },
+      {
+        "descricao": "Hanseníase",
+        "id": 9
+      },
+      {
+        "descricao": "Hipertensão arterial",
+        "id": 10
+      },
+      {
+        "descricao": "Obesidade",
+        "id": 11
+      },
+      {
+        "descricao": "Pré-natal",
+        "id": 12
+      },
+      {
+        "descricao": "Puericultura",
+        "id": 13
+      },
+      {
+        "descricao": "Puerpério",
+        "id": 14
+      },
+      {
+        "descricao": "Reabilitação",
+        "id": 15
+      },
+      {
+        "descricao": "Risco cardiovascular",
+        "id": 16
+      },
+      {
+        "descricao": "Saúde mental",
+        "id": 17
+      },
+      {
+        "descricao": "Saúde sexual e reprodutiva",
+        "id": 18
+      },
+      {
+        "descricao": "Tabagismo",
+        "id": 19
+      },
+      {
+        "descricao": "Tuberculose",
+        "id": 20
+      },
+      {
+        "descricao": "Usuário de álcool",
+        "id": 21
+      },
+      {
+        "descricao": "Usuário de outras drogas",
+        "id": 22
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "df35e30c89e3e0493624eee9590453aca433ab4738e962b302d9ea50746038e6",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

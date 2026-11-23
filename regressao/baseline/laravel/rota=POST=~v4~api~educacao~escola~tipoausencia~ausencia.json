@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/tipoausencia/ausencia",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42703]: Undefined column: 7 ERRO:  não existe a coluna \"ed320_categoria\" da relação \"tipoausencia\"\nLINE 1: ... into \"escola\".\"tipoausencia\" (\"ed320_descricao\", \"ed320_cat...\n                                                             ^ (SQL: insert into \"escola\".\"tipoausencia\" (\"ed320_descricao\", \"ed320_categoria\", \"ed320_subcategoria\") values (?, ?, ?))"
+  },
+  "sha256": "ab642652686206ec73ac4b5410ee6767968abc3ff0ece9b489efc59e25d513b2",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

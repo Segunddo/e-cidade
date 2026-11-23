@@ -33,7 +33,7 @@ $clcgs_und = new cl_cgs_und ( );
 $clcgs_und->rotulo->label ();
 $clrotulo = new rotulocampo ( );
 
-parse_str ( $_SERVER ['QUERY_STRING'] );
+parse_str ( $_SERVER ['QUERY_STRING'] , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory ($_GET);
 
 

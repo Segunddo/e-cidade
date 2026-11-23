@@ -37,7 +37,7 @@ $clobraspropri=new cl_obraspropri;
 $clobrasender=new cl_obrasender;
 $clobraslote=new cl_obraslote;
 $clobraslotei=new cl_obraslotei;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //echo $codigo;exit;
 if(!isset($codigo) || $codigo==''){
   db_redireciona('db_erros.php?fechar=true&db_erro=Carta de habitação não encontrada!');

@@ -35,7 +35,7 @@ include(modification("libs/db_libtxt.php"));
 include(modification("dbforms/db_funcoes.php"));
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 
@@ -53,7 +53,7 @@ $sql = "select *
             ";
 
 $res = db_query($sql);
-if (pg_numrows($res) == 0 ){      
+if (($res ? pg_numrows($res) : null) == 0 ){      
     db_redireciona('db_erros.php?fechar=true&db_erro=Nenhum registro encontrado ! ');   
 }
 /*
@@ -85,7 +85,7 @@ $pdf->addpage();
 $quantidade = 0;
 $valor_total =0;
 
-for($x=0;$x <pg_numrows($res);$x++){
+for($x=0;$x <($res ? pg_numrows($res) : null);$x++){
    db_fieldsmemory($res,$x);
 	
    $pdf->cell(15,$alt,$o27_sequen,  1,0,"C",0);

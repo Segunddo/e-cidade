@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/saude/ambulatorial/consulta/setoresambulatoriais",
+  "json": {
+    "error": true,
+    "message": "Undefined index: DB_coddepto"
+  },
+  "sha256": "e441144f2d3d9341a96618be200b93c683045335f39a54fb057e89b5d7181fd1",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

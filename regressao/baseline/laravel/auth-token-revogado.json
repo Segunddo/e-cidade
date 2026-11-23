@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "auth-token-revogado",
+  "json": {
+    "error": true,
+    "message": "Unauthenticated."
+  },
+  "sha256": "5f8a752f0f453397f9367c3ab1cd741a9a86c59b8d754d9417b3aa50266d8a4c",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

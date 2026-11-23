@@ -1,0 +1,6 @@
+# Dependencias do servidor MCP do e-Cidade (versoes fixas; instale num venv em .mcp/.venv).
+# O SDK oficial do MCP 2.x chama de MCPServer o que no 1.x era FastMCP (mesma API de decoradores).
+mcp==2.3.0
+pydantic==2.14.3
+# so para os testes
+pytest==9.2.0

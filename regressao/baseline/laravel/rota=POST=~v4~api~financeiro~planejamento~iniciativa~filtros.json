@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/iniciativa/filtros",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Iniciativas cadastradas no programa estratégicos."
+  },
+  "sha256": "6109b901d5b475b4e9d4c128d2e5774bf892bc36850083a3e771992382a5cdd5",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

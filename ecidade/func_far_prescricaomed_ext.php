@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_far_prescricaomed_classe.php"));
 include(modification("classes/db_far_prescricaomedica_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clfar_prescricaomed = new cl_far_prescricaomed;
 $clfar_prescricaomedica = new cl_far_prescricaomedica;
 $clfar_prescricaomed->rotulo->label("fa31_i_codigo");

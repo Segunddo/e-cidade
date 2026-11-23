@@ -36,7 +36,7 @@ if(isset($HTTP_POST_VARS["enviar"])) {
   echo "<script>  parent.document.getElementById('Iresultado').style.visibility = 'hidden'; parent.location.href = 'ipa4_atenmed0045.php';  </script>\n";
 }
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $result = db_query("select resultado 
                    from atendmedexa 

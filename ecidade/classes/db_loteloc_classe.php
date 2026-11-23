@@ -71,12 +71,12 @@ class cl_loteloc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j06_idbql = ($this->j06_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_idbql"]:$this->j06_idbql);
-       $this->j06_setorloc = ($this->j06_setorloc == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_setorloc"]:$this->j06_setorloc);
+       $this->j06_idbql = ($this->j06_idbql === 0 || $this->j06_idbql === 0.0 || $this->j06_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_idbql"]:$this->j06_idbql);
+       $this->j06_setorloc = ($this->j06_setorloc === 0 || $this->j06_setorloc === 0.0 || $this->j06_setorloc == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_setorloc"]:$this->j06_setorloc);
        $this->j06_quadraloc = ($this->j06_quadraloc == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_quadraloc"]:$this->j06_quadraloc);
        $this->j06_lote = ($this->j06_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_lote"]:$this->j06_lote);
      }else{
-       $this->j06_idbql = ($this->j06_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_idbql"]:$this->j06_idbql);
+       $this->j06_idbql = ($this->j06_idbql === 0 || $this->j06_idbql === 0.0 || $this->j06_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j06_idbql"]:$this->j06_idbql);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_loteloc {
        return false;
      }
        $this->j06_idbql = $j06_idbql;
-     if(($this->j06_idbql == null) || ($this->j06_idbql == "") ){
+     if(($this->j06_idbql == null) || ($this->j06_idbql === 0 || $this->j06_idbql === 0.0 || $this->j06_idbql == "") ){
        $this->erro_sql = " Campo j06_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

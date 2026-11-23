@@ -92,7 +92,7 @@ $sqlano = "select x22_exerc as anofim from aguacalc order by x22_exerc limit 1;"
 $resultano = db_query($sqlano) or die($sqlano);
 db_fieldsmemory($resultano,0);
 
-for($i=$anoini;$i >= $anofim;$i--){
+for($i=$anoini;(((is_int($i) || is_float($i)) && is_string($anofim) && !is_numeric($anofim)) ? $i >= (float)$anofim : $i >= $anofim);$i--){
   echo "<option value=$i>$i</option>\n";
 }
 

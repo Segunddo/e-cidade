@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/divida-ativa/lancamento-historico/dividas",
+  "json": {
+    "error": true,
+    "message": "Argument 1 passed to Illuminate\\Database\\Query\\Builder::cleanBindings() must be of the type array, string given, called in /var/www/html/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php on line 972"
+  },
+  "sha256": "201e0a85e56b6ef7cab7c07d1b1fe38d8aa0c9a110cb5823d0b9ab7fd73088be",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -31,7 +31,7 @@ require_once modification("libs/db_sessoes.php");
 require_once modification("libs/db_usuariosonline.php");
 
 if(isset($HTTP_POST_VARS["excluir"])) {
-  $data = mktime(0,0,0,$HTTP_POST_VARS["data_mes"],$HTTP_POST_VARS["data_dia"],$HTTP_POST_VARS["data_ano"]);
+  try { $data = mktime(0,0,0,$HTTP_POST_VARS["data_mes"] ?? 0,$HTTP_POST_VARS["data_dia"] ?? 0,$HTTP_POST_VARS["data_ano"] ?? 0); } catch (\Throwable $e) { $data = false; }
   db_query("delete from calend where k13_data = '".date("Y-m-d",$data)."'") or die("Erro(9) excluindo calend");
   unset($HTTP_POST_VARS);
 }
@@ -144,7 +144,7 @@ if(isset($HTTP_POST_VARS["sabdom"])) {
 </html>
 <?php
 if(isset($HTTP_POST_VARS["feriado"])) {
-  $data = mktime(0,0,0,$HTTP_POST_VARS["data_mes"],$HTTP_POST_VARS["data_dia"],$HTTP_POST_VARS["data_ano"]);
+  try { $data = mktime(0,0,0,$HTTP_POST_VARS["data_mes"] ?? 0,$HTTP_POST_VARS["data_dia"] ?? 0,$HTTP_POST_VARS["data_ano"] ?? 0); } catch (\Throwable $e) { $data = false; }
   $result = db_query("select k13_data from calend where k13_data = '".date("Y-m-d",$data)."'");
   if(pg_numrows($result) > 0) {
   ?>

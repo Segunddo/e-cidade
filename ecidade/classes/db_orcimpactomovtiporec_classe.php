@@ -67,10 +67,10 @@ class cl_orcimpactomovtiporec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o67_codseqimpmov = ($this->o67_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codseqimpmov"]:$this->o67_codseqimpmov);
-       $this->o67_codigo = ($this->o67_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codigo"]:$this->o67_codigo);
+       $this->o67_codseqimpmov = ($this->o67_codseqimpmov === 0 || $this->o67_codseqimpmov === 0.0 || $this->o67_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codseqimpmov"]:$this->o67_codseqimpmov);
+       $this->o67_codigo = ($this->o67_codigo === 0 || $this->o67_codigo === 0.0 || $this->o67_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codigo"]:$this->o67_codigo);
      }else{
-       $this->o67_codseqimpmov = ($this->o67_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codseqimpmov"]:$this->o67_codseqimpmov);
+       $this->o67_codseqimpmov = ($this->o67_codseqimpmov === 0 || $this->o67_codseqimpmov === 0.0 || $this->o67_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o67_codseqimpmov"]:$this->o67_codseqimpmov);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_orcimpactomovtiporec {
        return false;
      }
        $this->o67_codseqimpmov = $o67_codseqimpmov;
-     if(($this->o67_codseqimpmov == null) || ($this->o67_codseqimpmov == "") ){
+     if(($this->o67_codseqimpmov == null) || ($this->o67_codseqimpmov === 0 || $this->o67_codseqimpmov === 0.0 || $this->o67_codseqimpmov == "") ){
        $this->erro_sql = " Campo o67_codseqimpmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

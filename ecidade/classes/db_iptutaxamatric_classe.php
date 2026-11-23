@@ -71,12 +71,12 @@ class cl_iptutaxamatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j09_iptutaxamatric = ($this->j09_iptutaxamatric == ""?@$GLOBALS["HTTP_POST_VARS"]["j09_iptutaxamatric"]:$this->j09_iptutaxamatric);
-       $this->j09_iptucadtaxaexe = ($this->j09_iptucadtaxaexe == ""?@$GLOBALS["HTTP_POST_VARS"]["j09_iptucadtaxaexe"]:$this->j09_iptucadtaxaexe);
-       $this->j09_matric = ($this->j09_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j09_matric"]:$this->j09_matric);
-       $this->j09_valor = ($this->j09_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j09_valor"]:$this->j09_valor);
+       $this->j09_iptutaxamatric = ($this->j09_iptutaxamatric === 0 || $this->j09_iptutaxamatric === 0.0 || $this->j09_iptutaxamatric == ""?@$GLOBALS["HTTP_POST_VARS"]["j09_iptutaxamatric"]:$this->j09_iptutaxamatric);
+       $this->j09_iptucadtaxaexe = ($this->j09_iptucadtaxaexe === 0 || $this->j09_iptucadtaxaexe === 0.0 || $this->j09_iptucadtaxaexe == ""?@$GLOBALS["HTTP_POST_VARS"]["j09_iptucadtaxaexe"]:$this->j09_iptucadtaxaexe);
+       $this->j09_matric = ($this->j09_matric === 0 || $this->j09_matric === 0.0 || $this->j09_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j09_matric"]:$this->j09_matric);
+       $this->j09_valor = ($this->j09_valor === 0 || $this->j09_valor === 0.0 || $this->j09_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j09_valor"]:$this->j09_valor);
      }else{
-       $this->j09_iptutaxamatric = ($this->j09_iptutaxamatric == ""?@$GLOBALS["HTTP_POST_VARS"]["j09_iptutaxamatric"]:$this->j09_iptutaxamatric);
+       $this->j09_iptutaxamatric = ($this->j09_iptutaxamatric === 0 || $this->j09_iptutaxamatric === 0.0 || $this->j09_iptutaxamatric == ""?@$GLOBALS["HTTP_POST_VARS"]["j09_iptutaxamatric"]:$this->j09_iptutaxamatric);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_iptutaxamatric {
          $this->j09_iptutaxamatric = $j09_iptutaxamatric;
        }
      }
-     if(($this->j09_iptutaxamatric == null) || ($this->j09_iptutaxamatric == "") ){
+     if(($this->j09_iptutaxamatric == null) || ($this->j09_iptutaxamatric === 0 || $this->j09_iptutaxamatric === 0.0 || $this->j09_iptutaxamatric == "") ){
        $this->erro_sql = " Campo j09_iptutaxamatric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

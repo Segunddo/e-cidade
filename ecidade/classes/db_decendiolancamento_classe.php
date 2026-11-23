@@ -51,10 +51,10 @@ class cl_decendiolancamento
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->k231_codigo = ($this->k231_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k231_codigo"] : $this->k231_codigo);
-            $this->k231_decendio = ($this->k231_decendio == "" ? @$GLOBALS["HTTP_POST_VARS"]["k231_decendio"] : $this->k231_decendio);
-            $this->k231_lancamento = ($this->k231_lancamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["k231_lancamento"] : $this->k231_lancamento);
-            $this->k231_desdobramento = ($this->k231_desdobramento == "" ? @$GLOBALS["HTTP_POST_VARS"]["k231_desdobramento"] : $this->k231_desdobramento);
+            $this->k231_codigo = ($this->k231_codigo === 0 || $this->k231_codigo === 0.0 || $this->k231_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k231_codigo"] : $this->k231_codigo);
+            $this->k231_decendio = ($this->k231_decendio === 0 || $this->k231_decendio === 0.0 || $this->k231_decendio == "" ? @$GLOBALS["HTTP_POST_VARS"]["k231_decendio"] : $this->k231_decendio);
+            $this->k231_lancamento = ($this->k231_lancamento === 0 || $this->k231_lancamento === 0.0 || $this->k231_lancamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["k231_lancamento"] : $this->k231_lancamento);
+            $this->k231_desdobramento = ($this->k231_desdobramento === 0 || $this->k231_desdobramento === 0.0 || $this->k231_desdobramento == "" ? @$GLOBALS["HTTP_POST_VARS"]["k231_desdobramento"] : $this->k231_desdobramento);
             if (is_null($this->created_at)) {
                 $this->created_at = date('Y-m-d H:i:s');
             }
@@ -63,7 +63,7 @@ class cl_decendiolancamento
                 $this->updated_at = date('Y-m-d H:i:s');
             }
         } else {
-            $this->k231_codigo = ($this->k231_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k231_codigo"] : $this->k231_codigo);
+            $this->k231_codigo = ($this->k231_codigo === 0 || $this->k231_codigo === 0.0 || $this->k231_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["k231_codigo"] : $this->k231_codigo);
         }
     }
 
@@ -94,7 +94,7 @@ class cl_decendiolancamento
                 $this->k231_codigo = $k231_codigo;
             }
         }
-        if (($this->k231_codigo == null) || ($this->k231_codigo == "")) {
+        if (($this->k231_codigo == null) || ($this->k231_codigo === 0 || $this->k231_codigo === 0.0 || $this->k231_codigo == "")) {
             $this->erro_sql = " Campo k231_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

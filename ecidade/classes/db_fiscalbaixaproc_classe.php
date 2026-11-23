@@ -67,10 +67,10 @@ class cl_fiscalbaixaproc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y48_codnoti = ($this->y48_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y48_codnoti"]:$this->y48_codnoti);
-       $this->y48_codproc = ($this->y48_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y48_codproc"]:$this->y48_codproc);
+       $this->y48_codnoti = ($this->y48_codnoti === 0 || $this->y48_codnoti === 0.0 || $this->y48_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y48_codnoti"]:$this->y48_codnoti);
+       $this->y48_codproc = ($this->y48_codproc === 0 || $this->y48_codproc === 0.0 || $this->y48_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y48_codproc"]:$this->y48_codproc);
      }else{
-       $this->y48_codnoti = ($this->y48_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y48_codnoti"]:$this->y48_codnoti);
+       $this->y48_codnoti = ($this->y48_codnoti === 0 || $this->y48_codnoti === 0.0 || $this->y48_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y48_codnoti"]:$this->y48_codnoti);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_fiscalbaixaproc {
        return false;
      }
        $this->y48_codnoti = $y48_codnoti; 
-     if(($this->y48_codnoti == null) || ($this->y48_codnoti == "") ){ 
+     if(($this->y48_codnoti == null) || ($this->y48_codnoti === 0 || $this->y48_codnoti === 0.0 || $this->y48_codnoti == "") ){ 
        $this->erro_sql = " Campo y48_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/update-salao",
+  "json": {
+    "errors": {
+      "q202_dtinicial": [
+        "O campo q202 dtinicial é obrigatório."
+      ],
+      "q202_sequencial": [
+        "O campo q202 sequencial é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "6e07155c7729280504ac811c984879a0b5aa85d9cc5e1c84524eda3a8336956a",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

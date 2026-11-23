@@ -69,13 +69,13 @@ class cl_notidebitos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k53_notifica = ($this->k53_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_notifica"]:$this->k53_notifica);
-       $this->k53_numpre = ($this->k53_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_numpre"]:$this->k53_numpre);
-       $this->k53_numpar = ($this->k53_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_numpar"]:$this->k53_numpar);
+       $this->k53_notifica = ($this->k53_notifica === 0 || $this->k53_notifica === 0.0 || $this->k53_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_notifica"]:$this->k53_notifica);
+       $this->k53_numpre = ($this->k53_numpre === 0 || $this->k53_numpre === 0.0 || $this->k53_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_numpre"]:$this->k53_numpre);
+       $this->k53_numpar = ($this->k53_numpar === 0 || $this->k53_numpar === 0.0 || $this->k53_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_numpar"]:$this->k53_numpar);
      }else{
-       $this->k53_notifica = ($this->k53_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_notifica"]:$this->k53_notifica);
-       $this->k53_numpre = ($this->k53_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_numpre"]:$this->k53_numpre);
-       $this->k53_numpar = ($this->k53_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_numpar"]:$this->k53_numpar);
+       $this->k53_notifica = ($this->k53_notifica === 0 || $this->k53_notifica === 0.0 || $this->k53_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_notifica"]:$this->k53_notifica);
+       $this->k53_numpre = ($this->k53_numpre === 0 || $this->k53_numpre === 0.0 || $this->k53_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_numpre"]:$this->k53_numpre);
+       $this->k53_numpar = ($this->k53_numpar === 0 || $this->k53_numpar === 0.0 || $this->k53_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k53_numpar"]:$this->k53_numpar);
      }
    }
    // funcao para inclusao
@@ -84,7 +84,7 @@ class cl_notidebitos {
        $this->k53_notifica = $k53_notifica;
        $this->k53_numpre = $k53_numpre;
        $this->k53_numpar = $k53_numpar;
-     if(($this->k53_notifica == null) || ($this->k53_notifica == "") ){
+     if(($this->k53_notifica == null) || ($this->k53_notifica === 0 || $this->k53_notifica === 0.0 || $this->k53_notifica == "") ){
        $this->erro_sql = " Campo k53_notifica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -92,7 +92,7 @@ class cl_notidebitos {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k53_numpre == null) || ($this->k53_numpre == "") ){
+     if(($this->k53_numpre == null) || ($this->k53_numpre === 0 || $this->k53_numpre === 0.0 || $this->k53_numpre == "") ){
        $this->erro_sql = " Campo k53_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -100,7 +100,7 @@ class cl_notidebitos {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k53_numpar == null) || ($this->k53_numpar == "") ){
+     if(($this->k53_numpar == null) || ($this->k53_numpar === 0 || $this->k53_numpar === 0.0 || $this->k53_numpar == "") ){
        $this->erro_sql = " Campo k53_numpar nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_db_tipoinstit_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldb_tipoinstit = new cl_db_tipoinstit;
 $cldb_tipoinstit->rotulo->label("db21_codtipo");
 $cldb_tipoinstit->rotulo->label("db21_codtipo");

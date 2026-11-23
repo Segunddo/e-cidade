@@ -87,7 +87,7 @@ $clemptipoatojuridico = new cl_emptipoatojuridico;
 $clempjustificativaatojuridico = new cl_empjustificativaatojuridico;
 $clempjustificativainstrumentoprevio = new cl_empjustificativainstrumentoprevio;
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 $db_opcao = 22;
 $db_botao = false;

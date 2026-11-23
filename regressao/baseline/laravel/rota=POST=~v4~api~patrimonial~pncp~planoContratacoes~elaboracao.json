@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/planoContratacoes/elaboracao",
+  "json": {
+    "error": true,
+    "message": "Erro ao autenticar usuário no sistema PNCP\nMensagem do erro:\ncURL error 6: Could not resolve host: v1 (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for v1/usuarios/login"
+  },
+  "sha256": "872b911930eb8bd443d8353c53c0de066ebd26994424bab14e2920abe7f4a937",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

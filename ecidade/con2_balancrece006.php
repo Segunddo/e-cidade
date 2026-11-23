@@ -44,7 +44,7 @@ $tipo_impressao = 1;
 // 1 = orcamento
 // 2 = balanco
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $xinstit =explode("-", $db_selinstit);
@@ -53,7 +53,7 @@ $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config wher
 $descr_inst = '';
 $xvirg = '';
 $flag_abrev = false;
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     if (strlen(trim($nomeinstabrev)) > 0) {
         $descr_inst .= $xvirg . $nomeinstabrev;
@@ -82,7 +82,7 @@ if ($recurso == 0) {
 } else {
 $head2 = "BALANCETE DA RECEITA ";
     $resrec = db_query("select o15_descr from orctiporec where o15_codigo = $recurso");
-    $head3 = "Recurso: " . $recurso . "-" . substr(pg_result($resrec, 0, 0), 0, 30);
+    $head3 = "Recurso: " . $recurso . "-" . substr(($resrec ? pg_result($resrec, 0, 0) : null), 0, 30);
     $db_filtro .= " and o70_codigo = $recurso";
 }
 $head4 = "EXERCÍCIO: " . db_getsession("DB_anousu") . " - " . $xtipo;
@@ -124,7 +124,7 @@ if (EMENTARIO_RECEITA) {
 $todasLinhas = array();
 $todasLinhas[] = "Receita;Descrição;Reduz;Rec;Previsto;Prev.Adic;Arrecadado;Arrec.Ano;Diferença;Caract.Peculiar";
 //fputs($fp, "Receita;Descrição;Reduz;Rec;Previsto;Prev.Adic;Arrecadado;Arrec.Ano;Diferença;Caract.Peculiar\n");
-while ($ln = pg_fetch_array($result)) {
+while ($ln = ($result ? pg_fetch_array($result) : null)) {
     $res_orcreceita = $clorcreceita->sql_record($clorcreceita->sql_query(null, null, "c58_descr", null, "o70_anousu = $anousu and o57_fonte = '" . $ln["o57_fonte"] . "'"));
     if ($clorcreceita->numrows > 0) {
         db_fieldsmemory($res_orcreceita, 0);

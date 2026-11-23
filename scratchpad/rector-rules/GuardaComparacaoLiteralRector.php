@@ -29,6 +29,20 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *     $this->X == ""  ->  ($this->X === 0 || $this->X === 0.0 || $this->X == "")
  *
  * Literal numerico ("0", "5") fica intocado: `0 == "0"` ja era true nas duas versoes.
+ *
+ * COMO FAZ: visita cada classe; junta as propriedades cujo valor padrao e um literal
+ * INTEIRO (LNumber) -- a forma como as classes db_*_classe.php declaram campos inteiros;
+ * e, so dentro dessa classe, troca cada `$this->X == "literal nao numerico"` (X numa
+ * dessas propriedades) pela guarda acima. `=== 0 || === 0.0` reproduz o que o 5.6 dava
+ * para um 0 inteiro ou float; o `== ""` original fica no fim para os demais valores.
+ * Nao trata a forma negada `!=` (essa e medida no passo 6c do verifica_lote.py e
+ * corrigida caso a caso, negada_corrige.py), nem o literal do lado esquerdo, nem
+ * propriedade de outro objeto.
+ *
+ * ONDE E USADO: passo 4 do guia, carregada por scratchpad/rector-curado.php
+ * (require_once + withRules). O rector_lote.py a lista como "conhecida". Roda no PHP
+ * 8.5 dentro do Rector; o CODIGO que ela emite roda nos dois runtimes.
+ * Efeito: reescreve as comparacoes nos arquivos-alvo (so sem --dry-run).
  */
 final class GuardaComparacaoLiteralRector extends AbstractRector
 {
@@ -40,6 +54,8 @@ final class GuardaComparacaoLiteralRector extends AbstractRector
         );
     }
 
+    // Visita a CLASSE (e nao o Equal) porque a decisao depende do conjunto de
+    // propriedades inteiras da classe, que so e visivel a partir do no Class_.
     public function getNodeTypes(): array
     {
         return [Class_::class];
@@ -61,8 +77,13 @@ final class GuardaComparacaoLiteralRector extends AbstractRector
             && $interno->right->left instanceof PropertyFetch;
     }
 
+    /**
+     * Recebe um Class_. Devolve o mesmo no (alterado no lugar) se embrulhou ao menos
+     * uma comparacao, ou null se nao mudou nada (o Rector entao nao conta o arquivo).
+     */
     public function refactor(Node $node): ?Node
     {
+        // nomes das propriedades declaradas com padrao inteiro, ex.: `var $z01_numcgm = 0;`
         $inteiras = [];
         foreach ($node->getProperties() as $propriedade) {
             foreach ($propriedade->props as $p) {
@@ -98,6 +119,8 @@ final class GuardaComparacaoLiteralRector extends AbstractRector
             if ($valor !== '' && is_numeric(trim($valor))) {
                 return null;
             }
+            // so `$this->nome == ...` com nome literal (nao `$this->$var`) e de uma
+            // propriedade inteira DESTA classe
             $fetch = $n->left;
             if (!$fetch instanceof PropertyFetch
                 || !$fetch->var instanceof Variable
@@ -108,6 +131,8 @@ final class GuardaComparacaoLiteralRector extends AbstractRector
             }
             $mudou = true;
             $n->setAttribute('ecidade_guardado', true);
+            // clone: cada comparacao estrita recebe o SEU PropertyFetch; o original
+            // continua dentro do Equal ($n), que e reaproveitado como ultimo termo
             return new BooleanOr(
                 new BooleanOr(
                     new Identical(clone $fetch, new LNumber(0)),

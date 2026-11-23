@@ -86,10 +86,10 @@ class cl_levvalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y63_sequencia = ($this->y63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_sequencia"]:$this->y63_sequencia);
-       $this->y63_codlev = ($this->y63_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_codlev"]:$this->y63_codlev);
-       $this->y63_ano = ($this->y63_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_ano"]:$this->y63_ano);
-       $this->y63_mes = ($this->y63_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_mes"]:$this->y63_mes);
+       $this->y63_sequencia = ($this->y63_sequencia === 0 || $this->y63_sequencia === 0.0 || $this->y63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_sequencia"]:$this->y63_sequencia);
+       $this->y63_codlev = ($this->y63_codlev === 0 || $this->y63_codlev === 0.0 || $this->y63_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_codlev"]:$this->y63_codlev);
+       $this->y63_ano = ($this->y63_ano === 0 || $this->y63_ano === 0.0 || $this->y63_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_ano"]:$this->y63_ano);
+       $this->y63_mes = ($this->y63_mes === 0 || $this->y63_mes === 0.0 || $this->y63_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_mes"]:$this->y63_mes);
        if($this->y63_dtvenc == ""){
          $this->y63_dtvenc_dia = ($this->y63_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_dtvenc_dia"]:$this->y63_dtvenc_dia);
          $this->y63_dtvenc_mes = ($this->y63_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_dtvenc_mes"]:$this->y63_dtvenc_mes);
@@ -98,13 +98,13 @@ class cl_levvalor {
             $this->y63_dtvenc = $this->y63_dtvenc_ano."-".$this->y63_dtvenc_mes."-".$this->y63_dtvenc_dia;
          }
        }
-       $this->y63_bruto = ($this->y63_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_bruto"]:$this->y63_bruto);
-       $this->y63_aliquota = ($this->y63_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_aliquota"]:$this->y63_aliquota);
-       $this->y63_pago = ($this->y63_pago == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_pago"]:$this->y63_pago);
-       $this->y63_saldo = ($this->y63_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_saldo"]:$this->y63_saldo);
+       $this->y63_bruto = ($this->y63_bruto === 0 || $this->y63_bruto === 0.0 || $this->y63_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_bruto"]:$this->y63_bruto);
+       $this->y63_aliquota = ($this->y63_aliquota === 0 || $this->y63_aliquota === 0.0 || $this->y63_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_aliquota"]:$this->y63_aliquota);
+       $this->y63_pago = ($this->y63_pago === 0 || $this->y63_pago === 0.0 || $this->y63_pago == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_pago"]:$this->y63_pago);
+       $this->y63_saldo = ($this->y63_saldo === 0 || $this->y63_saldo === 0.0 || $this->y63_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_saldo"]:$this->y63_saldo);
        $this->y63_histor = ($this->y63_histor == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_histor"]:$this->y63_histor);
      }else{
-       $this->y63_sequencia = ($this->y63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_sequencia"]:$this->y63_sequencia);
+       $this->y63_sequencia = ($this->y63_sequencia === 0 || $this->y63_sequencia === 0.0 || $this->y63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y63_sequencia"]:$this->y63_sequencia);
      }
    }
    // funcao para inclusao
@@ -206,7 +206,7 @@ class cl_levvalor {
          $this->y63_sequencia = $y63_sequencia;
        }
      }
-     if(($this->y63_sequencia == null) || ($this->y63_sequencia == "") ){
+     if(($this->y63_sequencia == null) || ($this->y63_sequencia === 0 || $this->y63_sequencia === 0.0 || $this->y63_sequencia == "") ){
        $this->erro_sql = " Campo y63_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

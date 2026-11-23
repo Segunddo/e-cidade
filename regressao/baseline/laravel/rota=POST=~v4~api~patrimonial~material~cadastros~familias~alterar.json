@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/material/cadastros/familias/alterar",
+  "json": {
+    "errors": {
+      "descricao": [
+        "O campo descricao é obrigatório."
+      ],
+      "sequencial": [
+        "O campo sequencial é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "b562e7576cfaf04b1290d35c1bf9921563bc54bc93399fc486c60a1ebd8632f0",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

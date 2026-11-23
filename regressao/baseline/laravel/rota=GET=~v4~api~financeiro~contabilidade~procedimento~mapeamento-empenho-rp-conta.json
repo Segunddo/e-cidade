@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/procedimento/mapeamento-empenho-rp-conta",
+  "json": {
+    "errors": {
+      "exercicio": [
+        "O campo exercicio é obrigatório."
+      ],
+      "instituicao": [
+        "O campo instituicao é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "4cc069042a0bf4c6ece35857abcb9178c5fedd9edb958efd1f7e43986b4f92c3",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

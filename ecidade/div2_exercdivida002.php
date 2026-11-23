@@ -42,7 +42,7 @@ $clrotulo->label('v03_descr');
 
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 //db_postmemory($HTTP_POST_VARS,2);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $head2 = 'RELATÓRIO DA DÍVIDA POR EXERCÍCIO';
 $head5 = '';
 $head6 = '';

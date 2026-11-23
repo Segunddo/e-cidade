@@ -29,7 +29,7 @@ require_once(modification('fpdf151/pdf.php'));
 require_once(modification('libs/db_stdlibwebseller.php'));
 require_once(modification('libs/db_utils.php'));
 
-parse_str( $_SERVER['QUERY_STRING'] );
+parse_str( $_SERVER['QUERY_STRING'] , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 set_time_limit(0);
 
 $iAno = substr($sd23_d_consulta, 6, 4);

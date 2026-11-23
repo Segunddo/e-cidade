@@ -71,13 +71,13 @@ class cl_empageconfgera {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e90_codmov = ($this->e90_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codmov"]:$this->e90_codmov);
-       $this->e90_codgera = ($this->e90_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codgera"]:$this->e90_codgera);
+       $this->e90_codmov = ($this->e90_codmov === 0 || $this->e90_codmov === 0.0 || $this->e90_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codmov"]:$this->e90_codmov);
+       $this->e90_codgera = ($this->e90_codgera === 0 || $this->e90_codgera === 0.0 || $this->e90_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codgera"]:$this->e90_codgera);
        $this->e90_correto = ($this->e90_correto == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_correto"]:$this->e90_correto);
        $this->e90_cancelado = ($this->e90_cancelado == "f"?@$GLOBALS["HTTP_POST_VARS"]["e90_cancelado"]:$this->e90_cancelado);
      }else{
-       $this->e90_codmov = ($this->e90_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codmov"]:$this->e90_codmov);
-       $this->e90_codgera = ($this->e90_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codgera"]:$this->e90_codgera);
+       $this->e90_codmov = ($this->e90_codmov === 0 || $this->e90_codmov === 0.0 || $this->e90_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codmov"]:$this->e90_codmov);
+       $this->e90_codgera = ($this->e90_codgera === 0 || $this->e90_codgera === 0.0 || $this->e90_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codgera"]:$this->e90_codgera);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_empageconfgera {
      }
        $this->e90_codmov = $e90_codmov;
        $this->e90_codgera = $e90_codgera;
-     if(($this->e90_codmov == null) || ($this->e90_codmov == "") ){
+     if(($this->e90_codmov == null) || ($this->e90_codmov === 0 || $this->e90_codmov === 0.0 || $this->e90_codmov == "") ){
        $this->erro_sql = " Campo e90_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_empageconfgera {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e90_codgera == null) || ($this->e90_codgera == "") ){
+     if(($this->e90_codgera == null) || ($this->e90_codgera === 0 || $this->e90_codgera === 0.0 || $this->e90_codgera == "") ){
        $this->erro_sql = " Campo e90_codgera nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

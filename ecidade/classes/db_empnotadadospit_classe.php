@@ -79,16 +79,16 @@ class cl_empnotadadospit {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e11_sequencial = ($this->e11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_sequencial"]:$this->e11_sequencial);
-       $this->e11_cfop = ($this->e11_cfop == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_cfop"]:$this->e11_cfop);
+       $this->e11_sequencial = ($this->e11_sequencial === 0 || $this->e11_sequencial === 0.0 || $this->e11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_sequencial"]:$this->e11_sequencial);
+       $this->e11_cfop = ($this->e11_cfop === 0 || $this->e11_cfop === 0.0 || $this->e11_cfop == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_cfop"]:$this->e11_cfop);
        $this->e11_seriefiscal = ($this->e11_seriefiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_seriefiscal"]:$this->e11_seriefiscal);
-       $this->e11_basecalculoicms = ($this->e11_basecalculoicms == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_basecalculoicms"]:$this->e11_basecalculoicms);
-       $this->e11_inscricaosubstitutofiscal = ($this->e11_inscricaosubstitutofiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_inscricaosubstitutofiscal"]:$this->e11_inscricaosubstitutofiscal);
-       $this->e11_valoricms = ($this->e11_valoricms == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_valoricms"]:$this->e11_valoricms);
-       $this->e11_basecalculosubstitutotrib = ($this->e11_basecalculosubstitutotrib == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_basecalculosubstitutotrib"]:$this->e11_basecalculosubstitutotrib);
-       $this->e11_valoricmssubstitutotrib = ($this->e11_valoricmssubstitutotrib == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_valoricmssubstitutotrib"]:$this->e11_valoricmssubstitutotrib);
+       $this->e11_basecalculoicms = ($this->e11_basecalculoicms === 0 || $this->e11_basecalculoicms === 0.0 || $this->e11_basecalculoicms == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_basecalculoicms"]:$this->e11_basecalculoicms);
+       $this->e11_inscricaosubstitutofiscal = ($this->e11_inscricaosubstitutofiscal === 0 || $this->e11_inscricaosubstitutofiscal === 0.0 || $this->e11_inscricaosubstitutofiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_inscricaosubstitutofiscal"]:$this->e11_inscricaosubstitutofiscal);
+       $this->e11_valoricms = ($this->e11_valoricms === 0 || $this->e11_valoricms === 0.0 || $this->e11_valoricms == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_valoricms"]:$this->e11_valoricms);
+       $this->e11_basecalculosubstitutotrib = ($this->e11_basecalculosubstitutotrib === 0 || $this->e11_basecalculosubstitutotrib === 0.0 || $this->e11_basecalculosubstitutotrib == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_basecalculosubstitutotrib"]:$this->e11_basecalculosubstitutotrib);
+       $this->e11_valoricmssubstitutotrib = ($this->e11_valoricmssubstitutotrib === 0 || $this->e11_valoricmssubstitutotrib === 0.0 || $this->e11_valoricmssubstitutotrib == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_valoricmssubstitutotrib"]:$this->e11_valoricmssubstitutotrib);
      }else{
-       $this->e11_sequencial = ($this->e11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_sequencial"]:$this->e11_sequencial);
+       $this->e11_sequencial = ($this->e11_sequencial === 0 || $this->e11_sequencial === 0.0 || $this->e11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e11_sequencial"]:$this->e11_sequencial);
      }
    }
    // funcao para inclusao
@@ -142,7 +142,7 @@ class cl_empnotadadospit {
          $this->e11_sequencial = $e11_sequencial;
        }
      }
-     if(($this->e11_sequencial == null) || ($this->e11_sequencial == "") ){
+     if(($this->e11_sequencial == null) || ($this->e11_sequencial === 0 || $this->e11_sequencial === 0.0 || $this->e11_sequencial == "") ){
        $this->erro_sql = " Campo e11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

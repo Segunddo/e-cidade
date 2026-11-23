@@ -1,0 +1,29 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/issqn/buscar-labels-inscricoes",
+  "json": {
+    "data": {
+      "q02_dtbaix": "Data da Baixa",
+      "q02_dtinic": "Dt. Inicio",
+      "q02_inscmu": "Inscrição Anterior",
+      "q02_inscr": "Inscrição Municipal",
+      "q177_setorfiscal": "Setor Fiscal",
+      "z01_cgccpf": "CNPJ/CPF",
+      "z01_compl": "Complemento",
+      "z01_ender": "Endereço",
+      "z01_nome": "Nome/Razão Social",
+      "z01_numero": "Número"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "a820d55343c3c7cbf1785e3934c7c4fffae2782a145e27f8be2d91bcadb369a2",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

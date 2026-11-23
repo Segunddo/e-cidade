@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/lancamento-manual",
+  "json": {
+    "error": true,
+    "message": "Undefined index: exercicio"
+  },
+  "sha256": "f68b0db83a8172639b20cc79f85544764b05c44c0c4cea69c4b69c3e996b81f1",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

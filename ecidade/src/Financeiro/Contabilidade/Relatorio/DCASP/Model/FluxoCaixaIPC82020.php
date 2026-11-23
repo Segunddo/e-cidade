@@ -55,7 +55,7 @@ class FluxoCaixaIPC82020 extends FluxoCaixaMCASP2020
         return $linhasCalculo;
     }
 
-    public function getDados()
+    public function getDados($trazerConfiguracaoPadrao = true)
     {
         parent::getDados(); // TODO: Realiza o processamento das linhas
 

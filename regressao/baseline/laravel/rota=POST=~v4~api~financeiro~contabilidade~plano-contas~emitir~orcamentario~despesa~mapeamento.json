@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/emitir/orcamentario/despesa/mapeamento",
+  "json": {
+    "error": true,
+    "message": "Undefined index: exercicio"
+  },
+  "sha256": "11dad9285bdcb9e314e5a3b296ed4fc3dfde387cb33f6a89993259e3fcc45ef1",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

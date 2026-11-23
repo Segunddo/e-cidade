@@ -57,17 +57,17 @@ class cl_pcdotac
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->pc13_sequencial = ($this->pc13_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_sequencial"] : $this->pc13_sequencial);
-            $this->pc13_anousu = ($this->pc13_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_anousu"] : $this->pc13_anousu);
-            $this->pc13_coddot = ($this->pc13_coddot == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_coddot"] : $this->pc13_coddot);
-            $this->pc13_codigo = ($this->pc13_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_codigo"] : $this->pc13_codigo);
-            $this->pc13_depto = ($this->pc13_depto == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_depto"] : $this->pc13_depto);
-            $this->pc13_quant = ($this->pc13_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_quant"] : $this->pc13_quant);
-            $this->pc13_valor = ($this->pc13_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_valor"] : $this->pc13_valor);
-            $this->pc13_codele = ($this->pc13_codele == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_codele"] : $this->pc13_codele);
+            $this->pc13_sequencial = ($this->pc13_sequencial === 0 || $this->pc13_sequencial === 0.0 || $this->pc13_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_sequencial"] : $this->pc13_sequencial);
+            $this->pc13_anousu = ($this->pc13_anousu === 0 || $this->pc13_anousu === 0.0 || $this->pc13_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_anousu"] : $this->pc13_anousu);
+            $this->pc13_coddot = ($this->pc13_coddot === 0 || $this->pc13_coddot === 0.0 || $this->pc13_coddot == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_coddot"] : $this->pc13_coddot);
+            $this->pc13_codigo = ($this->pc13_codigo === 0 || $this->pc13_codigo === 0.0 || $this->pc13_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_codigo"] : $this->pc13_codigo);
+            $this->pc13_depto = ($this->pc13_depto === 0 || $this->pc13_depto === 0.0 || $this->pc13_depto == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_depto"] : $this->pc13_depto);
+            $this->pc13_quant = ($this->pc13_quant === 0 || $this->pc13_quant === 0.0 || $this->pc13_quant == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_quant"] : $this->pc13_quant);
+            $this->pc13_valor = ($this->pc13_valor === 0 || $this->pc13_valor === 0.0 || $this->pc13_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_valor"] : $this->pc13_valor);
+            $this->pc13_codele = ($this->pc13_codele === 0 || $this->pc13_codele === 0.0 || $this->pc13_codele == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_codele"] : $this->pc13_codele);
             $this->pc13_planoorcamentariolinhapacto = ($this->pc13_planoorcamentariolinhapacto == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_planoorcamentariolinhapacto"] : $this->pc13_planoorcamentariolinhapacto);
         } else {
-            $this->pc13_sequencial = ($this->pc13_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_sequencial"] : $this->pc13_sequencial);
+            $this->pc13_sequencial = ($this->pc13_sequencial === 0 || $this->pc13_sequencial === 0.0 || $this->pc13_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["pc13_sequencial"] : $this->pc13_sequencial);
         }
     }
 
@@ -173,7 +173,7 @@ class cl_pcdotac
                 $this->pc13_sequencial = $pc13_sequencial;
             }
         }
-        if (($this->pc13_sequencial == null) || ($this->pc13_sequencial == "")) {
+        if (($this->pc13_sequencial == null) || ($this->pc13_sequencial === 0 || $this->pc13_sequencial === 0.0 || $this->pc13_sequencial == "")) {
             $this->erro_sql = " Campo pc13_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

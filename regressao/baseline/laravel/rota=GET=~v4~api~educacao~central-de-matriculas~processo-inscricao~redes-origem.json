@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/redes-origem",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42P01]: Undefined table: 7 ERRO:  não existe a relação \"plugins.redeorigem\"\nLINE 1: select * from \"plugins\".\"redeorigem\"\n                      ^ (SQL: select * from \"plugins\".\"redeorigem\")"
+  },
+  "sha256": "beaab6a5974abf1d4b36d601aa9032e171b9ceefa0cfc0acb3fc72458a73bc3e",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

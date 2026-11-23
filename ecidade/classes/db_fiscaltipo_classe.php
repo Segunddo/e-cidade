@@ -67,11 +67,11 @@ class cl_fiscaltipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y31_codnoti = ($this->y31_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y31_codnoti"]:$this->y31_codnoti);
-       $this->y31_codtipo = ($this->y31_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y31_codtipo"]:$this->y31_codtipo);
+       $this->y31_codnoti = ($this->y31_codnoti === 0 || $this->y31_codnoti === 0.0 || $this->y31_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y31_codnoti"]:$this->y31_codnoti);
+       $this->y31_codtipo = ($this->y31_codtipo === 0 || $this->y31_codtipo === 0.0 || $this->y31_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y31_codtipo"]:$this->y31_codtipo);
      }else{
-       $this->y31_codnoti = ($this->y31_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y31_codnoti"]:$this->y31_codnoti);
-       $this->y31_codtipo = ($this->y31_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y31_codtipo"]:$this->y31_codtipo);
+       $this->y31_codnoti = ($this->y31_codnoti === 0 || $this->y31_codnoti === 0.0 || $this->y31_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y31_codnoti"]:$this->y31_codnoti);
+       $this->y31_codtipo = ($this->y31_codtipo === 0 || $this->y31_codtipo === 0.0 || $this->y31_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y31_codtipo"]:$this->y31_codtipo);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_fiscaltipo {
       $this->atualizacampos();
        $this->y31_codnoti = $y31_codnoti;
        $this->y31_codtipo = $y31_codtipo;
-     if(($this->y31_codnoti == null) || ($this->y31_codnoti == "") ){
+     if(($this->y31_codnoti == null) || ($this->y31_codnoti === 0 || $this->y31_codnoti === 0.0 || $this->y31_codnoti == "") ){
        $this->erro_sql = " Campo y31_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_fiscaltipo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y31_codtipo == null) || ($this->y31_codtipo == "") ){
+     if(($this->y31_codtipo == null) || ($this->y31_codtipo === 0 || $this->y31_codtipo === 0.0 || $this->y31_codtipo == "") ){
        $this->erro_sql = " Campo y31_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

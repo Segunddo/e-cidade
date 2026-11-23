@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/relatorios/diarioclasse/turmasEspeciais",
+  "json": {
+    "errors": {
+      "colunas": [
+        "Campo Colunas deve ser informado."
+      ],
+      "exibirPontos": [
+        "O campo exibir pontos é obrigatório."
+      ],
+      "tipo_turma": [
+        "Tipo da turma não informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "1130ed23549b3dd35e86eb3f9365bff012eab72033fc737a3fbb6391f0c2e3d6",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -83,20 +83,20 @@ class cl_gerffx {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r53_anousu = ($this->r53_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_anousu"]:$this->r53_anousu);
-       $this->r53_mesusu = ($this->r53_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_mesusu"]:$this->r53_mesusu);
-       $this->r53_regist = ($this->r53_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_regist"]:$this->r53_regist);
+       $this->r53_anousu = ($this->r53_anousu === 0 || $this->r53_anousu === 0.0 || $this->r53_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_anousu"]:$this->r53_anousu);
+       $this->r53_mesusu = ($this->r53_mesusu === 0 || $this->r53_mesusu === 0.0 || $this->r53_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_mesusu"]:$this->r53_mesusu);
+       $this->r53_regist = ($this->r53_regist === 0 || $this->r53_regist === 0.0 || $this->r53_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_regist"]:$this->r53_regist);
        $this->r53_rubric = ($this->r53_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_rubric"]:$this->r53_rubric);
-       $this->r53_valor = ($this->r53_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_valor"]:$this->r53_valor);
-       $this->r53_pd = ($this->r53_pd == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_pd"]:$this->r53_pd);
-       $this->r53_quant = ($this->r53_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_quant"]:$this->r53_quant);
+       $this->r53_valor = ($this->r53_valor === 0 || $this->r53_valor === 0.0 || $this->r53_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_valor"]:$this->r53_valor);
+       $this->r53_pd = ($this->r53_pd === 0 || $this->r53_pd === 0.0 || $this->r53_pd == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_pd"]:$this->r53_pd);
+       $this->r53_quant = ($this->r53_quant === 0 || $this->r53_quant === 0.0 || $this->r53_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_quant"]:$this->r53_quant);
        $this->r53_lotac = ($this->r53_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_lotac"]:$this->r53_lotac);
-       $this->r53_semest = ($this->r53_semest == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_semest"]:$this->r53_semest);
-       $this->r53_instit = ($this->r53_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_instit"]:$this->r53_instit);
+       $this->r53_semest = ($this->r53_semest === 0 || $this->r53_semest === 0.0 || $this->r53_semest == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_semest"]:$this->r53_semest);
+       $this->r53_instit = ($this->r53_instit === 0 || $this->r53_instit === 0.0 || $this->r53_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_instit"]:$this->r53_instit);
      }else{
-       $this->r53_anousu = ($this->r53_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_anousu"]:$this->r53_anousu);
-       $this->r53_mesusu = ($this->r53_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_mesusu"]:$this->r53_mesusu);
-       $this->r53_regist = ($this->r53_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_regist"]:$this->r53_regist);
+       $this->r53_anousu = ($this->r53_anousu === 0 || $this->r53_anousu === 0.0 || $this->r53_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_anousu"]:$this->r53_anousu);
+       $this->r53_mesusu = ($this->r53_mesusu === 0 || $this->r53_mesusu === 0.0 || $this->r53_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_mesusu"]:$this->r53_mesusu);
+       $this->r53_regist = ($this->r53_regist === 0 || $this->r53_regist === 0.0 || $this->r53_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_regist"]:$this->r53_regist);
        $this->r53_rubric = ($this->r53_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r53_rubric"]:$this->r53_rubric);
      }
    }
@@ -161,7 +161,7 @@ class cl_gerffx {
        $this->r53_mesusu = $r53_mesusu;
        $this->r53_regist = $r53_regist;
        $this->r53_rubric = $r53_rubric;
-     if(($this->r53_anousu == null) || ($this->r53_anousu == "") ){
+     if(($this->r53_anousu == null) || ($this->r53_anousu === 0 || $this->r53_anousu === 0.0 || $this->r53_anousu == "") ){
        $this->erro_sql = " Campo r53_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -169,7 +169,7 @@ class cl_gerffx {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r53_mesusu == null) || ($this->r53_mesusu == "") ){
+     if(($this->r53_mesusu == null) || ($this->r53_mesusu === 0 || $this->r53_mesusu === 0.0 || $this->r53_mesusu == "") ){
        $this->erro_sql = " Campo r53_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -177,7 +177,7 @@ class cl_gerffx {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r53_regist == null) || ($this->r53_regist == "") ){
+     if(($this->r53_regist == null) || ($this->r53_regist === 0 || $this->r53_regist === 0.0 || $this->r53_regist == "") ){
        $this->erro_sql = " Campo r53_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

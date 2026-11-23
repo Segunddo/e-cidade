@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/arrecadacao/parametros/config-ordenacao-cgf",
+  "json": null,
+  "sha256": "3cd964058b88620215b75ad45b5647b0b6c9880bfdac379f70dc8d4b73c7c4a8",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

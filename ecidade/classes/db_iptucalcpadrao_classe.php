@@ -75,14 +75,14 @@ class cl_iptucalcpadrao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j10_sequencial = ($this->j10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_sequencial"]:$this->j10_sequencial);
-       $this->j10_anousu = ($this->j10_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_anousu"]:$this->j10_anousu);
-       $this->j10_matric = ($this->j10_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_matric"]:$this->j10_matric);
-       $this->j10_vlrter = ($this->j10_vlrter == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_vlrter"]:$this->j10_vlrter);
-       $this->j10_aliq = ($this->j10_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_aliq"]:$this->j10_aliq);
-       $this->j10_perccorre = ($this->j10_perccorre == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_perccorre"]:$this->j10_perccorre);
+       $this->j10_sequencial = ($this->j10_sequencial === 0 || $this->j10_sequencial === 0.0 || $this->j10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_sequencial"]:$this->j10_sequencial);
+       $this->j10_anousu = ($this->j10_anousu === 0 || $this->j10_anousu === 0.0 || $this->j10_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_anousu"]:$this->j10_anousu);
+       $this->j10_matric = ($this->j10_matric === 0 || $this->j10_matric === 0.0 || $this->j10_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_matric"]:$this->j10_matric);
+       $this->j10_vlrter = ($this->j10_vlrter === 0 || $this->j10_vlrter === 0.0 || $this->j10_vlrter == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_vlrter"]:$this->j10_vlrter);
+       $this->j10_aliq = ($this->j10_aliq === 0 || $this->j10_aliq === 0.0 || $this->j10_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_aliq"]:$this->j10_aliq);
+       $this->j10_perccorre = ($this->j10_perccorre === 0 || $this->j10_perccorre === 0.0 || $this->j10_perccorre == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_perccorre"]:$this->j10_perccorre);
      }else{
-       $this->j10_sequencial = ($this->j10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_sequencial"]:$this->j10_sequencial);
+       $this->j10_sequencial = ($this->j10_sequencial === 0 || $this->j10_sequencial === 0.0 || $this->j10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_sequencial"]:$this->j10_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_iptucalcpadrao {
          $this->j10_sequencial = $j10_sequencial;
        }
      }
-     if(($this->j10_sequencial == null) || ($this->j10_sequencial == "") ){
+     if(($this->j10_sequencial == null) || ($this->j10_sequencial === 0 || $this->j10_sequencial === 0.0 || $this->j10_sequencial == "") ){
        $this->erro_sql = " Campo j10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/laboratorio/triagem-laboratorial/exportar-pendencias",
+  "json": {
+    "error": true,
+    "message": "Parâmetros não configurados. Acesse Laboratório > Procedimentos > Parâmetros."
+  },
+  "sha256": "90dc9a793af9502ea15554b93ee17bab94b8a7380bd2e45c672d213649c4b49c",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

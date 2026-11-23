@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/buscar-historico-inscricoes",
+  "json": {
+    "error": true,
+    "message": "Class 'App\\Domain\\Tributario\\ISSQN\\Model\\HistRiscoInscri\\HistRiscoInscricao' not found"
+  },
+  "sha256": "0d447dcdb09a0328380998116fd9cd0e366cc5211334958f7bb7cde6bb01b4a7",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

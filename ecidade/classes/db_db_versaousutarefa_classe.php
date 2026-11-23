@@ -69,11 +69,11 @@ class cl_db_versaousutarefa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db28_sequencial = ($this->db28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db28_sequencial"]:$this->db28_sequencial);
-       $this->db28_codusu = ($this->db28_codusu == ""?@$GLOBALS["HTTP_POST_VARS"]["db28_codusu"]:$this->db28_codusu);
-       $this->db28_tarefa = ($this->db28_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["db28_tarefa"]:$this->db28_tarefa);
+       $this->db28_sequencial = ($this->db28_sequencial === 0 || $this->db28_sequencial === 0.0 || $this->db28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db28_sequencial"]:$this->db28_sequencial);
+       $this->db28_codusu = ($this->db28_codusu === 0 || $this->db28_codusu === 0.0 || $this->db28_codusu == ""?@$GLOBALS["HTTP_POST_VARS"]["db28_codusu"]:$this->db28_codusu);
+       $this->db28_tarefa = ($this->db28_tarefa === 0 || $this->db28_tarefa === 0.0 || $this->db28_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["db28_tarefa"]:$this->db28_tarefa);
      }else{
-       $this->db28_sequencial = ($this->db28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db28_sequencial"]:$this->db28_sequencial);
+       $this->db28_sequencial = ($this->db28_sequencial === 0 || $this->db28_sequencial === 0.0 || $this->db28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db28_sequencial"]:$this->db28_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_versaousutarefa {
          $this->db28_sequencial = $db28_sequencial;
        }
      }
-     if(($this->db28_sequencial == null) || ($this->db28_sequencial == "") ){
+     if(($this->db28_sequencial == null) || ($this->db28_sequencial === 0 || $this->db28_sequencial === 0.0 || $this->db28_sequencial == "") ){
        $this->erro_sql = " Campo db28_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

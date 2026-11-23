@@ -69,11 +69,11 @@ class cl_arrehistip {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k45_idhist = ($this->k45_idhist == ""?@$GLOBALS["HTTP_POST_VARS"]["k45_idhist"]:$this->k45_idhist);
+       $this->k45_idhist = ($this->k45_idhist === 0 || $this->k45_idhist === 0.0 || $this->k45_idhist == ""?@$GLOBALS["HTTP_POST_VARS"]["k45_idhist"]:$this->k45_idhist);
        $this->k45_ip = ($this->k45_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["k45_ip"]:$this->k45_ip);
        $this->k45_obs = ($this->k45_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k45_obs"]:$this->k45_obs);
      }else{
-       $this->k45_idhist = ($this->k45_idhist == ""?@$GLOBALS["HTTP_POST_VARS"]["k45_idhist"]:$this->k45_idhist);
+       $this->k45_idhist = ($this->k45_idhist === 0 || $this->k45_idhist === 0.0 || $this->k45_idhist == ""?@$GLOBALS["HTTP_POST_VARS"]["k45_idhist"]:$this->k45_idhist);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_arrehistip {
        return false;
      }
        $this->k45_idhist = $k45_idhist; 
-     if(($this->k45_idhist == null) || ($this->k45_idhist == "") ){ 
+     if(($this->k45_idhist == null) || ($this->k45_idhist === 0 || $this->k45_idhist === 0.0 || $this->k45_idhist == "") ){ 
        $this->erro_sql = " Campo k45_idhist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

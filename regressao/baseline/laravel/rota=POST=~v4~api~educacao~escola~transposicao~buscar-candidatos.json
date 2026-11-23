@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/transposicao/buscar-candidatos",
+  "json": {
+    "errors": {
+      "anoDestino": [
+        "O campo ano destino é obrigatório."
+      ],
+      "etapaDestino": [
+        "O campo etapa destino é obrigatório."
+      ],
+      "turma": [
+        "O campo turma é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "72da3a3e4215d274a5dcafb8624f3f212af0d43619a7dd1bdca3e4f3703ba207",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

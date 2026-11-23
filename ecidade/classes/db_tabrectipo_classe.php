@@ -67,10 +67,10 @@ class cl_tabrectipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k116_sequencial = ($this->k116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k116_sequencial"]:$this->k116_sequencial);
+       $this->k116_sequencial = ($this->k116_sequencial === 0 || $this->k116_sequencial === 0.0 || $this->k116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k116_sequencial"]:$this->k116_sequencial);
        $this->k116_descricao = ($this->k116_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["k116_descricao"]:$this->k116_descricao);
      }else{
-       $this->k116_sequencial = ($this->k116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k116_sequencial"]:$this->k116_sequencial);
+       $this->k116_sequencial = ($this->k116_sequencial === 0 || $this->k116_sequencial === 0.0 || $this->k116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k116_sequencial"]:$this->k116_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tabrectipo {
          $this->k116_sequencial = $k116_sequencial;
        }
      }
-     if(($this->k116_sequencial == null) || ($this->k116_sequencial == "") ){
+     if(($this->k116_sequencial == null) || ($this->k116_sequencial === 0 || $this->k116_sequencial === 0.0 || $this->k116_sequencial == "") ){
        $this->erro_sql = " Campo k116_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

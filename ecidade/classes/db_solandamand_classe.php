@@ -67,10 +67,10 @@ class cl_solandamand {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc42_solandam = ($this->pc42_solandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc42_solandam"]:$this->pc42_solandam);
-       $this->pc42_codandam = ($this->pc42_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc42_codandam"]:$this->pc42_codandam);
+       $this->pc42_solandam = ($this->pc42_solandam === 0 || $this->pc42_solandam === 0.0 || $this->pc42_solandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc42_solandam"]:$this->pc42_solandam);
+       $this->pc42_codandam = ($this->pc42_codandam === 0 || $this->pc42_codandam === 0.0 || $this->pc42_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc42_codandam"]:$this->pc42_codandam);
      }else{
-       $this->pc42_solandam = ($this->pc42_solandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc42_solandam"]:$this->pc42_solandam);
+       $this->pc42_solandam = ($this->pc42_solandam === 0 || $this->pc42_solandam === 0.0 || $this->pc42_solandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc42_solandam"]:$this->pc42_solandam);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_solandamand {
        return false;
      }
        $this->pc42_solandam = $pc42_solandam;
-     if(($this->pc42_solandam == null) || ($this->pc42_solandam == "") ){
+     if(($this->pc42_solandam == null) || ($this->pc42_solandam === 0 || $this->pc42_solandam === 0.0 || $this->pc42_solandam == "") ){
        $this->erro_sql = " Campo pc42_solandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

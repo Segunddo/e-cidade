@@ -67,10 +67,10 @@ class cl_debcontapedidomatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d68_codigo = ($this->d68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_codigo"]:$this->d68_codigo);
-       $this->d68_matric = ($this->d68_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_matric"]:$this->d68_matric);
+       $this->d68_codigo = ($this->d68_codigo === 0 || $this->d68_codigo === 0.0 || $this->d68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_codigo"]:$this->d68_codigo);
+       $this->d68_matric = ($this->d68_matric === 0 || $this->d68_matric === 0.0 || $this->d68_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_matric"]:$this->d68_matric);
      }else{
-       $this->d68_codigo = ($this->d68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_codigo"]:$this->d68_codigo);
+       $this->d68_codigo = ($this->d68_codigo === 0 || $this->d68_codigo === 0.0 || $this->d68_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d68_codigo"]:$this->d68_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_debcontapedidomatric {
        return false;
      }
        $this->d68_codigo = $d68_codigo;
-     if(($this->d68_codigo == null) || ($this->d68_codigo == "") ){
+     if(($this->d68_codigo == null) || ($this->d68_codigo === 0 || $this->d68_codigo === 0.0 || $this->d68_codigo == "") ){
        $this->erro_sql = " Campo d68_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

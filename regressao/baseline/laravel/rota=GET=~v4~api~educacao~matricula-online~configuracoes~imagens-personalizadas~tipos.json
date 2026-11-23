@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/matricula-online/configuracoes/imagens-personalizadas/tipos",
+  "json": {
+    "error": true,
+    "message": "Plugin Matrícula On Line não instalado."
+  },
+  "sha256": "a04955087c5bfe4f4655c1a5d34b3bc0030846c837fb1cf4f4db51d71290da1b",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

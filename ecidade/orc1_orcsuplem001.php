@@ -43,7 +43,7 @@ include(modification("classes/db_orcsuplemrec_classe.php"));
 include(modification("classes/db_orcsuplemval_classe.php"));
 include(modification("classes/db_orcsuplementacaoparametro_classe.php"));
 db_app::import("orcamento.suplementacao.*");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clorcsuplem     = new cl_orcsuplem;

@@ -67,11 +67,11 @@ class cl_empempret {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e67_numemp = ($this->e67_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e67_numemp"]:$this->e67_numemp);
-       $this->e67_seqretencao = ($this->e67_seqretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["e67_seqretencao"]:$this->e67_seqretencao);
+       $this->e67_numemp = ($this->e67_numemp === 0 || $this->e67_numemp === 0.0 || $this->e67_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e67_numemp"]:$this->e67_numemp);
+       $this->e67_seqretencao = ($this->e67_seqretencao === 0 || $this->e67_seqretencao === 0.0 || $this->e67_seqretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["e67_seqretencao"]:$this->e67_seqretencao);
      }else{
-       $this->e67_numemp = ($this->e67_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e67_numemp"]:$this->e67_numemp);
-       $this->e67_seqretencao = ($this->e67_seqretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["e67_seqretencao"]:$this->e67_seqretencao);
+       $this->e67_numemp = ($this->e67_numemp === 0 || $this->e67_numemp === 0.0 || $this->e67_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e67_numemp"]:$this->e67_numemp);
+       $this->e67_seqretencao = ($this->e67_seqretencao === 0 || $this->e67_seqretencao === 0.0 || $this->e67_seqretencao == ""?@$GLOBALS["HTTP_POST_VARS"]["e67_seqretencao"]:$this->e67_seqretencao);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_empempret {
       $this->atualizacampos();
        $this->e67_numemp = $e67_numemp;
        $this->e67_seqretencao = $e67_seqretencao;
-     if(($this->e67_numemp == null) || ($this->e67_numemp == "") ){
+     if(($this->e67_numemp == null) || ($this->e67_numemp === 0 || $this->e67_numemp === 0.0 || $this->e67_numemp == "") ){
        $this->erro_sql = " Campo e67_numemp nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_empempret {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e67_seqretencao == null) || ($this->e67_seqretencao == "") ){
+     if(($this->e67_seqretencao == null) || ($this->e67_seqretencao === 0 || $this->e67_seqretencao === 0.0 || $this->e67_seqretencao == "") ){
        $this->erro_sql = " Campo e67_seqretencao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

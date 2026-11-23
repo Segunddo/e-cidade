@@ -41,7 +41,7 @@ $clrotulo->label("DBtxtmesacumulado");
 $clrotulo->label("DBtxtperiodoini");
 $clrotulo->label("DBtxtperiodofim");
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 
 $anousu = db_getsession("DB_anousu");
@@ -88,7 +88,7 @@ $nivel = 3;
 
 $result = db_dotacaosaldo(8, 2, 2, true, " o58_coddot in {$w} and o58_anousu = {$anousu} ", $anousu, $data1, $data2);
 
-if (pg_num_rows($result) == 0) {
+if (($result ? pg_num_rows($result) : null) == 0) {
   db_redireciona("db_erros.php?fechar=true&db_erro=Dotação não cadastrada.");
 }
 
@@ -117,7 +117,7 @@ $troca = 1;
 $alt   = 4;
 
 
-$numrows = pg_num_rows($result);
+$numrows = ($result ? pg_num_rows($result) : null);
 
 for( $dotacao = 0; $dotacao < $numrows ; $dotacao ++ ){
 	
@@ -371,7 +371,7 @@ for( $dotacao = 0; $dotacao < $numrows ; $dotacao ++ ){
 		 order by c73_data, c73_codlan ";
 
      $result_dados = pg_query($sql_analitico);
-	if (pg_num_rows($result_dados) > 0) {
+	if (($result_dados ? pg_num_rows($result_dados) : null) > 0) {
 	  $pdf->ln();
   	  $pdf->cell( 20,$alt,"Lancamento",1,0,"C",0);
 	  $pdf->cell( 15,$alt,"Data",1,0,"C",0);
@@ -383,7 +383,7 @@ for( $dotacao = 0; $dotacao < $numrows ; $dotacao ++ ){
 	  $pdf->cell( 30,$alt,"Valor",1,1,"R",0);
 
 	  $dt = "";
-        for( $i = 0 ; $i < pg_num_rows($result_dados); $i ++ ){
+        for( $i = 0 ; $i < ($result_dados ? pg_num_rows($result_dados) : null); $i ++ ){
 
 	  db_fieldsmemory($result_dados,$i);
 

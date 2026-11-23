@@ -36,7 +36,7 @@ $anousu = db_getsession('DB_anousu');
 $clrotulo = new rotulocampo();
 $clrotulo->label('o45_descr');
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $db_selinstit = str_replace('-', ', ', $db_selinstit);
 $iAnoUsu = db_getsession('DB_anousu');
@@ -121,7 +121,7 @@ for ($tiporel = 0; $tiporel <= 1; ++$tiporel) {
     ";
     $res = db_query($sql);
 
-    $linhas = pg_num_rows($res);
+    $linhas = ($res ? pg_num_rows($res) : null);
     $iTotalLinhas += $linhas;
 
     $head2 = 'RELATORIO DE SUPLEMENTAÇÔES POR RECURSO';
@@ -134,7 +134,7 @@ for ($tiporel = 0; $tiporel <= 1; ++$tiporel) {
     $resultinst = db_query($sqlInstit);
     $descr_inst = '';
     $xvirg = '';
-    for ($xins = 0; $xins < pg_num_rows($resultinst); ++$xins) {
+    for ($xins = 0; $xins < ($resultinst ? pg_num_rows($resultinst) : null); ++$xins) {
         db_fieldsmemory($resultinst, $xins);
         $descr_inst .= $xvirg.$nomeinst;
         $xvirg = ', ';
@@ -206,8 +206,8 @@ for ($tiporel = 0; $tiporel <= 1; ++$tiporel) {
             o46_tiposup,o48_descr
         ";
         $restipo = db_query($sql);
-        if (pg_num_rows($restipo) > 0) {
-            for ($u = 0; $u < pg_num_rows($restipo); ++$u) {
+        if (($restipo ? pg_num_rows($restipo) : null) > 0) {
+            for ($u = 0; $u < ($restipo ? pg_num_rows($restipo) : null); ++$u) {
                 db_fieldsmemory($restipo, $u);
                 $pdf->setX(50);
                 $pdf->Cell(20, 4, ' ', 0, 0, 'L', '0');

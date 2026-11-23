@@ -67,10 +67,10 @@ class cl_localiza {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v54_codlocal = ($this->v54_codlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["v54_codlocal"]:$this->v54_codlocal);
+       $this->v54_codlocal = ($this->v54_codlocal === 0 || $this->v54_codlocal === 0.0 || $this->v54_codlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["v54_codlocal"]:$this->v54_codlocal);
        $this->v54_descr = ($this->v54_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["v54_descr"]:$this->v54_descr);
      }else{
-       $this->v54_codlocal = ($this->v54_codlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["v54_codlocal"]:$this->v54_codlocal);
+       $this->v54_codlocal = ($this->v54_codlocal === 0 || $this->v54_codlocal === 0.0 || $this->v54_codlocal == ""?@$GLOBALS["HTTP_POST_VARS"]["v54_codlocal"]:$this->v54_codlocal);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_localiza {
          $this->v54_codlocal = $v54_codlocal;
        }
      }
-     if(($this->v54_codlocal == null) || ($this->v54_codlocal == "") ){
+     if(($this->v54_codlocal == null) || ($this->v54_codlocal === 0 || $this->v54_codlocal === 0.0 || $this->v54_codlocal == "") ){
        $this->erro_sql = " Campo v54_codlocal nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

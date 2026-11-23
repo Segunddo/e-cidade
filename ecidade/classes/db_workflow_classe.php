@@ -67,10 +67,10 @@ class cl_workflow {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db112_sequencial = ($this->db112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db112_sequencial"]:$this->db112_sequencial);
+       $this->db112_sequencial = ($this->db112_sequencial === 0 || $this->db112_sequencial === 0.0 || $this->db112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db112_sequencial"]:$this->db112_sequencial);
        $this->db112_descricao = ($this->db112_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db112_descricao"]:$this->db112_descricao);
      }else{
-       $this->db112_sequencial = ($this->db112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db112_sequencial"]:$this->db112_sequencial);
+       $this->db112_sequencial = ($this->db112_sequencial === 0 || $this->db112_sequencial === 0.0 || $this->db112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db112_sequencial"]:$this->db112_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_workflow {
          $this->db112_sequencial = $db112_sequencial;
        }
      }
-     if(($this->db112_sequencial == null) || ($this->db112_sequencial == "") ){
+     if(($this->db112_sequencial == null) || ($this->db112_sequencial === 0 || $this->db112_sequencial === 0.0 || $this->db112_sequencial == "") ){
        $this->erro_sql = " Campo db112_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

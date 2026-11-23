@@ -91,22 +91,22 @@ class cl_consolidacaodebitosregistros {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k162_sequencial = ($this->k162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_sequencial"]:$this->k162_sequencial);
+       $this->k162_sequencial = ($this->k162_sequencial === 0 || $this->k162_sequencial === 0.0 || $this->k162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_sequencial"]:$this->k162_sequencial);
        $this->k162_receitaorcamento = ($this->k162_receitaorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_receitaorcamento"]:$this->k162_receitaorcamento);
-       $this->k162_receitatesouraria = ($this->k162_receitatesouraria == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_receitatesouraria"]:$this->k162_receitatesouraria);
+       $this->k162_receitatesouraria = ($this->k162_receitatesouraria === 0 || $this->k162_receitatesouraria === 0.0 || $this->k162_receitatesouraria == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_receitatesouraria"]:$this->k162_receitatesouraria);
        $this->k162_descricao = ($this->k162_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_descricao"]:$this->k162_descricao);
-       $this->k162_valorhistorico = ($this->k162_valorhistorico == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_valorhistorico"]:$this->k162_valorhistorico);
-       $this->k162_valorcorrigido = ($this->k162_valorcorrigido == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_valorcorrigido"]:$this->k162_valorcorrigido);
-       $this->k162_multa = ($this->k162_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_multa"]:$this->k162_multa);
-       $this->k162_juros = ($this->k162_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_juros"]:$this->k162_juros);
-       $this->k162_total = ($this->k162_total == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_total"]:$this->k162_total);
-       $this->k162_valorpagar = ($this->k162_valorpagar == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_valorpagar"]:$this->k162_valorpagar);
-       $this->k162_valorpago = ($this->k162_valorpago == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_valorpago"]:$this->k162_valorpago);
-       $this->k162_descontoconcedido = ($this->k162_descontoconcedido == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_descontoconcedido"]:$this->k162_descontoconcedido);
-       $this->k162_tiporelatorio = ($this->k162_tiporelatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_tiporelatorio"]:$this->k162_tiporelatorio);
-       $this->k162_consolidacaodebitos = ($this->k162_consolidacaodebitos == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_consolidacaodebitos"]:$this->k162_consolidacaodebitos);
+       $this->k162_valorhistorico = ($this->k162_valorhistorico === 0 || $this->k162_valorhistorico === 0.0 || $this->k162_valorhistorico == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_valorhistorico"]:$this->k162_valorhistorico);
+       $this->k162_valorcorrigido = ($this->k162_valorcorrigido === 0 || $this->k162_valorcorrigido === 0.0 || $this->k162_valorcorrigido == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_valorcorrigido"]:$this->k162_valorcorrigido);
+       $this->k162_multa = ($this->k162_multa === 0 || $this->k162_multa === 0.0 || $this->k162_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_multa"]:$this->k162_multa);
+       $this->k162_juros = ($this->k162_juros === 0 || $this->k162_juros === 0.0 || $this->k162_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_juros"]:$this->k162_juros);
+       $this->k162_total = ($this->k162_total === 0 || $this->k162_total === 0.0 || $this->k162_total == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_total"]:$this->k162_total);
+       $this->k162_valorpagar = ($this->k162_valorpagar === 0 || $this->k162_valorpagar === 0.0 || $this->k162_valorpagar == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_valorpagar"]:$this->k162_valorpagar);
+       $this->k162_valorpago = ($this->k162_valorpago === 0 || $this->k162_valorpago === 0.0 || $this->k162_valorpago == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_valorpago"]:$this->k162_valorpago);
+       $this->k162_descontoconcedido = ($this->k162_descontoconcedido === 0 || $this->k162_descontoconcedido === 0.0 || $this->k162_descontoconcedido == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_descontoconcedido"]:$this->k162_descontoconcedido);
+       $this->k162_tiporelatorio = ($this->k162_tiporelatorio === 0 || $this->k162_tiporelatorio === 0.0 || $this->k162_tiporelatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_tiporelatorio"]:$this->k162_tiporelatorio);
+       $this->k162_consolidacaodebitos = ($this->k162_consolidacaodebitos === 0 || $this->k162_consolidacaodebitos === 0.0 || $this->k162_consolidacaodebitos == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_consolidacaodebitos"]:$this->k162_consolidacaodebitos);
      }else{
-       $this->k162_sequencial = ($this->k162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_sequencial"]:$this->k162_sequencial);
+       $this->k162_sequencial = ($this->k162_sequencial === 0 || $this->k162_sequencial === 0.0 || $this->k162_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k162_sequencial"]:$this->k162_sequencial);
      }
    }
    // funcao para inclusao
@@ -205,7 +205,7 @@ class cl_consolidacaodebitosregistros {
          $this->k162_sequencial = $k162_sequencial;
        }
      }
-     if(($this->k162_sequencial == null) || ($this->k162_sequencial == "") ){
+     if(($this->k162_sequencial == null) || ($this->k162_sequencial === 0 || $this->k162_sequencial === 0.0 || $this->k162_sequencial == "") ){
        $this->erro_sql = " Campo k162_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

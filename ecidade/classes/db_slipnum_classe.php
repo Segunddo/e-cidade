@@ -67,10 +67,10 @@ class cl_slipnum {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k17_codigo = ($this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
-       $this->k17_numcgm = ($this->k17_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_numcgm"]:$this->k17_numcgm);
+       $this->k17_codigo = ($this->k17_codigo === 0 || $this->k17_codigo === 0.0 || $this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
+       $this->k17_numcgm = ($this->k17_numcgm === 0 || $this->k17_numcgm === 0.0 || $this->k17_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_numcgm"]:$this->k17_numcgm);
      }else{
-       $this->k17_codigo = ($this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
+       $this->k17_codigo = ($this->k17_codigo === 0 || $this->k17_codigo === 0.0 || $this->k17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k17_codigo"]:$this->k17_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_slipnum {
        return false;
      }
        $this->k17_codigo = $k17_codigo;
-     if(($this->k17_codigo == null) || ($this->k17_codigo == "") ){
+     if(($this->k17_codigo == null) || ($this->k17_codigo === 0 || $this->k17_codigo === 0.0 || $this->k17_codigo == "") ){
        $this->erro_sql = " Campo k17_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

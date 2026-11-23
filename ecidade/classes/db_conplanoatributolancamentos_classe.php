@@ -80,11 +80,11 @@ class cl_conplanoatributolancamentos
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c124_sequencial = ($this->c124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_sequencial"]:$this->c124_sequencial);
+       $this->c124_sequencial = ($this->c124_sequencial === 0 || $this->c124_sequencial === 0.0 || $this->c124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_sequencial"]:$this->c124_sequencial);
        $this->c124_lancamento = ($this->c124_lancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_lancamento"]:$this->c124_lancamento);
        $this->c124_natureza = ($this->c124_natureza == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_natureza"]:$this->c124_natureza);
        $this->c124_tipo = ($this->c124_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_tipo"]:$this->c124_tipo);
-       $this->c124_valor = ($this->c124_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_valor"]:$this->c124_valor);
+       $this->c124_valor = ($this->c124_valor === 0 || $this->c124_valor === 0.0 || $this->c124_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_valor"]:$this->c124_valor);
        if($this->c124_data == ""){
          $this->c124_data_dia = ($this->c124_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_data_dia"]:$this->c124_data_dia);
          $this->c124_data_mes = ($this->c124_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_data_mes"]:$this->c124_data_mes);
@@ -93,9 +93,9 @@ class cl_conplanoatributolancamentos
             $this->c124_data = $this->c124_data_ano."-".$this->c124_data_mes."-".$this->c124_data_dia;
          }
        }
-       $this->c124_conplanosistema = ($this->c124_conplanosistema == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_conplanosistema"]:$this->c124_conplanosistema);
+       $this->c124_conplanosistema = ($this->c124_conplanosistema === 0 || $this->c124_conplanosistema === 0.0 || $this->c124_conplanosistema == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_conplanosistema"]:$this->c124_conplanosistema);
      }else{
-       $this->c124_sequencial = ($this->c124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_sequencial"]:$this->c124_sequencial);
+       $this->c124_sequencial = ($this->c124_sequencial === 0 || $this->c124_sequencial === 0.0 || $this->c124_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c124_sequencial"]:$this->c124_sequencial);
      }
    }
 
@@ -175,7 +175,7 @@ class cl_conplanoatributolancamentos
          $this->c124_sequencial = $c124_sequencial;
        }
      }
-     if(($this->c124_sequencial == null) || ($this->c124_sequencial == "") ){
+     if(($this->c124_sequencial == null) || ($this->c124_sequencial === 0 || $this->c124_sequencial === 0.0 || $this->c124_sequencial == "") ){
        $this->erro_sql = " Campo c124_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

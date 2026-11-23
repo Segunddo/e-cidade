@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_atendimento_top_classe.php"));
 include(modification("classes/db_db_usuclientes_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clatendimento_top = new cl_atendimento_top;
 $cldb_usuclientes  = new cl_db_usuclientes;
 $cldb_usuclientes->rotulo->label("at10_codigo");

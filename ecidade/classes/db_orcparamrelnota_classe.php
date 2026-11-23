@@ -82,18 +82,18 @@ class cl_orcparamrelnota {
    public function atualizacampos($exclusao=false) {
      if ($exclusao==false) {
 
-       $this->o42_codparrel = ($this->o42_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_codparrel"]:$this->o42_codparrel);
-       $this->o42_anousu = ($this->o42_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_anousu"]:$this->o42_anousu);
-       $this->o42_instit = ($this->o42_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_instit"]:$this->o42_instit);
+       $this->o42_codparrel = ($this->o42_codparrel === 0 || $this->o42_codparrel === 0.0 || $this->o42_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_codparrel"]:$this->o42_codparrel);
+       $this->o42_anousu = ($this->o42_anousu === 0 || $this->o42_anousu === 0.0 || $this->o42_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_anousu"]:$this->o42_anousu);
+       $this->o42_instit = ($this->o42_instit === 0 || $this->o42_instit === 0.0 || $this->o42_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_instit"]:$this->o42_instit);
        $this->o42_nota = ($this->o42_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_nota"]:$this->o42_nota);
        $this->o42_fonte = ($this->o42_fonte == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_fonte"]:$this->o42_fonte);
        $this->o42_periodo = ($this->o42_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_periodo"]:$this->o42_periodo);
-       $this->o42_tamanhofontenota = ($this->o42_tamanhofontenota == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_tamanhofontenota"]:$this->o42_tamanhofontenota);
-       $this->o42_tamanhofontedados = ($this->o42_tamanhofontedados == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_tamanhofontedados"]:$this->o42_tamanhofontedados);
+       $this->o42_tamanhofontenota = ($this->o42_tamanhofontenota === 0 || $this->o42_tamanhofontenota === 0.0 || $this->o42_tamanhofontenota == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_tamanhofontenota"]:$this->o42_tamanhofontenota);
+       $this->o42_tamanhofontedados = ($this->o42_tamanhofontedados === 0 || $this->o42_tamanhofontedados === 0.0 || $this->o42_tamanhofontedados == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_tamanhofontedados"]:$this->o42_tamanhofontedados);
      }else{
-       $this->o42_codparrel = ($this->o42_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_codparrel"]:$this->o42_codparrel);
-       $this->o42_anousu = ($this->o42_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_anousu"]:$this->o42_anousu);
-       $this->o42_instit = ($this->o42_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_instit"]:$this->o42_instit);
+       $this->o42_codparrel = ($this->o42_codparrel === 0 || $this->o42_codparrel === 0.0 || $this->o42_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_codparrel"]:$this->o42_codparrel);
+       $this->o42_anousu = ($this->o42_anousu === 0 || $this->o42_anousu === 0.0 || $this->o42_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_anousu"]:$this->o42_anousu);
+       $this->o42_instit = ($this->o42_instit === 0 || $this->o42_instit === 0.0 || $this->o42_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_instit"]:$this->o42_instit);
        $this->o42_periodo = ($this->o42_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["o42_periodo"]:$this->o42_periodo);
      }
    }
@@ -105,7 +105,7 @@ class cl_orcparamrelnota {
        $this->o42_anousu = $o42_anousu;
        $this->o42_instit = $o42_instit;
        $this->o42_periodo = $o42_periodo;
-     if(($this->o42_codparrel == null) || ($this->o42_codparrel == "") ){
+     if(($this->o42_codparrel == null) || ($this->o42_codparrel === 0 || $this->o42_codparrel === 0.0 || $this->o42_codparrel == "") ){
        $this->erro_sql = " Campo o42_codparrel nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -113,7 +113,7 @@ class cl_orcparamrelnota {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o42_anousu == null) || ($this->o42_anousu == "") ){
+     if(($this->o42_anousu == null) || ($this->o42_anousu === 0 || $this->o42_anousu === 0.0 || $this->o42_anousu == "") ){
        $this->erro_sql = " Campo o42_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -121,7 +121,7 @@ class cl_orcparamrelnota {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o42_instit == null) || ($this->o42_instit == "") ){
+     if(($this->o42_instit == null) || ($this->o42_instit === 0 || $this->o42_instit === 0.0 || $this->o42_instit == "") ){
        $this->erro_sql = " Campo o42_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

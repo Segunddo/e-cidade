@@ -322,7 +322,7 @@ class RelatoriosLegaisBase
 
             $this->setDataInicialPeriodo(new DBDate($aPeriodo[0]));
         } else {
-            $iUltimoDiaMes = cal_days_in_month(CAL_GREGORIAN, $this->oPeriodo->getMesFinal(), $this->iAnoUsu);
+            try { $iUltimoDiaMes = cal_days_in_month(CAL_GREGORIAN, $this->oPeriodo->getMesFinal(), $this->iAnoUsu); } catch (\Throwable $e) { $iUltimoDiaMes = false; }
             $sDataExercicio = "{$this->iAnoUsu}-{$this->oPeriodo->getMesFinal()}-{$iUltimoDiaMes}";
         }
 

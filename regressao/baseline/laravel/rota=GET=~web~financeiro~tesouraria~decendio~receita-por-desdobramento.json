@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/tesouraria/decendio/receita-por-desdobramento",
+  "json": null,
+  "sha256": "5314aea83d75b73e2ebf1ea0b383062b2a0d27a08de2aa55d48f34908a82fdf2",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

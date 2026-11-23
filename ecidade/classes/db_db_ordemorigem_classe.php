@@ -67,10 +67,10 @@ class cl_db_ordemorigem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->or11_codigo = ($this->or11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["or11_codigo"]:$this->or11_codigo);
+       $this->or11_codigo = ($this->or11_codigo === 0 || $this->or11_codigo === 0.0 || $this->or11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["or11_codigo"]:$this->or11_codigo);
        $this->or11_descricao = ($this->or11_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["or11_descricao"]:$this->or11_descricao);
      }else{
-       $this->or11_codigo = ($this->or11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["or11_codigo"]:$this->or11_codigo);
+       $this->or11_codigo = ($this->or11_codigo === 0 || $this->or11_codigo === 0.0 || $this->or11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["or11_codigo"]:$this->or11_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_db_ordemorigem {
        return false;
      }
        $this->or11_codigo = $or11_codigo;
-     if(($this->or11_codigo == null) || ($this->or11_codigo == "") ){
+     if(($this->or11_codigo == null) || ($this->or11_codigo === 0 || $this->or11_codigo === 0.0 || $this->or11_codigo == "") ){
        $this->erro_sql = " Campo or11_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

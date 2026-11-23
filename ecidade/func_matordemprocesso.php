@@ -6,7 +6,7 @@ include("libs/db_usuariosonline.php");
 include("dbforms/db_funcoes.php");
 include("classes/db_matordemprocesso_classe.php");
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmatordemprocesso = new cl_matordemprocesso;
 $clmatordemprocesso->rotulo->label("m08_sequencial");
 $clmatordemprocesso->rotulo->label("m08_sequencial");

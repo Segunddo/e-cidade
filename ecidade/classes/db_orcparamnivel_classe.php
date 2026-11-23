@@ -73,15 +73,15 @@ class cl_orcparamnivel {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o44_anousu = ($this->o44_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_anousu"]:$this->o44_anousu);
-       $this->o44_codparrel = ($this->o44_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_codparrel"]:$this->o44_codparrel);
-       $this->o44_sequencia = ($this->o44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_sequencia"]:$this->o44_sequencia);
-       $this->o44_nivel = ($this->o44_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_nivel"]:$this->o44_nivel);
-       $this->o44_nivelexclusao = ($this->o44_nivelexclusao == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_nivelexclusao"]:$this->o44_nivelexclusao);
+       $this->o44_anousu = ($this->o44_anousu === 0 || $this->o44_anousu === 0.0 || $this->o44_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_anousu"]:$this->o44_anousu);
+       $this->o44_codparrel = ($this->o44_codparrel === 0 || $this->o44_codparrel === 0.0 || $this->o44_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_codparrel"]:$this->o44_codparrel);
+       $this->o44_sequencia = ($this->o44_sequencia === 0 || $this->o44_sequencia === 0.0 || $this->o44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_sequencia"]:$this->o44_sequencia);
+       $this->o44_nivel = ($this->o44_nivel === 0 || $this->o44_nivel === 0.0 || $this->o44_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_nivel"]:$this->o44_nivel);
+       $this->o44_nivelexclusao = ($this->o44_nivelexclusao === 0 || $this->o44_nivelexclusao === 0.0 || $this->o44_nivelexclusao == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_nivelexclusao"]:$this->o44_nivelexclusao);
      }else{
-       $this->o44_anousu = ($this->o44_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_anousu"]:$this->o44_anousu);
-       $this->o44_codparrel = ($this->o44_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_codparrel"]:$this->o44_codparrel);
-       $this->o44_sequencia = ($this->o44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_sequencia"]:$this->o44_sequencia);
+       $this->o44_anousu = ($this->o44_anousu === 0 || $this->o44_anousu === 0.0 || $this->o44_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_anousu"]:$this->o44_anousu);
+       $this->o44_codparrel = ($this->o44_codparrel === 0 || $this->o44_codparrel === 0.0 || $this->o44_codparrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_codparrel"]:$this->o44_codparrel);
+       $this->o44_sequencia = ($this->o44_sequencia === 0 || $this->o44_sequencia === 0.0 || $this->o44_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o44_sequencia"]:$this->o44_sequencia);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_orcparamnivel {
        $this->o44_anousu = $o44_anousu;
        $this->o44_codparrel = $o44_codparrel;
        $this->o44_sequencia = $o44_sequencia;
-     if(($this->o44_anousu == null) || ($this->o44_anousu == "") ){
+     if(($this->o44_anousu == null) || ($this->o44_anousu === 0 || $this->o44_anousu === 0.0 || $this->o44_anousu == "") ){
        $this->erro_sql = " Campo o44_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -116,7 +116,7 @@ class cl_orcparamnivel {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o44_codparrel == null) || ($this->o44_codparrel == "") ){
+     if(($this->o44_codparrel == null) || ($this->o44_codparrel === 0 || $this->o44_codparrel === 0.0 || $this->o44_codparrel == "") ){
        $this->erro_sql = " Campo o44_codparrel nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -124,7 +124,7 @@ class cl_orcparamnivel {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o44_sequencia == null) || ($this->o44_sequencia == "") ){
+     if(($this->o44_sequencia == null) || ($this->o44_sequencia === 0 || $this->o44_sequencia === 0.0 || $this->o44_sequencia == "") ){
        $this->erro_sql = " Campo o44_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

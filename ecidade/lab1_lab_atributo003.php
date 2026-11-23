@@ -33,7 +33,7 @@ include(modification("classes/db_lab_atributo_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_lab_parametros_classe.php"));
 include(modification("classes/db_lab_exameatributoligacao_classe.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $cllab_atributo = new cl_lab_atributo;
 $cllab_parametros = new cl_lab_parametros;

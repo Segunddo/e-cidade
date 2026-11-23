@@ -73,13 +73,13 @@ class cl_ppaintegracaodespesa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o121_sequencial = ($this->o121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_sequencial"]:$this->o121_sequencial);
-       $this->o121_ppaintegracao = ($this->o121_ppaintegracao == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_ppaintegracao"]:$this->o121_ppaintegracao);
-       $this->o121_coddot = ($this->o121_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_coddot"]:$this->o121_coddot);
-       $this->o121_anousu = ($this->o121_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_anousu"]:$this->o121_anousu);
-       $this->o121_ppaestimativadespesa = ($this->o121_ppaestimativadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_ppaestimativadespesa"]:$this->o121_ppaestimativadespesa);
+       $this->o121_sequencial = ($this->o121_sequencial === 0 || $this->o121_sequencial === 0.0 || $this->o121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_sequencial"]:$this->o121_sequencial);
+       $this->o121_ppaintegracao = ($this->o121_ppaintegracao === 0 || $this->o121_ppaintegracao === 0.0 || $this->o121_ppaintegracao == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_ppaintegracao"]:$this->o121_ppaintegracao);
+       $this->o121_coddot = ($this->o121_coddot === 0 || $this->o121_coddot === 0.0 || $this->o121_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_coddot"]:$this->o121_coddot);
+       $this->o121_anousu = ($this->o121_anousu === 0 || $this->o121_anousu === 0.0 || $this->o121_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_anousu"]:$this->o121_anousu);
+       $this->o121_ppaestimativadespesa = ($this->o121_ppaestimativadespesa === 0 || $this->o121_ppaestimativadespesa === 0.0 || $this->o121_ppaestimativadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_ppaestimativadespesa"]:$this->o121_ppaestimativadespesa);
      }else{
-       $this->o121_sequencial = ($this->o121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_sequencial"]:$this->o121_sequencial);
+       $this->o121_sequencial = ($this->o121_sequencial === 0 || $this->o121_sequencial === 0.0 || $this->o121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o121_sequencial"]:$this->o121_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_ppaintegracaodespesa {
          $this->o121_sequencial = $o121_sequencial;
        }
      }
-     if(($this->o121_sequencial == null) || ($this->o121_sequencial == "") ){
+     if(($this->o121_sequencial == null) || ($this->o121_sequencial === 0 || $this->o121_sequencial === 0.0 || $this->o121_sequencial == "") ){
        $this->erro_sql = " Campo o121_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

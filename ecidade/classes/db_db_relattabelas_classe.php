@@ -69,11 +69,11 @@ class cl_db_relattabelas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db92_codigo = ($this->db92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codigo"]:$this->db92_codigo);
-       $this->db92_codrel = ($this->db92_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codrel"]:$this->db92_codrel);
-       $this->db92_codarq = ($this->db92_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codarq"]:$this->db92_codarq);
+       $this->db92_codigo = ($this->db92_codigo === 0 || $this->db92_codigo === 0.0 || $this->db92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codigo"]:$this->db92_codigo);
+       $this->db92_codrel = ($this->db92_codrel === 0 || $this->db92_codrel === 0.0 || $this->db92_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codrel"]:$this->db92_codrel);
+       $this->db92_codarq = ($this->db92_codarq === 0 || $this->db92_codarq === 0.0 || $this->db92_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codarq"]:$this->db92_codarq);
      }else{
-       $this->db92_codigo = ($this->db92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codigo"]:$this->db92_codigo);
+       $this->db92_codigo = ($this->db92_codigo === 0 || $this->db92_codigo === 0.0 || $this->db92_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db92_codigo"]:$this->db92_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_relattabelas {
          $this->db92_codigo = $db92_codigo;
        }
      }
-     if(($this->db92_codigo == null) || ($this->db92_codigo == "") ){
+     if(($this->db92_codigo == null) || ($this->db92_codigo === 0 || $this->db92_codigo === 0.0 || $this->db92_codigo == "") ){
        $this->erro_sql = " Campo db92_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

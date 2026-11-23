@@ -40,7 +40,7 @@ $clrotulo->label('j34_lote');
 $clrotulo->label('j34_quadra');
 $clrotulo->label('z01_nome');
 $cliptubase->rotulo->label();
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 

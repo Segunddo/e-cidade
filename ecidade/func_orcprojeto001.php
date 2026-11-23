@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_orcprojeto_classe.php"));
 $iSituacao = 1;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clorcprojeto = new cl_orcprojeto;
 $clorcprojeto->rotulo->label("o39_codproj");
 $clorcprojeto->rotulo->label("o39_numero");

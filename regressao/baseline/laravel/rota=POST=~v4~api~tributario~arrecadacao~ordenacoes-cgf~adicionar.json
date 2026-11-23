@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/arrecadacao/ordenacoes-cgf/adicionar",
+  "json": {
+    "errors": {
+      "cadtipo": [
+        "O campo cadtipo é obrigatório."
+      ],
+      "ordenacoes": [
+        "O campo ordenacoes é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "821c38fb623ecccdfabea69b7cf7d91c2fae9d5534aacb89832d22c08b47fad9",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

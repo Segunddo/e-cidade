@@ -67,10 +67,10 @@ class cl_itbisituacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it07_codigo = ($this->it07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it07_codigo"]:$this->it07_codigo);
+       $this->it07_codigo = ($this->it07_codigo === 0 || $this->it07_codigo === 0.0 || $this->it07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it07_codigo"]:$this->it07_codigo);
        $this->it07_descr = ($this->it07_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["it07_descr"]:$this->it07_descr);
      }else{
-       $this->it07_codigo = ($this->it07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it07_codigo"]:$this->it07_codigo);
+       $this->it07_codigo = ($this->it07_codigo === 0 || $this->it07_codigo === 0.0 || $this->it07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it07_codigo"]:$this->it07_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_itbisituacao {
          $this->it07_codigo = $it07_codigo;
        }
      }
-     if(($this->it07_codigo == null) || ($this->it07_codigo == "") ){
+     if(($this->it07_codigo == null) || ($this->it07_codigo === 0 || $this->it07_codigo === 0.0 || $this->it07_codigo == "") ){
        $this->erro_sql = " Campo it07_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

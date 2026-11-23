@@ -67,10 +67,10 @@ class cl_emphist {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e40_codhist = ($this->e40_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e40_codhist"]:$this->e40_codhist);
+       $this->e40_codhist = ($this->e40_codhist === 0 || $this->e40_codhist === 0.0 || $this->e40_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e40_codhist"]:$this->e40_codhist);
        $this->e40_descr = ($this->e40_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e40_descr"]:$this->e40_descr);
      }else{
-       $this->e40_codhist = ($this->e40_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e40_codhist"]:$this->e40_codhist);
+       $this->e40_codhist = ($this->e40_codhist === 0 || $this->e40_codhist === 0.0 || $this->e40_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e40_codhist"]:$this->e40_codhist);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_emphist {
        return false;
      }
        $this->e40_codhist = $e40_codhist;
-     if(($this->e40_codhist == null) || ($this->e40_codhist == "") ){
+     if(($this->e40_codhist == null) || ($this->e40_codhist === 0 || $this->e40_codhist === 0.0 || $this->e40_codhist == "") ){
        $this->erro_sql = " Campo e40_codhist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

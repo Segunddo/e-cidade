@@ -79,15 +79,15 @@ class cl_empagetipo
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e83_codtipo = ($this->e83_codtipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_codtipo"] : $this->e83_codtipo);
+            $this->e83_codtipo = ($this->e83_codtipo === 0 || $this->e83_codtipo === 0.0 || $this->e83_codtipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_codtipo"] : $this->e83_codtipo);
             $this->e83_descr = ($this->e83_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_descr"] : $this->e83_descr);
-            $this->e83_conta = ($this->e83_conta == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_conta"] : $this->e83_conta);
-            $this->e83_codmod = ($this->e83_codmod == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_codmod"] : $this->e83_codmod);
+            $this->e83_conta = ($this->e83_conta === 0 || $this->e83_conta === 0.0 || $this->e83_conta == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_conta"] : $this->e83_conta);
+            $this->e83_codmod = ($this->e83_codmod === 0 || $this->e83_codmod === 0.0 || $this->e83_codmod == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_codmod"] : $this->e83_codmod);
             $this->e83_convenio = ($this->e83_convenio == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_convenio"] : $this->e83_convenio);
-            $this->e83_sequencia = ($this->e83_sequencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_sequencia"] : $this->e83_sequencia);
+            $this->e83_sequencia = ($this->e83_sequencia === 0 || $this->e83_sequencia === 0.0 || $this->e83_sequencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_sequencia"] : $this->e83_sequencia);
             $this->e83_codigocompromisso = ($this->e83_codigocompromisso == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_codigocompromisso"] : $this->e83_codigocompromisso);
         } else {
-            $this->e83_codtipo = ($this->e83_codtipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_codtipo"] : $this->e83_codtipo);
+            $this->e83_codtipo = ($this->e83_codtipo === 0 || $this->e83_codtipo === 0.0 || $this->e83_codtipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e83_codtipo"] : $this->e83_codtipo);
         }
     }
 
@@ -163,7 +163,7 @@ class cl_empagetipo
                 $this->e83_codtipo = $e83_codtipo;
             }
         }
-        if (($this->e83_codtipo == null) || ($this->e83_codtipo == "")) {
+        if (($this->e83_codtipo == null) || ($this->e83_codtipo === 0 || $this->e83_codtipo === 0.0 || $this->e83_codtipo == "")) {
             $this->erro_sql = " Campo e83_codtipo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/anexo-sete",
+  "json": {
+    "errors": {
+      "codigo_relatorio": [
+        "O Código do Relatório deve ser informado."
+      ],
+      "instituicoes": [
+        "Deve ser informado a(s) Instituições."
+      ],
+      "periodo": [
+        "O Código do Período deve ser informado."
+      ],
+      "planejamento_id": [
+        "O campo \"Código\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "fe378a97d613492a6566ba3effc53232d180e015ecde488faf325a7f707b64d5",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

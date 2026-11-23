@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/resultado-parcial/fechar-periodo",
+  "json": {
+    "errors": {
+      "matricula": [
+        "O campo matricula é obrigatório."
+      ],
+      "resultadoParcial": [
+        "O campo resultado parcial é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "8a8bff41ae0916fd7854c03ccf258015515d5c626645e985bd4ab650d63b8d54",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

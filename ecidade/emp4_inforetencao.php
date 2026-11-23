@@ -106,6 +106,7 @@ $sAno      = date("Y",db_getsession("DB_datausu"));
      $aNotas = db_utils::getCollectionByRecord($rsNotas);
    }
  }
+ $oRetencao = new stdClass();
  $oRetencao->aMovimentos = array();
  if (isset($_SESSION["retencaoNota{$oGet->iCodNota}"][$oGet->iCodRetencao])) {
    $oRetencao = $_SESSION["retencaoNota{$oGet->iCodNota}"][$oGet->iCodRetencao];

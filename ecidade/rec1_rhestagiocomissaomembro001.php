@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_rhestagiocomissaomembro_classe.php"));
 include(modification("classes/db_rhestagiocomissao_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clrhestagiocomissaomembro = new cl_rhestagiocomissaomembro;
 $clrhestagiocomissao = new cl_rhestagiocomissao;

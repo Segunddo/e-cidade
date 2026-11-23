@@ -40,7 +40,7 @@ include(modification("classes/db_orcparamelemento_classe.php"));
 include(modification("classes/db_orcparamrecurso_classe.php"));
 include(modification("classes/db_orcparamsubfunc_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS,2);
 
 $clconrelinfo = new cl_conrelinfo;

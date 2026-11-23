@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/farmacia/procedimento/bnafar/salvar-movimentacao",
+  "json": {
+    "error": true,
+    "message": "Parâmetro BNAFAR não está ativo."
+  },
+  "sha256": "6142302834c315da6be54d815076d01c866f699c250f9f5b4e63e64c33f99841",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/ambulatorial/consulta/statuspaciente",
+  "json": {
+    "error": true,
+    "message": "Undefined index: DB_coddepto"
+  },
+  "sha256": "b28c697ac83a2ae95a0f0df8bfad4f2b1e00fe8fd377ddc823fc0b8f6f55382f",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

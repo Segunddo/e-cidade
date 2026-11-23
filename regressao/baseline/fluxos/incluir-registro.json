@@ -1,0 +1,101 @@
+{
+ "console": [
+  "Permissions policy violation: unload is not allowed in this document."
+ ],
+ "descricao": "inclusao pela UI em arr1_grupotaxa001 com conferencia do efeito no banco",
+ "falhas": [],
+ "id": "incluir-registro",
+ "passos": [
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": null,
+   "dom_sha256": null,
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "entrada",
+   "ok": true,
+   "requisicoes": [],
+   "runtime": {},
+   "url": null
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<html>\n<head>\n<title>DBSeller Informática Ltda - Página Inicial</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta http-equiv=\"Expires\" content=\"0\">\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/scripts.js\">\n</script>\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/prototype.js\">\n</script>\n<link href=\"estilos.css\" rel=\"stylesheet\" type=\"text/css\">\n<link href=\"http://localhost:8190/skins/estilos.php?file=widgets/DBModal.css\" rel=\"stylesheet\">\n<link href=\"http://localhost:8190/estilos/widgets/DBModalBase.css\" rel=\"stylesheet\">\n</head>\n<body bgcolor=\"#CCCCCC\" class=\"no-menu\">\n<form name=\"form1\" method=\"post\" action=\"\">\n<center>\n<fieldset style=\"margin-top: 20px;\">\n<legend>\n<b>Cadastro Grupo de Taxa</b>\n</legend>\n<table border=\"0\">\n<tbody>\n<tr>\n<td nowrap=\"\" title=\"Sequencial Campo:ar37_sequencial \">\n<strong>Sequencial:</strong>\n</td>\n<td>\n<input title=\"Sequencial Campo:ar37_sequencial \" name=\"ar37_sequencial\" type=\"text\" id=\"ar37_sequencial\" value=\"\" size=\"10\" maxlength=\"10\" readonly=\"\" style=\"background-color:#DEB887;\" autocomplete=\"off\" labelvalidacao=\"Sequencial\" ismandatory=\"true\" tabindex=\"0\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Tipo de Grupo de Custas Campo:ar37_grupotaxatipo \">\n<a class=\"DBAncora\" style=\"text-decoration:underline;\" onclick=\"js_pesquisaar37_grupotaxatipo(true);\">\n<strong>Tipo de Grupo de tarifas:</strong>\n</a>\n</td>\n<td>\n<input title=\"Tipo de Grupo de Custas Campo:ar37_grupotaxatipo \" name=\"ar37_grupotaxatipo\" type=\"text\" id=\"ar37_grupotaxatipo\" value=\"\" size=\"10\" maxlength=\"10\" onchange=\"js_pesquisaar37_grupotaxatipo(false);\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,1,'Tipo de Grupo de tarifas','f','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Tipo de Grupo de tarifas\" ismandatory=\"true\" tabindex=\"1\">\n<input title=\"Descrição Campo:ar38_descricao \" name=\"ar38_descricao\" type=\"text\" id=\"ar38_descricao\" value=\"\" size=\"40\" maxlength=\"150\" readonly=\"\" style=\"background-color:#DEB887;text-transform:uppercase;\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\" tabindex=\"0\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Descrição do Grupo de Custas Campo:ar37_descricao \">\n<strong>Descrição:</strong>\n</td>\n<td>\n<input title=\"Descrição do Grupo de Custas Campo:ar37_descricao \" name=\"ar37_descricao\" type=\"text\" id=\"ar37_descricao\" value=\"\" size=\"54\" maxlength=\"150\" style=\"text-transform:uppercase;\" onkeyup=\"js_ValidaMaiusculo(this,'t',event);\" oninput=\"js_ValidaCampos(this,0,'Descrição','f','t',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\" tabindex=\"2\">\n</td>\n</tr>\n</tbody>\n</table>\n</fieldset>\n</center>\n<input name=\"incluir\" type=\"submit\" id=\"db_opcao\" value=\"Incluir\" tabindex=\"3\">\n<input name=\"pesquisar\" type=\"button\" id=\"pesquisar\" value=\"Pesquisar\" onclick=\"js_pesquisa();\" tabindex=\"4\">\n</form>\n<script>\n</script>\n<style>\n</style>\n<script>\n</script>\n<div id=\"db-tooltip\" class=\"db-tooltip\">\n</div>\n<script type=\"text/javascript\" src=\"scripts/classes/configuracao/DBViewHelpInline.classe.js\">\n</script>\n<script type=\"text/javascript\">\n</script>\n<script>\n</script>\n</body>\n</html>",
+   "dom_sha256": "7356284e4325f294994291c5b49bc4a72bf2d8c0058d764baa2a4636c8ac2856",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "tela-cadastro",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 //w/1/extension/desktop/menu/getMenuArquivo/?file",
+    "GET 200 /w/1/arr1_grupotaxa001.php",
+    "GET 200 /w/1/con4_dbhelp.RPC.php?json",
+    "GET 200 /w/1/extension/desktop/window/bottom",
+    "GET 200 /w/1/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId"
+   ],
+   "runtime": {
+    "//w/1/extension/desktop/menu/getMenuArquivo/?file": "PHP-7.4 (referencia)",
+    "/w/1/arr1_grupotaxa001.php": "PHP-7.4 (referencia)",
+    "/w/1/con4_dbhelp.RPC.php?json": "PHP-7.4 (referencia)",
+    "/w/1/extension/desktop/window/bottom": "PHP-7.4 (referencia)",
+    "/w/1/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId": "PHP-7.4 (referencia)"
+   },
+   "url": "/w/1/arr1_grupotaxa001.php"
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<html>\n<head>\n<title>DBSeller Informática Ltda - Página Inicial</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta http-equiv=\"Expires\" content=\"0\">\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/scripts.js\">\n</script>\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/prototype.js\">\n</script>\n<link href=\"estilos.css\" rel=\"stylesheet\" type=\"text/css\">\n<link href=\"http://localhost:8190/skins/estilos.php?file=widgets/DBModal.css\" rel=\"stylesheet\">\n<link href=\"http://localhost:8190/estilos/widgets/DBModalBase.css\" rel=\"stylesheet\">\n</head>\n<body bgcolor=\"#CCCCCC\" class=\"no-menu\">\n<form name=\"form1\" method=\"post\" action=\"\">\n<center>\n<fieldset style=\"margin-top: 20px;\">\n<legend>\n<b>Cadastro Grupo de Taxa</b>\n</legend>\n<table border=\"0\">\n<tbody>\n<tr>\n<td nowrap=\"\" title=\"Sequencial Campo:ar37_sequencial \">\n<strong>Sequencial:</strong>\n</td>\n<td>\n<input title=\"Sequencial Campo:ar37_sequencial \" name=\"ar37_sequencial\" type=\"text\" id=\"ar37_sequencial\" value=\"\" size=\"10\" maxlength=\"10\" readonly=\"\" style=\"background-color:#DEB887;\" autocomplete=\"off\" labelvalidacao=\"Sequencial\" ismandatory=\"true\" tabindex=\"0\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Tipo de Grupo de Custas Campo:ar37_grupotaxatipo \">\n<a class=\"DBAncora\" style=\"text-decoration:underline;\" onclick=\"js_pesquisaar37_grupotaxatipo(true);\">\n<strong>Tipo de Grupo de tarifas:</strong>\n</a>\n</td>\n<td>\n<input title=\"Tipo de Grupo de Custas Campo:ar37_grupotaxatipo \" name=\"ar37_grupotaxatipo\" type=\"text\" id=\"ar37_grupotaxatipo\" value=\"\" size=\"10\" maxlength=\"10\" onchange=\"js_pesquisaar37_grupotaxatipo(false);\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,1,'Tipo de Grupo de tarifas','f','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Tipo de Grupo de tarifas\" ismandatory=\"true\" tabindex=\"1\">\n<input title=\"Descrição Campo:ar38_descricao \" name=\"ar38_descricao\" type=\"text\" id=\"ar38_descricao\" value=\"\" size=\"40\" maxlength=\"150\" readonly=\"\" style=\"background-color:#DEB887;text-transform:uppercase;\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\" tabindex=\"0\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Descrição do Grupo de Custas Campo:ar37_descricao \">\n<strong>Descrição:</strong>\n</td>\n<td>\n<input title=\"Descrição do Grupo de Custas Campo:ar37_descricao \" name=\"ar37_descricao\" type=\"text\" id=\"ar37_descricao\" value=\"\" size=\"54\" maxlength=\"150\" style=\"text-transform:uppercase;\" onkeyup=\"js_ValidaMaiusculo(this,'t',event);\" oninput=\"js_ValidaCampos(this,0,'Descrição','f','t',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\" tabindex=\"2\">\n</td>\n</tr>\n</tbody>\n</table>\n</fieldset>\n</center>\n<input name=\"incluir\" type=\"submit\" id=\"db_opcao\" value=\"Incluir\" tabindex=\"3\">\n<input name=\"pesquisar\" type=\"button\" id=\"pesquisar\" value=\"Pesquisar\" onclick=\"js_pesquisa();\" tabindex=\"4\">\n</form>\n<script>\n</script>\n<style>\n</style>\n<script>\n</script>\n<div id=\"db-tooltip\" class=\"db-tooltip\">\n</div>\n<script type=\"text/javascript\" src=\"scripts/classes/configuracao/DBViewHelpInline.classe.js\">\n</script>\n<script type=\"text/javascript\">\n</script>\n<script>\n</script>\n<div id=\"Jandb_iframe_grupotaxatipo\" class=\"DBJanelaIframe\" framename=\"IFdb_iframe_grupotaxatipo\" style=\"background-color: rgb(192, 192, 192); border: 0px outset rgb(102, 102, 102); position: absolute; left: 0px; top: 0px; z-index: 5; display: none; width: 1274px; height: 773px;\">\n<table cellspacing=\"0\" cellpadding=\"2\" border=\"0\" width=\"100%\" height=\"100%\" style=\"border-color: rgb(240, 240, 240) rgb(96, 96, 96) rgb(64, 64, 64) rgb(208, 208, 208); border-style: solid; border-width: 2px;\">\n<tbody>\n<tr style=\"background-color: rgb(192, 192, 192);\">\n<td>\n<table cellspacing=\"0\" cellpadding=\"0\" border=\"0\" width=\"100%\">\n<tbody>\n<tr id=\"CFdb_iframe_grupotaxatipo\" style=\"background-color: rgb(50, 96, 148);\">\n<td width=\"80%\" class=\"DBJanelaIframeTitulo\" style=\"white-space: nowrap; font-weight: bold; color: white; font-family: Arial, Helvetica, sans-serif; font-size: 11px;\" nowrap=\"1\">&nbsp;Pesquisa</td>\n<td nowrap=\"1\" width=\"20%\" align=\"right\" valign=\"middle\">\n<img src=\"http://localhost:8190/skins/img.php?file=Controles/jan_mini_on.png\" title=\"Minimizar\" border=\"0\" id=\"minimizardb_iframe_grupotaxatipo\">\n<img src=\"http://localhost:8190/skins/img.php?file=Controles/jan_fechar_on.png\" title=\"Fechar\" id=\"fechardb_iframe_grupotaxatipo\" style=\"margin-left: 2px; margin-right: 2px;\" border=\"0\">\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n<tr style=\"position: relative;\">\n<td width=\"100%\" height=\"100%\">\n<iframe frameborder=\"1\" height=\"100%\" width=\"100%\" id=\"IFdb_iframe_grupotaxatipo\" name=\"IFdb_iframe_grupotaxatipo\" scrolling=\"auto\" src=\"func_grupotaxatipo.php?pesquisa_chave=1&amp;funcao_js=parent.js_mostragrupotaxatipo\">\n</iframe>\n</td>\n<div style=\"background: url(&quot;http://localhost:8190/extension/desktop/assets/img/Window/loader.gif&quot;) center center no-repeat rgb(225, 222, 222); height: 100%; width: 100%; opacity: 0.6; position: absolute; top: 0px; left: 0px; z-index: 201; display: none;\">\n</div>\n<div style=\"position: absolute; top: 0px; left: 50%; transform: translateX(-50%); margin: auto; max-width: 90%; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 14px; color: rgb(51, 51, 51); border-width: 1px 1px 0px; border-style: solid solid none; border-color: rgb(51, 51, 51) rgb(51, 51, 51) currentcolor; border-image: none; z-index: 202; display: none; text-align: center; background: rgb(255, 255, 204); opacity: 0.8;\">\n</div>\n</tr>\n</tbody>\n</table>\n</div>\n</body>\n</html>",
+   "dom_sha256": "fcccbd802264218d967a2afb353260f99de93f2885675c3ef5837b8bae30ed98",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {
+    "valores": {
+     "ar37_descricao": "TESTE_FLUXO",
+     "ar37_grupotaxatipo": "1",
+     "ar38_descricao": "CUSTAS PROCESSUAIS"
+    }
+   },
+   "nome": "preenche",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 /w/1/func_grupotaxatipo.php?funcao_js&pesquisa_chave"
+   ],
+   "runtime": {
+    "/w/1/func_grupotaxatipo.php?funcao_js&pesquisa_chave": "PHP-7.4 (referencia)"
+   },
+   "url": "/w/1/arr1_grupotaxa001.php"
+  },
+  {
+   "banco": {
+    "arrecadacao.grupotaxa": "ee34561554ab5cfb145a01dea69dfe82"
+   },
+   "dialogos": [],
+   "dom": "<html>\n<head>\n<title>DBSeller Informática Ltda - Página Inicial</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta http-equiv=\"Expires\" content=\"0\">\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/scripts.js\">\n</script>\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/prototype.js\">\n</script>\n<link href=\"estilos.css\" rel=\"stylesheet\" type=\"text/css\">\n<link href=\"http://localhost:8190/skins/estilos.php?file=widgets/DBModal.css\" rel=\"stylesheet\">\n<link href=\"http://localhost:8190/estilos/widgets/DBModalBase.css\" rel=\"stylesheet\">\n</head>\n<body bgcolor=\"#CCCCCC\" class=\"no-menu\">\n<form name=\"form1\" method=\"post\" action=\"\">\n<center>\n<fieldset style=\"margin-top: 20px;\">\n<legend>\n<b>Cadastro Grupo de Taxa</b>\n</legend>\n<table border=\"0\">\n<tbody>\n<tr>\n<td nowrap=\"\" title=\"Sequencial Campo:ar37_sequencial \">\n<strong>Sequencial:</strong>\n</td>\n<td>\n<input title=\"Sequencial Campo:ar37_sequencial \" name=\"ar37_sequencial\" type=\"text\" id=\"ar37_sequencial\" value=\"\" size=\"10\" maxlength=\"10\" readonly=\"\" style=\"background-color:#DEB887;\" autocomplete=\"off\" labelvalidacao=\"Sequencial\" ismandatory=\"true\" tabindex=\"0\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Tipo de Grupo de Custas Campo:ar37_grupotaxatipo \">\n<a class=\"DBAncora\" style=\"text-decoration:underline;\" onclick=\"js_pesquisaar37_grupotaxatipo(true);\">\n<strong>Tipo de Grupo de tarifas:</strong>\n</a>\n</td>\n<td>\n<input title=\"Tipo de Grupo de Custas Campo:ar37_grupotaxatipo \" name=\"ar37_grupotaxatipo\" type=\"text\" id=\"ar37_grupotaxatipo\" value=\"\" size=\"10\" maxlength=\"10\" onchange=\"js_pesquisaar37_grupotaxatipo(false);\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,1,'Tipo de Grupo de tarifas','f','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Tipo de Grupo de tarifas\" ismandatory=\"true\" tabindex=\"1\">\n<input title=\"Descrição Campo:ar38_descricao \" name=\"ar38_descricao\" type=\"text\" id=\"ar38_descricao\" value=\"\" size=\"40\" maxlength=\"150\" readonly=\"\" style=\"background-color:#DEB887;text-transform:uppercase;\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\" tabindex=\"0\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Descrição do Grupo de Custas Campo:ar37_descricao \">\n<strong>Descrição:</strong>\n</td>\n<td>\n<input title=\"Descrição do Grupo de Custas Campo:ar37_descricao \" name=\"ar37_descricao\" type=\"text\" id=\"ar37_descricao\" value=\"\" size=\"54\" maxlength=\"150\" style=\"text-transform:uppercase;\" onkeyup=\"js_ValidaMaiusculo(this,'t',event);\" oninput=\"js_ValidaCampos(this,0,'Descrição','f','t',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\" tabindex=\"2\">\n</td>\n</tr>\n</tbody>\n</table>\n</fieldset>\n</center>\n<input name=\"incluir\" type=\"submit\" id=\"db_opcao\" value=\"Incluir\" tabindex=\"3\">\n<input name=\"pesquisar\" type=\"button\" id=\"pesquisar\" value=\"Pesquisar\" onclick=\"js_pesquisa();\" tabindex=\"4\">\n</form>\n<script>\n</script>\n<style>\n</style>\n<script>\n</script>\n<div id=\"db-tooltip\" class=\"db-tooltip\">\n</div>\n<script type=\"text/javascript\" src=\"scripts/classes/configuracao/DBViewHelpInline.classe.js\">\n</script>\n<script type=\"text/javascript\">\n</script>\n<script>\n</script>\n</body>\n</html>",
+   "dom_sha256": "7356284e4325f294994291c5b49bc4a72bf2d8c0058d764baa2a4636c8ac2856",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {
+    "hash_antes": "8ff8c1982c8f72e721dd0df63a0e960b",
+    "linhas_antes": 3,
+    "linhas_depois": 4
+   },
+   "nome": "salvar",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 /w/1/arr1_grupotaxa001.php",
+    "GET 200 /w/1/con4_dbhelp.RPC.php?json",
+    "POST 200 /w/1/arr1_grupotaxa001.php"
+   ],
+   "runtime": {
+    "/w/1/arr1_grupotaxa001.php": "PHP-7.4 (referencia)",
+    "/w/1/con4_dbhelp.RPC.php?json": "PHP-7.4 (referencia)"
+   },
+   "url": "/w/1/arr1_grupotaxa001.php"
+  }
+ ]
+}

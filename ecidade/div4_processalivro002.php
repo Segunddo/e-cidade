@@ -70,7 +70,7 @@ $clrotulo->label('v01_vlrhis');
 $clrotulo->label('v01_numpar');
 $clrotulo->label('v03_receit');
 
-parse_str($HTTP_SERVER_VARS ['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS ['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS); //exit;
 $valor = 0;
 $alt = "5";

@@ -91,22 +91,22 @@ class cl_orcimpactomov {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o63_codimpmov = ($this->o63_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_codimpmov"]:$this->o63_codimpmov);
-       $this->o63_codperiodo = ($this->o63_codperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_codperiodo"]:$this->o63_codperiodo);
-       $this->o63_anoexe = ($this->o63_anoexe == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_anoexe"]:$this->o63_anoexe);
-       $this->o63_orgao = ($this->o63_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_orgao"]:$this->o63_orgao);
-       $this->o63_unidade = ($this->o63_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_unidade"]:$this->o63_unidade);
-       $this->o63_funcao = ($this->o63_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_funcao"]:$this->o63_funcao);
-       $this->o63_subfuncao = ($this->o63_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_subfuncao"]:$this->o63_subfuncao);
-       $this->o63_programa = ($this->o63_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_programa"]:$this->o63_programa);
+       $this->o63_codimpmov = ($this->o63_codimpmov === 0 || $this->o63_codimpmov === 0.0 || $this->o63_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_codimpmov"]:$this->o63_codimpmov);
+       $this->o63_codperiodo = ($this->o63_codperiodo === 0 || $this->o63_codperiodo === 0.0 || $this->o63_codperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_codperiodo"]:$this->o63_codperiodo);
+       $this->o63_anoexe = ($this->o63_anoexe === 0 || $this->o63_anoexe === 0.0 || $this->o63_anoexe == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_anoexe"]:$this->o63_anoexe);
+       $this->o63_orgao = ($this->o63_orgao === 0 || $this->o63_orgao === 0.0 || $this->o63_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_orgao"]:$this->o63_orgao);
+       $this->o63_unidade = ($this->o63_unidade === 0 || $this->o63_unidade === 0.0 || $this->o63_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_unidade"]:$this->o63_unidade);
+       $this->o63_funcao = ($this->o63_funcao === 0 || $this->o63_funcao === 0.0 || $this->o63_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_funcao"]:$this->o63_funcao);
+       $this->o63_subfuncao = ($this->o63_subfuncao === 0 || $this->o63_subfuncao === 0.0 || $this->o63_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_subfuncao"]:$this->o63_subfuncao);
+       $this->o63_programa = ($this->o63_programa === 0 || $this->o63_programa === 0.0 || $this->o63_programa == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_programa"]:$this->o63_programa);
        $this->o63_programatxt = ($this->o63_programatxt == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_programatxt"]:$this->o63_programatxt);
-       $this->o63_acao = ($this->o63_acao == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_acao"]:$this->o63_acao);
+       $this->o63_acao = ($this->o63_acao === 0 || $this->o63_acao === 0.0 || $this->o63_acao == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_acao"]:$this->o63_acao);
        $this->o63_acaotxt = ($this->o63_acaotxt == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_acaotxt"]:$this->o63_acaotxt);
        $this->o63_unimed = ($this->o63_unimed == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_unimed"]:$this->o63_unimed);
-       $this->o63_produto = ($this->o63_produto == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_produto"]:$this->o63_produto);
-       $this->o63_codimpger = ($this->o63_codimpger == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_codimpger"]:$this->o63_codimpger);
+       $this->o63_produto = ($this->o63_produto === 0 || $this->o63_produto === 0.0 || $this->o63_produto == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_produto"]:$this->o63_produto);
+       $this->o63_codimpger = ($this->o63_codimpger === 0 || $this->o63_codimpger === 0.0 || $this->o63_codimpger == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_codimpger"]:$this->o63_codimpger);
      }else{
-       $this->o63_codimpmov = ($this->o63_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_codimpmov"]:$this->o63_codimpmov);
+       $this->o63_codimpmov = ($this->o63_codimpmov === 0 || $this->o63_codimpmov === 0.0 || $this->o63_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o63_codimpmov"]:$this->o63_codimpmov);
      }
    }
    // funcao para inclusao
@@ -235,7 +235,7 @@ class cl_orcimpactomov {
          $this->o63_codimpmov = $o63_codimpmov;
        }
      }
-     if(($this->o63_codimpmov == null) || ($this->o63_codimpmov == "") ){
+     if(($this->o63_codimpmov == null) || ($this->o63_codimpmov === 0 || $this->o63_codimpmov === 0.0 || $this->o63_codimpmov == "") ){
        $this->erro_sql = " Campo o63_codimpmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

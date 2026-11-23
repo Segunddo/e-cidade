@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/matricula-online/configuracoes/mensagens-personalizadas",
+  "json": {
+    "error": true,
+    "message": "Plugin Matrícula On Line não instalado."
+  },
+  "sha256": "2c45ccb943cd8347c42cf5800538811665c0bcedb303519425695f01abdea070",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

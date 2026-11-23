@@ -76,8 +76,8 @@ class cl_pagordemdesconto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e34_sequencial = ($this->e34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_sequencial"]:$this->e34_sequencial);
-       $this->e34_codord = ($this->e34_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_codord"]:$this->e34_codord);
+       $this->e34_sequencial = ($this->e34_sequencial === 0 || $this->e34_sequencial === 0.0 || $this->e34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_sequencial"]:$this->e34_sequencial);
+       $this->e34_codord = ($this->e34_codord === 0 || $this->e34_codord === 0.0 || $this->e34_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_codord"]:$this->e34_codord);
        if($this->e34_data == ""){
          $this->e34_data_dia = ($this->e34_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_data_dia"]:$this->e34_data_dia);
          $this->e34_data_mes = ($this->e34_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_data_mes"]:$this->e34_data_mes);
@@ -86,10 +86,10 @@ class cl_pagordemdesconto {
             $this->e34_data = $this->e34_data_ano."-".$this->e34_data_mes."-".$this->e34_data_dia;
          }
        }
-       $this->e34_valordesconto = ($this->e34_valordesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_valordesconto"]:$this->e34_valordesconto);
+       $this->e34_valordesconto = ($this->e34_valordesconto === 0 || $this->e34_valordesconto === 0.0 || $this->e34_valordesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_valordesconto"]:$this->e34_valordesconto);
        $this->e34_motivo = ($this->e34_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_motivo"]:$this->e34_motivo);
      }else{
-       $this->e34_sequencial = ($this->e34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_sequencial"]:$this->e34_sequencial);
+       $this->e34_sequencial = ($this->e34_sequencial === 0 || $this->e34_sequencial === 0.0 || $this->e34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e34_sequencial"]:$this->e34_sequencial);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_pagordemdesconto {
          $this->e34_sequencial = $e34_sequencial;
        }
      }
-     if(($this->e34_sequencial == null) || ($this->e34_sequencial == "") ){
+     if(($this->e34_sequencial == null) || ($this->e34_sequencial === 0 || $this->e34_sequencial === 0.0 || $this->e34_sequencial == "") ){
        $this->erro_sql = " Campo e34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -174,7 +174,7 @@ if ( $iLinhasDadosPIB > 0 ) {
 	}
 }
 
-if ( !array_key_exists($iAno1,$aPIB) ) {
+if ( !(is_array($aPIB) && array_key_exists($iAno1,$aPIB)) ) {
 	db_redireciona("db_erros.php?fechar=true&db_erro=1 - Valor do PIB do Cenário Macroeconômico para o exercício $iAno1 não informado!");
 }
 

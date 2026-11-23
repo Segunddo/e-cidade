@@ -71,12 +71,12 @@ class cl_termotipoconfig {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k42_sequencial = ($this->k42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_sequencial"]:$this->k42_sequencial);
-       $this->k42_cadtipo = ($this->k42_cadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_cadtipo"]:$this->k42_cadtipo);
-       $this->k42_tiponovo = ($this->k42_tiponovo == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_tiponovo"]:$this->k42_tiponovo);
-       $this->k42_instit = ($this->k42_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_instit"]:$this->k42_instit);
+       $this->k42_sequencial = ($this->k42_sequencial === 0 || $this->k42_sequencial === 0.0 || $this->k42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_sequencial"]:$this->k42_sequencial);
+       $this->k42_cadtipo = ($this->k42_cadtipo === 0 || $this->k42_cadtipo === 0.0 || $this->k42_cadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_cadtipo"]:$this->k42_cadtipo);
+       $this->k42_tiponovo = ($this->k42_tiponovo === 0 || $this->k42_tiponovo === 0.0 || $this->k42_tiponovo == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_tiponovo"]:$this->k42_tiponovo);
+       $this->k42_instit = ($this->k42_instit === 0 || $this->k42_instit === 0.0 || $this->k42_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_instit"]:$this->k42_instit);
      }else{
-       $this->k42_sequencial = ($this->k42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_sequencial"]:$this->k42_sequencial);
+       $this->k42_sequencial = ($this->k42_sequencial === 0 || $this->k42_sequencial === 0.0 || $this->k42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k42_sequencial"]:$this->k42_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_termotipoconfig {
          $this->k42_sequencial = $k42_sequencial;
        }
      }
-     if(($this->k42_sequencial == null) || ($this->k42_sequencial == "") ){
+     if(($this->k42_sequencial == null) || ($this->k42_sequencial === 0 || $this->k42_sequencial === 0.0 || $this->k42_sequencial == "") ){
        $this->erro_sql = " Campo k42_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

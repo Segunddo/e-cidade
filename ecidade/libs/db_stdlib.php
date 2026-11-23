@@ -1462,8 +1462,8 @@ function db_fieldsmemory($recordset, $indice, $formatar = "", $mostravar = false
     //#99#//Exemplo:
     //#99#//db_fieldsmemory($result,0);
     //#99#//Cria todas as variáveis com o conteúdo de cada uma sendo o valor do campo
-    $fm_numfields = pg_num_fields($recordset);
-    $fm_numrows = pg_num_rows($recordset);
+    $fm_numfields = $recordset ? pg_num_fields($recordset) : null;
+    $fm_numrows = $recordset ? pg_num_rows($recordset) : null;
     //if(pg_num_rows($recordset)==0){
     // echo "RecordSet Vazio: <br>";
     // for ($i = 0;$i < $fm_numfields;$i++){
@@ -1926,7 +1926,7 @@ function db_lovrot(
 
         db_putsession("dblov_query_inicial", $query);
 
-        ${$tot_registros} = pg_fetch_result($tot, 0, 0);
+        ${$tot_registros} = $tot ? pg_fetch_result($tot, 0, 0) : null;
 
         if (${$tot_registros} == 0) {
             $Dd2 = "disabled";
@@ -2059,11 +2059,11 @@ function db_lovrot(
     $query .= " limit $numlinhas offset " . ${$offset};
     $result = db_query($query);
     if ($origem === 'func_empnota001.php') {
-        while ($row = pg_fetch_assoc($result)) {
+        while ($row = ($result ? pg_fetch_assoc($result) : null)) {
             $codNotas[] = $row["e69_codnota"];
         }
     }
-    $NumRows = pg_num_rows($result);
+    $NumRows = $result ? pg_num_rows($result) : null;
 
     if ($NumRows == 0) {
         if (isset($query_anterior)) {
@@ -2090,11 +2090,11 @@ function db_lovrot(
                 $tot = db_query("select count(*) from ({$query_anterior}) as temp");
             }
 
-            $$tot_registros = pg_fetch_result($tot, 0, 0);
+            $$tot_registros = $tot ? pg_fetch_result($tot, 0, 0) : null;
 
             $query = $query_anterior . " limit $numlinhas offset " . ${$offset};
             $result = db_query($query);
-            $NumRows = pg_num_rows($result);
+            $NumRows = $result ? pg_num_rows($result) : null;
             $filtroquery = $query_anterior;
         }
     } else {
@@ -2122,7 +2122,7 @@ function db_lovrot(
                 $tot = db_query("select count(*) from ({$query_novo_filtro}) as temp");
             }
 
-            ${$tot_registros} = pg_fetch_result($tot, 0, 0);
+            ${$tot_registros} = $tot ? pg_fetch_result($tot, 0, 0) : null;
 
             if (${$tot_registros} == 0) {
                 $Dd2 = "disabled";
@@ -2130,7 +2130,7 @@ function db_lovrot(
         }
     }
 
-    $NumFields = pg_num_fields($result);
+    $NumFields = $result ? pg_num_fields($result) : null;
 
     if (($NumRows < $numlinhas) && ($numlinhas < (${$tot_registros} - ${$offset} - $numlinhas))) {
         $Dd1 = @ $Dd2 = "disabled";
@@ -2233,7 +2233,7 @@ function db_lovrot(
 
     if (isset($totalizacao) && isset($tot)) {
         if (count($totalizacao) > 0) {
-            $totNumfields = pg_num_fields($tot);
+            $totNumfields = $tot ? pg_num_fields($tot) : null;
             for ($totrep = 1; $totrep < $totNumfields; $totrep++) {
                 $sHtml .= "<input type=\"hidden\"";
                 $sHtml .= "       name=\"totrep_" . pg_field_name($tot, $totrep) . "\"";
@@ -2715,7 +2715,7 @@ function db_lovrot(
     }
 
     if ($automatico) {
-        if (pg_num_rows($result) == 1 && $$offset == 0) {
+        if (($result ? pg_num_rows($result) : null) == 1 && $$offset == 0) {
             $sHtml .= "<script>" . @$resultadoRetorno . "</script>";
         }
     }

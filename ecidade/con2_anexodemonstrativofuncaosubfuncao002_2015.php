@@ -82,7 +82,7 @@ $sSqlOrgaos .= "                         o41_orgao = o40_orgao and o40_anousu = 
 $sSqlOrgaos .= "     where o41_anousu = {$dtAnousu} and o41_instit  in (".str_replace('-', ',', $oGet->sOrigem).")";
 
 $res_orgaos     = @db_query($sSqlOrgaos);
-$iNumeroLinhas  = @pg_numrows($res_orgaos);
+$iNumeroLinhas  = @($res_orgaos ? pg_numrows($res_orgaos) : null);
 $sOrgao         = "";
 $sSeparador     = "";
 
@@ -354,7 +354,7 @@ function contabilizarDespesa ($oTipoDespesa,$oStdSubfuncao,$sFuncao,$sSubfuncao,
 function construirArraysDespesas($sSql, $lDiferenciaTipo = true) {
 
   $rsSubfuncoes      = db_query($sSql);
-  $iNumeroResultados = pg_num_rows($rsSubfuncoes);
+  $iNumeroResultados = ($rsSubfuncoes ? pg_num_rows($rsSubfuncoes) : null);
 
   $oRPPS          = inicializarDespesa();
   $oContingencia  = inicializarDespesa();
@@ -418,7 +418,7 @@ function construirArraysDespesas($sSql, $lDiferenciaTipo = true) {
     $sSqlBuscaDotacaoTipo .= "     and o58_coddot = {$oDespesa->o58_coddot}                ";
 
     $rsBuscaDotacaoTipo   = db_query($sSqlBuscaDotacaoTipo);
-    $iLinhasEncontradas   = pg_num_rows($rsBuscaDotacaoTipo);
+    $iLinhasEncontradas   = ($rsBuscaDotacaoTipo ? pg_num_rows($rsBuscaDotacaoTipo) : null);
 
     if ($iLinhasEncontradas > 0) {
       $sTipo = '37';
@@ -490,11 +490,11 @@ function calculaPercetual($oDespesas) {
   $nTotalD = $oDespesas->nTotalLiquidado;
 
   if ($nTotalB) {
-    $oDespesas->nPercentualB = ($oDespesas->nTotalDespesasEmpenhadasPeriodo / $nTotalB) * 100;
+    $oDespesas->nPercentualB = ((float) $nTotalB == 0 ? (float) $oDespesas->nTotalDespesasEmpenhadasPeriodo > 0 ? INF : ((float) $oDespesas->nTotalDespesasEmpenhadasPeriodo < 0 ? -INF : NAN) : $oDespesas->nTotalDespesasEmpenhadasPeriodo / $nTotalB) * 100;
   }
 
   if ($nTotalD) {
-    $oDespesas->nPercentualD = ($oDespesas->nTotalDespesasLiquidadasPeriodo / $nTotalD) * 100;
+    $oDespesas->nPercentualD = ((float) $nTotalD == 0 ? (float) $oDespesas->nTotalDespesasLiquidadasPeriodo > 0 ? INF : ((float) $oDespesas->nTotalDespesasLiquidadasPeriodo < 0 ? -INF : NAN) : $oDespesas->nTotalDespesasLiquidadasPeriodo / $nTotalD) * 100;
   }
 
   if (isset($oDespesas->oOutras)) {
@@ -502,21 +502,21 @@ function calculaPercetual($oDespesas) {
     foreach ($oDespesas->oOutras->aFuncoes as $oFuncao){
 
       if ($nTotalB) {
-        $oFuncao->nPercentualB = ($oFuncao->nTotalDespesasEmpenhadasPeriodo / $nTotalB) * 100;
+        $oFuncao->nPercentualB = ((float) $nTotalB == 0 ? (float) $oFuncao->nTotalDespesasEmpenhadasPeriodo > 0 ? INF : ((float) $oFuncao->nTotalDespesasEmpenhadasPeriodo < 0 ? -INF : NAN) : $oFuncao->nTotalDespesasEmpenhadasPeriodo / $nTotalB) * 100;
       }
 
       if ($nTotalD) {
-        $oFuncao->nPercentualD = ($oFuncao->nTotalDespesasLiquidadasPeriodo / $nTotalD) * 100;
+        $oFuncao->nPercentualD = ((float) $nTotalD == 0 ? (float) $oFuncao->nTotalDespesasLiquidadasPeriodo > 0 ? INF : ((float) $oFuncao->nTotalDespesasLiquidadasPeriodo < 0 ? -INF : NAN) : $oFuncao->nTotalDespesasLiquidadasPeriodo / $nTotalD) * 100;
       }
 
       foreach ($oFuncao->aSubfuncoes as $oSubfuncao) {
 
         if ($nTotalB) {
-          $oSubfuncao->nPercentualB = ($oSubfuncao->nTotalDespesasEmpenhadasPeriodo / $nTotalB) * 100;
+          $oSubfuncao->nPercentualB = ((float) $nTotalB == 0 ? (float) $oSubfuncao->nTotalDespesasEmpenhadasPeriodo > 0 ? INF : ((float) $oSubfuncao->nTotalDespesasEmpenhadasPeriodo < 0 ? -INF : NAN) : $oSubfuncao->nTotalDespesasEmpenhadasPeriodo / $nTotalB) * 100;
         }
 
         if ($nTotalD){
-          $oSubfuncao->nPercentualD = ($oSubfuncao->nTotalDespesasLiquidadasPeriodo / $nTotalD) * 100;
+          $oSubfuncao->nPercentualD = ((float) $nTotalD == 0 ? (float) $oSubfuncao->nTotalDespesasLiquidadasPeriodo > 0 ? INF : ((float) $oSubfuncao->nTotalDespesasLiquidadasPeriodo < 0 ? -INF : NAN) : $oSubfuncao->nTotalDespesasLiquidadasPeriodo / $nTotalD) * 100;
         }
 
       }
@@ -526,22 +526,22 @@ function calculaPercetual($oDespesas) {
   if (isset($oDespesas->oRPPS)) {
 
     if ($nTotalB) {
-      $oFuncao->oRPPS["nPercentualB"] = ($oDespesas->oRPPS->nTotalDespesasEmpenhadasPeriodo / $nTotalB) * 100;
+      $oFuncao->oRPPS["nPercentualB"] = ((float) $nTotalB == 0 ? (float) $oDespesas->oRPPS->nTotalDespesasEmpenhadasPeriodo > 0 ? INF : ((float) $oDespesas->oRPPS->nTotalDespesasEmpenhadasPeriodo < 0 ? -INF : NAN) : $oDespesas->oRPPS->nTotalDespesasEmpenhadasPeriodo / $nTotalB) * 100;
     }
 
     if ($nTotalD){
-      $oFuncao->oRPPS["nPercentualD"] = ($oDespesas->oRPPS->nTotalDespesasLiquidadasPeriodo / $nTotalD) * 100;
+      $oFuncao->oRPPS["nPercentualD"] = ((float) $nTotalD == 0 ? (float) $oDespesas->oRPPS->nTotalDespesasLiquidadasPeriodo > 0 ? INF : ((float) $oDespesas->oRPPS->nTotalDespesasLiquidadasPeriodo < 0 ? -INF : NAN) : $oDespesas->oRPPS->nTotalDespesasLiquidadasPeriodo / $nTotalD) * 100;
     }
   }
 
   if (isset($oDespesas->oContingencia)) {
 
     if ($nTotalB) {
-      $oFuncao->oContingencia["nPercentualB"] = ($oDespesas->oContingencia->nTotalDespesasEmpenhadasPeriodo / $nTotalB) * 100;
+      $oFuncao->oContingencia["nPercentualB"] = ((float) $nTotalB == 0 ? (float) $oDespesas->oContingencia->nTotalDespesasEmpenhadasPeriodo > 0 ? INF : ((float) $oDespesas->oContingencia->nTotalDespesasEmpenhadasPeriodo < 0 ? -INF : NAN) : $oDespesas->oContingencia->nTotalDespesasEmpenhadasPeriodo / $nTotalB) * 100;
     }
 
     if ($nTotalD) {
-      $oFuncao->oContingencia["nPercentualD"] = ($oDespesas->oContingencia->nTotalDespesasLiquidadasPeriodo / $nTotalD) * 100;
+      $oFuncao->oContingencia["nPercentualD"] = ((float) $nTotalD == 0 ? (float) $oDespesas->oContingencia->nTotalDespesasLiquidadasPeriodo > 0 ? INF : ((float) $oDespesas->oContingencia->nTotalDespesasLiquidadasPeriodo < 0 ? -INF : NAN) : $oDespesas->oContingencia->nTotalDespesasLiquidadasPeriodo / $nTotalD) * 100;
     }
   }
 }
@@ -789,8 +789,8 @@ $oDespesasExtra->nTotalLiquidado = $oDespesasExtra->nTotalDespesasLiquidadasPeri
 $oDespesasIntra->nTotalEmpenhado = $oDespesasIntra->nTotalDespesasEmpenhadasPeriodo;
 $oDespesasIntra->nTotalLiquidado = $oDespesasIntra->nTotalDespesasLiquidadasPeriodo;
 
-$oDespesasIntra->nPercentualB = ($oDespesasIntra->nTotalEmpenhado/$oDespesasExtra->nTotalEmpenhado) * 100;
-$oDespesasIntra->nPercentualD = ($oDespesasIntra->nTotalLiquidado/$oDespesasExtra->nTotalLiquidado) * 100;
+$oDespesasIntra->nPercentualB = ((float) $oDespesasExtra->nTotalEmpenhado == 0 ? (float) $oDespesasIntra->nTotalEmpenhado > 0 ? INF : ((float) $oDespesasIntra->nTotalEmpenhado < 0 ? -INF : NAN) : $oDespesasIntra->nTotalEmpenhado / $oDespesasExtra->nTotalEmpenhado) * 100;
+$oDespesasIntra->nPercentualD = ((float) $oDespesasExtra->nTotalLiquidado == 0 ? (float) $oDespesasIntra->nTotalLiquidado > 0 ? INF : ((float) $oDespesasIntra->nTotalLiquidado < 0 ? -INF : NAN) : $oDespesasIntra->nTotalLiquidado / $oDespesasExtra->nTotalLiquidado) * 100;
 
 /**
  *

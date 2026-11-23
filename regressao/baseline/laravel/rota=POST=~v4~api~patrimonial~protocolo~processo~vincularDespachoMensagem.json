@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/processo/vincularDespachoMensagem",
+  "json": {
+    "error": true,
+    "message": "Call to a member function setMensageria() on null"
+  },
+  "sha256": "294d2675db16eb63d7791f8f6e186721a02672335513a53fcf26760ccb648245",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

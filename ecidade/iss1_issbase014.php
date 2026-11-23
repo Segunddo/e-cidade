@@ -59,7 +59,7 @@ require_once(modification("model/logInscricao.model.php"));
 
 db_postmemory($_POST);
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $oPost = db_utils::postMemory($_POST);
 $oGet  = db_utils::postMemory($_GET);
@@ -108,7 +108,7 @@ if ($numrowsParissqn > 0) {
 //************************************************************************************************//
 //Busca o parametro na tabela parissqn para gerar risco automaticamente apartir do CNAE
 $selectRiscoAutomatico = db_query("select q60_riscoautomatico from issqn.parissqn;");
-$riscoAutomatico = pg_result($selectRiscoAutomatico,0,0);
+$riscoAutomatico = ($selectRiscoAutomatico ? pg_result($selectRiscoAutomatico,0,0) : null);
 //************************************************************************************************//
 
 $result02=$cldb_config->sql_record($cldb_config->sql_query_file(db_getsession("DB_instit"),"munic,cep"));

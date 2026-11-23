@@ -67,10 +67,10 @@ class cl_vistorianumpre {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y69_codvist = ($this->y69_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y69_codvist"]:$this->y69_codvist);
-       $this->y69_numpre = ($this->y69_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["y69_numpre"]:$this->y69_numpre);
+       $this->y69_codvist = ($this->y69_codvist === 0 || $this->y69_codvist === 0.0 || $this->y69_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y69_codvist"]:$this->y69_codvist);
+       $this->y69_numpre = ($this->y69_numpre === 0 || $this->y69_numpre === 0.0 || $this->y69_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["y69_numpre"]:$this->y69_numpre);
      }else{
-       $this->y69_codvist = ($this->y69_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y69_codvist"]:$this->y69_codvist);
+       $this->y69_codvist = ($this->y69_codvist === 0 || $this->y69_codvist === 0.0 || $this->y69_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y69_codvist"]:$this->y69_codvist);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_vistorianumpre {
        return false;
      }
        $this->y69_codvist = $y69_codvist;
-     if(($this->y69_codvist == null) || ($this->y69_codvist == "") ){
+     if(($this->y69_codvist == null) || ($this->y69_codvist === 0 || $this->y69_codvist === 0.0 || $this->y69_codvist == "") ){
        $this->erro_sql = " Campo y69_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

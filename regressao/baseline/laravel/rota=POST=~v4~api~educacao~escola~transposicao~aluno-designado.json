@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/transposicao/aluno-designado",
+  "json": {
+    "error": true,
+    "message": "Código do aluno não informado"
+  },
+  "sha256": "5297c16ec1e215cd3438a7962fa385f52f240aaac1814721a8452752257c49e0",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

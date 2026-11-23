@@ -1,0 +1,59 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/recursos/classificacoes",
+  "json": {
+    "data": [
+      {
+        "descricao": "Não se aplica",
+        "id": 1
+      },
+      {
+        "descricao": "Recursos Livres (não vinculados)",
+        "id": 2
+      },
+      {
+        "descricao": "Recursos Vinculados à Educação",
+        "id": 3
+      },
+      {
+        "descricao": "Recursos Vinculados à Saude",
+        "id": 4
+      },
+      {
+        "descricao": "Recursos Vinculados à Assistência Social",
+        "id": 5
+      },
+      {
+        "descricao": "Demais Vinculações Decorrentes de Transferências",
+        "id": 6
+      },
+      {
+        "descricao": "Demais Vinculações Legais",
+        "id": 7
+      },
+      {
+        "descricao": "Recursos Vinculados à Previdência social",
+        "id": 8
+      },
+      {
+        "descricao": "Recursos Extraorçamentários",
+        "id": 9
+      },
+      {
+        "descricao": "Outras Vinculações",
+        "id": 10
+      }
+    ],
+    "error": false,
+    "message": "Classificação de fonte de recurso."
+  },
+  "sha256": "2c25ac9cc3460c85bae7027dd612273d07e21c8f4facbd6542e61aeb7d0bcd98",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

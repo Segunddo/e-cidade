@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/itbi/taxas-itbi",
+  "json": {
+    "errors": {
+      "tipoTaxa": [
+        "O campo tipo taxa é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "3f0ce2f9593fe995168f7330d5f44860489556ce560bee50d332f14d19f2d080",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

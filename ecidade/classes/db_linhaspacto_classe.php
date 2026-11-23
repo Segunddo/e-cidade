@@ -50,11 +50,11 @@ class cl_linhaspacto
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->c07_sequencial = ($this->c07_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c07_sequencial"] : $this->c07_sequencial);
+            $this->c07_sequencial = ($this->c07_sequencial === 0 || $this->c07_sequencial === 0.0 || $this->c07_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c07_sequencial"] : $this->c07_sequencial);
             $this->c07_titulo = ($this->c07_titulo == "" ? @$GLOBALS["HTTP_POST_VARS"]["c07_titulo"] : $this->c07_titulo);
-            $this->c07_valor = ($this->c07_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["c07_valor"] : $this->c07_valor);
+            $this->c07_valor = ($this->c07_valor === 0 || $this->c07_valor === 0.0 || $this->c07_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["c07_valor"] : $this->c07_valor);
         } else {
-            $this->c07_sequencial = ($this->c07_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c07_sequencial"] : $this->c07_sequencial);
+            $this->c07_sequencial = ($this->c07_sequencial === 0 || $this->c07_sequencial === 0.0 || $this->c07_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["c07_sequencial"] : $this->c07_sequencial);
         }
     }
 
@@ -104,7 +104,7 @@ class cl_linhaspacto
                 $this->c07_sequencial = $c07_sequencial;
             }
         }
-        if (($this->c07_sequencial == null) || ($this->c07_sequencial == "")) {
+        if (($this->c07_sequencial == null) || ($this->c07_sequencial === 0 || $this->c07_sequencial === 0.0 || $this->c07_sequencial == "")) {
             $this->erro_sql = " Campo c07_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

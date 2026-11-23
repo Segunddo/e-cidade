@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/rgf/anexo-2",
+  "json": {
+    "errors": {
+      "codigo_relatorio": [
+        "O campo codigo relatorio é obrigatório."
+      ],
+      "instituicoes": [
+        "O campo instituicoes é obrigatório."
+      ],
+      "periodo": [
+        "O campo periodo é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "840e6e370f619f4d28b9d504cd49c0f19593311a621367a51786d937b44d9a54",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

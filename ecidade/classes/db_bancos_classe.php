@@ -67,10 +67,10 @@ class cl_bancos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codbco = ($this->codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["codbco"]:$this->codbco);
+       $this->codbco = ($this->codbco === 0 || $this->codbco === 0.0 || $this->codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["codbco"]:$this->codbco);
        $this->nomebco = ($this->nomebco == ""?@$GLOBALS["HTTP_POST_VARS"]["nomebco"]:$this->nomebco);
      }else{
-       $this->codbco = ($this->codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["codbco"]:$this->codbco);
+       $this->codbco = ($this->codbco === 0 || $this->codbco === 0.0 || $this->codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["codbco"]:$this->codbco);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_bancos {
        return false;
      }
        $this->codbco = $codbco;
-     if(($this->codbco == null) || ($this->codbco == "") ){
+     if(($this->codbco == null) || ($this->codbco === 0 || $this->codbco === 0.0 || $this->codbco == "") ){
        $this->erro_sql = " Campo codbco nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

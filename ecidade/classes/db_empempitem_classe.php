@@ -83,19 +83,19 @@ class cl_empempitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e62_sequencial = ($this->e62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_sequencial"]:$this->e62_sequencial);
-       $this->e62_numemp = ($this->e62_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_numemp"]:$this->e62_numemp);
-       $this->e62_item = ($this->e62_item == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_item"]:$this->e62_item);
-       $this->e62_sequen = ($this->e62_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_sequen"]:$this->e62_sequen);
-       $this->e62_quant = ($this->e62_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_quant"]:$this->e62_quant);
-       $this->e62_vltot = ($this->e62_vltot == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_vltot"]:$this->e62_vltot);
+       $this->e62_sequencial = ($this->e62_sequencial === 0 || $this->e62_sequencial === 0.0 || $this->e62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_sequencial"]:$this->e62_sequencial);
+       $this->e62_numemp = ($this->e62_numemp === 0 || $this->e62_numemp === 0.0 || $this->e62_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_numemp"]:$this->e62_numemp);
+       $this->e62_item = ($this->e62_item === 0 || $this->e62_item === 0.0 || $this->e62_item == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_item"]:$this->e62_item);
+       $this->e62_sequen = ($this->e62_sequen === 0 || $this->e62_sequen === 0.0 || $this->e62_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_sequen"]:$this->e62_sequen);
+       $this->e62_quant = ($this->e62_quant === 0 || $this->e62_quant === 0.0 || $this->e62_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_quant"]:$this->e62_quant);
+       $this->e62_vltot = ($this->e62_vltot === 0 || $this->e62_vltot === 0.0 || $this->e62_vltot == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_vltot"]:$this->e62_vltot);
        $this->e62_descr = ($this->e62_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_descr"]:$this->e62_descr);
-       $this->e62_codele = ($this->e62_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_codele"]:$this->e62_codele);
-       $this->e62_vlrun = ($this->e62_vlrun == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_vlrun"]:$this->e62_vlrun);
+       $this->e62_codele = ($this->e62_codele === 0 || $this->e62_codele === 0.0 || $this->e62_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_codele"]:$this->e62_codele);
+       $this->e62_vlrun = ($this->e62_vlrun === 0 || $this->e62_vlrun === 0.0 || $this->e62_vlrun == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_vlrun"]:$this->e62_vlrun);
        $this->e62_servicoquantidade = ($this->e62_servicoquantidade == "f"?@$GLOBALS["HTTP_POST_VARS"]["e62_servicoquantidade"]:$this->e62_servicoquantidade);
      }else{
-       $this->e62_sequencial = ($this->e62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_sequencial"]:$this->e62_sequencial);
-       $this->e62_sequen = ($this->e62_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_sequen"]:$this->e62_sequen);
+       $this->e62_sequencial = ($this->e62_sequencial === 0 || $this->e62_sequencial === 0.0 || $this->e62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_sequencial"]:$this->e62_sequencial);
+       $this->e62_sequen = ($this->e62_sequen === 0 || $this->e62_sequen === 0.0 || $this->e62_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e62_sequen"]:$this->e62_sequen);
      }
    }
    // funcao para inclusao
@@ -186,7 +186,7 @@ class cl_empempitem {
        }
      }
      */
-     if(($this->e62_sequencial == null) || ($this->e62_sequencial == "") ){
+     if(($this->e62_sequencial == null) || ($this->e62_sequencial === 0 || $this->e62_sequencial === 0.0 || $this->e62_sequencial == "") ){
        $this->erro_sql = " Campo e62_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

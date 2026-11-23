@@ -36,7 +36,7 @@ $clrotulo->label('r06_descr');
 $clrotulo->label('r06_elemen');
 $clrotulo->label('r06_pd');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 //db_postmemory($HTTP_POST_VARS,2);exit;
 
@@ -44,7 +44,7 @@ $xinstit =explode("-",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
       $descr_inst .= $xvirg.$nomeinst ;
         $xvirg = ', ';
@@ -110,7 +110,7 @@ $pdf->setfont('arial','B',9);
 $pdf->cell(50,6,'RECEITAS',0,1,"L",0);
 $pdf->setfont('arial','',8);
 $totalrec = 0;
-for($x = 0; $x < pg_numrows($resultrec);$x++){
+for($x = 0; $x < ($resultrec ? pg_numrows($resultrec) : null);$x++){
   db_fieldsmemory($resultrec,$x);
   if ($tipo_saldo == 1){
      $valor = $saldo_inicial;
@@ -128,7 +128,7 @@ $pdf->setfont('arial','B',9);
 $pdf->cell(50,6,'DESPESAS',0,1,"L",0);
 $pdf->setfont('arial','',8);
 $totalele = 0;
-for($x = 0; $x < pg_numrows($resultele);$x++){
+for($x = 0; $x < ($resultele ? pg_numrows($resultele) : null);$x++){
   db_fieldsmemory($resultele,$x);
   $valor = $dot_ini;
   $pdf->cell(70,5,$descr,0,0,"L",0);

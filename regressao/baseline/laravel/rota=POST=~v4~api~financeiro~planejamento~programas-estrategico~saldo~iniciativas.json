@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/programas-estrategico/saldo/iniciativas",
+  "json": {
+    "errors": {
+      "pl9_codigo": [
+        "Código do programa deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "1698aba360e74b29272ccc9b07138881dec36624071d1bc5c0296b17eec21c9a",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

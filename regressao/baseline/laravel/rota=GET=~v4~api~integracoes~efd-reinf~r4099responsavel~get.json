@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/integracoes/efd-reinf/r4099responsavel/get",
+  "json": {
+    "errors": {
+      "cgm": [
+        "O campo cgm é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "7b62e000bc60e36ffbfab4c5fe3b78caeb698ef19fa2f55251bddcab8ff6402d",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

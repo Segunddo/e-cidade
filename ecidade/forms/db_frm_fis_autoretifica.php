@@ -56,7 +56,7 @@
 
       $paSql  = "select * from fiscalizacao.fis_paragrafoauto where pl10_auto = $y50_codauto";
       $paRs   = db_query($paSql);
-      $paRows = pg_num_rows($paRs);
+      $paRows = ($paRs ? pg_num_rows($paRs) : null);
       for ($i=0; $i < $paRows; $i++) { 
         db_fieldsmemory($paRs, $i);
         if($pl10_paragrafo == 1){

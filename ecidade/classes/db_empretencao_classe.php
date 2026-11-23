@@ -73,13 +73,13 @@ class cl_empretencao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e65_seq = ($this->e65_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_seq"]:$this->e65_seq);
-       $this->e65_receita = ($this->e65_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_receita"]:$this->e65_receita);
-       $this->e65_aliquota = ($this->e65_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_aliquota"]:$this->e65_aliquota);
-       $this->e65_valor = ($this->e65_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_valor"]:$this->e65_valor);
+       $this->e65_seq = ($this->e65_seq === 0 || $this->e65_seq === 0.0 || $this->e65_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_seq"]:$this->e65_seq);
+       $this->e65_receita = ($this->e65_receita === 0 || $this->e65_receita === 0.0 || $this->e65_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_receita"]:$this->e65_receita);
+       $this->e65_aliquota = ($this->e65_aliquota === 0 || $this->e65_aliquota === 0.0 || $this->e65_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_aliquota"]:$this->e65_aliquota);
+       $this->e65_valor = ($this->e65_valor === 0 || $this->e65_valor === 0.0 || $this->e65_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_valor"]:$this->e65_valor);
        $this->e65_hist = ($this->e65_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_hist"]:$this->e65_hist);
      }else{
-       $this->e65_seq = ($this->e65_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_seq"]:$this->e65_seq);
+       $this->e65_seq = ($this->e65_seq === 0 || $this->e65_seq === 0.0 || $this->e65_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["e65_seq"]:$this->e65_seq);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_empretencao {
          $this->e65_seq = $e65_seq;
        }
      }
-     if(($this->e65_seq == null) || ($this->e65_seq == "") ){
+     if(($this->e65_seq == null) || ($this->e65_seq === 0 || $this->e65_seq === 0.0 || $this->e65_seq == "") ){
        $this->erro_sql = " Campo e65_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -76,7 +76,7 @@ class cl_orcreservager {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o84_codres = ($this->o84_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_codres"]:$this->o84_codres);
+       $this->o84_codres = ($this->o84_codres === 0 || $this->o84_codres === 0.0 || $this->o84_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_codres"]:$this->o84_codres);
        if($this->o84_data == ""){
          $this->o84_data_dia = ($this->o84_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_data_dia"]:$this->o84_data_dia);
          $this->o84_data_mes = ($this->o84_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_data_mes"]:$this->o84_data_mes);
@@ -85,11 +85,11 @@ class cl_orcreservager {
             $this->o84_data = $this->o84_data_ano."-".$this->o84_data_mes."-".$this->o84_data_dia;
          }
        }
-       $this->o84_id_usuario = ($this->o84_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_id_usuario"]:$this->o84_id_usuario);
+       $this->o84_id_usuario = ($this->o84_id_usuario === 0 || $this->o84_id_usuario === 0.0 || $this->o84_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_id_usuario"]:$this->o84_id_usuario);
        $this->o84_tipo = ($this->o84_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_tipo"]:$this->o84_tipo);
-       $this->o84_perc = ($this->o84_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_perc"]:$this->o84_perc);
+       $this->o84_perc = ($this->o84_perc === 0 || $this->o84_perc === 0.0 || $this->o84_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_perc"]:$this->o84_perc);
      }else{
-       $this->o84_codres = ($this->o84_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_codres"]:$this->o84_codres);
+       $this->o84_codres = ($this->o84_codres === 0 || $this->o84_codres === 0.0 || $this->o84_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o84_codres"]:$this->o84_codres);
      }
    }
    // funcao para inclusao
@@ -132,7 +132,7 @@ class cl_orcreservager {
        return false;
      }
        $this->o84_codres = $o84_codres;
-     if(($this->o84_codres == null) || ($this->o84_codres == "") ){
+     if(($this->o84_codres == null) || ($this->o84_codres === 0 || $this->o84_codres === 0.0 || $this->o84_codres == "") ){
        $this->erro_sql = " Campo o84_codres nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

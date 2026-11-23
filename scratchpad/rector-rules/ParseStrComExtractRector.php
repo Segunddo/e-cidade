@@ -24,6 +24,21 @@ use Symplify\RuleDocGenerator\ValueObject\RuleDefinition;
  *     parse_str($s, $result);  ->  $foo NAO existe; so $result
  *
  * Esta regra acrescenta o extract() junto, restaurando o escopo.
+ *
+ * COMO FAZ: visita cada instrucao-expressao (Expression); se ela e exatamente uma
+ * chamada `parse_str(<x>);` com UM argumento posicional, acrescenta `$__qs` como 2o
+ * argumento e devolve DUAS instrucoes no lugar da original: a chamada alterada e
+ * `extract($__qs);`. parse_str usada dentro de outra expressao (ex.: `$r = parse_str(..)`)
+ * nao e tocada -- e parse_str devolve void, entao esse uso nao aparece na pratica.
+ * O nome `$__qs` e fixo: duas chamadas no mesmo escopo reaproveitam a variavel, o que
+ * e inofensivo porque cada parse_str a sobrescreve antes do seu extract.
+ *
+ * ONDE E USADO: passo 4 do guia, carregada por scratchpad/rector-curado.php
+ * (require_once + withRules); o rector_lote.py a lista como "conhecida". Substitui a
+ * nativa ParseStrWithResultArgumentRector, que esta na denylist. Roda no PHP 8.5
+ * dentro do Rector; o codigo emitido roda nos dois runtimes (parse_str com 2
+ * argumentos e extract existem no 5.6).
+ * Efeito: reescreve os arquivos-alvo (so sem --dry-run).
  */
 final class ParseStrComExtractRector extends AbstractRector
 {
@@ -41,6 +56,9 @@ final class ParseStrComExtractRector extends AbstractRector
     }
 
     /**
+     * Recebe um Expression. Devolve null (nada a fazer) ou um array de instrucoes, que o
+     * Rector poe no lugar da original -- e assim que uma instrucao vira duas.
+     *
      * @return Node[]|null
      */
     public function refactor(Node $node): ?array

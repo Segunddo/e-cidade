@@ -85,14 +85,14 @@ $jaexiste = 0;
 //$resultverifica = pg_exec($sqlverifica);
 //if (pg_numrows($resultverifica) > 0) {
 if (1==0) {
-  $d72_conteudo = pg_result($resultverifica, 0, "d72_conteudo");
+  $d72_conteudo = ($resultverifica ? pg_result($resultverifica, 0, "d72_conteudo") : null);
   
   die("x: $d72_conteudo\nx");
   exit;
   
   db_fieldsmemory($resultverifica, 0);
   
-  $processados = pg_numrows($resultverifica);
+  $processados = ($resultverifica ? pg_numrows($resultverifica) : null);
   
   $jaexiste = 1;
   
@@ -116,7 +116,7 @@ if (1==0) {
 
   $resultarretipo = pg_query($sqlarretipo);
 
-  if(pg_numrows($resultarretipo) > 0) {
+  if(($resultarretipo ? pg_numrows($resultarretipo) : null) > 0) {
     db_fieldsmemory($resultarretipo, 0);
   } else {
     $k00_tipoagrup = 0;
@@ -249,7 +249,7 @@ if (1==0) {
   $resultprinc = pg_exec($sqlprinc) or die($sqlprinc);
   //db_criatabela($resultprinc);
   //die();
-  if ($resultprinc == false or pg_numrows($resultprinc) == 0) {
+  if ($resultprinc == false or ($resultprinc ? pg_numrows($resultprinc) : null) == 0) {
     $erro = true;
     $descricao_erro = "Não existem registros a processar!";
   } else {
@@ -258,8 +258,8 @@ if (1==0) {
     $resultini = pg_exec($sqlini) or die($sqlini);
     
     $resultmunic = pg_exec("select nomeinst, nomedebconta from db_config where codigo = " . db_getsession("DB_instit"));
-    $nomeinst = pg_result($resultmunic,0);
-    $munic    = pg_result($resultmunic,1);
+    $nomeinst = ($resultmunic ? pg_result($resultmunic,0) : null);
+    $munic    = ($resultmunic ? pg_result($resultmunic,1) : null);
     
     $data =  "$d72_data_ano-$d72_data_mes-$d72_data_dia";
     
@@ -272,7 +272,7 @@ if (1==0) {
 
     $resultparam = pg_exec($sqlparam) or die($sqlparam);
 
-    if (pg_numrows($resultparam) > 0) {
+    if (($resultparam ? pg_numrows($resultparam) : null) > 0) {
       db_fieldsmemory($resultparam, 0);
       
       $nextdebcontaarquivo = "select nextval('debcontaarquivo_d72_codigo_seq') as debcontaarquivo";
@@ -344,7 +344,7 @@ if (1==0) {
       
       $valortotal = 0;
       
-      $numrowsprinc = pg_numrows($resultprinc);
+      $numrowsprinc = ($resultprinc ? pg_numrows($resultprinc) : null);
       for ($i = 0; $i < $numrowsprinc; $i++) {
         db_fieldsmemory($resultprinc, $i);
         
@@ -462,7 +462,7 @@ if (1==0) {
       }
       
       $linhas .= "Z";
-      $linhas .= str_pad(pg_numrows($resultprinc) + 2, 6, "0", STR_PAD_LEFT);
+      $linhas .= str_pad(($resultprinc ? pg_numrows($resultprinc) : null) + 2, 6, "0", STR_PAD_LEFT);
       $linhas .= str_pad(trim(db_formatar($valortotal, 'valsemform', '0', 17)), 17, "0", STR_PAD_LEFT);
       $linhas .= str_repeat(" ", 126);
      
@@ -494,7 +494,7 @@ if (1==0) {
       $sqlfim = "commit;";
       $resultfim = pg_exec($sqlfim) or die($sqlfim);
       
-      $processados = pg_numrows($resultprinc);
+      $processados = ($resultprinc ? pg_numrows($resultprinc) : null);
       
     }
     
@@ -537,7 +537,7 @@ function busca_Valores_Recibo ( $iNumNov ) {
     $sSqlValores = "select sum(k00_valor) as valores from recibopaga where k00_numnov = $iNumNov";
 
     $rsValores   = db_query($sSqlValores) or die( $sSqlValores);
-    $iRetorno = pg_result($rsValores,0,'valores');
+    $iRetorno = ($rsValores ? pg_result($rsValores,0,'valores') : null);
     return  $iRetorno;
 
 

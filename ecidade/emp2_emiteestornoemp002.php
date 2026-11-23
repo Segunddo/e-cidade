@@ -35,7 +35,7 @@ include(modification("classes/db_db_config_classe.php"));
 $clempparametro	 = new  cl_empparametro;
 $cltipoinstit    = new  cl_db_config;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $result_instit = $cltipoinstit->sql_record($cltipoinstit->sql_query_tipoinstit(db_getsession("DB_instit"),"db21_tipoinstit",null,""));

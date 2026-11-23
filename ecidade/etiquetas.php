@@ -29,7 +29,7 @@ include(modification("libs/db_sql.php"));
 //include(modification("fpdf151/fpdf.php"));
 require_once(modification('fpdf151/PDF_Label.php'));
 db_postmemory($HTTP_SERVER_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $inicial = 1000;
 $final   = 1100;

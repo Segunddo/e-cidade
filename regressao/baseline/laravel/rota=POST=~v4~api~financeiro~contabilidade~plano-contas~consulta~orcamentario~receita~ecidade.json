@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/consulta/orcamentario/receita/ecidade",
+  "json": {
+    "error": true,
+    "message": "Undefined index: tipoPlano"
+  },
+  "sha256": "24ec82cfc343e56b91c4ba3a8e114f98ffe0803fb20a0f23b38e3d4bf5e6b935",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

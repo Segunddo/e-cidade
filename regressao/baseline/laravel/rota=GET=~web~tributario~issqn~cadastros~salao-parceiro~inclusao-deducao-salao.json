@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/issqn/cadastros/salao-parceiro/inclusao-deducao-salao",
+  "json": null,
+  "sha256": "d8959e6f26f1eb0c5f9fec961d7c3a570f73f28a8c2d78c7a71cbdd4954aa128",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

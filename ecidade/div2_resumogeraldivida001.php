@@ -119,7 +119,7 @@ if (count($clpostgresqlutils->getTableIndexes('debitos')) == 0) {
                             $sSqlDataDebitos .= "order by k115_data desc ";
 
                             $rsDataDebitos    = db_query($sSqlDataDebitos);
-                            $iNroDatas          = pg_num_rows($rsDataDebitos);
+                            $iNroDatas          = ($rsDataDebitos ? pg_num_rows($rsDataDebitos) : null);
                             for ($iInd=0; $iInd < $iNroDatas; $iInd++) {
                                 $oDataDebitos = db_utils::fieldsMemory($rsDataDebitos, $iInd);
                                 $aDatas[$oDataDebitos->k115_data] = db_formatar($oDataDebitos->k115_data, 'd');
@@ -142,7 +142,7 @@ if (count($clpostgresqlutils->getTableIndexes('debitos')) == 0) {
                     if (isset($oPost->dataDebitos) && trim($oPost->dataDebitos) != '') {
                         $dtDataDebitos = $oPost->dataDebitos;
                     } elseif ($iNroDatas > 0) {
-                        $dtDataDebitos = pg_fetch_result($rsDataDebitos, 0, 'k115_data');
+                        $dtDataDebitos = ($rsDataDebitos ? pg_fetch_result($rsDataDebitos, 0, 'k115_data') : null);
                     } else {
                         $dtDataDebitos = '';
                     }

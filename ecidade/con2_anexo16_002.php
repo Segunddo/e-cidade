@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 
 $classinatura = new cl_assinatura;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 $anousu  = db_getsession("DB_anousu");
@@ -42,7 +42,7 @@ $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config wher
 $descr_inst = '';
 $xvirg = '';
 $flag_abrev = false;
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
     if (strlen(trim($nomeinstabrev)) > 0){
          $descr_inst .= $xvirg.$nomeinstabrev;
@@ -69,7 +69,7 @@ $sql    = "select * from conreltitulos where c44_anousu = $anousu and c44_instit
 $result = db_query($sql);
 //db_criatabela($result);exit;
 
-if(pg_numrows($result) == 0) {
+if(($result ? pg_numrows($result) : null) == 0) {
 //	db_msgbox("Não existem informações para este exercício " . $anousu);
 //	echo "<script>window.close();</script>";
 }
@@ -107,7 +107,7 @@ if($pdf->gety() > $pdf->h -30 || $pagina == 1){
      $pdf->cell(40,$alt,"VALOR","LTB",1,"C",0);
 }
 
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
    db_fieldsmemory($result,$i);
    if($pdf->gety() > $pdf->h -30 || $pagina == 1){
      $pagina = 0;

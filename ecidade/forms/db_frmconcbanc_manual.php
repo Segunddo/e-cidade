@@ -31,7 +31,7 @@ $sSqlValidaDataConciliacao .= "  from condataconf ";
 $sSqlValidaDataConciliacao .= " where c99_instit = ".db_getsession("DB_instit");
 $sSqlValidaDataConciliacao .= " having max(c99_data) >= '{$data}'";
 $rsValidaDataConciliacao   = db_query($sSqlValidaDataConciliacao);
-if (pg_num_rows($rsValidaDataConciliacao) > 0) {
+if (($rsValidaDataConciliacao ? pg_num_rows($rsValidaDataConciliacao) : null) > 0) {
 	//  $lLiberado = false;
 	//  nao testa mais a data da contabilidade ( nao faz sentido )
   $lLiberado = true;
@@ -43,7 +43,7 @@ $sSqlValidaUltimaData .= "  from concilia ";
 $sSqlValidaUltimaData .= " where k68_contabancaria = {$conta}";
 $sSqlValidaUltimaData .= " having max(k68_data) = '{$data}'";
 $rsValidaUltimaData   = db_query($sSqlValidaUltimaData);
-if (pg_num_rows($rsValidaUltimaData) > 0) {
+if (($rsValidaUltimaData ? pg_num_rows($rsValidaUltimaData) : null) > 0) {
   $lUltimaData = true;
 }
 
@@ -57,7 +57,7 @@ $sSqlValidaUltimaConciliacao .= " where k68_contabancaria = {$conta} ";
 $sSqlValidaUltimaConciliacao .= "   and k68_conciliastatus in(1,3)";
 $sSqlValidaUltimaConciliacao .= " having max(k68_data) > '{$data}' ";
 $rsValidaUltimaConciliacao   = db_query($sSqlValidaUltimaConciliacao);
-if (pg_num_rows($rsValidaUltimaConciliacao) > 0) {
+if (($rsValidaUltimaConciliacao ? pg_num_rows($rsValidaUltimaConciliacao) : null) > 0) {
   $lDataMenorUltimaConciliacao = true;
 }
 
@@ -77,7 +77,7 @@ $sqlDadosConta .= "        inner join bancoagencia on bancoagencia.db89_sequenci
 $sqlDadosConta .= "        inner join db_bancos    on db_bancos.db90_codban        = bancoagencia.db89_db_bancos ";
 $sqlDadosConta .= "  where contabancaria.db83_sequencial = {$conta} ";
 $rsDadosConta   = db_query($sqlDadosConta);
-if($rsDadosConta && pg_num_rows($rsDadosConta) > 0){
+if($rsDadosConta && ($rsDadosConta ? pg_num_rows($rsDadosConta) : null) > 0){
   db_fieldsmemory($rsDadosConta,0);
 }
 
@@ -111,9 +111,9 @@ $rsReduz    = db_query($sSqlReduz);
 $sReduzidos = "Não encontrado";
 $aReduzidos = array();
 
-if( $rsReduz && pg_num_rows($rsReduz) > 0 ) {
+if( $rsReduz && ($rsReduz ? pg_num_rows($rsReduz) : null) > 0 ) {
 
-  for ($i = 0; $i <  pg_num_rows($rsReduz); $i++) {
+  for ($i = 0; $i <  ($rsReduz ? pg_num_rows($rsReduz) : null); $i++) {
 
     db_fieldsmemory($rsReduz,$i);
 
@@ -123,7 +123,7 @@ if( $rsReduz && pg_num_rows($rsReduz) > 0 ) {
 
     $sqlSaldoContaCaixa = "select substr(fc_saltessaldo(".$c61_reduz.",'".$data."','".$data."',null,{$c61_instit}),41,13)::float as saldocontacaixa";
     $rsSaldoContaCaixa  = db_query($sqlSaldoContaCaixa);
-    if ( pg_num_rows($rsSaldoContaCaixa) > 0) {
+    if ( ($rsSaldoContaCaixa ? pg_num_rows($rsSaldoContaCaixa) : null) > 0) {
       db_fieldsmemory($rsSaldoContaCaixa,0);
       $saldo_tesouraria += $saldocontacaixa;
     }
@@ -143,7 +143,7 @@ $sql = " select round(sum(k86_valor),2) as saldo_pendencias from (
 
 $rsSaldoContaCaixa  = db_query($sql);
 
-if ( pg_num_rows($rsSaldoContaCaixa) > 0) {
+if ( ($rsSaldoContaCaixa ? pg_num_rows($rsSaldoContaCaixa) : null) > 0) {
    db_fieldsmemory($rsSaldoContaCaixa,0);
 }
 
@@ -220,7 +220,7 @@ $sql = "select round(sum(k86_valor),2) as saldo_pendencias
 
 $rsSaldoContaCaixa  = db_query($sql);
 
-if ( pg_num_rows($rsSaldoContaCaixa) > 0) {
+if ( ($rsSaldoContaCaixa ? pg_num_rows($rsSaldoContaCaixa) : null) > 0) {
    db_fieldsmemory($rsSaldoContaCaixa,0);
 }
 $saldo_conciliacao -=  ( $saldo_pendencias ) ;
@@ -409,9 +409,9 @@ if (count($aReduzidos) > 0) {
                                             where k68_contabancaria = {$conta}
                                             order by k68_data desc";
                   $rsDadosContaDatas   = db_query($sqlDadosContaDatas);
-                  if($rsDadosContaDatas && pg_num_rows($rsDadosContaDatas) > 0){
+                  if($rsDadosContaDatas && ($rsDadosContaDatas ? pg_num_rows($rsDadosContaDatas) : null) > 0){
                     global $k68_data;
-                    for ($i=0;$i<pg_num_rows($rsDadosContaDatas);$i++){
+                    for ($i=0;$i<($rsDadosContaDatas ? pg_num_rows($rsDadosContaDatas) : null);$i++){
 			    db_fieldsmemory($rsDadosContaDatas,$i);
 			    // nao vai mais mostrar as datas anteriores.
                        if ( $k68_sequencial==$concilia ) {

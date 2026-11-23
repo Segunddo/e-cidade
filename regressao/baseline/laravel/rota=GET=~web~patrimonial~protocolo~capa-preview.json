@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/patrimonial/protocolo/capa-preview",
+  "json": null,
+  "sha256": "00a122583f6262277a5467d4c4f1e9fa80ee93774b189b576b4b1a9ee6c4187d",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

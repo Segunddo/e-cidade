@@ -67,10 +67,10 @@ class cl_empagemovconta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e98_codmov = ($this->e98_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_codmov"]:$this->e98_codmov);
-       $this->e98_contabanco = ($this->e98_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_contabanco"]:$this->e98_contabanco);
+       $this->e98_codmov = ($this->e98_codmov === 0 || $this->e98_codmov === 0.0 || $this->e98_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_codmov"]:$this->e98_codmov);
+       $this->e98_contabanco = ($this->e98_contabanco === 0 || $this->e98_contabanco === 0.0 || $this->e98_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_contabanco"]:$this->e98_contabanco);
      }else{
-       $this->e98_codmov = ($this->e98_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_codmov"]:$this->e98_codmov);
+       $this->e98_codmov = ($this->e98_codmov === 0 || $this->e98_codmov === 0.0 || $this->e98_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e98_codmov"]:$this->e98_codmov);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_empagemovconta {
        return false;
      }
        $this->e98_codmov = $e98_codmov;
-     if(($this->e98_codmov == null) || ($this->e98_codmov == "") ){
+     if(($this->e98_codmov == null) || ($this->e98_codmov === 0 || $this->e98_codmov === 0.0 || $this->e98_codmov == "") ){
        $this->erro_sql = " Campo e98_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

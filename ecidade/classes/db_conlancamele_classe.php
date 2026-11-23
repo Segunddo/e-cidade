@@ -67,10 +67,10 @@ class cl_conlancamele {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c67_codlan = ($this->c67_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c67_codlan"]:$this->c67_codlan);
-       $this->c67_codele = ($this->c67_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c67_codele"]:$this->c67_codele);
+       $this->c67_codlan = ($this->c67_codlan === 0 || $this->c67_codlan === 0.0 || $this->c67_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c67_codlan"]:$this->c67_codlan);
+       $this->c67_codele = ($this->c67_codele === 0 || $this->c67_codele === 0.0 || $this->c67_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c67_codele"]:$this->c67_codele);
      }else{
-       $this->c67_codlan = ($this->c67_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c67_codlan"]:$this->c67_codlan);
+       $this->c67_codlan = ($this->c67_codlan === 0 || $this->c67_codlan === 0.0 || $this->c67_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c67_codlan"]:$this->c67_codlan);
      }
    }
    // funcao para Inclusão
@@ -86,7 +86,7 @@ class cl_conlancamele {
        return false;
      }
        $this->c67_codlan = $c67_codlan;
-     if(($this->c67_codlan == null) || ($this->c67_codlan == "") ){
+     if(($this->c67_codlan == null) || ($this->c67_codlan === 0 || $this->c67_codlan === 0.0 || $this->c67_codlan == "") ){
        $this->erro_sql = " Campo c67_codlan não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -120,7 +120,7 @@ $totgeralliquidado_acumulado    = 0;
 $totgeralpago_acumulado         = 0;
 $totgeralatual_a_pagar_liquidado= 0;      
 
-for($i=0;$i<pg_numrows($res);$i++){
+for($i=0;$i<($res ? pg_numrows($res) : null);$i++){
 
   db_fieldsmemory($res,$i);
   

@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_tfd_passageiroretorno_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cltfd_passageiroretorno = new cl_tfd_passageiroretorno;
 $cltfd_passageiroretorno->rotulo->label("tf31_i_codigo");
 $cltfd_passageiroretorno->rotulo->label("tf31_i_codigo");

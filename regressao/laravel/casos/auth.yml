@@ -1,0 +1,125 @@
+# Casos de autenticacao (Passport/OAuth2). Marcadores ${...} sao resolvidos na execucao
+# (o segredo do cliente vem de application.php e nunca e gravado). A baseline registra o que
+# a app FAZ, inclusive onde isso surpreende: em dev, senha errada de `dbseller` ainda emite
+# token (200); so usuario inexistente da 401.
+- id: auth-token-valido
+  metodo: POST
+  caminho: /v4/oauth/token
+  form: true
+  autenticado: false
+  corpo:
+    grant_type: password
+    client_id: ${CLIENT_ID}
+    client_secret: ${CLIENT_SECRET}
+    username: ${USUARIO}
+    password: ${SENHA}
+  campos_volateis: [access_token, refresh_token, expires_in]
+
+- id: auth-client-secret-errado
+  metodo: POST
+  caminho: /v4/oauth/token
+  form: true
+  autenticado: false
+  corpo:
+    grant_type: password
+    client_id: ${CLIENT_ID}
+    client_secret: segredo-incorreto
+    username: ${USUARIO}
+    password: ${SENHA}
+
+- id: auth-senha-errada
+  metodo: POST
+  caminho: /v4/oauth/token
+  form: true
+  autenticado: false
+  corpo:
+    grant_type: password
+    client_id: ${CLIENT_ID}
+    client_secret: ${CLIENT_SECRET}
+    username: ${USUARIO}
+    password: senha-incorreta
+  campos_volateis: [access_token, refresh_token, expires_in]
+
+- id: auth-usuario-inexistente
+  metodo: POST
+  caminho: /v4/oauth/token
+  form: true
+  autenticado: false
+  corpo:
+    grant_type: password
+    client_id: ${CLIENT_ID}
+    client_secret: ${CLIENT_SECRET}
+    username: usuario-que-nao-existe
+    password: ${SENHA}
+
+- id: auth-sem-grant-type
+  metodo: POST
+  caminho: /v4/oauth/token
+  form: true
+  autenticado: false
+  corpo:
+    client_id: ${CLIENT_ID}
+    client_secret: ${CLIENT_SECRET}
+    username: ${USUARIO}
+    password: ${SENHA}
+
+- id: auth-refresh-token
+  metodo: POST
+  caminho: /v4/oauth/token
+  form: true
+  autenticado: false
+  corpo:
+    grant_type: refresh_token
+    client_id: ${CLIENT_ID}
+    client_secret: ${CLIENT_SECRET}
+    refresh_token: ${REFRESH_TOKEN}
+  campos_volateis: [access_token, refresh_token, expires_in]
+
+# Os quatro casos abaixo usam a MESMA rota protegida (auth:api): um GET sem parametros que a
+# referencia responde 200 com JSON nao vazio quando o token e valido. `/v4/api/configuracao/bancos`
+# nao serve de controle: da 500 ate com token valido (metodo inexistente na app).
+# `espera_status: 500` nos quatro casos de REJEICAO: comportamento observado do Laravel 5.4 em dev
+# (Authenticate.php:66 lanca "Unauthenticated." e o handler responde HTTP 500, nao 401). Igual nos
+# dois lados = IDENTICO. O Laravel 12 deve responder 401: isso DIVERGE, e e o objetivo.
+- id: auth-sem-token
+  metodo: GET
+  caminho: /v4/api/financeiro/contabilidade/sistemas
+  token: ""
+  espera_status: 500
+
+- id: auth-token-invalido
+  metodo: GET
+  caminho: /v4/api/financeiro/contabilidade/sistemas
+  token: token-que-nao-e-valido
+  espera_status: 500
+
+# Expirado de verdade: o token valido com `exp` no passado no proprio JWT (re-assinado com a
+# chave local do Passport). Contraste direto com auth-rota-protegida-com-token (200).
+- id: auth-token-expirado
+  metodo: GET
+  caminho: /v4/api/financeiro/contabilidade/sistemas
+  token: "@expirado"
+  espera_status: 500  # 5.4: "Unauthenticated." em HTTP 500 (Laravel 12 deve dar 401 e DIVERGIR)
+
+# Achado do 5.4: a app NAO consulta oauth_access_tokens.expires_at (so o `exp` do JWT e o
+# `revoked`); este caso grava essa realidade para a migracao nao a "corrigir" sem querer.
+- id: auth-token-expirado-so-no-banco
+  metodo: GET
+  caminho: /v4/api/financeiro/contabilidade/sistemas
+  token: "@novo"
+  sql_antes:
+    - "update oauth_access_tokens set expires_at = now() - interval '1 day' where id = '{jti}'"
+
+# Token revogado no banco (revoked = true): a app o rejeita.
+- id: auth-token-revogado
+  metodo: GET
+  caminho: /v4/api/financeiro/contabilidade/sistemas
+  token: "@novo"
+  sql_antes:
+    - "update oauth_access_tokens set revoked = true where id = '{jti}'"
+  espera_status: 500  # 5.4: "Unauthenticated." em HTTP 500 (Laravel 12 deve dar 401 e DIVERGIR)
+
+# Controle positivo: a rota protegida COM o token valido compartilhado (200 + JSON).
+- id: auth-rota-protegida-com-token
+  metodo: GET
+  caminho: /v4/api/financeiro/contabilidade/sistemas

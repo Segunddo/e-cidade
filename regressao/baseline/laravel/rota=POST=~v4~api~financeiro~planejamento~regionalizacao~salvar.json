@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/regionalizacao/salvar",
+  "json": {
+    "errors": {
+      "pl12_codigo": [
+        "O campo \"Código da iniciativa\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "ab977a72f6033bb6e5bf0a0e7e31285cc7257db7899c332d4f27e73022b1b5cc",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -69,12 +69,12 @@ class cl_procrec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p52_codigo = ($this->p52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codigo"]:$this->p52_codigo);
-       $this->p52_codrec = ($this->p52_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codrec"]:$this->p52_codrec);
-       $this->p52_valor = ($this->p52_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_valor"]:$this->p52_valor);
+       $this->p52_codigo = ($this->p52_codigo === 0 || $this->p52_codigo === 0.0 || $this->p52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codigo"]:$this->p52_codigo);
+       $this->p52_codrec = ($this->p52_codrec === 0 || $this->p52_codrec === 0.0 || $this->p52_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codrec"]:$this->p52_codrec);
+       $this->p52_valor = ($this->p52_valor === 0 || $this->p52_valor === 0.0 || $this->p52_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_valor"]:$this->p52_valor);
      }else{
-       $this->p52_codigo = ($this->p52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codigo"]:$this->p52_codigo);
-       $this->p52_codrec = ($this->p52_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codrec"]:$this->p52_codrec);
+       $this->p52_codigo = ($this->p52_codigo === 0 || $this->p52_codigo === 0.0 || $this->p52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codigo"]:$this->p52_codigo);
+       $this->p52_codrec = ($this->p52_codrec === 0 || $this->p52_codrec === 0.0 || $this->p52_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["p52_codrec"]:$this->p52_codrec);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_procrec {
      }
        $this->p52_codigo = $p52_codigo;
        $this->p52_codrec = $p52_codrec;
-     if(($this->p52_codigo == null) || ($this->p52_codigo == "") ){
+     if(($this->p52_codigo == null) || ($this->p52_codigo === 0 || $this->p52_codigo === 0.0 || $this->p52_codigo == "") ){
        $this->erro_sql = " Campo p52_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_procrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p52_codrec == null) || ($this->p52_codrec == "") ){
+     if(($this->p52_codrec == null) || ($this->p52_codrec === 0 || $this->p52_codrec === 0.0 || $this->p52_codrec == "") ){
        $this->erro_sql = " Campo p52_codrec nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

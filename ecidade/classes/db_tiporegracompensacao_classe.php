@@ -67,10 +67,10 @@ class cl_tiporegracompensacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k154_sequencial = ($this->k154_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k154_sequencial"]:$this->k154_sequencial);
+       $this->k154_sequencial = ($this->k154_sequencial === 0 || $this->k154_sequencial === 0.0 || $this->k154_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k154_sequencial"]:$this->k154_sequencial);
        $this->k154_descricao = ($this->k154_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["k154_descricao"]:$this->k154_descricao);
      }else{
-       $this->k154_sequencial = ($this->k154_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k154_sequencial"]:$this->k154_sequencial);
+       $this->k154_sequencial = ($this->k154_sequencial === 0 || $this->k154_sequencial === 0.0 || $this->k154_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k154_sequencial"]:$this->k154_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tiporegracompensacao {
          $this->k154_sequencial = $k154_sequencial;
        }
      }
-     if(($this->k154_sequencial == null) || ($this->k154_sequencial == "") ){
+     if(($this->k154_sequencial == null) || ($this->k154_sequencial === 0 || $this->k154_sequencial === 0.0 || $this->k154_sequencial == "") ){
        $this->erro_sql = " Campo k154_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

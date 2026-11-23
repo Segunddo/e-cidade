@@ -1,0 +1,33 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/demonstrativo-evolucao-despesa",
+  "json": {
+    "errors": {
+      "exercicio": [
+        "O campo exercicio é obrigatório."
+      ],
+      "filtros": [
+        "Os filtros devem ser selecionados."
+      ],
+      "instituicoes": [
+        "Deve ser selecionada pelo menos uma Instituição."
+      ],
+      "mes": [
+        "O filtro Mês deve ser selecionado."
+      ],
+      "tipo_pagamento": [
+        "O filtro Valores Exibidos deve ser selecionado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "340a858781a7b5fe8fdf6c981c2dc074fb99d2e1ded8670f0cbb0b8b14c0b18b",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

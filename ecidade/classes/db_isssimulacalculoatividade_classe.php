@@ -77,16 +77,16 @@ class cl_isssimulacalculoatividade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q131_sequencial = ($this->q131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_sequencial"]:$this->q131_sequencial);
-       $this->q131_atividade = ($this->q131_atividade == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_atividade"]:$this->q131_atividade);
-       $this->q131_issimulacalculo = ($this->q131_issimulacalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_issimulacalculo"]:$this->q131_issimulacalculo);
+       $this->q131_sequencial = ($this->q131_sequencial === 0 || $this->q131_sequencial === 0.0 || $this->q131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_sequencial"]:$this->q131_sequencial);
+       $this->q131_atividade = ($this->q131_atividade === 0 || $this->q131_atividade === 0.0 || $this->q131_atividade == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_atividade"]:$this->q131_atividade);
+       $this->q131_issimulacalculo = ($this->q131_issimulacalculo === 0 || $this->q131_issimulacalculo === 0.0 || $this->q131_issimulacalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_issimulacalculo"]:$this->q131_issimulacalculo);
        $this->q131_principal = ($this->q131_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["q131_principal"]:$this->q131_principal);
-       $this->q131_quantidade = ($this->q131_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_quantidade"]:$this->q131_quantidade);
-       $this->q131_seq = ($this->q131_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_seq"]:$this->q131_seq);
+       $this->q131_quantidade = ($this->q131_quantidade === 0 || $this->q131_quantidade === 0.0 || $this->q131_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_quantidade"]:$this->q131_quantidade);
+       $this->q131_seq = ($this->q131_seq === 0 || $this->q131_seq === 0.0 || $this->q131_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_seq"]:$this->q131_seq);
        $this->q131_permanente = ($this->q131_permanente == "f"?@$GLOBALS["HTTP_POST_VARS"]["q131_permanente"]:$this->q131_permanente);
      }else{
-       $this->q131_sequencial = ($this->q131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_sequencial"]:$this->q131_sequencial);
-       $this->q131_seq = ($this->q131_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_seq"]:$this->q131_seq);
+       $this->q131_sequencial = ($this->q131_sequencial === 0 || $this->q131_sequencial === 0.0 || $this->q131_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_sequencial"]:$this->q131_sequencial);
+       $this->q131_seq = ($this->q131_seq === 0 || $this->q131_seq === 0.0 || $this->q131_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q131_seq"]:$this->q131_seq);
      }
    }
    // funcao para inclusao
@@ -161,7 +161,7 @@ class cl_isssimulacalculoatividade {
          $this->q131_sequencial = $q131_sequencial;
        }
      }
-     if(($this->q131_sequencial == null) || ($this->q131_sequencial == "") ){
+     if(($this->q131_sequencial == null) || ($this->q131_sequencial === 0 || $this->q131_sequencial === 0.0 || $this->q131_sequencial == "") ){
        $this->erro_sql = " Campo q131_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

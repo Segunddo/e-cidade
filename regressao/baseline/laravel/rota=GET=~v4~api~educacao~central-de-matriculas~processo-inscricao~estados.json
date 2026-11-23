@@ -1,0 +1,131 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/estados",
+  "json": {
+    "data": [
+      {
+        "codigo": 12,
+        "nome": "ACRE"
+      },
+      {
+        "codigo": 27,
+        "nome": "ALAGOAS"
+      },
+      {
+        "codigo": 16,
+        "nome": "AMAPA"
+      },
+      {
+        "codigo": 13,
+        "nome": "AMAZONAS"
+      },
+      {
+        "codigo": 29,
+        "nome": "BAHIA"
+      },
+      {
+        "codigo": 23,
+        "nome": "CEARA"
+      },
+      {
+        "codigo": 53,
+        "nome": "DISTRITO FEDERAL"
+      },
+      {
+        "codigo": 32,
+        "nome": "ESPIRITO SANTO"
+      },
+      {
+        "codigo": 52,
+        "nome": "GOIAS"
+      },
+      {
+        "codigo": 21,
+        "nome": "MARANHAO"
+      },
+      {
+        "codigo": 51,
+        "nome": "MATO GROSSO"
+      },
+      {
+        "codigo": 50,
+        "nome": "MATO GROSSO DO SUL"
+      },
+      {
+        "codigo": 31,
+        "nome": "MINAS GERAIS"
+      },
+      {
+        "codigo": 0,
+        "nome": "NAO INFORMADO"
+      },
+      {
+        "codigo": 15,
+        "nome": "PARA"
+      },
+      {
+        "codigo": 25,
+        "nome": "PARAIBA"
+      },
+      {
+        "codigo": 41,
+        "nome": "PARANA"
+      },
+      {
+        "codigo": 26,
+        "nome": "PERNAMBUCO"
+      },
+      {
+        "codigo": 22,
+        "nome": "PIAUI"
+      },
+      {
+        "codigo": 33,
+        "nome": "RIO DE JANEIRO"
+      },
+      {
+        "codigo": 24,
+        "nome": "RIO GRANDE DO NORTE"
+      },
+      {
+        "codigo": 43,
+        "nome": "RIO GRANDE DO SUL"
+      },
+      {
+        "codigo": 11,
+        "nome": "RONDONIA"
+      },
+      {
+        "codigo": 14,
+        "nome": "RORAIMA"
+      },
+      {
+        "codigo": 42,
+        "nome": "SANTA CATARINA"
+      },
+      {
+        "codigo": 35,
+        "nome": "SAO PAULO"
+      },
+      {
+        "codigo": 28,
+        "nome": "SERGIPE"
+      },
+      {
+        "codigo": 17,
+        "nome": "TOCANTINS"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "a74555eb66dee53af3e9b735be380445aebdfa3fc960cf7697000251b1911659",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

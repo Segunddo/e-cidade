@@ -69,11 +69,11 @@ class cl_matordemmail {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m55_codigo = ($this->m55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codigo"]:$this->m55_codigo);
-       $this->m55_codordem = ($this->m55_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codordem"]:$this->m55_codordem);
+       $this->m55_codigo = ($this->m55_codigo === 0 || $this->m55_codigo === 0.0 || $this->m55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codigo"]:$this->m55_codigo);
+       $this->m55_codordem = ($this->m55_codordem === 0 || $this->m55_codordem === 0.0 || $this->m55_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codordem"]:$this->m55_codordem);
        $this->m55_email = ($this->m55_email == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_email"]:$this->m55_email);
      }else{
-       $this->m55_codigo = ($this->m55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codigo"]:$this->m55_codigo);
+       $this->m55_codigo = ($this->m55_codigo === 0 || $this->m55_codigo === 0.0 || $this->m55_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m55_codigo"]:$this->m55_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_matordemmail {
          $this->m55_codigo = $m55_codigo;
        }
      }
-     if(($this->m55_codigo == null) || ($this->m55_codigo == "") ){
+     if(($this->m55_codigo == null) || ($this->m55_codigo === 0 || $this->m55_codigo === 0.0 || $this->m55_codigo == "") ){
        $this->erro_sql = " Campo m55_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

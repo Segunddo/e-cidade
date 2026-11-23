@@ -85,19 +85,19 @@ class cl_carzonavalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j72_sequencial = ($this->j72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_sequencial"]:$this->j72_sequencial);
-       $this->j72_anousu = ($this->j72_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_anousu"]:$this->j72_anousu);
-       $this->j72_caract = ($this->j72_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_caract"]:$this->j72_caract);
-       $this->j72_zona = ($this->j72_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_zona"]:$this->j72_zona);
+       $this->j72_sequencial = ($this->j72_sequencial === 0 || $this->j72_sequencial === 0.0 || $this->j72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_sequencial"]:$this->j72_sequencial);
+       $this->j72_anousu = ($this->j72_anousu === 0 || $this->j72_anousu === 0.0 || $this->j72_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_anousu"]:$this->j72_anousu);
+       $this->j72_caract = ($this->j72_caract === 0 || $this->j72_caract === 0.0 || $this->j72_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_caract"]:$this->j72_caract);
+       $this->j72_zona = ($this->j72_zona === 0 || $this->j72_zona === 0.0 || $this->j72_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_zona"]:$this->j72_zona);
        $this->j72_tipo = ($this->j72_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_tipo"]:$this->j72_tipo);
-       $this->j72_quant = ($this->j72_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_quant"]:$this->j72_quant);
-       $this->j72_ini = ($this->j72_ini == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_ini"]:$this->j72_ini);
-       $this->j72_fim = ($this->j72_fim == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_fim"]:$this->j72_fim);
-       $this->j72_valor = ($this->j72_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_valor"]:$this->j72_valor);
-       $this->j72_quantini = ($this->j72_quantini == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_quantini"]:$this->j72_quantini);
-       $this->j72_quantfim = ($this->j72_quantfim == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_quantfim"]:$this->j72_quantfim);
+       $this->j72_quant = ($this->j72_quant === 0 || $this->j72_quant === 0.0 || $this->j72_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_quant"]:$this->j72_quant);
+       $this->j72_ini = ($this->j72_ini === 0 || $this->j72_ini === 0.0 || $this->j72_ini == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_ini"]:$this->j72_ini);
+       $this->j72_fim = ($this->j72_fim === 0 || $this->j72_fim === 0.0 || $this->j72_fim == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_fim"]:$this->j72_fim);
+       $this->j72_valor = ($this->j72_valor === 0 || $this->j72_valor === 0.0 || $this->j72_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_valor"]:$this->j72_valor);
+       $this->j72_quantini = ($this->j72_quantini === 0 || $this->j72_quantini === 0.0 || $this->j72_quantini == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_quantini"]:$this->j72_quantini);
+       $this->j72_quantfim = ($this->j72_quantfim === 0 || $this->j72_quantfim === 0.0 || $this->j72_quantfim == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_quantfim"]:$this->j72_quantfim);
      }else{
-       $this->j72_sequencial = ($this->j72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_sequencial"]:$this->j72_sequencial);
+       $this->j72_sequencial = ($this->j72_sequencial === 0 || $this->j72_sequencial === 0.0 || $this->j72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j72_sequencial"]:$this->j72_sequencial);
      }
    }
    // funcao para inclusao
@@ -217,7 +217,7 @@ class cl_carzonavalor {
          $this->j72_sequencial = $j72_sequencial;
        }
      }
-     if(($this->j72_sequencial == null) || ($this->j72_sequencial == "") ){
+     if(($this->j72_sequencial == null) || ($this->j72_sequencial === 0 || $this->j72_sequencial === 0.0 || $this->j72_sequencial == "") ){
        $this->erro_sql = " Campo j72_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

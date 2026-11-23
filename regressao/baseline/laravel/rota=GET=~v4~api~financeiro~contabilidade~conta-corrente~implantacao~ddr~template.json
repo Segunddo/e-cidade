@@ -1,0 +1,28 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/conta-corrente/implantacao/ddr/template",
+  "json": {
+    "data": {
+      "csv": "<X>",
+      "csvLinkExterno": "<X>"
+    },
+    "error": false,
+    "message": "Template gerado com sucesso."
+  },
+  "sha256": "01d5cd651df20430116b6e295ff4de6e0c8caf0cb6b50d489ee4e4856a6de461",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {
+    "data.csv": [
+      "str"
+    ],
+    "data.csvLinkExterno": [
+      "str"
+    ]
+  }
+}

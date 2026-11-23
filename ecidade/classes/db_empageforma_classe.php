@@ -67,10 +67,10 @@ class cl_empageforma {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e96_codigo = ($this->e96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e96_codigo"]:$this->e96_codigo);
+       $this->e96_codigo = ($this->e96_codigo === 0 || $this->e96_codigo === 0.0 || $this->e96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e96_codigo"]:$this->e96_codigo);
        $this->e96_descr = ($this->e96_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e96_descr"]:$this->e96_descr);
      }else{
-       $this->e96_codigo = ($this->e96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e96_codigo"]:$this->e96_codigo);
+       $this->e96_codigo = ($this->e96_codigo === 0 || $this->e96_codigo === 0.0 || $this->e96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e96_codigo"]:$this->e96_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_empageforma {
          $this->e96_codigo = $e96_codigo;
        }
      }
-     if(($this->e96_codigo == null) || ($this->e96_codigo == "") ){
+     if(($this->e96_codigo == null) || ($this->e96_codigo === 0 || $this->e96_codigo === 0.0 || $this->e96_codigo == "") ){
        $this->erro_sql = " Campo e96_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

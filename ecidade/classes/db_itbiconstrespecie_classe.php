@@ -67,10 +67,10 @@ class cl_itbiconstrespecie {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it09_codigo = ($this->it09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it09_codigo"]:$this->it09_codigo);
-       $this->it09_caract = ($this->it09_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["it09_caract"]:$this->it09_caract);
+       $this->it09_codigo = ($this->it09_codigo === 0 || $this->it09_codigo === 0.0 || $this->it09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it09_codigo"]:$this->it09_codigo);
+       $this->it09_caract = ($this->it09_caract === 0 || $this->it09_caract === 0.0 || $this->it09_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["it09_caract"]:$this->it09_caract);
      }else{
-       $this->it09_codigo = ($this->it09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it09_codigo"]:$this->it09_codigo);
+       $this->it09_codigo = ($this->it09_codigo === 0 || $this->it09_codigo === 0.0 || $this->it09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it09_codigo"]:$this->it09_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_itbiconstrespecie {
        return false;
      }
        $this->it09_codigo = $it09_codigo;
-     if(($this->it09_codigo == null) || ($this->it09_codigo == "") ){
+     if(($this->it09_codigo == null) || ($this->it09_codigo === 0 || $this->it09_codigo === 0.0 || $this->it09_codigo == "") ){
        $this->erro_sql = " Campo it09_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

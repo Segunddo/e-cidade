@@ -38,7 +38,7 @@ $sql = "
 		where v07_situacao = 2 and v07_numcgm = $cgm and v07_instit =	".db_getsession('DB_instit') ;
 
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 
 
 ?>

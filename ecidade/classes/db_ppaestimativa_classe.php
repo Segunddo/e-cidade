@@ -73,13 +73,13 @@ class cl_ppaestimativa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o05_sequencial = ($this->o05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o05_sequencial"]:$this->o05_sequencial);
-       $this->o05_ppaversao = ($this->o05_ppaversao == ""?@$GLOBALS["HTTP_POST_VARS"]["o05_ppaversao"]:$this->o05_ppaversao);
-       $this->o05_anoreferencia = ($this->o05_anoreferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o05_anoreferencia"]:$this->o05_anoreferencia);
+       $this->o05_sequencial = ($this->o05_sequencial === 0 || $this->o05_sequencial === 0.0 || $this->o05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o05_sequencial"]:$this->o05_sequencial);
+       $this->o05_ppaversao = ($this->o05_ppaversao === 0 || $this->o05_ppaversao === 0.0 || $this->o05_ppaversao == ""?@$GLOBALS["HTTP_POST_VARS"]["o05_ppaversao"]:$this->o05_ppaversao);
+       $this->o05_anoreferencia = ($this->o05_anoreferencia === 0 || $this->o05_anoreferencia === 0.0 || $this->o05_anoreferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o05_anoreferencia"]:$this->o05_anoreferencia);
        $this->o05_base = ($this->o05_base == "f"?@$GLOBALS["HTTP_POST_VARS"]["o05_base"]:$this->o05_base);
-       $this->o05_valor = ($this->o05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o05_valor"]:$this->o05_valor);
+       $this->o05_valor = ($this->o05_valor === 0 || $this->o05_valor === 0.0 || $this->o05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o05_valor"]:$this->o05_valor);
      }else{
-       $this->o05_sequencial = ($this->o05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o05_sequencial"]:$this->o05_sequencial);
+       $this->o05_sequencial = ($this->o05_sequencial === 0 || $this->o05_sequencial === 0.0 || $this->o05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o05_sequencial"]:$this->o05_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_ppaestimativa {
          $this->o05_sequencial = $o05_sequencial;
        }
      }
-     if(($this->o05_sequencial == null) || ($this->o05_sequencial == "") ){
+     if(($this->o05_sequencial == null) || ($this->o05_sequencial === 0 || $this->o05_sequencial === 0.0 || $this->o05_sequencial == "") ){
        $this->erro_sql = " Campo o05_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

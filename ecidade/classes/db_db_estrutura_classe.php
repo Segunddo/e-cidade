@@ -71,12 +71,12 @@ class cl_db_estrutura {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db77_codestrut = ($this->db77_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_codestrut"]:$this->db77_codestrut);
+       $this->db77_codestrut = ($this->db77_codestrut === 0 || $this->db77_codestrut === 0.0 || $this->db77_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_codestrut"]:$this->db77_codestrut);
        $this->db77_estrut = ($this->db77_estrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_estrut"]:$this->db77_estrut);
        $this->db77_descr = ($this->db77_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_descr"]:$this->db77_descr);
        $this->db77_permitesintetico = ($this->db77_permitesintetico == "f"?@$GLOBALS["HTTP_POST_VARS"]["db77_permitesintetico"]:$this->db77_permitesintetico);
      }else{
-       $this->db77_codestrut = ($this->db77_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_codestrut"]:$this->db77_codestrut);
+       $this->db77_codestrut = ($this->db77_codestrut === 0 || $this->db77_codestrut === 0.0 || $this->db77_codestrut == ""?@$GLOBALS["HTTP_POST_VARS"]["db77_codestrut"]:$this->db77_codestrut);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_db_estrutura {
          $this->db77_codestrut = $db77_codestrut;
        }
      }
-     if(($this->db77_codestrut == null) || ($this->db77_codestrut == "") ){
+     if(($this->db77_codestrut == null) || ($this->db77_codestrut === 0 || $this->db77_codestrut === 0.0 || $this->db77_codestrut == "") ){
        $this->erro_sql = " Campo db77_codestrut nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

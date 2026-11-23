@@ -52,7 +52,7 @@ $nTotalRPinscritos     = 0;
 $nTotalRPinscritosRpps = 0;
 $sInstitRPPS           = '';
 ## Fim declaracao variaveis
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 $orcparamrel = new cl_orcparamrel;
 $xinstit =explode("-",$db_selinstit);
@@ -78,7 +78,7 @@ if (!isset($lGerarPDF)){
 }
 
 //******************************************************************
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++) {
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++) {
   db_fieldsmemory($resultinst,$xins);
   if ($db21_tipoinstit == 5 or $db21_tipoinstit == 6) {
 
@@ -255,7 +255,7 @@ for ($x = 6; $x <= 9; $x++){
       break;
   }
 
-  for ($i=0;$i < pg_numrows($result1); $i++) {
+  for ($i=0;$i < ($result1 ? pg_numrows($result1) : null); $i++) {
 
     db_fieldsmemory($result1,$i);
     if (in_array($estrutural,$aParametros[$x])) {
@@ -271,7 +271,7 @@ for ($x = 1; $x <= 5; $x++){
   }else{
     $iInd = $x;
   }
-  for ($i=0;$i < pg_numrows($result1); $i++) {
+  for ($i=0;$i < ($result1 ? pg_numrows($result1) : null); $i++) {
 
     db_fieldsmemory($result1,$i);
     if (in_array($estrutural,$aParametros[$x])) {
@@ -330,7 +330,7 @@ $nTotalObrig = abs(abs($nSuficiencia) + $aTextoObrig[0]["valor"]);
  * Listamos as contas das outras disponibilidades
  */
 
-for ( $i = 0; $i < pg_num_rows($result1); $i++ ) {
+for ( $i = 0; $i < ($result1 ? pg_num_rows($result1) : null); $i++ ) {
 
   db_fieldsmemory($result1,$i);
   if ( in_array($estrutural,$aParametros[5]) ) {
@@ -343,7 +343,7 @@ for ( $i = 0; $i < pg_num_rows($result1); $i++ ) {
 }
 
 $cont   = 0;
-for ($i = 0; $i < pg_num_rows($result1); $i++) {
+for ($i = 0; $i < ($result1 ? pg_num_rows($result1) : null); $i++) {
 
   db_fieldsmemory($result1,$i);
   if ( in_array($estrutural,$aParametros[9]) ) {
@@ -535,7 +535,7 @@ if ($sInstitRPPS != ''){
         break;
     }
 
-    for ($i=0;$i < pg_numrows($result_rpps); $i++) {
+    for ($i=0;$i < ($result_rpps ? pg_numrows($result_rpps) : null); $i++) {
 
       db_fieldsmemory($result_rpps,$i);
       if (in_array($estrutural,$aParametros[$x])) {
@@ -551,7 +551,7 @@ if ($sInstitRPPS != ''){
     }else{
       $iInd = $x;
     }
-    for ($i=0;$i < pg_numrows($result_rpps); $i++) {
+    for ($i=0;$i < ($result_rpps ? pg_numrows($result_rpps) : null); $i++) {
 
       db_fieldsmemory($result_rpps,$i);
       if (in_array($estrutural,$aParametros[$x])) {
@@ -610,7 +610,7 @@ if ($sInstitRPPS != ''){
    * Listamos as contas das outras disponibilidades
    */
 
-  for ( $i = 0; $i < pg_num_rows($result_rpps); $i++ ) {
+  for ( $i = 0; $i < ($result_rpps ? pg_num_rows($result_rpps) : null); $i++ ) {
 
     db_fieldsmemory($result_rpps,$i);
     if ( in_array($estrutural,$aParametros[5]) ) {
@@ -623,7 +623,7 @@ if ($sInstitRPPS != ''){
   }
 
   $cont   = 0;
-  for ($i = 0; $i < pg_num_rows($result_rpps); $i++) {
+  for ($i = 0; $i < ($result_rpps ? pg_num_rows($result_rpps) : null); $i++) {
 
     db_fieldsmemory($result_rpps,$i);
     if ( in_array($estrutural,$aParametros[9]) ) {

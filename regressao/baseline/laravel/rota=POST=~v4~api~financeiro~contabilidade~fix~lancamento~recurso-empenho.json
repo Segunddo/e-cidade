@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/fix/lancamento/recurso-empenho",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42601]: Syntax error: 7 ERRO:  erro de sintaxe em ou próximo a \"and\"\nLINE 13:     and c53_tipo in (10, 11, 20, 21, 30, 31, 40, 41, 50, 51,...\n             ^"
+  },
+  "sha256": "2e396c59ed1b5dbf6c9d75b1954bbd3d1b027567583cb99e7fd78a2973baf509",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

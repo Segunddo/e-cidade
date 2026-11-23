@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/saude/laboratorio/cadastros/grupos-liberacao",
+  "json": null,
+  "sha256": "c297839f2a1b6f4ba4cac3fd72e7744cb0289f7d58062c54b6ec184676031251",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

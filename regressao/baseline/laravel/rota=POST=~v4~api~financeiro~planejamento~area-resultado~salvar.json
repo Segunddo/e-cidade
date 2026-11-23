@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/area-resultado/salvar",
+  "json": {
+    "errors": {
+      "pl2_codigo": [
+        "O campo \"Código\" deve ser informado."
+      ],
+      "pl4_titulo": [
+        "Deve ser informado um título para a área."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "00f012bdafa60d694e3944e80222c7144c330f1203da77ee159163999edcff58",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

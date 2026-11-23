@@ -69,11 +69,11 @@ class cl_conlancamconcarpeculiar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c08_sequencial = ($this->c08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c08_sequencial"]:$this->c08_sequencial);
-       $this->c08_codlan = ($this->c08_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c08_codlan"]:$this->c08_codlan);
+       $this->c08_sequencial = ($this->c08_sequencial === 0 || $this->c08_sequencial === 0.0 || $this->c08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c08_sequencial"]:$this->c08_sequencial);
+       $this->c08_codlan = ($this->c08_codlan === 0 || $this->c08_codlan === 0.0 || $this->c08_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c08_codlan"]:$this->c08_codlan);
        $this->c08_concarpeculiar = ($this->c08_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["c08_concarpeculiar"]:$this->c08_concarpeculiar);
      }else{
-       $this->c08_sequencial = ($this->c08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c08_sequencial"]:$this->c08_sequencial);
+       $this->c08_sequencial = ($this->c08_sequencial === 0 || $this->c08_sequencial === 0.0 || $this->c08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c08_sequencial"]:$this->c08_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_conlancamconcarpeculiar {
          $this->c08_sequencial = $c08_sequencial;
        }
      }
-     if(($this->c08_sequencial == null) || ($this->c08_sequencial == "") ){
+     if(($this->c08_sequencial == null) || ($this->c08_sequencial === 0 || $this->c08_sequencial === 0.0 || $this->c08_sequencial == "") ){
        $this->erro_sql = " Campo c08_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

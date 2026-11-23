@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/veiculos/veiculo/update",
+  "json": {
+    "errors": {
+      "q172_datacadastro": [
+        "Data de cadastro não informada."
+      ],
+      "q172_issbase": [
+        "Inscrição não informada."
+      ],
+      "q172_sequencial": [
+        "Sequencial não informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "25015a1b80e19ea20c9bc3c043173cfc3f7b14b4b870e5835026d8300a7102fb",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

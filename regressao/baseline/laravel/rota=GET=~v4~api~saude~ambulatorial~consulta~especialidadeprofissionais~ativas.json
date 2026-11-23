@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/saude/ambulatorial/consulta/especialidadeprofissionais/ativas",
+  "json": {
+    "error": true,
+    "message": "Undefined index: DB_coddepto"
+  },
+  "sha256": "63520d35f718d70e1100c4e5ea571b21c23121fd4ae4c06989b9bb726ec0323d",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

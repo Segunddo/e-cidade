@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/documentos-assinar/atualizar-assinantes",
+  "json": {
+    "error": true,
+    "message": "O ID do arquivo deve ser informado."
+  },
+  "sha256": "f006ccd58981cbded8e66338053193a96c70bff3e03d988fb8c95514ea8e0437",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

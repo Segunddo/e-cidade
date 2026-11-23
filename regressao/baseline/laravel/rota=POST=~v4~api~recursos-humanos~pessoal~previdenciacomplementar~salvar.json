@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/previdenciacomplementar/salvar",
+  "json": {
+    "errors": {
+      "cnpj": [
+        "CNPJ deve ser informado."
+      ],
+      "deducaoRelativa": [
+        "Deducao Relativa deve ser informada."
+      ],
+      "matricula": [
+        "Matricula deve ser informada."
+      ],
+      "tipoPrevidencia": [
+        "Tipo de Previdencia deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "5f744bef78bcdf106495f2fdc8b56259fb09ceda0124947913777ba435bdc3ae",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

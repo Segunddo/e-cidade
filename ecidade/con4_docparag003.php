@@ -33,7 +33,7 @@ include(modification("classes/db_db_docparag_classe.php"));
 include(modification("classes/db_matrequi_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldb_docparag = new cl_db_docparag;
 $clmatrequi = new cl_matrequi;
 $db_botao = true;

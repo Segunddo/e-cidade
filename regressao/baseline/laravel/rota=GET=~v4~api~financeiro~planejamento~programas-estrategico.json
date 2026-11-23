@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/planejamento/programas-estrategico",
+  "json": {
+    "error": true,
+    "message": "Argument 1 passed to App\\Domain\\Financeiro\\Planejamento\\Services\\ProgramaEstrategicoService::buscar() must be of the type array, object given, called in /var/www/html/app/Domain/Financeiro/Planejamento/Controllers/ProgramaEstrategioController.php on line 61"
+  },
+  "sha256": "4ea7e432dbb3920fb1584b783ff8caa93d268e7b8c7e5e5e39b4cb32e5591157",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

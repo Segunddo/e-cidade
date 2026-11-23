@@ -79,16 +79,16 @@ class cl_caitransf {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k91_transf = ($this->k91_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_transf"]:$this->k91_transf);
-       $this->k91_anousu = ($this->k91_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_anousu"]:$this->k91_anousu);
-       $this->k91_instit = ($this->k91_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_instit"]:$this->k91_instit);
+       $this->k91_transf = ($this->k91_transf === 0 || $this->k91_transf === 0.0 || $this->k91_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_transf"]:$this->k91_transf);
+       $this->k91_anousu = ($this->k91_anousu === 0 || $this->k91_anousu === 0.0 || $this->k91_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_anousu"]:$this->k91_anousu);
+       $this->k91_instit = ($this->k91_instit === 0 || $this->k91_instit === 0.0 || $this->k91_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_instit"]:$this->k91_instit);
        $this->k91_descr = ($this->k91_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_descr"]:$this->k91_descr);
        $this->k91_finalidade = ($this->k91_finalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_finalidade"]:$this->k91_finalidade);
-       $this->k91_debito = ($this->k91_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_debito"]:$this->k91_debito);
-       $this->k91_credito = ($this->k91_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_credito"]:$this->k91_credito);
+       $this->k91_debito = ($this->k91_debito === 0 || $this->k91_debito === 0.0 || $this->k91_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_debito"]:$this->k91_debito);
+       $this->k91_credito = ($this->k91_credito === 0 || $this->k91_credito === 0.0 || $this->k91_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_credito"]:$this->k91_credito);
        $this->k91_tipo = ($this->k91_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_tipo"]:$this->k91_tipo);
      }else{
-       $this->k91_transf = ($this->k91_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_transf"]:$this->k91_transf);
+       $this->k91_transf = ($this->k91_transf === 0 || $this->k91_transf === 0.0 || $this->k91_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k91_transf"]:$this->k91_transf);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_caitransf {
          $this->k91_transf = $k91_transf;
        }
      }
-     if(($this->k91_transf == null) || ($this->k91_transf == "") ){
+     if(($this->k91_transf == null) || ($this->k91_transf === 0 || $this->k91_transf === 0.0 || $this->k91_transf == "") ){
        $this->erro_sql = " Campo k91_transf nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

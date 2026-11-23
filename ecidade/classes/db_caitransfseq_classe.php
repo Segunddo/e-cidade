@@ -80,9 +80,9 @@ class cl_caitransfseq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k94_seqtransf = ($this->k94_seqtransf == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_seqtransf"]:$this->k94_seqtransf);
-       $this->k94_transf = ($this->k94_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_transf"]:$this->k94_transf);
-       $this->k94_anousu = ($this->k94_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_anousu"]:$this->k94_anousu);
+       $this->k94_seqtransf = ($this->k94_seqtransf === 0 || $this->k94_seqtransf === 0.0 || $this->k94_seqtransf == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_seqtransf"]:$this->k94_seqtransf);
+       $this->k94_transf = ($this->k94_transf === 0 || $this->k94_transf === 0.0 || $this->k94_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_transf"]:$this->k94_transf);
+       $this->k94_anousu = ($this->k94_anousu === 0 || $this->k94_anousu === 0.0 || $this->k94_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_anousu"]:$this->k94_anousu);
        if($this->k94_data == ""){
          $this->k94_data_dia = ($this->k94_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_data_dia"]:$this->k94_data_dia);
          $this->k94_data_mes = ($this->k94_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_data_mes"]:$this->k94_data_mes);
@@ -91,11 +91,11 @@ class cl_caitransfseq {
             $this->k94_data = $this->k94_data_ano."-".$this->k94_data_mes."-".$this->k94_data_dia;
          }
        }
-       $this->k94_valor = ($this->k94_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_valor"]:$this->k94_valor);
+       $this->k94_valor = ($this->k94_valor === 0 || $this->k94_valor === 0.0 || $this->k94_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_valor"]:$this->k94_valor);
        $this->k94_finalidade = ($this->k94_finalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_finalidade"]:$this->k94_finalidade);
-       $this->k94_id_usuario = ($this->k94_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_id_usuario"]:$this->k94_id_usuario);
+       $this->k94_id_usuario = ($this->k94_id_usuario === 0 || $this->k94_id_usuario === 0.0 || $this->k94_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_id_usuario"]:$this->k94_id_usuario);
      }else{
-       $this->k94_seqtransf = ($this->k94_seqtransf == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_seqtransf"]:$this->k94_seqtransf);
+       $this->k94_seqtransf = ($this->k94_seqtransf === 0 || $this->k94_seqtransf === 0.0 || $this->k94_seqtransf == ""?@$GLOBALS["HTTP_POST_VARS"]["k94_seqtransf"]:$this->k94_seqtransf);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_caitransfseq {
          $this->k94_seqtransf = $k94_seqtransf;
        }
      }
-     if(($this->k94_seqtransf == null) || ($this->k94_seqtransf == "") ){
+     if(($this->k94_seqtransf == null) || ($this->k94_seqtransf === 0 || $this->k94_seqtransf === 0.0 || $this->k94_seqtransf == "") ){
        $this->erro_sql = " Campo k94_seqtransf nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

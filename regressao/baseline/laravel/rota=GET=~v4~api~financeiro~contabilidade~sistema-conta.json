@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/sistema-conta",
+  "json": {
+    "data": [
+      {
+        "c65_descricao": "Não Aplicável",
+        "c65_sequencial": 0,
+        "c65_sigla": "N"
+      },
+      {
+        "c65_descricao": "Orçamentária",
+        "c65_sequencial": 1,
+        "c65_sigla": "O"
+      },
+      {
+        "c65_descricao": "Patrimonial",
+        "c65_sequencial": 2,
+        "c65_sigla": "P"
+      },
+      {
+        "c65_descricao": "Controle",
+        "c65_sequencial": 3,
+        "c65_sigla": "C"
+      }
+    ],
+    "error": false,
+    "message": "Sistema de contas"
+  },
+  "sha256": "9888da0e72073e23b8fb84c273be8b28fcd3a56f5f7243b45c4b5fd093731517",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

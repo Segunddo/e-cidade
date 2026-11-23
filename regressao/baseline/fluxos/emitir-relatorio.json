@@ -1,0 +1,75 @@
+{
+ "console": [
+  "Permissions policy violation: unload is not allowed in this document."
+ ],
+ "descricao": "emissao do relatorio cai2_relcaixa (PDF) pela UI",
+ "falhas": [],
+ "id": "emitir-relatorio",
+ "passos": [
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": null,
+   "dom_sha256": null,
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "entrada",
+   "ok": true,
+   "requisicoes": [],
+   "runtime": {},
+   "url": null
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<html>\n<head>\n<title>DBSeller Informática Ltda - Página Inicial</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta http-equiv=\"Expires\" content=\"0\">\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/scripts.js\">\n</script>\n<script>\n</script>\n<link href=\"estilos.css\" rel=\"stylesheet\" type=\"text/css\">\n<style>\n</style>\n<script type=\"text/javascript\">\n</script>\n<link href=\"http://localhost:8190/skins/estilos.php?file=widgets/DBModal.css\" rel=\"stylesheet\">\n<link href=\"http://localhost:8190/estilos/widgets/DBModalBase.css\" rel=\"stylesheet\">\n</head>\n<body class=\"no-menu\">\n<table class=\"table-relatorio\">\n<tbody>\n<tr>\n<td class=\"td-reatorio\">&nbsp;</td>\n<td class=\"td-reatorio\">&nbsp;</td>\n<td class=\"td-reatorio\">&nbsp;</td>\n<td class=\"td-reatorio\">&nbsp;</td>\n</tr>\n</tbody>\n</table>\n<table width=\"790\" height=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n<tbody>\n<tr>\n<td height=\"430\" align=\"center\" valign=\"top\" bgcolor=\"#CCCCCC\">\n<table width=\"80%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td>\n<form name=\"form1\" method=\"post\" action=\"cai2_relcaixa_002.php\">\n<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td>&nbsp;</td>\n</tr>\n<tr>\n<td align=\"center\">\n<table width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr align=\"center\">\n<td width=\"34%\" bgcolor=\"#0099CC\">\n<strong>Relatório</strong>\n</td>\n<td colspan=\"2\" bgcolor=\"#0099CC\">\n<strong>Ordem</strong>\n</td>\n</tr>\n<tr>\n<td>\n<input type=\"radio\" name=\"opcao_relatorio\" value=\"tabrecjm\" checked=\"\"> &nbsp;Tipos de Juros e Multa</td>\n<td>\n<input name=\"ordem_relatorio\" type=\"radio\" value=\"alfabetica\" checked=\"\"> &nbsp;Alfabetica&nbsp;</td>\n<td>&nbsp; <input type=\"radio\" name=\"ordem_relatorio\" value=\"numerica\"> Numerica&nbsp;</td>\n</tr>\n<tr align=\"center\">\n<td colspan=\"4\">&nbsp;</td>\n</tr>\n<tr align=\"center\">\n<td colspan=\"4\">\n<input name=\"exibir_relatorio\" type=\"button\" id=\"exibir_relatorio\" value=\"Imprimir\" onclick=\"js_AbreJanelaRelatorio()\">\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n</tbody>\n</table>\n</form>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n</tbody>\n</table>\n<style>\n</style>\n<script>\n</script>\n<div id=\"db-tooltip\" class=\"db-tooltip\">\n</div>\n<script type=\"text/javascript\" src=\"scripts/classes/configuracao/DBViewHelpInline.classe.js\">\n</script>\n<script type=\"text/javascript\">\n</script>\n</body>\n</html>",
+   "dom_sha256": "9b4754293e66bbd316e5408890a0127b8f04886f58e7f9c0cdf618e49d0f96b8",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "tela-relatorio",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 //w/1/extension/desktop/menu/getMenuArquivo/?file",
+    "GET 200 /w/1/cai2_relcaixa_001.php?db_opcao",
+    "GET 200 /w/1/con4_dbhelp.RPC.php?json",
+    "GET 200 /w/1/extension/desktop/window/bottom",
+    "GET 200 /w/1/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId"
+   ],
+   "runtime": {
+    "//w/1/extension/desktop/menu/getMenuArquivo/?file": "PHP-7.4 (referencia)",
+    "/w/1/cai2_relcaixa_001.php?db_opcao": "PHP-7.4 (referencia)",
+    "/w/1/con4_dbhelp.RPC.php?json": "PHP-7.4 (referencia)",
+    "/w/1/extension/desktop/window/bottom": "PHP-7.4 (referencia)",
+    "/w/1/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId": "PHP-7.4 (referencia)"
+   },
+   "url": "/w/1/cai2_relcaixa_001.php?db_opcao"
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": null,
+   "dom_sha256": null,
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {
+    "content_type": "application/pdf",
+    "conteudo": "=== pagina 1 === PREFEITURA DBSELLER RUA GENERAL CAMARA, 406 PORTO ALEGRE - RS 05130765101 - 00.000.000/0000-00 www.dbseller.com.br Codigo Inflator Descricao 62 INPC INPC 61 REAL REAL 63 REAL REAL Base: ecidade Arrecadação>Relatórios de Cadastro>Tipos de Juros/ Emissor: Prefeitura Dbseller Exerc: 2026 Data: X Pág 1/1",
+    "conteudo_sha256": "a69a16ad7f973af7d55ad8c8e589524405ed69cb53a7417c393ea9f781eb12e4",
+    "e_pdf": true,
+    "relatorio": "/w/1/cai2_relcaixa_002.php?opcaoOrdem&opcaoRelatorio&opcaoRelatorio2&opcaoSelect&xxx",
+    "status_corpo": 200
+   },
+   "nome": "emitir",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 /w/1/cai2_relcaixa_002.php?opcaoOrdem&opcaoRelatorio&opcaoRelatorio2&opcaoSelect&xxx"
+   ],
+   "runtime": {
+    "/w/1/cai2_relcaixa_002.php?opcaoOrdem&opcaoRelatorio&opcaoRelatorio2&opcaoSelect&xxx": "PHP-7.4 (referencia)"
+   },
+   "url": null
+  }
+ ]
+}

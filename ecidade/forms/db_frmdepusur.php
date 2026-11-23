@@ -62,7 +62,7 @@
             $depart = db_query("select * from db_depart order by descrdepto");
             $numrows = pg_numrows($depart);
 			for ($i=0;$i<$numrows;$i++) {
-			  echo "<option value=\"".pg_result($depart,$i,"coddepto")."\" ".(in_array(pg_result($depart,$i,"coddepto"),$depusu_coddepto)?"selected":"" ).">".pg_result($depart,$i,"coddepto") . " - " . pg_result($depart,$i,"descrdepto")." </option>\n";
+			  echo "<option value=\"".pg_result($depart,$i,"coddepto")."\" ".(in_array(pg_result($depart,$i,"coddepto"),(array) $depusu_coddepto)?"selected":"" ).">".pg_result($depart,$i,"coddepto") . " - " . pg_result($depart,$i,"descrdepto")." </option>\n";
 			}
           ?>
                   </select>

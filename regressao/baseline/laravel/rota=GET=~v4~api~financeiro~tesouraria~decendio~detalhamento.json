@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/tesouraria/decendio/detalhamento",
+  "json": {
+    "errors": {
+      "conta_pagadora": [
+        "O campo conta pagadora é obrigatório."
+      ],
+      "dataFinal": [
+        "O campo data final é obrigatório."
+      ],
+      "dataInicial": [
+        "O campo data inicial é obrigatório."
+      ],
+      "desdobramento": [
+        "O campo desdobramento é obrigatório."
+      ],
+      "exercicio": [
+        "O campo exercicio é obrigatório."
+      ],
+      "instituicao": [
+        "O campo instituicao é obrigatório."
+      ],
+      "reduzidos": [
+        "O campo reduzidos é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "e204c090e2e75c280ac8304f82c7549eda4730bc3a8ef03f96dcc4a6efd931dc",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

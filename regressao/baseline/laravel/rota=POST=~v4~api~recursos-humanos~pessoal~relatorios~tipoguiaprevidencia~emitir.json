@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/relatorios/tipoguiaprevidencia/emitir",
+  "json": {
+    "error": true,
+    "message": "Undefined index: dataVencimento"
+  },
+  "sha256": "d0399a2523d8703162a5f0ac1e17d617234605c9fbfeca83f6b4807fd4f18258",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

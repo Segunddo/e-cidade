@@ -96,7 +96,7 @@ $DB_BASE     = "ontem_20130220_1900";
 
       db_putsession("DB_instit", $oInstituicao->codigo);
       db_putsession("DB_ip",     $sIpTerminal);
-      db_putsession("DB_datausu", mktime());
+      db_putsession("DB_datausu", time());
 
       echo "\n\nPROCESSANDO SLIPS DA INSTITUICAO {$oInstituicao->codigo} - {$oInstituicao->nomeinst}\n\n";
 

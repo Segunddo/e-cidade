@@ -71,13 +71,13 @@ class cl_vistoriaslotevist {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y05_vistoriaslotevist = ($this->y05_vistoriaslotevist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
-       $this->y05_vistoriaslote = ($this->y05_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
-       $this->y05_codvist = ($this->y05_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_codvist"]:$this->y05_codvist);
-       $this->y05_codmsg = ($this->y05_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_codmsg"]:$this->y05_codmsg);
+       $this->y05_vistoriaslotevist = ($this->y05_vistoriaslotevist === 0 || $this->y05_vistoriaslotevist === 0.0 || $this->y05_vistoriaslotevist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
+       $this->y05_vistoriaslote = ($this->y05_vistoriaslote === 0 || $this->y05_vistoriaslote === 0.0 || $this->y05_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
+       $this->y05_codvist = ($this->y05_codvist === 0 || $this->y05_codvist === 0.0 || $this->y05_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_codvist"]:$this->y05_codvist);
+       $this->y05_codmsg = ($this->y05_codmsg === 0 || $this->y05_codmsg === 0.0 || $this->y05_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_codmsg"]:$this->y05_codmsg);
      }else{
-       $this->y05_vistoriaslotevist = ($this->y05_vistoriaslotevist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
-       $this->y05_vistoriaslote = ($this->y05_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
+       $this->y05_vistoriaslotevist = ($this->y05_vistoriaslotevist === 0 || $this->y05_vistoriaslotevist === 0.0 || $this->y05_vistoriaslotevist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
+       $this->y05_vistoriaslote = ($this->y05_vistoriaslote === 0 || $this->y05_vistoriaslote === 0.0 || $this->y05_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_vistoriaslotevist {
          $this->y05_vistoriaslotevist = $y05_vistoriaslotevist;
        }
      }
-     if(($this->y05_vistoriaslotevist == null) || ($this->y05_vistoriaslotevist == "") ){
+     if(($this->y05_vistoriaslotevist == null) || ($this->y05_vistoriaslotevist === 0 || $this->y05_vistoriaslotevist === 0.0 || $this->y05_vistoriaslotevist == "") ){
        $this->erro_sql = " Campo y05_vistoriaslotevist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

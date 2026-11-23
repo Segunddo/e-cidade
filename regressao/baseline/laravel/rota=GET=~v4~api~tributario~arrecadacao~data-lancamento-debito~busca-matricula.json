@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/arrecadacao/data-lancamento-debito/busca-matricula",
+  "json": {
+    "errors": {
+      "matricula": [
+        "O campo matricula é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "1c04c53254eaaad15c98edef78ccf524bf57c87531eefc3a35de245c4a005ccb",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

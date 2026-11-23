@@ -71,12 +71,12 @@ class cl_db_documentopadrao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db60_coddoc = ($this->db60_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_coddoc"]:$this->db60_coddoc);
+       $this->db60_coddoc = ($this->db60_coddoc === 0 || $this->db60_coddoc === 0.0 || $this->db60_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_coddoc"]:$this->db60_coddoc);
        $this->db60_descr = ($this->db60_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_descr"]:$this->db60_descr);
-       $this->db60_tipodoc = ($this->db60_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_tipodoc"]:$this->db60_tipodoc);
-       $this->db60_instit = ($this->db60_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_instit"]:$this->db60_instit);
+       $this->db60_tipodoc = ($this->db60_tipodoc === 0 || $this->db60_tipodoc === 0.0 || $this->db60_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_tipodoc"]:$this->db60_tipodoc);
+       $this->db60_instit = ($this->db60_instit === 0 || $this->db60_instit === 0.0 || $this->db60_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_instit"]:$this->db60_instit);
      }else{
-       $this->db60_coddoc = ($this->db60_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_coddoc"]:$this->db60_coddoc);
+       $this->db60_coddoc = ($this->db60_coddoc === 0 || $this->db60_coddoc === 0.0 || $this->db60_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db60_coddoc"]:$this->db60_coddoc);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_db_documentopadrao {
          $this->db60_coddoc = $db60_coddoc;
        }
      }
-     if(($this->db60_coddoc == null) || ($this->db60_coddoc == "") ){
+     if(($this->db60_coddoc == null) || ($this->db60_coddoc === 0 || $this->db60_coddoc === 0.0 || $this->db60_coddoc == "") ){
        $this->erro_sql = " Campo db60_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -76,9 +76,9 @@ class cl_empempenholiberado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e22_sequencial = ($this->e22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_sequencial"]:$this->e22_sequencial);
-       $this->e22_numemp = ($this->e22_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_numemp"]:$this->e22_numemp);
-       $this->e22_id_usuario = ($this->e22_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_id_usuario"]:$this->e22_id_usuario);
+       $this->e22_sequencial = ($this->e22_sequencial === 0 || $this->e22_sequencial === 0.0 || $this->e22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_sequencial"]:$this->e22_sequencial);
+       $this->e22_numemp = ($this->e22_numemp === 0 || $this->e22_numemp === 0.0 || $this->e22_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_numemp"]:$this->e22_numemp);
+       $this->e22_id_usuario = ($this->e22_id_usuario === 0 || $this->e22_id_usuario === 0.0 || $this->e22_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_id_usuario"]:$this->e22_id_usuario);
        if($this->e22_data == ""){
          $this->e22_data_dia = ($this->e22_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_data_dia"]:$this->e22_data_dia);
          $this->e22_data_mes = ($this->e22_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_data_mes"]:$this->e22_data_mes);
@@ -89,7 +89,7 @@ class cl_empempenholiberado {
        }
        $this->e22_hora = ($this->e22_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_hora"]:$this->e22_hora);
      }else{
-       $this->e22_sequencial = ($this->e22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_sequencial"]:$this->e22_sequencial);
+       $this->e22_sequencial = ($this->e22_sequencial === 0 || $this->e22_sequencial === 0.0 || $this->e22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e22_sequencial"]:$this->e22_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_empempenholiberado {
          $this->e22_sequencial = $e22_sequencial;
        }
      }
-     if(($this->e22_sequencial == null) || ($this->e22_sequencial == "") ){
+     if(($this->e22_sequencial == null) || ($this->e22_sequencial === 0 || $this->e22_sequencial === 0.0 || $this->e22_sequencial == "") ){
        $this->erro_sql = " Campo e22_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

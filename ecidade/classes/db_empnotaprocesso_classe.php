@@ -43,11 +43,11 @@ class cl_empnotaprocesso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e04_sequencial = ($this->e04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e04_sequencial"]:$this->e04_sequencial);
-       $this->e04_empnota = ($this->e04_empnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e04_empnota"]:$this->e04_empnota);
+       $this->e04_sequencial = ($this->e04_sequencial === 0 || $this->e04_sequencial === 0.0 || $this->e04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e04_sequencial"]:$this->e04_sequencial);
+       $this->e04_empnota = ($this->e04_empnota === 0 || $this->e04_empnota === 0.0 || $this->e04_empnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e04_empnota"]:$this->e04_empnota);
        $this->e04_numeroprocesso = ($this->e04_numeroprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["e04_numeroprocesso"]:$this->e04_numeroprocesso);
      }else{
-       $this->e04_sequencial = ($this->e04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e04_sequencial"]:$this->e04_sequencial);
+       $this->e04_sequencial = ($this->e04_sequencial === 0 || $this->e04_sequencial === 0.0 || $this->e04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e04_sequencial"]:$this->e04_sequencial);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_empnotaprocesso {
          $this->e04_sequencial = $e04_sequencial;
        }
      }
-     if(($this->e04_sequencial == null) || ($this->e04_sequencial == "") ){
+     if(($this->e04_sequencial == null) || ($this->e04_sequencial === 0 || $this->e04_sequencial === 0.0 || $this->e04_sequencial == "") ){
        $this->erro_sql = " Campo e04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

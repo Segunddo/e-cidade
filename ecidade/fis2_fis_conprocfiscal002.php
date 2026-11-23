@@ -85,7 +85,7 @@ $sql = "
 // die($sql);	
 		
 $result = pg_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 db_fieldsmemory($result,0);
 
 $sqldata = "select * from fiscalizacao.fis_processoprorrogacaofinalizacao where processo_fiscal = $procfiscal order by 1 desc limit 1";
@@ -109,7 +109,7 @@ $sqlvistoria = "
 								where y109_procfiscal =	$procfiscal					";
 								
 $rsvistorias     = pg_query($sqlvistoria);								
-$linhasvistorias = pg_num_rows($rsvistorias);			
+$linhasvistorias = ($rsvistorias ? pg_num_rows($rsvistorias) : null);			
 
 
 $sqlintimacao = "
@@ -124,7 +124,7 @@ $sqlintimacao = "
 									 left join fiscalizacao.fis_tipoandam on y41_codtipo = y39_codtipo
 									 where y110_procfiscal =$procfiscal and in01_intimacao = true";
 $rsintimacao     = pg_query($sqlintimacao);								
-$linhasintimacao = pg_num_rows($rsintimacao);
+$linhasintimacao = ($rsintimacao ? pg_num_rows($rsintimacao) : null);
 
 $sqlnotificacao = "
 									 select y36_numcgm,y35_matric,y34_inscr,y30_codnoti,y30_data,y30_nome,y41_descr 
@@ -139,7 +139,7 @@ $sqlnotificacao = "
 									 where y110_procfiscal =$procfiscal and in01_intimacao = false";
 
 $rsnotificacao     = pg_query($sqlnotificacao);								
-$linhasnotificacao = pg_num_rows($rsnotificacao);
+$linhasnotificacao = ($rsnotificacao ? pg_num_rows($rsnotificacao) : null);
 $sqlauto = "select y54_numcgm,y53_matric,y52_inscr,y50_codauto,y50_data,y50_nome,y41_descr,
 			(select pl11_autoret from fiscalizacao.fis_retauto where pl11_autoold = y50_codauto) as pl11_autoret
             from fiscalizacao.fis_procfiscalauto 
@@ -151,7 +151,7 @@ $sqlauto = "select y54_numcgm,y53_matric,y52_inscr,y50_codauto,y50_data,y50_nome
 						left join fiscalizacao.fis_tipoandam on y41_codtipo = y39_codtipo
 						where y111_procfiscal = $procfiscal ";
 $rsauto     = pg_query($sqlauto);								
-$linhasauto = pg_num_rows($rsauto);	
+$linhasauto = ($rsauto ? pg_num_rows($rsauto) : null);	
 
 $sqllancamento = "SELECT nl06_numcgm,
 			       nl05_matric,
@@ -172,7 +172,7 @@ $sqllancamento = "SELECT nl06_numcgm,
 			LEFT  JOIN fiscalizacao.fis_tipoandam ON y41_codtipo = y39_codtipo
 			WHERE nl09_procfiscal = $procfiscal ";
 $rslancamento     = pg_query($sqllancamento);								
-$linhaslancamento = pg_num_rows($rslancamento);	
+$linhaslancamento = ($rslancamento ? pg_num_rows($rslancamento) : null);	
 	
 $sqllevanta = "SELECT y62_inscr,
        y93_numcgm,
@@ -204,7 +204,7 @@ LEFT JOIN fiscalizacao.fis_levinscr ON y62_codlev = y60_codlev
 WHERE y112_procfiscal = $procfiscal";
 
 $rslevanta     = pg_query($sqllevanta);								
-$linhaslevanta = pg_num_rows($rslevanta);		
+$linhaslevanta = ($rslevanta ? pg_num_rows($rslevanta) : null);		
 
 $sqlvarfix = "select q33_codigo,q33_inscr,z01_nome as nome_lanc ,q33_data 
               from fiscalizacao.fis_procfiscalvarfix 
@@ -213,7 +213,7 @@ $sqlvarfix = "select q33_codigo,q33_inscr,z01_nome as nome_lanc ,q33_data
 							inner join cgm on q02_numcgm=z01_numcgm 
 							where y113_procfiscal = $procfiscal ";
 $rsvarfix     = pg_query($sqlvarfix);								
-$linhasvarfix = pg_num_rows($rsvarfix);		
+$linhasvarfix = ($rsvarfix ? pg_num_rows($rsvarfix) : null);		
 
 $sqlFiscais = "SELECT DISTINCT ON (db_usuarios.id_usuario) db_usuarios.id_usuario, db_usuarios.nome, fis_procfiscalfiscais.y106_principal, fis_processofiscalativo.ativo 
 FROM fiscalizacao.fis_procfiscalfiscais
@@ -224,7 +224,7 @@ INNER JOIN fiscalizacao.fis_processofiscalativo ON fis_processofiscalativo.proce
 WHERE fis_procfiscal.y100_coddepto = ".db_getsession('DB_coddepto')." and y106_procfiscal = $procfiscal AND fis_procfiscal.y100_instit = ".db_getsession('DB_instit');
 // die($sqlFiscais);
 $resultFiscais = pg_query($sqlFiscais);
-$rowFiscais = pg_num_rows($resultFiscais);
+$rowFiscais = ($resultFiscais ? pg_num_rows($resultFiscais) : null);
 
 $sqlAnexos = "select  	p58_numero || '/' || p58_ano as p58_numero,
 						p58_dtproc,
@@ -234,7 +234,7 @@ $sqlAnexos = "select  	p58_numero || '/' || p58_ano as p58_numero,
 				inner join tipoproc on p58_codigo = p51_codigo
 					where pf01_procfiscal = $procfiscal";
 $resultAnexos = pg_query($sqlAnexos);
-$rowAnexos = pg_num_rows($resultAnexos);
+$rowAnexos = ($resultAnexos ? pg_num_rows($resultAnexos) : null);
 
 $sqlProcAdm = "select
 		     p58_numero, p58_ano 
@@ -252,7 +252,7 @@ INNER JOIN fiscalizacao.fis_cadfiscais ON fis_procfiscalfiscais.y106_cadfiscais 
 INNER JOIN db_usuarios ON db_usuarios.id_usuario = fis_processoprorrogacaofinalizacao.id_usuario
 where processo_fiscal = $procfiscal";
 $rsPlugin = pg_query($sPlugin);
-$rowPlugin = pg_num_rows($rsPlugin);
+$rowPlugin = ($rsPlugin ? pg_num_rows($rsPlugin) : null);
 //die($sPlugin);
 ?>
 
@@ -864,7 +864,7 @@ function consultaRelatorio ( $codigo = null ,$intimacao = null ){
 
     $sGestor  = 'select * from fiscalizacao.fis_cadgestorfiscal where id_usuario = '.db_getsession('DB_id_usuario');
     $rsGestor = pg_query( $sGestor );
-    $iGestor  = pg_num_rows( $rsGestor );
+    $iGestor  = ($rsGestor ? pg_num_rows( $rsGestor ) : null);
 
     if( isset( $intimacao ) && $intimacao == 1 ){
             $whereIntimacao = ' and y30_codnoti in(select in01_codnoti from fiscalizacao.fis_fiscalintimacao where in01_intimacao = true) ';
@@ -887,7 +887,7 @@ function consultaRelatorio ( $codigo = null ,$intimacao = null ){
 
  	$rsQuery = db_query( $sql );
 	
-	if( $rsQuery  && pg_num_rows($rsQuery) > 0){
+	if( $rsQuery  && ($rsQuery ? pg_num_rows($rsQuery) : null) > 0){
                 return true;
         }else{
                 return false;
@@ -915,7 +915,7 @@ function consultaRelatorioAuto ( $codigo ){
 
         $sql = $clauto->sql_query_busca(null," y50_instit = ".db_getsession('DB_instit')." and dl_Auto = ". $codigo." and x.y50_setor=".db_getsession("DB_coddepto").$where.' order by dl_Auto desc', $where2);
         $rsQuery = db_query( $sql );
-        if( $rsQuery  && pg_num_rows( $rsQuery ) > 0){
+        if( $rsQuery  && ($rsQuery ? pg_num_rows( $rsQuery ) : null) > 0){
 
                 return true;
 
@@ -949,7 +949,7 @@ function consultaRelatorioLancamento ( $codigo ){
         $sql = $cllancamento->sql_query_busca(null," nl01_instit = ".db_getsession('DB_instit')." and dl_Notificacao_Lancamento = ". $codigo." and x.nl01_setor=".db_getsession("DB_coddepto").$where.' order by dl_Notificacao_Lancamento desc', $where2);
 
         $rsQuery = db_query( $sql );       
-        if( $rsQuery  && pg_num_rows( $rsQuery ) > 0){
+        if( $rsQuery  && ($rsQuery ? pg_num_rows( $rsQuery ) : null) > 0){
 
                 return true;
 
@@ -980,7 +980,7 @@ function consultaRelatorioLevanta ( $codigo ){
 	$sql = $cllevanta->sql_query_pesquisa(null,"*","",$dbwhere, $where2);
 	$rsQuery = db_query( $sql );
 
-	if ( pg_num_rows( $rsQuery ) > 0 ){
+	if ( ($rsQuery ? pg_num_rows( $rsQuery ) : null) > 0 ){
 
 		return true;
 

@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/arrecadacao/regra-emissao/salvar",
+  "json": {
+    "message": {
+      "k48_sequencial": [
+        "O campo k48 sequencial é obrigatório."
+      ]
+    },
+    "status": "Error"
+  },
+  "sha256": "846e5290854fddb5f8a7e581db5507af5be84cdcf99999837ff6596b47ba6ace",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

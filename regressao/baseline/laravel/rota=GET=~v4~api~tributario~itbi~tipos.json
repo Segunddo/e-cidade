@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/itbi/tipos",
+  "json": {
+    "errors": {
+      "tipoItbi": [
+        "O campo tipo itbi é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "c12a9809b086db95412900afab4a97fcf1184b1128be60fb99f3bd3e7e8d5e31",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

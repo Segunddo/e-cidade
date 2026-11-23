@@ -41,7 +41,7 @@ include(modification("classes/db_empresto_classe.php"));
 include(modification("classes/db_conrelvalor_classe.php"));
 require(modification("libs/db_libpostgres.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 //echo($HTTP_SERVER_VARS['QUERY_STRING']); exit;
 

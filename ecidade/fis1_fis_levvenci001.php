@@ -7,25 +7,25 @@ require_once  modification("libs/db_usuariosonline.php");
 $erro = 0;
 
 $resultpar      = db_query("select * from parissqn");
-$q60_codvencvar = pg_result($resultpar,0,"q60_codvencvar");
+$q60_codvencvar = ($resultpar ? pg_result($resultpar,0,"q60_codvencvar") : null);
 
 $sqlvenc    = "select q82_venc,q82_hist from cadvenc where q82_codigo = $q60_codvencvar and q82_parc = ".$_POST['mes'];
 $resultvenc = db_query($sqlvenc);
-$vencimento = pg_result($resultvenc,0,"q82_venc");
+$vencimento = ($resultvenc ? pg_result($resultvenc,0,"q82_venc") : null);
 
 //if($_POST['ano'] == db_getsession("DB_anousu")){
 //	$vencimento = $vencimento;
 //}else{
 	$res  = db_query("select * from confvencissqnvariavel where q144_ano = ".$_POST['ano']);
-	if(pg_num_rows($res) > 0){
-		$q144_codvenc = pg_result($res,0,"q144_codvenc");
+	if(($res ? pg_num_rows($res) : null) > 0){
+		$q144_codvenc = ($res ? pg_result($res,0,"q144_codvenc") : null);
 	}else{
 		$erro = "Tabela confvencissqnvariavel vazia!";
 	}
 	$sqlvenc    = "select q82_venc,q82_hist from cadvenc where q82_codigo = $q144_codvenc and q82_parc = ".$_POST['mes'];
 	
 	$resultvenc = db_query($sqlvenc);
-	$vencimento = pg_result($resultvenc,0,"q82_venc");
+	$vencimento = ($resultvenc ? pg_result($resultvenc,0,"q82_venc") : null);
 	// $qmes = $_POST['mes'];
 	// $qano = $_POST['ano'];
 	// $qmes += 1;

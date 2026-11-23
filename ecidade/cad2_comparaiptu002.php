@@ -39,7 +39,7 @@ $clrotulo->label('j14_nome');
 $clrotulo->label('d01_numero');
 $clrotulo->label('nome');
 ($HTTP_SERVER_VARS['QUERY_STRING']);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $dbwhere="1=1";
 $and="";
 

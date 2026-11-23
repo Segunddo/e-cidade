@@ -32,7 +32,7 @@ $clrotulo->label("t52_bem");
 $clbens->rotulo->label();
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if(isset($pesquisa) && ($pesquisa == "true")){
   $clrotulo->label("t52_codcla");

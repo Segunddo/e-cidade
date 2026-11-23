@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/configuracao/listar",
+  "json": {
+    "data": {
+      "configuracao": [],
+      "separador": ""
+    },
+    "error": false,
+    "message": "Nenhum registro encontrado"
+  },
+  "sha256": "3c492a0c3ece1deb43cf446dfc5f95aa05dbfde143ff883a97476195ff0e8241",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

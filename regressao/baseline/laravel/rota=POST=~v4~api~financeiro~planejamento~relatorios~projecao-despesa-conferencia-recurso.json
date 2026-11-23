@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/projecao-despesa-conferencia-recurso",
+  "json": {
+    "error": true,
+    "message": "Undefined index: planejamento_id"
+  },
+  "sha256": "720f26509760dc1f63f2de1796dd09fb996e2f519c2970db6c1a5dc966489c02",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

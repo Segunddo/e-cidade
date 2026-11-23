@@ -85,10 +85,10 @@ $resultsql = db_query(str_replace('\\','',$sql));
   $pdf->setX(5);
 
   $clrotulolov = new rotulolov; 
-  $fm_numfields = pg_numfields($resultsql);
+  $fm_numfields = ($resultsql ? pg_numfields($resultsql) : null);
   $tamanho = array();
   for ($i = 0;$i < $fm_numfields;$i++){
-    $clrotulolov->label(pg_fieldname($resultsql,$i));
+    $clrotulolov->label(($resultsql ? pg_fieldname($resultsql,$i) : null));
     $pdf->Cell((($clrotulolov->tamanho>strlen($clrotulolov->titulo)?$clrotulolov->tamanho:strlen($clrotulolov->titulo))*2)+2,4,$clrotulolov->titulo,"LRBT",($i==($fm_numfields-1)?1:0),"L",0);
     if($clrotulolov->tamanho==""){
   	  $tamanho[$i] = 20;
@@ -102,21 +102,21 @@ $resultsql = db_query(str_replace('\\','',$sql));
 
   $linha = 0;
 
-  for ($xi=0;$xi<pg_numrows($resultsql);$xi++){
+  for ($xi=0;$xi<($resultsql ? pg_numrows($resultsql) : null);$xi++){
     $pdf->setX(5);
     //db_fieldsmemory($resultsql,$i);
     for ($c=0;$c<($fm_numfields-1);$c++){
 //	  $pdf->Cell($tamanho[$c],4,pg_result($resultsql,$xi,$c),"",0,"L",0);
-	  $pdf->Cell($tamanho[$c],4,pg_result($resultsql,$xi,$c),"",0,"L",($linha%2==0?0:1));
+	  $pdf->Cell($tamanho[$c],4,($resultsql ? pg_result($resultsql,$xi,$c) : null),"",0,"L",($linha%2==0?0:1));
     }
-	$pdf->Cell($tamanho[($fm_numfields-1)],4,pg_result($resultsql,$xi,($fm_numfields-1)),"",1,"L",($linha%2==0?0:1));
+	$pdf->Cell($tamanho[($fm_numfields-1)],4,($resultsql ? pg_result($resultsql,$xi,($fm_numfields-1)) : null),"",1,"L",($linha%2==0?0:1));
         $linha += 1;
 	if($linha>35){
 	   $linha = 0;
        $pdf->AddPage("L");
        $pdf->setX(5);
        for ($cabec=0;$cabec < $fm_numfields;$cabec++){
-         $clrotulolov->label(pg_fieldname($resultsql,$cabec));
+         $clrotulolov->label(($resultsql ? pg_fieldname($resultsql,$cabec) : null));
          //$pdf->Cell($clrotulolov->tamanho*2,4,$clrotulolov->titulo,"LRBT",($cabec==($fm_numfields-1)?1:0),"L",0);
          $pdf->Cell((($clrotulolov->tamanho>strlen($clrotulolov->titulo)?$clrotulolov->tamanho:strlen($clrotulolov->titulo))*2)+2,4,$clrotulolov->titulo,"LRBT",($cabec==($fm_numfields-1)?1:0),"L",0);
        }	   

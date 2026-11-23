@@ -78,9 +78,9 @@ class cl_inicialmov {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v56_codmov = ($this->v56_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_codmov"]:$this->v56_codmov);
-       $this->v56_inicial = ($this->v56_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_inicial"]:$this->v56_inicial);
-       $this->v56_codsit = ($this->v56_codsit == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_codsit"]:$this->v56_codsit);
+       $this->v56_codmov = ($this->v56_codmov === 0 || $this->v56_codmov === 0.0 || $this->v56_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_codmov"]:$this->v56_codmov);
+       $this->v56_inicial = ($this->v56_inicial === 0 || $this->v56_inicial === 0.0 || $this->v56_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_inicial"]:$this->v56_inicial);
+       $this->v56_codsit = ($this->v56_codsit === 0 || $this->v56_codsit === 0.0 || $this->v56_codsit == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_codsit"]:$this->v56_codsit);
        $this->v56_obs = ($this->v56_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_obs"]:$this->v56_obs);
        if($this->v56_data == ""){
          $this->v56_data_dia = ($this->v56_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_data_dia"]:$this->v56_data_dia);
@@ -90,9 +90,9 @@ class cl_inicialmov {
             $this->v56_data = $this->v56_data_ano."-".$this->v56_data_mes."-".$this->v56_data_dia;
          }
        }
-       $this->v56_id_login = ($this->v56_id_login == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_id_login"]:$this->v56_id_login);
+       $this->v56_id_login = ($this->v56_id_login === 0 || $this->v56_id_login === 0.0 || $this->v56_id_login == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_id_login"]:$this->v56_id_login);
      }else{
-       $this->v56_codmov = ($this->v56_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_codmov"]:$this->v56_codmov);
+       $this->v56_codmov = ($this->v56_codmov === 0 || $this->v56_codmov === 0.0 || $this->v56_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["v56_codmov"]:$this->v56_codmov);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_inicialmov {
          $this->v56_codmov = $v56_codmov;
        }
      }
-     if(($this->v56_codmov == null) || ($this->v56_codmov == "") ){
+     if(($this->v56_codmov == null) || ($this->v56_codmov === 0 || $this->v56_codmov === 0.0 || $this->v56_codmov == "") ){
        $this->erro_sql = " Campo v56_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

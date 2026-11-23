@@ -80,7 +80,7 @@ if(isset($pTipo) && $pTipo == 1){
           $pSql  = 'select distinct * from fiscalizacao.fis_paragrafo where pl09_status = true '.$sWhere.' order by pl09_paragrafo';
 
           $pRs   = db_query($pSql);
-          $pRows = pg_num_rows($pRs);
+          $pRows = ($pRs ? pg_num_rows($pRs) : null);
         ?>
         <tr class="<?=((isset($pParagrafo) && $pParagrafo == 1 || $pParagrafo == '') ? '' : 'none ')?> relato">
           <td class="desc">RELATO</td>

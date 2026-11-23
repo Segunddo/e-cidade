@@ -69,11 +69,11 @@ class cl_grupotaxa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar37_sequencial = ($this->ar37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar37_sequencial"]:$this->ar37_sequencial);
-       $this->ar37_grupotaxatipo = ($this->ar37_grupotaxatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ar37_grupotaxatipo"]:$this->ar37_grupotaxatipo);
+       $this->ar37_sequencial = ($this->ar37_sequencial === 0 || $this->ar37_sequencial === 0.0 || $this->ar37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar37_sequencial"]:$this->ar37_sequencial);
+       $this->ar37_grupotaxatipo = ($this->ar37_grupotaxatipo === 0 || $this->ar37_grupotaxatipo === 0.0 || $this->ar37_grupotaxatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ar37_grupotaxatipo"]:$this->ar37_grupotaxatipo);
        $this->ar37_descricao = ($this->ar37_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar37_descricao"]:$this->ar37_descricao);
      }else{
-       $this->ar37_sequencial = ($this->ar37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar37_sequencial"]:$this->ar37_sequencial);
+       $this->ar37_sequencial = ($this->ar37_sequencial === 0 || $this->ar37_sequencial === 0.0 || $this->ar37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar37_sequencial"]:$this->ar37_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_grupotaxa {
          $this->ar37_sequencial = $ar37_sequencial;
        }
      }
-     if(($this->ar37_sequencial == null) || ($this->ar37_sequencial == "") ){
+     if(($this->ar37_sequencial == null) || ($this->ar37_sequencial === 0 || $this->ar37_sequencial === 0.0 || $this->ar37_sequencial == "") ){
        $this->erro_sql = " Campo ar37_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

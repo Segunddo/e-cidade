@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/juridico/anulacaocda/pesquisar",
+  "json": {
+    "data": [],
+    "error": true,
+    "message": "informe o codigo da lista"
+  },
+  "sha256": "1a178092d48c4a09dde5db188381f6e63f0e5b905e8787cf00e083f0701dc269",
+  "sql_negocio": [],
+  "status": 400,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

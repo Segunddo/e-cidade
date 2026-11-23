@@ -103,10 +103,10 @@ class cl_certidaoexistencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j133_sequencial = ($this->j133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_sequencial"]:$this->j133_sequencial);
-       $this->j133_db_usuarios = ($this->j133_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_db_usuarios"]:$this->j133_db_usuarios);
-       $this->j133_matric = ($this->j133_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_matric"]:$this->j133_matric);
-       $this->j133_iptuconstr = ($this->j133_iptuconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_iptuconstr"]:$this->j133_iptuconstr);
+       $this->j133_sequencial = ($this->j133_sequencial === 0 || $this->j133_sequencial === 0.0 || $this->j133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_sequencial"]:$this->j133_sequencial);
+       $this->j133_db_usuarios = ($this->j133_db_usuarios === 0 || $this->j133_db_usuarios === 0.0 || $this->j133_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_db_usuarios"]:$this->j133_db_usuarios);
+       $this->j133_matric = ($this->j133_matric === 0 || $this->j133_matric === 0.0 || $this->j133_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_matric"]:$this->j133_matric);
+       $this->j133_iptuconstr = ($this->j133_iptuconstr === 0 || $this->j133_iptuconstr === 0.0 || $this->j133_iptuconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_iptuconstr"]:$this->j133_iptuconstr);
        if($this->j133_data == ""){
          $this->j133_data_dia = ($this->j133_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_data_dia"]:$this->j133_data_dia);
          $this->j133_data_mes = ($this->j133_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_data_mes"]:$this->j133_data_mes);
@@ -116,7 +116,7 @@ class cl_certidaoexistencia {
          }
        }
        $this->j133_hora = ($this->j133_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_hora"]:$this->j133_hora);
-       $this->j133_arquivo = ($this->j133_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_arquivo"]:$this->j133_arquivo);
+       $this->j133_arquivo = ($this->j133_arquivo === 0 || $this->j133_arquivo === 0.0 || $this->j133_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_arquivo"]:$this->j133_arquivo);
        $this->j133_observacao = ($this->j133_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_observacao"]:$this->j133_observacao);
        $this->j133_processo = ($this->j133_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_processo"]:$this->j133_processo);
        $this->j133_arealote = ($this->j133_arealote == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_arealote"]:$this->j133_arealote);
@@ -134,7 +134,7 @@ class cl_certidaoexistencia {
          }
        }
      }else{
-       $this->j133_sequencial = ($this->j133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_sequencial"]:$this->j133_sequencial);
+       $this->j133_sequencial = ($this->j133_sequencial === 0 || $this->j133_sequencial === 0.0 || $this->j133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j133_sequencial"]:$this->j133_sequencial);
      }
    }
    // funcao para inclusao
@@ -230,7 +230,7 @@ class cl_certidaoexistencia {
          $this->j133_sequencial = $j133_sequencial;
        }
      }
-     if(($this->j133_sequencial == null) || ($this->j133_sequencial == "") ){
+     if(($this->j133_sequencial == null) || ($this->j133_sequencial === 0 || $this->j133_sequencial === 0.0 || $this->j133_sequencial == "") ){
        $this->erro_sql = " Campo j133_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

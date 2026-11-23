@@ -215,7 +215,7 @@ class ExtratoLinha {
   var $itemconciliacao  = '';
 
   // Construtor
-  function ExtratoLinha ( $pextratolinha    = null,
+  function __construct ( $pextratolinha    = null,
                           $pid              = null,
                           $pstatus          = null,
                           $pnumerodocumento = null,

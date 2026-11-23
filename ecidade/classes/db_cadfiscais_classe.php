@@ -65,16 +65,16 @@ class cl_cadfiscais {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
      }else{
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
      }
    }
    // funcao para inclusao
    public function incluir ($id_usuario){
       $this->atualizacampos();
        $this->id_usuario = $id_usuario;
-     if(($this->id_usuario == null) || ($this->id_usuario == "") ){
+     if(($this->id_usuario == null) || ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "") ){
        $this->erro_sql = " Campo id_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

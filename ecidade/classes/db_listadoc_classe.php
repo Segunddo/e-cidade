@@ -67,10 +67,10 @@ class cl_listadoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k64_docum = ($this->k64_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["k64_docum"]:$this->k64_docum);
-       $this->k64_codigo = ($this->k64_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k64_codigo"]:$this->k64_codigo);
+       $this->k64_docum = ($this->k64_docum === 0 || $this->k64_docum === 0.0 || $this->k64_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["k64_docum"]:$this->k64_docum);
+       $this->k64_codigo = ($this->k64_codigo === 0 || $this->k64_codigo === 0.0 || $this->k64_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k64_codigo"]:$this->k64_codigo);
      }else{
-       $this->k64_codigo = ($this->k64_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k64_codigo"]:$this->k64_codigo);
+       $this->k64_codigo = ($this->k64_codigo === 0 || $this->k64_codigo === 0.0 || $this->k64_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k64_codigo"]:$this->k64_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_listadoc {
        return false;
      }
        $this->k64_codigo = $k64_codigo;
-     if(($this->k64_codigo == null) || ($this->k64_codigo == "") ){
+     if(($this->k64_codigo == null) || ($this->k64_codigo === 0 || $this->k64_codigo === 0.0 || $this->k64_codigo == "") ){
        $this->erro_sql = " Campo k64_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

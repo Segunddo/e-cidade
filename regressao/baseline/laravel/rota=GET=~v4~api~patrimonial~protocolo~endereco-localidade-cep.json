@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/protocolo/endereco-localidade-cep",
+  "json": {
+    "data": {
+      "erro": true,
+      "mensagem": "CEP não encontrado"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "24cec4cf00e7b08cb22ce8691b6335427d472ba55173be639880abcee4a57f74",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

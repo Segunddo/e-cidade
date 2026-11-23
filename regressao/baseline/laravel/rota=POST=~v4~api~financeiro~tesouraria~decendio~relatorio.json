@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/tesouraria/decendio/relatorio",
+  "json": {
+    "error": true,
+    "message": "Illegal operator and value combination."
+  },
+  "sha256": "4f348631f3189c6c8c1381d7e642b5ef5898a52f2cd5ca09d74b71a816647dcc",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/configuracao/favoritos",
+  "json": null,
+  "sha256": "2c7f82d7cd0dc66981b00f2c7cdfce2e6b62c2c93cdbf8db551a3ce857c9f87c",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

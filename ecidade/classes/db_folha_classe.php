@@ -106,23 +106,23 @@ class cl_folha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r38_regist = ($this->r38_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_regist"]:$this->r38_regist);
+       $this->r38_regist = ($this->r38_regist === 0 || $this->r38_regist === 0.0 || $this->r38_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_regist"]:$this->r38_regist);
        $this->r38_nome = ($this->r38_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_nome"]:$this->r38_nome);
-       $this->r38_numcgm = ($this->r38_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_numcgm"]:$this->r38_numcgm);
-       $this->r38_regime = ($this->r38_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_regime"]:$this->r38_regime);
+       $this->r38_numcgm = ($this->r38_numcgm === 0 || $this->r38_numcgm === 0.0 || $this->r38_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_numcgm"]:$this->r38_numcgm);
+       $this->r38_regime = ($this->r38_regime === 0 || $this->r38_regime === 0.0 || $this->r38_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_regime"]:$this->r38_regime);
        $this->r38_lotac = ($this->r38_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_lotac"]:$this->r38_lotac);
        $this->r38_vincul = ($this->r38_vincul == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_vincul"]:$this->r38_vincul);
        $this->r38_padrao = ($this->r38_padrao == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_padrao"]:$this->r38_padrao);
-       $this->r38_salari = ($this->r38_salari == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_salari"]:$this->r38_salari);
+       $this->r38_salari = ($this->r38_salari === 0 || $this->r38_salari === 0.0 || $this->r38_salari == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_salari"]:$this->r38_salari);
        $this->r38_funcao = ($this->r38_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_funcao"]:$this->r38_funcao);
        $this->r38_banco = ($this->r38_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_banco"]:$this->r38_banco);
        $this->r38_agenc = ($this->r38_agenc == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_agenc"]:$this->r38_agenc);
        $this->r38_conta = ($this->r38_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_conta"]:$this->r38_conta);
-       $this->r38_situac = ($this->r38_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_situac"]:$this->r38_situac);
-       $this->r38_previd = ($this->r38_previd == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_previd"]:$this->r38_previd);
-       $this->r38_liq = ($this->r38_liq == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_liq"]:$this->r38_liq);
-       $this->r38_prov = ($this->r38_prov == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_prov"]:$this->r38_prov);
-       $this->r38_desc = ($this->r38_desc == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_desc"]:$this->r38_desc);
+       $this->r38_situac = ($this->r38_situac === 0 || $this->r38_situac === 0.0 || $this->r38_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_situac"]:$this->r38_situac);
+       $this->r38_previd = ($this->r38_previd === 0 || $this->r38_previd === 0.0 || $this->r38_previd == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_previd"]:$this->r38_previd);
+       $this->r38_liq = ($this->r38_liq === 0 || $this->r38_liq === 0.0 || $this->r38_liq == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_liq"]:$this->r38_liq);
+       $this->r38_prov = ($this->r38_prov === 0 || $this->r38_prov === 0.0 || $this->r38_prov == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_prov"]:$this->r38_prov);
+       $this->r38_desc = ($this->r38_desc === 0 || $this->r38_desc === 0.0 || $this->r38_desc == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_desc"]:$this->r38_desc);
        if($this->r38_proc == ""){
          $this->r38_proc_dia = ($this->r38_proc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_proc_dia"]:$this->r38_proc_dia);
          $this->r38_proc_mes = ($this->r38_proc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_proc_mes"]:$this->r38_proc_mes);
@@ -131,10 +131,10 @@ class cl_folha {
             $this->r38_proc = $this->r38_proc_ano."-".$this->r38_proc_mes."-".$this->r38_proc_dia;
          }
        }
-       $this->r38_instit = ($this->r38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_instit"]:$this->r38_instit);
+       $this->r38_instit = ($this->r38_instit === 0 || $this->r38_instit === 0.0 || $this->r38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_instit"]:$this->r38_instit);
      }else{
-       $this->r38_regist = ($this->r38_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_regist"]:$this->r38_regist);
-       $this->r38_instit = ($this->r38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_instit"]:$this->r38_instit);
+       $this->r38_regist = ($this->r38_regist === 0 || $this->r38_regist === 0.0 || $this->r38_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_regist"]:$this->r38_regist);
+       $this->r38_instit = ($this->r38_instit === 0 || $this->r38_instit === 0.0 || $this->r38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r38_instit"]:$this->r38_instit);
      }
    }
    // funcao para inclusao
@@ -202,7 +202,7 @@ class cl_folha {
      }
        $this->r38_regist = $r38_regist;
        $this->r38_instit = $r38_instit;
-     if(($this->r38_regist == null) || ($this->r38_regist == "") ){
+     if(($this->r38_regist == null) || ($this->r38_regist === 0 || $this->r38_regist === 0.0 || $this->r38_regist == "") ){
        $this->erro_sql = " Campo r38_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -210,7 +210,7 @@ class cl_folha {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r38_instit == null) || ($this->r38_instit == "") ){
+     if(($this->r38_instit == null) || ($this->r38_instit === 0 || $this->r38_instit === 0.0 || $this->r38_instit == "") ){
        $this->erro_sql = " Campo r38_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

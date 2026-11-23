@@ -78,8 +78,8 @@ class cl_averba {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j55_codave = ($this->j55_codave == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_codave"]:$this->j55_codave);
-       $this->j55_matric = ($this->j55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_matric"]:$this->j55_matric);
+       $this->j55_codave = ($this->j55_codave === 0 || $this->j55_codave === 0.0 || $this->j55_codave == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_codave"]:$this->j55_codave);
+       $this->j55_matric = ($this->j55_matric === 0 || $this->j55_matric === 0.0 || $this->j55_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_matric"]:$this->j55_matric);
        if($this->j55_data == ""){
          $this->j55_data_dia = ($this->j55_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_data_dia"]:$this->j55_data_dia);
          $this->j55_data_mes = ($this->j55_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_data_mes"]:$this->j55_data_mes);
@@ -90,9 +90,9 @@ class cl_averba {
        }
        $this->j55_regimo = ($this->j55_regimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_regimo"]:$this->j55_regimo);
        $this->j55_cidade = ($this->j55_cidade == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_cidade"]:$this->j55_cidade);
-       $this->j55_numcgm = ($this->j55_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_numcgm"]:$this->j55_numcgm);
+       $this->j55_numcgm = ($this->j55_numcgm === 0 || $this->j55_numcgm === 0.0 || $this->j55_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_numcgm"]:$this->j55_numcgm);
      }else{
-       $this->j55_codave = ($this->j55_codave == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_codave"]:$this->j55_codave);
+       $this->j55_codave = ($this->j55_codave === 0 || $this->j55_codave === 0.0 || $this->j55_codave == ""?@$GLOBALS["HTTP_POST_VARS"]["j55_codave"]:$this->j55_codave);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_averba {
          $this->j55_codave = $j55_codave;
        }
      }
-     if(($this->j55_codave == null) || ($this->j55_codave == "") ){
+     if(($this->j55_codave == null) || ($this->j55_codave === 0 || $this->j55_codave === 0.0 || $this->j55_codave == "") ){
        $this->erro_sql = " Campo j55_codave nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

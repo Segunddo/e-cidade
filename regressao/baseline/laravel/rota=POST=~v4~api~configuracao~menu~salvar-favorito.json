@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/menu/salvar-favorito",
+  "json": {
+    "errors": {
+      "idInsituicao": [
+        "O campo id insituicao é obrigatório."
+      ],
+      "idMenu": [
+        "O campo id menu é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "23b7d09e4255a6667bb0c5d4bdff00a794a11cd095e0803396561f65664bf097",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

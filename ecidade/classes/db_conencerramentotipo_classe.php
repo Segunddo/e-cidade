@@ -67,10 +67,10 @@ class cl_conencerramentotipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c43_sequencial = ($this->c43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c43_sequencial"]:$this->c43_sequencial);
+       $this->c43_sequencial = ($this->c43_sequencial === 0 || $this->c43_sequencial === 0.0 || $this->c43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c43_sequencial"]:$this->c43_sequencial);
        $this->c43_descr = ($this->c43_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c43_descr"]:$this->c43_descr);
      }else{
-       $this->c43_sequencial = ($this->c43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c43_sequencial"]:$this->c43_sequencial);
+       $this->c43_sequencial = ($this->c43_sequencial === 0 || $this->c43_sequencial === 0.0 || $this->c43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c43_sequencial"]:$this->c43_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_conencerramentotipo {
          $this->c43_sequencial = $c43_sequencial;
        }
      }
-     if(($this->c43_sequencial == null) || ($this->c43_sequencial == "") ){
+     if(($this->c43_sequencial == null) || ($this->c43_sequencial === 0 || $this->c43_sequencial === 0.0 || $this->c43_sequencial == "") ){
        $this->erro_sql = " Campo c43_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

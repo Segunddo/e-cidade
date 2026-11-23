@@ -69,11 +69,11 @@ class cl_ppasubtitulolocalizadorgasto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o11_sequencial = ($this->o11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o11_sequencial"]:$this->o11_sequencial);
-       $this->o11_codigo = ($this->o11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o11_codigo"]:$this->o11_codigo);
+       $this->o11_sequencial = ($this->o11_sequencial === 0 || $this->o11_sequencial === 0.0 || $this->o11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o11_sequencial"]:$this->o11_sequencial);
+       $this->o11_codigo = ($this->o11_codigo === 0 || $this->o11_codigo === 0.0 || $this->o11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o11_codigo"]:$this->o11_codigo);
        $this->o11_descricao = ($this->o11_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o11_descricao"]:$this->o11_descricao);
      }else{
-       $this->o11_sequencial = ($this->o11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o11_sequencial"]:$this->o11_sequencial);
+       $this->o11_sequencial = ($this->o11_sequencial === 0 || $this->o11_sequencial === 0.0 || $this->o11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o11_sequencial"]:$this->o11_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_ppasubtitulolocalizadorgasto {
          $this->o11_sequencial = $o11_sequencial;
        }
      }
-     if(($this->o11_sequencial == null) || ($this->o11_sequencial == "") ){
+     if(($this->o11_sequencial == null) || ($this->o11_sequencial === 0 || $this->o11_sequencial === 0.0 || $this->o11_sequencial == "") ){
        $this->erro_sql = " Campo o11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

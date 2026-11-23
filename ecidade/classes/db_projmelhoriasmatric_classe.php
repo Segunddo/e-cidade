@@ -77,16 +77,16 @@ class cl_projmelhoriasmatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d41_codigo = ($this->d41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_codigo"]:$this->d41_codigo);
-       $this->d41_matric = ($this->d41_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_matric"]:$this->d41_matric);
-       $this->d41_testada = ($this->d41_testada == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_testada"]:$this->d41_testada);
-       $this->d41_eixo = ($this->d41_eixo == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_eixo"]:$this->d41_eixo);
+       $this->d41_codigo = ($this->d41_codigo === 0 || $this->d41_codigo === 0.0 || $this->d41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_codigo"]:$this->d41_codigo);
+       $this->d41_matric = ($this->d41_matric === 0 || $this->d41_matric === 0.0 || $this->d41_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_matric"]:$this->d41_matric);
+       $this->d41_testada = ($this->d41_testada === 0 || $this->d41_testada === 0.0 || $this->d41_testada == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_testada"]:$this->d41_testada);
+       $this->d41_eixo = ($this->d41_eixo === 0 || $this->d41_eixo === 0.0 || $this->d41_eixo == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_eixo"]:$this->d41_eixo);
        $this->d41_obs = ($this->d41_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_obs"]:$this->d41_obs);
        $this->d41_auto = ($this->d41_auto == "f"?@$GLOBALS["HTTP_POST_VARS"]["d41_auto"]:$this->d41_auto);
        $this->d41_pgtopref = ($this->d41_pgtopref == "f"?@$GLOBALS["HTTP_POST_VARS"]["d41_pgtopref"]:$this->d41_pgtopref);
      }else{
-       $this->d41_codigo = ($this->d41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_codigo"]:$this->d41_codigo);
-       $this->d41_matric = ($this->d41_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_matric"]:$this->d41_matric);
+       $this->d41_codigo = ($this->d41_codigo === 0 || $this->d41_codigo === 0.0 || $this->d41_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_codigo"]:$this->d41_codigo);
+       $this->d41_matric = ($this->d41_matric === 0 || $this->d41_matric === 0.0 || $this->d41_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["d41_matric"]:$this->d41_matric);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_projmelhoriasmatric {
      }
        $this->d41_codigo = $d41_codigo;
        $this->d41_matric = $d41_matric;
-     if(($this->d41_codigo == null) || ($this->d41_codigo == "") ){
+     if(($this->d41_codigo == null) || ($this->d41_codigo === 0 || $this->d41_codigo === 0.0 || $this->d41_codigo == "") ){
        $this->erro_sql = " Campo d41_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -132,7 +132,7 @@ class cl_projmelhoriasmatric {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d41_matric == null) || ($this->d41_matric == "") ){
+     if(($this->d41_matric == null) || ($this->d41_matric === 0 || $this->d41_matric === 0.0 || $this->d41_matric == "") ){
        $this->erro_sql = " Campo d41_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

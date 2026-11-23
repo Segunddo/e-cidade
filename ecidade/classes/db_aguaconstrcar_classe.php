@@ -67,11 +67,11 @@ class cl_aguaconstrcar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x12_codconstr = ($this->x12_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codconstr"]:$this->x12_codconstr);
-       $this->x12_codigo = ($this->x12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codigo"]:$this->x12_codigo);
+       $this->x12_codconstr = ($this->x12_codconstr === 0 || $this->x12_codconstr === 0.0 || $this->x12_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codconstr"]:$this->x12_codconstr);
+       $this->x12_codigo = ($this->x12_codigo === 0 || $this->x12_codigo === 0.0 || $this->x12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codigo"]:$this->x12_codigo);
      }else{
-       $this->x12_codconstr = ($this->x12_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codconstr"]:$this->x12_codconstr);
-       $this->x12_codigo = ($this->x12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codigo"]:$this->x12_codigo);
+       $this->x12_codconstr = ($this->x12_codconstr === 0 || $this->x12_codconstr === 0.0 || $this->x12_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codconstr"]:$this->x12_codconstr);
+       $this->x12_codigo = ($this->x12_codigo === 0 || $this->x12_codigo === 0.0 || $this->x12_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x12_codigo"]:$this->x12_codigo);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_aguaconstrcar {
       $this->atualizacampos();
        $this->x12_codigo = $x12_codigo;
        $this->x12_codconstr = $x12_codconstr;
-     if(($this->x12_codigo == null) || ($this->x12_codigo == "") ){
+     if(($this->x12_codigo == null) || ($this->x12_codigo === 0 || $this->x12_codigo === 0.0 || $this->x12_codigo == "") ){
        $this->erro_sql = " Campo x12_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_aguaconstrcar {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x12_codconstr == null) || ($this->x12_codconstr == "") ){
+     if(($this->x12_codconstr == null) || ($this->x12_codconstr === 0 || $this->x12_codconstr === 0.0 || $this->x12_codconstr == "") ){
        $this->erro_sql = " Campo x12_codconstr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

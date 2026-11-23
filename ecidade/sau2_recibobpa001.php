@@ -34,7 +34,7 @@ require_once(modification("libs/db_sql.php"));
 require_once(modification("classes/db_sau_fecharquivo_classe.php"));
 require_once(modification("classes/db_lab_bpamagnetico_classe.php"));
 require_once(modification("classes/db_tfd_bpamagnetico_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clsau_fecharquivo  = new cl_sau_fecharquivo;
 $cllab_bpamagnetico = new cl_lab_bpamagnetico;
 $cltfd_bpamagnetico = new cl_tfd_bpamagnetico;

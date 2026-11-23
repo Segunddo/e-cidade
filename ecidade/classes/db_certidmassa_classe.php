@@ -65,16 +65,16 @@ class cl_certidmassa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v13_certid = ($this->v13_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
+       $this->v13_certid = ($this->v13_certid === 0 || $this->v13_certid === 0.0 || $this->v13_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
      }else{
-       $this->v13_certid = ($this->v13_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
+       $this->v13_certid = ($this->v13_certid === 0 || $this->v13_certid === 0.0 || $this->v13_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v13_certid"]:$this->v13_certid);
      }
    }
    // funcao para inclusao
    public function incluir ($v13_certid){
       $this->atualizacampos();
        $this->v13_certid = $v13_certid;
-     if(($this->v13_certid == null) || ($this->v13_certid == "") ){
+     if(($this->v13_certid == null) || ($this->v13_certid === 0 || $this->v13_certid === 0.0 || $this->v13_certid == "") ){
        $this->erro_sql = " Campo v13_certid nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

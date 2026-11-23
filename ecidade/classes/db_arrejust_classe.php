@@ -80,10 +80,10 @@ class cl_arrejust {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k27_sequencia = ($this->k27_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_sequencia"]:$this->k27_sequencia);
-       $this->k27_usuario = ($this->k27_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_usuario"]:$this->k27_usuario);
+       $this->k27_sequencia = ($this->k27_sequencia === 0 || $this->k27_sequencia === 0.0 || $this->k27_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_sequencia"]:$this->k27_sequencia);
+       $this->k27_usuario = ($this->k27_usuario === 0 || $this->k27_usuario === 0.0 || $this->k27_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_usuario"]:$this->k27_usuario);
        $this->k27_obs = ($this->k27_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_obs"]:$this->k27_obs);
-       $this->k27_dias = ($this->k27_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_dias"]:$this->k27_dias);
+       $this->k27_dias = ($this->k27_dias === 0 || $this->k27_dias === 0.0 || $this->k27_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_dias"]:$this->k27_dias);
        $this->k27_hora = ($this->k27_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_hora"]:$this->k27_hora);
        if($this->k27_data == ""){
          $this->k27_data_dia = ($this->k27_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_data_dia"]:$this->k27_data_dia);
@@ -93,9 +93,9 @@ class cl_arrejust {
             $this->k27_data = $this->k27_data_ano."-".$this->k27_data_mes."-".$this->k27_data_dia;
          }
        }
-       $this->k27_instit = ($this->k27_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_instit"]:$this->k27_instit);
+       $this->k27_instit = ($this->k27_instit === 0 || $this->k27_instit === 0.0 || $this->k27_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_instit"]:$this->k27_instit);
      }else{
-       $this->k27_sequencia = ($this->k27_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_sequencia"]:$this->k27_sequencia);
+       $this->k27_sequencia = ($this->k27_sequencia === 0 || $this->k27_sequencia === 0.0 || $this->k27_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k27_sequencia"]:$this->k27_sequencia);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_arrejust {
          $this->k27_sequencia = $k27_sequencia;
        }
      }
-     if(($this->k27_sequencia == null) || ($this->k27_sequencia == "") ){
+     if(($this->k27_sequencia == null) || ($this->k27_sequencia === 0 || $this->k27_sequencia === 0.0 || $this->k27_sequencia == "") ){
        $this->erro_sql = " Campo k27_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -79,8 +79,8 @@ class cl_discla {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codcla = ($this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
-       $this->codret = ($this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
+       $this->codcla = ($this->codcla === 0 || $this->codcla === 0.0 || $this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
+       $this->codret = ($this->codret === 0 || $this->codret === 0.0 || $this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
        if($this->dtcla == ""){
          $this->dtcla_dia = ($this->dtcla_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dtcla_dia"]:$this->dtcla_dia);
          $this->dtcla_mes = ($this->dtcla_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dtcla_mes"]:$this->dtcla_mes);
@@ -97,9 +97,9 @@ class cl_discla {
             $this->dtaute = $this->dtaute_ano."-".$this->dtaute_mes."-".$this->dtaute_dia;
          }
        }
-       $this->instit = ($this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
+       $this->instit = ($this->instit === 0 || $this->instit === 0.0 || $this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
      }else{
-       $this->codcla = ($this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
+       $this->codcla = ($this->codcla === 0 || $this->codcla === 0.0 || $this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_discla {
          $this->codcla = $codcla;
        }
      }
-     if(($this->codcla == null) || ($this->codcla == "") ){
+     if(($this->codcla == null) || ($this->codcla === 0 || $this->codcla === 0.0 || $this->codcla == "") ){
        $this->erro_sql = " Campo codcla nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

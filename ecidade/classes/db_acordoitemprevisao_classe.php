@@ -87,11 +87,11 @@ class cl_acordoitemprevisao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac37_sequencial = ($this->ac37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_sequencial"]:$this->ac37_sequencial);
-       $this->ac37_acordoitem = ($this->ac37_acordoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_acordoitem"]:$this->ac37_acordoitem);
-       $this->ac37_quantidade = ($this->ac37_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_quantidade"]:$this->ac37_quantidade);
-       $this->ac37_valor = ($this->ac37_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_valor"]:$this->ac37_valor);
-       $this->ac37_acordoperiodo = ($this->ac37_acordoperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_acordoperiodo"]:$this->ac37_acordoperiodo);
+       $this->ac37_sequencial = ($this->ac37_sequencial === 0 || $this->ac37_sequencial === 0.0 || $this->ac37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_sequencial"]:$this->ac37_sequencial);
+       $this->ac37_acordoitem = ($this->ac37_acordoitem === 0 || $this->ac37_acordoitem === 0.0 || $this->ac37_acordoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_acordoitem"]:$this->ac37_acordoitem);
+       $this->ac37_quantidade = ($this->ac37_quantidade === 0 || $this->ac37_quantidade === 0.0 || $this->ac37_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_quantidade"]:$this->ac37_quantidade);
+       $this->ac37_valor = ($this->ac37_valor === 0 || $this->ac37_valor === 0.0 || $this->ac37_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_valor"]:$this->ac37_valor);
+       $this->ac37_acordoperiodo = ($this->ac37_acordoperiodo === 0 || $this->ac37_acordoperiodo === 0.0 || $this->ac37_acordoperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_acordoperiodo"]:$this->ac37_acordoperiodo);
        if($this->ac37_datainicial == ""){
          $this->ac37_datainicial_dia = ($this->ac37_datainicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_datainicial_dia"]:$this->ac37_datainicial_dia);
          $this->ac37_datainicial_mes = ($this->ac37_datainicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_datainicial_mes"]:$this->ac37_datainicial_mes);
@@ -108,10 +108,10 @@ class cl_acordoitemprevisao {
             $this->ac37_datafinal = $this->ac37_datafinal_ano."-".$this->ac37_datafinal_mes."-".$this->ac37_datafinal_dia;
          }
        }
-       $this->ac37_quantidadeprevista = ($this->ac37_quantidadeprevista == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_quantidadeprevista"]:$this->ac37_quantidadeprevista);
-       $this->ac37_valorunitario = ($this->ac37_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_valorunitario"]:$this->ac37_valorunitario);
+       $this->ac37_quantidadeprevista = ($this->ac37_quantidadeprevista === 0 || $this->ac37_quantidadeprevista === 0.0 || $this->ac37_quantidadeprevista == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_quantidadeprevista"]:$this->ac37_quantidadeprevista);
+       $this->ac37_valorunitario = ($this->ac37_valorunitario === 0 || $this->ac37_valorunitario === 0.0 || $this->ac37_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_valorunitario"]:$this->ac37_valorunitario);
      }else{
-       $this->ac37_sequencial = ($this->ac37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_sequencial"]:$this->ac37_sequencial);
+       $this->ac37_sequencial = ($this->ac37_sequencial === 0 || $this->ac37_sequencial === 0.0 || $this->ac37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac37_sequencial"]:$this->ac37_sequencial);
      }
    }
    // funcao para inclusao
@@ -195,7 +195,7 @@ class cl_acordoitemprevisao {
          $this->ac37_sequencial = $ac37_sequencial;
        }
      }
-     if(($this->ac37_sequencial == null) || ($this->ac37_sequencial == "") ){
+     if(($this->ac37_sequencial == null) || ($this->ac37_sequencial === 0 || $this->ac37_sequencial === 0.0 || $this->ac37_sequencial == "") ){
        $this->erro_sql = " Campo ac37_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

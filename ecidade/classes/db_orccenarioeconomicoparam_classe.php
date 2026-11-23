@@ -81,17 +81,17 @@ class cl_orccenarioeconomicoparam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o03_sequencial = ($this->o03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_sequencial"]:$this->o03_sequencial);
-       $this->o03_orccenarioeconomico = ($this->o03_orccenarioeconomico == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_orccenarioeconomico"]:$this->o03_orccenarioeconomico);
-       $this->o03_anoorcamento = ($this->o03_anoorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_anoorcamento"]:$this->o03_anoorcamento);
-       $this->o03_anoreferencia = ($this->o03_anoreferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_anoreferencia"]:$this->o03_anoreferencia);
+       $this->o03_sequencial = ($this->o03_sequencial === 0 || $this->o03_sequencial === 0.0 || $this->o03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_sequencial"]:$this->o03_sequencial);
+       $this->o03_orccenarioeconomico = ($this->o03_orccenarioeconomico === 0 || $this->o03_orccenarioeconomico === 0.0 || $this->o03_orccenarioeconomico == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_orccenarioeconomico"]:$this->o03_orccenarioeconomico);
+       $this->o03_anoorcamento = ($this->o03_anoorcamento === 0 || $this->o03_anoorcamento === 0.0 || $this->o03_anoorcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_anoorcamento"]:$this->o03_anoorcamento);
+       $this->o03_anoreferencia = ($this->o03_anoreferencia === 0 || $this->o03_anoreferencia === 0.0 || $this->o03_anoreferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_anoreferencia"]:$this->o03_anoreferencia);
        $this->o03_descricao = ($this->o03_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_descricao"]:$this->o03_descricao);
-       $this->o03_tipovalor = ($this->o03_tipovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_tipovalor"]:$this->o03_tipovalor);
-       $this->o03_valorparam = ($this->o03_valorparam == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_valorparam"]:$this->o03_valorparam);
+       $this->o03_tipovalor = ($this->o03_tipovalor === 0 || $this->o03_tipovalor === 0.0 || $this->o03_tipovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_tipovalor"]:$this->o03_tipovalor);
+       $this->o03_valorparam = ($this->o03_valorparam === 0 || $this->o03_valorparam === 0.0 || $this->o03_valorparam == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_valorparam"]:$this->o03_valorparam);
        $this->o03_fonte = ($this->o03_fonte == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_fonte"]:$this->o03_fonte);
-       $this->o03_instit = ($this->o03_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_instit"]:$this->o03_instit);
+       $this->o03_instit = ($this->o03_instit === 0 || $this->o03_instit === 0.0 || $this->o03_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_instit"]:$this->o03_instit);
      }else{
-       $this->o03_sequencial = ($this->o03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_sequencial"]:$this->o03_sequencial);
+       $this->o03_sequencial = ($this->o03_sequencial === 0 || $this->o03_sequencial === 0.0 || $this->o03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o03_sequencial"]:$this->o03_sequencial);
      }
    }
    // funcao para inclusao
@@ -184,7 +184,7 @@ class cl_orccenarioeconomicoparam {
          $this->o03_sequencial = $o03_sequencial;
        }
      }
-     if(($this->o03_sequencial == null) || ($this->o03_sequencial == "") ){
+     if(($this->o03_sequencial == null) || ($this->o03_sequencial === 0 || $this->o03_sequencial === 0.0 || $this->o03_sequencial == "") ){
        $this->erro_sql = " Campo o03_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

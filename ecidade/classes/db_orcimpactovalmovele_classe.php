@@ -67,11 +67,11 @@ class cl_orcimpactovalmovele {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o66_codseqimpmov = ($this->o66_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o66_codseqimpmov"]:$this->o66_codseqimpmov);
-       $this->o66_codele = ($this->o66_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o66_codele"]:$this->o66_codele);
+       $this->o66_codseqimpmov = ($this->o66_codseqimpmov === 0 || $this->o66_codseqimpmov === 0.0 || $this->o66_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o66_codseqimpmov"]:$this->o66_codseqimpmov);
+       $this->o66_codele = ($this->o66_codele === 0 || $this->o66_codele === 0.0 || $this->o66_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o66_codele"]:$this->o66_codele);
      }else{
-       $this->o66_codseqimpmov = ($this->o66_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o66_codseqimpmov"]:$this->o66_codseqimpmov);
-       $this->o66_codele = ($this->o66_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o66_codele"]:$this->o66_codele);
+       $this->o66_codseqimpmov = ($this->o66_codseqimpmov === 0 || $this->o66_codseqimpmov === 0.0 || $this->o66_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o66_codseqimpmov"]:$this->o66_codseqimpmov);
+       $this->o66_codele = ($this->o66_codele === 0 || $this->o66_codele === 0.0 || $this->o66_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o66_codele"]:$this->o66_codele);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_orcimpactovalmovele {
       $this->atualizacampos();
        $this->o66_codseqimpmov = $o66_codseqimpmov;
        $this->o66_codele = $o66_codele;
-     if(($this->o66_codseqimpmov == null) || ($this->o66_codseqimpmov == "") ){
+     if(($this->o66_codseqimpmov == null) || ($this->o66_codseqimpmov === 0 || $this->o66_codseqimpmov === 0.0 || $this->o66_codseqimpmov == "") ){
        $this->erro_sql = " Campo o66_codseqimpmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_orcimpactovalmovele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o66_codele == null) || ($this->o66_codele == "") ){
+     if(($this->o66_codele == null) || ($this->o66_codele === 0 || $this->o66_codele === 0.0 || $this->o66_codele == "") ){
        $this->erro_sql = " Campo o66_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

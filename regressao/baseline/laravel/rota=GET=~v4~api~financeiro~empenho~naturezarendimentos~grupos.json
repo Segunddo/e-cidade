@@ -1,0 +1,51 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/empenho/naturezarendimentos/grupos",
+  "json": {
+    "data": {
+      "grupos": [
+        {
+          "grupo": "11"
+        },
+        {
+          "grupo": "12"
+        },
+        {
+          "grupo": "13"
+        },
+        {
+          "grupo": "14"
+        },
+        {
+          "grupo": "15"
+        },
+        {
+          "grupo": "16"
+        },
+        {
+          "grupo": "17"
+        },
+        {
+          "grupo": "18"
+        },
+        {
+          "grupo": "19"
+        },
+        {
+          "grupo": "20"
+        }
+      ]
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "974615c6a899fab95f8e04813e108d9d60f1a11dce6339476bcf7d169d1b27fa",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

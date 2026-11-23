@@ -34,7 +34,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_avaliacao_matric_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clavaliacao_matric = new cl_avaliacao_matric;
 $clavaliacao_matric->rotulo->label("ed29_i_codigo");
 $clavaliacao_matric->rotulo->label("ed29_c_descr");

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/tesouraria/relatorio/ExtratoContaBancaria",
+  "json": {
+    "error": true,
+    "message": "Undefined index: dataInicio"
+  },
+  "sha256": "81b60d8161ef15e510270c89533bd385029573b62e8b914000b55281e7bcc406",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

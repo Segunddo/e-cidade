@@ -93,10 +93,10 @@ class cl_disarq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
-       $this->k15_codbco = ($this->k15_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codbco"]:$this->k15_codbco);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->k15_codbco = ($this->k15_codbco === 0 || $this->k15_codbco === 0.0 || $this->k15_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codbco"]:$this->k15_codbco);
        $this->k15_codage = ($this->k15_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codage"]:$this->k15_codage);
-       $this->codret = ($this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
+       $this->codret = ($this->codret === 0 || $this->codret === 0.0 || $this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
        $this->arqret = ($this->arqret == ""?@$GLOBALS["HTTP_POST_VARS"]["arqret"]:$this->arqret);
        $this->textoret = ($this->textoret == ""?@$GLOBALS["HTTP_POST_VARS"]["textoret"]:$this->textoret);
        if($this->dtretorno == ""){
@@ -115,12 +115,12 @@ class cl_disarq {
             $this->dtarquivo = $this->dtarquivo_ano."-".$this->dtarquivo_mes."-".$this->dtarquivo_dia;
          }
        }
-       $this->k00_conta = ($this->k00_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_conta"]:$this->k00_conta);
+       $this->k00_conta = ($this->k00_conta === 0 || $this->k00_conta === 0.0 || $this->k00_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_conta"]:$this->k00_conta);
        $this->autent = ($this->autent == "f"?@$GLOBALS["HTTP_POST_VARS"]["autent"]:$this->autent);
-       $this->instit = ($this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
+       $this->instit = ($this->instit === 0 || $this->instit === 0.0 || $this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
        $this->md5 = ($this->md5 == ""?@$GLOBALS["HTTP_POST_VARS"]["md5"]:$this->md5);
      }else{
-       $this->codret = ($this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
+       $this->codret = ($this->codret === 0 || $this->codret === 0.0 || $this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
      }
    }
    // funcao para inclusao
@@ -231,7 +231,7 @@ class cl_disarq {
          $this->codret = $codret;
        }
      }
-     if(($this->codret == null) || ($this->codret == "") ){
+     if(($this->codret == null) || ($this->codret === 0 || $this->codret === 0.0 || $this->codret == "") ){
        $this->erro_sql = " Campo codret nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

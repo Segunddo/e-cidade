@@ -28,14 +28,14 @@
 require(modification("libs/db_stdlib.php"));
 require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(!isset($arg)) {
   $str =explode("?",$HTTP_SERVER_VARS['QUERY_STRING']);
   $str1 = base64_decode($str[0]);
   $str2 = base64_decode($str[1]);
 //  echo "$str1<br>$str2";
-  parse_str($str1);
-  parse_str($str2);
+  parse_str($str1, $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+  parse_str($str2, $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 }
 
 

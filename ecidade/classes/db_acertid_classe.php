@@ -82,8 +82,8 @@ class cl_acertid {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v15_codigo = ($this->v15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_codigo"]:$this->v15_codigo);
-       $this->v15_certid = ($this->v15_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_certid"]:$this->v15_certid);
+       $this->v15_codigo = ($this->v15_codigo === 0 || $this->v15_codigo === 0.0 || $this->v15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_codigo"]:$this->v15_codigo);
+       $this->v15_certid = ($this->v15_certid === 0 || $this->v15_certid === 0.0 || $this->v15_certid == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_certid"]:$this->v15_certid);
        if($this->v15_data == ""){
          $this->v15_data_dia = ($this->v15_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_data_dia"]:$this->v15_data_dia);
          $this->v15_data_mes = ($this->v15_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_data_mes"]:$this->v15_data_mes);
@@ -93,12 +93,12 @@ class cl_acertid {
          }
        }
        $this->v15_hora = ($this->v15_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_hora"]:$this->v15_hora);
-       $this->v15_usuario = ($this->v15_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_usuario"]:$this->v15_usuario);
+       $this->v15_usuario = ($this->v15_usuario === 0 || $this->v15_usuario === 0.0 || $this->v15_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_usuario"]:$this->v15_usuario);
        $this->v15_parcial = ($this->v15_parcial == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_parcial"]:$this->v15_parcial);
-       $this->v15_instit = ($this->v15_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_instit"]:$this->v15_instit);
+       $this->v15_instit = ($this->v15_instit === 0 || $this->v15_instit === 0.0 || $this->v15_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_instit"]:$this->v15_instit);
        $this->v15_observacao = ($this->v15_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_observacao"]:$this->v15_observacao);
      }else{
-       $this->v15_codigo = ($this->v15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_codigo"]:$this->v15_codigo);
+       $this->v15_codigo = ($this->v15_codigo === 0 || $this->v15_codigo === 0.0 || $this->v15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_codigo"]:$this->v15_codigo);
      }
    }
    // funcao para inclusao
@@ -182,7 +182,7 @@ class cl_acertid {
          $this->v15_codigo = $v15_codigo;
        }
      }
-     if(($this->v15_codigo == null) || ($this->v15_codigo == "") ){
+     if(($this->v15_codigo == null) || ($this->v15_codigo === 0 || $this->v15_codigo === 0.0 || $this->v15_codigo == "") ){
        $this->erro_sql = " Campo v15_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

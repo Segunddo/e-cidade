@@ -33,7 +33,7 @@ require_once(modification("ext/php/adodb-time.inc.php"));
 require_once(modification("libs/db_utils.php"));
 
 set_time_limit(0);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(isset($y50_codauto) && $y50_codauto != ''){
   $GLOBAL['y50_codauto'] = $y50_codauto;
 }
@@ -1108,7 +1108,7 @@ if(isset($tipo)) {
 
   //verifica se foi clicado no link agrupar e recria as variaveis do QUERY_STRING pra atualizar o agnump e agpar
   if(isset($verificaagrupar)) {
-    parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+    parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   }
 
   // calcular totregistros...

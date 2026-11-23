@@ -1,0 +1,28 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/api/educacao/files/parametros",
+  "json": {
+    "apenas_escolas_com_vagas": false,
+    "automatiza_situacao_alocado": true,
+    "exibe_classificacao_lista_espera": false,
+    "habilita_edicao": 0,
+    "habilita_edicao_exclusao": 0,
+    "habilita_lista_espera": false,
+    "habilita_reemissao": 0,
+    "habilita_validar_cpf_candidato": true,
+    "id": 1,
+    "li_concordo_legislacao": true,
+    "titulo_comprovante": "COMPROVANTE DE INSCRIÇÃO",
+    "valida_limite_inscricoes": false,
+    "validade_alocacao": 20
+  },
+  "sha256": "d9f08416a39ce6b4690e1b31abf932fc77a66db91f4d1aa8791650349f523103",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

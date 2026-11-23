@@ -67,10 +67,10 @@ class cl_vistmatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y72_codvist = ($this->y72_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y72_codvist"]:$this->y72_codvist);
-       $this->y72_matric = ($this->y72_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y72_matric"]:$this->y72_matric);
+       $this->y72_codvist = ($this->y72_codvist === 0 || $this->y72_codvist === 0.0 || $this->y72_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y72_codvist"]:$this->y72_codvist);
+       $this->y72_matric = ($this->y72_matric === 0 || $this->y72_matric === 0.0 || $this->y72_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y72_matric"]:$this->y72_matric);
      }else{
-       $this->y72_codvist = ($this->y72_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y72_codvist"]:$this->y72_codvist);
+       $this->y72_codvist = ($this->y72_codvist === 0 || $this->y72_codvist === 0.0 || $this->y72_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y72_codvist"]:$this->y72_codvist);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_vistmatric {
        return false;
      }
        $this->y72_codvist = $y72_codvist;
-     if(($this->y72_codvist == null) || ($this->y72_codvist == "") ){
+     if(($this->y72_codvist == null) || ($this->y72_codvist === 0 || $this->y72_codvist === 0.0 || $this->y72_codvist == "") ){
        $this->erro_sql = " Campo y72_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

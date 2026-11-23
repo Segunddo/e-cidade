@@ -32,7 +32,7 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_passagemdestino_classe.php"));
 
 db_postmemory( $_POST );
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"] , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clpassagemdestino = new cl_passagemdestino;
 $clpassagemdestino->rotulo->label("tf37_sequencial");

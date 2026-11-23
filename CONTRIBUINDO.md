@@ -50,6 +50,10 @@ Antes de abrir, rode `git pull origin base-php74` na sua branch para resolver co
 
 Formato: `PHP8-NN: descrição curta`. Exemplo: `PHP8-31: troca $str{i} por $str[i] em db_stdlib.php`.
 
+`NN` é o número da tarefa do grupo. Confirmado como formato oficial em 19/11/2026 (decisão 11): vale para todo commit
+novo, inclusive os sugeridos pelo servidor MCP (que usa o número de `ECIDADE_MCP_TAREFA`). Commits antigos, no formato
+"verbo no presente", ficam como estão.
+
 ## Divisão por área (sugestão inicial)
 
 | # | Área | Prefixos na raiz |

@@ -61,7 +61,7 @@ class AnexoQuadroDotacaoGoverno extends RelatoriosLegaisBase {
    *
    * @return array $aRetorno
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $oDaoPeriodo      = db_utils::getDao("periodo");
     $sSqlDadosPeriodo = $oDaoPeriodo->sql_query_file($this->iCodigoPeriodo);

@@ -73,10 +73,10 @@ class cl_iptuerro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j24_anousu = ($this->j24_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j24_anousu"]:$this->j24_anousu);
-       $this->j24_matric = ($this->j24_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j24_matric"]:$this->j24_matric);
-       $this->j24_idbql = ($this->j24_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j24_idbql"]:$this->j24_idbql);
-       $this->j24_erro = ($this->j24_erro == ""?@$GLOBALS["HTTP_POST_VARS"]["j24_erro"]:$this->j24_erro);
+       $this->j24_anousu = ($this->j24_anousu === 0 || $this->j24_anousu === 0.0 || $this->j24_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j24_anousu"]:$this->j24_anousu);
+       $this->j24_matric = ($this->j24_matric === 0 || $this->j24_matric === 0.0 || $this->j24_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j24_matric"]:$this->j24_matric);
+       $this->j24_idbql = ($this->j24_idbql === 0 || $this->j24_idbql === 0.0 || $this->j24_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j24_idbql"]:$this->j24_idbql);
+       $this->j24_erro = ($this->j24_erro === 0 || $this->j24_erro === 0.0 || $this->j24_erro == ""?@$GLOBALS["HTTP_POST_VARS"]["j24_erro"]:$this->j24_erro);
        $this->j24_descr = ($this->j24_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j24_descr"]:$this->j24_descr);
      }else{
      }

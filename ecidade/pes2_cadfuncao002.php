@@ -37,7 +37,7 @@ $clrotulo->label('r37_cbo');
 $clrotulo->label('r37_lei');
 $clrotulo->label('r37_class');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $oGet = db_utils::postMemory($_GET,0);
 

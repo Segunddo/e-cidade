@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/procedimento/mapeamento-empenho-rp-conta",
+  "json": {
+    "errors": {
+      "empenhos": [
+        "O campo empenhos é obrigatório."
+      ],
+      "exercicio": [
+        "O campo exercicio é obrigatório."
+      ],
+      "reduzido": [
+        "O campo reduzido é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "b4c849c8821c38a8c8d36f05c9fe4e6c50bb9409c753d7234a83c835ca5f9125",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

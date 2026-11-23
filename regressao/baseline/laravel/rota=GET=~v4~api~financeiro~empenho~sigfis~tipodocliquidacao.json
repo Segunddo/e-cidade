@@ -1,0 +1,70 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/empenho/sigfis/tipodocliquidacao",
+  "json": {
+    "data": {
+      "tipos": [
+        {
+          "e177_codigo": 1,
+          "e177_decimo": null,
+          "e177_descr": "Nota Fiscal",
+          "e177_sequencial": 1,
+          "e177_tipodiverso": null
+        },
+        {
+          "e177_codigo": 2,
+          "e177_decimo": false,
+          "e177_descr": "Folha de Pagamento",
+          "e177_sequencial": 2,
+          "e177_tipodiverso": null
+        },
+        {
+          "e177_codigo": 2,
+          "e177_decimo": true,
+          "e177_descr": "Folha de Pagamento - Décimo terceiro",
+          "e177_sequencial": 3,
+          "e177_tipodiverso": null
+        },
+        {
+          "e177_codigo": 3,
+          "e177_decimo": null,
+          "e177_descr": "Diversos - Recibo",
+          "e177_sequencial": 4,
+          "e177_tipodiverso": 1
+        },
+        {
+          "e177_codigo": 3,
+          "e177_decimo": null,
+          "e177_descr": "Diversos - Guia de Pagamento",
+          "e177_sequencial": 5,
+          "e177_tipodiverso": 2
+        },
+        {
+          "e177_codigo": 4,
+          "e177_decimo": null,
+          "e177_descr": "Diárias",
+          "e177_sequencial": 6,
+          "e177_tipodiverso": null
+        },
+        {
+          "e177_codigo": 5,
+          "e177_decimo": null,
+          "e177_descr": "Adiantamento",
+          "e177_sequencial": 7,
+          "e177_tipodiverso": null
+        }
+      ]
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "b2d8c9bd0203ab9fb27f96482410164909d1b89a52827e29529df0083c78d8d2",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -71,12 +71,12 @@ class cl_localidaderural {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j137_sequencial = ($this->j137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_sequencial"]:$this->j137_sequencial);
+       $this->j137_sequencial = ($this->j137_sequencial === 0 || $this->j137_sequencial === 0.0 || $this->j137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_sequencial"]:$this->j137_sequencial);
        $this->j137_descricao = ($this->j137_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_descricao"]:$this->j137_descricao);
-       $this->j137_valorminimo = ($this->j137_valorminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_valorminimo"]:$this->j137_valorminimo);
-       $this->j137_valormaximo = ($this->j137_valormaximo == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_valormaximo"]:$this->j137_valormaximo);
+       $this->j137_valorminimo = ($this->j137_valorminimo === 0 || $this->j137_valorminimo === 0.0 || $this->j137_valorminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_valorminimo"]:$this->j137_valorminimo);
+       $this->j137_valormaximo = ($this->j137_valormaximo === 0 || $this->j137_valormaximo === 0.0 || $this->j137_valormaximo == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_valormaximo"]:$this->j137_valormaximo);
      }else{
-       $this->j137_sequencial = ($this->j137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_sequencial"]:$this->j137_sequencial);
+       $this->j137_sequencial = ($this->j137_sequencial === 0 || $this->j137_sequencial === 0.0 || $this->j137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j137_sequencial"]:$this->j137_sequencial);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_localidaderural {
          $this->j137_sequencial = $j137_sequencial;
        }
      }
-     if(($this->j137_sequencial == null) || ($this->j137_sequencial == "") ){
+     if(($this->j137_sequencial == null) || ($this->j137_sequencial === 0 || $this->j137_sequencial === 0.0 || $this->j137_sequencial == "") ){
        $this->erro_sql = " Campo j137_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

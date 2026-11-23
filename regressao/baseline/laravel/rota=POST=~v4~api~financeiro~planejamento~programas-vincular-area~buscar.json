@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/programas-vincular-area/buscar",
+  "json": {
+    "errors": {
+      "area": [
+        "O campo \"Área de Resultado\" deve ser informada."
+      ],
+      "planejamento": [
+        "O campo \"Planejamento\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "c99c02bd1590ce34bd70122eef1a18034590b352e1af0b691f7a629de57d17a7",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

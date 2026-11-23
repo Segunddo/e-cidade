@@ -77,15 +77,15 @@ class cl_iptupadraoconstrpontos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j118_sequencial = ($this->j118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_sequencial"]:$this->j118_sequencial);
-       $this->j118_iptupadraoconstr = ($this->j118_iptupadraoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_iptupadraoconstr"]:$this->j118_iptupadraoconstr);
-       $this->j118_caracter = ($this->j118_caracter == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_caracter"]:$this->j118_caracter);
-       $this->j118_pontosini = ($this->j118_pontosini == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_pontosini"]:$this->j118_pontosini);
-       $this->j118_pontosfim = ($this->j118_pontosfim == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_pontosfim"]:$this->j118_pontosfim);
-       $this->j118_fatorreajuste = ($this->j118_fatorreajuste == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_fatorreajuste"]:$this->j118_fatorreajuste);
-       $this->j118_anousu = ($this->j118_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_anousu"]:$this->j118_anousu);
+       $this->j118_sequencial = ($this->j118_sequencial === 0 || $this->j118_sequencial === 0.0 || $this->j118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_sequencial"]:$this->j118_sequencial);
+       $this->j118_iptupadraoconstr = ($this->j118_iptupadraoconstr === 0 || $this->j118_iptupadraoconstr === 0.0 || $this->j118_iptupadraoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_iptupadraoconstr"]:$this->j118_iptupadraoconstr);
+       $this->j118_caracter = ($this->j118_caracter === 0 || $this->j118_caracter === 0.0 || $this->j118_caracter == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_caracter"]:$this->j118_caracter);
+       $this->j118_pontosini = ($this->j118_pontosini === 0 || $this->j118_pontosini === 0.0 || $this->j118_pontosini == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_pontosini"]:$this->j118_pontosini);
+       $this->j118_pontosfim = ($this->j118_pontosfim === 0 || $this->j118_pontosfim === 0.0 || $this->j118_pontosfim == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_pontosfim"]:$this->j118_pontosfim);
+       $this->j118_fatorreajuste = ($this->j118_fatorreajuste === 0 || $this->j118_fatorreajuste === 0.0 || $this->j118_fatorreajuste == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_fatorreajuste"]:$this->j118_fatorreajuste);
+       $this->j118_anousu = ($this->j118_anousu === 0 || $this->j118_anousu === 0.0 || $this->j118_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_anousu"]:$this->j118_anousu);
      }else{
-       $this->j118_sequencial = ($this->j118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_sequencial"]:$this->j118_sequencial);
+       $this->j118_sequencial = ($this->j118_sequencial === 0 || $this->j118_sequencial === 0.0 || $this->j118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j118_sequencial"]:$this->j118_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_iptupadraoconstrpontos {
          $this->j118_sequencial = $j118_sequencial;
        }
      }
-     if(($this->j118_sequencial == null) || ($this->j118_sequencial == "") ){
+     if(($this->j118_sequencial == null) || ($this->j118_sequencial === 0 || $this->j118_sequencial === 0.0 || $this->j118_sequencial == "") ){
        $this->erro_sql = " Campo j118_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

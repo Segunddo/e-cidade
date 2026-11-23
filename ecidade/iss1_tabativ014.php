@@ -36,7 +36,7 @@ $cltabativ->rotulo->label();
 $clrotulo = new rotulocampo;
 $clrotulo->label("q03_descr");
 $clrotulo->label("q11_tipcalc");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 ?>
 <style>
 a:hover {text-decoration:none;

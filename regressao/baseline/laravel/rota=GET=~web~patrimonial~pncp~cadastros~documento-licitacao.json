@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/patrimonial/pncp/cadastros/documento-licitacao",
+  "json": null,
+  "sha256": "d397f0ca72867ddc0c46f69296fddf4a5068cdb96296815408b6cf72f1a1c147",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

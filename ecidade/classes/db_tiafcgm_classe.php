@@ -67,10 +67,10 @@ class cl_tiafcgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y95_codtiaf = ($this->y95_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y95_codtiaf"]:$this->y95_codtiaf);
-       $this->y95_numcgm = ($this->y95_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y95_numcgm"]:$this->y95_numcgm);
+       $this->y95_codtiaf = ($this->y95_codtiaf === 0 || $this->y95_codtiaf === 0.0 || $this->y95_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y95_codtiaf"]:$this->y95_codtiaf);
+       $this->y95_numcgm = ($this->y95_numcgm === 0 || $this->y95_numcgm === 0.0 || $this->y95_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y95_numcgm"]:$this->y95_numcgm);
      }else{
-       $this->y95_codtiaf = ($this->y95_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y95_codtiaf"]:$this->y95_codtiaf);
+       $this->y95_codtiaf = ($this->y95_codtiaf === 0 || $this->y95_codtiaf === 0.0 || $this->y95_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y95_codtiaf"]:$this->y95_codtiaf);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_tiafcgm {
        return false;
      }
        $this->y95_codtiaf = $y95_codtiaf;
-     if(($this->y95_codtiaf == null) || ($this->y95_codtiaf == "") ){
+     if(($this->y95_codtiaf == null) || ($this->y95_codtiaf === 0 || $this->y95_codtiaf === 0.0 || $this->y95_codtiaf == "") ){
        $this->erro_sql = " Campo y95_codtiaf nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

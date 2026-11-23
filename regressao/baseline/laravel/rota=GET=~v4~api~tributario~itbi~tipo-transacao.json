@@ -1,0 +1,35 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/itbi/tipo-transacao",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "COMPRA E VENDA"
+      },
+      {
+        "codigo": 2,
+        "descricao": "USUCAPIAO"
+      },
+      {
+        "codigo": 3,
+        "descricao": "COMPRA E VENDA 3%"
+      },
+      {
+        "codigo": 4,
+        "descricao": "EXTINCAO DE CONDOMINIO"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "591fa8abbae3934254ac00bfd1919f9b28561c5678543ba7c66e3587c1e0f6c1",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

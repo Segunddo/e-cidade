@@ -44,7 +44,7 @@ $clorcsuplem = new cl_orcsuplem;
 $auxiliar = new cl_orcsuplem;
 $aux = new cl_orcsuplem;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $anousu = db_getsession("DB_anousu");
 

@@ -35,7 +35,7 @@ $clbensguarda = new cl_bensguarda;
 $clbensguardaitem = new cl_bensguardaitem;
 $clrotulo = new rotulocampo;
 $clrotulo->label('');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $where_instit = "t21_instit = ".db_getsession("DB_instit");
 $result_bensguarda = $clbensguarda->sql_record($clbensguarda->sql_query_file(null,"*",null,"t21_codigo = $codigo and $where_instit"));
 

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/tesouraria/decendio/gerar-slips",
+  "json": {
+    "error": true,
+    "message": "Argument 1 passed to App\\Domain\\Financeiro\\Tesouraria\\Services\\GerarSlipsDecendioService::gerarSlips() must be of the type array, null given, called in /var/www/html/app/Domain/Financeiro/Tesouraria/Controller/DecendioController.php on line 214"
+  },
+  "sha256": "581a468158dca03fba948d9c552df1cddbff0f4fc13d106267ce01bc0a6609b9",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

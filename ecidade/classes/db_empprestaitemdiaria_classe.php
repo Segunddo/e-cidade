@@ -69,9 +69,9 @@ class cl_empprestaitemdiaria
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->e446_sequencial = ($this->e446_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_sequencial"]:$this->e446_sequencial);
-            $this->e446_empprestaitem = ($this->e446_empprestaitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_empprestaitem"]:$this->e446_empprestaitem);
-            $this->e446_regist = ($this->e446_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_regist"]:$this->e446_regist);
+            $this->e446_sequencial = ($this->e446_sequencial === 0 || $this->e446_sequencial === 0.0 || $this->e446_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_sequencial"]:$this->e446_sequencial);
+            $this->e446_empprestaitem = ($this->e446_empprestaitem === 0 || $this->e446_empprestaitem === 0.0 || $this->e446_empprestaitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_empprestaitem"]:$this->e446_empprestaitem);
+            $this->e446_regist = ($this->e446_regist === 0 || $this->e446_regist === 0.0 || $this->e446_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_regist"]:$this->e446_regist);
             if ($this->e446_datainicio == "") {
                 $this->e446_datainicio_dia = ($this->e446_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_datainicio_dia"]:$this->e446_datainicio_dia);
                 $this->e446_datainicio_mes = ($this->e446_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_datainicio_mes"]:$this->e446_datainicio_mes);
@@ -90,13 +90,13 @@ class cl_empprestaitemdiaria
             }
             $this->e446_motivo = ($this->e446_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_motivo"]:$this->e446_motivo);
             $this->e446_destino = ($this->e446_destino == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_destino"]:$this->e446_destino);
-            $this->e446_quantidade = ($this->e446_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_quantidade"]:$this->e446_quantidade);
-            $this->e446_movimento = ($this->e446_movimento == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_movimento"]:$this->e446_movimento);
+            $this->e446_quantidade = ($this->e446_quantidade === 0 || $this->e446_quantidade === 0.0 || $this->e446_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_quantidade"]:$this->e446_quantidade);
+            $this->e446_movimento = ($this->e446_movimento === 0 || $this->e446_movimento === 0.0 || $this->e446_movimento == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_movimento"]:$this->e446_movimento);
             $this->e446_tipodiaria = ($this->e446_tipodiaria == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_tipodiaria"]:$this->e446_tipodiaria);
             $this->e446_estadodestino = ($this->e446_estadodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_estadodestino"]:$this->e446_estadodestino);
             $this->e446_paisdestino = ($this->e446_paisdestino == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_paisdestino"]:$this->e446_paisdestino);
         } else {
-            $this->e446_sequencial = ($this->e446_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_sequencial"]:$this->e446_sequencial);
+            $this->e446_sequencial = ($this->e446_sequencial === 0 || $this->e446_sequencial === 0.0 || $this->e446_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e446_sequencial"]:$this->e446_sequencial);
         }
     }
 
@@ -202,7 +202,7 @@ class cl_empprestaitemdiaria
                 $this->e446_sequencial = $e446_sequencial;
             }
         }
-        if (($this->e446_sequencial == null) || ($this->e446_sequencial == "")) {
+        if (($this->e446_sequencial == null) || ($this->e446_sequencial === 0 || $this->e446_sequencial === 0.0 || $this->e446_sequencial == "")) {
             $this->erro_sql = " Campo e446_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

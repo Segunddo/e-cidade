@@ -86,7 +86,7 @@ class cl_cornump {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k12_id = ($this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
+       $this->k12_id = ($this->k12_id === 0 || $this->k12_id === 0.0 || $this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
        if($this->k12_data == ""){
          $this->k12_data_dia = ($this->k12_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_dia"]:$this->k12_data_dia);
          $this->k12_data_mes = ($this->k12_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_mes"]:$this->k12_data_mes);
@@ -95,21 +95,21 @@ class cl_cornump {
             $this->k12_data = $this->k12_data_ano."-".$this->k12_data_mes."-".$this->k12_data_dia;
          }
        }
-       $this->k12_autent = ($this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
-       $this->k12_numpre = ($this->k12_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numpre"]:$this->k12_numpre);
-       $this->k12_numpar = ($this->k12_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numpar"]:$this->k12_numpar);
-       $this->k12_numtot = ($this->k12_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numtot"]:$this->k12_numtot);
-       $this->k12_numdig = ($this->k12_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numdig"]:$this->k12_numdig);
-       $this->k12_receit = ($this->k12_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_receit"]:$this->k12_receit);
-       $this->k12_valor = ($this->k12_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_valor"]:$this->k12_valor);
-       $this->k12_numnov = ($this->k12_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numnov"]:$this->k12_numnov);
+       $this->k12_autent = ($this->k12_autent === 0 || $this->k12_autent === 0.0 || $this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
+       $this->k12_numpre = ($this->k12_numpre === 0 || $this->k12_numpre === 0.0 || $this->k12_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numpre"]:$this->k12_numpre);
+       $this->k12_numpar = ($this->k12_numpar === 0 || $this->k12_numpar === 0.0 || $this->k12_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numpar"]:$this->k12_numpar);
+       $this->k12_numtot = ($this->k12_numtot === 0 || $this->k12_numtot === 0.0 || $this->k12_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numtot"]:$this->k12_numtot);
+       $this->k12_numdig = ($this->k12_numdig === 0 || $this->k12_numdig === 0.0 || $this->k12_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numdig"]:$this->k12_numdig);
+       $this->k12_receit = ($this->k12_receit === 0 || $this->k12_receit === 0.0 || $this->k12_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_receit"]:$this->k12_receit);
+       $this->k12_valor = ($this->k12_valor === 0 || $this->k12_valor === 0.0 || $this->k12_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_valor"]:$this->k12_valor);
+       $this->k12_numnov = ($this->k12_numnov === 0 || $this->k12_numnov === 0.0 || $this->k12_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numnov"]:$this->k12_numnov);
      }else{
-       $this->k12_id = ($this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
+       $this->k12_id = ($this->k12_id === 0 || $this->k12_id === 0.0 || $this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
        $this->k12_data = ($this->k12_data == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_ano"]."-".@$GLOBALS["HTTP_POST_VARS"]["k12_data_mes"]."-".@$GLOBALS["HTTP_POST_VARS"]["k12_data_dia"]:$this->k12_data);
-       $this->k12_autent = ($this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
-       $this->k12_numpre = ($this->k12_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numpre"]:$this->k12_numpre);
-       $this->k12_numpar = ($this->k12_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numpar"]:$this->k12_numpar);
-       $this->k12_receit = ($this->k12_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_receit"]:$this->k12_receit);
+       $this->k12_autent = ($this->k12_autent === 0 || $this->k12_autent === 0.0 || $this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
+       $this->k12_numpre = ($this->k12_numpre === 0 || $this->k12_numpre === 0.0 || $this->k12_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numpre"]:$this->k12_numpre);
+       $this->k12_numpar = ($this->k12_numpar === 0 || $this->k12_numpar === 0.0 || $this->k12_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numpar"]:$this->k12_numpar);
+       $this->k12_receit = ($this->k12_receit === 0 || $this->k12_receit === 0.0 || $this->k12_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_receit"]:$this->k12_receit);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_cornump {
        $this->k12_numpre = $k12_numpre;
        $this->k12_numpar = $k12_numpar;
        $this->k12_receit = $k12_receit;
-     if(($this->k12_id == null) || ($this->k12_id == "") ){
+     if(($this->k12_id == null) || ($this->k12_id === 0 || $this->k12_id === 0.0 || $this->k12_id == "") ){
        $this->erro_sql = " Campo k12_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -167,7 +167,7 @@ class cl_cornump {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k12_autent == null) || ($this->k12_autent == "") ){
+     if(($this->k12_autent == null) || ($this->k12_autent === 0 || $this->k12_autent === 0.0 || $this->k12_autent == "") ){
        $this->erro_sql = " Campo k12_autent nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -175,7 +175,7 @@ class cl_cornump {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k12_numpre == null) || ($this->k12_numpre == "") ){
+     if(($this->k12_numpre == null) || ($this->k12_numpre === 0 || $this->k12_numpre === 0.0 || $this->k12_numpre == "") ){
        $this->erro_sql = " Campo k12_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -183,7 +183,7 @@ class cl_cornump {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k12_numpar == null) || ($this->k12_numpar == "") ){
+     if(($this->k12_numpar == null) || ($this->k12_numpar === 0 || $this->k12_numpar === 0.0 || $this->k12_numpar == "") ){
        $this->erro_sql = " Campo k12_numpar nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -191,7 +191,7 @@ class cl_cornump {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k12_receit == null) || ($this->k12_receit == "") ){
+     if(($this->k12_receit == null) || ($this->k12_receit === 0 || $this->k12_receit === 0.0 || $this->k12_receit == "") ){
        $this->erro_sql = " Campo k12_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_far_formafarmaceuticamed_classe.php"));
 include(modification("classes/db_far_formafarmaceutica_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clfar_formafarmaceuticamed = new cl_far_formafarmaceuticamed;
 $clfar_formafarmaceutica = new cl_far_formafarmaceutica;
 $clfar_formafarmaceuticamed->rotulo->label("fa33_i_codigo");

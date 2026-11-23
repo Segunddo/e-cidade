@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/orgao-programa/filtros",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Órgãos do programa estratégico encontrado."
+  },
+  "sha256": "b503288af1157ef46c0dc86ffdc02f0072e1e035192ca63da72d7bc55500f839",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

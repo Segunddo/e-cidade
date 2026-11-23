@@ -67,10 +67,10 @@ class cl_carpadrao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j33_codgrupo = ($this->j33_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codgrupo"]:$this->j33_codgrupo);
-       $this->j33_codcaracter = ($this->j33_codcaracter == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codcaracter"]:$this->j33_codcaracter);
+       $this->j33_codgrupo = ($this->j33_codgrupo === 0 || $this->j33_codgrupo === 0.0 || $this->j33_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codgrupo"]:$this->j33_codgrupo);
+       $this->j33_codcaracter = ($this->j33_codcaracter === 0 || $this->j33_codcaracter === 0.0 || $this->j33_codcaracter == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codcaracter"]:$this->j33_codcaracter);
      }else{
-       $this->j33_codgrupo = ($this->j33_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codgrupo"]:$this->j33_codgrupo);
+       $this->j33_codgrupo = ($this->j33_codgrupo === 0 || $this->j33_codgrupo === 0.0 || $this->j33_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j33_codgrupo"]:$this->j33_codgrupo);
      }
    }
    // funcao para Inclusão
@@ -86,7 +86,7 @@ class cl_carpadrao {
        return false;
      }
        $this->j33_codgrupo = $j33_codgrupo;
-     if(($this->j33_codgrupo == null) || ($this->j33_codgrupo == "") ){
+     if(($this->j33_codgrupo == null) || ($this->j33_codgrupo === 0 || $this->j33_codgrupo === 0.0 || $this->j33_codgrupo == "") ){
        $this->erro_sql = " Campo j33_codgrupo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

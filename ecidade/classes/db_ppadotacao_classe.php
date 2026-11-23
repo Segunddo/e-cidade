@@ -91,30 +91,30 @@ class cl_ppadotacao {
   // funcao para atualizar campos
   public function atualizacampos($exclusao = false) {
     if ($exclusao == false) {
-      $this->o08_sequencial = ($this->o08_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_sequencial"]
+      $this->o08_sequencial = ($this->o08_sequencial === 0 || $this->o08_sequencial === 0.0 || $this->o08_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_sequencial"]
           : $this->o08_sequencial);
-      $this->o08_ano = ($this->o08_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_ano"] : $this->o08_ano);
-      $this->o08_orgao = ($this->o08_orgao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_orgao"] : $this->o08_orgao);
-      $this->o08_unidade = ($this->o08_unidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_unidade"] : $this->o08_unidade);
-      $this->o08_funcao = ($this->o08_funcao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_funcao"] : $this->o08_funcao);
-      $this->o08_subfuncao = ($this->o08_subfuncao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_subfuncao"]
+      $this->o08_ano = ($this->o08_ano === 0 || $this->o08_ano === 0.0 || $this->o08_ano == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_ano"] : $this->o08_ano);
+      $this->o08_orgao = ($this->o08_orgao === 0 || $this->o08_orgao === 0.0 || $this->o08_orgao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_orgao"] : $this->o08_orgao);
+      $this->o08_unidade = ($this->o08_unidade === 0 || $this->o08_unidade === 0.0 || $this->o08_unidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_unidade"] : $this->o08_unidade);
+      $this->o08_funcao = ($this->o08_funcao === 0 || $this->o08_funcao === 0.0 || $this->o08_funcao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_funcao"] : $this->o08_funcao);
+      $this->o08_subfuncao = ($this->o08_subfuncao === 0 || $this->o08_subfuncao === 0.0 || $this->o08_subfuncao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_subfuncao"]
           : $this->o08_subfuncao);
-      $this->o08_programa = ($this->o08_programa == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_programa"]
+      $this->o08_programa = ($this->o08_programa === 0 || $this->o08_programa === 0.0 || $this->o08_programa == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_programa"]
           : $this->o08_programa);
-      $this->o08_projativ = ($this->o08_projativ == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_projativ"]
+      $this->o08_projativ = ($this->o08_projativ === 0 || $this->o08_projativ === 0.0 || $this->o08_projativ == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_projativ"]
           : $this->o08_projativ);
-      $this->o08_elemento = ($this->o08_elemento == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_elemento"]
+      $this->o08_elemento = ($this->o08_elemento === 0 || $this->o08_elemento === 0.0 || $this->o08_elemento == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_elemento"]
           : $this->o08_elemento);
-      $this->o08_recurso = ($this->o08_recurso == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_recurso"] : $this->o08_recurso);
-      $this->o08_instit = ($this->o08_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_instit"] : $this->o08_instit);
-      $this->o08_localizadorgastos = ($this->o08_localizadorgastos == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_localizadorgastos"]
+      $this->o08_recurso = ($this->o08_recurso === 0 || $this->o08_recurso === 0.0 || $this->o08_recurso == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_recurso"] : $this->o08_recurso);
+      $this->o08_instit = ($this->o08_instit === 0 || $this->o08_instit === 0.0 || $this->o08_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_instit"] : $this->o08_instit);
+      $this->o08_localizadorgastos = ($this->o08_localizadorgastos === 0 || $this->o08_localizadorgastos === 0.0 || $this->o08_localizadorgastos == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_localizadorgastos"]
           : $this->o08_localizadorgastos);
-      $this->o08_ppaversao = ($this->o08_ppaversao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_ppaversao"]
+      $this->o08_ppaversao = ($this->o08_ppaversao === 0 || $this->o08_ppaversao === 0.0 || $this->o08_ppaversao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_ppaversao"]
           : $this->o08_ppaversao);
       $this->o08_concarpeculiar = ($this->o08_concarpeculiar == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_concarpeculiar"]
           : $this->o08_concarpeculiar);
     } else {
-      $this->o08_sequencial = ($this->o08_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_sequencial"]
+      $this->o08_sequencial = ($this->o08_sequencial === 0 || $this->o08_sequencial === 0.0 || $this->o08_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o08_sequencial"]
           : $this->o08_sequencial);
     }
   }
@@ -270,7 +270,7 @@ class cl_ppadotacao {
         $this->o08_sequencial = $o08_sequencial;
       }
     }
-    if (($this->o08_sequencial == null) || ($this->o08_sequencial == "")) {
+    if (($this->o08_sequencial == null) || ($this->o08_sequencial === 0 || $this->o08_sequencial === 0.0 || $this->o08_sequencial == "")) {
       $this->erro_sql = " Campo o08_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

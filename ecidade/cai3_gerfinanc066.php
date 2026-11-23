@@ -35,7 +35,7 @@ require(modification("classes/db_arrejust_classe.php"));
 require(modification("classes/db_arrejustreg_classe.php"));
 require(modification("classes/db_numpref_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $oPost = db_utils::postMemory($_POST);

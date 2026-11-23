@@ -67,10 +67,10 @@ class cl_levret {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y64_sequencia = ($this->y64_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y64_sequencia"]:$this->y64_sequencia);
-       $this->y64_inscr = ($this->y64_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y64_inscr"]:$this->y64_inscr);
+       $this->y64_sequencia = ($this->y64_sequencia === 0 || $this->y64_sequencia === 0.0 || $this->y64_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y64_sequencia"]:$this->y64_sequencia);
+       $this->y64_inscr = ($this->y64_inscr === 0 || $this->y64_inscr === 0.0 || $this->y64_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y64_inscr"]:$this->y64_inscr);
      }else{
-       $this->y64_sequencia = ($this->y64_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y64_sequencia"]:$this->y64_sequencia);
+       $this->y64_sequencia = ($this->y64_sequencia === 0 || $this->y64_sequencia === 0.0 || $this->y64_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y64_sequencia"]:$this->y64_sequencia);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_levret {
        return false;
      }
        $this->y64_sequencia = $y64_sequencia; 
-     if(($this->y64_sequencia == null) || ($this->y64_sequencia == "") ){ 
+     if(($this->y64_sequencia == null) || ($this->y64_sequencia === 0 || $this->y64_sequencia === 0.0 || $this->y64_sequencia == "") ){ 
        $this->erro_sql = " Campo y64_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

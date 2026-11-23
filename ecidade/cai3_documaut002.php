@@ -29,7 +29,7 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_corrente_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clcorrente = new cl_corrente;
 $clrotulo   = new rotulocampo;
@@ -203,7 +203,7 @@ $resultado = $clcorrente->sql_record($sql);
 
 //db_criatabela($resultado);
 
-if( pg_num_rows($resultado) == 0 ){
+if( ($resultado ? pg_num_rows($resultado) : null) == 0 ){
 
    $sql      = "select distinct
                        cgmempenho.z01_numcgm,

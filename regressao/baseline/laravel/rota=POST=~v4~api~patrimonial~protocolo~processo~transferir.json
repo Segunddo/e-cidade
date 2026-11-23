@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/processo/transferir",
+  "json": {
+    "errors": {
+      "codigoProcesso": [
+        "O campo codigo processo é obrigatório."
+      ],
+      "departamentoDestino": [
+        "O campo departamento destino é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "84c83abd8972006d91161a853617f27b178a9daced904dfb38a509c56a97b57b",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

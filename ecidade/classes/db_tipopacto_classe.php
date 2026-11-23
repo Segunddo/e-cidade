@@ -67,10 +67,10 @@ class cl_tipopacto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o29_sequencial = ($this->o29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o29_sequencial"]:$this->o29_sequencial);
+       $this->o29_sequencial = ($this->o29_sequencial === 0 || $this->o29_sequencial === 0.0 || $this->o29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o29_sequencial"]:$this->o29_sequencial);
        $this->o29_descricao = ($this->o29_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o29_descricao"]:$this->o29_descricao);
      }else{
-       $this->o29_sequencial = ($this->o29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o29_sequencial"]:$this->o29_sequencial);
+       $this->o29_sequencial = ($this->o29_sequencial === 0 || $this->o29_sequencial === 0.0 || $this->o29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o29_sequencial"]:$this->o29_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tipopacto {
          $this->o29_sequencial = $o29_sequencial;
        }
      }
-     if(($this->o29_sequencial == null) || ($this->o29_sequencial == "") ){
+     if(($this->o29_sequencial == null) || ($this->o29_sequencial === 0 || $this->o29_sequencial === 0.0 || $this->o29_sequencial == "") ){
        $this->erro_sql = " Campo o29_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_debcontapedidocgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d70_codigo = ($this->d70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d70_codigo"]:$this->d70_codigo);
-       $this->d70_numcgm = ($this->d70_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["d70_numcgm"]:$this->d70_numcgm);
+       $this->d70_codigo = ($this->d70_codigo === 0 || $this->d70_codigo === 0.0 || $this->d70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d70_codigo"]:$this->d70_codigo);
+       $this->d70_numcgm = ($this->d70_numcgm === 0 || $this->d70_numcgm === 0.0 || $this->d70_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["d70_numcgm"]:$this->d70_numcgm);
      }else{
-       $this->d70_codigo = ($this->d70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d70_codigo"]:$this->d70_codigo);
+       $this->d70_codigo = ($this->d70_codigo === 0 || $this->d70_codigo === 0.0 || $this->d70_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d70_codigo"]:$this->d70_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_debcontapedidocgm {
        return false;
      }
        $this->d70_codigo = $d70_codigo;
-     if(($this->d70_codigo == null) || ($this->d70_codigo == "") ){
+     if(($this->d70_codigo == null) || ($this->d70_codigo === 0 || $this->d70_codigo === 0.0 || $this->d70_codigo == "") ){
        $this->erro_sql = " Campo d70_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

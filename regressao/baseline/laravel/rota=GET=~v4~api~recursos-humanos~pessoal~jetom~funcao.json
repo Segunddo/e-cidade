@@ -1,0 +1,23 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/pessoal/jetom/funcao",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "REGRESSAO FUNCAO JETOM"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "bf4abbc62ef495c24b4a508e64397e436db7c26a736ea5aea91d33d091b5d60c",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

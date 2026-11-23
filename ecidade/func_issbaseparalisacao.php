@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_issbaseparalisacao_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clissbaseparalisacao = new cl_issbaseparalisacao;
 $clissbaseparalisacao->rotulo->label("q140_sequencial");
 $clissbaseparalisacao->rotulo->label("q140_sequencial");

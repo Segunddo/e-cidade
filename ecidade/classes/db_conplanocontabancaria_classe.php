@@ -49,13 +49,13 @@ class cl_conplanocontabancaria
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c56_sequencial = ($this->c56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_sequencial"]:$this->c56_sequencial);
-       $this->c56_contabancaria = ($this->c56_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_contabancaria"]:$this->c56_contabancaria);
-       $this->c56_codcon = ($this->c56_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_codcon"]:$this->c56_codcon);
-       $this->c56_anousu = ($this->c56_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_anousu"]:$this->c56_anousu);
-       $this->c56_reduz = ($this->c56_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_reduz"]:$this->c56_reduz);
+       $this->c56_sequencial = ($this->c56_sequencial === 0 || $this->c56_sequencial === 0.0 || $this->c56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_sequencial"]:$this->c56_sequencial);
+       $this->c56_contabancaria = ($this->c56_contabancaria === 0 || $this->c56_contabancaria === 0.0 || $this->c56_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_contabancaria"]:$this->c56_contabancaria);
+       $this->c56_codcon = ($this->c56_codcon === 0 || $this->c56_codcon === 0.0 || $this->c56_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_codcon"]:$this->c56_codcon);
+       $this->c56_anousu = ($this->c56_anousu === 0 || $this->c56_anousu === 0.0 || $this->c56_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_anousu"]:$this->c56_anousu);
+       $this->c56_reduz = ($this->c56_reduz === 0 || $this->c56_reduz === 0.0 || $this->c56_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_reduz"]:$this->c56_reduz);
      }else{
-       $this->c56_sequencial = ($this->c56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_sequencial"]:$this->c56_sequencial);
+       $this->c56_sequencial = ($this->c56_sequencial === 0 || $this->c56_sequencial === 0.0 || $this->c56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c56_sequencial"]:$this->c56_sequencial);
      }
    }
 
@@ -122,7 +122,7 @@ class cl_conplanocontabancaria
          $this->c56_sequencial = $c56_sequencial;
        }
      }
-     if(($this->c56_sequencial == null) || ($this->c56_sequencial == "") ){
+     if(($this->c56_sequencial == null) || ($this->c56_sequencial === 0 || $this->c56_sequencial === 0.0 || $this->c56_sequencial == "") ){
        $this->erro_sql = " Campo c56_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

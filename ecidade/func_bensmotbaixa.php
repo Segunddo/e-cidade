@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_bensmotbaixa_classe.php"));
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clbensmotbaixa = new cl_bensmotbaixa;
 $clbensmotbaixa->rotulo->label("t51_motivo");
 $clbensmotbaixa->rotulo->label("t51_descr");

@@ -6,7 +6,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_requisicaocivitas_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clrequisicaocivitas = new cl_requisicaocivitas;
 $clrequisicaocivitas->rotulo->label("rq01_sequencial");
 $clrequisicaocivitas->rotulo->label("rq01_sequencial");

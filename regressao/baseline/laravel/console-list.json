@@ -1,0 +1,11 @@
+{
+  "cabecalhos": {},
+  "id": "console-list",
+  "json": null,
+  "sha256": "65b558e824f7a2a89208c8063a26fd7c7b47e732aafaec2aca013d0d5b4831dd",
+  "sql_negocio": [],
+  "status": 0,
+  "tabelas": {},
+  "texto": "agendamento:inativarvinculoprofessor\nauth:clear-resets\ncache:clear\ncache:forget\ncache:table\nclear-compiled\nconfig:cache\nconfig:clear\nconfiguracao:cache-menu\ndb\ndb:seed\ndb:wipe\ndbseller:clear\ndbseller:notifica-acordos-vencimento\ndbseller:prune-tokens\ndown\nenv\nevent:cache\nevent:clear\nevent:generate\nevent:list\nhelp\nide-helper:eloquent\nide-helper:generate\nide-helper:meta\nide-helper:models\ninspire\nkey:generate\nlancamento:requisicao-material-reenvio\nlist\nmake:cast\nmake:channel\nmake:command\nmake:component\nmake:controller\nmake:event\nmake:exception\nmake:factory\nmake:job\nmake:listener\nmake:mail\nmake:middleware\nmake:migration\nmake:model\nmake:notification\nmake:observer\nmake:policy\nmake:provider\nmake:request\nmake:resource\nmake:rule\nmake:seeder\nmake:test\nmatriculaonline:alteracaoinscricao\nmigrate\nmigrate:fresh\nmigrate:install\nmigrate:refresh\nmigrate:reset\nmigrate:rollback\nmigrate:status\nmodel:prune\nnotifications:table\noptimize\noptimize:clear\npackage:discover\npassport:client\npassport:hash\npassport:install\npassport:keys\npassport:purge\npayroll:clear\npayroll:load\nqueue:batches-table\nqueue:clear\nqueue:failed\nqueue:failed-table\nqueue:flush\nqueue:forget\nqueue:listen\nqueue:monitor\nqueue:prune-batches\nqueue:prune-failed\nqueue:restart\nqueue:retry\nqueue:retry-batch\nqueue:table\nqueue:work\nroute:cache\nroute:clear\nroute:list\nsaude:limparpastabackupinfinity\nschedule:list\nschedule:run\nschedule:test\nschedule:work\nschema:dump\nserve\nsession:table\nstorage:link\nstub:publish\ntinker\ntributario:atualizacaocadastrosimplesnacional\ntributario:parcelamentovencido\ntributario:redesim:automaticEstablishmentProcess\ntributario:redesim:processRetrievedEstablishments\ntributario:redesim:retrieveEstablishments\nup\nvendor:publish\nview:cache\nview:clear\n",
+  "tipos": {}
+}

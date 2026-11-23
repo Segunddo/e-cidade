@@ -71,12 +71,12 @@ class cl_db_relatquebra {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db97_codigo = ($this->db97_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codigo"]:$this->db97_codigo);
-       $this->db97_codrel = ($this->db97_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codrel"]:$this->db97_codrel);
-       $this->db97_codcam = ($this->db97_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codcam"]:$this->db97_codcam);
+       $this->db97_codigo = ($this->db97_codigo === 0 || $this->db97_codigo === 0.0 || $this->db97_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codigo"]:$this->db97_codigo);
+       $this->db97_codrel = ($this->db97_codrel === 0 || $this->db97_codrel === 0.0 || $this->db97_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codrel"]:$this->db97_codrel);
+       $this->db97_codcam = ($this->db97_codcam === 0 || $this->db97_codcam === 0.0 || $this->db97_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codcam"]:$this->db97_codcam);
        $this->db97_totaliza = ($this->db97_totaliza == "f"?@$GLOBALS["HTTP_POST_VARS"]["db97_totaliza"]:$this->db97_totaliza);
      }else{
-       $this->db97_codigo = ($this->db97_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codigo"]:$this->db97_codigo);
+       $this->db97_codigo = ($this->db97_codigo === 0 || $this->db97_codigo === 0.0 || $this->db97_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db97_codigo"]:$this->db97_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_db_relatquebra {
          $this->db97_codigo = $db97_codigo;
        }
      }
-     if(($this->db97_codigo == null) || ($this->db97_codigo == "") ){
+     if(($this->db97_codigo == null) || ($this->db97_codigo === 0 || $this->db97_codigo === 0.0 || $this->db97_codigo == "") ){
        $this->erro_sql = " Campo db97_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

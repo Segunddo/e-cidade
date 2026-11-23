@@ -60,7 +60,7 @@ class cl_averbacgm {
                  j76_tipopromitente = int4 = Tipo de Promitente
                  ";
    //funcao construtor da classe 
-   public function cl_averbacgm() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("averbacgm"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -77,15 +77,15 @@ class cl_averbacgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j76_codigo = ($this->j76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_codigo"]:$this->j76_codigo);
-       $this->j76_averbacao = ($this->j76_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_averbacao"]:$this->j76_averbacao);
-       $this->j76_numcgm = ($this->j76_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_numcgm"]:$this->j76_numcgm);
-       $this->j76_tipo = ($this->j76_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_tipo"]:$this->j76_tipo);
+       $this->j76_codigo = ($this->j76_codigo === 0 || $this->j76_codigo === 0.0 || $this->j76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_codigo"]:$this->j76_codigo);
+       $this->j76_averbacao = ($this->j76_averbacao === 0 || $this->j76_averbacao === 0.0 || $this->j76_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_averbacao"]:$this->j76_averbacao);
+       $this->j76_numcgm = ($this->j76_numcgm === 0 || $this->j76_numcgm === 0.0 || $this->j76_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_numcgm"]:$this->j76_numcgm);
+       $this->j76_tipo = ($this->j76_tipo === 0 || $this->j76_tipo === 0.0 || $this->j76_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_tipo"]:$this->j76_tipo);
        $this->j76_principal = ($this->j76_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["j76_principal"]:$this->j76_principal);
        $this->j76_tipoproprietario = ($this->j76_tipoproprietario == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_tipoproprietario"]:$this->j76_tipoproprietario);
        $this->j76_tipopromitente = ($this->j76_tipopromitente == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_tipopromitente"]:$this->j76_tipopromitente);
      }else{
-       $this->j76_codigo = ($this->j76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_codigo"]:$this->j76_codigo);
+       $this->j76_codigo = ($this->j76_codigo === 0 || $this->j76_codigo === 0.0 || $this->j76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j76_codigo"]:$this->j76_codigo);
      }
    }
    // funcao para inclusao
@@ -154,7 +154,7 @@ class cl_averbacgm {
          $this->j76_codigo = $j76_codigo; 
        }
      }
-     if(($this->j76_codigo == null) || ($this->j76_codigo == "") ){ 
+     if(($this->j76_codigo == null) || ($this->j76_codigo === 0 || $this->j76_codigo === 0.0 || $this->j76_codigo == "") ){ 
        $this->erro_sql = " Campo j76_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

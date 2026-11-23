@@ -139,7 +139,7 @@ if (0 == count($clpostgresqlutils->getTableIndexes('debitos'))) {
             $sqlDataDebitos .= "  and k115_completa is true ";
             $sqlDataDebitos .= "order by k115_data desc ";
             $rsDataDebitos = db_query($sqlDataDebitos);
-            $intDatas = pg_num_rows($rsDataDebitos);
+            $intDatas = ($rsDataDebitos ? pg_num_rows($rsDataDebitos) : null);
 
             if ($intDatas > 0) {
                 for ($i = 0; $i < $intDatas; ++$i) {
@@ -194,7 +194,7 @@ if (0 == count($clpostgresqlutils->getTableIndexes('debitos'))) {
                 $sqlmenor = 'select distinct v01_exerc as exercicio from divida order by v01_exerc';
                 $resultmenor = db_query($sqlmenor) or die($sqlmenor);
                 $cont = 0;
-            for ($x = 0; $x < pg_num_rows($resultmenor); ++$x) {
+            for ($x = 0; $x < ($resultmenor ? pg_num_rows($resultmenor) : null); ++$x) {
                 db_fieldsmemory($resultmenor, $x);
                 if (0 == $cont) {
                     echo "<tr style='cursor: hand; height: 20px' bgcolor='$cor'>";

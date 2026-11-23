@@ -81,17 +81,17 @@ class cl_orcparamrelopcre {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o98_sequencial = ($this->o98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_sequencial"]:$this->o98_sequencial);
-       $this->o98_orcparamseq = ($this->o98_orcparamseq == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_orcparamseq"]:$this->o98_orcparamseq);
-       $this->o98_orcparamrel = ($this->o98_orcparamrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_orcparamrel"]:$this->o98_orcparamrel);
-       $this->o98_anousu = ($this->o98_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_anousu"]:$this->o98_anousu);
-       $this->o98_instit = ($this->o98_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_instit"]:$this->o98_instit);
+       $this->o98_sequencial = ($this->o98_sequencial === 0 || $this->o98_sequencial === 0.0 || $this->o98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_sequencial"]:$this->o98_sequencial);
+       $this->o98_orcparamseq = ($this->o98_orcparamseq === 0 || $this->o98_orcparamseq === 0.0 || $this->o98_orcparamseq == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_orcparamseq"]:$this->o98_orcparamseq);
+       $this->o98_orcparamrel = ($this->o98_orcparamrel === 0 || $this->o98_orcparamrel === 0.0 || $this->o98_orcparamrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_orcparamrel"]:$this->o98_orcparamrel);
+       $this->o98_anousu = ($this->o98_anousu === 0 || $this->o98_anousu === 0.0 || $this->o98_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_anousu"]:$this->o98_anousu);
+       $this->o98_instit = ($this->o98_instit === 0 || $this->o98_instit === 0.0 || $this->o98_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_instit"]:$this->o98_instit);
        $this->o98_identificacao = ($this->o98_identificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_identificacao"]:$this->o98_identificacao);
        $this->o98_credor = ($this->o98_credor == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_credor"]:$this->o98_credor);
        $this->o98_periodo = ($this->o98_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_periodo"]:$this->o98_periodo);
-       $this->o98_valor = ($this->o98_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_valor"]:$this->o98_valor);
+       $this->o98_valor = ($this->o98_valor === 0 || $this->o98_valor === 0.0 || $this->o98_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_valor"]:$this->o98_valor);
      }else{
-       $this->o98_sequencial = ($this->o98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_sequencial"]:$this->o98_sequencial);
+       $this->o98_sequencial = ($this->o98_sequencial === 0 || $this->o98_sequencial === 0.0 || $this->o98_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o98_sequencial"]:$this->o98_sequencial);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_orcparamrelopcre {
          $this->o98_sequencial = $o98_sequencial;
        }
      }
-     if(($this->o98_sequencial == null) || ($this->o98_sequencial == "") ){
+     if(($this->o98_sequencial == null) || ($this->o98_sequencial === 0 || $this->o98_sequencial === 0.0 || $this->o98_sequencial == "") ){
        $this->erro_sql = " Campo o98_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

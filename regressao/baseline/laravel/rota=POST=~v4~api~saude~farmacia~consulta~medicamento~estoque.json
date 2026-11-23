@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/farmacia/consulta/medicamento/estoque",
+  "json": {
+    "error": true,
+    "message": "O campo id medicamento é obrigatório."
+  },
+  "sha256": "fa05666bf8f06b0a52b40d87ec75bee11bede562ce14c557d55670e85ade9e25",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -29,7 +29,7 @@ require_once(modification("fpdf151/pdf.php"));
 require_once(modification("libs/db_sql.php"));
 require_once(modification("classes/db_pcsubgrupo_classe.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clpcsubgrupo   = new cl_pcsubgrupo();
 $clCgmEstrangeiro = new cl_cgmestrangeiro();

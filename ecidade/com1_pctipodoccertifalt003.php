@@ -35,7 +35,7 @@ $clpcdoccertif = new cl_pcdoccertif;
 $clrotulo = new rotulocampo;
 $clrotulo->label("pc71_codigo");
 $clrotulo->label("pc71_descr");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if (isset ($atualizar)) {
 	db_inicio_transacao();
 	$result03 = $clpctipodoccertif->sql_record($clpctipodoccertif->sql_query_file(null, "*", "pc72_pcdoccertif","pc72_pctipocertif=$pc72_pctipocertif"));

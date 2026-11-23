@@ -38,7 +38,7 @@ require_once(modification("classes/db_biblioteca_classe.php"));
 require_once(modification("classes/db_carteira_classe.php"));
 require_once(modification("classes/db_acervo_classe.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clemprestimo       = new cl_emprestimo;
 $clemprestimoacervo = new cl_emprestimoacervo;

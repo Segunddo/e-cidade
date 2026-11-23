@@ -69,7 +69,7 @@ if ( $numcgm == '' && $opcao != 'socios' ){
    }
    $result = db_query($sql);
    
-   if (pg_numrows($result) == 0 ) {
+   if (($result ? pg_numrows($result) : null) == 0 ) {
       db_redireciona("db_erros.php?fechar=true&db_erro=Proprietários/Promitentes nao Encontrados");
       exit;
    }
@@ -97,7 +97,7 @@ if ( $numcgm == '' && $opcao != 'socios' ){
    $pdf->multicell(0,6,'Dados dos '.$xtipo,0,"C",0);
    $pdf->ln(5);
    
-   for ($i=0;$i<pg_numrows($result);$i++) {
+   for ($i=0;$i<($result ? pg_numrows($result) : null);$i++) {
       db_fieldsmemory($result,$i);
       $pdf->SetFont('arial','',8);
       $pdf->multicell(0,4,'Numcgm : '.$z01_numcgm,0,"L",0);
@@ -135,7 +135,7 @@ if ( $numcgm == '' && $opcao != 'socios' ){
    $pdf->ln(5);
    
    $result = $clissbase->sql_record($clissbase->sqlinscricoes_socios($inscricao));
-   for ($i=0;$i<pg_numrows($result);$i++) {
+   for ($i=0;$i<($result ? pg_numrows($result) : null);$i++) {
       db_fieldsmemory($result,$i);
       $pdf->SetFont('arial','',8);
       $pdf->multicell(0,4,'Numcgm : '.$z01_numcgm,0,"L",0);
@@ -214,7 +214,7 @@ if ( $numcgm == '' && $opcao != 'socios' ){
    $pdf->cell(17,4,'Baixa'       ,1,0,"C",1);
    $pdf->cell(92,4,'Matricula RI'  ,1,1,"C",1);
    
-   for($i=0;$i<pg_numrows($result);$i++){
+   for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
       db_fieldsmemory($result,$i);
       
       if ($pdf->gety() > ( $pdf->h - 30 ) ){
@@ -312,7 +312,7 @@ if ( $numcgm == '' && $opcao != 'socios' ){
    $pdf->cell(20,4,'Baixa',1,1,"C",0);
    
    
-   for($i=0;$i<pg_numrows($result);$i++){
+   for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
       db_fieldsmemory($result,$i,true);
       if ($pdf->gety() > ( $pdf->h - 30 ) ){
 	     $pdf->addpage('L');

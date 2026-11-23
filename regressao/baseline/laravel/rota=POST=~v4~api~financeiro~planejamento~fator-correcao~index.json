@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/fator-correcao/index",
+  "json": {
+    "errors": {
+      "natureza_id": [
+        "O campo \"Natureza\" deve ser informado."
+      ],
+      "planejamento_id": [
+        "O campo \"Planejamento\" deve ser informado."
+      ],
+      "tipo": [
+        "Deve ser informado o tipo da natureza que deve ser buscado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "ee198fcc3e64b64314ce53cd58c867620dc89704447859aaa7738d3599e21812",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_clientesprodutoscomercial_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clclientesprodutoscomercial = new cl_clientesprodutoscomercial;
 $clclientesprodutoscomercial->rotulo->label("at91_sequencial");
 $clclientesprodutoscomercial->rotulo->label("at91_nome");

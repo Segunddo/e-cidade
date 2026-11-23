@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/ldo",
+  "json": {
+    "errors": {
+      "pl2_ano_final": [
+        "Campo \"Ano Final\" deve ser informado."
+      ],
+      "pl2_ano_inicial": [
+        "Campo \"Ano Inicial\" deve ser informado."
+      ],
+      "pl2_base_calculo": [
+        "Campo \"Base de Cálculo\" deve ser informado."
+      ],
+      "pl2_codigo_pai": [
+        "Código do plano vinculado, se informado, deve ser um inteiro."
+      ],
+      "pl2_composicao": [
+        "O campo pl2 composicao é obrigatório."
+      ],
+      "pl2_tipo": [
+        "Tipo do planejamento deve ser informado."
+      ],
+      "pl2_titulo": [
+        "Campo \"Título\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "7475f82762679c48c1177f32ef34eeb492503cc3ff9e2c5e4f4c765ee5033986",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

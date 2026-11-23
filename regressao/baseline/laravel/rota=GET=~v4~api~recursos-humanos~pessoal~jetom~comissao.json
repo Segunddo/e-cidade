@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/pessoal/jetom/comissao",
+  "json": {
+    "error": true,
+    "message": "Call to a member function getQueryParams() on null"
+  },
+  "sha256": "a2ffaeba67549d630c685f946a020034968d96c91ed66c5f56de76614f017bb7",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

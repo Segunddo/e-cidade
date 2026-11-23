@@ -73,13 +73,13 @@ class cl_itbiformapagamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it27_sequencial = ($this->it27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_sequencial"]:$this->it27_sequencial);
-       $this->it27_itbitipoformapag = ($this->it27_itbitipoformapag == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_itbitipoformapag"]:$this->it27_itbitipoformapag);
+       $this->it27_sequencial = ($this->it27_sequencial === 0 || $this->it27_sequencial === 0.0 || $this->it27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_sequencial"]:$this->it27_sequencial);
+       $this->it27_itbitipoformapag = ($this->it27_itbitipoformapag === 0 || $this->it27_itbitipoformapag === 0.0 || $this->it27_itbitipoformapag == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_itbitipoformapag"]:$this->it27_itbitipoformapag);
        $this->it27_descricao = ($this->it27_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_descricao"]:$this->it27_descricao);
-       $this->it27_tipo = ($this->it27_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_tipo"]:$this->it27_tipo);
-       $this->it27_aliquota = ($this->it27_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_aliquota"]:$this->it27_aliquota);
+       $this->it27_tipo = ($this->it27_tipo === 0 || $this->it27_tipo === 0.0 || $this->it27_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_tipo"]:$this->it27_tipo);
+       $this->it27_aliquota = ($this->it27_aliquota === 0 || $this->it27_aliquota === 0.0 || $this->it27_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_aliquota"]:$this->it27_aliquota);
      }else{
-       $this->it27_sequencial = ($this->it27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_sequencial"]:$this->it27_sequencial);
+       $this->it27_sequencial = ($this->it27_sequencial === 0 || $this->it27_sequencial === 0.0 || $this->it27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it27_sequencial"]:$this->it27_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_itbiformapagamento {
          $this->it27_sequencial = $it27_sequencial;
        }
      }
-     if(($this->it27_sequencial == null) || ($this->it27_sequencial == "") ){
+     if(($this->it27_sequencial == null) || ($this->it27_sequencial === 0 || $this->it27_sequencial === 0.0 || $this->it27_sequencial == "") ){
        $this->erro_sql = " Campo it27_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

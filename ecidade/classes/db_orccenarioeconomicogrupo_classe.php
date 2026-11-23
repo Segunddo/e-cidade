@@ -69,11 +69,11 @@ class cl_orccenarioeconomicogrupo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o111_sequencial = ($this->o111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o111_sequencial"]:$this->o111_sequencial);
+       $this->o111_sequencial = ($this->o111_sequencial === 0 || $this->o111_sequencial === 0.0 || $this->o111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o111_sequencial"]:$this->o111_sequencial);
        $this->o111_descricao = ($this->o111_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o111_descricao"]:$this->o111_descricao);
        $this->o111_obs = ($this->o111_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["o111_obs"]:$this->o111_obs);
      }else{
-       $this->o111_sequencial = ($this->o111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o111_sequencial"]:$this->o111_sequencial);
+       $this->o111_sequencial = ($this->o111_sequencial === 0 || $this->o111_sequencial === 0.0 || $this->o111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o111_sequencial"]:$this->o111_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_orccenarioeconomicogrupo {
          $this->o111_sequencial = $o111_sequencial;
        }
      }
-     if(($this->o111_sequencial == null) || ($this->o111_sequencial == "") ){
+     if(($this->o111_sequencial == null) || ($this->o111_sequencial === 0 || $this->o111_sequencial === 0.0 || $this->o111_sequencial == "") ){
        $this->erro_sql = " Campo o111_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

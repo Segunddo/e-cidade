@@ -69,11 +69,11 @@ class cl_isencaoinscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v16_sequencial = ($this->v16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v16_sequencial"]:$this->v16_sequencial);
-       $this->v16_isencao = ($this->v16_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["v16_isencao"]:$this->v16_isencao);
-       $this->v16_inscr = ($this->v16_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["v16_inscr"]:$this->v16_inscr);
+       $this->v16_sequencial = ($this->v16_sequencial === 0 || $this->v16_sequencial === 0.0 || $this->v16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v16_sequencial"]:$this->v16_sequencial);
+       $this->v16_isencao = ($this->v16_isencao === 0 || $this->v16_isencao === 0.0 || $this->v16_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["v16_isencao"]:$this->v16_isencao);
+       $this->v16_inscr = ($this->v16_inscr === 0 || $this->v16_inscr === 0.0 || $this->v16_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["v16_inscr"]:$this->v16_inscr);
      }else{
-       $this->v16_sequencial = ($this->v16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v16_sequencial"]:$this->v16_sequencial);
+       $this->v16_sequencial = ($this->v16_sequencial === 0 || $this->v16_sequencial === 0.0 || $this->v16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v16_sequencial"]:$this->v16_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_isencaoinscr {
          $this->v16_sequencial = $v16_sequencial;
        }
      }
-     if(($this->v16_sequencial == null) || ($this->v16_sequencial == "") ){
+     if(($this->v16_sequencial == null) || ($this->v16_sequencial === 0 || $this->v16_sequencial === 0.0 || $this->v16_sequencial == "") ){
        $this->erro_sql = " Campo v16_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

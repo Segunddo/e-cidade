@@ -97,7 +97,7 @@ $clrotulo->label("y29_descr");
             <?php
             $pSql  = 'select distinct pl09_paragrafo, pl09_descr from fiscalizacao.fis_paragrafo where pl09_status = true and pl09_tipo = 1  and pl09_coddepto = '.db_getsession('DB_coddepto');
             $pRs   = db_query($pSql);
-            $pRows = pg_num_rows($pRs);
+            $pRows = ($pRs ? pg_num_rows($pRs) : null);
             for($i=0; $i<$pRows; $i++){
                 db_fieldsmemory($pRs, $i);
                 echo '<option value="'.$pl09_paragrafo.'">'.$pl09_descr.'</option>';
@@ -117,7 +117,7 @@ $clrotulo->label("y29_descr");
 
 
                             $pRs   = db_query($pSql);
-                            $pRows = pg_num_rows($pRs);
+                            $pRows = ($pRs ? pg_num_rows($pRs) : null);
                             for($i=0; $i<$pRows; $i++){
                                 db_fieldsmemory($pRs, $i);
                                 echo '<option value="'.$pl09_paragrafo.'">'.$pl09_descr.'</option>';

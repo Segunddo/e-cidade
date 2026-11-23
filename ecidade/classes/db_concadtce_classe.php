@@ -71,12 +71,12 @@ class cl_concadtce {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c10_sequencial = ($this->c10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_sequencial"]:$this->c10_sequencial);
+       $this->c10_sequencial = ($this->c10_sequencial === 0 || $this->c10_sequencial === 0.0 || $this->c10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_sequencial"]:$this->c10_sequencial);
        $this->c10_nome = ($this->c10_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_nome"]:$this->c10_nome);
        $this->c10_sigla = ($this->c10_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_sigla"]:$this->c10_sigla);
-       $this->c10_db_uf = ($this->c10_db_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_db_uf"]:$this->c10_db_uf);
+       $this->c10_db_uf = ($this->c10_db_uf === 0 || $this->c10_db_uf === 0.0 || $this->c10_db_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_db_uf"]:$this->c10_db_uf);
      }else{
-       $this->c10_sequencial = ($this->c10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_sequencial"]:$this->c10_sequencial);
+       $this->c10_sequencial = ($this->c10_sequencial === 0 || $this->c10_sequencial === 0.0 || $this->c10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c10_sequencial"]:$this->c10_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_concadtce {
          $this->c10_sequencial = $c10_sequencial;
        }
      }
-     if(($this->c10_sequencial == null) || ($this->c10_sequencial == "") ){
+     if(($this->c10_sequencial == null) || ($this->c10_sequencial === 0 || $this->c10_sequencial === 0.0 || $this->c10_sequencial == "") ){
        $this->erro_sql = " Campo c10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -75,14 +75,14 @@ class cl_habitparametro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ht16_anousu = ($this->ht16_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_anousu"]:$this->ht16_anousu);
-       $this->ht16_avaliacao = ($this->ht16_avaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_avaliacao"]:$this->ht16_avaliacao);
-       $this->ht16_receitapadrao = ($this->ht16_receitapadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_receitapadrao"]:$this->ht16_receitapadrao);
-       $this->ht16_qtdparcelaspagamento = ($this->ht16_qtdparcelaspagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_qtdparcelaspagamento"]:$this->ht16_qtdparcelaspagamento);
-       $this->ht16_diaspadraopagamento = ($this->ht16_diaspadraopagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_diaspadraopagamento"]:$this->ht16_diaspadraopagamento);
-       $this->ht16_mesescarencia = ($this->ht16_mesescarencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_mesescarencia"]:$this->ht16_mesescarencia);
+       $this->ht16_anousu = ($this->ht16_anousu === 0 || $this->ht16_anousu === 0.0 || $this->ht16_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_anousu"]:$this->ht16_anousu);
+       $this->ht16_avaliacao = ($this->ht16_avaliacao === 0 || $this->ht16_avaliacao === 0.0 || $this->ht16_avaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_avaliacao"]:$this->ht16_avaliacao);
+       $this->ht16_receitapadrao = ($this->ht16_receitapadrao === 0 || $this->ht16_receitapadrao === 0.0 || $this->ht16_receitapadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_receitapadrao"]:$this->ht16_receitapadrao);
+       $this->ht16_qtdparcelaspagamento = ($this->ht16_qtdparcelaspagamento === 0 || $this->ht16_qtdparcelaspagamento === 0.0 || $this->ht16_qtdparcelaspagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_qtdparcelaspagamento"]:$this->ht16_qtdparcelaspagamento);
+       $this->ht16_diaspadraopagamento = ($this->ht16_diaspadraopagamento === 0 || $this->ht16_diaspadraopagamento === 0.0 || $this->ht16_diaspadraopagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_diaspadraopagamento"]:$this->ht16_diaspadraopagamento);
+       $this->ht16_mesescarencia = ($this->ht16_mesescarencia === 0 || $this->ht16_mesescarencia === 0.0 || $this->ht16_mesescarencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_mesescarencia"]:$this->ht16_mesescarencia);
      }else{
-       $this->ht16_anousu = ($this->ht16_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_anousu"]:$this->ht16_anousu);
+       $this->ht16_anousu = ($this->ht16_anousu === 0 || $this->ht16_anousu === 0.0 || $this->ht16_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ht16_anousu"]:$this->ht16_anousu);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_habitparametro {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->ht16_anousu == null) || ($this->ht16_anousu == "") ){
+     if(($this->ht16_anousu == null) || ($this->ht16_anousu === 0 || $this->ht16_anousu === 0.0 || $this->ht16_anousu == "") ){
        $this->erro_sql = " Campo ht16_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/fundeb/rhcalculofundeb/salvar",
+  "json": {
+    "errors": {
+      "id_ano": [
+        "O campo id ano é obrigatório."
+      ],
+      "id_mes": [
+        "O campo id mes é obrigatório."
+      ],
+      "valor": [
+        "O campo valor é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "ce68ad5daf59956444f47ae8e31bab4170c7ba3d273c8e1744963377bf8dc20d",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

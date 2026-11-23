@@ -25,7 +25,7 @@
  *                                licenca/licenca_pt.txt 
  */
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(!isset($abas)){
   echo "<script>location.href='ate1_atendimento005.php'</script>";
   exit;
@@ -37,7 +37,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_atendimento_classe.php"));
 include(modification("classes/db_tecnico_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clatendimento = new cl_atendimento;

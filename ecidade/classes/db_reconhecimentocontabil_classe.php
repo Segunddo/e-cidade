@@ -75,14 +75,14 @@ class cl_reconhecimentocontabil {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c112_sequencial = ($this->c112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_sequencial"]:$this->c112_sequencial);
-       $this->c112_reconhecimentocontabiltipo = ($this->c112_reconhecimentocontabiltipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_reconhecimentocontabiltipo"]:$this->c112_reconhecimentocontabiltipo);
-       $this->c112_numcgm = ($this->c112_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_numcgm"]:$this->c112_numcgm);
+       $this->c112_sequencial = ($this->c112_sequencial === 0 || $this->c112_sequencial === 0.0 || $this->c112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_sequencial"]:$this->c112_sequencial);
+       $this->c112_reconhecimentocontabiltipo = ($this->c112_reconhecimentocontabiltipo === 0 || $this->c112_reconhecimentocontabiltipo === 0.0 || $this->c112_reconhecimentocontabiltipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_reconhecimentocontabiltipo"]:$this->c112_reconhecimentocontabiltipo);
+       $this->c112_numcgm = ($this->c112_numcgm === 0 || $this->c112_numcgm === 0.0 || $this->c112_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_numcgm"]:$this->c112_numcgm);
        $this->c112_processoadm = ($this->c112_processoadm == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_processoadm"]:$this->c112_processoadm);
-       $this->c112_valor = ($this->c112_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_valor"]:$this->c112_valor);
+       $this->c112_valor = ($this->c112_valor === 0 || $this->c112_valor === 0.0 || $this->c112_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_valor"]:$this->c112_valor);
        $this->c112_estornado = ($this->c112_estornado == "f"?@$GLOBALS["HTTP_POST_VARS"]["c112_estornado"]:$this->c112_estornado);
      }else{
-       $this->c112_sequencial = ($this->c112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_sequencial"]:$this->c112_sequencial);
+       $this->c112_sequencial = ($this->c112_sequencial === 0 || $this->c112_sequencial === 0.0 || $this->c112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c112_sequencial"]:$this->c112_sequencial);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_reconhecimentocontabil {
          $this->c112_sequencial = $c112_sequencial;
        }
      }
-     if(($this->c112_sequencial == null) || ($this->c112_sequencial == "") ){
+     if(($this->c112_sequencial == null) || ($this->c112_sequencial === 0 || $this->c112_sequencial === 0.0 || $this->c112_sequencial == "") ){
        $this->erro_sql = " Campo c112_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

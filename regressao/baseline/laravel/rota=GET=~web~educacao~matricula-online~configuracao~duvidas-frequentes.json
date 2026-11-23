@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/matricula-online/configuracao/duvidas-frequentes",
+  "json": null,
+  "sha256": "7a48d07b071fb7bd2f9064849471e85b32ddd900c9590ab55e328af66b168df3",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

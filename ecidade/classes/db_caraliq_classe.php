@@ -69,12 +69,12 @@ class cl_caraliq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j73_anousu = ($this->j73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j73_anousu"]:$this->j73_anousu);
-       $this->j73_caract = ($this->j73_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j73_caract"]:$this->j73_caract);
-       $this->j73_aliq = ($this->j73_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["j73_aliq"]:$this->j73_aliq);
+       $this->j73_anousu = ($this->j73_anousu === 0 || $this->j73_anousu === 0.0 || $this->j73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j73_anousu"]:$this->j73_anousu);
+       $this->j73_caract = ($this->j73_caract === 0 || $this->j73_caract === 0.0 || $this->j73_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j73_caract"]:$this->j73_caract);
+       $this->j73_aliq = ($this->j73_aliq === 0 || $this->j73_aliq === 0.0 || $this->j73_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["j73_aliq"]:$this->j73_aliq);
      }else{
-       $this->j73_anousu = ($this->j73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j73_anousu"]:$this->j73_anousu);
-       $this->j73_caract = ($this->j73_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j73_caract"]:$this->j73_caract);
+       $this->j73_anousu = ($this->j73_anousu === 0 || $this->j73_anousu === 0.0 || $this->j73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j73_anousu"]:$this->j73_anousu);
+       $this->j73_caract = ($this->j73_caract === 0 || $this->j73_caract === 0.0 || $this->j73_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j73_caract"]:$this->j73_caract);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_caraliq {
      }
        $this->j73_anousu = $j73_anousu;
        $this->j73_caract = $j73_caract;
-     if(($this->j73_anousu == null) || ($this->j73_anousu == "") ){
+     if(($this->j73_anousu == null) || ($this->j73_anousu === 0 || $this->j73_anousu === 0.0 || $this->j73_anousu == "") ){
        $this->erro_sql = " Campo j73_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_caraliq {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j73_caract == null) || ($this->j73_caract == "") ){
+     if(($this->j73_caract == null) || ($this->j73_caract === 0 || $this->j73_caract === 0.0 || $this->j73_caract == "") ){
        $this->erro_sql = " Campo j73_caract nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

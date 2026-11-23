@@ -69,11 +69,11 @@ class cl_procedarretipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v06_sequencial = ($this->v06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_sequencial"]:$this->v06_sequencial);
-       $this->v06_proced = ($this->v06_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_proced"]:$this->v06_proced);
-       $this->v06_arretipo = ($this->v06_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_arretipo"]:$this->v06_arretipo);
+       $this->v06_sequencial = ($this->v06_sequencial === 0 || $this->v06_sequencial === 0.0 || $this->v06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_sequencial"]:$this->v06_sequencial);
+       $this->v06_proced = ($this->v06_proced === 0 || $this->v06_proced === 0.0 || $this->v06_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_proced"]:$this->v06_proced);
+       $this->v06_arretipo = ($this->v06_arretipo === 0 || $this->v06_arretipo === 0.0 || $this->v06_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_arretipo"]:$this->v06_arretipo);
      }else{
-       $this->v06_sequencial = ($this->v06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_sequencial"]:$this->v06_sequencial);
+       $this->v06_sequencial = ($this->v06_sequencial === 0 || $this->v06_sequencial === 0.0 || $this->v06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v06_sequencial"]:$this->v06_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procedarretipo {
          $this->v06_sequencial = $v06_sequencial;
        }
      }
-     if(($this->v06_sequencial == null) || ($this->v06_sequencial == "") ){
+     if(($this->v06_sequencial == null) || ($this->v06_sequencial === 0 || $this->v06_sequencial === 0.0 || $this->v06_sequencial == "") ){
        $this->erro_sql = " Campo v06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

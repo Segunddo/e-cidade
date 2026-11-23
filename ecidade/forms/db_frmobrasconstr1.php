@@ -51,7 +51,7 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("ob01_nomeobra");
 $clrotulo->label("j14_nome");
 $clrotulo->label("j13_descr");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>location.href='pro1_obrasconstr002.php?func_alvara=1&chavepesquisa=$ob08_codconstr&chavepesquisa1=$ob08_codobra'</script>";

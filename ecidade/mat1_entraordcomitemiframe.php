@@ -61,7 +61,7 @@ $clrotulo->label("pc01_descrmater");
 $clrotulo->label("e62_descr");
 $clrotulo->label("e70_valor");
     
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $vlitement = 0;

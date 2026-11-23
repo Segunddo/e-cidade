@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/fundeb/rhcargosfundeb/find",
+  "json": {
+    "errors": {
+      "id": [
+        "O campo id é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "02e61903439425b70edac0867967a466b768eae7cf00b9fb6ad90ae26b3caa7b",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

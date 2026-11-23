@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/tesouraria/contatesouraria/alterar",
+  "json": {
+    "errors": {
+      "changed": [
+        "A mudança deve ser informado."
+      ],
+      "conta": [
+        "A conta deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "58b990eee257f48cfeb5f3bb1588c7689719088cd45ca62f905198ac9af30360",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

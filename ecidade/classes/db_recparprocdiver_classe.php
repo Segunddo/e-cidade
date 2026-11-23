@@ -68,10 +68,10 @@ class cl_recparprocdiver {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->procdiver = ($this->procdiver == ""?@$GLOBALS["HTTP_POST_VARS"]["procdiver"]:$this->procdiver);
-       $this->receita = ($this->receita == ""?@$GLOBALS["HTTP_POST_VARS"]["receita"]:$this->receita);
+       $this->procdiver = ($this->procdiver === 0 || $this->procdiver === 0.0 || $this->procdiver == ""?@$GLOBALS["HTTP_POST_VARS"]["procdiver"]:$this->procdiver);
+       $this->receita = ($this->receita === 0 || $this->receita === 0.0 || $this->receita == ""?@$GLOBALS["HTTP_POST_VARS"]["receita"]:$this->receita);
      }else{
-       $this->procdiver = ($this->procdiver == ""?@$GLOBALS["HTTP_POST_VARS"]["procdiver"]:$this->procdiver);
+       $this->procdiver = ($this->procdiver === 0 || $this->procdiver === 0.0 || $this->procdiver == ""?@$GLOBALS["HTTP_POST_VARS"]["procdiver"]:$this->procdiver);
      }
    }
    // funcao para inclusao
@@ -87,7 +87,7 @@ class cl_recparprocdiver {
        return false;
      }
        $this->procdiver = $procdiver;
-     if(($this->procdiver == null) || ($this->procdiver == "") ){
+     if(($this->procdiver == null) || ($this->procdiver === 0 || $this->procdiver === 0.0 || $this->procdiver == "") ){
        $this->erro_sql = " Campo procdiver nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

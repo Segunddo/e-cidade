@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/patrimonio/etiquetas/imprimir",
+  "json": {
+    "error": true,
+    "message": "O campo codigos é obrigatório."
+  },
+  "sha256": "22cd236acba59655f0e69239e1601faa70cfeb0fc8a659927a521e190592ccdb",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

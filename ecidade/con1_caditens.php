@@ -36,7 +36,7 @@ $cldb_syscadproced = new cl_db_syscadproced;
 $cldb_syscadproced->rotulo->label();
 
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(isset($retorno)) {
   $sql = "SELECT *
           FROM db_itensmenu i
@@ -439,8 +439,8 @@ function js_remItem(obj) {
                     <td height="25" nowrap><label for="instit" id="at7" disabled><strong>Liberado p/ Cliente:</strong></label></td>
                     <td height="25" nowrap> 
                       <select name="libcliente" size="1" id="libcliente"  style="background-color:#999999" >
-                      <option value="0" <?=(@pg_result($result,0,"libcliente")=="f"?"selected":"")?> >Não</option>
-                      <option value="1" <?=(@pg_result($result,0,"libcliente")=="t"?"selected":"")?> >Sim</option>
+                      <option value="0" <?=((function($r){ try { return pg_result($r,0,"libcliente"); } catch (\Throwable $e) { return false; } })($result)=="f"?"selected":"")?> >Não</option>
+                      <option value="1" <?=((function($r){ try { return pg_result($r,0,"libcliente"); } catch (\Throwable $e) { return false; } })($result)=="t"?"selected":"")?> >Sim</option>
                       </select>
                       &nbsp; </td>
                   </tr>

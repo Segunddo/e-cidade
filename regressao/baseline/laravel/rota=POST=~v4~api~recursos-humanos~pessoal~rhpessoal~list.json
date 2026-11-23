@@ -1,0 +1,25 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/rhpessoal/list",
+  "json": {
+    "data": [
+      {
+        "rh01_admiss": "2013-12-23",
+        "rh01_numcgm": 19,
+        "rh01_regist": 1,
+        "z01_nome": "DBSELLER "
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "816735ba84c3ae8ac053134060057e4be1c000d5122990f398246ea268c188f3",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

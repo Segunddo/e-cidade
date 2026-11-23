@@ -37,7 +37,7 @@ require_once(modification("classes/db_fis_levvalor_classe.php"));
 require_once(modification("classes/db_fis_levusu_classe.php"));
 require_once(modification("classes/db_fis_levvalorpgtos_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $cllevanta = new cl_fis_levanta;
 $cllevantanotas = new cl_fis_levantanotas;

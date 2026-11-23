@@ -36,7 +36,7 @@ include(modification("classes/db_levanta_classe.php"));
 require_once(modification("classes/db_autotipo_classe.php"));
 
 db_postmemory($HTTP_GET_VARS, 0);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clvistorias = new cl_vistorias;
 $clauto = new cl_auto;
 $clfiscal = new cl_fiscal;

@@ -73,13 +73,13 @@ class cl_iptucadzonaentregaend {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j87_sequencial = ($this->j87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_sequencial"]:$this->j87_sequencial);
-       $this->j87_iptucadzonaentrega = ($this->j87_iptucadzonaentrega == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_iptucadzonaentrega"]:$this->j87_iptucadzonaentrega);
-       $this->j87_lograd = ($this->j87_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_lograd"]:$this->j87_lograd);
-       $this->j87_numero = ($this->j87_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_numero"]:$this->j87_numero);
+       $this->j87_sequencial = ($this->j87_sequencial === 0 || $this->j87_sequencial === 0.0 || $this->j87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_sequencial"]:$this->j87_sequencial);
+       $this->j87_iptucadzonaentrega = ($this->j87_iptucadzonaentrega === 0 || $this->j87_iptucadzonaentrega === 0.0 || $this->j87_iptucadzonaentrega == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_iptucadzonaentrega"]:$this->j87_iptucadzonaentrega);
+       $this->j87_lograd = ($this->j87_lograd === 0 || $this->j87_lograd === 0.0 || $this->j87_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_lograd"]:$this->j87_lograd);
+       $this->j87_numero = ($this->j87_numero === 0 || $this->j87_numero === 0.0 || $this->j87_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_numero"]:$this->j87_numero);
        $this->j87_compl = ($this->j87_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_compl"]:$this->j87_compl);
      }else{
-       $this->j87_sequencial = ($this->j87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_sequencial"]:$this->j87_sequencial);
+       $this->j87_sequencial = ($this->j87_sequencial === 0 || $this->j87_sequencial === 0.0 || $this->j87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j87_sequencial"]:$this->j87_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_iptucadzonaentregaend {
          $this->j87_sequencial = $j87_sequencial; 
        }
      }
-     if(($this->j87_sequencial == null) || ($this->j87_sequencial == "") ){ 
+     if(($this->j87_sequencial == null) || ($this->j87_sequencial === 0 || $this->j87_sequencial === 0.0 || $this->j87_sequencial == "") ){ 
        $this->erro_sql = " Campo j87_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

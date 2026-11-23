@@ -69,11 +69,11 @@ class cl_editaldoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d13_sequencial = ($this->d13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_sequencial"]:$this->d13_sequencial);
-       $this->d13_db_documento = ($this->d13_db_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_db_documento"]:$this->d13_db_documento);
-       $this->d13_edital = ($this->d13_edital == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_edital"]:$this->d13_edital);
+       $this->d13_sequencial = ($this->d13_sequencial === 0 || $this->d13_sequencial === 0.0 || $this->d13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_sequencial"]:$this->d13_sequencial);
+       $this->d13_db_documento = ($this->d13_db_documento === 0 || $this->d13_db_documento === 0.0 || $this->d13_db_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_db_documento"]:$this->d13_db_documento);
+       $this->d13_edital = ($this->d13_edital === 0 || $this->d13_edital === 0.0 || $this->d13_edital == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_edital"]:$this->d13_edital);
      }else{
-       $this->d13_sequencial = ($this->d13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_sequencial"]:$this->d13_sequencial);
+       $this->d13_sequencial = ($this->d13_sequencial === 0 || $this->d13_sequencial === 0.0 || $this->d13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d13_sequencial"]:$this->d13_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_editaldoc {
          $this->d13_sequencial = $d13_sequencial;
        }
      }
-     if(($this->d13_sequencial == null) || ($this->d13_sequencial == "") ){
+     if(($this->d13_sequencial == null) || ($this->d13_sequencial === 0 || $this->d13_sequencial === 0.0 || $this->d13_sequencial == "") ){
        $this->erro_sql = " Campo d13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

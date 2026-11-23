@@ -1,0 +1,14 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/broadcasting/auth",
+  "json": null,
+  "sha256": "5a4638fec7c6095cb805bf3a28b6de8922674d55dcf2c199b2621e3259956c32",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

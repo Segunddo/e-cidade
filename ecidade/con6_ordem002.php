@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 
 db_putsession('temp_file','temp');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   
 if(isset($HTTP_POST_VARS["atualizarperm"])) {
   $modulo = $HTTP_POST_VARS["modulos"];

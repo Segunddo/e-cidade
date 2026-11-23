@@ -57,7 +57,7 @@ $clobrasconstr = new cl_obrasconstr;
 $cldb_config = new cl_db_config;
 $cldb_cepmunic = new cl_db_cepmunic;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clobras->rotulo->label();

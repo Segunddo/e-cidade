@@ -1,0 +1,70 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/consultas/postgres/views",
+  "json": {
+    "data": [
+      {
+        "nome": "cadastro_pessoal_2008"
+      },
+      {
+        "nome": "cadastro_portaria"
+      },
+      {
+        "nome": "consulta_processo_alvara_portal"
+      },
+      {
+        "nome": "empresa"
+      },
+      {
+        "nome": "far_retiradaitensdepartamento"
+      },
+      {
+        "nome": "proprietario_ender"
+      },
+      {
+        "nome": "proprietario_nome"
+      },
+      {
+        "nome": "ultimas_movimentacoes_processos_vencidos"
+      },
+      {
+        "nome": "v_inscr_simples_comp"
+      },
+      {
+        "nome": "v_issqn_simples_complementar_irregular"
+      },
+      {
+        "nome": "v_suplementacao"
+      },
+      {
+        "nome": "vs_conlancam"
+      },
+      {
+        "nome": "vs_conlancamval"
+      },
+      {
+        "nome": "vs_corrente"
+      },
+      {
+        "nome": "vs_planocontas"
+      },
+      {
+        "nome": "vs_planosistema"
+      },
+      {
+        "nome": "vw_leitura"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "ad22c0b20c9599f1e0a3d9fe420de0f556f3d303f0c1019272f2302c5c4fa160",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

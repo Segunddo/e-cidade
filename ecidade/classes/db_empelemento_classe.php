@@ -82,15 +82,15 @@ class cl_empelemento
     public function atualizacampos($exclusao = false)
 
        { if (!$exclusao ) {
-            $this->e64_numemp = ($this->e64_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_numemp"] : $this->e64_numemp);
-            $this->e64_codele = ($this->e64_codele == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_codele"] : $this->e64_codele);
-            $this->e64_vlremp = ($this->e64_vlremp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_vlremp"] : $this->e64_vlremp);
-            $this->e64_vlrliq = ($this->e64_vlrliq == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_vlrliq"] : $this->e64_vlrliq);
-            $this->e64_vlranu = ($this->e64_vlranu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_vlranu"] : $this->e64_vlranu);
-            $this->e64_vlrpag = ($this->e64_vlrpag == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_vlrpag"] : $this->e64_vlrpag);
+            $this->e64_numemp = ($this->e64_numemp === 0 || $this->e64_numemp === 0.0 || $this->e64_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_numemp"] : $this->e64_numemp);
+            $this->e64_codele = ($this->e64_codele === 0 || $this->e64_codele === 0.0 || $this->e64_codele == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_codele"] : $this->e64_codele);
+            $this->e64_vlremp = ($this->e64_vlremp === 0 || $this->e64_vlremp === 0.0 || $this->e64_vlremp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_vlremp"] : $this->e64_vlremp);
+            $this->e64_vlrliq = ($this->e64_vlrliq === 0 || $this->e64_vlrliq === 0.0 || $this->e64_vlrliq == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_vlrliq"] : $this->e64_vlrliq);
+            $this->e64_vlranu = ($this->e64_vlranu === 0 || $this->e64_vlranu === 0.0 || $this->e64_vlranu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_vlranu"] : $this->e64_vlranu);
+            $this->e64_vlrpag = ($this->e64_vlrpag === 0 || $this->e64_vlrpag === 0.0 || $this->e64_vlrpag == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_vlrpag"] : $this->e64_vlrpag);
         } else {
-            $this->e64_numemp = ($this->e64_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_numemp"] : $this->e64_numemp);
-            $this->e64_codele = ($this->e64_codele == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_codele"] : $this->e64_codele);
+            $this->e64_numemp = ($this->e64_numemp === 0 || $this->e64_numemp === 0.0 || $this->e64_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_numemp"] : $this->e64_numemp);
+            $this->e64_codele = ($this->e64_codele === 0 || $this->e64_codele === 0.0 || $this->e64_codele == "" ? @$GLOBALS["HTTP_POST_VARS"]["e64_codele"] : $this->e64_codele);
         }
     }
 
@@ -136,7 +136,7 @@ class cl_empelemento
         }
         $this->e64_numemp = $e64_numemp;
         $this->e64_codele = $e64_codele;
-        if (($this->e64_numemp == null) || ($this->e64_numemp == "")) {
+        if (($this->e64_numemp == null) || ($this->e64_numemp === 0 || $this->e64_numemp === 0.0 || $this->e64_numemp == "")) {
             $this->erro_sql = " Campo e64_numemp nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -144,7 +144,7 @@ class cl_empelemento
             $this->erro_status = "0";
             return false;
         }
-        if (($this->e64_codele == null) || ($this->e64_codele == "")) {
+        if (($this->e64_codele == null) || ($this->e64_codele === 0 || $this->e64_codele === 0.0 || $this->e64_codele == "")) {
             $this->erro_sql = " Campo e64_codele nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

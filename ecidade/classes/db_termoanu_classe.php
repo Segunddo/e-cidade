@@ -61,7 +61,7 @@ class cl_termoanu {
                  v09_motivo = text = Motivo
                  ";
    //funcao construtor da classe
-   public function cl_termoanu() {
+   public function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("termoanu");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,9 +78,9 @@ class cl_termoanu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v09_sequencial = ($this->v09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_sequencial"]:$this->v09_sequencial);
-       $this->v09_parcel = ($this->v09_parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_parcel"]:$this->v09_parcel);
-       $this->v09_usuario = ($this->v09_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_usuario"]:$this->v09_usuario);
+       $this->v09_sequencial = ($this->v09_sequencial === 0 || $this->v09_sequencial === 0.0 || $this->v09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_sequencial"]:$this->v09_sequencial);
+       $this->v09_parcel = ($this->v09_parcel === 0 || $this->v09_parcel === 0.0 || $this->v09_parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_parcel"]:$this->v09_parcel);
+       $this->v09_usuario = ($this->v09_usuario === 0 || $this->v09_usuario === 0.0 || $this->v09_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_usuario"]:$this->v09_usuario);
        if($this->v09_data == ""){
          $this->v09_data_dia = ($this->v09_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_data_dia"]:$this->v09_data_dia);
          $this->v09_data_mes = ($this->v09_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_data_mes"]:$this->v09_data_mes);
@@ -92,7 +92,7 @@ class cl_termoanu {
        $this->v09_hora = ($this->v09_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_hora"]:$this->v09_hora);
        $this->v09_motivo = ($this->v09_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_motivo"]:$this->v09_motivo);
      }else{
-       $this->v09_sequencial = ($this->v09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_sequencial"]:$this->v09_sequencial);
+       $this->v09_sequencial = ($this->v09_sequencial === 0 || $this->v09_sequencial === 0.0 || $this->v09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v09_sequencial"]:$this->v09_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_termoanu {
          $this->v09_sequencial = $v09_sequencial;
        }
      }
-     if(($this->v09_sequencial == null) || ($this->v09_sequencial == "") ){
+     if(($this->v09_sequencial == null) || ($this->v09_sequencial === 0 || $this->v09_sequencial === 0.0 || $this->v09_sequencial == "") ){
        $this->erro_sql = " Campo v09_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

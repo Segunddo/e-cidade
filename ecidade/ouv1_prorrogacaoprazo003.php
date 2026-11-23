@@ -34,7 +34,7 @@ include(modification("classes/db_processoouvidoriaprorrogacao_classe.php"));
 $clprotprocesso = new cl_protprocesso();
 $clprocessoouvidoriaprorrogacao = new cl_processoouvidoriaprorrogacao();
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_GET_VARS);
 
 $codproc	 =  $p58_codproc;

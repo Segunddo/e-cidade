@@ -67,10 +67,10 @@ class cl_aguacondominio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x31_matric = ($this->x31_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x31_matric"]:$this->x31_matric);
-       $this->x31_codcondominio = ($this->x31_codcondominio == ""?@$GLOBALS["HTTP_POST_VARS"]["x31_codcondominio"]:$this->x31_codcondominio);
+       $this->x31_matric = ($this->x31_matric === 0 || $this->x31_matric === 0.0 || $this->x31_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x31_matric"]:$this->x31_matric);
+       $this->x31_codcondominio = ($this->x31_codcondominio === 0 || $this->x31_codcondominio === 0.0 || $this->x31_codcondominio == ""?@$GLOBALS["HTTP_POST_VARS"]["x31_codcondominio"]:$this->x31_codcondominio);
      }else{
-       $this->x31_codcondominio = ($this->x31_codcondominio == ""?@$GLOBALS["HTTP_POST_VARS"]["x31_codcondominio"]:$this->x31_codcondominio);
+       $this->x31_codcondominio = ($this->x31_codcondominio === 0 || $this->x31_codcondominio === 0.0 || $this->x31_codcondominio == ""?@$GLOBALS["HTTP_POST_VARS"]["x31_codcondominio"]:$this->x31_codcondominio);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_aguacondominio {
          $this->x31_codcondominio = $x31_codcondominio;
        }
      }
-     if(($this->x31_codcondominio == null) || ($this->x31_codcondominio == "") ){
+     if(($this->x31_codcondominio == null) || ($this->x31_codcondominio === 0 || $this->x31_codcondominio === 0.0 || $this->x31_codcondominio == "") ){
        $this->erro_sql = " Campo x31_codcondominio nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

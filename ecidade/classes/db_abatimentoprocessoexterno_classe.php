@@ -76,8 +76,8 @@ class cl_abatimentoprocessoexterno {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k160_sequencial = ($this->k160_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k160_sequencial"]:$this->k160_sequencial);
-       $this->k160_abatimento = ($this->k160_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k160_abatimento"]:$this->k160_abatimento);
+       $this->k160_sequencial = ($this->k160_sequencial === 0 || $this->k160_sequencial === 0.0 || $this->k160_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k160_sequencial"]:$this->k160_sequencial);
+       $this->k160_abatimento = ($this->k160_abatimento === 0 || $this->k160_abatimento === 0.0 || $this->k160_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k160_abatimento"]:$this->k160_abatimento);
        $this->k160_numeroprocesso = ($this->k160_numeroprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["k160_numeroprocesso"]:$this->k160_numeroprocesso);
        if($this->k160_data == ""){
          $this->k160_data_dia = ($this->k160_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k160_data_dia"]:$this->k160_data_dia);
@@ -89,7 +89,7 @@ class cl_abatimentoprocessoexterno {
        }
        $this->k160_nometitular = ($this->k160_nometitular == ""?@$GLOBALS["HTTP_POST_VARS"]["k160_nometitular"]:$this->k160_nometitular);
      }else{
-       $this->k160_sequencial = ($this->k160_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k160_sequencial"]:$this->k160_sequencial);
+       $this->k160_sequencial = ($this->k160_sequencial === 0 || $this->k160_sequencial === 0.0 || $this->k160_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k160_sequencial"]:$this->k160_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_abatimentoprocessoexterno {
          $this->k160_sequencial = $k160_sequencial;
        }
      }
-     if(($this->k160_sequencial == null) || ($this->k160_sequencial == "") ){
+     if(($this->k160_sequencial == null) || ($this->k160_sequencial === 0 || $this->k160_sequencial === 0.0 || $this->k160_sequencial == "") ){
        $this->erro_sql = " Campo k160_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

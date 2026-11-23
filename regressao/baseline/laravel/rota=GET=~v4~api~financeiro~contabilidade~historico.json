@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/historico",
+  "json": {
+    "error": true,
+    "message": "Undefined index: rows"
+  },
+  "sha256": "a2155f606d844d74f24ef87bb47da2e2682b0aa8fa1c2403965aff9e90cd09af",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

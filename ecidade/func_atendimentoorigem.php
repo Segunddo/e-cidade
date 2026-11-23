@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_atendimento_top_classe.php"));
 include(modification("classes/db_clientes_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clatendimento_top = new cl_atendimento_top;
 $cl_clientes       = new cl_clientes;
 $cl_clientes->rotulo->label("at01_codcli");

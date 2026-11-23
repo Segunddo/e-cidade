@@ -75,14 +75,14 @@ class cl_autotipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y59_codigo = ($this->y59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_codigo"]:$this->y59_codigo);
-       $this->y59_codauto = ($this->y59_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_codauto"]:$this->y59_codauto);
-       $this->y59_codtipo = ($this->y59_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_codtipo"]:$this->y59_codtipo);
-       $this->y59_valor = ($this->y59_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_valor"]:$this->y59_valor);
-       $this->y59_tipo = ($this->y59_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_tipo"]:$this->y59_tipo);
-       $this->y59_fator = ($this->y59_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_fator"]:$this->y59_fator);
+       $this->y59_codigo = ($this->y59_codigo === 0 || $this->y59_codigo === 0.0 || $this->y59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_codigo"]:$this->y59_codigo);
+       $this->y59_codauto = ($this->y59_codauto === 0 || $this->y59_codauto === 0.0 || $this->y59_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_codauto"]:$this->y59_codauto);
+       $this->y59_codtipo = ($this->y59_codtipo === 0 || $this->y59_codtipo === 0.0 || $this->y59_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_codtipo"]:$this->y59_codtipo);
+       $this->y59_valor = ($this->y59_valor === 0 || $this->y59_valor === 0.0 || $this->y59_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_valor"]:$this->y59_valor);
+       $this->y59_tipo = ($this->y59_tipo === 0 || $this->y59_tipo === 0.0 || $this->y59_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_tipo"]:$this->y59_tipo);
+       $this->y59_fator = ($this->y59_fator === 0 || $this->y59_fator === 0.0 || $this->y59_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_fator"]:$this->y59_fator);
      }else{
-       $this->y59_codigo = ($this->y59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_codigo"]:$this->y59_codigo);
+       $this->y59_codigo = ($this->y59_codigo === 0 || $this->y59_codigo === 0.0 || $this->y59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y59_codigo"]:$this->y59_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_autotipo {
          $this->y59_codigo = $y59_codigo;
        }
      }
-     if(($this->y59_codigo == null) || ($this->y59_codigo == "") ){
+     if(($this->y59_codigo == null) || ($this->y59_codigo === 0 || $this->y59_codigo === 0.0 || $this->y59_codigo == "") ){
        $this->erro_sql = " Campo y59_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

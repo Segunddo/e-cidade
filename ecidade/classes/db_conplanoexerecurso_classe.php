@@ -73,15 +73,15 @@ class cl_conplanoexerecurso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c89_anousu = ($this->c89_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_anousu"]:$this->c89_anousu);
-       $this->c89_recurso = ($this->c89_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_recurso"]:$this->c89_recurso);
-       $this->c89_reduz = ($this->c89_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_reduz"]:$this->c89_reduz);
-       $this->c89_vlrcre = ($this->c89_vlrcre == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_vlrcre"]:$this->c89_vlrcre);
-       $this->c89_vlrdeb = ($this->c89_vlrdeb == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_vlrdeb"]:$this->c89_vlrdeb);
+       $this->c89_anousu = ($this->c89_anousu === 0 || $this->c89_anousu === 0.0 || $this->c89_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_anousu"]:$this->c89_anousu);
+       $this->c89_recurso = ($this->c89_recurso === 0 || $this->c89_recurso === 0.0 || $this->c89_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_recurso"]:$this->c89_recurso);
+       $this->c89_reduz = ($this->c89_reduz === 0 || $this->c89_reduz === 0.0 || $this->c89_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_reduz"]:$this->c89_reduz);
+       $this->c89_vlrcre = ($this->c89_vlrcre === 0 || $this->c89_vlrcre === 0.0 || $this->c89_vlrcre == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_vlrcre"]:$this->c89_vlrcre);
+       $this->c89_vlrdeb = ($this->c89_vlrdeb === 0 || $this->c89_vlrdeb === 0.0 || $this->c89_vlrdeb == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_vlrdeb"]:$this->c89_vlrdeb);
      }else{
-       $this->c89_anousu = ($this->c89_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_anousu"]:$this->c89_anousu);
-       $this->c89_recurso = ($this->c89_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_recurso"]:$this->c89_recurso);
-       $this->c89_reduz = ($this->c89_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_reduz"]:$this->c89_reduz);
+       $this->c89_anousu = ($this->c89_anousu === 0 || $this->c89_anousu === 0.0 || $this->c89_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_anousu"]:$this->c89_anousu);
+       $this->c89_recurso = ($this->c89_recurso === 0 || $this->c89_recurso === 0.0 || $this->c89_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_recurso"]:$this->c89_recurso);
+       $this->c89_reduz = ($this->c89_reduz === 0 || $this->c89_reduz === 0.0 || $this->c89_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c89_reduz"]:$this->c89_reduz);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_conplanoexerecurso {
        $this->c89_anousu = $c89_anousu;
        $this->c89_recurso = $c89_recurso;
        $this->c89_reduz = $c89_reduz;
-     if(($this->c89_anousu == null) || ($this->c89_anousu == "") ){
+     if(($this->c89_anousu == null) || ($this->c89_anousu === 0 || $this->c89_anousu === 0.0 || $this->c89_anousu == "") ){
        $this->erro_sql = " Campo c89_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -116,7 +116,7 @@ class cl_conplanoexerecurso {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c89_recurso == null) || ($this->c89_recurso == "") ){
+     if(($this->c89_recurso == null) || ($this->c89_recurso === 0 || $this->c89_recurso === 0.0 || $this->c89_recurso == "") ){
        $this->erro_sql = " Campo c89_recurso nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -124,7 +124,7 @@ class cl_conplanoexerecurso {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c89_reduz == null) || ($this->c89_reduz == "") ){
+     if(($this->c89_reduz == null) || ($this->c89_reduz === 0 || $this->c89_reduz === 0.0 || $this->c89_reduz == "") ){
        $this->erro_sql = " Campo c89_reduz nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

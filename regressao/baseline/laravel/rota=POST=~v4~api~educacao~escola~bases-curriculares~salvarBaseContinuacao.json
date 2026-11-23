@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/bases-curriculares/salvarBaseContinuacao",
+  "json": {
+    "error": true,
+    "message": "Undefined index: baseEscola"
+  },
+  "sha256": "51183766dbe01d3439c0c19d331867bd98587b8d0653ee053d4475d9747063da",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

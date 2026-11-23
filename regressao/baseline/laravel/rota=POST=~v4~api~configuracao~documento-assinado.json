@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/documento-assinado",
+  "json": {
+    "error": true,
+    "message": "Pelo menos um arquivo deve ser informado."
+  },
+  "sha256": "8bf9cda0082cc132b81b44c84d3f10fc3ddce67f102faef3bdc7abba167e0aa6",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

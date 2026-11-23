@@ -67,11 +67,11 @@ class cl_atinota {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q14_ativ = ($this->q14_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_ativ"]:$this->q14_ativ);
-       $this->q14_nota = ($this->q14_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_nota"]:$this->q14_nota);
+       $this->q14_ativ = ($this->q14_ativ === 0 || $this->q14_ativ === 0.0 || $this->q14_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_ativ"]:$this->q14_ativ);
+       $this->q14_nota = ($this->q14_nota === 0 || $this->q14_nota === 0.0 || $this->q14_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_nota"]:$this->q14_nota);
      }else{
-       $this->q14_ativ = ($this->q14_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_ativ"]:$this->q14_ativ);
-       $this->q14_nota = ($this->q14_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_nota"]:$this->q14_nota);
+       $this->q14_ativ = ($this->q14_ativ === 0 || $this->q14_ativ === 0.0 || $this->q14_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_ativ"]:$this->q14_ativ);
+       $this->q14_nota = ($this->q14_nota === 0 || $this->q14_nota === 0.0 || $this->q14_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["q14_nota"]:$this->q14_nota);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_atinota {
       $this->atualizacampos();
        $this->q14_ativ = $q14_ativ; 
        $this->q14_nota = $q14_nota; 
-     if(($this->q14_ativ == null) || ($this->q14_ativ == "") ){ 
+     if(($this->q14_ativ == null) || ($this->q14_ativ === 0 || $this->q14_ativ === 0.0 || $this->q14_ativ == "") ){ 
        $this->erro_sql = " Campo q14_ativ nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_atinota {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q14_nota == null) || ($this->q14_nota == "") ){ 
+     if(($this->q14_nota == null) || ($this->q14_nota === 0 || $this->q14_nota === 0.0 || $this->q14_nota == "") ){ 
        $this->erro_sql = " Campo q14_nota nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

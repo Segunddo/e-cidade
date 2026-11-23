@@ -34,7 +34,7 @@ include(modification("classes/db_marca_classe.php"));
 include(modification("classes/db_transfmarca_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmarca = new cl_marca;
 $clcgm = new cl_cgm;
 $cltransfmarca = new cl_transfmarca;

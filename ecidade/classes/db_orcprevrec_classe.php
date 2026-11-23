@@ -73,13 +73,13 @@ class cl_orcprevrec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o34_codigo = ($this->o34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_codigo"]:$this->o34_codigo);
-       $this->o34_anousu = ($this->o34_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_anousu"]:$this->o34_anousu);
-       $this->o34_codrec = ($this->o34_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_codrec"]:$this->o34_codrec);
-       $this->o34_mes = ($this->o34_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_mes"]:$this->o34_mes);
-       $this->o34_valor = ($this->o34_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_valor"]:$this->o34_valor);
+       $this->o34_codigo = ($this->o34_codigo === 0 || $this->o34_codigo === 0.0 || $this->o34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_codigo"]:$this->o34_codigo);
+       $this->o34_anousu = ($this->o34_anousu === 0 || $this->o34_anousu === 0.0 || $this->o34_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_anousu"]:$this->o34_anousu);
+       $this->o34_codrec = ($this->o34_codrec === 0 || $this->o34_codrec === 0.0 || $this->o34_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_codrec"]:$this->o34_codrec);
+       $this->o34_mes = ($this->o34_mes === 0 || $this->o34_mes === 0.0 || $this->o34_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_mes"]:$this->o34_mes);
+       $this->o34_valor = ($this->o34_valor === 0 || $this->o34_valor === 0.0 || $this->o34_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_valor"]:$this->o34_valor);
      }else{
-       $this->o34_codigo = ($this->o34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_codigo"]:$this->o34_codigo);
+       $this->o34_codigo = ($this->o34_codigo === 0 || $this->o34_codigo === 0.0 || $this->o34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o34_codigo"]:$this->o34_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_orcprevrec {
          $this->o34_codigo = $o34_codigo;
        }
      }
-     if(($this->o34_codigo == null) || ($this->o34_codigo == "") ){
+     if(($this->o34_codigo == null) || ($this->o34_codigo === 0 || $this->o34_codigo === 0.0 || $this->o34_codigo == "") ){
        $this->erro_sql = " Campo o34_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

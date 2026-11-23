@@ -85,8 +85,8 @@ class cl_divimporta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v02_divimporta = ($this->v02_divimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_divimporta"]:$this->v02_divimporta);
-       $this->v02_usuario = ($this->v02_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_usuario"]:$this->v02_usuario);
+       $this->v02_divimporta = ($this->v02_divimporta === 0 || $this->v02_divimporta === 0.0 || $this->v02_divimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_divimporta"]:$this->v02_divimporta);
+       $this->v02_usuario = ($this->v02_usuario === 0 || $this->v02_usuario === 0.0 || $this->v02_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_usuario"]:$this->v02_usuario);
        if($this->v02_data == ""){
          $this->v02_data_dia = ($this->v02_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_data_dia"]:$this->v02_data_dia);
          $this->v02_data_mes = ($this->v02_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_data_mes"]:$this->v02_data_mes);
@@ -105,10 +105,10 @@ class cl_divimporta {
             $this->v02_datafim = $this->v02_datafim_ano."-".$this->v02_datafim_mes."-".$this->v02_datafim_dia;
          }
        }
-       $this->v02_tipo = ($this->v02_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_tipo"]:$this->v02_tipo);
-       $this->v02_instit = ($this->v02_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_instit"]:$this->v02_instit);
+       $this->v02_tipo = ($this->v02_tipo === 0 || $this->v02_tipo === 0.0 || $this->v02_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_tipo"]:$this->v02_tipo);
+       $this->v02_instit = ($this->v02_instit === 0 || $this->v02_instit === 0.0 || $this->v02_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_instit"]:$this->v02_instit);
      }else{
-       $this->v02_divimporta = ($this->v02_divimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_divimporta"]:$this->v02_divimporta);
+       $this->v02_divimporta = ($this->v02_divimporta === 0 || $this->v02_divimporta === 0.0 || $this->v02_divimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["v02_divimporta"]:$this->v02_divimporta);
      }
    }
    // funcao para inclusao
@@ -201,7 +201,7 @@ class cl_divimporta {
          $this->v02_divimporta = $v02_divimporta;
        }
      }
-     if(($this->v02_divimporta == null) || ($this->v02_divimporta == "") ){
+     if(($this->v02_divimporta == null) || ($this->v02_divimporta === 0 || $this->v02_divimporta === 0.0 || $this->v02_divimporta == "") ){
        $this->erro_sql = " Campo v02_divimporta nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

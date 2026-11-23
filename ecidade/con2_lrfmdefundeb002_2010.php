@@ -45,7 +45,7 @@ if (!isset($arqinclude)){
   include(modification("classes/db_orcparamrel_classe.php"));
   include(modification("classes/db_empresto_classe.php"));
 
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
 
   $classinatura    = new cl_assinatura;
@@ -102,10 +102,10 @@ for ($linha = 1; $linha <= 50; $linha++) {
 
   foreach($aValoresColunasLinhas as $oValor) {
 
-    $aValoresReceita[$linha]["inicial"]    += @$oValor->colunas[1]->o117_valor;
-    $aValoresReceita[$linha]["atualizada"] += @$oValor->colunas[2]->o117_valor;
-    $aValoresReceita[$linha]["bimestre"]   += @$oValor->colunas[3]->o117_valor;
-    $aValoresReceita[$linha]["exercicio"]  += @$oValor->colunas[4]->o117_valor;
+    $aValoresReceita[$linha]["inicial"]    += (float) @$oValor->colunas[1]->o117_valor;
+    $aValoresReceita[$linha]["atualizada"] += (float) @$oValor->colunas[2]->o117_valor;
+    $aValoresReceita[$linha]["bimestre"]   += (float) @$oValor->colunas[3]->o117_valor;
+    $aValoresReceita[$linha]["exercicio"]  += (float) @$oValor->colunas[4]->o117_valor;
   }
   //echo "<pre>";
   //print_r($aValoresColunasLinhas);
@@ -145,23 +145,23 @@ for ($linha = 51; $linha <= 76; $linha++) {
   foreach($aValoresColunasLinhas as $oValor) {
 
     if (($linha >= 55 && $linha <= 59) || ($linha >= 68 && $linha <= 71)) {
-      $aValoresDespesas[$linha]["valor"] = $oValor->colunas[1]->o117_valor;
+      $aValoresDespesas[$linha]["valor"] = (float) $oValor->colunas[1]->o117_valor;
     } else if ($linha == 76) {
 
-      $aValoresDespesas[$linha]["saldo"]     = $oValor->colunas[1]->o117_valor;
-      $aValoresDespesas[$linha]["cancelado"] = $oValor->colunas[2]->o117_valor;
+      $aValoresDespesas[$linha]["saldo"]     = (float) $oValor->colunas[1]->o117_valor;
+      $aValoresDespesas[$linha]["cancelado"] = (float) $oValor->colunas[2]->o117_valor;
 
     } else {
 
-      $aValoresDespesas[$linha]["inicial"]       = $oValor->colunas[1]->o117_valor;
-      $aValoresDespesas[$linha]["atualizada"]    = $oValor->colunas[2]->o117_valor;
-      $aValoresDespesas[$linha]["bimestre"]      = $oValor->colunas[3]->o117_valor;
-      $aValoresDespesas[$linha]["exercicio"]     = $oValor->colunas[4]->o117_valor;
+      $aValoresDespesas[$linha]["inicial"]       = (float) $oValor->colunas[1]->o117_valor;
+      $aValoresDespesas[$linha]["atualizada"]    = (float) $oValor->colunas[2]->o117_valor;
+      $aValoresDespesas[$linha]["bimestre"]      = (float) $oValor->colunas[3]->o117_valor;
+      $aValoresDespesas[$linha]["exercicio"]     = (float) $oValor->colunas[4]->o117_valor;
       /**
        * restos a pagar
        */
       if (isset($oValor->colunas[5])) {
-        $aValoresDespesas[$linha]["inscritas"]     = $oValor->colunas[5]->o117_valor;
+        $aValoresDespesas[$linha]["inscritas"]     = (float) $oValor->colunas[5]->o117_valor;
       }
     }
   }
@@ -330,7 +330,7 @@ $db_filtro = " o70_instit in ({$iPrefeitura})";
 $result    = db_receitasaldo(11,1,3,true,$db_filtro,$anousu,$dt_ini,$dt_fin);
 //db_criatabela($result); exit;
 
-for ($i = 0; $i < pg_numrows($result); $i++){
+for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i++){
 
   $oReceita   =  db_utils::fieldsmemory($result,$i);
   for ($linha = 1; $linha <= 50; $linha++) {
@@ -626,7 +626,7 @@ for($linha = 1; $linha <= 20; $linha++){
 $sele_work = "o58_instit in ({$iPrefeitura})";
 $result_despesa = db_dotacaosaldo(8,2,3,true,$sele_work,$anousu,$dt_ini,$dt_fin);
 
-for ($i = 0; $i < pg_numrows($result_despesa); $i++) {
+for ($i = 0; $i < ($result_despesa ? pg_numrows($result_despesa) : null); $i++) {
 
   $oDespesa = db_utils::fieldsmemory($result_despesa, $i);
 
@@ -674,44 +674,44 @@ for ($col = 1; $col <= 5; $col++){
   $pcol = array(1=>"inicial",2=>"atualizada",3=>"bimestre",4=>"exercicio",5=>"inscritas");
 
   // 12.1 PGTO PROFISSIONAIS - Educacao Infantil
-  $aDespesas[2][$pcol[$col]] += $aValoresDespesas[51][$pcol[$col]];
+  $aDespesas[2][$pcol[$col]] += (float) $aValoresDespesas[51][$pcol[$col]];
   // 12.2 PGTO PROFISSIONAIS - Ensino Fundamental
-  $aDespesas[3][$pcol[$col]] += $aValoresDespesas[52][$pcol[$col]];
+  $aDespesas[3][$pcol[$col]] += (float) $aValoresDespesas[52][$pcol[$col]];
   // 12 - PAGAMENTO PROFISSIONAIS DO MAGISTERIO
   $aDespesas[1][$pcol[$col]] = $aDespesas[2][$pcol[$col]] + $aDespesas[3][$pcol[$col]];
 
   // 13.1 OUTRAS DESPESAS - Educacao Infantil
-  $aDespesas[5][$pcol[$col]] += $aValoresDespesas[53][$pcol[$col]];
+  $aDespesas[5][$pcol[$col]] += (float) $aValoresDespesas[53][$pcol[$col]];
   // 13.2 OUTRAS DESPESAS - Ensino Fundamental
-  $aDespesas[6][$pcol[$col]] += $aValoresDespesas[54][$pcol[$col]];
+  $aDespesas[6][$pcol[$col]] += (float) $aValoresDespesas[54][$pcol[$col]];
 
   // 13 - OUTRAS DESPESAS
   $aDespesas[4][$pcol[$col]] = $aDespesas[5][$pcol[$col]] + $aDespesas[6][$pcol[$col]];
 
   // 17.1 Despesas com Recursos do FUNDEB
-  $aDespesas[8][$pcol[$col]] += $aValoresDespesas[60][$pcol[$col]];
+  $aDespesas[8][$pcol[$col]] += (float) $aValoresDespesas[60][$pcol[$col]];
   // 17.2 Despesas com outros Recursos de Impostos
-  $aDespesas[9][$pcol[$col]] += $aValoresDespesas[61][$pcol[$col]];
+  $aDespesas[9][$pcol[$col]] += (float) $aValoresDespesas[61][$pcol[$col]];
 
   // 17 EDUCACAO INFANTIL
   $aDespesas[7][$pcol[$col]] = $aDespesas[8][$pcol[$col]] + $aDespesas[9][$pcol[$col]];
 
   // 18.1 Despesas com Recursos do FUNDEB
-  $aDespesas[11][$pcol[$col]] += $aValoresDespesas[62][$pcol[$col]];
+  $aDespesas[11][$pcol[$col]] += (float) $aValoresDespesas[62][$pcol[$col]];
   // 18.2 Despesas com outros Recursos de Impostos
-  $aDespesas[12][$pcol[$col]] += $aValoresDespesas[63][$pcol[$col]];
+  $aDespesas[12][$pcol[$col]] += (float) $aValoresDespesas[63][$pcol[$col]];
 
   // 18 ENSINO FUNDAMENTAL
   $aDespesas[10][$pcol[$col]] = $aDespesas[11][$pcol[$col]] + $aDespesas[12][$pcol[$col]];
 
   // 19 ENSINO MEDIO
-  $aDespesas[13][$pcol[$col]] += $aValoresDespesas[64][$pcol[$col]];
+  $aDespesas[13][$pcol[$col]] += (float) $aValoresDespesas[64][$pcol[$col]];
   // 20 ENSINO SUPERIOR
-  $aDespesas[14][$pcol[$col]] += $aValoresDespesas[65][$pcol[$col]];
+  $aDespesas[14][$pcol[$col]] += (float) $aValoresDespesas[65][$pcol[$col]];
   // 21 ENSINO PROFISSIONAL
-  $aDespesas[15][$pcol[$col]] += $aValoresDespesas[66][$pcol[$col]];
+  $aDespesas[15][$pcol[$col]] += (float) $aValoresDespesas[66][$pcol[$col]];
   // 22 OUTRAS
-  $aDespesas[16][$pcol[$col]] += $aValoresDespesas[67][$pcol[$col]];
+  $aDespesas[16][$pcol[$col]] += (float) $aValoresDespesas[67][$pcol[$col]];
 
   // 32 CONTRIBUICAO SOCIAL SALARIO-EDUCACAO
   $aDespesas[17][$pcol[$col]] = $aValoresDespesas[72][$pcol[$col]];
@@ -757,11 +757,11 @@ $sqlperiodo = " select e91_recurso,o15_descr,e60_anousu,sum(vlranu) as vlranu, s
                 group by e91_recurso,o15_descr,e60_anousu
 	          		order by e91_recurso,e60_anousu";
 $result_restos_mde1  = db_query($sqlperiodo);
-$numrows_restos_mde1 = @pg_numrows($result_restos_mde1);
+$numrows_restos_mde1 = @($result_restos_mde1 ? pg_numrows($result_restos_mde1) : null);
 
 $cancelado = $m_restos_mde["cancelado"];
 $saldo     = $m_restos_mde["saldo"];
-for($i = 0; $i < pg_numrows($result_restos_mde1); $i++){
+for($i = 0; $i < ($result_restos_mde1 ? pg_numrows($result_restos_mde1) : null); $i++){
   db_fieldsmemory($result_restos_mde1,$i);
 
   $saldo += (($e91_vlremp-$e91_vlranu-$vlranu)-($e91_vlrpag+$vlrpag));
@@ -806,7 +806,7 @@ $result_restos_mde2 = db_rpsaldo($anousu,
 
 $sWhere = "";
 //db_criatabela($result_restos_mde); exit;
-for($i = 0; $i < pg_numrows($result_restos_mde2); $i++){
+for($i = 0; $i < ($result_restos_mde2 ? pg_numrows($result_restos_mde2) : null); $i++){
   db_fieldsmemory($result_restos_mde2,$i);
 
   $cancelado += $vlranu;
@@ -847,8 +847,8 @@ for($linha = 1; $linha <= 5; $linha++){
   $aValoresColunasLinhas = $oLinhaRelatorio->getValoresSomadosColunas($iPrefeitura, $anousu);
   foreach ($aValoresColunasLinhas as $oValorColuna) {
 
-    $fluxo[$linha]["valor"]        += $oValorColuna->colunas[1]->o117_valor;
-    $fluxo[$linha]["valor_fundef"] += $oValorColuna->colunas[2]->o117_valor;
+    $fluxo[$linha]["valor"]        += (float) $oValorColuna->colunas[1]->o117_valor;
+    $fluxo[$linha]["valor_fundef"] += (float) $oValorColuna->colunas[2]->o117_valor;
 
   }
 }
@@ -858,7 +858,7 @@ $m_fluxo_fundeb["valor_aplicacao"] = 0;
 $dt_ini2        = $anousu."-01-01";
 $db_filtro      = " c61_instit in ({$iPrefeitura}) ";
 $result_bal_ver = db_planocontassaldo_matriz($anousu,$dt_ini2,$dt_fin,false,$db_filtro);
-for ($i = 0; $i < pg_numrows($result_bal_ver); $i++) {
+for ($i = 0; $i < ($result_bal_ver ? pg_numrows($result_bal_ver) : null); $i++) {
 
   $oResultado = db_utils::fieldsmemory($result_bal_ver,$i);
   for ($iLinha =1; $iLinha <= 5; $iLinha++) {
@@ -911,9 +911,9 @@ $nValorLinha33 = $aValoresDespesas[69]["valor"];
 $nValorLinha34 = $aValoresDespesas[70]["valor"];
 $nValorLinha35 = $aValoresDespesas[71]["valor"];
 
-$nValorLinha37 = $aReceitas[65]["exercicio"]+ $nValorLinha31 + $nValorLinha32+$nValorLinha33+
-                 $nValorLinha34             +$nValorLinha35  +$m_restos_mde["cancelado"]
-                 +$fluxo[4]["valor"];
+$nValorLinha37 = (float) $aReceitas[65]["exercicio"]+ (float) $nValorLinha31 + (float) $nValorLinha32+(float) $nValorLinha33+
+                 (float) $nValorLinha34             +(float) $nValorLinha35  +(float) $m_restos_mde["cancelado"]
+                 +(float) $fluxo[4]["valor"];
 
 $nValorLinha38 = ($aDespesas[7]["exercicio"]+$aDespesas[10]["exercicio"])-$nValorLinha37;
 
@@ -922,10 +922,11 @@ if ($lUltimoPeriodo) {
 }
 
 
-@$nValorLinha39 = ($nValorLinha38/$aReceitas[42]["exercicio"])*100;
+@$nValorLinha39 = (((float) $aReceitas[42]["exercicio"] == 0 ? ((float) $nValorLinha38 > 0 ? INF : ((float) $nValorLinha38 < 0 ? -INF : NAN)) : $nValorLinha38/$aReceitas[42]["exercicio"]))*100;
 
-$nValorMinimo60Fundeb    = @(($aDespesas[1]["exercicio"]-($nValorLinha16+$nValorLinha17))/($aReceitas[61]["exercicio"])*100);
-$nValorMinimo60Fundeb    += $aValoresDespesas[59]["valor"];
+$nDivA = ($aDespesas[1]["exercicio"]-((float) $nValorLinha16+(float) $nValorLinha17));
+$nValorMinimo60Fundeb    = @(((float) $aReceitas[61]["exercicio"] == 0 ? ((float) $nDivA > 0 ? INF : ((float) $nDivA < 0 ? -INF : NAN)) : $nDivA/($aReceitas[61]["exercicio"]))*100);
+$nValorMinimo60Fundeb    += (float) $aValoresDespesas[59]["valor"];
 
 $nImpostosTransferencias      = @(($aReceitas[42]["exercicio"])*25)/100;
 $nImpostosTransferenciasPrev  = @(($aReceitas[42]["inicial"])*25)/100;
@@ -1047,7 +1048,7 @@ if (!isset($arqinclude)){
     $pdf->cell(20,$alt,db_formatar($aReceitas[$linha]['atualizada'],'f'),"R{$borda}",0,"R",0);
     $pdf->cell(20,$alt,db_formatar($aReceitas[$linha]['bimestre'],'f'),"R{$borda}",0,"R",0);
     $pdf->cell(20,$alt,db_formatar($aReceitas[$linha]['exercicio'],'f'),"R{$borda}",0,"R",0);
-    @$pdf->cell(20,$alt,db_formatar(($aReceitas[$linha]['exercicio']*100)/$aReceitas[$linha]['atualizada'],'f'),"L{$borda}",0,"R",0);
+    @$pdf->cell(20,$alt,db_formatar((float) $aReceitas[$linha]['atualizada'] == 0 ? (float) ($aReceitas[$linha]['exercicio'] * 100) > 0 ? INF : ((float) ($aReceitas[$linha]['exercicio'] * 100) < 0 ? -INF : NAN) : $aReceitas[$linha]['exercicio'] * 100 / $aReceitas[$linha]['atualizada'],'f'),"L{$borda}",0,"R",0);
     $pdf->Ln();
 
   }
@@ -1080,7 +1081,7 @@ if (!isset($arqinclude)){
       $pdf->cell(20,$alt*2,db_formatar($aReceitas[$linha]['atualizada'],'f'),'R',0,"R",0);
       $pdf->cell(20,$alt*2,db_formatar($aReceitas[$linha]['bimestre'],'f'),'R',0,"R",0);
       $pdf->cell(20,$alt*2,db_formatar($aReceitas[$linha]['exercicio'],'f'),'R',0,"R",0);
-      @$pdf->cell(20,$alt*2,db_formatar(($aReceitas[$linha]['exercicio']*100)/$aReceitas[$linha]['atualizada'],'f'),0,0,"R",0);
+      @$pdf->cell(20,$alt*2,db_formatar((float) $aReceitas[$linha]['atualizada'] == 0 ? (float) ($aReceitas[$linha]['exercicio'] * 100) > 0 ? INF : ((float) ($aReceitas[$linha]['exercicio'] * 100) < 0 ? -INF : NAN) : $aReceitas[$linha]['exercicio'] * 100 / $aReceitas[$linha]['atualizada'],'f'),0,0,"R",0);
       //$pdf->SetY($iAlturaNova);
 
 
@@ -1095,7 +1096,7 @@ if (!isset($arqinclude)){
       $pdf->cell(20,$alt,db_formatar($aReceitas[$linha]['atualizada'],'f'),"R{$sBorda}",0,"R",0);
       $pdf->cell(20,$alt,db_formatar($aReceitas[$linha]['bimestre'],'f'),"R{$sBorda}",0,"R",0);
       $pdf->cell(20,$alt,db_formatar($aReceitas[$linha]['exercicio'],'f'),"R{$sBorda}",0,"R",0);
-      @$pdf->cell(20,$alt,db_formatar(($aReceitas[$linha]['exercicio']*100)/$aReceitas[$linha]['atualizada'],'f'),$sBorda,0,"R",0);
+      @$pdf->cell(20,$alt,db_formatar((float) $aReceitas[$linha]['atualizada'] == 0 ? (float) ($aReceitas[$linha]['exercicio'] * 100) > 0 ? INF : ((float) ($aReceitas[$linha]['exercicio'] * 100) < 0 ? -INF : NAN) : $aReceitas[$linha]['exercicio'] * 100 / $aReceitas[$linha]['atualizada'],'f'),$sBorda,0,"R",0);
 
     }
     $pdf->Ln();
@@ -1138,7 +1139,7 @@ if (!isset($arqinclude)){
     $pdf->cell(20,$alt,db_formatar($aReceitas[$linha]['atualizada'],'f'),"R{$sBorda}",0,"R",0);
     $pdf->cell(20,$alt,db_formatar($aReceitas[$linha]['bimestre'],'f'),"R{$sBorda}",0,"R",0);
     $pdf->cell(20,$alt,db_formatar($aReceitas[$linha]['exercicio'],'f'),"R{$sBorda}",0,"R",0);
-    @$pdf->cell(20,$alt,db_formatar(($aReceitas[$linha]['exercicio']*100)/$aReceitas[$linha]['atualizada'],'f'),$sBorda,0,"R",0);
+    @$pdf->cell(20,$alt,db_formatar((float) $aReceitas[$linha]['atualizada'] == 0 ? (float) ($aReceitas[$linha]['exercicio'] * 100) > 0 ? INF : ((float) ($aReceitas[$linha]['exercicio'] * 100) < 0 ? -INF : NAN) : $aReceitas[$linha]['exercicio'] * 100 / $aReceitas[$linha]['atualizada'],'f'),$sBorda,0,"R",0);
     $pdf->Ln();
 
   }
@@ -1185,7 +1186,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
     $pdf->cell(16,$alt,db_formatar($aDespesas[$linha]['exercicio'],'f'),'R',0,"R",0);
     $pdf->cell(18,$alt,db_formatar($aDespesas[$linha]['inscritas'],'f'),'R',0,"R",0);
 //  @$pdf->cell(16,$alt,db_formatar(($aDespesas[$linha]['exercicio']*100)/$aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
-    @$pdf->cell(18,$alt,db_formatar( ( ( ($aDespesas[$linha]['exercicio'] + $aDespesas[$linha]['inscritas']) ) /$aDespesas[$linha]['atualizada'] )*100,'f'),0,0,"R",0);
+    @$pdf->cell(18,$alt,db_formatar( ( (float) $aDespesas[$linha]['atualizada'] == 0 ? (float) ($aDespesas[$linha]['exercicio'] + $aDespesas[$linha]['inscritas']) > 0 ? INF : ((float) ($aDespesas[$linha]['exercicio'] + $aDespesas[$linha]['inscritas']) < 0 ? -INF : NAN) : ($aDespesas[$linha]['exercicio'] + $aDespesas[$linha]['inscritas']) / $aDespesas[$linha]['atualizada'] )*100,'f'),0,0,"R",0);
     $pdf->Ln();
 
   }
@@ -1203,13 +1204,13 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
   $pdf->cell(16,$alt,db_formatar($somador14_nobimestre,"f"),"TBR",0,"R",0);
   $pdf->cell(34,$alt,db_formatar($soma14_InscrBim,"f"),"TBR",0,"R",0);
 //  @$pdf->cell(18,$alt,db_formatar(($somador14_atebimestre*100)/$somador14_atualizada,'f'),'TB',0,"R",0);
-  @$pdf->cell(18,$alt,db_formatar(($soma14_InscrBim/$somador14_atualizada)*100,'f'),'TB',0,"R",0);
+  @$pdf->cell(18,$alt,db_formatar(((float) $somador14_atualizada == 0 ? (float) $soma14_InscrBim > 0 ? INF : ((float) $soma14_InscrBim < 0 ? -INF : NAN) : $soma14_InscrBim / $somador14_atualizada)*100,'f'),'TB',0,"R",0);
   $pdf->ln();
 
   $perc_12    = $aDespesas[1]["exercicio"]  + $aDespesas[1]["inscritas"];
   $perc_10    = $aReceitas[43]["exercicio"] ;
 
-  $percentual = @(($perc_12/$perc_10)*100);
+  $percentual = @(((float) $perc_10 == 0 ? (float) $perc_12 > 0 ? INF : ((float) $perc_12 < 0 ? -INF : NAN) : $perc_12 / $perc_10)*100);
 
   //$pdf->cell(172,$alt,"15 - MÍNIMO DE 60% DO FUNDEB NA REMUNERAÇÃO DO MAGISTÉRIO COM EDUCAÇÃO INFANTIL E ENSINO FUNDAMENTAL(12/10)x100%","TBR",0,"L",0);
   //@$pdf->cell(18,$alt,db_formatar($percentual,'f'),'TB',0,"R",0);
@@ -1238,7 +1239,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
     $pdf->cell(20,$alt,db_formatar($aDespesas[$linha]['atualizada'],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($aDespesas[$linha]['bimestre'],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($aDespesas[$linha]['exercicio'],'f'),'R',0,"R",0);
-    @$pdf->cell(20,$alt,db_formatar(($aDespesas[$linha]['exercicio']*100)/$aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
+    @$pdf->cell(20,$alt,db_formatar((float) $aDespesas[$linha]['atualizada'] == 0 ? (float) ($aDespesas[$linha]['exercicio'] * 100) > 0 ? INF : ((float) ($aDespesas[$linha]['exercicio'] * 100) < 0 ? -INF : NAN) : $aDespesas[$linha]['exercicio'] * 100 / $aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
     $pdf->Ln();
 
   }
@@ -1262,7 +1263,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
   $pdf->cell(20,$alt,db_formatar($somador14_atualizada,"f"),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($somador14_nobimestre,"f"),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($somador14_atebimestre,"f"),"TBR",0,"R",0);
-  @$pdf->cell(20,$alt,db_formatar(($somador14_atebimestre*100)/$somador14_atualizada,'f'),'TB',0,"R",0);
+  @$pdf->cell(20,$alt,db_formatar((float) $somador14_atualizada == 0 ? (float) ($somador14_atebimestre * 100) > 0 ? INF : ((float) ($somador14_atebimestre * 100) < 0 ? -INF : NAN) : $somador14_atebimestre * 100 / $somador14_atualizada,'f'),'TB',0,"R",0);
   $pdf->ln();
 
 }
@@ -1308,7 +1309,7 @@ $pdf->cell(20,$alt,db_formatar($nImpostosTransferenciasPrev,"f"),'BR',0,"C",0);
 $pdf->cell(20,$alt,db_formatar($nImpostosTransferenciasAtual,"f"),'BR',0,"C",0);
 $pdf->cell(20,$alt,db_formatar($nImpostosTransferenciasBim,"f"),'BR',0,"C",0);
 $pdf->cell(20,$alt,db_formatar($nImpostosTransferencias,"f"),'BR',0,"C",0);
-$pdf->cell(20,$alt,@db_formatar(($nImpostosTransferencias/$nImpostosTransferenciasAtual)*100,"f"),'TB',1,"C",0);
+$pdf->cell(20,$alt,@db_formatar(((float) $nImpostosTransferenciasAtual == 0 ? (float) $nImpostosTransferencias > 0 ? INF : ((float) $nImpostosTransferencias < 0 ? -INF : NAN) : $nImpostosTransferencias / $nImpostosTransferenciasAtual)*100,"f"),'TB',1,"C",0);
 
 if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
   $pdf->setfont('arial','',4);
@@ -1347,7 +1348,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
     $pdf->cell(16,$alt,db_formatar($aDespesas[$linha]['bimestre'],'f'),'R',0,"R",0);
     $pdf->cell(16,$alt,db_formatar($aDespesas[$linha]['exercicio'],'f'),'R',0,"R",0);
     $pdf->cell(18,$alt,db_formatar($aDespesas[$linha]['inscritas'],'f'),'R',0,"R",0);
-    @$pdf->cell(18,$alt,db_formatar(($aDespesas[$linha]['exercicio']*100)/$aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
+    @$pdf->cell(18,$alt,db_formatar((float) $aDespesas[$linha]['atualizada'] == 0 ? (float) ($aDespesas[$linha]['exercicio'] * 100) > 0 ? INF : ((float) ($aDespesas[$linha]['exercicio'] * 100) < 0 ? -INF : NAN) : $aDespesas[$linha]['exercicio'] * 100 / $aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
     $pdf->Ln();
   }
 
@@ -1379,7 +1380,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
   $pdf->cell(16,$alt,db_formatar($somador23_nobimestre,"f"),"TBR",0,"R",0);
   $pdf->cell(34,$alt,db_formatar($soma23_InscrBim ,"f"),"TBR",0,"R",0);
  //$pdf->cell(18,$alt,db_formatar(($somador23_atebimestre*100)/$somador23_atualizada,'f'),'TB',0,"R",0);
-  @$pdf->cell(18,$alt,db_formatar((($somador23_atebimestre+$somador23_inscritas)/$somador23_atualizada )*100,'f'),'TB',0,"R",0);
+  @$pdf->cell(18,$alt,db_formatar(((float) $somador23_atualizada == 0 ? (float) ($somador23_atebimestre + $somador23_inscritas) > 0 ? INF : ((float) ($somador23_atebimestre + $somador23_inscritas) < 0 ? -INF : NAN) : ($somador23_atebimestre + $somador23_inscritas) / $somador23_atualizada )*100,'f'),'TB',0,"R",0);
   $pdf->ln();
 
 } else {
@@ -1407,7 +1408,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
     $pdf->cell(20,$alt,db_formatar($aDespesas[$linha]['atualizada'],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($aDespesas[$linha]['bimestre'],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($aDespesas[$linha]['exercicio'],'f'),'R',0,"R",0);
-    @$pdf->cell(20,$alt,db_formatar(($aDespesas[$linha]['exercicio']*100)/$aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
+    @$pdf->cell(20,$alt,db_formatar((float) $aDespesas[$linha]['atualizada'] == 0 ? (float) ($aDespesas[$linha]['exercicio'] * 100) > 0 ? INF : ((float) ($aDespesas[$linha]['exercicio'] * 100) < 0 ? -INF : NAN) : $aDespesas[$linha]['exercicio'] * 100 / $aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
 
     $pdf->Ln();
 
@@ -1435,7 +1436,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
   $pdf->cell(20,$alt,db_formatar($somador23_atualizada,"f"),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($somador23_nobimestre,"f"),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($somador23_atebimestre,"f"),"TBR",0,"R",0);
-  @$pdf->cell(20,$alt,db_formatar(($somador23_atebimestre*100)/$somador23_atualizada,'f'),'TB',0,"R",0);
+  @$pdf->cell(20,$alt,db_formatar((float) $somador23_atualizada == 0 ? (float) ($somador23_atebimestre * 100) > 0 ? INF : ((float) ($somador23_atebimestre * 100) < 0 ? -INF : NAN) : $somador23_atebimestre * 100 / $somador23_atualizada,'f'),'TB',0,"R",0);
   $pdf->ln();
 }
   $pdf->cell(190,($alt*2),'Continua na página '.($pdf->PageNo()+1)."/{nb}",0,1,"R",0);
@@ -1510,7 +1511,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
       $pdf->cell(16,$alt*2,db_formatar($aDespesas[$linha]['bimestre'],'f'),'R',0,"R",0);
       $pdf->cell(16,$alt*2,db_formatar($aDespesas[$linha]['exercicio'],'f'),'R',0,"R",0);
       $pdf->cell(18,$alt*2,db_formatar($aDespesas[$linha]['inscritas'],'f'),'R',0,"R",0);
-     @$pdf->cell(18,$alt*2,db_formatar((($aDespesas[$linha]['exercicio']+$aDespesas[$linha]['inscritas']) /$aDespesas[$linha]['atualizada'])*100,'f'),0,0,"R",0);
+     @$pdf->cell(18,$alt*2,db_formatar(((float) $aDespesas[$linha]['atualizada'] == 0 ? (float) ($aDespesas[$linha]['exercicio'] + $aDespesas[$linha]['inscritas']) > 0 ? INF : ((float) ($aDespesas[$linha]['exercicio'] + $aDespesas[$linha]['inscritas']) < 0 ? -INF : NAN) : ($aDespesas[$linha]['exercicio'] + $aDespesas[$linha]['inscritas']) / $aDespesas[$linha]['atualizada'])*100,'f'),0,0,"R",0);
 
     } else {
 
@@ -1521,7 +1522,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
       $pdf->cell(16,$alt,db_formatar($aDespesas[$linha]['exercicio'],'f'),'R',0,"R",0);
       $pdf->cell(18,$alt,db_formatar($aDespesas[$linha]['inscritas'],'f'),'R',0,"R",0);
     //  @$pdf->cell(18,$alt,db_formatar(($aDespesas[$linha]['exercicio']*100)/$aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
-      @$pdf->cell(18,$alt,db_formatar((($aDespesas[$linha]['exercicio']+$aDespesas[$linha]['inscritas']) /$aDespesas[$linha]['atualizada'])*100,'f'),0,0,"R",0);
+      @$pdf->cell(18,$alt,db_formatar(((float) $aDespesas[$linha]['atualizada'] == 0 ? (float) ($aDespesas[$linha]['exercicio'] + $aDespesas[$linha]['inscritas']) > 0 ? INF : ((float) ($aDespesas[$linha]['exercicio'] + $aDespesas[$linha]['inscritas']) < 0 ? -INF : NAN) : ($aDespesas[$linha]['exercicio'] + $aDespesas[$linha]['inscritas']) / $aDespesas[$linha]['atualizada'])*100,'f'),0,0,"R",0);
     }
     $pdf->Ln();
   }
@@ -1551,7 +1552,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
   $pdf->cell(16,$alt,db_formatar($somador35_nobimestre,"f"),"TBR",0,"R",0);
   $pdf->cell(34,$alt,db_formatar($soma35_InscrBim,"f"),"TBR",0,"R",0);
  // @$pdf->cell(18,$alt,db_formatar(($somador35_atebimestre*100)/$somador35_atualizada,'f'),'TB',0,"R",0);
- @$pdf->cell(18,$alt,db_formatar((($somador35_atebimestre + $somador35_inscritas)/$somador35_atualizada)*100,'f'),'TB',0,"R",0);
+ @$pdf->cell(18,$alt,db_formatar(((float) $somador35_atualizada == 0 ? (float) ($somador35_atebimestre + $somador35_inscritas) > 0 ? INF : ((float) ($somador35_atebimestre + $somador35_inscritas) < 0 ? -INF : NAN) : ($somador35_atebimestre + $somador35_inscritas) / $somador35_atualizada)*100,'f'),'TB',0,"R",0);
   $pdf->ln();
 
   $somador36_inicial     = $somador23_inicial     + $somador35_inicial;
@@ -1567,7 +1568,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
  // $pdf->cell(18,$alt,db_formatar($somador36_inscritas,"f"),"TBR",0,"R",0);
   $pdf->cell(34,$alt,db_formatar($somador35_DespEns,"f"),"TBR",0,"R",0);
  // @$pdf->cell(18,$alt,db_formatar(($somador36_atebimestre*100)/$somador36_atualizada,'f'),'TB',0,"R",0);
-  @$pdf->cell(18,$alt,db_formatar(($somador35_DespEns/$somador36_atualizada)*100,'f'),'TB',0,"R",0);
+  @$pdf->cell(18,$alt,db_formatar(((float) $somador36_atualizada == 0 ? (float) $somador35_DespEns > 0 ? INF : ((float) $somador35_DespEns < 0 ? -INF : NAN) : $somador35_DespEns / $somador36_atualizada)*100,'f'),'TB',0,"R",0);
   $pdf->ln();
 
 
@@ -1601,7 +1602,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
       $pdf->cell(20,$alt*2,db_formatar($aDespesas[$linha]['atualizada'],'f'),'R',0,"R",0);
       $pdf->cell(20,$alt*2,db_formatar($aDespesas[$linha]['bimestre'],'f'),'R',0,"R",0);
       $pdf->cell(20,$alt*2,db_formatar($aDespesas[$linha]['exercicio'],'f'),'R',0,"R",0);
-      @$pdf->cell(20,$alt*2,db_formatar(($aDespesas[$linha]['exercicio']*100)/$aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
+      @$pdf->cell(20,$alt*2,db_formatar((float) $aDespesas[$linha]['atualizada'] == 0 ? (float) ($aDespesas[$linha]['exercicio'] * 100) > 0 ? INF : ((float) ($aDespesas[$linha]['exercicio'] * 100) < 0 ? -INF : NAN) : $aDespesas[$linha]['exercicio'] * 100 / $aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
 
     } else {
 
@@ -1610,7 +1611,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
       $pdf->cell(20,$alt,db_formatar($aDespesas[$linha]['atualizada'],'f'),'R',0,"R",0);
       $pdf->cell(20,$alt,db_formatar($aDespesas[$linha]['bimestre'],'f'),'R',0,"R",0);
       $pdf->cell(20,$alt,db_formatar($aDespesas[$linha]['exercicio'],'f'),'R',0,"R",0);
-      @$pdf->cell(20,$alt,db_formatar(($aDespesas[$linha]['exercicio']*100)/$aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
+      @$pdf->cell(20,$alt,db_formatar((float) $aDespesas[$linha]['atualizada'] == 0 ? (float) ($aDespesas[$linha]['exercicio'] * 100) > 0 ? INF : ((float) ($aDespesas[$linha]['exercicio'] * 100) < 0 ? -INF : NAN) : $aDespesas[$linha]['exercicio'] * 100 / $aDespesas[$linha]['atualizada'],'f'),0,0,"R",0);
 
     }
     $pdf->Ln();
@@ -1636,7 +1637,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
   $pdf->cell(20,$alt,db_formatar($somador35_atualizada,"f"),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($somador35_nobimestre,"f"),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($somador35_atebimestre,"f"),"TBR",0,"R",0);
-  @$pdf->cell(20,$alt,db_formatar(($somador35_atebimestre*100)/$somador35_atualizada,'f'),'TB',0,"R",0);
+  @$pdf->cell(20,$alt,db_formatar((float) $somador35_atualizada == 0 ? (float) ($somador35_atebimestre * 100) > 0 ? INF : ((float) ($somador35_atebimestre * 100) < 0 ? -INF : NAN) : $somador35_atebimestre * 100 / $somador35_atualizada,'f'),'TB',0,"R",0);
   $pdf->ln();
 
   $somador36_inicial     = $somador23_inicial     + $somador35_inicial;
@@ -1649,7 +1650,7 @@ if ($periodo_selecionado=='6B' || $periodo_selecionado=='2S'){
   $pdf->cell(20,$alt,db_formatar($somador36_atualizada,"f"),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($somador36_nobimestre,"f"),"TBR",0,"R",0);
   $pdf->cell(20,$alt,db_formatar($somador36_atebimestre,"f"),"TBR",0,"R",0);
-  @$pdf->cell(20,$alt,db_formatar(($somador36_atebimestre*100)/$somador36_atualizada,'f'),'TB',0,"R",0);
+  @$pdf->cell(20,$alt,db_formatar((float) $somador36_atualizada == 0 ? (float) ($somador36_atebimestre * 100) > 0 ? INF : ((float) ($somador36_atebimestre * 100) < 0 ? -INF : NAN) : $somador36_atebimestre * 100 / $somador36_atualizada,'f'),'TB',0,"R",0);
   $pdf->ln();
 }
 

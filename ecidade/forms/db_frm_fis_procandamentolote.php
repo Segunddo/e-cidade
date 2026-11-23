@@ -162,7 +162,7 @@ db_app::load("estilos.css, grid.style.css, AjaxRequest.js");
 
   <?php 
     $rsDiasParam = db_query("select nl27_autodvenc as pa01_autodvenc,nl27_autodprazo as pa01_autodprazo from fiscalizacao.fis_parnotificacaolancamento where nl27_instit = ".db_getsession('DB_instit'));
-    if(pg_num_rows($rsDiasParam) > 0)
+    if(($rsDiasParam ? pg_num_rows($rsDiasParam) : null) > 0)
       db_fieldsmemory($rsDiasParam,0);
       db_input('pa01_autodvenc', 20, $se, true, 'hidden', 3, '');
       db_input('pa01_autodprazo', 20, $s, true, 'hidden', 3, '');

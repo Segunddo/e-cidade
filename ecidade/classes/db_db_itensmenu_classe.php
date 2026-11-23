@@ -81,7 +81,7 @@ class cl_db_itensmenu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
        $this->descricao = ($this->descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["descricao"]:$this->descricao);
        $this->help = ($this->help == ""?@$GLOBALS["HTTP_POST_VARS"]["help"]:$this->help);
        $this->funcao = ($this->funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["funcao"]:$this->funcao);
@@ -91,7 +91,7 @@ class cl_db_itensmenu {
        $this->libcliente = ($this->libcliente == "f"?@$GLOBALS["HTTP_POST_VARS"]["libcliente"]:$this->libcliente);
        $this->api = (@$GLOBALS["HTTP_POST_VARS"]["api"] != null?@$GLOBALS["HTTP_POST_VARS"]["api"]:$this->api);
      }else{
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
      }
    }
    // funcao para inclusao
@@ -175,7 +175,7 @@ class cl_db_itensmenu {
          $this->id_item = $id_item;
        }
      }
-     if(($this->id_item == null) || ($this->id_item == "") ){
+     if(($this->id_item == null) || ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == "") ){
        $this->erro_sql = " Campo id_item nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

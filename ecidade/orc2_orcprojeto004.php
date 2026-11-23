@@ -40,7 +40,7 @@ $clorcsuplem = new cl_orcsuplem;
 $auxiliar = new cl_orcsuplem;
 $aux = new cl_orcsuplem;
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $anousu = db_getsession("DB_anousu");
 $projeto = (isset($o46_codlei) && !empty($o46_codlei)) ? $o46_codlei : 'null';

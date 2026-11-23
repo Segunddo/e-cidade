@@ -33,7 +33,7 @@ $cliptubase    = new cl_iptubase;
 $oDaoCaracter  = new cl_caracter();
 
 db_postmemory( $_POST );
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"] , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 ///////////////////////////////////////////////////////////////////////
 $head4 = "RELATÓRIO DE FACE DE QUADRA";

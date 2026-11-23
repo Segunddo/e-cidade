@@ -69,9 +69,9 @@ class cl_empageparam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e99_instit = ($this->e99_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["e99_instit"]:$this->e99_instit);
+       $this->e99_instit = ($this->e99_instit === 0 || $this->e99_instit === 0.0 || $this->e99_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["e99_instit"]:$this->e99_instit);
        $this->e99_dias = ($this->e99_dias == "f"?@$GLOBALS["HTTP_POST_VARS"]["e99_dias"]:$this->e99_dias);
-       $this->e99_tipo = ($this->e99_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e99_tipo"]:$this->e99_tipo);
+       $this->e99_tipo = ($this->e99_tipo === 0 || $this->e99_tipo === 0.0 || $this->e99_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e99_tipo"]:$this->e99_tipo);
      }else{
      }
    }

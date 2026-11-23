@@ -80,10 +80,10 @@ class cl_db_virada {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c30_sequencial = ($this->c30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_sequencial"]:$this->c30_sequencial);
-       $this->c30_anoorigem = ($this->c30_anoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_anoorigem"]:$this->c30_anoorigem);
-       $this->c30_anodestino = ($this->c30_anodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_anodestino"]:$this->c30_anodestino);
-       $this->c30_usuario = ($this->c30_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_usuario"]:$this->c30_usuario);
+       $this->c30_sequencial = ($this->c30_sequencial === 0 || $this->c30_sequencial === 0.0 || $this->c30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_sequencial"]:$this->c30_sequencial);
+       $this->c30_anoorigem = ($this->c30_anoorigem === 0 || $this->c30_anoorigem === 0.0 || $this->c30_anoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_anoorigem"]:$this->c30_anoorigem);
+       $this->c30_anodestino = ($this->c30_anodestino === 0 || $this->c30_anodestino === 0.0 || $this->c30_anodestino == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_anodestino"]:$this->c30_anodestino);
+       $this->c30_usuario = ($this->c30_usuario === 0 || $this->c30_usuario === 0.0 || $this->c30_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_usuario"]:$this->c30_usuario);
        if($this->c30_data == ""){
          $this->c30_data_dia = ($this->c30_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_data_dia"]:$this->c30_data_dia);
          $this->c30_data_mes = ($this->c30_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_data_mes"]:$this->c30_data_mes);
@@ -93,9 +93,9 @@ class cl_db_virada {
          }
        }
        $this->c30_hora = ($this->c30_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_hora"]:$this->c30_hora);
-       $this->c30_situacao = ($this->c30_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_situacao"]:$this->c30_situacao);
+       $this->c30_situacao = ($this->c30_situacao === 0 || $this->c30_situacao === 0.0 || $this->c30_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_situacao"]:$this->c30_situacao);
      }else{
-       $this->c30_sequencial = ($this->c30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_sequencial"]:$this->c30_sequencial);
+       $this->c30_sequencial = ($this->c30_sequencial === 0 || $this->c30_sequencial === 0.0 || $this->c30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c30_sequencial"]:$this->c30_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_db_virada {
          $this->c30_sequencial = $c30_sequencial;
        }
      }
-     if(($this->c30_sequencial == null) || ($this->c30_sequencial == "") ){
+     if(($this->c30_sequencial == null) || ($this->c30_sequencial === 0 || $this->c30_sequencial === 0.0 || $this->c30_sequencial == "") ){
        $this->erro_sql = " Campo c30_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -77,7 +77,7 @@ class cl_db_bancos {
        $this->db90_descr = ($this->db90_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_descr"]:$this->db90_descr);
        $this->db90_digban = ($this->db90_digban == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_digban"]:$this->db90_digban);
        $this->db90_abrev = ($this->db90_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_abrev"]:$this->db90_abrev);
-       $this->db90_logo = ($this->db90_logo == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_logo"]:$this->db90_logo);
+       $this->db90_logo = ($this->db90_logo === 0 || $this->db90_logo === 0.0 || $this->db90_logo == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_logo"]:$this->db90_logo);
      }else{
        $this->db90_codban = ($this->db90_codban == ""?@$GLOBALS["HTTP_POST_VARS"]["db90_codban"]:$this->db90_codban);
      }

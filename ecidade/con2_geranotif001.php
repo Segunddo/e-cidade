@@ -49,7 +49,7 @@ $clrotulo->label('k51_procede');
 $clrotulo->label('k51_descr');
 $clrotulo->label('d07_matric');
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clnotificacao   = new cl_notificacao;
 $cleditalrua     = new cl_editalrua;
 $clnotidebitos   = new cl_notidebitos;

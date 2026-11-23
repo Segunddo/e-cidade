@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/matricula-online/configuracoes/parametros-notificacoes/getParametros",
+  "json": {
+    "error": true,
+    "message": "Class 'ECidade\\Educacao\\MatriculaOnline\\Repository\\ConfiguracaoRepository' not found"
+  },
+  "sha256": "f42aaf3bffbbed42278358154b7f1f84920b02a5b74cd718c60a53ed89de55c8",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

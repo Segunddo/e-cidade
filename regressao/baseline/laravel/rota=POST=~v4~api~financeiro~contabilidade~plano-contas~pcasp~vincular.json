@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/pcasp/vincular",
+  "json": {
+    "error": true,
+    "message": "Argument 1 passed to App\\Domain\\Financeiro\\Contabilidade\\Services\\VincularPcaspService::vincularContas() must be an instance of App\\Domain\\Financeiro\\Contabilidade\\Models\\Pcasp, null given, called in /var/www/html/app/Domain/Financeiro/Contabilidade/Services/VincularPcaspService.php on line 101"
+  },
+  "sha256": "c43fdde9aa36a5f2bbe9357a3300e6ac137e2e1d681c5cafe68fdbcd67366231",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

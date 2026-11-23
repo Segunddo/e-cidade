@@ -73,16 +73,16 @@ class cl_orcreceitaval {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o71_anousu = ($this->o71_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_anousu"]:$this->o71_anousu);
-       $this->o71_codrec = ($this->o71_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_codrec"]:$this->o71_codrec);
-       $this->o71_coddoc = ($this->o71_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_coddoc"]:$this->o71_coddoc);
-       $this->o71_mes = ($this->o71_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_mes"]:$this->o71_mes);
-       $this->o71_valor = ($this->o71_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_valor"]:$this->o71_valor);
+       $this->o71_anousu = ($this->o71_anousu === 0 || $this->o71_anousu === 0.0 || $this->o71_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_anousu"]:$this->o71_anousu);
+       $this->o71_codrec = ($this->o71_codrec === 0 || $this->o71_codrec === 0.0 || $this->o71_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_codrec"]:$this->o71_codrec);
+       $this->o71_coddoc = ($this->o71_coddoc === 0 || $this->o71_coddoc === 0.0 || $this->o71_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_coddoc"]:$this->o71_coddoc);
+       $this->o71_mes = ($this->o71_mes === 0 || $this->o71_mes === 0.0 || $this->o71_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_mes"]:$this->o71_mes);
+       $this->o71_valor = ($this->o71_valor === 0 || $this->o71_valor === 0.0 || $this->o71_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_valor"]:$this->o71_valor);
      }else{
-       $this->o71_anousu = ($this->o71_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_anousu"]:$this->o71_anousu);
-       $this->o71_codrec = ($this->o71_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_codrec"]:$this->o71_codrec);
-       $this->o71_coddoc = ($this->o71_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_coddoc"]:$this->o71_coddoc);
-       $this->o71_mes = ($this->o71_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_mes"]:$this->o71_mes);
+       $this->o71_anousu = ($this->o71_anousu === 0 || $this->o71_anousu === 0.0 || $this->o71_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_anousu"]:$this->o71_anousu);
+       $this->o71_codrec = ($this->o71_codrec === 0 || $this->o71_codrec === 0.0 || $this->o71_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_codrec"]:$this->o71_codrec);
+       $this->o71_coddoc = ($this->o71_coddoc === 0 || $this->o71_coddoc === 0.0 || $this->o71_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_coddoc"]:$this->o71_coddoc);
+       $this->o71_mes = ($this->o71_mes === 0 || $this->o71_mes === 0.0 || $this->o71_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o71_mes"]:$this->o71_mes);
      }
    }
    // funcao para inclusao
@@ -101,7 +101,7 @@ class cl_orcreceitaval {
        $this->o71_codrec = $o71_codrec;
        $this->o71_coddoc = $o71_coddoc;
        $this->o71_mes = $o71_mes;
-     if(($this->o71_anousu == null) || ($this->o71_anousu == "") ){
+     if(($this->o71_anousu == null) || ($this->o71_anousu === 0 || $this->o71_anousu === 0.0 || $this->o71_anousu == "") ){
        $this->erro_sql = " Campo o71_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -109,7 +109,7 @@ class cl_orcreceitaval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o71_codrec == null) || ($this->o71_codrec == "") ){
+     if(($this->o71_codrec == null) || ($this->o71_codrec === 0 || $this->o71_codrec === 0.0 || $this->o71_codrec == "") ){
        $this->erro_sql = " Campo o71_codrec nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -117,7 +117,7 @@ class cl_orcreceitaval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o71_coddoc == null) || ($this->o71_coddoc == "") ){
+     if(($this->o71_coddoc == null) || ($this->o71_coddoc === 0 || $this->o71_coddoc === 0.0 || $this->o71_coddoc == "") ){
        $this->erro_sql = " Campo o71_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -125,7 +125,7 @@ class cl_orcreceitaval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o71_mes == null) || ($this->o71_mes == "") ){
+     if(($this->o71_mes == null) || ($this->o71_mes === 0 || $this->o71_mes === 0.0 || $this->o71_mes == "") ){
        $this->erro_sql = " Campo o71_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

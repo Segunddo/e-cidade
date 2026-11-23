@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/balancete-receita",
+  "json": {
+    "error": true,
+    "message": "Não foi encontrado service para o ementário informado."
+  },
+  "sha256": "836284eee0761f547d13aff4d30b1cca4223cb74127b67e88ab2b3b657e88914",
+  "sql_negocio": [],
+  "status": 400,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

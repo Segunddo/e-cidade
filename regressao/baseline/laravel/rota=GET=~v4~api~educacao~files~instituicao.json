@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/api/educacao/files/instituicao",
+  "json": {
+    "endereco": "RUA SETE DE SETEMBRO, 237 - PORTO VELHO - RO",
+    "nome": "PREFEITURA MUNICIPAL DE PORTO VELHO",
+    "telefone": "06939013001"
+  },
+  "sha256": "21d41a09836832f196f7ded2a25c68ebcf5532dabc1ea95b388a2f43b414b920",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

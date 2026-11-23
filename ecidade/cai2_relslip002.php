@@ -29,7 +29,7 @@ require_once(modification("fpdf151/pdf.php"));
 require_once(modification("libs/db_sql.php"));
 require_once(modification("libs/db_utils.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clrotulo = new rotulocampo;
 $clrotulo->label('k17_codigo');
@@ -126,7 +126,7 @@ $sVirg = '';
 $bFlagAbrev = false;
 $sSqlInstit = "select codigo,nomeinst,nomeinstabrev from db_config where codigo in({$sDbInstit}) ";
 $resInst = db_query($sSqlInstit);
-$iInstit = pg_num_rows($resInst);
+$iInstit = ($resInst ? pg_num_rows($resInst) : null);
 
 if ($iInstit > 0) {
     for ($i = 0; $i < $iInstit; $i++) {
@@ -199,7 +199,7 @@ $sql = "
      order by slip.k17_codigo
     ";
 $result = db_query($sql);
-if (pg_num_rows($result) == 0) {
+if (($result ? pg_num_rows($result) : null) == 0) {
     db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 }
 
@@ -214,7 +214,7 @@ $alt = 4;
 $total = 0;
 $total_valor = 0;
 
-for ($x = 0; $x < pg_num_rows($result); $x++) {
+for ($x = 0; $x < ($result ? pg_num_rows($result) : null); $x++) {
     db_fieldsmemory($result, $x);
 
     if (isset($sprocesso) && !empty($sprocesso)) {

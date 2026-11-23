@@ -1,0 +1,1139 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/relatorios-legais/lrf",
+  "json": {
+    "data": [
+      {
+        "codigo": 100000,
+        "descricao": "IRF 1-A  - DEMOSTRATIVO POR CATEGORIA",
+        "o42_codparrel": 100000,
+        "o42_descrrel": "IRF 1-A  - DEMOSTRATIVO POR CATEGORIA",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 276,
+        "descricao": "RGF - ANEXO I - ED 14 Demonstrativo da Despesa com Pessoal - MDF",
+        "o42_codparrel": 276,
+        "o42_descrrel": "RGF - ANEXO I - ED 14 Demonstrativo da Despesa com Pessoal - MDF",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 275,
+        "descricao": "ANEXO III - ED. 14 RECEITA CORRENTE LÍQUIDA - MDF",
+        "o42_codparrel": 275,
+        "o42_descrrel": "ANEXO III - ED. 14 RECEITA CORRENTE LÍQUIDA - MDF",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 274,
+        "descricao": "RGF - ANEXO I - ED 13 Demonstrativo da Despesa com Pessoal - MDF",
+        "o42_codparrel": 274,
+        "o42_descrrel": "RGF - ANEXO I - ED 13 Demonstrativo da Despesa com Pessoal - MDF",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 273,
+        "descricao": "ANEXO XII - ED. 13 - Despesas com saúde",
+        "o42_codparrel": 273,
+        "o42_descrrel": "ANEXO XII - ED. 13 - Despesas com saúde",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 272,
+        "descricao": "ANEXO VIII - ED. 13 - DEM DAS REC E DESP COM MDE",
+        "o42_codparrel": 272,
+        "o42_descrrel": "ANEXO VIII - ED. 13 - DEM DAS REC E DESP COM MDE",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao]. Assinado Digitalmente no dia [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 271,
+        "descricao": "ANEXO VI - ED.13 - DEMONS. RESULT. PRIMÁRIO E NOMINAL",
+        "o42_codparrel": 271,
+        "o42_descrrel": "ANEXO VI - ED.13 - DEMONS. RESULT. PRIMÁRIO E NOMINAL",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao]. Assinado Digitalmente no dia [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 270,
+        "descricao": "ANEXO III - ED. 13 RECEITA CORRENTE LÍQUIDA - MDF",
+        "o42_codparrel": 270,
+        "o42_descrrel": "ANEXO III - ED. 13 RECEITA CORRENTE LÍQUIDA - MDF",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 269,
+        "descricao": "ANEXO I - ED. 13 - BALANÇO ORÇAMENTÁRIO",
+        "o42_codparrel": 269,
+        "o42_descrrel": "ANEXO I - ED. 13 - BALANÇO ORÇAMENTÁRIO",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 268,
+        "descricao": "Anexo I - ED. 12 - Balanço Orçamentário",
+        "o42_codparrel": 268,
+        "o42_descrrel": "Anexo I - ED. 12 - Balanço Orçamentário",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 266,
+        "descricao": "ANEXO V - DEMONSTRATIVO DA DISPONIBILIDADE DE CAIXA E DOS RESTOS A PAGAR",
+        "o42_codparrel": 266,
+        "o42_descrrel": "ANEXO V - DEMONSTRATIVO DA DISPONIBILIDADE DE CAIXA E DOS RESTOS A PAGAR",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data da emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 265,
+        "descricao": "RGF - ANEXO II - ED. 12/13 - DÍVIDA CONSOLIDADA LÍQUIDA",
+        "o42_codparrel": 265,
+        "o42_descrrel": "RGF - ANEXO II - ED. 12/13 - DÍVIDA CONSOLIDADA LÍQUIDA",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data da emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 264,
+        "descricao": "ANEXO VI - ED.12 - DEMONS. RESULT. PRIMÁRIO E NOMINAL",
+        "o42_codparrel": 264,
+        "o42_descrrel": "ANEXO VI - ED.12 - DEMONS. RESULT. PRIMÁRIO E NOMINAL",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao]. Assinado Digitalmente no dia [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 263,
+        "descricao": "ANEXO IV - ED. 12 - DEM DAS REC E DESP PREVIDENCIARIAS",
+        "o42_codparrel": 263,
+        "o42_descrrel": "ANEXO IV - ED. 12 - DEM DAS REC E DESP PREVIDENCIARIAS",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao]. Assinado Digitalmente no dia [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 262,
+        "descricao": "ANEXO III - ED. 12 RECEITA CORRENTE LÍQUIDA - MDF",
+        "o42_codparrel": 262,
+        "o42_descrrel": "ANEXO III - ED. 12 RECEITA CORRENTE LÍQUIDA - MDF",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 261,
+        "descricao": "RGF - ANEXO I - ED 11 DEMONSTRATIVO DA DESPESA COM PESSOAL - IN13",
+        "o42_codparrel": 261,
+        "o42_descrrel": "RGF - ANEXO I - ED 11 DEMONSTRATIVO DA DESPESA COM PESSOAL - IN13",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 260,
+        "descricao": "RGF - ANEXO I - ED 11 Demonstrativo da Despesa com Pessoal - MDF",
+        "o42_codparrel": 260,
+        "o42_descrrel": "RGF - ANEXO I - ED 11 Demonstrativo da Despesa com Pessoal - MDF",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 259,
+        "descricao": "ANEXO III - ED. 11 RECEITA CORRENTE LÍQUIDA - MDF",
+        "o42_codparrel": 259,
+        "o42_descrrel": "ANEXO III - ED. 11 RECEITA CORRENTE LÍQUIDA - MDF",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 258,
+        "descricao": "ANEXO III - ED. 11 RECEITA CORRENTE LÍQUIDA - IN RS",
+        "o42_codparrel": 258,
+        "o42_descrrel": "ANEXO III - ED. 11 RECEITA CORRENTE LÍQUIDA - IN RS",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 249,
+        "descricao": "RGF - ANEXO I (EDIÇÃO 11 - RONDONIA)",
+        "o42_codparrel": 249,
+        "o42_descrrel": "RGF - ANEXO I (EDIÇÃO 11 - RONDONIA)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 248,
+        "descricao": "RGF - ANEXO I (EDIÇÃO 11 - IN13)",
+        "o42_codparrel": 248,
+        "o42_descrrel": "RGF - ANEXO I (EDIÇÃO 11 - IN13)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 247,
+        "descricao": "RGF - ANEXO I (EDIÇÃO 11 - MDF)",
+        "o42_codparrel": 247,
+        "o42_descrrel": "RGF - ANEXO I (EDIÇÃO 11 - MDF)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 245,
+        "descricao": "ANEXO VIII - ED. 11 - DEM DAS REC E DESP COM MDE",
+        "o42_codparrel": 245,
+        "o42_descrrel": "ANEXO VIII - ED. 11 - DEM DAS REC E DESP COM MDE",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao]. Assinado Digitalmente no dia [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 244,
+        "descricao": "ANEXO IV - ED. 11 - DEM DAS REC E DESP PREVIDENCIARIAS",
+        "o42_codparrel": 244,
+        "o42_descrrel": "ANEXO IV - ED. 11 - DEM DAS REC E DESP PREVIDENCIARIAS",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao]. Assinado Digitalmente no dia [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 222,
+        "descricao": "RGF - ANEXO I (2020 - IN13)",
+        "o42_codparrel": 222,
+        "o42_descrrel": "RGF - ANEXO I (2020 - IN13)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 221,
+        "descricao": "RGF - ANEXO I (2020 - MDF)",
+        "o42_codparrel": 221,
+        "o42_descrrel": "RGF - ANEXO I (2020 - MDF)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 220,
+        "descricao": "RGF - ANEXO I (2020 - RONDONIA)",
+        "o42_codparrel": 220,
+        "o42_descrrel": "RGF - ANEXO I (2020 - RONDONIA)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 219,
+        "descricao": "QUADRO AUXILIAR BALANÇO ORÇAMENTÁRIO",
+        "o42_codparrel": 219,
+        "o42_descrrel": "QUADRO AUXILIAR BALANÇO ORÇAMENTÁRIO",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 218,
+        "descricao": "ANEXO XIII (RREO - 2020)",
+        "o42_codparrel": 218,
+        "o42_descrrel": "ANEXO XIII (RREO - 2020)",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao]. Assinado Digitalmente no dia [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 217,
+        "descricao": "ANEXO XII - 2020",
+        "o42_codparrel": 217,
+        "o42_descrrel": "ANEXO XII - 2020",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 215,
+        "descricao": "TCE/RO - ANEXO 10 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_codparrel": 215,
+        "o42_descrrel": "TCE/RO - ANEXO 10 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 214,
+        "descricao": "TCE/RO - ANEXO 9 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_codparrel": 214,
+        "o42_descrrel": "TCE/RO - ANEXO 9 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 213,
+        "descricao": "TCE/RO - ANEXO 8 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_codparrel": 213,
+        "o42_descrrel": "TCE/RO - ANEXO 8 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 212,
+        "descricao": "TCE/RO - ANEXO 7",
+        "o42_codparrel": 212,
+        "o42_descrrel": "TCE/RO - ANEXO 7",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 211,
+        "descricao": "TCE/RO - ANEXO 6 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_codparrel": 211,
+        "o42_descrrel": "TCE/RO - ANEXO 6 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 210,
+        "descricao": "TCE/RO - ANEXO 5 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_codparrel": 210,
+        "o42_descrrel": "TCE/RO - ANEXO 5 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 209,
+        "descricao": "TCE/RO - ANEXO 4 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_codparrel": 209,
+        "o42_descrrel": "TCE/RO - ANEXO 4 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 208,
+        "descricao": "TCE/RO - ANEXO 3 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_codparrel": 208,
+        "o42_descrrel": "TCE/RO - ANEXO 3 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 207,
+        "descricao": "TCE/RO - ANEXO 2 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_codparrel": 207,
+        "o42_descrrel": "TCE/RO - ANEXO 2 - ESTE RELATÓRIO NÃO POSSUI CONFIGURAÇÃO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 206,
+        "descricao": "TCE/RO - ANEXO 1",
+        "o42_codparrel": 206,
+        "o42_descrrel": "TCE/RO - ANEXO 1",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 201,
+        "descricao": "RREO - ANEXO XI - 2019",
+        "o42_codparrel": 201,
+        "o42_descrrel": "RREO - ANEXO XI - 2019",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao]. Assinado Digitalmente no dia [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 200,
+        "descricao": "RGF - ANEXO IV (2019)",
+        "o42_codparrel": 200,
+        "o42_descrrel": "RGF - ANEXO IV (2019)",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data da emissão [data_emissao] e hora de emissão [hora_emissao]\n            1 Conforme Manual para Instrução de Pleitos (MIP), disponível em conteudo.tesouro.gov.br/manuais/mip, essas operações podem ser contratadas mesmo que não haja margem disponível nos limites. No entanto, uma vez contratadas, os fluxos de tais operações terão seus efeitos contabilizados para fins da contratação de outras operações de crédito.",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 198,
+        "descricao": "RGF - ANEXO II 9ª EDIÇÃO (2019)",
+        "o42_codparrel": 198,
+        "o42_descrrel": "RGF - ANEXO II 9ª EDIÇÃO (2019)",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data da emissão [data_emissao] e hora de emissão [hora_emissao]\n            1. Se o saldo apurado for negativo, ou seja, se o total da Disponibilidade de Caixa Bruta for menor que Restos a Pagar Processados, esse saldo negativo não deverá ser informado nessa linha, mas sim na linha da \"Insuficiência Financeira\", no quadro \"Outros Valores não integrantes da Dívida Consolidada\". Assim, quando o cálculo de Disponibilidade de Caixa for negativo, o valor dessa linha deverá ser (0) \"zero\"\n            2. Refere-se aos precatórios posteriores a 05/05/2000 que, em cumprimento ao disposto no artigo 100 da Constituição Federal, ainda não foram incluídos no orçamento ou constam no orçamento e ainda não foram pagos. Ao final do exercício em que esses precatórios foram incluídos ou que deveriam ter sido incluídos, os valores deverão compor a linha \"Precatórios Posteriores a 05/05/2000 (inclusive) - Vencidos e não pagos\"",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 197,
+        "descricao": "RGF - ANEXO I 9ª EDIÇÃO (2019)",
+        "o42_codparrel": 197,
+        "o42_descrrel": "RGF - ANEXO I 9ª EDIÇÃO (2019)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 195,
+        "descricao": "ANEXO VIII (RREO - 2019)",
+        "o42_codparrel": 195,
+        "o42_descrrel": "ANEXO VIII (RREO - 2019)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 185,
+        "descricao": "RGF - ANEXO IV (2018/2019)",
+        "o42_codparrel": 185,
+        "o42_descrrel": "RGF - ANEXO IV (2018/2019)",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data da emissão [data_emissao] e hora de emissão [hora_emissao]\n1 Conforme Manual para Instrução de Pleitos (MIP), disponível em conteudo.tesouro.gov.br/manuais/mip, essas operações podem ser contratadas mesmo que não haja margem disponível nos limites. No entanto, uma vez contratadas, os fluxos de tais operações terão seus efeitos contabilizados para fins da contratação de outras operações de crédito.",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 184,
+        "descricao": "RGF - ANEXO III (2018)",
+        "o42_codparrel": 184,
+        "o42_descrrel": "RGF - ANEXO III (2018)",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 183,
+        "descricao": "RGF - ANEXO II (2018)",
+        "o42_codparrel": 183,
+        "o42_descrrel": "RGF - ANEXO II (2018)",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data da emissão [data_emissao] e hora de emissão [hora_emissao]\n1. Se o saldo apurado for negativo, ou seja, se o total da Disponibilidade de Caixa Bruta for menor que Restos a Pagar Processados, esse saldo negativo não deverá ser informado nessa linha, mas sim na linha da \"Insuficiência Financeira\", no quadro \"Outros Valores não integrantes da Dívida Consolidada\". Assim, quando o cálculo de Disponibilidade de Caixa for negativo, o valor dessa linha deverá ser (0) \"zero\"\n2. Refere-se aos precatórios posteriores a 05/05/2000 que, em cumprimento ao disposto no artigo 100 da Constituição Federal, ainda não foram incluídos no orçamento ou constam no orçamento e ainda não foram pagos. Ao final do exercício em que esses precatórios foram incluídos ou que deveriam ter sido incluídos, os valores deverão compor a linha \"Precatórios Posteriores a 05/05/2000 (inclusive) - Vencidos e não pagos\"",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 182,
+        "descricao": "RGF - ANEXO I 9ª EDIÇÃO (2018/2019)",
+        "o42_codparrel": 182,
+        "o42_descrrel": "RGF - ANEXO I 9ª EDIÇÃO (2018/2019)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 181,
+        "descricao": "ANEXO XIV (RREO - 2018)",
+        "o42_codparrel": 181,
+        "o42_descrrel": "ANEXO XIV (RREO - 2018)",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 180,
+        "descricao": "ANEXO XIII (RREO - 2018)",
+        "o42_codparrel": 180,
+        "o42_descrrel": "ANEXO XIII (RREO - 2018)",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao]. Assinado Digitalmente no dia [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 178,
+        "descricao": "ANEXO III (RREO - 2018)",
+        "o42_codparrel": 178,
+        "o42_descrrel": "ANEXO III (RREO - 2018)",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 168,
+        "descricao": "ANEXO IV - Demonstrativo das Operações de Crédito",
+        "o42_codparrel": 168,
+        "o42_descrrel": "ANEXO IV - Demonstrativo das Operações de Crédito",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]\n\n1 Conforme Manual de Instrução de Pleitos - MIP STN/COPEM, essas operações podem ser contratadas mesmo que não haja margem disponível nos limites. No entanto, uma vez contratadas, os fluxos de tais operações terão seus efeitos contabilizados para fins da contratação de outras operações de crédito.",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 167,
+        "descricao": "ANEXO II - Demonstrativo da Dívida Consolidada Líquida",
+        "o42_codparrel": 167,
+        "o42_descrrel": "ANEXO II - Demonstrativo da Dívida Consolidada Líquida",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]\n\n\n        1. Se o saldo apurado for negativo, ou seja, se o total da Disponibilidade de Caixa Bruta for menor que Restos a Pagar Processados, esse saldo negativo não deverá ser informado nessa linha, mas sim na linha da \"Insuficiência Financeira\", no quadro \"Outros Valores não integrantes da Dívida Consolidada\". Assim, quando o cálculo de Disponibilidade de Caixa for negativo, o valor dessa linha deverá ser (0) \"zero\".\n\n        2. Refere-se aos precatórios psteriores a 05/05/2000 que, em cumprimento ao disposto no artigo 100 da Constituição Federal, ainda não foram incluídos no orçamento ou constam no orçamento e ainda não foram pagos. Ao final do exercício em que esses precatórios foram incluídos ou que deveriam ter sido incluídos, os valores deverão compor a linha \"Precatórios Posteriores a 05/05/2000 (inclusive) - Vencidos e não pagos\"\n        ",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 166,
+        "descricao": "ANEXO I - Demonstrativo da Despesa com Pessoal",
+        "o42_codparrel": 166,
+        "o42_descrrel": "ANEXO I - Demonstrativo da Despesa com Pessoal",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]\n\n1. Nos demonstrativos elaborados no primeiro e no segundo quadrimestre de cada exercício, os valores de restos a pagar não processados inscritos em 31 de dezembro do exercício anterior continuarão a ser informados nesse campo. Esses valores não sofrem alteração pelo seu processamento, e somente no caso de cancelamento podem ser excluídos.",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 165,
+        "descricao": "ANEXO VIII (RREO - 2017)",
+        "o42_codparrel": 165,
+        "o42_descrrel": "ANEXO VIII (RREO - 2017)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 164,
+        "descricao": "ANEXO IV (RREO - 2017)",
+        "o42_codparrel": 164,
+        "o42_descrrel": "ANEXO IV (RREO - 2017)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 163,
+        "descricao": "ANEXO I (RREO - 2017)",
+        "o42_codparrel": 163,
+        "o42_descrrel": "ANEXO I (RREO - 2017)",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 162,
+        "descricao": "ANEXO V (RREO - 2017)",
+        "o42_codparrel": 162,
+        "o42_descrrel": "ANEXO V (RREO - 2017)",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável: [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 161,
+        "descricao": "DEMONSTRAÇÃO DAS MUTAÇÕES DO PATRIMÔNIO LÍQUIDO",
+        "o42_codparrel": 161,
+        "o42_descrrel": "DEMONSTRAÇÃO DAS MUTAÇÕES DO PATRIMÔNIO LÍQUIDO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 124,
+        "descricao": "RREO  ANEXO 12",
+        "o42_codparrel": 124,
+        "o42_descrrel": "RREO  ANEXO 12",
+        "o42_notapadrao": "Fonte: Sistema E-cidade, [nome_departamento] Data da emissão: [data_emissao], Hora de Emissão: [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 122,
+        "descricao": "DEM DE DESP DE SAUDE SIGFIS",
+        "o42_codparrel": 122,
+        "o42_descrrel": "DEM DE DESP DE SAUDE SIGFIS",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 121,
+        "descricao": "DEM DE DESP DE EDUCACAO SIGFIS",
+        "o42_codparrel": 121,
+        "o42_descrrel": "DEM DE DESP DE EDUCACAO SIGFIS",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 109,
+        "descricao": "ANEXO VI DO RGF",
+        "o42_codparrel": 109,
+        "o42_descrrel": "ANEXO VI DO RGF",
+        "o42_notapadrao": "1A disponibilidade de caixa do RPPS está comprometida com o Passivo Atuarial.",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 108,
+        "descricao": "ANEXO V DO RGF",
+        "o42_codparrel": 108,
+        "o42_descrrel": "ANEXO V DO RGF",
+        "o42_notapadrao": "1A disponibilidade de caixa do RPPS está comprometida com o Passivo Atuarial.",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 107,
+        "descricao": "ANEXO XIV DO RREO",
+        "o42_codparrel": 107,
+        "o42_descrrel": "ANEXO XIV DO RREO",
+        "o42_notapadrao": "Durante o exercício, somente as despesas liquidadas são consideradas executadas. No encerramento do exercício, as despesas não liquidadas inscritas em restos a\r\npagar não-processados são também consideradas executadas. Dessa forma, para maior transparência, as despesas executadas estão segregadas em:\r\n. a) Despesas liquidadas, consideradas aquelas em que houve a entrega do material ou serviço, nos termos do art. 63 da Lei 4.320/64;\r\n. b) Despesas empenhadas mas não liquidadas, inscritas em Restos a Pagar não-processados, consideradas liquidadas no encerramento do exercício, por força do\r\nart.35, inciso II da Lei 4.320/64.",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 106,
+        "descricao": "ANEXO XIII DO RREO",
+        "o42_codparrel": 106,
+        "o42_descrrel": "ANEXO XIII DO RREO",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao]. Assinado Digitalmente no dia [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 105,
+        "descricao": "ANEXO XI DO RREO",
+        "o42_codparrel": 105,
+        "o42_descrrel": "ANEXO XI DO RREO",
+        "o42_notapadrao": "1\r\n< Operações de Crédito descritas na CF, art. 167, inciso III>\r\n2\r\nDurante o exercício, somente as despesas liquidadas são consideradas executadas. No encerramento do exercício, as despesas não liquidadas\r\ninscritas em restos a pagar não-processados são também consideradas executadas. Dessa forma, para maior transparência, as despesas\r\nexecutadas estão segregadas em:\r\na)\r\nDespesas liquidadas, consideradas aquelas em que houve a entrega do material ou serviço, nos termos do art. 63 da Lei 4.320/64;\r\nb)\r\nDespesas empenhadas, mas não liquidadas, inscritas em Restos a Pagar não-processados, consideradas liquidadas no encerramento\r\ndo exercício, por força do art.35, inciso II da Lei 4.320/64.",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 98,
+        "descricao": "ANEXO XVIII DO RREO",
+        "o42_codparrel": 98,
+        "o42_descrrel": "ANEXO XVIII DO RREO",
+        "o42_notapadrao": "FONTE: Sistema E-Cidade, Unidade Responsável: [nome_departamento]. Emissão: [data_emissao], às [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 97,
+        "descricao": "ANEXO IX DO RREO",
+        "o42_codparrel": 97,
+        "o42_descrrel": "ANEXO IX DO RREO",
+        "o42_notapadrao": "Fonte: Sistema E-cidade, [nome_departamento] Data da emissão: [data_emissao], Hora de Emissão: [hora_emissao].",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 96,
+        "descricao": "ANEXO II DO RREO",
+        "o42_codparrel": 96,
+        "o42_descrrel": "ANEXO II DO RREO",
+        "o42_notapadrao": "Fonte: Sistema E-Cidade, Unidade Responsável: [nome_departamento], Data de emissão [data_emissao] e hora de emissão [hora_emissao]",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 95,
+        "descricao": "ANEXO VI DO RGF",
+        "o42_codparrel": 95,
+        "o42_descrrel": "ANEXO VI DO RGF",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 94,
+        "descricao": "ANEXO V DO RGF",
+        "o42_codparrel": 94,
+        "o42_descrrel": "ANEXO V DO RGF",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 93,
+        "descricao": "ANEXO VII DO RGF",
+        "o42_codparrel": 93,
+        "o42_descrrel": "ANEXO VII DO RGF",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 92,
+        "descricao": "ANEXO IV DO RGF",
+        "o42_codparrel": 92,
+        "o42_descrrel": "ANEXO IV DO RGF",
+        "o42_notapadrao": "",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 91,
+        "descricao": "ANEXO III DO RGF",
+        "o42_codparrel": 91,
+        "o42_descrrel": "ANEXO III DO RGF",
+        "o42_notapadrao": "¹ Inclui garantias concedidas por meio de Fundos.",
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 90,
+        "descricao": "ANEXO II DO RGF",
+        "o42_codparrel": 90,
+        "o42_descrrel": "ANEXO II DO RGF",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 89,
+        "descricao": "ANEXO I DO RGF",
+        "o42_codparrel": 89,
+        "o42_descrrel": "ANEXO I DO RGF",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 88,
+        "descricao": "ANEXO VI DO RREO",
+        "o42_codparrel": 88,
+        "o42_descrrel": "ANEXO VI DO RREO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 87,
+        "descricao": "ANEXO XVII DO RREO",
+        "o42_codparrel": 87,
+        "o42_descrrel": "ANEXO XVII DO RREO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 86,
+        "descricao": "ANEXO  X DO RREO",
+        "o42_codparrel": 86,
+        "o42_descrrel": "ANEXO  X DO RREO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 85,
+        "descricao": "ANEXO XVI DO RREO",
+        "o42_codparrel": 85,
+        "o42_descrrel": "ANEXO XVI DO RREO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 84,
+        "descricao": "ANEXO IX DO RREO",
+        "o42_codparrel": 84,
+        "o42_descrrel": "ANEXO IX DO RREO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 83,
+        "descricao": "ANEXO VII DO RREO",
+        "o42_codparrel": 83,
+        "o42_descrrel": "ANEXO VII DO RREO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 82,
+        "descricao": "ANEXO V DO RREO",
+        "o42_codparrel": 82,
+        "o42_descrrel": "ANEXO V DO RREO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 81,
+        "descricao": "ANEXO III DO RREO",
+        "o42_codparrel": 81,
+        "o42_descrrel": "ANEXO III DO RREO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 80,
+        "descricao": "ANEXO II DO RREO",
+        "o42_codparrel": 80,
+        "o42_descrrel": "ANEXO II DO RREO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 79,
+        "descricao": "ANEXO I DO RREO",
+        "o42_codparrel": 79,
+        "o42_descrrel": "ANEXO I DO RREO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 78,
+        "descricao": "COTAS DE DESPESA MENSAL",
+        "o42_codparrel": 78,
+        "o42_descrrel": "COTAS DE DESPESA MENSAL",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 77,
+        "descricao": "METAS DE RECEITA X COTAS DE DESPESA",
+        "o42_codparrel": 77,
+        "o42_descrrel": "METAS DE RECEITA X COTAS DE DESPESA",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 76,
+        "descricao": "METAS DA RECEITA",
+        "o42_codparrel": 76,
+        "o42_descrrel": "METAS DA RECEITA",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 63,
+        "descricao": "DEM.DAS OPERACOES DE CREDITO - ED.2009",
+        "o42_codparrel": 63,
+        "o42_descrrel": "DEM.DAS OPERACOES DE CREDITO - ED.2009",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 62,
+        "descricao": "BALANCO ORCAMENTARIO ANEXO 12 (4320)",
+        "o42_codparrel": 62,
+        "o42_descrrel": "BALANCO ORCAMENTARIO ANEXO 12 (4320)",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 61,
+        "descricao": "DEM DAS REC E DESP COM MDE - EDICAO 2009",
+        "o42_codparrel": 61,
+        "o42_descrrel": "DEM DAS REC E DESP COM MDE - EDICAO 2009",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 60,
+        "descricao": "DEM DAS REC E DESP PREVID DO RPPS  - EDICAO 2009",
+        "o42_codparrel": 60,
+        "o42_descrrel": "DEM DAS REC E DESP PREVID DO RPPS  - EDICAO 2009",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 59,
+        "descricao": "DEM DA RECEITA CORRENTE LÍQUIDA - EDICAO 2009",
+        "o42_codparrel": 59,
+        "o42_descrrel": "DEM DA RECEITA CORRENTE LÍQUIDA - EDICAO 2009",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 58,
+        "descricao": "DEM DOS RESTOS A PAGAR - RGF",
+        "o42_codparrel": 58,
+        "o42_descrrel": "DEM DOS RESTOS A PAGAR - RGF",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 57,
+        "descricao": "ACOMPANHAMENTO ORCAMENTARIO",
+        "o42_codparrel": 57,
+        "o42_descrrel": "ACOMPANHAMENTO ORCAMENTARIO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 56,
+        "descricao": "BALANÇO PATRIMONIAL-RPPS",
+        "o42_codparrel": 56,
+        "o42_descrrel": "BALANÇO PATRIMONIAL-RPPS",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 55,
+        "descricao": "BALANCO FINANCEIRO RPPS",
+        "o42_codparrel": 55,
+        "o42_descrrel": "BALANCO FINANCEIRO RPPS",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 54,
+        "descricao": "VARIAÇÕES PATRIMONIAIS RPPS",
+        "o42_codparrel": 54,
+        "o42_descrrel": "VARIAÇÕES PATRIMONIAIS RPPS",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 53,
+        "descricao": "BALANÇO ORÇAMENTÁRIO RPPS",
+        "o42_codparrel": 53,
+        "o42_descrrel": "BALANÇO ORÇAMENTÁRIO RPPS",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 52,
+        "descricao": "LRF-DEMONSTR. DAS DESPESAS POR FUNC/SUBFUNC - EDICAO 7",
+        "o42_codparrel": 52,
+        "o42_descrrel": "LRF-DEMONSTR. DAS DESPESAS POR FUNC/SUBFUNC - EDICAO 7",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 51,
+        "descricao": "Indice da Saude",
+        "o42_codparrel": 51,
+        "o42_descrrel": "Indice da Saude",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 50,
+        "descricao": "Indice Educação",
+        "o42_codparrel": 50,
+        "o42_descrrel": "Indice Educação",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 42,
+        "descricao": "ANEXO V - RECEITA E DESPESAS RPPS",
+        "o42_codparrel": 42,
+        "o42_descrrel": "ANEXO V - RECEITA E DESPESAS RPPS",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 41,
+        "descricao": "VARIAÇÕES PATRIMONIAIS - ANEXO 15",
+        "o42_codparrel": 41,
+        "o42_descrrel": "VARIAÇÕES PATRIMONIAIS - ANEXO 15",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 40,
+        "descricao": "ANEXO17- DIVIDA FLUTUANTE",
+        "o42_codparrel": 40,
+        "o42_descrrel": "ANEXO17- DIVIDA FLUTUANTE",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 33,
+        "descricao": "DEM.DA DISPONIBILIDADE DE CAIXA - EDICAO 7",
+        "o42_codparrel": 33,
+        "o42_descrrel": "DEM.DA DISPONIBILIDADE DE CAIXA - EDICAO 7",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 32,
+        "descricao": "DEM.DAS OPERACOES DE CREDITO - EDICAO 7",
+        "o42_codparrel": 32,
+        "o42_descrrel": "DEM.DAS OPERACOES DE CREDITO - EDICAO 7",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 31,
+        "descricao": "LRF-DEM DAS RECEITAS E DESPESAS COM MDE",
+        "o42_codparrel": 31,
+        "o42_descrrel": "LRF-DEM DAS RECEITAS E DESPESAS COM MDE",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 30,
+        "descricao": "LRF-ANEXO X -MDE",
+        "o42_codparrel": 30,
+        "o42_descrrel": "LRF-ANEXO X -MDE",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 29,
+        "descricao": "DEM.DA DIVIDA CONSOLIDADA LIQUIDA - EDICAO 7",
+        "o42_codparrel": 29,
+        "o42_descrrel": "DEM.DA DIVIDA CONSOLIDADA LIQUIDA - EDICAO 7",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 28,
+        "descricao": "DEM.DOS RESTOS A PAGAR POR PODER E ORGAO - EDICAO 7",
+        "o42_codparrel": 28,
+        "o42_descrrel": "DEM.DOS RESTOS A PAGAR POR PODER E ORGAO - EDICAO 7",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 27,
+        "descricao": "DEM.DA RECEITA CORRENTE LIQUIDA - EDICAO 7",
+        "o42_codparrel": 27,
+        "o42_descrrel": "DEM.DA RECEITA CORRENTE LIQUIDA - EDICAO 7",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 26,
+        "descricao": "DEM.DA DESPESA COM PESSOAL - EDICAO 7",
+        "o42_codparrel": 26,
+        "o42_descrrel": "DEM.DA DESPESA COM PESSOAL - EDICAO 7",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 25,
+        "descricao": "DEM.DAS OP.DE CRÉDITO E DESP.DE CAPITAL",
+        "o42_codparrel": 25,
+        "o42_descrrel": "DEM.DAS OP.DE CRÉDITO E DESP.DE CAPITAL",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 24,
+        "descricao": "DEM.DE IMPOSTOS E DESP.COM SAUDE - EDICAO 7",
+        "o42_codparrel": 24,
+        "o42_descrrel": "DEM.DE IMPOSTOS E DESP.COM SAUDE - EDICAO 7",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 23,
+        "descricao": "LRF-DEM.DAS REC.E DESP. PREV DO RPPS",
+        "o42_codparrel": 23,
+        "o42_descrrel": "LRF-DEM.DAS REC.E DESP. PREV DO RPPS",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 22,
+        "descricao": "LRF-BALANCO ORCAMENTARIO EDICAO 7",
+        "o42_codparrel": 22,
+        "o42_descrrel": "LRF-BALANCO ORCAMENTARIO EDICAO 7",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 21,
+        "descricao": "Relatórios Geral",
+        "o42_codparrel": 21,
+        "o42_descrrel": "Relatórios Geral",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 20,
+        "descricao": "CONFERENCIA, GASTOS COM PESSOAL",
+        "o42_codparrel": 20,
+        "o42_descrrel": "CONFERENCIA, GASTOS COM PESSOAL",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 19,
+        "descricao": "RELATORIO DE CONFERENCIA, MDE",
+        "o42_codparrel": 19,
+        "o42_descrrel": "RELATORIO DE CONFERENCIA, MDE",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 18,
+        "descricao": "Anexo XVII- Demonstrativo Simplificado LRF",
+        "o42_codparrel": 18,
+        "o42_descrrel": "Anexo XVII- Demonstrativo Simplificado LRF",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 17,
+        "descricao": "ANEXO VII - RESULTADO PRIMARIO ",
+        "o42_codparrel": 17,
+        "o42_descrrel": "ANEXO VII - RESULTADO PRIMARIO ",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 16,
+        "descricao": "Anexo VI - Resultado Nominal ",
+        "o42_codparrel": 16,
+        "o42_descrrel": "Anexo VI - Resultado Nominal ",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 15,
+        "descricao": "ANEXO 1, BALANÇO ORCAMENTARIO - LRF   ",
+        "o42_codparrel": 15,
+        "o42_descrrel": "ANEXO 1, BALANÇO ORCAMENTARIO - LRF   ",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 14,
+        "descricao": "DISPONIBILIDADE DE CAIXA RPPS",
+        "o42_codparrel": 14,
+        "o42_descrrel": "DISPONIBILIDADE DE CAIXA RPPS",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 13,
+        "descricao": "DISPONIBILIDADE DE CAIXA_LRF",
+        "o42_codparrel": 13,
+        "o42_descrrel": "DISPONIBILIDADE DE CAIXA_LRF",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 12,
+        "descricao": "GASTOS COM MDE - LRF ",
+        "o42_codparrel": 12,
+        "o42_descrrel": "GASTOS COM MDE - LRF ",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 11,
+        "descricao": "BALANÇO FINANCEIRO - ANEXO 13",
+        "o42_codparrel": 11,
+        "o42_descrrel": "BALANÇO FINANCEIRO - ANEXO 13",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 10,
+        "descricao": "LRF- EXEC.ORÇAMENTARIA - RECEITA DE IMP",
+        "o42_codparrel": 10,
+        "o42_descrrel": "LRF- EXEC.ORÇAMENTARIA - RECEITA DE IMP",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 9,
+        "descricao": "LRF DEMONSTRATIVO DOS LIMITES",
+        "o42_codparrel": 9,
+        "o42_descrrel": "LRF DEMONSTRATIVO DOS LIMITES",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 8,
+        "descricao": "LRF DIVIDA CONSOLIDADA LIQUIDA",
+        "o42_codparrel": 8,
+        "o42_descrrel": "LRF DIVIDA CONSOLIDADA LIQUIDA",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 7,
+        "descricao": "LRF GARANTIAS E CONTRA GARANTIAS",
+        "o42_codparrel": 7,
+        "o42_descrrel": "LRF GARANTIAS E CONTRA GARANTIAS",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 6,
+        "descricao": "LRF OPERAÇÃO DE CREDITO",
+        "o42_codparrel": 6,
+        "o42_descrrel": "LRF OPERAÇÃO DE CREDITO",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 5,
+        "descricao": "DEMONSTRATIVO RECEITA CORRENTE LIQUIDA",
+        "o42_codparrel": 5,
+        "o42_descrrel": "DEMONSTRATIVO RECEITA CORRENTE LIQUIDA",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 4,
+        "descricao": "LRF DEMONSTRATIVO DESP COM PESSOAL",
+        "o42_codparrel": 4,
+        "o42_descrrel": "LRF DEMONSTRATIVO DESP COM PESSOAL",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 3,
+        "descricao": "BALANÇO PATRIMONIAL - ANEXO 14",
+        "o42_codparrel": 3,
+        "o42_descrrel": "BALANÇO PATRIMONIAL - ANEXO 14",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      },
+      {
+        "codigo": 1,
+        "descricao": "DEMONSTRATIVO COM GASTOS DE PESSOAL",
+        "o42_codparrel": 1,
+        "o42_descrrel": "DEMONSTRATIVO COM GASTOS DE PESSOAL",
+        "o42_notapadrao": null,
+        "o42_orcparamrelgrupo": 1
+      }
+    ],
+    "error": false,
+    "message": "Relatórios"
+  },
+  "sha256": "ae578e2c9bf04661c2d288aae1af568a63eb0c86b45a9a9bf64292b507a23968",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

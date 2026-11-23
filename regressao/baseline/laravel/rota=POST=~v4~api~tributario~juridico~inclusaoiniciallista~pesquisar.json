@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/juridico/inclusaoiniciallista/pesquisar",
+  "json": {
+    "data": [],
+    "error": true,
+    "message": "Informe o codigo da lista"
+  },
+  "sha256": "c2eaadbd8f90047b8b48724847c4449b684b76fcd7934bb3fe2146f8b2b1c8d3",
+  "sql_negocio": [],
+  "status": 400,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -67,10 +67,10 @@ class cl_concarpeculiarclassificacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c09_sequencial = ($this->c09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c09_sequencial"]:$this->c09_sequencial);
+       $this->c09_sequencial = ($this->c09_sequencial === 0 || $this->c09_sequencial === 0.0 || $this->c09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c09_sequencial"]:$this->c09_sequencial);
        $this->c09_descricao = ($this->c09_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["c09_descricao"]:$this->c09_descricao);
      }else{
-       $this->c09_sequencial = ($this->c09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c09_sequencial"]:$this->c09_sequencial);
+       $this->c09_sequencial = ($this->c09_sequencial === 0 || $this->c09_sequencial === 0.0 || $this->c09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c09_sequencial"]:$this->c09_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_concarpeculiarclassificacao {
          $this->c09_sequencial = $c09_sequencial;
        }
      }
-     if(($this->c09_sequencial == null) || ($this->c09_sequencial == "") ){
+     if(($this->c09_sequencial == null) || ($this->c09_sequencial === 0 || $this->c09_sequencial === 0.0 || $this->c09_sequencial == "") ){
        $this->erro_sql = " Campo c09_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/e-social/exame-toxicologico/store",
+  "json": {
+    "errors": {
+      "eso41_cpftrab": [
+        "O campo eso41 cpftrab é obrigatório."
+      ],
+      "eso41_instit": [
+        "O campo eso41 instit é obrigatório."
+      ],
+      "eso41_matricula": [
+        "O campo eso41 matricula é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "8d0f586e8915b5a8925500dc67db734d81c5c6c11cdf54a9eaf39c7aa152fb8b",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

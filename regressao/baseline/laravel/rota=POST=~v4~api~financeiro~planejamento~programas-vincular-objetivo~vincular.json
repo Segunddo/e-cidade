@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/programas-vincular-objetivo/vincular",
+  "json": {
+    "errors": {
+      "objetivo": [
+        "O campo \"Objetivo Estratégico\" deve ser informada."
+      ],
+      "programas": [
+        "Deve ser informado uma coleção de programas."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "e9f60cfb7b8f2e8eb8fcf39c3c6cabd7830a7eca002f059d2cf6a4b525b5ab41",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

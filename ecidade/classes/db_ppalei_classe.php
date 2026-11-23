@@ -75,14 +75,14 @@ class cl_ppalei {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o01_sequencial = ($this->o01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_sequencial"]:$this->o01_sequencial);
-       $this->o01_anoinicio = ($this->o01_anoinicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_anoinicio"]:$this->o01_anoinicio);
-       $this->o01_anofinal = ($this->o01_anofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_anofinal"]:$this->o01_anofinal);
+       $this->o01_sequencial = ($this->o01_sequencial === 0 || $this->o01_sequencial === 0.0 || $this->o01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_sequencial"]:$this->o01_sequencial);
+       $this->o01_anoinicio = ($this->o01_anoinicio === 0 || $this->o01_anoinicio === 0.0 || $this->o01_anoinicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_anoinicio"]:$this->o01_anoinicio);
+       $this->o01_anofinal = ($this->o01_anofinal === 0 || $this->o01_anofinal === 0.0 || $this->o01_anofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_anofinal"]:$this->o01_anofinal);
        $this->o01_descricao = ($this->o01_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_descricao"]:$this->o01_descricao);
        $this->o01_numerolei = ($this->o01_numerolei == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_numerolei"]:$this->o01_numerolei);
-       $this->o01_instit = ($this->o01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_instit"]:$this->o01_instit);
+       $this->o01_instit = ($this->o01_instit === 0 || $this->o01_instit === 0.0 || $this->o01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_instit"]:$this->o01_instit);
      }else{
-       $this->o01_sequencial = ($this->o01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_sequencial"]:$this->o01_sequencial);
+       $this->o01_sequencial = ($this->o01_sequencial === 0 || $this->o01_sequencial === 0.0 || $this->o01_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o01_sequencial"]:$this->o01_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_ppalei {
          $this->o01_sequencial = $o01_sequencial;
        }
      }
-     if(($this->o01_sequencial == null) || ($this->o01_sequencial == "") ){
+     if(($this->o01_sequencial == null) || ($this->o01_sequencial === 0 || $this->o01_sequencial === 0.0 || $this->o01_sequencial == "") ){
        $this->erro_sql = " Campo o01_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

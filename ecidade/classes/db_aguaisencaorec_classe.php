@@ -71,13 +71,13 @@ class cl_aguaisencaorec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x26_codisencao = ($this->x26_codisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencao"]:$this->x26_codisencao);
-       $this->x26_codisencaorec = ($this->x26_codisencaorec == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencaorec"]:$this->x26_codisencaorec);
-       $this->x26_percentual = ($this->x26_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_percentual"]:$this->x26_percentual);
-       $this->x26_codconsumotipo = ($this->x26_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codconsumotipo"]:$this->x26_codconsumotipo);
+       $this->x26_codisencao = ($this->x26_codisencao === 0 || $this->x26_codisencao === 0.0 || $this->x26_codisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencao"]:$this->x26_codisencao);
+       $this->x26_codisencaorec = ($this->x26_codisencaorec === 0 || $this->x26_codisencaorec === 0.0 || $this->x26_codisencaorec == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencaorec"]:$this->x26_codisencaorec);
+       $this->x26_percentual = ($this->x26_percentual === 0 || $this->x26_percentual === 0.0 || $this->x26_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_percentual"]:$this->x26_percentual);
+       $this->x26_codconsumotipo = ($this->x26_codconsumotipo === 0 || $this->x26_codconsumotipo === 0.0 || $this->x26_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codconsumotipo"]:$this->x26_codconsumotipo);
      }else{
-       $this->x26_codisencao = ($this->x26_codisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencao"]:$this->x26_codisencao);
-       $this->x26_codisencaorec = ($this->x26_codisencaorec == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencaorec"]:$this->x26_codisencaorec);
+       $this->x26_codisencao = ($this->x26_codisencao === 0 || $this->x26_codisencao === 0.0 || $this->x26_codisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencao"]:$this->x26_codisencao);
+       $this->x26_codisencaorec = ($this->x26_codisencaorec === 0 || $this->x26_codisencaorec === 0.0 || $this->x26_codisencaorec == ""?@$GLOBALS["HTTP_POST_VARS"]["x26_codisencaorec"]:$this->x26_codisencaorec);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_aguaisencaorec {
          $this->x26_codisencaorec = $x26_codisencaorec;
        }
      }
-     if(($this->x26_codisencaorec == null) || ($this->x26_codisencaorec == "") ){
+     if(($this->x26_codisencaorec == null) || ($this->x26_codisencaorec === 0 || $this->x26_codisencaorec === 0.0 || $this->x26_codisencaorec == "") ){
        $this->erro_sql = " Campo x26_codisencaorec nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

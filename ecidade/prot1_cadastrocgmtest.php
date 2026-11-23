@@ -33,7 +33,7 @@ $func_iframe->altura=430;
 $func_iframe->titulo='Pesquisa';
 $func_iframe->iniciarVisivel = false;
 $func_iframe->mostrar();
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 ?>
 <script>
 function js_ruacorreta(){

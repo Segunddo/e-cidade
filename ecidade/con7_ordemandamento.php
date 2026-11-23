@@ -55,7 +55,7 @@ if (isset ($HTTP_POST_VARS["incluir"])) {
 	// apenas incluir andamento com id do usuario atual
         //
 	db_postmemory($HTTP_POST_VARS);
-	if (!checkdate($dtini_mes, $dtini_dia, $dtini_ano))
+	if (!checkdate((int)$dtini_mes, (int)$dtini_dia, (int)$dtini_ano))
 		db_erro("Erro (11). Data invalida.");
 	$dtini = $dtini_ano."-".$dtini_mes."-".$dtini_dia;
 	if ($dtfim_dia != "") {
@@ -108,7 +108,7 @@ if (isset ($HTTP_POST_VARS["incluir"])) {
 				// insere registro na tabela db_ordemfim indicando que essa ordem foi finalizada
 				$result = db_query("insert into db_ordemfim values ($codordem,$DB_id_usuario,'$dtatual')") or die(" $dtfim Erro: (26). Processo de inclusao.");
 				// verifica se a data nao foi deixada em branco
-				if (!checkdate($dtini_mes, $dtini_dia, $dtini_ano))
+				if (!checkdate((int)$dtini_mes, (int)$dtini_dia, (int)$dtini_ano))
 					db_erro("Erro (11). Data invalida.");
 				$dtini = $dtini_ano."-".$dtini_mes."-".$dtini_dia;
 				if ($dtfim_dia != "") {

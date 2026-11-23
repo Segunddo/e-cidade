@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/recursos/byFilters",
+  "json": {
+    "error": true,
+    "message": "Undefined index: exercicio"
+  },
+  "sha256": "4420aaa9ee8c401c3f24d7587d28e9463d9253f99c892dce9033eac7a00a6c0c",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

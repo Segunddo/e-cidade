@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/atributos-plano-conas",
+  "json": {
+    "error": true,
+    "message": "Call to a member function isEmpty() on null"
+  },
+  "sha256": "3a47ce4913a8eec194f354e78bd72433a40e06a119eb41481b2c45e158a6f636",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -73,13 +73,13 @@ class cl_loteam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j34_loteam = ($this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
+       $this->j34_loteam = ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
        $this->j34_descr = ($this->j34_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_descr"]:$this->j34_descr);
-       $this->j34_areacc = ($this->j34_areacc == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areacc"]:$this->j34_areacc);
-       $this->j34_areapc = ($this->j34_areapc == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areapc"]:$this->j34_areapc);
-       $this->j34_areato = ($this->j34_areato == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areato"]:$this->j34_areato);
+       $this->j34_areacc = ($this->j34_areacc === 0 || $this->j34_areacc === 0.0 || $this->j34_areacc == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areacc"]:$this->j34_areacc);
+       $this->j34_areapc = ($this->j34_areapc === 0 || $this->j34_areapc === 0.0 || $this->j34_areapc == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areapc"]:$this->j34_areapc);
+       $this->j34_areato = ($this->j34_areato === 0 || $this->j34_areato === 0.0 || $this->j34_areato == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areato"]:$this->j34_areato);
      }else{
-       $this->j34_loteam = ($this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
+       $this->j34_loteam = ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_loteam {
          $this->j34_loteam = $j34_loteam;
        }
      }
-     if(($this->j34_loteam == null) || ($this->j34_loteam == "") ){
+     if(($this->j34_loteam == null) || ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == "") ){
        $this->erro_sql = " Campo j34_loteam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/integracoes/efd-reinf/retencao/dadosrespR4099",
+  "json": null,
+  "sha256": "061d7c9e0ac5b1508b9ab739477e29de526ad7e975f17753399bd25f4169e5ed",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

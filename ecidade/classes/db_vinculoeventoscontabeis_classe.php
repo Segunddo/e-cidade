@@ -69,11 +69,11 @@ class cl_vinculoeventoscontabeis {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c115_sequencial = ($this->c115_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c115_sequencial"]:$this->c115_sequencial);
-       $this->c115_conhistdocinclusao = ($this->c115_conhistdocinclusao == ""?@$GLOBALS["HTTP_POST_VARS"]["c115_conhistdocinclusao"]:$this->c115_conhistdocinclusao);
-       $this->c115_conhistdocestorno = ($this->c115_conhistdocestorno == ""?@$GLOBALS["HTTP_POST_VARS"]["c115_conhistdocestorno"]:$this->c115_conhistdocestorno);
+       $this->c115_sequencial = ($this->c115_sequencial === 0 || $this->c115_sequencial === 0.0 || $this->c115_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c115_sequencial"]:$this->c115_sequencial);
+       $this->c115_conhistdocinclusao = ($this->c115_conhistdocinclusao === 0 || $this->c115_conhistdocinclusao === 0.0 || $this->c115_conhistdocinclusao == ""?@$GLOBALS["HTTP_POST_VARS"]["c115_conhistdocinclusao"]:$this->c115_conhistdocinclusao);
+       $this->c115_conhistdocestorno = ($this->c115_conhistdocestorno === 0 || $this->c115_conhistdocestorno === 0.0 || $this->c115_conhistdocestorno == ""?@$GLOBALS["HTTP_POST_VARS"]["c115_conhistdocestorno"]:$this->c115_conhistdocestorno);
      }else{
-       $this->c115_sequencial = ($this->c115_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c115_sequencial"]:$this->c115_sequencial);
+       $this->c115_sequencial = ($this->c115_sequencial === 0 || $this->c115_sequencial === 0.0 || $this->c115_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c115_sequencial"]:$this->c115_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_vinculoeventoscontabeis {
          $this->c115_sequencial = $c115_sequencial;
        }
      }
-     if(($this->c115_sequencial == null) || ($this->c115_sequencial == "") ){
+     if(($this->c115_sequencial == null) || ($this->c115_sequencial === 0 || $this->c115_sequencial === 0.0 || $this->c115_sequencial == "") ){
        $this->erro_sql = " Campo c115_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -220,7 +220,7 @@ class cl_vinculoeventoscontabeis {
          $this->c115_sequencial = $c115_sequencial;
        }
      }
-     if(($this->c115_sequencial == null) || ($this->c115_sequencial == "") ){
+     if(($this->c115_sequencial == null) || ($this->c115_sequencial === 0 || $this->c115_sequencial === 0.0 || $this->c115_sequencial == "") ){
        $this->erro_sql = " Campo c115_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

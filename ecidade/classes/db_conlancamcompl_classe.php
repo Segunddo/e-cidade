@@ -67,10 +67,10 @@ class cl_conlancamcompl {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c72_codlan = ($this->c72_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_codlan"]:$this->c72_codlan);
+       $this->c72_codlan = ($this->c72_codlan === 0 || $this->c72_codlan === 0.0 || $this->c72_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_codlan"]:$this->c72_codlan);
        $this->c72_complem = ($this->c72_complem == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_complem"]:$this->c72_complem);
      }else{
-       $this->c72_codlan = ($this->c72_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_codlan"]:$this->c72_codlan);
+       $this->c72_codlan = ($this->c72_codlan === 0 || $this->c72_codlan === 0.0 || $this->c72_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c72_codlan"]:$this->c72_codlan);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_conlancamcompl {
        return false;
      }
        $this->c72_codlan = $c72_codlan;
-     if(($this->c72_codlan == null) || ($this->c72_codlan == "") ){
+     if(($this->c72_codlan == null) || ($this->c72_codlan === 0 || $this->c72_codlan === 0.0 || $this->c72_codlan == "") ){
        $this->erro_sql = " Campo c72_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

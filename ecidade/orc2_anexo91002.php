@@ -31,7 +31,7 @@ include(modification("libs/db_sql.php"));
 include(modification("libs/db_liborcamento.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $classinatura = new cl_assinatura;
@@ -42,7 +42,7 @@ $xinstit =explode("-",$db_selinstit);
 $resultinst = db_query("select codigo, nomeinstabrev as nomeinst from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++) {
   db_fieldsmemory($resultinst,$xins);
   $descr_inst .= $xvirg.$nomeinst ;
   $xvirg = ', ';
@@ -109,7 +109,7 @@ order by o52_funcao";
 $result = db_query($sql);
 //db_criatabela($result);
 $sql = "";
-$quantascolunas = pg_numrows($result);
+$quantascolunas = ($result ? pg_numrows($result) : null);
 
 //echo $quantascolunas; exit;
 
@@ -119,7 +119,7 @@ if ($opcao == 1) {
   $xvalor = 'empenhado - anulado';
 }
 
-for ($i=0; $i<pg_numrows($result); $i++) {
+for ($i=0; $i<($result ? pg_numrows($result) : null); $i++) {
   db_fieldsmemory($result,$i);
   $sql .= " sum(case when o52_funcao = $o52_funcao then $xvalor else 0::float8 end ) as c_$o52_funcao, \n";
 }
@@ -182,7 +182,7 @@ $torgaonome = array();
 
 $pdf->sety(300);
 
-for ($i=0; $i<pg_numrows($result); $i++) {
+for ($i=0; $i<($result ? pg_numrows($result) : null); $i++) {
   db_fieldsmemory($result,$i);
   if ($pdf->gety()>$pdf->h-30 || $pagina ==1) {
     if ($pdf->gety()>$pdf->h-30) {
@@ -209,7 +209,7 @@ for ($i=0; $i<pg_numrows($result); $i++) {
       $contador -= $x;
     }
     for ($li=0; $li<$x; $li++) {
-      $campo = pg_fieldname($result,$contador);
+      $campo = ($result ? pg_fieldname($result,$contador) : null);
       $contador ++;
       $sql = "select o52_descr
 from orcfuncao
@@ -226,60 +226,60 @@ where o52_funcao = ".substr($campo,2);
 
   if ($quantascolunas+4 >= 4) {
     if ($x>=1) {
-      $valor = pg_fieldname($result,$contador-4);
+      $valor = ($result ? pg_fieldname($result,$contador-4) : null);
       $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
       $tvalor1 += $$valor;
     }
     if ($x>=2) {
-      $valor = pg_fieldname($result,$contador-3);
+      $valor = ($result ? pg_fieldname($result,$contador-3) : null);
       $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
       $tvalor2 += $$valor;
     }
     if ($x>=3) {
-      $valor = pg_fieldname($result,$contador-2);
+      $valor = ($result ? pg_fieldname($result,$contador-2) : null);
       $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
       $tvalor3 += $$valor;
     }
     if ($x>=4) {
-      $valor = pg_fieldname($result,$contador-1);
+      $valor = ($result ? pg_fieldname($result,$contador-1) : null);
       $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
       $tvalor4 += $$valor;
     }
   } else if ($quantascolunas >= 2) {
       if ($x>=1) {
-        $valor = pg_fieldname($result,$contador-4);
+        $valor = ($result ? pg_fieldname($result,$contador-4) : null);
         $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
         $tvalor1 += $$valor;
       }
       if ($x>=2) {
-        $valor = pg_fieldname($result,$contador-3);
+        $valor = ($result ? pg_fieldname($result,$contador-3) : null);
         $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
         $tvalor2 += $$valor;
       }
       if ($x>=3) {
-        $valor = pg_fieldname($result,$contador-2);
+        $valor = ($result ? pg_fieldname($result,$contador-2) : null);
         $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
         $tvalor3 += $$valor;
       }
       if ($x>=4) {
-        $valor = pg_fieldname($result,$contador-1);
+        $valor = ($result ? pg_fieldname($result,$contador-1) : null);
         $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
         $tvalor4 += $$valor;
       }
   } else {
       if ($quantascolunas > 2){
           if ($x>=1) {
-            $valor = pg_fieldname($result,$contador-3);
+            $valor = ($result ? pg_fieldname($result,$contador-3) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor1 += $$valor;
           }
           if ($x>=2) {
-            $valor = pg_fieldname($result,$contador-2);
+            $valor = ($result ? pg_fieldname($result,$contador-2) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor2 += $$valor;
           }
           if ($x>=3) {
-            $valor = pg_fieldname($result,$contador-1);
+            $valor = ($result ? pg_fieldname($result,$contador-1) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor3 += $$valor;
           }
@@ -287,12 +287,12 @@ where o52_funcao = ".substr($campo,2);
 
       if ($quantascolunas == -2){
           if ($x>=1) {
-            $valor = pg_fieldname($result,$contador-2);
+            $valor = ($result ? pg_fieldname($result,$contador-2) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor1 += $$valor;
           }
           if ($x>=2) {
-            $valor = pg_fieldname($result,$contador-1);
+            $valor = ($result ? pg_fieldname($result,$contador-1) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor2 += $$valor;
           }
@@ -300,19 +300,19 @@ where o52_funcao = ".substr($campo,2);
 
       if ($quantascolunas > -1){
           if ($x>=1) {
-            $valor = pg_fieldname($result,$contador-2);
+            $valor = ($result ? pg_fieldname($result,$contador-2) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor1 += $$valor;
           }
           if ($x>=2) {
-            $valor = pg_fieldname($result,$contador-1);
+            $valor = ($result ? pg_fieldname($result,$contador-1) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor2 += $$valor;
           }
       }
       if ($quantascolunas == -3){
           if ($x>=1) {
-            $valor = pg_fieldname($result,$contador-1);
+            $valor = ($result ? pg_fieldname($result,$contador-1) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor1 += $$valor;
           }
@@ -321,17 +321,17 @@ where o52_funcao = ".substr($campo,2);
 
       if ($quantascolunas == -1){
           if ($x>=1) {
-            $valor = pg_fieldname($result,$contador-3);
+            $valor = ($result ? pg_fieldname($result,$contador-3) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor1 += $$valor;
           }
           if ($x>=2) {
-            $valor = pg_fieldname($result,$contador-2);
+            $valor = ($result ? pg_fieldname($result,$contador-2) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor2 += $$valor;
           }
           if ($x>=3) {
-            $valor = pg_fieldname($result,$contador-1);
+            $valor = ($result ? pg_fieldname($result,$contador-1) : null);
             $pdf->cell(35,$alt,db_formatar($$valor,'f'),0,0,"C",0);
             $tvalor3 += $$valor;
           }
@@ -340,7 +340,7 @@ where o52_funcao = ".substr($campo,2);
 
   $pdf->cell(0,$alt,'',0,1,"L",0);
 
-  if ($i+1==pg_numrows($result) && ($quantascolunas >= 4 || $quantascolunas > 0) ) {
+  if ($i+1==($result ? pg_numrows($result) : null) && ($quantascolunas >= 4 || $quantascolunas > 0) ) {
     $pdf->cell(12,$alt,"TOTAL",0,0,"L",0);
     $pdf->cell(85,$alt,"",0,0,"L",0);
     $pdf->cell(35,$alt,db_formatar($tvalor1,'f'),0,0,"C",0);
@@ -421,7 +421,7 @@ $pdf->cell(85,$alt,"ORGAO",1,0,"L",0);
 $pdf->cell(35,$alt,"TOTAL",1,0,"C",0);
 $pdf->Ln();
 $tvalor=0;
-for ($x=0; $x<pg_numrows($result_tot); $x++) {
+for ($x=0; $x<($result_tot ? pg_numrows($result_tot) : null); $x++) {
   db_fieldsmemory($result_tot,$x);
   $pdf->cell(12,$alt,$o58_orgao,0,0,"L",0);
   $pdf->cell(85,$alt,$o40_descr,0,0,"L",0);

@@ -83,7 +83,7 @@ class cl_acordocomissao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac08_sequencial = ($this->ac08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac08_sequencial"]:$this->ac08_sequencial);
+       $this->ac08_sequencial = ($this->ac08_sequencial === 0 || $this->ac08_sequencial === 0.0 || $this->ac08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac08_sequencial"]:$this->ac08_sequencial);
        $this->ac08_descricao = ($this->ac08_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac08_descricao"]:$this->ac08_descricao);
        $this->ac08_observacao = ($this->ac08_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac08_observacao"]:$this->ac08_observacao);
        if($this->ac08_datainicial == ""){
@@ -102,10 +102,10 @@ class cl_acordocomissao {
             $this->ac08_datafim = $this->ac08_datafim_ano."-".$this->ac08_datafim_mes."-".$this->ac08_datafim_dia;
          }
        }
-       $this->ac08_instit = ($this->ac08_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ac08_instit"]:$this->ac08_instit);
-       $this->ac08_acordocomissaotipo = ($this->ac08_acordocomissaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac08_acordocomissaotipo"]:$this->ac08_acordocomissaotipo);
+       $this->ac08_instit = ($this->ac08_instit === 0 || $this->ac08_instit === 0.0 || $this->ac08_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ac08_instit"]:$this->ac08_instit);
+       $this->ac08_acordocomissaotipo = ($this->ac08_acordocomissaotipo === 0 || $this->ac08_acordocomissaotipo === 0.0 || $this->ac08_acordocomissaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac08_acordocomissaotipo"]:$this->ac08_acordocomissaotipo);
      }else{
-       $this->ac08_sequencial = ($this->ac08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac08_sequencial"]:$this->ac08_sequencial);
+       $this->ac08_sequencial = ($this->ac08_sequencial === 0 || $this->ac08_sequencial === 0.0 || $this->ac08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac08_sequencial"]:$this->ac08_sequencial);
      }
    }
    // funcao para inclusao
@@ -189,7 +189,7 @@ class cl_acordocomissao {
          $this->ac08_sequencial = $ac08_sequencial;
        }
      }
-     if(($this->ac08_sequencial == null) || ($this->ac08_sequencial == "") ){
+     if(($this->ac08_sequencial == null) || ($this->ac08_sequencial === 0 || $this->ac08_sequencial === 0.0 || $this->ac08_sequencial == "") ){
        $this->erro_sql = " Campo ac08_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -33,7 +33,7 @@ include(modification("classes/db_clientes_classe.php"));
 include(modification("classes/db_atendcadarea_classe.php"));
 include(modification("classes/db_db_modulos_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clclientes          = new cl_clientes;
 $clatendcadarea      = new cl_atendcadarea;

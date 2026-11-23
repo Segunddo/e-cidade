@@ -69,12 +69,12 @@ class cl_iptunump {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j20_anousu = ($this->j20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_anousu"]:$this->j20_anousu);
-       $this->j20_matric = ($this->j20_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_matric"]:$this->j20_matric);
-       $this->j20_numpre = ($this->j20_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_numpre"]:$this->j20_numpre);
+       $this->j20_anousu = ($this->j20_anousu === 0 || $this->j20_anousu === 0.0 || $this->j20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_anousu"]:$this->j20_anousu);
+       $this->j20_matric = ($this->j20_matric === 0 || $this->j20_matric === 0.0 || $this->j20_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_matric"]:$this->j20_matric);
+       $this->j20_numpre = ($this->j20_numpre === 0 || $this->j20_numpre === 0.0 || $this->j20_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_numpre"]:$this->j20_numpre);
      }else{
-       $this->j20_anousu = ($this->j20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_anousu"]:$this->j20_anousu);
-       $this->j20_matric = ($this->j20_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_matric"]:$this->j20_matric);
+       $this->j20_anousu = ($this->j20_anousu === 0 || $this->j20_anousu === 0.0 || $this->j20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_anousu"]:$this->j20_anousu);
+       $this->j20_matric = ($this->j20_matric === 0 || $this->j20_matric === 0.0 || $this->j20_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j20_matric"]:$this->j20_matric);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_iptunump {
      }
        $this->j20_anousu = $j20_anousu;
        $this->j20_matric = $j20_matric;
-     if(($this->j20_anousu == null) || ($this->j20_anousu == "") ){
+     if(($this->j20_anousu == null) || ($this->j20_anousu === 0 || $this->j20_anousu === 0.0 || $this->j20_anousu == "") ){
        $this->erro_sql = " Campo j20_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_iptunump {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j20_matric == null) || ($this->j20_matric == "") ){
+     if(($this->j20_matric == null) || ($this->j20_matric === 0 || $this->j20_matric === 0.0 || $this->j20_matric == "") ){
        $this->erro_sql = " Campo j20_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

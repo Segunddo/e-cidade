@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/receita/previsao/buscar",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Estimativas encontradas."
+  },
+  "sha256": "6ab745c6bd16cf7ee7bfeedfe37bf8c4bcbb619df3fc54f0cb8de5de6e40a890",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

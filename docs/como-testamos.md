@@ -6,6 +6,8 @@ Oct 25, 2026 · @Diego
 
 O registro completo, com cada número e cada defeito encontrado, fica em `docs/registro/` (índice no fim do `CLAUDE.md`). O passo a passo do porte de um módulo está em `docs/migrar-um-modulo.md`.
 
+> Suíte automática de regressão sobre a base 7.4 (7.4 × 8.5, rodar em 3 comandos): `regressao/COMO-USAR.md`.
+
 ## 1. A ideia central: o sistema antigo é o gabarito
 
 A migração não troca o PHP 5.6 pelo 8.5 de uma vez. As duas versões rodam **lado a lado**, sobre o **mesmo código** e o **mesmo banco**:

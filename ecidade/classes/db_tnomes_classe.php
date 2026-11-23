@@ -71,7 +71,7 @@ class cl_tnomes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->yy_codigo = ($this->yy_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["yy_codigo"]:$this->yy_codigo);
+       $this->yy_codigo = ($this->yy_codigo === 0 || $this->yy_codigo === 0.0 || $this->yy_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["yy_codigo"]:$this->yy_codigo);
        $this->yy_nome = ($this->yy_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["yy_nome"]:$this->yy_nome);
        if($this->yy_data == ""){
          $this->yy_data_dia = ($this->yy_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["yy_data_dia"]:$this->yy_data_dia);
@@ -83,7 +83,7 @@ class cl_tnomes {
        }
        $this->yy_obs = ($this->yy_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["yy_obs"]:$this->yy_obs);
      }else{
-       $this->yy_codigo = ($this->yy_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["yy_codigo"]:$this->yy_codigo);
+       $this->yy_codigo = ($this->yy_codigo === 0 || $this->yy_codigo === 0.0 || $this->yy_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["yy_codigo"]:$this->yy_codigo);
      }
    }
    // funcao para inclusao
@@ -140,7 +140,7 @@ class cl_tnomes {
          $this->yy_codigo = $yy_codigo;
        }
      }
-     if(($this->yy_codigo == null) || ($this->yy_codigo == "") ){
+     if(($this->yy_codigo == null) || ($this->yy_codigo === 0 || $this->yy_codigo === 0.0 || $this->yy_codigo == "") ){
        $this->erro_sql = " Campo yy_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_zonas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j50_zona = ($this->j50_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j50_zona"]:$this->j50_zona);
+       $this->j50_zona = ($this->j50_zona === 0 || $this->j50_zona === 0.0 || $this->j50_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j50_zona"]:$this->j50_zona);
        $this->j50_descr = ($this->j50_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j50_descr"]:$this->j50_descr);
      }else{
-       $this->j50_zona = ($this->j50_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j50_zona"]:$this->j50_zona);
+       $this->j50_zona = ($this->j50_zona === 0 || $this->j50_zona === 0.0 || $this->j50_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j50_zona"]:$this->j50_zona);
      }
    }
    // funcao para Inclusão
@@ -109,7 +109,7 @@ class cl_zonas {
          $this->j50_zona = $j50_zona;
        }
      }
-     if(($this->j50_zona == null) || ($this->j50_zona == "") ){
+     if(($this->j50_zona == null) || ($this->j50_zona === 0 || $this->j50_zona === 0.0 || $this->j50_zona == "") ){
        $this->erro_sql = " Campo j50_zona não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

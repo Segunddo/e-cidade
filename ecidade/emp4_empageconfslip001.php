@@ -65,7 +65,7 @@ db_postmemory($HTTP_POST_VARS);
 
 $db_opcao = 1;
 $db_botao = false;
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 //rotina que pega o nome do prefeito
 $result00 = $cldb_config->sql_record($cldb_config->sql_query_file(db_getsession("DB_instit"), "pref as prefeito,munic as municipio"));

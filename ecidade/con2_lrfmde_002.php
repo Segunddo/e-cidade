@@ -35,7 +35,7 @@ include(modification("libs/db_libtxt.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_conrelinfo_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 $classinatura = new cl_assinatura;
@@ -216,7 +216,7 @@ $INTERFERENCIA_FUNDEF= 0;
 $INTERFERENCIA_FUNDEF_DEMAIS = 0;
 @db_query("drop table work_pl");
 $result_bal_mde = db_planocontassaldo_matriz($anousu,$dt_ini,$dt_fin,false,' c61_instit in ('.str_replace('-',', ',$db_selinstit)   .' ) ');
-for($i=0;$i<pg_numrows($result_bal_mde);$i++){
+for($i=0;$i<($result_bal_mde ? pg_numrows($result_bal_mde) : null);$i++){
   db_fieldsmemory($result_bal_mde,$i);
   if (in_array($estrutural,$desp_ef)){
      $INTERFERENCIA_MDE += $saldo_final ;
@@ -234,7 +234,7 @@ $result_bal_acumulado = db_planocontassaldo_matriz($anousu,$data_inicial,$dt_fin
 $INTERFERENCIA_MDE_AC = 0;
 $INTERFERENCIA_FUNDEF_AC= 0;
 $INTERFERENCIA_FUNDEF_DEMAIS_AC =0;
-for($i=0;$i<pg_numrows($result_bal_acumulado);$i++){
+for($i=0;$i<($result_bal_acumulado ? pg_numrows($result_bal_acumulado) : null);$i++){
   db_fieldsmemory($result_bal_acumulado,$i);
   if (in_array($estrutural,$desp_ef)){
      $INTERFERENCIA_MDE_AC += $saldo_final ;
@@ -266,7 +266,7 @@ $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config wher
 $descr_inst = '';
 $xvirg = '';
 $flag_abrev = false;
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
     if (strlen(trim($nomeinstabrev)) > 0){
          $descr_inst .= $xvirg.$nomeinstabrev;
@@ -355,7 +355,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_impostos)){ // despesas com ensino fundamental
@@ -371,7 +371,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial     += $tot_rec_inicial;
   $somador_I_atualizada  += $tot_rec_atual;
@@ -382,7 +382,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_ativa)){ // despesas com ensino fundamental
@@ -398,7 +398,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial     += $tot_rec_inicial;
   $somador_I_atualizada  += $tot_rec_atual;
@@ -410,7 +410,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_multas)){ // despesas com ensino fundamental
@@ -426,7 +426,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial     += $tot_rec_inicial;
   $somador_I_atualizada  += $tot_rec_atual;
@@ -441,7 +441,7 @@ $pdf->Ln();
   $pdf->cell(20,$alt,db_formatar($somador_I_atualizada,'f'),'0',0,"R",0);
   $pdf->cell(20,$alt,db_formatar($somador_I_nobimestre,'f'),'0',0,"R",0);
   $pdf->cell(20,$alt,db_formatar($somador_I_atebimestre,'f'),'0',0,"R",0);
-  @$pdf->cell(20,$alt,db_formatar(($somador_I_atebimestre*100)/$somador_I_atualizada,'f'),'0',0,"R",0);
+  @$pdf->cell(20,$alt,db_formatar((float) $somador_I_atualizada == 0 ? (float) ($somador_I_atebimestre * 100) > 0 ? INF : ((float) ($somador_I_atebimestre * 100) < 0 ? -INF : NAN) : $somador_I_atebimestre * 100 / $somador_I_atualizada,'f'),'0',0,"R",0);
 
 $pdf->setY($pos);
 
@@ -462,7 +462,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_cota_fpm)){ // despesas com ensino fundamental
@@ -478,7 +478,7 @@ $pdf->cell(20,$alt,db_formatar(($tot_rec_inicial*0.85),'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar(($tot_rec_atual*0.85),'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar(($tot_rec_bim*0.85),'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar(($tot_rec_atebim*0.85),'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim*0.85)*100/($tot_rec_atual*0.85)),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) ($tot_rec_atual * 0.85) == 0 ? (float) ($tot_rec_atebim * 0.85 * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 0.85 * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 0.85 * 100 / ($tot_rec_atual * 0.85)),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial     += $tot_rec_inicial*0.85;
   $somador_I_atualizada  += $tot_rec_atual*0.85;
@@ -495,7 +495,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_cota_icms)){ // despesas com ensino fundamental
@@ -511,7 +511,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial*0.85,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual*0.85,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim*0.85,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim*0.85,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim*0.85)*100/($tot_rec_atual*0.85)),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) ($tot_rec_atual * 0.85) == 0 ? (float) ($tot_rec_atebim * 0.85 * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 0.85 * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 0.85 * 100 / ($tot_rec_atual * 0.85)),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial     += ($tot_rec_inicial*0.85);
   $somador_I_atualizada  += ($tot_rec_atual*0.85);
@@ -528,7 +528,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_parte_icms)){ // despesas com ensino fundamental
@@ -544,7 +544,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial*0.85,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual*0.85,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim*0.85,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim*0.85,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim*0.85)*100/($tot_rec_atual*0.85)),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) ($tot_rec_atual * 0.85) == 0 ? (float) ($tot_rec_atebim * 0.85 * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 0.85 * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 0.85 * 100 / ($tot_rec_atual * 0.85)),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial     += $tot_rec_inicial*0.85;
   $somador_I_atualizada  += $tot_rec_atual*0.85;
@@ -561,7 +561,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_parte_ipi)){ // despesas com ensino fundamental
@@ -577,7 +577,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial*0.85,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual*0.85,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim*0.85,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim*0.85,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim*0.85)*100/($tot_rec_atual*0.85)),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) ($tot_rec_atual * 0.85) == 0 ? (float) ($tot_rec_atebim * 0.85 * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 0.85 * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 0.85 * 100 / ($tot_rec_atual * 0.85)),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial     += $tot_rec_inicial*0.85;
   $somador_I_atualizada  += $tot_rec_atual*0.85;
@@ -594,7 +594,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_parcela)){
@@ -610,7 +610,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial            += $tot_rec_inicial;
   $somador_I_atualizada    += $tot_rec_atual;
@@ -633,7 +633,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_itr)){ // despesas com ensino fundamental
@@ -649,7 +649,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial     += $tot_rec_inicial;
   $somador_I_atualizada  += $tot_rec_atual;
@@ -667,7 +667,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_ouro)){
@@ -683,7 +683,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial     += $tot_rec_inicial;
   $somador_I_atualizada  += $tot_rec_atual;
@@ -700,7 +700,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_ipva)){ // despesas com ensino fundamental
@@ -716,7 +716,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_I_inicial     += $tot_rec_inicial;
   $somador_I_atualizada  += $tot_rec_atual;
@@ -737,7 +737,7 @@ $pdf->Ln();
  $pdf->cell(20,$alt,db_formatar($v_I_atualizada,'f'),'0',0,"R",0);
  $pdf->cell(20,$alt,db_formatar($v_I_nobimestre,'f'),'0',0,"R",0);
  $pdf->cell(20,$alt,db_formatar($v_I_atebimestre,'f'),'0',0,"R",0);
- @$pdf->cell(20,$alt,db_formatar(($v_I_atebimestre*100)/$v_I_atualizada,'f'),'0',0,"R",0);
+ @$pdf->cell(20,$alt,db_formatar((float) $v_I_atualizada == 0 ? (float) ($v_I_atebimestre * 100) > 0 ? INF : ((float) ($v_I_atebimestre * 100) < 0 ? -INF : NAN) : $v_I_atebimestre * 100 / $v_I_atualizada,'f'),'0',0,"R",0);
 
  $pdf->setY($pos);
 
@@ -770,7 +770,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_transf_recurso)){ // despesas com ensino fundamental
@@ -786,7 +786,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_III_inicial     += $tot_rec_inicial;
   $somador_III_atualizada  += $tot_rec_atual;
@@ -809,7 +809,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_complementacao)){ // despesas com ensino fundamental
@@ -825,7 +825,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($tot_rec_atebim*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_III_inicial     += $tot_rec_inicial;
   $somador_III_atualizada  += $tot_rec_atual;
@@ -846,7 +846,7 @@ $pdf->Ln();
  $pdf->cell(20,$alt,db_formatar($somador_IV_atualizada,'f'),'0',0,"R",0);
  $pdf->cell(20,$alt,db_formatar($somador_IV_nobimestre,'f'),'0',0,"R",0);
  $pdf->cell(20,$alt,db_formatar($somador_IV_atebimestre,'f'),'0',0,"R",0);
- @$pdf->cell(20,$alt,db_formatar(($somador_IV_atebimestre*100)/$somador_IV_atualizada,'f'),'0',0,"R",0);
+ @$pdf->cell(20,$alt,db_formatar((float) $somador_IV_atualizada == 0 ? (float) ($somador_IV_atebimestre * 100) > 0 ? INF : ((float) ($somador_IV_atebimestre * 100) < 0 ? -INF : NAN) : $somador_IV_atebimestre * 100 / $somador_IV_atualizada,'f'),'0',0,"R",0);
 
  $pdf->setY($pos);
 
@@ -856,7 +856,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_salario)){ // despesas com ensino fundamental
@@ -872,7 +872,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar(($tot_rec_atebim),'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_III_inicial     += $tot_rec_inicial;
   $somador_III_atualizada  += $tot_rec_atual;
@@ -884,7 +884,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_fnde)){ // despesas com ensino fundamental
@@ -900,7 +900,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar(($tot_rec_atebim),'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_III_inicial     += $tot_rec_inicial;
   $somador_III_atualizada  += $tot_rec_atual;
@@ -912,7 +912,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_programa_educacao)){ // despesas com ensino fundamental
@@ -928,7 +928,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar(($tot_rec_atebim),'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_III_inicial     += $tot_rec_inicial;
   $somador_III_atualizada  += $tot_rec_atual;
@@ -940,7 +940,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_credito)){ // despesas com ensino fundamental
@@ -956,7 +956,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar(($tot_rec_atebim),'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_III_inicial     += $tot_rec_inicial;
   $somador_III_atualizada  += $tot_rec_atual;
@@ -968,7 +968,7 @@ $tot_rec_inicial=0;
 $tot_rec_atual=0;
 $tot_rec_bim =0;
 $tot_rec_atebim =0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $estrutural = $o57_fonte;
   if (in_array($estrutural,$rec_outras)){ // despesas com ensino fundamental
@@ -984,7 +984,7 @@ $pdf->cell(20,$alt,db_formatar($tot_rec_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atual,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_rec_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_rec_atebim)*100/$tot_rec_atual),'f'),0,0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_rec_atual == 0 ? (float) ($tot_rec_atebim * 100) > 0 ? INF : ((float) ($tot_rec_atebim * 100) < 0 ? -INF : NAN) : $tot_rec_atebim * 100 / $tot_rec_atual),'f'),0,0,"R",0);
 $pdf->Ln();
   $somador_III_inicial     += $tot_rec_inicial;
   $somador_III_atualizada  += $tot_rec_atual;
@@ -1002,7 +1002,7 @@ $pdf->cell(20,$alt,db_formatar($somador_VI_inicial,'f'),'TBR',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_VI_atualizada,'f'),'TBR',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_VI_nobimestre,'f'),'TBR',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_VI_atebimestre,'f'),'TBR',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($somador_VI_atebimestre*100)/$somador_VI_atualizada,'f'),'TB',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar((float) $somador_VI_atualizada == 0 ? (float) ($somador_VI_atebimestre * 100) > 0 ? INF : ((float) ($somador_VI_atebimestre * 100) < 0 ? -INF : NAN) : $somador_VI_atebimestre * 100 / $somador_VI_atualizada,'f'),'TB',0,"R",0);
 $pdf->Ln();
 
 /// imprime lá em cima o total das receitas resultante de impostos e das receitas vinculadas
@@ -1014,7 +1014,7 @@ $pdf->cell(20,$alt,db_formatar($somador_I_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_I_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_I_nobimestre,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_I_atebimestre,'f'),'0',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($somador_I_atebimestre*100)/$somador_I_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar((float) $somador_I_atualizada == 0 ? (float) ($somador_I_atebimestre * 100) > 0 ? INF : ((float) ($somador_I_atebimestre * 100) < 0 ? -INF : NAN) : $somador_I_atebimestre * 100 / $somador_I_atualizada,'f'),'0',0,"R",0);
 
 $pdf->setY($pos_rec_vinculado);
 $pdf->setX(100);
@@ -1022,7 +1022,7 @@ $pdf->cell(20,$alt,db_formatar($somador_III_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_III_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_III_nobimestre,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_III_atebimestre,'f'),'0',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($somador_III_atebimestre*100)/$somador_III_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar((float) $somador_III_atualizada == 0 ? (float) ($somador_III_atebimestre * 100) > 0 ? INF : ((float) ($somador_III_atebimestre * 100) < 0 ? -INF : NAN) : $somador_III_atebimestre * 100 / $somador_III_atualizada,'f'),'0',0,"R",0);
 
 $pdf->setY($pos);
 
@@ -1081,7 +1081,7 @@ $RESERVA_MDE=0;
 $RESERVA_FUNDEF=0;
 
 $result_free = db_dotacaosaldo(4,3,2,true," o58_codigo=20 and o58_instit in (".str_replace('-',', ',$db_selinstit)." ) ",$anousu,$dt_ini,$dt_fin);
-for($i=0;$i<pg_numrows($result_free);$i++){
+for($i=0;$i<($result_free ? pg_numrows($result_free) : null);$i++){
   db_fieldsmemory($result_free,$i);
   if ($o58_subfuncao==999) {
   	 $RESERVA_MDE= $dot_ini;
@@ -1089,7 +1089,7 @@ for($i=0;$i<pg_numrows($result_free);$i++){
 }
 
 $result_free = db_dotacaosaldo(4,3,2,true," o58_codigo=30 and o58_instit in (".str_replace('-',', ',$db_selinstit)." ) ",$anousu,$dt_ini,$dt_fin);
-for($i=0;$i<pg_numrows($result_free);$i++){
+for($i=0;$i<($result_free ? pg_numrows($result_free) : null);$i++){
   db_fieldsmemory($result_free,$i);
   if ($o58_subfuncao==999){
   	 $RESERVA_FUNDEF= $dot_ini;
@@ -1101,7 +1101,7 @@ $tot_ini=0;
 $tot_atu =0;
 $tot_bim =0;
 $tot_atebim =0;
-for($i=0;$i<pg_numrows($result_desp);$i++){
+for($i=0;$i<($result_desp ? pg_numrows($result_desp) : null);$i++){
   db_fieldsmemory($result_desp,$i);
   if ($o58_subfuncao == 361 && $o58_codigo ==20){
      $tot_ini    += $dot_ini;
@@ -1115,7 +1115,7 @@ $pdf->cell(20,$alt,db_formatar($tot_ini+$RESERVA_MDE,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atu +$RESERVA_MDE,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_bim +$INTERFERENCIA_MDE,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atebim+$INTERFERENCIA_MDE_AC,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_atebim+$INTERFERENCIA_MDE_AC)*100/($tot_atu+$RESERVA_MDE)),'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) ($tot_atu + $RESERVA_MDE) == 0 ? (float) (($tot_atebim + $INTERFERENCIA_MDE_AC) * 100) > 0 ? INF : ((float) (($tot_atebim + $INTERFERENCIA_MDE_AC) * 100) < 0 ? -INF : NAN) : ($tot_atebim + $INTERFERENCIA_MDE_AC) * 100 / ($tot_atu + $RESERVA_MDE)),'f'),'0',0,"R",0);
 $pdf->Ln();
    $SOMADOR_SUBFUNCAO_MDE_BIMESTRAL = $tot_bim  +$INTERFERENCIA_MDE ;
 
@@ -1136,7 +1136,7 @@ $tot_ini=0;
 $tot_atu =0;
 $tot_bim =0;
 $tot_atebim =0;
-for($i=0;$i<pg_numrows($result_desp);$i++){
+for($i=0;$i<($result_desp ? pg_numrows($result_desp) : null);$i++){
   db_fieldsmemory($result_desp,$i);
   if ($o58_subfuncao == 365 && $o58_codigo ==20){
      $tot_ini    += $dot_ini;
@@ -1150,7 +1150,7 @@ $pdf->cell(20,$alt,db_formatar($tot_ini,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atu,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($tot_atebim*100/$tot_atu),'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_atu == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atu),'f'),'0',0,"R",0);
 $pdf->Ln();
    $somador_XI_inicial    += $tot_ini; //
    $somador_XI_atualizada += $tot_atu;
@@ -1168,7 +1168,7 @@ $tot_ini=0;
 $tot_atu =0;
 $tot_bim =0;
 $tot_atebim =0;
-for($i=0;$i<pg_numrows($result_desp);$i++){
+for($i=0;$i<($result_desp ? pg_numrows($result_desp) : null);$i++){
   db_fieldsmemory($result_desp,$i);
   if ( $o58_funcao ==12
        && $o58_subfuncao != 361
@@ -1186,7 +1186,7 @@ $pdf->cell(20,$alt,db_formatar($tot_ini,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atu,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($tot_atebim*100/$tot_atu),'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_atu == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atu),'f'),'0',0,"R",0);
 $pdf->Ln();
    $somador_XI_inicial    += $tot_ini; //
    $somador_XI_atualizada += $tot_atu;
@@ -1205,7 +1205,7 @@ $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_nobimestre,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atebimestre,'f'),'0',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($v_atebimestre*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebimestre * 100) > 0 ? INF : ((float) ($v_atebimestre * 100) < 0 ? -INF : NAN) : $v_atebimestre * 100 / $v_atualizada,'f'),'0',0,"R",0);
 
 $pdf->setY($pos);
 
@@ -1227,7 +1227,7 @@ $tot_ini=0;
 $tot_atu =0;
 $tot_bim =0;
 $tot_atebim =0;
-for($i=0;$i<pg_numrows($result_desp);$i++){
+for($i=0;$i<($result_desp ? pg_numrows($result_desp) : null);$i++){
    db_fieldsmemory($result_desp,$i);
    if ( $o58_funcao   ==12
         && $o58_subfuncao == 361
@@ -1245,7 +1245,7 @@ $pdf->cell(20,$alt,db_formatar($tot_ini+$RESERVA_FUNDEF,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atu+$RESERVA_FUNDEF,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_bim +$INTERFERENCIA_FUNDEF,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atebim+$INTERFERENCIA_FUNDEF_AC,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_atebim+$INTERFERENCIA_FUNDEF_AC)*100/($tot_atu+$RESERVA_FUNDEF)),'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) ($tot_atu + $RESERVA_FUNDEF) == 0 ? (float) (($tot_atebim + $INTERFERENCIA_FUNDEF_AC) * 100) > 0 ? INF : ((float) (($tot_atebim + $INTERFERENCIA_FUNDEF_AC) * 100) < 0 ? -INF : NAN) : ($tot_atebim + $INTERFERENCIA_FUNDEF_AC) * 100 / ($tot_atu + $RESERVA_FUNDEF)),'f'),'0',0,"R",0);
 $pdf->ln();
    $somador_XI_inicial    += $tot_ini+$RESERVA_FUNDEF; //
    $somador_XI_atualizada += $tot_atu+$RESERVA_FUNDEF;
@@ -1262,7 +1262,7 @@ $tot_ini=0;
 $tot_atu =0;
 $tot_bim =0;
 $tot_atebim =0;
-for($i=0;$i<pg_numrows($result_desp);$i++){
+for($i=0;$i<($result_desp ? pg_numrows($result_desp) : null);$i++){
   db_fieldsmemory($result_desp,$i);
    if ( $o58_funcao   ==12
         && $o58_subfuncao == 361
@@ -1280,7 +1280,7 @@ $pdf->cell(20,$alt,db_formatar($tot_ini+$RESERVA_FUNDEF,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atu+$RESERVA_FUNDEF,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_bim +$INTERFERENCIA_FUNDEF_DEMAIS,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atebim+$INTERFERENCIA_FUNDEF_DEMAIS_AC,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar((($tot_atebim+$INTERFERENCIA_FUNDEF_DEMAIS_AC)*100/$tot_atu+$RESERVA_FUNDEF),'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar((((float) $tot_atu == 0 ? (float) (($tot_atebim + $INTERFERENCIA_FUNDEF_DEMAIS_AC) * 100) > 0 ? INF : ((float) (($tot_atebim + $INTERFERENCIA_FUNDEF_DEMAIS_AC) * 100) < 0 ? -INF : NAN) : ($tot_atebim + $INTERFERENCIA_FUNDEF_DEMAIS_AC) * 100 / $tot_atu)+$RESERVA_FUNDEF),'f'),'0',0,"R",0);
 $pdf->ln();
    $somador_XI_inicial    += $tot_ini+$RESERVA_FUNDEF; //
    $somador_XI_atualizada += $tot_atu+$RESERVA_FUNDEF;
@@ -1299,7 +1299,7 @@ $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_nobimestre,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atebimestre,'f'),'0',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($v_atebimestre*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebimestre * 100) > 0 ? INF : ((float) ($v_atebimestre * 100) < 0 ? -INF : NAN) : $v_atebimestre * 100 / $v_atualizada,'f'),'0',0,"R",0);
 
 $somador_IX_atebimestre = $v_atebimestre;
 
@@ -1311,7 +1311,7 @@ $tot_ini=0;
 $tot_atu =0;
 $tot_bim =0;
 $tot_atebim =0;
-for($i=0;$i<pg_numrows($result_desp);$i++){
+for($i=0;$i<($result_desp ? pg_numrows($result_desp) : null);$i++){
   db_fieldsmemory($result_desp,$i);
   if ($o58_codigo== 1002 && $o58_subfuncao == 361){  // subfunc- ensino funcamental
      $tot_ini    += $dot_ini;
@@ -1325,7 +1325,7 @@ $pdf->cell(20,$alt,db_formatar($tot_ini,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atu,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($tot_atebim*100/$tot_atu),'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_atu == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atu),'f'),'0',0,"R",0);
 $pdf->ln();
    $somador_XI_inicial    += $tot_ini; //
    $somador_XI_atualizada += $tot_atu;
@@ -1354,7 +1354,7 @@ $pdf->cell(20,$alt,db_formatar($tot_ini,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atu,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($tot_atebim*100/$tot_atu),'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_atu == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atu),'f'),'0',0,"R",0);
 $pdf->ln();
    $somador_XI_inicial    += $tot_ini; //
    $somador_XI_atualizada += $tot_atu;
@@ -1370,7 +1370,7 @@ $tot_bim =0;
 $tot_atebim =0;
 
 
-for($i=0;$i<pg_numrows($result_desp);$i++){
+for($i=0;$i<($result_desp ? pg_numrows($result_desp) : null);$i++){
    db_fieldsmemory($result_desp,$i);
    if (
 	$o58_funcao== 12
@@ -1394,7 +1394,7 @@ $pdf->cell(20,$alt,db_formatar($tot_ini,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atu,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_bim,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($tot_atebim*100/$tot_atu),'f'),'0',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $tot_atu == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atu),'f'),'0',0,"R",0);
 $pdf->ln();
    $somador_XI_inicial    += $tot_ini; //
    $somador_XI_atualizada += $tot_atu;
@@ -1410,7 +1410,7 @@ $pdf->cell(20,$alt,db_formatar($somador_XI_inicial,'f'),'TBR',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_XI_atualizada,'f'),'TBR',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_XI_nobimestre,'f'),'TBR',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_XI_atebimestre,'f'),'TBR',0,"R",0);
-@$pdf->cell(20,$alt,db_formatar(($somador_XI_atebimestre*100/$somador_XI_atualizada),'f'),'TB',0,"R",0);
+@$pdf->cell(20,$alt,db_formatar(((float) $somador_XI_atualizada == 0 ? (float) ($somador_XI_atebimestre * 100) > 0 ? INF : ((float) ($somador_XI_atebimestre * 100) < 0 ? -INF : NAN) : $somador_XI_atebimestre * 100 / $somador_XI_atualizada),'f'),'TB',0,"R",0);
 $pdf->ln();
 
 //-----------------------------------
@@ -1504,7 +1504,7 @@ $pdf->cell(20,$alt,"Cancelados em $anousu",'TB',0,"C",0);
 $pdf->ln();
 //
 $tot_cancelado=0;
-for($i=0;$i<pg_numrows($result_rp_mde);$i++){
+for($i=0;$i<($result_rp_mde ? pg_numrows($result_rp_mde) : null);$i++){
   db_fieldsmemory($result_rp_mde,$i);
   $tot_cancelado += $vlranu;
 }
@@ -1515,7 +1515,7 @@ $pdf->cell(40,$alt,db_formatar($RP_MDE_INSCRITO,'f'),'RL',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_cancelado,'f'),'L',1,"R",0);
 // --
 $tot_cancelado=0;
-for($i=0;$i<pg_numrows($result_rp_fundef);$i++){
+for($i=0;$i<($result_rp_fundef ? pg_numrows($result_rp_fundef) : null);$i++){
   db_fieldsmemory($result_rp_fundef,$i);
   $tot_cancelado += $vlranu;
 }
@@ -1557,17 +1557,10 @@ $pdf->cell(150,$alt,'TOTAL DAS DESPESAS CONSIDERADAS PARA FINS DE LIMITE CONSTIT
 $pdf->cell(40,$alt,db_formatar($total_XIX_valor,'f'),'TB',1,"R",0);
 
 ///
-@$total_A = (($total_XIX_valor-$somador_XVII_valor)/$somador_I_atebimestre) * 100;
-@$total_B = ((($somador_VII_atebimestre
-             +$somador_IX_atebimestre
-	     +$somador_XII_atebimestre)
-             -($euxiii
-	       + $euxiv
-	       + $euxv
-	       + $euxviii
-	      ))/($somador_I_atebimestre *0.25)) * 100;
+@$total_A = ((float) $somador_I_atebimestre == 0 ? (float) ($total_XIX_valor - $somador_XVII_valor) > 0 ? INF : ((float) ($total_XIX_valor - $somador_XVII_valor) < 0 ? -INF : NAN) : ($total_XIX_valor - $somador_XVII_valor) / $somador_I_atebimestre) * 100;
+@$total_B = ((float) ($somador_I_atebimestre * 0.25) == 0 ? (float) ($somador_VII_atebimestre + $somador_IX_atebimestre + $somador_XII_atebimestre - ($euxiii + $euxiv + $euxv + $euxviii)) > 0 ? INF : ((float) ($somador_VII_atebimestre + $somador_IX_atebimestre + $somador_XII_atebimestre - ($euxiii + $euxiv + $euxv + $euxviii)) < 0 ? -INF : NAN) : ($somador_VII_atebimestre + $somador_IX_atebimestre + $somador_XII_atebimestre - ($euxiii + $euxiv + $euxv + $euxviii)) / ($somador_I_atebimestre * 0.25)) * 100;
 
-@$total_C =  ($somador_X_atebimestre / $somador_IV_atebimestre) * 100;
+@$total_C =  ((float) $somador_IV_atebimestre == 0 ? (float) $somador_X_atebimestre > 0 ? INF : ((float) $somador_X_atebimestre < 0 ? -INF : NAN) : $somador_X_atebimestre / $somador_IV_atebimestre) * 100;
 
 $pdf->Ln(3);
 $pdf->cell(170,$alt,'TABELA DE CUMPRIMENTO DOS LIMITES CONSTITUCIONAIS','TBR',0,"L",0);  $pdf->cell(20,$alt,'%','TB',1,"C",0);
@@ -1592,7 +1585,7 @@ $pdf->Ln(3);
 $tot_valor = 0;
 $tot_ant   = 0;
 
-for($i=0;$i<pg_numrows($result_bal);$i++){
+for($i=0;$i<($result_bal ? pg_numrows($result_bal) : null);$i++){
   db_fieldsmemory($result_bal,$i);
   if (in_array($estrutural,$saldo_fundef)){
      $tot_valor  += $saldo_final ;
@@ -1635,7 +1628,7 @@ $tot_dot_atual=0;
 $tot_dot_liquidado=0;
 $tot_dot_liquidado_acumulado=0;
 
-for($i=0;$i< pg_numrows($result_subfunc);$i++) {
+for($i=0;$i< ($result_subfunc ? pg_numrows($result_subfunc) : null);$i++) {
     db_fieldsmemory($result_subfunc,$i);
     $vatual = $dot_ini + ($suplementado_acumulado-$reduzido_acumulado);
     if ($o58_subfuncao==361){
@@ -1647,7 +1640,7 @@ for($i=0;$i< pg_numrows($result_subfunc);$i++) {
       // $pdf->cell(20,$alt,db_formatar($liquidado + $INTERFERENCIA_MDE,'f'),'R',0,"R",0);
       $pdf->cell(20,$alt,db_formatar($SOMADOR_SUBFUNCAO_MDE_BIMESTRAL,'f'),'R',0,"R",0);
       $pdf->cell(20,$alt,db_formatar(($liquidado_acumulado + $INTERFERENCIA_MDE_AC),'f'),'R',0,"R",0);
-      @$pdf->cell(20,$alt,db_formatar(((($liquidado_acumulado +$INTERFERENCIA_MDE_AC)*100)/($atual+$RESERVA_MDE)),'f'),'0',0,"R",0);
+      @$pdf->cell(20,$alt,db_formatar(((float) ($atual + $RESERVA_MDE) == 0 ? (float) (($liquidado_acumulado + $INTERFERENCIA_MDE_AC) * 100) > 0 ? INF : ((float) (($liquidado_acumulado + $INTERFERENCIA_MDE_AC) * 100) < 0 ? -INF : NAN) : ($liquidado_acumulado + $INTERFERENCIA_MDE_AC) * 100 / ($atual + $RESERVA_MDE)),'f'),'0',0,"R",0);
       $pdf->Ln();
       $tot_dot_ini         += $dot_ini + $RESERVA_MDE;
       $tot_dot_atual       += ($vatual  + $RESERVA_MDE);
@@ -1661,7 +1654,7 @@ for($i=0;$i< pg_numrows($result_subfunc);$i++) {
       $pdf->cell(20,$alt,db_formatar($vatual,'f'),'R',0,"R",0);
       $pdf->cell(20,$alt,db_formatar($liquidado,'f'),'R',0,"R",0);
       $pdf->cell(20,$alt,db_formatar(($liquidado_acumulado),'f'),'R',0,"R",0);
-      @$pdf->cell(20,$alt,db_formatar(((($liquidado_acumulado)*100)/($vatual)),'f'),'0',0,"R",0);
+      @$pdf->cell(20,$alt,db_formatar(((float) $vatual == 0 ? (float) ($liquidado_acumulado * 100) > 0 ? INF : ((float) ($liquidado_acumulado * 100) < 0 ? -INF : NAN) : $liquidado_acumulado * 100 / $vatual),'f'),'0',0,"R",0);
       $tot_dot_ini         += $dot_ini;
       $tot_dot_atual       += $vatual ;
       $tot_dot_liquidado   += $liquidado;

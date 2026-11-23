@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/farmacia/procedimento/bnafar/consistir",
+  "json": {
+    "errors": {
+      "DB_coddepto": [
+        "O campo DB_coddepto é obrigatório e deve ser um inteiro."
+      ],
+      "periodoFim": [
+        "O campo periodo fim é obrigatório."
+      ],
+      "periodoInicio": [
+        "O campo periodo inicio é obrigatório."
+      ],
+      "procedimentos": [
+        "O campo procedimentos é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "de121445d33d5c4c44caf845e7f4b075faf914653e7cec819a640ca3bb86635b",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

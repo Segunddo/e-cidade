@@ -69,11 +69,11 @@ class cl_levretnome {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y65_sequencia = ($this->y65_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y65_sequencia"]:$this->y65_sequencia);
+       $this->y65_sequencia = ($this->y65_sequencia === 0 || $this->y65_sequencia === 0.0 || $this->y65_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y65_sequencia"]:$this->y65_sequencia);
        $this->y65_nome = ($this->y65_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["y65_nome"]:$this->y65_nome);
        $this->y65_cnpj = ($this->y65_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["y65_cnpj"]:$this->y65_cnpj);
      }else{
-       $this->y65_sequencia = ($this->y65_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y65_sequencia"]:$this->y65_sequencia);
+       $this->y65_sequencia = ($this->y65_sequencia === 0 || $this->y65_sequencia === 0.0 || $this->y65_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y65_sequencia"]:$this->y65_sequencia);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_levretnome {
        return false;
      }
        $this->y65_sequencia = $y65_sequencia; 
-     if(($this->y65_sequencia == null) || ($this->y65_sequencia == "") ){ 
+     if(($this->y65_sequencia == null) || ($this->y65_sequencia === 0 || $this->y65_sequencia === 0.0 || $this->y65_sequencia == "") ){ 
        $this->erro_sql = " Campo y65_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

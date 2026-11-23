@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/etapas/etapas-intervalo",
+  "json": {
+    "error": true,
+    "message": "Trying to get property 'ed11_i_ensino' of non-object"
+  },
+  "sha256": "2072fcbdc18847b711dd67f0e2bb38f29d7e90c498876292c27ec5dd2ebe203e",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

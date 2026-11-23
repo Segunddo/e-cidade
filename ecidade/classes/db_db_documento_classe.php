@@ -71,12 +71,12 @@ class cl_db_documento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db03_docum = ($this->db03_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_docum"]:$this->db03_docum);
+       $this->db03_docum = ($this->db03_docum === 0 || $this->db03_docum === 0.0 || $this->db03_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_docum"]:$this->db03_docum);
        $this->db03_descr = ($this->db03_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_descr"]:$this->db03_descr);
-       $this->db03_tipodoc = ($this->db03_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_tipodoc"]:$this->db03_tipodoc);
-       $this->db03_instit = ($this->db03_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_instit"]:$this->db03_instit);
+       $this->db03_tipodoc = ($this->db03_tipodoc === 0 || $this->db03_tipodoc === 0.0 || $this->db03_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_tipodoc"]:$this->db03_tipodoc);
+       $this->db03_instit = ($this->db03_instit === 0 || $this->db03_instit === 0.0 || $this->db03_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_instit"]:$this->db03_instit);
      }else{
-       $this->db03_docum = ($this->db03_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_docum"]:$this->db03_docum);
+       $this->db03_docum = ($this->db03_docum === 0 || $this->db03_docum === 0.0 || $this->db03_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["db03_docum"]:$this->db03_docum);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_db_documento {
          $this->db03_docum = $db03_docum;
        }
      }
-     if(($this->db03_docum == null) || ($this->db03_docum == "") ){
+     if(($this->db03_docum == null) || ($this->db03_docum === 0 || $this->db03_docum === 0.0 || $this->db03_docum == "") ){
        $this->erro_sql = " Campo db03_docum nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

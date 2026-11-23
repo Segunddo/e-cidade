@@ -46,7 +46,7 @@ $clrotulo->label("e82_codord");
 $clrotulo->label("e60_codemp");
 $clrotulo->label("e87_codgera");
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $dbwhere = " e80_instit = " . db_getsession("DB_instit") . " and e92_processa = 't' and e92_sequencia <> 35 and e60_instit = ".db_getsession("DB_instit");

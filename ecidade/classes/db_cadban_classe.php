@@ -183,9 +183,9 @@ class cl_cadban {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k15_codigo = ($this->k15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codigo"]:$this->k15_codigo);
-       $this->k15_numcgm = ($this->k15_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_numcgm"]:$this->k15_numcgm);
-       $this->k15_codbco = ($this->k15_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codbco"]:$this->k15_codbco);
+       $this->k15_codigo = ($this->k15_codigo === 0 || $this->k15_codigo === 0.0 || $this->k15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codigo"]:$this->k15_codigo);
+       $this->k15_numcgm = ($this->k15_numcgm === 0 || $this->k15_numcgm === 0.0 || $this->k15_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_numcgm"]:$this->k15_numcgm);
+       $this->k15_codbco = ($this->k15_codbco === 0 || $this->k15_codbco === 0.0 || $this->k15_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codbco"]:$this->k15_codbco);
        $this->k15_codage = ($this->k15_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codage"]:$this->k15_codage);
        $this->k15_contat = ($this->k15_contat == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_contat"]:$this->k15_contat);
        $this->k15_gerent = ($this->k15_gerent == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_gerent"]:$this->k15_gerent);
@@ -195,11 +195,11 @@ class cl_cadban {
        $this->k15_conv3 = ($this->k15_conv3 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_conv3"]:$this->k15_conv3);
        $this->k15_conv4 = ($this->k15_conv4 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_conv4"]:$this->k15_conv4);
        $this->k15_conv5 = ($this->k15_conv5 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_conv5"]:$this->k15_conv5);
-       $this->k15_seq1 = ($this->k15_seq1 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq1"]:$this->k15_seq1);
-       $this->k15_seq2 = ($this->k15_seq2 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq2"]:$this->k15_seq2);
-       $this->k15_seq3 = ($this->k15_seq3 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq3"]:$this->k15_seq3);
-       $this->k15_seq4 = ($this->k15_seq4 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq4"]:$this->k15_seq4);
-       $this->k15_seq5 = ($this->k15_seq5 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq5"]:$this->k15_seq5);
+       $this->k15_seq1 = ($this->k15_seq1 === 0 || $this->k15_seq1 === 0.0 || $this->k15_seq1 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq1"]:$this->k15_seq1);
+       $this->k15_seq2 = ($this->k15_seq2 === 0 || $this->k15_seq2 === 0.0 || $this->k15_seq2 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq2"]:$this->k15_seq2);
+       $this->k15_seq3 = ($this->k15_seq3 === 0 || $this->k15_seq3 === 0.0 || $this->k15_seq3 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq3"]:$this->k15_seq3);
+       $this->k15_seq4 = ($this->k15_seq4 === 0 || $this->k15_seq4 === 0.0 || $this->k15_seq4 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq4"]:$this->k15_seq4);
+       $this->k15_seq5 = ($this->k15_seq5 === 0 || $this->k15_seq5 === 0.0 || $this->k15_seq5 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq5"]:$this->k15_seq5);
        $this->k15_ceden1 = ($this->k15_ceden1 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_ceden1"]:$this->k15_ceden1);
        $this->k15_ceden2 = ($this->k15_ceden2 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_ceden2"]:$this->k15_ceden2);
        $this->k15_ceden3 = ($this->k15_ceden3 == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_ceden3"]:$this->k15_ceden3);
@@ -214,9 +214,9 @@ class cl_cadban {
        $this->k15_posced = ($this->k15_posced == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_posced"]:$this->k15_posced);
        $this->k15_poscon = ($this->k15_poscon == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_poscon"]:$this->k15_poscon);
        $this->k15_seq = ($this->k15_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_seq"]:$this->k15_seq);
-       $this->k15_conta = ($this->k15_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_conta"]:$this->k15_conta);
-       $this->k15_rectxb = ($this->k15_rectxb == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_rectxb"]:$this->k15_rectxb);
-       $this->k15_txban = ($this->k15_txban == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_txban"]:$this->k15_txban);
+       $this->k15_conta = ($this->k15_conta === 0 || $this->k15_conta === 0.0 || $this->k15_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_conta"]:$this->k15_conta);
+       $this->k15_rectxb = ($this->k15_rectxb === 0 || $this->k15_rectxb === 0.0 || $this->k15_rectxb == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_rectxb"]:$this->k15_rectxb);
+       $this->k15_txban = ($this->k15_txban === 0 || $this->k15_txban === 0.0 || $this->k15_txban == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_txban"]:$this->k15_txban);
        $this->k15_local = ($this->k15_local == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_local"]:$this->k15_local);
        $this->k15_carte = ($this->k15_carte == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_carte"]:$this->k15_carte);
        $this->k15_espec = ($this->k15_espec == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_espec"]:$this->k15_espec);
@@ -224,7 +224,7 @@ class cl_cadban {
        $this->k15_ageced = ($this->k15_ageced == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_ageced"]:$this->k15_ageced);
        $this->k15_posjur = ($this->k15_posjur == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_posjur"]:$this->k15_posjur);
        $this->k15_posmul = ($this->k15_posmul == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_posmul"]:$this->k15_posmul);
-       $this->k15_taman = ($this->k15_taman == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_taman"]:$this->k15_taman);
+       $this->k15_taman = ($this->k15_taman === 0 || $this->k15_taman === 0.0 || $this->k15_taman == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_taman"]:$this->k15_taman);
        $this->k15_posdta = ($this->k15_posdta == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_posdta"]:$this->k15_posdta);
        $this->k15_numbco = ($this->k15_numbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_numbco"]:$this->k15_numbco);
        $this->k15_numpre = ($this->k15_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_numpre"]:$this->k15_numpre);
@@ -236,7 +236,7 @@ class cl_cadban {
        $this->k15_ppmes = ($this->k15_ppmes == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_ppmes"]:$this->k15_ppmes);
        $this->k15_ppano = ($this->k15_ppano == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_ppano"]:$this->k15_ppano);
        $this->k15_debcta = ($this->k15_debcta == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_debcta"]:$this->k15_debcta);
-       $this->k15_instit = ($this->k15_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_instit"]:$this->k15_instit);
+       $this->k15_instit = ($this->k15_instit === 0 || $this->k15_instit === 0.0 || $this->k15_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_instit"]:$this->k15_instit);
        $this->k15_diacredito = ($this->k15_diacredito == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_diacredito"]:$this->k15_diacredito);
        $this->k15_anocredito = ($this->k15_anocredito == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_anocredito"]:$this->k15_anocredito);
        $this->k15_mescredito = ($this->k15_mescredito == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_mescredito"]:$this->k15_mescredito);
@@ -244,7 +244,7 @@ class cl_cadban {
        $this->k15_agenciapagamento = ($this->k15_agenciapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_agenciapagamento"]:$this->k15_agenciapagamento);
        $this->k15_bancotef = ($this->k15_bancotef == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_bancotef"]:$this->k15_bancotef);
      }else{
-       $this->k15_codigo = ($this->k15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codigo"]:$this->k15_codigo);
+       $this->k15_codigo = ($this->k15_codigo === 0 || $this->k15_codigo === 0.0 || $this->k15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codigo"]:$this->k15_codigo);
      }
    }
    // funcao para inclusao
@@ -436,7 +436,7 @@ class cl_cadban {
          $this->k15_codigo = $k15_codigo;
        }
      }
-     if(($this->k15_codigo == null) || ($this->k15_codigo == "") ){
+     if(($this->k15_codigo == null) || ($this->k15_codigo === 0 || $this->k15_codigo === 0.0 || $this->k15_codigo == "") ){
        $this->erro_sql = " Campo k15_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

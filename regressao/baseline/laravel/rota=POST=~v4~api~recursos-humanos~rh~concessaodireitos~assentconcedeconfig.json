@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/concessaodireitos/assentconcedeconfig",
+  "json": {
+    "error": true,
+    "message": "Undefined index: rh503_seqassentconf"
+  },
+  "sha256": "d61d7c72f550083150cfbf59a1fcf15ebb839a62aaa1794bad75458dd20f110c",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

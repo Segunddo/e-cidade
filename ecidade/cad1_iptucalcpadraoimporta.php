@@ -63,7 +63,7 @@ $sqliptucalcpadrao       = "select j10_sequencial
                              where j10_matric = $matric   
                                and j10_anousu = ".db_getsession("DB_anousu");
 $resultiptucalcpadrao    = db_query($sqliptucalcpadrao);
-$linhasiptucalcpadrao    = pg_num_rows($resultiptucalcpadrao);
+$linhasiptucalcpadrao    = ($resultiptucalcpadrao ? pg_num_rows($resultiptucalcpadrao) : null);
 
 if($linhasiptucalcpadrao > 0 ){
   
@@ -77,7 +77,7 @@ if($linhasiptucalcpadrao > 0 ){
                                where j11_iptucalcpadrao = $j10_sequencial";
   
   $resultiptucalcpadraoconstr = db_query($sqliptucalcpadraoconstr);
-  $linhasiptucalcpadraoconstr = pg_num_rows($resultiptucalcpadraoconstr);
+  $linhasiptucalcpadraoconstr = ($resultiptucalcpadraoconstr ? pg_num_rows($resultiptucalcpadraoconstr) : null);
   if($linhasiptucalcpadraoconstr>0){
     for($c=0;$c<$linhasiptucalcpadraoconstr;$c++){
       db_fieldsmemory($resultiptucalcpadraoconstr,$c);
@@ -96,7 +96,7 @@ if($linhasiptucalcpadrao > 0 ){
                                 from iptutaxamatric 
                                where j09_matric = $matric ";
   $resultiptutaxamatric    = db_query($sqliptutaxamatric);
-  $linhasiptutaxamatric    = pg_num_rows($resultiptutaxamatric); 
+  $linhasiptutaxamatric    = ($resultiptutaxamatric ? pg_num_rows($resultiptutaxamatric) : null); 
   
   if($linhasiptutaxamatric>0){
     
@@ -119,7 +119,7 @@ if($linhasiptucalcpadrao > 0 ){
                                where j27_matric         = $matric 
                                  and j27_iptucalcpadrao = $j10_sequencial";
   $resultiptucalcpadraoorigem    = db_query($sqliptucalcpadraoorigem);
-  $linhasiptucalcpadraoorigem    = pg_num_rows($resultiptucalcpadraoorigem); 
+  $linhasiptucalcpadraoorigem    = ($resultiptucalcpadraoorigem ? pg_num_rows($resultiptucalcpadraoorigem) : null); 
   
   if($linhasiptucalcpadraoorigem>0){
     
@@ -143,7 +143,7 @@ if($linhasiptucalcpadrao > 0 ){
                                 from iptucalcpadraolog 
                                where j19_iptucalcpadrao = $j10_sequencial";
   $resultiptucalcpadraolog = db_query($sqliptucalcpadraolog);
-  $linhasiptucalcpadraolog = pg_num_rows($resultiptucalcpadraolog); 
+  $linhasiptucalcpadraolog = ($resultiptucalcpadraolog ? pg_num_rows($resultiptucalcpadraolog) : null); 
   if($linhasiptucalcpadraolog>0){
     db_fieldsmemory($resultiptucalcpadraolog,0);
     //exclui os logs
@@ -174,7 +174,7 @@ if($linhasiptucalcpadrao > 0 ){
                        and j23_anousu = $exec ";
                        
     $resultiptucalc = db_query($sqliptucalc);
-    $linhasiptucalc = pg_num_rows($resultiptucalc);
+    $linhasiptucalc = ($resultiptucalc ? pg_num_rows($resultiptucalc) : null);
     if($linhasiptucalc>0){
       db_fieldsmemory($resultiptucalc,0);
       
@@ -233,7 +233,7 @@ if($linhasiptucalcpadrao > 0 ){
                                           and j39_matric = j22_matric  
                        where j39_matric = $matric  and j22_anousu = $exec";
      $resultiptuconstr = db_query($sqliptuconstr);
-     $linhasiptuconstr = pg_num_rows($resultiptuconstr);
+     $linhasiptuconstr = ($resultiptuconstr ? pg_num_rows($resultiptuconstr) : null);
      if($linhasiptuconstr>0){
        for($ic=0;$ic<$linhasiptuconstr;$ic++){         
          db_fieldsmemory($resultiptuconstr,$ic);
@@ -275,7 +275,7 @@ if($linhasiptucalcpadrao > 0 ){
                             and j21_anousu = $exec ";
      
      $resultiptucadtaxa = db_query($sqliptucadtaxa);
-     $linhasiptucadtaxa = pg_num_rows($resultiptucadtaxa);
+     $linhasiptucadtaxa = ($resultiptucadtaxa ? pg_num_rows($resultiptucadtaxa) : null);
      if($linhasiptucadtaxa>0){
        for($it=0;$it<$linhasiptucadtaxa;$it++){
          db_fieldsmemory($resultiptucadtaxa,$it);
@@ -311,7 +311,7 @@ if($sqlerro==false){
                                                  and j27_matric     = j23_matric 
                    where j10_matric = $matric and j10_anousu = ".db_getsession("DB_anousu");
     $resultpadrao = db_query($sqlpadrao);
-    $linhaspadrao = pg_num_rows($resultpadrao);
+    $linhaspadrao = ($resultpadrao ? pg_num_rows($resultpadrao) : null);
     if($linhaspadrao>0){
       db_fieldsmemory($resultpadrao,0);
       

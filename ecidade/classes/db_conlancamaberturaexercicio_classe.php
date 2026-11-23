@@ -67,8 +67,8 @@ class cl_conlancamaberturaexercicio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c80_conlancam = ($this->c80_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_conlancam"]:$this->c80_conlancam);
-       $this->c80_aberturaexercicio = ($this->c80_aberturaexercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_aberturaexercicio"]:$this->c80_aberturaexercicio);
+       $this->c80_conlancam = ($this->c80_conlancam === 0 || $this->c80_conlancam === 0.0 || $this->c80_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_conlancam"]:$this->c80_conlancam);
+       $this->c80_aberturaexercicio = ($this->c80_aberturaexercicio === 0 || $this->c80_aberturaexercicio === 0.0 || $this->c80_aberturaexercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["c80_aberturaexercicio"]:$this->c80_aberturaexercicio);
      }else{
      }
    }

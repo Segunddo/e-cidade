@@ -67,10 +67,10 @@ class cl_orctipoproj {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o38_tipoproj = ($this->o38_tipoproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o38_tipoproj"]:$this->o38_tipoproj);
+       $this->o38_tipoproj = ($this->o38_tipoproj === 0 || $this->o38_tipoproj === 0.0 || $this->o38_tipoproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o38_tipoproj"]:$this->o38_tipoproj);
        $this->o38_descr = ($this->o38_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o38_descr"]:$this->o38_descr);
      }else{
-       $this->o38_tipoproj = ($this->o38_tipoproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o38_tipoproj"]:$this->o38_tipoproj);
+       $this->o38_tipoproj = ($this->o38_tipoproj === 0 || $this->o38_tipoproj === 0.0 || $this->o38_tipoproj == ""?@$GLOBALS["HTTP_POST_VARS"]["o38_tipoproj"]:$this->o38_tipoproj);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_orctipoproj {
          $this->o38_tipoproj = $o38_tipoproj;
        }
      }
-     if(($this->o38_tipoproj == null) || ($this->o38_tipoproj == "") ){
+     if(($this->o38_tipoproj == null) || ($this->o38_tipoproj === 0 || $this->o38_tipoproj === 0.0 || $this->o38_tipoproj == "") ){
        $this->erro_sql = " Campo o38_tipoproj nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

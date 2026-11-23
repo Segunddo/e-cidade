@@ -73,13 +73,13 @@ class cl_orcsuplemdespesappa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o136_sequencial = ($this->o136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_sequencial"]:$this->o136_sequencial);
-       $this->o136_orcsuplem = ($this->o136_orcsuplem == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_orcsuplem"]:$this->o136_orcsuplem);
-       $this->o136_ppaestimativadespesa = ($this->o136_ppaestimativadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_ppaestimativadespesa"]:$this->o136_ppaestimativadespesa);
-       $this->o136_valor = ($this->o136_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_valor"]:$this->o136_valor);
+       $this->o136_sequencial = ($this->o136_sequencial === 0 || $this->o136_sequencial === 0.0 || $this->o136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_sequencial"]:$this->o136_sequencial);
+       $this->o136_orcsuplem = ($this->o136_orcsuplem === 0 || $this->o136_orcsuplem === 0.0 || $this->o136_orcsuplem == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_orcsuplem"]:$this->o136_orcsuplem);
+       $this->o136_ppaestimativadespesa = ($this->o136_ppaestimativadespesa === 0 || $this->o136_ppaestimativadespesa === 0.0 || $this->o136_ppaestimativadespesa == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_ppaestimativadespesa"]:$this->o136_ppaestimativadespesa);
+       $this->o136_valor = ($this->o136_valor === 0 || $this->o136_valor === 0.0 || $this->o136_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_valor"]:$this->o136_valor);
        $this->o136_concarpeculiar = ($this->o136_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_concarpeculiar"]:$this->o136_concarpeculiar);
      }else{
-       $this->o136_sequencial = ($this->o136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_sequencial"]:$this->o136_sequencial);
+       $this->o136_sequencial = ($this->o136_sequencial === 0 || $this->o136_sequencial === 0.0 || $this->o136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o136_sequencial"]:$this->o136_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_orcsuplemdespesappa {
          $this->o136_sequencial = $o136_sequencial;
        }
      }
-     if(($this->o136_sequencial == null) || ($this->o136_sequencial == "") ){
+     if(($this->o136_sequencial == null) || ($this->o136_sequencial === 0 || $this->o136_sequencial === 0.0 || $this->o136_sequencial == "") ){
        $this->erro_sql = " Campo o136_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

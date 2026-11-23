@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/fix/lancamento/estoque-patrimonio",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[22007]: Invalid datetime format: 7 ERRO:  sintaxe de entrada é inválida para tipo date: \"\"\nLINE 18:  where c70_data >= ''\n                            ^ (SQL: drop table if exists lancamentos_caso_um;\n\ncreate table lancamentos_caso_um as\nselect c69_anousu, c69_codlan, c69_credito, c69_debito, reduzcredito.c61_instit,\n       reduzcredito.c61_codigo as recurso_credito, reduzdebito.c61_codigo as recurso_debito, c69_ordem\n  from contabilidade.conlancamval\n  join contabilidade.conlancam on c70_codlan = c69_codlan\n  join contabilidade.conlancamdoc on c70_codlan = c71_codlan\n  join contabilidade.conlancaminstit on c70_codlan = c02_codlan\n  join contabilidade.conplanoreduz reduzdebito on c69_debito = reduzdebito.c61_reduz\n       and c69_anousu = reduzdebito.c61_anousu\n  join contabilidade.conplano planodebito     on reduzdebito.c61_codcon = planodebito.c60_codcon\n       and reduzdebito.c61_anousu = planodebito.c60_anousu\n  join contabilidade.conplanoreduz reduzcredito on c69_credito = reduzcredito.c61_reduz\n       and c69_anousu = reduzcredito.c61_anousu\n  join contabilidade.conplano planocredito    on reduzcredito.c61_codcon = planocredito.c60_codcon\n       and reduzcredito.c61_anousu = planocredito.c60_anousu\n where c70_data >= ''\n   and c71_coddoc in (400, 401, 402, 403, 404, 600, 601, 602, 603, 604, 605, 700, 701, 702, 703, 704, 705,\n                      706, 708, 707, 709, 710)\norder by c69_codlan, c69_ordem;\n\ndelete from contabilidade.conlancamrecurso\nusing lancamentos_caso_um\nwhere c130_conlancam = c69_codlan;\n\n\ninsert into contabilidade.conlancamrecurso (c130_conlancam, c130_orctiporec, c130_conta, c130_anousu, c130_natureza)\nselect c69_codlan, recurso_debito, c69_debito, c69_anousu, 'D'\n  from lancamentos_caso_um;\n\ninsert into contabilidade.conlancamrecurso (c130_conlancam, c130_orctiporec, c130_conta, c130_anousu, c130_natureza)\nselect c69_codlan, recurso_credito, c69_credito, c69_anousu, 'C'\n  from lancamentos_caso_um;)"
+  },
+  "sha256": "66ce045ef8471e91d8d54e93409a5d36e113a1312c4995310f92715a7adb4330",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

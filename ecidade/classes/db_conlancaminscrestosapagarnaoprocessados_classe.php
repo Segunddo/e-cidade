@@ -52,7 +52,7 @@ class cl_conlancaminscrestosapagarnaoprocessados {
                  c108_inscricaorestosapagarnaoprocessados = int4 = Sequencial 
                  ";
    //funcao construtor da classe 
-   function cl_conlancaminscrestosapagarnaoprocessados() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("conlancaminscrestosapagarnaoprocessados"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_conlancaminscrestosapagarnaoprocessados {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c108_sequencial = ($this->c108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_sequencial"]:$this->c108_sequencial);
-       $this->c108_codlan = ($this->c108_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_codlan"]:$this->c108_codlan);
-       $this->c108_inscricaorestosapagarnaoprocessados = ($this->c108_inscricaorestosapagarnaoprocessados == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_inscricaorestosapagarnaoprocessados"]:$this->c108_inscricaorestosapagarnaoprocessados);
+       $this->c108_sequencial = ($this->c108_sequencial === 0 || $this->c108_sequencial === 0.0 || $this->c108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_sequencial"]:$this->c108_sequencial);
+       $this->c108_codlan = ($this->c108_codlan === 0 || $this->c108_codlan === 0.0 || $this->c108_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_codlan"]:$this->c108_codlan);
+       $this->c108_inscricaorestosapagarnaoprocessados = ($this->c108_inscricaorestosapagarnaoprocessados === 0 || $this->c108_inscricaorestosapagarnaoprocessados === 0.0 || $this->c108_inscricaorestosapagarnaoprocessados == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_inscricaorestosapagarnaoprocessados"]:$this->c108_inscricaorestosapagarnaoprocessados);
      }else{
-       $this->c108_sequencial = ($this->c108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_sequencial"]:$this->c108_sequencial);
+       $this->c108_sequencial = ($this->c108_sequencial === 0 || $this->c108_sequencial === 0.0 || $this->c108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c108_sequencial"]:$this->c108_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_conlancaminscrestosapagarnaoprocessados {
          $this->c108_sequencial = $c108_sequencial; 
        }
      }
-     if(($this->c108_sequencial == null) || ($this->c108_sequencial == "") ){ 
+     if(($this->c108_sequencial == null) || ($this->c108_sequencial === 0 || $this->c108_sequencial === 0.0 || $this->c108_sequencial == "") ){ 
        $this->erro_sql = " Campo c108_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -75,14 +75,14 @@ class cl_ossoariojazigo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm25_i_codigo = ($this->cm25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_codigo"]:$this->cm25_i_codigo);
+       $this->cm25_i_codigo = ($this->cm25_i_codigo === 0 || $this->cm25_i_codigo === 0.0 || $this->cm25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_codigo"]:$this->cm25_i_codigo);
        $this->cm25_c_numero = ($this->cm25_c_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_c_numero"]:$this->cm25_c_numero);
-       $this->cm25_i_lotecemit = ($this->cm25_i_lotecemit == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_lotecemit"]:$this->cm25_i_lotecemit);
-       $this->cm25_f_comprimento = ($this->cm25_f_comprimento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_f_comprimento"]:$this->cm25_f_comprimento);
-       $this->cm25_f_largura = ($this->cm25_f_largura == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_f_largura"]:$this->cm25_f_largura);
+       $this->cm25_i_lotecemit = ($this->cm25_i_lotecemit === 0 || $this->cm25_i_lotecemit === 0.0 || $this->cm25_i_lotecemit == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_lotecemit"]:$this->cm25_i_lotecemit);
+       $this->cm25_f_comprimento = ($this->cm25_f_comprimento === 0 || $this->cm25_f_comprimento === 0.0 || $this->cm25_f_comprimento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_f_comprimento"]:$this->cm25_f_comprimento);
+       $this->cm25_f_largura = ($this->cm25_f_largura === 0 || $this->cm25_f_largura === 0.0 || $this->cm25_f_largura == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_f_largura"]:$this->cm25_f_largura);
        $this->cm25_c_tipo = ($this->cm25_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_c_tipo"]:$this->cm25_c_tipo);
      }else{
-       $this->cm25_i_codigo = ($this->cm25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_codigo"]:$this->cm25_i_codigo);
+       $this->cm25_i_codigo = ($this->cm25_i_codigo === 0 || $this->cm25_i_codigo === 0.0 || $this->cm25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm25_i_codigo"]:$this->cm25_i_codigo);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_ossoariojazigo {
          $this->cm25_i_codigo = $cm25_i_codigo;
        }
      }
-     if(($this->cm25_i_codigo == null) || ($this->cm25_i_codigo == "") ){
+     if(($this->cm25_i_codigo == null) || ($this->cm25_i_codigo === 0 || $this->cm25_i_codigo === 0.0 || $this->cm25_i_codigo == "") ){
        $this->erro_sql = " Campo cm25_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

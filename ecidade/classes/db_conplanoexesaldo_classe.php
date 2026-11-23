@@ -73,15 +73,15 @@ class cl_conplanoexesaldo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c68_anousu = ($this->c68_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_anousu"]:$this->c68_anousu);
-       $this->c68_reduz = ($this->c68_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_reduz"]:$this->c68_reduz);
-       $this->c68_mes = ($this->c68_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_mes"]:$this->c68_mes);
-       $this->c68_debito = ($this->c68_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_debito"]:$this->c68_debito);
-       $this->c68_credito = ($this->c68_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_credito"]:$this->c68_credito);
+       $this->c68_anousu = ($this->c68_anousu === 0 || $this->c68_anousu === 0.0 || $this->c68_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_anousu"]:$this->c68_anousu);
+       $this->c68_reduz = ($this->c68_reduz === 0 || $this->c68_reduz === 0.0 || $this->c68_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_reduz"]:$this->c68_reduz);
+       $this->c68_mes = ($this->c68_mes === 0 || $this->c68_mes === 0.0 || $this->c68_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_mes"]:$this->c68_mes);
+       $this->c68_debito = ($this->c68_debito === 0 || $this->c68_debito === 0.0 || $this->c68_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_debito"]:$this->c68_debito);
+       $this->c68_credito = ($this->c68_credito === 0 || $this->c68_credito === 0.0 || $this->c68_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_credito"]:$this->c68_credito);
      }else{
-       $this->c68_anousu = ($this->c68_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_anousu"]:$this->c68_anousu);
-       $this->c68_reduz = ($this->c68_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_reduz"]:$this->c68_reduz);
-       $this->c68_mes = ($this->c68_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_mes"]:$this->c68_mes);
+       $this->c68_anousu = ($this->c68_anousu === 0 || $this->c68_anousu === 0.0 || $this->c68_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_anousu"]:$this->c68_anousu);
+       $this->c68_reduz = ($this->c68_reduz === 0 || $this->c68_reduz === 0.0 || $this->c68_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_reduz"]:$this->c68_reduz);
+       $this->c68_mes = ($this->c68_mes === 0 || $this->c68_mes === 0.0 || $this->c68_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c68_mes"]:$this->c68_mes);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_conplanoexesaldo {
        $this->c68_anousu = $c68_anousu; 
        $this->c68_reduz = $c68_reduz; 
        $this->c68_mes = $c68_mes; 
-     if(($this->c68_anousu == null) || ($this->c68_anousu == "") ){ 
+     if(($this->c68_anousu == null) || ($this->c68_anousu === 0 || $this->c68_anousu === 0.0 || $this->c68_anousu == "") ){ 
        $this->erro_sql = " Campo c68_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -116,7 +116,7 @@ class cl_conplanoexesaldo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c68_reduz == null) || ($this->c68_reduz == "") ){ 
+     if(($this->c68_reduz == null) || ($this->c68_reduz === 0 || $this->c68_reduz === 0.0 || $this->c68_reduz == "") ){ 
        $this->erro_sql = " Campo c68_reduz nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -124,7 +124,7 @@ class cl_conplanoexesaldo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c68_mes == null) || ($this->c68_mes == "") ){ 
+     if(($this->c68_mes == null) || ($this->c68_mes === 0 || $this->c68_mes === 0.0 || $this->c68_mes == "") ){ 
        $this->erro_sql = " Campo c68_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/pcasp/conta-corrente/salvar",
+  "json": {
+    "errors": {
+      "codcon": [
+        "O campo codcon é obrigatório."
+      ],
+      "contaCorrente": [
+        "O campo conta corrente é obrigatório."
+      ],
+      "exercicio": [
+        "O campo exercicio é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "602edddff69c925272ee274e57970a5f09fd02dd2650eb8cacffc586c808034f",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

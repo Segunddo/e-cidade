@@ -51,7 +51,7 @@ $instits = "(" . str_replace('-', ', ', $db_selinstit) . ")";
 $resultinst = db_query("select codigo, nomeinstabrev from db_config where codigo in $instits");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_num_rows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_num_rows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg . $nomeinstabrev;
     $xvirg = ', ';
@@ -261,7 +261,7 @@ for ($i = 0; $i < $clorctiporec->numrows; $i++) {
 
             //      db_criatabela($result); exit;
 
-            for ($i = 0; $i < pg_num_rows($result); $i++) {
+            for ($i = 0; $i < ($result ? pg_num_rows($result) : null); $i++) {
                 db_fieldsmemory($result, $i);
                 if (db_conplano_grupo($anousu, $o57_fonte, 9004) == true) {
                     $valor_arrecadado += $saldo_arrecadado;
@@ -313,7 +313,7 @@ for ($i = 0; $i < $clorctiporec->numrows; $i++) {
                 $saldo_liquidado = 0;
                 $saldo_empenhado = 0;
                 $saldo_pago = 0;
-                for ($i = 0; $i < pg_num_rows($result); $i++) {
+                for ($i = 0; $i < ($result ? pg_num_rows($result) : null); $i++) {
                     db_fieldsmemory($result, $i);
                     $saldo_liquidado += $liquidado;
                     $saldo_empenhado += ($empenhado - $anulado);
@@ -419,7 +419,7 @@ for ($i = 0; $i < $clorctiporec->numrows; $i++) {
             $sql .= "   and tabrec.k02_tipo = 'E' ";
 
             $rs = db_query($sql);
-            $numrows = pg_num_rows($rs);
+            $numrows = ($rs ? pg_num_rows($rs) : null);
             $totalRecp = 0;
             if ($numrows > 0) {
                 db_fieldsmemory($rs, 0);
@@ -497,7 +497,7 @@ for ($i = 0; $i < $clorctiporec->numrows; $i++) {
             $sql .= " where {$wh} ";
             $sql .= "   and corrente.k12_data between '{$dataini}' and '{$datafim}' ";
             $rs = db_query($sql);
-            $numrows = pg_num_rows($rs);
+            $numrows = ($rs ? pg_num_rows($rs) : null);
             $totalDesp = 0;
             if ($numrows > 0) {
                 db_fieldsmemory($rs, 0);

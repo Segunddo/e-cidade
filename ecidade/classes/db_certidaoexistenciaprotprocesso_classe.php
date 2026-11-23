@@ -69,11 +69,11 @@ class cl_certidaoexistenciaprotprocesso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j134_sequencial = ($this->j134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_sequencial"]:$this->j134_sequencial);
-       $this->j134_certidaoexistencia = ($this->j134_certidaoexistencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_certidaoexistencia"]:$this->j134_certidaoexistencia);
-       $this->j134_protprocesso = ($this->j134_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_protprocesso"]:$this->j134_protprocesso);
+       $this->j134_sequencial = ($this->j134_sequencial === 0 || $this->j134_sequencial === 0.0 || $this->j134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_sequencial"]:$this->j134_sequencial);
+       $this->j134_certidaoexistencia = ($this->j134_certidaoexistencia === 0 || $this->j134_certidaoexistencia === 0.0 || $this->j134_certidaoexistencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_certidaoexistencia"]:$this->j134_certidaoexistencia);
+       $this->j134_protprocesso = ($this->j134_protprocesso === 0 || $this->j134_protprocesso === 0.0 || $this->j134_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_protprocesso"]:$this->j134_protprocesso);
      }else{
-       $this->j134_sequencial = ($this->j134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_sequencial"]:$this->j134_sequencial);
+       $this->j134_sequencial = ($this->j134_sequencial === 0 || $this->j134_sequencial === 0.0 || $this->j134_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j134_sequencial"]:$this->j134_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_certidaoexistenciaprotprocesso {
          $this->j134_sequencial = $j134_sequencial;
        }
      }
-     if(($this->j134_sequencial == null) || ($this->j134_sequencial == "") ){
+     if(($this->j134_sequencial == null) || ($this->j134_sequencial === 0 || $this->j134_sequencial === 0.0 || $this->j134_sequencial == "") ){
        $this->erro_sql = " Campo j134_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

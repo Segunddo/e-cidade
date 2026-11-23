@@ -71,12 +71,12 @@ class cl_conplanoreduzcgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c22_sequencial = ($this->c22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c22_sequencial"]:$this->c22_sequencial);
-       $this->c22_anousu = ($this->c22_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c22_anousu"]:$this->c22_anousu);
-       $this->c22_reduz = ($this->c22_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c22_reduz"]:$this->c22_reduz);
-       $this->c22_numcgm = ($this->c22_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c22_numcgm"]:$this->c22_numcgm);
+       $this->c22_sequencial = ($this->c22_sequencial === 0 || $this->c22_sequencial === 0.0 || $this->c22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c22_sequencial"]:$this->c22_sequencial);
+       $this->c22_anousu = ($this->c22_anousu === 0 || $this->c22_anousu === 0.0 || $this->c22_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c22_anousu"]:$this->c22_anousu);
+       $this->c22_reduz = ($this->c22_reduz === 0 || $this->c22_reduz === 0.0 || $this->c22_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c22_reduz"]:$this->c22_reduz);
+       $this->c22_numcgm = ($this->c22_numcgm === 0 || $this->c22_numcgm === 0.0 || $this->c22_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c22_numcgm"]:$this->c22_numcgm);
      }else{
-       $this->c22_sequencial = ($this->c22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c22_sequencial"]:$this->c22_sequencial);
+       $this->c22_sequencial = ($this->c22_sequencial === 0 || $this->c22_sequencial === 0.0 || $this->c22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c22_sequencial"]:$this->c22_sequencial);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_conplanoreduzcgm {
          $this->c22_sequencial = $c22_sequencial;
        }
      }
-     if(($this->c22_sequencial == null) || ($this->c22_sequencial == "") ){
+     if(($this->c22_sequencial == null) || ($this->c22_sequencial === 0 || $this->c22_sequencial === 0.0 || $this->c22_sequencial == "") ){
        $this->erro_sql = " Campo c22_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

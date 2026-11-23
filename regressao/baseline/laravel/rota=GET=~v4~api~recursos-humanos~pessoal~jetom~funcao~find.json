@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/pessoal/jetom/funcao/find",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\RecursosHumanos\\Pessoal\\Controller\\Jetom\\FuncaoController::find does not exist."
+  },
+  "sha256": "73d04ddc5ff8a4b538bd0dc88f69a7ca6a47ab515e961b303c7610d32f8fac32",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

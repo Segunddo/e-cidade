@@ -69,11 +69,11 @@ class cl_cadenderruacep {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db86_sequencial = ($this->db86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db86_sequencial"]:$this->db86_sequencial);
-       $this->db86_cadenderrua = ($this->db86_cadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["db86_cadenderrua"]:$this->db86_cadenderrua);
+       $this->db86_sequencial = ($this->db86_sequencial === 0 || $this->db86_sequencial === 0.0 || $this->db86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db86_sequencial"]:$this->db86_sequencial);
+       $this->db86_cadenderrua = ($this->db86_cadenderrua === 0 || $this->db86_cadenderrua === 0.0 || $this->db86_cadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["db86_cadenderrua"]:$this->db86_cadenderrua);
        $this->db86_cep = ($this->db86_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["db86_cep"]:$this->db86_cep);
      }else{
-       $this->db86_sequencial = ($this->db86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db86_sequencial"]:$this->db86_sequencial);
+       $this->db86_sequencial = ($this->db86_sequencial === 0 || $this->db86_sequencial === 0.0 || $this->db86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db86_sequencial"]:$this->db86_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cadenderruacep {
          $this->db86_sequencial = $db86_sequencial; 
        }
      }
-     if(($this->db86_sequencial == null) || ($this->db86_sequencial == "") ){ 
+     if(($this->db86_sequencial == null) || ($this->db86_sequencial === 0 || $this->db86_sequencial === 0.0 || $this->db86_sequencial == "") ){ 
        $this->erro_sql = " Campo db86_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

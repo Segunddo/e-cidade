@@ -78,9 +78,9 @@ class cl_agualeituracancela {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x47_sequencial = ($this->x47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_sequencial"]:$this->x47_sequencial);
-       $this->x47_agualeitura = ($this->x47_agualeitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_agualeitura"]:$this->x47_agualeitura);
-       $this->x47_usuario = ($this->x47_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_usuario"]:$this->x47_usuario);
+       $this->x47_sequencial = ($this->x47_sequencial === 0 || $this->x47_sequencial === 0.0 || $this->x47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_sequencial"]:$this->x47_sequencial);
+       $this->x47_agualeitura = ($this->x47_agualeitura === 0 || $this->x47_agualeitura === 0.0 || $this->x47_agualeitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_agualeitura"]:$this->x47_agualeitura);
+       $this->x47_usuario = ($this->x47_usuario === 0 || $this->x47_usuario === 0.0 || $this->x47_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_usuario"]:$this->x47_usuario);
        if($this->x47_data == ""){
          $this->x47_data_dia = ($this->x47_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_data_dia"]:$this->x47_data_dia);
          $this->x47_data_mes = ($this->x47_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_data_mes"]:$this->x47_data_mes);
@@ -92,7 +92,7 @@ class cl_agualeituracancela {
        $this->x47_hora = ($this->x47_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_hora"]:$this->x47_hora);
        $this->x47_motivo = ($this->x47_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_motivo"]:$this->x47_motivo);
      }else{
-       $this->x47_sequencial = ($this->x47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_sequencial"]:$this->x47_sequencial);
+       $this->x47_sequencial = ($this->x47_sequencial === 0 || $this->x47_sequencial === 0.0 || $this->x47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x47_sequencial"]:$this->x47_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_agualeituracancela {
          $this->x47_sequencial = $x47_sequencial;
        }
      }
-     if(($this->x47_sequencial == null) || ($this->x47_sequencial == "") ){
+     if(($this->x47_sequencial == null) || ($this->x47_sequencial === 0 || $this->x47_sequencial === 0.0 || $this->x47_sequencial == "") ){
        $this->erro_sql = " Campo x47_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -76,14 +76,14 @@ class cl_infocomplementarvalor
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c123_sequencial = ($this->c123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_sequencial"]:$this->c123_sequencial);
-       $this->c123_conplanoatributolancamentos = ($this->c123_conplanoatributolancamentos == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_conplanoatributolancamentos"]:$this->c123_conplanoatributolancamentos);
+       $this->c123_sequencial = ($this->c123_sequencial === 0 || $this->c123_sequencial === 0.0 || $this->c123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_sequencial"]:$this->c123_sequencial);
+       $this->c123_conplanoatributolancamentos = ($this->c123_conplanoatributolancamentos === 0 || $this->c123_conplanoatributolancamentos === 0.0 || $this->c123_conplanoatributolancamentos == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_conplanoatributolancamentos"]:$this->c123_conplanoatributolancamentos);
        $this->c123_valor = ($this->c123_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_valor"]:$this->c123_valor);
-       $this->c123_reduzido = ($this->c123_reduzido == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_reduzido"]:$this->c123_reduzido);
-       $this->c123_infocomplementar = ($this->c123_infocomplementar == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_infocomplementar"]:$this->c123_infocomplementar);
-       $this->c123_conplanosistema = ($this->c123_conplanosistema == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_conplanosistema"]:$this->c123_conplanosistema);
+       $this->c123_reduzido = ($this->c123_reduzido === 0 || $this->c123_reduzido === 0.0 || $this->c123_reduzido == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_reduzido"]:$this->c123_reduzido);
+       $this->c123_infocomplementar = ($this->c123_infocomplementar === 0 || $this->c123_infocomplementar === 0.0 || $this->c123_infocomplementar == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_infocomplementar"]:$this->c123_infocomplementar);
+       $this->c123_conplanosistema = ($this->c123_conplanosistema === 0 || $this->c123_conplanosistema === 0.0 || $this->c123_conplanosistema == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_conplanosistema"]:$this->c123_conplanosistema);
      }else{
-       $this->c123_sequencial = ($this->c123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_sequencial"]:$this->c123_sequencial);
+       $this->c123_sequencial = ($this->c123_sequencial === 0 || $this->c123_sequencial === 0.0 || $this->c123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c123_sequencial"]:$this->c123_sequencial);
      }
    }
 
@@ -153,7 +153,7 @@ class cl_infocomplementarvalor
          $this->c123_sequencial = $c123_sequencial;
        }
      }
-     if(($this->c123_sequencial == null) || ($this->c123_sequencial == "") ){
+     if(($this->c123_sequencial == null) || ($this->c123_sequencial === 0 || $this->c123_sequencial === 0.0 || $this->c123_sequencial == "") ){
        $this->erro_sql = " Campo c123_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -36,7 +36,7 @@ $pdf->SetTextColor(0,0,0);
 $pdf->SetFillColor(235);
 $pdf->Ln(3);
 $pdf->SetFont($Letra,'',9);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if($codigo != "")
   $result = db_query("select w03_nome as nome from depen where w03_codigo = '".str_pad(trim($codigo),6," ",STR_PAD_LEFT)."'");
 else {

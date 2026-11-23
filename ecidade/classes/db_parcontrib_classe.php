@@ -77,13 +77,13 @@ class cl_parcontrib {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d12_receita = ($this->d12_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_receita"]:$this->d12_receita);
-       $this->d12_numtot = ($this->d12_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_numtot"]:$this->d12_numtot);
-       $this->d12_perunica = ($this->d12_perunica == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_perunica"]:$this->d12_perunica);
-       $this->d12_hist = ($this->d12_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_hist"]:$this->d12_hist);
-       $this->d12_notitipo = ($this->d12_notitipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_notitipo"]:$this->d12_notitipo);
-       $this->d12_tipo = ($this->d12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_tipo"]:$this->d12_tipo);
-       $this->d12_perc = ($this->d12_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_perc"]:$this->d12_perc);
+       $this->d12_receita = ($this->d12_receita === 0 || $this->d12_receita === 0.0 || $this->d12_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_receita"]:$this->d12_receita);
+       $this->d12_numtot = ($this->d12_numtot === 0 || $this->d12_numtot === 0.0 || $this->d12_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_numtot"]:$this->d12_numtot);
+       $this->d12_perunica = ($this->d12_perunica === 0 || $this->d12_perunica === 0.0 || $this->d12_perunica == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_perunica"]:$this->d12_perunica);
+       $this->d12_hist = ($this->d12_hist === 0 || $this->d12_hist === 0.0 || $this->d12_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_hist"]:$this->d12_hist);
+       $this->d12_notitipo = ($this->d12_notitipo === 0 || $this->d12_notitipo === 0.0 || $this->d12_notitipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_notitipo"]:$this->d12_notitipo);
+       $this->d12_tipo = ($this->d12_tipo === 0 || $this->d12_tipo === 0.0 || $this->d12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_tipo"]:$this->d12_tipo);
+       $this->d12_perc = ($this->d12_perc === 0 || $this->d12_perc === 0.0 || $this->d12_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["d12_perc"]:$this->d12_perc);
      }else{
      }
    }

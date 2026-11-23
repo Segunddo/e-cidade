@@ -1,0 +1,138 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/planejamento/consulta/ods",
+  "json": {
+    "data": [
+      {
+        "created_at": null,
+        "id": 1,
+        "pl26_codigo": "1",
+        "pl26_descricao": "Erradicação da pobreza",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 2,
+        "pl26_codigo": "2",
+        "pl26_descricao": "Fome zero e agricultura sustentável",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 3,
+        "pl26_codigo": "3",
+        "pl26_descricao": "Saúde e bem-estar",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 4,
+        "pl26_codigo": "4",
+        "pl26_descricao": "Educação de qualidade",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 5,
+        "pl26_codigo": "5",
+        "pl26_descricao": "Igualdade de gênero",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 6,
+        "pl26_codigo": "6",
+        "pl26_descricao": "Água potável",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 7,
+        "pl26_codigo": "7",
+        "pl26_descricao": "Energia Limpa e Acessível",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 8,
+        "pl26_codigo": "8",
+        "pl26_descricao": "Trabalho decente e crescimento econômico",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 9,
+        "pl26_codigo": "9",
+        "pl26_descricao": "Indústria, inovação e infraestrutura",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 10,
+        "pl26_codigo": "10",
+        "pl26_descricao": "Redução das desigualdades",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 11,
+        "pl26_codigo": "11",
+        "pl26_descricao": "Cidades e comunidades sustentáveis",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 12,
+        "pl26_codigo": "12",
+        "pl26_descricao": "Consumo e produção responsável",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 13,
+        "pl26_codigo": "13",
+        "pl26_descricao": "Ação contra a mudança global do clima",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 14,
+        "pl26_codigo": "14",
+        "pl26_descricao": "Vida na água",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 15,
+        "pl26_codigo": "15",
+        "pl26_descricao": "Vida terrestre",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 16,
+        "pl26_codigo": "16",
+        "pl26_descricao": "Paz, justiça e instituições eficazes",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "id": 17,
+        "pl26_codigo": "17",
+        "pl26_descricao": "Parcerias e meios de implementação",
+        "updated_at": null
+      }
+    ],
+    "error": false,
+    "message": "Lista de Objetivos de Desenvolvimento Sustentável (ODS)"
+  },
+  "sha256": "63d17c6522fb326daec7c2e61d334718e8a40328a4de19f914cb8b7960d0b9b1",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -210,7 +210,7 @@ $sSqlCancProc .= "  {$where}                                                    
 $sSqlCancProc .= "  {$orderby}                                                                                 ";
 //die$sSqlCancProc);
 $rsCancProc  = db_query($sSqlCancProc);
-$iCancProc   = pg_num_rows($rsCancProc);
+$iCancProc   = ($rsCancProc ? pg_num_rows($rsCancProc) : null);
 
 if($iCancProc == 0){
 

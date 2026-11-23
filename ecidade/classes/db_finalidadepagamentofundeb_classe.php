@@ -69,11 +69,11 @@ class cl_finalidadepagamentofundeb {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e151_sequencial = ($this->e151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_sequencial"]:$this->e151_sequencial);
+       $this->e151_sequencial = ($this->e151_sequencial === 0 || $this->e151_sequencial === 0.0 || $this->e151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_sequencial"]:$this->e151_sequencial);
        $this->e151_codigo = ($this->e151_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_codigo"]:$this->e151_codigo);
        $this->e151_descricao = ($this->e151_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_descricao"]:$this->e151_descricao);
      }else{
-       $this->e151_sequencial = ($this->e151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_sequencial"]:$this->e151_sequencial);
+       $this->e151_sequencial = ($this->e151_sequencial === 0 || $this->e151_sequencial === 0.0 || $this->e151_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e151_sequencial"]:$this->e151_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_finalidadepagamentofundeb {
          $this->e151_sequencial = $e151_sequencial;
        }
      }
-     if(($this->e151_sequencial == null) || ($this->e151_sequencial == "") ){
+     if(($this->e151_sequencial == null) || ($this->e151_sequencial === 0 || $this->e151_sequencial === 0.0 || $this->e151_sequencial == "") ){
        $this->erro_sql = " Campo e151_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

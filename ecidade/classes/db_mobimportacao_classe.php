@@ -74,8 +74,8 @@ class cl_mobimportacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j95_codimporta = ($this->j95_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_codimporta"]:$this->j95_codimporta);
-       $this->j95_pda = ($this->j95_pda == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_pda"]:$this->j95_pda);
+       $this->j95_codimporta = ($this->j95_codimporta === 0 || $this->j95_codimporta === 0.0 || $this->j95_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_codimporta"]:$this->j95_codimporta);
+       $this->j95_pda = ($this->j95_pda === 0 || $this->j95_pda === 0.0 || $this->j95_pda == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_pda"]:$this->j95_pda);
        if($this->j95_data == ""){
          $this->j95_data_dia = ($this->j95_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_data_dia"]:$this->j95_data_dia);
          $this->j95_data_mes = ($this->j95_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_data_mes"]:$this->j95_data_mes);
@@ -84,9 +84,9 @@ class cl_mobimportacao {
             $this->j95_data = $this->j95_data_ano."-".$this->j95_data_mes."-".$this->j95_data_dia;
          }
        }
-       $this->j95_idusuario = ($this->j95_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_idusuario"]:$this->j95_idusuario);
+       $this->j95_idusuario = ($this->j95_idusuario === 0 || $this->j95_idusuario === 0.0 || $this->j95_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_idusuario"]:$this->j95_idusuario);
      }else{
-       $this->j95_codimporta = ($this->j95_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_codimporta"]:$this->j95_codimporta);
+       $this->j95_codimporta = ($this->j95_codimporta === 0 || $this->j95_codimporta === 0.0 || $this->j95_codimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["j95_codimporta"]:$this->j95_codimporta);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_mobimportacao {
          $this->j95_codimporta = $j95_codimporta;
        }
      }
-     if(($this->j95_codimporta == null) || ($this->j95_codimporta == "") ){
+     if(($this->j95_codimporta == null) || ($this->j95_codimporta === 0 || $this->j95_codimporta === 0.0 || $this->j95_codimporta == "") ){
        $this->erro_sql = " Campo j95_codimporta nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

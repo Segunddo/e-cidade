@@ -69,12 +69,12 @@ class cl_iptutaxa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j19_anousu = ($this->j19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_anousu"]:$this->j19_anousu);
-       $this->j19_receit = ($this->j19_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_receit"]:$this->j19_receit);
-       $this->j19_valor = ($this->j19_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_valor"]:$this->j19_valor);
+       $this->j19_anousu = ($this->j19_anousu === 0 || $this->j19_anousu === 0.0 || $this->j19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_anousu"]:$this->j19_anousu);
+       $this->j19_receit = ($this->j19_receit === 0 || $this->j19_receit === 0.0 || $this->j19_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_receit"]:$this->j19_receit);
+       $this->j19_valor = ($this->j19_valor === 0 || $this->j19_valor === 0.0 || $this->j19_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_valor"]:$this->j19_valor);
      }else{
-       $this->j19_anousu = ($this->j19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_anousu"]:$this->j19_anousu);
-       $this->j19_receit = ($this->j19_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_receit"]:$this->j19_receit);
+       $this->j19_anousu = ($this->j19_anousu === 0 || $this->j19_anousu === 0.0 || $this->j19_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_anousu"]:$this->j19_anousu);
+       $this->j19_receit = ($this->j19_receit === 0 || $this->j19_receit === 0.0 || $this->j19_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_receit"]:$this->j19_receit);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_iptutaxa {
      }
        $this->j19_anousu = $j19_anousu;
        $this->j19_receit = $j19_receit;
-     if(($this->j19_anousu == null) || ($this->j19_anousu == "") ){
+     if(($this->j19_anousu == null) || ($this->j19_anousu === 0 || $this->j19_anousu === 0.0 || $this->j19_anousu == "") ){
        $this->erro_sql = " Campo j19_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_iptutaxa {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j19_receit == null) || ($this->j19_receit == "") ){
+     if(($this->j19_receit == null) || ($this->j19_receit === 0 || $this->j19_receit === 0.0 || $this->j19_receit == "") ){
        $this->erro_sql = " Campo j19_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

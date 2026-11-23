@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/fix/gera-csv-ajuste-saldo-contas",
+  "json": {
+    "error": true,
+    "message": "Undefined index: dataInicial"
+  },
+  "sha256": "001afa025e246325c348413ff733739b80d5f2cf38e79cf8e5018213f09b1918",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

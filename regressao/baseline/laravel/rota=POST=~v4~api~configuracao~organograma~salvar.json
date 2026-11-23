@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/organograma/salvar",
+  "json": {
+    "errors": {
+      "departamento": [
+        "O campo departamento deve ser informado."
+      ],
+      "departamentofilho": [
+        "O campo departamentofilho deve ser informado."
+      ],
+      "descricao": [
+        "O campo descricao deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "42d05eb84adc00cacebe7b66d1b6678307d7ffee1a085608e5991452d0711bea",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

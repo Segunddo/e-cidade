@@ -29,7 +29,7 @@ set_time_limit(0);
 include(modification("libs/db_sql.php"));
 include(modification("fpdf151/pdf.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $pdf = new pdf();
 $pdf->Open();
 $pdf->AliasNbPages();

@@ -68,13 +68,13 @@ class cl_hist {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c03_anousu = ($this->c03_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_anousu"]:$this->c03_anousu);
-       $this->c03_codigo = ($this->c03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_codigo"]:$this->c03_codigo);
+       $this->c03_anousu = ($this->c03_anousu === 0 || $this->c03_anousu === 0.0 || $this->c03_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_anousu"]:$this->c03_anousu);
+       $this->c03_codigo = ($this->c03_codigo === 0 || $this->c03_codigo === 0.0 || $this->c03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_codigo"]:$this->c03_codigo);
        $this->c03_descr = ($this->c03_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_descr"]:$this->c03_descr);
        $this->c03_compl = ($this->c03_compl == "f"?@$GLOBALS["HTTP_POST_VARS"]["c03_compl"]:$this->c03_compl);
      }else{
-       $this->c03_anousu = ($this->c03_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_anousu"]:$this->c03_anousu);
-       $this->c03_codigo = ($this->c03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_codigo"]:$this->c03_codigo);
+       $this->c03_anousu = ($this->c03_anousu === 0 || $this->c03_anousu === 0.0 || $this->c03_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_anousu"]:$this->c03_anousu);
+       $this->c03_codigo = ($this->c03_codigo === 0 || $this->c03_codigo === 0.0 || $this->c03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c03_codigo"]:$this->c03_codigo);
      }
    }
    // funcao para inclusao
@@ -100,7 +100,7 @@ class cl_hist {
      }
        $this->c03_anousu = $c03_anousu;
        $this->c03_codigo = $c03_codigo;
-     if(($this->c03_anousu == null) || ($this->c03_anousu == "") ){
+     if(($this->c03_anousu == null) || ($this->c03_anousu === 0 || $this->c03_anousu === 0.0 || $this->c03_anousu == "") ){
        $this->erro_sql = " Campo c03_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -108,7 +108,7 @@ class cl_hist {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c03_codigo == null) || ($this->c03_codigo == "") ){
+     if(($this->c03_codigo == null) || ($this->c03_codigo === 0 || $this->c03_codigo === 0.0 || $this->c03_codigo == "") ){
        $this->erro_sql = " Campo c03_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

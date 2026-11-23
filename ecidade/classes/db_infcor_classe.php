@@ -89,8 +89,8 @@ class cl_infcor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->i04_codigo = ($this->i04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_codigo"]:$this->i04_codigo);
-       $this->i04_seq = ($this->i04_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_seq"]:$this->i04_seq);
+       $this->i04_codigo = ($this->i04_codigo === 0 || $this->i04_codigo === 0.0 || $this->i04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_codigo"]:$this->i04_codigo);
+       $this->i04_seq = ($this->i04_seq === 0 || $this->i04_seq === 0.0 || $this->i04_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_seq"]:$this->i04_seq);
        $this->i04_obs = ($this->i04_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_obs"]:$this->i04_obs);
        if($this->i04_dtoper == ""){
          $this->i04_dtoper_dia = ($this->i04_dtoper_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_dtoper_dia"]:$this->i04_dtoper_dia);
@@ -108,14 +108,14 @@ class cl_infcor {
             $this->i04_dtvenc = $this->i04_dtvenc_ano."-".$this->i04_dtvenc_mes."-".$this->i04_dtvenc_dia;
          }
        }
-       $this->i04_valor = ($this->i04_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_valor"]:$this->i04_valor);
-       $this->i04_receit = ($this->i04_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_receit"]:$this->i04_receit);
-       $this->i04_correcao = ($this->i04_correcao == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_correcao"]:$this->i04_correcao);
-       $this->i04_juros = ($this->i04_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_juros"]:$this->i04_juros);
-       $this->i04_multa = ($this->i04_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_multa"]:$this->i04_multa);
+       $this->i04_valor = ($this->i04_valor === 0 || $this->i04_valor === 0.0 || $this->i04_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_valor"]:$this->i04_valor);
+       $this->i04_receit = ($this->i04_receit === 0 || $this->i04_receit === 0.0 || $this->i04_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_receit"]:$this->i04_receit);
+       $this->i04_correcao = ($this->i04_correcao === 0 || $this->i04_correcao === 0.0 || $this->i04_correcao == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_correcao"]:$this->i04_correcao);
+       $this->i04_juros = ($this->i04_juros === 0 || $this->i04_juros === 0.0 || $this->i04_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_juros"]:$this->i04_juros);
+       $this->i04_multa = ($this->i04_multa === 0 || $this->i04_multa === 0.0 || $this->i04_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_multa"]:$this->i04_multa);
      }else{
-       $this->i04_codigo = ($this->i04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_codigo"]:$this->i04_codigo);
-       $this->i04_seq = ($this->i04_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_seq"]:$this->i04_seq);
+       $this->i04_codigo = ($this->i04_codigo === 0 || $this->i04_codigo === 0.0 || $this->i04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_codigo"]:$this->i04_codigo);
+       $this->i04_seq = ($this->i04_seq === 0 || $this->i04_seq === 0.0 || $this->i04_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["i04_seq"]:$this->i04_seq);
      }
    }
    // funcao para inclusao
@@ -186,7 +186,7 @@ class cl_infcor {
      }
        $this->i04_codigo = $i04_codigo;
        $this->i04_seq = $i04_seq;
-     if(($this->i04_codigo == null) || ($this->i04_codigo == "") ){
+     if(($this->i04_codigo == null) || ($this->i04_codigo === 0 || $this->i04_codigo === 0.0 || $this->i04_codigo == "") ){
        $this->erro_sql = " Campo i04_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -194,7 +194,7 @@ class cl_infcor {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->i04_seq == null) || ($this->i04_seq == "") ){
+     if(($this->i04_seq == null) || ($this->i04_seq === 0 || $this->i04_seq === 0.0 || $this->i04_seq == "") ){
        $this->erro_sql = " Campo i04_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

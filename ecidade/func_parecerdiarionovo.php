@@ -37,7 +37,7 @@ require_once(modification("classes/db_parecer_classe.php"));
 db_postmemory($_POST);
 $oGet = db_utils::postMemory($_GET);
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clparecerturma = new cl_parecerturma;
 $oDaoParecer    = new cl_parecer;
 $oDaoParecer->rotulo->label("ed92_i_codigo");

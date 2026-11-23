@@ -475,7 +475,7 @@ class Autenticacoes {
   var $ctPagadora       = '';
 
   // Construtor   
-  public function Autenticacoes ($pid=null,$pstatus=null,$pnumeroCheque=null,$pdetalhe=null,$pcaixa=null,$pautent=null,$parquivo=null,$pdata=null,$pvalorDebito=null,$pvalorCredito=null,$pcredor=null,$pclasse='normal',$pitemconciliacao=null, $sJustificativa = '', $ctPagadora = null){
+  public function __construct ($pid=null,$pstatus=null,$pnumeroCheque=null,$pdetalhe=null,$pcaixa=null,$pautent=null,$parquivo=null,$pdata=null,$pvalorDebito=null,$pvalorCredito=null,$pcredor=null,$pclasse='normal',$pitemconciliacao=null, $sJustificativa = '', $ctPagadora = null){
 
   	$this->id               = $pid;
     $this->status           = $pstatus;

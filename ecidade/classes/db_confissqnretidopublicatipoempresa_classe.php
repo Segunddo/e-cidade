@@ -45,11 +45,11 @@ class cl_confissqnretidopublicatipoempresa
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->j171_sequencial = ($this->j171_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j171_sequencial"]:$this->j171_sequencial);
-       $this->j171_confissqnretidopublica = ($this->j171_confissqnretidopublica == ""?@$GLOBALS["HTTP_POST_VARS"]["j171_confissqnretidopublica"]:$this->j171_confissqnretidopublica);
-       $this->j171_tipoempresa = ($this->j171_tipoempresa == ""?@$GLOBALS["HTTP_POST_VARS"]["j171_tipoempresa"]:$this->j171_tipoempresa);
+       $this->j171_sequencial = ($this->j171_sequencial === 0 || $this->j171_sequencial === 0.0 || $this->j171_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j171_sequencial"]:$this->j171_sequencial);
+       $this->j171_confissqnretidopublica = ($this->j171_confissqnretidopublica === 0 || $this->j171_confissqnretidopublica === 0.0 || $this->j171_confissqnretidopublica == ""?@$GLOBALS["HTTP_POST_VARS"]["j171_confissqnretidopublica"]:$this->j171_confissqnretidopublica);
+       $this->j171_tipoempresa = ($this->j171_tipoempresa === 0 || $this->j171_tipoempresa === 0.0 || $this->j171_tipoempresa == ""?@$GLOBALS["HTTP_POST_VARS"]["j171_tipoempresa"]:$this->j171_tipoempresa);
      }else{
-       $this->j171_sequencial = ($this->j171_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j171_sequencial"]:$this->j171_sequencial);
+       $this->j171_sequencial = ($this->j171_sequencial === 0 || $this->j171_sequencial === 0.0 || $this->j171_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j171_sequencial"]:$this->j171_sequencial);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_confissqnretidopublicatipoempresa
          $this->j171_sequencial = $j171_sequencial; 
        }
      }
-     if(($this->j171_sequencial == null) || ($this->j171_sequencial == "") ){ 
+     if(($this->j171_sequencial == null) || ($this->j171_sequencial === 0 || $this->j171_sequencial === 0.0 || $this->j171_sequencial == "") ){ 
        $this->erro_sql = " Campo j171_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

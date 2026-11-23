@@ -69,11 +69,11 @@ class cl_cancdebitosprocconcarpeculiar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k74_sequencial = ($this->k74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_sequencial"]:$this->k74_sequencial);
-       $this->k74_cancdebitosproc = ($this->k74_cancdebitosproc == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_cancdebitosproc"]:$this->k74_cancdebitosproc);
+       $this->k74_sequencial = ($this->k74_sequencial === 0 || $this->k74_sequencial === 0.0 || $this->k74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_sequencial"]:$this->k74_sequencial);
+       $this->k74_cancdebitosproc = ($this->k74_cancdebitosproc === 0 || $this->k74_cancdebitosproc === 0.0 || $this->k74_cancdebitosproc == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_cancdebitosproc"]:$this->k74_cancdebitosproc);
        $this->k74_concarpeculiar = ($this->k74_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_concarpeculiar"]:$this->k74_concarpeculiar);
      }else{
-       $this->k74_sequencial = ($this->k74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_sequencial"]:$this->k74_sequencial);
+       $this->k74_sequencial = ($this->k74_sequencial === 0 || $this->k74_sequencial === 0.0 || $this->k74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k74_sequencial"]:$this->k74_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cancdebitosprocconcarpeculiar {
          $this->k74_sequencial = $k74_sequencial;
        }
      }
-     if(($this->k74_sequencial == null) || ($this->k74_sequencial == "") ){
+     if(($this->k74_sequencial == null) || ($this->k74_sequencial === 0 || $this->k74_sequencial === 0.0 || $this->k74_sequencial == "") ){
        $this->erro_sql = " Campo k74_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

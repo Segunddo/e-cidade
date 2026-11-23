@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/balancete/verificacao/informacao-complementar",
+  "json": {
+    "errors": {
+      "dataFinal": [
+        "A Data Final deve ser informada."
+      ],
+      "dataInicial": [
+        "A Data Inicial deve ser informada"
+      ],
+      "exercicio": [
+        "O Exercício deve ser informado."
+      ],
+      "instituicoes": [
+        "Ao menos uma instituição deve ser informada."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "4498cff0830be726d61e6e6314ff60ff41170a54c3a16066f44207418a6acc18",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

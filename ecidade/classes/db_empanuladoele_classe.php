@@ -69,11 +69,11 @@ class cl_empanuladoele {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e95_codanu = ($this->e95_codanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codanu"]:$this->e95_codanu);
-       $this->e95_codele = ($this->e95_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codele"]:$this->e95_codele);
-       $this->e95_valor = ($this->e95_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_valor"]:$this->e95_valor);
+       $this->e95_codanu = ($this->e95_codanu === 0 || $this->e95_codanu === 0.0 || $this->e95_codanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codanu"]:$this->e95_codanu);
+       $this->e95_codele = ($this->e95_codele === 0 || $this->e95_codele === 0.0 || $this->e95_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codele"]:$this->e95_codele);
+       $this->e95_valor = ($this->e95_valor === 0 || $this->e95_valor === 0.0 || $this->e95_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_valor"]:$this->e95_valor);
      }else{
-       $this->e95_codanu = ($this->e95_codanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codanu"]:$this->e95_codanu);
+       $this->e95_codanu = ($this->e95_codanu === 0 || $this->e95_codanu === 0.0 || $this->e95_codanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e95_codanu"]:$this->e95_codanu);
      }
    }
    // funcao para inclusao
@@ -89,7 +89,7 @@ class cl_empanuladoele {
        return false;
      }
        $this->e95_codanu = $e95_codanu;
-     if(($this->e95_codanu == null) || ($this->e95_codanu == "") ){
+     if(($this->e95_codanu == null) || ($this->e95_codanu === 0 || $this->e95_codanu === 0.0 || $this->e95_codanu == "") ){
        $this->erro_sql = " Campo e95_codanu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -97,7 +97,7 @@ class cl_empanuladoele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e95_codele == null) || ($this->e95_codele == "") ){
+     if(($this->e95_codele == null) || ($this->e95_codele === 0 || $this->e95_codele === 0.0 || $this->e95_codele == "") ){
        $this->erro_sql = " Campo e95_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

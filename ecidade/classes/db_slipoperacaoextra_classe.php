@@ -45,11 +45,11 @@ class cl_slipoperacaoextra
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->k208_sequencial = ($this->k208_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k208_sequencial"]:$this->k208_sequencial);
-       $this->k208_recebimento = ($this->k208_recebimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k208_recebimento"]:$this->k208_recebimento);
-       $this->k208_pagamento = ($this->k208_pagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["k208_pagamento"]:$this->k208_pagamento);
+       $this->k208_sequencial = ($this->k208_sequencial === 0 || $this->k208_sequencial === 0.0 || $this->k208_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k208_sequencial"]:$this->k208_sequencial);
+       $this->k208_recebimento = ($this->k208_recebimento === 0 || $this->k208_recebimento === 0.0 || $this->k208_recebimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k208_recebimento"]:$this->k208_recebimento);
+       $this->k208_pagamento = ($this->k208_pagamento === 0 || $this->k208_pagamento === 0.0 || $this->k208_pagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["k208_pagamento"]:$this->k208_pagamento);
      }else{
-       $this->k208_sequencial = ($this->k208_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k208_sequencial"]:$this->k208_sequencial);
+       $this->k208_sequencial = ($this->k208_sequencial === 0 || $this->k208_sequencial === 0.0 || $this->k208_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k208_sequencial"]:$this->k208_sequencial);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_slipoperacaoextra
          $this->k208_sequencial = $k208_sequencial;
        }
      }
-     if(($this->k208_sequencial == null) || ($this->k208_sequencial == "") ){
+     if(($this->k208_sequencial == null) || ($this->k208_sequencial === 0 || $this->k208_sequencial === 0.0 || $this->k208_sequencial == "") ){
        $this->erro_sql = " Campo k208_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

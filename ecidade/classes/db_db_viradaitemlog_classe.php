@@ -78,9 +78,9 @@ class cl_db_viradaitemlog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c35_sequencial = ($this->c35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_sequencial"]:$this->c35_sequencial);
-       $this->c35_codarq = ($this->c35_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_codarq"]:$this->c35_codarq);
-       $this->c35_db_viradaitem = ($this->c35_db_viradaitem == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_db_viradaitem"]:$this->c35_db_viradaitem);
+       $this->c35_sequencial = ($this->c35_sequencial === 0 || $this->c35_sequencial === 0.0 || $this->c35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_sequencial"]:$this->c35_sequencial);
+       $this->c35_codarq = ($this->c35_codarq === 0 || $this->c35_codarq === 0.0 || $this->c35_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_codarq"]:$this->c35_codarq);
+       $this->c35_db_viradaitem = ($this->c35_db_viradaitem === 0 || $this->c35_db_viradaitem === 0.0 || $this->c35_db_viradaitem == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_db_viradaitem"]:$this->c35_db_viradaitem);
        if($this->c35_data == ""){
          $this->c35_data_dia = ($this->c35_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_data_dia"]:$this->c35_data_dia);
          $this->c35_data_mes = ($this->c35_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_data_mes"]:$this->c35_data_mes);
@@ -92,7 +92,7 @@ class cl_db_viradaitemlog {
        $this->c35_hora = ($this->c35_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_hora"]:$this->c35_hora);
        $this->c35_log = ($this->c35_log == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_log"]:$this->c35_log);
      }else{
-       $this->c35_sequencial = ($this->c35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_sequencial"]:$this->c35_sequencial);
+       $this->c35_sequencial = ($this->c35_sequencial === 0 || $this->c35_sequencial === 0.0 || $this->c35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c35_sequencial"]:$this->c35_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_db_viradaitemlog {
          $this->c35_sequencial = $c35_sequencial;
        }
      }
-     if(($this->c35_sequencial == null) || ($this->c35_sequencial == "") ){
+     if(($this->c35_sequencial == null) || ($this->c35_sequencial === 0 || $this->c35_sequencial === 0.0 || $this->c35_sequencial == "") ){
        $this->erro_sql = " Campo c35_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

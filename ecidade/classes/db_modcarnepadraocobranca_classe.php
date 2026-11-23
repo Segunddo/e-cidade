@@ -79,9 +79,9 @@ class cl_modcarnepadraocobranca {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k22_sequencial = ($this->k22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_sequencial"]:$this->k22_sequencial);
-       $this->k22_modcarnepadrao = ($this->k22_modcarnepadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_modcarnepadrao"]:$this->k22_modcarnepadrao);
-       $this->k22_cadban = ($this->k22_cadban == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_cadban"]:$this->k22_cadban);
+       $this->k22_sequencial = ($this->k22_sequencial === 0 || $this->k22_sequencial === 0.0 || $this->k22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_sequencial"]:$this->k22_sequencial);
+       $this->k22_modcarnepadrao = ($this->k22_modcarnepadrao === 0 || $this->k22_modcarnepadrao === 0.0 || $this->k22_modcarnepadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_modcarnepadrao"]:$this->k22_modcarnepadrao);
+       $this->k22_cadban = ($this->k22_cadban === 0 || $this->k22_cadban === 0.0 || $this->k22_cadban == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_cadban"]:$this->k22_cadban);
        if($this->k22_datafim == ""){
          $this->k22_datafim_dia = ($this->k22_datafim_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_datafim_dia"]:$this->k22_datafim_dia);
          $this->k22_datafim_mes = ($this->k22_datafim_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_datafim_mes"]:$this->k22_datafim_mes);
@@ -99,7 +99,7 @@ class cl_modcarnepadraocobranca {
          }
        }
      }else{
-       $this->k22_sequencial = ($this->k22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_sequencial"]:$this->k22_sequencial);
+       $this->k22_sequencial = ($this->k22_sequencial === 0 || $this->k22_sequencial === 0.0 || $this->k22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_sequencial"]:$this->k22_sequencial);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_modcarnepadraocobranca {
          $this->k22_sequencial = $k22_sequencial;
        }
      }
-     if(($this->k22_sequencial == null) || ($this->k22_sequencial == "") ){
+     if(($this->k22_sequencial == null) || ($this->k22_sequencial === 0 || $this->k22_sequencial === 0.0 || $this->k22_sequencial == "") ){
        $this->erro_sql = " Campo k22_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

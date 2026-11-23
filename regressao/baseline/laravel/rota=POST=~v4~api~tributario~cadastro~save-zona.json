@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/cadastro/save-zona",
+  "json": {
+    "errors": {
+      "sequencial": [
+        "O campo sequencial é obrigatório."
+      ],
+      "sigla": [
+        "O campo sigla é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "f06f32f1667308cbb2a44417e5f83e131b304dd83a0c18dc22a88a047573fb08",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

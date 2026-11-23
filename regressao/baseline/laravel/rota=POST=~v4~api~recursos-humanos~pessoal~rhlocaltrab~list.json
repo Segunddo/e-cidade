@@ -1,0 +1,31 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/rhlocaltrab/list",
+  "json": {
+    "data": [
+      {
+        "rh55_codigo": 1,
+        "rh55_descr": "ADMINISTRAÇÃO",
+        "rh55_estrut": "00.00.00",
+        "rh55_instit": 1
+      },
+      {
+        "rh55_codigo": 2,
+        "rh55_descr": "CONTABILIDADE",
+        "rh55_estrut": "00.00.01",
+        "rh55_instit": 1
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "bf93df90d0a2446a15e68b882628a9f4eb6f69eaed77fdeec20b34e9b09fee7b",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

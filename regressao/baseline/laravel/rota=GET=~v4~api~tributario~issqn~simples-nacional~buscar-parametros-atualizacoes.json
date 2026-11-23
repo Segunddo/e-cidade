@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/issqn/simples-nacional/buscar-parametros-atualizacoes",
+  "json": {
+    "errors": {
+      "idUsuario": [
+        "O campo id usuario é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "0a7d2aa9d988b07a6a17b736ac1b84706519d08d764d234c4ba2faedc1c2e8ff",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -67,10 +67,10 @@ class cl_tipodocumentosfiscal {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e12_sequencial = ($this->e12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e12_sequencial"]:$this->e12_sequencial);
+       $this->e12_sequencial = ($this->e12_sequencial === 0 || $this->e12_sequencial === 0.0 || $this->e12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e12_sequencial"]:$this->e12_sequencial);
        $this->e12_descricao = ($this->e12_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["e12_descricao"]:$this->e12_descricao);
      }else{
-       $this->e12_sequencial = ($this->e12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e12_sequencial"]:$this->e12_sequencial);
+       $this->e12_sequencial = ($this->e12_sequencial === 0 || $this->e12_sequencial === 0.0 || $this->e12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e12_sequencial"]:$this->e12_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tipodocumentosfiscal {
          $this->e12_sequencial = $e12_sequencial;
        }
      }
-     if(($this->e12_sequencial == null) || ($this->e12_sequencial == "") ){
+     if(($this->e12_sequencial == null) || ($this->e12_sequencial === 0 || $this->e12_sequencial === 0.0 || $this->e12_sequencial == "") ){
        $this->erro_sql = " Campo e12_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

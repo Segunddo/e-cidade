@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/pessoal/ajudacusto/lancamento/create",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\RecursosHumanos\\Pessoal\\Controller\\AjudaCusto\\AjudaCustoController::create does not exist."
+  },
+  "sha256": "7976e2e691145417583c90a3b224f659c8b91eeff7d6356faf1ce13f9e01b9a8",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

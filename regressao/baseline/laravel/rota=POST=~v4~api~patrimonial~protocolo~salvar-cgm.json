@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/salvar-cgm",
+  "json": {
+    "error": true,
+    "message": "Undefined index: cpfcnpj"
+  },
+  "sha256": "4d7a917142115f93fb35b856884120a8faba28c5656d25d6d13429c4cc60d8cc",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

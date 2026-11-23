@@ -33,7 +33,7 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_orcreceita_classe.php"));
 require_once(modification("classes/db_orcfontes_classe.php"));
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clorcreceita = new cl_orcreceita;
 $clorcfontes = new cl_orcfontes;
 $clorcreceita->rotulo->label("o70_anousu");

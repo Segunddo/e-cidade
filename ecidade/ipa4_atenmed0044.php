@@ -33,7 +33,7 @@ DB_login=dbseller&DB_id_usuario=1&DB_porta=3055&DB_instit=1&DB_modulo=576
 &DB_nome_modulo=ipasem&DB_anousu=2003&DB_datausu=1061485231&codmed=251&nomemed=HERIBERT ADAM&especmed=9
 &COD_atendimento=5&w03_codigo=745&w01_regist=579
 */
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if(isset($exclenc)) {
   $ex =explode("#",$exclenc);

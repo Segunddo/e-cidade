@@ -75,14 +75,14 @@ class cl_contacorrentesaldo {
   // funcao para atualizar campos
   public function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->c29_sequencial = ($this->c29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_sequencial"]:$this->c29_sequencial);
-      $this->c29_contacorrentedetalhe = ($this->c29_contacorrentedetalhe == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_contacorrentedetalhe"]:$this->c29_contacorrentedetalhe);
-      $this->c29_anousu = ($this->c29_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_anousu"]:$this->c29_anousu);
-      $this->c29_mesusu = ($this->c29_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_mesusu"]:$this->c29_mesusu);
-      $this->c29_debito = ($this->c29_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_debito"]:$this->c29_debito);
-      $this->c29_credito = ($this->c29_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_credito"]:$this->c29_credito);
+      $this->c29_sequencial = ($this->c29_sequencial === 0 || $this->c29_sequencial === 0.0 || $this->c29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_sequencial"]:$this->c29_sequencial);
+      $this->c29_contacorrentedetalhe = ($this->c29_contacorrentedetalhe === 0 || $this->c29_contacorrentedetalhe === 0.0 || $this->c29_contacorrentedetalhe == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_contacorrentedetalhe"]:$this->c29_contacorrentedetalhe);
+      $this->c29_anousu = ($this->c29_anousu === 0 || $this->c29_anousu === 0.0 || $this->c29_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_anousu"]:$this->c29_anousu);
+      $this->c29_mesusu = ($this->c29_mesusu === 0 || $this->c29_mesusu === 0.0 || $this->c29_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_mesusu"]:$this->c29_mesusu);
+      $this->c29_debito = ($this->c29_debito === 0 || $this->c29_debito === 0.0 || $this->c29_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_debito"]:$this->c29_debito);
+      $this->c29_credito = ($this->c29_credito === 0 || $this->c29_credito === 0.0 || $this->c29_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_credito"]:$this->c29_credito);
     }else{
-      $this->c29_sequencial = ($this->c29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_sequencial"]:$this->c29_sequencial);
+      $this->c29_sequencial = ($this->c29_sequencial === 0 || $this->c29_sequencial === 0.0 || $this->c29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c29_sequencial"]:$this->c29_sequencial);
     }
   }
   // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_contacorrentesaldo {
         $this->c29_sequencial = $c29_sequencial;
       }
     }
-    if(($this->c29_sequencial == null) || ($this->c29_sequencial == "") ){
+    if(($this->c29_sequencial == null) || ($this->c29_sequencial === 0 || $this->c29_sequencial === 0.0 || $this->c29_sequencial == "") ){
       $this->erro_sql = " Campo c29_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

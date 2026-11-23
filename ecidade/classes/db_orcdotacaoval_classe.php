@@ -73,16 +73,16 @@ class cl_orcdotacaoval {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o59_anousu = ($this->o59_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_anousu"]:$this->o59_anousu);
-       $this->o59_coddoc = ($this->o59_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_coddoc"]:$this->o59_coddoc);
-       $this->o59_coddot = ($this->o59_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_coddot"]:$this->o59_coddot);
-       $this->o59_mes = ($this->o59_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_mes"]:$this->o59_mes);
-       $this->o59_valor = ($this->o59_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_valor"]:$this->o59_valor);
+       $this->o59_anousu = ($this->o59_anousu === 0 || $this->o59_anousu === 0.0 || $this->o59_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_anousu"]:$this->o59_anousu);
+       $this->o59_coddoc = ($this->o59_coddoc === 0 || $this->o59_coddoc === 0.0 || $this->o59_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_coddoc"]:$this->o59_coddoc);
+       $this->o59_coddot = ($this->o59_coddot === 0 || $this->o59_coddot === 0.0 || $this->o59_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_coddot"]:$this->o59_coddot);
+       $this->o59_mes = ($this->o59_mes === 0 || $this->o59_mes === 0.0 || $this->o59_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_mes"]:$this->o59_mes);
+       $this->o59_valor = ($this->o59_valor === 0 || $this->o59_valor === 0.0 || $this->o59_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_valor"]:$this->o59_valor);
      }else{
-       $this->o59_anousu = ($this->o59_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_anousu"]:$this->o59_anousu);
-       $this->o59_coddoc = ($this->o59_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_coddoc"]:$this->o59_coddoc);
-       $this->o59_coddot = ($this->o59_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_coddot"]:$this->o59_coddot);
-       $this->o59_mes = ($this->o59_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_mes"]:$this->o59_mes);
+       $this->o59_anousu = ($this->o59_anousu === 0 || $this->o59_anousu === 0.0 || $this->o59_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_anousu"]:$this->o59_anousu);
+       $this->o59_coddoc = ($this->o59_coddoc === 0 || $this->o59_coddoc === 0.0 || $this->o59_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_coddoc"]:$this->o59_coddoc);
+       $this->o59_coddot = ($this->o59_coddot === 0 || $this->o59_coddot === 0.0 || $this->o59_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_coddot"]:$this->o59_coddot);
+       $this->o59_mes = ($this->o59_mes === 0 || $this->o59_mes === 0.0 || $this->o59_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o59_mes"]:$this->o59_mes);
      }
    }
    // funcao para inclusao
@@ -101,7 +101,7 @@ class cl_orcdotacaoval {
        $this->o59_coddoc = $o59_coddoc;
        $this->o59_coddot = $o59_coddot;
        $this->o59_mes = $o59_mes;
-     if(($this->o59_anousu == null) || ($this->o59_anousu == "") ){
+     if(($this->o59_anousu == null) || ($this->o59_anousu === 0 || $this->o59_anousu === 0.0 || $this->o59_anousu == "") ){
        $this->erro_sql = " Campo o59_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -109,7 +109,7 @@ class cl_orcdotacaoval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o59_coddoc == null) || ($this->o59_coddoc == "") ){
+     if(($this->o59_coddoc == null) || ($this->o59_coddoc === 0 || $this->o59_coddoc === 0.0 || $this->o59_coddoc == "") ){
        $this->erro_sql = " Campo o59_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -117,7 +117,7 @@ class cl_orcdotacaoval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o59_coddot == null) || ($this->o59_coddot == "") ){
+     if(($this->o59_coddot == null) || ($this->o59_coddot === 0 || $this->o59_coddot === 0.0 || $this->o59_coddot == "") ){
        $this->erro_sql = " Campo o59_coddot nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -125,7 +125,7 @@ class cl_orcdotacaoval {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o59_mes == null) || ($this->o59_mes == "") ){
+     if(($this->o59_mes == null) || ($this->o59_mes === 0 || $this->o59_mes === 0.0 || $this->o59_mes == "") ){
        $this->erro_sql = " Campo o59_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

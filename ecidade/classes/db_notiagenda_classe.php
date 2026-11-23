@@ -76,8 +76,8 @@ class cl_notiagenda {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k58_codage = ($this->k58_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_codage"]:$this->k58_codage);
-       $this->k58_notifica = ($this->k58_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_notifica"]:$this->k58_notifica);
+       $this->k58_codage = ($this->k58_codage === 0 || $this->k58_codage === 0.0 || $this->k58_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_codage"]:$this->k58_codage);
+       $this->k58_notifica = ($this->k58_notifica === 0 || $this->k58_notifica === 0.0 || $this->k58_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_notifica"]:$this->k58_notifica);
        if($this->k58_data == ""){
          $this->k58_data_dia = ($this->k58_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_data_dia"]:$this->k58_data_dia);
          $this->k58_data_mes = ($this->k58_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_data_mes"]:$this->k58_data_mes);
@@ -87,9 +87,9 @@ class cl_notiagenda {
          }
        }
        $this->k58_hora = ($this->k58_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_hora"]:$this->k58_hora);
-       $this->k58_id_usuario = ($this->k58_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_id_usuario"]:$this->k58_id_usuario);
+       $this->k58_id_usuario = ($this->k58_id_usuario === 0 || $this->k58_id_usuario === 0.0 || $this->k58_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_id_usuario"]:$this->k58_id_usuario);
      }else{
-       $this->k58_codage = ($this->k58_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_codage"]:$this->k58_codage);
+       $this->k58_codage = ($this->k58_codage === 0 || $this->k58_codage === 0.0 || $this->k58_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k58_codage"]:$this->k58_codage);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_notiagenda {
          $this->k58_codage = $k58_codage;
        }
      }
-     if(($this->k58_codage == null) || ($this->k58_codage == "") ){
+     if(($this->k58_codage == null) || ($this->k58_codage === 0 || $this->k58_codage === 0.0 || $this->k58_codage == "") ){
        $this->erro_sql = " Campo k58_codage nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

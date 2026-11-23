@@ -67,10 +67,10 @@ class cl_conciliatipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k65_sequencial = ($this->k65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k65_sequencial"]:$this->k65_sequencial);
+       $this->k65_sequencial = ($this->k65_sequencial === 0 || $this->k65_sequencial === 0.0 || $this->k65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k65_sequencial"]:$this->k65_sequencial);
        $this->k65_descricao = ($this->k65_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["k65_descricao"]:$this->k65_descricao);
      }else{
-       $this->k65_sequencial = ($this->k65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k65_sequencial"]:$this->k65_sequencial);
+       $this->k65_sequencial = ($this->k65_sequencial === 0 || $this->k65_sequencial === 0.0 || $this->k65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k65_sequencial"]:$this->k65_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_conciliatipo {
          $this->k65_sequencial = $k65_sequencial;
        }
      }
-     if(($this->k65_sequencial == null) || ($this->k65_sequencial == "") ){
+     if(($this->k65_sequencial == null) || ($this->k65_sequencial === 0 || $this->k65_sequencial === 0.0 || $this->k65_sequencial == "") ){
        $this->erro_sql = " Campo k65_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

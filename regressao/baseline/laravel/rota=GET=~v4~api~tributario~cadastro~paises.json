@@ -1,0 +1,1269 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/paises",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "BRASIL",
+        "sigla": "BR"
+      },
+      {
+        "codigo": 150,
+        "descricao": "ILHAS DO CANAL (JERSEY E GUERNSEY)",
+        "sigla": null
+      },
+      {
+        "codigo": 563,
+        "descricao": "PACÍFICO, ILHAS DO (ADMINIST.DOS EUA)",
+        "sigla": null
+      },
+      {
+        "codigo": 895,
+        "descricao": "ZONA DO CANAL DO PANAMA",
+        "sigla": null
+      },
+      {
+        "codigo": 990,
+        "descricao": "PROVISAO DE NAVIOS E AERONAVES",
+        "sigla": null
+      },
+      {
+        "codigo": 994,
+        "descricao": "A DESIGNAR",
+        "sigla": null
+      },
+      {
+        "codigo": 995,
+        "descricao": "BANCOS CENTRAIS",
+        "sigla": null
+      },
+      {
+        "codigo": 997,
+        "descricao": "ORGANIZACOES INTERNACIONAIS",
+        "sigla": null
+      },
+      {
+        "codigo": 998,
+        "descricao": "DELEGAÇÃO ESPECIAL DA PALESTINA",
+        "sigla": null
+      },
+      {
+        "codigo": 999,
+        "descricao": "NÃO INFORMADO",
+        "sigla": null
+      },
+      {
+        "codigo": 1001,
+        "descricao": "AFEGANISTAO",
+        "sigla": null
+      },
+      {
+        "codigo": 1002,
+        "descricao": "ALBANIA, REPUBLICA  DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1003,
+        "descricao": "ALEMANHA",
+        "sigla": null
+      },
+      {
+        "codigo": 1004,
+        "descricao": "BURKINA FASO",
+        "sigla": null
+      },
+      {
+        "codigo": 1005,
+        "descricao": "ANDORRA",
+        "sigla": null
+      },
+      {
+        "codigo": 1006,
+        "descricao": "ANGOLA",
+        "sigla": null
+      },
+      {
+        "codigo": 1007,
+        "descricao": "ANGUILLA",
+        "sigla": null
+      },
+      {
+        "codigo": 1008,
+        "descricao": "ANTIGUA E BARBUDA",
+        "sigla": null
+      },
+      {
+        "codigo": 1009,
+        "descricao": "ANTILHAS HOLANDESAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1010,
+        "descricao": "ARABIA SAUDITA",
+        "sigla": null
+      },
+      {
+        "codigo": 1011,
+        "descricao": "ARGELIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1012,
+        "descricao": "ARGENTINA",
+        "sigla": null
+      },
+      {
+        "codigo": 1013,
+        "descricao": "ARMENIA, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1014,
+        "descricao": "ARUBA",
+        "sigla": null
+      },
+      {
+        "codigo": 1015,
+        "descricao": "AUSTRALIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1016,
+        "descricao": "AUSTRIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1017,
+        "descricao": "AZERBAIJAO, REPUBLICA DO",
+        "sigla": null
+      },
+      {
+        "codigo": 1018,
+        "descricao": "BAHAMAS, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1019,
+        "descricao": "BAHREIN, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1020,
+        "descricao": "BANGLADESH",
+        "sigla": null
+      },
+      {
+        "codigo": 1021,
+        "descricao": "BARBADOS",
+        "sigla": null
+      },
+      {
+        "codigo": 1022,
+        "descricao": "BELARUS, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1023,
+        "descricao": "BELGICA",
+        "sigla": null
+      },
+      {
+        "codigo": 1024,
+        "descricao": "BELIZE",
+        "sigla": null
+      },
+      {
+        "codigo": 1025,
+        "descricao": "BERMUDAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1026,
+        "descricao": "MIANMAR (BIRMANIA)",
+        "sigla": null
+      },
+      {
+        "codigo": 1027,
+        "descricao": "BOLIVIA, ESTADO PLURINACIONAL DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1028,
+        "descricao": "BOSNIA-HERZEGOVINA (REPUBLICA DA)",
+        "sigla": null
+      },
+      {
+        "codigo": 1029,
+        "descricao": "BOTSUANA",
+        "sigla": null
+      },
+      {
+        "codigo": 1030,
+        "descricao": "BRUNEI",
+        "sigla": null
+      },
+      {
+        "codigo": 1031,
+        "descricao": "BULGARIA, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1032,
+        "descricao": "BURUNDI",
+        "sigla": null
+      },
+      {
+        "codigo": 1033,
+        "descricao": "BUTAO",
+        "sigla": null
+      },
+      {
+        "codigo": 1034,
+        "descricao": "CABO VERDE, REPUBLICA DE",
+        "sigla": null
+      },
+      {
+        "codigo": 1035,
+        "descricao": "CAYMAN, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1036,
+        "descricao": "CAMBOJA",
+        "sigla": null
+      },
+      {
+        "codigo": 1037,
+        "descricao": "CAMAROES",
+        "sigla": null
+      },
+      {
+        "codigo": 1038,
+        "descricao": "CANADA",
+        "sigla": null
+      },
+      {
+        "codigo": 1039,
+        "descricao": "GUERNSEY, ILHA DO CANAL (INCLUI ALDERNEY E SARK)",
+        "sigla": null
+      },
+      {
+        "codigo": 1040,
+        "descricao": "JERSEY, ILHA DO CANAL",
+        "sigla": null
+      },
+      {
+        "codigo": 1041,
+        "descricao": "CANARIAS, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1042,
+        "descricao": "CAZAQUISTAO, REPUBLICA DO",
+        "sigla": null
+      },
+      {
+        "codigo": 1043,
+        "descricao": "CATAR",
+        "sigla": null
+      },
+      {
+        "codigo": 1044,
+        "descricao": "CHILE",
+        "sigla": null
+      },
+      {
+        "codigo": 1045,
+        "descricao": "CHINA, REPUBLICA POPULAR",
+        "sigla": null
+      },
+      {
+        "codigo": 1046,
+        "descricao": "FORMOSA (TAIWAN)",
+        "sigla": null
+      },
+      {
+        "codigo": 1047,
+        "descricao": "CHIPRE",
+        "sigla": null
+      },
+      {
+        "codigo": 1048,
+        "descricao": "COCOS(KEELING),ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1049,
+        "descricao": "COLOMBIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1050,
+        "descricao": "COMORES, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1051,
+        "descricao": "CONGO",
+        "sigla": null
+      },
+      {
+        "codigo": 1052,
+        "descricao": "COOK, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1053,
+        "descricao": "COREIA (DO NORTE), REP.POP.DEMOCRATICA",
+        "sigla": null
+      },
+      {
+        "codigo": 1054,
+        "descricao": "COREIA (DO SUL), REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1055,
+        "descricao": "COSTA DO MARFIM",
+        "sigla": null
+      },
+      {
+        "codigo": 1056,
+        "descricao": "CROACIA (REPUBLICA DA)",
+        "sigla": null
+      },
+      {
+        "codigo": 1057,
+        "descricao": "COSTA RICA",
+        "sigla": null
+      },
+      {
+        "codigo": 1058,
+        "descricao": "COVEITE",
+        "sigla": null
+      },
+      {
+        "codigo": 1059,
+        "descricao": "CUBA",
+        "sigla": null
+      },
+      {
+        "codigo": 1060,
+        "descricao": "BENIN",
+        "sigla": null
+      },
+      {
+        "codigo": 1061,
+        "descricao": "DINAMARCA",
+        "sigla": null
+      },
+      {
+        "codigo": 1062,
+        "descricao": "DOMINICA,ILHA",
+        "sigla": null
+      },
+      {
+        "codigo": 1063,
+        "descricao": "EQUADOR",
+        "sigla": null
+      },
+      {
+        "codigo": 1064,
+        "descricao": "EGITO",
+        "sigla": null
+      },
+      {
+        "codigo": 1065,
+        "descricao": "ERITREIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1066,
+        "descricao": "EMIRADOS ARABES UNIDOS",
+        "sigla": null
+      },
+      {
+        "codigo": 1067,
+        "descricao": "ESPANHA",
+        "sigla": null
+      },
+      {
+        "codigo": 1068,
+        "descricao": "ESLOVENIA, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1069,
+        "descricao": "ESLOVACA, REPUBLICA",
+        "sigla": null
+      },
+      {
+        "codigo": 1070,
+        "descricao": "ESTADOS UNIDOS",
+        "sigla": null
+      },
+      {
+        "codigo": 1071,
+        "descricao": "ESTONIA, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1072,
+        "descricao": "ETIOPIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1073,
+        "descricao": "FALKLAND (ILHAS MALVINAS)",
+        "sigla": null
+      },
+      {
+        "codigo": 1074,
+        "descricao": "FEROE, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1075,
+        "descricao": "FILIPINAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1076,
+        "descricao": "FINLANDIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1077,
+        "descricao": "FRANCA",
+        "sigla": null
+      },
+      {
+        "codigo": 1078,
+        "descricao": "GABAO",
+        "sigla": null
+      },
+      {
+        "codigo": 1079,
+        "descricao": "GAMBIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1080,
+        "descricao": "GANA",
+        "sigla": null
+      },
+      {
+        "codigo": 1081,
+        "descricao": "GEORGIA, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1082,
+        "descricao": "GIBRALTAR",
+        "sigla": null
+      },
+      {
+        "codigo": 1083,
+        "descricao": "GRANADA",
+        "sigla": null
+      },
+      {
+        "codigo": 1084,
+        "descricao": "GRECIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1085,
+        "descricao": "GROENLANDIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1086,
+        "descricao": "GUADALUPE",
+        "sigla": null
+      },
+      {
+        "codigo": 1087,
+        "descricao": "GUAM",
+        "sigla": null
+      },
+      {
+        "codigo": 1088,
+        "descricao": "GUATEMALA",
+        "sigla": null
+      },
+      {
+        "codigo": 1089,
+        "descricao": "GUIANA FRANCESA",
+        "sigla": null
+      },
+      {
+        "codigo": 1090,
+        "descricao": "GUINE",
+        "sigla": null
+      },
+      {
+        "codigo": 1091,
+        "descricao": "GUINE-EQUATORIAL",
+        "sigla": null
+      },
+      {
+        "codigo": 1092,
+        "descricao": "GUINE-BISSAU",
+        "sigla": null
+      },
+      {
+        "codigo": 1093,
+        "descricao": "GUIANA",
+        "sigla": null
+      },
+      {
+        "codigo": 1094,
+        "descricao": "HAITI",
+        "sigla": null
+      },
+      {
+        "codigo": 1095,
+        "descricao": "HONDURAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1096,
+        "descricao": "HONG KONG",
+        "sigla": null
+      },
+      {
+        "codigo": 1097,
+        "descricao": "HUNGRIA, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1098,
+        "descricao": "IEMEN",
+        "sigla": null
+      },
+      {
+        "codigo": 1099,
+        "descricao": "MAN, ILHA DE",
+        "sigla": null
+      },
+      {
+        "codigo": 1100,
+        "descricao": "INDIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1101,
+        "descricao": "INDONESIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1102,
+        "descricao": "IRAQUE",
+        "sigla": null
+      },
+      {
+        "codigo": 1103,
+        "descricao": "IRA, REPUBLICA ISLAMICA DO",
+        "sigla": null
+      },
+      {
+        "codigo": 1104,
+        "descricao": "IRLANDA",
+        "sigla": null
+      },
+      {
+        "codigo": 1105,
+        "descricao": "ISLANDIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1106,
+        "descricao": "ISRAEL",
+        "sigla": null
+      },
+      {
+        "codigo": 1107,
+        "descricao": "ITALIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1108,
+        "descricao": "JAMAICA",
+        "sigla": null
+      },
+      {
+        "codigo": 1109,
+        "descricao": "JOHNSTON, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1110,
+        "descricao": "JAPAO",
+        "sigla": null
+      },
+      {
+        "codigo": 1111,
+        "descricao": "JORDANIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1112,
+        "descricao": "KIRIBATI",
+        "sigla": null
+      },
+      {
+        "codigo": 1113,
+        "descricao": "LAOS, REP.POP.DEMOCR.DO",
+        "sigla": null
+      },
+      {
+        "codigo": 1114,
+        "descricao": "LEBUAN,ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1115,
+        "descricao": "LESOTO",
+        "sigla": null
+      },
+      {
+        "codigo": 1116,
+        "descricao": "LETONIA, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1117,
+        "descricao": "LIBANO",
+        "sigla": null
+      },
+      {
+        "codigo": 1118,
+        "descricao": "LIBERIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1119,
+        "descricao": "LIBIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1120,
+        "descricao": "LIECHTENSTEIN",
+        "sigla": null
+      },
+      {
+        "codigo": 1121,
+        "descricao": "LITUANIA, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1122,
+        "descricao": "LUXEMBURGO",
+        "sigla": null
+      },
+      {
+        "codigo": 1123,
+        "descricao": "MACAU",
+        "sigla": null
+      },
+      {
+        "codigo": 1124,
+        "descricao": "MACEDONIA, ANT.REP.IUGOSLAVA",
+        "sigla": null
+      },
+      {
+        "codigo": 1125,
+        "descricao": "MADAGASCAR",
+        "sigla": null
+      },
+      {
+        "codigo": 1126,
+        "descricao": "MADEIRA, ILHA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1127,
+        "descricao": "MALASIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1128,
+        "descricao": "MALAVI",
+        "sigla": null
+      },
+      {
+        "codigo": 1129,
+        "descricao": "MALDIVAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1130,
+        "descricao": "MALI",
+        "sigla": null
+      },
+      {
+        "codigo": 1131,
+        "descricao": "MALTA",
+        "sigla": null
+      },
+      {
+        "codigo": 1132,
+        "descricao": "MARIANAS DO NORTE",
+        "sigla": null
+      },
+      {
+        "codigo": 1133,
+        "descricao": "MARROCOS",
+        "sigla": null
+      },
+      {
+        "codigo": 1134,
+        "descricao": "MARSHALL,ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1135,
+        "descricao": "MARTINICA",
+        "sigla": null
+      },
+      {
+        "codigo": 1136,
+        "descricao": "MAURICIO",
+        "sigla": null
+      },
+      {
+        "codigo": 1137,
+        "descricao": "MAURITANIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1138,
+        "descricao": "MAYOTTE (ILHAS FRANCESAS)",
+        "sigla": null
+      },
+      {
+        "codigo": 1139,
+        "descricao": "MIDWAY, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1140,
+        "descricao": "MEXICO",
+        "sigla": null
+      },
+      {
+        "codigo": 1141,
+        "descricao": "MOLDAVIA, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1142,
+        "descricao": "MONACO",
+        "sigla": null
+      },
+      {
+        "codigo": 1143,
+        "descricao": "MONGOLIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1144,
+        "descricao": "MONTENEGRO",
+        "sigla": null
+      },
+      {
+        "codigo": 1145,
+        "descricao": "MICRONESIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1146,
+        "descricao": "MONTSERRAT,ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1147,
+        "descricao": "MOCAMBIQUE",
+        "sigla": null
+      },
+      {
+        "codigo": 1148,
+        "descricao": "NAMIBIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1149,
+        "descricao": "NAURU",
+        "sigla": null
+      },
+      {
+        "codigo": 1150,
+        "descricao": "CHRISTMAS,ILHA (NAVIDAD)",
+        "sigla": null
+      },
+      {
+        "codigo": 1151,
+        "descricao": "NEPAL",
+        "sigla": null
+      },
+      {
+        "codigo": 1152,
+        "descricao": "NICARAGUA",
+        "sigla": null
+      },
+      {
+        "codigo": 1153,
+        "descricao": "NIGER",
+        "sigla": null
+      },
+      {
+        "codigo": 1154,
+        "descricao": "NIGERIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1155,
+        "descricao": "NIUE,ILHA",
+        "sigla": null
+      },
+      {
+        "codigo": 1156,
+        "descricao": "NORFOLK,ILHA",
+        "sigla": null
+      },
+      {
+        "codigo": 1157,
+        "descricao": "NORUEGA",
+        "sigla": null
+      },
+      {
+        "codigo": 1158,
+        "descricao": "NOVA CALEDONIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1159,
+        "descricao": "PAPUA NOVA GUINE",
+        "sigla": null
+      },
+      {
+        "codigo": 1160,
+        "descricao": "NOVA ZELANDIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1161,
+        "descricao": "VANUATU",
+        "sigla": null
+      },
+      {
+        "codigo": 1162,
+        "descricao": "OMA",
+        "sigla": null
+      },
+      {
+        "codigo": 1163,
+        "descricao": "PACIFICO,ILHAS DO (POSSESSAO DOS EUA)",
+        "sigla": null
+      },
+      {
+        "codigo": 1164,
+        "descricao": "PAISES BAIXOS (HOLANDA)",
+        "sigla": null
+      },
+      {
+        "codigo": 1165,
+        "descricao": "PALAU",
+        "sigla": null
+      },
+      {
+        "codigo": 1166,
+        "descricao": "PAQUISTAO",
+        "sigla": null
+      },
+      {
+        "codigo": 1167,
+        "descricao": "PANAMA",
+        "sigla": null
+      },
+      {
+        "codigo": 1168,
+        "descricao": "PARAGUAI",
+        "sigla": null
+      },
+      {
+        "codigo": 1169,
+        "descricao": "PERU",
+        "sigla": null
+      },
+      {
+        "codigo": 1170,
+        "descricao": "PITCAIRN,ILHA",
+        "sigla": null
+      },
+      {
+        "codigo": 1171,
+        "descricao": "POLINESIA FRANCESA",
+        "sigla": null
+      },
+      {
+        "codigo": 1172,
+        "descricao": "POLONIA, REPUBLICA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1173,
+        "descricao": "PORTUGAL",
+        "sigla": null
+      },
+      {
+        "codigo": 1174,
+        "descricao": "PORTO RICO",
+        "sigla": null
+      },
+      {
+        "codigo": 1175,
+        "descricao": "QUENIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1176,
+        "descricao": "QUIRGUIZ, REPUBLICA",
+        "sigla": null
+      },
+      {
+        "codigo": 1177,
+        "descricao": "REINO UNIDO",
+        "sigla": null
+      },
+      {
+        "codigo": 1178,
+        "descricao": "REPUBLICA CENTRO-AFRICANA",
+        "sigla": null
+      },
+      {
+        "codigo": 1179,
+        "descricao": "REPUBLICA DOMINICANA",
+        "sigla": null
+      },
+      {
+        "codigo": 1180,
+        "descricao": "REUNIAO, ILHA",
+        "sigla": null
+      },
+      {
+        "codigo": 1181,
+        "descricao": "ZIMBABUE",
+        "sigla": null
+      },
+      {
+        "codigo": 1182,
+        "descricao": "ROMENIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1183,
+        "descricao": "RUANDA",
+        "sigla": null
+      },
+      {
+        "codigo": 1184,
+        "descricao": "RUSSIA, FEDERACAO DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1185,
+        "descricao": "SALOMAO, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1186,
+        "descricao": "SAARA OCIDENTAL",
+        "sigla": null
+      },
+      {
+        "codigo": 1187,
+        "descricao": "EL SALVADOR",
+        "sigla": null
+      },
+      {
+        "codigo": 1188,
+        "descricao": "SAMOA",
+        "sigla": null
+      },
+      {
+        "codigo": 1189,
+        "descricao": "SAMOA AMERICANA",
+        "sigla": null
+      },
+      {
+        "codigo": 1190,
+        "descricao": "SAO CRISTOVAO E NEVES,ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1191,
+        "descricao": "SAN MARINO",
+        "sigla": null
+      },
+      {
+        "codigo": 1192,
+        "descricao": "SAO PEDRO E MIQUELON",
+        "sigla": null
+      },
+      {
+        "codigo": 1193,
+        "descricao": "SAO VICENTE E GRANADINAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1194,
+        "descricao": "SANTA HELENA",
+        "sigla": null
+      },
+      {
+        "codigo": 1195,
+        "descricao": "SANTA LUCIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1196,
+        "descricao": "SAO TOME E PRINCIPE, ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1197,
+        "descricao": "SENEGAL",
+        "sigla": null
+      },
+      {
+        "codigo": 1198,
+        "descricao": "SEYCHELLES",
+        "sigla": null
+      },
+      {
+        "codigo": 1199,
+        "descricao": "SERRA LEOA",
+        "sigla": null
+      },
+      {
+        "codigo": 1200,
+        "descricao": "SERVIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1201,
+        "descricao": "CINGAPURA",
+        "sigla": null
+      },
+      {
+        "codigo": 1202,
+        "descricao": "SIRIA, REPUBLICA ARABE DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1203,
+        "descricao": "SOMALIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1204,
+        "descricao": "SRI LANKA",
+        "sigla": null
+      },
+      {
+        "codigo": 1205,
+        "descricao": "SUAZILANDIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1206,
+        "descricao": "AFRICA DO SUL",
+        "sigla": null
+      },
+      {
+        "codigo": 1207,
+        "descricao": "SUDAO",
+        "sigla": null
+      },
+      {
+        "codigo": 1208,
+        "descricao": "SUECIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1209,
+        "descricao": "SUICA",
+        "sigla": null
+      },
+      {
+        "codigo": 1210,
+        "descricao": "SURINAME",
+        "sigla": null
+      },
+      {
+        "codigo": 1211,
+        "descricao": "TADJIQUISTAO, REPUBLICA DO",
+        "sigla": null
+      },
+      {
+        "codigo": 1212,
+        "descricao": "TAILANDIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1213,
+        "descricao": "TANZANIA, REP.UNIDA DA",
+        "sigla": null
+      },
+      {
+        "codigo": 1214,
+        "descricao": "TERRITORIO BRIT.OC.INDICO",
+        "sigla": null
+      },
+      {
+        "codigo": 1215,
+        "descricao": "DJIBUTI",
+        "sigla": null
+      },
+      {
+        "codigo": 1216,
+        "descricao": "CHADE",
+        "sigla": null
+      },
+      {
+        "codigo": 1217,
+        "descricao": "TCHECA, REPUBLICA",
+        "sigla": null
+      },
+      {
+        "codigo": 1218,
+        "descricao": "TIMOR LESTE",
+        "sigla": null
+      },
+      {
+        "codigo": 1219,
+        "descricao": "TOGO",
+        "sigla": null
+      },
+      {
+        "codigo": 1220,
+        "descricao": "TOQUELAU,ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1221,
+        "descricao": "TONGA",
+        "sigla": null
+      },
+      {
+        "codigo": 1222,
+        "descricao": "TRINIDAD E TOBAGO",
+        "sigla": null
+      },
+      {
+        "codigo": 1223,
+        "descricao": "TUNISIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1224,
+        "descricao": "TURCAS E CAICOS,ILHAS",
+        "sigla": null
+      },
+      {
+        "codigo": 1225,
+        "descricao": "TURCOMENISTAO, REPUBLICA DO",
+        "sigla": null
+      },
+      {
+        "codigo": 1226,
+        "descricao": "TURQUIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1227,
+        "descricao": "TUVALU",
+        "sigla": null
+      },
+      {
+        "codigo": 1228,
+        "descricao": "UCRANIA",
+        "sigla": null
+      },
+      {
+        "codigo": 1229,
+        "descricao": "UGANDA",
+        "sigla": null
+      },
+      {
+        "codigo": 1230,
+        "descricao": "URUGUAI",
+        "sigla": null
+      },
+      {
+        "codigo": 1231,
+        "descricao": "UZBEQUISTAO, REPUBLICA DO",
+        "sigla": null
+      },
+      {
+        "codigo": 1232,
+        "descricao": "VATICANO, EST.DA CIDADE DO",
+        "sigla": null
+      },
+      {
+        "codigo": 1233,
+        "descricao": "VENEZUELA",
+        "sigla": null
+      },
+      {
+        "codigo": 1234,
+        "descricao": "VIETNA",
+        "sigla": null
+      },
+      {
+        "codigo": 1235,
+        "descricao": "VIRGENS,ILHAS (BRITANICAS)",
+        "sigla": null
+      },
+      {
+        "codigo": 1236,
+        "descricao": "VIRGENS,ILHAS (E.U.A.)",
+        "sigla": null
+      },
+      {
+        "codigo": 1237,
+        "descricao": "FIJI",
+        "sigla": null
+      },
+      {
+        "codigo": 1238,
+        "descricao": "WAKE, ILHA",
+        "sigla": null
+      },
+      {
+        "codigo": 1239,
+        "descricao": "CONGO, REPUBLICA DEMOCRATICA DO",
+        "sigla": null
+      },
+      {
+        "codigo": 1240,
+        "descricao": "ZAMBIA",
+        "sigla": null
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "1325b8267165707bff00ea8f69269433f6091b3d3ae12fd4682818ce0b8a019e",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

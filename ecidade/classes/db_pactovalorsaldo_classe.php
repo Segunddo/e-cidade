@@ -77,15 +77,15 @@ class cl_pactovalorsaldo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o103_sequencial = ($this->o103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_sequencial"]:$this->o103_sequencial);
-       $this->o103_pactovalor = ($this->o103_pactovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_pactovalor"]:$this->o103_pactovalor);
-       $this->o103_pactovalorsaldotipo = ($this->o103_pactovalorsaldotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_pactovalorsaldotipo"]:$this->o103_pactovalorsaldotipo);
-       $this->o103_anousu = ($this->o103_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_anousu"]:$this->o103_anousu);
-       $this->o103_mesusu = ($this->o103_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_mesusu"]:$this->o103_mesusu);
-       $this->o103_valor = ($this->o103_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_valor"]:$this->o103_valor);
+       $this->o103_sequencial = ($this->o103_sequencial === 0 || $this->o103_sequencial === 0.0 || $this->o103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_sequencial"]:$this->o103_sequencial);
+       $this->o103_pactovalor = ($this->o103_pactovalor === 0 || $this->o103_pactovalor === 0.0 || $this->o103_pactovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_pactovalor"]:$this->o103_pactovalor);
+       $this->o103_pactovalorsaldotipo = ($this->o103_pactovalorsaldotipo === 0 || $this->o103_pactovalorsaldotipo === 0.0 || $this->o103_pactovalorsaldotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_pactovalorsaldotipo"]:$this->o103_pactovalorsaldotipo);
+       $this->o103_anousu = ($this->o103_anousu === 0 || $this->o103_anousu === 0.0 || $this->o103_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_anousu"]:$this->o103_anousu);
+       $this->o103_mesusu = ($this->o103_mesusu === 0 || $this->o103_mesusu === 0.0 || $this->o103_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_mesusu"]:$this->o103_mesusu);
+       $this->o103_valor = ($this->o103_valor === 0 || $this->o103_valor === 0.0 || $this->o103_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_valor"]:$this->o103_valor);
        $this->o103_contrapartida = ($this->o103_contrapartida == "f"?@$GLOBALS["HTTP_POST_VARS"]["o103_contrapartida"]:$this->o103_contrapartida);
      }else{
-       $this->o103_sequencial = ($this->o103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_sequencial"]:$this->o103_sequencial);
+       $this->o103_sequencial = ($this->o103_sequencial === 0 || $this->o103_sequencial === 0.0 || $this->o103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o103_sequencial"]:$this->o103_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_pactovalorsaldo {
          $this->o103_sequencial = $o103_sequencial;
        }
      }
-     if(($this->o103_sequencial == null) || ($this->o103_sequencial == "") ){
+     if(($this->o103_sequencial == null) || ($this->o103_sequencial === 0 || $this->o103_sequencial === 0.0 || $this->o103_sequencial == "") ){
        $this->erro_sql = " Campo o103_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

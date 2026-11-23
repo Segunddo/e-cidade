@@ -95,24 +95,24 @@ class cl_clientes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at01_codcli = ($this->at01_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_codcli"]:$this->at01_codcli);
+       $this->at01_codcli = ($this->at01_codcli === 0 || $this->at01_codcli === 0.0 || $this->at01_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_codcli"]:$this->at01_codcli);
        $this->at01_nomecli = ($this->at01_nomecli == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_nomecli"]:$this->at01_nomecli);
        $this->at01_site = ($this->at01_site == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_site"]:$this->at01_site);
        $this->at01_status = ($this->at01_status == "f"?@$GLOBALS["HTTP_POST_VARS"]["at01_status"]:$this->at01_status);
        $this->at01_cidade = ($this->at01_cidade == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_cidade"]:$this->at01_cidade);
        $this->at01_ender = ($this->at01_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_ender"]:$this->at01_ender);
        $this->at01_cep = ($this->at01_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_cep"]:$this->at01_cep);
-       $this->at01_codver = ($this->at01_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_codver"]:$this->at01_codver);
+       $this->at01_codver = ($this->at01_codver === 0 || $this->at01_codver === 0.0 || $this->at01_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_codver"]:$this->at01_codver);
        $this->at01_sigla = ($this->at01_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_sigla"]:$this->at01_sigla);
        $this->at01_ativo = ($this->at01_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["at01_ativo"]:$this->at01_ativo);
        $this->at01_base = ($this->at01_base == "f"?@$GLOBALS["HTTP_POST_VARS"]["at01_base"]:$this->at01_base);
        $this->at01_obs = ($this->at01_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_obs"]:$this->at01_obs);
        $this->at01_cnpj = ($this->at01_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_cnpj"]:$this->at01_cnpj);
-       $this->at01_uf = ($this->at01_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_uf"]:$this->at01_uf);
+       $this->at01_uf = ($this->at01_uf === 0 || $this->at01_uf === 0.0 || $this->at01_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_uf"]:$this->at01_uf);
        $this->at01_telefone = ($this->at01_telefone == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_telefone"]:$this->at01_telefone);
-       $this->at01_tipocliente = ($this->at01_tipocliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_tipocliente"]:$this->at01_tipocliente);
+       $this->at01_tipocliente = ($this->at01_tipocliente === 0 || $this->at01_tipocliente === 0.0 || $this->at01_tipocliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_tipocliente"]:$this->at01_tipocliente);
      }else{
-       $this->at01_codcli = ($this->at01_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_codcli"]:$this->at01_codcli);
+       $this->at01_codcli = ($this->at01_codcli === 0 || $this->at01_codcli === 0.0 || $this->at01_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at01_codcli"]:$this->at01_codcli);
      }
    }
    // funcao para inclusao
@@ -244,7 +244,7 @@ class cl_clientes {
          $this->at01_codcli = $at01_codcli;
        }
      }
-     if(($this->at01_codcli == null) || ($this->at01_codcli == "") ){
+     if(($this->at01_codcli == null) || ($this->at01_codcli === 0 || $this->at01_codcli === 0.0 || $this->at01_codcli == "") ){
        $this->erro_sql = " Campo at01_codcli nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

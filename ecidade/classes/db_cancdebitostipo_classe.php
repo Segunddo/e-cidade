@@ -67,10 +67,10 @@ class cl_cancdebitostipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k73_sequencial = ($this->k73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k73_sequencial"]:$this->k73_sequencial);
+       $this->k73_sequencial = ($this->k73_sequencial === 0 || $this->k73_sequencial === 0.0 || $this->k73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k73_sequencial"]:$this->k73_sequencial);
        $this->k73_descricao = ($this->k73_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["k73_descricao"]:$this->k73_descricao);
      }else{
-       $this->k73_sequencial = ($this->k73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k73_sequencial"]:$this->k73_sequencial);
+       $this->k73_sequencial = ($this->k73_sequencial === 0 || $this->k73_sequencial === 0.0 || $this->k73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k73_sequencial"]:$this->k73_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_cancdebitostipo {
          $this->k73_sequencial = $k73_sequencial;
        }
      }
-     if(($this->k73_sequencial == null) || ($this->k73_sequencial == "") ){
+     if(($this->k73_sequencial == null) || ($this->k73_sequencial === 0 || $this->k73_sequencial === 0.0 || $this->k73_sequencial == "") ){
        $this->erro_sql = " Campo k73_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

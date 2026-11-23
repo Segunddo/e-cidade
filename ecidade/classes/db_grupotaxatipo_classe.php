@@ -67,10 +67,10 @@ class cl_grupotaxatipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar38_sequencial = ($this->ar38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar38_sequencial"]:$this->ar38_sequencial);
+       $this->ar38_sequencial = ($this->ar38_sequencial === 0 || $this->ar38_sequencial === 0.0 || $this->ar38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar38_sequencial"]:$this->ar38_sequencial);
        $this->ar38_descricao = ($this->ar38_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar38_descricao"]:$this->ar38_descricao);
      }else{
-       $this->ar38_sequencial = ($this->ar38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar38_sequencial"]:$this->ar38_sequencial);
+       $this->ar38_sequencial = ($this->ar38_sequencial === 0 || $this->ar38_sequencial === 0.0 || $this->ar38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar38_sequencial"]:$this->ar38_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_grupotaxatipo {
          $this->ar38_sequencial = $ar38_sequencial;
        }
      }
-     if(($this->ar38_sequencial == null) || ($this->ar38_sequencial == "") ){
+     if(($this->ar38_sequencial == null) || ($this->ar38_sequencial === 0 || $this->ar38_sequencial === 0.0 || $this->ar38_sequencial == "") ){
        $this->erro_sql = " Campo ar38_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

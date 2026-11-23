@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/caixa/vinculoreceitaprocedencia",
+  "json": {
+    "errors": {
+      "procedencia": [
+        "O campo procedencia é obrigatório."
+      ],
+      "receita": [
+        "O campo receita é obrigatório."
+      ],
+      "tipoinscricao": [
+        "O campo tipoinscricao é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "77e3477394ca04ad246c6974b52acac9fc4d5dab666259251d530613d4105ea1",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

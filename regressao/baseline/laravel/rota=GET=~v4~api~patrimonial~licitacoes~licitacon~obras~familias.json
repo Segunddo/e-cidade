@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/licitacoes/licitacon/obras/familias",
+  "json": {
+    "error": true,
+    "message": "No query results for model [App\\Domain\\Patrimonial\\Licitacoes\\Models\\LicitaconUsuario]."
+  },
+  "sha256": "58f67b3284b83a6eadf8bd386ab3a4f6a660e241abcd7151ec20339f9fe0495c",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

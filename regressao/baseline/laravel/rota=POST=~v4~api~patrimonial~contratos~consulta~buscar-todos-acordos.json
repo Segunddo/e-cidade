@@ -1,0 +1,14 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/contratos/consulta/buscar-todos-acordos",
+  "json": null,
+  "sha256": "7bff4ebd0280bfe075a22740543b197f33bf085ce8fdac6ed479f03deffd40a8",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "<script>(window.CurrentWindow || parent.CurrentWindow).alert('Variavel de sess�o nao encontrada: DB_coddepto');</script>\n{\"message\":\"\",\"error\":false,\"data\":[]}",
+  "tipos": {}
+}

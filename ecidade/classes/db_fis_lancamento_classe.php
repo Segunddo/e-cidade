@@ -70,7 +70,7 @@ class cl_fis_lancamento
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->nl01_codlanc = ($this->nl01_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_codlanc"]:$this->nl01_codlanc);
+            $this->nl01_codlanc = ($this->nl01_codlanc === 0 || $this->nl01_codlanc === 0.0 || $this->nl01_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_codlanc"]:$this->nl01_codlanc);
             if ($this->nl01_data == "") {
                 $this->nl01_data_dia = ($this->nl01_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_data_dia"]:$this->nl01_data_dia);
                 $this->nl01_data_mes = ($this->nl01_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_data_mes"]:$this->nl01_data_mes);
@@ -79,9 +79,9 @@ class cl_fis_lancamento
                     $this->nl01_data = $this->nl01_data_ano."-".$this->nl01_data_mes."-".$this->nl01_data_dia;
                 }
             }
-            $this->nl01_hora = ($this->nl01_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_hora"]:$this->nl01_hora);
+            $this->nl01_hora = ($this->nl01_hora === 0 || $this->nl01_hora === 0.0 || $this->nl01_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_hora"]:$this->nl01_hora);
             $this->nl01_obs = ($this->nl01_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_obs"]:$this->nl01_obs);
-            $this->nl01_setor = ($this->nl01_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_setor"]:$this->nl01_setor);
+            $this->nl01_setor = ($this->nl01_setor === 0 || $this->nl01_setor === 0.0 || $this->nl01_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_setor"]:$this->nl01_setor);
             $this->nl01_nome = ($this->nl01_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_nome"]:$this->nl01_nome);
             if ($this->nl01_dtvenc == "") {
                 $this->nl01_dtvenc_dia = ($this->nl01_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_dtvenc_dia"]:$this->nl01_dtvenc_dia);
@@ -100,10 +100,10 @@ class cl_fis_lancamento
                     $this->nl01_prazorec = $this->nl01_prazorec_ano."-".$this->nl01_prazorec_mes."-".$this->nl01_prazorec_dia;
                 }
             }
-            $this->nl01_codtipo = ($this->nl01_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_codtipo"]:$this->nl01_codtipo);
-            $this->nl01_instit = ($this->nl01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_instit"]:$this->nl01_instit);
+            $this->nl01_codtipo = ($this->nl01_codtipo === 0 || $this->nl01_codtipo === 0.0 || $this->nl01_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_codtipo"]:$this->nl01_codtipo);
+            $this->nl01_instit = ($this->nl01_instit === 0 || $this->nl01_instit === 0.0 || $this->nl01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_instit"]:$this->nl01_instit);
         } else {
-            $this->nl01_codlanc = ($this->nl01_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_codlanc"]:$this->nl01_codlanc);
+            $this->nl01_codlanc = ($this->nl01_codlanc === 0 || $this->nl01_codlanc === 0.0 || $this->nl01_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl01_codlanc"]:$this->nl01_codlanc);
         }
     }
 

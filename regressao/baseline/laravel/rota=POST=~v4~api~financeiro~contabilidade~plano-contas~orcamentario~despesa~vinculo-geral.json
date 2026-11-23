@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/orcamentario/despesa/vinculo-geral",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Contas vinculadas com sucesso."
+  },
+  "sha256": "7a2e5eeae2147aa15edcb90cd3e3585cd65014cf4383fbc4558a04dfcb5514b8",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

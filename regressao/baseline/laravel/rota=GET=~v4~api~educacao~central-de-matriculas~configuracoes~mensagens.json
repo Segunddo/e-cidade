@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/configuracoes/mensagens",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Educacao\\CentralMatriculas\\Controllers\\ConfiguracoesController::getMensagens does not exist."
+  },
+  "sha256": "ccc9da850f8b1d8d86f3f9e2fb3986719803a680732330d11192da7dbc52d726",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

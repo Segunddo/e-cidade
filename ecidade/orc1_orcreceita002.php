@@ -40,7 +40,7 @@ require_once(modification("classes/db_conplanoorcamentoanalitica_classe.php"));
 require_once(modification("classes/db_orcreceita_classe.php"));
 require_once(modification("classes/db_orcparametro_classe.php"));
 require_once(modification("classes/db_orcfontes_classe.php"));
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 $nameBotao = 'alterar';
 $labelBotao = 'Alterar';

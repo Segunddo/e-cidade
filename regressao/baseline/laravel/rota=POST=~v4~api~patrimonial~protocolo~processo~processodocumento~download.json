@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/processo/processodocumento/download",
+  "json": {
+    "errors": {
+      "id": [
+        "Código da arquivo não informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "7a0e1db120c33f9c4fffae52315214cfe2a86bfd00fd51ffdd19461b5dfc5362",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

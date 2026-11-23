@@ -1,0 +1,25 @@
+# Casos de ESCRITA real (validam a captura de SQL de negocio e o hash das tabelas).
+# Alvo: cadastro de "funcao de comissao" do Jetom (RH): uma linha em pessoal.jetomfuncao, sem
+# efeito colateral fora do banco (controller App\Domain\RecursosHumanos\Pessoal\Controller\Jetom\
+# FuncaoController@store). Ordem importa: incluir -> duplicada (validacao `unique`) -> listar.
+- id: escrita-jetom-funcao-incluir
+  metodo: POST
+  caminho: /v4/api/recursos-humanos/pessoal/jetom/funcao
+  corpo:
+    descricao: REGRESSAO FUNCAO JETOM
+    instituicao: 1
+  tabelas: [pessoal.jetomfuncao]
+  espera_escrita: true
+
+- id: escrita-jetom-funcao-duplicada
+  metodo: POST
+  caminho: /v4/api/recursos-humanos/pessoal/jetom/funcao
+  corpo:
+    descricao: REGRESSAO FUNCAO JETOM
+    instituicao: 1
+  tabelas: [pessoal.jetomfuncao]
+
+- id: escrita-jetom-funcao-listar
+  metodo: GET
+  caminho: /v4/api/recursos-humanos/pessoal/jetom/funcao
+  tabelas: [pessoal.jetomfuncao]

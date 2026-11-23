@@ -78,9 +78,9 @@ class cl_declaracaoquitacao {
   // funcao para atualizar campos
   public function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->ar30_sequencial = ($this->ar30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_sequencial"]:$this->ar30_sequencial);
-      $this->ar30_exercicio = ($this->ar30_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_exercicio"]:$this->ar30_exercicio);
-      $this->ar30_situacao = ($this->ar30_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_situacao"]:$this->ar30_situacao);
+      $this->ar30_sequencial = ($this->ar30_sequencial === 0 || $this->ar30_sequencial === 0.0 || $this->ar30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_sequencial"]:$this->ar30_sequencial);
+      $this->ar30_exercicio = ($this->ar30_exercicio === 0 || $this->ar30_exercicio === 0.0 || $this->ar30_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_exercicio"]:$this->ar30_exercicio);
+      $this->ar30_situacao = ($this->ar30_situacao === 0 || $this->ar30_situacao === 0.0 || $this->ar30_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_situacao"]:$this->ar30_situacao);
       if($this->ar30_data == ""){
         $this->ar30_data_dia = ($this->ar30_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_data_dia"]:$this->ar30_data_dia);
         $this->ar30_data_mes = ($this->ar30_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_data_mes"]:$this->ar30_data_mes);
@@ -89,10 +89,10 @@ class cl_declaracaoquitacao {
           $this->ar30_data = $this->ar30_data_ano."-".$this->ar30_data_mes."-".$this->ar30_data_dia;
         }
       }
-      $this->ar30_id_usuario = ($this->ar30_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_id_usuario"]:$this->ar30_id_usuario);
-      $this->ar30_instit = ($this->ar30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_instit"]:$this->ar30_instit);
+      $this->ar30_id_usuario = ($this->ar30_id_usuario === 0 || $this->ar30_id_usuario === 0.0 || $this->ar30_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_id_usuario"]:$this->ar30_id_usuario);
+      $this->ar30_instit = ($this->ar30_instit === 0 || $this->ar30_instit === 0.0 || $this->ar30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_instit"]:$this->ar30_instit);
     }else{
-      $this->ar30_sequencial = ($this->ar30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_sequencial"]:$this->ar30_sequencial);
+      $this->ar30_sequencial = ($this->ar30_sequencial === 0 || $this->ar30_sequencial === 0.0 || $this->ar30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar30_sequencial"]:$this->ar30_sequencial);
     }
   }
   // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_declaracaoquitacao {
         $this->ar30_sequencial = $ar30_sequencial;
       }
     }
-    if(($this->ar30_sequencial == null) || ($this->ar30_sequencial == "") ){
+    if(($this->ar30_sequencial == null) || ($this->ar30_sequencial === 0 || $this->ar30_sequencial === 0.0 || $this->ar30_sequencial == "") ){
       $this->erro_sql = " Campo ar30_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

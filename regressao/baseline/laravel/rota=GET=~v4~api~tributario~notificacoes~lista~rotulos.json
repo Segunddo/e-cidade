@@ -1,0 +1,26 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/notificacoes/lista/rotulos",
+  "json": {
+    "data": {
+      "k60_codigo": "Código da lista",
+      "k60_datadeb": "Data Base do Débito",
+      "k60_descr": "Descrição",
+      "k60_filtros": "Filtros",
+      "k60_instit": "Cód. Instituição",
+      "k60_tipo": "Tipo da Lista",
+      "k60_usuario": "Usuário"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "def7ccdfec3d4cae8fd900e63a75f892db525340f80ffd67e4460a151a6d9b00",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

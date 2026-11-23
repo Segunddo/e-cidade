@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/areas-resultado/filtros",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Áreas de Resultado encontradas."
+  },
+  "sha256": "3af05ca2ba606963a3bbf8d4bd1a983779771a0a9b9f66c51480db6589ff2f55",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

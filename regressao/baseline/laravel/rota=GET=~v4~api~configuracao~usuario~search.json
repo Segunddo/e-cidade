@@ -1,0 +1,147 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/usuario/search",
+  "json": {
+    "data": {
+      "current_page": 1,
+      "data": [
+        {
+          "administrador": 1,
+          "dataexpira": null,
+          "datatoken": "2010-04-29T03:00:00.000000Z",
+          "email": "",
+          "id": 1,
+          "id_usuario": 1,
+          "liberalotacao": 0,
+          "login": "dbseller",
+          "nome": "PREFEITURA DBSELLER",
+          "usuario_label": "NOME: PREFEITURA DBSELLER - CÓDIGO: [1]  LOGIN : (dbseller)",
+          "usuarioativo": 1,
+          "usuext": 0
+        },
+        {
+          "administrador": 0,
+          "dataexpira": null,
+          "datatoken": "2014-07-01T03:00:00.000000Z",
+          "email": "",
+          "id": 3,
+          "id_usuario": 3,
+          "liberalotacao": 0,
+          "login": "dbpref",
+          "nome": "dbpref",
+          "usuario_label": "NOME: dbpref - CÓDIGO: [3]  LOGIN : (dbpref)",
+          "usuarioativo": 1,
+          "usuext": 2
+        },
+        {
+          "administrador": 0,
+          "dataexpira": null,
+          "datatoken": "2014-07-01T03:00:00.000000Z",
+          "email": "",
+          "id": 4,
+          "id_usuario": 4,
+          "liberalotacao": 0,
+          "login": "escritorio",
+          "nome": "escritorio",
+          "usuario_label": "NOME: escritorio - CÓDIGO: [4]  LOGIN : (escritorio)",
+          "usuarioativo": 1,
+          "usuext": 2
+        },
+        {
+          "administrador": 0,
+          "dataexpira": null,
+          "datatoken": "2014-07-01T03:00:00.000000Z",
+          "email": "",
+          "id": 5,
+          "id_usuario": 5,
+          "liberalotacao": 0,
+          "login": "fornecedor",
+          "nome": "fornecedor",
+          "usuario_label": "NOME: fornecedor - CÓDIGO: [5]  LOGIN : (fornecedor)",
+          "usuarioativo": 1,
+          "usuext": 2
+        },
+        {
+          "administrador": 0,
+          "dataexpira": null,
+          "datatoken": "2014-07-01T03:00:00.000000Z",
+          "email": "",
+          "id": 6,
+          "id_usuario": 6,
+          "liberalotacao": 0,
+          "login": "funcionario",
+          "nome": "funcionario",
+          "usuario_label": "NOME: funcionario - CÓDIGO: [6]  LOGIN : (funcionario)",
+          "usuarioativo": 1,
+          "usuext": 2
+        },
+        {
+          "administrador": 0,
+          "dataexpira": null,
+          "datatoken": "2014-07-01T03:00:00.000000Z",
+          "email": "",
+          "id": 7,
+          "id_usuario": 7,
+          "liberalotacao": 0,
+          "login": "contribuinte",
+          "nome": "contribuinte",
+          "usuario_label": "NOME: contribuinte - CÓDIGO: [7]  LOGIN : (contribuinte)",
+          "usuarioativo": 1,
+          "usuext": 2
+        },
+        {
+          "administrador": 0,
+          "dataexpira": null,
+          "datatoken": "2014-07-01T03:00:00.000000Z",
+          "email": "",
+          "id": 8,
+          "id_usuario": 8,
+          "liberalotacao": 0,
+          "login": "imobiliaria",
+          "nome": "imobiliaria",
+          "usuario_label": "NOME: imobiliaria - CÓDIGO: [8]  LOGIN : (imobiliaria)",
+          "usuarioativo": 1,
+          "usuext": 2
+        }
+      ],
+      "first_page_url": "http://localhost:8074/v4/api/configuracao/usuario/search?page=1",
+      "from": 1,
+      "last_page": 1,
+      "last_page_url": "http://localhost:8074/v4/api/configuracao/usuario/search?page=1",
+      "links": [
+        {
+          "active": false,
+          "label": "&laquo; Anterior",
+          "url": null
+        },
+        {
+          "active": true,
+          "label": "1",
+          "url": "http://localhost:8074/v4/api/configuracao/usuario/search?page=1"
+        },
+        {
+          "active": false,
+          "label": "Próxima &raquo;",
+          "url": null
+        }
+      ],
+      "next_page_url": null,
+      "path": "http://localhost:8074/v4/api/configuracao/usuario/search",
+      "per_page": 10,
+      "prev_page_url": null,
+      "to": 7,
+      "total": 7
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "847d8fac4f9a2031090736432322a436aa8eaf63dba170ac6a513ca8baeb54aa",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

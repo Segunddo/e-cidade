@@ -1,0 +1,33 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/procedimento/manutencao/fonte-recurso/despesa/lancamentos",
+  "json": {
+    "errors": {
+      "dataFinal": [
+        "Data Final é obrigatório quando não informado empenho."
+      ],
+      "dataInicio": [
+        "Data Inicial é obrigatória quando não informado empenho."
+      ],
+      "gestao": [
+        "A Fonte de Gestão é obrigatório quando não informado o empenho."
+      ],
+      "idEmpenho": [
+        "O código do empenho deve ser preenchido se não informado o recurso."
+      ],
+      "subrecurso": [
+        "O subrecurso é obrigatório quando não informado o empenho."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "1f132039b9550f58911e6ed369e5a001dcf1a629fc19f8f981d14622bb8c36ef",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

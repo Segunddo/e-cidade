@@ -77,7 +77,7 @@ class AnexoSumarioGeralReceita extends RelatoriosLegaisBase
    *
    * @return array $aRetorno
    */
-    public function getDados()
+    public function getDados($trazerConfiguracaoPadrao = true)
     {
         $oDaoPeriodo      = new cl_periodo();
         $sSqlDadosPeriodo = $oDaoPeriodo->sql_query_file($this->iCodigoPeriodo);

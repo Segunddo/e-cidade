@@ -69,11 +69,11 @@ class cl_orccenarioeconomico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o02_sequencial = ($this->o02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_sequencial"]:$this->o02_sequencial);
+       $this->o02_sequencial = ($this->o02_sequencial === 0 || $this->o02_sequencial === 0.0 || $this->o02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_sequencial"]:$this->o02_sequencial);
        $this->o02_descricao = ($this->o02_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_descricao"]:$this->o02_descricao);
-       $this->o02_orccenarioeconomicogrupo = ($this->o02_orccenarioeconomicogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_orccenarioeconomicogrupo"]:$this->o02_orccenarioeconomicogrupo);
+       $this->o02_orccenarioeconomicogrupo = ($this->o02_orccenarioeconomicogrupo === 0 || $this->o02_orccenarioeconomicogrupo === 0.0 || $this->o02_orccenarioeconomicogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_orccenarioeconomicogrupo"]:$this->o02_orccenarioeconomicogrupo);
      }else{
-       $this->o02_sequencial = ($this->o02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_sequencial"]:$this->o02_sequencial);
+       $this->o02_sequencial = ($this->o02_sequencial === 0 || $this->o02_sequencial === 0.0 || $this->o02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_sequencial"]:$this->o02_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_orccenarioeconomico {
          $this->o02_sequencial = $o02_sequencial;
        }
      }
-     if(($this->o02_sequencial == null) || ($this->o02_sequencial == "") ){
+     if(($this->o02_sequencial == null) || ($this->o02_sequencial === 0 || $this->o02_sequencial === 0.0 || $this->o02_sequencial == "") ){
        $this->erro_sql = " Campo o02_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

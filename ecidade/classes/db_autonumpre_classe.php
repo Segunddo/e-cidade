@@ -67,8 +67,8 @@ class cl_autonumpre {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y17_numpre = ($this->y17_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["y17_numpre"]:$this->y17_numpre);
-       $this->y17_codauto = ($this->y17_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y17_codauto"]:$this->y17_codauto);
+       $this->y17_numpre = ($this->y17_numpre === 0 || $this->y17_numpre === 0.0 || $this->y17_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["y17_numpre"]:$this->y17_numpre);
+       $this->y17_codauto = ($this->y17_codauto === 0 || $this->y17_codauto === 0.0 || $this->y17_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y17_codauto"]:$this->y17_codauto);
      }else{
      }
    }

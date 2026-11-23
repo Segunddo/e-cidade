@@ -30,7 +30,7 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $sql = "select proprietario.*,ll.j34_descr , c.z01_nome as promitente, c.z01_ender as ender_promitente,
                                   j.z01_nome as imobiliaria,j.z01_ender as ender_imobiliaria, j.z01_numcgm as z01_numimob
                                   from proprietario
@@ -41,7 +41,7 @@ $sql = "select proprietario.*,ll.j34_descr , c.z01_nome as promitente, c.z01_end
  			                      where j01_matric = $cod_matricula limit 1";
 
 $matriculaSelecionada = db_query($sql);
-$numMatriculaSelecionada = pg_numrows($matriculaSelecionada);
+$numMatriculaSelecionada = ($matriculaSelecionada ? pg_numrows($matriculaSelecionada) : null);
 
  /***********************************************************************************************/
  // Verifica se encontrou a matrícula. Caso não tenha encontrado exibe a mensagem abaixo.

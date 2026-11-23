@@ -1,0 +1,28 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "arquivo-pcasp-csv",
+  "json": {
+    "data": {
+      "csv": "<X>",
+      "csvLinkExterno": "<X>"
+    },
+    "error": false,
+    "message": "Mapeamento das contas vinculadas."
+  },
+  "sha256": "a369fb25ad4507bb52c39fe21bc62a77a6df9d6e60a1f074034b36ff8b735129",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "[arquivo csv status=200 ct=text/csv]\ncsv|1|1|Exercício\ncsv|1|2|2026\ncsv|2|1|Plano\ncsv|2|2|Estadual / Regional\ncsv|4|2|Contas do e-cidade com Movimentação não vinculadas ao plano de governo\ncsv|5|1|Estrutural\ncsv|5|2|Nome\ncsv|7|2|Contas do e-cidade não vinculadas ao plano de governo\ncsv|8|1|Estrutural\ncsv|8|2|Nome\ncsv|10|2|Contas do e-cidade vinculadas ao plano de governo\ncsv|11|1|Estrutural e-Cidade\ncsv|11|2|Nome e-Cidade\ncsv|11|3|Estrutural Governo\ncsv|11|4|Nome Governo",
+  "tipos": {
+    "data.csv": [
+      "str"
+    ],
+    "data.csvLinkExterno": [
+      "str"
+    ]
+  }
+}

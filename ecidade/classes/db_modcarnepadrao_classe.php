@@ -85,10 +85,10 @@ class cl_modcarnepadrao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k48_sequencial = ($this->k48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_sequencial"]:$this->k48_sequencial);
-       $this->k48_cadconvenio = ($this->k48_cadconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_cadconvenio"]:$this->k48_cadconvenio);
-       $this->k48_cadtipomod = ($this->k48_cadtipomod == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_cadtipomod"]:$this->k48_cadtipomod);
-       $this->k48_instit = ($this->k48_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_instit"]:$this->k48_instit);
+       $this->k48_sequencial = ($this->k48_sequencial === 0 || $this->k48_sequencial === 0.0 || $this->k48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_sequencial"]:$this->k48_sequencial);
+       $this->k48_cadconvenio = ($this->k48_cadconvenio === 0 || $this->k48_cadconvenio === 0.0 || $this->k48_cadconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_cadconvenio"]:$this->k48_cadconvenio);
+       $this->k48_cadtipomod = ($this->k48_cadtipomod === 0 || $this->k48_cadtipomod === 0.0 || $this->k48_cadtipomod == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_cadtipomod"]:$this->k48_cadtipomod);
+       $this->k48_instit = ($this->k48_instit === 0 || $this->k48_instit === 0.0 || $this->k48_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_instit"]:$this->k48_instit);
        if($this->k48_dataini == ""){
          $this->k48_dataini_dia = ($this->k48_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_dataini_dia"]:$this->k48_dataini_dia);
          $this->k48_dataini_mes = ($this->k48_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_dataini_mes"]:$this->k48_dataini_mes);
@@ -105,10 +105,10 @@ class cl_modcarnepadrao {
             $this->k48_datafim = $this->k48_datafim_ano."-".$this->k48_datafim_mes."-".$this->k48_datafim_dia;
          }
        }
-       $this->k48_parcini = ($this->k48_parcini == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_parcini"]:$this->k48_parcini);
-       $this->k48_parcfim = ($this->k48_parcfim == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_parcfim"]:$this->k48_parcfim);
+       $this->k48_parcini = ($this->k48_parcini === 0 || $this->k48_parcini === 0.0 || $this->k48_parcini == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_parcini"]:$this->k48_parcini);
+       $this->k48_parcfim = ($this->k48_parcfim === 0 || $this->k48_parcfim === 0.0 || $this->k48_parcfim == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_parcfim"]:$this->k48_parcfim);
      }else{
-       $this->k48_sequencial = ($this->k48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_sequencial"]:$this->k48_sequencial);
+       $this->k48_sequencial = ($this->k48_sequencial === 0 || $this->k48_sequencial === 0.0 || $this->k48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k48_sequencial"]:$this->k48_sequencial);
      }
    }
    // funcao para inclusao
@@ -189,7 +189,7 @@ class cl_modcarnepadrao {
          $this->k48_sequencial = $k48_sequencial;
        }
      }
-     if(($this->k48_sequencial == null) || ($this->k48_sequencial == "") ){
+     if(($this->k48_sequencial == null) || ($this->k48_sequencial === 0 || $this->k48_sequencial === 0.0 || $this->k48_sequencial == "") ){
        $this->erro_sql = " Campo k48_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

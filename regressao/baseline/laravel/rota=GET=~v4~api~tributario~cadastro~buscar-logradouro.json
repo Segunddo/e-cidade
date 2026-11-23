@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/buscar-logradouro",
+  "json": {
+    "data": null,
+    "error": true,
+    "message": "Erro Interno ao buscar logradouros."
+  },
+  "sha256": "6d8d18dfab8ddcdb4930df3f991e8338997dcb60fd3e8f2b1951e2b1e5f81ac2",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

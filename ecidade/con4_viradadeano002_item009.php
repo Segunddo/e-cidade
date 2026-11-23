@@ -35,7 +35,7 @@ if ($sqlerro == false) {
   // Lista permissoes do ano de origem
   $sqlorigem    = $oDaoDBPermissao->sql_query_file(null, null, null, null, null, "distinct id_usuario", null, "anousu = {$anoorigem}");
   $resultorigem = $oDaoDBPermissao->sql_record($sqlorigem);
-  if (is_resource($resultorigem)) {
+  if (is_resource($resultorigem) || $resultorigem instanceof \PgSql\Result) {
   	$linhasorigem = $oDaoDBPermissao->numrows;
 
     $usuariodest  = "";

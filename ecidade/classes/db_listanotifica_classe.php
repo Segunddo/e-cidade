@@ -69,13 +69,13 @@ class cl_listanotifica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k63_codigo = ($this->k63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_codigo"]:$this->k63_codigo);
-       $this->k63_numpre = ($this->k63_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_numpre"]:$this->k63_numpre);
-       $this->k63_notifica = ($this->k63_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_notifica"]:$this->k63_notifica);
+       $this->k63_codigo = ($this->k63_codigo === 0 || $this->k63_codigo === 0.0 || $this->k63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_codigo"]:$this->k63_codigo);
+       $this->k63_numpre = ($this->k63_numpre === 0 || $this->k63_numpre === 0.0 || $this->k63_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_numpre"]:$this->k63_numpre);
+       $this->k63_notifica = ($this->k63_notifica === 0 || $this->k63_notifica === 0.0 || $this->k63_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_notifica"]:$this->k63_notifica);
      }else{
-       $this->k63_codigo = ($this->k63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_codigo"]:$this->k63_codigo);
-       $this->k63_numpre = ($this->k63_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_numpre"]:$this->k63_numpre);
-       $this->k63_notifica = ($this->k63_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_notifica"]:$this->k63_notifica);
+       $this->k63_codigo = ($this->k63_codigo === 0 || $this->k63_codigo === 0.0 || $this->k63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_codigo"]:$this->k63_codigo);
+       $this->k63_numpre = ($this->k63_numpre === 0 || $this->k63_numpre === 0.0 || $this->k63_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_numpre"]:$this->k63_numpre);
+       $this->k63_notifica = ($this->k63_notifica === 0 || $this->k63_notifica === 0.0 || $this->k63_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k63_notifica"]:$this->k63_notifica);
      }
    }
    // funcao para inclusao
@@ -84,7 +84,7 @@ class cl_listanotifica {
        $this->k63_codigo = $k63_codigo;
        $this->k63_numpre = $k63_numpre;
        $this->k63_notifica = $k63_notifica;
-     if(($this->k63_codigo == null) || ($this->k63_codigo == "") ){
+     if(($this->k63_codigo == null) || ($this->k63_codigo === 0 || $this->k63_codigo === 0.0 || $this->k63_codigo == "") ){
        $this->erro_sql = " Campo k63_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -92,7 +92,7 @@ class cl_listanotifica {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k63_numpre == null) || ($this->k63_numpre == "") ){
+     if(($this->k63_numpre == null) || ($this->k63_numpre === 0 || $this->k63_numpre === 0.0 || $this->k63_numpre == "") ){
        $this->erro_sql = " Campo k63_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -100,7 +100,7 @@ class cl_listanotifica {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k63_notifica == null) || ($this->k63_notifica == "") ){
+     if(($this->k63_notifica == null) || ($this->k63_notifica === 0 || $this->k63_notifica === 0.0 || $this->k63_notifica == "") ){
        $this->erro_sql = " Campo k63_notifica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

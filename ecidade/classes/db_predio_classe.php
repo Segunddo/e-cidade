@@ -69,11 +69,11 @@ class cl_predio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j111_condominio = ($this->j111_condominio == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_condominio"]:$this->j111_condominio);
+       $this->j111_condominio = ($this->j111_condominio === 0 || $this->j111_condominio === 0.0 || $this->j111_condominio == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_condominio"]:$this->j111_condominio);
        $this->j111_nome = ($this->j111_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_nome"]:$this->j111_nome);
-       $this->j111_sequencial = ($this->j111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_sequencial"]:$this->j111_sequencial);
+       $this->j111_sequencial = ($this->j111_sequencial === 0 || $this->j111_sequencial === 0.0 || $this->j111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_sequencial"]:$this->j111_sequencial);
      }else{
-       $this->j111_sequencial = ($this->j111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_sequencial"]:$this->j111_sequencial);
+       $this->j111_sequencial = ($this->j111_sequencial === 0 || $this->j111_sequencial === 0.0 || $this->j111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j111_sequencial"]:$this->j111_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_predio {
          $this->j111_sequencial = $j111_sequencial;
        }
      }
-     if(($this->j111_sequencial == null) || ($this->j111_sequencial == "") ){
+     if(($this->j111_sequencial == null) || ($this->j111_sequencial === 0 || $this->j111_sequencial === 0.0 || $this->j111_sequencial == "") ){
        $this->erro_sql = " Campo j111_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

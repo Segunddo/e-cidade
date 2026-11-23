@@ -43,11 +43,11 @@ class cl_advog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v57_numcgm = ($this->v57_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v57_numcgm"]:$this->v57_numcgm);
+       $this->v57_numcgm = ($this->v57_numcgm === 0 || $this->v57_numcgm === 0.0 || $this->v57_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v57_numcgm"]:$this->v57_numcgm);
        $this->v57_oab = ($this->v57_oab == ""?@$GLOBALS["HTTP_POST_VARS"]["v57_oab"]:$this->v57_oab);
        $this->v57_matriculaadvogado = ($this->v57_matriculaadvogado == ""?@$GLOBALS["HTTP_POST_VARS"]["v57_matriculaadvogado"]:$this->v57_matriculaadvogado);
      }else{
-       $this->v57_numcgm = ($this->v57_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v57_numcgm"]:$this->v57_numcgm);
+       $this->v57_numcgm = ($this->v57_numcgm === 0 || $this->v57_numcgm === 0.0 || $this->v57_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v57_numcgm"]:$this->v57_numcgm);
      }
    }
    // funcao para inclusao
@@ -63,7 +63,7 @@ class cl_advog {
        return false;
      }
        $this->v57_numcgm = $v57_numcgm;
-     if(($this->v57_numcgm == null) || ($this->v57_numcgm == "") ){
+     if(($this->v57_numcgm == null) || ($this->v57_numcgm === 0 || $this->v57_numcgm === 0.0 || $this->v57_numcgm == "") ){
        $this->erro_sql = " Campo v57_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_jurtipopet {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v59_codpet = ($this->v59_codpet == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_codpet"]:$this->v59_codpet);
+       $this->v59_codpet = ($this->v59_codpet === 0 || $this->v59_codpet === 0.0 || $this->v59_codpet == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_codpet"]:$this->v59_codpet);
        $this->v59_descr = ($this->v59_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_descr"]:$this->v59_descr);
      }else{
-       $this->v59_codpet = ($this->v59_codpet == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_codpet"]:$this->v59_codpet);
+       $this->v59_codpet = ($this->v59_codpet === 0 || $this->v59_codpet === 0.0 || $this->v59_codpet == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_codpet"]:$this->v59_codpet);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_jurtipopet {
          $this->v59_codpet = $v59_codpet;
        }
      }
-     if(($this->v59_codpet == null) || ($this->v59_codpet == "") ){
+     if(($this->v59_codpet == null) || ($this->v59_codpet === 0 || $this->v59_codpet === 0.0 || $this->v59_codpet == "") ){
        $this->erro_sql = " Campo v59_codpet nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

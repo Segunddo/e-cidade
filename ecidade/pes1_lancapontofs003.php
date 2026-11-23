@@ -36,7 +36,7 @@ include(modification("classes/db_movrel_classe.php"));
 include(modification("classes/db_pontofs_classe.php"));
 include(modification("classes/db_rhpessoal_classe.php"));
 include(modification("libs/db_sql.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clconvenio = new cl_convenio;
 $clrelac = new cl_relac;
 $clmovrel = new cl_movrel;

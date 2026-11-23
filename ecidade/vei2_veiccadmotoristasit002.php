@@ -32,7 +32,7 @@ $clveiccadmotoristasit = new cl_veiccadmotoristasit;
 $clveiccadmotoristasit->rotulo->label();
 $clrotulo = new rotulocampo;
 $clrotulo->label('');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if($ordem == "a") {
 	$desc_ordem = "Alfabética";
 	$order_by = "ve33_descr";

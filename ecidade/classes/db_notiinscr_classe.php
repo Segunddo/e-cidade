@@ -67,11 +67,11 @@ class cl_notiinscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k56_notifica = ($this->k56_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_notifica"]:$this->k56_notifica);
-       $this->k56_inscr = ($this->k56_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_inscr"]:$this->k56_inscr);
+       $this->k56_notifica = ($this->k56_notifica === 0 || $this->k56_notifica === 0.0 || $this->k56_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_notifica"]:$this->k56_notifica);
+       $this->k56_inscr = ($this->k56_inscr === 0 || $this->k56_inscr === 0.0 || $this->k56_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_inscr"]:$this->k56_inscr);
      }else{
-       $this->k56_notifica = ($this->k56_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_notifica"]:$this->k56_notifica);
-       $this->k56_inscr = ($this->k56_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_inscr"]:$this->k56_inscr);
+       $this->k56_notifica = ($this->k56_notifica === 0 || $this->k56_notifica === 0.0 || $this->k56_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_notifica"]:$this->k56_notifica);
+       $this->k56_inscr = ($this->k56_inscr === 0 || $this->k56_inscr === 0.0 || $this->k56_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_inscr"]:$this->k56_inscr);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_notiinscr {
       $this->atualizacampos();
        $this->k56_notifica = $k56_notifica;
        $this->k56_inscr = $k56_inscr;
-     if(($this->k56_notifica == null) || ($this->k56_notifica == "") ){
+     if(($this->k56_notifica == null) || ($this->k56_notifica === 0 || $this->k56_notifica === 0.0 || $this->k56_notifica == "") ){
        $this->erro_sql = " Campo k56_notifica nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_notiinscr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k56_inscr == null) || ($this->k56_inscr == "") ){
+     if(($this->k56_inscr == null) || ($this->k56_inscr === 0 || $this->k56_inscr === 0.0 || $this->k56_inscr == "") ){
        $this->erro_sql = " Campo k56_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

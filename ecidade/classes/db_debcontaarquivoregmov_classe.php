@@ -76,8 +76,8 @@ class cl_debcontaarquivoregmov {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d75_sequencial = ($this->d75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_sequencial"]:$this->d75_sequencial);
-       $this->d75_codigo = ($this->d75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_codigo"]:$this->d75_codigo);
+       $this->d75_sequencial = ($this->d75_sequencial === 0 || $this->d75_sequencial === 0.0 || $this->d75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_sequencial"]:$this->d75_sequencial);
+       $this->d75_codigo = ($this->d75_codigo === 0 || $this->d75_codigo === 0.0 || $this->d75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_codigo"]:$this->d75_codigo);
        if($this->d75_venc == ""){
          $this->d75_venc_dia = ($this->d75_venc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_venc_dia"]:$this->d75_venc_dia);
          $this->d75_venc_mes = ($this->d75_venc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_venc_mes"]:$this->d75_venc_mes);
@@ -86,10 +86,10 @@ class cl_debcontaarquivoregmov {
             $this->d75_venc = $this->d75_venc_ano."-".$this->d75_venc_mes."-".$this->d75_venc_dia;
          }
        }
-       $this->d75_valor = ($this->d75_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_valor"]:$this->d75_valor);
-       $this->d75_numpar = ($this->d75_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_numpar"]:$this->d75_numpar);
+       $this->d75_valor = ($this->d75_valor === 0 || $this->d75_valor === 0.0 || $this->d75_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_valor"]:$this->d75_valor);
+       $this->d75_numpar = ($this->d75_numpar === 0 || $this->d75_numpar === 0.0 || $this->d75_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_numpar"]:$this->d75_numpar);
      }else{
-       $this->d75_sequencial = ($this->d75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_sequencial"]:$this->d75_sequencial);
+       $this->d75_sequencial = ($this->d75_sequencial === 0 || $this->d75_sequencial === 0.0 || $this->d75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d75_sequencial"]:$this->d75_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_debcontaarquivoregmov {
          $this->d75_sequencial = $d75_sequencial;
        }
      }
-     if(($this->d75_sequencial == null) || ($this->d75_sequencial == "") ){
+     if(($this->d75_sequencial == null) || ($this->d75_sequencial === 0 || $this->d75_sequencial === 0.0 || $this->d75_sequencial == "") ){
        $this->erro_sql = " Campo d75_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

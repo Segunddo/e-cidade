@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/matricula-online/cadastros/ciclos",
+  "json": null,
+  "sha256": "893af9b4b7244ebc116def99c6ba5b34870f904af310af042e4d974f23306f86",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

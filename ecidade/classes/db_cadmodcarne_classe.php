@@ -77,15 +77,15 @@ class cl_cadmodcarne {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k47_sequencial = ($this->k47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_sequencial"]:$this->k47_sequencial);
+       $this->k47_sequencial = ($this->k47_sequencial === 0 || $this->k47_sequencial === 0.0 || $this->k47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_sequencial"]:$this->k47_sequencial);
        $this->k47_descr = ($this->k47_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_descr"]:$this->k47_descr);
        $this->k47_obs = ($this->k47_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_obs"]:$this->k47_obs);
-       $this->k47_altura = ($this->k47_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_altura"]:$this->k47_altura);
-       $this->k47_largura = ($this->k47_largura == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_largura"]:$this->k47_largura);
+       $this->k47_altura = ($this->k47_altura === 0 || $this->k47_altura === 0.0 || $this->k47_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_altura"]:$this->k47_altura);
+       $this->k47_largura = ($this->k47_largura === 0 || $this->k47_largura === 0.0 || $this->k47_largura == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_largura"]:$this->k47_largura);
        $this->k47_orientacao = ($this->k47_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_orientacao"]:$this->k47_orientacao);
-       $this->k47_tipoconvenio = ($this->k47_tipoconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_tipoconvenio"]:$this->k47_tipoconvenio);
+       $this->k47_tipoconvenio = ($this->k47_tipoconvenio === 0 || $this->k47_tipoconvenio === 0.0 || $this->k47_tipoconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_tipoconvenio"]:$this->k47_tipoconvenio);
      }else{
-       $this->k47_sequencial = ($this->k47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_sequencial"]:$this->k47_sequencial);
+       $this->k47_sequencial = ($this->k47_sequencial === 0 || $this->k47_sequencial === 0.0 || $this->k47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k47_sequencial"]:$this->k47_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_cadmodcarne {
          $this->k47_sequencial = $k47_sequencial;
        }
      }
-     if(($this->k47_sequencial == null) || ($this->k47_sequencial == "") ){
+     if(($this->k47_sequencial == null) || ($this->k47_sequencial === 0 || $this->k47_sequencial === 0.0 || $this->k47_sequencial == "") ){
        $this->erro_sql = " Campo k47_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

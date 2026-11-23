@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/orcamento/acompanhamento/cronograma/receita/salvar",
+  "json": {
+    "error": true,
+    "message": "Revise os dados enviados."
+  },
+  "sha256": "8d28e646a5f727b0c2ad2da3769c8a9ce00039503330eb9dd9e20081ce452fa8",
+  "sql_negocio": [],
+  "status": 403,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -25,7 +25,7 @@
  *                                licenca/licenca_pt.txt
  */
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(!isset($abas)){
   echo "<script>location.href='itb1_itbi005.php?db_opcao=2'</script>";
   exit;
@@ -39,7 +39,7 @@ include(modification("classes/db_itburbano_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_itbirural_classe.php"));
 include(modification("classes/db_itbiruralcaract_classe.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clitbi = new cl_itbi;
 $clitburbano = new cl_itburbano;

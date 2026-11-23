@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_proctransferworkflowativexec_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clproctransferworkflowativexec = new cl_proctransferworkflowativexec;
 $clproctransferworkflowativexec->rotulo->label("p46_sequencial");
 $clproctransferworkflowativexec->rotulo->label("p46_sequencial");

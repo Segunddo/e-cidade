@@ -1,0 +1,22 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/usuario",
+  "json": {
+    "data": {
+      "id": 1,
+      "login": "dbseller",
+      "nome": "PREFEITURA DBSELLER"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "fc58355f7209e9c04d8edf79f370185eaeab77bb5a297c3ec6068a19d41b8944",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

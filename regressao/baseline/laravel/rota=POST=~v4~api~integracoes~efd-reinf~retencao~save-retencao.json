@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/integracoes/efd-reinf/retencao/save-retencao",
+  "json": {
+    "data": null,
+    "error": true,
+    "message": "Erro Interno."
+  },
+  "sha256": "48464c0d81f1ae1e389034317250d22c32b9f4ac1b9f5506aff97d8e24d8dc7d",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

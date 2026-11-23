@@ -69,11 +69,11 @@ class cl_aguahidromatricultimaleitura {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x09_codigo = ($this->x09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x09_codigo"]:$this->x09_codigo);
-       $this->x09_codhidrometro = ($this->x09_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x09_codhidrometro"]:$this->x09_codhidrometro);
-       $this->x09_codleitura = ($this->x09_codleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x09_codleitura"]:$this->x09_codleitura);
+       $this->x09_codigo = ($this->x09_codigo === 0 || $this->x09_codigo === 0.0 || $this->x09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x09_codigo"]:$this->x09_codigo);
+       $this->x09_codhidrometro = ($this->x09_codhidrometro === 0 || $this->x09_codhidrometro === 0.0 || $this->x09_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x09_codhidrometro"]:$this->x09_codhidrometro);
+       $this->x09_codleitura = ($this->x09_codleitura === 0 || $this->x09_codleitura === 0.0 || $this->x09_codleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x09_codleitura"]:$this->x09_codleitura);
      }else{
-       $this->x09_codigo = ($this->x09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x09_codigo"]:$this->x09_codigo);
+       $this->x09_codigo = ($this->x09_codigo === 0 || $this->x09_codigo === 0.0 || $this->x09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x09_codigo"]:$this->x09_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aguahidromatricultimaleitura {
          $this->x09_codigo = $x09_codigo; 
        }
      }
-     if(($this->x09_codigo == null) || ($this->x09_codigo == "") ){ 
+     if(($this->x09_codigo == null) || ($this->x09_codigo === 0 || $this->x09_codigo === 0.0 || $this->x09_codigo == "") ){ 
        $this->erro_sql = " Campo x09_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

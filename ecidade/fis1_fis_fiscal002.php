@@ -34,7 +34,7 @@ include(modification("classes/db_fis_fiscalocal_classe.php"));
 include(modification("classes/db_fis_fiscexec_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_fis_procfiscalnotificacao_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 // Ticket 108335
 $getIntimacao = ((isset($intimacao) && $intimacao == 1) ? '&intimacao=1' : '');
 $getLabel     = ((isset($intimacao) && $intimacao == 1) ? 'Intimação' : 'Notificação');
@@ -46,7 +46,7 @@ if(!isset($abas)){
 
 $clenderecopecas = db_utils::getDao("fis_enderecopecas");
 $tipoEnd     = ((isset($intimacao) && $intimacao == 1) ? 'I' : 'N');
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clfiscal     = new cl_fis_fiscal;
 $clfiscalocal = new cl_fis_fiscalocal;

@@ -67,10 +67,10 @@ class cl_autoinscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y52_codauto = ($this->y52_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y52_codauto"]:$this->y52_codauto);
-       $this->y52_inscr = ($this->y52_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y52_inscr"]:$this->y52_inscr);
+       $this->y52_codauto = ($this->y52_codauto === 0 || $this->y52_codauto === 0.0 || $this->y52_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y52_codauto"]:$this->y52_codauto);
+       $this->y52_inscr = ($this->y52_inscr === 0 || $this->y52_inscr === 0.0 || $this->y52_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y52_inscr"]:$this->y52_inscr);
      }else{
-       $this->y52_codauto = ($this->y52_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y52_codauto"]:$this->y52_codauto);
+       $this->y52_codauto = ($this->y52_codauto === 0 || $this->y52_codauto === 0.0 || $this->y52_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y52_codauto"]:$this->y52_codauto);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_autoinscr {
        return false;
      }
        $this->y52_codauto = $y52_codauto;
-     if(($this->y52_codauto == null) || ($this->y52_codauto == "") ){
+     if(($this->y52_codauto == null) || ($this->y52_codauto === 0 || $this->y52_codauto === 0.0 || $this->y52_codauto == "") ){
        $this->erro_sql = " Campo y52_codauto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

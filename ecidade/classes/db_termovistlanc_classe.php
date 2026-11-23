@@ -67,8 +67,8 @@ class cl_termovistlanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y92_termovist = ($this->y92_termovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y92_termovist"]:$this->y92_termovist);
-       $this->y92_codvist = ($this->y92_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y92_codvist"]:$this->y92_codvist);
+       $this->y92_termovist = ($this->y92_termovist === 0 || $this->y92_termovist === 0.0 || $this->y92_termovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y92_termovist"]:$this->y92_termovist);
+       $this->y92_codvist = ($this->y92_codvist === 0 || $this->y92_codvist === 0.0 || $this->y92_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y92_codvist"]:$this->y92_codvist);
      }else{
      }
    }

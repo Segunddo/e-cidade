@@ -67,10 +67,10 @@ class cl_ativprinc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q88_inscr = ($this->q88_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q88_inscr"]:$this->q88_inscr);
-       $this->q88_seq = ($this->q88_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q88_seq"]:$this->q88_seq);
+       $this->q88_inscr = ($this->q88_inscr === 0 || $this->q88_inscr === 0.0 || $this->q88_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q88_inscr"]:$this->q88_inscr);
+       $this->q88_seq = ($this->q88_seq === 0 || $this->q88_seq === 0.0 || $this->q88_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q88_seq"]:$this->q88_seq);
      }else{
-       $this->q88_inscr = ($this->q88_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q88_inscr"]:$this->q88_inscr);
+       $this->q88_inscr = ($this->q88_inscr === 0 || $this->q88_inscr === 0.0 || $this->q88_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q88_inscr"]:$this->q88_inscr);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_ativprinc {
        return false;
      }
        $this->q88_inscr = $q88_inscr;
-     if(($this->q88_inscr == null) || ($this->q88_inscr == "") ){
+     if(($this->q88_inscr == null) || ($this->q88_inscr === 0 || $this->q88_inscr === 0.0 || $this->q88_inscr == "") ){
        $this->erro_sql = " Campo q88_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

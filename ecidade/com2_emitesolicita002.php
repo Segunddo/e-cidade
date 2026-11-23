@@ -84,7 +84,7 @@ if($clempparametro->numrows>0){
 $result_pcparam = $clpcparam->sql_record($clpcparam->sql_query_file(db_getsession("DB_instit"),"pc30_comsaldo,pc30_permsemdotac,pc30_gerareserva,pc30_libdotac"));
 db_fieldsmemory($result_pcparam,0);
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $where_solicita = "";
 if(isset($ini) && trim($ini)!=""){

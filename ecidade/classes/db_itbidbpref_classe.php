@@ -76,8 +76,8 @@ class cl_itbidbpref {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it23_sequencial = ($this->it23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it23_sequencial"]:$this->it23_sequencial);
-       $this->it23_itbi = ($this->it23_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["it23_itbi"]:$this->it23_itbi);
+       $this->it23_sequencial = ($this->it23_sequencial === 0 || $this->it23_sequencial === 0.0 || $this->it23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it23_sequencial"]:$this->it23_sequencial);
+       $this->it23_itbi = ($this->it23_itbi === 0 || $this->it23_itbi === 0.0 || $this->it23_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["it23_itbi"]:$this->it23_itbi);
        if($this->it23_data == ""){
          $this->it23_data_dia = ($this->it23_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["it23_data_dia"]:$this->it23_data_dia);
          $this->it23_data_mes = ($this->it23_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["it23_data_mes"]:$this->it23_data_mes);
@@ -89,7 +89,7 @@ class cl_itbidbpref {
        $this->it23_hora = ($this->it23_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["it23_hora"]:$this->it23_hora);
        $this->it23_ip = ($this->it23_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["it23_ip"]:$this->it23_ip);
      }else{
-       $this->it23_sequencial = ($this->it23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it23_sequencial"]:$this->it23_sequencial);
+       $this->it23_sequencial = ($this->it23_sequencial === 0 || $this->it23_sequencial === 0.0 || $this->it23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it23_sequencial"]:$this->it23_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_itbidbpref {
          $this->it23_sequencial = $it23_sequencial; 
        }
      }
-     if(($this->it23_sequencial == null) || ($this->it23_sequencial == "") ){ 
+     if(($this->it23_sequencial == null) || ($this->it23_sequencial === 0 || $this->it23_sequencial === 0.0 || $this->it23_sequencial == "") ){ 
        $this->erro_sql = " Campo it23_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

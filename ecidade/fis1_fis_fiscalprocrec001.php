@@ -34,7 +34,7 @@ require_once(modification("classes/db_fis_fiscalprocrecvinculo_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clfiscalprocrec = new cl_fis_fiscalprocrec;
 $clfiscalprocrecvinculo = new cl_fis_fiscalprocrecvinculo;

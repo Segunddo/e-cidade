@@ -81,7 +81,7 @@ class cl_iptubaixa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j02_matric = ($this->j02_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_matric"]:$this->j02_matric);
+       $this->j02_matric = ($this->j02_matric === 0 || $this->j02_matric === 0.0 || $this->j02_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_matric"]:$this->j02_matric);
        if($this->j02_dtbaixa == ""){
          $this->j02_dtbaixa_dia = ($this->j02_dtbaixa_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_dtbaixa_dia"]:$this->j02_dtbaixa_dia);
          $this->j02_dtbaixa_mes = ($this->j02_dtbaixa_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_dtbaixa_mes"]:$this->j02_dtbaixa_mes);
@@ -91,7 +91,7 @@ class cl_iptubaixa {
          }
        }
        $this->j02_motivo = ($this->j02_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_motivo"]:$this->j02_motivo);
-       $this->j02_usuario = ($this->j02_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_usuario"]:$this->j02_usuario);
+       $this->j02_usuario = ($this->j02_usuario === 0 || $this->j02_usuario === 0.0 || $this->j02_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_usuario"]:$this->j02_usuario);
        if($this->j02_data == ""){
          $this->j02_data_dia = ($this->j02_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_data_dia"]:$this->j02_data_dia);
          $this->j02_data_mes = ($this->j02_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_data_mes"]:$this->j02_data_mes);
@@ -102,7 +102,7 @@ class cl_iptubaixa {
        }
        $this->j02_hora = ($this->j02_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_hora"]:$this->j02_hora);
      }else{
-       $this->j02_matric = ($this->j02_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_matric"]:$this->j02_matric);
+       $this->j02_matric = ($this->j02_matric === 0 || $this->j02_matric === 0.0 || $this->j02_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j02_matric"]:$this->j02_matric);
      }
    }
    // funcao para inclusao
@@ -154,7 +154,7 @@ class cl_iptubaixa {
        return false;
      }
        $this->j02_matric = $j02_matric;
-     if(($this->j02_matric == null) || ($this->j02_matric == "") ){
+     if(($this->j02_matric == null) || ($this->j02_matric === 0 || $this->j02_matric === 0.0 || $this->j02_matric == "") ){
        $this->erro_sql = " Campo j02_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

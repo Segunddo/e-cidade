@@ -1,0 +1,55 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/planejamento/periodos",
+  "json": {
+    "data": [
+      {
+        "created_at": null,
+        "pl14_codigo": 1,
+        "pl14_descricao": "Mensal",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "pl14_codigo": 2,
+        "pl14_descricao": "Bimestral",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "pl14_codigo": 3,
+        "pl14_descricao": "Trimestral",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "pl14_codigo": 4,
+        "pl14_descricao": "Quadrimestral",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "pl14_codigo": 5,
+        "pl14_descricao": "Semestral",
+        "updated_at": null
+      },
+      {
+        "created_at": null,
+        "pl14_codigo": 6,
+        "pl14_descricao": "Anual",
+        "updated_at": null
+      }
+    ],
+    "error": false,
+    "message": "Períodos cadastrados."
+  },
+  "sha256": "43fb99f0533a3840618f1f7b803102e505c6f8d4bbbe7ca0ce4bf938be9289bb",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

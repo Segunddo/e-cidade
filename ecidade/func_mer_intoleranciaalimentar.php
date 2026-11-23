@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_mer_intoleranciaalimentar_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmer_intoleranciaalimentar = new cl_mer_intoleranciaalimentar;
 $clmer_intoleranciaalimentar->rotulo->label("me33_i_codigo");
 $clmer_intoleranciaalimentar->rotulo->label("me33_c_descr");

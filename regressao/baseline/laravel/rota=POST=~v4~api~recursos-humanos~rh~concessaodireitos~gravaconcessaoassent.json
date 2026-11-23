@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/concessaodireitos/gravaconcessaoassent",
+  "json": {
+    "error": true,
+    "message": "Undefined index: matricula"
+  },
+  "sha256": "53ac3330161992cc3f4bfde203586f1b9e03204826afde31f206deb04073fa9e",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

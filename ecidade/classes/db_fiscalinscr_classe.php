@@ -67,10 +67,10 @@ class cl_fiscalinscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y34_codnoti = ($this->y34_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y34_codnoti"]:$this->y34_codnoti);
-       $this->y34_inscr = ($this->y34_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y34_inscr"]:$this->y34_inscr);
+       $this->y34_codnoti = ($this->y34_codnoti === 0 || $this->y34_codnoti === 0.0 || $this->y34_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y34_codnoti"]:$this->y34_codnoti);
+       $this->y34_inscr = ($this->y34_inscr === 0 || $this->y34_inscr === 0.0 || $this->y34_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y34_inscr"]:$this->y34_inscr);
      }else{
-       $this->y34_codnoti = ($this->y34_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y34_codnoti"]:$this->y34_codnoti);
+       $this->y34_codnoti = ($this->y34_codnoti === 0 || $this->y34_codnoti === 0.0 || $this->y34_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y34_codnoti"]:$this->y34_codnoti);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_fiscalinscr {
        return false;
      }
        $this->y34_codnoti = $y34_codnoti;
-     if(($this->y34_codnoti == null) || ($this->y34_codnoti == "") ){
+     if(($this->y34_codnoti == null) || ($this->y34_codnoti === 0 || $this->y34_codnoti === 0.0 || $this->y34_codnoti == "") ){
        $this->erro_sql = " Campo y34_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

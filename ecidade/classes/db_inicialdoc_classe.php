@@ -75,10 +75,10 @@ class cl_inicialdoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v59_codigo = ($this->v59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_codigo"]:$this->v59_codigo);
-       $this->v59_inicial = ($this->v59_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_inicial"]:$this->v59_inicial);
-       $this->v59_docum = ($this->v59_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_docum"]:$this->v59_docum);
-       $this->v59_objtexto = ($this->v59_objtexto == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_objtexto"]:$this->v59_objtexto);
+       $this->v59_codigo = ($this->v59_codigo === 0 || $this->v59_codigo === 0.0 || $this->v59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_codigo"]:$this->v59_codigo);
+       $this->v59_inicial = ($this->v59_inicial === 0 || $this->v59_inicial === 0.0 || $this->v59_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_inicial"]:$this->v59_inicial);
+       $this->v59_docum = ($this->v59_docum === 0 || $this->v59_docum === 0.0 || $this->v59_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_docum"]:$this->v59_docum);
+       $this->v59_objtexto = ($this->v59_objtexto === 0 || $this->v59_objtexto === 0.0 || $this->v59_objtexto == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_objtexto"]:$this->v59_objtexto);
        if($this->v59_dtemissao == ""){
          $this->v59_dtemissao_dia = @$GLOBALS["HTTP_POST_VARS"]["v59_dtemissao_dia"];
          $this->v59_dtemissao_mes = @$GLOBALS["HTTP_POST_VARS"]["v59_dtemissao_mes"];
@@ -87,9 +87,9 @@ class cl_inicialdoc {
             $this->v59_dtemissao = $this->v59_dtemissao_ano."-".$this->v59_dtemissao_mes."-".$this->v59_dtemissao_dia;
          }
        }
-       $this->v59_id_usuario = ($this->v59_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_id_usuario"]:$this->v59_id_usuario);
+       $this->v59_id_usuario = ($this->v59_id_usuario === 0 || $this->v59_id_usuario === 0.0 || $this->v59_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_id_usuario"]:$this->v59_id_usuario);
      }else{
-       $this->v59_codigo = ($this->v59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_codigo"]:$this->v59_codigo);
+       $this->v59_codigo = ($this->v59_codigo === 0 || $this->v59_codigo === 0.0 || $this->v59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v59_codigo"]:$this->v59_codigo);
      }
    }
    // funcao para inclusao
@@ -164,7 +164,7 @@ class cl_inicialdoc {
          $this->v59_codigo = $v59_codigo;
        }
      }
-     if(($this->v59_codigo == null) || ($this->v59_codigo == "") ){
+     if(($this->v59_codigo == null) || ($this->v59_codigo === 0 || $this->v59_codigo === 0.0 || $this->v59_codigo == "") ){
        $this->erro_sql = " Campo v59_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

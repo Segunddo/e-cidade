@@ -1,0 +1,67 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/api/educacao/files/mensagens",
+  "json": {
+    "cadidato_possui_matricula": {
+      "ajuda": "Mensagem a ser exibida quando informado o CPF de um candidato que já possui matrícula na rede e a fase for exclusiva para candidatos de fora da rede.",
+      "conteudo": "A inscrição para a Chamada Escolar não pode ser realizada para alunos já pertencentes à Rede Municipal de Ensino de Porto Velho, considerando que o aluno já possui matrícula em escola da Rede, conforme Artigo 2° do Edital da Chamada Escolar."
+    },
+    "candiato_nao_possui_matricula": {
+      "ajuda": "Mensagem a ser exibida quando informado o CPF de um candidato que não possui matrícula na rede e a fase for exclusiva para candidatos da rede.",
+      "conteudo": "A inscrição para a Chamada Escolar não pode ser realizada para candidatos que não estão matriculados na Rede Municipal de Ensino de Porto Velho, considerando que este período de inscrição é exclusivo para transferências da alunos de escolas da rede."
+    },
+    "candidatura_editada": {
+      "ajuda": "Mensagem a ser exibida quando o usuário clicar no botão confirmar após editar a inscrição onde os campos opção de escola, turno, bairro, data de nascimento e/ou etapa forem alterados. Mensagem também deve aparecer no comprovante de inscrição.",
+      "conteudo": "Sua inscrição foi editada com sucesso."
+    },
+    "candidatura_lista_espera": {
+      "ajuda": "Mensagem a ser exibida ao clicar no botão 'Faça Sua Inscrição' para a lista de espera (fase já processada).",
+      "conteudo": "Prezado cidadão, você está realizando a inscrição para o Cadastro Reserva."
+    },
+    "consulta_candidatura": {
+      "ajuda": "Mensagem a ser exibida ao clicar no menu Consulta Inscrição.",
+      "conteudo": "Srs. Pais e ou responsáveis. Informamos que a classificação na Chamada Escolar será de acordo com os critérios estabelecidos no º 01/SEMED/2023, disponível no menu Legislação."
+    },
+    "creiterio_candidatura_anterior_nao_alocada_nao_possui": {
+      "ajuda": "Mensagem a ser exibida quando o critério 'Inscrição anterior não alocada' estiver configurado e o candidato não se enquadra no critério por não possuir inscrição.",
+      "conteudo": "Inscrito na lista de espera do ano anterior e não conseguiu alocação: Candidato não se enquadra neste critério."
+    },
+    "criterio_candidatura_anterior_nao_alocada_possui": {
+      "ajuda": "Mensagem a ser exibida quando o critério   Inscrição anterior não alocada' estiver configurado e o candidato se enquadra no critério, pois possui inscrição não alocada na fase anterior. Possui variável do número do protocolo. Mensagem também deve aparecer no comprovante de inscrição.",
+      "conteudo": "Candidato estava inscrito na lista de espera do ano anterior e não conseguiu alocação."
+    },
+    "documentos_para_matricula": {
+      "ajuda": "Mensagem a ser exibida na tela de emissão do comprovante e no comprovante.",
+      "conteudo": "<p><strong>No ato da efetivação da matrícula deverão ser apresentados os seguintes documentos:</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I - Certidão de nascimento (fotocópia);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; II - CPF do aluno (fotocópia);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; III - Cartão do SUS do aluno (fotocópia);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IV - Carteira de vacinação atualizada (fotocópia);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; V - Duas fotos 3X4 do aluno recentes;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VI - Cartão do Bolsa Família do aluno (fotocópia), quando for o caso;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VII - Comprovante de residência (cópia);<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; VIII - CPF e RG (fotocópia) do(s) responsável(eis) pelo aluno; <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; IX - Laudo médico (para pessoa com deficiência - PcD), quando for o caso;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; X - Histórico Escolar ou Declaração de Escolaridade;<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; XI - Documento Judicial de Guarda do menor (fotocópia) se for o caso.<br></p>"
+    },
+    "escolha_escolas": {
+      "ajuda": "Mensagem a ser exibida na tela onde serão selecionadas as escolas às quais o candidato irá pleitear a vaga.",
+      "conteudo": "Prezados pais e/ou responsáveis:\nOrientamos que preencham as três opções de escolas, para facilitar a garantia de vaga em uma das escolas da rede municipal!"
+    },
+    "mensagem_veracidade": {
+      "ajuda": "Mensagem a ser exibida na tela de confirmação da inscrição e no comprovante de inscrição.",
+      "conteudo": "Declaro para os devidos fins que se façam necessários e sub as penas da lei, a veracidade das informações declaradas, neste formulário."
+    },
+    "obs_tela_confirmar": {
+      "ajuda": "Mensagem a ser exibida na tela em destaque no ato de confirmação da inscrição. Mensagem também deve aparecer no comprovante de inscrição.",
+      "conteudo": "Ao clicar em FINALIZAR, certifique-se que aparecerá o NÚMERO DO PROTOCOLO. Apenas com este número você tem a garantia que sua Inscrição foi efetuada com sucesso.\n\nCaso NÃO APAREÇA O NÚMERO DO PROTOCOLO repita o processo de Inscrição."
+    },
+    "sistema_fechado": {
+      "ajuda": "Mensagem a ser exibida ao clicar no botão 'Faça Sua Inscrição' quando a fase (lista de espera) estiver fechada/inativa e não houver outra fase aberta.",
+      "conteudo": "ATENÇÃO \n\nPrezados Pais e/ou Responsáveis! Informamos que as inscrições para a Chamada Escolar 2024 encerraram no dia 04 de dezembro de 2023, às 23:59."
+    },
+    "termo_de_aceite": {
+      "ajuda": "Mensagem a ser exibida no campo do termo de aceite ao realizar inscrição.",
+      "conteudo": "Li e concordo com os termos."
+    }
+  },
+  "sha256": "7e7f2fa1c439e6fe4493d261b0f4a7a92b96c0007a5d96db87ba737770745716",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

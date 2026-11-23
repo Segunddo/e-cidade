@@ -39,7 +39,7 @@ require_once(modification("classes/db_cgm_classe.php"));
 db_postmemory($HTTP_POST_VARS);
 
 if (!isset($pesquisar)) {
-  parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+  parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 }
 
 $oGet = db_utils::postMemory($_GET);

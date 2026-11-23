@@ -67,10 +67,10 @@ class cl_db_sysregrasacessousu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db47_idacesso = ($this->db47_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_idacesso"]:$this->db47_idacesso);
-       $this->db47_id_usuario = ($this->db47_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_id_usuario"]:$this->db47_id_usuario);
+       $this->db47_idacesso = ($this->db47_idacesso === 0 || $this->db47_idacesso === 0.0 || $this->db47_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_idacesso"]:$this->db47_idacesso);
+       $this->db47_id_usuario = ($this->db47_id_usuario === 0 || $this->db47_id_usuario === 0.0 || $this->db47_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_id_usuario"]:$this->db47_id_usuario);
      }else{
-       $this->db47_idacesso = ($this->db47_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_idacesso"]:$this->db47_idacesso);
+       $this->db47_idacesso = ($this->db47_idacesso === 0 || $this->db47_idacesso === 0.0 || $this->db47_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db47_idacesso"]:$this->db47_idacesso);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_db_sysregrasacessousu {
        return false;
      }
        $this->db47_idacesso = $db47_idacesso;
-     if(($this->db47_idacesso == null) || ($this->db47_idacesso == "") ){
+     if(($this->db47_idacesso == null) || ($this->db47_idacesso === 0 || $this->db47_idacesso === 0.0 || $this->db47_idacesso == "") ){
        $this->erro_sql = " Campo db47_idacesso nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

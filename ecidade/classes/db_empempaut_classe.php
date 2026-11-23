@@ -69,10 +69,10 @@ class cl_empempaut
   // funcao para atualizar campos
     public function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->e61_numemp = ($this->e61_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e61_numemp"]:$this->e61_numemp);
-      $this->e61_autori = ($this->e61_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e61_autori"]:$this->e61_autori);
+      $this->e61_numemp = ($this->e61_numemp === 0 || $this->e61_numemp === 0.0 || $this->e61_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e61_numemp"]:$this->e61_numemp);
+      $this->e61_autori = ($this->e61_autori === 0 || $this->e61_autori === 0.0 || $this->e61_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e61_autori"]:$this->e61_autori);
     }else{
-      $this->e61_numemp = ($this->e61_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e61_numemp"]:$this->e61_numemp);
+      $this->e61_numemp = ($this->e61_numemp === 0 || $this->e61_numemp === 0.0 || $this->e61_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e61_numemp"]:$this->e61_numemp);
     }
   }
   // funcao para inclusao
@@ -88,7 +88,7 @@ class cl_empempaut
       return false;
     }
     $this->e61_numemp = $e61_numemp;
-    if(($this->e61_numemp == null) || ($this->e61_numemp == "") ){
+    if(($this->e61_numemp == null) || ($this->e61_numemp === 0 || $this->e61_numemp === 0.0 || $this->e61_numemp == "") ){
       $this->erro_sql = " Campo e61_numemp nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

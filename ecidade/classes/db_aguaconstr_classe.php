@@ -81,17 +81,17 @@ class cl_aguaconstr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x11_codconstr = ($this->x11_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_codconstr"]:$this->x11_codconstr);
-       $this->x11_matric = ($this->x11_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_matric"]:$this->x11_matric);
-       $this->x11_area = ($this->x11_area == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_area"]:$this->x11_area);
+       $this->x11_codconstr = ($this->x11_codconstr === 0 || $this->x11_codconstr === 0.0 || $this->x11_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_codconstr"]:$this->x11_codconstr);
+       $this->x11_matric = ($this->x11_matric === 0 || $this->x11_matric === 0.0 || $this->x11_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_matric"]:$this->x11_matric);
+       $this->x11_area = ($this->x11_area === 0 || $this->x11_area === 0.0 || $this->x11_area == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_area"]:$this->x11_area);
        $this->x11_pavimento = ($this->x11_pavimento == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_pavimento"]:$this->x11_pavimento);
-       $this->x11_numero = ($this->x11_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_numero"]:$this->x11_numero);
-       $this->x11_qtdfamilia = ($this->x11_qtdfamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_qtdfamilia"]:$this->x11_qtdfamilia);
-       $this->x11_qtdpessoas = ($this->x11_qtdpessoas == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_qtdpessoas"]:$this->x11_qtdpessoas);
+       $this->x11_numero = ($this->x11_numero === 0 || $this->x11_numero === 0.0 || $this->x11_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_numero"]:$this->x11_numero);
+       $this->x11_qtdfamilia = ($this->x11_qtdfamilia === 0 || $this->x11_qtdfamilia === 0.0 || $this->x11_qtdfamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_qtdfamilia"]:$this->x11_qtdfamilia);
+       $this->x11_qtdpessoas = ($this->x11_qtdpessoas === 0 || $this->x11_qtdpessoas === 0.0 || $this->x11_qtdpessoas == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_qtdpessoas"]:$this->x11_qtdpessoas);
        $this->x11_complemento = ($this->x11_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_complemento"]:$this->x11_complemento);
        $this->x11_tipo = ($this->x11_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_tipo"]:$this->x11_tipo);
      }else{
-       $this->x11_codconstr = ($this->x11_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_codconstr"]:$this->x11_codconstr);
+       $this->x11_codconstr = ($this->x11_codconstr === 0 || $this->x11_codconstr === 0.0 || $this->x11_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["x11_codconstr"]:$this->x11_codconstr);
      }
    }
    // funcao para inclusao
@@ -184,7 +184,7 @@ class cl_aguaconstr {
          $this->x11_codconstr = $x11_codconstr;
        }
      }
-     if(($this->x11_codconstr == null) || ($this->x11_codconstr == "") ){
+     if(($this->x11_codconstr == null) || ($this->x11_codconstr === 0 || $this->x11_codconstr === 0.0 || $this->x11_codconstr == "") ){
        $this->erro_sql = " Campo x11_codconstr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

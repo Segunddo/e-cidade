@@ -76,7 +76,7 @@ class cl_corconf {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k12_id = ($this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
+       $this->k12_id = ($this->k12_id === 0 || $this->k12_id === 0.0 || $this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
        if($this->k12_data == ""){
          $this->k12_data_dia = ($this->k12_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_dia"]:$this->k12_data_dia);
          $this->k12_data_mes = ($this->k12_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_mes"]:$this->k12_data_mes);
@@ -85,13 +85,13 @@ class cl_corconf {
             $this->k12_data = $this->k12_data_ano."-".$this->k12_data_mes."-".$this->k12_data_dia;
          }
        }
-       $this->k12_autent = ($this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
-       $this->k12_codmov = ($this->k12_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codmov"]:$this->k12_codmov);
+       $this->k12_autent = ($this->k12_autent === 0 || $this->k12_autent === 0.0 || $this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
+       $this->k12_codmov = ($this->k12_codmov === 0 || $this->k12_codmov === 0.0 || $this->k12_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codmov"]:$this->k12_codmov);
        $this->k12_ativo = ($this->k12_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["k12_ativo"]:$this->k12_ativo);
      }else{
-       $this->k12_id = ($this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
+       $this->k12_id = ($this->k12_id === 0 || $this->k12_id === 0.0 || $this->k12_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_id"]:$this->k12_id);
        $this->k12_data = ($this->k12_data == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_data_ano"]."-".@$GLOBALS["HTTP_POST_VARS"]["k12_data_mes"]."-".@$GLOBALS["HTTP_POST_VARS"]["k12_data_dia"]:$this->k12_data);
-       $this->k12_autent = ($this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
+       $this->k12_autent = ($this->k12_autent === 0 || $this->k12_autent === 0.0 || $this->k12_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_autent"]:$this->k12_autent);
      }
    }
    // funcao para inclusao
@@ -118,7 +118,7 @@ class cl_corconf {
        $this->k12_id = $k12_id;
        $this->k12_data = $k12_data;
        $this->k12_autent = $k12_autent;
-     if(($this->k12_id == null) || ($this->k12_id == "") ){
+     if(($this->k12_id == null) || ($this->k12_id === 0 || $this->k12_id === 0.0 || $this->k12_id == "") ){
        $this->erro_sql = " Campo k12_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -134,7 +134,7 @@ class cl_corconf {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k12_autent == null) || ($this->k12_autent == "") ){
+     if(($this->k12_autent == null) || ($this->k12_autent === 0 || $this->k12_autent === 0.0 || $this->k12_autent == "") ){
        $this->erro_sql = " Campo k12_autent nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

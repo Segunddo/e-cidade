@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/anexo-oito",
+  "json": {
+    "errors": {
+      "codigo_relatorio": [
+        "O Código do Relatório deve ser informado."
+      ],
+      "instituicoes": [
+        "Deve ser informado a(s) Instituições."
+      ],
+      "periodo": [
+        "O Código do Período deve ser informado."
+      ],
+      "planejamento_id": [
+        "O campo \"Código\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "ba657d5171d5200abbe6a90e505d5d1393ce143d1e59722ed95a6e9fc02876a2",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

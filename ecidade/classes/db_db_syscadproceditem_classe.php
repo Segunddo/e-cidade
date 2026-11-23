@@ -69,11 +69,11 @@ class cl_db_syscadproceditem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->seqproitem = ($this->seqproitem == ""?@$GLOBALS["HTTP_POST_VARS"]["seqproitem"]:$this->seqproitem);
-       $this->codproced = ($this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
-       $this->id_item = ($this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
+       $this->seqproitem = ($this->seqproitem === 0 || $this->seqproitem === 0.0 || $this->seqproitem == ""?@$GLOBALS["HTTP_POST_VARS"]["seqproitem"]:$this->seqproitem);
+       $this->codproced = ($this->codproced === 0 || $this->codproced === 0.0 || $this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
+       $this->id_item = ($this->id_item === 0 || $this->id_item === 0.0 || $this->id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["id_item"]:$this->id_item);
      }else{
-       $this->seqproitem = ($this->seqproitem == ""?@$GLOBALS["HTTP_POST_VARS"]["seqproitem"]:$this->seqproitem);
+       $this->seqproitem = ($this->seqproitem === 0 || $this->seqproitem === 0.0 || $this->seqproitem == ""?@$GLOBALS["HTTP_POST_VARS"]["seqproitem"]:$this->seqproitem);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_syscadproceditem {
          $this->seqproitem = $seqproitem;
        }
      }
-     if(($this->seqproitem == null) || ($this->seqproitem == "") ){
+     if(($this->seqproitem == null) || ($this->seqproitem === 0 || $this->seqproitem === 0.0 || $this->seqproitem == "") ){
        $this->erro_sql = " Campo seqproitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

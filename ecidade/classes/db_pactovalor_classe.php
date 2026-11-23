@@ -87,20 +87,20 @@ class cl_pactovalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o87_sequencial = ($this->o87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_sequencial"]:$this->o87_sequencial);
-       $this->o87_pactoplano = ($this->o87_pactoplano == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_pactoplano"]:$this->o87_pactoplano);
-       $this->o87_pactoprograma = ($this->o87_pactoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_pactoprograma"]:$this->o87_pactoprograma);
-       $this->o87_orcprojativativprojeto = ($this->o87_orcprojativativprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_orcprojativativprojeto"]:$this->o87_orcprojativativprojeto);
-       $this->o87_orcprojativanoprojeto = ($this->o87_orcprojativanoprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_orcprojativanoprojeto"]:$this->o87_orcprojativanoprojeto);
-       $this->o87_pactoatividade = ($this->o87_pactoatividade == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_pactoatividade"]:$this->o87_pactoatividade);
-       $this->o87_pactoacoes = ($this->o87_pactoacoes == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_pactoacoes"]:$this->o87_pactoacoes);
-       $this->o87_categoriapacto = ($this->o87_categoriapacto == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_categoriapacto"]:$this->o87_categoriapacto);
-       $this->o87_pactoitem = ($this->o87_pactoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_pactoitem"]:$this->o87_pactoitem);
-       $this->o87_quantidade = ($this->o87_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_quantidade"]:$this->o87_quantidade);
-       $this->o87_vlraproximado = ($this->o87_vlraproximado == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_vlraproximado"]:$this->o87_vlraproximado);
-       $this->o87_orcprogramaano = ($this->o87_orcprogramaano == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_orcprogramaano"]:$this->o87_orcprogramaano);
+       $this->o87_sequencial = ($this->o87_sequencial === 0 || $this->o87_sequencial === 0.0 || $this->o87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_sequencial"]:$this->o87_sequencial);
+       $this->o87_pactoplano = ($this->o87_pactoplano === 0 || $this->o87_pactoplano === 0.0 || $this->o87_pactoplano == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_pactoplano"]:$this->o87_pactoplano);
+       $this->o87_pactoprograma = ($this->o87_pactoprograma === 0 || $this->o87_pactoprograma === 0.0 || $this->o87_pactoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_pactoprograma"]:$this->o87_pactoprograma);
+       $this->o87_orcprojativativprojeto = ($this->o87_orcprojativativprojeto === 0 || $this->o87_orcprojativativprojeto === 0.0 || $this->o87_orcprojativativprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_orcprojativativprojeto"]:$this->o87_orcprojativativprojeto);
+       $this->o87_orcprojativanoprojeto = ($this->o87_orcprojativanoprojeto === 0 || $this->o87_orcprojativanoprojeto === 0.0 || $this->o87_orcprojativanoprojeto == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_orcprojativanoprojeto"]:$this->o87_orcprojativanoprojeto);
+       $this->o87_pactoatividade = ($this->o87_pactoatividade === 0 || $this->o87_pactoatividade === 0.0 || $this->o87_pactoatividade == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_pactoatividade"]:$this->o87_pactoatividade);
+       $this->o87_pactoacoes = ($this->o87_pactoacoes === 0 || $this->o87_pactoacoes === 0.0 || $this->o87_pactoacoes == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_pactoacoes"]:$this->o87_pactoacoes);
+       $this->o87_categoriapacto = ($this->o87_categoriapacto === 0 || $this->o87_categoriapacto === 0.0 || $this->o87_categoriapacto == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_categoriapacto"]:$this->o87_categoriapacto);
+       $this->o87_pactoitem = ($this->o87_pactoitem === 0 || $this->o87_pactoitem === 0.0 || $this->o87_pactoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_pactoitem"]:$this->o87_pactoitem);
+       $this->o87_quantidade = ($this->o87_quantidade === 0 || $this->o87_quantidade === 0.0 || $this->o87_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_quantidade"]:$this->o87_quantidade);
+       $this->o87_vlraproximado = ($this->o87_vlraproximado === 0 || $this->o87_vlraproximado === 0.0 || $this->o87_vlraproximado == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_vlraproximado"]:$this->o87_vlraproximado);
+       $this->o87_orcprogramaano = ($this->o87_orcprogramaano === 0 || $this->o87_orcprogramaano === 0.0 || $this->o87_orcprogramaano == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_orcprogramaano"]:$this->o87_orcprogramaano);
      }else{
-       $this->o87_sequencial = ($this->o87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_sequencial"]:$this->o87_sequencial);
+       $this->o87_sequencial = ($this->o87_sequencial === 0 || $this->o87_sequencial === 0.0 || $this->o87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o87_sequencial"]:$this->o87_sequencial);
      }
    }
    // funcao para inclusao
@@ -175,7 +175,7 @@ class cl_pactovalor {
          $this->o87_sequencial = $o87_sequencial;
        }
      }
-     if(($this->o87_sequencial == null) || ($this->o87_sequencial == "") ){
+     if(($this->o87_sequencial == null) || ($this->o87_sequencial === 0 || $this->o87_sequencial === 0.0 || $this->o87_sequencial == "") ){
        $this->erro_sql = " Campo o87_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -34,7 +34,7 @@ require_once modification("fpdf151/assinatura.php");
 require_once modification("libs/db_libcontabilidade.php");
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clempresto = new cl_empresto;
 $clorcprojativ = new cl_orcprojativ;
@@ -54,7 +54,7 @@ $listaInstituicoes = str_replace('-', ', ', $db_selinstit);
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in ($listaInstituicoes) ");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_num_rows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_num_rows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg . $nomeinstabrev;
     $xvirg = ', ';
@@ -667,7 +667,7 @@ for ($x = 0; $x < $rows; $x++) {
 
     if ($tipo == 'de') {
         $resdesdob = retorna_desdob(substr($o56_elemento, 0, 7), $e64_codele);
-        $numrows = pg_num_rows($resdesdob);
+        $numrows = ($resdesdob ? pg_num_rows($resdesdob) : null);
 
         for ($i = 0; $i < $numrows; $i++) {
             db_fieldsmemory($resdesdob, $i);
@@ -996,7 +996,7 @@ function getElementoSintetico($elemento, $anuUsu)
              WHERE c60_estrut ilike '{$elemento}%'
                AND c60_anousu = {$anuUsu};";
     $rs =  db_query($sql);
-    return  pg_fetch_object($rs)->c60_descr;
+    return  ($rs ? pg_fetch_object($rs) : null)->c60_descr;
 }
 
 function cabecalho($pdf = null, $troca = 0)

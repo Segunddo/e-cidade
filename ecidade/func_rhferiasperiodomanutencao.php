@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_rhferiasperiodo_classe.php"));
 db_postmemory($_POST);
 db_postmemory($_GET);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clrhferiasperiodo = new cl_rhferiasperiodo;
 $clrhferiasperiodo->rotulo->label("rh110_sequencial");
 $clrhferiasperiodo->rotulo->label("rh110_sequencial");

@@ -74,13 +74,13 @@ class cl_setorfiscalvalor
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->j82_codigo = ($this->j82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_codigo"]:$this->j82_codigo);
-            $this->j82_setorfiscal = ($this->j82_setorfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_setorfiscal"]:$this->j82_setorfiscal);
-            $this->j82_anousu = ($this->j82_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_anousu"]:$this->j82_anousu);
-            $this->j82_valorterreno = ($this->j82_valorterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_valorterreno"]:$this->j82_valorterreno);
+            $this->j82_codigo = ($this->j82_codigo === 0 || $this->j82_codigo === 0.0 || $this->j82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_codigo"]:$this->j82_codigo);
+            $this->j82_setorfiscal = ($this->j82_setorfiscal === 0 || $this->j82_setorfiscal === 0.0 || $this->j82_setorfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_setorfiscal"]:$this->j82_setorfiscal);
+            $this->j82_anousu = ($this->j82_anousu === 0 || $this->j82_anousu === 0.0 || $this->j82_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_anousu"]:$this->j82_anousu);
+            $this->j82_valorterreno = ($this->j82_valorterreno === 0 || $this->j82_valorterreno === 0.0 || $this->j82_valorterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_valorterreno"]:$this->j82_valorterreno);
             $this->j82_caract = ($this->j82_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_caract"]:$this->j82_caract);
         } else {
-            $this->j82_codigo = ($this->j82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_codigo"]:$this->j82_codigo);
+            $this->j82_codigo = ($this->j82_codigo === 0 || $this->j82_codigo === 0.0 || $this->j82_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j82_codigo"]:$this->j82_codigo);
         }
     }
 
@@ -138,7 +138,7 @@ class cl_setorfiscalvalor
                 $this->j82_codigo = $j82_codigo;
             }
         }
-        if (($this->j82_codigo == null) || ($this->j82_codigo == "")) {
+        if (($this->j82_codigo == null) || ($this->j82_codigo === 0 || $this->j82_codigo === 0.0 || $this->j82_codigo == "")) {
             $this->erro_sql = " Campo j82_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

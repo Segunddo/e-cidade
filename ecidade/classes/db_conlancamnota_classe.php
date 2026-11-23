@@ -67,11 +67,11 @@ class cl_conlancamnota {
     // funcao para atualizar campos
     public function atualizacampos($exclusao=false) {
         if($exclusao==false){
-            $this->c66_codlan = ($this->c66_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codlan"]:$this->c66_codlan);
-            $this->c66_codnota = ($this->c66_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codnota"]:$this->c66_codnota);
+            $this->c66_codlan = ($this->c66_codlan === 0 || $this->c66_codlan === 0.0 || $this->c66_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codlan"]:$this->c66_codlan);
+            $this->c66_codnota = ($this->c66_codnota === 0 || $this->c66_codnota === 0.0 || $this->c66_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codnota"]:$this->c66_codnota);
         }else{
-            $this->c66_codlan = ($this->c66_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codlan"]:$this->c66_codlan);
-            $this->c66_codnota = ($this->c66_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codnota"]:$this->c66_codnota);
+            $this->c66_codlan = ($this->c66_codlan === 0 || $this->c66_codlan === 0.0 || $this->c66_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codlan"]:$this->c66_codlan);
+            $this->c66_codnota = ($this->c66_codnota === 0 || $this->c66_codnota === 0.0 || $this->c66_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["c66_codnota"]:$this->c66_codnota);
         }
     }
     // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_conlancamnota {
         $this->atualizacampos();
         $this->c66_codlan = $c66_codlan;
         $this->c66_codnota = $c66_codnota;
-        if(($this->c66_codlan == null) || ($this->c66_codlan == "") ){
+        if(($this->c66_codlan == null) || ($this->c66_codlan === 0 || $this->c66_codlan === 0.0 || $this->c66_codlan == "") ){
             $this->erro_sql = " Campo c66_codlan nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_conlancamnota {
             $this->erro_status = "0";
             return false;
         }
-        if(($this->c66_codnota == null) || ($this->c66_codnota == "") ){
+        if(($this->c66_codnota == null) || ($this->c66_codnota === 0 || $this->c66_codnota === 0.0 || $this->c66_codnota == "") ){
             $this->erro_sql = " Campo c66_codnota nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

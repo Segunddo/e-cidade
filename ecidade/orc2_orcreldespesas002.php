@@ -85,7 +85,7 @@ $resultinst = db_query("select codigo,nomeinst from db_config where codigo in ($
 $descr_inst = '';
 $xvirg = '';
 
-for($xins = 0; $xins < pg_numrows($resultinst); $xins ++) {
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins ++) {
   db_fieldsmemory($resultinst, $xins);
   $descr_inst .= $xvirg . $nomeinst;
   $xvirg = ', ';
@@ -167,7 +167,7 @@ if (substr($nivel, 1, 1) == 'A') {
 
   $pagina = 1;
 
-  for($i = 0; $i < pg_numrows($result); $i ++) {
+  for($i = 0; $i < ($result ? pg_numrows($result) : null); $i ++) {
 
     db_fieldsmemory($result, $i);
 
@@ -566,7 +566,7 @@ if (substr($nivel, 1, 1) == 'A') {
 		      substr(o56_elemento,8,5) != '00000' and o56_anousu = " . db_getsession("DB_anousu") . " and
 		      o56_orcado is true";
         $res = db_query($sql);
-        for($ne = 0; $ne < pg_numrows($res); $ne ++) {
+        for($ne = 0; $ne < ($res ? pg_numrows($res) : null); $ne ++) {
           db_fieldsmemory($res, $ne);
           $pdf->cell(20, $alt, $o56_elemento, 0, 0, "L", 0);
           $pdf->cell(80, $alt, $o56_descr, 0, 0, "L", 0);
@@ -709,7 +709,7 @@ if (substr($nivel, 1, 1) == 'A') {
   $totunidaatual = 0;
   $pagina = 1;
 
-  for($k = 0; $k < pg_numrows($result); $k ++) {
+  for($k = 0; $k < ($result ? pg_numrows($result) : null); $k ++) {
 
     db_fieldsmemory($result, $k);
     if ($pdf->gety() > $pdf->h - 30 || $pagina == 1) {

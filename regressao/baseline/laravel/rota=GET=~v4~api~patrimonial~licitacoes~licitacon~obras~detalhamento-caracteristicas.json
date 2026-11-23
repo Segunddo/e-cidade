@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/licitacoes/licitacon/obras/detalhamento-caracteristicas",
+  "json": {
+    "error": true,
+    "message": "No query results for model [App\\Domain\\Patrimonial\\Licitacoes\\Models\\LicitaconUsuario]."
+  },
+  "sha256": "75a7422c36d05c2fd5cba6301c2b39c602a80223ec32c288453d788bd272e052",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

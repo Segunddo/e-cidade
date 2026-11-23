@@ -100,7 +100,7 @@ if (isset($calcular)) {
             $sql = "select fc_iptu_verificacalculo($j01_matric::integer,$anousu::integer, 0, 0)";
             $result = db_query($sql);
 
-            $retorno_result = pg_fetch_result($result,0,0);
+            $retorno_result = ($result ? pg_fetch_result($result,0,0) : null);
 
             $retorno_erro = substr($retorno_result,3,2);
             $retorno_erro = str_replace(")", "", $retorno_erro);
@@ -127,7 +127,7 @@ if (isset($calcular)) {
                 } else {
                     $result = db_query("select distinct j18_anousu, j18_permvenc from cfiptu order by j18_anousu desc");
                     $j18_permvenc = 1;
-                    if (pg_num_rows($result) > 0) {
+                    if (($result ? pg_num_rows($result) : null) > 0) {
                         db_fieldsmemory($result,0);
                     }
                     if ($j18_permvenc == 0) {
@@ -313,7 +313,7 @@ if (isset($calcular)) {
                             db_query("ROLLBACK");
                         }
 
-                        if (pg_num_rows($result2) > 0) {
+                        if (($result2 ? pg_num_rows($result2) : null) > 0) {
 
                             db_fieldsmemory($result2, 0);
 
@@ -349,8 +349,8 @@ if (isset($calcular)) {
 
                         $cliptubase->erro_msg = $sErro;
                         $cliptubase->erro_status = '0';
-                    } else if (pg_num_rows($result) > 0 && !$taxa_erro) {
-                        $retorno_result = pg_fetch_result($result,0,0);
+                    } else if (($result ? pg_num_rows($result) : null) > 0 && !$taxa_erro) {
+                        $retorno_result = ($result ? pg_fetch_result($result,0,0) : null);
 
                         preg_match('/[0-9]*/', trim($retorno_result), $aTipoLogCalc);
 
@@ -410,14 +410,14 @@ if (isset($calcular)) {
                                 $erro = true;
                                 $perc = 0;
 
-                                if (pg_num_rows($sqlunica) != 0) {
-                                    $perc = pg_fetch_result($sqlunica,0,'k00_percdes');
+                                if (($sqlunica ? pg_num_rows($sqlunica) : null) != 0) {
+                                    $perc = ($sqlunica ? pg_fetch_result($sqlunica,0,'k00_percdes') : null);
                                     $sqlresultunica = "delete from recibounica where k00_numpre = $j20_numpre and k00_dtvenc = '$anousu-$mesini-$diavenc'";
                                     $resultunica = db_query($sqlresultunica );
                                     $descricao_erro = "Vencimento Excluído.";
                                 }
 
-                                if (($perc != $percentualdesconto) || (pg_num_rows($sqlunica) == 0)) {
+                                if (($perc != $percentualdesconto) || (($sqlunica ? pg_num_rows($sqlunica) : null) == 0)) {
                                     $oDaoReciboUnica->k00_numpre = $j20_numpre;
                                     $oDaoReciboUnica->k00_dtvenc = "$anousu-$mesini-$diavenc";
                                     $oDaoReciboUnica->k00_dtoper = date("Y-m-d",db_getsession("DB_datausu"));
@@ -493,7 +493,7 @@ if (isset($demonstrativo)) {
     } else { 
         if (isset($HTTP_POST_VARS['j01_matric'])) {
             $result = db_query("select distinct j18_anousu, j18_permvenc from cfiptu order by j18_anousu desc");
-            if (pg_num_rows($result) > 0) {
+            if (($result ? pg_num_rows($result) : null) > 0) {
                 db_fieldsmemory($result, 0);
             } else {
                 $j18_permvenc = 0;
@@ -522,8 +522,8 @@ if (isset($demonstrativo)) {
                 $cliptubase->erro_msg = $sErro;
                 $cliptubase->erro_status = '0';
 
-            } else if (pg_num_rows($result) > 0) {
-                $retorno_result = pg_fetch_result($result,0,0);
+            } else if (($result ? pg_num_rows($result) : null) > 0) {
+                $retorno_result = ($result ? pg_fetch_result($result,0,0) : null);
                 preg_match('/[0-9]*/', trim($retorno_result), $aTipoLogCalc);
                 $retorno = $aTipoLogCalc[0];
 
@@ -684,9 +684,9 @@ if (isset($demonstrativo)) {
                             <td>
                                 <?php
                                 $result = db_query("select distinct j18_anousu from cfiptu order by j18_anousu desc");
-                                if (pg_num_rows($result) > 0) {
+                                if (($result ? pg_num_rows($result) : null) > 0) {
                                     $opcoes = array();
-                                    for ($i = 0; $i < pg_num_rows($result); $i++) {
+                                    for ($i = 0; $i < ($result ? pg_num_rows($result) : null); $i++) {
                                         db_fieldsmemory($result, $i);
                                         $opcoes[$j18_anousu] = $j18_anousu;
                                     }
@@ -700,7 +700,7 @@ if (isset($demonstrativo)) {
                         <?php
                             $oDaocfiptu = new cl_cfiptu;
                             $sqlcfiptu = $oDaocfiptu->sql_query_file(db_getsession("DB_anousu"),'j18_taxaseparada, j18_simulacaocalculo');
-                            $rs = pg_fetch_object(db_query($sqlcfiptu));
+                            $rsCfiptu = db_query($sqlcfiptu); $rs = ($rsCfiptu ? pg_fetch_object($rsCfiptu) : null);
  
                             if($rs->j18_taxaseparada == 0 && $rs->j18_simulacaocalculo == 't'){
                             ?>
@@ -728,7 +728,7 @@ if (isset($demonstrativo)) {
                         </tr>
                         <?php
                         $rsPar = db_query("select j18_permvenc from cfiptu where j18_anousu = " . db_getsession('DB_anousu') . " ");
-                        if (pg_num_rows($rsPar) > 0) {
+                        if (($rsPar ? pg_num_rows($rsPar) : null) > 0) {
                             db_fieldsmemory($rsPar,0);
                         }
                         if (!isset($j18_permvenc)) {

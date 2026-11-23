@@ -69,11 +69,11 @@ class cl_divcontr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v01_coddiv = ($this->v01_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
-       $this->v01_contr = ($this->v01_contr == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_contr"]:$this->v01_contr);
-       $this->v01_matric = ($this->v01_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_matric"]:$this->v01_matric);
+       $this->v01_coddiv = ($this->v01_coddiv === 0 || $this->v01_coddiv === 0.0 || $this->v01_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
+       $this->v01_contr = ($this->v01_contr === 0 || $this->v01_contr === 0.0 || $this->v01_contr == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_contr"]:$this->v01_contr);
+       $this->v01_matric = ($this->v01_matric === 0 || $this->v01_matric === 0.0 || $this->v01_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_matric"]:$this->v01_matric);
      }else{
-       $this->v01_coddiv = ($this->v01_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
+       $this->v01_coddiv = ($this->v01_coddiv === 0 || $this->v01_coddiv === 0.0 || $this->v01_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_divcontr {
        return false;
      }
        $this->v01_coddiv = $v01_coddiv; 
-     if(($this->v01_coddiv == null) || ($this->v01_coddiv == "") ){ 
+     if(($this->v01_coddiv == null) || ($this->v01_coddiv === 0 || $this->v01_coddiv === 0.0 || $this->v01_coddiv == "") ){ 
        $this->erro_sql = " Campo v01_coddiv nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

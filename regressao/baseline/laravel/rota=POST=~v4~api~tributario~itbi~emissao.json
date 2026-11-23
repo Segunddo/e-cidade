@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/itbi/emissao",
+  "json": {
+    "errors": {
+      "numeroGuia": [
+        "O campo numero guia é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "8e15b58ee7fdd7de2263751bcafc13d3caa9749176c8de84d2862967a377261e",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

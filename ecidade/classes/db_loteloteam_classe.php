@@ -67,11 +67,11 @@ class cl_loteloteam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j34_idbql = ($this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
-       $this->j34_loteam = ($this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
+       $this->j34_idbql = ($this->j34_idbql === 0 || $this->j34_idbql === 0.0 || $this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
+       $this->j34_loteam = ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
      }else{
-       $this->j34_idbql = ($this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
-       $this->j34_loteam = ($this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
+       $this->j34_idbql = ($this->j34_idbql === 0 || $this->j34_idbql === 0.0 || $this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
+       $this->j34_loteam = ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_loteam"]:$this->j34_loteam);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_loteloteam {
       $this->atualizacampos();
        $this->j34_idbql = $j34_idbql;
        $this->j34_loteam = $j34_loteam;
-     if(($this->j34_idbql == null) || ($this->j34_idbql == "") ){
+     if(($this->j34_idbql == null) || ($this->j34_idbql === 0 || $this->j34_idbql === 0.0 || $this->j34_idbql == "") ){
        $this->erro_sql = " Campo j34_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_loteloteam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j34_loteam == null) || ($this->j34_loteam == "") ){
+     if(($this->j34_loteam == null) || ($this->j34_loteam === 0 || $this->j34_loteam === 0.0 || $this->j34_loteam == "") ){
        $this->erro_sql = " Campo j34_loteam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

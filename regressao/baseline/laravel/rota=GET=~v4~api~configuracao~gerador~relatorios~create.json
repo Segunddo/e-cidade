@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/gerador/relatorios/create",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Configuracao\\GeradorRelatorio\\Controllers\\RelatorioController::create does not exist."
+  },
+  "sha256": "bd35f75c6105ab20014d5f5722f6c62150768e3050fe63c4824c4a199146f9e6",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -50,7 +50,7 @@ include(modification("classes/db_periodocalendario_classe.php"));
 include(modification("classes/db_transfaprov_classe.php"));
 include(modification("classes/db_serieequiv_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $resultedu= eduparametros(db_getsession("DB_coddepto"));
 $escola = db_getsession("DB_coddepto");

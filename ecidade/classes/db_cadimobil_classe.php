@@ -67,16 +67,16 @@ class cl_cadimobil
   {
 
     if ($exclusao == false) {
-      $this->j63_numcgm = ($this->j63_numcgm == "" ? @$_POST["j63_numcgm"] : $this->j63_numcgm);
+      $this->j63_numcgm = ($this->j63_numcgm === 0 || $this->j63_numcgm === 0.0 || $this->j63_numcgm == "" ? @$_POST["j63_numcgm"] : $this->j63_numcgm);
     } else {
-      $this->j63_numcgm = ($this->j63_numcgm == "" ? @$_POST["j63_numcgm"]:$this->j63_numcgm);
+      $this->j63_numcgm = ($this->j63_numcgm === 0 || $this->j63_numcgm === 0.0 || $this->j63_numcgm == "" ? @$_POST["j63_numcgm"]:$this->j63_numcgm);
      }
    }
    // funcao para inclusao
    public function incluir($j63_numcgm)
   {    $this->atualizacampos();
        $this->j63_numcgm = $j63_numcgm;
-     if(($this->j63_numcgm == null) || ($this->j63_numcgm == "") ){
+     if(($this->j63_numcgm == null) || ($this->j63_numcgm === 0 || $this->j63_numcgm === 0.0 || $this->j63_numcgm == "") ){
        $this->erro_sql = " Campo j63_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

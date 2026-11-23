@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/alunos/historicos-alunos-transf-fora",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42601]: Syntax error: 7 ERRO:  erro de sintaxe em ou próximo a \"and\"\nLINE 1: ...EDE' and transfescolarede.ed103_i_escolaorigem =  and 1 = 1 ...\n                                                             ^ (SQL: select distinct ed47_i_codigo, trim(aluno.ed47_v_nome) AS ed47_v_nome, escola.ed18_i_codigo from \"transfescolarede\" inner join \"escola\" on \"escola\".\"ed18_i_codigo\" = \"transfescolarede\".\"ed103_i_escolaorigem\" inner join \"matricula\" on \"matricula\".\"ed60_i_codigo\" = \"transfescolarede\".\"ed103_i_matricula\" inner join \"turma\" on \"turma\".\"ed57_i_codigo\" = \"matricula\".\"ed60_i_turma\" inner join \"matriculaserie\" on \"matriculaserie\".\"ed221_i_matricula\" = \"matricula\".\"ed60_i_codigo\" inner join \"atestvaga\" on \"atestvaga\".\"ed102_i_codigo\" = \"transfescolarede\".\"ed103_i_atestvaga\" inner join \"aluno\" on \"aluno\".\"ed47_i_codigo\" = \"matricula\".\"ed60_i_aluno\" inner join \"historico\" on \"historico\".\"ed61_i_aluno\" = \"aluno\".\"ed47_i_codigo\" inner join \"calendario\" on \"calendario\".\"ed52_i_codigo\" = \"atestvaga\".\"ed102_i_calendario\" inner join \"base\" on \"base\".\"ed31_i_codigo\" = \"atestvaga\".\"ed102_i_base\" where matricula.ed60_c_situacao = 'TRANSFERIDO REDE' and transfescolarede.ed103_i_escolaorigem =  and 1 = 1 and 1 = 1 order by \"ed47_v_nome\" asc)"
+  },
+  "sha256": "146b94eb0649a7072c5200a05c1491e011b27886be7c2a3f5ab90a576ff75f4b",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

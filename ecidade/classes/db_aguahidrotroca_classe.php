@@ -74,7 +74,7 @@ class cl_aguahidrotroca {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x28_codigo = ($this->x28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x28_codigo"]:$this->x28_codigo);
+       $this->x28_codigo = ($this->x28_codigo === 0 || $this->x28_codigo === 0.0 || $this->x28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x28_codigo"]:$this->x28_codigo);
        if($this->x28_dttroca == ""){
          $this->x28_dttroca_dia = ($this->x28_dttroca_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x28_dttroca_dia"]:$this->x28_dttroca_dia);
          $this->x28_dttroca_mes = ($this->x28_dttroca_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x28_dttroca_mes"]:$this->x28_dttroca_mes);
@@ -84,9 +84,9 @@ class cl_aguahidrotroca {
          }
        }
        $this->x28_obs = ($this->x28_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["x28_obs"]:$this->x28_obs);
-       $this->x28_codhidrometro = ($this->x28_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x28_codhidrometro"]:$this->x28_codhidrometro);
+       $this->x28_codhidrometro = ($this->x28_codhidrometro === 0 || $this->x28_codhidrometro === 0.0 || $this->x28_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x28_codhidrometro"]:$this->x28_codhidrometro);
      }else{
-       $this->x28_codhidrometro = ($this->x28_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x28_codhidrometro"]:$this->x28_codhidrometro);
+       $this->x28_codhidrometro = ($this->x28_codhidrometro === 0 || $this->x28_codhidrometro === 0.0 || $this->x28_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x28_codhidrometro"]:$this->x28_codhidrometro);
      }
    }
    // funcao para inclusao
@@ -120,7 +120,7 @@ class cl_aguahidrotroca {
        return false;
      }
        $this->x28_codhidrometro = $x28_codhidrometro;
-     if(($this->x28_codhidrometro == null) || ($this->x28_codhidrometro == "") ){
+     if(($this->x28_codhidrometro == null) || ($this->x28_codhidrometro === 0 || $this->x28_codhidrometro === 0.0 || $this->x28_codhidrometro == "") ){
        $this->erro_sql = " Campo x28_codhidrometro nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

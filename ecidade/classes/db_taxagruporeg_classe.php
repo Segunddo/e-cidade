@@ -69,12 +69,12 @@ class cl_taxagruporeg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k08_taxagruporeg = ($this->k08_taxagruporeg == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagruporeg"]:$this->k08_taxagruporeg);
-       $this->k08_taxagrupo = ($this->k08_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagrupo"]:$this->k08_taxagrupo);
-       $this->k08_codsubrec = ($this->k08_codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_codsubrec"]:$this->k08_codsubrec);
+       $this->k08_taxagruporeg = ($this->k08_taxagruporeg === 0 || $this->k08_taxagruporeg === 0.0 || $this->k08_taxagruporeg == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagruporeg"]:$this->k08_taxagruporeg);
+       $this->k08_taxagrupo = ($this->k08_taxagrupo === 0 || $this->k08_taxagrupo === 0.0 || $this->k08_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagrupo"]:$this->k08_taxagrupo);
+       $this->k08_codsubrec = ($this->k08_codsubrec === 0 || $this->k08_codsubrec === 0.0 || $this->k08_codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_codsubrec"]:$this->k08_codsubrec);
      }else{
-       $this->k08_taxagruporeg = ($this->k08_taxagruporeg == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagruporeg"]:$this->k08_taxagruporeg);
-       $this->k08_taxagrupo = ($this->k08_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagrupo"]:$this->k08_taxagrupo);
+       $this->k08_taxagruporeg = ($this->k08_taxagruporeg === 0 || $this->k08_taxagruporeg === 0.0 || $this->k08_taxagruporeg == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagruporeg"]:$this->k08_taxagruporeg);
+       $this->k08_taxagrupo = ($this->k08_taxagrupo === 0 || $this->k08_taxagrupo === 0.0 || $this->k08_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k08_taxagrupo"]:$this->k08_taxagrupo);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_taxagruporeg {
          $this->k08_taxagruporeg = $k08_taxagruporeg;
        }
      }
-     if(($this->k08_taxagruporeg == null) || ($this->k08_taxagruporeg == "") ){
+     if(($this->k08_taxagruporeg == null) || ($this->k08_taxagruporeg === 0 || $this->k08_taxagruporeg === 0.0 || $this->k08_taxagruporeg == "") ){
        $this->erro_sql = " Campo k08_taxagruporeg nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

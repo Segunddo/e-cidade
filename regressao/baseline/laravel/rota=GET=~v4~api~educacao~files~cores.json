@@ -1,0 +1,23 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/api/educacao/files/cores",
+  "json": {
+    "cabecalho": "#1c4dbf",
+    "consulta": "#0fa62b",
+    "duvidas": "#ffbe30",
+    "edicao": "#8510b3",
+    "escolas": "#ed5717",
+    "inscricao": "#6260c4",
+    "legislacao": "#ba1127",
+    "lista": "#5b4db1"
+  },
+  "sha256": "024625214014542bead71497de176cafbe84bbe3fa1eb0eebac1109e39e8fb57",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

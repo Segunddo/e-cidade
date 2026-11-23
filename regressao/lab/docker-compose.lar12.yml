@@ -1,0 +1,59 @@
+# Laboratorio "Laravel 12" na porta 8187 (alvo padrao da bateria Laravel: REGRESSAO_LARAVEL_NOVO_URL).
+#
+# ESTADO HONESTO: ainda NAO existe codigo do e-Cidade em Laravel 12. A base de referencia desta branch e
+# PHP 7.4 / Laravel 8.73 (laravel/framework ^8.0, Passport ^10.0). Por isso o laboratorio sobe o MESMO runtime
+# PHP 8.5 do ecidade74_php85 (mesma imagem, mesmos volumes, mesmo paridade-74.ini) com o codigo apontado por
+# LAR12_CODIGO -- por padrao o ./ecidade atual (Laravel 8). Hoje ele mede, portanto, "Laravel 8 sob PHP 8.5".
+# Quando houver o Laravel 12 migrado, basta apontar LAR12_CODIGO para ele. Ver regressao/lab/README.md e o
+# resultado em regressao/baseline/lab-lar12-resultado.md.
+#
+# Uso (da raiz do repositorio; requer o ambiente e74 no ar: rede e74_ecidade74, volumes e74_sessions/e74_tmp,
+# banco ecidade74_database e a imagem ecidade74-php85:latest):
+#   docker compose -p e74-lar12 -f regressao/lab/docker-compose.lar12.yml up -d
+#   LAR12_CODIGO=/caminho/do/ecidade-laravel12 docker compose -p e74-lar12 -f regressao/lab/docker-compose.lar12.yml up -d --force-recreate
+#   docker compose -p e74-lar12 -f regressao/lab/docker-compose.lar12.yml stop     # para so o ecidade74_lar12
+#
+# Projeto compose PROPRIO (e74-lar12): `down` aqui remove so o container do laboratorio; a rede e os volumes do
+# e74 sao externos e nunca sao removidos por este arquivo. Nao toca no ecidade_lar12 (:8087) da pilha antiga.
+#
+# Caminhos relativos sao resolvidos a partir DESTA pasta (regressao/lab/): o padrao ../../ecidade e o
+# ./ecidade da raiz. Prefira caminho absoluto em LAR12_CODIGO.
+# A imagem e REUSADA (pull_policy: never, sem build): rebuild reinstalaria pacotes do apt em outras versoes e o
+# laboratorio deixaria de ter o mesmo runtime do ecidade74_php85.
+
+name: e74-lar12
+
+services:
+
+  ecidade74_lar12:
+    image: ${LAR12_IMAGEM:-ecidade74-php85:latest}
+    pull_policy: never
+    container_name: ecidade74_lar12
+    ports:
+      - "127.0.0.1:8187:80"
+    environment:
+      DB_HOST: ecidade74_database
+      DB_PORT: 5432
+      DB_DATABASE: ecidade
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+    volumes:
+      - ${LAR12_CODIGO:-../../ecidade}:/var/www/html/
+      # Mesmos volumes e ini do ecidade74_php85 (docker-compose.e74.yml): a unica diferenca para ele e o
+      # codigo montado (e a porta).
+      - e74_sessions:/var/lib/php/sessions
+      - e74_tmp:/tmp
+      - ./php85/paridade-74.ini:/usr/local/etc/php/conf.d/zz-paridade-74.ini:ro
+    networks:
+      - e74
+
+networks:
+  e74:
+    external: true
+    name: e74_ecidade74
+
+volumes:
+  e74_sessions:
+    external: true
+  e74_tmp:
+    external: true

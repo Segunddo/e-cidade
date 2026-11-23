@@ -67,10 +67,10 @@ class cl_acordotipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac04_sequencial = ($this->ac04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac04_sequencial"]:$this->ac04_sequencial);
+       $this->ac04_sequencial = ($this->ac04_sequencial === 0 || $this->ac04_sequencial === 0.0 || $this->ac04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac04_sequencial"]:$this->ac04_sequencial);
        $this->ac04_descricao = ($this->ac04_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac04_descricao"]:$this->ac04_descricao);
      }else{
-       $this->ac04_sequencial = ($this->ac04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac04_sequencial"]:$this->ac04_sequencial);
+       $this->ac04_sequencial = ($this->ac04_sequencial === 0 || $this->ac04_sequencial === 0.0 || $this->ac04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac04_sequencial"]:$this->ac04_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_acordotipo {
          $this->ac04_sequencial = $ac04_sequencial;
        }
      }
-     if(($this->ac04_sequencial == null) || ($this->ac04_sequencial == "") ){
+     if(($this->ac04_sequencial == null) || ($this->ac04_sequencial === 0 || $this->ac04_sequencial === 0.0 || $this->ac04_sequencial == "") ){
        $this->erro_sql = " Campo ac04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,12 +71,12 @@ class cl_zonafator {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j110_sequencial = ($this->j110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j110_sequencial"]:$this->j110_sequencial);
-       $this->j110_zona = ($this->j110_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j110_zona"]:$this->j110_zona);
-       $this->j110_fator = ($this->j110_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j110_fator"]:$this->j110_fator);
-       $this->j110_anousu = ($this->j110_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j110_anousu"]:$this->j110_anousu);
+       $this->j110_sequencial = ($this->j110_sequencial === 0 || $this->j110_sequencial === 0.0 || $this->j110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j110_sequencial"]:$this->j110_sequencial);
+       $this->j110_zona = ($this->j110_zona === 0 || $this->j110_zona === 0.0 || $this->j110_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j110_zona"]:$this->j110_zona);
+       $this->j110_fator = ($this->j110_fator === 0 || $this->j110_fator === 0.0 || $this->j110_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j110_fator"]:$this->j110_fator);
+       $this->j110_anousu = ($this->j110_anousu === 0 || $this->j110_anousu === 0.0 || $this->j110_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j110_anousu"]:$this->j110_anousu);
      }else{
-       $this->j110_sequencial = ($this->j110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j110_sequencial"]:$this->j110_sequencial);
+       $this->j110_sequencial = ($this->j110_sequencial === 0 || $this->j110_sequencial === 0.0 || $this->j110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j110_sequencial"]:$this->j110_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_zonafator {
          $this->j110_sequencial = $j110_sequencial;
        }
      }
-     if(($this->j110_sequencial == null) || ($this->j110_sequencial == "") ){
+     if(($this->j110_sequencial == null) || ($this->j110_sequencial === 0 || $this->j110_sequencial === 0.0 || $this->j110_sequencial == "") ){
        $this->erro_sql = " Campo j110_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

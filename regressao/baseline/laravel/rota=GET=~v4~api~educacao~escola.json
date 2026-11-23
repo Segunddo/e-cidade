@@ -1,0 +1,26 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/escola",
+  "json": {
+    "data": [
+      {
+        "bairro": null,
+        "ed18_c_nome": "EMEF DBSELLER                                                                   ",
+        "ed18_i_codigo": 10,
+        "endereco": null,
+        "rua": null
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "a3abc15d662be5c91cdc3ce5b8916d3f0c82e30f96601febc7a6d5d9d6ee1420",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

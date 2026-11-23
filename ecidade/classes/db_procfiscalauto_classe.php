@@ -69,11 +69,11 @@ class cl_procfiscalauto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y111_sequencial = ($this->y111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y111_sequencial"]:$this->y111_sequencial);
-       $this->y111_procfiscal = ($this->y111_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y111_procfiscal"]:$this->y111_procfiscal);
-       $this->y111_auto = ($this->y111_auto == ""?@$GLOBALS["HTTP_POST_VARS"]["y111_auto"]:$this->y111_auto);
+       $this->y111_sequencial = ($this->y111_sequencial === 0 || $this->y111_sequencial === 0.0 || $this->y111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y111_sequencial"]:$this->y111_sequencial);
+       $this->y111_procfiscal = ($this->y111_procfiscal === 0 || $this->y111_procfiscal === 0.0 || $this->y111_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y111_procfiscal"]:$this->y111_procfiscal);
+       $this->y111_auto = ($this->y111_auto === 0 || $this->y111_auto === 0.0 || $this->y111_auto == ""?@$GLOBALS["HTTP_POST_VARS"]["y111_auto"]:$this->y111_auto);
      }else{
-       $this->y111_sequencial = ($this->y111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y111_sequencial"]:$this->y111_sequencial);
+       $this->y111_sequencial = ($this->y111_sequencial === 0 || $this->y111_sequencial === 0.0 || $this->y111_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y111_sequencial"]:$this->y111_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procfiscalauto {
          $this->y111_sequencial = $y111_sequencial;
        }
      }
-     if(($this->y111_sequencial == null) || ($this->y111_sequencial == "") ){
+     if(($this->y111_sequencial == null) || ($this->y111_sequencial === 0 || $this->y111_sequencial === 0.0 || $this->y111_sequencial == "") ){
        $this->erro_sql = " Campo y111_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

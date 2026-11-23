@@ -33,7 +33,7 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("y30_data");
 $clrotulo->label("y39_codandam");
 $clrotulo->label("nome");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_fiscais.location.href='fis1_fis_fiscalusuario002.php?chavepesquisa=$y38_codnoti&chavepesquisa1=$y38_id_usuario&y39_codandam=$y39_codandam".$getIntimacao."'</script>";}
@@ -57,7 +57,7 @@ Campo:y30_data                             ';
 }
 // -------------
 $rsConsultaProc = db_query(" select y110_procfiscal as procfiscal from fiscalizacao.fis_procfiscalnotificacao where y110_notificacaofiscal = $y38_codnoti");
-if( pg_num_rows( $rsConsultaProc ) > 0 ){
+if( ($rsConsultaProc ? pg_num_rows( $rsConsultaProc ) : null) > 0 ){
     db_fieldsmemory($rsConsultaProc,0);
 } 
 

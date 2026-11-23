@@ -46,7 +46,7 @@ require_once(modification("model/configuracao/DBDivisaoDepartamento.model.php"))
 require_once(modification("model/CgmFactory.model.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $oGet       = db_utils::postMemory($_GET,0);
 $iInstit    = db_getsession("DB_instit") ;

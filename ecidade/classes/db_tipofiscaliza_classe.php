@@ -69,11 +69,11 @@ class cl_tipofiscaliza {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y27_codtipo = ($this->y27_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
+       $this->y27_codtipo = ($this->y27_codtipo === 0 || $this->y27_codtipo === 0.0 || $this->y27_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
        $this->y27_descr = ($this->y27_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_descr"]:$this->y27_descr);
-       $this->y27_instit = ($this->y27_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_instit"]:$this->y27_instit);
+       $this->y27_instit = ($this->y27_instit === 0 || $this->y27_instit === 0.0 || $this->y27_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_instit"]:$this->y27_instit);
      }else{
-       $this->y27_codtipo = ($this->y27_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
+       $this->y27_codtipo = ($this->y27_codtipo === 0 || $this->y27_codtipo === 0.0 || $this->y27_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tipofiscaliza {
          $this->y27_codtipo = $y27_codtipo;
        }
      }
-     if(($this->y27_codtipo == null) || ($this->y27_codtipo == "") ){
+     if(($this->y27_codtipo == null) || ($this->y27_codtipo === 0 || $this->y27_codtipo === 0.0 || $this->y27_codtipo == "") ){
        $this->erro_sql = " Campo y27_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

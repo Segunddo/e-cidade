@@ -81,7 +81,7 @@ class cl_infla {
             $this->i02_data = $this->i02_data_ano."-".$this->i02_data_mes."-".$this->i02_data_dia;
          }
        }
-       $this->i02_valor = ($this->i02_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["i02_valor"]:$this->i02_valor);
+       $this->i02_valor = ($this->i02_valor === 0 || $this->i02_valor === 0.0 || $this->i02_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["i02_valor"]:$this->i02_valor);
      }else{
        $this->i02_codigo = ($this->i02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i02_codigo"]:$this->i02_codigo);
        $this->i02_data = ($this->i02_data == ""?@$GLOBALS["HTTP_POST_VARS"]["i02_data_ano"]."-".@$GLOBALS["HTTP_POST_VARS"]["i02_data_mes"]."-".@$GLOBALS["HTTP_POST_VARS"]["i02_data_dia"]:$this->i02_data);

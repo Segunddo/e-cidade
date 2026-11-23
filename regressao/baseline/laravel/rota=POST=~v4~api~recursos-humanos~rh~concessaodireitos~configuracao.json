@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/concessaodireitos/configuracao",
+  "json": {
+    "error": true,
+    "message": "Undefined index: rh500_sequencial"
+  },
+  "sha256": "0777356d639a81115b1f1a249b87de23fc1c67083c3fb9be0df71e2a9b78c9ed",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

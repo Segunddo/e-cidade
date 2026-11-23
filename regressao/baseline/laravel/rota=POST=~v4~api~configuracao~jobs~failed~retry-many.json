@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/jobs/failed/retry-many",
+  "json": {
+    "errors": {
+      "failed_ids": [
+        "O campo failed ids é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "88309eaa79a7bf3f5dddec6f3996b1387346cf982b42ce61ef93d426ff4e5a0b",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

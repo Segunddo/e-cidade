@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/procedimento/mapeamento-empenho-rp-manual",
+  "json": null,
+  "sha256": "a50fd2ab4e0ec921a2665084577d875aea0b17b61f9faa8e0b36156c71ffad7a",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

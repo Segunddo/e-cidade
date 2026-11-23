@@ -67,10 +67,10 @@ class cl_itbitipocaract {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it31_sequencial = ($this->it31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it31_sequencial"]:$this->it31_sequencial);
+       $this->it31_sequencial = ($this->it31_sequencial === 0 || $this->it31_sequencial === 0.0 || $this->it31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it31_sequencial"]:$this->it31_sequencial);
        $this->it31_descricao = ($this->it31_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["it31_descricao"]:$this->it31_descricao);
      }else{
-       $this->it31_sequencial = ($this->it31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it31_sequencial"]:$this->it31_sequencial);
+       $this->it31_sequencial = ($this->it31_sequencial === 0 || $this->it31_sequencial === 0.0 || $this->it31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it31_sequencial"]:$this->it31_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_itbitipocaract {
          $this->it31_sequencial = $it31_sequencial;
        }
      }
-     if(($this->it31_sequencial == null) || ($this->it31_sequencial == "") ){
+     if(($this->it31_sequencial == null) || ($this->it31_sequencial === 0 || $this->it31_sequencial === 0.0 || $this->it31_sequencial == "") ){
        $this->erro_sql = " Campo it31_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

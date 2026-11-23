@@ -29,14 +29,14 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("libs/db_libcontabilidade.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $xinstit =explode("-",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-$numero_instit = pg_numrows($resultinst);
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+$numero_instit = ($resultinst ? pg_numrows($resultinst) : null);
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
   db_fieldsmemory($resultinst,$xins);
   $descr_inst .= $xvirg.$nomeinst ;
   $xvirg = ', ';
@@ -83,7 +83,7 @@ $total_anterior    = 0;
 $total_debitos  = 0;
 $total_creditos = 0;
 $total_final    = 0;
-for($x = 0; $x < pg_numrows($result);$x++){
+for($x = 0; $x < ($result ? pg_numrows($result) : null);$x++){
    db_fieldsmemory($result,$x);
 
 /*
@@ -169,7 +169,7 @@ for($x = 0; $x < pg_numrows($result);$x++){
 			 and c63_anousu = ".db_getsession("DB_anousu")."
 			 and c63_reduz  = {$c61_reduz} " );
 
-   if(pg_numrows($resconta) > 0)
+   if(($resconta ? pg_numrows($resconta) : null) > 0)
      db_fieldsmemory($resconta,0);
    if($c61_reduz != 0){
      $pdf->setfont('arial','',7);

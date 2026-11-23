@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_far_tiporeceita_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clfar_tiporeceita = new cl_far_tiporeceita;
 $clfar_tiporeceita->rotulo->label("fa03_i_codigo");
 $clfar_tiporeceita->rotulo->label("fa03_c_descr");

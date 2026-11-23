@@ -99,7 +99,7 @@ if ($solicitacao == "Proced") {
 }
 if ($pesquisaLocalizada==true) {
   $result = pg_exec($sql);
-  if(pg_numrows($result) == 0){
+  if(($result ? pg_numrows($result) : null) == 0){
     echo "<br><br><b>Nenhum Registro Cadastrado!!<b>";
   }else{
     db_lovrot($sql,5,"","","");

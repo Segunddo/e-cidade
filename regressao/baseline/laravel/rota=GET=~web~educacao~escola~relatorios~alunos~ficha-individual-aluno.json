@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/escola/relatorios/alunos/ficha-individual-aluno",
+  "json": null,
+  "sha256": "89a77c29d0ec78cf876b8a2296956f8732c76a58ef3b402dce482b5806111b69",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

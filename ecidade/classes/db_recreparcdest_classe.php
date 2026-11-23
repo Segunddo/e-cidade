@@ -67,10 +67,10 @@ class cl_recreparcdest {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k71_codigo = ($this->k71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_codigo"]:$this->k71_codigo);
-       $this->k71_recdest = ($this->k71_recdest == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_recdest"]:$this->k71_recdest);
+       $this->k71_codigo = ($this->k71_codigo === 0 || $this->k71_codigo === 0.0 || $this->k71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_codigo"]:$this->k71_codigo);
+       $this->k71_recdest = ($this->k71_recdest === 0 || $this->k71_recdest === 0.0 || $this->k71_recdest == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_recdest"]:$this->k71_recdest);
      }else{
-       $this->k71_codigo = ($this->k71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_codigo"]:$this->k71_codigo);
+       $this->k71_codigo = ($this->k71_codigo === 0 || $this->k71_codigo === 0.0 || $this->k71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k71_codigo"]:$this->k71_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_recreparcdest {
        return false;
      }
        $this->k71_codigo = $k71_codigo;
-     if(($this->k71_codigo == null) || ($this->k71_codigo == "") ){
+     if(($this->k71_codigo == null) || ($this->k71_codigo === 0 || $this->k71_codigo === 0.0 || $this->k71_codigo == "") ){
        $this->erro_sql = " Campo k71_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

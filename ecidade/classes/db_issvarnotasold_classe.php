@@ -71,10 +71,10 @@ class cl_issvarnotasold {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q16_codigo = ($this->q16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q16_codigo"]:$this->q16_codigo);
-       $this->q16_seq = ($this->q16_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q16_seq"]:$this->q16_seq);
+       $this->q16_codigo = ($this->q16_codigo === 0 || $this->q16_codigo === 0.0 || $this->q16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q16_codigo"]:$this->q16_codigo);
+       $this->q16_seq = ($this->q16_seq === 0 || $this->q16_seq === 0.0 || $this->q16_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q16_seq"]:$this->q16_seq);
        $this->q16_nota = ($this->q16_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["q16_nota"]:$this->q16_nota);
-       $this->q16_valor = ($this->q16_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q16_valor"]:$this->q16_valor);
+       $this->q16_valor = ($this->q16_valor === 0 || $this->q16_valor === 0.0 || $this->q16_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q16_valor"]:$this->q16_valor);
      }else{
      }
    }

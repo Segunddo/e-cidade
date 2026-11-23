@@ -67,10 +67,10 @@ class cl_empagemovforma {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e97_codmov = ($this->e97_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codmov"]:$this->e97_codmov);
-       $this->e97_codforma = ($this->e97_codforma == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codforma"]:$this->e97_codforma);
+       $this->e97_codmov = ($this->e97_codmov === 0 || $this->e97_codmov === 0.0 || $this->e97_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codmov"]:$this->e97_codmov);
+       $this->e97_codforma = ($this->e97_codforma === 0 || $this->e97_codforma === 0.0 || $this->e97_codforma == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codforma"]:$this->e97_codforma);
      }else{
-       $this->e97_codmov = ($this->e97_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codmov"]:$this->e97_codmov);
+       $this->e97_codmov = ($this->e97_codmov === 0 || $this->e97_codmov === 0.0 || $this->e97_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e97_codmov"]:$this->e97_codmov);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_empagemovforma {
        return false;
      }
        $this->e97_codmov = $e97_codmov;
-     if(($this->e97_codmov == null) || ($this->e97_codmov == "") ){
+     if(($this->e97_codmov == null) || ($this->e97_codmov === 0 || $this->e97_codmov === 0.0 || $this->e97_codmov == "") ){
        $this->erro_sql = " Campo e97_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

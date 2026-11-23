@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/transposicao/vagas-etapa",
+  "json": {
+    "error": true,
+    "message": "Call to a member function getCodigo() on null"
+  },
+  "sha256": "7cc6390c254eb44b45555e0549cfd73f02edea3895a1765480ca3dd37e7d4cb9",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -67,10 +67,10 @@ class cl_orcproduto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o22_codproduto = ($this->o22_codproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o22_codproduto"]:$this->o22_codproduto);
+       $this->o22_codproduto = ($this->o22_codproduto === 0 || $this->o22_codproduto === 0.0 || $this->o22_codproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o22_codproduto"]:$this->o22_codproduto);
        $this->o22_descrprod = ($this->o22_descrprod == ""?@$GLOBALS["HTTP_POST_VARS"]["o22_descrprod"]:$this->o22_descrprod);
      }else{
-       $this->o22_codproduto = ($this->o22_codproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o22_codproduto"]:$this->o22_codproduto);
+       $this->o22_codproduto = ($this->o22_codproduto === 0 || $this->o22_codproduto === 0.0 || $this->o22_codproduto == ""?@$GLOBALS["HTTP_POST_VARS"]["o22_codproduto"]:$this->o22_codproduto);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_orcproduto {
          $this->o22_codproduto = $o22_codproduto;
        }
      }
-     if(($this->o22_codproduto == null) || ($this->o22_codproduto == "") ){
+     if(($this->o22_codproduto == null) || ($this->o22_codproduto === 0 || $this->o22_codproduto === 0.0 || $this->o22_codproduto == "") ){
        $this->erro_sql = " Campo o22_codproduto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

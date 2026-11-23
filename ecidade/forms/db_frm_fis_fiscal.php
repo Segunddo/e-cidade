@@ -89,7 +89,7 @@ if(isset($y30_codnoti) && $y30_codnoti != "" && $db_opcao != 1){
         left join fiscalizacao.fis_vistorias on fis_vistorias.y70_codvist = fis_procfiscalvistorias.y109_codvist
         where fis_procfiscal.y100_sequencial = $procfiscal";
         $resultProcFiscal = pg_query($sqlProcFiscal);
-        $linhas = pg_num_rows($resultProcFiscal);
+        $linhas = ($resultProcFiscal ? pg_num_rows($resultProcFiscal) : null);
             if ($linhas != 0) {
                 db_fieldsmemory($resultProcFiscal, 0);
             }
@@ -512,7 +512,7 @@ db_inputdata('y30_prazorec',@$y30_prazorec_dia,@$y30_prazorec_mes,@$y30_prazorec
                             $pTipo = ((isset($intimacao) && $intimacao == 1) ? 2 : 3 );
                             $pSql  = 'select distinct pl09_paragrafo, pl09_descr from fiscalizacao.fis_paragrafo where pl09_status = true and pl09_tipo = '.$pTipo.' and pl09_coddepto = '.db_getsession('DB_coddepto');
                             $pRs   = db_query($pSql);
-                            $pRows = pg_num_rows($pRs);
+                            $pRows = ($pRs ? pg_num_rows($pRs) : null);
                             for($i=0; $i<$pRows; $i++){
                                 db_fieldsmemory($pRs, $i);
                                 echo '<option value="'.$pl09_paragrafo.'">'.$pl09_descr.'</option>';
@@ -536,7 +536,7 @@ db_inputdata('y30_prazorec',@$y30_prazorec_dia,@$y30_prazorec_mes,@$y30_prazorec
 
                     $paSql  = "select * from fiscalizacao.fis_paragrafointimacao where pl11_intimacao = $y30_codnoti";
                     $paRs   = db_query($paSql);
-                    $paRows = pg_num_rows($paRs);
+                    $paRows = ($paRs ? pg_num_rows($paRs) : null);
                     for ($i=0; $i < $paRows; $i++) {
                         db_fieldsmemory($paRs, $i);
                         if($pl11_paragrafo == 1){
@@ -815,7 +815,7 @@ if($db_opcao==1){
        if (isset($z01_numcgm)&&$z01_numcgm!=""){
         $sql_cgm = "select z01_munic from cgm where z01_numcgm = $z01_numcgm";
         $result_cgm = pg_query($sql_cgm);
-        if (pg_numrows($result_cgm)>0){
+        if (($result_cgm ? pg_numrows($result_cgm) : null)>0){
             db_fieldsmemory($result_cgm,0);
             $sql_munic = "select munic from db_config";
             $result_munic = pg_query($sql_munic);

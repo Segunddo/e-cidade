@@ -1,0 +1,25 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "escrita-jetom-funcao-listar",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "REGRESSAO FUNCAO JETOM"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "08f7281f78c2ff87f52987d72408db08dc951e91af3e11480e7124d353a8c0bc",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {
+    "pessoal.jetomfuncao": "42a814c6bcda8b189927168ac6d01b60"
+  },
+  "texto": "",
+  "tipos": {}
+}

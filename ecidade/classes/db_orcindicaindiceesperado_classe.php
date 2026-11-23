@@ -71,12 +71,12 @@ class cl_orcindicaindiceesperado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o25_sequencial = ($this->o25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_sequencial"]:$this->o25_sequencial);
-       $this->o25_orcindica = ($this->o25_orcindica == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_orcindica"]:$this->o25_orcindica);
-       $this->o25_anousu = ($this->o25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_anousu"]:$this->o25_anousu);
-       $this->o25_valor = ($this->o25_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_valor"]:$this->o25_valor);
+       $this->o25_sequencial = ($this->o25_sequencial === 0 || $this->o25_sequencial === 0.0 || $this->o25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_sequencial"]:$this->o25_sequencial);
+       $this->o25_orcindica = ($this->o25_orcindica === 0 || $this->o25_orcindica === 0.0 || $this->o25_orcindica == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_orcindica"]:$this->o25_orcindica);
+       $this->o25_anousu = ($this->o25_anousu === 0 || $this->o25_anousu === 0.0 || $this->o25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_anousu"]:$this->o25_anousu);
+       $this->o25_valor = ($this->o25_valor === 0 || $this->o25_valor === 0.0 || $this->o25_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_valor"]:$this->o25_valor);
      }else{
-       $this->o25_sequencial = ($this->o25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_sequencial"]:$this->o25_sequencial);
+       $this->o25_sequencial = ($this->o25_sequencial === 0 || $this->o25_sequencial === 0.0 || $this->o25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o25_sequencial"]:$this->o25_sequencial);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_orcindicaindiceesperado {
          $this->o25_sequencial = $o25_sequencial;
        }
      }
-     if(($this->o25_sequencial == null) || ($this->o25_sequencial == "") ){
+     if(($this->o25_sequencial == null) || ($this->o25_sequencial === 0 || $this->o25_sequencial === 0.0 || $this->o25_sequencial == "") ){
        $this->erro_sql = " Campo o25_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

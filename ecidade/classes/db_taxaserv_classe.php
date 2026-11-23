@@ -80,12 +80,12 @@ class cl_taxaserv {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm11_i_codigo = ($this->cm11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_codigo"]:$this->cm11_i_codigo);
+       $this->cm11_i_codigo = ($this->cm11_i_codigo === 0 || $this->cm11_i_codigo === 0.0 || $this->cm11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_codigo"]:$this->cm11_i_codigo);
        $this->cm11_c_descr = ($this->cm11_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_c_descr"]:$this->cm11_c_descr);
-       $this->cm11_i_receita = ($this->cm11_i_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_receita"]:$this->cm11_i_receita);
-       $this->cm11_i_proced = ($this->cm11_i_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_proced"]:$this->cm11_i_proced);
-       $this->cm11_i_historico = ($this->cm11_i_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_historico"]:$this->cm11_i_historico);
-       $this->cm11_i_tipo = ($this->cm11_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_tipo"]:$this->cm11_i_tipo);
+       $this->cm11_i_receita = ($this->cm11_i_receita === 0 || $this->cm11_i_receita === 0.0 || $this->cm11_i_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_receita"]:$this->cm11_i_receita);
+       $this->cm11_i_proced = ($this->cm11_i_proced === 0 || $this->cm11_i_proced === 0.0 || $this->cm11_i_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_proced"]:$this->cm11_i_proced);
+       $this->cm11_i_historico = ($this->cm11_i_historico === 0 || $this->cm11_i_historico === 0.0 || $this->cm11_i_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_historico"]:$this->cm11_i_historico);
+       $this->cm11_i_tipo = ($this->cm11_i_tipo === 0 || $this->cm11_i_tipo === 0.0 || $this->cm11_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_tipo"]:$this->cm11_i_tipo);
        if($this->cm11_d_datalimite == ""){
          $this->cm11_d_datalimite_dia = ($this->cm11_d_datalimite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_d_datalimite_dia"]:$this->cm11_d_datalimite_dia);
          $this->cm11_d_datalimite_mes = ($this->cm11_d_datalimite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_d_datalimite_mes"]:$this->cm11_d_datalimite_mes);
@@ -95,7 +95,7 @@ class cl_taxaserv {
          }
        }
      }else{
-       $this->cm11_i_codigo = ($this->cm11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_codigo"]:$this->cm11_i_codigo);
+       $this->cm11_i_codigo = ($this->cm11_i_codigo === 0 || $this->cm11_i_codigo === 0.0 || $this->cm11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm11_i_codigo"]:$this->cm11_i_codigo);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_taxaserv {
          $this->cm11_i_codigo = $cm11_i_codigo;
        }
      }
-     if(($this->cm11_i_codigo == null) || ($this->cm11_i_codigo == "") ){
+     if(($this->cm11_i_codigo == null) || ($this->cm11_i_codigo === 0 || $this->cm11_i_codigo === 0.0 || $this->cm11_i_codigo == "") ){
        $this->erro_sql = " Campo cm11_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

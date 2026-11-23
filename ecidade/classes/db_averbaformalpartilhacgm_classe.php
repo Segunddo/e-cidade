@@ -69,11 +69,11 @@ class cl_averbaformalpartilhacgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j102_sequencial = ($this->j102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_sequencial"]:$this->j102_sequencial);
-       $this->j102_numcgm = ($this->j102_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_numcgm"]:$this->j102_numcgm);
-       $this->j102_averbaformalpartilha = ($this->j102_averbaformalpartilha == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_averbaformalpartilha"]:$this->j102_averbaformalpartilha);
+       $this->j102_sequencial = ($this->j102_sequencial === 0 || $this->j102_sequencial === 0.0 || $this->j102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_sequencial"]:$this->j102_sequencial);
+       $this->j102_numcgm = ($this->j102_numcgm === 0 || $this->j102_numcgm === 0.0 || $this->j102_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_numcgm"]:$this->j102_numcgm);
+       $this->j102_averbaformalpartilha = ($this->j102_averbaformalpartilha === 0 || $this->j102_averbaformalpartilha === 0.0 || $this->j102_averbaformalpartilha == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_averbaformalpartilha"]:$this->j102_averbaformalpartilha);
      }else{
-       $this->j102_sequencial = ($this->j102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_sequencial"]:$this->j102_sequencial);
+       $this->j102_sequencial = ($this->j102_sequencial === 0 || $this->j102_sequencial === 0.0 || $this->j102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j102_sequencial"]:$this->j102_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_averbaformalpartilhacgm {
          $this->j102_sequencial = $j102_sequencial;
        }
      }
-     if(($this->j102_sequencial == null) || ($this->j102_sequencial == "") ){
+     if(($this->j102_sequencial == null) || ($this->j102_sequencial === 0 || $this->j102_sequencial === 0.0 || $this->j102_sequencial == "") ){
        $this->erro_sql = " Campo j102_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

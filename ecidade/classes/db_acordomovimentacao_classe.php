@@ -80,10 +80,10 @@ class cl_acordomovimentacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac10_sequencial = ($this->ac10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_sequencial"]:$this->ac10_sequencial);
-       $this->ac10_acordomovimentacaotipo = ($this->ac10_acordomovimentacaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_acordomovimentacaotipo"]:$this->ac10_acordomovimentacaotipo);
-       $this->ac10_acordo = ($this->ac10_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_acordo"]:$this->ac10_acordo);
-       $this->ac10_id_usuario = ($this->ac10_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_id_usuario"]:$this->ac10_id_usuario);
+       $this->ac10_sequencial = ($this->ac10_sequencial === 0 || $this->ac10_sequencial === 0.0 || $this->ac10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_sequencial"]:$this->ac10_sequencial);
+       $this->ac10_acordomovimentacaotipo = ($this->ac10_acordomovimentacaotipo === 0 || $this->ac10_acordomovimentacaotipo === 0.0 || $this->ac10_acordomovimentacaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_acordomovimentacaotipo"]:$this->ac10_acordomovimentacaotipo);
+       $this->ac10_acordo = ($this->ac10_acordo === 0 || $this->ac10_acordo === 0.0 || $this->ac10_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_acordo"]:$this->ac10_acordo);
+       $this->ac10_id_usuario = ($this->ac10_id_usuario === 0 || $this->ac10_id_usuario === 0.0 || $this->ac10_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_id_usuario"]:$this->ac10_id_usuario);
        if($this->ac10_datamovimento == ""){
          $this->ac10_datamovimento_dia = ($this->ac10_datamovimento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_datamovimento_dia"]:$this->ac10_datamovimento_dia);
          $this->ac10_datamovimento_mes = ($this->ac10_datamovimento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_datamovimento_mes"]:$this->ac10_datamovimento_mes);
@@ -95,7 +95,7 @@ class cl_acordomovimentacao {
        $this->ac10_hora = ($this->ac10_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_hora"]:$this->ac10_hora);
        $this->ac10_obs = ($this->ac10_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_obs"]:$this->ac10_obs);
      }else{
-       $this->ac10_sequencial = ($this->ac10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_sequencial"]:$this->ac10_sequencial);
+       $this->ac10_sequencial = ($this->ac10_sequencial === 0 || $this->ac10_sequencial === 0.0 || $this->ac10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac10_sequencial"]:$this->ac10_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_acordomovimentacao {
          $this->ac10_sequencial = $ac10_sequencial;
        }
      }
-     if(($this->ac10_sequencial == null) || ($this->ac10_sequencial == "") ){
+     if(($this->ac10_sequencial == null) || ($this->ac10_sequencial === 0 || $this->ac10_sequencial === 0.0 || $this->ac10_sequencial == "") ){
        $this->erro_sql = " Campo ac10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

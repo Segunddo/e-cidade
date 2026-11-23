@@ -69,12 +69,12 @@ class cl_aguaconsumorec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x20_codconsumotipo = ($this->x20_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumotipo"]:$this->x20_codconsumotipo);
-       $this->x20_codconsumo = ($this->x20_codconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumo"]:$this->x20_codconsumo);
-       $this->x20_valor = ($this->x20_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_valor"]:$this->x20_valor);
+       $this->x20_codconsumotipo = ($this->x20_codconsumotipo === 0 || $this->x20_codconsumotipo === 0.0 || $this->x20_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumotipo"]:$this->x20_codconsumotipo);
+       $this->x20_codconsumo = ($this->x20_codconsumo === 0 || $this->x20_codconsumo === 0.0 || $this->x20_codconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumo"]:$this->x20_codconsumo);
+       $this->x20_valor = ($this->x20_valor === 0 || $this->x20_valor === 0.0 || $this->x20_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_valor"]:$this->x20_valor);
      }else{
-       $this->x20_codconsumotipo = ($this->x20_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumotipo"]:$this->x20_codconsumotipo);
-       $this->x20_codconsumo = ($this->x20_codconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumo"]:$this->x20_codconsumo);
+       $this->x20_codconsumotipo = ($this->x20_codconsumotipo === 0 || $this->x20_codconsumotipo === 0.0 || $this->x20_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumotipo"]:$this->x20_codconsumotipo);
+       $this->x20_codconsumo = ($this->x20_codconsumo === 0 || $this->x20_codconsumo === 0.0 || $this->x20_codconsumo == ""?@$GLOBALS["HTTP_POST_VARS"]["x20_codconsumo"]:$this->x20_codconsumo);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_aguaconsumorec {
      }
        $this->x20_codconsumo = $x20_codconsumo;
        $this->x20_codconsumotipo = $x20_codconsumotipo;
-     if(($this->x20_codconsumo == null) || ($this->x20_codconsumo == "") ){
+     if(($this->x20_codconsumo == null) || ($this->x20_codconsumo === 0 || $this->x20_codconsumo === 0.0 || $this->x20_codconsumo == "") ){
        $this->erro_sql = " Campo x20_codconsumo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_aguaconsumorec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x20_codconsumotipo == null) || ($this->x20_codconsumotipo == "") ){
+     if(($this->x20_codconsumotipo == null) || ($this->x20_codconsumotipo === 0 || $this->x20_codconsumotipo === 0.0 || $this->x20_codconsumotipo == "") ){
        $this->erro_sql = " Campo x20_codconsumotipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

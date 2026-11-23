@@ -83,18 +83,18 @@ class cl_iptuender {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j43_matric = ($this->j43_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_matric"]:$this->j43_matric);
+       $this->j43_matric = ($this->j43_matric === 0 || $this->j43_matric === 0.0 || $this->j43_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_matric"]:$this->j43_matric);
        $this->j43_dest = ($this->j43_dest == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_dest"]:$this->j43_dest);
        $this->j43_ender = ($this->j43_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_ender"]:$this->j43_ender);
-       $this->j43_numimo = ($this->j43_numimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_numimo"]:$this->j43_numimo);
+       $this->j43_numimo = ($this->j43_numimo === 0 || $this->j43_numimo === 0.0 || $this->j43_numimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_numimo"]:$this->j43_numimo);
        $this->j43_comple = ($this->j43_comple == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_comple"]:$this->j43_comple);
        $this->j43_bairro = ($this->j43_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_bairro"]:$this->j43_bairro);
        $this->j43_munic = ($this->j43_munic == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_munic"]:$this->j43_munic);
        $this->j43_uf = ($this->j43_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_uf"]:$this->j43_uf);
        $this->j43_cep = ($this->j43_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_cep"]:$this->j43_cep);
-       $this->j43_cxpost = ($this->j43_cxpost == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_cxpost"]:$this->j43_cxpost);
+       $this->j43_cxpost = ($this->j43_cxpost === 0 || $this->j43_cxpost === 0.0 || $this->j43_cxpost == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_cxpost"]:$this->j43_cxpost);
      }else{
-       $this->j43_matric = ($this->j43_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_matric"]:$this->j43_matric);
+       $this->j43_matric = ($this->j43_matric === 0 || $this->j43_matric === 0.0 || $this->j43_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j43_matric"]:$this->j43_matric);
      }
    }
    // funcao para Inclusão
@@ -103,7 +103,7 @@ class cl_iptuender {
     $this->atualizacampos();
 
      $this->j43_matric = $j43_matric;
-     if(($this->j43_matric == null) || ($this->j43_matric == "") ){
+     if(($this->j43_matric == null) || ($this->j43_matric === 0 || $this->j43_matric === 0.0 || $this->j43_matric == "") ){
        $this->erro_sql = " Campo Matricula é de preenchimento obrigatório!";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

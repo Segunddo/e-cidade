@@ -73,13 +73,13 @@ class cl_orccenarioeconomicoconplanoorcamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o04_sequencial = ($this->o04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_sequencial"]:$this->o04_sequencial);
-       $this->o04_orccenarioeconomicoparam = ($this->o04_orccenarioeconomicoparam == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_orccenarioeconomicoparam"]:$this->o04_orccenarioeconomicoparam);
-       $this->o04_conplano = ($this->o04_conplano == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_conplano"]:$this->o04_conplano);
-       $this->o04_anousu = ($this->o04_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_anousu"]:$this->o04_anousu);
-       $this->o04_tipocalculo = ($this->o04_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_tipocalculo"]:$this->o04_tipocalculo);
+       $this->o04_sequencial = ($this->o04_sequencial === 0 || $this->o04_sequencial === 0.0 || $this->o04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_sequencial"]:$this->o04_sequencial);
+       $this->o04_orccenarioeconomicoparam = ($this->o04_orccenarioeconomicoparam === 0 || $this->o04_orccenarioeconomicoparam === 0.0 || $this->o04_orccenarioeconomicoparam == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_orccenarioeconomicoparam"]:$this->o04_orccenarioeconomicoparam);
+       $this->o04_conplano = ($this->o04_conplano === 0 || $this->o04_conplano === 0.0 || $this->o04_conplano == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_conplano"]:$this->o04_conplano);
+       $this->o04_anousu = ($this->o04_anousu === 0 || $this->o04_anousu === 0.0 || $this->o04_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_anousu"]:$this->o04_anousu);
+       $this->o04_tipocalculo = ($this->o04_tipocalculo === 0 || $this->o04_tipocalculo === 0.0 || $this->o04_tipocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_tipocalculo"]:$this->o04_tipocalculo);
      }else{
-       $this->o04_sequencial = ($this->o04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_sequencial"]:$this->o04_sequencial);
+       $this->o04_sequencial = ($this->o04_sequencial === 0 || $this->o04_sequencial === 0.0 || $this->o04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o04_sequencial"]:$this->o04_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_orccenarioeconomicoconplanoorcamento {
          $this->o04_sequencial = $o04_sequencial;
        }
      }
-     if(($this->o04_sequencial == null) || ($this->o04_sequencial == "") ){
+     if(($this->o04_sequencial == null) || ($this->o04_sequencial === 0 || $this->o04_sequencial === 0.0 || $this->o04_sequencial == "") ){
        $this->erro_sql = " Campo o04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

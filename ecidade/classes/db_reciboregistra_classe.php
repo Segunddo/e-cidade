@@ -67,8 +67,8 @@ class cl_reciboregistra {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k146_numpre = ($this->k146_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k146_numpre"]:$this->k146_numpre);
-       $this->k146_convenio = ($this->k146_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k146_convenio"]:$this->k146_convenio);
+       $this->k146_numpre = ($this->k146_numpre === 0 || $this->k146_numpre === 0.0 || $this->k146_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k146_numpre"]:$this->k146_numpre);
+       $this->k146_convenio = ($this->k146_convenio === 0 || $this->k146_convenio === 0.0 || $this->k146_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k146_convenio"]:$this->k146_convenio);
      }else{
      }
    }

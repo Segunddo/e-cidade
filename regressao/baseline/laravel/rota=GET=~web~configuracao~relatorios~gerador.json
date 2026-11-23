@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/configuracao/relatorios/gerador",
+  "json": null,
+  "sha256": "f9b00f05cbf5d96ab2db6d1759695d9ee200be8662a7a5fdbc4295aa1cd155eb",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

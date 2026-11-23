@@ -58,7 +58,7 @@ $dataatual = date("Y-m-d",db_getsession("DB_datausu"));
            where corrente.k12_instit = ".db_getsession("DB_instit")." and
                  corrente.k12_data  = '".$datai."' limit 1";
   $res = db_query($sql);
-  if(pg_num_rows($res)==0){
+  if(($res ? pg_num_rows($res) : null)==0){
     db_redireciona("db_erros.php?fechar=true&db_erro=Não existem laçamentos nesta data (".db_formatar($datai,'d').")");
     exit;
   }
@@ -373,7 +373,7 @@ $pdf->AliasNbPages();
 $pdf->AddPage();
 
 //RECEITAS RECEBIDAS NO CAIXA
-$numlin = pg_num_rows($resultorcamentaria);
+$numlin = ($resultorcamentaria ? pg_num_rows($resultorcamentaria) : null);
 $cai_rec_orc = 0;
 $cai_rec_ext = 0;
 for ($i = 0; $i < $numlin; $i ++) {
@@ -389,7 +389,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 }
 
 //RECEITAS EXTRAS RECEBIDAS NO CAIXA
-$numlin = pg_num_rows($resultextraorcamentaria);
+$numlin = ($resultextraorcamentaria ? pg_num_rows($resultextraorcamentaria) : null);
 for ($i = 0; $i < $numlin; $i ++) {
   db_fieldsmemory($resultextraorcamentaria, $i);
 	if ($sis_debito == 5) {
@@ -399,7 +399,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 
 //DESPESAS ORÇAMENTARIAS PAGAS NO CAIXA
 //db_criatabela($resultdespesaorca);
-$numlin = pg_num_rows($resultdespesaorca);
+$numlin = ($resultdespesaorca ? pg_num_rows($resultdespesaorca) : null);
 $cai_desp_orca = 0;
 $cai_ret_bco_orca = 0;
 $cai_dep_bco_orca = 0;
@@ -411,7 +411,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 }
 
 //DESPESAS EXTRA-ORÇAMENTARIAS PAGAS NO CAIXA
-$numlin = pg_num_rows($resultdespesaextra);
+$numlin = ($resultdespesaextra ? pg_num_rows($resultdespesaextra) : null);
 $cai_desp_ext = 0;
 $cai_ret_bco = 0;
 $cai_dep_bco = 0;
@@ -439,7 +439,7 @@ $caixa_saldo_anterior = 0;
 $caixa_debitado = 0;
 $caixa_creditado = 0;
 $caixa_saldo_atual = 0;
-for ($i = 0; $i < pg_num_rows($resultcontasmovimento); $i ++) {
+for ($i = 0; $i < ($resultcontasmovimento ? pg_num_rows($resultcontasmovimento) : null); $i ++) {
 	db_fieldsmemory($resultcontasmovimento, $i);
 	if ($c60_codsis == 5) {
 		$caixa_saldo_anterior += $anterior;
@@ -502,7 +502,7 @@ $caixa_saldo_anterior = 0;
 $caixa_debitado = 0;
 $caixa_creditado = 0;
 $caixa_saldo_atual = 0;
-for ($i = 0; $i < pg_num_rows($resultcontasmovimento); $i ++) {
+for ($i = 0; $i < ($resultcontasmovimento ? pg_num_rows($resultcontasmovimento) : null); $i ++) {
 	db_fieldsmemory($resultcontasmovimento, $i);
 	if ($c60_codsis == 5) {
 		$caixa_saldo_anterior += $anterior;
@@ -533,7 +533,7 @@ $saldoc_creditado = 0;
 $saldoc_atual = 0;
 $pdf->SetTextColor(0);
 $pdf->SetFont('Arial', '', 8);
-for ($i = 0; $i < pg_num_rows($resultcontasmovimento); $i ++) {
+for ($i = 0; $i < ($resultcontasmovimento ? pg_num_rows($resultcontasmovimento) : null); $i ++) {
 	db_fieldsmemory($resultcontasmovimento, $i);
 	if ($pdf->gety() > ($pdf->h - 30)) {
 		$pdf->addpage();
@@ -579,7 +579,7 @@ if ($imprime_interferencia == 'S') {
 	$inter_debitado = 0;
 	$inter_creditado = 0;
 	$inter_saldo_atual = 0;
-	for ($i = 0; $i < pg_num_rows($resultcontasmovimento); $i ++) {
+	for ($i = 0; $i < ($resultcontasmovimento ? pg_num_rows($resultcontasmovimento) : null); $i ++) {
 		db_fieldsmemory($resultcontasmovimento, $i);
 		if ($c60_codsis == 8) {
 			$inter_saldo_anterior += $anterior;
@@ -608,7 +608,7 @@ if ($imprime_interferencia == 'S') {
 	$saldoi_atual = 0;
 	$pdf->SetTextColor(0);
 	$pdf->SetFont('Arial', '', 8);
-	for ($i = 0; $i < pg_num_rows($resultcontasmovimento); $i ++) {
+	for ($i = 0; $i < ($resultcontasmovimento ? pg_num_rows($resultcontasmovimento) : null); $i ++) {
 		db_fieldsmemory($resultcontasmovimento, $i);
 		if ($contassemmov == "f" and $debitado == 0 and $creditado == 0 and $anterior==0 and $atual==0) {
 			continue;
@@ -670,7 +670,7 @@ $saldo_creditado = 0;
 $saldo_atual = 0;
 $pdf->SetTextColor(0);
 $pdf->SetFont('Arial', '', 8);
-for ($i = 0; $i < pg_num_rows($resultcontasmovimento); $i ++) {
+for ($i = 0; $i < ($resultcontasmovimento ? pg_num_rows($resultcontasmovimento) : null); $i ++) {
 	db_fieldsmemory($resultcontasmovimento, $i);
 	if ($contassemmov == "f" and $debitado == 0 and $creditado == 0 and $anterior==0 and $atual ==0) {
 		continue;
@@ -813,7 +813,7 @@ $pdf->SetFont('Arial', '', 6);
 
 // TRANSFERENCIAS
 
-$numlin = pg_num_rows($resultdespesaextra);
+$numlin = ($resultdespesaextra ? pg_num_rows($resultdespesaextra) : null);
 $total_valor = 0;
 $total_estorno = 0;
 $total_banco = 0;
@@ -845,7 +845,7 @@ for ($i = 0; $i < $numlin; $i ++) {
        --  and (k13_limite is null or k13_limite >= '$dataatual' )";
   $result = db_query($sql);
 
-	if ($result == false || pg_num_rows($result) != 2)
+	if ($result == false || ($result ? pg_num_rows($result) : null) != 2)
 		continue;
 
 	if ($quebra != $corrente) {
@@ -870,7 +870,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 		$pdf->cell(20, $alt, db_formatar($total_banco, 'f'), 1, 1, "R", 0);
 		$total_banco = 0;
 	}
-	elseif ($quebra != pg_fetch_result($resultdespesaextra, $i +1, "corrente")) {
+	elseif ($quebra != ($resultdespesaextra ? pg_fetch_result($resultdespesaextra, $i +1, "corrente") : null)) {
 
 		$pdf->cell(20, $alt, db_formatar($total_banco, 'f'), 1, 1, "R", 0);
 		$total_banco = 0;
@@ -1039,7 +1039,7 @@ order by k02_tipo,k12_conta,c60_descr,k12_receit;
 
 $resultreceitas = db_query($sql);
 
-$numlin = pg_num_rows($resultreceitas);
+$numlin = ($resultreceitas ? pg_num_rows($resultreceitas) : null);
 $total_valor = 0;
 $total_estorno = 0;
 $quebra = 0;
@@ -1073,7 +1073,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 			$pdf->cell(20, $alt, db_formatar($total_banco, 'f'), 1, 1, "R", 0);
 			$total_banco = 0;
 		}
-		elseif ($quebra != pg_fetch_result($resultreceitas, $i +1, "k12_conta")) {
+		elseif ($quebra != ($resultreceitas ? pg_fetch_result($resultreceitas, $i +1, "k12_conta") : null)) {
 			$pdf->cell(20, $alt, db_formatar($total_banco, 'f'), 1, 1, "R", 0);
 			$total_banco = 0;
 		} else {
@@ -1117,7 +1117,7 @@ $saldo_atual = 0;
 $pdf->SetTextColor(0);
 $pdf->SetFont('Arial', 'b', 6);
 
-$numlin = pg_num_rows($resultreceitas);
+$numlin = ($resultreceitas ? pg_num_rows($resultreceitas) : null);
 $total_valor = 0;
 $total_estorno = 0;
 $quebra = 0;
@@ -1157,7 +1157,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 			$pdf->cell(20, $alt, db_formatar($total_banco, 'f'), 1, 1, "R", 0);
 			$total_banco = 0;
 		}
-		elseif ($quebra != pg_fetch_result($resultreceitas, $i +1, "k12_conta")) {
+		elseif ($quebra != ($resultreceitas ? pg_fetch_result($resultreceitas, $i +1, "k12_conta") : null)) {
 			$pdf->cell(20, $alt, db_formatar($total_banco, 'f'), 1, 1, "R", 0);
 			$total_banco = 0;
 		} else {
@@ -1242,7 +1242,7 @@ $pdf->cell(20, $alt, 'TOTAL', 1, 0, 'C', 0);
 $pdf->cell(20, $alt, 'TOTAL CONTA', 1, 1, 'C', 0);
 $pdf->SetTextColor(0);
 $pdf->SetFont('Arial', '', 6);
-$numlin = pg_num_rows($resultdespesaorca);
+$numlin = ($resultdespesaorca ? pg_num_rows($resultdespesaorca) : null);
 $total_valor = 0;
 $total_estorno = 0;
 $total_banco = 0;
@@ -1274,7 +1274,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 		$pdf->cell(20, $alt, db_formatar($total_banco, 'f'), 1, 1, "R", 0);
 		$total_banco = 0;
 	}
-	elseif ($quebra != pg_fetch_result($resultdespesaorca, $i +1, "k12_conta")) {
+	elseif ($quebra != ($resultdespesaorca ? pg_fetch_result($resultdespesaorca, $i +1, "k12_conta") : null)) {
 		$pdf->cell(20, $alt, db_formatar($total_banco, 'f'), 1, 1, "R", 0);
 		$total_banco = 0;
 	} else {
@@ -1316,7 +1316,7 @@ $pdf->SetFont('Arial', '', 6);
 //echo 'Despesa Extra-Orçamentaria';
 //db_criatabela($resultdespesaextra);
 
-$numlin = pg_num_rows($resultdespesaextra);
+$numlin = ($resultdespesaextra ? pg_num_rows($resultdespesaextra) : null);
 $total_valor = 0;
 $total_estorno = 0;
 $total_banco = 0;
@@ -1369,7 +1369,7 @@ for ($i = 0; $i < $numlin; $i ++) {
 		$pdf->cell(20, $alt, db_formatar($total_banco, 'f'), 1, 1, "R", 0);
 		$total_banco = 0;
 	}
-	elseif ($quebra != pg_fetch_result($resultdespesaextra, $i +1, "corrente")) {
+	elseif ($quebra != ($resultdespesaextra ? pg_fetch_result($resultdespesaextra, $i +1, "corrente") : null)) {
 		$pdf->cell(20, $alt, db_formatar($total_banco, 'f'), 1, 1, "R", 0);
 		$total_banco = 0;
 	} else {

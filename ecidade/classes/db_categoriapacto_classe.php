@@ -69,11 +69,11 @@ class cl_categoriapacto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o31_sequencial = ($this->o31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o31_sequencial"]:$this->o31_sequencial);
-       $this->o31_tipopacto = ($this->o31_tipopacto == ""?@$GLOBALS["HTTP_POST_VARS"]["o31_tipopacto"]:$this->o31_tipopacto);
+       $this->o31_sequencial = ($this->o31_sequencial === 0 || $this->o31_sequencial === 0.0 || $this->o31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o31_sequencial"]:$this->o31_sequencial);
+       $this->o31_tipopacto = ($this->o31_tipopacto === 0 || $this->o31_tipopacto === 0.0 || $this->o31_tipopacto == ""?@$GLOBALS["HTTP_POST_VARS"]["o31_tipopacto"]:$this->o31_tipopacto);
        $this->o31_descricao = ($this->o31_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o31_descricao"]:$this->o31_descricao);
      }else{
-       $this->o31_sequencial = ($this->o31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o31_sequencial"]:$this->o31_sequencial);
+       $this->o31_sequencial = ($this->o31_sequencial === 0 || $this->o31_sequencial === 0.0 || $this->o31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o31_sequencial"]:$this->o31_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_categoriapacto {
          $this->o31_sequencial = $o31_sequencial;
        }
      }
-     if(($this->o31_sequencial == null) || ($this->o31_sequencial == "") ){
+     if(($this->o31_sequencial == null) || ($this->o31_sequencial === 0 || $this->o31_sequencial === 0.0 || $this->o31_sequencial == "") ){
        $this->erro_sql = " Campo o31_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

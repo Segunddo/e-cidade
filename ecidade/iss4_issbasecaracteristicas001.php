@@ -122,7 +122,7 @@ foreach ($aCaracteristicas as $oCaracteristicas) {
 	 
 }
 
-$oGrupo->aCaracteristicas = array();
+if (!isset($oGrupo) || $oGrupo === false || $oGrupo === '') { $oGrupo = new stdClass(); } $oGrupo->aCaracteristicas = array();
 	
 foreach ($aCaracteristicas as $oCaracteristicas) {
 		

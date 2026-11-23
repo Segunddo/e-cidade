@@ -74,7 +74,7 @@ $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config wher
 $descr_inst = '';
 $xvirg = '';
 $flag_abrev = false;
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
   db_fieldsmemory($resultinst,$xins);
   if (strlen(trim($nomeinstabrev)) > 0){
        $descr_inst .= $xvirg.$nomeinstabrev;
@@ -215,7 +215,7 @@ $totunidareser = 0;
 
 $pagina        = 1;
 $dotini = 0;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
 
   db_fieldsmemory($result,$i);
   $dotini = $dot_ini;
@@ -562,7 +562,7 @@ for($i=0;$i<pg_numrows($result);$i++){
 */
       $res = db_query($sql);
 //      db_criatabela($res);
-      for($ne=0;$ne<pg_numrows($res);$ne++){
+      for($ne=0;$ne<($res ? pg_numrows($res) : null);$ne++){
 	db_fieldsmemory($res,$ne);
         $pdf->cell(20,4,$o56_elemento,0,0,"L",0);
         $pdf->cell(60,4,substr($o56_descr,0,37),0,0,"L",0);
@@ -677,7 +677,7 @@ $totunidareser  = 0;
 $totunidaatual  = 0;
 $pagina = 1;
 
-for($k=0;$k<pg_numrows($result);$k++){
+for($k=0;$k<($result ? pg_numrows($result) : null);$k++){
 
   db_fieldsmemory($result,$k);
   $dotini = $dot_ini;

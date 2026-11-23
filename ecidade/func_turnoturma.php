@@ -35,7 +35,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_turno_classe.php"));
 include(modification("classes/db_cursoturno_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clturno = new cl_turno;
 $clcursoturno = new cl_cursoturno;
 $clturno->rotulo->label("ed15_i_codigo");

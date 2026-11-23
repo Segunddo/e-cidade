@@ -39,7 +39,7 @@ include(modification("classes/db_vistinscr_classe.php"));
 include(modification("classes/db_vistsanitario_classe.php"));
 include(modification("classes/db_procfiscalvistorias_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(!isset($abas)){
   echo "<script>location.href='fis1_vistorias005.php?db_opcao=2&inscr=1'</script>";
   exit;

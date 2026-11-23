@@ -1,0 +1,36 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/documento",
+  "json": {
+    "errors": {
+      "assunto": [
+        "O campo assunto é obrigatório."
+      ],
+      "departamento_transferencia": [
+        "O campo departamento transferencia é obrigatório."
+      ],
+      "instituicao_transferencia": [
+        "O campo instituicao transferencia é obrigatório."
+      ],
+      "observacao": [
+        "O campo observacao é obrigatório."
+      ],
+      "requerente": [
+        "O campo requerente é obrigatório."
+      ],
+      "titular": [
+        "O campo titular é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "431287ed43ca029baab1f2beb7fb01e222c4c0bc3bcc2ecd21f362fcba5ecd1a",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

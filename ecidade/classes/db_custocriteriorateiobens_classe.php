@@ -71,12 +71,12 @@ class cl_custocriteriorateiobens {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc06_sequencial = ($this->cc06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_sequencial"]:$this->cc06_sequencial);
-       $this->cc06_custoplanoanaliticabens = ($this->cc06_custoplanoanaliticabens == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_custoplanoanaliticabens"]:$this->cc06_custoplanoanaliticabens);
-       $this->cc06_custocriteriorateio = ($this->cc06_custocriteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_custocriteriorateio"]:$this->cc06_custocriteriorateio);
+       $this->cc06_sequencial = ($this->cc06_sequencial === 0 || $this->cc06_sequencial === 0.0 || $this->cc06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_sequencial"]:$this->cc06_sequencial);
+       $this->cc06_custoplanoanaliticabens = ($this->cc06_custoplanoanaliticabens === 0 || $this->cc06_custoplanoanaliticabens === 0.0 || $this->cc06_custoplanoanaliticabens == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_custoplanoanaliticabens"]:$this->cc06_custoplanoanaliticabens);
+       $this->cc06_custocriteriorateio = ($this->cc06_custocriteriorateio === 0 || $this->cc06_custocriteriorateio === 0.0 || $this->cc06_custocriteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_custocriteriorateio"]:$this->cc06_custocriteriorateio);
        $this->cc06_ativo = ($this->cc06_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["cc06_ativo"]:$this->cc06_ativo);
      }else{
-       $this->cc06_sequencial = ($this->cc06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_sequencial"]:$this->cc06_sequencial);
+       $this->cc06_sequencial = ($this->cc06_sequencial === 0 || $this->cc06_sequencial === 0.0 || $this->cc06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc06_sequencial"]:$this->cc06_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_custocriteriorateiobens {
          $this->cc06_sequencial = $cc06_sequencial;
        }
      }
-     if(($this->cc06_sequencial == null) || ($this->cc06_sequencial == "") ){
+     if(($this->cc06_sequencial == null) || ($this->cc06_sequencial === 0 || $this->cc06_sequencial === 0.0 || $this->cc06_sequencial == "") ){
        $this->erro_sql = " Campo cc06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

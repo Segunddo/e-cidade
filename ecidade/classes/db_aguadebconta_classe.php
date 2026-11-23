@@ -67,10 +67,10 @@ class cl_aguadebconta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x05_matric = ($this->x05_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x05_matric"]:$this->x05_matric);
-       $this->x05_conta = ($this->x05_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["x05_conta"]:$this->x05_conta);
+       $this->x05_matric = ($this->x05_matric === 0 || $this->x05_matric === 0.0 || $this->x05_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x05_matric"]:$this->x05_matric);
+       $this->x05_conta = ($this->x05_conta === 0 || $this->x05_conta === 0.0 || $this->x05_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["x05_conta"]:$this->x05_conta);
      }else{
-       $this->x05_matric = ($this->x05_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x05_matric"]:$this->x05_matric);
+       $this->x05_matric = ($this->x05_matric === 0 || $this->x05_matric === 0.0 || $this->x05_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x05_matric"]:$this->x05_matric);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_aguadebconta {
        return false;
      }
        $this->x05_matric = $x05_matric; 
-     if(($this->x05_matric == null) || ($this->x05_matric == "") ){ 
+     if(($this->x05_matric == null) || ($this->x05_matric === 0 || $this->x05_matric === 0.0 || $this->x05_matric == "") ){ 
        $this->erro_sql = " Campo x05_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -54,7 +54,7 @@ $sqlDadosContaDatas = " select k68_sequencial as k68_sequencial,
 
 $rsDadosContaDatas   = db_query($sqlDadosContaDatas);
 
-if (pg_num_rows($rsDadosContaDatas) == 0){
+if (($rsDadosContaDatas ? pg_num_rows($rsDadosContaDatas) : null) == 0){
 
 $sqlDadosContaDatas = " select k68_sequencial as k68_sequencial,
                                                  k68_data

@@ -67,11 +67,11 @@ class cl_orcimpactomovpai {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o86_codimpmovpai = ($this->o86_codimpmovpai == ""?@$GLOBALS["HTTP_POST_VARS"]["o86_codimpmovpai"]:$this->o86_codimpmovpai);
-       $this->o86_codimpmovfilho = ($this->o86_codimpmovfilho == ""?@$GLOBALS["HTTP_POST_VARS"]["o86_codimpmovfilho"]:$this->o86_codimpmovfilho);
+       $this->o86_codimpmovpai = ($this->o86_codimpmovpai === 0 || $this->o86_codimpmovpai === 0.0 || $this->o86_codimpmovpai == ""?@$GLOBALS["HTTP_POST_VARS"]["o86_codimpmovpai"]:$this->o86_codimpmovpai);
+       $this->o86_codimpmovfilho = ($this->o86_codimpmovfilho === 0 || $this->o86_codimpmovfilho === 0.0 || $this->o86_codimpmovfilho == ""?@$GLOBALS["HTTP_POST_VARS"]["o86_codimpmovfilho"]:$this->o86_codimpmovfilho);
      }else{
-       $this->o86_codimpmovpai = ($this->o86_codimpmovpai == ""?@$GLOBALS["HTTP_POST_VARS"]["o86_codimpmovpai"]:$this->o86_codimpmovpai);
-       $this->o86_codimpmovfilho = ($this->o86_codimpmovfilho == ""?@$GLOBALS["HTTP_POST_VARS"]["o86_codimpmovfilho"]:$this->o86_codimpmovfilho);
+       $this->o86_codimpmovpai = ($this->o86_codimpmovpai === 0 || $this->o86_codimpmovpai === 0.0 || $this->o86_codimpmovpai == ""?@$GLOBALS["HTTP_POST_VARS"]["o86_codimpmovpai"]:$this->o86_codimpmovpai);
+       $this->o86_codimpmovfilho = ($this->o86_codimpmovfilho === 0 || $this->o86_codimpmovfilho === 0.0 || $this->o86_codimpmovfilho == ""?@$GLOBALS["HTTP_POST_VARS"]["o86_codimpmovfilho"]:$this->o86_codimpmovfilho);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_orcimpactomovpai {
       $this->atualizacampos();
        $this->o86_codimpmovpai = $o86_codimpmovpai;
        $this->o86_codimpmovfilho = $o86_codimpmovfilho;
-     if(($this->o86_codimpmovpai == null) || ($this->o86_codimpmovpai == "") ){
+     if(($this->o86_codimpmovpai == null) || ($this->o86_codimpmovpai === 0 || $this->o86_codimpmovpai === 0.0 || $this->o86_codimpmovpai == "") ){
        $this->erro_sql = " Campo o86_codimpmovpai nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_orcimpactomovpai {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o86_codimpmovfilho == null) || ($this->o86_codimpmovfilho == "") ){
+     if(($this->o86_codimpmovfilho == null) || ($this->o86_codimpmovfilho === 0 || $this->o86_codimpmovfilho === 0.0 || $this->o86_codimpmovfilho == "") ){
        $this->erro_sql = " Campo o86_codimpmovfilho nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

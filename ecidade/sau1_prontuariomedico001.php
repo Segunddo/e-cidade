@@ -38,7 +38,7 @@ include(modification("dbforms/db_classesgenericas.php"));
 require(modification("libs/db_stdlibwebseller.php"));
 require(modification("libs/db_jsplibwebseller.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clprontuariomedico = new cl_prontuariomedico;
 $clcgs_und          = new cl_cgs_und;

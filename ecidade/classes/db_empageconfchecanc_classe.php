@@ -71,10 +71,10 @@ class cl_empageconfchecanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e93_codcheque = ($this->e93_codcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_codcheque"]:$this->e93_codcheque);
-       $this->e93_codmov = ($this->e93_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_codmov"]:$this->e93_codmov);
+       $this->e93_codcheque = ($this->e93_codcheque === 0 || $this->e93_codcheque === 0.0 || $this->e93_codcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_codcheque"]:$this->e93_codcheque);
+       $this->e93_codmov = ($this->e93_codmov === 0 || $this->e93_codmov === 0.0 || $this->e93_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_codmov"]:$this->e93_codmov);
        $this->e93_cheque = ($this->e93_cheque == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_cheque"]:$this->e93_cheque);
-       $this->e93_valor = ($this->e93_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_valor"]:$this->e93_valor);
+       $this->e93_valor = ($this->e93_valor === 0 || $this->e93_valor === 0.0 || $this->e93_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e93_valor"]:$this->e93_valor);
      }else{
      }
    }

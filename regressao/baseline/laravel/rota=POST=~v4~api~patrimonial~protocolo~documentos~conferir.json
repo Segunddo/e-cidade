@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/documentos/conferir",
+  "json": {
+    "error": true,
+    "message": "Argument 1 passed to App\\Domain\\Patrimonial\\Protocolo\\Factories\\DocumentoAndamentoFactory::getService() must be an instance of App\\Domain\\Patrimonial\\Protocolo\\Model\\DocumentoAndamento, null given, called in /var/www/html/app/Domain/Patrimonial/Protocolo/Controller/DocumentoAndamentoController.php on line 84"
+  },
+  "sha256": "680193d59b7eed265941d968234fb6af8b9b15b75d0b8fac9a7885639fdda8e7",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

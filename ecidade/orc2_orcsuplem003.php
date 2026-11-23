@@ -35,7 +35,7 @@ $auxiliar = new cl_orcsuplem;
 $anousu = db_getsession("DB_anousu");
 $instit = db_getsession("DB_instit");
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 // str_replace('-',', ',$db_selinstit);
 

@@ -69,11 +69,11 @@ class cl_procedenciaagrupa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v24_sequencial = ($this->v24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_sequencial"]:$this->v24_sequencial);
-       $this->v24_proced = ($this->v24_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_proced"]:$this->v24_proced);
-       $this->v24_procedagrupa = ($this->v24_procedagrupa == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_procedagrupa"]:$this->v24_procedagrupa);
+       $this->v24_sequencial = ($this->v24_sequencial === 0 || $this->v24_sequencial === 0.0 || $this->v24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_sequencial"]:$this->v24_sequencial);
+       $this->v24_proced = ($this->v24_proced === 0 || $this->v24_proced === 0.0 || $this->v24_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_proced"]:$this->v24_proced);
+       $this->v24_procedagrupa = ($this->v24_procedagrupa === 0 || $this->v24_procedagrupa === 0.0 || $this->v24_procedagrupa == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_procedagrupa"]:$this->v24_procedagrupa);
      }else{
-       $this->v24_sequencial = ($this->v24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_sequencial"]:$this->v24_sequencial);
+       $this->v24_sequencial = ($this->v24_sequencial === 0 || $this->v24_sequencial === 0.0 || $this->v24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v24_sequencial"]:$this->v24_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procedenciaagrupa {
          $this->v24_sequencial = $v24_sequencial;
        }
      }
-     if(($this->v24_sequencial == null) || ($this->v24_sequencial == "") ){
+     if(($this->v24_sequencial == null) || ($this->v24_sequencial === 0 || $this->v24_sequencial === 0.0 || $this->v24_sequencial == "") ){
        $this->erro_sql = " Campo v24_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

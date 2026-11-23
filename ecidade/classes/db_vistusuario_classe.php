@@ -69,12 +69,12 @@ class cl_vistusuario {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y75_codvist = ($this->y75_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y75_codvist"]:$this->y75_codvist);
-       $this->y75_id_usuario = ($this->y75_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y75_id_usuario"]:$this->y75_id_usuario);
+       $this->y75_codvist = ($this->y75_codvist === 0 || $this->y75_codvist === 0.0 || $this->y75_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y75_codvist"]:$this->y75_codvist);
+       $this->y75_id_usuario = ($this->y75_id_usuario === 0 || $this->y75_id_usuario === 0.0 || $this->y75_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y75_id_usuario"]:$this->y75_id_usuario);
        $this->y75_obs = ($this->y75_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y75_obs"]:$this->y75_obs);
      }else{
-       $this->y75_codvist = ($this->y75_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y75_codvist"]:$this->y75_codvist);
-       $this->y75_id_usuario = ($this->y75_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y75_id_usuario"]:$this->y75_id_usuario);
+       $this->y75_codvist = ($this->y75_codvist === 0 || $this->y75_codvist === 0.0 || $this->y75_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y75_codvist"]:$this->y75_codvist);
+       $this->y75_id_usuario = ($this->y75_id_usuario === 0 || $this->y75_id_usuario === 0.0 || $this->y75_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y75_id_usuario"]:$this->y75_id_usuario);
      }
    }
    // funcao para inclusao
@@ -82,7 +82,7 @@ class cl_vistusuario {
       $this->atualizacampos();
        $this->y75_codvist = $y75_codvist;
        $this->y75_id_usuario = $y75_id_usuario;
-     if(($this->y75_codvist == null) || ($this->y75_codvist == "") ){
+     if(($this->y75_codvist == null) || ($this->y75_codvist === 0 || $this->y75_codvist === 0.0 || $this->y75_codvist == "") ){
        $this->erro_sql = " Campo y75_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -90,7 +90,7 @@ class cl_vistusuario {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y75_id_usuario == null) || ($this->y75_id_usuario == "") ){
+     if(($this->y75_id_usuario == null) || ($this->y75_id_usuario === 0 || $this->y75_id_usuario === 0.0 || $this->y75_id_usuario == "") ){
        $this->erro_sql = " Campo y75_id_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

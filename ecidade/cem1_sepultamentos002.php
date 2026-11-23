@@ -33,7 +33,7 @@ require_once(modification("classes/db_sepultamentos_classe.php"));
 require_once(modification("classes/db_renovacoes_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 db_postmemory($_GET);
 

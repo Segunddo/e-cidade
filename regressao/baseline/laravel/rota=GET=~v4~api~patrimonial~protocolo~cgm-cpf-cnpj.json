@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/protocolo/cgm-cpf-cnpj",
+  "json": {
+    "errors": {
+      "cpfCnpj": [
+        "O campo cpf cnpj é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "8d026120c38141c5a6aed7db7f8011cd9375a0b2b77082d5ab1ff8baec2c68b6",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

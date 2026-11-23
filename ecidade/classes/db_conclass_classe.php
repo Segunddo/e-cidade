@@ -67,10 +67,10 @@ class cl_conclass {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c51_codcla = ($this->c51_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["c51_codcla"]:$this->c51_codcla);
+       $this->c51_codcla = ($this->c51_codcla === 0 || $this->c51_codcla === 0.0 || $this->c51_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["c51_codcla"]:$this->c51_codcla);
        $this->c51_descr = ($this->c51_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c51_descr"]:$this->c51_descr);
      }else{
-       $this->c51_codcla = ($this->c51_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["c51_codcla"]:$this->c51_codcla);
+       $this->c51_codcla = ($this->c51_codcla === 0 || $this->c51_codcla === 0.0 || $this->c51_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["c51_codcla"]:$this->c51_codcla);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_conclass {
        return false;
      }
        $this->c51_codcla = $c51_codcla;
-     if(($this->c51_codcla == null) || ($this->c51_codcla == "") ){
+     if(($this->c51_codcla == null) || ($this->c51_codcla === 0 || $this->c51_codcla === 0.0 || $this->c51_codcla == "") ){
        $this->erro_sql = " Campo c51_codcla nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

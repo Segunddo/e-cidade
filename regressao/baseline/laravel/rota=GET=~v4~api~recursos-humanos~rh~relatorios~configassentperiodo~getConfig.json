@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/rh/relatorios/configassentperiodo/getConfig",
+  "json": {
+    "data": {
+      "config": null,
+      "institDescr": " - "
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "cd98b94af031502be9a9506a08760b7e07ac118c431bc2825e1b15372c3fdf4b",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

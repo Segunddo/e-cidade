@@ -96,7 +96,7 @@ class cl_fis_vistorias
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y70_codvist = ($this->y70_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_codvist"]:$this->y70_codvist);
+            $this->y70_codvist = ($this->y70_codvist === 0 || $this->y70_codvist === 0.0 || $this->y70_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_codvist"]:$this->y70_codvist);
             if ($this->y70_data == "") {
                 $this->y70_data_dia = ($this->y70_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_data_dia"]:$this->y70_data_dia);
                 $this->y70_data_mes = ($this->y70_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_data_mes"]:$this->y70_data_mes);
@@ -108,16 +108,16 @@ class cl_fis_vistorias
             $this->y70_hora = ($this->y70_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_hora"]:$this->y70_hora);
             $this->y70_obs = ($this->y70_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_obs"]:$this->y70_obs);
             $this->y70_contato = ($this->y70_contato == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_contato"]:$this->y70_contato);
-            $this->y70_tipovist = ($this->y70_tipovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_tipovist"]:$this->y70_tipovist);
-            $this->y70_ultandam = ($this->y70_ultandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_ultandam"]:$this->y70_ultandam);
-            $this->y70_id_usuario = ($this->y70_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_id_usuario"]:$this->y70_id_usuario);
-            $this->y70_coddepto = ($this->y70_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_coddepto"]:$this->y70_coddepto);
+            $this->y70_tipovist = ($this->y70_tipovist === 0 || $this->y70_tipovist === 0.0 || $this->y70_tipovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_tipovist"]:$this->y70_tipovist);
+            $this->y70_ultandam = ($this->y70_ultandam === 0 || $this->y70_ultandam === 0.0 || $this->y70_ultandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_ultandam"]:$this->y70_ultandam);
+            $this->y70_id_usuario = ($this->y70_id_usuario === 0 || $this->y70_id_usuario === 0.0 || $this->y70_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_id_usuario"]:$this->y70_id_usuario);
+            $this->y70_coddepto = ($this->y70_coddepto === 0 || $this->y70_coddepto === 0.0 || $this->y70_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_coddepto"]:$this->y70_coddepto);
             $this->y70_numbloco = ($this->y70_numbloco == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_numbloco"]:$this->y70_numbloco);
             $this->y70_parcial = ($this->y70_parcial == "f"?@$GLOBALS["HTTP_POST_VARS"]["y70_parcial"]:$this->y70_parcial);
             $this->y70_ativo = ($this->y70_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["y70_ativo"]:$this->y70_ativo);
-            $this->y70_instit = ($this->y70_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_instit"]:$this->y70_instit);
+            $this->y70_instit = ($this->y70_instit === 0 || $this->y70_instit === 0.0 || $this->y70_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_instit"]:$this->y70_instit);
         } else {
-            $this->y70_codvist = ($this->y70_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_codvist"]:$this->y70_codvist);
+            $this->y70_codvist = ($this->y70_codvist === 0 || $this->y70_codvist === 0.0 || $this->y70_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y70_codvist"]:$this->y70_codvist);
         }
     }
    // funcao para inclusao

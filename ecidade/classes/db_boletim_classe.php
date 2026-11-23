@@ -86,14 +86,14 @@ class cl_boletim {
             $this->k11_data = $this->k11_data_ano."-".$this->k11_data_mes."-".$this->k11_data_dia;
          }
        }
-       $this->k11_instit = ($this->k11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_instit"]:$this->k11_instit);
-       $this->k11_numbol = ($this->k11_numbol == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_numbol"]:$this->k11_numbol);
+       $this->k11_instit = ($this->k11_instit === 0 || $this->k11_instit === 0.0 || $this->k11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_instit"]:$this->k11_instit);
+       $this->k11_numbol = ($this->k11_numbol === 0 || $this->k11_numbol === 0.0 || $this->k11_numbol == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_numbol"]:$this->k11_numbol);
        $this->k11_libera = ($this->k11_libera == "f"?@$GLOBALS["HTTP_POST_VARS"]["k11_libera"]:$this->k11_libera);
        $this->k11_lanca = ($this->k11_lanca == "f"?@$GLOBALS["HTTP_POST_VARS"]["k11_lanca"]:$this->k11_lanca);
-       $this->k11_anousu = ($this->k11_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_anousu"]:$this->k11_anousu);
+       $this->k11_anousu = ($this->k11_anousu === 0 || $this->k11_anousu === 0.0 || $this->k11_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_anousu"]:$this->k11_anousu);
      }else{
        $this->k11_data = ($this->k11_data == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_data_ano"]."-".@$GLOBALS["HTTP_POST_VARS"]["k11_data_mes"]."-".@$GLOBALS["HTTP_POST_VARS"]["k11_data_dia"]:$this->k11_data);
-       $this->k11_instit = ($this->k11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_instit"]:$this->k11_instit);
+       $this->k11_instit = ($this->k11_instit === 0 || $this->k11_instit === 0.0 || $this->k11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k11_instit"]:$this->k11_instit);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_boletim {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k11_instit == null) || ($this->k11_instit == "") ){
+     if(($this->k11_instit == null) || ($this->k11_instit === 0 || $this->k11_instit === 0.0 || $this->k11_instit == "") ){
        $this->erro_sql = " Campo k11_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

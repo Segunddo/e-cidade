@@ -52,10 +52,10 @@ class cl_confvencissqnavulso
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->j178_receita = ($this->j178_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["j178_receita"]:$this->j178_receita);
-       $this->j178_histdebito = ($this->j178_histdebito == ""?@$GLOBALS["HTTP_POST_VARS"]["j178_histdebito"]:$this->j178_histdebito);
-       $this->j178_tipodebito = ($this->j178_tipodebito == ""?@$GLOBALS["HTTP_POST_VARS"]["j178_tipodebito"]:$this->j178_tipodebito);
-       $this->j178_diavenc = ($this->j178_diavenc == ""?@$GLOBALS["HTTP_POST_VARS"]["j178_diavenc"]:$this->j178_diavenc);
+       $this->j178_receita = ($this->j178_receita === 0 || $this->j178_receita === 0.0 || $this->j178_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["j178_receita"]:$this->j178_receita);
+       $this->j178_histdebito = ($this->j178_histdebito === 0 || $this->j178_histdebito === 0.0 || $this->j178_histdebito == ""?@$GLOBALS["HTTP_POST_VARS"]["j178_histdebito"]:$this->j178_histdebito);
+       $this->j178_tipodebito = ($this->j178_tipodebito === 0 || $this->j178_tipodebito === 0.0 || $this->j178_tipodebito == ""?@$GLOBALS["HTTP_POST_VARS"]["j178_tipodebito"]:$this->j178_tipodebito);
+       $this->j178_diavenc = ($this->j178_diavenc === 0 || $this->j178_diavenc === 0.0 || $this->j178_diavenc == ""?@$GLOBALS["HTTP_POST_VARS"]["j178_diavenc"]:$this->j178_diavenc);
        if($this->j178_anousu == ""){
          $this->j178_anousu_dia = ($this->j178_anousu_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j178_anousu_dia"]:$this->j178_anousu_dia);
          $this->j178_anousu_mes = ($this->j178_anousu_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j178_anousu_mes"]:$this->j178_anousu_mes);

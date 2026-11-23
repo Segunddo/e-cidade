@@ -35,7 +35,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_regencia_classe.php"));
 include(modification("classes/db_regenciaperiodo_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clregencia = new cl_regencia;
 $clregenciaperiodo = new cl_regenciaperiodo;
 $result = $clregencia->sql_record($clregencia->sql_query("","*","","ed59_i_codigo = $regencia"));

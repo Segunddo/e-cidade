@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/cadastro/configuracao/salvar",
+  "json": {
+    "data": null,
+    "error": true,
+    "message": "Não foi possível salvar"
+  },
+  "sha256": "d65f04131f2919a3f1c34eb36e9ae05458866abccdddfc626f29c71cbe443e88",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -67,10 +67,10 @@ class cl_autosanitario {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y55_codauto = ($this->y55_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y55_codauto"]:$this->y55_codauto);
-       $this->y55_codsani = ($this->y55_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y55_codsani"]:$this->y55_codsani);
+       $this->y55_codauto = ($this->y55_codauto === 0 || $this->y55_codauto === 0.0 || $this->y55_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y55_codauto"]:$this->y55_codauto);
+       $this->y55_codsani = ($this->y55_codsani === 0 || $this->y55_codsani === 0.0 || $this->y55_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y55_codsani"]:$this->y55_codsani);
      }else{
-       $this->y55_codauto = ($this->y55_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y55_codauto"]:$this->y55_codauto);
+       $this->y55_codauto = ($this->y55_codauto === 0 || $this->y55_codauto === 0.0 || $this->y55_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y55_codauto"]:$this->y55_codauto);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_autosanitario {
        return false;
      }
        $this->y55_codauto = $y55_codauto;
-     if(($this->y55_codauto == null) || ($this->y55_codauto == "") ){
+     if(($this->y55_codauto == null) || ($this->y55_codauto === 0 || $this->y55_codauto === 0.0 || $this->y55_codauto == "") ){
        $this->erro_sql = " Campo y55_codauto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_aguahidrodiametro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x15_coddiametro = ($this->x15_coddiametro == ""?@$GLOBALS["HTTP_POST_VARS"]["x15_coddiametro"]:$this->x15_coddiametro);
+       $this->x15_coddiametro = ($this->x15_coddiametro === 0 || $this->x15_coddiametro === 0.0 || $this->x15_coddiametro == ""?@$GLOBALS["HTTP_POST_VARS"]["x15_coddiametro"]:$this->x15_coddiametro);
        $this->x15_diametro = ($this->x15_diametro == ""?@$GLOBALS["HTTP_POST_VARS"]["x15_diametro"]:$this->x15_diametro);
      }else{
-       $this->x15_coddiametro = ($this->x15_coddiametro == ""?@$GLOBALS["HTTP_POST_VARS"]["x15_coddiametro"]:$this->x15_coddiametro);
+       $this->x15_coddiametro = ($this->x15_coddiametro === 0 || $this->x15_coddiametro === 0.0 || $this->x15_coddiametro == ""?@$GLOBALS["HTTP_POST_VARS"]["x15_coddiametro"]:$this->x15_coddiametro);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_aguahidrodiametro {
          $this->x15_coddiametro = $x15_coddiametro;
        }
      }
-     if(($this->x15_coddiametro == null) || ($this->x15_coddiametro == "") ){
+     if(($this->x15_coddiametro == null) || ($this->x15_coddiametro === 0 || $this->x15_coddiametro === 0.0 || $this->x15_coddiametro == "") ){
        $this->erro_sql = " Campo x15_coddiametro nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

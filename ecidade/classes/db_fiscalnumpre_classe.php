@@ -67,10 +67,10 @@ class cl_fiscalnumpre {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y43_codnoti = ($this->y43_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y43_codnoti"]:$this->y43_codnoti);
-       $this->y43_numpre = ($this->y43_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["y43_numpre"]:$this->y43_numpre);
+       $this->y43_codnoti = ($this->y43_codnoti === 0 || $this->y43_codnoti === 0.0 || $this->y43_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y43_codnoti"]:$this->y43_codnoti);
+       $this->y43_numpre = ($this->y43_numpre === 0 || $this->y43_numpre === 0.0 || $this->y43_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["y43_numpre"]:$this->y43_numpre);
      }else{
-       $this->y43_codnoti = ($this->y43_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y43_codnoti"]:$this->y43_codnoti);
+       $this->y43_codnoti = ($this->y43_codnoti === 0 || $this->y43_codnoti === 0.0 || $this->y43_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y43_codnoti"]:$this->y43_codnoti);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_fiscalnumpre {
        return false;
      }
        $this->y43_codnoti = $y43_codnoti; 
-     if(($this->y43_codnoti == null) || ($this->y43_codnoti == "") ){ 
+     if(($this->y43_codnoti == null) || ($this->y43_codnoti === 0 || $this->y43_codnoti === 0.0 || $this->y43_codnoti == "") ){ 
        $this->erro_sql = " Campo y43_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/gerador/relatorios/grupos",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "Folha de Pagamento"
+      },
+      {
+        "codigo": 2,
+        "descricao": "Recursos Humanos"
+      },
+      {
+        "codigo": 3,
+        "descricao": "Sistema de atendimento"
+      },
+      {
+        "codigo": 4,
+        "descricao": "Cubo BI"
+      },
+      {
+        "codigo": 5,
+        "descricao": "Cubo BI Temporario"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "4ba98277a94aff559d0e6899c51f0bc47267105ef2a9d5bbde605f5f5744288a",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

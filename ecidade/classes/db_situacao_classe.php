@@ -69,11 +69,11 @@ class cl_situacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v52_codsit = ($this->v52_codsit == ""?@$GLOBALS["HTTP_POST_VARS"]["v52_codsit"]:$this->v52_codsit);
+       $this->v52_codsit = ($this->v52_codsit === 0 || $this->v52_codsit === 0.0 || $this->v52_codsit == ""?@$GLOBALS["HTTP_POST_VARS"]["v52_codsit"]:$this->v52_codsit);
        $this->v52_descr = ($this->v52_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["v52_descr"]:$this->v52_descr);
-       $this->v52_tpsit = ($this->v52_tpsit == ""?@$GLOBALS["HTTP_POST_VARS"]["v52_tpsit"]:$this->v52_tpsit);
+       $this->v52_tpsit = ($this->v52_tpsit === 0 || $this->v52_tpsit === 0.0 || $this->v52_tpsit == ""?@$GLOBALS["HTTP_POST_VARS"]["v52_tpsit"]:$this->v52_tpsit);
      }else{
-       $this->v52_codsit = ($this->v52_codsit == ""?@$GLOBALS["HTTP_POST_VARS"]["v52_codsit"]:$this->v52_codsit);
+       $this->v52_codsit = ($this->v52_codsit === 0 || $this->v52_codsit === 0.0 || $this->v52_codsit == ""?@$GLOBALS["HTTP_POST_VARS"]["v52_codsit"]:$this->v52_codsit);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_situacao {
          $this->v52_codsit = $v52_codsit;
        }
      }
-     if(($this->v52_codsit == null) || ($this->v52_codsit == "") ){
+     if(($this->v52_codsit == null) || ($this->v52_codsit === 0 || $this->v52_codsit === 0.0 || $this->v52_codsit == "") ){
        $this->erro_sql = " Campo v52_codsit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

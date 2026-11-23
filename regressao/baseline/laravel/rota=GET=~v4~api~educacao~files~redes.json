@@ -1,0 +1,43 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/api/educacao/files/redes",
+  "json": [
+    {
+      "label": "FEDERAL",
+      "value": 1
+    },
+    {
+      "label": "ESTADUAL",
+      "value": 2
+    },
+    {
+      "label": "OUTROS MUNICÍPIOS",
+      "value": 3
+    },
+    {
+      "label": "PARTICULAR",
+      "value": 4
+    },
+    {
+      "label": "DESISTENTE",
+      "value": 7
+    },
+    {
+      "label": "INICIAL",
+      "value": 8
+    },
+    {
+      "label": "TRANSFERÊNCIA - REDE MUNICIPAL",
+      "value": 9
+    }
+  ],
+  "sha256": "9312e508fe484f74f5d70fbe5f6f01b034d431339cd9675374fbd48522669798",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

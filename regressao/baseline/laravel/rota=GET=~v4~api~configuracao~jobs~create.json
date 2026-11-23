@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/jobs/create",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Configuracao\\Job\\Controller\\JobsController::create does not exist."
+  },
+  "sha256": "31215eaec2c7f93041bcd17725ffb8a96b51fd8465a2b6d03e766be4ce4108ae",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

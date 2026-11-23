@@ -37,7 +37,7 @@ include(modification("classes/db_empageconfcanc_classe.php"));
 $clempageconf = new cl_empageconf;
 $clempageconfcanc = new cl_empageconfcanc;
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $db_opcao = 1;
 $db_botao = false;

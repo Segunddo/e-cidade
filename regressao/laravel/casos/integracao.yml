@@ -1,0 +1,56 @@
+# Casos de integracao (Task 11b), escritos a mao. Ver laravel/integracao.py.
+#
+# arquivo: a resposta JSON traz o caminho do arquivo gerado (PDF/CSV); a bateria o baixa e compara o TEXTO
+# extraido (extrai_conteudo), nunca os bytes; o nome do arquivo (timestamp) e mascarado em campos_volateis.
+- id: arquivo-vacinacao-pdf-todos
+  metodo: POST
+  caminho: /v4/api/educacao/escola/relatorios/vacinacao
+  corpo: {tipo: 1}
+  arquivo: data.path
+  campos_volateis: [data.path]
+- id: arquivo-vacinacao-pdf-tipo2
+  metodo: POST
+  caminho: /v4/api/educacao/escola/relatorios/vacinacao
+  corpo: {tipo: 2}
+  arquivo: data.path
+  campos_volateis: [data.path]
+- id: arquivo-vacinacao-pdf-tipo3
+  metodo: POST
+  caminho: /v4/api/educacao/escola/relatorios/vacinacao
+  corpo: {tipo: 3}
+  arquivo: data.path
+  campos_volateis: [data.path]
+- id: arquivo-siconfi-csv
+  metodo: GET
+  caminho: /v4/api/financeiro/orcamento/de-para-siconfi/exportar/2026
+  corpo: null
+  arquivo: data.csv
+  campos_volateis: [data.csvLinkExterno]
+- id: arquivo-pcasp-csv
+  metodo: POST
+  caminho: /v4/api/financeiro/contabilidade/plano-contas/emitir/pcasp/mapeamento
+  corpo: {exercicio: 2026, tipoPlano: 1}
+  arquivo: data.csv
+  campos_volateis: [data.csv, data.csvLinkExterno]
+
+# console: `php artisan` no container do alvo (referencia: ecidade74_php74; laboratorio: ecidade74_lar12; outro
+# alvo: REGRESSAO_LARAVEL_CONSOLE_CONTAINER). So comandos SEM efeito: list, env, migrate:status. Comandos de dominio
+# (agendamento:inativarvinculoprofessor, matriculaonline:alteracaoinscricao, payroll:*) escrevem no banco e ficam
+# de fora. Comando que nao carrega no Laravel 12 muda o codigo de saida/saida => DIVERGE.
+- id: console-list
+  metodo: CONSOLE
+  caminho: artisan
+  corpo: null
+  console: [list, --raw]
+  console_modo: nomes
+- id: console-env
+  metodo: CONSOLE
+  caminho: artisan
+  corpo: null
+  console: [env]
+- id: console-migrate-status
+  metodo: CONSOLE
+  caminho: artisan
+  corpo: null
+  console: [migrate:status]
+  console_modo: migracoes   # conjunto completo de migrations (contagem + sha256 + lista), sem truncar

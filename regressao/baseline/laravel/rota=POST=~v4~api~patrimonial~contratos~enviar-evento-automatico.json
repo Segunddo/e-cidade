@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/contratos/enviar-evento-automatico",
+  "json": {
+    "error": true,
+    "message": "Trying to access array offset on value of type null"
+  },
+  "sha256": "31e1898d5b93a60ee68d8d1c81694e4e47c8ef1e3e9843434cf8c63f6d140aa5",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

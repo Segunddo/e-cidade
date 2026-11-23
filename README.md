@@ -134,6 +134,12 @@ A evolução contínua da ferramenta depende da comunidade, e contribuições s�
 *   **Grupo Oficial do Telegram:** Para comunicação direta, alinhamentos da comunidade, suporte e dúvidas, participe do canal através do link https://t.me/eCidadeCE.
 *   **Registro de Problemas (Issues):** Para demandas técnicas específicas ou bugs, recomenda-se registrar uma *Issue* nos repositórios, a fim de manter a rastreabilidade do problema sempre que possível.
 
+## Migração para o PHP 8.5: regressão e MCP
+
+Para conferir se o e-Cidade no PHP 8.5 responde igual ao 7.4: [`regressao/COMO-USAR.md`](regressao/COMO-USAR.md).
+Servidor MCP para a sua IA seguir as regras do grupo: [`.mcp/README.md`](.mcp/README.md).
+Para quem não participou: [o que foi feito e por quê](docs/regressao-php74/01-passo-a-passo-do-que-foi-feito.md) e [tutorial de uso](docs/regressao-php74/02-tutorial-de-uso.md).
+
 ## Atualização a partir de ecidade_psp
 
 O código da aplicação está em `ecidade/`; `docker-compose.yml` e os arquivos de construção das imagens continuam na raiz. A imagem `ecidade-php74:latest`, construída em `docker/php74-apache`, utiliza PHP 7.4, exigido pela aplicação com Laravel 8. O serviço e o container se chamam `ecidade_php74`.

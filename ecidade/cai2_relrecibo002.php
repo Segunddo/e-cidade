@@ -40,7 +40,7 @@ $clrotulo->label('k00_dtvenc');
 $clrotulo->label('k00_valor');
 $clrotulo->label('k00_dtpaga');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 
@@ -102,7 +102,7 @@ $sql= "select recibo.k00_numcgm ,
        where $where $order_by";																			
        //die($sql);
 $result=db_query($sql);																			
-if (pg_numrows($result) == 0){
+if (($result ? pg_numrows($result) : null) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 }
 $pdf = new PDF(); 
@@ -117,7 +117,7 @@ $total = 0;
 $id_usuarioaux = ""; 
 $p=0;
 $totalval=0; 
-for($x = 0; $x < pg_numrows($result);$x++){
+for($x = 0; $x < ($result ? pg_numrows($result) : null);$x++){
    db_fieldsmemory($result,$x);
    if ($pdf->gety() > $pdf->h - 30 || $troca != 0 ){
       $pdf->addpage();

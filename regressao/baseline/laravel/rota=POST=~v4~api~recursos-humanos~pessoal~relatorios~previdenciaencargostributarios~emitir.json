@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/relatorios/previdenciaencargostributarios/emitir",
+  "json": {
+    "error": true,
+    "message": "sizeof(): Parameter must be an array or an object that implements Countable"
+  },
+  "sha256": "147c0202107e0b3f4270ee990be50824e7dc0e5dcd545c2bf9fcd678737c3acd",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -66,7 +66,7 @@ final class AnexoVIRGF extends RelatoriosLegaisBase {
    *                               ->disponibilidadeliquida
    * @return Object - Colecao de stdClass
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     /**
      * separamos o RPPS das outras instituicoes

@@ -68,10 +68,10 @@ class cl_db_errobanco {
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->e78_codban = ($this->e78_codban == ""?@$GLOBALS["HTTP_POST_VARS"]["e78_codban"]:$this->e78_codban);
-       $this->e78_errobanco = ($this->e78_errobanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e78_errobanco"]:$this->e78_errobanco);
+       $this->e78_errobanco = ($this->e78_errobanco === 0 || $this->e78_errobanco === 0.0 || $this->e78_errobanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e78_errobanco"]:$this->e78_errobanco);
      }else{
        $this->e78_codban = ($this->e78_codban == ""?@$GLOBALS["HTTP_POST_VARS"]["e78_codban"]:$this->e78_codban);
-       $this->e78_errobanco = ($this->e78_errobanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e78_errobanco"]:$this->e78_errobanco);
+       $this->e78_errobanco = ($this->e78_errobanco === 0 || $this->e78_errobanco === 0.0 || $this->e78_errobanco == ""?@$GLOBALS["HTTP_POST_VARS"]["e78_errobanco"]:$this->e78_errobanco);
      }
    }
    // funcao para inclusao
@@ -87,7 +87,7 @@ class cl_db_errobanco {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e78_errobanco == null) || ($this->e78_errobanco == "") ){
+     if(($this->e78_errobanco == null) || ($this->e78_errobanco === 0 || $this->e78_errobanco === 0.0 || $this->e78_errobanco == "") ){
        $this->erro_sql = " Campo e78_errobanco nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -74,7 +74,7 @@ $clmatestoqueitemunid = new cl_matestoqueitemunid;
 $clempnota->rotulo->label();
 $clempnotaele->rotulo->label();
 $gravanota = false;
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 db_postmemory($_GET);
 

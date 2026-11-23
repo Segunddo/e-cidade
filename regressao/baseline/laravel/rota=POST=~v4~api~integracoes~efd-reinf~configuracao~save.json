@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/integracoes/efd-reinf/configuracao/save",
+  "json": {
+    "data": "",
+    "error": true,
+    "message": "The given data was invalid."
+  },
+  "sha256": "4aef1ea42af428490386d9c7df34b3107d4de608c097bd6b33ff4b056e70e50d",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

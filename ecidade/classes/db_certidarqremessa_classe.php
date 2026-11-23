@@ -74,9 +74,9 @@ class cl_certidarqremessa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v83_sequencial = ($this->v83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_sequencial"]:$this->v83_sequencial);
+       $this->v83_sequencial = ($this->v83_sequencial === 0 || $this->v83_sequencial === 0.0 || $this->v83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_sequencial"]:$this->v83_sequencial);
        $this->v83_nomearq = ($this->v83_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_nomearq"]:$this->v83_nomearq);
-       $this->v83_lista = ($this->v83_lista == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_lista"]:$this->v83_lista);
+       $this->v83_lista = ($this->v83_lista === 0 || $this->v83_lista === 0.0 || $this->v83_lista == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_lista"]:$this->v83_lista);
        if($this->v83_dtgeracao == ""){
          $this->v83_dtgeracao_dia = ($this->v83_dtgeracao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_dtgeracao_dia"]:$this->v83_dtgeracao_dia);
          $this->v83_dtgeracao_mes = ($this->v83_dtgeracao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_dtgeracao_mes"]:$this->v83_dtgeracao_mes);
@@ -86,7 +86,7 @@ class cl_certidarqremessa {
          }
        }
      }else{
-       $this->v83_sequencial = ($this->v83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_sequencial"]:$this->v83_sequencial);
+       $this->v83_sequencial = ($this->v83_sequencial === 0 || $this->v83_sequencial === 0.0 || $this->v83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v83_sequencial"]:$this->v83_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_certidarqremessa {
          $this->v83_sequencial = $v83_sequencial;
        }
      }
-     if(($this->v83_sequencial == null) || ($this->v83_sequencial == "") ){
+     if(($this->v83_sequencial == null) || ($this->v83_sequencial === 0 || $this->v83_sequencial === 0.0 || $this->v83_sequencial == "") ){
        $this->erro_sql = " Campo v83_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

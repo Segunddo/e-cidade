@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_sau_fluxocliente_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clsau_fluxocliente = new cl_sau_fluxocliente;
 $clsau_fluxocliente->rotulo->label("sd41_i_cod_cliente");
 $clsau_fluxocliente->rotulo->label("sd41_v_descricao");

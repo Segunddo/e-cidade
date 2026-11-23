@@ -87,10 +87,10 @@ class cl_ppaversao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o119_sequencial = ($this->o119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_sequencial"]:$this->o119_sequencial);
-       $this->o119_ppalei = ($this->o119_ppalei == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_ppalei"]:$this->o119_ppalei);
-       $this->o119_idusuario = ($this->o119_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_idusuario"]:$this->o119_idusuario);
-       $this->o119_versao = ($this->o119_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_versao"]:$this->o119_versao);
+       $this->o119_sequencial = ($this->o119_sequencial === 0 || $this->o119_sequencial === 0.0 || $this->o119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_sequencial"]:$this->o119_sequencial);
+       $this->o119_ppalei = ($this->o119_ppalei === 0 || $this->o119_ppalei === 0.0 || $this->o119_ppalei == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_ppalei"]:$this->o119_ppalei);
+       $this->o119_idusuario = ($this->o119_idusuario === 0 || $this->o119_idusuario === 0.0 || $this->o119_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_idusuario"]:$this->o119_idusuario);
+       $this->o119_versao = ($this->o119_versao === 0 || $this->o119_versao === 0.0 || $this->o119_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_versao"]:$this->o119_versao);
        $this->o119_finalizada = ($this->o119_finalizada == "f"?@$GLOBALS["HTTP_POST_VARS"]["o119_finalizada"]:$this->o119_finalizada);
        if($this->o119_datainicio == ""){
          $this->o119_datainicio_dia = ($this->o119_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_datainicio_dia"]:$this->o119_datainicio_dia);
@@ -111,7 +111,7 @@ class cl_ppaversao {
        $this->o119_versaofinal = ($this->o119_versaofinal == "f"?@$GLOBALS["HTTP_POST_VARS"]["o119_versaofinal"]:$this->o119_versaofinal);
        $this->o119_ativo = ($this->o119_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["o119_ativo"]:$this->o119_ativo);
      }else{
-       $this->o119_sequencial = ($this->o119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_sequencial"]:$this->o119_sequencial);
+       $this->o119_sequencial = ($this->o119_sequencial === 0 || $this->o119_sequencial === 0.0 || $this->o119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o119_sequencial"]:$this->o119_sequencial);
      }
    }
    // funcao para inclusao
@@ -207,7 +207,7 @@ class cl_ppaversao {
          $this->o119_sequencial = $o119_sequencial;
        }
      }
-     if(($this->o119_sequencial == null) || ($this->o119_sequencial == "") ){
+     if(($this->o119_sequencial == null) || ($this->o119_sequencial === 0 || $this->o119_sequencial === 0.0 || $this->o119_sequencial == "") ){
        $this->erro_sql = " Campo o119_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

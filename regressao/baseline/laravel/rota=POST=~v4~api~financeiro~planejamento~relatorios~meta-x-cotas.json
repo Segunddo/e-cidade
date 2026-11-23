@@ -1,0 +1,33 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/meta-x-cotas",
+  "json": {
+    "errors": {
+      "agruparPor": [
+        "O campo \"Agrupar por\" deve ser informado."
+      ],
+      "exercicio": [
+        "O campo \"Exercício\" deve ser informado."
+      ],
+      "instituicoes": [
+        "O campo \"Instituições\" deve ser informado."
+      ],
+      "periodicidade": [
+        "O campo \"Periodicidade\" deve ser informado."
+      ],
+      "planejamento_id": [
+        "O campo \"Código\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "078b2a31c8a089d2a93343602d9bfcbb8a9d867a180b0d3e892c2c6114e14391",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

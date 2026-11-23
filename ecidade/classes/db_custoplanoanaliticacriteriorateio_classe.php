@@ -75,14 +75,14 @@ class cl_custoplanoanaliticacriteriorateio {
   // funcao para atualizar campos
   public function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->cc07_sequencial = ($this->cc07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_sequencial"]:$this->cc07_sequencial);
-      $this->cc07_custocriteriorateio = ($this->cc07_custocriteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_custocriteriorateio"]:$this->cc07_custocriteriorateio);
-      $this->cc07_custoplanoanalitica = ($this->cc07_custoplanoanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_custoplanoanalitica"]:$this->cc07_custoplanoanalitica);
-      $this->cc07_quantidade = ($this->cc07_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_quantidade"]:$this->cc07_quantidade);
-      $this->cc07_percentual = ($this->cc07_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_percentual"]:$this->cc07_percentual);
+      $this->cc07_sequencial = ($this->cc07_sequencial === 0 || $this->cc07_sequencial === 0.0 || $this->cc07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_sequencial"]:$this->cc07_sequencial);
+      $this->cc07_custocriteriorateio = ($this->cc07_custocriteriorateio === 0 || $this->cc07_custocriteriorateio === 0.0 || $this->cc07_custocriteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_custocriteriorateio"]:$this->cc07_custocriteriorateio);
+      $this->cc07_custoplanoanalitica = ($this->cc07_custoplanoanalitica === 0 || $this->cc07_custoplanoanalitica === 0.0 || $this->cc07_custoplanoanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_custoplanoanalitica"]:$this->cc07_custoplanoanalitica);
+      $this->cc07_quantidade = ($this->cc07_quantidade === 0 || $this->cc07_quantidade === 0.0 || $this->cc07_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_quantidade"]:$this->cc07_quantidade);
+      $this->cc07_percentual = ($this->cc07_percentual === 0 || $this->cc07_percentual === 0.0 || $this->cc07_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_percentual"]:$this->cc07_percentual);
       $this->cc07_automatico = ($this->cc07_automatico == "f"?@$GLOBALS["HTTP_POST_VARS"]["cc07_automatico"]:$this->cc07_automatico);
     }else{
-      $this->cc07_sequencial = ($this->cc07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_sequencial"]:$this->cc07_sequencial);
+      $this->cc07_sequencial = ($this->cc07_sequencial === 0 || $this->cc07_sequencial === 0.0 || $this->cc07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc07_sequencial"]:$this->cc07_sequencial);
     }
   }
   // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_custoplanoanaliticacriteriorateio {
         $this->cc07_sequencial = $cc07_sequencial;
       }
     }
-    if(($this->cc07_sequencial == null) || ($this->cc07_sequencial == "") ){
+    if(($this->cc07_sequencial == null) || ($this->cc07_sequencial === 0 || $this->cc07_sequencial === 0.0 || $this->cc07_sequencial == "") ){
       $this->erro_sql = " Campo cc07_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

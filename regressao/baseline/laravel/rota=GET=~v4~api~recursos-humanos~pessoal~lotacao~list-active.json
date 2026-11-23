@@ -1,0 +1,29 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/pessoal/lotacao/list-active",
+  "json": {
+    "data": [
+      {
+        "codigo": 4,
+        "descricao": "SECRETARIA DE EDUCAÇÃO",
+        "estrutural": "10000"
+      },
+      {
+        "codigo": 8,
+        "descricao": "MDE - EDUCACAO - EST",
+        "estrutural": "10450"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "9109533b519f546e65f87a9f0ac08e8d9a965c8c306c25e7a7140fc8a7815f6e",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -58,10 +58,10 @@ class cl_empanulado
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e94_codanu = ($this->e94_codanu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_codanu"] : $this->e94_codanu);
-            $this->e94_numemp = ($this->e94_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_numemp"] : $this->e94_numemp);
-            $this->e94_valor = ($this->e94_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_valor"] : $this->e94_valor);
-            $this->e94_saldoant = ($this->e94_saldoant == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_saldoant"] : $this->e94_saldoant);
+            $this->e94_codanu = ($this->e94_codanu === 0 || $this->e94_codanu === 0.0 || $this->e94_codanu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_codanu"] : $this->e94_codanu);
+            $this->e94_numemp = ($this->e94_numemp === 0 || $this->e94_numemp === 0.0 || $this->e94_numemp == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_numemp"] : $this->e94_numemp);
+            $this->e94_valor = ($this->e94_valor === 0 || $this->e94_valor === 0.0 || $this->e94_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_valor"] : $this->e94_valor);
+            $this->e94_saldoant = ($this->e94_saldoant === 0 || $this->e94_saldoant === 0.0 || $this->e94_saldoant == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_saldoant"] : $this->e94_saldoant);
             if ($this->e94_data == "") {
                 $this->e94_data_dia = ($this->e94_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_data_dia"] : $this->e94_data_dia);
                 $this->e94_data_mes = ($this->e94_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_data_mes"] : $this->e94_data_mes);
@@ -71,10 +71,10 @@ class cl_empanulado
                 }
             }
             $this->e94_motivo = ($this->e94_motivo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_motivo"] : $this->e94_motivo);
-            $this->e94_empanuladotipo = ($this->e94_empanuladotipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_empanuladotipo"] : $this->e94_empanuladotipo);
+            $this->e94_empanuladotipo = ($this->e94_empanuladotipo === 0 || $this->e94_empanuladotipo === 0.0 || $this->e94_empanuladotipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_empanuladotipo"] : $this->e94_empanuladotipo);
             $this->e94_usuario = db_getsession('DB_id_usuario');
         } else {
-            $this->e94_codanu = ($this->e94_codanu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_codanu"] : $this->e94_codanu);
+            $this->e94_codanu = ($this->e94_codanu === 0 || $this->e94_codanu === 0.0 || $this->e94_codanu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e94_codanu"] : $this->e94_codanu);
         }
     }
 
@@ -153,7 +153,7 @@ class cl_empanulado
                 $this->e94_codanu = $e94_codanu;
             }
         }
-        if (($this->e94_codanu == null) || ($this->e94_codanu == "")) {
+        if (($this->e94_codanu == null) || ($this->e94_codanu === 0 || $this->e94_codanu === 0.0 || $this->e94_codanu == "")) {
             $this->erro_sql = " Campo e94_codanu nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/projecao/despesa/atualizar/valor-base",
+  "json": {
+    "errors": {
+      "id": [
+        "Estimativa deve ser informado."
+      ],
+      "valor": [
+        "Valor deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "e248cb2fe35bdfb8ecd592a7bc866c5544c07d84b72b9fa844fd90c1f5b2a11b",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

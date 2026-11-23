@@ -71,12 +71,12 @@ class cl_workflowativ {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db114_sequencial = ($this->db114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db114_sequencial"]:$this->db114_sequencial);
-       $this->db114_workflow = ($this->db114_workflow == ""?@$GLOBALS["HTTP_POST_VARS"]["db114_workflow"]:$this->db114_workflow);
+       $this->db114_sequencial = ($this->db114_sequencial === 0 || $this->db114_sequencial === 0.0 || $this->db114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db114_sequencial"]:$this->db114_sequencial);
+       $this->db114_workflow = ($this->db114_workflow === 0 || $this->db114_workflow === 0.0 || $this->db114_workflow == ""?@$GLOBALS["HTTP_POST_VARS"]["db114_workflow"]:$this->db114_workflow);
        $this->db114_descricao = ($this->db114_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db114_descricao"]:$this->db114_descricao);
-       $this->db114_ordem = ($this->db114_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db114_ordem"]:$this->db114_ordem);
+       $this->db114_ordem = ($this->db114_ordem === 0 || $this->db114_ordem === 0.0 || $this->db114_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db114_ordem"]:$this->db114_ordem);
      }else{
-       $this->db114_sequencial = ($this->db114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db114_sequencial"]:$this->db114_sequencial);
+       $this->db114_sequencial = ($this->db114_sequencial === 0 || $this->db114_sequencial === 0.0 || $this->db114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db114_sequencial"]:$this->db114_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_workflowativ {
          $this->db114_sequencial = $db114_sequencial;
        }
      }
-     if(($this->db114_sequencial == null) || ($this->db114_sequencial == "") ){
+     if(($this->db114_sequencial == null) || ($this->db114_sequencial === 0 || $this->db114_sequencial === 0.0 || $this->db114_sequencial == "") ){
        $this->erro_sql = " Campo db114_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

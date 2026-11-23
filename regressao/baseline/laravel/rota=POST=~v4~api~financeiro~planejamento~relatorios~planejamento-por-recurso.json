@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/planejamento-por-recurso",
+  "json": {
+    "error": true,
+    "message": "O planejamento é uma informação obrigatória."
+  },
+  "sha256": "cf40470b291d418c10795c1b628e5be6896a9bb7e4e0b1c5d3ebb6a2cef4d48d",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

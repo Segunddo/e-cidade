@@ -184,7 +184,7 @@ if (!isset($sequencial)){
         $oSql = "select * from fiscalizacao.fis_fiscalparametros";
       }
       $rsDiasParam = db_query($oSql);
-      if (pg_num_rows($rsDiasParam) > 0)
+      if (($rsDiasParam ? pg_num_rows($rsDiasParam) : null) > 0)
          db_fieldsmemory($rsDiasParam, 0);
          db_input('pa01_autodvenc', 20, $pa01_autodvenc, true, 'hidden', 3, '');
          db_input('pa01_autodprazo', 20, $pa01_autodprazo, true, 'hidden', 3, '');

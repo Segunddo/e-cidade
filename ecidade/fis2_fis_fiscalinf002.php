@@ -41,7 +41,7 @@ include(modification("classes/db_fis_fiscalmatric_classe.php"));
 	$clfiscalmatric  = new cl_fis_fiscalmatric;
 	$clrotulo        = new rotulocampo;
 
-	parse_str($_SERVER['QUERY_STRING']);
+	parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 	//-----------------------VALIDA A EXISTÊNCIA DA VARIÁVEL CODFISCAL--------------------
 

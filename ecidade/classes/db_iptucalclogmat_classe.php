@@ -71,13 +71,13 @@ class cl_iptucalclogmat {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j28_codigo = ($this->j28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_codigo"]:$this->j28_codigo);
-       $this->j28_matric = ($this->j28_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_matric"]:$this->j28_matric);
-       $this->j28_tipologcalc = ($this->j28_tipologcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_tipologcalc"]:$this->j28_tipologcalc);
+       $this->j28_codigo = ($this->j28_codigo === 0 || $this->j28_codigo === 0.0 || $this->j28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_codigo"]:$this->j28_codigo);
+       $this->j28_matric = ($this->j28_matric === 0 || $this->j28_matric === 0.0 || $this->j28_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_matric"]:$this->j28_matric);
+       $this->j28_tipologcalc = ($this->j28_tipologcalc === 0 || $this->j28_tipologcalc === 0.0 || $this->j28_tipologcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_tipologcalc"]:$this->j28_tipologcalc);
        $this->j28_obs = ($this->j28_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_obs"]:$this->j28_obs);
      }else{
-       $this->j28_codigo = ($this->j28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_codigo"]:$this->j28_codigo);
-       $this->j28_matric = ($this->j28_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_matric"]:$this->j28_matric);
+       $this->j28_codigo = ($this->j28_codigo === 0 || $this->j28_codigo === 0.0 || $this->j28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_codigo"]:$this->j28_codigo);
+       $this->j28_matric = ($this->j28_matric === 0 || $this->j28_matric === 0.0 || $this->j28_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j28_matric"]:$this->j28_matric);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_iptucalclogmat {
      }
        $this->j28_codigo = $j28_codigo;
        $this->j28_matric = $j28_matric;
-     if(($this->j28_codigo == null) || ($this->j28_codigo == "") ){
+     if(($this->j28_codigo == null) || ($this->j28_codigo === 0 || $this->j28_codigo === 0.0 || $this->j28_codigo == "") ){
        $this->erro_sql = " Campo j28_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_iptucalclogmat {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j28_matric == null) || ($this->j28_matric == "") ){
+     if(($this->j28_matric == null) || ($this->j28_matric === 0 || $this->j28_matric === 0.0 || $this->j28_matric == "") ){
        $this->erro_sql = " Campo j28_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

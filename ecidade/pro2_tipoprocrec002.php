@@ -31,7 +31,7 @@
  $aux    = new cl_protprocesso;
 
  db_postmemory($HTTP_POST_VARS); 
- parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+ parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 
  $sql =" select p51_codigo,p51_descr,k02_codigo,k02_drecei,p52_valor 

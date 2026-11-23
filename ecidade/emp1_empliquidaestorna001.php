@@ -76,7 +76,7 @@ $clconlancamnota  = new cl_conlancamnota;
 include(modification("libs/db_libcontabilidade.php"));
 $cltranslan       = new cl_translan;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
   $db_opcao = 22;

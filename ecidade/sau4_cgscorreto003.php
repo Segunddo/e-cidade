@@ -25,7 +25,7 @@
  *                                licenca/licenca_pt.txt 
  */
 
-parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"] );
+parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"] , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if (! isset ( $abas )) {
 	echo "<script>location.href='sau4_cgscorreto004.php?db_opcao=3'</script>";
     /**
@@ -42,7 +42,7 @@ include(modification("classes/db_sau_cgscorreto_classe.php"));
 include(modification("classes/db_sau_cgserrado_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"] );
+parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"] , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory ( $HTTP_POST_VARS );
 
 $clcgscorreto = new cl_sau_cgscorreto ( );

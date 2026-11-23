@@ -69,12 +69,12 @@ class cl_matestoqueitemoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m73_codmatestoqueitem = ($this->m73_codmatestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m73_codmatestoqueitem"]:$this->m73_codmatestoqueitem);
-       $this->m73_codmatordemitem = ($this->m73_codmatordemitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m73_codmatordemitem"]:$this->m73_codmatordemitem);
+       $this->m73_codmatestoqueitem = ($this->m73_codmatestoqueitem === 0 || $this->m73_codmatestoqueitem === 0.0 || $this->m73_codmatestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m73_codmatestoqueitem"]:$this->m73_codmatestoqueitem);
+       $this->m73_codmatordemitem = ($this->m73_codmatordemitem === 0 || $this->m73_codmatordemitem === 0.0 || $this->m73_codmatordemitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m73_codmatordemitem"]:$this->m73_codmatordemitem);
        $this->m73_cancelado = ($this->m73_cancelado == "f"?@$GLOBALS["HTTP_POST_VARS"]["m73_cancelado"]:$this->m73_cancelado);
      }else{
-       $this->m73_codmatestoqueitem = ($this->m73_codmatestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m73_codmatestoqueitem"]:$this->m73_codmatestoqueitem);
-       $this->m73_codmatordemitem = ($this->m73_codmatordemitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m73_codmatordemitem"]:$this->m73_codmatordemitem);
+       $this->m73_codmatestoqueitem = ($this->m73_codmatestoqueitem === 0 || $this->m73_codmatestoqueitem === 0.0 || $this->m73_codmatestoqueitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m73_codmatestoqueitem"]:$this->m73_codmatestoqueitem);
+       $this->m73_codmatordemitem = ($this->m73_codmatordemitem === 0 || $this->m73_codmatordemitem === 0.0 || $this->m73_codmatordemitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m73_codmatordemitem"]:$this->m73_codmatordemitem);
      }
    }
    // funcao para inclusao
@@ -85,7 +85,7 @@ class cl_matestoqueitemoc {
      }
        $this->m73_codmatestoqueitem = $m73_codmatestoqueitem;
        $this->m73_codmatordemitem = $m73_codmatordemitem;
-     if(($this->m73_codmatestoqueitem == null) || ($this->m73_codmatestoqueitem == "") ){
+     if(($this->m73_codmatestoqueitem == null) || ($this->m73_codmatestoqueitem === 0 || $this->m73_codmatestoqueitem === 0.0 || $this->m73_codmatestoqueitem == "") ){
        $this->erro_sql = " Campo m73_codmatestoqueitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -93,7 +93,7 @@ class cl_matestoqueitemoc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->m73_codmatordemitem == null) || ($this->m73_codmatordemitem == "") ){
+     if(($this->m73_codmatordemitem == null) || ($this->m73_codmatordemitem === 0 || $this->m73_codmatordemitem === 0.0 || $this->m73_codmatordemitem == "") ){
        $this->erro_sql = " Campo m73_codmatordemitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

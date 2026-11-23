@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/escola/procedimentos/diario-classe/registro-aula",
+  "json": null,
+  "sha256": "88cae3c7a7343b65cead0c47600edc6341d0b2c7a630a97306f670dcfa0fb2b2",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

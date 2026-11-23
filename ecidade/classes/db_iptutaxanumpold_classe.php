@@ -29,7 +29,7 @@ class cl_iptutaxanumpold {
                  j159_iptucalclog = int4 = Sequencial da iptucalclog 
                  ";
    //funcao construtor da classe 
-   function cl_iptutaxanumpold() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("iptutaxanumpold"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -46,14 +46,14 @@ class cl_iptutaxanumpold {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j159_sequencial = ($this->j159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_sequencial"]:$this->j159_sequencial);
-       $this->j159_codigo = ($this->j159_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_codigo"]:$this->j159_codigo);
-       $this->j159_matric = ($this->j159_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_matric"]:$this->j159_matric);
-       $this->j159_numpre = ($this->j159_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_numpre"]:$this->j159_numpre);
-       $this->j159_iptucadtaxaexe = ($this->j159_iptucadtaxaexe == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_iptucadtaxaexe"]:$this->j159_iptucadtaxaexe);
-       $this->j159_iptucalclog = ($this->j159_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_iptucalclog"]:$this->j159_iptucalclog);
+       $this->j159_sequencial = ($this->j159_sequencial === 0 || $this->j159_sequencial === 0.0 || $this->j159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_sequencial"]:$this->j159_sequencial);
+       $this->j159_codigo = ($this->j159_codigo === 0 || $this->j159_codigo === 0.0 || $this->j159_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_codigo"]:$this->j159_codigo);
+       $this->j159_matric = ($this->j159_matric === 0 || $this->j159_matric === 0.0 || $this->j159_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_matric"]:$this->j159_matric);
+       $this->j159_numpre = ($this->j159_numpre === 0 || $this->j159_numpre === 0.0 || $this->j159_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_numpre"]:$this->j159_numpre);
+       $this->j159_iptucadtaxaexe = ($this->j159_iptucadtaxaexe === 0 || $this->j159_iptucadtaxaexe === 0.0 || $this->j159_iptucadtaxaexe == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_iptucadtaxaexe"]:$this->j159_iptucadtaxaexe);
+       $this->j159_iptucalclog = ($this->j159_iptucalclog === 0 || $this->j159_iptucalclog === 0.0 || $this->j159_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_iptucalclog"]:$this->j159_iptucalclog);
      }else{
-       $this->j159_sequencial = ($this->j159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_sequencial"]:$this->j159_sequencial);
+       $this->j159_sequencial = ($this->j159_sequencial === 0 || $this->j159_sequencial === 0.0 || $this->j159_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j159_sequencial"]:$this->j159_sequencial);
      }
    }
    // funcao para inclusao
@@ -128,7 +128,7 @@ class cl_iptutaxanumpold {
          $this->j159_sequencial = $j159_sequencial; 
        }
      }
-     if(($this->j159_sequencial == null) || ($this->j159_sequencial == "") ){ 
+     if(($this->j159_sequencial == null) || ($this->j159_sequencial === 0 || $this->j159_sequencial === 0.0 || $this->j159_sequencial == "") ){ 
        $this->erro_sql = " Campo j159_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

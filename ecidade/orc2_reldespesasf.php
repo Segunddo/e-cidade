@@ -80,7 +80,7 @@ $head3 = "EXERCÍCIO: " . db_getsession("DB_anousu");
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in $instits");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_num_rows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_num_rows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg . $nomeinst;
     $xvirg = ', ';
@@ -164,7 +164,7 @@ if (substr($nivel, 1, 1) == 'A') {
 
     $pagina = 1;
 
-    for ($i = 0; $i < pg_num_rows($result); $i++) {
+    for ($i = 0; $i < ($result ? pg_num_rows($result) : null); $i++) {
         db_fieldsmemory($result, $i);
 
         if ($xorgao . $xunidade != $o58_orgao . $o58_unidade && $quebra_unidade == 'S' && $pagina != 1 && $totunidaanter != 0) {
@@ -543,7 +543,7 @@ if (substr($nivel, 1, 1) == 'A') {
 		      substr(o56_elemento,8,5) != '00000' and o56_anousu = " . db_getsession("DB_anousu") . " and
 		      o56_orcado is true";
                 $res = db_query($sql);
-                for ($ne = 0; $ne < pg_num_rows($res); $ne++) {
+                for ($ne = 0; $ne < ($res ? pg_num_rows($res) : null); $ne++) {
                     db_fieldsmemory($res, $ne);
                     $pdf->cell(20, $alt, $o56_elemento, 0, 0, "L", 0);
                     $pdf->cell(80, $alt, $o56_descr, 0, 0, "L", 0);
@@ -630,7 +630,7 @@ if (substr($nivel, 1, 1) == 'A') {
     $totunidaatual = 0;
     $pagina = 1;
 
-    for ($k = 0; $k < pg_num_rows($result); $k++) {
+    for ($k = 0; $k < ($result ? pg_num_rows($result) : null); $k++) {
         db_fieldsmemory($result, $k);
         if ($pdf->gety() > $pdf->getH() - 30 || $pagina == 1) {
             $pagina = 0;

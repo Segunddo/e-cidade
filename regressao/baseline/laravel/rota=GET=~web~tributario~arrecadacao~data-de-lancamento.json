@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/arrecadacao/data-de-lancamento",
+  "json": null,
+  "sha256": "2d34fbe4d7f4e3d0a2ff15198bf3b2a1462d02b3405e7be0c6aff9c24457fbb7",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

@@ -85,8 +85,8 @@ if(isset($db_opcaoal)){
 	                    from caitransfdest where k92_transf= $k93_transf
 	                  ) order by codigo desc ");
 	 $db_matriz = array();
-	 if (pg_numrows($res)>0){
-            for ($x=0;$x<pg_numrows($res);$x++){
+	 if (($res ? pg_numrows($res) : null)>0){
+            for ($x=0;$x<($res ? pg_numrows($res) : null);$x++){
                  db_fieldsmemory($res,$x);
 		 $db_matriz[$codigo]=$nomeinst;
 	    }

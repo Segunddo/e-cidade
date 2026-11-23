@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/empenho/relatorio/relatorio-subcontratacao",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[22007]: Invalid datetime format: 7 ERRO:  sintaxe de entrada é inválida para tipo date: \"\"\nLINE 28: where retencaoreceitas.e23_dtcalculo between '' and ''\n                                                      ^ (SQL: \nselect concat(empempenho.e60_codemp, '/', empempenho.e60_anousu) as empenho_numero,\n       e69_numero as nota_fiscal,\n       contratado.z01_numcgm    as cgm_contratado,\n       subcontratado.z01_numcgm    as cgm_subcontratado,\n       e23_dtcalculo as data_apropriacao,\n       contratado.z01_cgccpf as cpf_cnpj_contratado,\n       e23_valorretencao as valorirrfretido_contratado,\n       e50_numemp as empenho,\n       e50_codord as op,\n       contratado.z01_nome as nome_contratado,\n       subcontratado.z01_nome as nome_subcontratado,\n       subcontratado.z01_cgccpf as cpf_cnpj_subcontratado,\n       e163_valor as valorirrfretido_subcontratado\nfrom empenho.retencaoreceitassubcontratacao\n         inner join retencaoreceitas on e163_retencaoreceitas = retencaoreceitas.e23_sequencial\n         inner join retencaotiporec on e163_retencaotiporec = retencaotiporec.e21_sequencial\n         inner join retencaopagordem on retencaoreceitas.e23_retencaopagordem = retencaopagordem.e20_sequencial\n         inner join pagordem on retencaopagordem.e20_pagordem = pagordem.e50_codord\n         inner join pagordemnota on pagordem.e50_codord = pagordemnota.e71_codord\n         inner join empnotaele on e71_codnota = e70_codnota\n         inner join empnota on empnotaele.e70_codnota = empnota.e69_codnota\n         inner join empempenho on empempenho.e60_numemp = pagordem.e50_numemp\n         inner join cgm as subcontratado on e163_numcgm = subcontratado.z01_numcgm\n         inner join cgm as contratado on e60_numcgm = contratado.z01_numcgm\n         inner join retencaoempagemov on retencaoempagemov.e27_retencaoreceitas = retencaoreceitas.e23_sequencial\n         inner join empagemov on empagemov.e81_codmov = retencaoempagemov.e27_empagemov\nwhere retencaoreceitas.e23_dtcalculo between '' and ''\nand e60_instit = 1\nand e23_ativo is true and e81_cancelado is null\n  \n  )"
+  },
+  "sha256": "f20dea8f01ed3acae3e9f6dc3be7dfea8d22d8d49ccebf9e321e2a9aa85017fc",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/saude/esf/controle-vacinas/imunobiologicos",
+  "json": {
+    "error": true,
+    "message": "Plugin ESF não instalado."
+  },
+  "sha256": "007d8189daac7e9c59f0d6dc125d8c0ed71f095f6a922d2f442d3737a3947c01",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

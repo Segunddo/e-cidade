@@ -80,10 +80,10 @@ class cl_suspensaofinaliza {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar19_sequencial = ($this->ar19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_sequencial"]:$this->ar19_sequencial);
-       $this->ar19_suspensao = ($this->ar19_suspensao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_suspensao"]:$this->ar19_suspensao);
-       $this->ar19_id_usuario = ($this->ar19_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_id_usuario"]:$this->ar19_id_usuario);
-       $this->ar19_tipo = ($this->ar19_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_tipo"]:$this->ar19_tipo);
+       $this->ar19_sequencial = ($this->ar19_sequencial === 0 || $this->ar19_sequencial === 0.0 || $this->ar19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_sequencial"]:$this->ar19_sequencial);
+       $this->ar19_suspensao = ($this->ar19_suspensao === 0 || $this->ar19_suspensao === 0.0 || $this->ar19_suspensao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_suspensao"]:$this->ar19_suspensao);
+       $this->ar19_id_usuario = ($this->ar19_id_usuario === 0 || $this->ar19_id_usuario === 0.0 || $this->ar19_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_id_usuario"]:$this->ar19_id_usuario);
+       $this->ar19_tipo = ($this->ar19_tipo === 0 || $this->ar19_tipo === 0.0 || $this->ar19_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_tipo"]:$this->ar19_tipo);
        if($this->ar19_data == ""){
          $this->ar19_data_dia = ($this->ar19_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_data_dia"]:$this->ar19_data_dia);
          $this->ar19_data_mes = ($this->ar19_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_data_mes"]:$this->ar19_data_mes);
@@ -95,7 +95,7 @@ class cl_suspensaofinaliza {
        $this->ar19_hora = ($this->ar19_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_hora"]:$this->ar19_hora);
        $this->ar19_obs = ($this->ar19_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_obs"]:$this->ar19_obs);
      }else{
-       $this->ar19_sequencial = ($this->ar19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_sequencial"]:$this->ar19_sequencial);
+       $this->ar19_sequencial = ($this->ar19_sequencial === 0 || $this->ar19_sequencial === 0.0 || $this->ar19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar19_sequencial"]:$this->ar19_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_suspensaofinaliza {
          $this->ar19_sequencial = $ar19_sequencial;
        }
      }
-     if(($this->ar19_sequencial == null) || ($this->ar19_sequencial == "") ){
+     if(($this->ar19_sequencial == null) || ($this->ar19_sequencial === 0 || $this->ar19_sequencial === 0.0 || $this->ar19_sequencial == "") ){
        $this->erro_sql = " Campo ar19_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

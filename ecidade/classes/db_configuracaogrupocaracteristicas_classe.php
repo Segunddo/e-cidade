@@ -67,10 +67,10 @@ class cl_configuracaogrupocaracteristicas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db144_sequencial = ($this->db144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db144_sequencial"]:$this->db144_sequencial);
-       $this->db144_tipoutilizacaoiptu = ($this->db144_tipoutilizacaoiptu == ""?@$GLOBALS["HTTP_POST_VARS"]["db144_tipoutilizacaoiptu"]:$this->db144_tipoutilizacaoiptu);
+       $this->db144_sequencial = ($this->db144_sequencial === 0 || $this->db144_sequencial === 0.0 || $this->db144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db144_sequencial"]:$this->db144_sequencial);
+       $this->db144_tipoutilizacaoiptu = ($this->db144_tipoutilizacaoiptu === 0 || $this->db144_tipoutilizacaoiptu === 0.0 || $this->db144_tipoutilizacaoiptu == ""?@$GLOBALS["HTTP_POST_VARS"]["db144_tipoutilizacaoiptu"]:$this->db144_tipoutilizacaoiptu);
      }else{
-       $this->db144_sequencial = ($this->db144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db144_sequencial"]:$this->db144_sequencial);
+       $this->db144_sequencial = ($this->db144_sequencial === 0 || $this->db144_sequencial === 0.0 || $this->db144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db144_sequencial"]:$this->db144_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_configuracaogrupocaracteristicas {
          $this->db144_sequencial = $db144_sequencial;
        }
      }
-     if(($this->db144_sequencial == null) || ($this->db144_sequencial == "") ){
+     if(($this->db144_sequencial == null) || ($this->db144_sequencial === 0 || $this->db144_sequencial === 0.0 || $this->db144_sequencial == "") ){
        $this->erro_sql = " Campo db144_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

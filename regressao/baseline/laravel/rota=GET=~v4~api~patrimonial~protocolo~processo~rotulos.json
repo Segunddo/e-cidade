@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/protocolo/processo/rotulos",
+  "json": {
+    "data": {
+      "p58_ano": "Ano do Processo",
+      "p58_codigo": "Tipo",
+      "p58_codproc": "Número de Controle",
+      "p58_dtproc": "Data do Processo",
+      "p58_id_usuario": "Id do usuário",
+      "p58_numcgm": "Titular",
+      "p58_obs": "Observação",
+      "p58_requer": "Requerente"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "9fb0f2e4e7389bf692acf01032a4a6d9db487fd198925bd93da5476da9e02852",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

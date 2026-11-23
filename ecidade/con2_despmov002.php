@@ -67,8 +67,8 @@ $xinstit =explode("-",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-$numero_instit = pg_numrows($resultinst);
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+$numero_instit = ($resultinst ? pg_numrows($resultinst) : null);
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
   db_fieldsmemory($resultinst,$xins);
   $descr_inst .= $xvirg.$nomeinst ;
   $xvirg = ', ';
@@ -154,7 +154,7 @@ $yordem
 $result = db_query($sql);
 
 //db_criatabela($result);exit;
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Movimentações para esses dados.');
 
@@ -183,7 +183,7 @@ $total_anupago = 0;
 $cor = 0;
 $emp = 0;
 $cgm = 0;
-   for($x=0;$x<pg_numrows($result);$x++){
+   for($x=0;$x<($result ? pg_numrows($result) : null);$x++){
    db_fieldsmemory($result,$x);
 
    if($cgm != $e60_numcgm && $troca != 1 && $credor == 's'){

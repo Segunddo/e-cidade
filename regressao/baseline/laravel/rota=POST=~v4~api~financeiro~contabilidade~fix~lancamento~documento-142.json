@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/fix/lancamento/documento-142",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42601]: Syntax error: 7 ERRO:  erro de sintaxe em ou próximo a \"and\"\nLINE 5:    and c60_estrut like '72111%';\n           ^ (SQL: select c60_estrut, c61_instit, c61_codigo, c61_reduz\n  from contabilidade.conplano\n  join contabilidade.conplanoreduz on (c60_codcon, c60_anousu) = (c61_codcon, c61_anousu)\n where c60_anousu = \n   and c60_estrut like '72111%';)"
+  },
+  "sha256": "2aeba804604dbb8c926ea852b8628258f930363ad0b5c9bd4acf04f32e6da885",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -134,7 +134,7 @@ function imprime_cabec_desp($alt,$pdf, $bimestre) {
 $anousu = db_getsession("DB_anousu");
 $instit = db_getsession("DB_instit");
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 $classinatura    = new cl_assinatura;
@@ -970,10 +970,10 @@ $pdf->cell(60,$alt,espaco($n2)."Impostos",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1014,10 +1014,10 @@ $pdf->cell(60,$alt,espaco($n2)."Taxas",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1058,10 +1058,10 @@ $pdf->cell(60,$alt,espaco($n2)."Contribuição de Melhoria",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1084,9 +1084,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -1134,10 +1134,10 @@ $pdf->cell(60,$alt,espaco($n2)."Contribuições Sociais",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1179,10 +1179,10 @@ $pdf->cell(60,$alt,espaco($n2)."Contribuições de Intervenção no Domínio Econômic
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1223,10 +1223,10 @@ $pdf->cell(60,$alt,espaco($n2)."Contribuições de Iluminação Pública",'R',0,"L",0
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1250,9 +1250,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -1298,10 +1298,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receitas Imobiliárias",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1343,10 +1343,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receita de Valores Mobiliários",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1390,10 +1390,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receita de Concessões e Permissões",'R',0,"L",0)
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1433,10 +1433,10 @@ $pdf->cell(60,$alt,espaco($n2)."Compensações Financeiras",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1477,10 +1477,10 @@ $pdf->cell(60,$alt,espaco($n2)."Rec. Dec. Direito Expl. Bens Pub. Áreas Dom. Púb
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1523,10 +1523,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receita De Cessão De Direitos",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1568,10 +1568,10 @@ $pdf->cell(60,$alt,espaco($n2)."Outras Receitas Patrimoniais",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1596,9 +1596,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -1645,10 +1645,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receita da Produção Vegetal",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1688,10 +1688,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receita da Produção Animal e Derivados",'R',0,"L
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1733,10 +1733,10 @@ $pdf->cell(60,$alt,espaco($n2)."Outras Receitas Agropecuárias",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1759,9 +1759,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -1808,10 +1808,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receita da Indústria Extrativa Mineral",'R',0,"L
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1852,10 +1852,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receita da Indústria de Transformação",'R',0,"L"
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1898,10 +1898,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receita da Indústria de Construção",'R',0,"L",0)
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1942,10 +1942,10 @@ $pdf->cell(60,$alt,espaco($n2)."Outras Receitas Industriais",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -1969,9 +1969,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -2021,9 +2021,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -2068,10 +2068,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências Intergovernamentais",'R',0,"L",0)
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2113,10 +2113,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências de Instituições Privadas",'R',0,"
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2156,10 +2156,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências do Exterior",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2201,10 +2201,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências de Pessoas",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2244,10 +2244,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências de Convenios",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2275,16 +2275,16 @@ atualizaTotaisReceita($m_transf_fome["parametros"], $m_transf_fome_intra, $resul
 $oLinha = $m_transf_fome["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas){
 
-  $tot_inicial    += $oColunas->colunas[1]->o117_valor;
-  $tot_atualizada += $oColunas->colunas[2]->o117_valor;
-  $tot_nobim      += $oColunas->colunas[3]->o117_valor;
-  $tot_atebim     += $oColunas->colunas[4]->o117_valor;
-  //$tot_realizar   += $oColunas->colunas[5]->o117_valor;
+  $tot_inicial    += (float) $oColunas->colunas[1]->o117_valor;
+  $tot_atualizada += (float) $oColunas->colunas[2]->o117_valor;
+  $tot_nobim      += (float) $oColunas->colunas[3]->o117_valor;
+  $tot_atebim     += (float) $oColunas->colunas[4]->o117_valor;
+  //$tot_realizar   += (float) $oColunas->colunas[5]->o117_valor;
 
   if ($bimestre == 6) {
 
     if (isset($oColunas->colunas[7]->o117_valor)) {
-      $tot_inscritos_rp     += $oColunas->colunas[7]->o117_valor;
+      $tot_inscritos_rp     += (float) $oColunas->colunas[7]->o117_valor;
     }
   }
 
@@ -2307,10 +2307,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências para o Combate à Fome",'R',0,"L",
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2333,9 +2333,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -2380,10 +2380,10 @@ $pdf->cell(60,$alt,espaco($n2)."Multas e Juros de Mora",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2426,10 +2426,10 @@ $pdf->cell(60,$alt,espaco($n2)."Indenizações e Restituições",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2470,10 +2470,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receita da Dívida Ativa",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2519,10 +2519,10 @@ $pdf->cell(60,$alt,espaco($n2)."Rec. Dec. Aportes Per. Amort. Def. Atuarial RPPS
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2580,10 +2580,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receitas Correntes Diversas",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2607,9 +2607,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -2630,9 +2630,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($rec_cor_I_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($rec_cor_I_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($rec_cor_I_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($rec_cor_I_nobim*100)/$rec_cor_I_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $rec_cor_I_atualizada == 0 ? (float) ($rec_cor_I_nobim * 100) > 0 ? INF : ((float) ($rec_cor_I_nobim * 100) < 0 ? -INF : NAN) : $rec_cor_I_nobim * 100 / $rec_cor_I_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($rec_cor_I_atebim ,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($rec_cor_I_atebim *100)/$rec_cor_I_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $rec_cor_I_atualizada == 0 ? (float) ($rec_cor_I_atebim * 100) > 0 ? INF : ((float) ($rec_cor_I_atebim * 100) < 0 ? -INF : NAN) : $rec_cor_I_atebim * 100 / $rec_cor_I_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($rec_cor_I_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -2691,10 +2691,10 @@ $pdf->cell(60,$alt,espaco($n2)."Operações de Crédito Internas",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 
@@ -2739,10 +2739,10 @@ $pdf->cell(60,$alt,espaco($n2)."Operações de Crédito Externas",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2766,9 +2766,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -2812,10 +2812,10 @@ $pdf->cell(60,$alt,espaco($n2)."Alienação de Bens Móveis",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2856,10 +2856,10 @@ $pdf->cell(60,$alt,espaco($n2)."Alienação de Bens Imóveis",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -2881,9 +2881,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 //--------------------------------
@@ -2913,9 +2913,9 @@ $pdf->cell(60,$alt,espaco($n1)."AMORTIZAÇÕES DE EMPRÉSTIMOS",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),'0',1,"R",0);
 
 // --------------------------------
@@ -2978,10 +2978,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências Intergovernamentais",'R',0,"L",0)
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -3022,10 +3022,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências de Instituições Privadas",'R',0,"
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -3066,10 +3066,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências do Exterior",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -3110,10 +3110,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências de Pessoas",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -3155,10 +3155,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências de Outras Instituições Públicas",
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -3199,10 +3199,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências de Convênios",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -3230,10 +3230,10 @@ atualizaTotaisReceita($m_transf_capital_fome["parametros"], $m_transf_capital_fo
 $oLinha = $m_transf_capital_fome["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas){
 
-  $tot_inicial    += $oColunas->colunas[1]->o117_valor;
-  $tot_atualizada += $oColunas->colunas[2]->o117_valor;
-  $tot_nobim      += $oColunas->colunas[3]->o117_valor;
-  $tot_atebim     += $oColunas->colunas[4]->o117_valor;
+  $tot_inicial    += (float) $oColunas->colunas[1]->o117_valor;
+  $tot_atualizada += (float) $oColunas->colunas[2]->o117_valor;
+  $tot_nobim      += (float) $oColunas->colunas[3]->o117_valor;
+  $tot_atebim     += (float) $oColunas->colunas[4]->o117_valor;
 
 }
 
@@ -3255,10 +3255,10 @@ $pdf->cell(60,$alt,espaco($n2)."Transferências para o Combate à Fome",'R',0,"L",
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -3283,9 +3283,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -3316,10 +3316,10 @@ atualizaTotaisReceita($m_outras_social["parametros"], $m_outras_social_intra, $r
 $oLinha = $m_outras_social["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas){
 
-  $tot_inicial    += $oColunas->colunas[1]->o117_valor;
-  $tot_atualizada += $oColunas->colunas[2]->o117_valor;
-  $tot_nobim      += $oColunas->colunas[3]->o117_valor;
-  $tot_atebim     += $oColunas->colunas[4]->o117_valor;
+  $tot_inicial    += (float) $oColunas->colunas[1]->o117_valor;
+  $tot_atualizada += (float) $oColunas->colunas[2]->o117_valor;
+  $tot_nobim      += (float) $oColunas->colunas[3]->o117_valor;
+  $tot_atebim     += (float) $oColunas->colunas[4]->o117_valor;
 
 }
 
@@ -3340,10 +3340,10 @@ $pdf->cell(60,$alt,espaco($n2)."Integralização do Capital Social",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -3384,10 +3384,10 @@ $pdf->cell(60,$alt,espaco($n2)."Div. Atv. Prov. da Amortiz. de Emp. e Financ.",'
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 $somador_I_inicial    += $tot_inicial;
@@ -3445,9 +3445,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -3469,9 +3469,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($rec_cor_I_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($rec_cor_I_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($rec_cor_I_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($rec_cor_I_nobim*100)/$rec_cor_I_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $rec_cor_I_atualizada == 0 ? (float) ($rec_cor_I_nobim * 100) > 0 ? INF : ((float) ($rec_cor_I_nobim * 100) < 0 ? -INF : NAN) : $rec_cor_I_nobim * 100 / $rec_cor_I_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($rec_cor_I_atebim ,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($rec_cor_I_atebim *100)/$rec_cor_I_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $rec_cor_I_atualizada == 0 ? (float) ($rec_cor_I_atebim * 100) > 0 ? INF : ((float) ($rec_cor_I_atebim * 100) < 0 ? -INF : NAN) : $rec_cor_I_atebim * 100 / $rec_cor_I_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($rec_cor_I_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -3485,9 +3485,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($somador_I_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_I_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($somador_I_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($somador_I_nobim*100)/$somador_I_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $somador_I_atualizada == 0 ? (float) ($somador_I_nobim * 100) > 0 ? INF : ((float) ($somador_I_nobim * 100) < 0 ? -INF : NAN) : $somador_I_nobim * 100 / $somador_I_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($somador_I_atebim ,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($somador_I_atebim *100)/$somador_I_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $somador_I_atualizada == 0 ? (float) ($somador_I_atebim * 100) > 0 ? INF : ((float) ($somador_I_atebim * 100) < 0 ? -INF : NAN) : $somador_I_atebim * 100 / $somador_I_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_I_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -3504,10 +3504,10 @@ $pdf->cell(60,$alt,espaco($n2)."Receitas de Capital Diversas",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 
@@ -3864,7 +3864,7 @@ if ($tot_nobim > 0) {
   $AlinhaBim       = "C";
 
 }
-@$nTotBimAtu = ($tot_nobim*100)/$tot_atualizada;
+@$nTotBimAtu = (float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada;
 if ($nTotBimAtu > 0) {
 
   $nTotBimAtu = db_formatar($nTotBimAtu,'f');
@@ -3900,7 +3900,7 @@ if ($tot_atebim > 0) {
   $AlinhaAte       = "C";
 
 }
-@$nTotAteBimAtual = ($tot_atebim*100)/$tot_atualizada;
+@$nTotAteBimAtual = (float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada;
 if ($nTotAteBimAtual > 0) {
 
   $nTotAteBimAtual = db_formatar($nTotAteBimAtual,'f');
@@ -3941,10 +3941,10 @@ if ($rec_cor_II_inicial_intra  > 0 || $rec_cor_II_atualizada_intra > 0 ||
     $pdf->cell(20,$alt,db_formatar($rec_cor_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_cor_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_cor_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_cor_II_nobim_intra*100)/$rec_cor_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_cor_II_atualizada_intra == 0 ? (float) ($rec_cor_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_cor_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_cor_II_nobim_intra * 100 / $rec_cor_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_cor_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_cor_II_atebim_intra*100)/$rec_cor_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_cor_II_atualizada_intra == 0 ? (float) ($rec_cor_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_cor_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_cor_II_atebim_intra * 100 / $rec_cor_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_cor_II_realizar_intra,'f'),0,1,"R",0);
   }
@@ -3957,10 +3957,10 @@ if ($rec_trib_II_inicial_intra  > 0 || $rec_trib_II_atualizada_intra > 0 ||
     $pdf->cell(20,$alt,db_formatar($rec_trib_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_trib_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_trib_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_trib_II_nobim_intra*100)/$rec_trib_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_trib_II_atualizada_intra == 0 ? (float) ($rec_trib_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_trib_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_trib_II_nobim_intra * 100 / $rec_trib_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_trib_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_trib_II_atebim_intra*100)/$rec_trib_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_trib_II_atualizada_intra == 0 ? (float) ($rec_trib_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_trib_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_trib_II_atebim_intra * 100 / $rec_trib_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_trib_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -3986,10 +3986,10 @@ if ($m_impostos_intra["inicial"]  > 0 || $m_impostos_intra["atualizada"] > 0 ||
     $pdf->cell(20,$alt,db_formatar($m_impostos_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_impostos_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_impostos_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_impostos_intra["nobim"]*100)/$m_impostos_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_impostos_intra["atualizada"] == 0 ? (float) ($m_impostos_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_impostos_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_impostos_intra["nobim"] * 100 / $m_impostos_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_impostos_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_impostos_intra["atebim"]*100)/$m_impostos_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_impostos_intra["atualizada"] == 0 ? (float) ($m_impostos_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_impostos_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_impostos_intra["atebim"] * 100 / $m_impostos_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_impostos_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4014,10 +4014,10 @@ if ($m_taxas_intra["inicial"]  > 0 || $m_taxas_intra["atualizada"] > 0 ||
     $pdf->cell(20,$alt,db_formatar($m_taxas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_taxas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_taxas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_taxas_intra["nobim"]*100)/$m_taxas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_taxas_intra["atualizada"] == 0 ? (float) ($m_taxas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_taxas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_taxas_intra["nobim"] * 100 / $m_taxas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_taxas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_taxas_intra["atebim"]*100)/$m_taxas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_taxas_intra["atualizada"] == 0 ? (float) ($m_taxas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_taxas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_taxas_intra["atebim"] * 100 / $m_taxas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_taxas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4042,10 +4042,10 @@ if ($m_melhorias_intra["inicial"]  > 0 || $m_melhorias_intra["atualizada"] > 0 |
     $pdf->cell(20,$alt,db_formatar($m_melhorias_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_melhorias_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_melhorias_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_melhorias_intra["nobim"]*100)/$m_melhorias_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_melhorias_intra["atualizada"] == 0 ? (float) ($m_melhorias_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_melhorias_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_melhorias_intra["nobim"] * 100 / $m_melhorias_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_melhorias_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_melhorias_intra["atebim"]*100)/$m_melhorias_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_melhorias_intra["atualizada"] == 0 ? (float) ($m_melhorias_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_melhorias_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_melhorias_intra["atebim"] * 100 / $m_melhorias_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_melhorias_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4069,10 +4069,10 @@ if ($rec_contr_II_inicial_intra  > 0 || $rec_contr_II_atualizada_intra > 0 ||
     $pdf->cell(20,$alt,db_formatar($rec_contr_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_contr_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_contr_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_contr_II_nobim_intra*100)/$rec_contr_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_contr_II_atualizada_intra == 0 ? (float) ($rec_contr_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_contr_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_contr_II_nobim_intra * 100 / $rec_contr_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_contr_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_contr_II_atebim_intra*100)/$rec_contr_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_contr_II_atualizada_intra == 0 ? (float) ($rec_contr_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_contr_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_contr_II_atebim_intra * 100 / $rec_contr_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_contr_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -4098,10 +4098,10 @@ if ($m_sociais_intra["inicial"]  > 0 || $m_sociais_intra["atualizada"] > 0 ||
     $pdf->cell(20,$alt,db_formatar($m_sociais_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_sociais_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_sociais_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_sociais_intra["nobim"]*100)/$m_sociais_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_sociais_intra["atualizada"] == 0 ? (float) ($m_sociais_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_sociais_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_sociais_intra["nobim"] * 100 / $m_sociais_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_sociais_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_sociais_intra["atebim"]*100)/$m_sociais_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_sociais_intra["atualizada"] == 0 ? (float) ($m_sociais_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_sociais_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_sociais_intra["atebim"] * 100 / $m_sociais_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_sociais_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4126,10 +4126,10 @@ if ($m_economicas_intra["inicial"]  > 0 || $m_economicas_intra["atualizada"] > 0
     $pdf->cell(20,$alt,db_formatar($m_economicas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_economicas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_economicas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_economicas_intra["nobim"]*100)/$m_economicas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_economicas_intra["atualizada"] == 0 ? (float) ($m_economicas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_economicas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_economicas_intra["nobim"] * 100 / $m_economicas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_economicas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_economicas_intra["atebim"]*100)/$m_economicas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_economicas_intra["atualizada"] == 0 ? (float) ($m_economicas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_economicas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_economicas_intra["atebim"] * 100 / $m_economicas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_economicas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4155,10 +4155,10 @@ if ($m_iluminacao_publica_intra["inicial"]  > 0 || $m_iluminacao_publica_intra["
     $pdf->cell(20,$alt,db_formatar($m_iluminacao_publica_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_iluminacao_publica_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_iluminacao_publica_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_iluminacao_publica_intra["nobim"]*100)/$m_iluminacao_publica_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_iluminacao_publica_intra["atualizada"] == 0 ? (float) ($m_iluminacao_publica_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_iluminacao_publica_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_iluminacao_publica_intra["nobim"] * 100 / $m_iluminacao_publica_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_iluminacao_publica_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_iluminacao_publica_intra["atebim"]*100)/$m_iluminacao_publica_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_iluminacao_publica_intra["atualizada"] == 0 ? (float) ($m_iluminacao_publica_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_iluminacao_publica_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_iluminacao_publica_intra["atebim"] * 100 / $m_iluminacao_publica_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_iluminacao_publica_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4183,10 +4183,10 @@ if ($rec_patr_II_inicial_intra  > 0 || $rec_patr_II_atualizada_intra > 0 ||
     $pdf->cell(20,$alt,db_formatar($rec_patr_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_patr_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_patr_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_patr_II_nobim_intra*100)/$rec_patr_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_patr_II_atualizada_intra == 0 ? (float) ($rec_patr_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_patr_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_patr_II_nobim_intra * 100 / $rec_patr_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_patr_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_patr_II_atebim_intra*100)/$rec_patr_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_patr_II_atualizada_intra == 0 ? (float) ($rec_patr_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_patr_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_patr_II_atebim_intra * 100 / $rec_patr_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_patr_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -4211,10 +4211,10 @@ if ($m_imobiliarias_intra["inicial"]  > 0 || $m_imobiliarias_intra["atualizada"]
     $pdf->cell(20,$alt,db_formatar($m_imobiliarias_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_imobiliarias_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_imobiliarias_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_imobiliarias_intra["nobim"]*100)/$m_imobiliarias_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_imobiliarias_intra["atualizada"] == 0 ? (float) ($m_imobiliarias_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_imobiliarias_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_imobiliarias_intra["nobim"] * 100 / $m_imobiliarias_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_imobiliarias_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_imobiliarias_intra["atebim"]*100)/$m_imobiliarias_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_imobiliarias_intra["atualizada"] == 0 ? (float) ($m_imobiliarias_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_imobiliarias_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_imobiliarias_intra["atebim"] * 100 / $m_imobiliarias_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_imobiliarias_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4239,10 +4239,10 @@ if ($m_valmobiliarias_intra["inicial"]  > 0 || $m_valmobiliarias_intra["atualiza
     $pdf->cell(20,$alt,db_formatar($m_valmobiliarias_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_valmobiliarias_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_valmobiliarias_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_valmobiliarias_intra["nobim"]*100)/$m_valmobiliarias_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_valmobiliarias_intra["atualizada"] == 0 ? (float) ($m_valmobiliarias_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_valmobiliarias_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_valmobiliarias_intra["nobim"] * 100 / $m_valmobiliarias_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_valmobiliarias_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_valmobiliarias_intra["atebim"]*100)/$m_valmobiliarias_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_valmobiliarias_intra["atualizada"] == 0 ? (float) ($m_valmobiliarias_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_valmobiliarias_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_valmobiliarias_intra["atebim"] * 100 / $m_valmobiliarias_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_valmobiliarias_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4267,10 +4267,10 @@ if ($m_permissoes_intra["inicial"]  > 0 || $m_permissoes_intra["atualizada"] > 0
     $pdf->cell(20,$alt,db_formatar($m_permissoes_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_permissoes_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_permissoes_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_permissoes_intra["nobim"]*100)/$m_permissoes_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_permissoes_intra["atualizada"] == 0 ? (float) ($m_permissoes_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_permissoes_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_permissoes_intra["nobim"] * 100 / $m_permissoes_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_permissoes_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_permissoes_intra["atebim"]*100)/$m_permissoes_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_permissoes_intra["atualizada"] == 0 ? (float) ($m_permissoes_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_permissoes_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_permissoes_intra["atebim"] * 100 / $m_permissoes_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_permissoes_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4295,10 +4295,10 @@ if ($m_patrimoniais_intra["inicial"]  > 0 || $m_patrimoniais_intra["atualizada"]
     $pdf->cell(20,$alt,db_formatar($m_patrimoniais_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_patrimoniais_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_patrimoniais_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_patrimoniais_intra["nobim"]*100)/$m_patrimoniais_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_patrimoniais_intra["atualizada"] == 0 ? (float) ($m_patrimoniais_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_patrimoniais_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_patrimoniais_intra["nobim"] * 100 / $m_patrimoniais_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_patrimoniais_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_patrimoniais_intra["atebim"]*100)/$m_patrimoniais_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_patrimoniais_intra["atualizada"] == 0 ? (float) ($m_patrimoniais_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_patrimoniais_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_patrimoniais_intra["atebim"] * 100 / $m_patrimoniais_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_patrimoniais_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4322,10 +4322,10 @@ if ($rec_agro_II_inicial_intra  > 0 || $rec_agro_II_atualizada_intra > 0 ||
     $pdf->cell(20,$alt,db_formatar($rec_agro_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_agro_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_agro_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_agro_II_nobim_intra*100)/$rec_agro_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_agro_II_atualizada_intra == 0 ? (float) ($rec_agro_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_agro_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_agro_II_nobim_intra * 100 / $rec_agro_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_agro_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_agro_II_atebim_intra*100)/$rec_agro_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_agro_II_atualizada_intra == 0 ? (float) ($rec_agro_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_agro_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_agro_II_atebim_intra * 100 / $rec_agro_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_agro_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -4350,10 +4350,10 @@ if ($m_vegetal_intra["inicial"]  > 0 || $m_vegetal_intra["atualizada"] > 0 ||
     $pdf->cell(20,$alt,db_formatar($m_vegetal_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_vegetal_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_vegetal_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_vegetal_intra["nobim"]*100)/$m_vegetal_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_vegetal_intra["atualizada"] == 0 ? (float) ($m_vegetal_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_vegetal_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_vegetal_intra["nobim"] * 100 / $m_vegetal_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_vegetal_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_vegetal_intra["atebim"]*100)/$m_vegetal_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_vegetal_intra["atualizada"] == 0 ? (float) ($m_vegetal_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_vegetal_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_vegetal_intra["atebim"] * 100 / $m_vegetal_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_vegetal_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4378,10 +4378,10 @@ if ($m_animal_intra["inicial"]  > 0 || $m_animal_intra["atualizada"] > 0 ||
     $pdf->cell(20,$alt,db_formatar($m_animal_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_animal_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_animal_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_animal_intra["nobim"]*100)/$m_animal_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_animal_intra["atualizada"] == 0 ? (float) ($m_animal_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_animal_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_animal_intra["nobim"] * 100 / $m_animal_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_animal_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_animal_intra["atebim"]*100)/$m_animal_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_animal_intra["atualizada"] == 0 ? (float) ($m_animal_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_animal_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_animal_intra["atebim"] * 100 / $m_animal_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_animal_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4406,10 +4406,10 @@ if ($m_agropecuarias_intra["inicial"]  > 0 || $m_agropecuarias_intra["atualizada
     $pdf->cell(20,$alt,db_formatar($m_agropecuarias_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_agropecuarias_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_agropecuarias_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_agropecuarias_intra["nobim"]*100)/$m_agropecuarias_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_agropecuarias_intra["atualizada"] == 0 ? (float) ($m_agropecuarias_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_agropecuarias_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_agropecuarias_intra["nobim"] * 100 / $m_agropecuarias_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_agropecuarias_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_agropecuarias_intra["atebim"]*100)/$m_agropecuarias_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_agropecuarias_intra["atualizada"] == 0 ? (float) ($m_agropecuarias_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_agropecuarias_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_agropecuarias_intra["atebim"] * 100 / $m_agropecuarias_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_agropecuarias_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4433,10 +4433,10 @@ if ($rec_ind_II_inicial_intra  > 0 || $rec_ind_II_atualizada_intra > 0 ||
     $pdf->cell(20,$alt,db_formatar($rec_ind_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_ind_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_ind_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_ind_II_nobim_intra*100)/$rec_ind_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_ind_II_atualizada_intra == 0 ? (float) ($rec_ind_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_ind_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_ind_II_nobim_intra * 100 / $rec_ind_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_ind_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_ind_II_atebim_intra*100)/$rec_ind_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_ind_II_atualizada_intra == 0 ? (float) ($rec_ind_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_ind_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_ind_II_atebim_intra * 100 / $rec_ind_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_ind_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -4461,10 +4461,10 @@ if ($m_transformacao_intra["inicial"]  > 0 || $m_transformacao_intra["atualizada
     $pdf->cell(20,$alt,db_formatar($m_transformacao_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transformacao_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transformacao_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transformacao_intra["nobim"]*100)/$m_transformacao_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transformacao_intra["atualizada"] == 0 ? (float) ($m_transformacao_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transformacao_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transformacao_intra["nobim"] * 100 / $m_transformacao_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transformacao_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transformacao_intra["atebim"]*100)/$m_transformacao_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transformacao_intra["atualizada"] == 0 ? (float) ($m_transformacao_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transformacao_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transformacao_intra["atebim"] * 100 / $m_transformacao_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transformacao_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4489,10 +4489,10 @@ if ($m_construcao_intra["inicial"]  > 0 || $m_construcao_intra["atualizada"] > 0
     $pdf->cell(20,$alt,db_formatar($m_construcao_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_construcao_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_construcao_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_construcao_intra["nobim"]*100)/$m_construcao_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_construcao_intra["atualizada"] == 0 ? (float) ($m_construcao_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_construcao_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_construcao_intra["nobim"] * 100 / $m_construcao_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_construcao_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_construcao_intra["atebim"]*100)/$m_construcao_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_construcao_intra["atualizada"] == 0 ? (float) ($m_construcao_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_construcao_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_construcao_intra["atebim"] * 100 / $m_construcao_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_construcao_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4517,10 +4517,10 @@ if ($m_industriais_intra["inicial"]  > 0 || $m_industriais_intra["atualizada"] >
     $pdf->cell(20,$alt,db_formatar($m_industriais_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_industriais_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_industriais_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_industriais_intra["nobim"]*100)/$m_industriais_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_industriais_intra["atualizada"] == 0 ? (float) ($m_industriais_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_industriais_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_industriais_intra["nobim"] * 100 / $m_industriais_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_industriais_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_industriais_intra["atebim"]*100)/$m_industriais_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_industriais_intra["atualizada"] == 0 ? (float) ($m_industriais_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_industriais_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_industriais_intra["atebim"] * 100 / $m_industriais_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_industriais_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4545,10 +4545,10 @@ if ($m_servicos_intra["inicial"]  > 0 || $m_servicos_intra["atualizada"] > 0 ||
     $pdf->cell(20,$alt,db_formatar($m_servicos_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_servicos_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_servicos_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_servicos_intra["nobim"]*100)/$m_servicos_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_servicos_intra["atualizada"] == 0 ? (float) ($m_servicos_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_servicos_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_servicos_intra["nobim"] * 100 / $m_servicos_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_servicos_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_servicos_intra["atebim"]*100)/$m_servicos_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_servicos_intra["atualizada"] == 0 ? (float) ($m_servicos_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_servicos_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_servicos_intra["atebim"] * 100 / $m_servicos_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_servicos_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4572,10 +4572,10 @@ if ($rec_transf_cor_II_inicial_intra  > 0 || $rec_transf_cor_II_atualizada_intra
     $pdf->cell(20,$alt,db_formatar($rec_transf_cor_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_transf_cor_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_transf_cor_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_transf_cor_II_nobim_intra*100)/$rec_transf_cor_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_transf_cor_II_atualizada_intra == 0 ? (float) ($rec_transf_cor_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_transf_cor_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_transf_cor_II_nobim_intra * 100 / $rec_transf_cor_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_transf_cor_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_transf_cor_II_atebim_intra*100)/$rec_contr_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_contr_II_atualizada_intra == 0 ? (float) ($rec_transf_cor_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_transf_cor_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_transf_cor_II_atebim_intra * 100 / $rec_contr_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_transf_cor_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -4600,10 +4600,10 @@ if ($m_intergovernamental_intra["inicial"]  > 0 || $m_intergovernamental_intra["
     $pdf->cell(20,$alt,db_formatar($m_intergovernamental_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_intergovernamental_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_intergovernamental_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_intergovernamental_intra["nobim"]*100)/$m_intergovernamental_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_intergovernamental_intra["atualizada"] == 0 ? (float) ($m_intergovernamental_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_intergovernamental_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_intergovernamental_intra["nobim"] * 100 / $m_intergovernamental_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_intergovernamental_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_intergovernamental_intra["atebim"]*100)/$m_intergovernamental_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_intergovernamental_intra["atualizada"] == 0 ? (float) ($m_intergovernamental_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_intergovernamental_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_intergovernamental_intra["atebim"] * 100 / $m_intergovernamental_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_intergovernamental_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4628,10 +4628,10 @@ if ($m_privadas_intra["inicial"]  > 0 || $m_privadas_intra["atualizada"] > 0 ||
     $pdf->cell(20,$alt,db_formatar($m_privadas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_privadas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_privadas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_privadas_intra["nobim"]*100)/$m_privadas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_privadas_intra["atualizada"] == 0 ? (float) ($m_privadas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_privadas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_privadas_intra["nobim"] * 100 / $m_privadas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_privadas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_privadas_intra["atebim"]*100)/$m_privadas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_privadas_intra["atualizada"] == 0 ? (float) ($m_privadas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_privadas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_privadas_intra["atebim"] * 100 / $m_privadas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_privadas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4656,10 +4656,10 @@ if ($m_transf_exterior_intra["inicial"]  > 0 || $m_transf_exterior_intra["atuali
     $pdf->cell(20,$alt,db_formatar($m_transf_exterior_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_exterior_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_exterior_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_exterior_intra["nobim"]*100)/$m_transf_exterior_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_exterior_intra["atualizada"] == 0 ? (float) ($m_transf_exterior_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_exterior_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_exterior_intra["nobim"] * 100 / $m_transf_exterior_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_exterior_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_exterior_intra["atebim"]*100)/$m_transf_exterior_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_exterior_intra["atualizada"] == 0 ? (float) ($m_transf_exterior_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_exterior_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_exterior_intra["atebim"] * 100 / $m_transf_exterior_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_exterior_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4684,10 +4684,10 @@ if ($m_transf_pessoas_intra["inicial"]  > 0 || $m_transf_pessoas_intra["atualiza
     $pdf->cell(20,$alt,db_formatar($m_transf_pessoas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_pessoas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_pessoas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_pessoas_intra["nobim"]*100)/$m_transf_pessoas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_pessoas_intra["atualizada"] == 0 ? (float) ($m_transf_pessoas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_pessoas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_pessoas_intra["nobim"] * 100 / $m_transf_pessoas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_pessoas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_pessoas_intra["atebim"]*100)/$m_transf_pessoas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_pessoas_intra["atualizada"] == 0 ? (float) ($m_transf_pessoas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_pessoas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_pessoas_intra["atebim"] * 100 / $m_transf_pessoas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_pessoas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4712,10 +4712,10 @@ if ($m_transf_convenios_intra["inicial"]  > 0 || $m_transf_convenios_intra["atua
     $pdf->cell(20,$alt,db_formatar($m_transf_convenios_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_convenios_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_convenios_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_convenios_intra["nobim"]*100)/$m_transf_convenios_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_convenios_intra["atualizada"] == 0 ? (float) ($m_transf_convenios_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_convenios_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_convenios_intra["nobim"] * 100 / $m_transf_convenios_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_convenios_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_convenios_intra["atebim"]*100)/$m_transf_convenios_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_convenios_intra["atualizada"] == 0 ? (float) ($m_transf_convenios_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_convenios_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_convenios_intra["atebim"] * 100 / $m_transf_convenios_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_convenios_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4740,10 +4740,10 @@ if ($m_transf_fome_intra["inicial"]  > 0 || $m_transf_fome_intra["atualizada"] >
     $pdf->cell(20,$alt,db_formatar($m_transf_fome_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_fome_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_fome_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_fome_intra["nobim"]*100)/$m_transf_fome_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_fome_intra["atualizada"] == 0 ? (float) ($m_transf_fome_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_fome_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_fome_intra["nobim"] * 100 / $m_transf_fome_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_fome_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_fome_intra["atebim"]*100)/$m_transf_fome_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_fome_intra["atualizada"] == 0 ? (float) ($m_transf_fome_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_fome_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_fome_intra["atebim"] * 100 / $m_transf_fome_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_fome_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4767,10 +4767,10 @@ if ($rec_outras_cor_II_inicial_intra  > 0 || $rec_outras_cor_II_atualizada_intra
     $pdf->cell(20,$alt,db_formatar($rec_outras_cor_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_outras_cor_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_outras_cor_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_outras_cor_II_nobim_intra*100)/$rec_outras_cor_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_outras_cor_II_atualizada_intra == 0 ? (float) ($rec_outras_cor_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_outras_cor_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_outras_cor_II_nobim_intra * 100 / $rec_outras_cor_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_outras_cor_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_outras_cor_II_atebim_intra*100)/$rec_outras_cor_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_outras_cor_II_atualizada_intra == 0 ? (float) ($rec_outras_cor_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_outras_cor_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_outras_cor_II_atebim_intra * 100 / $rec_outras_cor_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_outras_cor_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -4795,10 +4795,10 @@ if ($m_multas_intra["inicial"]  > 0 || $m_multas_intra["atualizada"] > 0 ||
     $pdf->cell(20,$alt,db_formatar($m_multas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_multas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_multas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_multas_intra["nobim"]*100)/$m_multas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_multas_intra["atualizada"] == 0 ? (float) ($m_multas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_multas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_multas_intra["nobim"] * 100 / $m_multas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_multas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_multas_intra["atebim"]*100)/$m_multas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_multas_intra["atualizada"] == 0 ? (float) ($m_multas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_multas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_multas_intra["atebim"] * 100 / $m_multas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_multas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4823,10 +4823,10 @@ if ($m_indenizacao_intra["inicial"]  > 0 || $m_indenizacao_intra["atualizada"] >
     $pdf->cell(20,$alt,db_formatar($m_indenizacao_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_indenizacao_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_indenizacao_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_indenizacao_intra["nobim"]*100)/$m_indenizacao_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_indenizacao_intra["atualizada"] == 0 ? (float) ($m_indenizacao_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_indenizacao_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_indenizacao_intra["nobim"] * 100 / $m_indenizacao_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_indenizacao_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_indenizacao_intra["atebim"]*100)/$m_indenizacao_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_indenizacao_intra["atualizada"] == 0 ? (float) ($m_indenizacao_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_indenizacao_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_indenizacao_intra["atebim"] * 100 / $m_indenizacao_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_indenizacao_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4851,10 +4851,10 @@ if ($m_divida_ativa_intra["inicial"]  > 0 || $m_divida_ativa_intra["atualizada"]
     $pdf->cell(20,$alt,db_formatar($m_divida_ativa_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_divida_ativa_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_divida_ativa_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_divida_ativa_intra["nobim"]*100)/$m_divida_ativa_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_divida_ativa_intra["atualizada"] == 0 ? (float) ($m_divida_ativa_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_divida_ativa_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_divida_ativa_intra["nobim"] * 100 / $m_divida_ativa_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_divida_ativa_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_divida_ativa_intra["atebim"]*100)/$m_divida_ativa_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_divida_ativa_intra["atualizada"] == 0 ? (float) ($m_divida_ativa_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_divida_ativa_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_divida_ativa_intra["atebim"] * 100 / $m_divida_ativa_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_divida_ativa_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4879,10 +4879,10 @@ if ($m_correntes_diversas_intra["inicial"]  > 0 || $m_correntes_diversas_intra["
     $pdf->cell(20,$alt,db_formatar($m_correntes_diversas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_correntes_diversas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_correntes_diversas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_correntes_diversas_intra["nobim"]*100)/$m_correntes_diversas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_correntes_diversas_intra["atualizada"] == 0 ? (float) ($m_correntes_diversas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_correntes_diversas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_correntes_diversas_intra["nobim"] * 100 / $m_correntes_diversas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_correntes_diversas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_correntes_diversas_intra["atebim"]*100)/$m_correntes_diversas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_correntes_diversas_intra["atualizada"] == 0 ? (float) ($m_correntes_diversas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_correntes_diversas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_correntes_diversas_intra["atebim"] * 100 / $m_correntes_diversas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_correntes_diversas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4906,10 +4906,10 @@ if ($rec_cap_II_inicial_intra  > 0 || $rec_cap_II_atualizada_intra > 0 ||
     $pdf->cell(20,$alt,db_formatar($rec_cap_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_cap_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_cap_II_nobim_intra*100)/$rec_cap_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_cap_II_atualizada_intra == 0 ? (float) ($rec_cap_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_cap_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_cap_II_nobim_intra * 100 / $rec_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_cap_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_cap_II_atebim_intra*100)/$rec_cap_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_cap_II_atualizada_intra == 0 ? (float) ($rec_cap_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_cap_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_cap_II_atebim_intra * 100 / $rec_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_cap_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -4934,10 +4934,10 @@ if ($rec_oper_cred_cap_II_inicial_intra  > 0 || $rec_oper_cred_cap_II_atualizada
     $pdf->cell(20,$alt,db_formatar($rec_oper_cred_cap_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_oper_cred_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_oper_cred_cap_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_oper_cred_cap_II_nobim_intra*100)/$rec_oper_cred_cap_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_oper_cred_cap_II_atualizada_intra == 0 ? (float) ($rec_oper_cred_cap_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_oper_cred_cap_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_oper_cred_cap_II_nobim_intra * 100 / $rec_oper_cred_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_oper_cred_cap_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_oper_cred_cap_II_atebim_intra*100)/$rec_oper_cred_cap_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_oper_cred_cap_II_atualizada_intra == 0 ? (float) ($rec_oper_cred_cap_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_oper_cred_cap_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_oper_cred_cap_II_atebim_intra * 100 / $rec_oper_cred_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_oper_cred_cap_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -4962,10 +4962,10 @@ if ($m_oper_internas_intra["inicial"]  > 0 || $m_oper_internas_intra["atualizada
     $pdf->cell(20,$alt,db_formatar($m_oper_internas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_oper_internas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_oper_internas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_oper_internas_intra["nobim"]*100)/$m_oper_internas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_oper_internas_intra["atualizada"] == 0 ? (float) ($m_oper_internas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_oper_internas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_oper_internas_intra["nobim"] * 100 / $m_oper_internas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_oper_internas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_oper_internas_intra["atebim"]*100)/$m_oper_internas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_oper_internas_intra["atualizada"] == 0 ? (float) ($m_oper_internas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_oper_internas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_oper_internas_intra["atebim"] * 100 / $m_oper_internas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_oper_internas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -4990,10 +4990,10 @@ if ($m_oper_externas_intra["inicial"]  > 0 || $m_oper_externas_intra["atualizada
     $pdf->cell(20,$alt,db_formatar($m_oper_externas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_oper_externas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_oper_externas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_oper_externas_intra["nobim"]*100)/$m_oper_externas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_oper_externas_intra["atualizada"] == 0 ? (float) ($m_oper_externas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_oper_externas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_oper_externas_intra["nobim"] * 100 / $m_oper_externas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_oper_externas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_oper_externas_intra["atebim"]*100)/$m_oper_externas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_oper_externas_intra["atualizada"] == 0 ? (float) ($m_oper_externas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_oper_externas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_oper_externas_intra["atebim"] * 100 / $m_oper_externas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_oper_externas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5018,10 +5018,10 @@ if ($rec_alien_bens_cap_II_inicial_intra  > 0 || $rec_alien_bens_cap_II_atualiza
     $pdf->cell(20,$alt,db_formatar($rec_alien_bens_cap_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_alien_bens_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_alien_bens_cap_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_alien_bens_cap_II_nobim_intra*100)/$rec_alien_bens_cap_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_alien_bens_cap_II_atualizada_intra == 0 ? (float) ($rec_alien_bens_cap_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_alien_bens_cap_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_alien_bens_cap_II_nobim_intra * 100 / $rec_alien_bens_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_alien_bens_cap_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_alien_bens_cap_II_atebim_intra*100)/$rec_alien_bens_cap_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_alien_bens_cap_II_atualizada_intra == 0 ? (float) ($rec_alien_bens_cap_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_alien_bens_cap_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_alien_bens_cap_II_atebim_intra * 100 / $rec_alien_bens_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_alien_bens_cap_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -5046,10 +5046,10 @@ if ($m_bens_moveis_intra["inicial"]  > 0 || $m_bens_moveis_intra["atualizada"] >
     $pdf->cell(20,$alt,db_formatar($m_bens_moveis_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_bens_moveis_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_bens_moveis_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_bens_moveis_intra["nobim"]*100)/$m_bens_moveis_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_bens_moveis_intra["atualizada"] == 0 ? (float) ($m_bens_moveis_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_bens_moveis_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_bens_moveis_intra["nobim"] * 100 / $m_bens_moveis_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_bens_moveis_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_bens_moveis_intra["atebim"]*100)/$m_bens_moveis_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_bens_moveis_intra["atualizada"] == 0 ? (float) ($m_bens_moveis_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_bens_moveis_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_bens_moveis_intra["atebim"] * 100 / $m_bens_moveis_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_bens_moveis_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5074,10 +5074,10 @@ if ($m_bens_imoveis_intra["inicial"]  > 0 || $m_bens_imoveis_intra["atualizada"]
     $pdf->cell(20,$alt,db_formatar($m_bens_imoveis_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_bens_imoveis_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_bens_imoveis_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_bens_imoveis_intra["nobim"]*100)/$m_bens_imoveis_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_bens_imoveis_intra["atualizada"] == 0 ? (float) ($m_bens_imoveis_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_bens_imoveis_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_bens_imoveis_intra["nobim"] * 100 / $m_bens_imoveis_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_bens_imoveis_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_bens_imoveis_intra["atebim"]*100)/$m_bens_imoveis_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_bens_imoveis_intra["atualizada"] == 0 ? (float) ($m_bens_imoveis_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_bens_imoveis_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_bens_imoveis_intra["atebim"] * 100 / $m_bens_imoveis_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_bens_imoveis_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5102,10 +5102,10 @@ if ($m_emprestimos_intra["inicial"]  > 0 || $m_emprestimos_intra["atualizada"] >
     $pdf->cell(20,$alt,db_formatar($m_emprestimos_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_emprestimos_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_emprestimos_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_emprestimos_intra["nobim"]*100)/$m_emprestimos_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_emprestimos_intra["atualizada"] == 0 ? (float) ($m_emprestimos_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_emprestimos_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_emprestimos_intra["nobim"] * 100 / $m_emprestimos_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_emprestimos_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_emprestimos_intra["atebim"]*100)/$m_emprestimos_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_emprestimos_intra["atualizada"] == 0 ? (float) ($m_emprestimos_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_emprestimos_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_emprestimos_intra["atebim"] * 100 / $m_emprestimos_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_emprestimos_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5130,10 +5130,10 @@ if ($rec_transf_cap_II_inicial_intra  > 0 || $rec_transf_cap_II_atualizada_intra
     $pdf->cell(20,$alt,db_formatar($rec_transf_cap_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_transf_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_transf_cap_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_transf_cap_II_nobim_intra*100)/$rec_transf_cap_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_transf_cap_II_atualizada_intra == 0 ? (float) ($rec_transf_cap_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_transf_cap_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_transf_cap_II_nobim_intra * 100 / $rec_transf_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_transf_cap_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_transf_cap_II_atebim_intra*100)/$rec_transf_cap_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_transf_cap_II_atualizada_intra == 0 ? (float) ($rec_transf_cap_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_transf_cap_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_transf_cap_II_atebim_intra * 100 / $rec_transf_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_transf_cap_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -5158,10 +5158,10 @@ if ($m_transf_capital_intergovernamentais_intra["inicial"]  > 0 || $m_transf_cap
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_intergovernamentais_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_intergovernamentais_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_intergovernamentais_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_intergovernamentais_intra["nobim"]*100)/$m_transf_capital_intergovernamentais_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_intergovernamentais_intra["atualizada"] == 0 ? (float) ($m_transf_capital_intergovernamentais_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_intergovernamentais_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_intergovernamentais_intra["nobim"] * 100 / $m_transf_capital_intergovernamentais_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_intergovernamentais_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_intergovernamentais_intra["atebim"]*100)/$m_transf_capital_intergovernamentais_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_intergovernamentais_intra["atualizada"] == 0 ? (float) ($m_transf_capital_intergovernamentais_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_intergovernamentais_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_intergovernamentais_intra["atebim"] * 100 / $m_transf_capital_intergovernamentais_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_intergovernamentais_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5186,10 +5186,10 @@ if ($m_transf_capital_privadas_intra["inicial"]  > 0 || $m_transf_capital_privad
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_privadas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_privadas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_privadas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_privadas_intra["nobim"]*100)/$m_transf_capital_privadas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_privadas_intra["atualizada"] == 0 ? (float) ($m_transf_capital_privadas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_privadas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_privadas_intra["nobim"] * 100 / $m_transf_capital_privadas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_privadas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_privadas_intra["atebim"]*100)/$m_transf_capital_privadas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_privadas_intra["atualizada"] == 0 ? (float) ($m_transf_capital_privadas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_privadas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_privadas_intra["atebim"] * 100 / $m_transf_capital_privadas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_privadas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5214,10 +5214,10 @@ if ($m_transf_capital_exterior_intra["inicial"]  > 0 || $m_transf_capital_exteri
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_exterior_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_exterior_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_exterior_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_exterior_intra["nobim"]*100)/$m_transf_capital_exterior_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_exterior_intra["atualizada"] == 0 ? (float) ($m_transf_capital_exterior_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_exterior_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_exterior_intra["nobim"] * 100 / $m_transf_capital_exterior_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_exterior_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_exterior_intra["atebim"]*100)/$m_transf_capital_exterior_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_exterior_intra["atualizada"] == 0 ? (float) ($m_transf_capital_exterior_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_exterior_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_exterior_intra["atebim"] * 100 / $m_transf_capital_exterior_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_exterior_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5242,10 +5242,10 @@ if ($m_transf_capital_pessoas_intra["inicial"]  > 0 || $m_transf_capital_pessoas
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_pessoas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_pessoas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_pessoas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_pessoas_intra["nobim"]*100)/$m_transf_capital_pessoas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_pessoas_intra["atualizada"] == 0 ? (float) ($m_transf_capital_pessoas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_pessoas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_pessoas_intra["nobim"] * 100 / $m_transf_capital_pessoas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_pessoas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_pessoas_intra["atebim"]*100)/$m_transf_capital_pessoas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_pessoas_intra["atualizada"] == 0 ? (float) ($m_transf_capital_pessoas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_pessoas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_pessoas_intra["atebim"] * 100 / $m_transf_capital_pessoas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_pessoas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5270,10 +5270,10 @@ if ($m_transf_capital_outras_intra["inicial"]  > 0 || $m_transf_capital_outras_i
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_outras_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_outras_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_outras_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_outras_intra["nobim"]*100)/$m_transf_capital_outras_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_outras_intra["atualizada"] == 0 ? (float) ($m_transf_capital_outras_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_outras_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_outras_intra["nobim"] * 100 / $m_transf_capital_outras_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_outras_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_outras_intra["atebim"]*100)/$m_transf_capital_outras_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_outras_intra["atualizada"] == 0 ? (float) ($m_transf_capital_outras_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_outras_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_outras_intra["atebim"] * 100 / $m_transf_capital_outras_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_outras_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5298,10 +5298,10 @@ if ($m_transf_capital_convenios_intra["inicial"]  > 0 || $m_transf_capital_conve
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_convenios_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_convenios_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_convenios_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_convenios_intra["nobim"]*100)/$m_transf_capital_convenios_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_convenios_intra["atualizada"] == 0 ? (float) ($m_transf_capital_convenios_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_convenios_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_convenios_intra["nobim"] * 100 / $m_transf_capital_convenios_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_convenios_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_convenios_intra["atebim"]*100)/$m_transf_capital_convenios_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_convenios_intra["atualizada"] == 0 ? (float) ($m_transf_capital_convenios_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_convenios_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_convenios_intra["atebim"] * 100 / $m_transf_capital_convenios_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_convenios_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5326,10 +5326,10 @@ if ($m_transf_capital_fome_intra["inicial"]  > 0 || $m_transf_capital_fome_intra
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_fome_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_fome_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_fome_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_fome_intra["nobim"]*100)/$m_transf_capital_fome_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_fome_intra["atualizada"] == 0 ? (float) ($m_transf_capital_fome_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_fome_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_fome_intra["nobim"] * 100 / $m_transf_capital_fome_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_transf_capital_fome_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_transf_capital_fome_intra["atebim"]*100)/$m_transf_capital_fome_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_transf_capital_fome_intra["atualizada"] == 0 ? (float) ($m_transf_capital_fome_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_transf_capital_fome_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_transf_capital_fome_intra["atebim"] * 100 / $m_transf_capital_fome_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_transf_capital_fome_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5354,10 +5354,10 @@ if ($rec_outras_cap_II_inicial_intra  > 0 || $rec_outras_cap_II_atualizada_intra
     $pdf->cell(20,$alt,db_formatar($rec_outras_cap_II_inicial_intra,'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($rec_outras_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($rec_outras_cap_II_nobim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_outras_cap_II_nobim_intra*100)/$rec_outras_cap_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_outras_cap_II_atualizada_intra == 0 ? (float) ($rec_outras_cap_II_nobim_intra * 100) > 0 ? INF : ((float) ($rec_outras_cap_II_nobim_intra * 100) < 0 ? -INF : NAN) : $rec_outras_cap_II_nobim_intra * 100 / $rec_outras_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($rec_outras_cap_II_atebim_intra,'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($rec_outras_cap_II_atebim_intra*100)/$rec_outras_cap_II_atualizada_intra,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $rec_outras_cap_II_atualizada_intra == 0 ? (float) ($rec_outras_cap_II_atebim_intra * 100) > 0 ? INF : ((float) ($rec_outras_cap_II_atebim_intra * 100) < 0 ? -INF : NAN) : $rec_outras_cap_II_atebim_intra * 100 / $rec_outras_cap_II_atualizada_intra,'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($rec_outras_cap_II_realizar_intra,'f'),0,1,"R",0);
 
@@ -5382,10 +5382,10 @@ if ($m_outras_social_intra["inicial"]  > 0 || $m_outras_social_intra["atualizada
     $pdf->cell(20,$alt,db_formatar($m_outras_social_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_outras_social_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_outras_social_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_outras_social_intra["nobim"]*100)/$m_outras_social_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_outras_social_intra["atualizada"] == 0 ? (float) ($m_outras_social_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_outras_social_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_outras_social_intra["nobim"] * 100 / $m_outras_social_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_outras_social_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_outras_social_intra["atebim"]*100)/$m_outras_social_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_outras_social_intra["atualizada"] == 0 ? (float) ($m_outras_social_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_outras_social_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_outras_social_intra["atebim"] * 100 / $m_outras_social_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_outras_social_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5410,10 +5410,10 @@ if ($m_outras_disponibilidades_intra["inicial"]  > 0 || $m_outras_disponibilidad
     $pdf->cell(20,$alt,db_formatar($m_outras_disponibilidades_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_outras_disponibilidades_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_outras_disponibilidades_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_outras_disponibilidades_intra["nobim"]*100)/$m_outras_disponibilidades_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_outras_disponibilidades_intra["atualizada"] == 0 ? (float) ($m_outras_disponibilidades_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_outras_disponibilidades_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_outras_disponibilidades_intra["nobim"] * 100 / $m_outras_disponibilidades_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_outras_disponibilidades_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_outras_disponibilidades_intra["atebim"]*100)/$m_outras_disponibilidades_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_outras_disponibilidades_intra["atualizada"] == 0 ? (float) ($m_outras_disponibilidades_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_outras_disponibilidades_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_outras_disponibilidades_intra["atebim"] * 100 / $m_outras_disponibilidades_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_outras_disponibilidades_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5438,10 +5438,10 @@ if ($m_outras_restituicoes_intra["inicial"]  > 0 || $m_outras_restituicoes_intra
     $pdf->cell(20,$alt,db_formatar($m_outras_restituicoes_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_outras_restituicoes_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_outras_restituicoes_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_outras_restituicoes_intra["nobim"]*100)/$m_outras_restituicoes_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_outras_restituicoes_intra["atualizada"] == 0 ? (float) ($m_outras_restituicoes_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_outras_restituicoes_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_outras_restituicoes_intra["nobim"] * 100 / $m_outras_restituicoes_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_outras_restituicoes_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_outras_restituicoes_intra["atebim"]*100)/$m_outras_restituicoes_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_outras_restituicoes_intra["atualizada"] == 0 ? (float) ($m_outras_restituicoes_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_outras_restituicoes_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_outras_restituicoes_intra["atebim"] * 100 / $m_outras_restituicoes_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_outras_restituicoes_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5467,10 +5467,10 @@ if ($m_outras_diversas_intra["inicial"]  > 0 || $m_outras_diversas_intra["atuali
     $pdf->cell(20,$alt,db_formatar($m_outras_diversas_intra["inicial"],'f'),'R',0,"R",0);
     $pdf->cell(20,$alt,db_formatar($m_outras_diversas_intra["atualizada"],'f'),'R',0,"R",0);
     $pdf->cell(25,$alt,db_formatar($m_outras_diversas_intra["nobim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_outras_diversas_intra["nobim"]*100)/$m_outras_diversas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_outras_diversas_intra["atualizada"] == 0 ? (float) ($m_outras_diversas_intra["nobim"] * 100) > 0 ? INF : ((float) ($m_outras_diversas_intra["nobim"] * 100) < 0 ? -INF : NAN) : $m_outras_diversas_intra["nobim"] * 100 / $m_outras_diversas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(25,$alt,db_formatar($m_outras_diversas_intra["atebim"],'f'),'R',0,"R",0);
-    @$pdf->cell(10,$alt,db_formatar(($m_outras_diversas_intra["atebim"]*100)/$m_outras_diversas_intra["atualizada"],'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $m_outras_diversas_intra["atualizada"] == 0 ? (float) ($m_outras_diversas_intra["atebim"] * 100) > 0 ? INF : ((float) ($m_outras_diversas_intra["atebim"] * 100) < 0 ? -INF : NAN) : $m_outras_diversas_intra["atebim"] * 100 / $m_outras_diversas_intra["atualizada"],'f'),'R',0,"R",0);
     // % (b/a)
     $pdf->cell(20,$alt,db_formatar($m_outras_diversas_intra["realizar"],'f'),0,1,"R",0);
 
@@ -5507,10 +5507,10 @@ $pdf->cell(60,$alt,"SUBTOTAL DAS RECEITAS(III) = (I+II)",'TBR',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($somador_I_inicial,'f'),'TBR',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_I_atualizada,'f'),'TBR',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($somador_I_nobim,'f'),'TBR',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($somador_I_nobim*100)/$somador_I_atualizada,'f'),'TBR',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $somador_I_atualizada == 0 ? (float) ($somador_I_nobim * 100) > 0 ? INF : ((float) ($somador_I_nobim * 100) < 0 ? -INF : NAN) : $somador_I_nobim * 100 / $somador_I_atualizada,'f'),'TBR',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($somador_I_atebim,'f'),'TBR',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($somador_I_atebim*100)/$somador_I_atualizada,'f'),'TBR',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $somador_I_atualizada == 0 ? (float) ($somador_I_atebim * 100) > 0 ? INF : ((float) ($somador_I_atebim * 100) < 0 ? -INF : NAN) : $somador_I_atebim * 100 / $somador_I_atualizada,'f'),'TBR',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($somador_I_realizar,'f'),'TB',1,"R",0);
 //--------------------------------
@@ -5573,16 +5573,16 @@ $aColunas  = $oLinha->getValoresSomadosColunas(str_replace('-',', ',$db_selinsti
 foreach ($aColunas as $oLinhaColuna) {
 
   if (isset($oLinhaColuna->colunas[1]->o117_valor)) {
-    $tot_inicial    += @$oLinhaColuna->colunas[1]->o117_valor;
+    $tot_inicial    += (float) @$oLinhaColuna->colunas[1]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[2]->o117_valor)) {
-    $tot_atualizada += @$oLinhaColuna->colunas[2]->o117_valor;
+    $tot_atualizada += (float) @$oLinhaColuna->colunas[2]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[3]->o117_valor)) {
-    $tot_nobim      += @$oLinhaColuna->colunas[3]->o117_valor;
+    $tot_nobim      += (float) @$oLinhaColuna->colunas[3]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[4]->o117_valor)) {
-    $tot_atebim     += @$oLinhaColuna->colunas[4]->o117_valor;
+    $tot_atebim     += (float) @$oLinhaColuna->colunas[4]->o117_valor;
   }
 }
 $tot_realizar = $tot_atualizada - $tot_atebim;
@@ -5590,10 +5590,10 @@ $pdf->cell(60,$alt,espaco($n2)."Mobiliária",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 
@@ -5623,16 +5623,16 @@ $aColunas  = $oLinha->getValoresSomadosColunas(str_replace('-',', ',$db_selinsti
 foreach ($aColunas as $oLinhaColuna) {
 
   if (isset($oLinhaColuna->colunas[1]->o117_valor)) {
-    $tot_inicial    += @$oLinhaColuna->colunas[1]->o117_valor;
+    $tot_inicial    += (float) @$oLinhaColuna->colunas[1]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[2]->o117_valor)) {
-    $tot_atualizada += @$oLinhaColuna->colunas[2]->o117_valor;
+    $tot_atualizada += (float) @$oLinhaColuna->colunas[2]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[3]->o117_valor)) {
-    $tot_nobim      += @$oLinhaColuna->colunas[3]->o117_valor;
+    $tot_nobim      += (float) @$oLinhaColuna->colunas[3]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[4]->o117_valor)) {
-    $tot_atebim     += @$oLinhaColuna->colunas[4]->o117_valor;
+    $tot_atebim     += (float) @$oLinhaColuna->colunas[4]->o117_valor;
   }
 }
 $tot_realizar = $tot_atualizada - $tot_atebim;
@@ -5640,10 +5640,10 @@ $pdf->cell(60,$alt,espaco($n2)."Contratual",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 
@@ -5668,9 +5668,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -5704,16 +5704,16 @@ $aColunas  = $oLinha->getValoresSomadosColunas(str_replace('-',', ',$db_selinsti
 foreach ($aColunas as $oLinhaColuna) {
 
   if (isset($oLinhaColuna->colunas[1]->o117_valor)) {
-    $tot_inicial    += @$oLinhaColuna->colunas[1]->o117_valor;
+    $tot_inicial    += (float) @$oLinhaColuna->colunas[1]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[2]->o117_valor)) {
-    $tot_atualizada += @$oLinhaColuna->colunas[2]->o117_valor;
+    $tot_atualizada += (float) @$oLinhaColuna->colunas[2]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[3]->o117_valor)) {
-    $tot_nobim      += @$oLinhaColuna->colunas[3]->o117_valor;
+    $tot_nobim      += (float) @$oLinhaColuna->colunas[3]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[4]->o117_valor)) {
-    $tot_atebim     += @$oLinhaColuna->colunas[4]->o117_valor;
+    $tot_atebim     += (float) @$oLinhaColuna->colunas[4]->o117_valor;
   }
 }
 $tot_realizar = $tot_atualizada - $tot_atebim;
@@ -5721,10 +5721,10 @@ $pdf->cell(60,$alt,espaco($n2)."Mobiliária",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 
@@ -5754,16 +5754,16 @@ $aColunas  = $oLinha->getValoresSomadosColunas(str_replace('-',', ',$db_selinsti
 foreach ($aColunas as $oLinhaColuna) {
 
   if (isset($oLinhaColuna->colunas[1]->o117_valor)) {
-    $tot_inicial    += @$oLinhaColuna->colunas[1]->o117_valor;
+    $tot_inicial    += (float) @$oLinhaColuna->colunas[1]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[2]->o117_valor)) {
-    $tot_atualizada += @$oLinhaColuna->colunas[2]->o117_valor;
+    $tot_atualizada += (float) @$oLinhaColuna->colunas[2]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[3]->o117_valor)) {
-    $tot_nobim      += @$oLinhaColuna->colunas[3]->o117_valor;
+    $tot_nobim      += (float) @$oLinhaColuna->colunas[3]->o117_valor;
   }
   if (isset($oLinhaColuna->colunas[4]->o117_valor)) {
-    $tot_atebim     += @$oLinhaColuna->colunas[4]->o117_valor;
+    $tot_atebim     += (float) @$oLinhaColuna->colunas[4]->o117_valor;
   }
 }
 $tot_realizar = $tot_atualizada - $tot_atebim;
@@ -5771,10 +5771,10 @@ $pdf->cell(60,$alt,espaco($n2)."Contratual",'R',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($tot_inicial,'f'),'R',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($tot_nobim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_nobim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_nobim * 100) > 0 ? INF : ((float) ($tot_nobim * 100) < 0 ? -INF : NAN) : $tot_nobim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(25,$alt,db_formatar($tot_atebim,'f'),'R',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($tot_atebim*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) ($tot_atebim * 100) > 0 ? INF : ((float) ($tot_atebim * 100) < 0 ? -INF : NAN) : $tot_atebim * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($tot_realizar,'f'),0,1,"R",0);
 
@@ -5799,9 +5799,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($v_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_nobim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_nobim * 100) > 0 ? INF : ((float) ($v_nobim * 100) < 0 ? -INF : NAN) : $v_nobim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($v_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($v_atebim*100)/$v_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) ($v_atebim * 100) > 0 ? INF : ((float) ($v_atebim * 100) < 0 ? -INF : NAN) : $v_atebim * 100 / $v_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($v_realizar,'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -5812,9 +5812,9 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($somador_II_inicial,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_II_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($somador_II_nobim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($somador_II_nobim*100)/$somador_II_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $somador_II_atualizada == 0 ? (float) ($somador_II_nobim * 100) > 0 ? INF : ((float) ($somador_II_nobim * 100) < 0 ? -INF : NAN) : $somador_II_nobim * 100 / $somador_II_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($somador_II_atebim,'f'),'0',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($somador_II_atebim*100)/$somador_II_atualizada,'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $somador_II_atualizada == 0 ? (float) ($somador_II_atebim * 100) > 0 ? INF : ((float) ($somador_II_atebim * 100) < 0 ? -INF : NAN) : $somador_II_atebim * 100 / $somador_II_atualizada,'f'),'0',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_II_realizar,'f'),'0',0,"R",0);
 
 $pdf->setY($pos_atu);
@@ -5833,17 +5833,17 @@ $pdf->cell(60,$alt,"SUBTOTAL COM REFINANCIAMENTO(V) = (III+IV)",'TBR',0,"L",0);
 $pdf->cell(20,$alt,db_formatar($somador_III_inicial,'f'),'TBR',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_III_atualizada,'f'),'TBR',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($somador_III_nobim,'f'),'TBR',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($somador_III_nobim*100)/$somador_III_atualizada,'f'),'TBR',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $somador_III_atualizada == 0 ? (float) ($somador_III_nobim * 100) > 0 ? INF : ((float) ($somador_III_nobim * 100) < 0 ? -INF : NAN) : $somador_III_nobim * 100 / $somador_III_atualizada,'f'),'TBR',0,"R",0);
 // %
 $pdf->cell(25,$alt,db_formatar($somador_III_atebim,'f'),'TBR',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($somador_III_atebim*100)/$somador_III_atualizada,'f'),'TBR',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $somador_III_atualizada == 0 ? (float) ($somador_III_atebim * 100) > 0 ? INF : ((float) ($somador_III_atebim * 100) < 0 ? -INF : NAN) : $somador_III_atebim * 100 / $somador_III_atualizada,'f'),'TBR',0,"R",0);
 // %
 $pdf->cell(20,$alt,db_formatar($somador_III_realizar,'f'),'TB',1,"R",0);
 //--------------------------------
 $tot_despesas   = 0;
 $tot_liq_atebim = 0;
 $tot_deficit    = 0;
-for ($i=0; $i<pg_numrows($result_desp); $i++) {
+for ($i=0; $i<($result_desp ? pg_numrows($result_desp) : null); $i++) {
   db_fieldsmemory($result_desp,$i);
   $estrutural = $o58_elemento."00";
 
@@ -5903,17 +5903,17 @@ $sSqlSuperavit = " SELECT sum(o47_valor) as soma
   and o46_instit in ($instituicao);";
 
 $rsSqlSuperavit = db_query($sSqlSuperavit);
-if(pg_num_rows($rsSqlSuperavit) > 0){
+if(($rsSqlSuperavit ? pg_num_rows($rsSqlSuperavit) : null) > 0){
   $oSuperavit = db_utils::fieldsMemory($rsSqlSuperavit,0);
-  $nSuperavitFinancPrevAtu += $oSuperavit->soma;
+  $nSuperavitFinancPrevAtu = (float) $nSuperavitFinancPrevAtu + (float) $oSuperavit->soma;
 }
 
 $m_superavit_financeiro["parametros"]->setPeriodo($iCodigoPeriodo);
 $oLinha = $m_superavit_financeiro["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas){
 
-  $nSuperavitFinancPrevAtu += $oColunas->colunas[2]->o117_valor;
-  $nSuperavitFinancAteBim  += $oColunas->colunas[4]->o117_valor;
+  $nSuperavitFinancPrevAtu = (float) $nSuperavitFinancPrevAtu + (float) $oColunas->colunas[2]->o117_valor;
+  $nSuperavitFinancAteBim = (float) $nSuperavitFinancAteBim + (float) $oColunas->colunas[4]->o117_valor;
 
 }
 
@@ -5927,16 +5927,16 @@ $sSqlReabertura = " SELECT sum(o47_valor) as soma
   and o46_instit in ($instituicao);";
 
 $rsSqlReabertura = db_query($sSqlReabertura);
-if(pg_num_rows($rsSqlReabertura) > 0){
+if(($rsSqlReabertura ? pg_num_rows($rsSqlReabertura) : null) > 0){
   $oReabertura = db_utils::fieldsMemory($rsSqlReabertura,0);
-  $nReaberturaCredPrevAtu += $oReabertura->soma;
+  $nReaberturaCredPrevAtu = (float) $nReaberturaCredPrevAtu + (float) $oReabertura->soma;
 }
 
 $oLinha = $m_reab_credito_adicionais["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas){
 
-  $nReaberturaCredPrevAtu += $oColunas->colunas[2]->o117_valor;
-  $nReaberturaCredAteBim  += $oColunas->colunas[4]->o117_valor;
+  $nReaberturaCredPrevAtu = (float) $nReaberturaCredPrevAtu + (float) $oColunas->colunas[2]->o117_valor;
+  $nReaberturaCredAteBim = (float) $nReaberturaCredAteBim + (float) $oColunas->colunas[4]->o117_valor;
 
 }
 
@@ -6091,7 +6091,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (j/f)
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
@@ -6126,7 +6126,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (j/f)
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
@@ -6154,17 +6154,17 @@ atualizaTotaisDespesa($m_outras_despesas_correntes["parametros"],$result_desp,fa
 $oLinha = $m_outras_despesas_correntes["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas){
 
-  $tot_inicial    += $oColunas->colunas[1]->o117_valor;
-  $tot_adicional  += $oColunas->colunas[2]->o117_valor;
-  $tot_emp_nobim  += $oColunas->colunas[3]->o117_valor;
-  $tot_emp_atebim += $oColunas->colunas[4]->o117_valor;
-  $tot_liq_nobim  += $oColunas->colunas[5]->o117_valor;
-  $tot_liq_atebim += $oColunas->colunas[6]->o117_valor;
+  $tot_inicial    += (float) $oColunas->colunas[1]->o117_valor;
+  $tot_adicional  += (float) $oColunas->colunas[2]->o117_valor;
+  $tot_emp_nobim  += (float) $oColunas->colunas[3]->o117_valor;
+  $tot_emp_atebim += (float) $oColunas->colunas[4]->o117_valor;
+  $tot_liq_nobim  += (float) $oColunas->colunas[5]->o117_valor;
+  $tot_liq_atebim += (float) $oColunas->colunas[6]->o117_valor;
 
   if ($bimestre == 6) {
 
     if (isset($oColunas->colunas[7]->o117_valor)) {
-      $tot_inscritos_rp += $oColunas->colunas[7]->o117_valor;
+      $tot_inscritos_rp += (float) $oColunas->colunas[7]->o117_valor;
     }
   }
 
@@ -6185,7 +6185,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (j/f)
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
@@ -6214,7 +6214,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($somador_VI_liqatebim,'f'),'0',0,"R",
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($somador_VI_inscritos,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($somador_VI_liqatebim+$somador_VI_inscritos)*100)/($somador_VI_inicial+$somador_VI_adicional),'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) ($somador_VI_inicial + $somador_VI_adicional) == 0 ? (float) (($somador_VI_liqatebim + $somador_VI_inscritos) * 100) > 0 ? INF : ((float) (($somador_VI_liqatebim + $somador_VI_inscritos) * 100) < 0 ? -INF : NAN) : ($somador_VI_liqatebim + $somador_VI_inscritos) * 100 / ($somador_VI_inicial + $somador_VI_adicional),'f'),'0',0,"R",0);
 $pdf->cell(14,$alt,db_formatar(($somador_VI_inicial+$somador_VI_adicional)-($somador_VI_inscritos+$somador_VI_liqatebim),'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -6265,7 +6265,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (j/f)
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
@@ -6310,7 +6310,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (j/f)
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
@@ -6355,7 +6355,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (j/f)
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
@@ -6392,7 +6392,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($v_VI_liqatebim,'f'),'0',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($v_VI_inscritos,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar(($v_VI_liqatebim+$v_VI_inscritos)*100/($v_VI_inicial+$v_VI_adicional),'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) ($v_VI_inicial + $v_VI_adicional) == 0 ? (float) (($v_VI_liqatebim + $v_VI_inscritos) * 100) > 0 ? INF : ((float) (($v_VI_liqatebim + $v_VI_inscritos) * 100) < 0 ? -INF : NAN) : ($v_VI_liqatebim + $v_VI_inscritos) * 100 / ($v_VI_inicial + $v_VI_adicional),'f'),'0',0,"R",0);
 $pdf->cell(14,$alt,db_formatar(($v_VI_inicial+$v_VI_adicional)-($v_VI_inscritos+$v_VI_liqatebim),'f'),'0',0,"R",0);
 
 $pdf->setY($pos_atu);
@@ -6422,7 +6422,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (j/f)
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
@@ -6460,7 +6460,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 // % (j/f)
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
@@ -6489,7 +6489,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($somador_VI_liqatebim,'f'),'0',0,"R",
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($somador_VI_inscritos,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($somador_VI_liqatebim+$somador_VI_inscritos)*100)/($somador_VI_inicial+$somador_VI_adicional),'f'),'0',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) ($somador_VI_inicial + $somador_VI_adicional) == 0 ? (float) (($somador_VI_liqatebim + $somador_VI_inscritos) * 100) > 0 ? INF : ((float) (($somador_VI_liqatebim + $somador_VI_inscritos) * 100) < 0 ? -INF : NAN) : ($somador_VI_liqatebim + $somador_VI_inscritos) * 100 / ($somador_VI_inicial + $somador_VI_adicional),'f'),'0',0,"R",0);
 $pdf->cell(14,$alt,db_formatar(($somador_VI_inicial+$somador_VI_adicional)-($somador_VI_inscritos+$somador_VI_liqatebim),'f'),'0',0,"R",0);
 $pdf->setY($pos_atu);
 // desce novamente até aki
@@ -6504,7 +6504,7 @@ $tot_liq_atebim   = 0;
 $tot_inscritos_rp = 0;
 // atualizaTotaisDespesa($m_in["parametros"],$result_desp,false);
 
-for ($i=0; $i<pg_numrows($result_desp); $i++) {
+for ($i=0; $i<($result_desp ? pg_numrows($result_desp) : null); $i++) {
   db_fieldsmemory($result_desp,$i);
   $estrutural = $o58_elemento."00";
   if (substr($estrutural,3,2)=='91' ) {
@@ -6562,7 +6562,7 @@ if ($tot_inicial    > 0 || $tot_adicional > 0 || $tot_emp_nobim  > 0 ||
     if ($bimestre == 6) {
       $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
     }
-    @$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
     // % (j/f)
     $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
     // (f-j)
@@ -6629,7 +6629,7 @@ if ($tot_inicial    > 0 || $tot_adicional > 0 || $tot_emp_nobim  > 0 ||
     if ($bimestre == 6) {
       $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
     }
-    @$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
     // % (j/f)
     $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
     // (f-j)
@@ -6668,7 +6668,7 @@ if ($tot_inicial    > 0 || $tot_adicional > 0 || $tot_emp_nobim  > 0 ||
     if ($bimestre == 6) {
       $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
     }
-    @$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
     // % (j/f)
     $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
     // (f-j)
@@ -6688,17 +6688,17 @@ atualizaTotaisDespesa($m_outras_despesas_correntes["parametros"],$result_desp,tr
 $oLinha = $m_outras_despesas_correntes["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas){
 
-  $tot_inicial    += $oColunas->colunas[1]->o117_valor;
-  $tot_adicional  += $oColunas->colunas[2]->o117_valor;
-  $tot_emp_nobim  += $oColunas->colunas[3]->o117_valor;
-  $tot_emp_atebim += $oColunas->colunas[4]->o117_valor;
-  $tot_liq_nobim  += $oColunas->colunas[5]->o117_valor;
-  $tot_liq_atebim += $oColunas->colunas[6]->o117_valor;
+  $tot_inicial    += (float) $oColunas->colunas[1]->o117_valor;
+  $tot_adicional  += (float) $oColunas->colunas[2]->o117_valor;
+  $tot_emp_nobim  += (float) $oColunas->colunas[3]->o117_valor;
+  $tot_emp_atebim += (float) $oColunas->colunas[4]->o117_valor;
+  $tot_liq_nobim  += (float) $oColunas->colunas[5]->o117_valor;
+  $tot_liq_atebim += (float) $oColunas->colunas[6]->o117_valor;
 
   if ($bimestre == 6) {
 
     if (isset($oColunas->colunas[7]->o117_valor)) {
-      $tot_inscritos_rp += $oColunas->colunas[7]->o117_valor;
+      $tot_inscritos_rp += (float) $oColunas->colunas[7]->o117_valor;
     }
   }
 
@@ -6730,7 +6730,7 @@ if ($tot_inicial    > 0 || $tot_adicional > 0 || $tot_emp_nobim  > 0 ||
     if ($bimestre == 6) {
       $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
     }
-    @$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
     // % (j/f)
     $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
     // (f-j)
@@ -6753,7 +6753,7 @@ if ($v_desp_cor_intra_inicial    > 0 || $v_desp_cor_intra_adicional > 0 || $v_de
     if ($bimestre == 6) {
       $pdf->cell($iTamRPInscritos,$alt, db_formatar($v_desp_cor_intra_inscritos,'f'),'R',0,"R",0);
     }
-    @$pdf->cell(10,$alt,db_formatar((($v_desp_cor_intra_liqatebim+$v_desp_cor_intra_inscritos)*100)/($v_desp_cor_intra_inicial+$v_desp_cor_intra_adicional),'f'),'0',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) ($v_desp_cor_intra_inicial + $v_desp_cor_intra_adicional) == 0 ? (float) (($v_desp_cor_intra_liqatebim + $v_desp_cor_intra_inscritos) * 100) > 0 ? INF : ((float) (($v_desp_cor_intra_liqatebim + $v_desp_cor_intra_inscritos) * 100) < 0 ? -INF : NAN) : ($v_desp_cor_intra_liqatebim + $v_desp_cor_intra_inscritos) * 100 / ($v_desp_cor_intra_inicial + $v_desp_cor_intra_adicional),'f'),'0',0,"R",0);
     $pdf->cell(14,$alt,db_formatar(($v_desp_cor_intra_inicial+$v_desp_cor_intra_adicional)-($v_desp_cor_intra_inscritos+$v_desp_cor_intra_liqatebim),'f'),'0',0,"R",0);
     $pdf->setY($pos_atu);
     // desce novamente até aki
@@ -6793,7 +6793,7 @@ if ($tot_inicial    > 0 || $tot_adicional > 0 || $tot_emp_nobim  > 0 ||
     if ($bimestre == 6) {
       $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
     }
-    @$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
     // % (j/f)
     $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
     // (f-j)
@@ -6832,7 +6832,7 @@ if ($tot_inicial    > 0 || $tot_adicional > 0 || $tot_emp_nobim  > 0 ||
     if ($bimestre == 6) {
       $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
     }
-    @$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
     // % (j/f)
     $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
     // (f-j)
@@ -6871,7 +6871,7 @@ if ($tot_inicial    > 0 || $tot_adicional > 0 || $tot_emp_nobim  > 0 ||
     if ($bimestre == 6) {
       $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
     }
-    @$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
     // % (j/f)
     $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
     // (f-j)
@@ -6896,7 +6896,7 @@ if ($v_desp_cap_intra_inicial    > 0 || $v_desp_cap_intra_adicional > 0 || $v_de
     if ($bimestre == 6) {
       $pdf->cell($iTamRPInscritos,$alt, db_formatar($v_desp_cap_intra_inscritos,'f'),'R',0,"R",0);
     }
-    @$pdf->cell(10,$alt,db_formatar((($v_desp_cap_intra_liqatebim+$v_desp_cap_intra_inscritos)*100)/($v_desp_cap_intra_inicial+$v_desp_cap_intra_adicional),'f'),"R",0,"R",0);
+    @$pdf->cell(10,$alt,db_formatar((float) ($v_desp_cap_intra_inicial + $v_desp_cap_intra_adicional) == 0 ? (float) (($v_desp_cap_intra_liqatebim + $v_desp_cap_intra_inscritos) * 100) > 0 ? INF : ((float) (($v_desp_cap_intra_liqatebim + $v_desp_cap_intra_inscritos) * 100) < 0 ? -INF : NAN) : ($v_desp_cap_intra_liqatebim + $v_desp_cap_intra_inscritos) * 100 / ($v_desp_cap_intra_inicial + $v_desp_cap_intra_adicional),'f'),"R",0,"R",0);
     $pdf->cell(14,$alt,db_formatar(($v_desp_cap_intra_inicial+$v_desp_cap_intra_adicional)-($v_desp_cap_intra_inscritos+$v_desp_cap_intra_liqatebim),'f'),'0',1,"R",0);
     // $pdf->setY($pos_atu);
     // desce novamente até aki
@@ -6925,7 +6925,7 @@ $pdf->cell($iTamLiqAteBim,     $alt, db_formatar($somador_VI_liqatebim,'f'),'TBR
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($somador_VI_inscritos,'f'),'TBR',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar(($somador_VI_liqatebim+$somador_VI_inscritos)*100/($somador_VI_inicial+$somador_VI_adicional),'f'),'TBR',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) ($somador_VI_inicial + $somador_VI_adicional) == 0 ? (float) (($somador_VI_liqatebim + $somador_VI_inscritos) * 100) > 0 ? INF : ((float) (($somador_VI_liqatebim + $somador_VI_inscritos) * 100) < 0 ? -INF : NAN) : ($somador_VI_liqatebim + $somador_VI_inscritos) * 100 / ($somador_VI_inicial + $somador_VI_adicional),'f'),'TBR',0,"R",0);
 // % (j/f)
 $pdf->cell(14,$alt,db_formatar((($somador_VI_inicial+$somador_VI_adicional)-($somador_VI_inscritos+$somador_VI_liqatebim)),'f'),'TB',1,"R",0);
 // (f-j)
@@ -6977,17 +6977,17 @@ $tot_atualizada   = 0;
 $oLinha = $m_amort_divida_int_mobiliario["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas){
 
-  @$tot_inicial    += $oColunas->colunas[1]->o117_valor;
-  @$tot_adicional  += $oColunas->colunas[2]->o117_valor;
-  @$tot_emp_nobim  += $oColunas->colunas[3]->o117_valor;
-  @$tot_emp_atebim += $oColunas->colunas[4]->o117_valor;
-  @$tot_liq_nobim  += $oColunas->colunas[5]->o117_valor;
-  @$tot_liq_atebim += $oColunas->colunas[6]->o117_valor;
+  @$tot_inicial    += (float) $oColunas->colunas[1]->o117_valor;
+  @$tot_adicional  += (float) $oColunas->colunas[2]->o117_valor;
+  @$tot_emp_nobim  += (float) $oColunas->colunas[3]->o117_valor;
+  @$tot_emp_atebim += (float) $oColunas->colunas[4]->o117_valor;
+  @$tot_liq_nobim  += (float) $oColunas->colunas[5]->o117_valor;
+  @$tot_liq_atebim += (float) $oColunas->colunas[6]->o117_valor;
 
   if ($bimestre == 6) {
 
     if (isset($oColunas->colunas[7]->o117_valor)) {
-      $tot_inscritos_rp += $oColunas->colunas[7]->o117_valor;
+      $tot_inscritos_rp += (float) $oColunas->colunas[7]->o117_valor;
     }
   }
 }
@@ -7006,7 +7006,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 
 $somador_VII_inicial    += $tot_inicial ;
@@ -7040,17 +7040,17 @@ atualizaTotaisDespesaDivida($m_amort_divida_int_outras["parametros"],$result_des
 $oLinha = $m_amort_divida_int_outras["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas){
 
-  @$tot_inicial    += $oColunas->colunas[1]->o117_valor;
-  @$tot_adicional  += $oColunas->colunas[2]->o117_valor;
-  @$tot_emp_nobim  += $oColunas->colunas[3]->o117_valor;
-  @$tot_emp_atebim += $oColunas->colunas[4]->o117_valor;
-  @$tot_liq_nobim  += $oColunas->colunas[5]->o117_valor;
-  @$tot_liq_atebim += $oColunas->colunas[6]->o117_valor;
+  @$tot_inicial    += (float) $oColunas->colunas[1]->o117_valor;
+  @$tot_adicional  += (float) $oColunas->colunas[2]->o117_valor;
+  @$tot_emp_nobim  += (float) $oColunas->colunas[3]->o117_valor;
+  @$tot_emp_atebim += (float) $oColunas->colunas[4]->o117_valor;
+  @$tot_liq_nobim  += (float) $oColunas->colunas[5]->o117_valor;
+  @$tot_liq_atebim += (float) $oColunas->colunas[6]->o117_valor;
 
   if ($bimestre == 6) {
 
     if (isset($oColunas->colunas[7]->o117_valor)) {
-      $tot_inscritos_rp += $oColunas->colunas[7]->o117_valor;
+      $tot_inscritos_rp += (float) $oColunas->colunas[7]->o117_valor;
     }
   }
 }
@@ -7069,7 +7069,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
 $somador_VII_inicial    += $tot_inicial ;
@@ -7104,7 +7104,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($v_liqatebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($v_inscritos,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($v_liq_atebim+$v_inscritos_rp)*100)/$v_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) (($v_liq_atebim + $v_inscritos_rp) * 100) > 0 ? INF : ((float) (($v_liq_atebim + $v_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($v_liq_atebim + $v_inscritos_rp) * 100 / $v_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(14,$alt,db_formatar(($v_atualizada - ($v_inscritos+$v_liqatebim)),'f'),'0',1,"R",0);
 
 $pdf->setY($pos_atu);
@@ -7139,17 +7139,17 @@ $tot_inscritos_rp = 0;
 $oLinha = $m_amort_divida_ext_mobiliario["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas) {
 
-  @$tot_inicial    += $oColunas->colunas[1]->o117_valor;
-  @$tot_adicional  += $oColunas->colunas[2]->o117_valor;
-  @$tot_emp_nobim  += $oColunas->colunas[3]->o117_valor;
-  @$tot_emp_atebim += $oColunas->colunas[4]->o117_valor;
-  @$tot_liq_nobim  += $oColunas->colunas[5]->o117_valor;
-  @$tot_liq_atebim += $oColunas->colunas[6]->o117_valor;
+  @$tot_inicial    += (float) $oColunas->colunas[1]->o117_valor;
+  @$tot_adicional  += (float) $oColunas->colunas[2]->o117_valor;
+  @$tot_emp_nobim  += (float) $oColunas->colunas[3]->o117_valor;
+  @$tot_emp_atebim += (float) $oColunas->colunas[4]->o117_valor;
+  @$tot_liq_nobim  += (float) $oColunas->colunas[5]->o117_valor;
+  @$tot_liq_atebim += (float) $oColunas->colunas[6]->o117_valor;
 
   if ($bimestre == 6) {
 
     if (isset($oColunas->colunas[7]->o117_valor)) {
-      $tot_inscritos_rp += $oColunas->colunas[7]->o117_valor;
+      $tot_inscritos_rp += (float) $oColunas->colunas[7]->o117_valor;
     }
   }
 }
@@ -7168,7 +7168,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
 $somador_VII_inicial    += $tot_inicial ;
@@ -7201,17 +7201,17 @@ $tot_inscritos_rp = 0;
 $oLinha = $m_amort_divida_ext_outras["parametros"]->getValoresSomadosColunas($instituicao, $anousu);
 foreach ($oLinha as $oColunas){
 
-  @$tot_inicial    += $oColunas->colunas[1]->o117_valor;
-  @$tot_adicional  += $oColunas->colunas[2]->o117_valor;
-  @$tot_emp_nobim  += $oColunas->colunas[3]->o117_valor;
-  @$tot_emp_atebim += $oColunas->colunas[4]->o117_valor;
-  @$tot_liq_nobim  += $oColunas->colunas[5]->o117_valor;
-  @$tot_liq_atebim += $oColunas->colunas[6]->o117_valor;
+  @$tot_inicial    += (float) $oColunas->colunas[1]->o117_valor;
+  @$tot_adicional  += (float) $oColunas->colunas[2]->o117_valor;
+  @$tot_emp_nobim  += (float) $oColunas->colunas[3]->o117_valor;
+  @$tot_emp_atebim += (float) $oColunas->colunas[4]->o117_valor;
+  @$tot_liq_nobim  += (float) $oColunas->colunas[5]->o117_valor;
+  @$tot_liq_atebim += (float) $oColunas->colunas[6]->o117_valor;
 
   if ($bimestre == 6) {
 
     if (isset($oColunas->colunas[7]->o117_valor)) {
-      $tot_inscritos_rp += $oColunas->colunas[7]->o117_valor;
+      $tot_inscritos_rp += (float) $oColunas->colunas[7]->o117_valor;
     }
   }
 }
@@ -7229,7 +7229,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($tot_liq_atebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($tot_inscritos_rp,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($tot_liq_atebim+$tot_inscritos_rp)*100)/$tot_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $tot_atualizada == 0 ? (float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) > 0 ? INF : ((float) (($tot_liq_atebim + $tot_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($tot_liq_atebim + $tot_inscritos_rp) * 100 / $tot_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(14,$alt,db_formatar(($tot_atualizada - ($tot_inscritos_rp+$tot_liq_atebim)),'f'),'0',1,"R",0);
 // (f-j)
 $somador_VII_inicial    += $tot_inicial ;
@@ -7265,7 +7265,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($v_liqatebim,'f'),'R',0,"R",0);
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($v_inscritos,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar((($v_liq_atebim+$v_inscritos_rp)*100)/$v_atualizada,'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $v_atualizada == 0 ? (float) (($v_liq_atebim + $v_inscritos_rp) * 100) > 0 ? INF : ((float) (($v_liq_atebim + $v_inscritos_rp) * 100) < 0 ? -INF : NAN) : ($v_liq_atebim + $v_inscritos_rp) * 100 / $v_atualizada,'f'),'R',0,"R",0);
 $pdf->cell(14,$alt,db_formatar(($v_atualizada - ($v_inscritos+$v_liqatebim)),'f'),'0',1,"R",0);
 
 $pdf->setY($pos_div_amort);
@@ -7280,7 +7280,7 @@ $pdf->cell($iTamLiqAteBim,$alt,db_formatar($somador_VII_liqatebim,'f'),'0',0,"R"
 if ($bimestre == 6) {
   $pdf->cell($iTamRPInscritos,$alt, db_formatar($somador_VII_inscritos,'f'),'R',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar(($somador_VII_liqatebim+$somador_VII_inscritos)*100/($somador_VII_inicial+$somador_VII_adicional),'f'),'R',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) ($somador_VII_inicial + $somador_VII_adicional) == 0 ? (float) (($somador_VII_liqatebim + $somador_VII_inscritos) * 100) > 0 ? INF : ((float) (($somador_VII_liqatebim + $somador_VII_inscritos) * 100) < 0 ? -INF : NAN) : ($somador_VII_liqatebim + $somador_VII_inscritos) * 100 / ($somador_VII_inicial + $somador_VII_adicional),'f'),'R',0,"R",0);
 // % (j/f)
 $pdf->cell(14,$alt,db_formatar(($somador_VII_inicial+$somador_VII_adicional)-($somador_VII_inscritos+$somador_VII_liqatebim),'f'),'0',0,"R",0);
 
@@ -7310,7 +7310,7 @@ if ($bimestre == 6) {
 } else {
   $pdf->cell($iTamLiqAteBim,$alt,db_formatar($somador_VIII_liqatebim,'f'),'TBR',0,"R",0);
 }
-@$pdf->cell(10,$alt,db_formatar(($somador_VIII_liqatebim+$somador_VIII_inscritos)*100/($somador_VIII_inicial+$somador_VIII_adicional),'f'),'TBR',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) ($somador_VIII_inicial + $somador_VIII_adicional) == 0 ? (float) (($somador_VIII_liqatebim + $somador_VIII_inscritos) * 100) > 0 ? INF : ((float) (($somador_VIII_liqatebim + $somador_VIII_inscritos) * 100) < 0 ? -INF : NAN) : ($somador_VIII_liqatebim + $somador_VIII_inscritos) * 100 / ($somador_VIII_inicial + $somador_VIII_adicional),'f'),'TBR',0,"R",0);
 
 //$pdf->cell(14,$alt,'>>'.db_formatar((($somador_VIII_inicial+$somador_VIII_adicional) - ($somador_VII_inscritos+$somador_VIII_liqatebim)),'f'),'TB',1,"R",0);
 $pdf->cell(14,$alt,db_formatar((($somador_VI_inicial  +$somador_VI_adicional  ) - ($somador_VI_inscritos +$somador_VI_liqatebim)),'f'),'TB',1,"R",0);
@@ -7426,10 +7426,10 @@ $pdf->setX(70);
 $pdf->cell(20,$alt,db_formatar($somador_V_inicial,'f'),'TBR',0,"R",0);
 $pdf->cell(20,$alt,db_formatar($somador_V_atualizada,'f'),'TBR',0,"R",0);
 $pdf->cell(25,$alt,db_formatar($somador_V_nobim,'f'),'TBR',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($somador_V_nobim*100)/$somador_V_atualizada,'f'),'TBR',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $somador_V_atualizada == 0 ? (float) ($somador_V_nobim * 100) > 0 ? INF : ((float) ($somador_V_nobim * 100) < 0 ? -INF : NAN) : $somador_V_nobim * 100 / $somador_V_atualizada,'f'),'TBR',0,"R",0);
 // %
 $pdf->cell(25,$alt,db_formatar($somador_VII_atebim,'f'),'TBR',0,"R",0);
-@$pdf->cell(10,$alt,db_formatar(($somador_VII_atebim*100)/$somador_V_atualizada,'f'),'TBR',0,"R",0);
+@$pdf->cell(10,$alt,db_formatar((float) $somador_V_atualizada == 0 ? (float) ($somador_VII_atebim * 100) > 0 ? INF : ((float) ($somador_VII_atebim * 100) < 0 ? -INF : NAN) : $somador_VII_atebim * 100 / $somador_V_atualizada,'f'),'TBR',0,"R",0);
 // % (b/a)
 $pdf->cell(20,$alt,db_formatar($somador_V_realizar,'f'),'TB',1,"R",0);
 
@@ -7488,7 +7488,7 @@ function atualizaTotaisReceita($oLinha, &$aReceitaIntra, $recordset){
     $tot_realizar,
     $anousu;
 
-  for ($i=0; $i<pg_num_rows($recordset); $i++) {
+  for ($i=0; $i<($recordset ? pg_num_rows($recordset) : null); $i++) {
 
     $oResultado = db_utils::fieldsmemory($recordset,$i);
     $oParametro = $oLinha->getParametros($anousu);
@@ -7522,7 +7522,7 @@ function atualizaTotaisDespesa($oLinha,$recordset, $lIntra){
 
   global $bimestre,$anousu,$tot_inicial,$tot_adicional,$tot_emp_nobim,$tot_emp_atebim,$tot_liq_nobim,$tot_liq_atebim,$tot_inscritos_rp;
 
-  for ($i=0; $i<pg_num_rows($recordset); $i++) {
+  for ($i=0; $i<($recordset ? pg_num_rows($recordset) : null); $i++) {
 
     $oResultado = db_utils::fieldsmemory($recordset,$i);
     $oParametro = $oLinha->getParametros($anousu);
@@ -7560,7 +7560,7 @@ function atualizaTotaisDespesaDivida($oLinha,$recordset){
 
   global $bimestre,$anousu,$tot_inicial,$tot_adicional,$tot_emp_nobim,$tot_emp_atebim,$tot_liq_nobim,$tot_liq_atebim,$tot_inscritos_rp;
 
-  for ($i=0; $i<pg_num_rows($recordset); $i++) {
+  for ($i=0; $i<($recordset ? pg_num_rows($recordset) : null); $i++) {
 
     $oResultado = db_utils::fieldsmemory($recordset,$i);
     $oParametro = $oLinha->getParametros($anousu);

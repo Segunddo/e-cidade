@@ -69,11 +69,11 @@ class cl_db_versaotarefa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db29_seqvertar = ($this->db29_seqvertar == ""?@$GLOBALS["HTTP_POST_VARS"]["db29_seqvertar"]:$this->db29_seqvertar);
-       $this->db29_codver = ($this->db29_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db29_codver"]:$this->db29_codver);
-       $this->db29_tarefa = ($this->db29_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["db29_tarefa"]:$this->db29_tarefa);
+       $this->db29_seqvertar = ($this->db29_seqvertar === 0 || $this->db29_seqvertar === 0.0 || $this->db29_seqvertar == ""?@$GLOBALS["HTTP_POST_VARS"]["db29_seqvertar"]:$this->db29_seqvertar);
+       $this->db29_codver = ($this->db29_codver === 0 || $this->db29_codver === 0.0 || $this->db29_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db29_codver"]:$this->db29_codver);
+       $this->db29_tarefa = ($this->db29_tarefa === 0 || $this->db29_tarefa === 0.0 || $this->db29_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["db29_tarefa"]:$this->db29_tarefa);
      }else{
-       $this->db29_seqvertar = ($this->db29_seqvertar == ""?@$GLOBALS["HTTP_POST_VARS"]["db29_seqvertar"]:$this->db29_seqvertar);
+       $this->db29_seqvertar = ($this->db29_seqvertar === 0 || $this->db29_seqvertar === 0.0 || $this->db29_seqvertar == ""?@$GLOBALS["HTTP_POST_VARS"]["db29_seqvertar"]:$this->db29_seqvertar);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_db_versaotarefa {
        return false;
      }
        $this->db29_seqvertar = $db29_seqvertar;
-     if(($this->db29_seqvertar == null) || ($this->db29_seqvertar == "") ){
+     if(($this->db29_seqvertar == null) || ($this->db29_seqvertar === 0 || $this->db29_seqvertar === 0.0 || $this->db29_seqvertar == "") ){
        $this->erro_sql = " Campo db29_seqvertar nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

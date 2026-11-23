@@ -67,8 +67,8 @@ class cl_tiafinscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y94_codtiaf = ($this->y94_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y94_codtiaf"]:$this->y94_codtiaf);
-       $this->y94_inscr = ($this->y94_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y94_inscr"]:$this->y94_inscr);
+       $this->y94_codtiaf = ($this->y94_codtiaf === 0 || $this->y94_codtiaf === 0.0 || $this->y94_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y94_codtiaf"]:$this->y94_codtiaf);
+       $this->y94_inscr = ($this->y94_inscr === 0 || $this->y94_inscr === 0.0 || $this->y94_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y94_inscr"]:$this->y94_inscr);
      }else{
      }
    }

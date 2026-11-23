@@ -71,12 +71,12 @@ class cl_quadracemit {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm22_i_codigo = ($this->cm22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm22_i_codigo"]:$this->cm22_i_codigo);
-       $this->cm22_i_cemiterio = ($this->cm22_i_cemiterio == ""?@$GLOBALS["HTTP_POST_VARS"]["cm22_i_cemiterio"]:$this->cm22_i_cemiterio);
+       $this->cm22_i_codigo = ($this->cm22_i_codigo === 0 || $this->cm22_i_codigo === 0.0 || $this->cm22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm22_i_codigo"]:$this->cm22_i_codigo);
+       $this->cm22_i_cemiterio = ($this->cm22_i_cemiterio === 0 || $this->cm22_i_cemiterio === 0.0 || $this->cm22_i_cemiterio == ""?@$GLOBALS["HTTP_POST_VARS"]["cm22_i_cemiterio"]:$this->cm22_i_cemiterio);
        $this->cm22_c_quadra = ($this->cm22_c_quadra == ""?@$GLOBALS["HTTP_POST_VARS"]["cm22_c_quadra"]:$this->cm22_c_quadra);
        $this->cm22_c_tipo = ($this->cm22_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm22_c_tipo"]:$this->cm22_c_tipo);
      }else{
-       $this->cm22_i_codigo = ($this->cm22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm22_i_codigo"]:$this->cm22_i_codigo);
+       $this->cm22_i_codigo = ($this->cm22_i_codigo === 0 || $this->cm22_i_codigo === 0.0 || $this->cm22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm22_i_codigo"]:$this->cm22_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_quadracemit {
          $this->cm22_i_codigo = $cm22_i_codigo;
        }
      }
-     if(($this->cm22_i_codigo == null) || ($this->cm22_i_codigo == "") ){
+     if(($this->cm22_i_codigo == null) || ($this->cm22_i_codigo === 0 || $this->cm22_i_codigo === 0.0 || $this->cm22_i_codigo == "") ){
        $this->erro_sql = " Campo cm22_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

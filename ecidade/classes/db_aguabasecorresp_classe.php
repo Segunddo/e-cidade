@@ -67,10 +67,10 @@ class cl_aguabasecorresp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x32_codcorresp = ($this->x32_codcorresp == ""?@$GLOBALS["HTTP_POST_VARS"]["x32_codcorresp"]:$this->x32_codcorresp);
-       $this->x32_matric = ($this->x32_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x32_matric"]:$this->x32_matric);
+       $this->x32_codcorresp = ($this->x32_codcorresp === 0 || $this->x32_codcorresp === 0.0 || $this->x32_codcorresp == ""?@$GLOBALS["HTTP_POST_VARS"]["x32_codcorresp"]:$this->x32_codcorresp);
+       $this->x32_matric = ($this->x32_matric === 0 || $this->x32_matric === 0.0 || $this->x32_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x32_matric"]:$this->x32_matric);
      }else{
-       $this->x32_matric = ($this->x32_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x32_matric"]:$this->x32_matric);
+       $this->x32_matric = ($this->x32_matric === 0 || $this->x32_matric === 0.0 || $this->x32_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x32_matric"]:$this->x32_matric);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_aguabasecorresp {
        return false;
      }
        $this->x32_matric = $x32_matric;
-     if(($this->x32_matric == null) || ($this->x32_matric == "") ){
+     if(($this->x32_matric == null) || ($this->x32_matric === 0 || $this->x32_matric === 0.0 || $this->x32_matric == "") ){
        $this->erro_sql = " Campo x32_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

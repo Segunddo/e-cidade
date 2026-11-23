@@ -77,8 +77,8 @@ class cl_cadtipoparcdeb {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k41_cadtipoparc = ($this->k41_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_cadtipoparc"]:$this->k41_cadtipoparc);
-       $this->k41_arretipo = ($this->k41_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_arretipo"]:$this->k41_arretipo);
+       $this->k41_cadtipoparc = ($this->k41_cadtipoparc === 0 || $this->k41_cadtipoparc === 0.0 || $this->k41_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_cadtipoparc"]:$this->k41_cadtipoparc);
+       $this->k41_arretipo = ($this->k41_arretipo === 0 || $this->k41_arretipo === 0.0 || $this->k41_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_arretipo"]:$this->k41_arretipo);
        if($this->k41_vencini == ""){
          $this->k41_vencini_dia = ($this->k41_vencini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_vencini_dia"]:$this->k41_vencini_dia);
          $this->k41_vencini_mes = ($this->k41_vencini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_vencini_mes"]:$this->k41_vencini_mes);
@@ -96,8 +96,8 @@ class cl_cadtipoparcdeb {
          }
        }
      }else{
-       $this->k41_cadtipoparc = ($this->k41_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_cadtipoparc"]:$this->k41_cadtipoparc);
-       $this->k41_arretipo = ($this->k41_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_arretipo"]:$this->k41_arretipo);
+       $this->k41_cadtipoparc = ($this->k41_cadtipoparc === 0 || $this->k41_cadtipoparc === 0.0 || $this->k41_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_cadtipoparc"]:$this->k41_cadtipoparc);
+       $this->k41_arretipo = ($this->k41_arretipo === 0 || $this->k41_arretipo === 0.0 || $this->k41_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k41_arretipo"]:$this->k41_arretipo);
      }
    }
    // funcao para inclusao
@@ -123,7 +123,7 @@ class cl_cadtipoparcdeb {
      }
        $this->k41_cadtipoparc = $k41_cadtipoparc;
        $this->k41_arretipo = $k41_arretipo;
-     if(($this->k41_cadtipoparc == null) || ($this->k41_cadtipoparc == "") ){
+     if(($this->k41_cadtipoparc == null) || ($this->k41_cadtipoparc === 0 || $this->k41_cadtipoparc === 0.0 || $this->k41_cadtipoparc == "") ){
        $this->erro_sql = " Campo k41_cadtipoparc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -131,7 +131,7 @@ class cl_cadtipoparcdeb {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k41_arretipo == null) || ($this->k41_arretipo == "") ){
+     if(($this->k41_arretipo == null) || ($this->k41_arretipo === 0 || $this->k41_arretipo === 0.0 || $this->k41_arretipo == "") ){
        $this->erro_sql = " Campo k41_arretipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

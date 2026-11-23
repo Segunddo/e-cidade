@@ -69,11 +69,11 @@ class cl_aguacoletor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x46_sequencial = ($this->x46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x46_sequencial"]:$this->x46_sequencial);
+       $this->x46_sequencial = ($this->x46_sequencial === 0 || $this->x46_sequencial === 0.0 || $this->x46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x46_sequencial"]:$this->x46_sequencial);
        $this->x46_descricao = ($this->x46_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["x46_descricao"]:$this->x46_descricao);
        $this->x46_observacao = ($this->x46_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x46_observacao"]:$this->x46_observacao);
      }else{
-       $this->x46_sequencial = ($this->x46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x46_sequencial"]:$this->x46_sequencial);
+       $this->x46_sequencial = ($this->x46_sequencial === 0 || $this->x46_sequencial === 0.0 || $this->x46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x46_sequencial"]:$this->x46_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aguacoletor {
          $this->x46_sequencial = $x46_sequencial;
        }
      }
-     if(($this->x46_sequencial == null) || ($this->x46_sequencial == "") ){
+     if(($this->x46_sequencial == null) || ($this->x46_sequencial === 0 || $this->x46_sequencial === 0.0 || $this->x46_sequencial == "") ){
        $this->erro_sql = " Campo x46_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

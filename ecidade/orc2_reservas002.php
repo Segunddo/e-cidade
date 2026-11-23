@@ -40,13 +40,13 @@ $oJson          = new services_json();
 $aListaTipos    = $oJson->decode(str_replace("\\", "", $aListaTipo));
 $aListaDeptos   = $oJson->decode(str_replace("\\", "", $aListaDepartamentos));
 $sDepartamentos = "";
-if (count($aListaDeptos) > 0) {
+if (count((array)$aListaDeptos) > 0) {
     foreach ($aListaDeptos as $iDepto) {
         $sDepartamentos .= "{$iDepto},";
     }
     $sDepartamentos = substr($sDepartamentos, 0, -1);
 }
-$iNroLista      = count($aListaTipos);
+$iNroLista      = count((array)$aListaTipos);
 $sWhereTipo     = "";
 $sCamposTipo    = "";
 
@@ -110,7 +110,7 @@ if (trim(@$instits) == "") {
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in ($instits)");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_num_rows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_num_rows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg.$nomeinst ;
     $xvirg = ', ';
@@ -233,7 +233,7 @@ if ($o83_autori_inicial != "") {
 $sql .= " order by tiporeserva,{$sCampos} ";
 
 $rsDadosReserva = db_query($sql);
-$iNroReserva    = pg_num_rows($rsDadosReserva);
+$iNroReserva    = ($rsDadosReserva ? pg_num_rows($rsDadosReserva) : null);
 
 if ($iNroReserva == 0) {
     db_redireciona("db_erros.php?fechar&db_erro=Não existem reserva de saldo para listar.");

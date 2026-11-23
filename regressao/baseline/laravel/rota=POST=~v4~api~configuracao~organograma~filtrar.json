@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/organograma/filtrar",
+  "json": {
+    "error": true,
+    "message": "Departamento não encontrado."
+  },
+  "sha256": "1cfa0509678fd31410829f5a85618043bc9fabe4b792994899adb0926d730f12",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

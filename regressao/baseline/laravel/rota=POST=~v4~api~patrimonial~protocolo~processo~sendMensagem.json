@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/processo/sendMensagem",
+  "json": {
+    "data": {
+      "erro": false,
+      "mensagem": "Mensagem salva com sucesso"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "6742a1e075403476305e727fdabe34ab3ed849c75c725d5e2aacd749c781ac07",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

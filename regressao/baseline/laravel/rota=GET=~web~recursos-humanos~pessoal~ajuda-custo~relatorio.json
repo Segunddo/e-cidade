@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/recursos-humanos/pessoal/ajuda-custo/relatorio",
+  "json": null,
+  "sha256": "eb7a579a4e43f84dd05c7dfba7fa201f5e9f9e35590f92d2dc9a2cc21a5ec04f",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

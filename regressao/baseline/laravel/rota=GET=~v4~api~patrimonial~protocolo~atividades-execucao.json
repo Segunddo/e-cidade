@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/protocolo/atividades-execucao",
+  "json": {
+    "data": [
+      {
+        "p114_atividade": "Gerar",
+        "p114_codigo": 1,
+        "p114_status": "Gerado"
+      },
+      {
+        "p114_atividade": "Conferir",
+        "p114_codigo": 2,
+        "p114_status": "Conferido"
+      },
+      {
+        "p114_atividade": "Assinar",
+        "p114_codigo": 3,
+        "p114_status": "Assinado"
+      },
+      {
+        "p114_atividade": "Arquivar",
+        "p114_codigo": 4,
+        "p114_status": "Arquivado"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "0dbfd15919ff83a911332a8eefea7a157b97d469de237b427579629aac49a15b",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

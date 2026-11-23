@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/relatorios-legais/upload/template",
+  "json": {
+    "error": true,
+    "message": "Undefined index: file"
+  },
+  "sha256": "7578a495ef306abaa6863ba26ef03358853e9b1e309a85fef0167e0a2f4fbad5",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

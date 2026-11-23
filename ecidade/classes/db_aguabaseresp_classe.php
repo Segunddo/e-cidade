@@ -67,10 +67,10 @@ class cl_aguabaseresp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x14_matric = ($this->x14_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x14_matric"]:$this->x14_matric);
-       $this->x14_numcgm = ($this->x14_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x14_numcgm"]:$this->x14_numcgm);
+       $this->x14_matric = ($this->x14_matric === 0 || $this->x14_matric === 0.0 || $this->x14_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x14_matric"]:$this->x14_matric);
+       $this->x14_numcgm = ($this->x14_numcgm === 0 || $this->x14_numcgm === 0.0 || $this->x14_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x14_numcgm"]:$this->x14_numcgm);
      }else{
-       $this->x14_matric = ($this->x14_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x14_matric"]:$this->x14_matric);
+       $this->x14_matric = ($this->x14_matric === 0 || $this->x14_matric === 0.0 || $this->x14_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x14_matric"]:$this->x14_matric);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_aguabaseresp {
        return false;
      }
        $this->x14_matric = $x14_matric;
-     if(($this->x14_matric == null) || ($this->x14_matric == "") ){
+     if(($this->x14_matric == null) || ($this->x14_matric === 0 || $this->x14_matric === 0.0 || $this->x14_matric == "") ){
        $this->erro_sql = " Campo x14_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

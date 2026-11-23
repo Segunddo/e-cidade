@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/material/relatorios/controle-estoque",
+  "json": {
+    "errors": {
+      "materialCodigo": [
+        "Código do Material deve ser preenchido."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "18e0ed5328bd2023dca16d48957b3f7b934d323927c8171e16e39221b05e9052",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -69,11 +69,11 @@ class cl_dividaprotprocesso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v88_sequencial = ($this->v88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_sequencial"]:$this->v88_sequencial);
-       $this->v88_divida = ($this->v88_divida == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_divida"]:$this->v88_divida);
-       $this->v88_protprocesso = ($this->v88_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_protprocesso"]:$this->v88_protprocesso);
+       $this->v88_sequencial = ($this->v88_sequencial === 0 || $this->v88_sequencial === 0.0 || $this->v88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_sequencial"]:$this->v88_sequencial);
+       $this->v88_divida = ($this->v88_divida === 0 || $this->v88_divida === 0.0 || $this->v88_divida == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_divida"]:$this->v88_divida);
+       $this->v88_protprocesso = ($this->v88_protprocesso === 0 || $this->v88_protprocesso === 0.0 || $this->v88_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_protprocesso"]:$this->v88_protprocesso);
      }else{
-       $this->v88_sequencial = ($this->v88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_sequencial"]:$this->v88_sequencial);
+       $this->v88_sequencial = ($this->v88_sequencial === 0 || $this->v88_sequencial === 0.0 || $this->v88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v88_sequencial"]:$this->v88_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_dividaprotprocesso {
          $this->v88_sequencial = $v88_sequencial;
        }
      }
-     if(($this->v88_sequencial == null) || ($this->v88_sequencial == "") ){
+     if(($this->v88_sequencial == null) || ($this->v88_sequencial === 0 || $this->v88_sequencial === 0.0 || $this->v88_sequencial == "") ){
        $this->erro_sql = " Campo v88_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

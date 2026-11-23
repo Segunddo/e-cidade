@@ -71,14 +71,14 @@ class cl_zonastaxa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j57_zona = ($this->j57_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_zona"]:$this->j57_zona);
-       $this->j57_receit = ($this->j57_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_receit"]:$this->j57_receit);
-       $this->j57_anousu = ($this->j57_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_anousu"]:$this->j57_anousu);
-       $this->j57_valor = ($this->j57_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_valor"]:$this->j57_valor);
+       $this->j57_zona = ($this->j57_zona === 0 || $this->j57_zona === 0.0 || $this->j57_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_zona"]:$this->j57_zona);
+       $this->j57_receit = ($this->j57_receit === 0 || $this->j57_receit === 0.0 || $this->j57_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_receit"]:$this->j57_receit);
+       $this->j57_anousu = ($this->j57_anousu === 0 || $this->j57_anousu === 0.0 || $this->j57_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_anousu"]:$this->j57_anousu);
+       $this->j57_valor = ($this->j57_valor === 0 || $this->j57_valor === 0.0 || $this->j57_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_valor"]:$this->j57_valor);
      }else{
-       $this->j57_zona = ($this->j57_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_zona"]:$this->j57_zona);
-       $this->j57_receit = ($this->j57_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_receit"]:$this->j57_receit);
-       $this->j57_anousu = ($this->j57_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_anousu"]:$this->j57_anousu);
+       $this->j57_zona = ($this->j57_zona === 0 || $this->j57_zona === 0.0 || $this->j57_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_zona"]:$this->j57_zona);
+       $this->j57_receit = ($this->j57_receit === 0 || $this->j57_receit === 0.0 || $this->j57_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_receit"]:$this->j57_receit);
+       $this->j57_anousu = ($this->j57_anousu === 0 || $this->j57_anousu === 0.0 || $this->j57_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j57_anousu"]:$this->j57_anousu);
      }
    }
    // funcao para inclusao
@@ -96,7 +96,7 @@ class cl_zonastaxa {
        $this->j57_zona = $j57_zona;
        $this->j57_receit = $j57_receit;
        $this->j57_anousu = $j57_anousu;
-     if(($this->j57_zona == null) || ($this->j57_zona == "") ){
+     if(($this->j57_zona == null) || ($this->j57_zona === 0 || $this->j57_zona === 0.0 || $this->j57_zona == "") ){
        $this->erro_sql = " Campo j57_zona nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -104,7 +104,7 @@ class cl_zonastaxa {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j57_receit == null) || ($this->j57_receit == "") ){
+     if(($this->j57_receit == null) || ($this->j57_receit === 0 || $this->j57_receit === 0.0 || $this->j57_receit == "") ){
        $this->erro_sql = " Campo j57_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -112,7 +112,7 @@ class cl_zonastaxa {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j57_anousu == null) || ($this->j57_anousu == "") ){
+     if(($this->j57_anousu == null) || ($this->j57_anousu === 0 || $this->j57_anousu === 0.0 || $this->j57_anousu == "") ){
        $this->erro_sql = " Campo j57_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

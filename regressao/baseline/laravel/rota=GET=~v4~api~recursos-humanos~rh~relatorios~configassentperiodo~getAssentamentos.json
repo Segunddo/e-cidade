@@ -1,0 +1,805 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/rh/relatorios/configassentperiodo/getAssentamentos",
+  "json": {
+    "data": {
+      "assentamentos": [
+        {
+          "h12_codigo": 1,
+          "h12_descr": "CAE   - COMISSAO DE ALIMENTACAO ESCOLAR         "
+        },
+        {
+          "h12_codigo": 2,
+          "h12_descr": "SPREV - SUSPENSAO PREVENTIVA                    "
+        },
+        {
+          "h12_codigo": 3,
+          "h12_descr": "TEA   - TEMPO ESTADUAL AVERBADO                 "
+        },
+        {
+          "h12_codigo": 4,
+          "h12_descr": "RCL   - REGENCIA DE CLASSE                      "
+        },
+        {
+          "h12_codigo": 5,
+          "h12_descr": "SFM   - SALARIO FAMILIA                         "
+        },
+        {
+          "h12_codigo": 6,
+          "h12_descr": "TMA   - TEMPO MUNICIPAL AVERBADO                "
+        },
+        {
+          "h12_codigo": 7,
+          "h12_descr": "ADPR  - ALTERA DIFICIL PROVIMENTO               "
+        },
+        {
+          "h12_codigo": 8,
+          "h12_descr": "APPI  - APOSENTADORIA POR INVALIDEZ             "
+        },
+        {
+          "h12_codigo": 9,
+          "h12_descr": "LBP   - LICENCA E BENEFICIO DA PREVIDENCIA      "
+        },
+        {
+          "h12_codigo": 10,
+          "h12_descr": "ALTF  - ALTERACAO DE FUNCAO                     "
+        },
+        {
+          "h12_codigo": 11,
+          "h12_descr": "PSI   - PROCESSO SINDICANCIA                    "
+        },
+        {
+          "h12_codigo": 12,
+          "h12_descr": "AFCO  - AFASTAMENTO COM ÔNUS                    "
+        },
+        {
+          "h12_codigo": 13,
+          "h12_descr": "FDEF  - FUNDO DESENV. EDUC.FUNDAMENTAL          "
+        },
+        {
+          "h12_codigo": 14,
+          "h12_descr": "FNJ   - FALTAS NAO JUSTIFICADAS                 "
+        },
+        {
+          "h12_codigo": 15,
+          "h12_descr": "INE   - INICIO DE EFETIVIDADE                   "
+        },
+        {
+          "h12_codigo": 16,
+          "h12_descr": "CAT   - ACIDENTE DE TRABALHO                    "
+        },
+        {
+          "h12_codigo": 17,
+          "h12_descr": "FR    - GOZO DE FERIAS                          "
+        },
+        {
+          "h12_codigo": 18,
+          "h12_descr": "OUT   - OUTROS ASSENTAMENTOS                    "
+        },
+        {
+          "h12_codigo": 19,
+          "h12_descr": "OBS   - OBSERVACOES                             "
+        },
+        {
+          "h12_codigo": 20,
+          "h12_descr": "CGDPR - CANCELA GRATIFICACAO DIFICIL PROVIMENTO "
+        },
+        {
+          "h12_codigo": 21,
+          "h12_descr": "LPG   - LICENCA PREMIO EM GOZO                  "
+        },
+        {
+          "h12_codigo": 22,
+          "h12_descr": "LP    - LICENCA PATERNIDADE                     "
+        },
+        {
+          "h12_codigo": 23,
+          "h12_descr": "DESD  - DESDOBRAMENTO                           "
+        },
+        {
+          "h12_codigo": 24,
+          "h12_descr": "DIFAC - DIFICIL ACESSO                          "
+        },
+        {
+          "h12_codigo": 25,
+          "h12_descr": "ALFAB - ALFABETIZACAO                           "
+        },
+        {
+          "h12_codigo": 26,
+          "h12_descr": "INSAL - INSALUBRIDADE                           "
+        },
+        {
+          "h12_codigo": 27,
+          "h12_descr": "CARGA - AUMENTO/REDUCAO DE CARGA HORARIA        "
+        },
+        {
+          "h12_codigo": 28,
+          "h12_descr": "PERIC - PERICULOSIDADE                          "
+        },
+        {
+          "h12_codigo": 29,
+          "h12_descr": "LCF   - LICENCA PARA CUIDAR DE FAMILIAR         "
+        },
+        {
+          "h12_codigo": 30,
+          "h12_descr": "LSM   - LICENCA SERVICO MILITAR                 "
+        },
+        {
+          "h12_codigo": 31,
+          "h12_descr": "LCE   - LICENCA PARA CONCORRER A CARGO ELETIVO  "
+        },
+        {
+          "h12_codigo": 32,
+          "h12_descr": "LMC   - LICENCA MANDATO CLASSISTA               "
+        },
+        {
+          "h12_codigo": 33,
+          "h12_descr": "LAC   - LICENCA ATIVIDADES CLASSISTAS           "
+        },
+        {
+          "h12_codigo": 34,
+          "h12_descr": "JE    - JUSTICA ELEITORAL                       "
+        },
+        {
+          "h12_codigo": 35,
+          "h12_descr": "LS    - LICENCA SAUDE                           "
+        },
+        {
+          "h12_codigo": 36,
+          "h12_descr": "INSS  - INSS                                    "
+        },
+        {
+          "h12_codigo": 37,
+          "h12_descr": "RES   - RESCISAO                                "
+        },
+        {
+          "h12_codigo": 38,
+          "h12_descr": "SUSP  - SUSPENSAO                               "
+        },
+        {
+          "h12_codigo": 39,
+          "h12_descr": "ADVER - ADVERTENCIA                             "
+        },
+        {
+          "h12_codigo": 40,
+          "h12_descr": "CLI   - CANCELAMENTO DE LICENCA INTERESSE       "
+        },
+        {
+          "h12_codigo": 41,
+          "h12_descr": "LGA   - LICENCA GALA (CASAMENTO)                "
+        },
+        {
+          "h12_codigo": 42,
+          "h12_descr": "AVL   - ATRIBUI VOTOS DE LOUVOR                 "
+        },
+        {
+          "h12_codigo": 43,
+          "h12_descr": "FEC   - FERIAS COLETIVAS                        "
+        },
+        {
+          "h12_codigo": 44,
+          "h12_descr": "GCE   - GRATIFICACAO CLASSE ESPECIAL            "
+        },
+        {
+          "h12_codigo": 45,
+          "h12_descr": "APOS  - APOSENTADORIA                           "
+        },
+        {
+          "h12_codigo": 46,
+          "h12_descr": "LADOT - LICENCA ADOTANTE                        "
+        },
+        {
+          "h12_codigo": 47,
+          "h12_descr": "PENSA - PENSAO POR MORTE                        "
+        },
+        {
+          "h12_codigo": 48,
+          "h12_descr": "ESTAG - ESTAGIO PROBATORIO                      "
+        },
+        {
+          "h12_codigo": 49,
+          "h12_descr": "TERMO - TERMO DE POSSE                          "
+        },
+        {
+          "h12_codigo": 50,
+          "h12_descr": "ACL   - ALTERA A CLASSE                         "
+        },
+        {
+          "h12_codigo": 51,
+          "h12_descr": "PCE   - PRORROGA CEDENCIA                       "
+        },
+        {
+          "h12_codigo": 52,
+          "h12_descr": "ADS   - APROVEITAMENTO D SERVIDOR EM DISPONIBIL."
+        },
+        {
+          "h12_codigo": 53,
+          "h12_descr": "LOTA  - LOTACAO DE SERVIDOR                     "
+        },
+        {
+          "h12_codigo": 54,
+          "h12_descr": "CHE   - CONVOCAÇÃO HORAS EXTRAS                 "
+        },
+        {
+          "h12_codigo": 55,
+          "h12_descr": "CEDE  - CEDE SERVIDOR(A) SEM ONUS P/EXEC.MUNIC. "
+        },
+        {
+          "h12_codigo": 56,
+          "h12_descr": "CEDEC - CEDE SERVIDOR C/ONUS AO PODER EXEC.MUNIC"
+        },
+        {
+          "h12_codigo": 57,
+          "h12_descr": "DEMIS - DEMISSAO DE SERV.APROV.EM CONC.PUBLICO  "
+        },
+        {
+          "h12_codigo": 58,
+          "h12_descr": "PROMO - PROMOCAO                                "
+        },
+        {
+          "h12_codigo": 59,
+          "h12_descr": "FISC  - FISCAL AD HOC                           "
+        },
+        {
+          "h12_codigo": 60,
+          "h12_descr": "CONVO - CONVOCACAO P/AUMENTO DE CARGA HORARIA   "
+        },
+        {
+          "h12_codigo": 61,
+          "h12_descr": "GFD1  - DIRETOR(A) E/OU VICE-DIRETOR(A) ESCOLA  "
+        },
+        {
+          "h12_codigo": 62,
+          "h12_descr": "CD    - CEDENCIA NO MUNICIPIO                   "
+        },
+        {
+          "h12_codigo": 63,
+          "h12_descr": "ANIV  - ALTERA NIVEL                            "
+        },
+        {
+          "h12_codigo": 64,
+          "h12_descr": "GTS   - GRATIFICACAO DE TEMPO DE SERVICO        "
+        },
+        {
+          "h12_codigo": 65,
+          "h12_descr": "RDE   - REGIME DEDICACAO EXCLUSIVA              "
+        },
+        {
+          "h12_codigo": 66,
+          "h12_descr": "FGFL  - FUNCAO GRATIFICADA FLEXIVEL             "
+        },
+        {
+          "h12_codigo": 67,
+          "h12_descr": "DEXC  - DEDICACAO EXCLUSIVA                     "
+        },
+        {
+          "h12_codigo": 68,
+          "h12_descr": "TRR   - TRANSPOSICAO DE REGIME                  "
+        },
+        {
+          "h12_codigo": 69,
+          "h12_descr": "ATRR  - ANULACAO DE TRANSPOSICAO DE REGIME      "
+        },
+        {
+          "h12_codigo": 70,
+          "h12_descr": "CLP   - CONCESSAO DE LICENCA PREMIO             "
+        },
+        {
+          "h12_codigo": 71,
+          "h12_descr": "LPD   - LICENCA PREMIO EM DOBRO                 "
+        },
+        {
+          "h12_codigo": 72,
+          "h12_descr": "CRE   - CONVOCACAO DE REGIME ESPECIAL           "
+        },
+        {
+          "h12_codigo": 73,
+          "h12_descr": "DRE   - DESIGNACAO DE REGIME ESPECIAL           "
+        },
+        {
+          "h12_codigo": 74,
+          "h12_descr": "PRE   - PRORROGACAO DE REGIME ESPECIAL          "
+        },
+        {
+          "h12_codigo": 75,
+          "h12_descr": "FC    - FIM DE CONTRATO                         "
+        },
+        {
+          "h12_codigo": 76,
+          "h12_descr": "PC    - PRORROGACAO DE CONTRATO                 "
+        },
+        {
+          "h12_codigo": 77,
+          "h12_descr": "LI    - LICENCA INTERESSE                       "
+        },
+        {
+          "h12_codigo": 78,
+          "h12_descr": "PRDES - PRORROGACAO DE DESDOBRAMENTO            "
+        },
+        {
+          "h12_codigo": 79,
+          "h12_descr": "COML  - COMISSAO DE LICITACAO                   "
+        },
+        {
+          "h12_codigo": 80,
+          "h12_descr": "COMS  - COMISSAO DE SINDICANCIA                 "
+        },
+        {
+          "h12_codigo": 81,
+          "h12_descr": "CDESD - CANCELAMENTO DE DESDOBRAMENTO           "
+        },
+        {
+          "h12_codigo": 82,
+          "h12_descr": "FMRCB - FUNREBOM                                "
+        },
+        {
+          "h12_codigo": 83,
+          "h12_descr": "INCOP - INCORPORA AO VENCIMENTO                 "
+        },
+        {
+          "h12_codigo": 84,
+          "h12_descr": "DECLA - DECLARACAO                              "
+        },
+        {
+          "h12_codigo": 85,
+          "h12_descr": "TPA   - TEMPO PRIVADO AVERBADO                  "
+        },
+        {
+          "h12_codigo": 86,
+          "h12_descr": "COMP  - COMISSAO DE PATRIMONIO MOVEL E IMOVEL   "
+        },
+        {
+          "h12_codigo": 87,
+          "h12_descr": "CDIFA - CANCELA DIFICIL ACESSO                  "
+        },
+        {
+          "h12_codigo": 88,
+          "h12_descr": "CANC  - CANCELAMENTO                            "
+        },
+        {
+          "h12_codigo": 89,
+          "h12_descr": "COMEP - COMISSAO DE ESTAGIO PROBATORIO          "
+        },
+        {
+          "h12_codigo": 90,
+          "h12_descr": "PERMU - PERMUTA                                 "
+        },
+        {
+          "h12_codigo": 91,
+          "h12_descr": "COME  - COMISSAO ESPECIAL                       "
+        },
+        {
+          "h12_codigo": 92,
+          "h12_descr": "TRANS - TRANSFERENCIA                           "
+        },
+        {
+          "h12_codigo": 93,
+          "h12_descr": "RECLA - RECLASSIFICACAO                         "
+        },
+        {
+          "h12_codigo": 94,
+          "h12_descr": "CPADD - COMISSAO PROC. ADM. DISCIPLINAR         "
+        },
+        {
+          "h12_codigo": 95,
+          "h12_descr": "GDE   - GRATIFICACAO DE DIRECAO ESCOLAR         "
+        },
+        {
+          "h12_codigo": 96,
+          "h12_descr": "CGDE  - CANCELA GRATIFICACAO DE DIRECAO ESCOLAR "
+        },
+        {
+          "h12_codigo": 97,
+          "h12_descr": "RETIF - RETIFICACAO                             "
+        },
+        {
+          "h12_codigo": 98,
+          "h12_descr": "LTIP  - LICENCA P/TRATAR INTERESSES PARTICULARES"
+        },
+        {
+          "h12_codigo": 99,
+          "h12_descr": "COMIS - COMISSAO                                "
+        },
+        {
+          "h12_codigo": 100,
+          "h12_descr": "FD    - FERIAS EM DOBRO                         "
+        },
+        {
+          "h12_codigo": 101,
+          "h12_descr": "JARI  - JUNTA ADMIN. DE RECURSO DE INFRACAO     "
+        },
+        {
+          "h12_codigo": 102,
+          "h12_descr": "GSE   - GRATIFICACAO DE SUPERVISAO ESCOLAR      "
+        },
+        {
+          "h12_codigo": 103,
+          "h12_descr": "COMDE - COMISSAO MUNICIPAL DE DEFESA CIVIL      "
+        },
+        {
+          "h12_codigo": 104,
+          "h12_descr": "JM    - JUNTA MEDICA                            "
+        },
+        {
+          "h12_codigo": 105,
+          "h12_descr": "AXRE  - AUXILIO RECLUSAO                        "
+        },
+        {
+          "h12_codigo": 106,
+          "h12_descr": "LE    - LICENCA ESPECIAL                        "
+        },
+        {
+          "h12_codigo": 107,
+          "h12_descr": "CEDOR - CEDENCIA A OUTROS ORGAOS                "
+        },
+        {
+          "h12_codigo": 108,
+          "h12_descr": "CRST  - CONVOCA P REGIME SUPLEMENTAR DE TRABALHO"
+        },
+        {
+          "h12_codigo": 109,
+          "h12_descr": "PLS   - PRORROGACAO DE LICENCA SAUDE            "
+        },
+        {
+          "h12_codigo": 110,
+          "h12_descr": "PATM  - PRORROGACAO ATESTADO MEDICO             "
+        },
+        {
+          "h12_codigo": 111,
+          "h12_descr": "PRORR - PRORROGACAO                             "
+        },
+        {
+          "h12_codigo": 112,
+          "h12_descr": "COMAV - COMISSAO DE AVALIACAO                   "
+        },
+        {
+          "h12_codigo": 113,
+          "h12_descr": "DEPOR - DESCONSTITUI PORTARIA                   "
+        },
+        {
+          "h12_codigo": 114,
+          "h12_descr": "TSEFP - TORNA SEM EFEITO UMA PORTARIA           "
+        },
+        {
+          "h12_codigo": 115,
+          "h12_descr": "LPV   - LICENCA PREMIO INDENIZADA               "
+        },
+        {
+          "h12_codigo": 116,
+          "h12_descr": "AXNAT - AUXILIO NATALIDADE                      "
+        },
+        {
+          "h12_codigo": 117,
+          "h12_descr": "TNIL  - TORNA NULO O ATO                        "
+        },
+        {
+          "h12_codigo": 118,
+          "h12_descr": "REVOG - REVOGACAO                               "
+        },
+        {
+          "h12_codigo": 119,
+          "h12_descr": "GE    - GRATIFICACAO ESPECIAL                   "
+        },
+        {
+          "h12_codigo": 120,
+          "h12_descr": "GETES - GRATIFICACAO ESPECIAL TRANSP.ESCOLAR    "
+        },
+        {
+          "h12_codigo": 121,
+          "h12_descr": "LOUV  - LOUVOR                                  "
+        },
+        {
+          "h12_codigo": 122,
+          "h12_descr": "LN    - LICENCA NOJO (FALECIMENTO)              "
+        },
+        {
+          "h12_codigo": 123,
+          "h12_descr": "LG    - LICENCA GESTANTE (MATERNIDADE)          "
+        },
+        {
+          "h12_codigo": 124,
+          "h12_descr": "DESIG - DESIGNACAO                              "
+        },
+        {
+          "h12_codigo": 125,
+          "h12_descr": "ABP   - CONVERTER ABONO PECUNIARIO              "
+        },
+        {
+          "h12_codigo": 126,
+          "h12_descr": "PRAPF - PROGRESSAO POR APERFEICOAMENTO          "
+        },
+        {
+          "h12_codigo": 127,
+          "h12_descr": "ALRST - ALTERACAO DE REGIME SUPL DE TRABALHO    "
+        },
+        {
+          "h12_codigo": 128,
+          "h12_descr": "NMBTR - NUCLEO MUNICIPAL BANCO DA TERRA         "
+        },
+        {
+          "h12_codigo": 129,
+          "h12_descr": "COMCU - COMISSAO DE CONCURSO                    "
+        },
+        {
+          "h12_codigo": 130,
+          "h12_descr": "GDPRO - GRATIFICACAO DIFICIL PROVIMENTO         "
+        },
+        {
+          "h12_codigo": 131,
+          "h12_descr": "CGSE  - CANCELA GRATIF.SUPERV.ESCOLAR           "
+        },
+        {
+          "h12_codigo": 132,
+          "h12_descr": "CIPA  - COMISSAO INTERNA PREVENCAO ACIDENTES    "
+        },
+        {
+          "h12_codigo": 133,
+          "h12_descr": "ILP   - INTERRUPÇÃO DE LICENÇA PRÊMIO           "
+        },
+        {
+          "h12_codigo": 134,
+          "h12_descr": "PAD   - PROCESSO ADM. DISCIPLINAR               "
+        },
+        {
+          "h12_codigo": 135,
+          "h12_descr": "TP    - TRANSFERENCIA E PROMOCOES               "
+        },
+        {
+          "h12_codigo": 136,
+          "h12_descr": "AESC  - ATESTADO ESCOLAR                        "
+        },
+        {
+          "h12_codigo": 137,
+          "h12_descr": "GCI   - GRATIFICACAO CONTROLE INTERNO           "
+        },
+        {
+          "h12_codigo": 138,
+          "h12_descr": "EXON  - EXONERACAO                              "
+        },
+        {
+          "h12_codigo": 139,
+          "h12_descr": "PREP  - PREPOSTO OFICIAL                        "
+        },
+        {
+          "h12_codigo": 140,
+          "h12_descr": "FJ    - FALTAS JUSTIFICADAS                     "
+        },
+        {
+          "h12_codigo": 141,
+          "h12_descr": "GVD   - GRATIFICAÇÃO DE VICE-DIREÇÃO            "
+        },
+        {
+          "h12_codigo": 142,
+          "h12_descr": "ESTAV - ESTÁVEL NO SERVIÇO PÚBLICO              "
+        },
+        {
+          "h12_codigo": 143,
+          "h12_descr": "LPAC  - LICENCA PARA ACOMPANHAR CONJUGE         "
+        },
+        {
+          "h12_codigo": 144,
+          "h12_descr": "ANP   - ANULA PORTARIA                          "
+        },
+        {
+          "h12_codigo": 145,
+          "h12_descr": "ECCI  - EXON COORD. CONTROLE INTERNO            "
+        },
+        {
+          "h12_codigo": 146,
+          "h12_descr": "CPOR  - CANCELA PORTARIA                        "
+        },
+        {
+          "h12_codigo": 147,
+          "h12_descr": "NCCI  - COORD.CENTRAL CONT.INTERNO              "
+        },
+        {
+          "h12_codigo": 148,
+          "h12_descr": "CLPG  - CANCELA LP EM GOZO                      "
+        },
+        {
+          "h12_codigo": 149,
+          "h12_descr": "CCRST - CANCELA R. SUPLEMENTAR TRABALHO         "
+        },
+        {
+          "h12_codigo": 150,
+          "h12_descr": "SLTIP - SUSPENDE L.TRAT.INTERES.PARTICUL.       "
+        },
+        {
+          "h12_codigo": 151,
+          "h12_descr": "RPOR  - REVOGA PORTARIA                         "
+        },
+        {
+          "h12_codigo": 152,
+          "h12_descr": "CEPE  - COMISSÃO ESPECIAL PREGÃO ELETRONI       "
+        },
+        {
+          "h12_codigo": 153,
+          "h12_descr": "REAPO - RETIFICA APOSENTADORIA                  "
+        },
+        {
+          "h12_codigo": 154,
+          "h12_descr": "CGE   - CANCELA GRATIFICAÇÃO ESPECIAL           "
+        },
+        {
+          "h12_codigo": 155,
+          "h12_descr": "GT    - GRUPO DE TRABALHO                       "
+        },
+        {
+          "h12_codigo": 156,
+          "h12_descr": "CCP   - CONSELHO CONSULTA POPULAR               "
+        },
+        {
+          "h12_codigo": 157,
+          "h12_descr": "CCI   - COMISSÃO DA CENTRAL CONTROLE INTERNO    "
+        },
+        {
+          "h12_codigo": 158,
+          "h12_descr": "REIN  - REINTEGRAÇÃO                            "
+        },
+        {
+          "h12_codigo": 159,
+          "h12_descr": "GAD   - GRATIFICACAO ADICIONAL                  "
+        },
+        {
+          "h12_codigo": 160,
+          "h12_descr": "SFG   - SUBSTITUIÇÃO FUNÇÃO GRATIFICADA         "
+        },
+        {
+          "h12_codigo": 161,
+          "h12_descr": "CRAI  - C.RECURSOS AUTOS DE INFRAÇÃO            "
+        },
+        {
+          "h12_codigo": 162,
+          "h12_descr": "GFT   - GRATIFICAÇÃO DE FUNÇÃO TEMPORÁRIA       "
+        },
+        {
+          "h12_codigo": 163,
+          "h12_descr": "CRSTI - REGIME SUPL. TRABALHO INCORPORADO       "
+        },
+        {
+          "h12_codigo": 164,
+          "h12_descr": "REEN  - REENQUADRA                              "
+        },
+        {
+          "h12_codigo": 165,
+          "h12_descr": "CINSS - COLOC A DISP DO INSS                    "
+        },
+        {
+          "h12_codigo": 166,
+          "h12_descr": "RETP  - RETIFICA PENSÃO                         "
+        },
+        {
+          "h12_codigo": 167,
+          "h12_descr": "CPSIN - COMISSÃO PERMANENTE SINDICANCIA         "
+        },
+        {
+          "h12_codigo": 168,
+          "h12_descr": "COMPL - COMISSÃO PERMANENTE LICITAÇÃO           "
+        },
+        {
+          "h12_codigo": 169,
+          "h12_descr": "REPOR - RETIFICA PORTARIA                       "
+        },
+        {
+          "h12_codigo": 170,
+          "h12_descr": "FP(S) - FÉRIAS PERDIDAS (LICENÇA SAÚDE)"
+        },
+        {
+          "h12_codigo": 171,
+          "h12_descr": "EXPOR - EXCLUI DA PORTARIA"
+        },
+        {
+          "h12_codigo": 172,
+          "h12_descr": "GOE - GRATIFICAÇÃO ORIENTAÇÃO ESCOLAR"
+        },
+        {
+          "h12_codigo": 173,
+          "h12_descr": "PLCF - PRORROGAÇÃO LIC. CUIDAR FAMILIAR"
+        },
+        {
+          "h12_codigo": 174,
+          "h12_descr": "GDEP - GRATIFICAÇÃO DEDICAÇÃO EXCLUSIVA"
+        },
+        {
+          "h12_codigo": 175,
+          "h12_descr": "ARV - ADICIONAL RISCO DE VIDA"
+        },
+        {
+          "h12_codigo": 176,
+          "h12_descr": "CDES - CANCELA DESIGNAÇÃO"
+        },
+        {
+          "h12_codigo": 177,
+          "h12_descr": "COAP - COMISSAO AVALIAÇÃO DAS PROMOÇÕES"
+        },
+        {
+          "h12_codigo": 178,
+          "h12_descr": "CSAD - COLOCA SERVIDOR A DISPOSIÇÃO"
+        },
+        {
+          "h12_codigo": 179,
+          "h12_descr": "RRST - REDUZ CARGA HOR. REG. SUPLEMENTAR"
+        },
+        {
+          "h12_codigo": 180,
+          "h12_descr": "TF - TEMPO FEDERAL"
+        },
+        {
+          "h12_codigo": 181,
+          "h12_descr": "CONVT - CONVOCACAO PARA TRABALHO (EM FERIAS)"
+        },
+        {
+          "h12_codigo": 182,
+          "h12_descr": "APGTO - AUTORIZA O PAGAMENTO CARGO EM COMISSAO"
+        },
+        {
+          "h12_codigo": 183,
+          "h12_descr": "GZLP - GOZO DE LICENCA PREMIO"
+        },
+        {
+          "h12_codigo": 184,
+          "h12_descr": "READP - READAPTACAO"
+        },
+        {
+          "h12_codigo": 185,
+          "h12_descr": "CDDES - CONVOCA DEFINITIVAMENTO P/ DESDOBRAMENTO"
+        },
+        {
+          "h12_codigo": 186,
+          "h12_descr": "CONTR - CONTRATO"
+        },
+        {
+          "h12_codigo": 187,
+          "h12_descr": "RATIF - RATIFICACAO"
+        },
+        {
+          "h12_codigo": 188,
+          "h12_descr": "AVC - CONCESSAO DE AVANCO"
+        },
+        {
+          "h12_codigo": 189,
+          "h12_descr": "TE - TEMPO EXERCITO AVERBADO"
+        },
+        {
+          "h12_codigo": 190,
+          "h12_descr": "EFETV - EFETIVA O SERVIDOR"
+        },
+        {
+          "h12_codigo": 191,
+          "h12_descr": "ATM - ATESTADO MEDICO"
+        },
+        {
+          "h12_codigo": 192,
+          "h12_descr": "NOM - NOMEACOES"
+        },
+        {
+          "h12_codigo": 193,
+          "h12_descr": "ALPOR - ALTERACAO DE PORTARIA"
+        },
+        {
+          "h12_codigo": 194,
+          "h12_descr": "RCFR - RETORNO CONV. DE GOZO DE FÉRIAS"
+        },
+        {
+          "h12_codigo": 195,
+          "h12_descr": "ATT - ATEST MEDICO DE UM TURNO"
+        },
+        {
+          "h12_codigo": 196,
+          "h12_descr": "DMT - DESCONTO DE MULTA DE TRANSITO"
+        }
+      ]
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "3e5ba8a5bec76bc2ef6d427ae2a6382a5a231aaca771700770a13ca5bf2e5608",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

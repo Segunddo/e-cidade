@@ -73,13 +73,13 @@ class cl_cronogramabaserecano {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o129_sequencial = ($this->o129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o129_sequencial"]:$this->o129_sequencial);
-       $this->o129_cronogramaperspectivareceita = ($this->o129_cronogramaperspectivareceita == ""?@$GLOBALS["HTTP_POST_VARS"]["o129_cronogramaperspectivareceita"]:$this->o129_cronogramaperspectivareceita);
-       $this->o129_ano = ($this->o129_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["o129_ano"]:$this->o129_ano);
-       $this->o129_valor = ($this->o129_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o129_valor"]:$this->o129_valor);
+       $this->o129_sequencial = ($this->o129_sequencial === 0 || $this->o129_sequencial === 0.0 || $this->o129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o129_sequencial"]:$this->o129_sequencial);
+       $this->o129_cronogramaperspectivareceita = ($this->o129_cronogramaperspectivareceita === 0 || $this->o129_cronogramaperspectivareceita === 0.0 || $this->o129_cronogramaperspectivareceita == ""?@$GLOBALS["HTTP_POST_VARS"]["o129_cronogramaperspectivareceita"]:$this->o129_cronogramaperspectivareceita);
+       $this->o129_ano = ($this->o129_ano === 0 || $this->o129_ano === 0.0 || $this->o129_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["o129_ano"]:$this->o129_ano);
+       $this->o129_valor = ($this->o129_valor === 0 || $this->o129_valor === 0.0 || $this->o129_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o129_valor"]:$this->o129_valor);
        $this->o129_usamedia = ($this->o129_usamedia == "f"?@$GLOBALS["HTTP_POST_VARS"]["o129_usamedia"]:$this->o129_usamedia);
      }else{
-       $this->o129_sequencial = ($this->o129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o129_sequencial"]:$this->o129_sequencial);
+       $this->o129_sequencial = ($this->o129_sequencial === 0 || $this->o129_sequencial === 0.0 || $this->o129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o129_sequencial"]:$this->o129_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_cronogramabaserecano {
          $this->o129_sequencial = $o129_sequencial;
        }
      }
-     if(($this->o129_sequencial == null) || ($this->o129_sequencial == "") ){
+     if(($this->o129_sequencial == null) || ($this->o129_sequencial === 0 || $this->o129_sequencial === 0.0 || $this->o129_sequencial == "") ){
        $this->erro_sql = " Campo o129_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

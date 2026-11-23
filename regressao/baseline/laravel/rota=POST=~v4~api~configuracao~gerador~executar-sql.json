@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/gerador/executar-sql",
+  "json": {
+    "errors": {
+      "bindings": [
+        "O campo bindings deve ser presente."
+      ],
+      "sql": [
+        "O campo sql é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "4822bad526e9b1d2e144175679d64840af32935616627e74283dc6fdb5f422c3",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

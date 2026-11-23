@@ -33,7 +33,7 @@ require_once(modification("classes/db_veicmanut_classe.php"));
 require_once(modification("classes/db_veiccadcentraldepart_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clveicmanut            = new cl_veicmanut;
 $clveiccadcentraldepart = new cl_veiccadcentraldepart;

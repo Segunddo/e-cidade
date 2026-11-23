@@ -86,13 +86,13 @@ class cl_aguahidromatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x04_codhidrometro = ($this->x04_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_codhidrometro"]:$this->x04_codhidrometro);
-       $this->x04_codmarca = ($this->x04_codmarca == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_codmarca"]:$this->x04_codmarca);
+       $this->x04_codhidrometro = ($this->x04_codhidrometro === 0 || $this->x04_codhidrometro === 0.0 || $this->x04_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_codhidrometro"]:$this->x04_codhidrometro);
+       $this->x04_codmarca = ($this->x04_codmarca === 0 || $this->x04_codmarca === 0.0 || $this->x04_codmarca == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_codmarca"]:$this->x04_codmarca);
        $this->x04_nrohidro = ($this->x04_nrohidro == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_nrohidro"]:$this->x04_nrohidro);
-       $this->x04_qtddigito = ($this->x04_qtddigito == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_qtddigito"]:$this->x04_qtddigito);
-       $this->x04_coddiametro = ($this->x04_coddiametro == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_coddiametro"]:$this->x04_coddiametro);
+       $this->x04_qtddigito = ($this->x04_qtddigito === 0 || $this->x04_qtddigito === 0.0 || $this->x04_qtddigito == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_qtddigito"]:$this->x04_qtddigito);
+       $this->x04_coddiametro = ($this->x04_coddiametro === 0 || $this->x04_coddiametro === 0.0 || $this->x04_coddiametro == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_coddiametro"]:$this->x04_coddiametro);
        $this->x04_matric = ($this->x04_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_matric"]:$this->x04_matric);
-       $this->x04_leitinicial = ($this->x04_leitinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_leitinicial"]:$this->x04_leitinicial);
+       $this->x04_leitinicial = ($this->x04_leitinicial === 0 || $this->x04_leitinicial === 0.0 || $this->x04_leitinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_leitinicial"]:$this->x04_leitinicial);
        if($this->x04_dtinst == ""){
          $this->x04_dtinst_dia = ($this->x04_dtinst_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_dtinst_dia"]:$this->x04_dtinst_dia);
          $this->x04_dtinst_mes = ($this->x04_dtinst_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_dtinst_mes"]:$this->x04_dtinst_mes);
@@ -104,7 +104,7 @@ class cl_aguahidromatric {
        $this->x04_avisoleiturista = ($this->x04_avisoleiturista == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_avisoleiturista"]:$this->x04_avisoleiturista);
        $this->x04_observacao = ($this->x04_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_observacao"]:$this->x04_observacao);
      }else{
-       $this->x04_codhidrometro = ($this->x04_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_codhidrometro"]:$this->x04_codhidrometro);
+       $this->x04_codhidrometro = ($this->x04_codhidrometro === 0 || $this->x04_codhidrometro === 0.0 || $this->x04_codhidrometro == ""?@$GLOBALS["HTTP_POST_VARS"]["x04_codhidrometro"]:$this->x04_codhidrometro);
      }
    }
    // funcao para inclusao
@@ -188,7 +188,7 @@ class cl_aguahidromatric {
          $this->x04_codhidrometro = $x04_codhidrometro;
        }
      }
-     if(($this->x04_codhidrometro == null) || ($this->x04_codhidrometro == "") ){
+     if(($this->x04_codhidrometro == null) || ($this->x04_codhidrometro === 0 || $this->x04_codhidrometro === 0.0 || $this->x04_codhidrometro == "") ){
        $this->erro_sql = " Campo x04_codhidrometro nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

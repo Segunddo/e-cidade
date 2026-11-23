@@ -35,7 +35,7 @@ include(modification("classes/db_tarefaparam_classe.php"));
 include(modification("classes/db_tarefa_classe.php"));
 include(modification("classes/db_db_usuarios_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cltarefa = new cl_tarefa;
 $cldb_usuarios = new cl_db_usuarios;
 //set_time_limit(30);

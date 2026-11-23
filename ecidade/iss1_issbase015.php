@@ -104,7 +104,7 @@ db_fieldsmemory($result02,0);
 //************************************************************************************************//
 //Busca o parametro na tabela parissqn para gerar risco automaticamente apartir do CNAE
 $selectRiscoAutomatico = db_query("select q60_riscoautomatico from issqn.parissqn;");
-$riscoAutomatico = pg_result($selectRiscoAutomatico,0,0);
+$riscoAutomatico = ($selectRiscoAutomatico ? pg_result($selectRiscoAutomatico,0,0) : null);
 //************************************************************************************************//
 
 if (isset($alterar)) {
@@ -113,8 +113,8 @@ if (isset($alterar)) {
     $cep=$z01_cep;
   }else{
     $issruas = $clissruas->sql_record($clissruas->sql_query($q02_inscr,"z01_cep"));
-    if(pg_num_rows($issruas) != 0){
-      $cep = pg_fetch_result($issruas,0);
+    if(($issruas ? pg_num_rows($issruas) : null) != 0){
+      $cep = ($issruas ? pg_fetch_result($issruas,0) : null);
     }
   }
 
@@ -194,12 +194,12 @@ if (isset($alterar)) {
                          on c2.q71_sequencial = c.q72_cnae 
                          where ap.q88_inscr = {$q02_inscr};"
                         );
-      switch(pg_fetch_result($risco,0,0)) {
+      switch(($risco ? pg_fetch_result($risco,0,0) : null)) {
         case false:
           $clissquant->q30_graurisco = null;
           break;
         default:
-          $clissquant->q30_graurisco = strtoupper(pg_fetch_result($risco,0,0));
+          $clissquant->q30_graurisco = strtoupper(($risco ? pg_fetch_result($risco,0,0) : null));
       }
     }
     $clissquant->q30_tempofuncionamento = $q30_tempofuncionamento;

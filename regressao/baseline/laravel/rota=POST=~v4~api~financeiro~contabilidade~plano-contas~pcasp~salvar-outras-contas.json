@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/pcasp/salvar-outras-contas",
+  "json": {
+    "error": true,
+    "message": "Undefined index: contaEstado"
+  },
+  "sha256": "93e9619d4b0f2ff0e194ab13b31524596ed628ec0bbfd6bde3cb4ed7dc737839",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

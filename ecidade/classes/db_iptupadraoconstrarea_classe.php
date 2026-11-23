@@ -77,15 +77,15 @@ class cl_iptupadraoconstrarea {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j116_sequencial = ($this->j116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_sequencial"]:$this->j116_sequencial);
-       $this->j116_iptupadraoconstr = ($this->j116_iptupadraoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_iptupadraoconstr"]:$this->j116_iptupadraoconstr);
-       $this->j116_areaini = ($this->j116_areaini == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_areaini"]:$this->j116_areaini);
-       $this->j116_areafim = ($this->j116_areafim == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_areafim"]:$this->j116_areafim);
-       $this->j116_caracter = ($this->j116_caracter == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_caracter"]:$this->j116_caracter);
-       $this->j116_peso = ($this->j116_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_peso"]:$this->j116_peso);
-       $this->j116_anousu = ($this->j116_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_anousu"]:$this->j116_anousu);
+       $this->j116_sequencial = ($this->j116_sequencial === 0 || $this->j116_sequencial === 0.0 || $this->j116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_sequencial"]:$this->j116_sequencial);
+       $this->j116_iptupadraoconstr = ($this->j116_iptupadraoconstr === 0 || $this->j116_iptupadraoconstr === 0.0 || $this->j116_iptupadraoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_iptupadraoconstr"]:$this->j116_iptupadraoconstr);
+       $this->j116_areaini = ($this->j116_areaini === 0 || $this->j116_areaini === 0.0 || $this->j116_areaini == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_areaini"]:$this->j116_areaini);
+       $this->j116_areafim = ($this->j116_areafim === 0 || $this->j116_areafim === 0.0 || $this->j116_areafim == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_areafim"]:$this->j116_areafim);
+       $this->j116_caracter = ($this->j116_caracter === 0 || $this->j116_caracter === 0.0 || $this->j116_caracter == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_caracter"]:$this->j116_caracter);
+       $this->j116_peso = ($this->j116_peso === 0 || $this->j116_peso === 0.0 || $this->j116_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_peso"]:$this->j116_peso);
+       $this->j116_anousu = ($this->j116_anousu === 0 || $this->j116_anousu === 0.0 || $this->j116_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_anousu"]:$this->j116_anousu);
      }else{
-       $this->j116_sequencial = ($this->j116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_sequencial"]:$this->j116_sequencial);
+       $this->j116_sequencial = ($this->j116_sequencial === 0 || $this->j116_sequencial === 0.0 || $this->j116_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j116_sequencial"]:$this->j116_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_iptupadraoconstrarea {
          $this->j116_sequencial = $j116_sequencial;
        }
      }
-     if(($this->j116_sequencial == null) || ($this->j116_sequencial == "") ){
+     if(($this->j116_sequencial == null) || ($this->j116_sequencial === 0 || $this->j116_sequencial === 0.0 || $this->j116_sequencial == "") ){
        $this->erro_sql = " Campo j116_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

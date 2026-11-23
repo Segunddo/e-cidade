@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/orcamento/relatorios/anexo-2-receita",
+  "json": {
+    "error": true,
+    "message": "Undefined index: instituicoes"
+  },
+  "sha256": "e3bda0dbe3c76bf477ce3a922516fcd9236a1a9eb2745d25cd77aca158ce41cf",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

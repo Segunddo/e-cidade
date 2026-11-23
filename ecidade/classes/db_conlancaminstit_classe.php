@@ -43,11 +43,11 @@ class cl_conlancaminstit {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c02_sequencial = ($this->c02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c02_sequencial"]:$this->c02_sequencial);
-       $this->c02_codlan = ($this->c02_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c02_codlan"]:$this->c02_codlan);
-       $this->c02_instit = ($this->c02_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c02_instit"]:$this->c02_instit);
+       $this->c02_sequencial = ($this->c02_sequencial === 0 || $this->c02_sequencial === 0.0 || $this->c02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c02_sequencial"]:$this->c02_sequencial);
+       $this->c02_codlan = ($this->c02_codlan === 0 || $this->c02_codlan === 0.0 || $this->c02_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c02_codlan"]:$this->c02_codlan);
+       $this->c02_instit = ($this->c02_instit === 0 || $this->c02_instit === 0.0 || $this->c02_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c02_instit"]:$this->c02_instit);
      }else{
-       $this->c02_sequencial = ($this->c02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c02_sequencial"]:$this->c02_sequencial);
+       $this->c02_sequencial = ($this->c02_sequencial === 0 || $this->c02_sequencial === 0.0 || $this->c02_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c02_sequencial"]:$this->c02_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_conlancaminstit {
          $this->c02_sequencial = $c02_sequencial;
        }
      }
-     if(($this->c02_sequencial == null) || ($this->c02_sequencial == "") ){
+     if(($this->c02_sequencial == null) || ($this->c02_sequencial === 0 || $this->c02_sequencial === 0.0 || $this->c02_sequencial == "") ){
        $this->erro_sql = " Campo c02_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

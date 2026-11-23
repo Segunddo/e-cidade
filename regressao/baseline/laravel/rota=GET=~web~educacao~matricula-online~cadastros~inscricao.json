@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/matricula-online/cadastros/inscricao",
+  "json": null,
+  "sha256": "cf4fc33fc85357869abdd8e3002b4b9f99270c2350b6c2257f1c440545eccc99",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

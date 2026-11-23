@@ -67,11 +67,11 @@ class cl_sanitarioinscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y18_codsani = ($this->y18_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y18_codsani"]:$this->y18_codsani);
-       $this->y18_inscr = ($this->y18_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y18_inscr"]:$this->y18_inscr);
+       $this->y18_codsani = ($this->y18_codsani === 0 || $this->y18_codsani === 0.0 || $this->y18_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y18_codsani"]:$this->y18_codsani);
+       $this->y18_inscr = ($this->y18_inscr === 0 || $this->y18_inscr === 0.0 || $this->y18_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y18_inscr"]:$this->y18_inscr);
      }else{
-       $this->y18_codsani = ($this->y18_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y18_codsani"]:$this->y18_codsani);
-       $this->y18_inscr = ($this->y18_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y18_inscr"]:$this->y18_inscr);
+       $this->y18_codsani = ($this->y18_codsani === 0 || $this->y18_codsani === 0.0 || $this->y18_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y18_codsani"]:$this->y18_codsani);
+       $this->y18_inscr = ($this->y18_inscr === 0 || $this->y18_inscr === 0.0 || $this->y18_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y18_inscr"]:$this->y18_inscr);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_sanitarioinscr {
       $this->atualizacampos();
        $this->y18_codsani = $y18_codsani;
        $this->y18_inscr = $y18_inscr;
-     if(($this->y18_codsani == null) || ($this->y18_codsani == "") ){
+     if(($this->y18_codsani == null) || ($this->y18_codsani === 0 || $this->y18_codsani === 0.0 || $this->y18_codsani == "") ){
        $this->erro_sql = " Campo y18_codsani nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_sanitarioinscr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y18_inscr == null) || ($this->y18_inscr == "") ){
+     if(($this->y18_inscr == null) || ($this->y18_inscr === 0 || $this->y18_inscr === 0.0 || $this->y18_inscr == "") ){
        $this->erro_sql = " Campo y18_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,8 +67,8 @@ class cl_inicialcert_anulada {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v49_inicial = ($this->v49_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v49_inicial"]:$this->v49_inicial);
-       $this->v49_certidao = ($this->v49_certidao == ""?@$GLOBALS["HTTP_POST_VARS"]["v49_certidao"]:$this->v49_certidao);
+       $this->v49_inicial = ($this->v49_inicial === 0 || $this->v49_inicial === 0.0 || $this->v49_inicial == ""?@$GLOBALS["HTTP_POST_VARS"]["v49_inicial"]:$this->v49_inicial);
+       $this->v49_certidao = ($this->v49_certidao === 0 || $this->v49_certidao === 0.0 || $this->v49_certidao == ""?@$GLOBALS["HTTP_POST_VARS"]["v49_certidao"]:$this->v49_certidao);
      }else{
      }
    }

@@ -78,7 +78,7 @@ $sqldiferenca = "
 	  and disarq.autent   is false
     and disbanco.instit = $instit";
 $resultdiferenca = db_query($sqldiferenca);
-$linhasdiferenca = pg_num_rows($resultdiferenca);
+$linhasdiferenca = ($resultdiferenca ? pg_num_rows($resultdiferenca) : null);
 if($linhasdiferenca >0){
   db_inicio_transacao();
   for($i=0;$i<$linhasdiferenca;$i++){
@@ -96,7 +96,7 @@ if($linhasdiferenca >0){
     $sqldisbancodiver .= "       left  join arrecad  on  dv05_numpre  = k00_numpre ";
     $sqldisbancodiver .= " where k44_idret = $idret ";
     $resultdisbancodiver = db_query($sqldisbancodiver);
-    $linhasdisbancodiver = pg_num_rows($resultdisbancodiver);
+    $linhasdisbancodiver = ($resultdisbancodiver ? pg_num_rows($resultdisbancodiver) : null);
     if($linhasdisbancodiver > 0){
       $linhadesprocess ++;
       db_fieldsmemory($resultdisbancodiver,0);
@@ -163,7 +163,7 @@ if($linhasdiferenca >0){
 
       $sqlcgm = " select k00_numcgm from arrenumcgm where k00_numpre = $k00_numpre";
       $resultcgm = db_query($sqlcgm);
-      $linhascgm = pg_num_rows($resultcgm);
+      $linhascgm = ($resultcgm ? pg_num_rows($resultcgm) : null);
       if($linhascgm>0){
         db_fieldsmemory($resultcgm,0);
       }
@@ -174,7 +174,7 @@ if($linhasdiferenca >0){
         $sqlcgm .= "        inner join arrenumcgm on arrenumcgm.k00_numpre = recibopaga.k00_numpre ";
         $sqlcgm .= "  where recibopaga.k00_numnov = $k00_numpre limit 1";
         $resultcgm = db_query($sqlcgm);
-        $linhascgm = pg_num_rows($resultcgm);
+        $linhascgm = ($resultcgm ? pg_num_rows($resultcgm) : null);
         if($linhascgm>0){
           db_fieldsmemory($resultcgm,0);
         }
@@ -183,7 +183,7 @@ if($linhasdiferenca >0){
       if($k00_numcgm==0) {
         $sqlcgm = " select k00_numcgm from recibo where k00_numpre = $k00_numpre";
         $resultcgm = db_query($sqlcgm);
-        $linhascgm = pg_num_rows($resultcgm);
+        $linhascgm = ($resultcgm ? pg_num_rows($resultcgm) : null);
         if($linhascgm>0){
           db_fieldsmemory($resultcgm,0);
         }
@@ -237,7 +237,7 @@ if($linhasdiferenca >0){
 			inner join arrematric on arrematric.k00_numpre = arrecant.k00_numpre
 			where arrecant.k00_numpre = $k00_numpre";
       $resultmatric = db_query($sqlmatric);
-      $linhasmatric = pg_num_rows($resultmatric);
+      $linhasmatric = ($resultmatric ? pg_num_rows($resultmatric) : null);
       if($linhasmatric>0){
         db_fieldsmemory($resultmatric,0);
         //inclui na arrematric
@@ -270,7 +270,7 @@ from arrecant
 inner join arreinscr on arreinscr.k00_numpre = arrecant.k00_numpre
 where arrecant.k00_numpre = $k00_numpre";
       $resultinscr = db_query($sqlinscr);
-      $linhasinscr = pg_num_rows($resultinscr);
+      $linhasinscr = ($resultinscr ? pg_num_rows($resultinscr) : null);
       if($linhasinscr>0){
         db_fieldsmemory($resultinscr,0);
         $clarreinscr->k00_numpre=$nextval;
@@ -287,7 +287,7 @@ where arrecant.k00_numpre = $k00_numpre";
 
       $sqlArretipo = " select dv09_tipo as arretipo from procdiver where dv09_procdiver = $procedencia and dv09_instit = ".db_getsession('DB_instit') ;
       $rsArretipo  = db_query($sqlArretipo);
-      if (pg_num_rows($rsArretipo) > 0 ){
+      if (($rsArretipo ? pg_num_rows($rsArretipo) : null) > 0 ){
         db_fieldsmemory($rsArretipo,0);
       }else{
         db_msgbox("Configure o tipo de debitos destino para a procedencia selecionada ! ");
@@ -296,7 +296,7 @@ where arrecant.k00_numpre = $k00_numpre";
       }
 
       $result09 = db_query("select fc_geraarrecad(7,$nextval,true,2) as retorno") ;
-      if (pg_num_rows($result09) > 0 ) {
+      if (($result09 ? pg_num_rows($result09) : null) > 0 ) {
         db_fieldsmemory($result09,0);
         $iRetorno = substr(trim($retorno),0,1);
         if ($iRetorno != '9') {

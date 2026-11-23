@@ -67,10 +67,10 @@ class cl_causa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm04_i_codigo = ($this->cm04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm04_i_codigo"]:$this->cm04_i_codigo);
+       $this->cm04_i_codigo = ($this->cm04_i_codigo === 0 || $this->cm04_i_codigo === 0.0 || $this->cm04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm04_i_codigo"]:$this->cm04_i_codigo);
        $this->cm04_c_descr = ($this->cm04_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["cm04_c_descr"]:$this->cm04_c_descr);
      }else{
-       $this->cm04_i_codigo = ($this->cm04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm04_i_codigo"]:$this->cm04_i_codigo);
+       $this->cm04_i_codigo = ($this->cm04_i_codigo === 0 || $this->cm04_i_codigo === 0.0 || $this->cm04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm04_i_codigo"]:$this->cm04_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_causa {
          $this->cm04_i_codigo = $cm04_i_codigo;
        }
      }
-     if(($this->cm04_i_codigo == null) || ($this->cm04_i_codigo == "") ){
+     if(($this->cm04_i_codigo == null) || ($this->cm04_i_codigo === 0 || $this->cm04_i_codigo === 0.0 || $this->cm04_i_codigo == "") ){
        $this->erro_sql = " Campo cm04_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

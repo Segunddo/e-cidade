@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/fix/lancamento/criar-recurso",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42601]: Syntax error: 7 ERRO:  erro de sintaxe em ou próximo a \"and\"\nLINE 10:             and c53_tipo in (\n                     ^ (SQL: \n        select distinct c53_tipo\n          from (\n         select c71_codlan as lancamento, c71_coddoc, c53_tipo, c69_anousu as anousu\n           from conlancamval\n           join conlancamdoc on c71_codlan = c69_codlan\n           join conhistdoc on c53_coddoc = c71_coddoc\n           left join conlancamcomplementorecurso on o201_codlan = c69_codlan\n          where c69_anousu = \n            and c53_tipo in (\n                10, 11, 20, 21, 30, 31, 40, 41, 50, 51, 60, 61, 70, 71, 90, 91, 92, 100, 101, 110, 111, 112, 113,\n                200, 201, 414, 415, 900, 901, 1000, 1500, 2000, 2001\n            )\n            and o201_sequencial is null\n         union\n         select c71_codlan, c71_coddoc, c53_tipo, c69_anousu\n           from conlancamval\n           join conlancamdoc on c71_codlan = c69_codlan\n           join conhistdoc on c53_coddoc = c71_coddoc\n           left join conlancamrecurso on c130_conlancam = c69_codlan\n          where c69_anousu = \n            and c130_sequencial is null\n        ) as x\n        )"
+  },
+  "sha256": "9212533073776962a1518e22064422d44c60d9136956b1235c263caefeb550ee",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

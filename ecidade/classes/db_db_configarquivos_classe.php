@@ -71,12 +71,12 @@ class cl_db_configarquivos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db38_sequencial = ($this->db38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db38_sequencial"]:$this->db38_sequencial);
-       $this->db38_instit = ($this->db38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db38_instit"]:$this->db38_instit);
-       $this->db38_arquivo = ($this->db38_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["db38_arquivo"]:$this->db38_arquivo);
-       $this->db38_tipo = ($this->db38_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db38_tipo"]:$this->db38_tipo);
+       $this->db38_sequencial = ($this->db38_sequencial === 0 || $this->db38_sequencial === 0.0 || $this->db38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db38_sequencial"]:$this->db38_sequencial);
+       $this->db38_instit = ($this->db38_instit === 0 || $this->db38_instit === 0.0 || $this->db38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db38_instit"]:$this->db38_instit);
+       $this->db38_arquivo = ($this->db38_arquivo === 0 || $this->db38_arquivo === 0.0 || $this->db38_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["db38_arquivo"]:$this->db38_arquivo);
+       $this->db38_tipo = ($this->db38_tipo === 0 || $this->db38_tipo === 0.0 || $this->db38_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db38_tipo"]:$this->db38_tipo);
      }else{
-       $this->db38_sequencial = ($this->db38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db38_sequencial"]:$this->db38_sequencial);
+       $this->db38_sequencial = ($this->db38_sequencial === 0 || $this->db38_sequencial === 0.0 || $this->db38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db38_sequencial"]:$this->db38_sequencial);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_db_configarquivos {
          $this->db38_sequencial = $db38_sequencial;
        }
      }
-     if(($this->db38_sequencial == null) || ($this->db38_sequencial == "") ){
+     if(($this->db38_sequencial == null) || ($this->db38_sequencial === 0 || $this->db38_sequencial === 0.0 || $this->db38_sequencial == "") ){
        $this->erro_sql = " Campo db38_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

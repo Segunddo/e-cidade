@@ -69,11 +69,11 @@ class cl_procedparag {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v80_proced = ($this->v80_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_proced"]:$this->v80_proced);
-       $this->v80_docum = ($this->v80_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_docum"]:$this->v80_docum);
-       $this->v80_docmetcalculo = ($this->v80_docmetcalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_docmetcalculo"]:$this->v80_docmetcalculo);
+       $this->v80_proced = ($this->v80_proced === 0 || $this->v80_proced === 0.0 || $this->v80_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_proced"]:$this->v80_proced);
+       $this->v80_docum = ($this->v80_docum === 0 || $this->v80_docum === 0.0 || $this->v80_docum == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_docum"]:$this->v80_docum);
+       $this->v80_docmetcalculo = ($this->v80_docmetcalculo === 0 || $this->v80_docmetcalculo === 0.0 || $this->v80_docmetcalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_docmetcalculo"]:$this->v80_docmetcalculo);
      }else{
-       $this->v80_proced = ($this->v80_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_proced"]:$this->v80_proced);
+       $this->v80_proced = ($this->v80_proced === 0 || $this->v80_proced === 0.0 || $this->v80_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v80_proced"]:$this->v80_proced);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_procedparag {
        return false;
      }
        $this->v80_proced = $v80_proced;
-     if(($this->v80_proced == null) || ($this->v80_proced == "") ){
+     if(($this->v80_proced == null) || ($this->v80_proced === 0 || $this->v80_proced === 0.0 || $this->v80_proced == "") ){
        $this->erro_sql = " Campo v80_proced nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

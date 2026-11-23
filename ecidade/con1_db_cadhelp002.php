@@ -33,7 +33,7 @@ include(modification("classes/db_db_cadhelp_classe.php"));
 include(modification("classes/db_db_itenshelp_classe.php"));
 include(modification("classes/db_db_itensmenu_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $cldb_cadhelp = new cl_db_cadhelp;
 $cldb_itenshelp = new cl_db_itenshelp;

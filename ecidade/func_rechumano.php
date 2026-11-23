@@ -35,7 +35,7 @@ require_once modification("dbforms/db_funcoes.php");
 use \App\Domain\Educacao\Escola\Models\Disciplina;
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clrechumano   = new cl_rechumano;
 $clatividaderh = new cl_atividaderh;

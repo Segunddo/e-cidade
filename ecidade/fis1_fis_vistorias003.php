@@ -25,7 +25,7 @@
  *                                licenca/licenca_pt.txt 
  */
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(!isset($abas)){
   echo "<script>location.href='fis1_fis_vistorias005.php?db_opcao=3&inscr=1'</script>";
   exit;
@@ -49,7 +49,7 @@ include(modification("classes/db_fis_vistlocal_classe.php"));
 include(modification("classes/db_fis_vistexec_classe.php"));
 include(modification("classes/db_fis_vistestem_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clvistorias      = new cl_fis_vistorias;

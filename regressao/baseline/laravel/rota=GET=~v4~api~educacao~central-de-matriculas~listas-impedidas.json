@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/listas-impedidas",
+  "json": {
+    "error": true,
+    "message": "Class 'ECidade\\Educacao\\MatriculaOnline\\Repository\\FaseRepository' not found"
+  },
+  "sha256": "5b7623799ef5370a26139d82a22afbd6284abe7252643b43384db3425480bc40",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

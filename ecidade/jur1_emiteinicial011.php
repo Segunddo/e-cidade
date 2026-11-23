@@ -363,7 +363,7 @@ $numrows = 0;
 if ($veinclu == false ) {
 
   $resulta = @db_query( $sSql );
-  $numrows = @pg_numrows( $resulta );
+  $numrows = @($resulta ? pg_numrows( $resulta ) : null);
 
   if ( $numrows == 0 && $veinclu == false ) {
     db_redireciona("jur1_emiteinicial001.php?invalido=true");
@@ -452,7 +452,7 @@ if(isset($incluir)) {
           )
   );
 
-  if (pg_num_rows($rsPardiv) > 0 ) {
+  if (($rsPardiv ? pg_num_rows($rsPardiv) : null) > 0 ) {
     db_fieldsmemory($rsPardiv,0);
   } else {
 
@@ -573,7 +573,7 @@ if(isset($incluir)) {
                           and v13_certid = " . $$x . "  ) as x";
 
         $result = db_query($sql);
-        $numso  = pg_numrows($result);
+        $numso  = ($result ? pg_numrows($result) : null);
 
         for($xr = 0; $xr < $numso; $xr++) {
 

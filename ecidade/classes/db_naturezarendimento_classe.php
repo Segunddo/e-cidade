@@ -49,13 +49,13 @@ class cl_naturezarendimento
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->e167_sequencial = ($this->e167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e167_sequencial"]:$this->e167_sequencial);
+       $this->e167_sequencial = ($this->e167_sequencial === 0 || $this->e167_sequencial === 0.0 || $this->e167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e167_sequencial"]:$this->e167_sequencial);
        $this->e167_codigo = ($this->e167_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e167_codigo"]:$this->e167_codigo);
        $this->e167_descricao = ($this->e167_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["e167_descricao"]:$this->e167_descricao);
        $this->e167_tributo = ($this->e167_tributo == ""?@$GLOBALS["HTTP_POST_VARS"]["e167_tributo"]:$this->e167_tributo);
        $this->e167_declarante = ($this->e167_declarante == ""?@$GLOBALS["HTTP_POST_VARS"]["e167_declarante"]:$this->e167_declarante);
      }else{
-       $this->e167_sequencial = ($this->e167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e167_sequencial"]:$this->e167_sequencial);
+       $this->e167_sequencial = ($this->e167_sequencial === 0 || $this->e167_sequencial === 0.0 || $this->e167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e167_sequencial"]:$this->e167_sequencial);
      }
    }
 
@@ -104,7 +104,7 @@ class cl_naturezarendimento
          $this->e167_sequencial = $e167_sequencial; 
        }
      }
-     if(($this->e167_sequencial == null) || ($this->e167_sequencial == "") ){ 
+     if(($this->e167_sequencial == null) || ($this->e167_sequencial === 0 || $this->e167_sequencial === 0.0 || $this->e167_sequencial == "") ){ 
        $this->erro_sql = " Campo e167_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

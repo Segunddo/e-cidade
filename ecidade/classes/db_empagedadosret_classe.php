@@ -77,15 +77,15 @@ class cl_empagedadosret {
     // funcao para atualizar campos
     public function atualizacampos($exclusao=false) {
         if($exclusao==false){
-            $this->e75_codret = ($this->e75_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_codret"]:$this->e75_codret);
-            $this->e75_codgera = ($this->e75_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_codgera"]:$this->e75_codgera);
+            $this->e75_codret = ($this->e75_codret === 0 || $this->e75_codret === 0.0 || $this->e75_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_codret"]:$this->e75_codret);
+            $this->e75_codgera = ($this->e75_codgera === 0 || $this->e75_codgera === 0.0 || $this->e75_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_codgera"]:$this->e75_codgera);
             $this->e75_arquivoret = ($this->e75_arquivoret == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_arquivoret"]:$this->e75_arquivoret);
             $this->e75_febraban = ($this->e75_febraban == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_febraban"]:$this->e75_febraban);
-            $this->e75_seqarq = ($this->e75_seqarq == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_seqarq"]:$this->e75_seqarq);
+            $this->e75_seqarq = ($this->e75_seqarq === 0 || $this->e75_seqarq === 0.0 || $this->e75_seqarq == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_seqarq"]:$this->e75_seqarq);
             $this->e75_codfebraban = ($this->e75_codfebraban == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_codfebraban"]:$this->e75_codfebraban);
             $this->e75_ativo = ($this->e75_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["e75_ativo"]:$this->e75_ativo);
         }else{
-            $this->e75_codret = ($this->e75_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_codret"]:$this->e75_codret);
+            $this->e75_codret = ($this->e75_codret === 0 || $this->e75_codret === 0.0 || $this->e75_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["e75_codret"]:$this->e75_codret);
         }
     }
     // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_empagedadosret {
                 $this->e75_codret = $e75_codret;
             }
         }
-        if(($this->e75_codret == null) || ($this->e75_codret == "") ){
+        if(($this->e75_codret == null) || ($this->e75_codret === 0 || $this->e75_codret === 0.0 || $this->e75_codret == "") ){
             $this->erro_sql = " Campo e75_codret nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

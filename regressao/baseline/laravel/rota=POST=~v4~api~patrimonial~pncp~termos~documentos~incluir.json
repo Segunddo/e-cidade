@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/termos/documentos/incluir",
+  "json": {
+    "errors": {
+      "anoContrato": [
+        "O campo ano contrato é obrigatório."
+      ],
+      "cnpj": [
+        "O campo cnpj é obrigatório."
+      ],
+      "documento": [
+        "Nenhum documento anexado ao Contrato."
+      ],
+      "numeroContrato": [
+        "O campo numero contrato é obrigatório."
+      ],
+      "sequencialTermoContrato": [
+        "O campo sequencial termo contrato é obrigatório."
+      ],
+      "tipoDocumentoId": [
+        "O campo tipo documento id é obrigatório."
+      ],
+      "tituloDocumento": [
+        "O campo titulo documento é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "313b203059b175db92f083b680cb9bad118277c472c9525c87c6ee103594c908",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

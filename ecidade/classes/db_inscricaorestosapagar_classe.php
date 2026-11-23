@@ -75,14 +75,14 @@ class cl_inscricaorestosapagar {
   // funcao para atualizar campos
   public function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->c107_sequencial = ($this->c107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_sequencial"]:$this->c107_sequencial);
-      $this->c107_usuario = ($this->c107_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_usuario"]:$this->c107_usuario);
-      $this->c107_instit = ($this->c107_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_instit"]:$this->c107_instit);
-      $this->c107_ano = ($this->c107_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_ano"]:$this->c107_ano);
+      $this->c107_sequencial = ($this->c107_sequencial === 0 || $this->c107_sequencial === 0.0 || $this->c107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_sequencial"]:$this->c107_sequencial);
+      $this->c107_usuario = ($this->c107_usuario === 0 || $this->c107_usuario === 0.0 || $this->c107_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_usuario"]:$this->c107_usuario);
+      $this->c107_instit = ($this->c107_instit === 0 || $this->c107_instit === 0.0 || $this->c107_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_instit"]:$this->c107_instit);
+      $this->c107_ano = ($this->c107_ano === 0 || $this->c107_ano === 0.0 || $this->c107_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_ano"]:$this->c107_ano);
       $this->c107_processado = ($this->c107_processado == "f"?@$GLOBALS["HTTP_POST_VARS"]["c107_processado"]:$this->c107_processado);
-      $this->c107_tipo = ($this->c107_tipo == "f"?@$GLOBALS["HTTP_POST_VARS"]["c107_tipo"]:$this->c107_tipo);
+      $this->c107_tipo = ($this->c107_tipo === 0 || $this->c107_tipo === 0.0 || $this->c107_tipo == "f"?@$GLOBALS["HTTP_POST_VARS"]["c107_tipo"]:$this->c107_tipo);
     }else{
-      $this->c107_sequencial = ($this->c107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_sequencial"]:$this->c107_sequencial);
+      $this->c107_sequencial = ($this->c107_sequencial === 0 || $this->c107_sequencial === 0.0 || $this->c107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c107_sequencial"]:$this->c107_sequencial);
     }
   }
   // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_inscricaorestosapagar {
         $this->c107_sequencial = $c107_sequencial;
       }
     }
-    if(($this->c107_sequencial == null) || ($this->c107_sequencial == "") ){
+    if(($this->c107_sequencial == null) || ($this->c107_sequencial === 0 || $this->c107_sequencial === 0.0 || $this->c107_sequencial == "") ){
       $this->erro_sql = " Campo c107_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

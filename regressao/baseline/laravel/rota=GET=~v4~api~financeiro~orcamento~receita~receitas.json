@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/receita/receitas",
+  "json": {
+    "error": true,
+    "message": "Argument 1 passed to App\\Domain\\Financeiro\\Orcamento\\Resources\\ReceitaResource::toArray() must be an instance of Illuminate\\Pagination\\LengthAwarePaginator, instance of Illuminate\\Database\\Eloquent\\Collection given, called in /var/www/html/app/Domain/Financeiro/Orcamento/Controllers/ReceitaController.php on line 85"
+  },
+  "sha256": "c86a79cd22d15e2eeda8e2b02b58c27919e48153fa21744503bbb67d48287e17",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

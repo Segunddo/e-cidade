@@ -1,0 +1,25 @@
+# GERADO por `python -m regressao.laravel.gerador` a partir de _inventario.tsv: nao edite a mao.
+# Ajustes (volateis/instaveis) ficam em _ajustes.yml.
+- id: rota:POST:/api/v1/auth/login
+  metodo: POST
+  caminho: /api/v1/auth/login
+  corpo: {}
+  autenticado: false
+- id: rota:GET:/api/v1/matriculaonline/emissaoProtocolo
+  metodo: GET
+  caminho: /api/v1/matriculaonline/emissaoProtocolo
+  autenticado: false
+- id: rota:POST:/api/v1/matriculaonline/inscricao
+  metodo: POST
+  caminho: /api/v1/matriculaonline/inscricao
+  corpo: {}
+  autenticado: false
+- id: rota:GET:/api/v1/protocolo/cgm
+  metodo: GET
+  caminho: /api/v1/protocolo/cgm
+  autenticado: false
+- id: rota:POST:/api/v1/tributario/recibo
+  metodo: POST
+  caminho: /api/v1/tributario/recibo
+  corpo: {}
+  autenticado: false

@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/status-planejamento/situacao",
+  "json": {
+    "errors": {
+      "pl1_codigo": [
+        "Situação deve ser informada."
+      ],
+      "pl2_codigo": [
+        "O campo \"Código\" deve ser informado."
+      ],
+      "pl2_tipo": [
+        "Tipo do planejamento deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "81bf3516b17d3086e02da7bb1c1bbf3d0023636e479181cb5ad93b66639a088e",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

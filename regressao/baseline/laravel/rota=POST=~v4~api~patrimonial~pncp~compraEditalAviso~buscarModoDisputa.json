@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/compraEditalAviso/buscarModoDisputa",
+  "json": {
+    "error": true,
+    "message": "Undefined index: "
+  },
+  "sha256": "a68a818b11e6290942c927a6fd50d0dd74a442ff295e3860f9bc6f6ce33b3696",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

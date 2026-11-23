@@ -64,7 +64,7 @@ class VariacaoPatrimonialRPPS extends RelatoriosLegaisBase {
   /**
    * return array Linhas com os dados processados do relatorio
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $aLinhasUtilizamBalanceteReceita     = array(3, 4, 5, 6);
     $aLinhasUtilizamBalanceteDespesa     = array(26, 27, 28, 29);

@@ -97,7 +97,7 @@ class cl_convenio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r56_instit = ($this->r56_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_instit"]:$this->r56_instit);
+       $this->r56_instit = ($this->r56_instit === 0 || $this->r56_instit === 0.0 || $this->r56_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_instit"]:$this->r56_instit);
        $this->r56_codrel = ($this->r56_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_codrel"]:$this->r56_codrel);
        $this->r56_descr = ($this->r56_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_descr"]:$this->r56_descr);
        $this->r56_local = ($this->r56_local == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_local"]:$this->r56_local);
@@ -112,10 +112,10 @@ class cl_convenio {
        $this->r56_vq02 = ($this->r56_vq02 == "f"?@$GLOBALS["HTTP_POST_VARS"]["r56_vq02"]:$this->r56_vq02);
        $this->r56_posq03 = ($this->r56_posq03 == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_posq03"]:$this->r56_posq03);
        $this->r56_vq03 = ($this->r56_vq03 == "f"?@$GLOBALS["HTTP_POST_VARS"]["r56_vq03"]:$this->r56_vq03);
-       $this->r56_linhastrailler = ($this->r56_linhastrailler == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_linhastrailler"]:$this->r56_linhastrailler);
-       $this->r56_linhasheader = ($this->r56_linhasheader == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_linhasheader"]:$this->r56_linhasheader);
+       $this->r56_linhastrailler = ($this->r56_linhastrailler === 0 || $this->r56_linhastrailler === 0.0 || $this->r56_linhastrailler == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_linhastrailler"]:$this->r56_linhastrailler);
+       $this->r56_linhasheader = ($this->r56_linhasheader === 0 || $this->r56_linhasheader === 0.0 || $this->r56_linhasheader == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_linhasheader"]:$this->r56_linhasheader);
      }else{
-       $this->r56_instit = ($this->r56_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_instit"]:$this->r56_instit);
+       $this->r56_instit = ($this->r56_instit === 0 || $this->r56_instit === 0.0 || $this->r56_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_instit"]:$this->r56_instit);
        $this->r56_codrel = ($this->r56_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["r56_codrel"]:$this->r56_codrel);
      }
    }
@@ -192,7 +192,7 @@ class cl_convenio {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r56_instit == null) || ($this->r56_instit == "") ){
+     if(($this->r56_instit == null) || ($this->r56_instit === 0 || $this->r56_instit === 0.0 || $this->r56_instit == "") ){
        $this->erro_sql = " Campo r56_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

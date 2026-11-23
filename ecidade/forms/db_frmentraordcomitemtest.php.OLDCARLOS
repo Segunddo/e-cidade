@@ -36,7 +36,7 @@ include("../classes/db_matestoqueitemoc_classe.php");
 include("../classes/db_matestoqueitem_classe.php");
 include("../classes/db_transmater_classe.php");
 include("../dbforms/db_funcoes.php");
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clmatestoqueitem = new cl_matestoqueitem;

@@ -52,7 +52,7 @@ class cl_setorloc {
                  j05_codigoproprio = varchar(10) = Código Próprio
                  ";
    //funcao construtor da classe
-   public function cl_setorloc() {
+   public function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("setorloc");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);

@@ -37,7 +37,7 @@ $cldb_versao = new cl_db_versao;
 $cldb_versaocpd = new cl_db_versaocpd;
 $cldb_versaousu = new cl_db_versaousu;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $db_opcao = 1;
 $db_botao = true;
 if(isset($incluir)){

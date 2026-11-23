@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/integracoes/efd-reinf/r4099responsavel/get-contribuinte",
+  "json": {
+    "data": {
+      "contribuinte": [
+        {
+          "cgm": "1",
+          "cnpj": "00000000000000",
+          "descricao": "PREFEITURA DBSELLER",
+          "sequencial": "1"
+        }
+      ]
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "635979a72ef40ddb7852eb59c536401540d708a8bdc2e37f0b59a93aee1ca8a5",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

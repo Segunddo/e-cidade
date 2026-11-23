@@ -44,7 +44,7 @@ $cldb_config = new cl_db_config;
 $clconplanoreduz = new cl_conplanoreduz;
 $clrotulo = new rotulocampo;
 $clrotulo->label("o15_descr");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $instit=str_replace("-",",",$instit);
 
 function php_espaco($nivel){

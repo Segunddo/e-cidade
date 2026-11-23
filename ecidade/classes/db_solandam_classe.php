@@ -71,12 +71,12 @@ class cl_solandam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc43_codigo = ($this->pc43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc43_codigo"]:$this->pc43_codigo);
-       $this->pc43_solicitem = ($this->pc43_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc43_solicitem"]:$this->pc43_solicitem);
-       $this->pc43_ordem = ($this->pc43_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc43_ordem"]:$this->pc43_ordem);
-       $this->pc43_depto = ($this->pc43_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc43_depto"]:$this->pc43_depto);
+       $this->pc43_codigo = ($this->pc43_codigo === 0 || $this->pc43_codigo === 0.0 || $this->pc43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc43_codigo"]:$this->pc43_codigo);
+       $this->pc43_solicitem = ($this->pc43_solicitem === 0 || $this->pc43_solicitem === 0.0 || $this->pc43_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc43_solicitem"]:$this->pc43_solicitem);
+       $this->pc43_ordem = ($this->pc43_ordem === 0 || $this->pc43_ordem === 0.0 || $this->pc43_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc43_ordem"]:$this->pc43_ordem);
+       $this->pc43_depto = ($this->pc43_depto === 0 || $this->pc43_depto === 0.0 || $this->pc43_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc43_depto"]:$this->pc43_depto);
      }else{
-       $this->pc43_codigo = ($this->pc43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc43_codigo"]:$this->pc43_codigo);
+       $this->pc43_codigo = ($this->pc43_codigo === 0 || $this->pc43_codigo === 0.0 || $this->pc43_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc43_codigo"]:$this->pc43_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_solandam {
          $this->pc43_codigo = $pc43_codigo;
        }
      }
-     if(($this->pc43_codigo == null) || ($this->pc43_codigo == "") ){
+     if(($this->pc43_codigo == null) || ($this->pc43_codigo === 0 || $this->pc43_codigo === 0.0 || $this->pc43_codigo == "") ){
        $this->erro_sql = " Campo pc43_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

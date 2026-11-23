@@ -67,11 +67,11 @@ class cl_db_almoxdepto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m92_codalmox = ($this->m92_codalmox == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_codalmox"]:$this->m92_codalmox);
-       $this->m92_depto = ($this->m92_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_depto"]:$this->m92_depto);
+       $this->m92_codalmox = ($this->m92_codalmox === 0 || $this->m92_codalmox === 0.0 || $this->m92_codalmox == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_codalmox"]:$this->m92_codalmox);
+       $this->m92_depto = ($this->m92_depto === 0 || $this->m92_depto === 0.0 || $this->m92_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_depto"]:$this->m92_depto);
      }else{
-       $this->m92_codalmox = ($this->m92_codalmox == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_codalmox"]:$this->m92_codalmox);
-       $this->m92_depto = ($this->m92_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_depto"]:$this->m92_depto);
+       $this->m92_codalmox = ($this->m92_codalmox === 0 || $this->m92_codalmox === 0.0 || $this->m92_codalmox == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_codalmox"]:$this->m92_codalmox);
+       $this->m92_depto = ($this->m92_depto === 0 || $this->m92_depto === 0.0 || $this->m92_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m92_depto"]:$this->m92_depto);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_db_almoxdepto {
       $this->atualizacampos();
        $this->m92_codalmox = $m92_codalmox;
        $this->m92_depto = $m92_depto;
-     if(($this->m92_codalmox == null) || ($this->m92_codalmox == "") ){
+     if(($this->m92_codalmox == null) || ($this->m92_codalmox === 0 || $this->m92_codalmox === 0.0 || $this->m92_codalmox == "") ){
        $this->erro_sql = " Campo m92_codalmox nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_db_almoxdepto {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->m92_depto == null) || ($this->m92_depto == "") ){
+     if(($this->m92_depto == null) || ($this->m92_depto === 0 || $this->m92_depto === 0.0 || $this->m92_depto == "") ){
        $this->erro_sql = " Campo m92_depto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

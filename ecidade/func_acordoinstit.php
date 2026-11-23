@@ -37,7 +37,7 @@ require_once(modification("classes/db_acordo_classe.php"));
 $iTipoFiltro = 0;
 $lAtivo = '';
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clacordo = new cl_acordo;
 $clacordo->rotulo->label("ac16_sequencial");

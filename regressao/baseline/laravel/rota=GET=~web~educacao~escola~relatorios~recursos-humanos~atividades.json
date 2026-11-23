@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/escola/relatorios/recursos-humanos/atividades",
+  "json": null,
+  "sha256": "e6848e36690d1dfdf84915bb412fbdb425750042a35a8237563886f4f110c964",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

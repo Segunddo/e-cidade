@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/pcasp/editar-estruturais",
+  "json": {
+    "error": true,
+    "message": "Undefined index: contasEditar"
+  },
+  "sha256": "7c04f0da93bb60b4944fd4e6a0d1ea737592396c4be3f7e676653e5b71de3586",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

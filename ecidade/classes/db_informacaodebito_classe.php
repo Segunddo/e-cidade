@@ -74,8 +74,8 @@ class cl_informacaodebito {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k163_sequencial = ($this->k163_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_sequencial"]:$this->k163_sequencial);
-       $this->k163_numpre = ($this->k163_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_numpre"]:$this->k163_numpre);
+       $this->k163_sequencial = ($this->k163_sequencial === 0 || $this->k163_sequencial === 0.0 || $this->k163_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_sequencial"]:$this->k163_sequencial);
+       $this->k163_numpre = ($this->k163_numpre === 0 || $this->k163_numpre === 0.0 || $this->k163_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_numpre"]:$this->k163_numpre);
        if($this->k163_data == ""){
          $this->k163_data_dia = ($this->k163_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_data_dia"]:$this->k163_data_dia);
          $this->k163_data_mes = ($this->k163_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_data_mes"]:$this->k163_data_mes);
@@ -84,9 +84,9 @@ class cl_informacaodebito {
             $this->k163_data = $this->k163_data_ano."-".$this->k163_data_mes."-".$this->k163_data_dia;
          }
        }
-       $this->k163_numpar = ($this->k163_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_numpar"]:$this->k163_numpar);
+       $this->k163_numpar = ($this->k163_numpar === 0 || $this->k163_numpar === 0.0 || $this->k163_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_numpar"]:$this->k163_numpar);
      }else{
-       $this->k163_sequencial = ($this->k163_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_sequencial"]:$this->k163_sequencial);
+       $this->k163_sequencial = ($this->k163_sequencial === 0 || $this->k163_sequencial === 0.0 || $this->k163_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k163_sequencial"]:$this->k163_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_informacaodebito {
          $this->k163_sequencial = $k163_sequencial;
        }
      }
-     if(($this->k163_sequencial == null) || ($this->k163_sequencial == "") ){
+     if(($this->k163_sequencial == null) || ($this->k163_sequencial === 0 || $this->k163_sequencial === 0.0 || $this->k163_sequencial == "") ){
        $this->erro_sql = " Campo k163_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

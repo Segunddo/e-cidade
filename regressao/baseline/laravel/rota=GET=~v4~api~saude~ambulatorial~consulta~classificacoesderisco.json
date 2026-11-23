@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/saude/ambulatorial/consulta/classificacoesderisco",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "EMERGÊNCIA   "
+      },
+      {
+        "codigo": 2,
+        "descricao": "MUITO URGENTE"
+      },
+      {
+        "codigo": 3,
+        "descricao": "URGENTE      "
+      },
+      {
+        "codigo": 4,
+        "descricao": "POUCO URGENTE"
+      },
+      {
+        "codigo": 5,
+        "descricao": "NÃO URGENTE  "
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "4783a92ae60332bfecf4e5513cfd222eb53fe16fb36818f466fe2ddc230ee6ad",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

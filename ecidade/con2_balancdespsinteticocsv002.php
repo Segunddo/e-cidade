@@ -70,7 +70,7 @@ $aTextoSaida[] = trim("  DOTAÇÃO
 $classinatura = new cl_assinatura;
 $clorcelemento = new cl_orcelemento;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 //db_postmemory($HTTP_POST_VARS,2); exit;
 

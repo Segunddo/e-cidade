@@ -36,7 +36,7 @@ require_once(modification("classes/db_pcparam_classe.php"));
 require_once(modification("model/empenho/AutorizacaoEmpenho.model.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clpcmaterele = new cl_pcmaterele;
 $clpcparam = new cl_pcparam;
 $clpcmaterele->rotulo->label("pc07_codmater");

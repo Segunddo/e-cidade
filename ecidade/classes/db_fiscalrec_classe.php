@@ -71,13 +71,13 @@ class cl_fiscalrec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y42_codnoti = ($this->y42_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_codnoti"]:$this->y42_codnoti);
-       $this->y42_receit = ($this->y42_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_receit"]:$this->y42_receit);
+       $this->y42_codnoti = ($this->y42_codnoti === 0 || $this->y42_codnoti === 0.0 || $this->y42_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_codnoti"]:$this->y42_codnoti);
+       $this->y42_receit = ($this->y42_receit === 0 || $this->y42_receit === 0.0 || $this->y42_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_receit"]:$this->y42_receit);
        $this->y42_descr = ($this->y42_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_descr"]:$this->y42_descr);
-       $this->y42_valor = ($this->y42_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_valor"]:$this->y42_valor);
+       $this->y42_valor = ($this->y42_valor === 0 || $this->y42_valor === 0.0 || $this->y42_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_valor"]:$this->y42_valor);
      }else{
-       $this->y42_codnoti = ($this->y42_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_codnoti"]:$this->y42_codnoti);
-       $this->y42_receit = ($this->y42_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_receit"]:$this->y42_receit);
+       $this->y42_codnoti = ($this->y42_codnoti === 0 || $this->y42_codnoti === 0.0 || $this->y42_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_codnoti"]:$this->y42_codnoti);
+       $this->y42_receit = ($this->y42_receit === 0 || $this->y42_receit === 0.0 || $this->y42_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y42_receit"]:$this->y42_receit);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_fiscalrec {
      }
        $this->y42_codnoti = $y42_codnoti;
        $this->y42_receit = $y42_receit;
-     if(($this->y42_codnoti == null) || ($this->y42_codnoti == "") ){
+     if(($this->y42_codnoti == null) || ($this->y42_codnoti === 0 || $this->y42_codnoti === 0.0 || $this->y42_codnoti == "") ){
        $this->erro_sql = " Campo y42_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_fiscalrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y42_receit == null) || ($this->y42_receit == "") ){
+     if(($this->y42_receit == null) || ($this->y42_receit === 0 || $this->y42_receit === 0.0 || $this->y42_receit == "") ){
        $this->erro_sql = " Campo y42_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

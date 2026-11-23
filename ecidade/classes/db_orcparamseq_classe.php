@@ -113,15 +113,15 @@ class cl_orcparamseq
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->o69_codparamrel = ($this->o69_codparamrel == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_codparamrel"] : $this->o69_codparamrel);
-            $this->o69_codseq = ($this->o69_codseq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_codseq"] : $this->o69_codseq);
-            $this->o69_grupoexclusao = ($this->o69_grupoexclusao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_grupoexclusao"] : $this->o69_grupoexclusao);
+            $this->o69_codparamrel = ($this->o69_codparamrel === 0 || $this->o69_codparamrel === 0.0 || $this->o69_codparamrel == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_codparamrel"] : $this->o69_codparamrel);
+            $this->o69_codseq = ($this->o69_codseq === 0 || $this->o69_codseq === 0.0 || $this->o69_codseq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_codseq"] : $this->o69_codseq);
+            $this->o69_grupoexclusao = ($this->o69_grupoexclusao === 0 || $this->o69_grupoexclusao === 0.0 || $this->o69_grupoexclusao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_grupoexclusao"] : $this->o69_grupoexclusao);
             $this->o69_labelrel = ($this->o69_labelrel == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_labelrel"] : $this->o69_labelrel);
             $this->o69_manual = ($this->o69_manual == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_manual"] : $this->o69_manual);
-            $this->o69_nivellinha = ($this->o69_nivellinha == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_nivellinha"] : $this->o69_nivellinha);
+            $this->o69_nivellinha = ($this->o69_nivellinha === 0 || $this->o69_nivellinha === 0.0 || $this->o69_nivellinha == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_nivellinha"] : $this->o69_nivellinha);
             $this->o69_observacao = ($this->o69_observacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_observacao"] : $this->o69_observacao);
             $this->o69_desdobrarlinha = ($this->o69_desdobrarlinha == "f" ? @$GLOBALS["HTTP_POST_VARS"]["o69_desdobrarlinha"] : $this->o69_desdobrarlinha);
-            $this->o69_origem = ($this->o69_origem == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_origem"] : $this->o69_origem);
+            $this->o69_origem = ($this->o69_origem === 0 || $this->o69_origem === 0.0 || $this->o69_origem == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_origem"] : $this->o69_origem);
 
             $this->o69_descr = substr($this->o69_labelrel, 0, 60);
 
@@ -135,8 +135,8 @@ class cl_orcparamseq
             }
 
         } else {
-            $this->o69_codparamrel = ($this->o69_codparamrel == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_codparamrel"] : $this->o69_codparamrel);
-            $this->o69_codseq = ($this->o69_codseq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_codseq"] : $this->o69_codseq);
+            $this->o69_codparamrel = ($this->o69_codparamrel === 0 || $this->o69_codparamrel === 0.0 || $this->o69_codparamrel == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_codparamrel"] : $this->o69_codparamrel);
+            $this->o69_codseq = ($this->o69_codseq === 0 || $this->o69_codseq === 0.0 || $this->o69_codseq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o69_codseq"] : $this->o69_codseq);
         }
     }
 
@@ -278,7 +278,7 @@ class cl_orcparamseq
 
         $this->o69_codparamrel = $o69_codparamrel;
         $this->o69_codseq = $o69_codseq;
-        if (($this->o69_codparamrel == null) || ($this->o69_codparamrel == "")) {
+        if (($this->o69_codparamrel == null) || ($this->o69_codparamrel === 0 || $this->o69_codparamrel === 0.0 || $this->o69_codparamrel == "")) {
             $this->erro_sql = " Campo o69_codparamrel nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -290,7 +290,7 @@ class cl_orcparamseq
             $this->erro_status = "0";
             return false;
         }
-        if (($this->o69_codseq == null) || ($this->o69_codseq == "")) {
+        if (($this->o69_codseq == null) || ($this->o69_codseq === 0 || $this->o69_codseq === 0.0 || $this->o69_codseq == "")) {
             $this->erro_sql = " Campo o69_codseq nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

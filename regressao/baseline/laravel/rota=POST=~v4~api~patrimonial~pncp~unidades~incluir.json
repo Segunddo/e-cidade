@@ -1,0 +1,33 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/unidades/incluir",
+  "json": {
+    "errors": {
+      "ativo": [
+        "O campo ativo é obrigatório."
+      ],
+      "codigoIbge": [
+        "O campo codigo ibge é obrigatório."
+      ],
+      "documento": [
+        "O campo documento é obrigatório."
+      ],
+      "unidadeCodigo": [
+        "O campo unidade codigo é obrigatório."
+      ],
+      "unidadeNome": [
+        "O campo unidade nome é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "204fc44b60792d5b6fa3cd900428d333980f2f05d238c65854f9f35714fdf4e5",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

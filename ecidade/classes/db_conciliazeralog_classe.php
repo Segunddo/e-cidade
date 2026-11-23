@@ -78,7 +78,7 @@ class cl_conciliazeralog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k123_sequencial = ($this->k123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k123_sequencial"]:$this->k123_sequencial);
+       $this->k123_sequencial = ($this->k123_sequencial === 0 || $this->k123_sequencial === 0.0 || $this->k123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k123_sequencial"]:$this->k123_sequencial);
        if($this->k123_data == ""){
          $this->k123_data_dia = ($this->k123_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k123_data_dia"]:$this->k123_data_dia);
          $this->k123_data_mes = ($this->k123_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k123_data_mes"]:$this->k123_data_mes);
@@ -88,11 +88,11 @@ class cl_conciliazeralog {
          }
        }
        $this->k123_hora = ($this->k123_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k123_hora"]:$this->k123_hora);
-       $this->k123_id_usuario = ($this->k123_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k123_id_usuario"]:$this->k123_id_usuario);
+       $this->k123_id_usuario = ($this->k123_id_usuario === 0 || $this->k123_id_usuario === 0.0 || $this->k123_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k123_id_usuario"]:$this->k123_id_usuario);
        $this->k123_obs = ($this->k123_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k123_obs"]:$this->k123_obs);
        $this->k132_filtros = ($this->k132_filtros == ""?@$GLOBALS["HTTP_POST_VARS"]["k132_filtros"]:$this->k132_filtros);
      }else{
-       $this->k123_sequencial = ($this->k123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k123_sequencial"]:$this->k123_sequencial);
+       $this->k123_sequencial = ($this->k123_sequencial === 0 || $this->k123_sequencial === 0.0 || $this->k123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k123_sequencial"]:$this->k123_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_conciliazeralog {
          $this->k123_sequencial = $k123_sequencial;
        }
      }
-     if(($this->k123_sequencial == null) || ($this->k123_sequencial == "") ){
+     if(($this->k123_sequencial == null) || ($this->k123_sequencial === 0 || $this->k123_sequencial === 0.0 || $this->k123_sequencial == "") ){
        $this->erro_sql = " Campo k123_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

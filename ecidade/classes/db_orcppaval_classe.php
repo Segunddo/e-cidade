@@ -75,14 +75,14 @@ class cl_orcppaval {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o24_codseqppa = ($this->o24_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_codseqppa"]:$this->o24_codseqppa);
-       $this->o24_codppa = ($this->o24_codppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_codppa"]:$this->o24_codppa);
-       $this->o24_exercicio = ($this->o24_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_exercicio"]:$this->o24_exercicio);
-       $this->o24_valor = ($this->o24_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_valor"]:$this->o24_valor);
-       $this->o24_quantmed = ($this->o24_quantmed == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_quantmed"]:$this->o24_quantmed);
-       $this->o24_proces = ($this->o24_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_proces"]:$this->o24_proces);
+       $this->o24_codseqppa = ($this->o24_codseqppa === 0 || $this->o24_codseqppa === 0.0 || $this->o24_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_codseqppa"]:$this->o24_codseqppa);
+       $this->o24_codppa = ($this->o24_codppa === 0 || $this->o24_codppa === 0.0 || $this->o24_codppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_codppa"]:$this->o24_codppa);
+       $this->o24_exercicio = ($this->o24_exercicio === 0 || $this->o24_exercicio === 0.0 || $this->o24_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_exercicio"]:$this->o24_exercicio);
+       $this->o24_valor = ($this->o24_valor === 0 || $this->o24_valor === 0.0 || $this->o24_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_valor"]:$this->o24_valor);
+       $this->o24_quantmed = ($this->o24_quantmed === 0 || $this->o24_quantmed === 0.0 || $this->o24_quantmed == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_quantmed"]:$this->o24_quantmed);
+       $this->o24_proces = ($this->o24_proces === 0 || $this->o24_proces === 0.0 || $this->o24_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_proces"]:$this->o24_proces);
      }else{
-       $this->o24_codseqppa = ($this->o24_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_codseqppa"]:$this->o24_codseqppa);
+       $this->o24_codseqppa = ($this->o24_codseqppa === 0 || $this->o24_codseqppa === 0.0 || $this->o24_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o24_codseqppa"]:$this->o24_codseqppa);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_orcppaval {
          $this->o24_codseqppa = $o24_codseqppa;
        }
      }
-     if(($this->o24_codseqppa == null) || ($this->o24_codseqppa == "") ){
+     if(($this->o24_codseqppa == null) || ($this->o24_codseqppa === 0 || $this->o24_codseqppa === 0.0 || $this->o24_codseqppa == "") ){
        $this->erro_sql = " Campo o24_codseqppa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

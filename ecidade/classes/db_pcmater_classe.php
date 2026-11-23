@@ -92,13 +92,13 @@ class cl_pcmater {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc01_codmater = ($this->pc01_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc01_codmater"]:$this->pc01_codmater);
+       $this->pc01_codmater = ($this->pc01_codmater === 0 || $this->pc01_codmater === 0.0 || $this->pc01_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc01_codmater"]:$this->pc01_codmater);
        $this->pc01_descrmater = ($this->pc01_descrmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc01_descrmater"]:$this->pc01_descrmater);
        $this->pc01_complmater = ($this->pc01_complmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc01_complmater"]:$this->pc01_complmater);
-       $this->pc01_codsubgrupo = ($this->pc01_codsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc01_codsubgrupo"]:$this->pc01_codsubgrupo);
+       $this->pc01_codsubgrupo = ($this->pc01_codsubgrupo === 0 || $this->pc01_codsubgrupo === 0.0 || $this->pc01_codsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc01_codsubgrupo"]:$this->pc01_codsubgrupo);
        $this->pc01_ativo = ($this->pc01_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc01_ativo"]:$this->pc01_ativo);
        $this->pc01_conversao = ($this->pc01_conversao == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc01_conversao"]:$this->pc01_conversao);
-       $this->pc01_id_usuario = ($this->pc01_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc01_id_usuario"]:$this->pc01_id_usuario);
+       $this->pc01_id_usuario = ($this->pc01_id_usuario === 0 || $this->pc01_id_usuario === 0.0 || $this->pc01_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc01_id_usuario"]:$this->pc01_id_usuario);
        $this->pc01_libaut = ($this->pc01_libaut == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc01_libaut"]:$this->pc01_libaut);
        $this->pc01_servico = ($this->pc01_servico == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc01_servico"]:$this->pc01_servico);
        $this->pc01_veiculo = ($this->pc01_veiculo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc01_veiculo"]:$this->pc01_veiculo);
@@ -107,7 +107,7 @@ class cl_pcmater {
        $this->pc01_obrigatorio = ($this->pc01_obrigatorio == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc01_obrigatorio"]:$this->pc01_obrigatorio);
        $this->pc01_liberaresumo = ($this->pc01_liberaresumo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc01_liberaresumo"]:$this->pc01_liberaresumo);
      }else{
-       $this->pc01_codmater = ($this->pc01_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc01_codmater"]:$this->pc01_codmater);
+       $this->pc01_codmater = ($this->pc01_codmater === 0 || $this->pc01_codmater === 0.0 || $this->pc01_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["pc01_codmater"]:$this->pc01_codmater);
      }
    }
    // funcao para inclusao
@@ -245,7 +245,7 @@ class cl_pcmater {
          $this->pc01_codmater = $pc01_codmater;
        }
      }
-     if(($this->pc01_codmater == null) || ($this->pc01_codmater == "") ){
+     if(($this->pc01_codmater == null) || ($this->pc01_codmater === 0 || $this->pc01_codmater === 0.0 || $this->pc01_codmater == "") ){
        $this->erro_sql = " Campo pc01_codmater nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

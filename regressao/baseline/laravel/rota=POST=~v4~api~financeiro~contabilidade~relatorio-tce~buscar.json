@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio-tce/buscar",
+  "json": {
+    "errors": {
+      "anousu": [
+        "O ano deve ser informada."
+      ],
+      "mes": [
+        "O mes deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "df184019e1f97a3a480bddf2fc05cf8e0406aee3c49a8faa0a79a7a0b15eb884",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/objetivo-programa/filtros",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Objetivos encontrados."
+  },
+  "sha256": "c997e7e186047bee471b598ef16eab1f6da14720bc2a466e7d27015b55ad3043",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -38,7 +38,7 @@ $clrotulo->label('r01_regist');
 $clrotulo->label('r14_quant');
 $clrotulo->label('r14_valor');
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $head2 = "FINANCEIRA POR RUBRICA";
 $head4 = "PERÍODO : ".$mes." / ".$ano;

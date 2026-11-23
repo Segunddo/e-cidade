@@ -40,7 +40,7 @@ db_postmemory($HTTP_POST_VARS);
 $clisstipoalvaradepto = new cl_isstipoalvaradepto;
 $cliframe_seleciona   = new cl_iframe_seleciona;
 $clrotulo             = new rotulocampo;
-$cltabdesc->k07_instit = db_getsession("DB_instit");
+if (!isset($cltabdesc) || $cltabdesc === false || $cltabdesc === '') { $cltabdesc = new stdClass(); } $cltabdesc->k07_instit = db_getsession("DB_instit");
 $db_botao = true;
 
 $db_opcao = $_GET['dbopcao'];

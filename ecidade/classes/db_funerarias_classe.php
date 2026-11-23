@@ -65,16 +65,16 @@ class cl_funerarias {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm17_i_funeraria = ($this->cm17_i_funeraria == ""?@$GLOBALS["HTTP_POST_VARS"]["cm17_i_funeraria"]:$this->cm17_i_funeraria);
+       $this->cm17_i_funeraria = ($this->cm17_i_funeraria === 0 || $this->cm17_i_funeraria === 0.0 || $this->cm17_i_funeraria == ""?@$GLOBALS["HTTP_POST_VARS"]["cm17_i_funeraria"]:$this->cm17_i_funeraria);
      }else{
-       $this->cm17_i_funeraria = ($this->cm17_i_funeraria == ""?@$GLOBALS["HTTP_POST_VARS"]["cm17_i_funeraria"]:$this->cm17_i_funeraria);
+       $this->cm17_i_funeraria = ($this->cm17_i_funeraria === 0 || $this->cm17_i_funeraria === 0.0 || $this->cm17_i_funeraria == ""?@$GLOBALS["HTTP_POST_VARS"]["cm17_i_funeraria"]:$this->cm17_i_funeraria);
      }
    }
    // funcao para inclusao
    public function incluir ($cm17_i_funeraria){
       $this->atualizacampos();
        $this->cm17_i_funeraria = $cm17_i_funeraria;
-     if(($this->cm17_i_funeraria == null) || ($this->cm17_i_funeraria == "") ){
+     if(($this->cm17_i_funeraria == null) || ($this->cm17_i_funeraria === 0 || $this->cm17_i_funeraria === 0.0 || $this->cm17_i_funeraria == "") ){
        $this->erro_sql = " Campo cm17_i_funeraria nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

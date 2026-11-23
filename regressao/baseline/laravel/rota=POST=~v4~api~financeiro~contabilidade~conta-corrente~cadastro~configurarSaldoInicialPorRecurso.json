@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/conta-corrente/cadastro/configurarSaldoInicialPorRecurso",
+  "json": {
+    "error": true,
+    "message": "Undefined index: reduzido"
+  },
+  "sha256": "9ede07c8a88715cdd98932bac3f33960108aa83212738e40fa29afa414e69f92",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

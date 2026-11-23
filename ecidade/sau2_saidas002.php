@@ -29,7 +29,7 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_cgmsaida_classe.php"));
 include(modification("classes/db_prontsaida_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clprontsaida = new cl_prontsaida;
 $clcgmsaida = new cl_cgmsaida;
 

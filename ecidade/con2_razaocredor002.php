@@ -610,8 +610,8 @@ group by c53_descr ";
 $result = pg_exec($sql);
 $result2 = pg_exec($sql2); 
 
-$xxnum = pg_numrows($result);
-$xxnum2= pg_numrows($result2);
+$xxnum = ($result ? pg_numrows($result) : null);
+$xxnum2= ($result2 ? pg_numrows($result2) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Movimentações para este credor.');
 
@@ -632,7 +632,7 @@ $total_anupago = 0;
 $cor = 0;
 $emp = 0;
 $cgm = 0;
-   for($x=0;$x<pg_numrows($result);$x++){
+   for($x=0;$x<($result ? pg_numrows($result) : null);$x++){
    db_fieldsmemory($result,$x);
    
    if($cgm != $e60_numcgm && $troca != 1){
@@ -697,7 +697,7 @@ $cgm = 0;
    $pdf->cell(142,$alt,'MOVIMENTAÇÃO',1,0,"C",1);
    $pdf->cell(30,$alt,'TOTAIS',1,1,"C",1);
    
-   for($y=0;$y<pg_numrows($result2);$y++){
+   for($y=0;$y<($result2 ? pg_numrows($result2) : null);$y++){
        db_fieldsmemory($result2,$y);
        
        if($y % 2)

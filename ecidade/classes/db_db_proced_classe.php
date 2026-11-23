@@ -81,9 +81,9 @@ class cl_db_proced {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at30_codigo = ($this->at30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_codigo"]:$this->at30_codigo);
+       $this->at30_codigo = ($this->at30_codigo === 0 || $this->at30_codigo === 0.0 || $this->at30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_codigo"]:$this->at30_codigo);
        $this->at30_descr = ($this->at30_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_descr"]:$this->at30_descr);
-       $this->at30_responsavel = ($this->at30_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_responsavel"]:$this->at30_responsavel);
+       $this->at30_responsavel = ($this->at30_responsavel === 0 || $this->at30_responsavel === 0.0 || $this->at30_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_responsavel"]:$this->at30_responsavel);
        if($this->at30_inicio == ""){
          $this->at30_inicio_dia = ($this->at30_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_inicio_dia"]:$this->at30_inicio_dia);
          $this->at30_inicio_mes = ($this->at30_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_inicio_mes"]:$this->at30_inicio_mes);
@@ -100,9 +100,9 @@ class cl_db_proced {
             $this->at30_fim = $this->at30_fim_ano."-".$this->at30_fim_mes."-".$this->at30_fim_dia;
          }
        }
-       $this->at30_situacao = ($this->at30_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_situacao"]:$this->at30_situacao);
+       $this->at30_situacao = ($this->at30_situacao === 0 || $this->at30_situacao === 0.0 || $this->at30_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_situacao"]:$this->at30_situacao);
      }else{
-       $this->at30_codigo = ($this->at30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_codigo"]:$this->at30_codigo);
+       $this->at30_codigo = ($this->at30_codigo === 0 || $this->at30_codigo === 0.0 || $this->at30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at30_codigo"]:$this->at30_codigo);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_db_proced {
          $this->at30_codigo = $at30_codigo;
        }
      }
-     if(($this->at30_codigo == null) || ($this->at30_codigo == "") ){
+     if(($this->at30_codigo == null) || ($this->at30_codigo === 0 || $this->at30_codigo === 0.0 || $this->at30_codigo == "") ){
        $this->erro_sql = " Campo at30_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

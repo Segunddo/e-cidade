@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/tem-fase-abeta",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42P01]: Undefined table: 7 ERRO:  não existe a relação \"plugins.fase\"\nLINE 1: select * from \"plugins\".\"fase\" where \"mo04_encerrada\" = $1\n                      ^ (SQL: select * from \"plugins\".\"fase\" where \"mo04_encerrada\" = 0)"
+  },
+  "sha256": "93ae9552ec52ed46525f9ff9594afe251edada7f9e8fe7086055477937057507",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

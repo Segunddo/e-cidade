@@ -67,17 +67,17 @@ class cl_matricobs {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j26_matric = ($this->j26_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j26_matric"]:$this->j26_matric);
+       $this->j26_matric = ($this->j26_matric === 0 || $this->j26_matric === 0.0 || $this->j26_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j26_matric"]:$this->j26_matric);
        $this->j26_obs = ($this->j26_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["j26_obs"]:$this->j26_obs);
      }else{
-       $this->j26_matric = ($this->j26_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j26_matric"]:$this->j26_matric);
+       $this->j26_matric = ($this->j26_matric === 0 || $this->j26_matric === 0.0 || $this->j26_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j26_matric"]:$this->j26_matric);
      }
    }
    // funcao para inclusao
    public function incluir ($j26_matric){
       $this->atualizacampos();
        $this->j26_matric = $j26_matric;
-     if(($this->j26_matric == null) || ($this->j26_matric == "") ){
+     if(($this->j26_matric == null) || ($this->j26_matric === 0 || $this->j26_matric === 0.0 || $this->j26_matric == "") ){
        $this->erro_sql = " Campo j26_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

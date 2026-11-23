@@ -44,7 +44,7 @@ require_once(modification("classes/db_edu_parametros_classe.php"));
 db_postmemory($_POST);
 db_postmemory($_GET);
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clturma         = new cl_turma;
 $clcalendario    = new cl_calendario;
 $clturno         = new cl_turno;

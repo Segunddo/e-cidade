@@ -1,0 +1,20 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/protocolo/documentos/usuario/total",
+  "json": {
+    "data": {
+      "total": 0
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "46f263c07cbf04a310a9d2f9fd73536db197bb5e1cda8cf925d6c4bc5508d119",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

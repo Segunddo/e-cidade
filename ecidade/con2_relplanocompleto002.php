@@ -33,7 +33,7 @@ include(modification("fpdf151/pdf.php"));
 $head1 = "RELATÓRIO PLANO DE CONTAS ";
 
 //db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clconplano = new cl_conplano;
 $clconplano->rotulo->label("c60_codcon");

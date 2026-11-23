@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/matricula-online/configuracao/imagens-personalizadas",
+  "json": null,
+  "sha256": "be02a7b32ea5d56c6b83b4c8bc0752b7b044c502b4f552cdae0bacc10af575c3",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

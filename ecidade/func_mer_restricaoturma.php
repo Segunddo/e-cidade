@@ -35,7 +35,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_matricula_classe.php"));
 include(modification("classes/db_mer_restriitem_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmatricula = new cl_matricula;
 $clmer_restriitem = new cl_mer_restriitem;
 $campos  = " to_char(ed60_d_datasaida,'DD/MM/YYYY') as datasaida, ";

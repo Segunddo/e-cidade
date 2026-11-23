@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "ecidade": {
+      "type": "stdio",
+      "command": ".mcp/.venv/bin/python",
+      "args": [".mcp/servidor/main.py"],
+      "env": {}
+    }
+  }
+}

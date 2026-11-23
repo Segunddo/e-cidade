@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/save-atividades-salao",
+  "json": {
+    "errors": {
+      "deducoes": [
+        "O campo deducoes é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "247ca3c5bd067df937c401fc6c736051848816d6c312e44e5df86abb6fcb2876",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

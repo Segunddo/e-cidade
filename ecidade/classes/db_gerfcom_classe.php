@@ -83,20 +83,20 @@ class cl_gerfcom {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r48_anousu = ($this->r48_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_anousu"]:$this->r48_anousu);
-       $this->r48_mesusu = ($this->r48_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_mesusu"]:$this->r48_mesusu);
-       $this->r48_regist = ($this->r48_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_regist"]:$this->r48_regist);
+       $this->r48_anousu = ($this->r48_anousu === 0 || $this->r48_anousu === 0.0 || $this->r48_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_anousu"]:$this->r48_anousu);
+       $this->r48_mesusu = ($this->r48_mesusu === 0 || $this->r48_mesusu === 0.0 || $this->r48_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_mesusu"]:$this->r48_mesusu);
+       $this->r48_regist = ($this->r48_regist === 0 || $this->r48_regist === 0.0 || $this->r48_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_regist"]:$this->r48_regist);
        $this->r48_rubric = ($this->r48_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_rubric"]:$this->r48_rubric);
-       $this->r48_valor = ($this->r48_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_valor"]:$this->r48_valor);
-       $this->r48_pd = ($this->r48_pd == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_pd"]:$this->r48_pd);
-       $this->r48_quant = ($this->r48_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_quant"]:$this->r48_quant);
+       $this->r48_valor = ($this->r48_valor === 0 || $this->r48_valor === 0.0 || $this->r48_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_valor"]:$this->r48_valor);
+       $this->r48_pd = ($this->r48_pd === 0 || $this->r48_pd === 0.0 || $this->r48_pd == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_pd"]:$this->r48_pd);
+       $this->r48_quant = ($this->r48_quant === 0 || $this->r48_quant === 0.0 || $this->r48_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_quant"]:$this->r48_quant);
        $this->r48_lotac = ($this->r48_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_lotac"]:$this->r48_lotac);
-       $this->r48_semest = ($this->r48_semest == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_semest"]:$this->r48_semest);
-       $this->r48_instit = ($this->r48_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_instit"]:$this->r48_instit);
+       $this->r48_semest = ($this->r48_semest === 0 || $this->r48_semest === 0.0 || $this->r48_semest == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_semest"]:$this->r48_semest);
+       $this->r48_instit = ($this->r48_instit === 0 || $this->r48_instit === 0.0 || $this->r48_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_instit"]:$this->r48_instit);
      }else{
-       $this->r48_anousu = ($this->r48_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_anousu"]:$this->r48_anousu);
-       $this->r48_mesusu = ($this->r48_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_mesusu"]:$this->r48_mesusu);
-       $this->r48_regist = ($this->r48_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_regist"]:$this->r48_regist);
+       $this->r48_anousu = ($this->r48_anousu === 0 || $this->r48_anousu === 0.0 || $this->r48_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_anousu"]:$this->r48_anousu);
+       $this->r48_mesusu = ($this->r48_mesusu === 0 || $this->r48_mesusu === 0.0 || $this->r48_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_mesusu"]:$this->r48_mesusu);
+       $this->r48_regist = ($this->r48_regist === 0 || $this->r48_regist === 0.0 || $this->r48_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_regist"]:$this->r48_regist);
        $this->r48_rubric = ($this->r48_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r48_rubric"]:$this->r48_rubric);
      }
    }
@@ -161,7 +161,7 @@ class cl_gerfcom {
        $this->r48_mesusu = $r48_mesusu;
        $this->r48_regist = $r48_regist;
        $this->r48_rubric = $r48_rubric;
-     if(($this->r48_anousu == null) || ($this->r48_anousu == "") ){
+     if(($this->r48_anousu == null) || ($this->r48_anousu === 0 || $this->r48_anousu === 0.0 || $this->r48_anousu == "") ){
        $this->erro_sql = " Campo r48_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -169,7 +169,7 @@ class cl_gerfcom {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r48_mesusu == null) || ($this->r48_mesusu == "") ){
+     if(($this->r48_mesusu == null) || ($this->r48_mesusu === 0 || $this->r48_mesusu === 0.0 || $this->r48_mesusu == "") ){
        $this->erro_sql = " Campo r48_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -177,7 +177,7 @@ class cl_gerfcom {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r48_regist == null) || ($this->r48_regist == "") ){
+     if(($this->r48_regist == null) || ($this->r48_regist === 0 || $this->r48_regist === 0.0 || $this->r48_regist == "") ){
        $this->erro_sql = " Campo r48_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -32,7 +32,7 @@ include(modification("libs/db_libcaixa_ze.php"));
 include(modification("libs/db_libgertxtfolha.php"));
 include(modification("classes/db_rharqbanco_classe.php"));
 include(modification("classes/db_rhlocaltrab_classe.php"));
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 //db_postmemory($HTTP_SERVER_VARS,2);
 //db_postmemory($HTTP_POST_VARS,2);exit;

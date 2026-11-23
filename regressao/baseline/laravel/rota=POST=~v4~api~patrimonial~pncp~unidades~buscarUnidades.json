@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/unidades/buscarUnidades",
+  "json": {
+    "error": true,
+    "message": "Erro ao autenticar usuário no sistema PNCP\nMensagem do erro:\ncURL error 6: Could not resolve host: v1 (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for v1/usuarios/login"
+  },
+  "sha256": "0157759eb3525b25df5ca0c89429ff3cb38a7f7ff20a2af44491edcace710be9",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

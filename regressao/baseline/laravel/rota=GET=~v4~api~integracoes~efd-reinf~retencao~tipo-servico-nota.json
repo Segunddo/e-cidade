@@ -1,0 +1,176 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/integracoes/efd-reinf/retencao/tipo-servico-nota",
+  "json": {
+    "data": {
+      "tipos": [
+        {
+          "e18_descricao": "Limpeza, conservação ou zeladoria",
+          "e18_referencia": "100000001",
+          "e18_sequencial": 1
+        },
+        {
+          "e18_descricao": "Vigilância ou segurança",
+          "e18_referencia": "100000002",
+          "e18_sequencial": 2
+        },
+        {
+          "e18_descricao": "Construção civil",
+          "e18_referencia": "100000003",
+          "e18_sequencial": 3
+        },
+        {
+          "e18_descricao": "Serviços de natureza rural",
+          "e18_referencia": "100000004",
+          "e18_sequencial": 4
+        },
+        {
+          "e18_descricao": "Digitação",
+          "e18_referencia": "100000005",
+          "e18_sequencial": 5
+        },
+        {
+          "e18_descricao": "Preparação de dados para processamento",
+          "e18_referencia": "100000006",
+          "e18_sequencial": 6
+        },
+        {
+          "e18_descricao": "Acabamento",
+          "e18_referencia": "100000007",
+          "e18_sequencial": 7
+        },
+        {
+          "e18_descricao": "Embalagem",
+          "e18_referencia": "100000008",
+          "e18_sequencial": 8
+        },
+        {
+          "e18_descricao": "Acondicionamento",
+          "e18_referencia": "100000009",
+          "e18_sequencial": 9
+        },
+        {
+          "e18_descricao": "Cobrança",
+          "e18_referencia": "100000010",
+          "e18_sequencial": 10
+        },
+        {
+          "e18_descricao": "Coleta ou reciclagem de lixo ou de resíduos",
+          "e18_referencia": "100000011",
+          "e18_sequencial": 11
+        },
+        {
+          "e18_descricao": "Copa",
+          "e18_referencia": "100000012",
+          "e18_sequencial": 12
+        },
+        {
+          "e18_descricao": "Hotelaria",
+          "e18_referencia": "100000013",
+          "e18_sequencial": 13
+        },
+        {
+          "e18_descricao": "Corte ou ligação de serviços públicos",
+          "e18_referencia": "100000014",
+          "e18_sequencial": 14
+        },
+        {
+          "e18_descricao": "Distribuição",
+          "e18_referencia": "100000015",
+          "e18_sequencial": 15
+        },
+        {
+          "e18_descricao": "Treinamento e ensino",
+          "e18_referencia": "100000016",
+          "e18_sequencial": 16
+        },
+        {
+          "e18_descricao": "Entrega de contas e de documentos",
+          "e18_referencia": "100000017",
+          "e18_sequencial": 17
+        },
+        {
+          "e18_descricao": "Ligação de medidores",
+          "e18_referencia": "100000018",
+          "e18_sequencial": 18
+        },
+        {
+          "e18_descricao": "Leitura de medidores",
+          "e18_referencia": "100000019",
+          "e18_sequencial": 19
+        },
+        {
+          "e18_descricao": "Manutenção de instalações, de máquinas ou de equipamentos",
+          "e18_referencia": "100000020",
+          "e18_sequencial": 20
+        },
+        {
+          "e18_descricao": "Montagem",
+          "e18_referencia": "100000021",
+          "e18_sequencial": 21
+        },
+        {
+          "e18_descricao": "Operação de máquinas, de equipamentos e de veículos",
+          "e18_referencia": "100000022",
+          "e18_sequencial": 22
+        },
+        {
+          "e18_descricao": "Operação de pedágio ou de terminal de transporte",
+          "e18_referencia": "100000023",
+          "e18_sequencial": 23
+        },
+        {
+          "e18_descricao": "Operação de transporte de passageiros",
+          "e18_referencia": "100000024",
+          "e18_sequencial": 24
+        },
+        {
+          "e18_descricao": "Portaria, recepção ou ascensorista",
+          "e18_referencia": "100000025",
+          "e18_sequencial": 25
+        },
+        {
+          "e18_descricao": "Recepção, triagem ou movimentação de materiais",
+          "e18_referencia": "100000026",
+          "e18_sequencial": 26
+        },
+        {
+          "e18_descricao": "Promoção de vendas ou de eventos",
+          "e18_referencia": "100000027",
+          "e18_sequencial": 27
+        },
+        {
+          "e18_descricao": "Secretaria e expediente",
+          "e18_referencia": "100000028",
+          "e18_sequencial": 28
+        },
+        {
+          "e18_descricao": "Saúde",
+          "e18_referencia": "100000029",
+          "e18_sequencial": 29
+        },
+        {
+          "e18_descricao": "Telefonia ou telemarketing",
+          "e18_referencia": "100000030",
+          "e18_sequencial": 30
+        },
+        {
+          "e18_descricao": "Trabalho temporário na forma da Lei nº 6.019, de janeiro de 197",
+          "e18_referencia": "100000031",
+          "e18_sequencial": 31
+        }
+      ]
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "69be32094722ac544b236fb81910544d926632efbb2378928f7e65bcd9498cd0",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

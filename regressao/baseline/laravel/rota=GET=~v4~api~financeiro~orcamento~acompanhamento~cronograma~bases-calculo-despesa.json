@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/acompanhamento/cronograma/bases-calculo-despesa",
+  "json": {
+    "data": [
+      {
+        "name": "Saldo Inicial",
+        "value": 1
+      },
+      {
+        "name": "Previsão Atualizada",
+        "value": 2
+      },
+      {
+        "name": "Realizado e Reestimado - Empenhado",
+        "value": 3
+      },
+      {
+        "name": "Realizado e Reestimado - Liquidado",
+        "value": 4
+      },
+      {
+        "name": "Realizado e Reestimado - Pago",
+        "value": 5
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "f968600de4a79215bce3db632048f341b5a7a9bf34f3f9b8255771b88c9d910c",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/concessaodireitos/gravarconfiguracao",
+  "json": {
+    "error": true,
+    "message": "Undefined index: rh500_datalimite"
+  },
+  "sha256": "a554b9df6cda0b8d595c6053f0595a1dbc6860f098ef0187c973843b0df972e4",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

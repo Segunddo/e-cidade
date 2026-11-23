@@ -69,11 +69,11 @@ class cl_custoplanotipoconta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc03_sequencial = ($this->cc03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_sequencial"]:$this->cc03_sequencial);
-       $this->cc03_custoplanoanalitica = ($this->cc03_custoplanoanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_custoplanoanalitica"]:$this->cc03_custoplanoanalitica);
-       $this->cc03_custotipoconta = ($this->cc03_custotipoconta == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_custotipoconta"]:$this->cc03_custotipoconta);
+       $this->cc03_sequencial = ($this->cc03_sequencial === 0 || $this->cc03_sequencial === 0.0 || $this->cc03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_sequencial"]:$this->cc03_sequencial);
+       $this->cc03_custoplanoanalitica = ($this->cc03_custoplanoanalitica === 0 || $this->cc03_custoplanoanalitica === 0.0 || $this->cc03_custoplanoanalitica == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_custoplanoanalitica"]:$this->cc03_custoplanoanalitica);
+       $this->cc03_custotipoconta = ($this->cc03_custotipoconta === 0 || $this->cc03_custotipoconta === 0.0 || $this->cc03_custotipoconta == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_custotipoconta"]:$this->cc03_custotipoconta);
      }else{
-       $this->cc03_sequencial = ($this->cc03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_sequencial"]:$this->cc03_sequencial);
+       $this->cc03_sequencial = ($this->cc03_sequencial === 0 || $this->cc03_sequencial === 0.0 || $this->cc03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc03_sequencial"]:$this->cc03_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_custoplanotipoconta {
          $this->cc03_sequencial = $cc03_sequencial;
        }
      }
-     if(($this->cc03_sequencial == null) || ($this->cc03_sequencial == "") ){
+     if(($this->cc03_sequencial == null) || ($this->cc03_sequencial === 0 || $this->cc03_sequencial === 0.0 || $this->cc03_sequencial == "") ){
        $this->erro_sql = " Campo cc03_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

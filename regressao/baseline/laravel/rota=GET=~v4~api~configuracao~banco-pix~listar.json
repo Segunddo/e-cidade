@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/banco-pix/listar",
+  "json": {
+    "message": [],
+    "status": "Success"
+  },
+  "sha256": "104d5d653d2a5a8e22f9e954d13beb9eb85cba36d63ec8704631dac0502dd59d",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

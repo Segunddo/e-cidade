@@ -1,0 +1,40 @@
+# Ajustes preservados pela regeneracao dos casos (ver gerador.py).
+# perigosas: sondas com corpo VAZIO que, numa gravacao ao vivo, ESCREVERAM no banco
+# (sql_negocio nao vazio): deixam de ser geradas.
+perigosas:
+  # Gravacao ao vivo no Laravel 5.4 (branch antiga); seguem perigosas na base 7.4:
+  rota:POST:/v4/api/configuracao/instituicao/departamento-principal: UPDATE em db_config com corpo vazio (200)
+  rota:POST:/v4/api/educacao/escola/recursos-humanos/salvar-formacao-superior-profissional: INSERT DEFAULT VALUES em escola.rhformacaosuperior com corpo vazio (500)
+  rota:POST:/v4/api/educacao/secretaria/tipo-base/salvar: INSERT em secretariadeeducacao.tipobase com corpo vazio (500)
+  rota:POST:/v4/api/tributario/arrecadacao/controle-parcelamentos-vencidos/agendamento/salvar: INSERT em arrecadacao.controleparc_agendamento com corpo vazio (500)
+  # Gravacao exploratoria na referencia Laravel 8 (base 7.4, 2026-11-18):
+  rota:POST:/v4/api/educacao/escola/bases-curriculares/baseEscola/atos/salvar: INSERT em escola.baseato com valores NULL e corpo vazio (200, Laravel 8)
+  rota:POST:/v4/api/financeiro/contabilidade/fix/lancamento/slips: DELETE e UPDATE em contabilidade.conlancamrecurso (rotina de correcao em massa) com corpo vazio (200, Laravel 8)
+  rota:POST:/v4/api/financeiro/contabilidade/fix/lancamento/suplementacoes: UPDATE em massa em contabilidade.conlancamrecurso com corpo vazio (200, Laravel 8)
+  rota:POST:/v4/api/financeiro/contabilidade/procedimento/escrituracao-contabil/virada-rp: INSERT em configuracoes.db_virada e DELETE em empenho.empresto com corpo vazio (500, Laravel 8)
+  # Banco v2 (migrations do PR aplicadas, 2026-11-18): as tabelas novas fazem estas sondas chegarem ao INSERT/DELETE
+  rota:POST:/v4/api/educacao/escola/ocupacoes/ocupacao: INSERT em escola.cboocupacao com titulo NULL e corpo vazio (500, banco v2)
+  rota:POST:/v4/api/educacao/escola/transposicao/criterios-ordenacao: INSERT em escola.criteriostransposicaoordenacao com corpo vazio (500, banco v2)
+  rota:POST:/v4/api/financeiro/contabilidade/procedimento/escrituracao-contabil/implantar-saldo-inicial: DELETE em contabilidade.conplanoexecontacorrente da instituicao 1 com corpo vazio (200, banco v2)
+  rota:POST:/v4/api/recursos-humanos/e-social/store: INSERT em recursoshumanos.informacoes_complementares com corpo vazio (500, banco v2)
+# volateis: campo mascarado no JSON, achado comparando duas gravacoes independentes (restauracoes distintas) da
+# referencia Laravel 8 (python -m regressao.laravel.estabilidade A B). /v4/api/user (que devolvia o hash da
+# senha no 5.4) nao existe na base 7.4; a mascara de SEGURANCA fica, caso a rota volte.
+volateis:
+  rota:GET:/v4/api/user: [senha]
+  # nome do CSV gerado leva o timestamp unix (tmp/template_<ts>.csv) e o link leva o host do alvo
+  rota:GET:/v4/api/financeiro/contabilidade/conta-corrente/implantacao/ddr/template: [data.csv, data.csvLinkExterno]
+  # a mensagem de erro (SQLSTATE 22007, data vazia) traz o SQL com a tabela w_ajuste_conlancamrecurso_<ts unix>;
+  # status, `error` e o tipo da mensagem continuam comparados
+  rota:POST:/v4/api/financeiro/contabilidade/fix/lancamento/conlancamrecurso: [message]
+  # Banco v2 (2026-11-18). O GET cria a configuracao padrao na primeira chamada (INSERT em mensageriaacordo,
+  # comparado em sql_negocio): created_at/updated_at sao o relogio da gravacao
+  rota:GET:/v4/api/patrimonial/contratos/acordo/buscar-configuracoes: [data.created_at, data.updated_at]
+  # o CSV gerado leva o timestamp unix no nome (tmp/relatrio-inscritos-<ts>.csv)
+  rota:POST:/v4/api/educacao/escola/transposicao/relatorio-inscritos: [data.path, data.url]
+instaveis: {}
+# sem_ordem: listas que a API devolve sem ordem garantida; comparadas como conjunto ordenado.
+sem_ordem:
+  # `select viewname from pg_catalog.pg_views where schemaname = 'public'` sem ORDER BY: tres gravacoes da
+  # referencia deram as mesmas 20 views em tres ordens diferentes
+  rota:GET:/v4/api/configuracao/consultas/postgres/views: [data]

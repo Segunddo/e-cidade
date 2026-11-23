@@ -93,10 +93,10 @@ class cl_agualeiturista {
             $this->x16_dtfim = $this->x16_dtfim_ano."-".$this->x16_dtfim_mes."-".$this->x16_dtfim_dia;
          }
        }
-       $this->x16_numcgm = ($this->x16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x16_numcgm"]:$this->x16_numcgm);
+       $this->x16_numcgm = ($this->x16_numcgm === 0 || $this->x16_numcgm === 0.0 || $this->x16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x16_numcgm"]:$this->x16_numcgm);
        $this->x16_senha = ($this->x16_senha == ""?@$GLOBALS["HTTP_POST_VARS"]["x16_senha"]:$this->x16_senha);
      }else{
-       $this->x16_numcgm = ($this->x16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x16_numcgm"]:$this->x16_numcgm);
+       $this->x16_numcgm = ($this->x16_numcgm === 0 || $this->x16_numcgm === 0.0 || $this->x16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x16_numcgm"]:$this->x16_numcgm);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_agualeiturista {
        return false;
      }
        $this->x16_numcgm = $x16_numcgm;
-     if(($this->x16_numcgm == null) || ($this->x16_numcgm == "") ){
+     if(($this->x16_numcgm == null) || ($this->x16_numcgm === 0 || $this->x16_numcgm === 0.0 || $this->x16_numcgm == "") ){
        $this->erro_sql = " Campo x16_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

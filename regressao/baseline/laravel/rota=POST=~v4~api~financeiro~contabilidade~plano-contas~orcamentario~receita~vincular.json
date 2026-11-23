@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/orcamentario/receita/vincular",
+  "json": {
+    "error": true,
+    "message": "Trying to get property 'id' of non-object"
+  },
+  "sha256": "e0d5d7a651d621a26f19bc693d9758153d5392c22bd4830a3cf0f102213cf6bf",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

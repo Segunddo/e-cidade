@@ -76,10 +76,10 @@ class cl_tabplansaldorecursomov {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k113_sequencial = ($this->k113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_sequencial"]:$this->k113_sequencial);
-       $this->k113_recurso = ($this->k113_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_recurso"]:$this->k113_recurso);
-       $this->k113_conta = ($this->k113_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_conta"]:$this->k113_conta);
-       $this->k113_valor = ($this->k113_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_valor"]:$this->k113_valor);
+       $this->k113_sequencial = ($this->k113_sequencial === 0 || $this->k113_sequencial === 0.0 || $this->k113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_sequencial"]:$this->k113_sequencial);
+       $this->k113_recurso = ($this->k113_recurso === 0 || $this->k113_recurso === 0.0 || $this->k113_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_recurso"]:$this->k113_recurso);
+       $this->k113_conta = ($this->k113_conta === 0 || $this->k113_conta === 0.0 || $this->k113_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_conta"]:$this->k113_conta);
+       $this->k113_valor = ($this->k113_valor === 0 || $this->k113_valor === 0.0 || $this->k113_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_valor"]:$this->k113_valor);
        if($this->k113_data == ""){
          $this->k113_data_dia = ($this->k113_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_data_dia"]:$this->k113_data_dia);
          $this->k113_data_mes = ($this->k113_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_data_mes"]:$this->k113_data_mes);
@@ -89,7 +89,7 @@ class cl_tabplansaldorecursomov {
          }
        }
      }else{
-       $this->k113_sequencial = ($this->k113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_sequencial"]:$this->k113_sequencial);
+       $this->k113_sequencial = ($this->k113_sequencial === 0 || $this->k113_sequencial === 0.0 || $this->k113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k113_sequencial"]:$this->k113_sequencial);
      }
    }
    // funcao para inclusao
@@ -149,7 +149,7 @@ class cl_tabplansaldorecursomov {
          $this->k113_sequencial = $k113_sequencial;
        }
      }
-     if(($this->k113_sequencial == null) || ($this->k113_sequencial == "") ){
+     if(($this->k113_sequencial == null) || ($this->k113_sequencial === 0 || $this->k113_sequencial === 0.0 || $this->k113_sequencial == "") ){
        $this->erro_sql = " Campo k113_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

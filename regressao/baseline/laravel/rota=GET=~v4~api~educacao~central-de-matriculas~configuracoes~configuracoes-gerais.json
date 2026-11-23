@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/configuracoes/configuracoes-gerais",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42P01]: Undefined table: 7 ERRO:  não existe a relação \"plugins.configuracaomatriculaonline\"\nLINE 1: select * from \"plugins\".\"configuracaomatriculaonline\"\n                      ^ (SQL: select * from \"plugins\".\"configuracaomatriculaonline\")"
+  },
+  "sha256": "4b1e515ef21877e12780c0a78f46f51a29084aa2101e52a42f6a3e788b3965f8",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

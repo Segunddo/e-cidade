@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/renda-familiar",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "faixa": "Nenhuma renda"
+      },
+      {
+        "codigo": 2,
+        "faixa": "Até um salário mínimo"
+      },
+      {
+        "codigo": 3,
+        "faixa": "Até 2 salários mínimos"
+      },
+      {
+        "codigo": 4,
+        "faixa": "Até 3 salários mínimos"
+      },
+      {
+        "codigo": 5,
+        "faixa": "Acima de 3 salários mínimos"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "24532681e4ccdfaaae898308bb7516679fdb8fd86bc6057ab732c4c3c35a1cb7",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

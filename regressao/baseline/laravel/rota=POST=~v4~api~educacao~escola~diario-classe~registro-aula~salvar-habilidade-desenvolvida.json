@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/diario-classe/registro-aula/salvar-habilidade-desenvolvida",
+  "json": {
+    "error": true,
+    "message": "Undefined index: disciplina"
+  },
+  "sha256": "4b9be850df4b4d4f88c4631491bd9a257147b6b9d0a1e6e7f44a576500248837",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

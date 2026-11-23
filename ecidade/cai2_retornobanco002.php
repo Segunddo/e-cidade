@@ -49,7 +49,7 @@ $clrotulo->label("z01_nome");
 $clrotulo->label("e82_codord");
 $clrotulo->label("e60_codemp");
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $dbwhere  = " e80_instit = " . db_getsession("DB_instit") . " and e75_codret = ".$retorno;
 $dbwhere .= " and e75_ativo is true and e90_cancelado = false ";

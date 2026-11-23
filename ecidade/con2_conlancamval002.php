@@ -84,7 +84,7 @@
    //--
    //echo $sql;exit;
    $result = db_query($sql);
-   $rows = pg_numrows($result);
+   $rows = ($result ? pg_numrows($result) : null);
    if($result==false){
         db_redireciona('db_erros.php?fechar=true&db_erro=Nenhum registro encontrado, verifique as datas e tente novamente');   
    }

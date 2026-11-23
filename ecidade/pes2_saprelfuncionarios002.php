@@ -33,7 +33,7 @@ $clrotulo->label('rh01_regist');
 $clrotulo->label('z01_nome');
 $clrotulo->label('r70_estrut');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $head3 = "CADASTRO DE FUNCIONÁRIOS COMPLETO";
 $head5 = "PERÍODO : ".$mes." / ".$ano;

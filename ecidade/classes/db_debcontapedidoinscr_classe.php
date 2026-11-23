@@ -67,10 +67,10 @@ class cl_debcontapedidoinscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d69_codigo = ($this->d69_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d69_codigo"]:$this->d69_codigo);
-       $this->d69_inscr = ($this->d69_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["d69_inscr"]:$this->d69_inscr);
+       $this->d69_codigo = ($this->d69_codigo === 0 || $this->d69_codigo === 0.0 || $this->d69_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d69_codigo"]:$this->d69_codigo);
+       $this->d69_inscr = ($this->d69_inscr === 0 || $this->d69_inscr === 0.0 || $this->d69_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["d69_inscr"]:$this->d69_inscr);
      }else{
-       $this->d69_codigo = ($this->d69_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d69_codigo"]:$this->d69_codigo);
+       $this->d69_codigo = ($this->d69_codigo === 0 || $this->d69_codigo === 0.0 || $this->d69_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d69_codigo"]:$this->d69_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_debcontapedidoinscr {
        return false;
      }
        $this->d69_codigo = $d69_codigo;
-     if(($this->d69_codigo == null) || ($this->d69_codigo == "") ){
+     if(($this->d69_codigo == null) || ($this->d69_codigo === 0 || $this->d69_codigo === 0.0 || $this->d69_codigo == "") ){
        $this->erro_sql = " Campo d69_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

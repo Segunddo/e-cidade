@@ -69,12 +69,12 @@ class cl_sanibaixaproc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y82_codsani = ($this->y82_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_codsani"]:$this->y82_codsani);
-       $this->y82_seq = ($this->y82_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_seq"]:$this->y82_seq);
-       $this->y82_codproc = ($this->y82_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_codproc"]:$this->y82_codproc);
+       $this->y82_codsani = ($this->y82_codsani === 0 || $this->y82_codsani === 0.0 || $this->y82_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_codsani"]:$this->y82_codsani);
+       $this->y82_seq = ($this->y82_seq === 0 || $this->y82_seq === 0.0 || $this->y82_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_seq"]:$this->y82_seq);
+       $this->y82_codproc = ($this->y82_codproc === 0 || $this->y82_codproc === 0.0 || $this->y82_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_codproc"]:$this->y82_codproc);
      }else{
-       $this->y82_codsani = ($this->y82_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_codsani"]:$this->y82_codsani);
-       $this->y82_seq = ($this->y82_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_seq"]:$this->y82_seq);
+       $this->y82_codsani = ($this->y82_codsani === 0 || $this->y82_codsani === 0.0 || $this->y82_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_codsani"]:$this->y82_codsani);
+       $this->y82_seq = ($this->y82_seq === 0 || $this->y82_seq === 0.0 || $this->y82_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y82_seq"]:$this->y82_seq);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_sanibaixaproc {
      }
        $this->y82_codsani = $y82_codsani;
        $this->y82_seq = $y82_seq;
-     if(($this->y82_codsani == null) || ($this->y82_codsani == "") ){
+     if(($this->y82_codsani == null) || ($this->y82_codsani === 0 || $this->y82_codsani === 0.0 || $this->y82_codsani == "") ){
        $this->erro_sql = " Campo y82_codsani nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_sanibaixaproc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y82_seq == null) || ($this->y82_seq == "") ){
+     if(($this->y82_seq == null) || ($this->y82_seq === 0 || $this->y82_seq === 0.0 || $this->y82_seq == "") ){
        $this->erro_sql = " Campo y82_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

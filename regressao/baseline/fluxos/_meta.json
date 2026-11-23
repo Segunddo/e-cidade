@@ -1,0 +1,14 @@
+{
+ "commit": "317ca6ae4fc33c46ea28aa0bec3a9568d3f34132",
+ "data": "2026-11-18",
+ "dump_sha256": "972515745567622ce8394d91e63c481a50d3500104c115c170ba95544b8b0fad",
+ "fluxos": [
+  "cadastros",
+  "emitir-relatorio",
+  "financeiro",
+  "incluir-registro",
+  "navegacao",
+  "tributario"
+ ],
+ "n_passos": 26
+}

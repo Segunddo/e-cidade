@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/bases-curriculares/disciplinas/salvar",
+  "json": {
+    "error": true,
+    "message": "Undefined property: stdClass::$base"
+  },
+  "sha256": "1a53c34cb83802fb41e6281f90380f57f1894e2a1ff2a61c2ae86ce095235a54",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

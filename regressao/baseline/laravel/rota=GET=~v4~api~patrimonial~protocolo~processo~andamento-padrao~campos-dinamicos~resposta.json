@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/protocolo/processo/andamento-padrao/campos-dinamicos/resposta",
+  "json": {
+    "error": true,
+    "message": "Informe o código do vínculo do campo"
+  },
+  "sha256": "c316c97639b7450a3678d4937950e234902c39343c7f19c7144769a8d25554f9",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

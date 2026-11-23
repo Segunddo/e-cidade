@@ -71,12 +71,12 @@ class cl_pagordemtiporec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e59_sequen = ($this->e59_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_sequen"]:$this->e59_sequen);
-       $this->e59_codrec = ($this->e59_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_codrec"]:$this->e59_codrec);
-       $this->e59_aliquota = ($this->e59_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_aliquota"]:$this->e59_aliquota);
+       $this->e59_sequen = ($this->e59_sequen === 0 || $this->e59_sequen === 0.0 || $this->e59_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_sequen"]:$this->e59_sequen);
+       $this->e59_codrec = ($this->e59_codrec === 0 || $this->e59_codrec === 0.0 || $this->e59_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_codrec"]:$this->e59_codrec);
+       $this->e59_aliquota = ($this->e59_aliquota === 0 || $this->e59_aliquota === 0.0 || $this->e59_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_aliquota"]:$this->e59_aliquota);
        $this->e59_ipes = ($this->e59_ipes == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_ipes"]:$this->e59_ipes);
      }else{
-       $this->e59_sequen = ($this->e59_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_sequen"]:$this->e59_sequen);
+       $this->e59_sequen = ($this->e59_sequen === 0 || $this->e59_sequen === 0.0 || $this->e59_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e59_sequen"]:$this->e59_sequen);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_pagordemtiporec {
          $this->e59_sequen = $e59_sequen;
        }
      }
-     if(($this->e59_sequen == null) || ($this->e59_sequen == "") ){
+     if(($this->e59_sequen == null) || ($this->e59_sequen === 0 || $this->e59_sequen === 0.0 || $this->e59_sequen == "") ){
        $this->erro_sql = " Campo e59_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

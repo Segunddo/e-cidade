@@ -61,7 +61,7 @@ $clorcimpactoperiodo = new cl_orcimpactoperiodo;
 
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if(isset($incluir) || isset($alterar)){
   $result=$clorcimpactoperiodo->sql_record($clorcimpactoperiodo->sql_query_file($o90_codperiodo,"o96_anoini"));

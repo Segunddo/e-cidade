@@ -33,7 +33,7 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_sau_procedimento_ext_classe.php"));
 
 db_postmemory( $_POST );
-parse_str( $_SERVER["QUERY_STRING"] );
+parse_str( $_SERVER["QUERY_STRING"] , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clsau_procedimento = new cl_sau_procedimento_ext;
 $clsau_procedimento->rotulo->label("sd63_i_codigo");

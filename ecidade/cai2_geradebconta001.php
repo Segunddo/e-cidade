@@ -103,11 +103,11 @@ function js_geraarquivo() {
                    where   k00_instit = ".db_getsession("DB_instit")."    
 									order by d66_arretipo desc");
                  
-                if (pg_numrows($resulttipodebito) > 0) {
+                if (($resulttipodebito ? pg_numrows($resulttipodebito) : null) > 0) {
                   ?>
                   <select name="tipodebito" onChange='document.form1.submit()'>
                   <?php
-                  for ($i = 0; $i < pg_numrows($resulttipodebito); $i ++) {
+                  for ($i = 0; $i < ($resulttipodebito ? pg_numrows($resulttipodebito) : null); $i ++) {
                     db_fieldsmemory($resulttipodebito, $i);
                     ?>
                     <option value='<?=$d66_arretipo?>'><?=$k00_descr?></option>
@@ -143,11 +143,11 @@ function js_geraarquivo() {
                    order by k00_numpar";
                  $resultnumpar = db_query($sqlnumpar);
 
-                 if (pg_numrows($resultnumpar) > 0) {
+                 if (($resultnumpar ? pg_numrows($resultnumpar) : null) > 0) {
                    ?>
                    <select name="numpar">
                    <?php
-                   for ($i = 0; $i < pg_numrows($resultnumpar); $i ++) {
+                   for ($i = 0; $i < ($resultnumpar ? pg_numrows($resultnumpar) : null); $i ++) {
                      db_fieldsmemory($resultnumpar, $i);
                      ?>
                      <option value='<?=$k00_numpar?>'><?=$k00_numpar?></option>
@@ -215,7 +215,7 @@ function js_geraarquivo() {
                          inner join bancos on codbco = d62_banco
                    where d62_instituicao =  ".db_getsession("DB_instit"));
 
-                if (pg_numrows($resultbanco) > 0) {
+                if (($resultbanco ? pg_numrows($resultbanco) : null) > 0) {
 	                /*?>
 	                <select name="banco">
 	                <?php

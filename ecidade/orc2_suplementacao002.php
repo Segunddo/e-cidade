@@ -70,7 +70,7 @@ if ($processados == 3) {
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in ($instits)");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_num_rows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_num_rows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg . $nomeinst;
     $xvirg = ', ';
@@ -221,13 +221,13 @@ for ($tiporel = 0; $tiporel <= 1; $tiporel++) {
     //--//
     $sSqlSuplementacoes = "{$sql} union all {$sSqlDotacoesPPA}";
     $res = db_query($sSqlSuplementacoes) or die($sSqlSuplementacoes);
-    if (pg_num_rows($res) == 0) {
+    if (($res ? pg_num_rows($res) : null) == 0) {
         continue;
 //      db_redireciona('db_erros.php?db_erro=Sem projetos neste periodo&fechar=true');
     }
 
 
-    $rows = pg_num_rows($res);
+    $rows = ($res ? pg_num_rows($res) : null);
     $pagina = 1;
     $tot_sup = 0;
     $tot_red = 0;
@@ -237,7 +237,7 @@ for ($tiporel = 0; $tiporel <= 1; $tiporel++) {
     $codsup_reduzido = 0;
     $codsup_receita = 0;
 
-    if (pg_num_rows($res) > 0) {
+    if (($res ? pg_num_rows($res) : null) > 0) {
         db_fieldsmemory($res, 0);
         $codsup = $o47_codsup;
     }
@@ -300,7 +300,7 @@ for ($tiporel = 0; $tiporel <= 1; $tiporel++) {
 
             $ress = db_query(analiseQueryPlanoOrcamento($sSqlReceitas));
             //$codsup_reduzido = 0;
-            for ($xx = 0; $xx < pg_num_rows($ress); $xx++) {
+            for ($xx = 0; $xx < ($ress ? pg_num_rows($ress) : null); $xx++) {
                 $oReceita = db_utils::fieldsMemory($ress, $xx);
                 $pdf->setX(3);
                 $pdf->Cell(18, $alt, "", 0, 0, "R", '0');
@@ -399,7 +399,7 @@ for ($tiporel = 0; $tiporel <= 1; $tiporel++) {
     $sSqlReceitas = "{$sSqlReceitasOrcamento} union all {$sSqlReceitasPPA} ";
 
     $ress = db_query($sSqlReceitas);
-    for ($xx = 0; $xx < pg_num_rows($ress); $xx++) {
+    for ($xx = 0; $xx < ($ress ? pg_num_rows($ress) : null); $xx++) {
         $oReceita = db_utils::fieldsMemory($ress, $xx);
         $pdf->setX(3);
         $pdf->Cell(18, $alt, "", 0, 0, "R", '0');
@@ -520,7 +520,7 @@ $sql .= " order by orcprojeto.o39_codproj, o47_codsup ,o47_coddot";
 //--//
 $res = db_query($sql) or die($sql);
 
-$rows = pg_num_rows($res);
+$rows = ($res ? pg_num_rows($res) : null);
 $pagina = 0;
 $tot_sup = 0;
 $tot_red = 0;
@@ -580,7 +580,7 @@ if ($rows > 0) {
 						 where o46_tiposup in ($vTipos) and o85_codsup = $codsup";
             $ress = db_query($sql);
 
-            for ($xx = 0; $xx < pg_num_rows($ress); $xx++) {
+            for ($xx = 0; $xx < ($ress ? pg_num_rows($ress) : null); $xx++) {
                 db_fieldsmemory($ress, $xx);
 
                 $pdf->setX(3);
@@ -657,7 +657,7 @@ if ($rows > 0) {
 		 where o46_tiposup in ($vTipos) and o85_codsup = $codsup";
     $ress = db_query($sql);
 
-    for ($xx = 0; $xx < pg_num_rows($ress); $xx++) {
+    for ($xx = 0; $xx < ($ress ? pg_num_rows($ress) : null); $xx++) {
         db_fieldsmemory($ress, $xx);
         $pdf->setX(3);
 

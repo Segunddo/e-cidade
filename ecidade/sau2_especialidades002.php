@@ -30,7 +30,7 @@ require_once modification("libs/db_conecta.php");
 require_once modification("libs/db_sessoes.php");
 include(modification("libs/db_sql.php"));
 include(modification("classes/db_prontproced_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clprontproced = new cl_prontproced;
 $clprontproced->rotulo->label();

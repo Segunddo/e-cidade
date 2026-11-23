@@ -1,0 +1,33 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/orcamento/cadastro/recurso/salvar",
+  "json": {
+    "errors": {
+      "codigoEstrutural": [
+        "Código do estrutural não foi informado."
+      ],
+      "codigoTribunal": [
+        "O código do Tribunal deve ser informado."
+      ],
+      "descricao": [
+        "Informe a descrição do recurso."
+      ],
+      "finalidade": [
+        "A Finalidade do recurso deve ser informada."
+      ],
+      "tipoRecurso": [
+        "Tipo do Recurso não foi informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "2a41c723bf9e37c4bc082a5c8f436a42ae4c91b728c201b911298279008c6b96",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

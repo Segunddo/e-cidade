@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/contratos/realizar-alteracoes",
+  "json": {
+    "data": true,
+    "error": false,
+    "message": ""
+  },
+  "sha256": "615553deaa7b4ba54303b6b419a779af004492a8d8081a4155f6fc3e21c68cde",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

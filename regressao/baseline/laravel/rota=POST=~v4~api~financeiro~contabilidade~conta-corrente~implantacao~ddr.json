@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/conta-corrente/implantacao/ddr",
+  "json": {
+    "errors": {
+      "exercicio": [
+        "O campo exercicio é obrigatório."
+      ],
+      "file": [
+        "O arquivo deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "33f464f09ed385b41b462bc5c2e810a47cb484096aba3b8a8a0b9021914d6e9a",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

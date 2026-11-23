@@ -35,7 +35,7 @@ require(modification("libs/db_stdlib.php"));
   include(modification("classes/db_issbase_classe.php"));
   include(modification("classes/db_iptubase_classe.php"));
   include(modification("classes/db_termo_classe.php"));
-  parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+  parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   $clcgm = new cl_cgm;
   $clissbase = new cl_issbase;
   $cliptubase = new cl_iptubase;

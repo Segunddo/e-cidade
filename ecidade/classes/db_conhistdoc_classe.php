@@ -69,11 +69,11 @@ class cl_conhistdoc {
   // funcao para atualizar campos
   public function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->c53_coddoc = ($this->c53_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c53_coddoc"]:$this->c53_coddoc);
+      $this->c53_coddoc = ($this->c53_coddoc === 0 || $this->c53_coddoc === 0.0 || $this->c53_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c53_coddoc"]:$this->c53_coddoc);
       $this->c53_descr = ($this->c53_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c53_descr"]:$this->c53_descr);
-      $this->c53_tipo = ($this->c53_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c53_tipo"]:$this->c53_tipo);
+      $this->c53_tipo = ($this->c53_tipo === 0 || $this->c53_tipo === 0.0 || $this->c53_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c53_tipo"]:$this->c53_tipo);
     }else{
-      $this->c53_coddoc = ($this->c53_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c53_coddoc"]:$this->c53_coddoc);
+      $this->c53_coddoc = ($this->c53_coddoc === 0 || $this->c53_coddoc === 0.0 || $this->c53_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c53_coddoc"]:$this->c53_coddoc);
     }
   }
   // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_conhistdoc {
       return false;
     }
     $this->c53_coddoc = $c53_coddoc;
-    if(($this->c53_coddoc == null) || ($this->c53_coddoc == "") ){
+    if(($this->c53_coddoc == null) || ($this->c53_coddoc === 0 || $this->c53_coddoc === 0.0 || $this->c53_coddoc == "") ){
       $this->erro_sql = " Campo c53_coddoc nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

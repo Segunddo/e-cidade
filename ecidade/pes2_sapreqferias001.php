@@ -36,7 +36,7 @@ include(modification("classes/db_issbase_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("libs/db_sql.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clcgm = new cl_cgm;
 $clcgm->rotulo->label();
 $clrotulo = new rotulocampo;

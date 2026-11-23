@@ -69,12 +69,12 @@ class cl_orcimpactovalmovmes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o65_codseqimpmov = ($this->o65_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o65_codseqimpmov"]:$this->o65_codseqimpmov);
-       $this->o65_mes = ($this->o65_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o65_mes"]:$this->o65_mes);
-       $this->o65_valor = ($this->o65_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o65_valor"]:$this->o65_valor);
+       $this->o65_codseqimpmov = ($this->o65_codseqimpmov === 0 || $this->o65_codseqimpmov === 0.0 || $this->o65_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o65_codseqimpmov"]:$this->o65_codseqimpmov);
+       $this->o65_mes = ($this->o65_mes === 0 || $this->o65_mes === 0.0 || $this->o65_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o65_mes"]:$this->o65_mes);
+       $this->o65_valor = ($this->o65_valor === 0 || $this->o65_valor === 0.0 || $this->o65_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o65_valor"]:$this->o65_valor);
      }else{
-       $this->o65_codseqimpmov = ($this->o65_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o65_codseqimpmov"]:$this->o65_codseqimpmov);
-       $this->o65_mes = ($this->o65_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o65_mes"]:$this->o65_mes);
+       $this->o65_codseqimpmov = ($this->o65_codseqimpmov === 0 || $this->o65_codseqimpmov === 0.0 || $this->o65_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o65_codseqimpmov"]:$this->o65_codseqimpmov);
+       $this->o65_mes = ($this->o65_mes === 0 || $this->o65_mes === 0.0 || $this->o65_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o65_mes"]:$this->o65_mes);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_orcimpactovalmovmes {
      }
        $this->o65_codseqimpmov = $o65_codseqimpmov;
        $this->o65_mes = $o65_mes;
-     if(($this->o65_codseqimpmov == null) || ($this->o65_codseqimpmov == "") ){
+     if(($this->o65_codseqimpmov == null) || ($this->o65_codseqimpmov === 0 || $this->o65_codseqimpmov === 0.0 || $this->o65_codseqimpmov == "") ){
        $this->erro_sql = " Campo o65_codseqimpmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_orcimpactovalmovmes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o65_mes == null) || ($this->o65_mes == "") ){
+     if(($this->o65_mes == null) || ($this->o65_mes === 0 || $this->o65_mes === 0.0 || $this->o65_mes == "") ){
        $this->erro_sql = " Campo o65_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

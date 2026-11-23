@@ -35,7 +35,7 @@ class AnexoBalancoOrcamentarioDCASP extends RelatoriosLegaisBase {
    * Busca os dados a serem impressos no relatório
    * @return array
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $this->aLinhasConsistencia = $this->getLinhasRelatorio();
     parent::executarBalancetesNecessarios();

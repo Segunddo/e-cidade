@@ -96,14 +96,14 @@ class cl_pagordemele {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e53_codord = ($this->e53_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codord"]:$this->e53_codord);
-       $this->e53_codele = ($this->e53_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codele"]:$this->e53_codele);
-       $this->e53_valor = ($this->e53_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_valor"]:$this->e53_valor);
-       $this->e53_vlranu = ($this->e53_vlranu == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_vlranu"]:$this->e53_vlranu);
-       $this->e53_vlrpag = ($this->e53_vlrpag == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_vlrpag"]:$this->e53_vlrpag);
+       $this->e53_codord = ($this->e53_codord === 0 || $this->e53_codord === 0.0 || $this->e53_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codord"]:$this->e53_codord);
+       $this->e53_codele = ($this->e53_codele === 0 || $this->e53_codele === 0.0 || $this->e53_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codele"]:$this->e53_codele);
+       $this->e53_valor = ($this->e53_valor === 0 || $this->e53_valor === 0.0 || $this->e53_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_valor"]:$this->e53_valor);
+       $this->e53_vlranu = ($this->e53_vlranu === 0 || $this->e53_vlranu === 0.0 || $this->e53_vlranu == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_vlranu"]:$this->e53_vlranu);
+       $this->e53_vlrpag = ($this->e53_vlrpag === 0 || $this->e53_vlrpag === 0.0 || $this->e53_vlrpag == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_vlrpag"]:$this->e53_vlrpag);
      }else{
-       $this->e53_codord = ($this->e53_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codord"]:$this->e53_codord);
-       $this->e53_codele = ($this->e53_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codele"]:$this->e53_codele);
+       $this->e53_codord = ($this->e53_codord === 0 || $this->e53_codord === 0.0 || $this->e53_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codord"]:$this->e53_codord);
+       $this->e53_codele = ($this->e53_codele === 0 || $this->e53_codele === 0.0 || $this->e53_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["e53_codele"]:$this->e53_codele);
      }
    }
    // funcao para inclusao
@@ -138,7 +138,7 @@ class cl_pagordemele {
      }
        $this->e53_codord = $e53_codord;
        $this->e53_codele = $e53_codele;
-     if(($this->e53_codord == null) || ($this->e53_codord == "") ){
+     if(($this->e53_codord == null) || ($this->e53_codord === 0 || $this->e53_codord === 0.0 || $this->e53_codord == "") ){
        $this->erro_sql = " Campo e53_codord nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -146,7 +146,7 @@ class cl_pagordemele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e53_codele == null) || ($this->e53_codele == "") ){
+     if(($this->e53_codele == null) || ($this->e53_codele === 0 || $this->e53_codele === 0.0 || $this->e53_codele == "") ){
        $this->erro_sql = " Campo e53_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -48,7 +48,7 @@ use ECidade\Tributario\Juridico\InicialPartilha\Repository\InicialPartilha as In
 use ECidade\Tributario\Juridico\ProcessoForo\ProcessoForo;
 use ECidade\Tributario\Juridico\Inicial\Inicial;
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if (!isset($parcel) || $parcel == '') {
     db_redireciona('db_erros.php?fechar=true&db_erro=Parcelamento não encontrado!');
     exit;

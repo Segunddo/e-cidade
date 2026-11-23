@@ -78,10 +78,10 @@ class cl_aberturaexercicioorcamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c104_sequencial = ($this->c104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_sequencial"]:$this->c104_sequencial);
-       $this->c104_usuario = ($this->c104_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_usuario"]:$this->c104_usuario);
-       $this->c104_instit = ($this->c104_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_instit"]:$this->c104_instit);
-       $this->c104_ano = ($this->c104_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_ano"]:$this->c104_ano);
+       $this->c104_sequencial = ($this->c104_sequencial === 0 || $this->c104_sequencial === 0.0 || $this->c104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_sequencial"]:$this->c104_sequencial);
+       $this->c104_usuario = ($this->c104_usuario === 0 || $this->c104_usuario === 0.0 || $this->c104_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_usuario"]:$this->c104_usuario);
+       $this->c104_instit = ($this->c104_instit === 0 || $this->c104_instit === 0.0 || $this->c104_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_instit"]:$this->c104_instit);
+       $this->c104_ano = ($this->c104_ano === 0 || $this->c104_ano === 0.0 || $this->c104_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_ano"]:$this->c104_ano);
        if($this->c104_data == ""){
          $this->c104_data_dia = ($this->c104_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_data_dia"]:$this->c104_data_dia);
          $this->c104_data_mes = ($this->c104_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_data_mes"]:$this->c104_data_mes);
@@ -92,7 +92,7 @@ class cl_aberturaexercicioorcamento {
        }
        $this->c104_processado = ($this->c104_processado == "f"?@$GLOBALS["HTTP_POST_VARS"]["c104_processado"]:$this->c104_processado);
      }else{
-       $this->c104_sequencial = ($this->c104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_sequencial"]:$this->c104_sequencial);
+       $this->c104_sequencial = ($this->c104_sequencial === 0 || $this->c104_sequencial === 0.0 || $this->c104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c104_sequencial"]:$this->c104_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_aberturaexercicioorcamento {
          $this->c104_sequencial = $c104_sequencial;
        }
      }
-     if(($this->c104_sequencial == null) || ($this->c104_sequencial == "") ){
+     if(($this->c104_sequencial == null) || ($this->c104_sequencial === 0 || $this->c104_sequencial === 0.0 || $this->c104_sequencial == "") ){
        $this->erro_sql = " Campo c104_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

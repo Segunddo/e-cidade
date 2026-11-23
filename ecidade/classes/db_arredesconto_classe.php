@@ -80,10 +80,10 @@ class cl_arredesconto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k38_sequencial = ($this->k38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_sequencial"]:$this->k38_sequencial);
-       $this->k38_cadtipoparc = ($this->k38_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_cadtipoparc"]:$this->k38_cadtipoparc);
-       $this->k38_usuario = ($this->k38_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_usuario"]:$this->k38_usuario);
-       $this->k38_numpre = ($this->k38_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_numpre"]:$this->k38_numpre);
+       $this->k38_sequencial = ($this->k38_sequencial === 0 || $this->k38_sequencial === 0.0 || $this->k38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_sequencial"]:$this->k38_sequencial);
+       $this->k38_cadtipoparc = ($this->k38_cadtipoparc === 0 || $this->k38_cadtipoparc === 0.0 || $this->k38_cadtipoparc == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_cadtipoparc"]:$this->k38_cadtipoparc);
+       $this->k38_usuario = ($this->k38_usuario === 0 || $this->k38_usuario === 0.0 || $this->k38_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_usuario"]:$this->k38_usuario);
+       $this->k38_numpre = ($this->k38_numpre === 0 || $this->k38_numpre === 0.0 || $this->k38_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_numpre"]:$this->k38_numpre);
        if($this->k38_data == ""){
          $this->k38_data_dia = ($this->k38_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_data_dia"]:$this->k38_data_dia);
          $this->k38_data_mes = ($this->k38_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_data_mes"]:$this->k38_data_mes);
@@ -95,7 +95,7 @@ class cl_arredesconto {
        $this->k38_hora = ($this->k38_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_hora"]:$this->k38_hora);
        $this->k38_obs = ($this->k38_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_obs"]:$this->k38_obs);
      }else{
-       $this->k38_sequencial = ($this->k38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_sequencial"]:$this->k38_sequencial);
+       $this->k38_sequencial = ($this->k38_sequencial === 0 || $this->k38_sequencial === 0.0 || $this->k38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k38_sequencial"]:$this->k38_sequencial);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_arredesconto {
          $this->k38_sequencial = $k38_sequencial; 
        }
      }
-     if(($this->k38_sequencial == null) || ($this->k38_sequencial == "") ){ 
+     if(($this->k38_sequencial == null) || ($this->k38_sequencial === 0 || $this->k38_sequencial === 0.0 || $this->k38_sequencial == "") ){ 
        $this->erro_sql = " Campo k38_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

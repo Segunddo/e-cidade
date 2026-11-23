@@ -43,11 +43,11 @@ class cl_tabdesccadban {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k114_sequencial = ($this->k114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k114_sequencial"]:$this->k114_sequencial);
-       $this->k114_tabdesc = ($this->k114_tabdesc == ""?@$GLOBALS["HTTP_POST_VARS"]["k114_tabdesc"]:$this->k114_tabdesc);
-       $this->k114_codban = ($this->k114_codban == ""?@$GLOBALS["HTTP_POST_VARS"]["k114_codban"]:$this->k114_codban);
+       $this->k114_sequencial = ($this->k114_sequencial === 0 || $this->k114_sequencial === 0.0 || $this->k114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k114_sequencial"]:$this->k114_sequencial);
+       $this->k114_tabdesc = ($this->k114_tabdesc === 0 || $this->k114_tabdesc === 0.0 || $this->k114_tabdesc == ""?@$GLOBALS["HTTP_POST_VARS"]["k114_tabdesc"]:$this->k114_tabdesc);
+       $this->k114_codban = ($this->k114_codban === 0 || $this->k114_codban === 0.0 || $this->k114_codban == ""?@$GLOBALS["HTTP_POST_VARS"]["k114_codban"]:$this->k114_codban);
      }else{
-       $this->k114_sequencial = ($this->k114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k114_sequencial"]:$this->k114_sequencial);
+       $this->k114_sequencial = ($this->k114_sequencial === 0 || $this->k114_sequencial === 0.0 || $this->k114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k114_sequencial"]:$this->k114_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_tabdesccadban {
          $this->k114_sequencial = $k114_sequencial;
        }
      }
-     if(($this->k114_sequencial == null) || ($this->k114_sequencial == "") ){
+     if(($this->k114_sequencial == null) || ($this->k114_sequencial === 0 || $this->k114_sequencial === 0.0 || $this->k114_sequencial == "") ){
        $this->erro_sql = " Campo k114_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

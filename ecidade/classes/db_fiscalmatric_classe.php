@@ -67,10 +67,10 @@ class cl_fiscalmatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y35_codnoti = ($this->y35_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y35_codnoti"]:$this->y35_codnoti);
-       $this->y35_matric = ($this->y35_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y35_matric"]:$this->y35_matric);
+       $this->y35_codnoti = ($this->y35_codnoti === 0 || $this->y35_codnoti === 0.0 || $this->y35_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y35_codnoti"]:$this->y35_codnoti);
+       $this->y35_matric = ($this->y35_matric === 0 || $this->y35_matric === 0.0 || $this->y35_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y35_matric"]:$this->y35_matric);
      }else{
-       $this->y35_codnoti = ($this->y35_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y35_codnoti"]:$this->y35_codnoti);
+       $this->y35_codnoti = ($this->y35_codnoti === 0 || $this->y35_codnoti === 0.0 || $this->y35_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y35_codnoti"]:$this->y35_codnoti);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_fiscalmatric {
        return false;
      }
        $this->y35_codnoti = $y35_codnoti;
-     if(($this->y35_codnoti == null) || ($this->y35_codnoti == "") ){
+     if(($this->y35_codnoti == null) || ($this->y35_codnoti === 0 || $this->y35_codnoti === 0.0 || $this->y35_codnoti == "") ){
        $this->erro_sql = " Campo y35_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

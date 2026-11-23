@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/transporte-escolar/relatorios/emissao-carteira",
+  "json": null,
+  "sha256": "e6b0b933f8a3bb195180f7e1a79dc1580b4d10e976590922563c8886d6f54a28",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

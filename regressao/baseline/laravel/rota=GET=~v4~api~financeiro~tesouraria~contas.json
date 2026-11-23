@@ -1,0 +1,103 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/tesouraria/contas",
+  "json": {
+    "data": [
+      {
+        "conta": 1303,
+        "contaContabil": null,
+        "contaExtra": null,
+        "contrapartida": null,
+        "dataAtualizacao": "2010-04-24",
+        "dataImplantacao": "2010-04-24",
+        "dataLimite": null,
+        "identificacao": "               ",
+        "nome": "BANCO DO BRASIL MOVIMENTO",
+        "outrosDados": null,
+        "saldoImplantacao": "5000",
+        "valorAtual": "0"
+      },
+      {
+        "conta": 1306,
+        "contaContabil": null,
+        "contaExtra": null,
+        "contrapartida": null,
+        "dataAtualizacao": "2010-04-24",
+        "dataImplantacao": "2010-04-24",
+        "dataLimite": null,
+        "identificacao": "               ",
+        "nome": "BANRISUL - CONTA MOVIMENTO",
+        "outrosDados": null,
+        "saldoImplantacao": "5000",
+        "valorAtual": "0"
+      },
+      {
+        "conta": 1309,
+        "contaContabil": null,
+        "contaExtra": null,
+        "contrapartida": null,
+        "dataAtualizacao": "2010-04-24",
+        "dataImplantacao": "2010-04-24",
+        "dataLimite": null,
+        "identificacao": "               ",
+        "nome": "BANRISUL CONTA EXTRA",
+        "outrosDados": null,
+        "saldoImplantacao": "5000",
+        "valorAtual": "0"
+      },
+      {
+        "conta": 1310,
+        "contaContabil": null,
+        "contaExtra": null,
+        "contrapartida": null,
+        "dataAtualizacao": "2010-04-24",
+        "dataImplantacao": "2010-04-24",
+        "dataLimite": null,
+        "identificacao": "               ",
+        "nome": "BANRISUL VINCULADA",
+        "outrosDados": null,
+        "saldoImplantacao": "5000",
+        "valorAtual": "0"
+      },
+      {
+        "conta": 1307,
+        "contaContabil": null,
+        "contaExtra": null,
+        "contrapartida": null,
+        "dataAtualizacao": null,
+        "dataImplantacao": "2010-04-24",
+        "dataLimite": null,
+        "identificacao": "               ",
+        "nome": "CAIXA GERAL",
+        "outrosDados": null,
+        "saldoImplantacao": "5000",
+        "valorAtual": "0"
+      },
+      {
+        "conta": 1304,
+        "contaContabil": null,
+        "contaExtra": null,
+        "contrapartida": null,
+        "dataAtualizacao": "2010-04-24",
+        "dataImplantacao": "2010-04-24",
+        "dataLimite": null,
+        "identificacao": "               ",
+        "nome": "CIAXA ECONOMOCA FEDERAL - CONTA MOVIMENT",
+        "outrosDados": null,
+        "saldoImplantacao": "5000",
+        "valorAtual": "0"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "3c16375ce7258941a65da88fce173a15bea59cf6451fd10bfae81e70249f8b6c",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

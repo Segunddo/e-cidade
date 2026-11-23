@@ -88,8 +88,8 @@ class cl_abatimento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k125_sequencial = ($this->k125_sequencial == ""?@$_POST["k125_sequencial"]:$this->k125_sequencial);
-       $this->k125_tipoabatimento = ($this->k125_tipoabatimento == ""?@$_POST["k125_tipoabatimento"]:$this->k125_tipoabatimento);
+       $this->k125_sequencial = ($this->k125_sequencial === 0 || $this->k125_sequencial === 0.0 || $this->k125_sequencial == ""?@$_POST["k125_sequencial"]:$this->k125_sequencial);
+       $this->k125_tipoabatimento = ($this->k125_tipoabatimento === 0 || $this->k125_tipoabatimento === 0.0 || $this->k125_tipoabatimento == ""?@$_POST["k125_tipoabatimento"]:$this->k125_tipoabatimento);
        if($this->k125_datalanc == ""){
          $this->k125_datalanc_dia = ($this->k125_datalanc_dia == ""?@$_POST["k125_datalanc_dia"]:$this->k125_datalanc_dia);
          $this->k125_datalanc_mes = ($this->k125_datalanc_mes == ""?@$_POST["k125_datalanc_mes"]:$this->k125_datalanc_mes);
@@ -99,15 +99,15 @@ class cl_abatimento {
          }
        }
        $this->k125_hora = ($this->k125_hora == ""?@$_POST["k125_hora"]:$this->k125_hora);
-       $this->k125_usuario = ($this->k125_usuario == ""?@$_POST["k125_usuario"]:$this->k125_usuario);
-       $this->k125_instit = ($this->k125_instit == ""?@$_POST["k125_instit"]:$this->k125_instit);
-       $this->k125_valor = ($this->k125_valor == ""?@$_POST["k125_valor"]:$this->k125_valor);
-       $this->k125_perc = ($this->k125_perc == ""?@$_POST["k125_perc"]:$this->k125_perc);
-       $this->k125_valordisponivel = ($this->k125_valordisponivel == ""?@$_POST["k125_valordisponivel"]:$this->k125_valordisponivel);
-       $this->k125_abatimentosituacao = ($this->k125_abatimentosituacao == ""?@$_POST["k125_abatimentosituacao"]:$this->k125_abatimentosituacao);
+       $this->k125_usuario = ($this->k125_usuario === 0 || $this->k125_usuario === 0.0 || $this->k125_usuario == ""?@$_POST["k125_usuario"]:$this->k125_usuario);
+       $this->k125_instit = ($this->k125_instit === 0 || $this->k125_instit === 0.0 || $this->k125_instit == ""?@$_POST["k125_instit"]:$this->k125_instit);
+       $this->k125_valor = ($this->k125_valor === 0 || $this->k125_valor === 0.0 || $this->k125_valor == ""?@$_POST["k125_valor"]:$this->k125_valor);
+       $this->k125_perc = ($this->k125_perc === 0 || $this->k125_perc === 0.0 || $this->k125_perc == ""?@$_POST["k125_perc"]:$this->k125_perc);
+       $this->k125_valordisponivel = ($this->k125_valordisponivel === 0 || $this->k125_valordisponivel === 0.0 || $this->k125_valordisponivel == ""?@$_POST["k125_valordisponivel"]:$this->k125_valordisponivel);
+       $this->k125_abatimentosituacao = ($this->k125_abatimentosituacao === 0 || $this->k125_abatimentosituacao === 0.0 || $this->k125_abatimentosituacao == ""?@$_POST["k125_abatimentosituacao"]:$this->k125_abatimentosituacao);
        $this->k125_observacao = ($this->k125_observacao == ""?@$_POST["k125_observacao"]:$this->k125_observacao);
      }else{
-       $this->k125_sequencial = ($this->k125_sequencial == ""?@$_POST["k125_sequencial"]:$this->k125_sequencial);
+       $this->k125_sequencial = ($this->k125_sequencial === 0 || $this->k125_sequencial === 0.0 || $this->k125_sequencial == ""?@$_POST["k125_sequencial"]:$this->k125_sequencial);
      }
    }
    // funcao para inclusao
@@ -209,7 +209,7 @@ class cl_abatimento {
          $this->k125_sequencial = $k125_sequencial;
        }
      }
-     if(($this->k125_sequencial == null) || ($this->k125_sequencial == "") ){
+     if(($this->k125_sequencial == null) || ($this->k125_sequencial === 0 || $this->k125_sequencial === 0.0 || $this->k125_sequencial == "") ){
        $this->erro_sql = " Campo k125_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

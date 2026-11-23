@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/escola/procedimentos/diario-classe/acompanhamento-alunos-pcd",
+  "json": null,
+  "sha256": "d772fb0dc80fcb11ff6058c74e131b0e044415b7b22f04e6ae94e833ce406b42",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

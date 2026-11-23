@@ -67,11 +67,11 @@ class cl_issvarlev {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q18_codigo = ($this->q18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q18_codigo"]:$this->q18_codigo);
-       $this->q18_codlev = ($this->q18_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["q18_codlev"]:$this->q18_codlev);
+       $this->q18_codigo = ($this->q18_codigo === 0 || $this->q18_codigo === 0.0 || $this->q18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q18_codigo"]:$this->q18_codigo);
+       $this->q18_codlev = ($this->q18_codlev === 0 || $this->q18_codlev === 0.0 || $this->q18_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["q18_codlev"]:$this->q18_codlev);
      }else{
-       $this->q18_codigo = ($this->q18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q18_codigo"]:$this->q18_codigo);
-       $this->q18_codlev = ($this->q18_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["q18_codlev"]:$this->q18_codlev);
+       $this->q18_codigo = ($this->q18_codigo === 0 || $this->q18_codigo === 0.0 || $this->q18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q18_codigo"]:$this->q18_codigo);
+       $this->q18_codlev = ($this->q18_codlev === 0 || $this->q18_codlev === 0.0 || $this->q18_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["q18_codlev"]:$this->q18_codlev);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_issvarlev {
       $this->atualizacampos();
        $this->q18_codigo = $q18_codigo;
        $this->q18_codlev = $q18_codlev;
-     if(($this->q18_codigo == null) || ($this->q18_codigo == "") ){
+     if(($this->q18_codigo == null) || ($this->q18_codigo === 0 || $this->q18_codigo === 0.0 || $this->q18_codigo == "") ){
        $this->erro_sql = " Campo q18_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_issvarlev {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q18_codlev == null) || ($this->q18_codlev == "") ){
+     if(($this->q18_codlev == null) || ($this->q18_codlev === 0 || $this->q18_codlev === 0.0 || $this->q18_codlev == "") ){
        $this->erro_sql = " Campo q18_codlev nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

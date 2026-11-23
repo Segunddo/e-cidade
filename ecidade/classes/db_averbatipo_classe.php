@@ -76,9 +76,9 @@ class cl_averbatipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j93_codigo = ($this->j93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_codigo"]:$this->j93_codigo);
+       $this->j93_codigo = ($this->j93_codigo === 0 || $this->j93_codigo === 0.0 || $this->j93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_codigo"]:$this->j93_codigo);
        $this->j93_descr = ($this->j93_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_descr"]:$this->j93_descr);
-       $this->j93_regra = ($this->j93_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_regra"]:$this->j93_regra);
+       $this->j93_regra = ($this->j93_regra === 0 || $this->j93_regra === 0.0 || $this->j93_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_regra"]:$this->j93_regra);
        if($this->j93_datalimite == ""){
          $this->j93_datalimite_dia = ($this->j93_datalimite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_datalimite_dia"]:$this->j93_datalimite_dia);
          $this->j93_datalimite_mes = ($this->j93_datalimite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_datalimite_mes"]:$this->j93_datalimite_mes);
@@ -87,9 +87,9 @@ class cl_averbatipo {
             $this->j93_datalimite = $this->j93_datalimite_ano."-".$this->j93_datalimite_mes."-".$this->j93_datalimite_dia;
          }
        }
-       $this->j93_averbagrupo = ($this->j93_averbagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_averbagrupo"]:$this->j93_averbagrupo);
+       $this->j93_averbagrupo = ($this->j93_averbagrupo === 0 || $this->j93_averbagrupo === 0.0 || $this->j93_averbagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_averbagrupo"]:$this->j93_averbagrupo);
      }else{
-       $this->j93_codigo = ($this->j93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_codigo"]:$this->j93_codigo);
+       $this->j93_codigo = ($this->j93_codigo === 0 || $this->j93_codigo === 0.0 || $this->j93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j93_codigo"]:$this->j93_codigo);
      }
    }
    // funcao para inclusao
@@ -149,7 +149,7 @@ class cl_averbatipo {
          $this->j93_codigo = $j93_codigo;
        }
      }
-     if(($this->j93_codigo == null) || ($this->j93_codigo == "") ){
+     if(($this->j93_codigo == null) || ($this->j93_codigo === 0 || $this->j93_codigo === 0.0 || $this->j93_codigo == "") ){
        $this->erro_sql = " Campo j93_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

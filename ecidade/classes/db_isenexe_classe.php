@@ -67,11 +67,11 @@ class cl_isenexe {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j47_codigo = ($this->j47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_codigo"]:$this->j47_codigo);
-       $this->j47_anousu = ($this->j47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_anousu"]:$this->j47_anousu);
+       $this->j47_codigo = ($this->j47_codigo === 0 || $this->j47_codigo === 0.0 || $this->j47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_codigo"]:$this->j47_codigo);
+       $this->j47_anousu = ($this->j47_anousu === 0 || $this->j47_anousu === 0.0 || $this->j47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_anousu"]:$this->j47_anousu);
      }else{
-       $this->j47_codigo = ($this->j47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_codigo"]:$this->j47_codigo);
-       $this->j47_anousu = ($this->j47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_anousu"]:$this->j47_anousu);
+       $this->j47_codigo = ($this->j47_codigo === 0 || $this->j47_codigo === 0.0 || $this->j47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_codigo"]:$this->j47_codigo);
+       $this->j47_anousu = ($this->j47_anousu === 0 || $this->j47_anousu === 0.0 || $this->j47_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j47_anousu"]:$this->j47_anousu);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_isenexe {
       $this->atualizacampos();
        $this->j47_codigo = $j47_codigo;
        $this->j47_anousu = $j47_anousu;
-     if(($this->j47_codigo == null) || ($this->j47_codigo == "") ){
+     if(($this->j47_codigo == null) || ($this->j47_codigo === 0 || $this->j47_codigo === 0.0 || $this->j47_codigo == "") ){
        $this->erro_sql = " Campo j47_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_isenexe {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j47_anousu == null) || ($this->j47_anousu == "") ){
+     if(($this->j47_anousu == null) || ($this->j47_anousu === 0 || $this->j47_anousu === 0.0 || $this->j47_anousu == "") ){
        $this->erro_sql = " Campo j47_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

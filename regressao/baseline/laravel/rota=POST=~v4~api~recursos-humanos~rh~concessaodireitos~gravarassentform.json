@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/concessaodireitos/gravarassentform",
+  "json": {
+    "data": [],
+    "error": true,
+    "message": "{\"rh502_condicao\":[\"O campo rh502 condicao \\u00e9 obrigat\\u00f3rio.\"],\"rh502_resultado\":[\"O campo rh502 resultado \\u00e9 obrigat\\u00f3rio.\"],\"rh502_operador\":[\"O campo rh502 operador \\u00e9 obrigat\\u00f3rio.\"],\"rh502_multiplicador\":[\"O campo rh502 multiplicador \\u00e9 obrigat\\u00f3rio.\"]}"
+  },
+  "sha256": "9ea728c6164e155ea02fba677f1db6ef4e3d695ef6379cd0d0656b248975b209",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

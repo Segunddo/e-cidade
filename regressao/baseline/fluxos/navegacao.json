@@ -1,0 +1,177 @@
+{
+ "console": [
+  "Permissions policy violation: unload is not allowed in this document."
+ ],
+ "descricao": "login ate sair passando por modulo, tela de cadastro e tela de relatorio",
+ "falhas": [],
+ "id": "navegacao",
+ "passos": [
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<div class=\"menu-header\">\n<div class=\"menu-actions\">\n<div class=\"menu-action-home\">\n<span>\n</span>\n</div>\n<div class=\"menu-action-search\">\n<input name=\"menu-search\" id=\"menu-search\">\n<div class=\"menu-search-results\">\n</div>\n<span class=\"menu-search-icon\">\n</span>\n</div>\n</div>\n<div class=\"menu-breadcrumb selectable\">\n<ul id=\"menu-breadcrumb\">\n<li>1 - PREFEITURA DBSELLER</li>\n</ul>\n</div>\n<div class=\"menu-resizer\">\n</div>\n<div class=\"menu-close\">\n<span>×</span>\n</div>\n</div>\n<div class=\"menu-content\">\n<div class=\"menu-pager menu-pager-left disabled\">\n<div class=\"icon\">\n</div>\n</div>\n<div class=\"menu-list-container\">\n<div class=\"menu-list-title\">Instituições</div>\n<div id=\"instituicoes\" class=\"menu-list scrollator\">\n<span class=\"instituicao_1 active\">1 - PREFEITURA DBSELLER</span>\n<span class=\"instituicao_7\">2 - DEPARTAMENTO DE AGUA</span>\n</div>\n</div>\n<div class=\"menu-list-container divider-left\">\n<div class=\"menu-list-title\">Áreas</div>\n<div id=\"areas\" class=\"menu-list scrollator\">\n<span class=\"area_15\">DB:ASSISTÊNCIA SOCIAL</span>\n<span class=\"area_5\">DB:CIDADÃO</span>\n<span class=\"area_11\">DB:CONFIGURAÇÃO</span>\n<span class=\"area_8\">DB:EDUCAÇÃO</span>\n<span class=\"area_2\">DB:FINANCEIRO</span>\n<span class=\"area_10\">DB:GESTOR</span>\n<span class=\"area_16\">DB:INTEGRAÇÕES</span>\n<span class=\"area_4\">DB:PATRIMONIAL</span>\n<span class=\"area_3\">DB:RECURSOSHUMANOS</span>\n<span class=\"area_9\">DB:SAÚDE</span>\n<span class=\"area_1\">DB:TRIBUTÁRIO</span>\n</div>\n</div>\n<div class=\"menu-list-container divider-left\">\n<div class=\"menu-list-title\">Módulos</div>\n<div id=\"modulos\" class=\"menu-list scrollator\">\n</div>\n</div>\n<div class=\"menu-pager menu-pager-right\">\n<div class=\"icon\">\n</div>\n</div>\n</div>",
+   "dom_sha256": "e78881cf86448244f10664fce24a7cb7e4cf91601c728ef6f4afd791e1372943",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "login",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 /extension/desktop",
+    "GET 200 /extension/desktop/Menu/getAreas/?iInstitId",
+    "GET 200 /extension/desktop/Menu/getInstituicoes/",
+    "GET 200 /extension/desktop/desktop/getBases?instit",
+    "GET 200 /login.php",
+    "GET 200 /v4/api/configuracao/menu/buscar-favoritos",
+    "GET 200 /v4/api/configuracao/usuario/notificacoes",
+    "GET 200 /v4/api/patrimonial/protocolo/documentos/usuario/total",
+    "POST 200 /v4/login"
+   ],
+   "runtime": {
+    "/extension/desktop": "PHP-7.4 (referencia)",
+    "/extension/desktop/Menu/getAreas/?iInstitId": "PHP-7.4 (referencia)",
+    "/extension/desktop/Menu/getInstituicoes/": "PHP-7.4 (referencia)",
+    "/extension/desktop/desktop/getBases?instit": "PHP-7.4 (referencia)",
+    "/login.php": "PHP-7.4 (referencia)",
+    "/v4/api/configuracao/menu/buscar-favoritos": "PHP-7.4 (referencia)",
+    "/v4/api/configuracao/usuario/notificacoes": "PHP-7.4 (referencia)",
+    "/v4/api/patrimonial/protocolo/documentos/usuario/total": "PHP-7.4 (referencia)",
+    "/v4/login": "PHP-7.4 (referencia)"
+   },
+   "url": "/extension/desktop"
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<div class=\"menu-header\">\n<div class=\"menu-actions\">\n<div class=\"menu-action-home\">\n<span>\n</span>\n</div>\n<div class=\"menu-action-search\">\n<input name=\"menu-search\" id=\"menu-search\">\n<div class=\"menu-search-results\">\n</div>\n<span class=\"menu-search-icon\">\n</span>\n</div>\n</div>\n<div class=\"menu-breadcrumb selectable\">\n<ul id=\"menu-breadcrumb\">\n<li>1 - PREFEITURA DBSELLER</li>\n</ul>\n</div>\n<div class=\"menu-resizer\">\n</div>\n<div class=\"menu-close\">\n<span>×</span>\n</div>\n</div>\n<div class=\"menu-content\">\n<div class=\"menu-pager menu-pager-left disabled\">\n<div class=\"icon\">\n</div>\n</div>\n<div class=\"menu-list-container\">\n<div class=\"menu-list-title\">Instituições</div>\n<div id=\"instituicoes\" class=\"menu-list scrollator\">\n<span class=\"instituicao_1 active\">1 - PREFEITURA DBSELLER</span>\n<span class=\"instituicao_7\">2 - DEPARTAMENTO DE AGUA</span>\n</div>\n</div>\n<div class=\"menu-list-container divider-left\">\n<div class=\"menu-list-title\">Áreas</div>\n<div id=\"areas\" class=\"menu-list scrollator\">\n<span class=\"area_15\">DB:ASSISTÊNCIA SOCIAL</span>\n<span class=\"area_5\">DB:CIDADÃO</span>\n<span class=\"area_11\">DB:CONFIGURAÇÃO</span>\n<span class=\"area_8\">DB:EDUCAÇÃO</span>\n<span class=\"area_2\">DB:FINANCEIRO</span>\n<span class=\"area_10\">DB:GESTOR</span>\n<span class=\"area_16\">DB:INTEGRAÇÕES</span>\n<span class=\"area_4\">DB:PATRIMONIAL</span>\n<span class=\"area_3\">DB:RECURSOSHUMANOS</span>\n<span class=\"area_9\">DB:SAÚDE</span>\n<span class=\"area_1\">DB:TRIBUTÁRIO</span>\n</div>\n</div>\n<div class=\"menu-list-container divider-left\">\n<div class=\"menu-list-title\">Módulos</div>\n<div id=\"modulos\" class=\"menu-list scrollator\">\n</div>\n</div>\n<div class=\"menu-pager menu-pager-right\">\n<div class=\"icon\">\n</div>\n</div>\n</div>",
+   "dom_sha256": "e78881cf86448244f10664fce24a7cb7e4cf91601c728ef6f4afd791e1372943",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "menu",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 /extension/desktop/Menu/getAreas/?iInstitId",
+    "GET 200 /extension/desktop/desktop/getBases?instit"
+   ],
+   "runtime": {
+    "/extension/desktop/Menu/getAreas/?iInstitId": "PHP-7.4 (referencia)",
+    "/extension/desktop/desktop/getBases?instit": "PHP-7.4 (referencia)"
+   },
+   "url": "/extension/desktop"
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<div class=\"menu-header\">\n<div class=\"menu-actions\">\n<div class=\"menu-action-home\">\n<span>\n</span>\n</div>\n<div class=\"menu-action-search\">\n<input name=\"menu-search\" id=\"menu-search\">\n<div class=\"menu-search-results\">\n</div>\n<span class=\"menu-search-icon\">\n</span>\n</div>\n</div>\n<div class=\"menu-breadcrumb selectable\">\n<ul id=\"menu-breadcrumb\">\n<li>1 - PREFEITURA DBSELLER &gt; DB:TRIBUTÁRIO</li>\n</ul>\n</div>\n<div class=\"menu-resizer\">\n</div>\n<div class=\"menu-close\">\n<span>×</span>\n</div>\n</div>\n<div class=\"menu-content\">\n<div class=\"menu-pager menu-pager-left disabled\">\n<div class=\"icon\">\n</div>\n</div>\n<div class=\"menu-list-container\">\n<div class=\"menu-list-title\">Instituições</div>\n<div id=\"instituicoes\" class=\"menu-list scrollator\">\n<span class=\"instituicao_1 active\">1 - PREFEITURA DBSELLER</span>\n<span class=\"instituicao_7\">2 - DEPARTAMENTO DE AGUA</span>\n</div>\n</div>\n<div class=\"menu-list-container divider-left\">\n<div class=\"menu-list-title\">Áreas</div>\n<div id=\"areas\" class=\"menu-list scrollator\">\n<span class=\"area_15\">DB:ASSISTÊNCIA SOCIAL</span>\n<span class=\"area_5\">DB:CIDADÃO</span>\n<span class=\"area_11\">DB:CONFIGURAÇÃO</span>\n<span class=\"area_8\">DB:EDUCAÇÃO</span>\n<span class=\"area_2\">DB:FINANCEIRO</span>\n<span class=\"area_10\">DB:GESTOR</span>\n<span class=\"area_16\">DB:INTEGRAÇÕES</span>\n<span class=\"area_4\">DB:PATRIMONIAL</span>\n<span class=\"area_3\">DB:RECURSOSHUMANOS</span>\n<span class=\"area_9\">DB:SAÚDE</span>\n<span class=\"area_1 active\">DB:TRIBUTÁRIO</span>\n</div>\n</div>\n<div class=\"menu-list-container divider-left\">\n<div class=\"menu-list-title\">Módulos</div>\n<div id=\"modulos\" class=\"menu-list scrollator\">\n<span class=\"modulo_4555\">Água</span>\n<span class=\"modulo_1985522\">Arrecadação</span>\n<span class=\"modulo_578\">Cadastro</span>\n<span class=\"modulo_289579\">Cemitério</span>\n<span class=\"modulo_852\">Contribuição</span>\n<span class=\"modulo_1444\">Diversos</span>\n<span class=\"modulo_81\">Dívida Ativa</span>\n<span class=\"modulo_277\">Fiscal</span>\n<span class=\"modulo_836\">Inflatores</span>\n<span class=\"modulo_40\">ISSQN</span>\n<span class=\"modulo_2544\">ITBI</span>\n<span class=\"modulo_313\">Jurídico</span>\n<span class=\"modulo_331321\">Marcas</span>\n<span class=\"modulo_7808\">Meio Ambiente</span>\n<span class=\"modulo_4066\">Notificações</span>\n<span class=\"modulo_3675\">Projetos</span>\n</div>\n</div>\n<div class=\"menu-pager menu-pager-right\">\n<div class=\"icon\">\n</div>\n</div>\n</div>",
+   "dom_sha256": "c53a2ba9d8b4622411eaabe24476a555e0fa0a74d02641cf925a453f92262d39",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "area",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 /extension/desktop/Menu/getModulos/?iAreaId&iInstitId"
+   ],
+   "runtime": {
+    "/extension/desktop/Menu/getModulos/?iAreaId&iInstitId": "PHP-7.4 (referencia)"
+   },
+   "url": "/extension/desktop"
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<div class=\"menu-header\">\n<div class=\"menu-actions\">\n<div class=\"menu-action-home\">\n<span>\n</span>\n</div>\n<div class=\"menu-action-search\">\n<input name=\"menu-search\" id=\"menu-search\">\n<div class=\"menu-search-results\">\n</div>\n<span class=\"menu-search-icon\">\n</span>\n</div>\n</div>\n<div class=\"menu-breadcrumb selectable\">\n<ul id=\"menu-breadcrumb\">\n<li>1 - PREFEITURA DBSELLER &gt; DB:TRIBUTÁRIO &gt; Arrecadação</li>\n</ul>\n</div>\n<div class=\"menu-resizer\">\n</div>\n<div class=\"menu-close\">\n<span>×</span>\n</div>\n</div>\n<div class=\"menu-content\">\n<div class=\"menu-pager menu-pager-left disabled\">\n<div class=\"icon\">\n</div>\n</div>\n<div class=\"menu-list-container\">\n<div class=\"menu-list-title\">Instituições</div>\n<div id=\"instituicoes\" class=\"menu-list scrollator\">\n<span class=\"instituicao_1 active\">1 - PREFEITURA DBSELLER</span>\n<span class=\"instituicao_7\">2 - DEPARTAMENTO DE AGUA</span>\n</div>\n</div>\n<div class=\"menu-list-container divider-left\">\n<div class=\"menu-list-title\">Áreas</div>\n<div id=\"areas\" class=\"menu-list scrollator\">\n<span class=\"area_15\">DB:ASSISTÊNCIA SOCIAL</span>\n<span class=\"area_5\">DB:CIDADÃO</span>\n<span class=\"area_11\">DB:CONFIGURAÇÃO</span>\n<span class=\"area_8\">DB:EDUCAÇÃO</span>\n<span class=\"area_2\">DB:FINANCEIRO</span>\n<span class=\"area_10\">DB:GESTOR</span>\n<span class=\"area_16\">DB:INTEGRAÇÕES</span>\n<span class=\"area_4\">DB:PATRIMONIAL</span>\n<span class=\"area_3\">DB:RECURSOSHUMANOS</span>\n<span class=\"area_9\">DB:SAÚDE</span>\n<span class=\"area_1 active\">DB:TRIBUTÁRIO</span>\n</div>\n</div>\n<div class=\"menu-list-container divider-left\">\n<div class=\"menu-list-title\">Módulos</div>\n<div id=\"modulos\" class=\"menu-list scrollator\">\n<span class=\"modulo_4555\">Água</span>\n<span class=\"modulo_1985522 active\">Arrecadação</span>\n<span class=\"modulo_578\">Cadastro</span>\n<span class=\"modulo_289579\">Cemitério</span>\n<span class=\"modulo_852\">Contribuição</span>\n<span class=\"modulo_1444\">Diversos</span>\n<span class=\"modulo_81\">Dívida Ativa</span>\n<span class=\"modulo_277\">Fiscal</span>\n<span class=\"modulo_836\">Inflatores</span>\n<span class=\"modulo_40\">ISSQN</span>\n<span class=\"modulo_2544\">ITBI</span>\n<span class=\"modulo_313\">Jurídico</span>\n<span class=\"modulo_331321\">Marcas</span>\n<span class=\"modulo_7808\">Meio Ambiente</span>\n<span class=\"modulo_4066\">Notificações</span>\n<span class=\"modulo_3675\">Projetos</span>\n</div>\n</div>\n<div class=\"menu-list-container divider-left menu-itens\">\n<div class=\"menu-list-title\">\n</div>\n<div class=\"menu-list scrollator\">\n<span class=\"\" id=\"menu_id_29\">Cadastros<i class=\"arrow\">\n</i>\n</span>\n<span class=\"\" id=\"menu_id_31\">Consultas<i class=\"arrow\">\n</i>\n</span>\n<span class=\"\" id=\"menu_id_30\">Relatórios<i class=\"arrow\">\n</i>\n</span>\n<span class=\"\" id=\"menu_id_32\">Procedimentos<i class=\"arrow\">\n</i>\n</span>\n</div>\n</div>\n<div class=\"menu-pager menu-pager-right\">\n<div class=\"icon\">\n</div>\n</div>\n</div>",
+   "dom_sha256": "0daf1e3f0d565e58ebf761a2dd8282587a2a840ed3445f7efbfb50f705285401",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "modulo",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 /extension/desktop/Menu/getItensMenu/?iAreaId&iInstitId&iModuloId"
+   ],
+   "runtime": {
+    "/extension/desktop/Menu/getItensMenu/?iAreaId&iInstitId&iModuloId": "PHP-7.4 (referencia)"
+   },
+   "url": "/extension/desktop"
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<html>\n<head>\n<title>DBSeller Informática Ltda - Página Inicial</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta http-equiv=\"Expires\" content=\"0\">\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/scripts.js\">\n</script>\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/prototype.js\">\n</script>\n<link href=\"estilos.css\" rel=\"stylesheet\" type=\"text/css\">\n<link href=\"http://localhost:8190/skins/estilos.php?file=widgets/DBModal.css\" rel=\"stylesheet\">\n<link href=\"http://localhost:8190/estilos/widgets/DBModalBase.css\" rel=\"stylesheet\">\n</head>\n<body bgcolor=\"#CCCCCC\" class=\"no-menu\">\n<form name=\"form1\" method=\"post\" action=\"\">\n<center>\n<fieldset style=\"margin-top: 20px;\">\n<legend>\n<b>Cadastro Grupo de Taxa</b>\n</legend>\n<table border=\"0\">\n<tbody>\n<tr>\n<td nowrap=\"\" title=\"Sequencial Campo:ar37_sequencial \">\n<strong>Sequencial:</strong>\n</td>\n<td>\n<input title=\"Sequencial Campo:ar37_sequencial \" name=\"ar37_sequencial\" type=\"text\" id=\"ar37_sequencial\" value=\"\" size=\"10\" maxlength=\"10\" readonly=\"\" style=\"background-color:#DEB887;\" autocomplete=\"off\" labelvalidacao=\"Sequencial\" ismandatory=\"true\" tabindex=\"0\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Tipo de Grupo de Custas Campo:ar37_grupotaxatipo \">\n<a class=\"DBAncora\" style=\"text-decoration:underline;\" onclick=\"js_pesquisaar37_grupotaxatipo(true);\">\n<strong>Tipo de Grupo de tarifas:</strong>\n</a>\n</td>\n<td>\n<input title=\"Tipo de Grupo de Custas Campo:ar37_grupotaxatipo \" name=\"ar37_grupotaxatipo\" type=\"text\" id=\"ar37_grupotaxatipo\" value=\"\" size=\"10\" maxlength=\"10\" onchange=\"js_pesquisaar37_grupotaxatipo(false);\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,1,'Tipo de Grupo de tarifas','f','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Tipo de Grupo de tarifas\" ismandatory=\"true\" tabindex=\"1\">\n<input title=\"Descrição Campo:ar38_descricao \" name=\"ar38_descricao\" type=\"text\" id=\"ar38_descricao\" value=\"\" size=\"40\" maxlength=\"150\" readonly=\"\" style=\"background-color:#DEB887;text-transform:uppercase;\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\" tabindex=\"0\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Descrição do Grupo de Custas Campo:ar37_descricao \">\n<strong>Descrição:</strong>\n</td>\n<td>\n<input title=\"Descrição do Grupo de Custas Campo:ar37_descricao \" name=\"ar37_descricao\" type=\"text\" id=\"ar37_descricao\" value=\"\" size=\"54\" maxlength=\"150\" style=\"text-transform:uppercase;\" onkeyup=\"js_ValidaMaiusculo(this,'t',event);\" oninput=\"js_ValidaCampos(this,0,'Descrição','f','t',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\" tabindex=\"2\">\n</td>\n</tr>\n</tbody>\n</table>\n</fieldset>\n</center>\n<input name=\"incluir\" type=\"submit\" id=\"db_opcao\" value=\"Incluir\" tabindex=\"3\">\n<input name=\"pesquisar\" type=\"button\" id=\"pesquisar\" value=\"Pesquisar\" onclick=\"js_pesquisa();\" tabindex=\"4\">\n</form>\n<script>\n</script>\n<style>\n</style>\n<script>\n</script>\n<div id=\"db-tooltip\" class=\"db-tooltip\">\n</div>\n<script type=\"text/javascript\" src=\"scripts/classes/configuracao/DBViewHelpInline.classe.js\">\n</script>\n<script type=\"text/javascript\">\n</script>\n<script>\n</script>\n</body>\n</html>",
+   "dom_sha256": "7356284e4325f294994291c5b49bc4a72bf2d8c0058d764baa2a4636c8ac2856",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {
+    "campos": [
+     "ar37_descricao",
+     "ar37_grupotaxatipo",
+     "ar37_sequencial",
+     "ar38_descricao",
+     "incluir",
+     "pesquisar"
+    ]
+   },
+   "nome": "tela-cadastro",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 //w/1/extension/desktop/menu/getMenuArquivo/?file",
+    "GET 200 /w/1/arr1_grupotaxa001.php",
+    "GET 200 /w/1/con4_dbhelp.RPC.php?json",
+    "GET 200 /w/1/extension/desktop/window/bottom",
+    "GET 200 /w/1/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId"
+   ],
+   "runtime": {
+    "//w/1/extension/desktop/menu/getMenuArquivo/?file": "PHP-7.4 (referencia)",
+    "/w/1/arr1_grupotaxa001.php": "PHP-7.4 (referencia)",
+    "/w/1/con4_dbhelp.RPC.php?json": "PHP-7.4 (referencia)",
+    "/w/1/extension/desktop/window/bottom": "PHP-7.4 (referencia)",
+    "/w/1/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId": "PHP-7.4 (referencia)"
+   },
+   "url": "/w/1/arr1_grupotaxa001.php"
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<html>\n<head>\n<title>DBSeller Informática Ltda - Página Inicial</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta http-equiv=\"Expires\" content=\"0\">\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/scripts.js\">\n</script>\n<script>\n</script>\n<link href=\"estilos.css\" rel=\"stylesheet\" type=\"text/css\">\n<style>\n</style>\n<script type=\"text/javascript\">\n</script>\n<link href=\"http://localhost:8190/skins/estilos.php?file=widgets/DBModal.css\" rel=\"stylesheet\">\n<link href=\"http://localhost:8190/estilos/widgets/DBModalBase.css\" rel=\"stylesheet\">\n</head>\n<body class=\"no-menu\">\n<table class=\"table-relatorio\">\n<tbody>\n<tr>\n<td class=\"td-reatorio\">&nbsp;</td>\n<td class=\"td-reatorio\">&nbsp;</td>\n<td class=\"td-reatorio\">&nbsp;</td>\n<td class=\"td-reatorio\">&nbsp;</td>\n</tr>\n</tbody>\n</table>\n<table width=\"790\" height=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\">\n<tbody>\n<tr>\n<td height=\"430\" align=\"center\" valign=\"top\" bgcolor=\"#CCCCCC\">\n<table width=\"80%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td>\n<form name=\"form1\" method=\"post\" action=\"cai2_relcaixa_002.php\">\n<table width=\"100%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr>\n<td>&nbsp;</td>\n</tr>\n<tr>\n<td align=\"center\">\n<table width=\"100%\" border=\"1\" cellspacing=\"0\" cellpadding=\"0\">\n<tbody>\n<tr align=\"center\">\n<td width=\"34%\" bgcolor=\"#0099CC\">\n<strong>Relatório</strong>\n</td>\n<td colspan=\"2\" bgcolor=\"#0099CC\">\n<strong>Ordem</strong>\n</td>\n</tr>\n<tr>\n<td>\n<input type=\"radio\" name=\"opcao_relatorio\" value=\"tabrecjm\" checked=\"\"> &nbsp;Tipos de Juros e Multa</td>\n<td>\n<input name=\"ordem_relatorio\" type=\"radio\" value=\"alfabetica\" checked=\"\"> &nbsp;Alfabetica&nbsp;</td>\n<td>&nbsp; <input type=\"radio\" name=\"ordem_relatorio\" value=\"numerica\"> Numerica&nbsp;</td>\n</tr>\n<tr align=\"center\">\n<td colspan=\"4\">&nbsp;</td>\n</tr>\n<tr align=\"center\">\n<td colspan=\"4\">\n<input name=\"exibir_relatorio\" type=\"button\" id=\"exibir_relatorio\" value=\"Imprimir\" onclick=\"js_AbreJanelaRelatorio()\">\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n</tbody>\n</table>\n</form>\n</td>\n</tr>\n</tbody>\n</table>\n</td>\n</tr>\n</tbody>\n</table>\n<style>\n</style>\n<script>\n</script>\n<div id=\"db-tooltip\" class=\"db-tooltip\">\n</div>\n<script type=\"text/javascript\" src=\"scripts/classes/configuracao/DBViewHelpInline.classe.js\">\n</script>\n<script type=\"text/javascript\">\n</script>\n</body>\n</html>",
+   "dom_sha256": "9b4754293e66bbd316e5408890a0127b8f04886f58e7f9c0cdf618e49d0f96b8",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "tela-relatorio",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 //w/2/extension/desktop/menu/getMenuArquivo/?file",
+    "GET 200 /w/2/cai2_relcaixa_001.php?db_opcao",
+    "GET 200 /w/2/con4_dbhelp.RPC.php?json",
+    "GET 200 /w/2/extension/desktop/window/bottom",
+    "GET 200 /w/2/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId"
+   ],
+   "runtime": {
+    "//w/2/extension/desktop/menu/getMenuArquivo/?file": "PHP-7.4 (referencia)",
+    "/w/2/cai2_relcaixa_001.php?db_opcao": "PHP-7.4 (referencia)",
+    "/w/2/con4_dbhelp.RPC.php?json": "PHP-7.4 (referencia)",
+    "/w/2/extension/desktop/window/bottom": "PHP-7.4 (referencia)",
+    "/w/2/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId": "PHP-7.4 (referencia)"
+   },
+   "url": "/w/2/cai2_relcaixa_001.php?db_opcao"
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": null,
+   "dom_sha256": null,
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {
+    "saiu_do_desktop": false
+   },
+   "nome": "sair",
+   "ok": true,
+   "requisicoes": [],
+   "runtime": {},
+   "url": null
+  }
+ ]
+}

@@ -26,7 +26,7 @@
  */
 
 header("Content-type: image/png");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $img = imagecreatefromjpeg(__DIR__ . "/logomodulo.jpg");
 $preto = imagecolorallocate($img,0,0,0);
 

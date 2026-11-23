@@ -35,7 +35,7 @@ require_once(modification("classes/db_solicita_classe.php"));
 
 db_postmemory($_POST);
 db_postmemory($_GET);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $oPost = db_utils::postMemory($_POST, 0);
 $oGet = db_utils::postMemory($_GET, 0);

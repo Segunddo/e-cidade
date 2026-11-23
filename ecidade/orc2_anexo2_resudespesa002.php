@@ -31,7 +31,7 @@ require_once(modification("libs/db_sql.php"));
 require_once(modification("libs/db_liborcamento.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $classinatura = new cl_assinatura;
@@ -47,7 +47,7 @@ $xinstit = explode("-",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
       $descr_inst .= $xvirg.$nomeinstabrev ;
         $xvirg = ', ';
@@ -159,7 +159,7 @@ $result_rec = db_dotacaosaldo(7,2,3,true,$where,$anousu,$dataini,$datafin,null,n
 
 $valor = 0;
 
-for($i=0;$i<pg_numrows($result_rec);$i++){
+for($i=0;$i<($result_rec ? pg_numrows($result_rec) : null);$i++){
   db_fieldsmemory($result_rec,$i);
 
   if($tipo_balanco == 2){
@@ -226,11 +226,11 @@ if ($tipoArquivo == 2) {
     $totativ = 0;
     $totoper = 0;
 
-    $qorgao = pg_result($result, 0, 'orgao');
-    $qunidade = pg_result($result, 0, 'unidade');
+    $qorgao = ($result ? pg_result($result, 0, 'orgao') : null);
+    $qunidade = ($result ? pg_result($result, 0, 'unidade') : null);
     $qualou = $qorgao . $qunidade;
 
-    for ($i = 0; $i < pg_numrows($result); $i++) {
+    for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i++) {
         db_fieldsmemory($result, $i);
 
         if ($valor == 0) continue;
@@ -262,9 +262,9 @@ if ($tipoArquivo == 2) {
         fputcsv($rArquivo, $row, ';');
 
 
-        if ($i < pg_numrows($result) - 1) {
-            $proxOrgao = pg_result($result, $i + 1, 'orgao');
-            $proxUnidade = pg_result($result, $i + 1, 'unidade');
+        if ($i < ($result ? pg_numrows($result) : null) - 1) {
+            $proxOrgao = ($result ? pg_result($result, $i + 1, 'orgao') : null);
+            $proxUnidade = ($result ? pg_result($result, $i + 1, 'unidade') : null);
             if ($orgao != $proxOrgao || $unidade != $proxUnidade) {
                 fputcsv($rArquivo, array('', 'Total', '', '', db_formatar($valorx, 'f')), ';');
                 $totalvalorx += $valorx;
@@ -296,7 +296,7 @@ if ($tipoArquivo == 2) {
 
     $currentGroup = '';
 
-    for ($i = 0; $i < pg_numrows($result); $i++) {
+    for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i++) {
         db_fieldsmemory($result, $i);
 
         $group = substr($elemento, 1, 1);
@@ -368,14 +368,14 @@ if ($tipoArquivo == 2) {
     $pagina = 1;
     $valorx = 0;
     $totalvalorx = 0;
-    $qorgao = pg_result($result, 0, 'orgao');
-    $qunidade = pg_result($result, 0, 'unidade');
+    $qorgao = ($result ? pg_result($result, 0, 'orgao') : null);
+    $qunidade = ($result ? pg_result($result, 0, 'unidade') : null);
     $qualou = $qorgao . $qunidade;
     $totproj  = 0;
     $totativ  = 0;
     $totoper  = 0;
 
-    for ($i = 0; $i < pg_numrows($result); $i++) {
+    for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i++) {
         db_fieldsmemory($result, $i);
         if ($valor == 0)
             continue;
@@ -461,9 +461,9 @@ if ($tipoArquivo == 2) {
             $totoper  += $valor;
         }
 
-        if (pg_numrows($result) > ($i + 1) && $i > 0) {
-            $auxorgao   = pg_result($result, $i + 1, 'orgao');
-            $auxunidade = pg_result($result, $i + 1, 'unidade');
+        if (($result ? pg_numrows($result) : null) > ($i + 1) && $i > 0) {
+            $auxorgao   = ($result ? pg_result($result, $i + 1, 'orgao') : null);
+            $auxunidade = ($result ? pg_result($result, $i + 1, 'unidade') : null);
             if ($orgao != $auxorgao && $unidade != $auxunidade) {
                 if ($tipo_agrupa != 1) {
                     $pdf->cell(110, $alt, "", 0, 0, "L", 0);
@@ -520,7 +520,7 @@ if ($tipoArquivo == 2) {
     $desp_cap = 0;
     $res_con = 0;
 
-    for ($i = 0; $i < pg_numrows($result); $i++) {
+    for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i++) {
         db_fieldsmemory($result, $i);
         $pdf->setfont('arial', '', 7);
         if (substr($elemento, 1, 1) == "3") {
@@ -536,7 +536,7 @@ if ($tipoArquivo == 2) {
     $pdf->cell(30, $alt, db_formatar($desp_cor, 'f'), "T", 1, "R", 0);
     $pdf->ln(3);
 
-    for ($i = 0; $i < pg_numrows($result); $i++) {
+    for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i++) {
         db_fieldsmemory($result, $i);
         $pdf->setfont('arial', '', 7);
         if (substr($elemento, 1, 1) == "4") {
@@ -552,7 +552,7 @@ if ($tipoArquivo == 2) {
     $pdf->cell(30, $alt, db_formatar($desp_cap, 'f'), "T", 1, "R", 0);
     $pdf->ln(3);
 
-    for ($i = 0; $i < pg_numrows($result); $i++) {
+    for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i++) {
         db_fieldsmemory($result, $i);
         $pdf->setfont('arial', '', 7);
         if (substr($elemento, 1, 1) == "9" || substr($elemento, 1, 1) == "7") {

@@ -35,7 +35,7 @@ $clrotulo->label('m61_descr');
 $clrotulo->label('m61_usaquant');
 $clrotulo->label('m61_abrev');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $xordem = '';

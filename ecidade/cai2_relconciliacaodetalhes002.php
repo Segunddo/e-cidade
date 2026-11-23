@@ -57,7 +57,7 @@ $sSqlCodConcilia .= "   and k68_data = '{$sDataIniConciliacao}' ";
 $sSqlCodConcilia .= " order by k68_data ";
 
 $rsCodigoConcilia = db_query($sSqlCodConcilia);
-if (pg_num_rows($rsCodigoConcilia) == 0){
+if (($rsCodigoConcilia ? pg_num_rows($rsCodigoConcilia) : null) == 0){
     db_redireciona("db_erros.php?fechar=true&db_erro=Conta ($iConta) sem conciliação.");
 }
 
@@ -99,9 +99,9 @@ $sSqlReduz .= "                                        and conplanoreduz.c61_ins
 $sSqlReduz .= "  where contabancaria.db83_sequencial = {$iConta} ";
 $rsReduz    = db_query($sSqlReduz);
 
-if( $rsReduz && pg_num_rows($rsReduz) > 0 ) {
+if( $rsReduz && ($rsReduz ? pg_num_rows($rsReduz) : null) > 0 ) {
 
-  for ($i = 0; $i <  pg_num_rows($rsReduz); $i++) {
+  for ($i = 0; $i <  ($rsReduz ? pg_num_rows($rsReduz) : null); $i++) {
 
     db_fieldsmemory($rsReduz,$i);
 
@@ -110,7 +110,7 @@ if( $rsReduz && pg_num_rows($rsReduz) > 0 ) {
     $sqlSaldoContaCaixa = "select substr(fc_saltessaldo(".$c61_reduz.",'".$sDataFimConciliacao."','".$sDataFimConciliacao."',null,".db_getsession('DB_instit')."),41,13)::float as saldocontacaixa";
     $rsSaldoContaCaixa  = db_query($sqlSaldoContaCaixa);
 
-    if ( pg_num_rows($rsSaldoContaCaixa) > 0) {
+    if ( ($rsSaldoContaCaixa ? pg_num_rows($rsSaldoContaCaixa) : null) > 0) {
       db_fieldsmemory($rsSaldoContaCaixa,0);
       $saldo_tesouraria += $saldocontacaixa;
     }
@@ -129,7 +129,7 @@ $sql = " select round(sum(k86_valor),2) as saldo_pendencias from (
 
 $rsSaldoContaCaixa  = db_query($sql);
 
-if ( pg_num_rows($rsSaldoContaCaixa) > 0) {
+if ( ($rsSaldoContaCaixa ? pg_num_rows($rsSaldoContaCaixa) : null) > 0) {
    db_fieldsmemory($rsSaldoContaCaixa,0);
 }
  
@@ -191,7 +191,7 @@ k89_justificativa
 
 $rsSaldoContaCaixa  = db_query($sql);
 
-if ( pg_num_rows($rsSaldoContaCaixa) > 0) {
+if ( ($rsSaldoContaCaixa ? pg_num_rows($rsSaldoContaCaixa) : null) > 0) {
    db_fieldsmemory($rsSaldoContaCaixa,0);
 }
 $saldo_conciliacao -=  ( $saldo_pendencias ) ;
@@ -251,7 +251,7 @@ if( !$rsCodigoConcilia ){
 
 $data = "";
 
-for( $lista = 0 ; $lista < pg_num_rows($rsCodigoConcilia); $lista ++ ){
+for( $lista = 0 ; $lista < ($rsCodigoConcilia ? pg_num_rows($rsCodigoConcilia) : null); $lista ++ ){
 
    $concilia = db_utils::fieldsMemory($rsCodigoConcilia, $lista);
 

@@ -33,7 +33,7 @@ include(modification("classes/db_fis_fiscal_classe.php"));
 include(modification("classes/db_fis_fiscalocal_classe.php"));
 include(modification("classes/db_fis_fiscexec_classe.php"));
 include(modification("classes/db_fis_fiscalbaixa_classe.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 // Ticket 108335
 $getIntimacao = ((isset($intimacao) && $intimacao == 1) ? '&intimacao=1' : '');
 $getLabel     = ((isset($intimacao) && $intimacao == 1) ? 'Intimação' : 'Notificação');
@@ -82,14 +82,14 @@ $sql .= "where y30_codnoti = $codfiscal $whereIntimacao ";
 //$result = $clfiscal->sql_record($clfiscal->sql_query($codfiscal,"*",null," y30_codnoti = $codfiscal and y30_instit = ".db_getsession('DB_instit')));
 // die($sql);
 $result = $clfiscal->sql_record($sql);
-$num = pg_numrows($result);
+$num = ($result ? pg_numrows($result) : null);
 
 
 $sql2  = "select data_ciencia,y39_hora as y30_hora from fiscalizacao.fis_fiscalandam left join fiscalizacao.fis_fandam on y49_codandam = y39_codandam ";
 $sql2 .= "left join fiscalizacao.fis_datacienciaandamento on fis_datacienciaandamento.fandam = y39_codandam where y49_codnoti =$codfiscal and data_ciencia is not null";
 // echo $sql2;
 $result2 = $clfiscal->sql_record($sql2);
-$num2 = pg_numrows($result2);
+$num2 = ($result2 ? pg_numrows($result2) : null);
 ?>
 
 <html>
@@ -200,7 +200,7 @@ $num2 = pg_numrows($result2);
   }else{
     $rs2EndPecas = db_query( "select end01_rua as j14_nome, end01_numero as y12_numero,end01_compl as  y12_compl,end01_bairro as j13_descr
                                 from fiscalizacao.fis_enderecopecas where end01_codpeca = {$codfiscal} and end01_tipopeca = '$tipoEnd' " );
-   if( pg_num_rows( $rs2EndPecas ) > 0 ){
+   if( ($rs2EndPecas ? pg_num_rows( $rs2EndPecas ) : null) > 0 ){
       db_fieldsmemory( $rs2EndPecas,0 );
    }
   }

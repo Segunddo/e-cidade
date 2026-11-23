@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/ambulatorial/consulta/unidades-origem/unidade",
+  "json": {
+    "error": true,
+    "message": "Campo código requerido!"
+  },
+  "sha256": "38bcbaa1c33a89f2314fa4c19b55298ccf0105f69b905e3072b63412faf95875",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

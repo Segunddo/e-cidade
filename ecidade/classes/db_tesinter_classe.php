@@ -73,13 +73,13 @@ class cl_tesinter {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j39_sequencial = ($this->j39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_sequencial"]:$this->j39_sequencial);
-       $this->j39_idbql = ($this->j39_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_idbql"]:$this->j39_idbql);
-       $this->j39_orientacao = ($this->j39_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_orientacao"]:$this->j39_orientacao);
-       $this->j39_testad = ($this->j39_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_testad"]:$this->j39_testad);
-       $this->j39_testle = ($this->j39_testle == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_testle"]:$this->j39_testle);
+       $this->j39_sequencial = ($this->j39_sequencial === 0 || $this->j39_sequencial === 0.0 || $this->j39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_sequencial"]:$this->j39_sequencial);
+       $this->j39_idbql = ($this->j39_idbql === 0 || $this->j39_idbql === 0.0 || $this->j39_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_idbql"]:$this->j39_idbql);
+       $this->j39_orientacao = ($this->j39_orientacao === 0 || $this->j39_orientacao === 0.0 || $this->j39_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_orientacao"]:$this->j39_orientacao);
+       $this->j39_testad = ($this->j39_testad === 0 || $this->j39_testad === 0.0 || $this->j39_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_testad"]:$this->j39_testad);
+       $this->j39_testle = ($this->j39_testle === 0 || $this->j39_testle === 0.0 || $this->j39_testle == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_testle"]:$this->j39_testle);
      }else{
-       $this->j39_sequencial = ($this->j39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_sequencial"]:$this->j39_sequencial);
+       $this->j39_sequencial = ($this->j39_sequencial === 0 || $this->j39_sequencial === 0.0 || $this->j39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j39_sequencial"]:$this->j39_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_tesinter {
          $this->j39_sequencial = $j39_sequencial;
        }
      }
-     if(($this->j39_sequencial == null) || ($this->j39_sequencial == "") ){
+     if(($this->j39_sequencial == null) || ($this->j39_sequencial === 0 || $this->j39_sequencial === 0.0 || $this->j39_sequencial == "") ){
        $this->erro_sql = " Campo j39_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

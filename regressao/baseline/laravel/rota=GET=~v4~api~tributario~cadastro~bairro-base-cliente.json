@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/bairro-base-cliente",
+  "json": {
+    "errors": {
+      "id_rua": [
+        "O campo id rua é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "3b543a58266643ff8577a594e709ddd353fcbb8c235557c64454db0be039577f",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

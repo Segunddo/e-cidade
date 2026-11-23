@@ -79,7 +79,7 @@ class cl_empagegera {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e87_codgera = ($this->e87_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e87_codgera"]:$this->e87_codgera);
+       $this->e87_codgera = ($this->e87_codgera === 0 || $this->e87_codgera === 0.0 || $this->e87_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e87_codgera"]:$this->e87_codgera);
        $this->e87_descgera = ($this->e87_descgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e87_descgera"]:$this->e87_descgera);
        if($this->e87_data == ""){
          $this->e87_data_dia = ($this->e87_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e87_data_dia"]:$this->e87_data_dia);
@@ -99,7 +99,7 @@ class cl_empagegera {
          }
        }
      }else{
-       $this->e87_codgera = ($this->e87_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e87_codgera"]:$this->e87_codgera);
+       $this->e87_codgera = ($this->e87_codgera === 0 || $this->e87_codgera === 0.0 || $this->e87_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e87_codgera"]:$this->e87_codgera);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_empagegera {
          $this->e87_codgera = $e87_codgera;
        }
      }
-     if(($this->e87_codgera == null) || ($this->e87_codgera == "") ){
+     if(($this->e87_codgera == null) || ($this->e87_codgera === 0 || $this->e87_codgera === 0.0 || $this->e87_codgera == "") ){
        $this->erro_sql = " Campo e87_codgera nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

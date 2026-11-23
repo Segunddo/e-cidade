@@ -69,11 +69,11 @@ class cl_zonasaliq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j70_zona = ($this->j70_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j70_zona"]:$this->j70_zona);
-       $this->j70_alipre = ($this->j70_alipre == ""?@$GLOBALS["HTTP_POST_VARS"]["j70_alipre"]:$this->j70_alipre);
-       $this->j70_aliter = ($this->j70_aliter == ""?@$GLOBALS["HTTP_POST_VARS"]["j70_aliter"]:$this->j70_aliter);
+       $this->j70_zona = ($this->j70_zona === 0 || $this->j70_zona === 0.0 || $this->j70_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j70_zona"]:$this->j70_zona);
+       $this->j70_alipre = ($this->j70_alipre === 0 || $this->j70_alipre === 0.0 || $this->j70_alipre == ""?@$GLOBALS["HTTP_POST_VARS"]["j70_alipre"]:$this->j70_alipre);
+       $this->j70_aliter = ($this->j70_aliter === 0 || $this->j70_aliter === 0.0 || $this->j70_aliter == ""?@$GLOBALS["HTTP_POST_VARS"]["j70_aliter"]:$this->j70_aliter);
      }else{
-       $this->j70_zona = ($this->j70_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j70_zona"]:$this->j70_zona);
+       $this->j70_zona = ($this->j70_zona === 0 || $this->j70_zona === 0.0 || $this->j70_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j70_zona"]:$this->j70_zona);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_zonasaliq {
        return false;
      }
        $this->j70_zona = $j70_zona; 
-     if(($this->j70_zona == null) || ($this->j70_zona == "") ){ 
+     if(($this->j70_zona == null) || ($this->j70_zona === 0 || $this->j70_zona === 0.0 || $this->j70_zona == "") ){ 
        $this->erro_sql = " Campo j70_zona nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -31,7 +31,7 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_gradeshorarios_classe.php"));
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $instituicao = db_getsession('DB_instit');
 
 $clgradeshorarios = new cl_gradeshorarios;

@@ -1,0 +1,69 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "auth-rota-protegida-com-token",
+  "json": {
+    "data": [
+      {
+        "c52_codsis": 0,
+        "c52_descr": "NÃO SE APLICA",
+        "c52_descrred": "N"
+      },
+      {
+        "c52_codsis": 1,
+        "c52_descr": "FINANCEIRO",
+        "c52_descrred": "F"
+      },
+      {
+        "c52_codsis": 2,
+        "c52_descr": "PATRIMONIAL",
+        "c52_descrred": "P"
+      },
+      {
+        "c52_codsis": 3,
+        "c52_descr": "ORÇAMENTÁRIO",
+        "c52_descrred": "O"
+      },
+      {
+        "c52_codsis": 4,
+        "c52_descr": "COMPENSADO",
+        "c52_descrred": "C"
+      },
+      {
+        "c52_codsis": 5,
+        "c52_descr": "FINANCEIRO - CAIXA",
+        "c52_descrred": "F"
+      },
+      {
+        "c52_codsis": 6,
+        "c52_descr": "FINANCEIRO - BANCOS",
+        "c52_descrred": "F"
+      },
+      {
+        "c52_codsis": 7,
+        "c52_descr": "FINANCEIRO - EXTRA ORÇAMENTÁRIA",
+        "c52_descrred": "F"
+      },
+      {
+        "c52_codsis": 8,
+        "c52_descr": "FINANCEIRO - INTERFERÊNCIA",
+        "c52_descrred": "F"
+      },
+      {
+        "c52_codsis": 9,
+        "c52_descr": "DÍVIDA CONSOLIDADA",
+        "c52_descrred": "D"
+      }
+    ],
+    "error": false,
+    "message": "Sistemas de Identificações das Contas"
+  },
+  "sha256": "50efa1b4948d65474e6ce2ff69b2f2e95c5fdab0b3975d9b60a603d5fe4ddae6",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

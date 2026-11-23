@@ -32,7 +32,7 @@ include(modification("libs/db_utils.php"));
 
 $cldbconfig = new cl_db_config();
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //echo "<pre>";
 //echo var_dump($_GET);
 //echo "</pre>";

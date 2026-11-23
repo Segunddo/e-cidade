@@ -69,11 +69,11 @@ class cl_itbiretificacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it32_sequencial = ($this->it32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it32_sequencial"]:$this->it32_sequencial);
-       $this->it32_itbi = ($this->it32_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["it32_itbi"]:$this->it32_itbi);
-       $this->it32_itbiretif = ($this->it32_itbiretif == ""?@$GLOBALS["HTTP_POST_VARS"]["it32_itbiretif"]:$this->it32_itbiretif);
+       $this->it32_sequencial = ($this->it32_sequencial === 0 || $this->it32_sequencial === 0.0 || $this->it32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it32_sequencial"]:$this->it32_sequencial);
+       $this->it32_itbi = ($this->it32_itbi === 0 || $this->it32_itbi === 0.0 || $this->it32_itbi == ""?@$GLOBALS["HTTP_POST_VARS"]["it32_itbi"]:$this->it32_itbi);
+       $this->it32_itbiretif = ($this->it32_itbiretif === 0 || $this->it32_itbiretif === 0.0 || $this->it32_itbiretif == ""?@$GLOBALS["HTTP_POST_VARS"]["it32_itbiretif"]:$this->it32_itbiretif);
      }else{
-       $this->it32_sequencial = ($this->it32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it32_sequencial"]:$this->it32_sequencial);
+       $this->it32_sequencial = ($this->it32_sequencial === 0 || $this->it32_sequencial === 0.0 || $this->it32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["it32_sequencial"]:$this->it32_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_itbiretificacao {
          $this->it32_sequencial = $it32_sequencial;
        }
      }
-     if(($this->it32_sequencial == null) || ($this->it32_sequencial == "") ){
+     if(($this->it32_sequencial == null) || ($this->it32_sequencial === 0 || $this->it32_sequencial === 0.0 || $this->it32_sequencial == "") ){
        $this->erro_sql = " Campo it32_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

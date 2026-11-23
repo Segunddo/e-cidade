@@ -37,7 +37,7 @@ include(modification("classes/db_rhlocaltrabcustoplano_classe.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 include(modification("dbforms/db_funcoes.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clrhlocaltrab = new cl_rhlocaltrab;
 $cldb_estrut = new cl_db_estrut;
 $db_botao = false;

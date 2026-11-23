@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/concessaodireitos/gravarassentconcedeconfig",
+  "json": {
+    "data": [],
+    "error": true,
+    "message": "{\"rh503_condicao\":[\"O campo rh503 condicao \\u00e9 obrigat\\u00f3rio.\"],\"rh503_formula\":[\"O campo rh503 formula \\u00e9 obrigat\\u00f3rio.\"]}"
+  },
+  "sha256": "386ea20a6a22065d30d36853d26a3c9e4ddca327fdddcaad71f2b9a475b07d3d",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

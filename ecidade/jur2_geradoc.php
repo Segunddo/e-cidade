@@ -43,7 +43,7 @@ include(modification("classes/db_averba_classe.php"));
 include(modification("fpdf151/pdf1.php"));
 include(modification("classes/db_db_docparag_classe.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clinicialdoc           = new cl_inicialdoc;
 $clinicial              = new cl_inicial;

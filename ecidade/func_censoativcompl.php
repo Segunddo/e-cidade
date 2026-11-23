@@ -55,7 +55,7 @@ if ( count($aFiltroAtividades) > 0) {
   $aWhere[] = " ed133_i_codigo not in (" . implode(", ", $aFiltroAtividades) . ") ";
 }
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clcensoativcompl = new cl_censoativcompl;
 $clcensoativcompl->rotulo->label("ed133_i_codigo");
 $clcensoativcompl->rotulo->label("ed133_c_descr");

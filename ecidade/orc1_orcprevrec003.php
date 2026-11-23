@@ -33,7 +33,7 @@ include(modification("libs/db_liborcamento.php"));
 include(modification("classes/db_orcprevrec_classe.php"));
 include(modification("classes/db_orcreceita_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clorcprevrec = new cl_orcprevrec;
 $clorcreceita = new cl_orcreceita;
@@ -238,7 +238,7 @@ function js_valorinicial(campo){
 	x = document.form1;
 	arr = new Array();
 	<?php
-	for($i=0; $i<count($arr_valin); $i++){
+	for($i=0; $i<count((array)$arr_valin); $i++){
     echo "  arr[".$i."] = ".$arr_valin[$i].";\n";
 	}
 	?>

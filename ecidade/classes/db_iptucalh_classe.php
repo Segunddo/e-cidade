@@ -67,10 +67,10 @@ class cl_iptucalh {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j17_codhis = ($this->j17_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j17_codhis"]:$this->j17_codhis);
+       $this->j17_codhis = ($this->j17_codhis === 0 || $this->j17_codhis === 0.0 || $this->j17_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j17_codhis"]:$this->j17_codhis);
        $this->j17_descr = ($this->j17_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j17_descr"]:$this->j17_descr);
      }else{
-       $this->j17_codhis = ($this->j17_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j17_codhis"]:$this->j17_codhis);
+       $this->j17_codhis = ($this->j17_codhis === 0 || $this->j17_codhis === 0.0 || $this->j17_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j17_codhis"]:$this->j17_codhis);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_iptucalh {
          $this->j17_codhis = $j17_codhis;
        }
      }
-     if(($this->j17_codhis == null) || ($this->j17_codhis == "") ){
+     if(($this->j17_codhis == null) || ($this->j17_codhis === 0 || $this->j17_codhis === 0.0 || $this->j17_codhis == "") ){
        $this->erro_sql = " Campo j17_codhis nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

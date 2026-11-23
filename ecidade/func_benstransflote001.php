@@ -34,7 +34,7 @@ include(modification("classes/db_benstransf_classe.php"));
 include(modification("classes/db_benstransfdes_classe.php"));
 include(modification("classes/db_benstransfconf_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clbenstransf = new cl_benstransf;
 $clbenstransfdes = new cl_benstransfdes;
 $clbenstransfconf = new cl_benstransfconf;

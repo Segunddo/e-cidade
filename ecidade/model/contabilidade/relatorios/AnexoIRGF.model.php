@@ -92,7 +92,7 @@ final class AnexoIRGF extends RelatoriosLegaisBase {
    *
    * @return Object $oRetorno
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
   	/**
   	 * Configurações do período informado.

@@ -67,10 +67,10 @@ class cl_empauthist {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e57_autori = ($this->e57_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_autori"]:$this->e57_autori);
-       $this->e57_codhist = ($this->e57_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_codhist"]:$this->e57_codhist);
+       $this->e57_autori = ($this->e57_autori === 0 || $this->e57_autori === 0.0 || $this->e57_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_autori"]:$this->e57_autori);
+       $this->e57_codhist = ($this->e57_codhist === 0 || $this->e57_codhist === 0.0 || $this->e57_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_codhist"]:$this->e57_codhist);
      }else{
-       $this->e57_autori = ($this->e57_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_autori"]:$this->e57_autori);
+       $this->e57_autori = ($this->e57_autori === 0 || $this->e57_autori === 0.0 || $this->e57_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_autori"]:$this->e57_autori);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_empauthist {
        return false;
      }
        $this->e57_autori = $e57_autori;
-     if(($this->e57_autori == null) || ($this->e57_autori == "") ){
+     if(($this->e57_autori == null) || ($this->e57_autori === 0 || $this->e57_autori === 0.0 || $this->e57_autori == "") ){
        $this->erro_sql = " Campo e57_autori nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

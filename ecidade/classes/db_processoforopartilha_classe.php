@@ -83,9 +83,9 @@ class cl_processoforopartilha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v76_sequencial = ($this->v76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_sequencial"]:$this->v76_sequencial);
-       $this->v76_processoforo = ($this->v76_processoforo == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_processoforo"]:$this->v76_processoforo);
-       $this->v76_tipolancamento = ($this->v76_tipolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_tipolancamento"]:$this->v76_tipolancamento);
+       $this->v76_sequencial = ($this->v76_sequencial === 0 || $this->v76_sequencial === 0.0 || $this->v76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_sequencial"]:$this->v76_sequencial);
+       $this->v76_processoforo = ($this->v76_processoforo === 0 || $this->v76_processoforo === 0.0 || $this->v76_processoforo == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_processoforo"]:$this->v76_processoforo);
+       $this->v76_tipolancamento = ($this->v76_tipolancamento === 0 || $this->v76_tipolancamento === 0.0 || $this->v76_tipolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_tipolancamento"]:$this->v76_tipolancamento);
        if($this->v76_dtpagamento == ""){
          $this->v76_dtpagamento_dia = ($this->v76_dtpagamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_dtpagamento_dia"]:$this->v76_dtpagamento_dia);
          $this->v76_dtpagamento_mes = ($this->v76_dtpagamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_dtpagamento_mes"]:$this->v76_dtpagamento_mes);
@@ -95,7 +95,7 @@ class cl_processoforopartilha {
          }
        }
        $this->v76_obs = ($this->v76_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_obs"]:$this->v76_obs);
-       $this->v76_valorpartilha = ($this->v76_valorpartilha == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_valorpartilha"]:$this->v76_valorpartilha);
+       $this->v76_valorpartilha = ($this->v76_valorpartilha === 0 || $this->v76_valorpartilha === 0.0 || $this->v76_valorpartilha == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_valorpartilha"]:$this->v76_valorpartilha);
        if($this->v76_datapartilha == ""){
          $this->v76_datapartilha_dia = ($this->v76_datapartilha_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_datapartilha_dia"]:$this->v76_datapartilha_dia);
          $this->v76_datapartilha_mes = ($this->v76_datapartilha_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_datapartilha_mes"]:$this->v76_datapartilha_mes);
@@ -105,7 +105,7 @@ class cl_processoforopartilha {
          }
        }
      }else{
-       $this->v76_sequencial = ($this->v76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_sequencial"]:$this->v76_sequencial);
+       $this->v76_sequencial = ($this->v76_sequencial === 0 || $this->v76_sequencial === 0.0 || $this->v76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v76_sequencial"]:$this->v76_sequencial);
      }
    }
    // funcao para inclusao
@@ -174,7 +174,7 @@ class cl_processoforopartilha {
          $this->v76_sequencial = $v76_sequencial;
        }
      }
-     if(($this->v76_sequencial == null) || ($this->v76_sequencial == "") ){
+     if(($this->v76_sequencial == null) || ($this->v76_sequencial === 0 || $this->v76_sequencial === 0.0 || $this->v76_sequencial == "") ){
        $this->erro_sql = " Campo v76_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

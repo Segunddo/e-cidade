@@ -90,7 +90,7 @@ class cl_extratosaldo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k97_sequencial = ($this->k97_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_sequencial"]:$this->k97_sequencial);
+       $this->k97_sequencial = ($this->k97_sequencial === 0 || $this->k97_sequencial === 0.0 || $this->k97_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_sequencial"]:$this->k97_sequencial);
        if($this->k97_dtsaldofinal == ""){
          $this->k97_dtsaldofinal_dia = ($this->k97_dtsaldofinal_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_dtsaldofinal_dia"]:$this->k97_dtsaldofinal_dia);
          $this->k97_dtsaldofinal_mes = ($this->k97_dtsaldofinal_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_dtsaldofinal_mes"]:$this->k97_dtsaldofinal_mes);
@@ -99,18 +99,18 @@ class cl_extratosaldo {
             $this->k97_dtsaldofinal = $this->k97_dtsaldofinal_ano."-".$this->k97_dtsaldofinal_mes."-".$this->k97_dtsaldofinal_dia;
          }
        }
-       $this->k97_contabancaria = ($this->k97_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_contabancaria"]:$this->k97_contabancaria);
-       $this->k97_extrato = ($this->k97_extrato == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_extrato"]:$this->k97_extrato);
-       $this->k97_valorcredito = ($this->k97_valorcredito == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_valorcredito"]:$this->k97_valorcredito);
-       $this->k97_valordebito = ($this->k97_valordebito == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_valordebito"]:$this->k97_valordebito);
-       $this->k97_qtdregistros = ($this->k97_qtdregistros == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_qtdregistros"]:$this->k97_qtdregistros);
+       $this->k97_contabancaria = ($this->k97_contabancaria === 0 || $this->k97_contabancaria === 0.0 || $this->k97_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_contabancaria"]:$this->k97_contabancaria);
+       $this->k97_extrato = ($this->k97_extrato === 0 || $this->k97_extrato === 0.0 || $this->k97_extrato == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_extrato"]:$this->k97_extrato);
+       $this->k97_valorcredito = ($this->k97_valorcredito === 0 || $this->k97_valorcredito === 0.0 || $this->k97_valorcredito == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_valorcredito"]:$this->k97_valorcredito);
+       $this->k97_valordebito = ($this->k97_valordebito === 0 || $this->k97_valordebito === 0.0 || $this->k97_valordebito == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_valordebito"]:$this->k97_valordebito);
+       $this->k97_qtdregistros = ($this->k97_qtdregistros === 0 || $this->k97_qtdregistros === 0.0 || $this->k97_qtdregistros == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_qtdregistros"]:$this->k97_qtdregistros);
        $this->k97_posicao = ($this->k97_posicao == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_posicao"]:$this->k97_posicao);
        $this->k97_situacao = ($this->k97_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_situacao"]:$this->k97_situacao);
-       $this->k97_saldobloqueado = ($this->k97_saldobloqueado == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_saldobloqueado"]:$this->k97_saldobloqueado);
-       $this->k97_saldofinal = ($this->k97_saldofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_saldofinal"]:$this->k97_saldofinal);
-       $this->k97_limite = ($this->k97_limite == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_limite"]:$this->k97_limite);
+       $this->k97_saldobloqueado = ($this->k97_saldobloqueado === 0 || $this->k97_saldobloqueado === 0.0 || $this->k97_saldobloqueado == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_saldobloqueado"]:$this->k97_saldobloqueado);
+       $this->k97_saldofinal = ($this->k97_saldofinal === 0 || $this->k97_saldofinal === 0.0 || $this->k97_saldofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_saldofinal"]:$this->k97_saldofinal);
+       $this->k97_limite = ($this->k97_limite === 0 || $this->k97_limite === 0.0 || $this->k97_limite == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_limite"]:$this->k97_limite);
      }else{
-       $this->k97_sequencial = ($this->k97_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_sequencial"]:$this->k97_sequencial);
+       $this->k97_sequencial = ($this->k97_sequencial === 0 || $this->k97_sequencial === 0.0 || $this->k97_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k97_sequencial"]:$this->k97_sequencial);
      }
    }
    // funcao para inclusao
@@ -209,7 +209,7 @@ class cl_extratosaldo {
          $this->k97_sequencial = $k97_sequencial;
        }
      }
-     if(($this->k97_sequencial == null) || ($this->k97_sequencial == "") ){
+     if(($this->k97_sequencial == null) || ($this->k97_sequencial === 0 || $this->k97_sequencial === 0.0 || $this->k97_sequencial == "") ){
        $this->erro_sql = " Campo k97_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

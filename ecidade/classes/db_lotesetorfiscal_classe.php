@@ -67,10 +67,10 @@ class cl_lotesetorfiscal {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j91_idbql = ($this->j91_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j91_idbql"]:$this->j91_idbql);
-       $this->j91_codigo = ($this->j91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j91_codigo"]:$this->j91_codigo);
+       $this->j91_idbql = ($this->j91_idbql === 0 || $this->j91_idbql === 0.0 || $this->j91_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j91_idbql"]:$this->j91_idbql);
+       $this->j91_codigo = ($this->j91_codigo === 0 || $this->j91_codigo === 0.0 || $this->j91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j91_codigo"]:$this->j91_codigo);
      }else{
-       $this->j91_idbql = ($this->j91_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j91_idbql"]:$this->j91_idbql);
+       $this->j91_idbql = ($this->j91_idbql === 0 || $this->j91_idbql === 0.0 || $this->j91_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j91_idbql"]:$this->j91_idbql);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_lotesetorfiscal {
        return false;
      }
        $this->j91_idbql = $j91_idbql; 
-     if(($this->j91_idbql == null) || ($this->j91_idbql == "") ){ 
+     if(($this->j91_idbql == null) || ($this->j91_idbql === 0 || $this->j91_idbql === 0.0 || $this->j91_idbql == "") ){ 
        $this->erro_sql = " Campo j91_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

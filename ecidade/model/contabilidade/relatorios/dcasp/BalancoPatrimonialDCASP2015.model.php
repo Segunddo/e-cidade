@@ -412,7 +412,7 @@ class BalancoPatrimonialDCASP2015 extends RelatoriosLegaisBase
      * @return array
      * @throws Exception
      */
-    public function getDados()
+    public function getDados($trazerConfiguracaoPadrao = true)
     {
 
         if (!$this->exibirQuadroRelatorio(self::QUADRO_PRINCIPAL)

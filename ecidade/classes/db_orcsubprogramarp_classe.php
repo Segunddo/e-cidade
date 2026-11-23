@@ -71,13 +71,13 @@ class cl_orcsubprogramarp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o32_anousu = ($this->o32_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o32_anousu"]:$this->o32_anousu);
-       $this->o32_subprog = ($this->o32_subprog == ""?@$GLOBALS["HTTP_POST_VARS"]["o32_subprog"]:$this->o32_subprog);
+       $this->o32_anousu = ($this->o32_anousu === 0 || $this->o32_anousu === 0.0 || $this->o32_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o32_anousu"]:$this->o32_anousu);
+       $this->o32_subprog = ($this->o32_subprog === 0 || $this->o32_subprog === 0.0 || $this->o32_subprog == ""?@$GLOBALS["HTTP_POST_VARS"]["o32_subprog"]:$this->o32_subprog);
        $this->o32_descr = ($this->o32_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o32_descr"]:$this->o32_descr);
        $this->o32_finali = ($this->o32_finali == ""?@$GLOBALS["HTTP_POST_VARS"]["o32_finali"]:$this->o32_finali);
      }else{
-       $this->o32_anousu = ($this->o32_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o32_anousu"]:$this->o32_anousu);
-       $this->o32_subprog = ($this->o32_subprog == ""?@$GLOBALS["HTTP_POST_VARS"]["o32_subprog"]:$this->o32_subprog);
+       $this->o32_anousu = ($this->o32_anousu === 0 || $this->o32_anousu === 0.0 || $this->o32_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o32_anousu"]:$this->o32_anousu);
+       $this->o32_subprog = ($this->o32_subprog === 0 || $this->o32_subprog === 0.0 || $this->o32_subprog == ""?@$GLOBALS["HTTP_POST_VARS"]["o32_subprog"]:$this->o32_subprog);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_orcsubprogramarp {
      }
        $this->o32_anousu = $o32_anousu; 
        $this->o32_subprog = $o32_subprog; 
-     if(($this->o32_anousu == null) || ($this->o32_anousu == "") ){ 
+     if(($this->o32_anousu == null) || ($this->o32_anousu === 0 || $this->o32_anousu === 0.0 || $this->o32_anousu == "") ){ 
        $this->erro_sql = " Campo o32_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_orcsubprogramarp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o32_subprog == null) || ($this->o32_subprog == "") ){ 
+     if(($this->o32_subprog == null) || ($this->o32_subprog === 0 || $this->o32_subprog === 0.0 || $this->o32_subprog == "") ){ 
        $this->erro_sql = " Campo o32_subprog nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

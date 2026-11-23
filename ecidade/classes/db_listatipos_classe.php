@@ -67,11 +67,11 @@ class cl_listatipos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k62_lista = ($this->k62_lista == ""?@$GLOBALS["HTTP_POST_VARS"]["k62_lista"]:$this->k62_lista);
-       $this->k62_tipodeb = ($this->k62_tipodeb == ""?@$GLOBALS["HTTP_POST_VARS"]["k62_tipodeb"]:$this->k62_tipodeb);
+       $this->k62_lista = ($this->k62_lista === 0 || $this->k62_lista === 0.0 || $this->k62_lista == ""?@$GLOBALS["HTTP_POST_VARS"]["k62_lista"]:$this->k62_lista);
+       $this->k62_tipodeb = ($this->k62_tipodeb === 0 || $this->k62_tipodeb === 0.0 || $this->k62_tipodeb == ""?@$GLOBALS["HTTP_POST_VARS"]["k62_tipodeb"]:$this->k62_tipodeb);
      }else{
-       $this->k62_lista = ($this->k62_lista == ""?@$GLOBALS["HTTP_POST_VARS"]["k62_lista"]:$this->k62_lista);
-       $this->k62_tipodeb = ($this->k62_tipodeb == ""?@$GLOBALS["HTTP_POST_VARS"]["k62_tipodeb"]:$this->k62_tipodeb);
+       $this->k62_lista = ($this->k62_lista === 0 || $this->k62_lista === 0.0 || $this->k62_lista == ""?@$GLOBALS["HTTP_POST_VARS"]["k62_lista"]:$this->k62_lista);
+       $this->k62_tipodeb = ($this->k62_tipodeb === 0 || $this->k62_tipodeb === 0.0 || $this->k62_tipodeb == ""?@$GLOBALS["HTTP_POST_VARS"]["k62_tipodeb"]:$this->k62_tipodeb);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_listatipos {
       $this->atualizacampos();
        $this->k62_lista = $k62_lista;
        $this->k62_tipodeb = $k62_tipodeb;
-     if(($this->k62_lista == null) || ($this->k62_lista == "") ){
+     if(($this->k62_lista == null) || ($this->k62_lista === 0 || $this->k62_lista === 0.0 || $this->k62_lista == "") ){
        $this->erro_sql = " Campo k62_lista nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_listatipos {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k62_tipodeb == null) || ($this->k62_tipodeb == "") ){
+     if(($this->k62_tipodeb == null) || ($this->k62_tipodeb === 0 || $this->k62_tipodeb === 0.0 || $this->k62_tipodeb == "") ){
        $this->erro_sql = " Campo k62_tipodeb nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

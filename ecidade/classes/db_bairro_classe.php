@@ -71,12 +71,12 @@ class cl_bairro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j13_codi = ($this->j13_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["j13_codi"]:$this->j13_codi);
+       $this->j13_codi = ($this->j13_codi === 0 || $this->j13_codi === 0.0 || $this->j13_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["j13_codi"]:$this->j13_codi);
        $this->j13_descr = ($this->j13_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j13_descr"]:$this->j13_descr);
        $this->j13_codant = ($this->j13_codant == ""?@$GLOBALS["HTTP_POST_VARS"]["j13_codant"]:$this->j13_codant);
        $this->j13_rural = ($this->j13_rural == "f"?@$GLOBALS["HTTP_POST_VARS"]["j13_rural"]:$this->j13_rural);
      }else{
-       $this->j13_codi = ($this->j13_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["j13_codi"]:$this->j13_codi);
+       $this->j13_codi = ($this->j13_codi === 0 || $this->j13_codi === 0.0 || $this->j13_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["j13_codi"]:$this->j13_codi);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_bairro {
          $this->j13_codi = $j13_codi; 
        }
      }
-     if(($this->j13_codi == null) || ($this->j13_codi == "") ){ 
+     if(($this->j13_codi == null) || ($this->j13_codi === 0 || $this->j13_codi === 0.0 || $this->j13_codi == "") ){ 
        $this->erro_sql = " Campo j13_codi nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

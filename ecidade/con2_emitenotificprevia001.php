@@ -39,7 +39,7 @@ $clrotulo->label("d01_codedi");
 $clrotulo->label("d01_descr");
 $clrotulo->label("d04_forma");
 $db_opcao = 1;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 ?>
 <html>
 <head>

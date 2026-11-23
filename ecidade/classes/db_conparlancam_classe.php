@@ -67,10 +67,10 @@ class cl_conparlancam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c91_codele = ($this->c91_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codele"]:$this->c91_codele);
-       $this->c91_codconpas = ($this->c91_codconpas == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codconpas"]:$this->c91_codconpas);
+       $this->c91_codele = ($this->c91_codele === 0 || $this->c91_codele === 0.0 || $this->c91_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codele"]:$this->c91_codele);
+       $this->c91_codconpas = ($this->c91_codconpas === 0 || $this->c91_codconpas === 0.0 || $this->c91_codconpas == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codconpas"]:$this->c91_codconpas);
      }else{
-       $this->c91_codele = ($this->c91_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codele"]:$this->c91_codele);
+       $this->c91_codele = ($this->c91_codele === 0 || $this->c91_codele === 0.0 || $this->c91_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["c91_codele"]:$this->c91_codele);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_conparlancam {
        return false;
      }
        $this->c91_codele = $c91_codele;
-     if(($this->c91_codele == null) || ($this->c91_codele == "") ){
+     if(($this->c91_codele == null) || ($this->c91_codele === 0 || $this->c91_codele === 0.0 || $this->c91_codele == "") ){
        $this->erro_sql = " Campo c91_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

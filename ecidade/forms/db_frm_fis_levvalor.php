@@ -340,7 +340,7 @@ db_input('y63_sequencia',10,$Iy63_sequencia,true,'text',3);
       $anos=array();
 
       //Pega os exercícios do periodo
-      for($i=$ini; $i<$fim+1; $i++){
+      for($i=$ini; $i<(int)$fim+1; $i++){
        $anos[$i]=$i;
       }
 
@@ -402,7 +402,7 @@ db_input('y63_sequencia',10,$Iy63_sequencia,true,'text',3);
       $anos=array();
 
       //Pega os exercícios do periodo
-      for($i=$ini; $i<$fim+1; $i++){
+      for($i=$ini; $i<(int)$fim+1; $i++){
        $anos[$i]=$i;
       }
 
@@ -590,7 +590,7 @@ db_input('y63_sequencia',10,$Iy63_sequencia,true,'text',3);
     }
 
     $results = db_query("select sum(yl63_pagoriginal) as pagoriginal from fiscalizacao.fis_levvalor inner join fiscalizacao.fis_levvalorpgtos on y63_sequencia = y68_sequencia inner join fiscalizacao.fis_valordefla on yl63_sequencia = y68_sequencia and y68_seq = yl63_seq where y63_codlev=$y63_codlev");
-    if(pg_num_rows($results) > 0 ){
+    if(($results ? pg_num_rows($results) : null) > 0 ){
       db_fieldsmemory($results,0);
     }
    ?>
@@ -641,7 +641,7 @@ db_input('y63_sequencia',10,$Iy63_sequencia,true,'text',3);
   db_input('str',10,0,true,'hidden',3);
 
   $result2 = db_query("select * from fiscalizacao.fis_levvalor inner join fiscalizacao.fis_levvalorpgtos on y63_sequencia = y68_sequencia inner join fiscalizacao.fis_valordefla on yl63_sequencia = y68_sequencia and y68_seq = yl63_seq where y63_codlev=$y63_codlev");
-  $numrows2 = pg_num_rows($result2);
+  $numrows2 = ($result2 ? pg_num_rows($result2) : null);
   $str2 = '';
   $sep = '';
   for($x=0; $x<$numrows2; $x++){
@@ -652,7 +652,7 @@ db_input('y63_sequencia',10,$Iy63_sequencia,true,'text',3);
   }
 
   $result3 = db_query("select * from fiscalizacao.fis_levvalor where y63_codlev=$y63_codlev");
-  $numrows3 = pg_num_rows($result3);
+  $numrows3 = ($result3 ? pg_num_rows($result3) : null);
   $str3 = '';
   $sep = '';
   for($f=0; $f<$numrows3; $f++){

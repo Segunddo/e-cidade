@@ -190,7 +190,7 @@ $sqlAutentica .= "  group by caixa, autent, arquivo, data, cheque, credor, class
 $sqlAutentica .= "  order by data, autent";
 
 $rsCorrente = pg_query($sqlAutentica);
-$intNumrows = pg_num_rows($rsCorrente);
+$intNumrows = ($rsCorrente ? pg_num_rows($rsCorrente) : null);
 for ($i = 0; $i < $intNumrows; $i ++) {
     db_fieldsmemory($rsCorrente, $i);
 
@@ -200,7 +200,7 @@ for ($i = 0; $i < $intNumrows; $i ++) {
 			  and k89_data = '$data'
                           and k89_autent = $autent ";
     $rSql = pg_query($sSql);
-    if ($rSql and pg_num_rows($rSql) == 0) {
+    if ($rSql and ($rSql ? pg_num_rows($rSql) : null) == 0) {
 
         $scSql = "select k84_id
 			from conciliacor
@@ -209,7 +209,7 @@ for ($i = 0; $i < $intNumrows; $i ++) {
                           and k84_autent = $autent ";
 
         $rcSql = pg_query($scSql);
-        if ($rcSql and pg_num_rows($rcSql) == 0) {
+        if ($rcSql and ($rcSql ? pg_num_rows($rcSql) : null) == 0) {
             $clconciliapendcorrente->k89_concilia = $concilia;
             $clconciliapendcorrente->k89_id = $caixa;
             $clconciliapendcorrente->k89_data = $data;

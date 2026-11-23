@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/esf/equipes/unidades-com-equipe",
+  "json": {
+    "error": true,
+    "message": "Plugin ESF não instalado."
+  },
+  "sha256": "b2bcad4aa0e11775cd06ac5c5a0415fea4910966819a0501bfb421c70eb0fd89",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

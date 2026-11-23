@@ -150,7 +150,7 @@ class cl_aguacontrato {
          $this->x54_sequencial = $x54_sequencial;
        }
      }
-     if(($this->x54_sequencial == null) || ($this->x54_sequencial == "") ){
+     if(($this->x54_sequencial == null) || ($this->x54_sequencial === 0 || $this->x54_sequencial === 0.0 || $this->x54_sequencial == "") ){
        $this->erro_sql = " Campo x54_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

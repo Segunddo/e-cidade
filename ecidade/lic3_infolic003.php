@@ -35,7 +35,7 @@ require_once (modification("classes/db_liclicitem_classe.php"));
 require_once (modification("classes/db_pcprocitem_classe.php"));
 require_once (modification("model/licitacao.model.php"));
 require_once (modification("classes/db_liclicitasituacao_classe.php"));
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 $clliclicitem        = new cl_liclicitem;
 $clliclicitasituacao = new cl_liclicitasituacao;

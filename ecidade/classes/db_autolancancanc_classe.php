@@ -72,7 +72,7 @@ class cl_autolancancanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y89_codtermo = ($this->y89_codtermo == ""?@$GLOBALS["HTTP_POST_VARS"]["y89_codtermo"]:$this->y89_codtermo);
+       $this->y89_codtermo = ($this->y89_codtermo === 0 || $this->y89_codtermo === 0.0 || $this->y89_codtermo == ""?@$GLOBALS["HTTP_POST_VARS"]["y89_codtermo"]:$this->y89_codtermo);
        if($this->y89_datacanc == ""){
          $this->y89_datacanc_dia = ($this->y89_datacanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y89_datacanc_dia"]:$this->y89_datacanc_dia);
          $this->y89_datacanc_mes = ($this->y89_datacanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y89_datacanc_mes"]:$this->y89_datacanc_mes);

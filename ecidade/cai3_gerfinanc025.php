@@ -65,7 +65,7 @@ $sql = "select k03_tipo
         where k00_tipo = $tipo and k00_instit = ".db_getsession('DB_instit') ;
 //die($sql);
 $result = db_query($sql);
-$numrows = pg_numrows($result);
+$numrows = ($result ? pg_numrows($result) : null);
 if($numrows > 0){
   db_fieldsmemory($result,0);
 }else{
@@ -77,7 +77,7 @@ if($numrows > 0){
 $sql_arrebanco_nbant = "select array_to_string( array_accum(arrebanco.k00_nbant), ', ' ) as k00_nbant from caixa.recibopaga inner join caixa.arrebanco on arrebanco.k00_numpre = recibopaga.k00_numnov where recibopaga.k00_numpre = $numpre";
 //echo $sql_arrebanco_nbant;
 $rs_arrebanco_nbant = db_query($sql_arrebanco_nbant) or die($sql_arrebanco_nbant);
-$oArrebanco->k00_nbant = pg_result($rs_arrebanco_nbant,0,0);
+$oArrebanco->k00_nbant = ($rs_arrebanco_nbant ? pg_result($rs_arrebanco_nbant,0,0) : null);
 
 
 //BUSCA CODIGO DO PROCESSO FORO
@@ -88,7 +88,7 @@ $sSqlProcessoForo  = "select distinct v70_codforo
                       inner join termo on termo.v07_parcel = termoini.parcel 
                       where termo.v07_numpre = {$numpre} and v70_anulado is false order by v70_codforo ";
 $rsProcessoForo = db_query($sSqlProcessoForo);
-$v70_codforo = pg_fetch_result($rsProcessoForo, 0, 0);
+$v70_codforo = ($rsProcessoForo ? pg_fetch_result($rsProcessoForo, 0, 0) : null);
 
 /**
  * Legend dos fieldset
@@ -154,7 +154,7 @@ if ( $k03_tipo == 1 ) {
           from arrematric
           where k00_numpre = $numpre";
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Código de Arrecadacao nao cadastrado no arrematric.";
     exit;
   }else{
@@ -164,7 +164,7 @@ if ( $k03_tipo == 1 ) {
           from proprietario
           where j01_matric = $k00_matric";
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Matrícula nao cadastrada em proprietario.";
     exit;
   }else{
@@ -182,7 +182,7 @@ if ( $k03_tipo == 1 ) {
                inner join cgm on dv05_numcgm = z01_numcgm
           where diversos.dv05_numpre = $numpre and dv05_instit = ".db_getsession('DB_instit') ;
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Código de Arrecadacao nao cadastrado no diversos.";
     exit;
   }else{
@@ -196,7 +196,7 @@ if ( $k03_tipo == 1 ) {
           where k00_numpre = $numpre";
   echo $sql;
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Parcelamento nao cadastrada no diversos.";
     exit;
   }else{
@@ -253,7 +253,7 @@ if ( $k03_tipo == 1 ) {
   $sql .= ($numpar>0?" and arrepaga.k00_numpar=$numpar":"");
   //die($sql);
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Código de Arrecadacao nao cadastrado no arreinscr.";
     exit;
   }else{
@@ -265,7 +265,7 @@ if ( $k03_tipo == 1 ) {
             from empresa
             where q02_inscr = $k00_inscr";
     $result = db_query($sql);
-    if(pg_numrows($result)==0){
+    if(($result ? pg_numrows($result) : null)==0){
       echo "Empresa nao cadastrada no issbase.";
       exit;
     }else{
@@ -279,7 +279,7 @@ if ( $k03_tipo == 1 ) {
           from arrematric
           where k00_numpre = $numpre";
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Código de Arrecadacao nao cadastrado no arrematric.";
     exit;
   }else{
@@ -289,7 +289,7 @@ if ( $k03_tipo == 1 ) {
           from proprietario
           where j01_matric = $k00_matric";
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Matrícula nao cadastrada em proprietario.";
     exit;
   }else{
@@ -306,7 +306,7 @@ if ( $k03_tipo == 1 ) {
   $sql .= "      left join edital on d02_codedi = d01_codedi \n";
   $sql .= " where k00_numpre = $numpre";
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Código de Arrecadacao nao cadastrado Na Constribuição.  ";
     exit;
   }else{
@@ -325,7 +325,7 @@ if ( $k03_tipo == 1 ) {
   $sql .= " and d.v01_numpar = $numpar ";
 
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Código de Arrecadacao nao cadastrado.";
     exit;
   }else{
@@ -344,7 +344,7 @@ if ( $k03_tipo == 1 ) {
             left outer join cgm c on c.z01_numcgm = t.v07_numcgm
        where t.v07_numpre = $numpre and v07_instit = ".db_getsession('DB_instit') ;
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Código de Arrecadacao nao cadastrado.";
     exit;
   }else{
@@ -360,7 +360,7 @@ if ( $k03_tipo == 1 ) {
     if($numpar!=0)
     $sql .= " and d.v01_numpar = $numpar ";
     $result = db_query($sql);
-    if(pg_numrows($result)>0){
+    if(($result ? pg_numrows($result) : null)>0){
       db_fieldsmemory($result,0,true);
     }else{
 
@@ -368,7 +368,7 @@ if ( $k03_tipo == 1 ) {
 
        $sql = "select * from termoini where parcel = $v07_parcel";
        $result = db_query($sql);
-       if(pg_numrows($result)>0){
+       if(($result ? pg_numrows($result) : null)>0){
 
        } else {
 
@@ -377,7 +377,7 @@ if ( $k03_tipo == 1 ) {
           left outer join arreinscr  on v07_numpre = arreinscr.k00_numpre
            where v07_numpre = $numpre and v07_instit = ".db_getsession('DB_instit') ;
          $result = db_query($sql);
-         if(pg_numrows($result)>0){
+         if(($result ? pg_numrows($result) : null)>0){
            db_fieldsmemory($result,0,true);
          } else {
            $v01_proced="&nbsp;" ;
@@ -397,7 +397,7 @@ if ( $k03_tipo == 1 ) {
             inner join certid ce on ce.v13_certid = c.v14_certid
        where d.v01_numpre = $numpre and v01_instit = ".db_getsession('DB_instit') ." limit 1";
   $result = db_query($sql);
-  if(pg_numrows($result)==0){
+  if(($result ? pg_numrows($result) : null)==0){
     echo "Código de Arrecadacao nao cadastrado.";
     exit;
   }else{
@@ -410,7 +410,7 @@ if ( $k03_tipo == 1 ) {
       left outer join arreinscr  on v07_numpre = arreinscr.k00_numpre
        where v07_numpre = $numpre and v07_instit = ".db_getsession('DB_instit') ;
   $result = db_query($sql);
-  if(pg_numrows($result)>0){
+  if(($result ? pg_numrows($result) : null)>0){
     db_fieldsmemory($result,0,true);
   } else {
     $v01_proced="&nbsp;" ;
@@ -432,7 +432,7 @@ if ( $k03_tipo == 1 ) {
                 inner join cgm on z01_numcgm = k00_numcgm
            where recibo.k00_numpre = $numpre";
   $result = db_query($sql);
-  if(pg_numrows($result)>0) {
+  if(($result ? pg_numrows($result) : null)>0) {
     db_fieldsmemory($result,0,true);
   } else {
 
@@ -443,7 +443,7 @@ if ( $k03_tipo == 1 ) {
              where arrepaga.k00_numpre = $numpre";
 
     $result = db_query($sql);
-    if(pg_numrows($result)>0) {
+    if(($result ? pg_numrows($result) : null)>0) {
       db_fieldsmemory($result,0,true);
     } else {
       $z01_nome = null;
@@ -465,7 +465,7 @@ if ( $k03_tipo == 1 ) {
   //echo "<br>$sql<br>";
 
   $result = db_query($sql);
-  if(pg_numrows($result)>0) {
+  if(($result ? pg_numrows($result) : null)>0) {
     db_fieldsmemory($result,0,true);
   } else {
     $z01_nome = null;
@@ -664,9 +664,9 @@ if ( $k03_tipo == 1 ) {
         <td nowrap>Matr&iacute;cula Im&oacute;vel:</td>
         <td>
           <?php
-            if(pg_numrows($result)!=0){
+            if(($result ? pg_numrows($result) : null)!=0){
 
-              for($i=0;$i<pg_numrows($result);$i++){
+              for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
 
                 db_fieldsmemory($result,$i,'1');
                 if($v01_matric!=""){
@@ -682,9 +682,9 @@ if ( $k03_tipo == 1 ) {
         <td>Inscri&ccedil;&atilde;o Alvar&aacute;:</td>
         <td>&nbsp;
           <?php
-            if(pg_numrows($result)!=0){
+            if(($result ? pg_numrows($result) : null)!=0){
 
-              for($i=0;$i<pg_numrows($result);$i++){
+              for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
 
                 db_fieldsmemory($result,$i,'1');
                 if($v01_inscr!=""){
@@ -797,7 +797,7 @@ if ( $k03_tipo == 1 ) {
 
       $rsParcelamentoDeiversos = db_query($sSqlParcelamentoDiversos);
 
-      if ( pg_num_rows($rsParcelamentoDeiversos) == 0 ) {
+      if ( ($rsParcelamentoDeiversos ? pg_num_rows($rsParcelamentoDeiversos) : null) == 0 ) {
 
         echo "Parcelamento não cadastrado no diversos.";
         exit;
@@ -912,9 +912,9 @@ if ( $k03_tipo == 1 ) {
         <td>Matr&iacute;cula Im&oacute;vel:</td>
 				<td>
 					<?php
-						if ( pg_numrows( $result ) != 0 ) {
+						if ( ($result ? pg_numrows( $result ) : null) != 0 ) {
 
-							for ( $i = 0; $i < pg_numrows($result); $i++ ) {
+							for ( $i = 0; $i < ($result ? pg_numrows($result) : null); $i++ ) {
 
 								db_fieldsmemory( $result ,$i, '1' );
 								if ( $k03_tipo == 13 ) {
@@ -935,9 +935,9 @@ if ( $k03_tipo == 1 ) {
         <td>Inscri&ccedil;&atilde;o Alvar&aacute;:</td>
 				<td>&nbsp;
 					<?php
-						if ( pg_numrows( $result ) != 0 ) {
+						if ( ($result ? pg_numrows( $result ) : null) != 0 ) {
 
-							for ( $i = 0; $i < pg_numrows( $result ); $i++ ) {
+							for ( $i = 0; $i < ($result ? pg_numrows( $result ) : null); $i++ ) {
 
 								db_fieldsmemory( $result, $i, '1' );
 								if ( $k00_inscr != "" ) {

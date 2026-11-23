@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/resultado-parcial/fechar-todos",
+  "json": {
+    "error": true,
+    "message": "Invalid argument supplied for foreach()"
+  },
+  "sha256": "f558c32d920e9f0d9b4b6f1353f024ddbdd9c3da97af61383b64d21e761f9bbb",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

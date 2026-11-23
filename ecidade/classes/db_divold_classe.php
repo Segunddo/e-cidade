@@ -73,13 +73,13 @@ class cl_divold {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k10_sequencial = ($this->k10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_sequencial"]:$this->k10_sequencial);
-       $this->k10_coddiv = ($this->k10_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_coddiv"]:$this->k10_coddiv);
-       $this->k10_numpre = ($this->k10_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_numpre"]:$this->k10_numpre);
-       $this->k10_numpar = ($this->k10_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_numpar"]:$this->k10_numpar);
-       $this->k10_receita = ($this->k10_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_receita"]:$this->k10_receita);
+       $this->k10_sequencial = ($this->k10_sequencial === 0 || $this->k10_sequencial === 0.0 || $this->k10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_sequencial"]:$this->k10_sequencial);
+       $this->k10_coddiv = ($this->k10_coddiv === 0 || $this->k10_coddiv === 0.0 || $this->k10_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_coddiv"]:$this->k10_coddiv);
+       $this->k10_numpre = ($this->k10_numpre === 0 || $this->k10_numpre === 0.0 || $this->k10_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_numpre"]:$this->k10_numpre);
+       $this->k10_numpar = ($this->k10_numpar === 0 || $this->k10_numpar === 0.0 || $this->k10_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_numpar"]:$this->k10_numpar);
+       $this->k10_receita = ($this->k10_receita === 0 || $this->k10_receita === 0.0 || $this->k10_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_receita"]:$this->k10_receita);
      }else{
-       $this->k10_sequencial = ($this->k10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_sequencial"]:$this->k10_sequencial);
+       $this->k10_sequencial = ($this->k10_sequencial === 0 || $this->k10_sequencial === 0.0 || $this->k10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k10_sequencial"]:$this->k10_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_divold {
          $this->k10_sequencial = $k10_sequencial;
        }
      }
-     if(($this->k10_sequencial == null) || ($this->k10_sequencial == "") ){
+     if(($this->k10_sequencial == null) || ($this->k10_sequencial === 0 || $this->k10_sequencial === 0.0 || $this->k10_sequencial == "") ){
        $this->erro_sql = " Campo k10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

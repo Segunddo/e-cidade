@@ -1,0 +1,36 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/buscar-labels-imoveis",
+  "json": {
+    "data": {
+      "j01_baixa": "Baixa",
+      "j01_matric": "Matrícula do Imóvel",
+      "j05_codigoproprio": "Código Próprio",
+      "j06_lote": "Lote de Localização",
+      "j06_quadraloc": "Quadra de Localização",
+      "j108_condominio": "Cód. Condomínio",
+      "j14_codigo": "Cód. Logradouro",
+      "j14_nome": "Logradouro",
+      "j34_lote": "Lote",
+      "j34_loteam": "Cód. Loteamento",
+      "j34_quadra": "Quadra",
+      "j34_setor": "Setor",
+      "j39_compl": "Complemento",
+      "j39_numero": "Número",
+      "j40_refant": "Ref. Anterior",
+      "j40_registrocartografico": "Registro Cartográfico",
+      "z01_nome": "Nome/Razão Social"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "d7842c801e0c62f4afa56a1896793c8402e618994d2c853dc92c545b6944db44",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

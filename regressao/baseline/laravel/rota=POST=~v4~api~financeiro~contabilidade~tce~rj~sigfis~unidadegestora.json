@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/tce/rj/sigfis/unidadegestora",
+  "json": {
+    "errors": {
+      "cgmordenadordespesa": [
+        "O campo cgmordenadordespesa é obrigatório."
+      ],
+      "codigo": [
+        "O campo codigo é obrigatório."
+      ],
+      "instit": [
+        "O campo instit é obrigatório."
+      ],
+      "responsavelfolha": [
+        "O campo responsavelfolha é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "2f41fbebf0c0edf4ed280ba9bfa89d2dc5cf15418771d5cd56c5ceb590829e27",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

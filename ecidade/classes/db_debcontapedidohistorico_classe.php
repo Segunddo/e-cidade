@@ -91,9 +91,9 @@ class cl_debcontapedidohistorico {
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->d83_sequencial = ($this->d83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_sequencial"]:$this->d83_sequencial);
-       $this->d83_debcontapedido = ($this->d83_debcontapedido == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_debcontapedido"]:$this->d83_debcontapedido);
-       $this->d83_instit = ($this->d83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_instit"]:$this->d83_instit);
-       $this->d83_banco = ($this->d83_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_banco"]:$this->d83_banco);
+       $this->d83_debcontapedido = ($this->d83_debcontapedido === 0 || $this->d83_debcontapedido === 0.0 || $this->d83_debcontapedido == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_debcontapedido"]:$this->d83_debcontapedido);
+       $this->d83_instit = ($this->d83_instit === 0 || $this->d83_instit === 0.0 || $this->d83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_instit"]:$this->d83_instit);
+       $this->d83_banco = ($this->d83_banco === 0 || $this->d83_banco === 0.0 || $this->d83_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_banco"]:$this->d83_banco);
        $this->d83_agencia = ($this->d83_agencia == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_agencia"]:$this->d83_agencia);
        $this->d83_conta = ($this->d83_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_conta"]:$this->d83_conta);
        if($this->d83_datalanc == ""){
@@ -105,10 +105,10 @@ class cl_debcontapedidohistorico {
          }
        }
        $this->d83_horalanc = ($this->d83_horalanc == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_horalanc"]:$this->d83_horalanc);
-       $this->d83_status = ($this->d83_status == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_status"]:$this->d83_status);
-       $this->d83_acao = ($this->d83_acao == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_acao"]:$this->d83_acao);
+       $this->d83_status = ($this->d83_status === 0 || $this->d83_status === 0.0 || $this->d83_status == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_status"]:$this->d83_status);
+       $this->d83_acao = ($this->d83_acao === 0 || $this->d83_acao === 0.0 || $this->d83_acao == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_acao"]:$this->d83_acao);
        $this->d83_idempresa = ($this->d83_idempresa == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_idempresa"]:$this->d83_idempresa);
-       $this->d83_codret = ($this->d83_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_codret"]:$this->d83_codret);
+       $this->d83_codret = ($this->d83_codret === 0 || $this->d83_codret === 0.0 || $this->d83_codret == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_codret"]:$this->d83_codret);
      }else{
        $this->d83_sequencial = ($this->d83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d83_sequencial"]:$this->d83_sequencial);
      }

@@ -38,7 +38,7 @@ $classinatura = new cl_assinatura;
 $clorctiporec = new cl_orctiporec;
 $clempresto   = new cl_empresto;
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $dataSessao = date('Y-m-d', db_getsession('DB_datausu'));
 
 $anousu = db_getsession("DB_anousu");
@@ -50,7 +50,7 @@ $lExtraOrcamentario = false;
 $sSqlParametro = " select k29_datasaldocontasextra from caiparametro ";
 $rsSqlParametro = db_query($sSqlParametro);
 
-if (pg_num_rows($rsSqlParametro) > 0) {
+if (($rsSqlParametro ? pg_num_rows($rsSqlParametro) : null) > 0) {
     $k29_datasaldocontasextra = db_utils::fieldsMemory($rsSqlParametro, 0)->k29_datasaldocontasextra;
 
     $lExtraOrcamentario = false;
@@ -65,7 +65,7 @@ $listaInstituicoes = implode(', ', $xinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in ({$listaInstituicoes})");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg . $nomeinst;
     $xvirg = ', ';
@@ -113,11 +113,11 @@ $sql = "
 ";
 
 $result = db_query($sql);
-for ($x = 0; $x < pg_numrows($result); $x++) {
+for ($x = 0; $x < ($result ? pg_numrows($result) : null); $x++) {
     db_fieldsmemory($result, $x);
     $sql = "select * from work_rel where recurso = '{$gestao}'";
     $rr = db_query($sql);
-    if (pg_numrows($rr) > 0) {
+    if (($rr ? pg_numrows($rr) : null) > 0) {
         $sql = "
             update work_rel set res_anterior = coalesce(" . $valor . ",0)
              where recurso = '{$gestao}'
@@ -188,11 +188,11 @@ $sql = "
 ";
 $result = db_query($sql);
 
-for ($x = 0; $x < pg_numrows($result); $x++) {
+for ($x = 0; $x < ($result ? pg_numrows($result) : null); $x++) {
     db_fieldsmemory($result, $x);
     $sql = "select * from work_rel where recurso = '{$gestao}'";
     $rr = db_query($sql);
-    if (pg_numrows($rr) > 0) {
+    if (($rr ? pg_numrows($rr) : null) > 0) {
         $sql = "
             update work_rel set rp_anterior = coalesce(" . $rp_anterior . ",0)  ,
 							    rp_atual    = coalesce(" . $rp_atual . ",0)
@@ -239,13 +239,13 @@ $sql_baldesp = "
 ";
 $result_baldesp = db_query($sql_baldesp);
 
-if (pg_numrows($result_baldesp) > 0) {
-    for ($x = 0; $x < pg_numrows($result_baldesp); $x++) {
+if (($result_baldesp ? pg_numrows($result_baldesp) : null) > 0) {
+    for ($x = 0; $x < ($result_baldesp ? pg_numrows($result_baldesp) : null); $x++) {
         db_fieldsmemory($result_baldesp, $x);
 
         $sql = "select * from work_rel where recurso = '{$gestao}'";
         $rr = db_query($sql);
-        if (pg_numrows($rr) > 0) {
+        if (($rr ? pg_numrows($rr) : null) > 0) {
             $sql = "
                 update work_rel
 				   set liquidado      = coalesce(" . ($liquidado - $pago) . ",0)  ,
@@ -298,17 +298,17 @@ $sql="select o15_recurso,
 ";
 
 $result_contas = db_query($sql);
-$nrows = pg_numrows($result_contas);
+$nrows = ($result_contas ? pg_numrows($result_contas) : null);
 
-if (pg_numrows($result_contas) > 0) {
-    for ($x = 0; $x < pg_numrows($result_contas); $x++) {
+if (($result_contas ? pg_numrows($result_contas) : null) > 0) {
+    for ($x = 0; $x < ($result_contas ? pg_numrows($result_contas) : null); $x++) {
         db_fieldsmemory($result_contas, $x);
 
         $dadosContas = db_utils::fieldsMemory($result_contas, $x);
         $sql = "select * from work_rel where recurso = '{$o15_recurso}'";
         $rr = db_query($sql);
         $descricao = substr($dadosContas->o15_descr, 0, 30);
-        if (pg_numrows($rr) > 0) {
+        if (($rr ? pg_numrows($rr) : null) > 0) {
             if ($c60_codsis == 5) {
                 $sql = "
                 update work_rel
@@ -369,7 +369,7 @@ $sql = "
        and o48_grupo=2
 ";
 $res = db_query($sql);
-if (pg_numrows($res) > 0) {
+if (($res ? pg_numrows($res) : null) > 0) {
     //seleciona os valores informados manualmente
     $where = "";
     if (!empty($filtroFonteRecurso)) {
@@ -385,13 +385,13 @@ if (pg_numrows($res) > 0) {
     ";
     $result = db_query($sql);
 	// db_criatabela($result); exit;
-    if (pg_numrows($res) > 0) {
-        for ($x = 0; $x < pg_numrows($result); $x++) {
+    if (($res ? pg_numrows($res) : null) > 0) {
+        for ($x = 0; $x < ($result ? pg_numrows($result) : null); $x++) {
             db_fieldsmemory($result, $x);
 
             $sql = "select * from work_rel where recurso = '{$o15_recurso}' ";
             $rr = db_query($sql);
-            if (pg_numrows($rr) > 0) {
+            if (($rr ? pg_numrows($rr) : null) > 0) {
                 $sql = "
                 update work_rel
                    set saldo_extra_pagar = coalesce(" . ($saldo_final) . ",0)
@@ -428,8 +428,8 @@ if (pg_numrows($res) > 0) {
     ";
     $result_bver = db_query($sql);
 
-    if (pg_numrows($result_bver) > 0) {
-        for ($x = 0; $x < pg_numrows($result_bver); $x++) {
+    if (($result_bver ? pg_numrows($result_bver) : null) > 0) {
+        for ($x = 0; $x < ($result_bver ? pg_numrows($result_bver) : null); $x++) {
             db_fieldsmemory($result_bver, $x);
 
             $sql = "select * from work_rel where recurso = '{$o15_recurso}'";
@@ -437,7 +437,7 @@ if (pg_numrows($res) > 0) {
             $rr = db_query($sql);
 
             //    db_criatabela($rr);
-            if (pg_numrows($rr) > 0) {
+            if (($rr ? pg_numrows($rr) : null) > 0) {
                 $sql = "
                 update work_rel set saldo_extra_pagar = saldo_extra_pagar + coalesce(" . ($saldo_final) . ",0)
                 where recurso = '{$o15_recurso}'
@@ -456,8 +456,8 @@ if (pg_numrows($res) > 0) {
 }
 //  ------------------------------------------------------ //
 $res = db_query("select * from work_rel order by recurso");
-$rows = pg_numrows($res);
-$cols = pg_numfields($res);
+$rows = ($res ? pg_numrows($res) : null);
+$cols = ($res ? pg_numfields($res) : null);
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

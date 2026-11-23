@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/pessoal/jetom/funcao/show",
+  "json": {
+    "errors": {
+      "id": [
+        "Código da função não informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "8b0384e182013f633ffa44a4a647ced13de0fec1d5b13670a602b45a22758f2b",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -41,7 +41,7 @@ $clconplanoreduz = new cl_conplanoreduz;
 $clrotulo = new rotulocampo;
 $clrotulo->label("o15_descr");
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $anousu = db_getsession("DB_anousu");
 
 $instit = str_replace("-", ",", $instit);

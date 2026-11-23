@@ -1,0 +1,60 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/despesa/cronograma/salvar",
+  "json": {
+    "errors": {
+      "abril": [
+        "O valor de \"Abril\" deve ser informado."
+      ],
+      "agosto": [
+        "O valor de \"Agosto\" deve ser informado."
+      ],
+      "detalhamentoiniciativa_id": [
+        "O campo \"Detalhamento\" deve ser informado."
+      ],
+      "dezembro": [
+        "O valor de \"Dezembro\" deve ser informado."
+      ],
+      "exercicio": [
+        "O campo \"Exercício\" deve ser informado."
+      ],
+      "fevereiro": [
+        "O valor de \"Fevereiro\" deve ser informado."
+      ],
+      "janeiro": [
+        "O valor de \"Janeiro\" deve ser informado."
+      ],
+      "julho": [
+        "O valor de \"Julho\" deve ser informado."
+      ],
+      "junho": [
+        "O valor de \"Junho\" deve ser informado."
+      ],
+      "maio": [
+        "O valor de \"Maio\" deve ser informado."
+      ],
+      "marco": [
+        "O valor de \"Março\" deve ser informado."
+      ],
+      "novembro": [
+        "O valor de \"Novembro\" deve ser informado."
+      ],
+      "outubro": [
+        "O valor de \"Outubro\" deve ser informado."
+      ],
+      "setembro": [
+        "O valor de \"Setembro\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "aa821cab721e7dbb8fdbd270cff83140c61c21ae6705fadf91932e30f78dd82e",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

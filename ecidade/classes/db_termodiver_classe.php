@@ -87,21 +87,21 @@ class cl_termodiver {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->dv10_parcel = ($this->dv10_parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_parcel"]:$this->dv10_parcel);
-       $this->dv10_coddiver = ($this->dv10_coddiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_coddiver"]:$this->dv10_coddiver);
-       $this->dv10_valor = ($this->dv10_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_valor"]:$this->dv10_valor);
-       $this->dv10_juros = ($this->dv10_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_juros"]:$this->dv10_juros);
-       $this->dv10_multa = ($this->dv10_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_multa"]:$this->dv10_multa);
-       $this->dv10_desconto = ($this->dv10_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_desconto"]:$this->dv10_desconto);
-       $this->dv10_total = ($this->dv10_total == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_total"]:$this->dv10_total);
-       $this->dv10_numpreant = ($this->dv10_numpreant == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_numpreant"]:$this->dv10_numpreant);
-       $this->dv10_perc = ($this->dv10_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_perc"]:$this->dv10_perc);
-       $this->dv10_vlrcor = ($this->dv10_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_vlrcor"]:$this->dv10_vlrcor);
-       $this->dv10_vlrdescjur = ($this->dv10_vlrdescjur == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_vlrdescjur"]:$this->dv10_vlrdescjur);
-       $this->dv10_vlrdescmul = ($this->dv10_vlrdescmul == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_vlrdescmul"]:$this->dv10_vlrdescmul);
+       $this->dv10_parcel = ($this->dv10_parcel === 0 || $this->dv10_parcel === 0.0 || $this->dv10_parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_parcel"]:$this->dv10_parcel);
+       $this->dv10_coddiver = ($this->dv10_coddiver === 0 || $this->dv10_coddiver === 0.0 || $this->dv10_coddiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_coddiver"]:$this->dv10_coddiver);
+       $this->dv10_valor = ($this->dv10_valor === 0 || $this->dv10_valor === 0.0 || $this->dv10_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_valor"]:$this->dv10_valor);
+       $this->dv10_juros = ($this->dv10_juros === 0 || $this->dv10_juros === 0.0 || $this->dv10_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_juros"]:$this->dv10_juros);
+       $this->dv10_multa = ($this->dv10_multa === 0 || $this->dv10_multa === 0.0 || $this->dv10_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_multa"]:$this->dv10_multa);
+       $this->dv10_desconto = ($this->dv10_desconto === 0 || $this->dv10_desconto === 0.0 || $this->dv10_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_desconto"]:$this->dv10_desconto);
+       $this->dv10_total = ($this->dv10_total === 0 || $this->dv10_total === 0.0 || $this->dv10_total == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_total"]:$this->dv10_total);
+       $this->dv10_numpreant = ($this->dv10_numpreant === 0 || $this->dv10_numpreant === 0.0 || $this->dv10_numpreant == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_numpreant"]:$this->dv10_numpreant);
+       $this->dv10_perc = ($this->dv10_perc === 0 || $this->dv10_perc === 0.0 || $this->dv10_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_perc"]:$this->dv10_perc);
+       $this->dv10_vlrcor = ($this->dv10_vlrcor === 0 || $this->dv10_vlrcor === 0.0 || $this->dv10_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_vlrcor"]:$this->dv10_vlrcor);
+       $this->dv10_vlrdescjur = ($this->dv10_vlrdescjur === 0 || $this->dv10_vlrdescjur === 0.0 || $this->dv10_vlrdescjur == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_vlrdescjur"]:$this->dv10_vlrdescjur);
+       $this->dv10_vlrdescmul = ($this->dv10_vlrdescmul === 0 || $this->dv10_vlrdescmul === 0.0 || $this->dv10_vlrdescmul == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_vlrdescmul"]:$this->dv10_vlrdescmul);
      }else{
-       $this->dv10_parcel = ($this->dv10_parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_parcel"]:$this->dv10_parcel);
-       $this->dv10_coddiver = ($this->dv10_coddiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_coddiver"]:$this->dv10_coddiver);
+       $this->dv10_parcel = ($this->dv10_parcel === 0 || $this->dv10_parcel === 0.0 || $this->dv10_parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_parcel"]:$this->dv10_parcel);
+       $this->dv10_coddiver = ($this->dv10_coddiver === 0 || $this->dv10_coddiver === 0.0 || $this->dv10_coddiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv10_coddiver"]:$this->dv10_coddiver);
      }
    }
    // funcao para inclusao
@@ -199,7 +199,7 @@ class cl_termodiver {
      }
        $this->dv10_parcel = $dv10_parcel;
        $this->dv10_coddiver = $dv10_coddiver;
-     if(($this->dv10_parcel == null) || ($this->dv10_parcel == "") ){
+     if(($this->dv10_parcel == null) || ($this->dv10_parcel === 0 || $this->dv10_parcel === 0.0 || $this->dv10_parcel == "") ){
        $this->erro_sql = " Campo dv10_parcel nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -207,7 +207,7 @@ class cl_termodiver {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->dv10_coddiver == null) || ($this->dv10_coddiver == "") ){
+     if(($this->dv10_coddiver == null) || ($this->dv10_coddiver === 0 || $this->dv10_coddiver === 0.0 || $this->dv10_coddiver == "") ){
        $this->erro_sql = " Campo dv10_coddiver nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

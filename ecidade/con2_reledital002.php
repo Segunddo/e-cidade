@@ -40,7 +40,7 @@ $clcontricalc = new cl_contricalc;
 $clcontlotv = new cl_contlotv;
 $cleditalserv = new cl_editalserv;
 $cleditalrua = new cl_editalrua;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 //db_postmemory($HTTP_GET_VARS,2);exit;
 db_postmemory($HTTP_GET_VARS);

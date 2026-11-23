@@ -43,11 +43,11 @@ class cl_classificacaocredorestipocompra {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc34_sequencial = ($this->cc34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc34_sequencial"]:$this->cc34_sequencial);
-       $this->cc34_classificacaocredores = ($this->cc34_classificacaocredores == ""?@$GLOBALS["HTTP_POST_VARS"]["cc34_classificacaocredores"]:$this->cc34_classificacaocredores);
-       $this->cc34_pctipocompra = ($this->cc34_pctipocompra == ""?@$GLOBALS["HTTP_POST_VARS"]["cc34_pctipocompra"]:$this->cc34_pctipocompra);
+       $this->cc34_sequencial = ($this->cc34_sequencial === 0 || $this->cc34_sequencial === 0.0 || $this->cc34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc34_sequencial"]:$this->cc34_sequencial);
+       $this->cc34_classificacaocredores = ($this->cc34_classificacaocredores === 0 || $this->cc34_classificacaocredores === 0.0 || $this->cc34_classificacaocredores == ""?@$GLOBALS["HTTP_POST_VARS"]["cc34_classificacaocredores"]:$this->cc34_classificacaocredores);
+       $this->cc34_pctipocompra = ($this->cc34_pctipocompra === 0 || $this->cc34_pctipocompra === 0.0 || $this->cc34_pctipocompra == ""?@$GLOBALS["HTTP_POST_VARS"]["cc34_pctipocompra"]:$this->cc34_pctipocompra);
      }else{
-       $this->cc34_sequencial = ($this->cc34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc34_sequencial"]:$this->cc34_sequencial);
+       $this->cc34_sequencial = ($this->cc34_sequencial === 0 || $this->cc34_sequencial === 0.0 || $this->cc34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc34_sequencial"]:$this->cc34_sequencial);
      }
    }
    // funcao para Inclusão
@@ -95,7 +95,7 @@ class cl_classificacaocredorestipocompra {
          $this->cc34_sequencial = $cc34_sequencial; 
        }
      }
-     if(($this->cc34_sequencial == null) || ($this->cc34_sequencial == "") ){ 
+     if(($this->cc34_sequencial == null) || ($this->cc34_sequencial === 0 || $this->cc34_sequencial === 0.0 || $this->cc34_sequencial == "") ){ 
        $this->erro_sql = " Campo cc34_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

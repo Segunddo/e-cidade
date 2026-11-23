@@ -87,18 +87,18 @@ class cl_issvar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q05_codigo = ($this->q05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_codigo"]:$this->q05_codigo);
-       $this->q05_numpre = ($this->q05_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_numpre"]:$this->q05_numpre);
-       $this->q05_numpar = ($this->q05_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_numpar"]:$this->q05_numpar);
-       $this->q05_valor = ($this->q05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_valor"]:$this->q05_valor);
-       $this->q05_ano = ($this->q05_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_ano"]:$this->q05_ano);
-       $this->q05_mes = ($this->q05_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_mes"]:$this->q05_mes);
+       $this->q05_codigo = ($this->q05_codigo === 0 || $this->q05_codigo === 0.0 || $this->q05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_codigo"]:$this->q05_codigo);
+       $this->q05_numpre = ($this->q05_numpre === 0 || $this->q05_numpre === 0.0 || $this->q05_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_numpre"]:$this->q05_numpre);
+       $this->q05_numpar = ($this->q05_numpar === 0 || $this->q05_numpar === 0.0 || $this->q05_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_numpar"]:$this->q05_numpar);
+       $this->q05_valor = ($this->q05_valor === 0 || $this->q05_valor === 0.0 || $this->q05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_valor"]:$this->q05_valor);
+       $this->q05_ano = ($this->q05_ano === 0 || $this->q05_ano === 0.0 || $this->q05_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_ano"]:$this->q05_ano);
+       $this->q05_mes = ($this->q05_mes === 0 || $this->q05_mes === 0.0 || $this->q05_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_mes"]:$this->q05_mes);
        $this->q05_histor = ($this->q05_histor == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_histor"]:$this->q05_histor);
-       $this->q05_aliq = ($this->q05_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_aliq"]:$this->q05_aliq);
-       $this->q05_bruto = ($this->q05_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_bruto"]:$this->q05_bruto);
-       $this->q05_vlrinf = ($this->q05_vlrinf == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_vlrinf"]:$this->q05_vlrinf);
+       $this->q05_aliq = ($this->q05_aliq === 0 || $this->q05_aliq === 0.0 || $this->q05_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_aliq"]:$this->q05_aliq);
+       $this->q05_bruto = ($this->q05_bruto === 0 || $this->q05_bruto === 0.0 || $this->q05_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_bruto"]:$this->q05_bruto);
+       $this->q05_vlrinf = ($this->q05_vlrinf === 0 || $this->q05_vlrinf === 0.0 || $this->q05_vlrinf == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_vlrinf"]:$this->q05_vlrinf);
      }else{
-       $this->q05_codigo = ($this->q05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_codigo"]:$this->q05_codigo);
+       $this->q05_codigo = ($this->q05_codigo === 0 || $this->q05_codigo === 0.0 || $this->q05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q05_codigo"]:$this->q05_codigo);
      }
    }
    // funcao para inclusao
@@ -200,7 +200,7 @@ class cl_issvar {
          $this->q05_codigo = $q05_codigo;
        }
      }
-     if(($this->q05_codigo == null) || ($this->q05_codigo == "") ){
+     if(($this->q05_codigo == null) || ($this->q05_codigo === 0 || $this->q05_codigo === 0.0 || $this->q05_codigo == "") ){
        $this->erro_sql = " Campo q05_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

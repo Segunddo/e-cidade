@@ -79,16 +79,16 @@ class cl_ceplocalidades {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cp05_codlocalidades = ($this->cp05_codlocalidades == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codlocalidades"]:$this->cp05_codlocalidades);
+       $this->cp05_codlocalidades = ($this->cp05_codlocalidades === 0 || $this->cp05_codlocalidades === 0.0 || $this->cp05_codlocalidades == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codlocalidades"]:$this->cp05_codlocalidades);
        $this->cp05_sigla = ($this->cp05_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_sigla"]:$this->cp05_sigla);
        $this->cp05_localidades = ($this->cp05_localidades == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_localidades"]:$this->cp05_localidades);
        $this->cp05_cepinicial = ($this->cp05_cepinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_cepinicial"]:$this->cp05_cepinicial);
        $this->cp05_cepfinal = ($this->cp05_cepfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_cepfinal"]:$this->cp05_cepfinal);
        $this->cp05_tipo = ($this->cp05_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_tipo"]:$this->cp05_tipo);
        $this->cp05_situacao = ($this->cp05_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_situacao"]:$this->cp05_situacao);
-       $this->cp05_codsubordinacao = ($this->cp05_codsubordinacao == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codsubordinacao"]:$this->cp05_codsubordinacao);
+       $this->cp05_codsubordinacao = ($this->cp05_codsubordinacao === 0 || $this->cp05_codsubordinacao === 0.0 || $this->cp05_codsubordinacao == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codsubordinacao"]:$this->cp05_codsubordinacao);
      }else{
-       $this->cp05_codlocalidades = ($this->cp05_codlocalidades == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codlocalidades"]:$this->cp05_codlocalidades);
+       $this->cp05_codlocalidades = ($this->cp05_codlocalidades === 0 || $this->cp05_codlocalidades === 0.0 || $this->cp05_codlocalidades == ""?@$GLOBALS["HTTP_POST_VARS"]["cp05_codlocalidades"]:$this->cp05_codlocalidades);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_ceplocalidades {
          $this->cp05_codlocalidades = $cp05_codlocalidades;
        }
      }
-     if(($this->cp05_codlocalidades == null) || ($this->cp05_codlocalidades == "") ){
+     if(($this->cp05_codlocalidades == null) || ($this->cp05_codlocalidades === 0 || $this->cp05_codlocalidades === 0.0 || $this->cp05_codlocalidades == "") ){
        $this->erro_sql = " Campo cp05_codlocalidades nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

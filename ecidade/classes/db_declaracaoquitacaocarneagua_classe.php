@@ -75,14 +75,14 @@ class cl_declaracaoquitacaocarneagua {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar41_sequencial = ($this->ar41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_sequencial"]:$this->ar41_sequencial);
-       $this->ar41_declaracaoquitacao = ($this->ar41_declaracaoquitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_declaracaoquitacao"]:$this->ar41_declaracaoquitacao);
-       $this->ar41_numpre = ($this->ar41_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_numpre"]:$this->ar41_numpre);
-       $this->ar41_numpar = ($this->ar41_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_numpar"]:$this->ar41_numpar);
-       $this->ar41_anoemissao = ($this->ar41_anoemissao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_anoemissao"]:$this->ar41_anoemissao);
+       $this->ar41_sequencial = ($this->ar41_sequencial === 0 || $this->ar41_sequencial === 0.0 || $this->ar41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_sequencial"]:$this->ar41_sequencial);
+       $this->ar41_declaracaoquitacao = ($this->ar41_declaracaoquitacao === 0 || $this->ar41_declaracaoquitacao === 0.0 || $this->ar41_declaracaoquitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_declaracaoquitacao"]:$this->ar41_declaracaoquitacao);
+       $this->ar41_numpre = ($this->ar41_numpre === 0 || $this->ar41_numpre === 0.0 || $this->ar41_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_numpre"]:$this->ar41_numpre);
+       $this->ar41_numpar = ($this->ar41_numpar === 0 || $this->ar41_numpar === 0.0 || $this->ar41_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_numpar"]:$this->ar41_numpar);
+       $this->ar41_anoemissao = ($this->ar41_anoemissao === 0 || $this->ar41_anoemissao === 0.0 || $this->ar41_anoemissao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_anoemissao"]:$this->ar41_anoemissao);
        $this->ar41_mesemissao = ($this->ar41_mesemissao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_mesemissao"]:$this->ar41_mesemissao);
      }else{
-       $this->ar41_sequencial = ($this->ar41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_sequencial"]:$this->ar41_sequencial);
+       $this->ar41_sequencial = ($this->ar41_sequencial === 0 || $this->ar41_sequencial === 0.0 || $this->ar41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar41_sequencial"]:$this->ar41_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_declaracaoquitacaocarneagua {
          $this->ar41_sequencial = $ar41_sequencial;
        }
      }
-     if(($this->ar41_sequencial == null) || ($this->ar41_sequencial == "") ){
+     if(($this->ar41_sequencial == null) || ($this->ar41_sequencial === 0 || $this->ar41_sequencial === 0.0 || $this->ar41_sequencial == "") ){
        $this->erro_sql = " Campo ar41_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

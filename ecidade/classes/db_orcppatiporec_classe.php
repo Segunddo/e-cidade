@@ -67,11 +67,11 @@ class cl_orcppatiporec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o26_codseqppa = ($this->o26_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o26_codseqppa"]:$this->o26_codseqppa);
-       $this->o26_codigo = ($this->o26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o26_codigo"]:$this->o26_codigo);
+       $this->o26_codseqppa = ($this->o26_codseqppa === 0 || $this->o26_codseqppa === 0.0 || $this->o26_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o26_codseqppa"]:$this->o26_codseqppa);
+       $this->o26_codigo = ($this->o26_codigo === 0 || $this->o26_codigo === 0.0 || $this->o26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o26_codigo"]:$this->o26_codigo);
      }else{
-       $this->o26_codseqppa = ($this->o26_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o26_codseqppa"]:$this->o26_codseqppa);
-       $this->o26_codigo = ($this->o26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o26_codigo"]:$this->o26_codigo);
+       $this->o26_codseqppa = ($this->o26_codseqppa === 0 || $this->o26_codseqppa === 0.0 || $this->o26_codseqppa == ""?@$GLOBALS["HTTP_POST_VARS"]["o26_codseqppa"]:$this->o26_codseqppa);
+       $this->o26_codigo = ($this->o26_codigo === 0 || $this->o26_codigo === 0.0 || $this->o26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o26_codigo"]:$this->o26_codigo);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_orcppatiporec {
       $this->atualizacampos();
        $this->o26_codseqppa = $o26_codseqppa;
        $this->o26_codigo = $o26_codigo;
-     if(($this->o26_codseqppa == null) || ($this->o26_codseqppa == "") ){
+     if(($this->o26_codseqppa == null) || ($this->o26_codseqppa === 0 || $this->o26_codseqppa === 0.0 || $this->o26_codseqppa == "") ){
        $this->erro_sql = " Campo o26_codseqppa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_orcppatiporec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o26_codigo == null) || ($this->o26_codigo == "") ){
+     if(($this->o26_codigo == null) || ($this->o26_codigo === 0 || $this->o26_codigo === 0.0 || $this->o26_codigo == "") ){
        $this->erro_sql = " Campo o26_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

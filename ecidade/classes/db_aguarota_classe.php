@@ -67,10 +67,10 @@ class cl_aguarota {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x06_codrota = ($this->x06_codrota == ""?@$GLOBALS["HTTP_POST_VARS"]["x06_codrota"]:$this->x06_codrota);
+       $this->x06_codrota = ($this->x06_codrota === 0 || $this->x06_codrota === 0.0 || $this->x06_codrota == ""?@$GLOBALS["HTTP_POST_VARS"]["x06_codrota"]:$this->x06_codrota);
        $this->x06_descr = ($this->x06_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["x06_descr"]:$this->x06_descr);
      }else{
-       $this->x06_codrota = ($this->x06_codrota == ""?@$GLOBALS["HTTP_POST_VARS"]["x06_codrota"]:$this->x06_codrota);
+       $this->x06_codrota = ($this->x06_codrota === 0 || $this->x06_codrota === 0.0 || $this->x06_codrota == ""?@$GLOBALS["HTTP_POST_VARS"]["x06_codrota"]:$this->x06_codrota);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_aguarota {
          $this->x06_codrota = $x06_codrota;
        }
      }
-     if(($this->x06_codrota == null) || ($this->x06_codrota == "") ){
+     if(($this->x06_codrota == null) || ($this->x06_codrota === 0 || $this->x06_codrota === 0.0 || $this->x06_codrota == "") ){
        $this->erro_sql = " Campo x06_codrota nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

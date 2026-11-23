@@ -73,13 +73,13 @@ class cl_orcparamseqfiltroorcamento {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o133_sequencial = ($this->o133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_sequencial"]:$this->o133_sequencial);
-       $this->o133_orcparamrel = ($this->o133_orcparamrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_orcparamrel"]:$this->o133_orcparamrel);
-       $this->o133_orcparamseq = ($this->o133_orcparamseq == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_orcparamseq"]:$this->o133_orcparamseq);
-       $this->o133_anousu = ($this->o133_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_anousu"]:$this->o133_anousu);
+       $this->o133_sequencial = ($this->o133_sequencial === 0 || $this->o133_sequencial === 0.0 || $this->o133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_sequencial"]:$this->o133_sequencial);
+       $this->o133_orcparamrel = ($this->o133_orcparamrel === 0 || $this->o133_orcparamrel === 0.0 || $this->o133_orcparamrel == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_orcparamrel"]:$this->o133_orcparamrel);
+       $this->o133_orcparamseq = ($this->o133_orcparamseq === 0 || $this->o133_orcparamseq === 0.0 || $this->o133_orcparamseq == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_orcparamseq"]:$this->o133_orcparamseq);
+       $this->o133_anousu = ($this->o133_anousu === 0 || $this->o133_anousu === 0.0 || $this->o133_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_anousu"]:$this->o133_anousu);
        $this->o133_filtro = ($this->o133_filtro == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_filtro"]:$this->o133_filtro);
      }else{
-       $this->o133_sequencial = ($this->o133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_sequencial"]:$this->o133_sequencial);
+       $this->o133_sequencial = ($this->o133_sequencial === 0 || $this->o133_sequencial === 0.0 || $this->o133_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o133_sequencial"]:$this->o133_sequencial);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_orcparamseqfiltroorcamento {
          $this->o133_sequencial = $o133_sequencial;
        }
      }
-     if(($this->o133_sequencial == null) || ($this->o133_sequencial == "") ){
+     if(($this->o133_sequencial == null) || ($this->o133_sequencial === 0 || $this->o133_sequencial === 0.0 || $this->o133_sequencial == "") ){
        $this->erro_sql = " Campo o133_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

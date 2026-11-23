@@ -63,7 +63,7 @@ $clempempenholiberado = new cl_empempenholiberado;
 $clcgm					      = new cl_cgm;
 $clmatordemmail       = new cl_matordemmail;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $oGet      = db_utils::Postmemory($_GET);
 $oPost     = db_utils::Postmemory($_POST);
 

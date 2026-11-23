@@ -81,17 +81,17 @@ class cl_issplan {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q20_planilha = ($this->q20_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_planilha"]:$this->q20_planilha);
-       $this->q20_numcgm = ($this->q20_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_numcgm"]:$this->q20_numcgm);
-       $this->q20_ano = ($this->q20_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_ano"]:$this->q20_ano);
-       $this->q20_mes = ($this->q20_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_mes"]:$this->q20_mes);
+       $this->q20_planilha = ($this->q20_planilha === 0 || $this->q20_planilha === 0.0 || $this->q20_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_planilha"]:$this->q20_planilha);
+       $this->q20_numcgm = ($this->q20_numcgm === 0 || $this->q20_numcgm === 0.0 || $this->q20_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_numcgm"]:$this->q20_numcgm);
+       $this->q20_ano = ($this->q20_ano === 0 || $this->q20_ano === 0.0 || $this->q20_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_ano"]:$this->q20_ano);
+       $this->q20_mes = ($this->q20_mes === 0 || $this->q20_mes === 0.0 || $this->q20_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_mes"]:$this->q20_mes);
        $this->q20_nomecontri = ($this->q20_nomecontri == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_nomecontri"]:$this->q20_nomecontri);
        $this->q20_fonecontri = ($this->q20_fonecontri == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_fonecontri"]:$this->q20_fonecontri);
-       $this->q20_numpre = ($this->q20_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_numpre"]:$this->q20_numpre);
-       $this->q20_numbco = ($this->q20_numbco == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_numbco"]:$this->q20_numbco);
-       $this->q20_situacao = ($this->q20_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_situacao"]:$this->q20_situacao);
+       $this->q20_numpre = ($this->q20_numpre === 0 || $this->q20_numpre === 0.0 || $this->q20_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_numpre"]:$this->q20_numpre);
+       $this->q20_numbco = ($this->q20_numbco === 0 || $this->q20_numbco === 0.0 || $this->q20_numbco == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_numbco"]:$this->q20_numbco);
+       $this->q20_situacao = ($this->q20_situacao === 0 || $this->q20_situacao === 0.0 || $this->q20_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_situacao"]:$this->q20_situacao);
      }else{
-       $this->q20_planilha = ($this->q20_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_planilha"]:$this->q20_planilha);
+       $this->q20_planilha = ($this->q20_planilha === 0 || $this->q20_planilha === 0.0 || $this->q20_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q20_planilha"]:$this->q20_planilha);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_issplan {
          $this->q20_planilha = $q20_planilha;
        }
      }
-     if(($this->q20_planilha == null) || ($this->q20_planilha == "") ){
+     if(($this->q20_planilha == null) || ($this->q20_planilha === 0 || $this->q20_planilha === 0.0 || $this->q20_planilha == "") ){
        $this->erro_sql = " Campo q20_planilha nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

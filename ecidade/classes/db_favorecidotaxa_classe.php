@@ -69,11 +69,11 @@ class cl_favorecidotaxa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v87_sequencial = ($this->v87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_sequencial"]:$this->v87_sequencial);
-       $this->v87_favorecido = ($this->v87_favorecido == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_favorecido"]:$this->v87_favorecido);
-       $this->v87_taxa = ($this->v87_taxa == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_taxa"]:$this->v87_taxa);
+       $this->v87_sequencial = ($this->v87_sequencial === 0 || $this->v87_sequencial === 0.0 || $this->v87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_sequencial"]:$this->v87_sequencial);
+       $this->v87_favorecido = ($this->v87_favorecido === 0 || $this->v87_favorecido === 0.0 || $this->v87_favorecido == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_favorecido"]:$this->v87_favorecido);
+       $this->v87_taxa = ($this->v87_taxa === 0 || $this->v87_taxa === 0.0 || $this->v87_taxa == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_taxa"]:$this->v87_taxa);
      }else{
-       $this->v87_sequencial = ($this->v87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_sequencial"]:$this->v87_sequencial);
+       $this->v87_sequencial = ($this->v87_sequencial === 0 || $this->v87_sequencial === 0.0 || $this->v87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v87_sequencial"]:$this->v87_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_favorecidotaxa {
          $this->v87_sequencial = $v87_sequencial;
        }
      }
-     if(($this->v87_sequencial == null) || ($this->v87_sequencial == "") ){
+     if(($this->v87_sequencial == null) || ($this->v87_sequencial === 0 || $this->v87_sequencial === 0.0 || $this->v87_sequencial == "") ){
        $this->erro_sql = " Campo v87_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

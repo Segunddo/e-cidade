@@ -1,0 +1,31 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/recursos-humanos/pessoal/jetom/tiposessao/all",
+  "json": {
+    "data": [
+      {
+        "rh240_descricao": "Extraordinaria",
+        "rh240_sequencial": 2
+      },
+      {
+        "rh240_descricao": "Normal",
+        "rh240_sequencial": 1
+      },
+      {
+        "rh240_descricao": "Urgente",
+        "rh240_sequencial": 3
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "bf908160329e8799c36f4d00145f79a8de2f38c10c3c0a3fbf9ba81b16fba22d",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

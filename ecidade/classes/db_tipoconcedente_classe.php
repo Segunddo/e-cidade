@@ -67,10 +67,10 @@ class cl_tipoconcedente {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o37_sequencial = ($this->o37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o37_sequencial"]:$this->o37_sequencial);
+       $this->o37_sequencial = ($this->o37_sequencial === 0 || $this->o37_sequencial === 0.0 || $this->o37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o37_sequencial"]:$this->o37_sequencial);
        $this->o37_descricao = ($this->o37_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o37_descricao"]:$this->o37_descricao);
      }else{
-       $this->o37_sequencial = ($this->o37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o37_sequencial"]:$this->o37_sequencial);
+       $this->o37_sequencial = ($this->o37_sequencial === 0 || $this->o37_sequencial === 0.0 || $this->o37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o37_sequencial"]:$this->o37_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tipoconcedente {
          $this->o37_sequencial = $o37_sequencial;
        }
      }
-     if(($this->o37_sequencial == null) || ($this->o37_sequencial == "") ){
+     if(($this->o37_sequencial == null) || ($this->o37_sequencial === 0 || $this->o37_sequencial === 0.0 || $this->o37_sequencial == "") ){
        $this->erro_sql = " Campo o37_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

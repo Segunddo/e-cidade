@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/material/relatorios/rastreabilidade",
+  "json": {
+    "errors": {
+      "estoqueZerado": [
+        "O campo estoque zerado é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "f74e266377a1f4bb7489299f4a2f87513ca0ff06e65b8dbf58de11cf23090012",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

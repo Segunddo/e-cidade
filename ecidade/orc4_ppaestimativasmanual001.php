@@ -70,7 +70,7 @@ $lBloquear = "true";
 $sDisplay = "none";
 $sMessage = "";
 
-if (pg_num_rows($rsAnoCancelar) > 0) {
+if (($rsAnoCancelar ? pg_num_rows($rsAnoCancelar) : null) > 0) {
 
   $lBloquear = "false";
   $sDisplay = "";

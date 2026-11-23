@@ -129,7 +129,7 @@ foreach ($aDescontos as $oDescontos) {
 }
 
 
-if (count($aDadosSaida) > 0) {
+if (count((array)$aDadosSaida) > 0) {
     ?>
     <table border="1" cellspacing="0" cellpadding="3">
       <tr bgcolor="#FFCC66">

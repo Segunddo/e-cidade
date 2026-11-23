@@ -35,7 +35,7 @@ require_once(modification("classes/db_sanitario_classe.php"));
 require_once(modification("classes/db_sanibaixa_classe.php"));
 require_once(modification("classes/db_sanibaixaproc_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clsaniatividade = new cl_saniatividade;

@@ -1,0 +1,36 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/arrecadacao/tef/incluir-operacao",
+  "json": {
+    "errors": {
+      "DB_coddepto": [
+        "Código do departamentro não informado."
+      ],
+      "grupo": [
+        "Grupo não informado."
+      ],
+      "numnov": [
+        "Número do recibo não informado."
+      ],
+      "operacaotef": [
+        "Operação não informada."
+      ],
+      "terminal": [
+        "Terminal não informado."
+      ],
+      "valor": [
+        "Valor do recibo não informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "af71cb9ca5024bc646fe0efff7ffdaf5bc8165657417443a4aeda38531da58fc",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -58,7 +58,7 @@ class BalancoOrcamentarioRPPS extends RelatoriosLegaisBase {
    * Retorna as linhas processadas do relatorio
    * @return array lista de linhas processadas do relatorio
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $sWhereReceita = " o70_instit in ({$this->getInstituicoes()}) ";
     $sWhereDespesa = " o58_instit in ({$this->getInstituicoes()}) ";

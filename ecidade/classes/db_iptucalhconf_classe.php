@@ -69,11 +69,11 @@ class cl_iptucalhconf {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j89_sequencial = ($this->j89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j89_sequencial"]:$this->j89_sequencial);
-       $this->j89_codhis = ($this->j89_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j89_codhis"]:$this->j89_codhis);
-       $this->j89_codhispai = ($this->j89_codhispai == ""?@$GLOBALS["HTTP_POST_VARS"]["j89_codhispai"]:$this->j89_codhispai);
+       $this->j89_sequencial = ($this->j89_sequencial === 0 || $this->j89_sequencial === 0.0 || $this->j89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j89_sequencial"]:$this->j89_sequencial);
+       $this->j89_codhis = ($this->j89_codhis === 0 || $this->j89_codhis === 0.0 || $this->j89_codhis == ""?@$GLOBALS["HTTP_POST_VARS"]["j89_codhis"]:$this->j89_codhis);
+       $this->j89_codhispai = ($this->j89_codhispai === 0 || $this->j89_codhispai === 0.0 || $this->j89_codhispai == ""?@$GLOBALS["HTTP_POST_VARS"]["j89_codhispai"]:$this->j89_codhispai);
      }else{
-       $this->j89_sequencial = ($this->j89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j89_sequencial"]:$this->j89_sequencial);
+       $this->j89_sequencial = ($this->j89_sequencial === 0 || $this->j89_sequencial === 0.0 || $this->j89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j89_sequencial"]:$this->j89_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_iptucalhconf {
          $this->j89_sequencial = $j89_sequencial;
        }
      }
-     if(($this->j89_sequencial == null) || ($this->j89_sequencial == "") ){
+     if(($this->j89_sequencial == null) || ($this->j89_sequencial === 0 || $this->j89_sequencial === 0.0 || $this->j89_sequencial == "") ){
        $this->erro_sql = " Campo j89_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

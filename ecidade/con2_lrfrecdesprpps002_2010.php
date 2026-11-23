@@ -98,11 +98,11 @@ for ($linha = 1; $linha <= 17; $linha++) {
   $aColunas = $m_receita[$linha]['estrut']->getValoresSomadosColunas($iInstit, $iAnoUsu);
   foreach($aColunas as $oValor) {
 
-    $m_receita[$linha]["inicial"]    += @$oValor->colunas[1]->o117_valor;
-    $m_receita[$linha]["atualizada"] += @$oValor->colunas[2]->o117_valor;
-    $m_receita[$linha]["bimestre"]   += @$oValor->colunas[3]->o117_valor;
-    $m_receita[$linha]["exercicio"]  += @$oValor->colunas[4]->o117_valor;
-    $m_receita[$linha]["anterior"]   += @$oValor->colunas[5]->o117_valor;
+    $m_receita[$linha]["inicial"]    += (float) @$oValor->colunas[1]->o117_valor;
+    $m_receita[$linha]["atualizada"] += (float) @$oValor->colunas[2]->o117_valor;
+    $m_receita[$linha]["bimestre"]   += (float) @$oValor->colunas[3]->o117_valor;
+    $m_receita[$linha]["exercicio"]  += (float) @$oValor->colunas[4]->o117_valor;
+    $m_receita[$linha]["anterior"]   += (float) @$oValor->colunas[5]->o117_valor;
   }
 }
 
@@ -120,11 +120,11 @@ for ($linha = 39; $linha <= 53; $linha++) {
   $aColunas = $m_receita[$linha]['estrut']->getValoresSomadosColunas($iInstit, $iAnoUsu);
   foreach($aColunas as $oValor) {
 
-    $m_receita[$linha]["inicial"]    += @$oValor->colunas[1]->o117_valor;
-    $m_receita[$linha]["atualizada"] += @$oValor->colunas[2]->o117_valor;
-    $m_receita[$linha]["bimestre"]   += @$oValor->colunas[3]->o117_valor;
-    $m_receita[$linha]["exercicio"]  += @$oValor->colunas[4]->o117_valor;
-    $m_receita[$linha]["anterior"]   += @$oValor->colunas[5]->o117_valor;
+    $m_receita[$linha]["inicial"]    += (float) @$oValor->colunas[1]->o117_valor;
+    $m_receita[$linha]["atualizada"] += (float) @$oValor->colunas[2]->o117_valor;
+    $m_receita[$linha]["bimestre"]   += (float) @$oValor->colunas[3]->o117_valor;
+    $m_receita[$linha]["exercicio"]  += (float) @$oValor->colunas[4]->o117_valor;
+    $m_receita[$linha]["anterior"]   += (float) @$oValor->colunas[5]->o117_valor;
   }
 }
 
@@ -147,15 +147,15 @@ for ($linha = 18; $linha <= 27; $linha++) {
   $aColunas = $m_despesa[$linha]['estrut']->getValoresSomadosColunas($iInstit, $iAnoUsu);
   foreach($aColunas as $oValor) {
 
-    $m_despesa[$linha]['inicial']    += $oValor->colunas[1]->o117_valor;
-    $m_despesa[$linha]['atualizada'] += $oValor->colunas[2]->o117_valor;
-    $m_despesa[$linha]['bimestre']   += $oValor->colunas[3]->o117_valor;
-    $m_despesa[$linha]['exercicio']  += $oValor->colunas[4]->o117_valor;  // ate o bimestre
-    $m_despesa[$linha]['anterior']   += $oValor->colunas[5]->o117_valor;
+    $m_despesa[$linha]['inicial']    += (float) $oValor->colunas[1]->o117_valor;
+    $m_despesa[$linha]['atualizada'] += (float) $oValor->colunas[2]->o117_valor;
+    $m_despesa[$linha]['bimestre']   += (float) $oValor->colunas[3]->o117_valor;
+    $m_despesa[$linha]['exercicio']  += (float) $oValor->colunas[4]->o117_valor;  // ate o bimestre
+    $m_despesa[$linha]['anterior']   += (float) $oValor->colunas[5]->o117_valor;
     if ($ultimo_periodo) {
 
-      $m_despesa[$linha]['rpnp_exe']   += @$oValor->colunas[6]->o117_valor;  // RP nao processado exercicio
-      $m_despesa[$linha]['rpnp_ant']   += @$oValor->colunas[7]->o117_valor;  // RP nao processado exercicio anterior
+      $m_despesa[$linha]['rpnp_exe']   += (float) @$oValor->colunas[6]->o117_valor;  // RP nao processado exercicio
+      $m_despesa[$linha]['rpnp_ant']   += (float) @$oValor->colunas[7]->o117_valor;  // RP nao processado exercicio anterior
     }
   }
 }
@@ -176,15 +176,15 @@ for ($linha = 54; $linha <= 55; $linha++) {
   $aColunas = $m_despesa[$linha]['estrut']->getValoresSomadosColunas($iInstit, $iAnoUsu);
   foreach($aColunas as $oValor) {
 
-    $m_despesa[$linha]['inicial']    += $oValor->colunas[1]->o117_valor;
-    $m_despesa[$linha]['atualizada'] += $oValor->colunas[2]->o117_valor;
-    $m_despesa[$linha]['bimestre']   += $oValor->colunas[3]->o117_valor;
-    $m_despesa[$linha]['exercicio']  += $oValor->colunas[4]->o117_valor;  // ate o bimestre
-    $m_despesa[$linha]['anterior']   += $oValor->colunas[5]->o117_valor;
+    $m_despesa[$linha]['inicial']    += (float) $oValor->colunas[1]->o117_valor;
+    $m_despesa[$linha]['atualizada'] += (float) $oValor->colunas[2]->o117_valor;
+    $m_despesa[$linha]['bimestre']   += (float) $oValor->colunas[3]->o117_valor;
+    $m_despesa[$linha]['exercicio']  += (float) $oValor->colunas[4]->o117_valor;  // ate o bimestre
+    $m_despesa[$linha]['anterior']   += (float) $oValor->colunas[5]->o117_valor;
     if ($ultimo_periodo) {
 
-      $m_despesa[$linha]['rpnp_exe']   += @$oValor->colunas[6]->o117_valor;  // RP nao processado exercicio
-      $m_despesa[$linha]['rpnp_ant']   += @$oValor->colunas[7]->o117_valor;  // RP nao processado exercicio anterior
+      $m_despesa[$linha]['rpnp_exe']   += (float) @$oValor->colunas[6]->o117_valor;  // RP nao processado exercicio
+      $m_despesa[$linha]['rpnp_ant']   += (float) @$oValor->colunas[7]->o117_valor;  // RP nao processado exercicio anterior
     }
   }
 }
@@ -211,14 +211,14 @@ for ($linha=28; $linha<=34; $linha++){
   foreach($aColunas as $oValor) {
 
     if ($linha == 34) {
-      $aParamReservaOrc[34]["inicial"] += $oValor->colunas[1]->o117_valor;
+      $aParamReservaOrc[34]["inicial"] += (float) $oValor->colunas[1]->o117_valor;
     } else {
 
-      $aParamAportes[$linha]['inicial']    += $oValor->colunas[1]->o117_valor;
-      $aParamAportes[$linha]['atualizada'] += $oValor->colunas[2]->o117_valor;
-      $aParamAportes[$linha]['bimestre']   += $oValor->colunas[3]->o117_valor;
-      $aParamAportes[$linha]['exercicio']  += $oValor->colunas[4]->o117_valor;  // ate o bimestre
-      $aParamAportes[$linha]['anterior']   += $oValor->colunas[5]->o117_valor;
+      $aParamAportes[$linha]['inicial']    += (float) $oValor->colunas[1]->o117_valor;
+      $aParamAportes[$linha]['atualizada'] += (float) $oValor->colunas[2]->o117_valor;
+      $aParamAportes[$linha]['bimestre']   += (float) $oValor->colunas[3]->o117_valor;
+      $aParamAportes[$linha]['exercicio']  += (float) $oValor->colunas[4]->o117_valor;  // ate o bimestre
+      $aParamAportes[$linha]['anterior']   += (float) $oValor->colunas[5]->o117_valor;
     }
   }
 

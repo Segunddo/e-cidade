@@ -40,7 +40,7 @@ $clautonumpre = new cl_autonumpre;
 $clrotulo = new rotulocampo;
 $clrotulo->label('y50_codauto');
 $clrotulo->label('y50_nome');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 $pdf = new PDF1();
 $pdf->Open();

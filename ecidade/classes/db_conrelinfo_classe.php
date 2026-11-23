@@ -71,12 +71,12 @@ class cl_conrelinfo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c83_codigo = ($this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
-       $this->c83_codrel = ($this->c83_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codrel"]:$this->c83_codrel);
+       $this->c83_codigo = ($this->c83_codigo === 0 || $this->c83_codigo === 0.0 || $this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
+       $this->c83_codrel = ($this->c83_codrel === 0 || $this->c83_codrel === 0.0 || $this->c83_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codrel"]:$this->c83_codrel);
        $this->c83_variavel = ($this->c83_variavel == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_variavel"]:$this->c83_variavel);
-       $this->c83_anousu = ($this->c83_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_anousu"]:$this->c83_anousu);
+       $this->c83_anousu = ($this->c83_anousu === 0 || $this->c83_anousu === 0.0 || $this->c83_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_anousu"]:$this->c83_anousu);
      }else{
-       $this->c83_codigo = ($this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
+       $this->c83_codigo = ($this->c83_codigo === 0 || $this->c83_codigo === 0.0 || $this->c83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c83_codigo"]:$this->c83_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_conrelinfo {
          $this->c83_codigo = $c83_codigo;
        }
      }
-     if(($this->c83_codigo == null) || ($this->c83_codigo == "") ){
+     if(($this->c83_codigo == null) || ($this->c83_codigo === 0 || $this->c83_codigo === 0.0 || $this->c83_codigo == "") ){
        $this->erro_sql = " Campo c83_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

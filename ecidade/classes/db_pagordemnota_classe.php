@@ -69,12 +69,12 @@ class cl_pagordemnota {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e71_codord = ($this->e71_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codord"]:$this->e71_codord);
-       $this->e71_codnota = ($this->e71_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codnota"]:$this->e71_codnota);
+       $this->e71_codord = ($this->e71_codord === 0 || $this->e71_codord === 0.0 || $this->e71_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codord"]:$this->e71_codord);
+       $this->e71_codnota = ($this->e71_codnota === 0 || $this->e71_codnota === 0.0 || $this->e71_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codnota"]:$this->e71_codnota);
        $this->e71_anulado = ($this->e71_anulado == "f"?@$GLOBALS["HTTP_POST_VARS"]["e71_anulado"]:$this->e71_anulado);
      }else{
-       $this->e71_codord = ($this->e71_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codord"]:$this->e71_codord);
-       $this->e71_codnota = ($this->e71_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codnota"]:$this->e71_codnota);
+       $this->e71_codord = ($this->e71_codord === 0 || $this->e71_codord === 0.0 || $this->e71_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codord"]:$this->e71_codord);
+       $this->e71_codnota = ($this->e71_codnota === 0 || $this->e71_codnota === 0.0 || $this->e71_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e71_codnota"]:$this->e71_codnota);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_pagordemnota {
      }
        $this->e71_codord = $e71_codord;
        $this->e71_codnota = $e71_codnota;
-     if(($this->e71_codord == null) || ($this->e71_codord == "") ){
+     if(($this->e71_codord == null) || ($this->e71_codord === 0 || $this->e71_codord === 0.0 || $this->e71_codord == "") ){
        $this->erro_sql = " Campo e71_codord nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_pagordemnota {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e71_codnota == null) || ($this->e71_codnota == "") ){
+     if(($this->e71_codnota == null) || ($this->e71_codnota === 0 || $this->e71_codnota === 0.0 || $this->e71_codnota == "") ){
        $this->erro_sql = " Campo e71_codnota nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -47,7 +47,7 @@ include modification("classes/db_fis_fandamusu_classe.php");
 include modification("classes/db_fis_fisctestem_classe.php");
 include modification("classes/db_fis_fiscarquivos_classe.php");
 include modification("classes/db_fis_fiscalvistorias_classe.php");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 // Ticket 108335
 $getIntimacao = ((isset($intimacao) && $intimacao == 1) ? '&intimacao=1' : '');
 $getLabel     = ((isset($intimacao) && $intimacao == 1) ? 'Intimação' : 'Notificação');
@@ -56,7 +56,7 @@ if(!isset($abas)){
   echo "<script>location.href='fis1_fis_fiscal005.php?db_opcao=3".$getIntimacao."'</script>";
   exit;
 }
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clfiscal          = new cl_fis_fiscal;
 $clfiscalvistorias = new cl_fis_fiscalvistorias;

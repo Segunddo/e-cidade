@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/fix/lancamento/contas-bancarias",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Financeiro\\Contabilidade\\Controllers\\ManutencaoLancamentosController::corrigirContasBancarias does not exist."
+  },
+  "sha256": "4cdacdf37c23b972f139fef13587a7aeb802c72debd678f76f8af31641abc1ce",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

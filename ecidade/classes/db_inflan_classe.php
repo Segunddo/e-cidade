@@ -83,7 +83,7 @@ class cl_inflan {
        $this->i01_dm = ($this->i01_dm == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_dm"]:$this->i01_dm);
        $this->i01_tipo = ($this->i01_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_tipo"]:$this->i01_tipo);
        $this->i01_percen = ($this->i01_percen == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_percen"]:$this->i01_percen);
-       $this->i01_calc = ($this->i01_calc == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_calc"]:$this->i01_calc);
+       $this->i01_calc = ($this->i01_calc === 0 || $this->i01_calc === 0.0 || $this->i01_calc == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_calc"]:$this->i01_calc);
      }else{
        $this->i01_codigo = ($this->i01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i01_codigo"]:$this->i01_codigo);
      }

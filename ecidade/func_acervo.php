@@ -42,7 +42,7 @@ require_once(modification("classes/db_autor_classe.php"));
 require_once(modification("classes/db_assunto_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clacervo         = new cl_acervo;
 $clautor          = new cl_autor;

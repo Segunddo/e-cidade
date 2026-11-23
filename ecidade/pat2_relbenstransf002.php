@@ -40,7 +40,7 @@ $clbenstransfcodigo = new cl_benstransfcodigo;
 $cldb_depart        = new cl_db_depart;
 $clrotulo           = new rotulocampo;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $sqlinst    = "select * from db_config where codigo = ".db_getsession("DB_instit");
 $resultinst = db_query($sqlinst);

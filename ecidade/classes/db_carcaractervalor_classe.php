@@ -73,13 +73,13 @@ class cl_carcaractervalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j119_sequencial = ($this->j119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_sequencial"]:$this->j119_sequencial);
-       $this->j119_anousu = ($this->j119_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_anousu"]:$this->j119_anousu);
-       $this->j119_caracteristica1 = ($this->j119_caracteristica1 == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_caracteristica1"]:$this->j119_caracteristica1);
-       $this->j119_caracteristica2 = ($this->j119_caracteristica2 == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_caracteristica2"]:$this->j119_caracteristica2);
-       $this->j119_valor = ($this->j119_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_valor"]:$this->j119_valor);
+       $this->j119_sequencial = ($this->j119_sequencial === 0 || $this->j119_sequencial === 0.0 || $this->j119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_sequencial"]:$this->j119_sequencial);
+       $this->j119_anousu = ($this->j119_anousu === 0 || $this->j119_anousu === 0.0 || $this->j119_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_anousu"]:$this->j119_anousu);
+       $this->j119_caracteristica1 = ($this->j119_caracteristica1 === 0 || $this->j119_caracteristica1 === 0.0 || $this->j119_caracteristica1 == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_caracteristica1"]:$this->j119_caracteristica1);
+       $this->j119_caracteristica2 = ($this->j119_caracteristica2 === 0 || $this->j119_caracteristica2 === 0.0 || $this->j119_caracteristica2 == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_caracteristica2"]:$this->j119_caracteristica2);
+       $this->j119_valor = ($this->j119_valor === 0 || $this->j119_valor === 0.0 || $this->j119_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_valor"]:$this->j119_valor);
      }else{
-       $this->j119_sequencial = ($this->j119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_sequencial"]:$this->j119_sequencial);
+       $this->j119_sequencial = ($this->j119_sequencial === 0 || $this->j119_sequencial === 0.0 || $this->j119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j119_sequencial"]:$this->j119_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_carcaractervalor {
          $this->j119_sequencial = $j119_sequencial;
        }
      }
-     if(($this->j119_sequencial == null) || ($this->j119_sequencial == "") ){
+     if(($this->j119_sequencial == null) || ($this->j119_sequencial === 0 || $this->j119_sequencial === 0.0 || $this->j119_sequencial == "") ){
        $this->erro_sql = " Campo j119_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

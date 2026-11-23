@@ -72,8 +72,8 @@ class cl_aguaconfvenc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x33_exerc = ($this->x33_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["x33_exerc"]:$this->x33_exerc);
-       $this->x33_parcela = ($this->x33_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["x33_parcela"]:$this->x33_parcela);
+       $this->x33_exerc = ($this->x33_exerc === 0 || $this->x33_exerc === 0.0 || $this->x33_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["x33_exerc"]:$this->x33_exerc);
+       $this->x33_parcela = ($this->x33_parcela === 0 || $this->x33_parcela === 0.0 || $this->x33_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["x33_parcela"]:$this->x33_parcela);
        if($this->x33_dtvenc == ""){
          $this->x33_dtvenc_dia = ($this->x33_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x33_dtvenc_dia"]:$this->x33_dtvenc_dia);
          $this->x33_dtvenc_mes = ($this->x33_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x33_dtvenc_mes"]:$this->x33_dtvenc_mes);
@@ -83,8 +83,8 @@ class cl_aguaconfvenc {
          }
        }
      }else{
-       $this->x33_exerc = ($this->x33_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["x33_exerc"]:$this->x33_exerc);
-       $this->x33_parcela = ($this->x33_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["x33_parcela"]:$this->x33_parcela);
+       $this->x33_exerc = ($this->x33_exerc === 0 || $this->x33_exerc === 0.0 || $this->x33_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["x33_exerc"]:$this->x33_exerc);
+       $this->x33_parcela = ($this->x33_parcela === 0 || $this->x33_parcela === 0.0 || $this->x33_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["x33_parcela"]:$this->x33_parcela);
      }
    }
    // funcao para inclusao
@@ -101,7 +101,7 @@ class cl_aguaconfvenc {
      }
        $this->x33_exerc = $x33_exerc;
        $this->x33_parcela = $x33_parcela;
-     if(($this->x33_exerc == null) || ($this->x33_exerc == "") ){
+     if(($this->x33_exerc == null) || ($this->x33_exerc === 0 || $this->x33_exerc === 0.0 || $this->x33_exerc == "") ){
        $this->erro_sql = " Campo x33_exerc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -109,7 +109,7 @@ class cl_aguaconfvenc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x33_parcela == null) || ($this->x33_parcela == "") ){
+     if(($this->x33_parcela == null) || ($this->x33_parcela === 0 || $this->x33_parcela === 0.0 || $this->x33_parcela == "") ){
        $this->erro_sql = " Campo x33_parcela nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

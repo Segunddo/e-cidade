@@ -45,11 +45,11 @@ class cl_retencaonaturezarendimento
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e168_sequencial = ($this->e168_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e168_sequencial"] : $this->e168_sequencial);
-            $this->e168_retencaoreceitas = ($this->e168_retencaoreceitas == "" ? @$GLOBALS["HTTP_POST_VARS"]["e168_retencaoreceitas"] : $this->e168_retencaoreceitas);
-            $this->e168_naturezarendimento = ($this->e168_naturezarendimento == "" ? @$GLOBALS["HTTP_POST_VARS"]["e168_naturezarendimento"] : $this->e168_naturezarendimento);
+            $this->e168_sequencial = ($this->e168_sequencial === 0 || $this->e168_sequencial === 0.0 || $this->e168_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e168_sequencial"] : $this->e168_sequencial);
+            $this->e168_retencaoreceitas = ($this->e168_retencaoreceitas === 0 || $this->e168_retencaoreceitas === 0.0 || $this->e168_retencaoreceitas == "" ? @$GLOBALS["HTTP_POST_VARS"]["e168_retencaoreceitas"] : $this->e168_retencaoreceitas);
+            $this->e168_naturezarendimento = ($this->e168_naturezarendimento === 0 || $this->e168_naturezarendimento === 0.0 || $this->e168_naturezarendimento == "" ? @$GLOBALS["HTTP_POST_VARS"]["e168_naturezarendimento"] : $this->e168_naturezarendimento);
         } else {
-            $this->e168_sequencial = ($this->e168_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e168_sequencial"] : $this->e168_sequencial);
+            $this->e168_sequencial = ($this->e168_sequencial === 0 || $this->e168_sequencial === 0.0 || $this->e168_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e168_sequencial"] : $this->e168_sequencial);
         }
     }
 
@@ -98,7 +98,7 @@ class cl_retencaonaturezarendimento
                 $this->e168_sequencial = $e168_sequencial;
             }
         }
-        if (($this->e168_sequencial == null) || ($this->e168_sequencial == "")) {
+        if (($this->e168_sequencial == null) || ($this->e168_sequencial === 0 || $this->e168_sequencial === 0.0 || $this->e168_sequencial == "")) {
             $this->erro_sql = " Campo e168_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

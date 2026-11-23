@@ -1,0 +1,20 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/notificacoes/lista/verificatodosparcelamentos",
+  "json": {
+    "data": {
+      "parcelamento": false
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "2045b61ab7f1b87b21c16056ba7d57893d3f86c99dd42746d3a11ac841b9ea56",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

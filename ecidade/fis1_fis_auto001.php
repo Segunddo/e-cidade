@@ -42,7 +42,7 @@ require_once(modification("classes/db_fis_autousu_classe.php"));
 $clenderecopecas = db_utils::getDao("fis_enderecopecas");
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(!isset($abas)){
 
   echo "<script>location.href='fis1_fis_auto005.php?como=$optionComo'</script>";

@@ -30,7 +30,7 @@ require_once(modification("libs/db_stdlib.php"));
 require_once(modification("libs/db_conecta.php"));
 require_once(modification("libs/db_sessoes.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if ($unidade == '') {
     $unidade = 0;
@@ -92,7 +92,7 @@ $pdf->setfillcolor(235);
 $pdf->setfont('arial', 'b', 7);
 $troca = 1;
 
-for ($o = 0; $o < pg_numrows($res_orgao); $o++) {
+for ($o = 0; $o < ($res_orgao ? pg_numrows($res_orgao) : null); $o++) {
     db_fieldsmemory($res_orgao, $o);
     /////inicio funcao
     $imprimirTotal = false;
@@ -122,7 +122,7 @@ for ($o = 0; $o < pg_numrows($res_orgao); $o++) {
     $troca = 1;
 
     $alt = 6;
-    for ($x1 = 0; $x1 < pg_numrows($result_funcao); $x1++) {
+    for ($x1 = 0; $x1 < ($result_funcao ? pg_numrows($result_funcao) : null); $x1++) {
         db_fieldsmemory($result_funcao, $x1);
         $imprimirTotal = true;
         if ($pdf->getY() > $pdf->getH() - 35 || $troca != 0) {
@@ -213,9 +213,9 @@ for ($o = 0; $o < pg_numrows($res_orgao); $o++) {
         order by o58_subfuncao, o53_descr       
         ";
         $result_subfuncao = pg_exec($sql_subfuncao);
-        $xxnum1 = pg_numrows($result_subfuncao);
+        $xxnum1 = ($result_subfuncao ? pg_numrows($result_subfuncao) : null);
         
-        for ($x2 = 0; $x2 < pg_numrows($result_subfuncao); $x2++) {
+        for ($x2 = 0; $x2 < ($result_subfuncao ? pg_numrows($result_subfuncao) : null); $x2++) {
             db_fieldsmemory($result_subfuncao, $x2);
             if ($pdf->getY() > $pdf->getH() - 35 || $troca != 0) {
                 $pdf->AddPage("L");
@@ -311,9 +311,9 @@ for ($o = 0; $o < pg_numrows($res_orgao); $o++) {
             order by o58_programa, o54_descr, o54_finali
             ";
             $result_programa = pg_exec($sql_programa);
-            $xxnum2 = pg_numrows($result_programa);
+            $xxnum2 = ($result_programa ? pg_numrows($result_programa) : null);
           
-            for ($x3 = 0; $x3 < pg_numrows($result_programa); $x3++) {
+            for ($x3 = 0; $x3 < ($result_programa ? pg_numrows($result_programa) : null); $x3++) {
                 db_fieldsmemory($result_programa, $x3);
                 if ($pdf->getY() > $pdf->getH() - 35 || $troca != 0) {
                     $pdf->AddPage("L");
@@ -414,9 +414,9 @@ for ($o = 0; $o < pg_numrows($res_orgao); $o++) {
                 order by o58_projativ, o55_descr, o55_finali
                 ";
                 $result_projativ = pg_exec($sql_projativ);
-                $xxnum3 = pg_numrows($result_projativ);
+                $xxnum3 = ($result_projativ ? pg_numrows($result_projativ) : null);
             
-                for ($x4 = 0; $x4 < pg_numrows($result_projativ); $x4++) {
+                for ($x4 = 0; $x4 < ($result_projativ ? pg_numrows($result_projativ) : null); $x4++) {
                     db_fieldsmemory($result_projativ, $x4);
                     if ($pdf->getY() > $pdf->getH() - 35 || $troca != 0) {
                         $pdf->AddPage("L");
@@ -525,9 +525,9 @@ for ($o = 0; $o < pg_numrows($res_orgao); $o++) {
                     order by o58_esferaorcamentaria, o15_recurso 
                     ";
                     $result_recurso = pg_exec($sql_recurso);
-                    $xxnum4 = pg_numrows($result_recurso);
+                    $xxnum4 = ($result_recurso ? pg_numrows($result_recurso) : null);
                
-                    for ($x5 = 0; $x5 < pg_numrows($result_recurso); $x5++) {
+                    for ($x5 = 0; $x5 < ($result_recurso ? pg_numrows($result_recurso) : null); $x5++) {
                         db_fieldsmemory($result_recurso, $x5);
                         if ($pdf->getY() > $pdf->getH() - 35 || $troca != 0) {
                               $pdf->AddPage("L");
@@ -640,9 +640,9 @@ for ($o = 0; $o < pg_numrows($res_orgao); $o++) {
         ";
         
         $result_recurso1 = pg_exec($sql_recurso1);
-        $xxnum5 = pg_numrows($result_recurso1);
+        $xxnum5 = ($result_recurso1 ? pg_numrows($result_recurso1) : null);
             
-        for ($x6 = 0; $x6 < pg_numrows($result_recurso1); $x6++) {
+        for ($x6 = 0; $x6 < ($result_recurso1 ? pg_numrows($result_recurso1) : null); $x6++) {
             db_fieldsmemory($result_recurso1, $x6);
             $pdf->setfont('arial', 'b', 8);
             $pdf->cell(97, $alt, $o58_esferaorcamentaria1, 'LR', 0, "L", 0);

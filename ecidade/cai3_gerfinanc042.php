@@ -25,7 +25,7 @@
  *                                licenca/licenca_pt.txt
  */
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 require(modification("libs/db_stdlib.php"));
 require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
@@ -85,7 +85,7 @@ if(isset($certid)){
 <?php
 
   $result02=db_query($sql02);
-  $numrows02=pg_numrows($result02);
+  $numrows02=($result02 ? pg_numrows($result02) : null);
     echo "
    <table border='1';>
     <tr>
@@ -113,7 +113,7 @@ if(isset($certid)){
      if ($result05==false){
      	//echo "retornou falso";
      }else{
-	     $numrows05=pg_numrows($result05);
+	     $numrows05=($result05 ? pg_numrows($result05) : null);
 	     for($d=0; $d<$numrows05; $d++){
 			 db_fieldsmemory($result05,$d);
 			 $lrhis+=$vlrhis;
@@ -177,7 +177,7 @@ echo "
 <?php
 
   $result=db_query($sql);
-  $numrows=pg_numrows($result);
+  $numrows=($result ? pg_numrows($result) : null);
     echo "
    <table border='1';>
     <tr>

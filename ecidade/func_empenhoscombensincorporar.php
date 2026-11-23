@@ -44,7 +44,7 @@ $dao = new cl_bempendenteincorporacao;
 
 db_postmemory($_POST);
 $get = db_utils::postMemory($_GET);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clrotulo = new rotulocampo;
 $clrotulo->label('e60_numemp');
 $clrotulo->label('e60_codemp');

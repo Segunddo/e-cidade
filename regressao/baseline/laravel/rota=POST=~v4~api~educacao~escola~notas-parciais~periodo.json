@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/notas-parciais/periodo",
+  "json": {
+    "error": true,
+    "message": "Argument 2 passed to App\\Domain\\Educacao\\Escola\\Repositories\\AvaliacaoParcialRepository::getAvaliacoesByRegenciaPeriodo() must be an instance of App\\Domain\\Educacao\\Escola\\Models\\PeriodoAvaliacao, null given, called in /var/www/html/app/Domain/Educacao/Escola/Services/AvaliacoesParciaisService.php on line 42"
+  },
+  "sha256": "6b9b0ecfdf568c5485d0b3dfa89856f4b49e7122fadfe004e2927a7d703e6c86",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

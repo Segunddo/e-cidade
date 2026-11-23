@@ -77,15 +77,15 @@ class cl_abatimentoarreckey {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k128_sequencial = ($this->k128_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_sequencial"]:$this->k128_sequencial);
-       $this->k128_arreckey = ($this->k128_arreckey == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_arreckey"]:$this->k128_arreckey);
-       $this->k128_abatimento = ($this->k128_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_abatimento"]:$this->k128_abatimento);
-       $this->k128_valorabatido = ($this->k128_valorabatido == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_valorabatido"]:$this->k128_valorabatido);
-       $this->k128_correcao = ($this->k128_correcao == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_correcao"]:$this->k128_correcao);
-       $this->k128_juros = ($this->k128_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_juros"]:$this->k128_juros);
-       $this->k128_multa = ($this->k128_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_multa"]:$this->k128_multa);
+       $this->k128_sequencial = ($this->k128_sequencial === 0 || $this->k128_sequencial === 0.0 || $this->k128_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_sequencial"]:$this->k128_sequencial);
+       $this->k128_arreckey = ($this->k128_arreckey === 0 || $this->k128_arreckey === 0.0 || $this->k128_arreckey == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_arreckey"]:$this->k128_arreckey);
+       $this->k128_abatimento = ($this->k128_abatimento === 0 || $this->k128_abatimento === 0.0 || $this->k128_abatimento == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_abatimento"]:$this->k128_abatimento);
+       $this->k128_valorabatido = ($this->k128_valorabatido === 0 || $this->k128_valorabatido === 0.0 || $this->k128_valorabatido == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_valorabatido"]:$this->k128_valorabatido);
+       $this->k128_correcao = ($this->k128_correcao === 0 || $this->k128_correcao === 0.0 || $this->k128_correcao == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_correcao"]:$this->k128_correcao);
+       $this->k128_juros = ($this->k128_juros === 0 || $this->k128_juros === 0.0 || $this->k128_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_juros"]:$this->k128_juros);
+       $this->k128_multa = ($this->k128_multa === 0 || $this->k128_multa === 0.0 || $this->k128_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_multa"]:$this->k128_multa);
      }else{
-       $this->k128_sequencial = ($this->k128_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_sequencial"]:$this->k128_sequencial);
+       $this->k128_sequencial = ($this->k128_sequencial === 0 || $this->k128_sequencial === 0.0 || $this->k128_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k128_sequencial"]:$this->k128_sequencial);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_abatimentoarreckey {
          $this->k128_sequencial = $k128_sequencial;
        }
      }
-     if(($this->k128_sequencial == null) || ($this->k128_sequencial == "") ){
+     if(($this->k128_sequencial == null) || ($this->k128_sequencial === 0 || $this->k128_sequencial === 0.0 || $this->k128_sequencial == "") ){
        $this->erro_sql = " Campo k128_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -65,7 +65,7 @@ class cl_pardivultcodcert {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v05_codultcert = ($this->v05_codultcert == ""?@$GLOBALS["HTTP_POST_VARS"]["v05_codultcert"]:$this->v05_codultcert);
+       $this->v05_codultcert = ($this->v05_codultcert === 0 || $this->v05_codultcert === 0.0 || $this->v05_codultcert == ""?@$GLOBALS["HTTP_POST_VARS"]["v05_codultcert"]:$this->v05_codultcert);
      }else{
      }
    }

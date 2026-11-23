@@ -59,7 +59,7 @@ $qunidade = 0;
 
 $classinatura = new cl_assinatura;
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 
 if ($orgaos == "") {

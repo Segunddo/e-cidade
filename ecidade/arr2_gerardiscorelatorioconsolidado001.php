@@ -90,7 +90,7 @@
             $sSqlDataDebitos .= "order by k115_data desc ";
 
             $rsDataDebitos    = db_query($sSqlDataDebitos);
-            $iNroDatas        = pg_num_rows($rsDataDebitos);
+            $iNroDatas        = ($rsDataDebitos ? pg_num_rows($rsDataDebitos) : null);
            
             $aDatas[''] = 'SELECIONE';
             for ($iInd=0; $iInd < $iNroDatas; $iInd++) {

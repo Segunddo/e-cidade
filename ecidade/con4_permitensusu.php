@@ -64,7 +64,7 @@ try {
     $rsPerfisInstituicao = db_query($sqlPerfisInstituicao);
     $perfisInstituicao = array();
 
-    while ($rsPerfil = pg_fetch_object($rsPerfisInstituicao)) {
+    while ($rsPerfil = ($rsPerfisInstituicao ? pg_fetch_object($rsPerfisInstituicao) : null)) {
         $perfisInstituicao[] = $rsPerfil;
     }
 
@@ -100,8 +100,8 @@ try {
             throw new Exception('Não foi possível buscar as permissões do usuário.');
         }
 
-        if (pg_num_rows($rsPermHerda) > 0) {
-            while ($oDadosPermHerda = pg_fetch_object($rsPermHerda)) {
+        if (($rsPermHerda ? pg_num_rows($rsPermHerda) : null) > 0) {
+            while ($oDadosPermHerda = ($rsPermHerda ? pg_fetch_object($rsPermHerda) : null)) {
                 $sWherePermHerda = array(
                     "id_usuario = {$oDadosPermHerda->usuario}",
                     "id_perfil = {$oDadosPermHerda->perfil}"
@@ -141,7 +141,7 @@ try {
 
         $rsPerfisInstituicaoSelecionados = db_query($sqlPerfisInstituicaoSelecionados);
 
-        if (!$rsPerfisInstituicaoSelecionados || pg_num_rows($rsPerfisInstituicaoSelecionados) === 0) {
+        if (!$rsPerfisInstituicaoSelecionados || ($rsPerfisInstituicaoSelecionados ? pg_num_rows($rsPerfisInstituicaoSelecionados) : null) === 0) {
             $rsPerfisInstituicaoSelecionados = '';
         }
     }

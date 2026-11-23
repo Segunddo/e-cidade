@@ -58,7 +58,7 @@ class BalancoPatrimonialRPPS extends RelatoriosLegaisBase {
    * Retorna as linhas processadas do relatorio
    * @return array lista de linhas processadas do relatorio
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $alinhasCompensadoAtivo   = array(35, 36, 37, 38, 39, 40);
     $alinhasCompensadoPassivo = array(64, 65, 66, 67, 68, 69);

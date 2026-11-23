@@ -1,0 +1,1465 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/censo/tabelas-censo/cursos-profissionalizantes",
+  "json": {
+    "data": [
+      {
+        "ed247_c_descr": "MANUTENÇÃO DE MÁQUINAS NAVAIS                                                                       ",
+        "ed247_i_codigo": 3042,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "MANUTENÇÃO DE SISTEMAS METROFERROVIÁRIOS                                                            ",
+        "ed247_i_codigo": 3054,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "CONDOMÍNIO                                                                                          ",
+        "ed247_i_codigo": 4062,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "ARTES CIRCENSES                                                                                     ",
+        "ed247_i_codigo": 10128,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "TEATRO                                                                                              ",
+        "ed247_i_codigo": 10129,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "LABORATÓRIO DE CIÊNCIAS DA NATUREZA                                                                 ",
+        "ed247_i_codigo": 2039,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "MANUTENÇÃO DE MÁQUINAS INDUSTRIAIS                                                                  ",
+        "ed247_i_codigo": 3060,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "DESENVOLVIMENTO DE SISTEMAS                                                                         ",
+        "ed247_i_codigo": 6082,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "BOMBEIRO AERONÁUTICO                                                                                ",
+        "ed247_i_codigo": 8133,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "FIGURINO CÊNICO                                                                                     ",
+        "ed247_i_codigo": 10157,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "PETROQUIMICA                                                                                        ",
+        "ed247_i_codigo": 11174,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "QUIMICA                                                                                             ",
+        "ed247_i_codigo": 11175,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "BIBLIOTECONOMIA                                                                                     ",
+        "ed247_i_codigo": 2030,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "BIOTECNOLOGIA                                                                                       ",
+        "ed247_i_codigo": 11173,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "AGENTE COMUNITARIO DE SAUDE                                                                         ",
+        "ed247_i_codigo": 1001,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "ANALISES CLINICAS                                                                                   ",
+        "ed247_i_codigo": 1002,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "CITOPATOLOGIA                                                                                       ",
+        "ed247_i_codigo": 1004,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "CONTROLE AMBIENTAL                                                                                  ",
+        "ed247_i_codigo": 1005,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "ENFERMAGEM                                                                                          ",
+        "ed247_i_codigo": 1006,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "EQUIPAMENTOS BIOMEDICOS                                                                             ",
+        "ed247_i_codigo": 1007,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "ESTETICA                                                                                            ",
+        "ed247_i_codigo": 1008,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "FARMACIA                                                                                            ",
+        "ed247_i_codigo": 1009,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "GERENCIA DE SAUDE                                                                                   ",
+        "ed247_i_codigo": 1010,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "HEMOTERAPIA                                                                                         ",
+        "ed247_i_codigo": 1011,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "SAUDE BUCAL                                                                                         ",
+        "ed247_i_codigo": 1012,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "IMAGEM PESSOAL                                                                                      ",
+        "ed247_i_codigo": 1013,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "IMOBILIZACOES ORTOPEDICAS                                                                           ",
+        "ed247_i_codigo": 1014,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "MASSOTERAPIA                                                                                        ",
+        "ed247_i_codigo": 1015,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "MEIO AMBIENTE                                                                                       ",
+        "ed247_i_codigo": 1016,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "METEOROLOGIA                                                                                        ",
+        "ed247_i_codigo": 1017,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "NUTRICAO E DIETETICA                                                                                ",
+        "ed247_i_codigo": 1018,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "OPTICA                                                                                              ",
+        "ed247_i_codigo": 1019,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "ORTESES E PROTESES                                                                                  ",
+        "ed247_i_codigo": 1020,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "PODOLOGIA                                                                                           ",
+        "ed247_i_codigo": 1021,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "PROTESE DENTARIA                                                                                    ",
+        "ed247_i_codigo": 1022,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "RADIOLOGIA                                                                                          ",
+        "ed247_i_codigo": 1023,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "RECICLAGEM                                                                                          ",
+        "ed247_i_codigo": 1025,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "REGISTROS E INFORMACOES EM SAUDE                                                                    ",
+        "ed247_i_codigo": 1026,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "VIGILANCIA EM SAUDE                                                                                 ",
+        "ed247_i_codigo": 1028,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "CUIDADOS DE IDOSOS                                                                                  ",
+        "ed247_i_codigo": 1029,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "NECROPSIA                                                                                           ",
+        "ed247_i_codigo": 1030,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO AMBIENTE E SAUDE                                                                      ",
+        "ed247_i_codigo": 1999,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "ALIMENTACAO ESCOLAR                                                                                 ",
+        "ed247_i_codigo": 2029,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "INFRAESTRUTURA ESCOLAR                                                                              ",
+        "ed247_i_codigo": 2031,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "MULTIMEIOS DIDATICOS                                                                                ",
+        "ed247_i_codigo": 2032,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "SECRETARIA ESCOLAR                                                                                  ",
+        "ed247_i_codigo": 2034,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "PRODUCAO DE MATERIAIS DIDATICOS BILINGUE EM LIBRAS/LINGUA PORTUGUESA                                ",
+        "ed247_i_codigo": 2036,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "TRADUCAO E INTERPRETACAO DE LIBRAS                                                                  ",
+        "ed247_i_codigo": 2037,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO APOIO EDUCACIONAL                                                                     ",
+        "ed247_i_codigo": 2999,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "AUTOMACAO INDUSTRIAL                                                                                ",
+        "ed247_i_codigo": 3036,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "ELETROELETRONICA                                                                                    ",
+        "ed247_i_codigo": 3037,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "ELETROMECANICA                                                                                      ",
+        "ed247_i_codigo": 3038,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "ELETRONICA                                                                                          ",
+        "ed247_i_codigo": 3039,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "ELETROTECNICA                                                                                       ",
+        "ed247_i_codigo": 3040,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "MANUTENCAO AUTOMOTIVA                                                                               ",
+        "ed247_i_codigo": 3041,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "MECANICA                                                                                            ",
+        "ed247_i_codigo": 3043,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "MECATRONICA                                                                                         ",
+        "ed247_i_codigo": 3044,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "METALURGIA                                                                                          ",
+        "ed247_i_codigo": 3045,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "REFRIGERACAO E CLIMATIZACAO                                                                         ",
+        "ed247_i_codigo": 3048,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "SISTEMAS A GAS                                                                                      ",
+        "ed247_i_codigo": 3049,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "MANUTENCAO DE MAQUINAS PESADAS                                                                      ",
+        "ed247_i_codigo": 3053,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "MECANICA DE PRECISAO                                                                                ",
+        "ed247_i_codigo": 3055,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "METROLOGIA                                                                                          ",
+        "ed247_i_codigo": 3056,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "SISTEMAS DE ENERGIA RENOVAVEL                                                                       ",
+        "ed247_i_codigo": 3058,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "SOLDAGEM                                                                                            ",
+        "ed247_i_codigo": 3059,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO CONTROLE E PROCESSOS INDUSTRIAIS                                                      ",
+        "ed247_i_codigo": 3999,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "ADMINISTRACAO                                                                                       ",
+        "ed247_i_codigo": 4050,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "COMERCIO                                                                                            ",
+        "ed247_i_codigo": 4051,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "COMERCIO EXTERIOR                                                                                   ",
+        "ed247_i_codigo": 4052,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "CONTABILIDADE                                                                                       ",
+        "ed247_i_codigo": 4053,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "COOPERATIVISMO                                                                                      ",
+        "ed247_i_codigo": 4054,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "FINANCAS                                                                                            ",
+        "ed247_i_codigo": 4055,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "LOGISTICA                                                                                           ",
+        "ed247_i_codigo": 4056,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "MARKETING                                                                                           ",
+        "ed247_i_codigo": 4057,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "QUALIDADE                                                                                           ",
+        "ed247_i_codigo": 4058,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "RECURSOS HUMANOS                                                                                    ",
+        "ed247_i_codigo": 4059,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "SECRETARIADO                                                                                        ",
+        "ed247_i_codigo": 4060,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "SEGUROS                                                                                             ",
+        "ed247_i_codigo": 4061,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "SERVICOS PUBLICOS                                                                                   ",
+        "ed247_i_codigo": 4063,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "TRANSACOES IMOBILIARIAS                                                                             ",
+        "ed247_i_codigo": 4064,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "VENDAS                                                                                              ",
+        "ed247_i_codigo": 4065,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "SERVICOS JURIDICOS                                                                                  ",
+        "ed247_i_codigo": 4066,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO GESTAO E NEGOCIOS                                                                     ",
+        "ed247_i_codigo": 4999,
+        "ed247_i_tipo": 4,
+        "tipo": "Gestão e negócios"
+      },
+      {
+        "ed247_c_descr": "AGENCIAMENTO DE VIAGEM                                                                              ",
+        "ed247_i_codigo": 5066,
+        "ed247_i_tipo": 5,
+        "tipo": "Turismo, hospitalidade e lazer"
+      },
+      {
+        "ed247_c_descr": "EVENTOS                                                                                             ",
+        "ed247_i_codigo": 5068,
+        "ed247_i_tipo": 5,
+        "tipo": "Turismo, hospitalidade e lazer"
+      },
+      {
+        "ed247_c_descr": "GUIA DE TURISMO                                                                                     ",
+        "ed247_i_codigo": 5069,
+        "ed247_i_tipo": 5,
+        "tipo": "Turismo, hospitalidade e lazer"
+      },
+      {
+        "ed247_c_descr": "HOSPEDAGEM                                                                                          ",
+        "ed247_i_codigo": 5070,
+        "ed247_i_tipo": 5,
+        "tipo": "Turismo, hospitalidade e lazer"
+      },
+      {
+        "ed247_c_descr": "LAZER                                                                                               ",
+        "ed247_i_codigo": 5071,
+        "ed247_i_tipo": 5,
+        "tipo": "Turismo, hospitalidade e lazer"
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO TURISMO, HOSPITALIDADE E LAZER                                                        ",
+        "ed247_i_codigo": 5999,
+        "ed247_i_tipo": 5,
+        "tipo": "Turismo, hospitalidade e lazer"
+      },
+      {
+        "ed247_c_descr": "INFORMATICA                                                                                         ",
+        "ed247_i_codigo": 6073,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "INFORMATICA PARA INTERNET                                                                           ",
+        "ed247_i_codigo": 6074,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "MANUTENCAO E SUPORTE EM INFORMATICA                                                                 ",
+        "ed247_i_codigo": 6075,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "PROGRAMACAO DE JOGOS DIGITAIS                                                                       ",
+        "ed247_i_codigo": 6076,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "REDES DE COMPUTADORES                                                                               ",
+        "ed247_i_codigo": 6077,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "TELECOMUNICACOES                                                                                    ",
+        "ed247_i_codigo": 6080,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "COMPUTACAO GRAFICA                                                                                  ",
+        "ed247_i_codigo": 6081,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO INFORMACAO E COMUNICACAO                                                              ",
+        "ed247_i_codigo": 6999,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "AEROPORTUARIO                                                                                       ",
+        "ed247_i_codigo": 7081,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "AGRIMENSURA                                                                                         ",
+        "ed247_i_codigo": 7082,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "CARPINTARIA                                                                                         ",
+        "ed247_i_codigo": 7083,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "DESENHO DE CONSTRUCAO CIVIL                                                                         ",
+        "ed247_i_codigo": 7084,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "EDIFICACOES                                                                                         ",
+        "ed247_i_codigo": 7085,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "ESTRADAS                                                                                            ",
+        "ed247_i_codigo": 7086,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "GEODESIA E CARTOGRAFIA                                                                              ",
+        "ed247_i_codigo": 7087,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "GEOPROCESSAMENTO                                                                                    ",
+        "ed247_i_codigo": 7088,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "HIDROLOGIA                                                                                          ",
+        "ed247_i_codigo": 7089,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "PORTOS                                                                                              ",
+        "ed247_i_codigo": 7091,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "SANEAMENTO                                                                                          ",
+        "ed247_i_codigo": 7092,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "TRANSITO                                                                                            ",
+        "ed247_i_codigo": 7093,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "TRANSPORTE AQUAVIARIO                                                                               ",
+        "ed247_i_codigo": 7094,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "TRANSPORTE DE CARGAS                                                                                ",
+        "ed247_i_codigo": 7095,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "TRANSPORTE METROFERROVIARIO                                                                         ",
+        "ed247_i_codigo": 7097,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "TRANSPORTE RODOVIARIO                                                                               ",
+        "ed247_i_codigo": 7098,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "OUTROS - INFRA-ESTRUTURA                                                                            ",
+        "ed247_i_codigo": 7999,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "COMUNICACOES AERONAUTICAS                                                                           ",
+        "ed247_i_codigo": 8099,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "CONTROLE DE TRAFEGO AEREO                                                                           ",
+        "ed247_i_codigo": 8100,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "DESENHO MILITAR                                                                                     ",
+        "ed247_i_codigo": 8101,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "ELETRICIDADE E INSTRUMENTOS AERONAUTICOS                                                            ",
+        "ed247_i_codigo": 8102,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "EQUIPAMENTOS DE VOO                                                                                 ",
+        "ed247_i_codigo": 8103,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "ESTRUTURA E PINTURA DE AERONAVES                                                                    ",
+        "ed247_i_codigo": 8104,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "FOTOINTELIGENCIA                                                                                    ",
+        "ed247_i_codigo": 8105,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "GUARDA E SEGURANCA                                                                                  ",
+        "ed247_i_codigo": 8106,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "HIDROGRAFIA                                                                                         ",
+        "ed247_i_codigo": 8107,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "INFORMACOES AERONAUTICAS                                                                            ",
+        "ed247_i_codigo": 8108,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "MANOBRAS E EQUIPAMENTOS DE CONVES                                                                   ",
+        "ed247_i_codigo": 8109,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "MATERIAL BELICO                                                                                     ",
+        "ed247_i_codigo": 8110,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "MERGULHO                                                                                            ",
+        "ed247_i_codigo": 8111,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "OPERACAO DE RADAR                                                                                   ",
+        "ed247_i_codigo": 8112,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "OPERACAO DE SONAR                                                                                   ",
+        "ed247_i_codigo": 8113,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "OPERACOES DE ENGENHARIA MILITAR                                                                     ",
+        "ed247_i_codigo": 8114,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "PREPARACAO FISICA E DESPORTIVA MILITAR                                                              ",
+        "ed247_i_codigo": 8115,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "SENSORES DE AVIACAO                                                                                 ",
+        "ed247_i_codigo": 8116,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "SINAIS NAVAIS                                                                                       ",
+        "ed247_i_codigo": 8117,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "SINALIZACAO NAUTICA                                                                                 ",
+        "ed247_i_codigo": 8118,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "SUPRIMENTO                                                                                          ",
+        "ed247_i_codigo": 8119,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "COMUNICACOES NAVAIS                                                                                 ",
+        "ed247_i_codigo": 8126,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "MECANICA DE AERONAVES                                                                               ",
+        "ed247_i_codigo": 8130,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "OUTROS - MILITAR                                                                                    ",
+        "ed247_i_codigo": 8999,
+        "ed247_i_tipo": 8,
+        "tipo": "Militar"
+      },
+      {
+        "ed247_c_descr": "ALIMENTOS                                                                                           ",
+        "ed247_i_codigo": 9120,
+        "ed247_i_tipo": 9,
+        "tipo": "Produção alimentícia"
+      },
+      {
+        "ed247_c_descr": "AGROINDUSTRIA                                                                                       ",
+        "ed247_i_codigo": 9121,
+        "ed247_i_tipo": 9,
+        "tipo": "Produção alimentícia"
+      },
+      {
+        "ed247_c_descr": "CERVEJARIA                                                                                          ",
+        "ed247_i_codigo": 9123,
+        "ed247_i_tipo": 9,
+        "tipo": "Produção alimentícia"
+      },
+      {
+        "ed247_c_descr": "CONFEITARIA                                                                                         ",
+        "ed247_i_codigo": 9124,
+        "ed247_i_tipo": 9,
+        "tipo": "Produção alimentícia"
+      },
+      {
+        "ed247_c_descr": "PANIFICACAO                                                                                         ",
+        "ed247_i_codigo": 9125,
+        "ed247_i_tipo": 9,
+        "tipo": "Produção alimentícia"
+      },
+      {
+        "ed247_c_descr": "VITICULTURA E ENOLOGIA                                                                              ",
+        "ed247_i_codigo": 9127,
+        "ed247_i_tipo": 9,
+        "tipo": "Produção alimentícia"
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO PRODUCAO ALIMENTICIA                                                                  ",
+        "ed247_i_codigo": 9999,
+        "ed247_i_tipo": 9,
+        "tipo": "Produção alimentícia"
+      },
+      {
+        "ed247_c_descr": "ARTES VISUAIS                                                                                       ",
+        "ed247_i_codigo": 10130,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "ARTESANATO                                                                                          ",
+        "ed247_i_codigo": 10131,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "CANTO                                                                                               ",
+        "ed247_i_codigo": 10132,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "COMPOSICAO E ARRANJO                                                                                ",
+        "ed247_i_codigo": 10133,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "CONSERVACAO E RESTAURO                                                                              ",
+        "ed247_i_codigo": 10135,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "DANCA                                                                                               ",
+        "ed247_i_codigo": 10136,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "DESIGN DE CALCADOS                                                                                  ",
+        "ed247_i_codigo": 10137,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "DESIGN DE EMBALAGENS                                                                                ",
+        "ed247_i_codigo": 10138,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "DESIGN DE INTERIORES                                                                                ",
+        "ed247_i_codigo": 10139,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "DESIGN DE JOIAS                                                                                     ",
+        "ed247_i_codigo": 10140,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "DESIGN DE MOVEIS                                                                                    ",
+        "ed247_i_codigo": 10141,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "FABRICACAO DE INSTRUMENTOS MUSICAIS                                                                 ",
+        "ed247_i_codigo": 10143,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "MODELAGEM DO VESTUARIO                                                                              ",
+        "ed247_i_codigo": 10145,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "MULTIMIDIA                                                                                          ",
+        "ed247_i_codigo": 10146,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "PAISAGISMO                                                                                          ",
+        "ed247_i_codigo": 10147,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "PROCESSOS FOTOGRAFICOS                                                                              ",
+        "ed247_i_codigo": 10148,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "PRODUCAO DE AUDIO E VIDEO                                                                           ",
+        "ed247_i_codigo": 10149,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "PRODUCAO DE MODA                                                                                    ",
+        "ed247_i_codigo": 10150,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "PUBLICIDADE                                                                                         ",
+        "ed247_i_codigo": 10151,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "RADIO E TELEVISAO                                                                                   ",
+        "ed247_i_codigo": 10152,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "REGENCIA                                                                                            ",
+        "ed247_i_codigo": 10153,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "CENOGRAFIA                                                                                          ",
+        "ed247_i_codigo": 10154,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "MUSEOLOGIA                                                                                          ",
+        "ed247_i_codigo": 10155,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO PRODUCAO CULTURAL E DESIGN                                                            ",
+        "ed247_i_codigo": 10999,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "ACUCAR E ALCOOL                                                                                     ",
+        "ed247_i_codigo": 11154,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "BIOCOMBUSTIVEIS                                                                                     ",
+        "ed247_i_codigo": 11155,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "CALCADOS                                                                                            ",
+        "ed247_i_codigo": 11156,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "CELULOSE E PAPEL                                                                                    ",
+        "ed247_i_codigo": 11157,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "CERAMICA                                                                                            ",
+        "ed247_i_codigo": 11158,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "CONSTRUCAO NAVAL                                                                                    ",
+        "ed247_i_codigo": 11159,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "CURTIMENTO                                                                                          ",
+        "ed247_i_codigo": 11160,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "JOALHERIA                                                                                           ",
+        "ed247_i_codigo": 11164,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "MOVEIS                                                                                              ",
+        "ed247_i_codigo": 11165,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "PETROLEO E GAS                                                                                      ",
+        "ed247_i_codigo": 11166,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "PLASTICOS                                                                                           ",
+        "ed247_i_codigo": 11167,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "TEXTIL                                                                                              ",
+        "ed247_i_codigo": 11169,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "VESTUARIO                                                                                           ",
+        "ed247_i_codigo": 11170,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "PROCESSOS GRAFICOS                                                                                  ",
+        "ed247_i_codigo": 11171,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO PRODUCAO INDUSTRIAL                                                                   ",
+        "ed247_i_codigo": 11999,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "AGRICULTURA                                                                                         ",
+        "ed247_i_codigo": 12171,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "AGROECOLOGIA                                                                                        ",
+        "ed247_i_codigo": 12172,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "AGRONEGOCIO                                                                                         ",
+        "ed247_i_codigo": 12173,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "AGROPECUARIA                                                                                        ",
+        "ed247_i_codigo": 12174,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "AQUICULTURA                                                                                         ",
+        "ed247_i_codigo": 12175,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "CAFEICULTURA                                                                                        ",
+        "ed247_i_codigo": 12176,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "FLORESTAS                                                                                           ",
+        "ed247_i_codigo": 12178,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "FRUTICULTURA                                                                                        ",
+        "ed247_i_codigo": 12179,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "GEOLOGIA                                                                                            ",
+        "ed247_i_codigo": 12180,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "MINERACAO                                                                                           ",
+        "ed247_i_codigo": 12181,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "PESCA                                                                                               ",
+        "ed247_i_codigo": 12182,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "RECURSOS PESQUEIROS                                                                                 ",
+        "ed247_i_codigo": 12184,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "ZOOTECNIA                                                                                           ",
+        "ed247_i_codigo": 12185,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO RECURSOS NATURAIS                                                                     ",
+        "ed247_i_codigo": 12999,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "DEFESA CIVIL                                                                                        ",
+        "ed247_i_codigo": 13181,
+        "ed247_i_tipo": 13,
+        "tipo": "Segurança "
+      },
+      {
+        "ed247_c_descr": "SEGURANCA DO TRABALHO                                                                               ",
+        "ed247_i_codigo": 13182,
+        "ed247_i_tipo": 13,
+        "tipo": "Segurança "
+      },
+      {
+        "ed247_c_descr": "OUTROS - EIXO SEGURANCA                                                                             ",
+        "ed247_i_codigo": 13999,
+        "ed247_i_tipo": 13,
+        "tipo": "Segurança "
+      },
+      {
+        "ed247_c_descr": "TREINAMENTO E INSTRUÇÃO DE CÃES-GUIA                                                                ",
+        "ed247_i_codigo": 2038,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "OPTOMETRIA                                                                                          ",
+        "ed247_i_codigo": 1031,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "TERAPIAS HOLÍSTICAS                                                                                 ",
+        "ed247_i_codigo": 1032,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "VETERINÁRIA                                                                                         ",
+        "ed247_i_codigo": 1033,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "ARQUIVO                                                                                             ",
+        "ed247_i_codigo": 2040,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "FERRAMENTARIA                                                                                       ",
+        "ed247_i_codigo": 3061,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "FUNDIÇÃO                                                                                            ",
+        "ed247_i_codigo": 3062,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "INSTRUMENTAÇÃO INDUSTRIAL                                                                           ",
+        "ed247_i_codigo": 3063,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "FABRICAÇÃO MECÂNICA                                                                                 ",
+        "ed247_i_codigo": 3064,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "DESIGN DE MODA                                                                                      ",
+        "ed247_i_codigo": 10158,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "ESTILISMO E COORDENAÇÃO DE MODA                                                                     ",
+        "ed247_i_codigo": 10159,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "PRODUÇÃO CULTURAL                                                                                   ",
+        "ed247_i_codigo": 10160,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "PLANEJAMENTO E CONTROLE DA PRODUÇÃO                                                                 ",
+        "ed247_i_codigo": 11176,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "VIDROS                                                                                              ",
+        "ed247_i_codigo": 11177,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "PROCESSAMENTO DA MADEIRA                                                                            ",
+        "ed247_i_codigo": 11178,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "PREVENÇÃO E COMBATE A INCÊNDIOS                                                                     ",
+        "ed247_i_codigo": 13183,
+        "ed247_i_tipo": 13,
+        "tipo": "Segurança "
+      },
+      {
+        "ed247_c_descr": "DEPENDÊNCIA QUÍMICA                                                                                 ",
+        "ed247_i_codigo": 1024,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "BRINQUEDOTECA                                                                                       ",
+        "ed247_i_codigo": 2035,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "DESENVOLVIMENTO COMUNITÁRIO                                                                         ",
+        "ed247_i_codigo": 2033,
+        "ed247_i_tipo": 2,
+        "tipo": "Desenvolvimento educacional e social"
+      },
+      {
+        "ed247_c_descr": "MANUTENÇÃO AERONÁUTICA EM AVIÔNICOS                                                                 ",
+        "ed247_i_codigo": 3050,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "MANUTENÇÃO AERONÁUTICA EM CÉLULA                                                                    ",
+        "ed247_i_codigo": 3051,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "MANUTENÇÃO AERONÁUTICA EM GRUPO MOTOPROPULSOR                                                       ",
+        "ed247_i_codigo": 3052,
+        "ed247_i_tipo": 3,
+        "tipo": "Controle e processos industriais"
+      },
+      {
+        "ed247_c_descr": "GASTRONOMIA                                                                                         ",
+        "ed247_i_codigo": 5067,
+        "ed247_i_tipo": 5,
+        "tipo": "Turismo, hospitalidade e lazer"
+      },
+      {
+        "ed247_c_descr": "SERVIÇOS DE RESTAURANTE E BAR                                                                       ",
+        "ed247_i_codigo": 5072,
+        "ed247_i_tipo": 5,
+        "tipo": "Turismo, hospitalidade e lazer"
+      },
+      {
+        "ed247_c_descr": "DESIGN GRÁFICO                                                                                      ",
+        "ed247_i_codigo": 10134,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "INSTRUMENTO MUSICAL (NOME DO INSTRUMENTO)                                                           ",
+        "ed247_i_codigo": 10144,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "SEGURANCA DO TRABALHO                                                                               ",
+        "ed247_i_codigo": 1027,
+        "ed247_i_tipo": 1,
+        "tipo": "Ambiente e saúde"
+      },
+      {
+        "ed247_c_descr": "SISTEMAS DE COMPUTAÇÃO                                                                              ",
+        "ed247_i_codigo": 6078,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "SISTEMAS DE TRANSMISSAO                                                                             ",
+        "ed247_i_codigo": 6079,
+        "ed247_i_tipo": 6,
+        "tipo": " Informação e comunicação"
+      },
+      {
+        "ed247_c_descr": "MANUTENÇÃO DE AERONAVES                                                                             ",
+        "ed247_i_codigo": 7090,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "TRANSPORTE DUTOVIÁRIO                                                                               ",
+        "ed247_i_codigo": 7096,
+        "ed247_i_tipo": 7,
+        "tipo": "Infraestrutura"
+      },
+      {
+        "ed247_c_descr": "PROCESSAMENTO DE PESCADO                                                                            ",
+        "ed247_i_codigo": 9126,
+        "ed247_i_tipo": 9,
+        "tipo": "Produção alimentícia"
+      },
+      {
+        "ed247_c_descr": "DOCUMENTACAO MUSICAL                                                                                ",
+        "ed247_i_codigo": 10142,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "PROCESSOS FONOGRAFICOS                                                                              ",
+        "ed247_i_codigo": 10156,
+        "ed247_i_tipo": 10,
+        "tipo": "Produção cultural e design"
+      },
+      {
+        "ed247_c_descr": "IMPRESSAO ROTOGRAFICA E FLEXOGRAFICA                                                                ",
+        "ed247_i_codigo": 11162,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "IMPRESSAO OFFSET                                                                                    ",
+        "ed247_i_codigo": 11163,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "ANALISES QUIMICAS                                                                                   ",
+        "ed247_i_codigo": 11172,
+        "ed247_i_tipo": 11,
+        "tipo": "Produção industrial"
+      },
+      {
+        "ed247_c_descr": "RECURSOS MINERAIS                                                                                   ",
+        "ed247_i_codigo": 12183,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "PÓS-COLHEITA                                                                                        ",
+        "ed247_i_codigo": 12187,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      },
+      {
+        "ed247_c_descr": "APICULTURA                                                                                          ",
+        "ed247_i_codigo": 12186,
+        "ed247_i_tipo": 12,
+        "tipo": "Recursos naturais"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "f5ae2d63f441410de2df250bc39a2cc2ffeb744f5dff519226c610ce41ab9067",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

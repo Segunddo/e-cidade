@@ -67,10 +67,10 @@ class cl_orcreservasup {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o81_codres = ($this->o81_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o81_codres"]:$this->o81_codres);
-       $this->o81_codsup = ($this->o81_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o81_codsup"]:$this->o81_codsup);
+       $this->o81_codres = ($this->o81_codres === 0 || $this->o81_codres === 0.0 || $this->o81_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o81_codres"]:$this->o81_codres);
+       $this->o81_codsup = ($this->o81_codsup === 0 || $this->o81_codsup === 0.0 || $this->o81_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o81_codsup"]:$this->o81_codsup);
      }else{
-       $this->o81_codres = ($this->o81_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o81_codres"]:$this->o81_codres);
+       $this->o81_codres = ($this->o81_codres === 0 || $this->o81_codres === 0.0 || $this->o81_codres == ""?@$GLOBALS["HTTP_POST_VARS"]["o81_codres"]:$this->o81_codres);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_orcreservasup {
        return false;
      }
        $this->o81_codres = $o81_codres;
-     if(($this->o81_codres == null) || ($this->o81_codres == "") ){
+     if(($this->o81_codres == null) || ($this->o81_codres === 0 || $this->o81_codres === 0.0 || $this->o81_codres == "") ){
        $this->erro_sql = " Campo o81_codres nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

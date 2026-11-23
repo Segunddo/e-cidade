@@ -34,7 +34,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_feriadomerenda_ext_classe.php"));
 $clferiado = new cl_feriadomerenda_ext;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']); // ta com o globals desativado no php -- Crestani
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs); // ta com o globals desativado no php -- Crestani
 
 function checa_eventos($dia,$mes,$ano){
     return 'false';

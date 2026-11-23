@@ -73,13 +73,13 @@ class cl_custoplanilha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc15_sequencial = ($this->cc15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_sequencial"]:$this->cc15_sequencial);
-       $this->cc15_anousu = ($this->cc15_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_anousu"]:$this->cc15_anousu);
-       $this->cc15_mesusu = ($this->cc15_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_mesusu"]:$this->cc15_mesusu);
-       $this->cc15_id_usuario = ($this->cc15_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_id_usuario"]:$this->cc15_id_usuario);
-       $this->cc15_situacao = ($this->cc15_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_situacao"]:$this->cc15_situacao);
+       $this->cc15_sequencial = ($this->cc15_sequencial === 0 || $this->cc15_sequencial === 0.0 || $this->cc15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_sequencial"]:$this->cc15_sequencial);
+       $this->cc15_anousu = ($this->cc15_anousu === 0 || $this->cc15_anousu === 0.0 || $this->cc15_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_anousu"]:$this->cc15_anousu);
+       $this->cc15_mesusu = ($this->cc15_mesusu === 0 || $this->cc15_mesusu === 0.0 || $this->cc15_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_mesusu"]:$this->cc15_mesusu);
+       $this->cc15_id_usuario = ($this->cc15_id_usuario === 0 || $this->cc15_id_usuario === 0.0 || $this->cc15_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_id_usuario"]:$this->cc15_id_usuario);
+       $this->cc15_situacao = ($this->cc15_situacao === 0 || $this->cc15_situacao === 0.0 || $this->cc15_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_situacao"]:$this->cc15_situacao);
      }else{
-       $this->cc15_sequencial = ($this->cc15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_sequencial"]:$this->cc15_sequencial);
+       $this->cc15_sequencial = ($this->cc15_sequencial === 0 || $this->cc15_sequencial === 0.0 || $this->cc15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc15_sequencial"]:$this->cc15_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_custoplanilha {
          $this->cc15_sequencial = $cc15_sequencial;
        }
      }
-     if(($this->cc15_sequencial == null) || ($this->cc15_sequencial == "") ){
+     if(($this->cc15_sequencial == null) || ($this->cc15_sequencial === 0 || $this->cc15_sequencial === 0.0 || $this->cc15_sequencial == "") ){
        $this->erro_sql = " Campo cc15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

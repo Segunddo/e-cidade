@@ -31,7 +31,7 @@
   include(modification("libs/db_usuariosonline.php"));
   include(modification("classes/db_issvar_classe.php"));
   include(modification("classes/db_issvarnotas_classe.php"));
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   $clissvar = new cl_issvar;
   $clissvarnotas = new cl_issvarnotas;
   $clissvar->rotulo->label();
@@ -80,7 +80,7 @@
   }
  
   $result04  = db_query($sql04);
-  $numrows04 = pg_num_rows($result04)
+  $numrows04 = ($result04 ? pg_num_rows($result04) : null)
 ?>
 <html>
 <head>

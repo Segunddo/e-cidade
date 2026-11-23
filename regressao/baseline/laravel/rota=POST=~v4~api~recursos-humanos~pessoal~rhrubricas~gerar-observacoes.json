@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/rhrubricas/gerar-observacoes",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42601]: Syntax error: 7 ERRO:  erro de sintaxe em ou próximo a \"and\"\nLINE 4:                                             and rh02_mesusu ...\n                                                    ^ (SQL: select \"rh02_regist\" as \"matricula\", \"cgm\".\"z01_nome\" as \"nome\", \"rh27_rubric\" as \"codigo_rubrica\", \"rh27_descr\" as \"descricao_rubrica\", \"rh315_observacao\" as \"observacao\", \"rh315_tipo\" as \"tipo_folha\" from \"pessoal\".\"rhobservacaorubricaservidor\" inner join \"rhpessoal\" on \"rh01_regist\" = rh315_matricula and rh01_instit = rh315_instit inner join \"rhrubricas\" on \"rh27_rubric\" = rh315_rubrica and rh27_instit = rh315_instit inner join \"cgm\" on \"z01_numcgm\" = \"rh01_numcgm\" inner join \"rhpessoalmov\" on \"rh02_regist\" = rh01_regist\n                                            and rh02_instit = rh01_instit\n                                            and rh02_anousu = \n                                            and rh02_mesusu = left join \"rhpeslocaltrab\" on \"rh56_seqpes\" = rh02_seqpes and rh56_princ is true left join \"rhlocaltrab\" on \"rh55_codigo\" = rh56_localtrab and rh55_instit = rh02_instit left join \"rhlota\" on \"r70_codigo\" = rh02_lota and r70_instit = rh02_instit left join \"rhfuncao\" on \"rh37_funcao\" = rh02_funcao and rh37_instit = rh02_instit where \"rh315_instit\" = 1 and \"rh315_anousu\" is null and \"rh315_mesusu\" is null)"
+  },
+  "sha256": "afa2cbec27a788f4824085e2474c57eb201c4492389349ab36817bffe6fc9dd2",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -35,7 +35,7 @@ include(modification("classes/db_pagordem_classe.php"));
 include(modification("classes/db_pcmater_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clempempaut  = new cl_empempaut;
 $clempempenho = new cl_empempenho;
 $clempautitem = new cl_empautitem;

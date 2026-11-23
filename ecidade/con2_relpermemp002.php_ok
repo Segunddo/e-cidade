@@ -45,7 +45,7 @@ $clorcdotacao = new cl_orcdotacao;
 $cldb_permemp = new cl_db_permemp;
 $cldb_usupermemp = new cl_db_usupermemp;
 $cldb_depusuemp = new cl_db_depusuemp;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $cldb_permemp->rotulo->label();
 $clrotulo = new rotulocampo;

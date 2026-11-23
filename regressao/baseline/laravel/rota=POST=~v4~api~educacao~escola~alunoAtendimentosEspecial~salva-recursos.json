@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/alunoAtendimentosEspecial/salva-recursos",
+  "json": {
+    "error": true,
+    "message": "Undefined index: ed198_descricao"
+  },
+  "sha256": "1de32009e6486feb71654c9ef726d374ad89c9c7a269dbabfaa552495a9ea34e",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

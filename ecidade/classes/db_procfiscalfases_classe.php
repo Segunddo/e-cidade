@@ -81,8 +81,8 @@ class cl_procfiscalfases {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y108_sequencial = ($this->y108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_sequencial"]:$this->y108_sequencial);
-       $this->y108_procfiscal = ($this->y108_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_procfiscal"]:$this->y108_procfiscal);
+       $this->y108_sequencial = ($this->y108_sequencial === 0 || $this->y108_sequencial === 0.0 || $this->y108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_sequencial"]:$this->y108_sequencial);
+       $this->y108_procfiscal = ($this->y108_procfiscal === 0 || $this->y108_procfiscal === 0.0 || $this->y108_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_procfiscal"]:$this->y108_procfiscal);
        if($this->y108_dtcriacao == ""){
          $this->y108_dtcriacao_dia = ($this->y108_dtcriacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_dtcriacao_dia"]:$this->y108_dtcriacao_dia);
          $this->y108_dtcriacao_mes = ($this->y108_dtcriacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_dtcriacao_mes"]:$this->y108_dtcriacao_mes);
@@ -99,10 +99,10 @@ class cl_procfiscalfases {
             $this->y108_dtassinatura = $this->y108_dtassinatura_ano."-".$this->y108_dtassinatura_mes."-".$this->y108_dtassinatura_dia;
          }
        }
-       $this->y108_responsavel = ($this->y108_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_responsavel"]:$this->y108_responsavel);
-       $this->y108_tipo = ($this->y108_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_tipo"]:$this->y108_tipo);
+       $this->y108_responsavel = ($this->y108_responsavel === 0 || $this->y108_responsavel === 0.0 || $this->y108_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_responsavel"]:$this->y108_responsavel);
+       $this->y108_tipo = ($this->y108_tipo === 0 || $this->y108_tipo === 0.0 || $this->y108_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_tipo"]:$this->y108_tipo);
      }else{
-       $this->y108_sequencial = ($this->y108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_sequencial"]:$this->y108_sequencial);
+       $this->y108_sequencial = ($this->y108_sequencial === 0 || $this->y108_sequencial === 0.0 || $this->y108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_sequencial"]:$this->y108_sequencial);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_procfiscalfases {
          $this->y108_sequencial = $y108_sequencial;
        }
      }
-     if(($this->y108_sequencial == null) || ($this->y108_sequencial == "") ){
+     if(($this->y108_sequencial == null) || ($this->y108_sequencial === 0 || $this->y108_sequencial === 0.0 || $this->y108_sequencial == "") ){
        $this->erro_sql = " Campo y108_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

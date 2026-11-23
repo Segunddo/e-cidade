@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/ambulatorial/consulta/unidades-encaminhadoras/unidade",
+  "json": {
+    "error": true,
+    "message": "Campo código requerido!"
+  },
+  "sha256": "5c259df498dbe4bd165ae233bbe16f8ce3937757c0b283e72990314a19cb0e2f",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

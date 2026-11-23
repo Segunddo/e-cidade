@@ -37,7 +37,7 @@ include(modification("dbforms/db_funcoes.php"));
 
   $sqlperc = "select j18_perccorrepadrao from cfiptu where j18_anousu = ".db_getsession('DB_anousu');
   $resultperc = db_query($sqlperc);
-  $linhasperc = pg_num_rows($resultperc);
+  $linhasperc = ($resultperc ? pg_num_rows($resultperc) : null);
   
   if($linhasperc>0){
     
@@ -62,7 +62,7 @@ $sql = " select distinct
           order by j23_anousu desc ";
           
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 if($linhas>0){
   $xx  = "";  
   $anos= "";

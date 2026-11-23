@@ -69,11 +69,11 @@ class cl_procfiscalmatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y102_sequencial = ($this->y102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_sequencial"]:$this->y102_sequencial);
-       $this->y102_procfiscal = ($this->y102_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_procfiscal"]:$this->y102_procfiscal);
-       $this->y102_matric = ($this->y102_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_matric"]:$this->y102_matric);
+       $this->y102_sequencial = ($this->y102_sequencial === 0 || $this->y102_sequencial === 0.0 || $this->y102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_sequencial"]:$this->y102_sequencial);
+       $this->y102_procfiscal = ($this->y102_procfiscal === 0 || $this->y102_procfiscal === 0.0 || $this->y102_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_procfiscal"]:$this->y102_procfiscal);
+       $this->y102_matric = ($this->y102_matric === 0 || $this->y102_matric === 0.0 || $this->y102_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_matric"]:$this->y102_matric);
      }else{
-       $this->y102_sequencial = ($this->y102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_sequencial"]:$this->y102_sequencial);
+       $this->y102_sequencial = ($this->y102_sequencial === 0 || $this->y102_sequencial === 0.0 || $this->y102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_sequencial"]:$this->y102_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procfiscalmatric {
          $this->y102_sequencial = $y102_sequencial;
        }
      }
-     if(($this->y102_sequencial == null) || ($this->y102_sequencial == "") ){
+     if(($this->y102_sequencial == null) || ($this->y102_sequencial === 0 || $this->y102_sequencial === 0.0 || $this->y102_sequencial == "") ){
        $this->erro_sql = " Campo y102_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

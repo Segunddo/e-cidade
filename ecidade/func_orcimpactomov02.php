@@ -34,7 +34,7 @@ include(modification("classes/db_orcimpactomov_classe.php"));
 include(modification("classes/db_orcorgao_classe.php"));
 include(modification("classes/db_orcunidade_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clorcimpactomov = new cl_orcimpactomov;
 $clorcorgao = new cl_orcorgao;
 $clorcunidade = new cl_orcunidade;

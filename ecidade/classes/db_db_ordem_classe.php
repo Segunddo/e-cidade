@@ -108,9 +108,9 @@ class cl_db_ordem {
          }
        }
        $this->descricao = ($this->descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["descricao"]:$this->descricao);
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
-       $this->usureceb = ($this->usureceb == ""?@$GLOBALS["HTTP_POST_VARS"]["usureceb"]:$this->usureceb);
-       $this->coddepto = ($this->coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["coddepto"]:$this->coddepto);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->usureceb = ($this->usureceb === 0 || $this->usureceb === 0.0 || $this->usureceb == ""?@$GLOBALS["HTTP_POST_VARS"]["usureceb"]:$this->usureceb);
+       $this->coddepto = ($this->coddepto === 0 || $this->coddepto === 0.0 || $this->coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["coddepto"]:$this->coddepto);
        if($this->dataprev == ""){
          $this->dataprev_dia = ($this->dataprev_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dataprev_dia"]:$this->dataprev_dia);
          $this->dataprev_mes = ($this->dataprev_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dataprev_mes"]:$this->dataprev_mes);
@@ -120,10 +120,10 @@ class cl_db_ordem {
          }
        }
        $this->alertado = ($this->alertado == "f"?@$GLOBALS["HTTP_POST_VARS"]["alertado"]:$this->alertado);
-       $this->codorigem = ($this->codorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["codorigem"]:$this->codorigem);
-       $this->codcli = ($this->codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["codcli"]:$this->codcli);
-       $this->prioridade = ($this->prioridade == ""?@$GLOBALS["HTTP_POST_VARS"]["prioridade"]:$this->prioridade);
-       $this->status = ($this->status == ""?@$GLOBALS["HTTP_POST_VARS"]["status"]:$this->status);
+       $this->codorigem = ($this->codorigem === 0 || $this->codorigem === 0.0 || $this->codorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["codorigem"]:$this->codorigem);
+       $this->codcli = ($this->codcli === 0 || $this->codcli === 0.0 || $this->codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["codcli"]:$this->codcli);
+       $this->prioridade = ($this->prioridade === 0 || $this->prioridade === 0.0 || $this->prioridade == ""?@$GLOBALS["HTTP_POST_VARS"]["prioridade"]:$this->prioridade);
+       $this->status = ($this->status === 0 || $this->status === 0.0 || $this->status == ""?@$GLOBALS["HTTP_POST_VARS"]["status"]:$this->status);
        if($this->dtrecebe == ""){
          $this->dtrecebe_dia = ($this->dtrecebe_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dtrecebe_dia"]:$this->dtrecebe_dia);
          $this->dtrecebe_mes = ($this->dtrecebe_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dtrecebe_mes"]:$this->dtrecebe_mes);

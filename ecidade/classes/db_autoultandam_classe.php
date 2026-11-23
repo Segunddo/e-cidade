@@ -67,11 +67,11 @@ class cl_autoultandam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y16_codauto = ($this->y16_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codauto"]:$this->y16_codauto);
-       $this->y16_codandam = ($this->y16_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codandam"]:$this->y16_codandam);
+       $this->y16_codauto = ($this->y16_codauto === 0 || $this->y16_codauto === 0.0 || $this->y16_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codauto"]:$this->y16_codauto);
+       $this->y16_codandam = ($this->y16_codandam === 0 || $this->y16_codandam === 0.0 || $this->y16_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codandam"]:$this->y16_codandam);
      }else{
-       $this->y16_codauto = ($this->y16_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codauto"]:$this->y16_codauto);
-       $this->y16_codandam = ($this->y16_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codandam"]:$this->y16_codandam);
+       $this->y16_codauto = ($this->y16_codauto === 0 || $this->y16_codauto === 0.0 || $this->y16_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codauto"]:$this->y16_codauto);
+       $this->y16_codandam = ($this->y16_codandam === 0 || $this->y16_codandam === 0.0 || $this->y16_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y16_codandam"]:$this->y16_codandam);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_autoultandam {
       $this->atualizacampos();
        $this->y16_codauto = $y16_codauto;
        $this->y16_codandam = $y16_codandam;
-     if(($this->y16_codauto == null) || ($this->y16_codauto == "") ){
+     if(($this->y16_codauto == null) || ($this->y16_codauto === 0 || $this->y16_codauto === 0.0 || $this->y16_codauto == "") ){
        $this->erro_sql = " Campo y16_codauto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_autoultandam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y16_codandam == null) || ($this->y16_codandam == "") ){
+     if(($this->y16_codandam == null) || ($this->y16_codandam === 0 || $this->y16_codandam === 0.0 || $this->y16_codandam == "") ){
        $this->erro_sql = " Campo y16_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

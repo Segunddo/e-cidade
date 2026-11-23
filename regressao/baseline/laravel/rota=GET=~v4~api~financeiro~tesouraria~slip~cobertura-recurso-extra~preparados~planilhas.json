@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/tesouraria/slip/cobertura-recurso-extra/preparados/planilhas",
+  "json": {
+    "errors": {
+      "dataInicial": [
+        "Deve ser informada."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "45c17d59b6467d9e40ac868d00c5cca91c29058db7c922d87aaccacfe253b8c0",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -73,13 +73,13 @@ class cl_empanuladoitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e37_sequencial = ($this->e37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_sequencial"]:$this->e37_sequencial);
-       $this->e37_empempitem = ($this->e37_empempitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_empempitem"]:$this->e37_empempitem);
-       $this->e37_empanulado = ($this->e37_empanulado == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_empanulado"]:$this->e37_empanulado);
-       $this->e37_vlranu = ($this->e37_vlranu == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_vlranu"]:$this->e37_vlranu);
-       $this->e37_qtd = ($this->e37_qtd == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_qtd"]:$this->e37_qtd);
+       $this->e37_sequencial = ($this->e37_sequencial === 0 || $this->e37_sequencial === 0.0 || $this->e37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_sequencial"]:$this->e37_sequencial);
+       $this->e37_empempitem = ($this->e37_empempitem === 0 || $this->e37_empempitem === 0.0 || $this->e37_empempitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_empempitem"]:$this->e37_empempitem);
+       $this->e37_empanulado = ($this->e37_empanulado === 0 || $this->e37_empanulado === 0.0 || $this->e37_empanulado == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_empanulado"]:$this->e37_empanulado);
+       $this->e37_vlranu = ($this->e37_vlranu === 0 || $this->e37_vlranu === 0.0 || $this->e37_vlranu == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_vlranu"]:$this->e37_vlranu);
+       $this->e37_qtd = ($this->e37_qtd === 0 || $this->e37_qtd === 0.0 || $this->e37_qtd == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_qtd"]:$this->e37_qtd);
      }else{
-       $this->e37_sequencial = ($this->e37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_sequencial"]:$this->e37_sequencial);
+       $this->e37_sequencial = ($this->e37_sequencial === 0 || $this->e37_sequencial === 0.0 || $this->e37_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e37_sequencial"]:$this->e37_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_empanuladoitem {
          $this->e37_sequencial = $e37_sequencial;
        }
      }
-     if(($this->e37_sequencial == null) || ($this->e37_sequencial == "") ){
+     if(($this->e37_sequencial == null) || ($this->e37_sequencial === 0 || $this->e37_sequencial === 0.0 || $this->e37_sequencial == "") ){
        $this->erro_sql = " Campo e37_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

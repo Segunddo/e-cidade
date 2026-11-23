@@ -61,7 +61,7 @@ class cl_concilia {
                  k68_conciliastatus = int4 = Codigo 
                  ";
    //funcao construtor da classe 
-   public function cl_concilia() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("concilia"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -78,7 +78,7 @@ class cl_concilia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k68_sequencial = ($this->k68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_sequencial"]:$this->k68_sequencial);
+       $this->k68_sequencial = ($this->k68_sequencial === 0 || $this->k68_sequencial === 0.0 || $this->k68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_sequencial"]:$this->k68_sequencial);
        if($this->k68_data == ""){
          $this->k68_data_dia = ($this->k68_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_data_dia"]:$this->k68_data_dia);
          $this->k68_data_mes = ($this->k68_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_data_mes"]:$this->k68_data_mes);
@@ -87,12 +87,12 @@ class cl_concilia {
             $this->k68_data = $this->k68_data_ano."-".$this->k68_data_mes."-".$this->k68_data_dia;
          }
        }
-       $this->k68_contabancaria = ($this->k68_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_contabancaria"]:$this->k68_contabancaria);
-       $this->k68_saldoextrato = ($this->k68_saldoextrato == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_saldoextrato"]:$this->k68_saldoextrato);
-       $this->k68_saldocorrente = ($this->k68_saldocorrente == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_saldocorrente"]:$this->k68_saldocorrente);
-       $this->k68_conciliastatus = ($this->k68_conciliastatus == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_conciliastatus"]:$this->k68_conciliastatus);
+       $this->k68_contabancaria = ($this->k68_contabancaria === 0 || $this->k68_contabancaria === 0.0 || $this->k68_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_contabancaria"]:$this->k68_contabancaria);
+       $this->k68_saldoextrato = ($this->k68_saldoextrato === 0 || $this->k68_saldoextrato === 0.0 || $this->k68_saldoextrato == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_saldoextrato"]:$this->k68_saldoextrato);
+       $this->k68_saldocorrente = ($this->k68_saldocorrente === 0 || $this->k68_saldocorrente === 0.0 || $this->k68_saldocorrente == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_saldocorrente"]:$this->k68_saldocorrente);
+       $this->k68_conciliastatus = ($this->k68_conciliastatus === 0 || $this->k68_conciliastatus === 0.0 || $this->k68_conciliastatus == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_conciliastatus"]:$this->k68_conciliastatus);
      }else{
-       $this->k68_sequencial = ($this->k68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_sequencial"]:$this->k68_sequencial);
+       $this->k68_sequencial = ($this->k68_sequencial === 0 || $this->k68_sequencial === 0.0 || $this->k68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k68_sequencial"]:$this->k68_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_concilia {
          $this->k68_sequencial = $k68_sequencial; 
        }
      }
-     if(($this->k68_sequencial == null) || ($this->k68_sequencial == "") ){ 
+     if(($this->k68_sequencial == null) || ($this->k68_sequencial === 0 || $this->k68_sequencial === 0.0 || $this->k68_sequencial == "") ){ 
        $this->erro_sql = " Campo k68_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

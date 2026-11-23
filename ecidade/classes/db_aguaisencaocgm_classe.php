@@ -134,7 +134,7 @@ class cl_aguaisencaocgm {
          $this->x56_sequencial = $x56_sequencial;
        }
      }
-     if(($this->x56_sequencial == null) || ($this->x56_sequencial == "") ){
+     if(($this->x56_sequencial == null) || ($this->x56_sequencial === 0 || $this->x56_sequencial === 0.0 || $this->x56_sequencial == "") ){
        $this->erro_sql = " Campo x56_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

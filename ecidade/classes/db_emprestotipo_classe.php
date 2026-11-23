@@ -69,11 +69,11 @@ class cl_emprestotipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e90_codigo = ($this->e90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codigo"]:$this->e90_codigo);
+       $this->e90_codigo = ($this->e90_codigo === 0 || $this->e90_codigo === 0.0 || $this->e90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codigo"]:$this->e90_codigo);
        $this->e90_descr = ($this->e90_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_descr"]:$this->e90_descr);
        $this->e90_estrut = ($this->e90_estrut == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_estrut"]:$this->e90_estrut);
      }else{
-       $this->e90_codigo = ($this->e90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codigo"]:$this->e90_codigo);
+       $this->e90_codigo = ($this->e90_codigo === 0 || $this->e90_codigo === 0.0 || $this->e90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e90_codigo"]:$this->e90_codigo);
      }
    }
    // funcao para inclusao
@@ -89,7 +89,7 @@ class cl_emprestotipo {
        return false;
      }
        $this->e90_codigo = $e90_codigo;
-     if(($this->e90_codigo == null) || ($this->e90_codigo == "") ){
+     if(($this->e90_codigo == null) || ($this->e90_codigo === 0 || $this->e90_codigo === 0.0 || $this->e90_codigo == "") ){
        $this->erro_sql = " Campo e90_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

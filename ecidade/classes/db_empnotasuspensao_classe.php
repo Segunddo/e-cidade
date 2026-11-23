@@ -126,7 +126,7 @@ class cl_empnotasuspensao {
         $this->cc36_sequencial = $cc36_sequencial;
       }
     }
-    if(($this->cc36_sequencial == null) || ($this->cc36_sequencial == "") ){
+    if(($this->cc36_sequencial == null) || ($this->cc36_sequencial === 0 || $this->cc36_sequencial === 0.0 || $this->cc36_sequencial == "") ){
       $this->erro_sql = " Campo cc36_sequencial não declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

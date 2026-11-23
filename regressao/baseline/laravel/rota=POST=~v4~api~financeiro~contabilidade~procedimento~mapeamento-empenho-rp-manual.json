@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/procedimento/mapeamento-empenho-rp-manual",
+  "json": {
+    "error": true,
+    "message": "Undefined index: elemento"
+  },
+  "sha256": "335a2c959c590ac6fc581aa8cdffba52b7c732fb40c78e14bcc771bbee3b8a41",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

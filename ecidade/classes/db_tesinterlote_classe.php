@@ -67,10 +67,10 @@ class cl_tesinterlote {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j69_tesinter = ($this->j69_tesinter == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_tesinter"]:$this->j69_tesinter);
-       $this->j69_idbql = ($this->j69_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_idbql"]:$this->j69_idbql);
+       $this->j69_tesinter = ($this->j69_tesinter === 0 || $this->j69_tesinter === 0.0 || $this->j69_tesinter == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_tesinter"]:$this->j69_tesinter);
+       $this->j69_idbql = ($this->j69_idbql === 0 || $this->j69_idbql === 0.0 || $this->j69_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_idbql"]:$this->j69_idbql);
      }else{
-       $this->j69_tesinter = ($this->j69_tesinter == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_tesinter"]:$this->j69_tesinter);
+       $this->j69_tesinter = ($this->j69_tesinter === 0 || $this->j69_tesinter === 0.0 || $this->j69_tesinter == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_tesinter"]:$this->j69_tesinter);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_tesinterlote {
        return false;
      }
        $this->j69_tesinter = $j69_tesinter;
-     if(($this->j69_tesinter == null) || ($this->j69_tesinter == "") ){
+     if(($this->j69_tesinter == null) || ($this->j69_tesinter === 0 || $this->j69_tesinter === 0.0 || $this->j69_tesinter == "") ){
        $this->erro_sql = " Campo j69_tesinter nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

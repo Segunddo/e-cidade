@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/arrecadacao/data-lancamento-debito/busca-inscricao-municipal",
+  "json": {
+    "errors": {
+      "inscricao": [
+        "O campo inscricao é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "8a3b4879b7653c033534f79200c2ee75fd953084e5d332cc6b53e761aa492e69",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

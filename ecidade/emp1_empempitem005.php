@@ -35,7 +35,7 @@ include_once(modification("classes/db_empempenho_classe.php"));
 include_once(modification("classes/db_empanuladoitem_classe.php"));
 include_once(modification("dbforms/db_funcoes.php"));
 db_postmemory($_POST);
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clempautitem = new cl_empautitem;
 $clempempitem = new cl_empempitem;

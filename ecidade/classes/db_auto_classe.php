@@ -94,7 +94,7 @@ class cl_auto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y50_codauto = ($this->y50_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_codauto"]:$this->y50_codauto);
+       $this->y50_codauto = ($this->y50_codauto === 0 || $this->y50_codauto === 0.0 || $this->y50_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_codauto"]:$this->y50_codauto);
        if($this->y50_data == ""){
          $this->y50_data_dia = ($this->y50_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_data_dia"]:$this->y50_data_dia);
          $this->y50_data_mes = ($this->y50_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_data_mes"]:$this->y50_data_mes);
@@ -105,7 +105,7 @@ class cl_auto {
        }
        $this->y50_hora = ($this->y50_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_hora"]:$this->y50_hora);
        $this->y50_obs = ($this->y50_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_obs"]:$this->y50_obs);
-       $this->y50_setor = ($this->y50_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_setor"]:$this->y50_setor);
+       $this->y50_setor = ($this->y50_setor === 0 || $this->y50_setor === 0.0 || $this->y50_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_setor"]:$this->y50_setor);
        $this->y50_nome = ($this->y50_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_nome"]:$this->y50_nome);
        if($this->y50_dtvenc == ""){
          $this->y50_dtvenc_dia = ($this->y50_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_dtvenc_dia"]:$this->y50_dtvenc_dia);
@@ -124,10 +124,10 @@ class cl_auto {
             $this->y50_prazorec = $this->y50_prazorec_ano."-".$this->y50_prazorec_mes."-".$this->y50_prazorec_dia;
          }
        }
-       $this->y50_codtipo = ($this->y50_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_codtipo"]:$this->y50_codtipo);
-       $this->y50_instit = ($this->y50_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_instit"]:$this->y50_instit);
+       $this->y50_codtipo = ($this->y50_codtipo === 0 || $this->y50_codtipo === 0.0 || $this->y50_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_codtipo"]:$this->y50_codtipo);
+       $this->y50_instit = ($this->y50_instit === 0 || $this->y50_instit === 0.0 || $this->y50_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_instit"]:$this->y50_instit);
      }else{
-       $this->y50_codauto = ($this->y50_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_codauto"]:$this->y50_codauto);
+       $this->y50_codauto = ($this->y50_codauto === 0 || $this->y50_codauto === 0.0 || $this->y50_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y50_codauto"]:$this->y50_codauto);
      }
    }
    // funcao para inclusao
@@ -232,7 +232,7 @@ class cl_auto {
          $this->y50_codauto = $y50_codauto;
        }
      }
-     if(($this->y50_codauto == null) || ($this->y50_codauto == "") ){
+     if(($this->y50_codauto == null) || ($this->y50_codauto === 0 || $this->y50_codauto === 0.0 || $this->y50_codauto == "") ){
        $this->erro_sql = " Campo y50_codauto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

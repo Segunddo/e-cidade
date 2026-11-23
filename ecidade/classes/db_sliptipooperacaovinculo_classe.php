@@ -67,10 +67,10 @@ class cl_sliptipooperacaovinculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k153_slip = ($this->k153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slip"]:$this->k153_slip);
-       $this->k153_slipoperacaotipo = ($this->k153_slipoperacaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slipoperacaotipo"]:$this->k153_slipoperacaotipo);
+       $this->k153_slip = ($this->k153_slip === 0 || $this->k153_slip === 0.0 || $this->k153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slip"]:$this->k153_slip);
+       $this->k153_slipoperacaotipo = ($this->k153_slipoperacaotipo === 0 || $this->k153_slipoperacaotipo === 0.0 || $this->k153_slipoperacaotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slipoperacaotipo"]:$this->k153_slipoperacaotipo);
      }else{
-       $this->k153_slip = ($this->k153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slip"]:$this->k153_slip);
+       $this->k153_slip = ($this->k153_slip === 0 || $this->k153_slip === 0.0 || $this->k153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k153_slip"]:$this->k153_slip);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sliptipooperacaovinculo {
        return false;
      }
        $this->k153_slip = $k153_slip;
-     if(($this->k153_slip == null) || ($this->k153_slip == "") ){
+     if(($this->k153_slip == null) || ($this->k153_slip === 0 || $this->k153_slip === 0.0 || $this->k153_slip == "") ){
        $this->erro_sql = " Campo k153_slip nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

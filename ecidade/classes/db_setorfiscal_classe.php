@@ -69,11 +69,11 @@ class cl_setorfiscal {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j90_codigo = ($this->j90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_codigo"]:$this->j90_codigo);
+       $this->j90_codigo = ($this->j90_codigo === 0 || $this->j90_codigo === 0.0 || $this->j90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_codigo"]:$this->j90_codigo);
        $this->j90_descr = ($this->j90_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_descr"]:$this->j90_descr);
-       $this->j90_valor = ($this->j90_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_valor"]:$this->j90_valor);
+       $this->j90_valor = ($this->j90_valor === 0 || $this->j90_valor === 0.0 || $this->j90_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_valor"]:$this->j90_valor);
      }else{
-       $this->j90_codigo = ($this->j90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_codigo"]:$this->j90_codigo);
+       $this->j90_codigo = ($this->j90_codigo === 0 || $this->j90_codigo === 0.0 || $this->j90_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j90_codigo"]:$this->j90_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_setorfiscal {
          $this->j90_codigo = $j90_codigo;
        }
      }
-     if(($this->j90_codigo == null) || ($this->j90_codigo == "") ){
+     if(($this->j90_codigo == null) || ($this->j90_codigo === 0 || $this->j90_codigo === 0.0 || $this->j90_codigo == "") ){
        $this->erro_sql = " Campo j90_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

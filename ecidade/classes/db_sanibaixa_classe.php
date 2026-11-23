@@ -76,8 +76,8 @@ class cl_sanibaixa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y81_codsani = ($this->y81_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_codsani"]:$this->y81_codsani);
-       $this->y81_seq = ($this->y81_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_seq"]:$this->y81_seq);
+       $this->y81_codsani = ($this->y81_codsani === 0 || $this->y81_codsani === 0.0 || $this->y81_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_codsani"]:$this->y81_codsani);
+       $this->y81_seq = ($this->y81_seq === 0 || $this->y81_seq === 0.0 || $this->y81_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_seq"]:$this->y81_seq);
        if($this->y81_data == ""){
          $this->y81_data_dia = ($this->y81_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_data_dia"]:$this->y81_data_dia);
          $this->y81_data_mes = ($this->y81_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_data_mes"]:$this->y81_data_mes);
@@ -89,8 +89,8 @@ class cl_sanibaixa {
        $this->y81_obs = ($this->y81_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_obs"]:$this->y81_obs);
        $this->y81_oficio = ($this->y81_oficio == "f"?@$GLOBALS["HTTP_POST_VARS"]["y81_oficio"]:$this->y81_oficio);
      }else{
-       $this->y81_codsani = ($this->y81_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_codsani"]:$this->y81_codsani);
-       $this->y81_seq = ($this->y81_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_seq"]:$this->y81_seq);
+       $this->y81_codsani = ($this->y81_codsani === 0 || $this->y81_codsani === 0.0 || $this->y81_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_codsani"]:$this->y81_codsani);
+       $this->y81_seq = ($this->y81_seq === 0 || $this->y81_seq === 0.0 || $this->y81_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y81_seq"]:$this->y81_seq);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_sanibaixa {
      }
        $this->y81_codsani = $y81_codsani;
        $this->y81_seq = $y81_seq;
-     if(($this->y81_codsani == null) || ($this->y81_codsani == "") ){
+     if(($this->y81_codsani == null) || ($this->y81_codsani === 0 || $this->y81_codsani === 0.0 || $this->y81_codsani == "") ){
        $this->erro_sql = " Campo y81_codsani nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -133,7 +133,7 @@ class cl_sanibaixa {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y81_seq == null) || ($this->y81_seq == "") ){
+     if(($this->y81_seq == null) || ($this->y81_seq === 0 || $this->y81_seq === 0.0 || $this->y81_seq == "") ){
        $this->erro_sql = " Campo y81_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

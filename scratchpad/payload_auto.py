@@ -7,6 +7,21 @@ precisam de ajuste manual -- que e onde o custo do nivel 3 realmente esta.
 
 Uso: python3 scratchpad/payload_auto.py <SID> <tela.php>
 Saida: a querystring, em uma linha.
+
+Como faz: restaura a sessao a partir de /tmp/_d.bak, faz um GET da tela no 7.4
+  (:8080), le <input>, <select> e <textarea> por expressao regular e da a cada
+  campo um valor plausivel pela heuristica de valor() (pelo NOME do campo);
+  acrescenta no fim o PRIMEIRO botao de submit (em tela 001, o de inclusao).
+Entradas: SID de uma sessao autenticada; a tela (relativa a ecidade/).
+  Exige /tmp/_d.bak no container ecidade_php74 (prova de fumaca do guia ou
+  nivel3.py); se faltar, o cp falha em silencio e a sessao e usada como esta.
+Efeitos colaterais: sobrescreve o arquivo de sessao com /tmp/_d.bak; o GET nao
+  grava no banco. Nao altera codigo.
+Limites: os valores NAO sao codificados para URL (espaco, & ou ' num valor
+  quebram a querystring ou o comando curl do escrita_post.py); campo repetido
+  fica com o ultimo visto.
+Usado em: guia (docs/migrar-um-modulo.md), Nivel 3, "Passo 3 -- gerar o payload
+  lendo o formulario"; chamado pelo nivel3.py e pelo demo_nivel3.sh.
 """
 import re, subprocess, sys
 SID, TELA = sys.argv[1], sys.argv[2]
@@ -18,6 +33,7 @@ h = subprocess.run(["bash","-lc",
   f'curl -s -b "ECIDADEWINDOWMAIN={SID}" http://localhost:8080/{TELA}'],
   capture_output=True).stdout.decode("latin-1")
 
+# atributos da tag como dict; so os valores entre aspas sao lidos
 def attrs(t): return dict(re.findall(r'(\w+)\s*=\s*["\']([^"\']*)["\']', t))
 
 campos, submit = {}, None
@@ -31,12 +47,18 @@ for tag in re.findall(r'<input[^>]*>', h, re.I):
         continue
     if t == "reset": continue
     campos[n] = ("", t)
+# select: ja resolve o valor -- a primeira <option> com value nao vazio (a vazia
+# costuma ser o "Selecione")
 for m in re.finditer(r'<select[^>]*name\s*=\s*["\']([^"\']+)["\'][^>]*>(.*?)</select>', h, re.I|re.S):
     ops = [o for o in re.findall(r'<option[^>]*value\s*=\s*["\']?([^"\'>\s]*)', m.group(2), re.I) if o]
     campos[m.group(1)] = (ops[0] if ops else "", "select")
 for m in re.finditer(r'<textarea[^>]*name\s*=\s*["\']([^"\']+)["\']', h, re.I):
     campos[m.group(1)] = ("", "textarea")
 
+# Heuristica pelo nome do campo. A ORDEM importa: _dia/_mes/_ano (data quebrada
+# em tres campos escondidos) antes do teste generico de "dt"/"data"; textos
+# reconheciveis recebem TESTE_N3 (facil de achar se sobrar linha de teste no
+# banco); chave/codigo/sequencial ficam vazios para a sequencia gerar; o resto, "1".
 def valor(n, atual, tipo):
     if atual: return atual                      # select ja resolvido
     b = n.lower()

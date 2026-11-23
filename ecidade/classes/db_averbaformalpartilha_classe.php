@@ -71,12 +71,12 @@ class cl_averbaformalpartilha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j100_sequencial = ($this->j100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j100_sequencial"]:$this->j100_sequencial);
-       $this->j100_averbacao = ($this->j100_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j100_averbacao"]:$this->j100_averbacao);
-       $this->j100_processojudicial = ($this->j100_processojudicial == ""?@$GLOBALS["HTTP_POST_VARS"]["j100_processojudicial"]:$this->j100_processojudicial);
+       $this->j100_sequencial = ($this->j100_sequencial === 0 || $this->j100_sequencial === 0.0 || $this->j100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j100_sequencial"]:$this->j100_sequencial);
+       $this->j100_averbacao = ($this->j100_averbacao === 0 || $this->j100_averbacao === 0.0 || $this->j100_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j100_averbacao"]:$this->j100_averbacao);
+       $this->j100_processojudicial = ($this->j100_processojudicial === 0 || $this->j100_processojudicial === 0.0 || $this->j100_processojudicial == ""?@$GLOBALS["HTTP_POST_VARS"]["j100_processojudicial"]:$this->j100_processojudicial);
        $this->j100_nomeespolio = ($this->j100_nomeespolio == ""?@$GLOBALS["HTTP_POST_VARS"]["j100_nomeespolio"]:$this->j100_nomeespolio);
      }else{
-       $this->j100_sequencial = ($this->j100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j100_sequencial"]:$this->j100_sequencial);
+       $this->j100_sequencial = ($this->j100_sequencial === 0 || $this->j100_sequencial === 0.0 || $this->j100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j100_sequencial"]:$this->j100_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_averbaformalpartilha {
          $this->j100_sequencial = $j100_sequencial;
        }
      }
-     if(($this->j100_sequencial == null) || ($this->j100_sequencial == "") ){
+     if(($this->j100_sequencial == null) || ($this->j100_sequencial === 0 || $this->j100_sequencial === 0.0 || $this->j100_sequencial == "") ){
        $this->erro_sql = " Campo j100_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

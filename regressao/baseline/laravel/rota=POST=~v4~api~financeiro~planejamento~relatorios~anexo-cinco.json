@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/anexo-cinco",
+  "json": {
+    "errors": {
+      "codigo_relatorio": [
+        "O Código do Relatório deve ser informado."
+      ],
+      "instituicoes": [
+        "Deve ser informado a(s) Instituições."
+      ],
+      "periodo": [
+        "O Código do Período deve ser informado."
+      ],
+      "planejamento_id": [
+        "O campo \"Código\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "4d4e5570c173d95a1a58d0cfdecd467472e8655fd7818ae77c2d402c596b2891",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

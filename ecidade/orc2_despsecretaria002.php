@@ -35,7 +35,7 @@ require_once modification("libs/db_sql.php");
 
 $clselorcdotacao = new cl_selorcdotacao();
 $opcao = 2;
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 $anousu = db_getsession('DB_anousu');
 

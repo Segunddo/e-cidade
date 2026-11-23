@@ -67,10 +67,10 @@ class cl_recparproc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->receita = ($this->receita == ""?@$GLOBALS["HTTP_POST_VARS"]["receita"]:$this->receita);
-       $this->v03_codigo = ($this->v03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
+       $this->receita = ($this->receita === 0 || $this->receita === 0.0 || $this->receita == ""?@$GLOBALS["HTTP_POST_VARS"]["receita"]:$this->receita);
+       $this->v03_codigo = ($this->v03_codigo === 0 || $this->v03_codigo === 0.0 || $this->v03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
      }else{
-       $this->v03_codigo = ($this->v03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
+       $this->v03_codigo = ($this->v03_codigo === 0 || $this->v03_codigo === 0.0 || $this->v03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["v03_codigo"]:$this->v03_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_recparproc {
        return false;
      }
        $this->v03_codigo = $v03_codigo;
-     if(($this->v03_codigo == null) || ($this->v03_codigo == "") ){
+     if(($this->v03_codigo == null) || ($this->v03_codigo === 0 || $this->v03_codigo === 0.0 || $this->v03_codigo == "") ){
        $this->erro_sql = " Campo v03_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

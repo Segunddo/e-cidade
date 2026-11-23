@@ -73,8 +73,8 @@ class cl_conlancamdoc
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->c71_codlan = ($this->c71_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c71_codlan"]:$this->c71_codlan);
-            $this->c71_coddoc = ($this->c71_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c71_coddoc"]:$this->c71_coddoc);
+            $this->c71_codlan = ($this->c71_codlan === 0 || $this->c71_codlan === 0.0 || $this->c71_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c71_codlan"]:$this->c71_codlan);
+            $this->c71_coddoc = ($this->c71_coddoc === 0 || $this->c71_coddoc === 0.0 || $this->c71_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c71_coddoc"]:$this->c71_coddoc);
             if ($this->c71_data == "") {
                 $this->c71_data_dia = ($this->c71_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c71_data_dia"]:$this->c71_data_dia);
                 $this->c71_data_mes = ($this->c71_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c71_data_mes"]:$this->c71_data_mes);
@@ -84,7 +84,7 @@ class cl_conlancamdoc
                 }
             }
         } else {
-            $this->c71_codlan = ($this->c71_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c71_codlan"]:$this->c71_codlan);
+            $this->c71_codlan = ($this->c71_codlan === 0 || $this->c71_codlan === 0.0 || $this->c71_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c71_codlan"]:$this->c71_codlan);
         }
     }
 
@@ -110,7 +110,7 @@ class cl_conlancamdoc
             return false;
         }
         $this->c71_codlan = $c71_codlan;
-        if (($this->c71_codlan == null) || ($this->c71_codlan == "")) {
+        if (($this->c71_codlan == null) || ($this->c71_codlan === 0 || $this->c71_codlan === 0.0 || $this->c71_codlan == "")) {
             $this->erro_sql = " Campo c71_codlan não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

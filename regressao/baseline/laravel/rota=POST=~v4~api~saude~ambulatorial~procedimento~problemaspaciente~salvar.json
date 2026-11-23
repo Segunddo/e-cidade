@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/ambulatorial/procedimento/problemaspaciente/salvar",
+  "json": {
+    "errors": {
+      "paciente": [
+        "O campo paciente é obrigatório."
+      ],
+      "problema": [
+        "O campo problema é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "d4fe84e5c8661d9a49cc2c239d65173c96938f473213419f3e8591d561b49457",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

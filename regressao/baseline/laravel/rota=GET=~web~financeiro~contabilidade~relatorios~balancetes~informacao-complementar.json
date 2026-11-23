@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/relatorios/balancetes/informacao-complementar",
+  "json": null,
+  "sha256": "33f408369babfa583bd083a91759a084da8cb2eb8c63cb935d783389fdcc248e",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

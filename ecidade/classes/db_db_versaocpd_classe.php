@@ -76,8 +76,8 @@ class cl_db_versaocpd {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db33_codcpd = ($this->db33_codcpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codcpd"]:$this->db33_codcpd);
-       $this->db33_codver = ($this->db33_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codver"]:$this->db33_codver);
+       $this->db33_codcpd = ($this->db33_codcpd === 0 || $this->db33_codcpd === 0.0 || $this->db33_codcpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codcpd"]:$this->db33_codcpd);
+       $this->db33_codver = ($this->db33_codver === 0 || $this->db33_codver === 0.0 || $this->db33_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codver"]:$this->db33_codver);
        $this->db33_obs = ($this->db33_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_obs"]:$this->db33_obs);
        $this->db33_obscpd = ($this->db33_obscpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_obscpd"]:$this->db33_obscpd);
        if($this->db33_data == ""){
@@ -89,7 +89,7 @@ class cl_db_versaocpd {
          }
        }
      }else{
-       $this->db33_codcpd = ($this->db33_codcpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codcpd"]:$this->db33_codcpd);
+       $this->db33_codcpd = ($this->db33_codcpd === 0 || $this->db33_codcpd === 0.0 || $this->db33_codcpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db33_codcpd"]:$this->db33_codcpd);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_db_versaocpd {
          $this->db33_codcpd = $db33_codcpd;
        }
      }
-     if(($this->db33_codcpd == null) || ($this->db33_codcpd == "") ){
+     if(($this->db33_codcpd == null) || ($this->db33_codcpd === 0 || $this->db33_codcpd === 0.0 || $this->db33_codcpd == "") ){
        $this->erro_sql = " Campo db33_codcpd nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

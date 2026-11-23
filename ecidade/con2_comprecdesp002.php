@@ -29,14 +29,14 @@ require_once(modification("libs/db_liborcamento.php"));
 require_once(modification("fpdf151/pdf.php"));
 require_once(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $xinstit    =explode("-",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 $descr_inst = '';
 $xvirg      = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
   db_fieldsmemory($resultinst,$xins);
   $descr_inst .= $xvirg.$nomeinst ;
   $xvirg = ', ';
@@ -77,7 +77,7 @@ for($mes=1;$mes<13;$mes++){
 
   $valor = 0;
 
-  for($i=0;$i<pg_numrows($result_rec);$i++){
+  for($i=0;$i<($result_rec ? pg_numrows($result_rec) : null);$i++){
     db_fieldsmemory($result_rec,$i);
 
     $valor = $empenhado-$anulado;
@@ -117,8 +117,8 @@ $alt = 4;
 $result = db_query($sql);
 
 $pagina = 1;
-$qorgao = pg_result($result,0,'orgao');
-$qunidade = pg_result($result,0,'unidade');
+$qorgao = ($result ? pg_result($result,0,'orgao') : null);
+$qunidade = ($result ? pg_result($result,0,'unidade') : null);
 $qualou = "$qorgao$unidade";
 $totoper  = 0;
 
@@ -138,7 +138,7 @@ $tvlr12 = 0;
 if($tipo_rel==2){
 
   $troca_secretaria = false;
-  for($i=0;$i<pg_numrows($result);$i++){
+  for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
     db_fieldsmemory($result,$i);
     if($vlr1+$vlr2+$vlr3+$vlr4+$vlr5+$vlr6+$vlr7+$vlr8+$vlr9+$vlr10+$vlr11+$vlr12==0)
       continue;
@@ -288,7 +288,7 @@ if($tipo_rel==2){
 }else{
 
   $troca_secretaria = false;
-  for($i=0;$i<pg_numrows($result);$i++){
+  for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
     db_fieldsmemory($result,$i);
 
     if (("$qualou" != "$orgao$unidade") ){

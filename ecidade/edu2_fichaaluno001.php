@@ -39,7 +39,7 @@ include(modification("classes/db_alunopossib_classe.php"));
 include(modification("classes/db_cursoescola_classe.php"));
 include(modification("libs/db_jsplibwebseller.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $claluno = new cl_aluno;
 $clserie = new cl_serie;
 $clalunocurso = new cl_alunocurso;

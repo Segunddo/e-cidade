@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/relatorio-legal/notas-explicativas",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Notas Explicativas"
+  },
+  "sha256": "c1cac1a10aade53198e74c56e12f278626ea099d934a6812f10d92972545378c",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

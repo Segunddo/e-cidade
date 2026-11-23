@@ -73,13 +73,13 @@ class cl_empagenotasordem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e43_sequencial = ($this->e43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_sequencial"]:$this->e43_sequencial);
-       $this->e43_ordempagamento = ($this->e43_ordempagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_ordempagamento"]:$this->e43_ordempagamento);
-       $this->e43_empagemov = ($this->e43_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_empagemov"]:$this->e43_empagemov);
+       $this->e43_sequencial = ($this->e43_sequencial === 0 || $this->e43_sequencial === 0.0 || $this->e43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_sequencial"]:$this->e43_sequencial);
+       $this->e43_ordempagamento = ($this->e43_ordempagamento === 0 || $this->e43_ordempagamento === 0.0 || $this->e43_ordempagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_ordempagamento"]:$this->e43_ordempagamento);
+       $this->e43_empagemov = ($this->e43_empagemov === 0 || $this->e43_empagemov === 0.0 || $this->e43_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_empagemov"]:$this->e43_empagemov);
        $this->e43_autorizado = ($this->e43_autorizado == "f"?@$GLOBALS["HTTP_POST_VARS"]["e43_autorizado"]:$this->e43_autorizado);
-       $this->e43_valor = ($this->e43_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_valor"]:$this->e43_valor);
+       $this->e43_valor = ($this->e43_valor === 0 || $this->e43_valor === 0.0 || $this->e43_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_valor"]:$this->e43_valor);
      }else{
-       $this->e43_sequencial = ($this->e43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_sequencial"]:$this->e43_sequencial);
+       $this->e43_sequencial = ($this->e43_sequencial === 0 || $this->e43_sequencial === 0.0 || $this->e43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e43_sequencial"]:$this->e43_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_empagenotasordem {
          $this->e43_sequencial = $e43_sequencial;
        }
      }
-     if(($this->e43_sequencial == null) || ($this->e43_sequencial == "") ){
+     if(($this->e43_sequencial == null) || ($this->e43_sequencial === 0 || $this->e43_sequencial === 0.0 || $this->e43_sequencial == "") ){
        $this->erro_sql = " Campo e43_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

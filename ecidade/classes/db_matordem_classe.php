@@ -84,7 +84,7 @@ class cl_matordem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m51_codordem = ($this->m51_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_codordem"]:$this->m51_codordem);
+       $this->m51_codordem = ($this->m51_codordem === 0 || $this->m51_codordem === 0.0 || $this->m51_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_codordem"]:$this->m51_codordem);
        if($this->m51_data == ""){
          $this->m51_data_dia = ($this->m51_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_data_dia"]:$this->m51_data_dia);
          $this->m51_data_mes = ($this->m51_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_data_mes"]:$this->m51_data_mes);
@@ -93,15 +93,15 @@ class cl_matordem {
             $this->m51_data = $this->m51_data_ano."-".$this->m51_data_mes."-".$this->m51_data_dia;
          }
        }
-       $this->m51_depto = ($this->m51_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_depto"]:$this->m51_depto);
-       $this->m51_numcgm = ($this->m51_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_numcgm"]:$this->m51_numcgm);
+       $this->m51_depto = ($this->m51_depto === 0 || $this->m51_depto === 0.0 || $this->m51_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_depto"]:$this->m51_depto);
+       $this->m51_numcgm = ($this->m51_numcgm === 0 || $this->m51_numcgm === 0.0 || $this->m51_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_numcgm"]:$this->m51_numcgm);
        $this->m51_obs = ($this->m51_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_obs"]:$this->m51_obs);
-       $this->m51_valortotal = ($this->m51_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_valortotal"]:$this->m51_valortotal);
-       $this->m51_prazoent = ($this->m51_prazoent == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_prazoent"]:$this->m51_prazoent);
-       $this->m51_tipo = ($this->m51_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_tipo"]:$this->m51_tipo);
-       $this->m51_deptoorigem = ($this->m51_deptoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_deptoorigem"]:$this->m51_deptoorigem);
+       $this->m51_valortotal = ($this->m51_valortotal === 0 || $this->m51_valortotal === 0.0 || $this->m51_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_valortotal"]:$this->m51_valortotal);
+       $this->m51_prazoent = ($this->m51_prazoent === 0 || $this->m51_prazoent === 0.0 || $this->m51_prazoent == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_prazoent"]:$this->m51_prazoent);
+       $this->m51_tipo = ($this->m51_tipo === 0 || $this->m51_tipo === 0.0 || $this->m51_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_tipo"]:$this->m51_tipo);
+       $this->m51_deptoorigem = ($this->m51_deptoorigem === 0 || $this->m51_deptoorigem === 0.0 || $this->m51_deptoorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_deptoorigem"]:$this->m51_deptoorigem);
      }else{
-       $this->m51_codordem = ($this->m51_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_codordem"]:$this->m51_codordem);
+       $this->m51_codordem = ($this->m51_codordem === 0 || $this->m51_codordem === 0.0 || $this->m51_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m51_codordem"]:$this->m51_codordem);
      }
    }
    // funcao para inclusao
@@ -188,7 +188,7 @@ class cl_matordem {
          $this->m51_codordem = $m51_codordem;
        }
      }
-     if(($this->m51_codordem == null) || ($this->m51_codordem == "") ){
+     if(($this->m51_codordem == null) || ($this->m51_codordem === 0 || $this->m51_codordem === 0.0 || $this->m51_codordem == "") ){
        $this->erro_sql = " Campo m51_codordem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

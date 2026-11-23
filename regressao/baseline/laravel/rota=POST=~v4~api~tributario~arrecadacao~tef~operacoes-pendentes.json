@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/arrecadacao/tef/operacoes-pendentes",
+  "json": {
+    "errors": {
+      "DB_itemmenu_acessado": [
+        "Menu não informado."
+      ],
+      "dataFim": [
+        "Data Fim não informada."
+      ],
+      "dataInicio": [
+        "Data Inicio não informada."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "cc5920957a76c255768e3778307456439437afc4dc9d86bb1a12ada57f6579d1",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

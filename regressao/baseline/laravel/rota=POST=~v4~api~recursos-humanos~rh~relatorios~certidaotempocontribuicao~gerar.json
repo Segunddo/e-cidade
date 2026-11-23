@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/relatorios/certidaotempocontribuicao/gerar",
+  "json": {
+    "errors": {
+      "ano": [
+        "Ano deve ser informado."
+      ],
+      "matricula": [
+        "Matricula deve ser informada."
+      ],
+      "numero": [
+        "Numero deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "84f482a9f1495019651b3bffc802d8608cb00928606fdd5a7a679dd83b1e49df",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

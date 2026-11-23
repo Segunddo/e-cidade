@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/termos/retificar",
+  "json": {
+    "error": true,
+    "message": "Erro ao autenticar usuário no sistema PNCP\nMensagem do erro:\ncURL error 6: Could not resolve host: v1 (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for v1/usuarios/login"
+  },
+  "sha256": "35de37dfc6d43490d29ba7ceb29aa8d9b38eb34d4c30c42062e7cb4f994ba9be",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

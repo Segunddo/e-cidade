@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/procedimento/apropriacao/decimo-ferias/apropriar/buscarValores",
+  "json": {
+    "error": true,
+    "message": "Não foi implantado a Apropriação por Competência de Férias e 13º Salário. \nAcesse: DB:FINANCEIRO > Contabilidade > Procedimentos > Parâmetros > Integração Patrimonial para configurar"
+  },
+  "sha256": "fb313b54e1ddd8fd00cde8d92dd814fec13aeb9b3bdae6d5bdc5a4ae6d7db2da",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

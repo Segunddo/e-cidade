@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/anexos4320/orcamento",
+  "json": {
+    "error": true,
+    "message": "Você deve selecionar o planejamento."
+  },
+  "sha256": "ec2929c919e2a0725b59b47c46a3808948856edfdcba0352e00173717294c40b",
+  "sql_negocio": [],
+  "status": 403,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

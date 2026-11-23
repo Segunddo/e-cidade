@@ -39,7 +39,7 @@ require_once(modification("fpdf151/PDFTable.php"));
 $oGet    = db_utils::postMemory($_GET);
 $iAnousu = $oGet->anousu;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $oPdfTable = new PDFTable(PDFDocument::PRINT_LANDSCAPE);
 $aCabecalho     = array( "Código", "Desrição", "Código da Receita", "Descrição da Receita", "Valor" );

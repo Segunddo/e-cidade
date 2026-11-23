@@ -83,18 +83,18 @@ class cl_orcduplicacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o75_sequencial = ($this->o75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_sequencial"]:$this->o75_sequencial);
-       $this->o75_conaberturaexe = ($this->o75_conaberturaexe == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_conaberturaexe"]:$this->o75_conaberturaexe);
-       $this->o75_tipo = ($this->o75_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_tipo"]:$this->o75_tipo);
-       $this->o75_previsaoinicial = ($this->o75_previsaoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_previsaoinicial"]:$this->o75_previsaoinicial);
-       $this->o75_acrescimos = ($this->o75_acrescimos == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_acrescimos"]:$this->o75_acrescimos);
-       $this->o75_reducoes = ($this->o75_reducoes == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_reducoes"]:$this->o75_reducoes);
-       $this->o75_atualizado = ($this->o75_atualizado == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_atualizado"]:$this->o75_atualizado);
-       $this->o75_percentual = ($this->o75_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_percentual"]:$this->o75_percentual);
-       $this->o75_valorduplicar = ($this->o75_valorduplicar == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_valorduplicar"]:$this->o75_valorduplicar);
+       $this->o75_sequencial = ($this->o75_sequencial === 0 || $this->o75_sequencial === 0.0 || $this->o75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_sequencial"]:$this->o75_sequencial);
+       $this->o75_conaberturaexe = ($this->o75_conaberturaexe === 0 || $this->o75_conaberturaexe === 0.0 || $this->o75_conaberturaexe == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_conaberturaexe"]:$this->o75_conaberturaexe);
+       $this->o75_tipo = ($this->o75_tipo === 0 || $this->o75_tipo === 0.0 || $this->o75_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_tipo"]:$this->o75_tipo);
+       $this->o75_previsaoinicial = ($this->o75_previsaoinicial === 0 || $this->o75_previsaoinicial === 0.0 || $this->o75_previsaoinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_previsaoinicial"]:$this->o75_previsaoinicial);
+       $this->o75_acrescimos = ($this->o75_acrescimos === 0 || $this->o75_acrescimos === 0.0 || $this->o75_acrescimos == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_acrescimos"]:$this->o75_acrescimos);
+       $this->o75_reducoes = ($this->o75_reducoes === 0 || $this->o75_reducoes === 0.0 || $this->o75_reducoes == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_reducoes"]:$this->o75_reducoes);
+       $this->o75_atualizado = ($this->o75_atualizado === 0 || $this->o75_atualizado === 0.0 || $this->o75_atualizado == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_atualizado"]:$this->o75_atualizado);
+       $this->o75_percentual = ($this->o75_percentual === 0 || $this->o75_percentual === 0.0 || $this->o75_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_percentual"]:$this->o75_percentual);
+       $this->o75_valorduplicar = ($this->o75_valorduplicar === 0 || $this->o75_valorduplicar === 0.0 || $this->o75_valorduplicar == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_valorduplicar"]:$this->o75_valorduplicar);
        $this->o75_importar = ($this->o75_importar == "f"?@$GLOBALS["HTTP_POST_VARS"]["o75_importar"]:$this->o75_importar);
      }else{
-       $this->o75_sequencial = ($this->o75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_sequencial"]:$this->o75_sequencial);
+       $this->o75_sequencial = ($this->o75_sequencial === 0 || $this->o75_sequencial === 0.0 || $this->o75_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o75_sequencial"]:$this->o75_sequencial);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_orcduplicacao {
          $this->o75_sequencial = $o75_sequencial;
        }
      }
-     if(($this->o75_sequencial == null) || ($this->o75_sequencial == "") ){
+     if(($this->o75_sequencial == null) || ($this->o75_sequencial === 0 || $this->o75_sequencial === 0.0 || $this->o75_sequencial == "") ){
        $this->erro_sql = " Campo o75_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

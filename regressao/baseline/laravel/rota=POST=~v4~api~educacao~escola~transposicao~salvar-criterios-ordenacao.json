@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/transposicao/salvar-criterios-ordenacao",
+  "json": {
+    "error": true,
+    "message": "Invalid argument supplied for foreach()"
+  },
+  "sha256": "b3d418846c373a27d41d7b2370e180a59431390184d5a812a785034a8c47700b",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

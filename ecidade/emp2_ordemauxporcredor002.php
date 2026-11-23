@@ -42,7 +42,7 @@ $sCamposCredorCgm = " z01_numcgm, z01_nome, z01_ender, z01_munic, z01_cgccpf,e94
 //echo $clEmpAgeOrdemCgm->sql_query(null,$sCamposCredorCgm,null,$sWhereCredorCgm);
 $rsCredorCgm = $clEmpAgeOrdemCgm->sql_record($clEmpAgeOrdemCgm->sql_query(null,$sCamposCredorCgm,null,$sWhereCredorCgm)); 
 
-if(pg_num_rows($rsCredorCgm) > 0){
+if(($rsCredorCgm ? pg_num_rows($rsCredorCgm) : null) > 0){
 	
 	$oCredor = db_utils::fieldsMemory($rsCredorCgm,0);
 	
@@ -60,7 +60,7 @@ $sSqlCredorConta .= "       inner join pcforneconpad on pc64_contabanco = pc63_c
 $sSqlCredorConta .= " where pc63_numcgm = ".$oCredor->z01_numcgm;
 //echo $sSqlCredorConta;
 $rsCredorConta = db_query($sSqlCredorConta);
-if(pg_num_rows($rsCredorConta) > 0){
+if(($rsCredorConta ? pg_num_rows($rsCredorConta) : null) > 0){
 	$oCredorConta = db_utils::fieldsMemory($rsCredorConta,0);
 }else{
 	$oCredorConta = new stdClass();
@@ -79,7 +79,7 @@ $sqlPagamentos      = $clEmpAgeNotasOrdem->sql_query_empenho(null,$sCamposPagame
 
 $rsPagamentos = $clEmpAgeNotasOrdem->sql_record($sqlPagamentos);
 if($rsPagamentos !== false){
-  $iNumPagamentos = pg_num_rows($rsPagamentos);
+  $iNumPagamentos = ($rsPagamentos ? pg_num_rows($rsPagamentos) : null);
 }else{
 	db_redireciona('db_erros.php?fechar=true&db_erro=Não existem dados para o relatório.');
 }
@@ -89,7 +89,7 @@ if($rsPagamentos !== false){
 $iNroViaOrd = 1;
 $sqlNroViaOrd = "select e30_nroviaord from empparametro where e39_anousu = ".db_getsession("DB_anousu");
 $rsqlNroViaOrd = db_query($sqlNroViaOrd);
-if($rsqlNroViaOrd !== false && pg_num_rows($rsqlNroViaOrd)>0){
+if($rsqlNroViaOrd !== false && ($rsqlNroViaOrd ? pg_num_rows($rsqlNroViaOrd) : null)>0){
 	$oEmpPar = db_utils::fieldsMemory($rsqlNroViaOrd,0);
 	$iNroViaOrd = $oEmpPar->e30_nroviaord;
 }
@@ -296,7 +296,7 @@ for($iNroVias = 0; $iNroVias < $iNroViaOrd; $iNroVias++){
 			
 			//$emissao = $oPagamento->e42_dtpagamento;
 			
-			if (@pg_num_rows($resparag) > 0) {
+			if (@($resparag ? pg_num_rows($resparag) : null) > 0) {
 			 
 			  $oTexto = db_utils::fieldsmemory($resparag,0);
 			  $sTexto = str_replace('$this->municpref', '$municpref', $oTexto->db02_texto);
@@ -315,7 +315,7 @@ for($iNroVias = 0; $iNroVias < $iNroViaOrd; $iNroVias++){
 			  $sqlparagpadrao .= " where db60_tipodoc = 1500 and db60_instit = " . db_getsession("DB_instit")." order by db62_ordem";
 			    
 			  $resparagpadrao = db_query($sqlparagpadrao);
-			  if (@pg_num_rows($resparagpadrao) > 0) {
+			  if (@($resparagpadrao ? pg_num_rows($resparagpadrao) : null) > 0) {
 			    
 			  	$oTexto = db_utils::fieldsmemory($resparagpadrao,0);
 			    $sTexto = str_replace('$this->municpref', '$municpref', $oTexto->db61_texto);

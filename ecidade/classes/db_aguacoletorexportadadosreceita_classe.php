@@ -79,16 +79,16 @@ class cl_aguacoletorexportadadosreceita {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x52_sequencial = ($this->x52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_sequencial"]:$this->x52_sequencial);
-       $this->x52_receita = ($this->x52_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_receita"]:$this->x52_receita);
-       $this->x52_aguacoletorexportadados = ($this->x52_aguacoletorexportadados == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_aguacoletorexportadados"]:$this->x52_aguacoletorexportadados);
+       $this->x52_sequencial = ($this->x52_sequencial === 0 || $this->x52_sequencial === 0.0 || $this->x52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_sequencial"]:$this->x52_sequencial);
+       $this->x52_receita = ($this->x52_receita === 0 || $this->x52_receita === 0.0 || $this->x52_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_receita"]:$this->x52_receita);
+       $this->x52_aguacoletorexportadados = ($this->x52_aguacoletorexportadados === 0 || $this->x52_aguacoletorexportadados === 0.0 || $this->x52_aguacoletorexportadados == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_aguacoletorexportadados"]:$this->x52_aguacoletorexportadados);
        $this->x52_descricao = ($this->x52_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_descricao"]:$this->x52_descricao);
        $this->x52_numpar = ($this->x52_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_numpar"]:$this->x52_numpar);
-       $this->x52_valor = ($this->x52_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_valor"]:$this->x52_valor);
-       $this->x52_numpre = ($this->x52_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_numpre"]:$this->x52_numpre);
-       $this->x52_numtot = ($this->x52_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_numtot"]:$this->x52_numtot);
+       $this->x52_valor = ($this->x52_valor === 0 || $this->x52_valor === 0.0 || $this->x52_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_valor"]:$this->x52_valor);
+       $this->x52_numpre = ($this->x52_numpre === 0 || $this->x52_numpre === 0.0 || $this->x52_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_numpre"]:$this->x52_numpre);
+       $this->x52_numtot = ($this->x52_numtot === 0 || $this->x52_numtot === 0.0 || $this->x52_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_numtot"]:$this->x52_numtot);
      }else{
-       $this->x52_sequencial = ($this->x52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_sequencial"]:$this->x52_sequencial);
+       $this->x52_sequencial = ($this->x52_sequencial === 0 || $this->x52_sequencial === 0.0 || $this->x52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x52_sequencial"]:$this->x52_sequencial);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_aguacoletorexportadadosreceita {
          $this->x52_sequencial = $x52_sequencial;
        }
      }
-     if(($this->x52_sequencial == null) || ($this->x52_sequencial == "") ){
+     if(($this->x52_sequencial == null) || ($this->x52_sequencial === 0 || $this->x52_sequencial === 0.0 || $this->x52_sequencial == "") ){
        $this->erro_sql = " Campo x52_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

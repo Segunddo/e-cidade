@@ -81,7 +81,7 @@ $clrotulo->label("t64_class");
 $clrotulo->label("t52_ident");
 $clrotulo->label("descrdepto");
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $and              = "and";
 $where            = " t55_codbem is null ";

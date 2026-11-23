@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/comissao",
+  "json": {
+    "errors": {
+      "cgms": [
+        "Deve ser informado uma coleção de cgm."
+      ],
+      "pl2_codigo": [
+        "O campo \"Código\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "d82ca32946b91c0b1101611328ab38dc12f742793dfd51918fe598cb4493f464",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

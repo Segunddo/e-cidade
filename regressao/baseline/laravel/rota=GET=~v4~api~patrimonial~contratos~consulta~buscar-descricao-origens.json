@@ -1,0 +1,25 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/contratos/consulta/buscar-descricao-origens",
+  "json": {
+    "data": {
+      "1": "Processo de Compras",
+      "2": "Licitação",
+      "3": "Manual",
+      "4": "Interno",
+      "5": "Custo Fixo",
+      "6": "Empenho"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "f2c3db7f80769216d4e093b14ec8a479c31dccd741fb89d787ce75aa91fc618d",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

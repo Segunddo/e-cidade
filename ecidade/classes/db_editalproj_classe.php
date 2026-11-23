@@ -67,11 +67,11 @@ class cl_editalproj {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d10_codedi = ($this->d10_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codedi"]:$this->d10_codedi);
-       $this->d10_codigo = ($this->d10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codigo"]:$this->d10_codigo);
+       $this->d10_codedi = ($this->d10_codedi === 0 || $this->d10_codedi === 0.0 || $this->d10_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codedi"]:$this->d10_codedi);
+       $this->d10_codigo = ($this->d10_codigo === 0 || $this->d10_codigo === 0.0 || $this->d10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codigo"]:$this->d10_codigo);
      }else{
-       $this->d10_codedi = ($this->d10_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codedi"]:$this->d10_codedi);
-       $this->d10_codigo = ($this->d10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codigo"]:$this->d10_codigo);
+       $this->d10_codedi = ($this->d10_codedi === 0 || $this->d10_codedi === 0.0 || $this->d10_codedi == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codedi"]:$this->d10_codedi);
+       $this->d10_codigo = ($this->d10_codigo === 0 || $this->d10_codigo === 0.0 || $this->d10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d10_codigo"]:$this->d10_codigo);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_editalproj {
       $this->atualizacampos();
        $this->d10_codedi = $d10_codedi;
        $this->d10_codigo = $d10_codigo;
-     if(($this->d10_codedi == null) || ($this->d10_codedi == "") ){
+     if(($this->d10_codedi == null) || ($this->d10_codedi === 0 || $this->d10_codedi === 0.0 || $this->d10_codedi == "") ){
        $this->erro_sql = " Campo d10_codedi nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_editalproj {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d10_codigo == null) || ($this->d10_codigo == "") ){
+     if(($this->d10_codigo == null) || ($this->d10_codigo === 0 || $this->d10_codigo === 0.0 || $this->d10_codigo == "") ){
        $this->erro_sql = " Campo d10_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

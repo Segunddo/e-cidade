@@ -89,10 +89,10 @@ class cl_issnotaavulsa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q51_sequencial = ($this->q51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_sequencial"]:$this->q51_sequencial);
-       $this->q51_numnota = ($this->q51_numnota == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_numnota"]:$this->q51_numnota);
-       $this->q51_inscr = ($this->q51_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_inscr"]:$this->q51_inscr);
-       $this->q51_usuario = ($this->q51_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_usuario"]:$this->q51_usuario);
+       $this->q51_sequencial = ($this->q51_sequencial === 0 || $this->q51_sequencial === 0.0 || $this->q51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_sequencial"]:$this->q51_sequencial);
+       $this->q51_numnota = ($this->q51_numnota === 0 || $this->q51_numnota === 0.0 || $this->q51_numnota == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_numnota"]:$this->q51_numnota);
+       $this->q51_inscr = ($this->q51_inscr === 0 || $this->q51_inscr === 0.0 || $this->q51_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_inscr"]:$this->q51_inscr);
+       $this->q51_usuario = ($this->q51_usuario === 0 || $this->q51_usuario === 0.0 || $this->q51_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_usuario"]:$this->q51_usuario);
        if($this->q51_dtemiss == ""){
          $this->q51_dtemiss_dia = ($this->q51_dtemiss_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_dtemiss_dia"]:$this->q51_dtemiss_dia);
          $this->q51_dtemiss_mes = ($this->q51_dtemiss_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_dtemiss_mes"]:$this->q51_dtemiss_mes);
@@ -111,10 +111,10 @@ class cl_issnotaavulsa {
          }
        }
        $this->q51_codautent = ($this->q51_codautent == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_codautent"]:$this->q51_codautent);
-       $this->q51_pdfnota = ($this->q51_pdfnota == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_pdfnota"]:$this->q51_pdfnota);
+       $this->q51_pdfnota = ($this->q51_pdfnota === 0 || $this->q51_pdfnota === 0.0 || $this->q51_pdfnota == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_pdfnota"]:$this->q51_pdfnota);
        $this->q51_obs = ($this->q51_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_obs"]:$this->q51_obs);
      }else{
-       $this->q51_sequencial = ($this->q51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_sequencial"]:$this->q51_sequencial);
+       $this->q51_sequencial = ($this->q51_sequencial === 0 || $this->q51_sequencial === 0.0 || $this->q51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q51_sequencial"]:$this->q51_sequencial);
      }
    }
    // funcao para inclusao
@@ -207,7 +207,7 @@ class cl_issnotaavulsa {
          $this->q51_sequencial = $q51_sequencial;
        }
      }
-     if(($this->q51_sequencial == null) || ($this->q51_sequencial == "") ){
+     if(($this->q51_sequencial == null) || ($this->q51_sequencial === 0 || $this->q51_sequencial === 0.0 || $this->q51_sequencial == "") ){
        $this->erro_sql = " Campo q51_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

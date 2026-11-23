@@ -82,11 +82,11 @@ class cl_ppaintegracao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o123_sequencial = ($this->o123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_sequencial"]:$this->o123_sequencial);
-       $this->o123_idusuario = ($this->o123_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_idusuario"]:$this->o123_idusuario);
-       $this->o123_ppaversao = ($this->o123_ppaversao == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_ppaversao"]:$this->o123_ppaversao);
-       $this->o123_situacao = ($this->o123_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_situacao"]:$this->o123_situacao);
-       $this->o123_ano = ($this->o123_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_ano"]:$this->o123_ano);
+       $this->o123_sequencial = ($this->o123_sequencial === 0 || $this->o123_sequencial === 0.0 || $this->o123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_sequencial"]:$this->o123_sequencial);
+       $this->o123_idusuario = ($this->o123_idusuario === 0 || $this->o123_idusuario === 0.0 || $this->o123_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_idusuario"]:$this->o123_idusuario);
+       $this->o123_ppaversao = ($this->o123_ppaversao === 0 || $this->o123_ppaversao === 0.0 || $this->o123_ppaversao == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_ppaversao"]:$this->o123_ppaversao);
+       $this->o123_situacao = ($this->o123_situacao === 0 || $this->o123_situacao === 0.0 || $this->o123_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_situacao"]:$this->o123_situacao);
+       $this->o123_ano = ($this->o123_ano === 0 || $this->o123_ano === 0.0 || $this->o123_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_ano"]:$this->o123_ano);
        if($this->o123_data == ""){
          $this->o123_data_dia = ($this->o123_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_data_dia"]:$this->o123_data_dia);
          $this->o123_data_mes = ($this->o123_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_data_mes"]:$this->o123_data_mes);
@@ -95,10 +95,10 @@ class cl_ppaintegracao {
             $this->o123_data = $this->o123_data_ano."-".$this->o123_data_mes."-".$this->o123_data_dia;
          }
        }
-       $this->o123_instit = ($this->o123_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_instit"]:$this->o123_instit);
-       $this->o123_tipointegracao = ($this->o123_tipointegracao == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_tipointegracao"]:$this->o123_tipointegracao);
+       $this->o123_instit = ($this->o123_instit === 0 || $this->o123_instit === 0.0 || $this->o123_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_instit"]:$this->o123_instit);
+       $this->o123_tipointegracao = ($this->o123_tipointegracao === 0 || $this->o123_tipointegracao === 0.0 || $this->o123_tipointegracao == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_tipointegracao"]:$this->o123_tipointegracao);
      }else{
-       $this->o123_sequencial = ($this->o123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_sequencial"]:$this->o123_sequencial);
+       $this->o123_sequencial = ($this->o123_sequencial === 0 || $this->o123_sequencial === 0.0 || $this->o123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o123_sequencial"]:$this->o123_sequencial);
      }
    }
    // funcao para inclusao
@@ -191,7 +191,7 @@ class cl_ppaintegracao {
          $this->o123_sequencial = $o123_sequencial;
        }
      }
-     if(($this->o123_sequencial == null) || ($this->o123_sequencial == "") ){
+     if(($this->o123_sequencial == null) || ($this->o123_sequencial === 0 || $this->o123_sequencial === 0.0 || $this->o123_sequencial == "") ){
        $this->erro_sql = " Campo o123_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

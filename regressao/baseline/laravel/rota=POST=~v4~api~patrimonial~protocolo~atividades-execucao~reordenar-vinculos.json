@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/atividades-execucao/reordenar-vinculos",
+  "json": {
+    "errors": {
+      "codigoTipoProcesso": [
+        "O campo codigo tipo processo é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "5e149f92e42955bc8369d15555743ed74697c0ff728f320b4ab44bcb5fd33f2a",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

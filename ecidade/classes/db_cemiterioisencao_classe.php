@@ -76,9 +76,9 @@ class cl_cemiterioisencao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm34_sequencial = ($this->cm34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm34_sequencial"]:$this->cm34_sequencial);
+       $this->cm34_sequencial = ($this->cm34_sequencial === 0 || $this->cm34_sequencial === 0.0 || $this->cm34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm34_sequencial"]:$this->cm34_sequencial);
        $this->cm34_descricao = ($this->cm34_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["cm34_descricao"]:$this->cm34_descricao);
-       $this->cm34_tipo = ($this->cm34_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm34_tipo"]:$this->cm34_tipo);
+       $this->cm34_tipo = ($this->cm34_tipo === 0 || $this->cm34_tipo === 0.0 || $this->cm34_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm34_tipo"]:$this->cm34_tipo);
        if($this->cm34_datalimite == ""){
          $this->cm34_datalimite_dia = ($this->cm34_datalimite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm34_datalimite_dia"]:$this->cm34_datalimite_dia);
          $this->cm34_datalimite_mes = ($this->cm34_datalimite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm34_datalimite_mes"]:$this->cm34_datalimite_mes);
@@ -89,7 +89,7 @@ class cl_cemiterioisencao {
        }
        $this->cm34_obs = ($this->cm34_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["cm34_obs"]:$this->cm34_obs);
      }else{
-       $this->cm34_sequencial = ($this->cm34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm34_sequencial"]:$this->cm34_sequencial);
+       $this->cm34_sequencial = ($this->cm34_sequencial === 0 || $this->cm34_sequencial === 0.0 || $this->cm34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cm34_sequencial"]:$this->cm34_sequencial);
      }
    }
    // funcao para inclusao
@@ -137,7 +137,7 @@ class cl_cemiterioisencao {
          $this->cm34_sequencial = $cm34_sequencial;
        }
      }
-     if(($this->cm34_sequencial == null) || ($this->cm34_sequencial == "") ){
+     if(($this->cm34_sequencial == null) || ($this->cm34_sequencial === 0 || $this->cm34_sequencial === 0.0 || $this->cm34_sequencial == "") ){
        $this->erro_sql = " Campo cm34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

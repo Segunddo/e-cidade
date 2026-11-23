@@ -73,13 +73,13 @@ class cl_orcimpactovalmov {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o64_codseqimpmov = ($this->o64_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codseqimpmov"]:$this->o64_codseqimpmov);
-       $this->o64_codimpmov = ($this->o64_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codimpmov"]:$this->o64_codimpmov);
-       $this->o64_exercicio = ($this->o64_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_exercicio"]:$this->o64_exercicio);
-       $this->o64_valor = ($this->o64_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_valor"]:$this->o64_valor);
-       $this->o64_proces = ($this->o64_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_proces"]:$this->o64_proces);
+       $this->o64_codseqimpmov = ($this->o64_codseqimpmov === 0 || $this->o64_codseqimpmov === 0.0 || $this->o64_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codseqimpmov"]:$this->o64_codseqimpmov);
+       $this->o64_codimpmov = ($this->o64_codimpmov === 0 || $this->o64_codimpmov === 0.0 || $this->o64_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codimpmov"]:$this->o64_codimpmov);
+       $this->o64_exercicio = ($this->o64_exercicio === 0 || $this->o64_exercicio === 0.0 || $this->o64_exercicio == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_exercicio"]:$this->o64_exercicio);
+       $this->o64_valor = ($this->o64_valor === 0 || $this->o64_valor === 0.0 || $this->o64_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_valor"]:$this->o64_valor);
+       $this->o64_proces = ($this->o64_proces === 0 || $this->o64_proces === 0.0 || $this->o64_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_proces"]:$this->o64_proces);
      }else{
-       $this->o64_codseqimpmov = ($this->o64_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codseqimpmov"]:$this->o64_codseqimpmov);
+       $this->o64_codseqimpmov = ($this->o64_codseqimpmov === 0 || $this->o64_codseqimpmov === 0.0 || $this->o64_codseqimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o64_codseqimpmov"]:$this->o64_codseqimpmov);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_orcimpactovalmov {
          $this->o64_codseqimpmov = $o64_codseqimpmov;
        }
      }
-     if(($this->o64_codseqimpmov == null) || ($this->o64_codseqimpmov == "") ){
+     if(($this->o64_codseqimpmov == null) || ($this->o64_codseqimpmov === 0 || $this->o64_codseqimpmov === 0.0 || $this->o64_codseqimpmov == "") ){
        $this->erro_sql = " Campo o64_codseqimpmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

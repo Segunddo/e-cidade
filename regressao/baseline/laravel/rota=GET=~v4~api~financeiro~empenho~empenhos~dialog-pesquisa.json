@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/empenho/empenhos/dialog-pesquisa",
+  "json": {
+    "error": true,
+    "message": "Undefined index: instituicao"
+  },
+  "sha256": "9ec9a45cd770b73ddb93886ea1793dafefd5c53a7cfbf1928b9fe787f83f8001",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

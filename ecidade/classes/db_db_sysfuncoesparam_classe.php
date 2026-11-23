@@ -81,17 +81,17 @@ class cl_db_sysfuncoesparam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db42_sysfuncoesparam = ($this->db42_sysfuncoesparam == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_sysfuncoesparam"]:$this->db42_sysfuncoesparam);
-       $this->db42_funcao = ($this->db42_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_funcao"]:$this->db42_funcao);
-       $this->db42_ordem = ($this->db42_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_ordem"]:$this->db42_ordem);
+       $this->db42_sysfuncoesparam = ($this->db42_sysfuncoesparam === 0 || $this->db42_sysfuncoesparam === 0.0 || $this->db42_sysfuncoesparam == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_sysfuncoesparam"]:$this->db42_sysfuncoesparam);
+       $this->db42_funcao = ($this->db42_funcao === 0 || $this->db42_funcao === 0.0 || $this->db42_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_funcao"]:$this->db42_funcao);
+       $this->db42_ordem = ($this->db42_ordem === 0 || $this->db42_ordem === 0.0 || $this->db42_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_ordem"]:$this->db42_ordem);
        $this->db42_nome = ($this->db42_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_nome"]:$this->db42_nome);
        $this->db42_tipo = ($this->db42_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_tipo"]:$this->db42_tipo);
-       $this->db42_tamanho = ($this->db42_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_tamanho"]:$this->db42_tamanho);
-       $this->db42_precisao = ($this->db42_precisao == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_precisao"]:$this->db42_precisao);
+       $this->db42_tamanho = ($this->db42_tamanho === 0 || $this->db42_tamanho === 0.0 || $this->db42_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_tamanho"]:$this->db42_tamanho);
+       $this->db42_precisao = ($this->db42_precisao === 0 || $this->db42_precisao === 0.0 || $this->db42_precisao == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_precisao"]:$this->db42_precisao);
        $this->db42_valor_default = ($this->db42_valor_default == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_valor_default"]:$this->db42_valor_default);
        $this->db42_descricao = ($this->db42_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_descricao"]:$this->db42_descricao);
      }else{
-       $this->db42_sysfuncoesparam = ($this->db42_sysfuncoesparam == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_sysfuncoesparam"]:$this->db42_sysfuncoesparam);
+       $this->db42_sysfuncoesparam = ($this->db42_sysfuncoesparam === 0 || $this->db42_sysfuncoesparam === 0.0 || $this->db42_sysfuncoesparam == ""?@$GLOBALS["HTTP_POST_VARS"]["db42_sysfuncoesparam"]:$this->db42_sysfuncoesparam);
      }
    }
    // funcao para inclusao
@@ -172,7 +172,7 @@ class cl_db_sysfuncoesparam {
          $this->db42_sysfuncoesparam = $db42_sysfuncoesparam;
        }
      }
-     if(($this->db42_sysfuncoesparam == null) || ($this->db42_sysfuncoesparam == "") ){
+     if(($this->db42_sysfuncoesparam == null) || ($this->db42_sysfuncoesparam === 0 || $this->db42_sysfuncoesparam === 0.0 || $this->db42_sysfuncoesparam == "") ){
        $this->erro_sql = " Campo db42_sysfuncoesparam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

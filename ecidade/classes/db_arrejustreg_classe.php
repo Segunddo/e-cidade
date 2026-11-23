@@ -73,13 +73,13 @@ class cl_arrejustreg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k28_sequencia = ($this->k28_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_sequencia"]:$this->k28_sequencia);
-       $this->k28_arrejust = ($this->k28_arrejust == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_arrejust"]:$this->k28_arrejust);
-       $this->k28_numpre = ($this->k28_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_numpre"]:$this->k28_numpre);
-       $this->k28_numpar = ($this->k28_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_numpar"]:$this->k28_numpar);
-       $this->k28_receita = ($this->k28_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_receita"]:$this->k28_receita);
+       $this->k28_sequencia = ($this->k28_sequencia === 0 || $this->k28_sequencia === 0.0 || $this->k28_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_sequencia"]:$this->k28_sequencia);
+       $this->k28_arrejust = ($this->k28_arrejust === 0 || $this->k28_arrejust === 0.0 || $this->k28_arrejust == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_arrejust"]:$this->k28_arrejust);
+       $this->k28_numpre = ($this->k28_numpre === 0 || $this->k28_numpre === 0.0 || $this->k28_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_numpre"]:$this->k28_numpre);
+       $this->k28_numpar = ($this->k28_numpar === 0 || $this->k28_numpar === 0.0 || $this->k28_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_numpar"]:$this->k28_numpar);
+       $this->k28_receita = ($this->k28_receita === 0 || $this->k28_receita === 0.0 || $this->k28_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_receita"]:$this->k28_receita);
      }else{
-       $this->k28_sequencia = ($this->k28_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_sequencia"]:$this->k28_sequencia);
+       $this->k28_sequencia = ($this->k28_sequencia === 0 || $this->k28_sequencia === 0.0 || $this->k28_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k28_sequencia"]:$this->k28_sequencia);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_arrejustreg {
          $this->k28_sequencia = $k28_sequencia;
        }
      }
-     if(($this->k28_sequencia == null) || ($this->k28_sequencia == "") ){
+     if(($this->k28_sequencia == null) || ($this->k28_sequencia === 0 || $this->k28_sequencia === 0.0 || $this->k28_sequencia == "") ){
        $this->erro_sql = " Campo k28_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

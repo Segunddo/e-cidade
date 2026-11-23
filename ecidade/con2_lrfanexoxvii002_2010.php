@@ -47,7 +47,7 @@ if (!isset($arqinclude)){
   include(modification("classes/db_orcparamrel_classe.php"));
   include(modification("classes/db_empresto_classe.php"));
 
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
 
   $classinatura         = new cl_assinatura;
@@ -148,23 +148,23 @@ if (!isset($arqinclude)){
     foreach ($aLinhaSoma as $oColuna) {
 
     	foreach ($oColuna->colunas as $key => $oValor) {
-        isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += $oValor->o117_valor :
+        isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += (float) $oValor->o117_valor :
                                         $oLinha->valores[$key] = $oValor->o117_valor;
 
     	}
-    	isset($oLinha->valores["total"]) ? $oLinha->valores["total"] += $oLinha->valores[1] + $oLinha->valores[3] :
-    	                                   $oLinha->valores["total"] = $oLinha->valores[1] + $oLinha->valores[3];
+    	isset($oLinha->valores["total"]) ? $oLinha->valores["total"] += (float) $oLinha->valores[1] + (float) $oLinha->valores[3] :
+    	                                   $oLinha->valores["total"] = (float) $oLinha->valores[1] + (float) $oLinha->valores[3];
     }
     $aLinhasRelatorio[$iInd] = $oLinha;
     foreach ($oLinha->valores as $key=>$value){
 
-      isset($aLinhasRelatorio[0]->valores[$key]) ? $aLinhasRelatorio[0]->valores[$key] += $value :
-                                                   $aLinhasRelatorio[0]->valores[$key] = $value;
+      isset($aLinhasRelatorio[0]->valores[$key]) ? $aLinhasRelatorio[0]->valores[$key] += (float) $value :
+                                                   $aLinhasRelatorio[0]->valores[$key] = (float) $value;
     }
   }
 
   //1º Total  linha c = a+b
-  $aLinhasRelatorio[0]->valores["total"] = $aLinhasRelatorio[0]->valores[1] + $aLinhasRelatorio[0]->valores[3];
+  $aLinhasRelatorio[0]->valores["total"] = (float) $aLinhasRelatorio[0]->valores[1] + (float) $aLinhasRelatorio[0]->valores[3];
 
   for ($iInd = 5; $iInd < 8; $iInd++) {
 
@@ -176,22 +176,22 @@ if (!isset($arqinclude)){
 
       foreach ($oColuna->colunas as $key => $oValor) {
 
-        isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += $oValor->o117_valor :
+        isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += (float) $oValor->o117_valor :
                                        $oLinha->valores[$key] = $oValor->o117_valor;
 
       }
-      isset($oLinha->valores["total"]) ? $oLinha->valores["total"] += $oLinha->valores[1] + $oLinha->valores[3] :
-                                         $oLinha->valores["total"] = $oLinha->valores[1] + $oLinha->valores[3];
+      isset($oLinha->valores["total"]) ? $oLinha->valores["total"] += (float) $oLinha->valores[1] + (float) $oLinha->valores[3] :
+                                         $oLinha->valores["total"] = (float) $oLinha->valores[1] + (float) $oLinha->valores[3];
     }
     $aLinhasRelatorio[$iInd] = $oLinha;
     foreach ($oLinha->valores as $key => $value) {
 
-      isset($aLinhasRelatorio[4]->valores[$key]) ? $aLinhasRelatorio[4]->valores[$key] += $value :
-                                                   $aLinhasRelatorio[4]->valores[$key] = $value;
+      isset($aLinhasRelatorio[4]->valores[$key]) ? $aLinhasRelatorio[4]->valores[$key] += (float) $value :
+                                                   $aLinhasRelatorio[4]->valores[$key] = (float) $value;
     }
   }
   //2º Total  linha c = a+b
-  $aLinhasRelatorio[4]->valores["total"] = $aLinhasRelatorio[4]->valores[1] + $aLinhasRelatorio[4]->valores[3];
+  $aLinhasRelatorio[4]->valores["total"] = (float) $aLinhasRelatorio[4]->valores[1] + (float) $aLinhasRelatorio[4]->valores[3];
 
   for ($iInd = 8; $iInd < 9; $iInd++) {
 
@@ -203,22 +203,22 @@ if (!isset($arqinclude)){
 
       foreach ($oColuna->colunas as $key => $oValor) {
 
-        isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += $oValor->o117_valor :
+        isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += (float) $oValor->o117_valor :
                                         $oLinha->valores[$key] = $oValor->o117_valor;
 
       }
 
-      isset($oLinha->valores["total"]) ? $oLinha->valores["total"] += $oLinha->valores[1] + $oLinha->valores[3] :
-                                         $oLinha->valores["total"]  = $oLinha->valores[1] + $oLinha->valores[3];
+      isset($oLinha->valores["total"]) ? $oLinha->valores["total"] += (float) $oLinha->valores[1] + (float) $oLinha->valores[3] :
+                                         $oLinha->valores["total"]  = (float) $oLinha->valores[1] + (float) $oLinha->valores[3];
     }
     $aLinhasRelatorio[$iInd] = $oLinha;
   }
 
   //SALDO LÍQUIDO DE PASSIVOS DE PPP(III) = (I-II)
-  $aLinhasRelatorio[9]->valores[1]       = $aLinhasRelatorio[4]->valores[1] - $aLinhasRelatorio[8]->valores[1];
-  $aLinhasRelatorio[9]->valores[2]       = $aLinhasRelatorio[4]->valores[2] - $aLinhasRelatorio[8]->valores[2];
-  $aLinhasRelatorio[9]->valores[3]       = $aLinhasRelatorio[4]->valores[3] - $aLinhasRelatorio[8]->valores[3];
-  $aLinhasRelatorio[9]->valores["total"] = $aLinhasRelatorio[4]->valores["total"] - $aLinhasRelatorio[8]->valores["total"];
+  $aLinhasRelatorio[9]->valores[1]       = (float) $aLinhasRelatorio[4]->valores[1] - (float) $aLinhasRelatorio[8]->valores[1];
+  $aLinhasRelatorio[9]->valores[2]       = (float) $aLinhasRelatorio[4]->valores[2] - (float) $aLinhasRelatorio[8]->valores[2];
+  $aLinhasRelatorio[9]->valores[3]       = (float) $aLinhasRelatorio[4]->valores[3] - (float) $aLinhasRelatorio[8]->valores[3];
+  $aLinhasRelatorio[9]->valores["total"] = (float) $aLinhasRelatorio[4]->valores["total"] - (float) $aLinhasRelatorio[8]->valores["total"];
 
   for ($iInd = 11; $iInd < 14; $iInd++) {
 
@@ -230,18 +230,18 @@ if (!isset($arqinclude)){
 
       foreach ($oColuna->colunas as $key => $oValor){
 
-        isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += $oValor->o117_valor :
+        isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += (float) $oValor->o117_valor :
                                         $oLinha->valores[$key] = $oValor->o117_valor;
 
       }
-      isset($oLinha->valores["total"]) ? $oLinha->valores["total"] += $oLinha->valores[1] + $oLinha->valores[3] :
-                                         $oLinha->valores["total"]  = $oLinha->valores[1] + $oLinha->valores[3];
+      isset($oLinha->valores["total"]) ? $oLinha->valores["total"] += (float) $oLinha->valores[1] + (float) $oLinha->valores[3] :
+                                         $oLinha->valores["total"]  = (float) $oLinha->valores[1] + (float) $oLinha->valores[3];
     }
     $aLinhasRelatorio[$iInd] = $oLinha;
     foreach ($oLinha->valores as $key => $value) {
 
-      isset($aLinhasRelatorio[10]->valores[$key]) ? $aLinhasRelatorio[10]->valores[$key] += $value :
-                                                    $aLinhasRelatorio[10]->valores[$key]  = $value;
+      isset($aLinhasRelatorio[10]->valores[$key]) ? $aLinhasRelatorio[10]->valores[$key] += (float) $value :
+                                                    $aLinhasRelatorio[10]->valores[$key]  = (float) $value;
     }
   }
   //3º Total  linha c = a+b PASSIVOS CONTIGENTES
@@ -257,19 +257,19 @@ if (!isset($arqinclude)){
 
      foreach ($oColuna->colunas as $key => $oValor) {
 
-       isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += $oValor->o117_valor :
+       isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += (float) $oValor->o117_valor :
                                        $oLinha->valores[$key]  = $oValor->o117_valor;
 
       }
-      isset($oLinha->valores["total"]) ? $oLinha->valores["total"] += $oLinha->valores[1] + $oLinha->valores[3] :
-                                         $oLinha->valores["total"]  = $oLinha->valores[1] + $oLinha->valores[3];
+      isset($oLinha->valores["total"]) ? $oLinha->valores["total"] += (float) $oLinha->valores[1] + (float) $oLinha->valores[3] :
+                                         $oLinha->valores["total"]  = (float) $oLinha->valores[1] + (float) $oLinha->valores[3];
     }
 
     $aLinhasRelatorio[$iInd] = $oLinha;
 
     foreach ($oLinha->valores as $key => $value) {
-      isset($aLinhasRelatorio[14]->valores[$key]) ? $aLinhasRelatorio[14]->valores[$key] += $value :
-                                                    $aLinhasRelatorio[14]->valores[$key]  = $value;
+      isset($aLinhasRelatorio[14]->valores[$key]) ? $aLinhasRelatorio[14]->valores[$key] += (float) $value :
+                                                    $aLinhasRelatorio[14]->valores[$key]  = (float) $value;
     }
   }
 
@@ -284,7 +284,7 @@ if (!isset($arqinclude)){
 
       foreach ($oColuna->colunas as $key => $oValor) {
 
-        isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += $oValor->o117_valor :
+        isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += (float) $oValor->o117_valor :
                                         $oLinha->valores[$key]  = $oValor->o117_valor;
 
       }
@@ -294,8 +294,8 @@ if (!isset($arqinclude)){
     //Calcula TOTAL DE DESPESAS
     foreach ($oLinha->valores as $key => $value) {
 
-      isset($aLinhasRelatorio[19]->valores[$key]) ? $aLinhasRelatorio[19]->valores[$key] += $value :
-                                                    $aLinhasRelatorio[19]->valores[$key]  = $value;
+      isset($aLinhasRelatorio[19]->valores[$key]) ? $aLinhasRelatorio[19]->valores[$key] += (float) $value :
+                                                    $aLinhasRelatorio[19]->valores[$key]  = (float) $value;
     }
   }
   //Processa RECEITA CORRENTE LÍQUIDA (RCL)
@@ -311,7 +311,7 @@ if (!isset($arqinclude)){
 
       foreach ($oColuna->colunas as $key => $oValor) {
 
-       isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += $oValor->o117_valor :
+       isset($oLinha->valores[$key]) ? $oLinha->valores[$key] += (float) $oValor->o117_valor :
                                        $oLinha->valores[$key]  = $oValor->o117_valor;
 
       }
@@ -336,13 +336,13 @@ if (!isset($arqinclude)){
 
     $nValorRCLPeriodo  += calcula_rcl2($anousu, $dDataPeriodo, $dt_fin, $todasinstit, false, 81);
     $nValorRCLPeriodo  += calcula_rcl2($anousu_ant, $dt_ini_ant, $dt_fin_ant, $todasinstit, false, 81,$dt_fin);
-    $aLinhasRelatorio[20]->valores[1] += array_sum($aValorRCLAnterior);
-    $aLinhasRelatorio[20]->valores[2] += $nValorRCLPeriodo;
+    $aLinhasRelatorio[20]->valores[1] = (float) $aLinhasRelatorio[20]->valores[1] + (float) array_sum($aValorRCLAnterior);
+    $aLinhasRelatorio[20]->valores[2] = (float) $aLinhasRelatorio[20]->valores[2] + (float) $nValorRCLPeriodo;
   }
   //Calcula TOTAL DAS DESPESAS / RCL(%)
   foreach ($aLinhasRelatorio[20]->valores as $key => $value) {
 
-    if($value != 0){
+    if($value !== "" && $value != 0){
   	  $aLinhasRelatorio[21]->valores[$key] = ($aLinhasRelatorio[19]->valores[$key] / $value) * 100;
   	} else {
   		$aLinhasRelatorio[21]->valores[$key] = 0;

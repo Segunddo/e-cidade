@@ -1,0 +1,32 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/protocolo/rotulos-pesquisa-geral-cgm",
+  "json": {
+    "data": {
+      "z01_bairro": "Bairro",
+      "z01_cep": "CEP",
+      "z01_cgccpf": "CNPJ/CPF",
+      "z01_compl": "Complemento",
+      "z01_cxpostal": "Caixa Postal",
+      "z01_email": "Email",
+      "z01_ender": "Endereço",
+      "z01_munic": "Município",
+      "z01_nome": "Nome/Razão Social",
+      "z01_numcgm": "Numcgm",
+      "z01_numero": "Número",
+      "z01_sexo": "Sexo",
+      "z01_uf": "UF"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "6b01d27cf7d94c0724df826087c31c11fb378f9aada3f75db47e7a7530e6a029",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

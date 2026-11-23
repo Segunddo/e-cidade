@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/farmacia/procedimento/atualizar/paciente/cgs-cpf",
+  "json": {
+    "errors": {
+      "cgsPaciente": [
+        "O campo cgs paciente é obrigatório."
+      ],
+      "cns": [
+        "O campo cns é obrigatório quando cpf não está presente."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "e1b35a9ca84e1dce6593efd037ad7c07c3b3919f82373c7bfcc1b89ffb6933b1",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

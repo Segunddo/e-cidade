@@ -69,11 +69,11 @@ class cl_remessacobrancaregistradarecibo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k148_sequencial = ($this->k148_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k148_sequencial"]:$this->k148_sequencial);
-       $this->k148_remessacobrancaregistrada = ($this->k148_remessacobrancaregistrada == ""?@$GLOBALS["HTTP_POST_VARS"]["k148_remessacobrancaregistrada"]:$this->k148_remessacobrancaregistrada);
-       $this->k148_numpre = ($this->k148_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k148_numpre"]:$this->k148_numpre);
+       $this->k148_sequencial = ($this->k148_sequencial === 0 || $this->k148_sequencial === 0.0 || $this->k148_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k148_sequencial"]:$this->k148_sequencial);
+       $this->k148_remessacobrancaregistrada = ($this->k148_remessacobrancaregistrada === 0 || $this->k148_remessacobrancaregistrada === 0.0 || $this->k148_remessacobrancaregistrada == ""?@$GLOBALS["HTTP_POST_VARS"]["k148_remessacobrancaregistrada"]:$this->k148_remessacobrancaregistrada);
+       $this->k148_numpre = ($this->k148_numpre === 0 || $this->k148_numpre === 0.0 || $this->k148_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k148_numpre"]:$this->k148_numpre);
      }else{
-       $this->k148_sequencial = ($this->k148_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k148_sequencial"]:$this->k148_sequencial);
+       $this->k148_sequencial = ($this->k148_sequencial === 0 || $this->k148_sequencial === 0.0 || $this->k148_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k148_sequencial"]:$this->k148_sequencial);
      }
    }
    // funcao para Inclusão
@@ -121,7 +121,7 @@ class cl_remessacobrancaregistradarecibo {
          $this->k148_sequencial = $k148_sequencial;
        }
      }
-     if(($this->k148_sequencial == null) || ($this->k148_sequencial == "") ){
+     if(($this->k148_sequencial == null) || ($this->k148_sequencial === 0 || $this->k148_sequencial === 0.0 || $this->k148_sequencial == "") ){
        $this->erro_sql = " Campo k148_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

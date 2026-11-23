@@ -17,6 +17,7 @@ try {
 
   db_inicio_transacao();
 
+  if (!$oParam) { $oParam = new stdClass(); }
   if (empty($oParam->sTipo)) {
     $oParam->sTipo = DBReleaseNote::buscarTipo(db_getsession('DB_itemmenu_acessado'));
   }

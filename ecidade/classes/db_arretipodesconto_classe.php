@@ -79,7 +79,7 @@ class cl_arretipodesconto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k19_tipo = ($this->k19_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k19_tipo"]:$this->k19_tipo);
+       $this->k19_tipo = ($this->k19_tipo === 0 || $this->k19_tipo === 0.0 || $this->k19_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k19_tipo"]:$this->k19_tipo);
        if($this->k19_dtini == ""){
          $this->k19_dtini_dia = ($this->k19_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k19_dtini_dia"]:$this->k19_dtini_dia);
          $this->k19_dtini_mes = ($this->k19_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k19_dtini_mes"]:$this->k19_dtini_mes);
@@ -96,10 +96,10 @@ class cl_arretipodesconto {
             $this->k19_dtfim = $this->k19_dtfim_ano."-".$this->k19_dtfim_mes."-".$this->k19_dtfim_dia;
          }
        }
-       $this->k19_percjuros = ($this->k19_percjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["k19_percjuros"]:$this->k19_percjuros);
-       $this->k19_percmulta = ($this->k19_percmulta == ""?@$GLOBALS["HTTP_POST_VARS"]["k19_percmulta"]:$this->k19_percmulta);
+       $this->k19_percjuros = ($this->k19_percjuros === 0 || $this->k19_percjuros === 0.0 || $this->k19_percjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["k19_percjuros"]:$this->k19_percjuros);
+       $this->k19_percmulta = ($this->k19_percmulta === 0 || $this->k19_percmulta === 0.0 || $this->k19_percmulta == ""?@$GLOBALS["HTTP_POST_VARS"]["k19_percmulta"]:$this->k19_percmulta);
      }else{
-       $this->k19_tipo = ($this->k19_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k19_tipo"]:$this->k19_tipo);
+       $this->k19_tipo = ($this->k19_tipo === 0 || $this->k19_tipo === 0.0 || $this->k19_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k19_tipo"]:$this->k19_tipo);
      }
    }
    // funcao para inclusao
@@ -142,7 +142,7 @@ class cl_arretipodesconto {
        return false;
      }
        $this->k19_tipo = $k19_tipo; 
-     if(($this->k19_tipo == null) || ($this->k19_tipo == "") ){ 
+     if(($this->k19_tipo == null) || ($this->k19_tipo === 0 || $this->k19_tipo === 0.0 || $this->k19_tipo == "") ){ 
        $this->erro_sql = " Campo k19_tipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio-legal/linha/valor-manual",
+  "json": {
+    "errors": {
+      "coluna": [
+        "O campo coluna é obrigatório."
+      ],
+      "exercicio": [
+        "O campo exercicio é obrigatório."
+      ],
+      "instituicao": [
+        "O campo instituicao é obrigatório."
+      ],
+      "linha": [
+        "O campo linha é obrigatório."
+      ],
+      "mes": [
+        "O campo mes é obrigatório."
+      ],
+      "relatorio": [
+        "O campo relatorio é obrigatório."
+      ],
+      "valor": [
+        "O campo valor é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "c61bfbaad26c258c22c4f3b5daeca52d28b8ea9586a1779cec0ae91ff950ae3f",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

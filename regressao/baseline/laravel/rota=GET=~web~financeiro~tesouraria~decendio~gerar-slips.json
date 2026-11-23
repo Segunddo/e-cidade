@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/tesouraria/decendio/gerar-slips",
+  "json": null,
+  "sha256": "1a27d553ac3f95bf4b0d81bae3319fa6dc3c3231dc7e2036ef463d3dc6308897",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

@@ -78,8 +78,8 @@ class cl_slipcorrente {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k112_sequencial = ($this->k112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_sequencial"]:$this->k112_sequencial);
-       $this->k112_id = ($this->k112_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_id"]:$this->k112_id);
+       $this->k112_sequencial = ($this->k112_sequencial === 0 || $this->k112_sequencial === 0.0 || $this->k112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_sequencial"]:$this->k112_sequencial);
+       $this->k112_id = ($this->k112_id === 0 || $this->k112_id === 0.0 || $this->k112_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_id"]:$this->k112_id);
        if($this->k112_data == ""){
          $this->k112_data_dia = ($this->k112_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_data_dia"]:$this->k112_data_dia);
          $this->k112_data_mes = ($this->k112_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_data_mes"]:$this->k112_data_mes);
@@ -88,11 +88,11 @@ class cl_slipcorrente {
             $this->k112_data = $this->k112_data_ano."-".$this->k112_data_mes."-".$this->k112_data_dia;
          }
        }
-       $this->k112_autent = ($this->k112_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_autent"]:$this->k112_autent);
-       $this->k112_slip = ($this->k112_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_slip"]:$this->k112_slip);
+       $this->k112_autent = ($this->k112_autent === 0 || $this->k112_autent === 0.0 || $this->k112_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_autent"]:$this->k112_autent);
+       $this->k112_slip = ($this->k112_slip === 0 || $this->k112_slip === 0.0 || $this->k112_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_slip"]:$this->k112_slip);
        $this->k112_ativo = ($this->k112_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["k112_ativo"]:$this->k112_ativo);
      }else{
-       $this->k112_sequencial = ($this->k112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_sequencial"]:$this->k112_sequencial);
+       $this->k112_sequencial = ($this->k112_sequencial === 0 || $this->k112_sequencial === 0.0 || $this->k112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k112_sequencial"]:$this->k112_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_slipcorrente {
          $this->k112_sequencial = $k112_sequencial;
        }
      }
-     if(($this->k112_sequencial == null) || ($this->k112_sequencial == "") ){
+     if(($this->k112_sequencial == null) || ($this->k112_sequencial === 0 || $this->k112_sequencial === 0.0 || $this->k112_sequencial == "") ){
        $this->erro_sql = " Campo k112_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

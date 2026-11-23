@@ -65,11 +65,11 @@ class cl_empageslip {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e89_codmov = ($this->e89_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e89_codmov"]:$this->e89_codmov);
-       $this->e89_codigo = ($this->e89_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e89_codigo"]:$this->e89_codigo);
+       $this->e89_codmov = ($this->e89_codmov === 0 || $this->e89_codmov === 0.0 || $this->e89_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e89_codmov"]:$this->e89_codmov);
+       $this->e89_codigo = ($this->e89_codigo === 0 || $this->e89_codigo === 0.0 || $this->e89_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e89_codigo"]:$this->e89_codigo);
      }else{
-       $this->e89_codmov = ($this->e89_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e89_codmov"]:$this->e89_codmov);
-       $this->e89_codigo = ($this->e89_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e89_codigo"]:$this->e89_codigo);
+       $this->e89_codmov = ($this->e89_codmov === 0 || $this->e89_codmov === 0.0 || $this->e89_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e89_codmov"]:$this->e89_codmov);
+       $this->e89_codigo = ($this->e89_codigo === 0 || $this->e89_codigo === 0.0 || $this->e89_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e89_codigo"]:$this->e89_codigo);
      }
    }
    // funcao para inclusao
@@ -77,7 +77,7 @@ class cl_empageslip {
       $this->atualizacampos();
        $this->e89_codmov = $e89_codmov;
        $this->e89_codigo = $e89_codigo;
-     if(($this->e89_codmov == null) || ($this->e89_codmov == "") ){
+     if(($this->e89_codmov == null) || ($this->e89_codmov === 0 || $this->e89_codmov === 0.0 || $this->e89_codmov == "") ){
        $this->erro_sql = " Campo e89_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -85,7 +85,7 @@ class cl_empageslip {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e89_codigo == null) || ($this->e89_codigo == "") ){
+     if(($this->e89_codigo == null) || ($this->e89_codigo === 0 || $this->e89_codigo === 0.0 || $this->e89_codigo == "") ){
        $this->erro_sql = " Campo e89_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -108,7 +108,7 @@ class empenho
 
     private $log = [];
 
-    function empenho()
+    function __construct()
     {
 
         if (!class_exists("cl_empempenho")) {

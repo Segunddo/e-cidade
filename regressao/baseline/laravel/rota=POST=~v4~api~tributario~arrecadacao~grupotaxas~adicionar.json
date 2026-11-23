@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/arrecadacao/grupotaxas/adicionar",
+  "json": {
+    "errors": {
+      "descricao": [
+        "O campo descricao é obrigatório."
+      ],
+      "origem": [
+        "O campo origem é obrigatório."
+      ],
+      "procedenciaprinc": [
+        "O campo procedenciaprinc é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "cdd873fb387c7e8750f48cbdedf7cdecea452c4906227398d32fe294dfb458c1",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

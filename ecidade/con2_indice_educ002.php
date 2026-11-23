@@ -39,7 +39,7 @@ $orcparamrel = new cl_orcparamrel;
 $clconrelinfo = new cl_conrelinfo;
 $clempresto = new cl_empresto;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 // db_postmemory($HTTP_POST_VARS,2); exit;

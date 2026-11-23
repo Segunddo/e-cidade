@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/farmacia/consulta/bnafar/inconsistencias",
+  "json": {
+    "error": true,
+    "message": "Competência  com formato inválido."
+  },
+  "sha256": "f2f5275d3fc9be92f61fd79a4c788a7670b349d76bf3ee900f6006b8442dcde2",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

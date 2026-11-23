@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_pctipocertifdepartamento_classe.php"));
 include(modification("classes/db_pctipocertif_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clpctipocertifdepartamento = new cl_pctipocertifdepartamento;
 $clpctipocertif = new cl_pctipocertif;

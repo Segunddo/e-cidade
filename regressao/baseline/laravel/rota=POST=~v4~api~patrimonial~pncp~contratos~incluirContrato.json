@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/contratos/incluirContrato",
+  "json": {
+    "errors": {
+      "acordo": [
+        "O campo acordo é obrigatório."
+      ],
+      "anoContrato": [
+        "O campo ano contrato é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "fb992a602b9e55aa5df0626c630a567eafbc6693c665f47729d7beb3efada8ad",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

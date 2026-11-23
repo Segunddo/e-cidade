@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/arrecadacao/grupotaxas/rotulos",
+  "json": {
+    "data": {
+      "ar55_datalimite": "Data limite",
+      "ar55_descricao": "Descrição",
+      "ar55_origem": "Origem",
+      "ar55_procedenciaprinc": "Procedência principal",
+      "ar55_sequencial": "Sequencial"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "163eda2a5cd9e87e238b4ad92ef50d07cef37236f37b45d66d6100e592b39e5a",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

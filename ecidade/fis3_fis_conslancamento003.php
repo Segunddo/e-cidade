@@ -38,7 +38,7 @@ require_once modification('classes/db_fis_lancexec_classe.php');
 require_once modification('classes/db_fis_lanclocal_classe.php');
 $cllancamento = new cl_fis_lancamento;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cllanc = new cl_fis_lancamento;
 
 /*$clautolocal = new cl_fis_autolocal;*/

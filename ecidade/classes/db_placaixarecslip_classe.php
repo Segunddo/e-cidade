@@ -69,11 +69,11 @@ class cl_placaixarecslip {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k110_sequencial = ($this->k110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k110_sequencial"]:$this->k110_sequencial);
-       $this->k110_placaixarec = ($this->k110_placaixarec == ""?@$GLOBALS["HTTP_POST_VARS"]["k110_placaixarec"]:$this->k110_placaixarec);
-       $this->k110_slip = ($this->k110_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k110_slip"]:$this->k110_slip);
+       $this->k110_sequencial = ($this->k110_sequencial === 0 || $this->k110_sequencial === 0.0 || $this->k110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k110_sequencial"]:$this->k110_sequencial);
+       $this->k110_placaixarec = ($this->k110_placaixarec === 0 || $this->k110_placaixarec === 0.0 || $this->k110_placaixarec == ""?@$GLOBALS["HTTP_POST_VARS"]["k110_placaixarec"]:$this->k110_placaixarec);
+       $this->k110_slip = ($this->k110_slip === 0 || $this->k110_slip === 0.0 || $this->k110_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["k110_slip"]:$this->k110_slip);
      }else{
-       $this->k110_sequencial = ($this->k110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k110_sequencial"]:$this->k110_sequencial);
+       $this->k110_sequencial = ($this->k110_sequencial === 0 || $this->k110_sequencial === 0.0 || $this->k110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k110_sequencial"]:$this->k110_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_placaixarecslip {
          $this->k110_sequencial = $k110_sequencial;
        }
      }
-     if(($this->k110_sequencial == null) || ($this->k110_sequencial == "") ){
+     if(($this->k110_sequencial == null) || ($this->k110_sequencial === 0 || $this->k110_sequencial === 0.0 || $this->k110_sequencial == "") ){
        $this->erro_sql = " Campo k110_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

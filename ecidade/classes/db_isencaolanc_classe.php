@@ -83,9 +83,9 @@ class cl_isencaolanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v18_sequencial = ($this->v18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_sequencial"]:$this->v18_sequencial);
-       $this->v18_cadtipoitem = ($this->v18_cadtipoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_cadtipoitem"]:$this->v18_cadtipoitem);
-       $this->v18_isencao = ($this->v18_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_isencao"]:$this->v18_isencao);
+       $this->v18_sequencial = ($this->v18_sequencial === 0 || $this->v18_sequencial === 0.0 || $this->v18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_sequencial"]:$this->v18_sequencial);
+       $this->v18_cadtipoitem = ($this->v18_cadtipoitem === 0 || $this->v18_cadtipoitem === 0.0 || $this->v18_cadtipoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_cadtipoitem"]:$this->v18_cadtipoitem);
+       $this->v18_isencao = ($this->v18_isencao === 0 || $this->v18_isencao === 0.0 || $this->v18_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_isencao"]:$this->v18_isencao);
        if($this->v18_dtini == ""){
          $this->v18_dtini_dia = ($this->v18_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_dtini_dia"]:$this->v18_dtini_dia);
          $this->v18_dtini_mes = ($this->v18_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_dtini_mes"]:$this->v18_dtini_mes);
@@ -102,10 +102,10 @@ class cl_isencaolanc {
             $this->v18_dtfim = $this->v18_dtfim_ano."-".$this->v18_dtfim_mes."-".$this->v18_dtfim_dia;
          }
        }
-       $this->v18_tipovalor = ($this->v18_tipovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_tipovalor"]:$this->v18_tipovalor);
-       $this->v18_valor = ($this->v18_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_valor"]:$this->v18_valor);
+       $this->v18_tipovalor = ($this->v18_tipovalor === 0 || $this->v18_tipovalor === 0.0 || $this->v18_tipovalor == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_tipovalor"]:$this->v18_tipovalor);
+       $this->v18_valor = ($this->v18_valor === 0 || $this->v18_valor === 0.0 || $this->v18_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_valor"]:$this->v18_valor);
      }else{
-       $this->v18_sequencial = ($this->v18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_sequencial"]:$this->v18_sequencial);
+       $this->v18_sequencial = ($this->v18_sequencial === 0 || $this->v18_sequencial === 0.0 || $this->v18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v18_sequencial"]:$this->v18_sequencial);
      }
    }
    // funcao para inclusao
@@ -189,7 +189,7 @@ class cl_isencaolanc {
          $this->v18_sequencial = $v18_sequencial;
        }
      }
-     if(($this->v18_sequencial == null) || ($this->v18_sequencial == "") ){
+     if(($this->v18_sequencial == null) || ($this->v18_sequencial === 0 || $this->v18_sequencial === 0.0 || $this->v18_sequencial == "") ){
        $this->erro_sql = " Campo v18_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

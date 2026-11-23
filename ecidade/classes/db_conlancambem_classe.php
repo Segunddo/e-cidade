@@ -69,11 +69,11 @@ class cl_conlancambem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c110_sequencial = ($this->c110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c110_sequencial"]:$this->c110_sequencial);
-       $this->c110_codlan = ($this->c110_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c110_codlan"]:$this->c110_codlan);
-       $this->c110_bem = ($this->c110_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["c110_bem"]:$this->c110_bem);
+       $this->c110_sequencial = ($this->c110_sequencial === 0 || $this->c110_sequencial === 0.0 || $this->c110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c110_sequencial"]:$this->c110_sequencial);
+       $this->c110_codlan = ($this->c110_codlan === 0 || $this->c110_codlan === 0.0 || $this->c110_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c110_codlan"]:$this->c110_codlan);
+       $this->c110_bem = ($this->c110_bem === 0 || $this->c110_bem === 0.0 || $this->c110_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["c110_bem"]:$this->c110_bem);
      }else{
-       $this->c110_sequencial = ($this->c110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c110_sequencial"]:$this->c110_sequencial);
+       $this->c110_sequencial = ($this->c110_sequencial === 0 || $this->c110_sequencial === 0.0 || $this->c110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c110_sequencial"]:$this->c110_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_conlancambem {
          $this->c110_sequencial = $c110_sequencial;
        }
      }
-     if(($this->c110_sequencial == null) || ($this->c110_sequencial == "") ){
+     if(($this->c110_sequencial == null) || ($this->c110_sequencial === 0 || $this->c110_sequencial === 0.0 || $this->c110_sequencial == "") ){
        $this->erro_sql = " Campo c110_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

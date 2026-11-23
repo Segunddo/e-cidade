@@ -72,8 +72,8 @@ class cl_aguabasevenc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x27_matric = ($this->x27_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_matric"]:$this->x27_matric);
-       $this->x27_parcela = ($this->x27_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_parcela"]:$this->x27_parcela);
+       $this->x27_matric = ($this->x27_matric === 0 || $this->x27_matric === 0.0 || $this->x27_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_matric"]:$this->x27_matric);
+       $this->x27_parcela = ($this->x27_parcela === 0 || $this->x27_parcela === 0.0 || $this->x27_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_parcela"]:$this->x27_parcela);
        if($this->x27_dtvenc == ""){
          $this->x27_dtvenc_dia = ($this->x27_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_dtvenc_dia"]:$this->x27_dtvenc_dia);
          $this->x27_dtvenc_mes = ($this->x27_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_dtvenc_mes"]:$this->x27_dtvenc_mes);
@@ -83,8 +83,8 @@ class cl_aguabasevenc {
          }
        }
      }else{
-       $this->x27_matric = ($this->x27_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_matric"]:$this->x27_matric);
-       $this->x27_parcela = ($this->x27_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_parcela"]:$this->x27_parcela);
+       $this->x27_matric = ($this->x27_matric === 0 || $this->x27_matric === 0.0 || $this->x27_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_matric"]:$this->x27_matric);
+       $this->x27_parcela = ($this->x27_parcela === 0 || $this->x27_parcela === 0.0 || $this->x27_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["x27_parcela"]:$this->x27_parcela);
      }
    }
    // funcao para inclusao
@@ -101,7 +101,7 @@ class cl_aguabasevenc {
      }
        $this->x27_matric = $x27_matric;
        $this->x27_parcela = $x27_parcela;
-     if(($this->x27_matric == null) || ($this->x27_matric == "") ){
+     if(($this->x27_matric == null) || ($this->x27_matric === 0 || $this->x27_matric === 0.0 || $this->x27_matric == "") ){
        $this->erro_sql = " Campo x27_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -109,7 +109,7 @@ class cl_aguabasevenc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x27_parcela == null) || ($this->x27_parcela == "") ){
+     if(($this->x27_parcela == null) || ($this->x27_parcela === 0 || $this->x27_parcela === 0.0 || $this->x27_parcela == "") ){
        $this->erro_sql = " Campo x27_parcela nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

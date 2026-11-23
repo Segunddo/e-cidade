@@ -73,13 +73,13 @@ class cl_tipcalcexe {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q83_codigo = ($this->q83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_codigo"]:$this->q83_codigo);
-       $this->q83_tipcalc = ($this->q83_tipcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_tipcalc"]:$this->q83_tipcalc);
-       $this->q83_anousu = ($this->q83_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_anousu"]:$this->q83_anousu);
-       $this->q83_codven = ($this->q83_codven == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_codven"]:$this->q83_codven);
-       $this->q83_cadvencdescsimples = ($this->q83_cadvencdescsimples == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_cadvencdescsimples"]:$this->q83_cadvencdescsimples);
+       $this->q83_codigo = ($this->q83_codigo === 0 || $this->q83_codigo === 0.0 || $this->q83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_codigo"]:$this->q83_codigo);
+       $this->q83_tipcalc = ($this->q83_tipcalc === 0 || $this->q83_tipcalc === 0.0 || $this->q83_tipcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_tipcalc"]:$this->q83_tipcalc);
+       $this->q83_anousu = ($this->q83_anousu === 0 || $this->q83_anousu === 0.0 || $this->q83_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_anousu"]:$this->q83_anousu);
+       $this->q83_codven = ($this->q83_codven === 0 || $this->q83_codven === 0.0 || $this->q83_codven == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_codven"]:$this->q83_codven);
+       $this->q83_cadvencdescsimples = ($this->q83_cadvencdescsimples === 0 || $this->q83_cadvencdescsimples === 0.0 || $this->q83_cadvencdescsimples == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_cadvencdescsimples"]:$this->q83_cadvencdescsimples);
      }else{
-       $this->q83_codigo = ($this->q83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_codigo"]:$this->q83_codigo);
+       $this->q83_codigo = ($this->q83_codigo === 0 || $this->q83_codigo === 0.0 || $this->q83_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q83_codigo"]:$this->q83_codigo);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_tipcalcexe {
          $this->q83_codigo = $q83_codigo; 
        }
      }
-     if(($this->q83_codigo == null) || ($this->q83_codigo == "") ){ 
+     if(($this->q83_codigo == null) || ($this->q83_codigo === 0 || $this->q83_codigo === 0.0 || $this->q83_codigo == "") ){ 
        $this->erro_sql = " Campo q83_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

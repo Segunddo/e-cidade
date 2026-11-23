@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "auth-sem-grant-type",
+  "json": {
+    "error": true,
+    "message": "The authorization grant type is not supported by the authorization server."
+  },
+  "sha256": "f405cf05b2c0b8490273e8e484d030f5f143da7c6fab4a8b948bd52d3a1b110b",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

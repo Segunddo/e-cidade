@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/resultado-parcial/reabrir-periodo",
+  "json": {
+    "errors": {
+      "matricula": [
+        "O campo matricula é obrigatório."
+      ],
+      "resultadoParcial": [
+        "O campo resultado parcial é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "d313235601a59d26e43018c3ff5a6481e04777447ea9a9f6abe40893e3e28bb1",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -73,13 +73,13 @@ class cl_declaracaoquitacaoreg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar31_sequencial = ($this->ar31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_sequencial"]:$this->ar31_sequencial);
-       $this->ar31_declaracaoquitacao = ($this->ar31_declaracaoquitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_declaracaoquitacao"]:$this->ar31_declaracaoquitacao);
-       $this->ar31_numpre = ($this->ar31_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_numpre"]:$this->ar31_numpre);
-       $this->ar31_numpar = ($this->ar31_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_numpar"]:$this->ar31_numpar);
-       $this->ar31_receita = ($this->ar31_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_receita"]:$this->ar31_receita);
+       $this->ar31_sequencial = ($this->ar31_sequencial === 0 || $this->ar31_sequencial === 0.0 || $this->ar31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_sequencial"]:$this->ar31_sequencial);
+       $this->ar31_declaracaoquitacao = ($this->ar31_declaracaoquitacao === 0 || $this->ar31_declaracaoquitacao === 0.0 || $this->ar31_declaracaoquitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_declaracaoquitacao"]:$this->ar31_declaracaoquitacao);
+       $this->ar31_numpre = ($this->ar31_numpre === 0 || $this->ar31_numpre === 0.0 || $this->ar31_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_numpre"]:$this->ar31_numpre);
+       $this->ar31_numpar = ($this->ar31_numpar === 0 || $this->ar31_numpar === 0.0 || $this->ar31_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_numpar"]:$this->ar31_numpar);
+       $this->ar31_receita = ($this->ar31_receita === 0 || $this->ar31_receita === 0.0 || $this->ar31_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_receita"]:$this->ar31_receita);
      }else{
-       $this->ar31_sequencial = ($this->ar31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_sequencial"]:$this->ar31_sequencial);
+       $this->ar31_sequencial = ($this->ar31_sequencial === 0 || $this->ar31_sequencial === 0.0 || $this->ar31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar31_sequencial"]:$this->ar31_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_declaracaoquitacaoreg {
          $this->ar31_sequencial = $ar31_sequencial;
        }
      }
-     if(($this->ar31_sequencial == null) || ($this->ar31_sequencial == "") ){
+     if(($this->ar31_sequencial == null) || ($this->ar31_sequencial === 0 || $this->ar31_sequencial === 0.0 || $this->ar31_sequencial == "") ){
        $this->erro_sql = " Campo ar31_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

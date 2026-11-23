@@ -67,17 +67,17 @@ class cl_recibopagahist {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numnov = ($this->k00_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numnov"]:$this->k00_numnov);
+       $this->k00_numnov = ($this->k00_numnov === 0 || $this->k00_numnov === 0.0 || $this->k00_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numnov"]:$this->k00_numnov);
        $this->k00_historico = ($this->k00_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_historico"]:$this->k00_historico);
      }else{
-       $this->k00_numnov = ($this->k00_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numnov"]:$this->k00_numnov);
+       $this->k00_numnov = ($this->k00_numnov === 0 || $this->k00_numnov === 0.0 || $this->k00_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numnov"]:$this->k00_numnov);
      }
    }
    // funcao para inclusao
    public function incluir ($k00_numnov){ 
       $this->atualizacampos();
        $this->k00_numnov = $k00_numnov; 
-     if(($this->k00_numnov == null) || ($this->k00_numnov == "") ){ 
+     if(($this->k00_numnov == null) || ($this->k00_numnov === 0 || $this->k00_numnov === 0.0 || $this->k00_numnov == "") ){ 
        $this->erro_sql = " Campo k00_numnov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

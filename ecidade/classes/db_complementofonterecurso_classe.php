@@ -47,12 +47,12 @@ class cl_complementofonterecurso
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->o200_sequencial = ($this->o200_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o200_sequencial"] : $this->o200_sequencial);
+            $this->o200_sequencial = ($this->o200_sequencial === 0 || $this->o200_sequencial === 0.0 || $this->o200_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o200_sequencial"] : $this->o200_sequencial);
             $this->o200_descricao = ($this->o200_descricao == "" ? @$GLOBALS["HTTP_POST_VARS"]["o200_descricao"] : $this->o200_descricao);
             $this->o200_msc = ($this->o200_msc == "" ? @$GLOBALS["HTTP_POST_VARS"]["o200_msc"] : $this->o200_msc);
             $this->o200_tribunal = ($this->o200_tribunal == "" ? @$GLOBALS["HTTP_POST_VARS"]["o200_tribunal"] : $this->o200_tribunal);
         } else {
-            $this->o200_sequencial = ($this->o200_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o200_sequencial"] : $this->o200_sequencial);
+            $this->o200_sequencial = ($this->o200_sequencial === 0 || $this->o200_sequencial === 0.0 || $this->o200_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["o200_sequencial"] : $this->o200_sequencial);
         }
     }
 
@@ -87,7 +87,7 @@ class cl_complementofonterecurso
             return false;
         }
 
-        if (($this->o200_sequencial == null) || ($this->o200_sequencial == "")) {
+        if (($this->o200_sequencial == null) || ($this->o200_sequencial === 0 || $this->o200_sequencial === 0.0 || $this->o200_sequencial == "")) {
             $this->erro_sql = " Campo o200_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

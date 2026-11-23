@@ -69,11 +69,11 @@ class cl_cliente {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j99_codigo = ($this->j99_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j99_codigo"]:$this->j99_codigo);
+       $this->j99_codigo = ($this->j99_codigo === 0 || $this->j99_codigo === 0.0 || $this->j99_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j99_codigo"]:$this->j99_codigo);
        $this->j99_nome = ($this->j99_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["j99_nome"]:$this->j99_nome);
        $this->j99_obs = ($this->j99_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["j99_obs"]:$this->j99_obs);
      }else{
-       $this->j99_codigo = ($this->j99_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j99_codigo"]:$this->j99_codigo);
+       $this->j99_codigo = ($this->j99_codigo === 0 || $this->j99_codigo === 0.0 || $this->j99_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j99_codigo"]:$this->j99_codigo);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_cliente {
          $this->j99_codigo = $j99_codigo;
        }
      }
-     if(($this->j99_codigo == null) || ($this->j99_codigo == "") ){
+     if(($this->j99_codigo == null) || ($this->j99_codigo === 0 || $this->j99_codigo === 0.0 || $this->j99_codigo == "") ){
        $this->erro_sql = " Campo j99_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

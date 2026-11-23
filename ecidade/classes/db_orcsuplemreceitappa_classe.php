@@ -71,12 +71,12 @@ class cl_orcsuplemreceitappa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o137_sequencial = ($this->o137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o137_sequencial"]:$this->o137_sequencial);
-       $this->o137_orcsuplem = ($this->o137_orcsuplem == ""?@$GLOBALS["HTTP_POST_VARS"]["o137_orcsuplem"]:$this->o137_orcsuplem);
-       $this->o137_ppaestimativareceita = ($this->o137_ppaestimativareceita == ""?@$GLOBALS["HTTP_POST_VARS"]["o137_ppaestimativareceita"]:$this->o137_ppaestimativareceita);
-       $this->o137_valor = ($this->o137_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o137_valor"]:$this->o137_valor);
+       $this->o137_sequencial = ($this->o137_sequencial === 0 || $this->o137_sequencial === 0.0 || $this->o137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o137_sequencial"]:$this->o137_sequencial);
+       $this->o137_orcsuplem = ($this->o137_orcsuplem === 0 || $this->o137_orcsuplem === 0.0 || $this->o137_orcsuplem == ""?@$GLOBALS["HTTP_POST_VARS"]["o137_orcsuplem"]:$this->o137_orcsuplem);
+       $this->o137_ppaestimativareceita = ($this->o137_ppaestimativareceita === 0 || $this->o137_ppaestimativareceita === 0.0 || $this->o137_ppaestimativareceita == ""?@$GLOBALS["HTTP_POST_VARS"]["o137_ppaestimativareceita"]:$this->o137_ppaestimativareceita);
+       $this->o137_valor = ($this->o137_valor === 0 || $this->o137_valor === 0.0 || $this->o137_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o137_valor"]:$this->o137_valor);
      }else{
-       $this->o137_sequencial = ($this->o137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o137_sequencial"]:$this->o137_sequencial);
+       $this->o137_sequencial = ($this->o137_sequencial === 0 || $this->o137_sequencial === 0.0 || $this->o137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o137_sequencial"]:$this->o137_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_orcsuplemreceitappa {
          $this->o137_sequencial = $o137_sequencial;
        }
      }
-     if(($this->o137_sequencial == null) || ($this->o137_sequencial == "") ){
+     if(($this->o137_sequencial == null) || ($this->o137_sequencial === 0 || $this->o137_sequencial === 0.0 || $this->o137_sequencial == "") ){
        $this->erro_sql = " Campo o137_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

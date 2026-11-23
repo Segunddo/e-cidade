@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/etapas-lista-espera",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42P01]: Undefined table: 7 ERRO:  não existe a relação \"plugins.listaespera\"\nLINE 1: ...no\".\"ed10_ordem\", \"serie\".\"ed11_i_sequencia\" from \"plugins\"....\n                                                             ^ (SQL: select distinct \"ed11_i_codigo\" as \"codigo\", \"ed11_c_descr\" as \"nome\", \"ensino\".\"ed10_ordem\", \"serie\".\"ed11_i_sequencia\" from \"plugins\".\"listaespera\" inner join \"escola\".\"serie\" on \"serie\".\"ed11_i_codigo\" = \"listaespera\".\"mo18_serie\" inner join \"escola\".\"ensino\" on \"ensino\".\"ed10_i_codigo\" = \"serie\".\"ed11_i_ensino\" where \"listaespera\".\"mo18_status\" = 1 and \"listaespera\".\"mo18_base\" in (select \"basefase\".\"mo12_base\" from \"plugins\".\"basefase\" where \"basefase\".\"mo12_fase\" in (select \"fase\".\"mo04_codigo\" from \"plugins\".\"fase\" where \"fase\".\"mo04_encerrada\" = 0)) order by \"ensino\".\"ed10_ordem\" asc, \"serie\".\"ed11_i_sequencia\" asc)"
+  },
+  "sha256": "a7048b10ee85b41d087a2268652f84ec040626ad32115bdf1798037b15d93689",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

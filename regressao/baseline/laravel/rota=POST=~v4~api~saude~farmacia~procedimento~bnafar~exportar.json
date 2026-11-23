@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/farmacia/procedimento/bnafar/exportar",
+  "json": {
+    "errors": {
+      "DB_coddepto": [
+        "O campo DB_coddepto é obrigatório e deve ser um inteiro."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "c65a45231fa0d699cc3fd412d0974eab4769c0ea80493c80c2850d1b90c21b65",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

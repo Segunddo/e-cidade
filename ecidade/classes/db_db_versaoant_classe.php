@@ -70,7 +70,7 @@ class cl_db_versaoant {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db31_codver = ($this->db31_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db31_codver"]:$this->db31_codver);
+       $this->db31_codver = ($this->db31_codver === 0 || $this->db31_codver === 0.0 || $this->db31_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db31_codver"]:$this->db31_codver);
        if($this->db31_data == ""){
          $this->db31_data_dia = ($this->db31_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db31_data_dia"]:$this->db31_data_dia);
          $this->db31_data_mes = ($this->db31_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db31_data_mes"]:$this->db31_data_mes);
@@ -80,7 +80,7 @@ class cl_db_versaoant {
          }
        }
      }else{
-       $this->db31_codver = ($this->db31_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db31_codver"]:$this->db31_codver);
+       $this->db31_codver = ($this->db31_codver === 0 || $this->db31_codver === 0.0 || $this->db31_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db31_codver"]:$this->db31_codver);
      }
    }
    // funcao para inclusao
@@ -96,7 +96,7 @@ class cl_db_versaoant {
        return false;
      }
        $this->db31_codver = $db31_codver;
-     if(($this->db31_codver == null) || ($this->db31_codver == "") ){
+     if(($this->db31_codver == null) || ($this->db31_codver === 0 || $this->db31_codver === 0.0 || $this->db31_codver == "") ){
        $this->erro_sql = " Campo db31_codver nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

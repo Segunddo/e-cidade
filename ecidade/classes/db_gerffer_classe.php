@@ -85,21 +85,21 @@ class cl_gerffer {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r31_anousu = ($this->r31_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_anousu"]:$this->r31_anousu);
-       $this->r31_mesusu = ($this->r31_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_mesusu"]:$this->r31_mesusu);
-       $this->r31_regist = ($this->r31_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_regist"]:$this->r31_regist);
+       $this->r31_anousu = ($this->r31_anousu === 0 || $this->r31_anousu === 0.0 || $this->r31_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_anousu"]:$this->r31_anousu);
+       $this->r31_mesusu = ($this->r31_mesusu === 0 || $this->r31_mesusu === 0.0 || $this->r31_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_mesusu"]:$this->r31_mesusu);
+       $this->r31_regist = ($this->r31_regist === 0 || $this->r31_regist === 0.0 || $this->r31_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_regist"]:$this->r31_regist);
        $this->r31_rubric = ($this->r31_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_rubric"]:$this->r31_rubric);
-       $this->r31_valor = ($this->r31_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_valor"]:$this->r31_valor);
-       $this->r31_pd = ($this->r31_pd == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_pd"]:$this->r31_pd);
-       $this->r31_quant = ($this->r31_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_quant"]:$this->r31_quant);
+       $this->r31_valor = ($this->r31_valor === 0 || $this->r31_valor === 0.0 || $this->r31_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_valor"]:$this->r31_valor);
+       $this->r31_pd = ($this->r31_pd === 0 || $this->r31_pd === 0.0 || $this->r31_pd == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_pd"]:$this->r31_pd);
+       $this->r31_quant = ($this->r31_quant === 0 || $this->r31_quant === 0.0 || $this->r31_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_quant"]:$this->r31_quant);
        $this->r31_lotac = ($this->r31_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_lotac"]:$this->r31_lotac);
-       $this->r31_semest = ($this->r31_semest == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_semest"]:$this->r31_semest);
+       $this->r31_semest = ($this->r31_semest === 0 || $this->r31_semest === 0.0 || $this->r31_semest == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_semest"]:$this->r31_semest);
        $this->r31_tpp = ($this->r31_tpp == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_tpp"]:$this->r31_tpp);
-       $this->r31_instit = ($this->r31_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_instit"]:$this->r31_instit);
+       $this->r31_instit = ($this->r31_instit === 0 || $this->r31_instit === 0.0 || $this->r31_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_instit"]:$this->r31_instit);
      }else{
-       $this->r31_anousu = ($this->r31_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_anousu"]:$this->r31_anousu);
-       $this->r31_mesusu = ($this->r31_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_mesusu"]:$this->r31_mesusu);
-       $this->r31_regist = ($this->r31_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_regist"]:$this->r31_regist);
+       $this->r31_anousu = ($this->r31_anousu === 0 || $this->r31_anousu === 0.0 || $this->r31_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_anousu"]:$this->r31_anousu);
+       $this->r31_mesusu = ($this->r31_mesusu === 0 || $this->r31_mesusu === 0.0 || $this->r31_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_mesusu"]:$this->r31_mesusu);
+       $this->r31_regist = ($this->r31_regist === 0 || $this->r31_regist === 0.0 || $this->r31_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_regist"]:$this->r31_regist);
        $this->r31_rubric = ($this->r31_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_rubric"]:$this->r31_rubric);
        $this->r31_tpp = ($this->r31_tpp == ""?@$GLOBALS["HTTP_POST_VARS"]["r31_tpp"]:$this->r31_tpp);
      }
@@ -166,7 +166,7 @@ class cl_gerffer {
        $this->r31_regist = $r31_regist;
        $this->r31_rubric = $r31_rubric;
        $this->r31_tpp = $r31_tpp;
-     if(($this->r31_anousu == null) || ($this->r31_anousu == "") ){
+     if(($this->r31_anousu == null) || ($this->r31_anousu === 0 || $this->r31_anousu === 0.0 || $this->r31_anousu == "") ){
        $this->erro_sql = " Campo r31_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -174,7 +174,7 @@ class cl_gerffer {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r31_mesusu == null) || ($this->r31_mesusu == "") ){
+     if(($this->r31_mesusu == null) || ($this->r31_mesusu === 0 || $this->r31_mesusu === 0.0 || $this->r31_mesusu == "") ){
        $this->erro_sql = " Campo r31_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -182,7 +182,7 @@ class cl_gerffer {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r31_regist == null) || ($this->r31_regist == "") ){
+     if(($this->r31_regist == null) || ($this->r31_regist === 0 || $this->r31_regist === 0.0 || $this->r31_regist == "") ){
        $this->erro_sql = " Campo r31_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_orcsuplementacaoparametro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o134_anousu = ($this->o134_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o134_anousu"]:$this->o134_anousu);
-       $this->o134_percentuallimiteloa = ($this->o134_percentuallimiteloa == ""?@$GLOBALS["HTTP_POST_VARS"]["o134_percentuallimiteloa"]:$this->o134_percentuallimiteloa);
+       $this->o134_anousu = ($this->o134_anousu === 0 || $this->o134_anousu === 0.0 || $this->o134_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o134_anousu"]:$this->o134_anousu);
+       $this->o134_percentuallimiteloa = ($this->o134_percentuallimiteloa === 0 || $this->o134_percentuallimiteloa === 0.0 || $this->o134_percentuallimiteloa == ""?@$GLOBALS["HTTP_POST_VARS"]["o134_percentuallimiteloa"]:$this->o134_percentuallimiteloa);
      }else{
-       $this->o134_anousu = ($this->o134_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o134_anousu"]:$this->o134_anousu);
+       $this->o134_anousu = ($this->o134_anousu === 0 || $this->o134_anousu === 0.0 || $this->o134_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o134_anousu"]:$this->o134_anousu);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_orcsuplementacaoparametro {
        return false;
      }
        $this->o134_anousu = $o134_anousu;
-     if(($this->o134_anousu == null) || ($this->o134_anousu == "") ){
+     if(($this->o134_anousu == null) || ($this->o134_anousu === 0 || $this->o134_anousu === 0.0 || $this->o134_anousu == "") ){
        $this->erro_sql = " Campo o134_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

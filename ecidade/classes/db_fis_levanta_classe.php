@@ -96,7 +96,7 @@ class cl_fis_levanta
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y60_codlev = ($this->y60_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_codlev"]:$this->y60_codlev);
+            $this->y60_codlev = ($this->y60_codlev === 0 || $this->y60_codlev === 0.0 || $this->y60_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_codlev"]:$this->y60_codlev);
             if ($this->y60_data == "") {
                 $this->y60_data_dia = ($this->y60_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_data_dia"]:$this->y60_data_dia);
                 $this->y60_data_mes = ($this->y60_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_data_mes"]:$this->y60_data_mes);
@@ -124,10 +124,10 @@ class cl_fis_levanta
             }
             $this->y60_obs = ($this->y60_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_obs"]:$this->y60_obs);
             $this->y60_importado = ($this->y60_importado == "f"?@$GLOBALS["HTTP_POST_VARS"]["y60_importado"]:$this->y60_importado);
-            $this->y60_proces = ($this->y60_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_proces"]:$this->y60_proces);
+            $this->y60_proces = ($this->y60_proces === 0 || $this->y60_proces === 0.0 || $this->y60_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_proces"]:$this->y60_proces);
             $this->y60_espontaneo = ($this->y60_espontaneo == "f"?@$GLOBALS["HTTP_POST_VARS"]["y60_espontaneo"]:$this->y60_espontaneo);
         } else {
-            $this->y60_codlev = ($this->y60_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_codlev"]:$this->y60_codlev);
+            $this->y60_codlev = ($this->y60_codlev === 0 || $this->y60_codlev === 0.0 || $this->y60_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y60_codlev"]:$this->y60_codlev);
         }
     }
 

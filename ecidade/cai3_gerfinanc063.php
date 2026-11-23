@@ -25,7 +25,7 @@
  *                                licenca/licenca_pt.txt
  */
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 require_once(modification("libs/db_stdlib.php"));
 require_once(modification("libs/db_conecta.php"));
 require_once(modification("libs/db_sessoes.php"));
@@ -187,7 +187,7 @@ for ($contatipo1 = 0; $contatipo1 < sizeof($tipo1); $contatipo1++) {
   $valorTotal = $valorTotal - $entradaminima;
 
 
-  if ( ( round($valorTotal/$ultparc,2) >= $vlrmin ) and ( $ultparc >= $ultmaxparc ) ) {
+  if ( ( round((float) $ultparc == 0 ? (float) $valorTotal > 0 ? INF : ((float) $valorTotal < 0 ? -INF : NAN) : $valorTotal / $ultparc,2) >= $vlrmin ) and ( $ultparc >= $ultmaxparc ) ) {
 
  $sSql = "select k40_controlavencimento
           from cadtipoparc
@@ -211,7 +211,7 @@ for ($contatipo1 = 0; $contatipo1 < sizeof($tipo1); $contatipo1++) {
       if ($i < $minparc) {
         continue;
       }
-      if (round($valorTotal/$i,2) < $vlrmin) {
+      if (round((float) $i == 0 ? (float) $valorTotal > 0 ? INF : ((float) $valorTotal < 0 ? -INF : NAN) : $valorTotal / $i,2) < $vlrmin) {
 
         break;
       }
@@ -230,19 +230,19 @@ for ($contatipo1 = 0; $contatipo1 < sizeof($tipo1); $contatipo1++) {
       $percentualDesconto = 1;
 
       if ((float)$valorTotalParcelado < (float)$valor) {
-        $percentualDesconto = (((float)$valorTotalParcelado * 100) / (float)$valor) / 100;
+        $percentualDesconto = ((float) (float)$valor == 0 ? (float) ((float)$valorTotalParcelado * 100) > 0 ? INF : ((float) ((float)$valorTotalParcelado * 100) < 0 ? -INF : NAN) : (float)$valorTotalParcelado * 100 / (float)$valor) / 100;
       }
 
       $valorTotalParceladoSemEntrada = $valorTotalParcelado - $entradaminima;
-      $valorMedioParcelas = $valorTotalParceladoSemEntrada / ($i - 1);
+      $valorMedioParcelas = (float) ($i - 1) == 0 ? (float) $valorTotalParceladoSemEntrada > 0 ? INF : ((float) $valorTotalParceladoSemEntrada < 0 ? -INF : NAN) : $valorTotalParceladoSemEntrada / ($i - 1);
 
-      if (($valorMedioParcelas < $regraParcelamento->vlrmin || $valorTotalParcelado/$i < $regraParcelamento->vlrmin)){
+      if (($valorMedioParcelas < $regraParcelamento->vlrmin || ((float) $i == 0 ? (float) $valorTotalParcelado > 0 ? INF : ((float) $valorTotalParcelado < 0 ? -INF : NAN) : $valorTotalParcelado / $i) < $regraParcelamento->vlrmin)){
         continue;
       }
 
       echo "<td nowrap align='left' valign='top'>
               <input type='radio' name='val' id='val$i' onClick=\"parent.document.form1.parc.value='".($i - 1)."';js_atualizaValorComDesconto($valorTotalParcelado, $i, $vlrmin,$temdesconto,$percentualDesconto);\" value=''>$i X R$<font id='$i'>
-                ".str_pad(number_format(($valorTotalParcelado/$i),2,",","."),strlen(round($valorTotalParcelado/$i)),",",STR_PAD_LEFT)."
+                ".str_pad(number_format(((float) $i == 0 ? (float) $valorTotalParcelado > 0 ? INF : ((float) $valorTotalParcelado < 0 ? -INF : NAN) : $valorTotalParcelado / $i),2,",","."),strlen(round((float) $i == 0 ? (float) $valorTotalParcelado > 0 ? INF : ((float) $valorTotalParcelado < 0 ? -INF : NAN) : $valorTotalParcelado / $i)),",",STR_PAD_LEFT)."
               </font>
             </td>";
       if ($linha == 2) {

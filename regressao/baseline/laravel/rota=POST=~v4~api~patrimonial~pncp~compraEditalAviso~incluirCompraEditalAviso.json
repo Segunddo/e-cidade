@@ -1,0 +1,51 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/compraEditalAviso/incluirCompraEditalAviso",
+  "json": {
+    "errors": {
+      "amparoLegal": [
+        "O campo amparo legal é obrigatório."
+      ],
+      "anoCompra": [
+        "O campo ano compra é obrigatório."
+      ],
+      "cnpj": [
+        "O campo cnpj é obrigatório."
+      ],
+      "instrumentoConvocatorio": [
+        "O campo instrumento convocatorio é obrigatório."
+      ],
+      "modalidade": [
+        "O campo modalidade é obrigatório."
+      ],
+      "modoDisputa": [
+        "O campo modo disputa é obrigatório."
+      ],
+      "numeroCompra": [
+        "O campo numero compra é obrigatório."
+      ],
+      "numeroProcesso": [
+        "O campo numero processo é obrigatório."
+      ],
+      "objetoCompra": [
+        "O campo objeto compra é obrigatório."
+      ],
+      "tituloDocumento": [
+        "O campo titulo documento é obrigatório."
+      ],
+      "unidadeCompradora": [
+        "O campo unidade compradora é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "e837f0885125d8c1c227e20b6b3959352d59661a931970742a11f19894671d51",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -38,7 +38,7 @@ $clrotulo->label('z01_hora');
 
 
 db_postmemory($HTTP_SERVER_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $txt_where="1=1";
 $info="Total";

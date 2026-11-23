@@ -71,12 +71,12 @@ class cl_sepulturas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm05_i_codigo = ($this->cm05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm05_i_codigo"]:$this->cm05_i_codigo);
+       $this->cm05_i_codigo = ($this->cm05_i_codigo === 0 || $this->cm05_i_codigo === 0.0 || $this->cm05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm05_i_codigo"]:$this->cm05_i_codigo);
        $this->cm05_c_numero = ($this->cm05_c_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["cm05_c_numero"]:$this->cm05_c_numero);
-       $this->cm05_i_campa = ($this->cm05_i_campa == ""?@$GLOBALS["HTTP_POST_VARS"]["cm05_i_campa"]:$this->cm05_i_campa);
-       $this->cm05_i_lotecemit = ($this->cm05_i_lotecemit == ""?@$GLOBALS["HTTP_POST_VARS"]["cm05_i_lotecemit"]:$this->cm05_i_lotecemit);
+       $this->cm05_i_campa = ($this->cm05_i_campa === 0 || $this->cm05_i_campa === 0.0 || $this->cm05_i_campa == ""?@$GLOBALS["HTTP_POST_VARS"]["cm05_i_campa"]:$this->cm05_i_campa);
+       $this->cm05_i_lotecemit = ($this->cm05_i_lotecemit === 0 || $this->cm05_i_lotecemit === 0.0 || $this->cm05_i_lotecemit == ""?@$GLOBALS["HTTP_POST_VARS"]["cm05_i_lotecemit"]:$this->cm05_i_lotecemit);
      }else{
-       $this->cm05_i_codigo = ($this->cm05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm05_i_codigo"]:$this->cm05_i_codigo);
+       $this->cm05_i_codigo = ($this->cm05_i_codigo === 0 || $this->cm05_i_codigo === 0.0 || $this->cm05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm05_i_codigo"]:$this->cm05_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_sepulturas {
          $this->cm05_i_codigo = $cm05_i_codigo;
        }
      }
-     if(($this->cm05_i_codigo == null) || ($this->cm05_i_codigo == "") ){
+     if(($this->cm05_i_codigo == null) || ($this->cm05_i_codigo === 0 || $this->cm05_i_codigo === 0.0 || $this->cm05_i_codigo == "") ){
        $this->erro_sql = " Campo cm05_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

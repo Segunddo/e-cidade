@@ -69,11 +69,11 @@ class cl_reciborecurso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_sequen = ($this->k00_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequen"]:$this->k00_sequen);
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_recurso = ($this->k00_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_recurso"]:$this->k00_recurso);
+       $this->k00_sequen = ($this->k00_sequen === 0 || $this->k00_sequen === 0.0 || $this->k00_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequen"]:$this->k00_sequen);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_recurso = ($this->k00_recurso === 0 || $this->k00_recurso === 0.0 || $this->k00_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_recurso"]:$this->k00_recurso);
      }else{
-       $this->k00_sequen = ($this->k00_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequen"]:$this->k00_sequen);
+       $this->k00_sequen = ($this->k00_sequen === 0 || $this->k00_sequen === 0.0 || $this->k00_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequen"]:$this->k00_sequen);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_reciborecurso {
          $this->k00_sequen = $k00_sequen;
        }
      }
-     if(($this->k00_sequen == null) || ($this->k00_sequen == "") ){
+     if(($this->k00_sequen == null) || ($this->k00_sequen === 0 || $this->k00_sequen === 0.0 || $this->k00_sequen == "") ){
        $this->erro_sql = " Campo k00_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

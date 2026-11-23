@@ -69,11 +69,11 @@ class cl_tabrecarretipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k79_sequencial = ($this->k79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_sequencial"]:$this->k79_sequencial);
-       $this->k79_arretipo = ($this->k79_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_arretipo"]:$this->k79_arretipo);
-       $this->k79_receit = ($this->k79_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_receit"]:$this->k79_receit);
+       $this->k79_sequencial = ($this->k79_sequencial === 0 || $this->k79_sequencial === 0.0 || $this->k79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_sequencial"]:$this->k79_sequencial);
+       $this->k79_arretipo = ($this->k79_arretipo === 0 || $this->k79_arretipo === 0.0 || $this->k79_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_arretipo"]:$this->k79_arretipo);
+       $this->k79_receit = ($this->k79_receit === 0 || $this->k79_receit === 0.0 || $this->k79_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_receit"]:$this->k79_receit);
      }else{
-       $this->k79_sequencial = ($this->k79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_sequencial"]:$this->k79_sequencial);
+       $this->k79_sequencial = ($this->k79_sequencial === 0 || $this->k79_sequencial === 0.0 || $this->k79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k79_sequencial"]:$this->k79_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tabrecarretipo {
          $this->k79_sequencial = $k79_sequencial;
        }
      }
-     if(($this->k79_sequencial == null) || ($this->k79_sequencial == "") ){
+     if(($this->k79_sequencial == null) || ($this->k79_sequencial === 0 || $this->k79_sequencial === 0.0 || $this->k79_sequencial == "") ){
        $this->erro_sql = " Campo k79_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

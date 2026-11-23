@@ -145,7 +145,7 @@ if(isset($HTTP_POST_VARS['id_itbi'])) {
   }
 }
 $matricula = 200;
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cod_matricula = 0 + $matricula;
 if ( !is_int($cod_matricula) or $cod_matricula == "" ){
   // db_msgbox("Código da Matrícula Inválido.");

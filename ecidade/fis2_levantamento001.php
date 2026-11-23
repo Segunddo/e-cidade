@@ -35,7 +35,7 @@ $clrotulo = new rotulocampo;
 $clrotulo->label("y60_codlev");
 $clrotulo->label("z01_nome");
 $db_opcao = 1;
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 ?>
 <html>
 <head>

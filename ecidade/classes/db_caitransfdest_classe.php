@@ -71,12 +71,12 @@ class cl_caitransfdest {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k92_transf = ($this->k92_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k92_transf"]:$this->k92_transf);
-       $this->k92_instit = ($this->k92_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k92_instit"]:$this->k92_instit);
-       $this->k92_credito = ($this->k92_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["k92_credito"]:$this->k92_credito);
-       $this->k92_debito = ($this->k92_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["k92_debito"]:$this->k92_debito);
+       $this->k92_transf = ($this->k92_transf === 0 || $this->k92_transf === 0.0 || $this->k92_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k92_transf"]:$this->k92_transf);
+       $this->k92_instit = ($this->k92_instit === 0 || $this->k92_instit === 0.0 || $this->k92_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k92_instit"]:$this->k92_instit);
+       $this->k92_credito = ($this->k92_credito === 0 || $this->k92_credito === 0.0 || $this->k92_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["k92_credito"]:$this->k92_credito);
+       $this->k92_debito = ($this->k92_debito === 0 || $this->k92_debito === 0.0 || $this->k92_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["k92_debito"]:$this->k92_debito);
      }else{
-       $this->k92_transf = ($this->k92_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k92_transf"]:$this->k92_transf);
+       $this->k92_transf = ($this->k92_transf === 0 || $this->k92_transf === 0.0 || $this->k92_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k92_transf"]:$this->k92_transf);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_caitransfdest {
        return false;
      }
        $this->k92_transf = $k92_transf;
-     if(($this->k92_transf == null) || ($this->k92_transf == "") ){
+     if(($this->k92_transf == null) || ($this->k92_transf === 0 || $this->k92_transf === 0.0 || $this->k92_transf == "") ){
        $this->erro_sql = " Campo k92_transf nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

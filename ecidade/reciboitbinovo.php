@@ -42,7 +42,7 @@ include(modification("classes/db_numpref_classe.php"));
 include(modification("classes/db_itbiconstrespecie_classe.php"));
 include(modification("classes/db_itbiconstrtipo_classe.php"));
 include(modification("classes/db_parreciboitbi_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 $clitbiavalia = new cl_itbiavalia;
 $clitbi = new cl_itbi;

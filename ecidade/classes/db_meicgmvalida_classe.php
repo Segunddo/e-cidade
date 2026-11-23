@@ -80,9 +80,9 @@ class cl_meicgmvalida {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q117_sequencial = ($this->q117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_sequencial"]:$this->q117_sequencial);
-       $this->q117_meicgm = ($this->q117_meicgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_meicgm"]:$this->q117_meicgm);
-       $this->q117_id_usuario = ($this->q117_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_id_usuario"]:$this->q117_id_usuario);
+       $this->q117_sequencial = ($this->q117_sequencial === 0 || $this->q117_sequencial === 0.0 || $this->q117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_sequencial"]:$this->q117_sequencial);
+       $this->q117_meicgm = ($this->q117_meicgm === 0 || $this->q117_meicgm === 0.0 || $this->q117_meicgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_meicgm"]:$this->q117_meicgm);
+       $this->q117_id_usuario = ($this->q117_id_usuario === 0 || $this->q117_id_usuario === 0.0 || $this->q117_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_id_usuario"]:$this->q117_id_usuario);
        $this->q117_hora = ($this->q117_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_hora"]:$this->q117_hora);
        if($this->q117_data == ""){
          $this->q117_data_dia = ($this->q117_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_data_dia"]:$this->q117_data_dia);
@@ -95,7 +95,7 @@ class cl_meicgmvalida {
        $this->q117_obs = ($this->q117_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_obs"]:$this->q117_obs);
        $this->q117_aprovado = ($this->q117_aprovado == "f"?@$GLOBALS["HTTP_POST_VARS"]["q117_aprovado"]:$this->q117_aprovado);
      }else{
-       $this->q117_sequencial = ($this->q117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_sequencial"]:$this->q117_sequencial);
+       $this->q117_sequencial = ($this->q117_sequencial === 0 || $this->q117_sequencial === 0.0 || $this->q117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q117_sequencial"]:$this->q117_sequencial);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_meicgmvalida {
          $this->q117_sequencial = $q117_sequencial;
        }
      }
-     if(($this->q117_sequencial == null) || ($this->q117_sequencial == "") ){
+     if(($this->q117_sequencial == null) || ($this->q117_sequencial === 0 || $this->q117_sequencial === 0.0 || $this->q117_sequencial == "") ){
        $this->erro_sql = " Campo q117_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

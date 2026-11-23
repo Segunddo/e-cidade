@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/laboratorio/triagem-laboratorial/buscar-requisicoes",
+  "json": {
+    "error": true,
+    "message": "Parâmetros não configurados. Acesse Laboratório > Procedimentos > Parâmetros."
+  },
+  "sha256": "b30698d31e823fdcd4eb59b765be9511d614cb194f812049748ff7f9f4ade594",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

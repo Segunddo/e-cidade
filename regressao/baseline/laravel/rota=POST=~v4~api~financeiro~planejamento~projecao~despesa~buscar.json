@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/projecao/despesa/buscar",
+  "json": {
+    "errors": {
+      "planejamento": [
+        "Planejamento deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "fee1ae85885e5927ca3376b996e587c708ea2a274f74ecfd94ac27ab3d465db1",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

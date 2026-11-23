@@ -32,7 +32,7 @@ require_once(modification("classes/db_matestoque_classe.php"));
 require_once(modification("classes/db_matestoqueitem_classe.php"));
 require_once(modification("classes/db_matmaterestoque_classe.php"));
 require_once modification("classes/materialestoque.model.php");
-parse_str($HTTP_SERVER_VARS ['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS ['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clmatestoque = new cl_matestoque();
 $clmatestoqueitem = new cl_matestoqueitem();

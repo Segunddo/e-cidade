@@ -20,7 +20,7 @@ class cl_assinatura
            from db_usuarios
            where id_usuario = " . db_getsession("DB_id_usuario")
         );
-        $nome = pg_fetch_result($result, 0, "nome");
+        $nome = ($result ? pg_fetch_result($result, 0, "nome") : null);
         return $nome;
     }
 
@@ -51,11 +51,11 @@ class cl_assinatura
         ");
 
         $ass = $default;
-        if (pg_num_rows($result) > 0) {
+        if (($result ? pg_num_rows($result) : null) > 0) {
             $ass = '';
             $ar = "";
-            for ($i = 0; $i < pg_num_rows($result); $i++) {
-                $db02_texto = pg_fetch_result($result, $i, "db02_texto");
+            for ($i = 0; $i < ($result ? pg_num_rows($result) : null); $i++) {
+                $db02_texto = ($result ? pg_fetch_result($result, $i, "db02_texto") : null);
                 $ass .= $ar . $db02_texto;
                 $ar = "\r\n";
             }
@@ -66,9 +66,9 @@ class cl_assinatura
              */
             if ($pos_paragrafo != "") {
                 $ass = '';
-                if (pg_num_rows($result) > $pos_paragrafo) {
+                if (($result ? pg_num_rows($result) : null) > $pos_paragrafo) {
                     // retorna da posição paragrafo
-                    $db02_texto = pg_fetch_result($result, $pos_paragrafo, "db02_texto");
+                    $db02_texto = ($result ? pg_fetch_result($result, $pos_paragrafo, "db02_texto") : null);
                     $ass = $db02_texto;
                 }
             }

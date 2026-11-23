@@ -67,11 +67,11 @@ class cl_itbiconstrpadraoconstrutivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it34_codigo = ($this->it34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it34_codigo"]:$this->it34_codigo);
-       $this->it34_caract = ($this->it34_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["it34_caract"]:$this->it34_caract);
+       $this->it34_codigo = ($this->it34_codigo === 0 || $this->it34_codigo === 0.0 || $this->it34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it34_codigo"]:$this->it34_codigo);
+       $this->it34_caract = ($this->it34_caract === 0 || $this->it34_caract === 0.0 || $this->it34_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["it34_caract"]:$this->it34_caract);
      }else{
-       $this->it34_codigo = ($this->it34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it34_codigo"]:$this->it34_codigo);
-       $this->it34_caract = ($this->it34_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["it34_caract"]:$this->it34_caract);
+       $this->it34_codigo = ($this->it34_codigo === 0 || $this->it34_codigo === 0.0 || $this->it34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["it34_codigo"]:$this->it34_codigo);
+       $this->it34_caract = ($this->it34_caract === 0 || $this->it34_caract === 0.0 || $this->it34_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["it34_caract"]:$this->it34_caract);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_itbiconstrpadraoconstrutivo {
       $this->atualizacampos();
        $this->it34_codigo = $it34_codigo;
        $this->it34_caract = $it34_caract;
-     if(($this->it34_codigo == null) || ($this->it34_codigo == "") ){
+     if(($this->it34_codigo == null) || ($this->it34_codigo === 0 || $this->it34_codigo === 0.0 || $this->it34_codigo == "") ){
        $this->erro_sql = " Campo it34_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_itbiconstrpadraoconstrutivo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->it34_caract == null) || ($this->it34_caract == "") ){
+     if(($this->it34_caract == null) || ($this->it34_caract === 0 || $this->it34_caract === 0.0 || $this->it34_caract == "") ){
        $this->erro_sql = " Campo it34_caract nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

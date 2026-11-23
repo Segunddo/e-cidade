@@ -69,12 +69,12 @@ class cl_iptutaxamatricexe {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j10_iptutaxamatricexe = ($this->j10_iptutaxamatricexe == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_iptutaxamatricexe"]:$this->j10_iptutaxamatricexe);
-       $this->j10_iptutaxamatric = ($this->j10_iptutaxamatric == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_iptutaxamatric"]:$this->j10_iptutaxamatric);
-       $this->j10_anousu = ($this->j10_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_anousu"]:$this->j10_anousu);
+       $this->j10_iptutaxamatricexe = ($this->j10_iptutaxamatricexe === 0 || $this->j10_iptutaxamatricexe === 0.0 || $this->j10_iptutaxamatricexe == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_iptutaxamatricexe"]:$this->j10_iptutaxamatricexe);
+       $this->j10_iptutaxamatric = ($this->j10_iptutaxamatric === 0 || $this->j10_iptutaxamatric === 0.0 || $this->j10_iptutaxamatric == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_iptutaxamatric"]:$this->j10_iptutaxamatric);
+       $this->j10_anousu = ($this->j10_anousu === 0 || $this->j10_anousu === 0.0 || $this->j10_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_anousu"]:$this->j10_anousu);
      }else{
-       $this->j10_iptutaxamatricexe = ($this->j10_iptutaxamatricexe == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_iptutaxamatricexe"]:$this->j10_iptutaxamatricexe);
-       $this->j10_iptutaxamatric = ($this->j10_iptutaxamatric == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_iptutaxamatric"]:$this->j10_iptutaxamatric);
+       $this->j10_iptutaxamatricexe = ($this->j10_iptutaxamatricexe === 0 || $this->j10_iptutaxamatricexe === 0.0 || $this->j10_iptutaxamatricexe == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_iptutaxamatricexe"]:$this->j10_iptutaxamatricexe);
+       $this->j10_iptutaxamatric = ($this->j10_iptutaxamatric === 0 || $this->j10_iptutaxamatric === 0.0 || $this->j10_iptutaxamatric == ""?@$GLOBALS["HTTP_POST_VARS"]["j10_iptutaxamatric"]:$this->j10_iptutaxamatric);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_iptutaxamatricexe {
          $this->j10_iptutaxamatricexe = $j10_iptutaxamatricexe; 
        }
      }
-     if(($this->j10_iptutaxamatricexe == null) || ($this->j10_iptutaxamatricexe == "") ){ 
+     if(($this->j10_iptutaxamatricexe == null) || ($this->j10_iptutaxamatricexe === 0 || $this->j10_iptutaxamatricexe === 0.0 || $this->j10_iptutaxamatricexe == "") ){ 
        $this->erro_sql = " Campo j10_iptutaxamatricexe nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

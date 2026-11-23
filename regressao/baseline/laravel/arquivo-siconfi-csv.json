@@ -1,0 +1,25 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "arquivo-siconfi-csv",
+  "json": {
+    "data": {
+      "csv": "tmp/de-para-recursos.csv",
+      "csvLinkExterno": "<X>"
+    },
+    "error": false,
+    "message": "Lista de Recursos"
+  },
+  "sha256": "05e1249652a6ab427aa9b7fc1240ff313eb2308259b851c3ef15164991252cc3",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "[arquivo csv status=200 ct=text/csv]\ncsv|1|1|Id Recurso\ncsv|1|2|Descrição\ncsv|1|3|FR 2026\ncsv|1|4|Complemento\ncsv|1|5|Exercício\ncsv|1|6|Classificacao\ncsv|1|7|Siconfi\ncsv|1|8|Gestão\ncsv|1|9|Tipo Detalhamento",
+  "tipos": {
+    "data.csvLinkExterno": [
+      "str"
+    ]
+  }
+}

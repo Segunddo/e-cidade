@@ -50,9 +50,9 @@ class cl_isscnaeanexos
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->q178_sequencial = ($this->q178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q178_sequencial"]:$this->q178_sequencial);
-       $this->q178_cnae = ($this->q178_cnae == ""?@$GLOBALS["HTTP_POST_VARS"]["q178_cnae"]:$this->q178_cnae);
-       $this->q178_issgscadanexos = ($this->q178_issgscadanexos == ""?@$GLOBALS["HTTP_POST_VARS"]["q178_issgscadanexos"]:$this->q178_issgscadanexos);
+       $this->q178_sequencial = ($this->q178_sequencial === 0 || $this->q178_sequencial === 0.0 || $this->q178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q178_sequencial"]:$this->q178_sequencial);
+       $this->q178_cnae = ($this->q178_cnae === 0 || $this->q178_cnae === 0.0 || $this->q178_cnae == ""?@$GLOBALS["HTTP_POST_VARS"]["q178_cnae"]:$this->q178_cnae);
+       $this->q178_issgscadanexos = ($this->q178_issgscadanexos === 0 || $this->q178_issgscadanexos === 0.0 || $this->q178_issgscadanexos == ""?@$GLOBALS["HTTP_POST_VARS"]["q178_issgscadanexos"]:$this->q178_issgscadanexos);
        if($this->q178_data_fim == ""){
          $this->q178_data_fim_dia = ($this->q178_data_fim_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q178_data_fim_dia"]:$this->q178_data_fim_dia);
          $this->q178_data_fim_mes = ($this->q178_data_fim_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q178_data_fim_mes"]:$this->q178_data_fim_mes);
@@ -62,7 +62,7 @@ class cl_isscnaeanexos
          }
        }
      }else{
-       $this->q178_sequencial = ($this->q178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q178_sequencial"]:$this->q178_sequencial);
+       $this->q178_sequencial = ($this->q178_sequencial === 0 || $this->q178_sequencial === 0.0 || $this->q178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q178_sequencial"]:$this->q178_sequencial);
      }
    }
 
@@ -114,7 +114,7 @@ class cl_isscnaeanexos
          $this->q178_sequencial = $q178_sequencial; 
        }
      }
-     if(($this->q178_sequencial == null) || ($this->q178_sequencial == "") ){ 
+     if(($this->q178_sequencial == null) || ($this->q178_sequencial === 0 || $this->q178_sequencial === 0.0 || $this->q178_sequencial == "") ){ 
        $this->erro_sql = " Campo q178_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

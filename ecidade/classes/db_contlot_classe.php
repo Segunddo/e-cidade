@@ -69,12 +69,12 @@ class cl_contlot {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d05_contri = ($this->d05_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_contri"]:$this->d05_contri);
-       $this->d05_idbql = ($this->d05_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_idbql"]:$this->d05_idbql);
-       $this->d05_testad = ($this->d05_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_testad"]:$this->d05_testad);
+       $this->d05_contri = ($this->d05_contri === 0 || $this->d05_contri === 0.0 || $this->d05_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_contri"]:$this->d05_contri);
+       $this->d05_idbql = ($this->d05_idbql === 0 || $this->d05_idbql === 0.0 || $this->d05_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_idbql"]:$this->d05_idbql);
+       $this->d05_testad = ($this->d05_testad === 0 || $this->d05_testad === 0.0 || $this->d05_testad == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_testad"]:$this->d05_testad);
      }else{
-       $this->d05_contri = ($this->d05_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_contri"]:$this->d05_contri);
-       $this->d05_idbql = ($this->d05_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_idbql"]:$this->d05_idbql);
+       $this->d05_contri = ($this->d05_contri === 0 || $this->d05_contri === 0.0 || $this->d05_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_contri"]:$this->d05_contri);
+       $this->d05_idbql = ($this->d05_idbql === 0 || $this->d05_idbql === 0.0 || $this->d05_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["d05_idbql"]:$this->d05_idbql);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_contlot {
      }
        $this->d05_contri = $d05_contri;
        $this->d05_idbql = $d05_idbql;
-     if(($this->d05_contri == null) || ($this->d05_contri == "") ){
+     if(($this->d05_contri == null) || ($this->d05_contri === 0 || $this->d05_contri === 0.0 || $this->d05_contri == "") ){
        $this->erro_sql = " Campo d05_contri nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_contlot {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d05_idbql == null) || ($this->d05_idbql == "") ){
+     if(($this->d05_idbql == null) || ($this->d05_idbql === 0 || $this->d05_idbql === 0.0 || $this->d05_idbql == "") ){
        $this->erro_sql = " Campo d05_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

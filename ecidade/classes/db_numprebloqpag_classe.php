@@ -69,11 +69,11 @@ class cl_numprebloqpag {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar22_sequencial = ($this->ar22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar22_sequencial"]:$this->ar22_sequencial);
-       $this->ar22_numpre = ($this->ar22_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["ar22_numpre"]:$this->ar22_numpre);
-       $this->ar22_numpar = ($this->ar22_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["ar22_numpar"]:$this->ar22_numpar);
+       $this->ar22_sequencial = ($this->ar22_sequencial === 0 || $this->ar22_sequencial === 0.0 || $this->ar22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar22_sequencial"]:$this->ar22_sequencial);
+       $this->ar22_numpre = ($this->ar22_numpre === 0 || $this->ar22_numpre === 0.0 || $this->ar22_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["ar22_numpre"]:$this->ar22_numpre);
+       $this->ar22_numpar = ($this->ar22_numpar === 0 || $this->ar22_numpar === 0.0 || $this->ar22_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["ar22_numpar"]:$this->ar22_numpar);
      }else{
-       $this->ar22_sequencial = ($this->ar22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar22_sequencial"]:$this->ar22_sequencial);
+       $this->ar22_sequencial = ($this->ar22_sequencial === 0 || $this->ar22_sequencial === 0.0 || $this->ar22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar22_sequencial"]:$this->ar22_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_numprebloqpag {
          $this->ar22_sequencial = $ar22_sequencial;
        }
      }
-     if(($this->ar22_sequencial == null) || ($this->ar22_sequencial == "") ){
+     if(($this->ar22_sequencial == null) || ($this->ar22_sequencial === 0 || $this->ar22_sequencial === 0.0 || $this->ar22_sequencial == "") ){
        $this->erro_sql = " Campo ar22_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

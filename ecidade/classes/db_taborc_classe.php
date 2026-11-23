@@ -76,14 +76,14 @@ class cl_taborc
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->k02_codigo = ($this->k02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codigo"]:$this->k02_codigo);
-       $this->k02_anousu = ($this->k02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_anousu"]:$this->k02_anousu);
-       $this->k02_codrec = ($this->k02_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codrec"]:$this->k02_codrec);
+       $this->k02_codigo = ($this->k02_codigo === 0 || $this->k02_codigo === 0.0 || $this->k02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codigo"]:$this->k02_codigo);
+       $this->k02_anousu = ($this->k02_anousu === 0 || $this->k02_anousu === 0.0 || $this->k02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_anousu"]:$this->k02_anousu);
+       $this->k02_codrec = ($this->k02_codrec === 0 || $this->k02_codrec === 0.0 || $this->k02_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codrec"]:$this->k02_codrec);
        $this->k02_estorc = ($this->k02_estorc == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_estorc"]:$this->k02_estorc);
-       $this->k02_complemento = ($this->k02_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_complemento"]:$this->k02_complemento);
+       $this->k02_complemento = ($this->k02_complemento === 0 || $this->k02_complemento === 0.0 || $this->k02_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_complemento"]:$this->k02_complemento);
      }else{
-       $this->k02_codigo = ($this->k02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codigo"]:$this->k02_codigo);
-       $this->k02_anousu = ($this->k02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_anousu"]:$this->k02_anousu);
+       $this->k02_codigo = ($this->k02_codigo === 0 || $this->k02_codigo === 0.0 || $this->k02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_codigo"]:$this->k02_codigo);
+       $this->k02_anousu = ($this->k02_anousu === 0 || $this->k02_anousu === 0.0 || $this->k02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["k02_anousu"]:$this->k02_anousu);
      }
    }
 
@@ -135,7 +135,7 @@ class cl_taborc
          $this->k02_codigo = $k02_codigo;
        }
      }
-     if(($this->k02_anousu == null) || ($this->k02_anousu == "") ){
+     if(($this->k02_anousu == null) || ($this->k02_anousu === 0 || $this->k02_anousu === 0.0 || $this->k02_anousu == "") ){
        $this->erro_sql = " Campo k02_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -143,7 +143,7 @@ class cl_taborc
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k02_codigo == null) || ($this->k02_codigo == "") ){
+     if(($this->k02_codigo == null) || ($this->k02_codigo === 0 || $this->k02_codigo === 0.0 || $this->k02_codigo == "") ){
        $this->erro_sql = " Campo k02_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

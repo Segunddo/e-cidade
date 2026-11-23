@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/redesim/inclusao-inscricao",
+  "json": {
+    "error": true,
+    "message": "Header accessKeyId não informado."
+  },
+  "sha256": "a9f2a7ceca82b74d1b31920eb1bc5fd90102e8a4f1e3238ab8543d21dd19d94e",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

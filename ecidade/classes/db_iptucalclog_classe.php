@@ -80,8 +80,8 @@ class cl_iptucalclog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j27_codigo = ($this->j27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_codigo"]:$this->j27_codigo);
-       $this->j27_anousu = ($this->j27_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_anousu"]:$this->j27_anousu);
+       $this->j27_codigo = ($this->j27_codigo === 0 || $this->j27_codigo === 0.0 || $this->j27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_codigo"]:$this->j27_codigo);
+       $this->j27_anousu = ($this->j27_anousu === 0 || $this->j27_anousu === 0.0 || $this->j27_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_anousu"]:$this->j27_anousu);
        if($this->j27_data == ""){
          $this->j27_data_dia = ($this->j27_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_data_dia"]:$this->j27_data_dia);
          $this->j27_data_mes = ($this->j27_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_data_mes"]:$this->j27_data_mes);
@@ -91,11 +91,11 @@ class cl_iptucalclog {
          }
        }
        $this->j27_hora = ($this->j27_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_hora"]:$this->j27_hora);
-       $this->j27_usuario = ($this->j27_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_usuario"]:$this->j27_usuario);
+       $this->j27_usuario = ($this->j27_usuario === 0 || $this->j27_usuario === 0.0 || $this->j27_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_usuario"]:$this->j27_usuario);
        $this->j27_parcial = ($this->j27_parcial == "f"?@$GLOBALS["HTTP_POST_VARS"]["j27_parcial"]:$this->j27_parcial);
-       $this->j27_quantaproc = ($this->j27_quantaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_quantaproc"]:$this->j27_quantaproc);
+       $this->j27_quantaproc = ($this->j27_quantaproc === 0 || $this->j27_quantaproc === 0.0 || $this->j27_quantaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_quantaproc"]:$this->j27_quantaproc);
      }else{
-       $this->j27_codigo = ($this->j27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_codigo"]:$this->j27_codigo);
+       $this->j27_codigo = ($this->j27_codigo === 0 || $this->j27_codigo === 0.0 || $this->j27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j27_codigo"]:$this->j27_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_iptucalclog {
          $this->j27_codigo = $j27_codigo;
        }
      }
-     if(($this->j27_codigo == null) || ($this->j27_codigo == "") ){
+     if(($this->j27_codigo == null) || ($this->j27_codigo === 0 || $this->j27_codigo === 0.0 || $this->j27_codigo == "") ){
        $this->erro_sql = " Campo j27_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

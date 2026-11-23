@@ -37,7 +37,7 @@ include(modification("classes/db_conlancamdig_classe.php"));
 include(modification("classes/db_conplano_classe.php"));
 include(modification("dbforms/db_classesgenericas.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;

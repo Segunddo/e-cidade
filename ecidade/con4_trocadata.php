@@ -50,8 +50,8 @@ if (isset($atualiza)) {
         $erro = true;
     }
 
-    $datatime = mktime(12, 0, 0, $data_mes, $data_dia, $data_ano);
-    $verdata  = checkdate($data_mes, $data_dia, $data_ano);
+    try { $datatime = mktime(12, 0, 0, $data_mes ?? 0, $data_dia ?? 0, $data_ano ?? 0); } catch (\Throwable $e) { $datatime = false; }
+    $verdata  = checkdate((int)$data_mes, (int)$data_dia, (int)$data_ano);
     if ($verdata && !$erro) {
         db_putsession("DB_datausu", $datatime);
         db_putsession("DB_anousu", date("Y", $datatime));

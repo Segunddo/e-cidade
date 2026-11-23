@@ -83,18 +83,18 @@ class cl_db_layoutlinha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db51_codigo = ($this->db51_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_codigo"]:$this->db51_codigo);
-       $this->db51_layouttxt = ($this->db51_layouttxt == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_layouttxt"]:$this->db51_layouttxt);
+       $this->db51_codigo = ($this->db51_codigo === 0 || $this->db51_codigo === 0.0 || $this->db51_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_codigo"]:$this->db51_codigo);
+       $this->db51_layouttxt = ($this->db51_layouttxt === 0 || $this->db51_layouttxt === 0.0 || $this->db51_layouttxt == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_layouttxt"]:$this->db51_layouttxt);
        $this->db51_descr = ($this->db51_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_descr"]:$this->db51_descr);
-       $this->db51_tipolinha = ($this->db51_tipolinha == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_tipolinha"]:$this->db51_tipolinha);
-       $this->db51_tamlinha = ($this->db51_tamlinha == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_tamlinha"]:$this->db51_tamlinha);
-       $this->db51_linhasantes = ($this->db51_linhasantes == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_linhasantes"]:$this->db51_linhasantes);
-       $this->db51_linhasdepois = ($this->db51_linhasdepois == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_linhasdepois"]:$this->db51_linhasdepois);
+       $this->db51_tipolinha = ($this->db51_tipolinha === 0 || $this->db51_tipolinha === 0.0 || $this->db51_tipolinha == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_tipolinha"]:$this->db51_tipolinha);
+       $this->db51_tamlinha = ($this->db51_tamlinha === 0 || $this->db51_tamlinha === 0.0 || $this->db51_tamlinha == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_tamlinha"]:$this->db51_tamlinha);
+       $this->db51_linhasantes = ($this->db51_linhasantes === 0 || $this->db51_linhasantes === 0.0 || $this->db51_linhasantes == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_linhasantes"]:$this->db51_linhasantes);
+       $this->db51_linhasdepois = ($this->db51_linhasdepois === 0 || $this->db51_linhasdepois === 0.0 || $this->db51_linhasdepois == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_linhasdepois"]:$this->db51_linhasdepois);
        $this->db51_obs = ($this->db51_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_obs"]:$this->db51_obs);
        $this->db51_separador = ($this->db51_separador == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_separador"]:$this->db51_separador);
        $this->db51_compacta = ($this->db51_compacta == "f"?@$GLOBALS["HTTP_POST_VARS"]["db51_compacta"]:$this->db51_compacta);
      }else{
-       $this->db51_codigo = ($this->db51_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_codigo"]:$this->db51_codigo);
+       $this->db51_codigo = ($this->db51_codigo === 0 || $this->db51_codigo === 0.0 || $this->db51_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db51_codigo"]:$this->db51_codigo);
      }
    }
    // funcao para inclusao
@@ -175,7 +175,7 @@ class cl_db_layoutlinha {
          $this->db51_codigo = $db51_codigo;
        }
      }
-     if(($this->db51_codigo == null) || ($this->db51_codigo == "") ){
+     if(($this->db51_codigo == null) || ($this->db51_codigo === 0 || $this->db51_codigo === 0.0 || $this->db51_codigo == "") ){
        $this->erro_sql = " Campo db51_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

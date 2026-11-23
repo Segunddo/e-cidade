@@ -69,13 +69,13 @@ class cl_db_ordematend {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->or10_codordem = ($this->or10_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_codordem"]:$this->or10_codordem);
-       $this->or10_codatend = ($this->or10_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_codatend"]:$this->or10_codatend);
-       $this->or10_seq = ($this->or10_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_seq"]:$this->or10_seq);
+       $this->or10_codordem = ($this->or10_codordem === 0 || $this->or10_codordem === 0.0 || $this->or10_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_codordem"]:$this->or10_codordem);
+       $this->or10_codatend = ($this->or10_codatend === 0 || $this->or10_codatend === 0.0 || $this->or10_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_codatend"]:$this->or10_codatend);
+       $this->or10_seq = ($this->or10_seq === 0 || $this->or10_seq === 0.0 || $this->or10_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_seq"]:$this->or10_seq);
      }else{
-       $this->or10_codordem = ($this->or10_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_codordem"]:$this->or10_codordem);
-       $this->or10_codatend = ($this->or10_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_codatend"]:$this->or10_codatend);
-       $this->or10_seq = ($this->or10_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_seq"]:$this->or10_seq);
+       $this->or10_codordem = ($this->or10_codordem === 0 || $this->or10_codordem === 0.0 || $this->or10_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_codordem"]:$this->or10_codordem);
+       $this->or10_codatend = ($this->or10_codatend === 0 || $this->or10_codatend === 0.0 || $this->or10_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_codatend"]:$this->or10_codatend);
+       $this->or10_seq = ($this->or10_seq === 0 || $this->or10_seq === 0.0 || $this->or10_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["or10_seq"]:$this->or10_seq);
      }
    }
    // funcao para inclusao
@@ -84,7 +84,7 @@ class cl_db_ordematend {
        $this->or10_codordem = $or10_codordem;
        $this->or10_codatend = $or10_codatend;
        $this->or10_seq = $or10_seq;
-     if(($this->or10_codordem == null) || ($this->or10_codordem == "") ){
+     if(($this->or10_codordem == null) || ($this->or10_codordem === 0 || $this->or10_codordem === 0.0 || $this->or10_codordem == "") ){
        $this->erro_sql = " Campo or10_codordem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -92,7 +92,7 @@ class cl_db_ordematend {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->or10_codatend == null) || ($this->or10_codatend == "") ){
+     if(($this->or10_codatend == null) || ($this->or10_codatend === 0 || $this->or10_codatend === 0.0 || $this->or10_codatend == "") ){
        $this->erro_sql = " Campo or10_codatend nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -100,7 +100,7 @@ class cl_db_ordematend {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->or10_seq == null) || ($this->or10_seq == "") ){
+     if(($this->or10_seq == null) || ($this->or10_seq === 0 || $this->or10_seq === 0.0 || $this->or10_seq == "") ){
        $this->erro_sql = " Campo or10_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

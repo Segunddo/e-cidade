@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/ajudacusto/relatorio",
+  "json": {
+    "error": true,
+    "message": "array_map(): Expected parameter 2 to be an array, null given"
+  },
+  "sha256": "d402cded5e877253cac7b10ba7dee30914e26c9235b0e0e320dc2de7cd6cfe34",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

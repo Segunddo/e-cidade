@@ -67,11 +67,11 @@ class cl_empnotaord {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m72_codordem = ($this->m72_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m72_codordem"]:$this->m72_codordem);
-       $this->m72_codnota = ($this->m72_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["m72_codnota"]:$this->m72_codnota);
+       $this->m72_codordem = ($this->m72_codordem === 0 || $this->m72_codordem === 0.0 || $this->m72_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m72_codordem"]:$this->m72_codordem);
+       $this->m72_codnota = ($this->m72_codnota === 0 || $this->m72_codnota === 0.0 || $this->m72_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["m72_codnota"]:$this->m72_codnota);
      }else{
-       $this->m72_codordem = ($this->m72_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m72_codordem"]:$this->m72_codordem);
-       $this->m72_codnota = ($this->m72_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["m72_codnota"]:$this->m72_codnota);
+       $this->m72_codordem = ($this->m72_codordem === 0 || $this->m72_codordem === 0.0 || $this->m72_codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["m72_codordem"]:$this->m72_codordem);
+       $this->m72_codnota = ($this->m72_codnota === 0 || $this->m72_codnota === 0.0 || $this->m72_codnota == ""?@$GLOBALS["HTTP_POST_VARS"]["m72_codnota"]:$this->m72_codnota);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_empnotaord {
       $this->atualizacampos();
        $this->m72_codnota = $m72_codnota;
        $this->m72_codordem = $m72_codordem;
-     if(($this->m72_codnota == null) || ($this->m72_codnota == "") ){
+     if(($this->m72_codnota == null) || ($this->m72_codnota === 0 || $this->m72_codnota === 0.0 || $this->m72_codnota == "") ){
        $this->erro_sql = " Campo m72_codnota nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_empnotaord {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->m72_codordem == null) || ($this->m72_codordem == "") ){
+     if(($this->m72_codordem == null) || ($this->m72_codordem === 0 || $this->m72_codordem === 0.0 || $this->m72_codordem == "") ){
        $this->erro_sql = " Campo m72_codordem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

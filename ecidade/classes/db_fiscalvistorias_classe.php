@@ -67,11 +67,11 @@ class cl_fiscalvistorias {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y21_codnoti = ($this->y21_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y21_codnoti"]:$this->y21_codnoti);
-       $this->y21_codvist = ($this->y21_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y21_codvist"]:$this->y21_codvist);
+       $this->y21_codnoti = ($this->y21_codnoti === 0 || $this->y21_codnoti === 0.0 || $this->y21_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y21_codnoti"]:$this->y21_codnoti);
+       $this->y21_codvist = ($this->y21_codvist === 0 || $this->y21_codvist === 0.0 || $this->y21_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y21_codvist"]:$this->y21_codvist);
      }else{
-       $this->y21_codnoti = ($this->y21_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y21_codnoti"]:$this->y21_codnoti);
-       $this->y21_codvist = ($this->y21_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y21_codvist"]:$this->y21_codvist);
+       $this->y21_codnoti = ($this->y21_codnoti === 0 || $this->y21_codnoti === 0.0 || $this->y21_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y21_codnoti"]:$this->y21_codnoti);
+       $this->y21_codvist = ($this->y21_codvist === 0 || $this->y21_codvist === 0.0 || $this->y21_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y21_codvist"]:$this->y21_codvist);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_fiscalvistorias {
       $this->atualizacampos();
        $this->y21_codnoti = $y21_codnoti;
        $this->y21_codvist = $y21_codvist;
-     if(($this->y21_codnoti == null) || ($this->y21_codnoti == "") ){
+     if(($this->y21_codnoti == null) || ($this->y21_codnoti === 0 || $this->y21_codnoti === 0.0 || $this->y21_codnoti == "") ){
        $this->erro_sql = " Campo y21_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_fiscalvistorias {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y21_codvist == null) || ($this->y21_codvist == "") ){
+     if(($this->y21_codvist == null) || ($this->y21_codvist === 0 || $this->y21_codvist === 0.0 || $this->y21_codvist == "") ){
        $this->erro_sql = " Campo y21_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

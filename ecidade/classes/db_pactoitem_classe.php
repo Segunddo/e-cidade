@@ -71,12 +71,12 @@ class cl_pactoitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o109_sequencial = ($this->o109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o109_sequencial"]:$this->o109_sequencial);
-       $this->o109_matunid = ($this->o109_matunid == ""?@$GLOBALS["HTTP_POST_VARS"]["o109_matunid"]:$this->o109_matunid);
+       $this->o109_sequencial = ($this->o109_sequencial === 0 || $this->o109_sequencial === 0.0 || $this->o109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o109_sequencial"]:$this->o109_sequencial);
+       $this->o109_matunid = ($this->o109_matunid === 0 || $this->o109_matunid === 0.0 || $this->o109_matunid == ""?@$GLOBALS["HTTP_POST_VARS"]["o109_matunid"]:$this->o109_matunid);
        $this->o109_descricao = ($this->o109_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o109_descricao"]:$this->o109_descricao);
-       $this->o109_controlasaldo = ($this->o109_controlasaldo == ""?@$GLOBALS["HTTP_POST_VARS"]["o109_controlasaldo"]:$this->o109_controlasaldo);
+       $this->o109_controlasaldo = ($this->o109_controlasaldo === 0 || $this->o109_controlasaldo === 0.0 || $this->o109_controlasaldo == ""?@$GLOBALS["HTTP_POST_VARS"]["o109_controlasaldo"]:$this->o109_controlasaldo);
      }else{
-       $this->o109_sequencial = ($this->o109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o109_sequencial"]:$this->o109_sequencial);
+       $this->o109_sequencial = ($this->o109_sequencial === 0 || $this->o109_sequencial === 0.0 || $this->o109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o109_sequencial"]:$this->o109_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_pactoitem {
          $this->o109_sequencial = $o109_sequencial;
        }
      }
-     if(($this->o109_sequencial == null) || ($this->o109_sequencial == "") ){
+     if(($this->o109_sequencial == null) || ($this->o109_sequencial === 0 || $this->o109_sequencial === 0.0 || $this->o109_sequencial == "") ){
        $this->erro_sql = " Campo o109_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

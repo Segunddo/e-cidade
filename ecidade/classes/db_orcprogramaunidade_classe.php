@@ -73,13 +73,13 @@ class cl_orcprogramaunidade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o14_sequencial = ($this->o14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_sequencial"]:$this->o14_sequencial);
-       $this->o14_orcunidade = ($this->o14_orcunidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_orcunidade"]:$this->o14_orcunidade);
-       $this->o14_orgao = ($this->o14_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_orgao"]:$this->o14_orgao);
-       $this->o14_orcprograma = ($this->o14_orcprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_orcprograma"]:$this->o14_orcprograma);
-       $this->o14_anousu = ($this->o14_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_anousu"]:$this->o14_anousu);
+       $this->o14_sequencial = ($this->o14_sequencial === 0 || $this->o14_sequencial === 0.0 || $this->o14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_sequencial"]:$this->o14_sequencial);
+       $this->o14_orcunidade = ($this->o14_orcunidade === 0 || $this->o14_orcunidade === 0.0 || $this->o14_orcunidade == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_orcunidade"]:$this->o14_orcunidade);
+       $this->o14_orgao = ($this->o14_orgao === 0 || $this->o14_orgao === 0.0 || $this->o14_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_orgao"]:$this->o14_orgao);
+       $this->o14_orcprograma = ($this->o14_orcprograma === 0 || $this->o14_orcprograma === 0.0 || $this->o14_orcprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_orcprograma"]:$this->o14_orcprograma);
+       $this->o14_anousu = ($this->o14_anousu === 0 || $this->o14_anousu === 0.0 || $this->o14_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_anousu"]:$this->o14_anousu);
      }else{
-       $this->o14_sequencial = ($this->o14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_sequencial"]:$this->o14_sequencial);
+       $this->o14_sequencial = ($this->o14_sequencial === 0 || $this->o14_sequencial === 0.0 || $this->o14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o14_sequencial"]:$this->o14_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_orcprogramaunidade {
          $this->o14_sequencial = $o14_sequencial;
        }
      }
-     if(($this->o14_sequencial == null) || ($this->o14_sequencial == "") ){
+     if(($this->o14_sequencial == null) || ($this->o14_sequencial === 0 || $this->o14_sequencial === 0.0 || $this->o14_sequencial == "") ){
        $this->erro_sql = " Campo o14_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

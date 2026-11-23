@@ -91,12 +91,12 @@ class cl_devedores {
          }
        }
        $this->numpre = ($this->numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["numpre"]:$this->numpre);
-       $this->numcgm = ($this->numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["numcgm"]:$this->numcgm);
-       $this->matric = ($this->matric == ""?@$GLOBALS["HTTP_POST_VARS"]["matric"]:$this->matric);
-       $this->inscr = ($this->inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["inscr"]:$this->inscr);
+       $this->numcgm = ($this->numcgm === 0 || $this->numcgm === 0.0 || $this->numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["numcgm"]:$this->numcgm);
+       $this->matric = ($this->matric === 0 || $this->matric === 0.0 || $this->matric == ""?@$GLOBALS["HTTP_POST_VARS"]["matric"]:$this->matric);
+       $this->inscr = ($this->inscr === 0 || $this->inscr === 0.0 || $this->inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["inscr"]:$this->inscr);
        $this->tipo = ($this->tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["tipo"]:$this->tipo);
-       $this->valor_tudo = ($this->valor_tudo == ""?@$GLOBALS["HTTP_POST_VARS"]["valor_tudo"]:$this->valor_tudo);
-       $this->valor_vencidos = ($this->valor_vencidos == ""?@$GLOBALS["HTTP_POST_VARS"]["valor_vencidos"]:$this->valor_vencidos);
+       $this->valor_tudo = ($this->valor_tudo === 0 || $this->valor_tudo === 0.0 || $this->valor_tudo == ""?@$GLOBALS["HTTP_POST_VARS"]["valor_tudo"]:$this->valor_tudo);
+       $this->valor_vencidos = ($this->valor_vencidos === 0 || $this->valor_vencidos === 0.0 || $this->valor_vencidos == ""?@$GLOBALS["HTTP_POST_VARS"]["valor_vencidos"]:$this->valor_vencidos);
      }else{
      }
    }

@@ -69,11 +69,11 @@ class cl_notitipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k51_procede = ($this->k51_procede == ""?@$GLOBALS["HTTP_POST_VARS"]["k51_procede"]:$this->k51_procede);
+       $this->k51_procede = ($this->k51_procede === 0 || $this->k51_procede === 0.0 || $this->k51_procede == ""?@$GLOBALS["HTTP_POST_VARS"]["k51_procede"]:$this->k51_procede);
        $this->k51_descr = ($this->k51_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k51_descr"]:$this->k51_descr);
        $this->k51_confirma = ($this->k51_confirma == "f"?@$GLOBALS["HTTP_POST_VARS"]["k51_confirma"]:$this->k51_confirma);
      }else{
-       $this->k51_procede = ($this->k51_procede == ""?@$GLOBALS["HTTP_POST_VARS"]["k51_procede"]:$this->k51_procede);
+       $this->k51_procede = ($this->k51_procede === 0 || $this->k51_procede === 0.0 || $this->k51_procede == ""?@$GLOBALS["HTTP_POST_VARS"]["k51_procede"]:$this->k51_procede);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_notitipo {
          $this->k51_procede = $k51_procede;
        }
      }
-     if(($this->k51_procede == null) || ($this->k51_procede == "") ){
+     if(($this->k51_procede == null) || ($this->k51_procede === 0 || $this->k51_procede === 0.0 || $this->k51_procede == "") ){
        $this->erro_sql = " Campo k51_procede nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

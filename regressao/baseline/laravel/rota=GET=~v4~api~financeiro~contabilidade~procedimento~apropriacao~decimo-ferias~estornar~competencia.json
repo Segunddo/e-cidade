@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/procedimento/apropriacao/decimo-ferias/estornar/competencia",
+  "json": {
+    "error": true,
+    "message": "Não existe nenhuma competência de Apropriação de 13ª ou férias processada."
+  },
+  "sha256": "fb75a84920a2a5f33bab3888e8cca0ecc0e7b177005dedd6b20c6c924a8fa453",
+  "sql_negocio": [],
+  "status": 403,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

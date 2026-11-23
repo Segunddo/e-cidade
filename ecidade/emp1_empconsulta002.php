@@ -37,7 +37,7 @@ require_once(modification("classes/db_pagordem_classe.php"));
 require_once(modification("classes/db_empparametro_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clempempenho = new cl_empempenho;
 $clpagordem = new cl_pagordem;
 $clempparametro = new cl_empparametro;

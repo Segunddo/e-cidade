@@ -28,7 +28,7 @@
 require(modification("libs/db_stdlib.php"));
 require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $sql = "select ag30_codigo,ag30_codage,ag30_data,ag30_hora,j01_nome,w03_nome,ag30_regist,ag30_depend,
                      (CASE WHEN ag40_codate IS NULL THEN 'Aguardando' ELSE 'Atendido' END) as situacao
                      from agenate

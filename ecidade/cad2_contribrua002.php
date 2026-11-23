@@ -39,7 +39,7 @@ $clrotulo->label('z01_nome');
 $clrotulo->label('j01_matric');
 $clrotulo->label('z01_numcgm');
 $clrotulo->label('j14_codigo');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $where = "";
 if ($lista != "") {
 	if (isset ($ver) and $ver == "com") {

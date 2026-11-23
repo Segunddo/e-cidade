@@ -41,7 +41,7 @@ require_once(modification("model/educacao/QuadroGeralHorario.model.php"));
 ini_set('memory_limit', '-1');
 set_time_limit(0);
 $parametros = $HTTP_SERVER_VARS["QUERY_STRING"];
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $anoAtual = db_getsession("DB_anousu");
 $pCorQuadro = QuadroGeralHorarioRepository::getParamQuadroHorarios();

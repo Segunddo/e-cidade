@@ -1,0 +1,120 @@
+# Ambiente ISOLADO da regressao sobre a base PHP 7.4 / Laravel 8 (projeto compose `e74`).
+#
+#   referencia PHP 7.4 (Laravel 8)  -> http://localhost:8074   container ecidade74_php74
+#   alvo PHP 8.5                    -> http://localhost:8185   container ecidade74_php85
+#   proxy (uma origem so)           -> http://localhost:8190   container ecidade74_proxy
+#   banco PostgreSQL 16             -> sem porta publicada      container ecidade74_database
+#
+# As portas sao publicadas SO em 127.0.0.1: o login de teste (dbseller/dbseller) e conhecido e o ambiente nao
+# pode aparecer na rede local. Para abrir de outra maquina use um tunel (ssh -L), nunca 0.0.0.0.
+#
+# Convive com a pilha antiga (ecidade_*, :8080/:8085/:8090) e com outros projetos do host
+# (ex.: outro projeto local na porta 8080): nomes, portas, rede e volumes sao todos proprios do projeto `e74`.
+# Nada aqui para, recria ou reaproveita container de outro projeto.
+#
+# Uso (da raiz do repositorio):
+#   docker compose -p e74 -f regressao/lab/docker-compose.e74.yml up -d --build
+#   docker compose -p e74 -f regressao/lab/docker-compose.e74.yml stop        # para so os ecidade74_*
+#   docker compose -p e74 -f regressao/lab/docker-compose.e74.yml down        # remove os ecidade74_* (o banco volta vazio)
+#
+# Caminhos relativos sao resolvidos a partir DESTA pasta (regressao/lab/): ../../ecidade e o
+# ./ecidade da raiz; ../../docker/* sao os Dockerfiles da base 7.4.
+#
+# A instalacao do banco, do .env e dos arquivos locais do login esta em regressao/README.md (secao 1).
+#
+# Sessao e /tmp compartilhados (como o docker-compose.sessions.yml da branch antiga): o proxy serve os
+# dois runtimes numa origem so; a mesma sessao PHP precisa valer nos dois, e os iframes gerados por
+# tempnam() em dbforms/db_classesgenericas.php sao gravados por um runtime e lidos pelo outro.
+
+name: e74
+
+services:
+
+  ecidade74_database:
+    build:
+      context: ../../docker/database
+    image: ecidade74-database:latest
+    container_name: ecidade74_database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_HOST_AUTH_METHOD: "trust"
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_INITDB_ARGS: '--encoding=LATIN1 --lc-collate=pt_BR.ISO-8859-1 --lc-ctype=pt_BR.ISO-8859-1 --lc-messages=pt_BR.ISO-8859-1 --lc-monetary=pt_BR.ISO-8859-1 --lc-numeric=pt_BR.ISO-8859-1 --lc-time=pt_BR.ISO-8859-1'
+    # Sem porta publicada: a suite fala com o banco por `docker exec ecidade74_database psql ...`.
+    networks:
+      - ecidade74
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  ecidade74_php74:
+    # Mesma imagem do docker-compose.yml da raiz (docker/php74-apache).
+    build:
+      context: ../../docker/php74-apache
+    image: ecidade-php74:latest
+    container_name: ecidade74_php74
+    ports:
+      - "127.0.0.1:8074:80"
+    environment: &db
+      DB_HOST: ecidade74_database
+      DB_PORT: 5432
+      DB_DATABASE: ecidade
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+    volumes:
+      - ../../ecidade:/var/www/html/
+      - sessions:/var/lib/php/sessions
+      - tmp:/tmp
+    depends_on:
+      ecidade74_database:
+        condition: service_healthy
+    networks:
+      - ecidade74
+
+  ecidade74_php85:
+    # Mesmo Dockerfile do PHP 8.5 da branch antiga (copiado em php85/). Se a imagem ja existir
+    # (ex.: `docker tag e-cidade-ecidade_php85 ecidade74-php85:latest`), ela e reusada sem rebuild.
+    build:
+      context: ./php85
+    image: ${E74_PHP85_IMAGEM:-ecidade74-php85:latest}
+    container_name: ecidade74_php85
+    ports:
+      - "127.0.0.1:8185:80"
+    environment: *db
+    volumes:
+      - ../../ecidade:/var/www/html/
+      - sessions:/var/lib/php/sessions
+      - tmp:/tmp
+      # Paridade de php.ini com a referencia 7.4 nas diretivas que mudam a saida.
+      - ./php85/paridade-74.ini:/usr/local/etc/php/conf.d/zz-paridade-74.ini:ro
+    depends_on:
+      # O 7.4 (Ubuntu) sobe primeiro e povoa o volume de sessoes com as permissoes do Debian (1733).
+      - ecidade74_php74
+    networks:
+      - ecidade74
+
+  ecidade74_proxy:
+    image: nginx:1.27-alpine
+    container_name: ecidade74_proxy
+    ports:
+      - "127.0.0.1:8190:80"
+    volumes:
+      - ./proxy/nginx-e74.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./proxy/map-e74.conf:/etc/nginx/map-e74.conf:ro
+    depends_on:
+      - ecidade74_php74
+      - ecidade74_php85
+    networks:
+      - ecidade74
+
+networks:
+  ecidade74:
+    name: e74_ecidade74
+
+volumes:
+  sessions:
+    name: e74_sessions
+  tmp:
+    name: e74_tmp

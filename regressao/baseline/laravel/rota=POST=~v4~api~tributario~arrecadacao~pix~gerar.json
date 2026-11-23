@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/arrecadacao/pix/gerar",
+  "json": {
+    "error": true,
+    "message": "Recibo não informado!"
+  },
+  "sha256": "645ee7c448ab6a592d26b8f7e6553e03326b89ee01f58508f7beb87bfce1907b",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

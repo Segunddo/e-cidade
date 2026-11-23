@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/contratos/incluirDocumento",
+  "json": {
+    "error": true,
+    "message": "Call to a member function getClientOriginalExtension() on null"
+  },
+  "sha256": "6f89fe6882c3de3b9072b4c7a7ea17cddf27fd7065fdf4c91855725573863b92",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

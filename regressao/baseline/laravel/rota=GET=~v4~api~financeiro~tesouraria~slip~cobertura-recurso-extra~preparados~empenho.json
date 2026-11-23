@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/tesouraria/slip/cobertura-recurso-extra/preparados/empenho",
+  "json": {
+    "errors": {
+      "dataInicial": [
+        "Deve ser informada."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "305cd20f3c9cb14022feac0fd98bcb44b8b263989f35a2d0878a615ba0c800c8",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -67,10 +67,10 @@ class cl_fiscalsanitario {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y37_codnoti = ($this->y37_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y37_codnoti"]:$this->y37_codnoti);
-       $this->y37_codsani = ($this->y37_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y37_codsani"]:$this->y37_codsani);
+       $this->y37_codnoti = ($this->y37_codnoti === 0 || $this->y37_codnoti === 0.0 || $this->y37_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y37_codnoti"]:$this->y37_codnoti);
+       $this->y37_codsani = ($this->y37_codsani === 0 || $this->y37_codsani === 0.0 || $this->y37_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y37_codsani"]:$this->y37_codsani);
      }else{
-       $this->y37_codnoti = ($this->y37_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y37_codnoti"]:$this->y37_codnoti);
+       $this->y37_codnoti = ($this->y37_codnoti === 0 || $this->y37_codnoti === 0.0 || $this->y37_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y37_codnoti"]:$this->y37_codnoti);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_fiscalsanitario {
        return false;
      }
        $this->y37_codnoti = $y37_codnoti;
-     if(($this->y37_codnoti == null) || ($this->y37_codnoti == "") ){
+     if(($this->y37_codnoti == null) || ($this->y37_codnoti === 0 || $this->y37_codnoti === 0.0 || $this->y37_codnoti == "") ){
        $this->erro_sql = " Campo y37_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

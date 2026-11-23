@@ -43,11 +43,11 @@ class cl_mensageriaacordo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac51_sequencial = ($this->ac51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_sequencial"]:$this->ac51_sequencial);
+       $this->ac51_sequencial = ($this->ac51_sequencial === 0 || $this->ac51_sequencial === 0.0 || $this->ac51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_sequencial"]:$this->ac51_sequencial);
        $this->ac51_assunto = ($this->ac51_assunto == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_assunto"]:$this->ac51_assunto);
        $this->ac51_mensagem = ($this->ac51_mensagem == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_mensagem"]:$this->ac51_mensagem);
      }else{
-       $this->ac51_sequencial = ($this->ac51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_sequencial"]:$this->ac51_sequencial);
+       $this->ac51_sequencial = ($this->ac51_sequencial === 0 || $this->ac51_sequencial === 0.0 || $this->ac51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac51_sequencial"]:$this->ac51_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_mensageriaacordo {
          $this->ac51_sequencial = $ac51_sequencial;
        }
      }
-     if(($this->ac51_sequencial == null) || ($this->ac51_sequencial == "") ){
+     if(($this->ac51_sequencial == null) || ($this->ac51_sequencial === 0 || $this->ac51_sequencial === 0.0 || $this->ac51_sequencial == "") ){
        $this->erro_sql = " Campo ac51_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

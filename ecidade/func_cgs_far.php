@@ -41,7 +41,7 @@ if (!isset($pesquisar))
 
 {
     if (isset($alterar_cgs)) {
-        parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+        parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
         ?>
         <script>
             location.href = "sau1_cgs_und002.php?chavepesquisa=<?=$chave_z01_i_cgsund?>";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/alunoAtendimentosespecial/atendimentos",
+  "json": {
+    "error": true,
+    "message": "Invalid argument supplied for foreach()"
+  },
+  "sha256": "f1f977cd0b6cc74bde7b7bcee5efa27a519186065d4bec4d902548d70c080814",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

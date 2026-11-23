@@ -80,8 +80,8 @@ class cl_issplananula {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q76_sequencial = ($this->q76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_sequencial"]:$this->q76_sequencial);
-       $this->q76_planilha = ($this->q76_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_planilha"]:$this->q76_planilha);
+       $this->q76_sequencial = ($this->q76_sequencial === 0 || $this->q76_sequencial === 0.0 || $this->q76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_sequencial"]:$this->q76_sequencial);
+       $this->q76_planilha = ($this->q76_planilha === 0 || $this->q76_planilha === 0.0 || $this->q76_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_planilha"]:$this->q76_planilha);
        if($this->q76_data == ""){
          $this->q76_data_dia = ($this->q76_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_data_dia"]:$this->q76_data_dia);
          $this->q76_data_mes = ($this->q76_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_data_mes"]:$this->q76_data_mes);
@@ -93,9 +93,9 @@ class cl_issplananula {
        $this->q76_hora = ($this->q76_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_hora"]:$this->q76_hora);
        $this->q76_motivo = ($this->q76_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_motivo"]:$this->q76_motivo);
        $this->q76_ip = ($this->q76_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_ip"]:$this->q76_ip);
-       $this->q76_id_usuario = ($this->q76_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_id_usuario"]:$this->q76_id_usuario);
+       $this->q76_id_usuario = ($this->q76_id_usuario === 0 || $this->q76_id_usuario === 0.0 || $this->q76_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_id_usuario"]:$this->q76_id_usuario);
      }else{
-       $this->q76_sequencial = ($this->q76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_sequencial"]:$this->q76_sequencial);
+       $this->q76_sequencial = ($this->q76_sequencial === 0 || $this->q76_sequencial === 0.0 || $this->q76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q76_sequencial"]:$this->q76_sequencial);
      }
    }
    // funcao para inclusao
@@ -173,7 +173,7 @@ class cl_issplananula {
          $this->q76_sequencial = $q76_sequencial;
        }
      }
-     if(($this->q76_sequencial == null) || ($this->q76_sequencial == "") ){
+     if(($this->q76_sequencial == null) || ($this->q76_sequencial === 0 || $this->q76_sequencial === 0.0 || $this->q76_sequencial == "") ){
        $this->erro_sql = " Campo q76_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

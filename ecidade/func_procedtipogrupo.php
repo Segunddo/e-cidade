@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_procedtipogrupo_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clprocedtipogrupo = new cl_procedtipogrupo;
 $clprocedtipogrupo->rotulo->label("v29_sequencial");
 $clprocedtipogrupo->rotulo->label("v29_descricao");

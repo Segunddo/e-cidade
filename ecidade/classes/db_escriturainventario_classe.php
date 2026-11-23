@@ -76,8 +76,8 @@ class cl_escriturainventario {
   // funcao para atualizar campos
   public function atualizacampos($exclusao=false) {
     if($exclusao==false){
-      $this->c88_sequencial = ($this->c88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_sequencial"]:$this->c88_sequencial);
-      $this->c88_inventario = ($this->c88_inventario == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_inventario"]:$this->c88_inventario);
+      $this->c88_sequencial = ($this->c88_sequencial === 0 || $this->c88_sequencial === 0.0 || $this->c88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_sequencial"]:$this->c88_sequencial);
+      $this->c88_inventario = ($this->c88_inventario === 0 || $this->c88_inventario === 0.0 || $this->c88_inventario == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_inventario"]:$this->c88_inventario);
       if($this->c88_data == ""){
         $this->c88_data_dia = ($this->c88_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_data_dia"]:$this->c88_data_dia);
         $this->c88_data_mes = ($this->c88_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_data_mes"]:$this->c88_data_mes);
@@ -86,10 +86,10 @@ class cl_escriturainventario {
           $this->c88_data = $this->c88_data_ano."-".$this->c88_data_mes."-".$this->c88_data_dia;
         }
       }
-      $this->c88_usuario = ($this->c88_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_usuario"]:$this->c88_usuario);
+      $this->c88_usuario = ($this->c88_usuario === 0 || $this->c88_usuario === 0.0 || $this->c88_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_usuario"]:$this->c88_usuario);
       $this->c88_estornado = ($this->c88_estornado == "f"?@$GLOBALS["HTTP_POST_VARS"]["c88_estornado"]:$this->c88_estornado);
     }else{
-      $this->c88_sequencial = ($this->c88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_sequencial"]:$this->c88_sequencial);
+      $this->c88_sequencial = ($this->c88_sequencial === 0 || $this->c88_sequencial === 0.0 || $this->c88_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_sequencial"]:$this->c88_sequencial);
     }
   }
   // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_escriturainventario {
         $this->c88_sequencial = $c88_sequencial;
       }
     }
-    if(($this->c88_sequencial == null) || ($this->c88_sequencial == "") ){
+    if(($this->c88_sequencial == null) || ($this->c88_sequencial === 0 || $this->c88_sequencial === 0.0 || $this->c88_sequencial == "") ){
       $this->erro_sql = " Campo c88_sequencial nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

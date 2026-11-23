@@ -30,7 +30,7 @@ require(modification("libs/db_stdlib.php"));
 define('FPDF_FONTPATH','fpdf151/font/');
 require(modification('fpdf151/fpdf.php'));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if(!($conn = pg_connect("host=$DB_SERVIDOR dbname=$DB_BASE port=$DB_PORTA user=$DB_USUARIO password=$DB_SENHA"))) {
   echo "Erro(10) ao tentar conectar no servidor.";
@@ -40,12 +40,12 @@ if(!($conn = pg_connect("host=$DB_SERVIDOR dbname=$DB_BASE port=$DB_PORTA user=$
   $campos = db_query("select nomecam,posxmodelo,posymodelo from db_carnescampos where codmodelo = $codigo");
   $result = db_query("select * from cgm limit 10");
   $nomeimg = db_query("select nomemodelo,imgmodelo,orientacao from db_carnesimg where codmodelo = $codigo");
-  $arquivo = str_replace(" ","_",pg_result($nomeimg,0,"nomemodelo")).".jpg";
+  $arquivo = str_replace(" ","_",($nomeimg ? pg_result($nomeimg,0,"nomemodelo") : null)).".jpg";
   db_query("begin");
-  $oid = pg_result($nomeimg,0,"imgmodelo");
-  pg_loexport($oid,$arquivo);
+  $oid = ($nomeimg ? pg_result($nomeimg,0,"imgmodelo") : null);
+  try { pg_loexport($oid,$arquivo); } catch (\Throwable $e) { }
   db_query("end");
-  $orientacao = pg_result($nomeimg,0,"orientacao");
+  $orientacao = ($nomeimg ? pg_result($nomeimg,0,"orientacao") : null);
   if($orientacao == "R") {
     $orientacao = "P";
 	$W = 595;
@@ -58,8 +58,8 @@ if(!($conn = pg_connect("host=$DB_SERVIDOR dbname=$DB_BASE port=$DB_PORTA user=$
   $pdf = new FPDF($orientacao,"pt","A4");
   $pdf->Open();
 
-  $numrows = pg_numrows($result);
-  $numfields = pg_numrows($campos);
+  $numrows = ($result ? pg_numrows($result) : null);
+  $numfields = ($campos ? pg_numrows($campos) : null);
   
   for($i = 0;$i < $numrows;$i++) {
     $pdf->AddPage();
@@ -68,7 +68,7 @@ if(!($conn = pg_connect("host=$DB_SERVIDOR dbname=$DB_BASE port=$DB_PORTA user=$
     $pdf->SetTextColor(0,0,0);
 	for($j = 0;$j < $numfields;$j++) {
       db_fieldsmemory($campos,$j);	  
-      $pdf->Text($posxmodelo,$posymodelo,pg_result($result,$i,$nomecam));    
+      $pdf->Text($posxmodelo,$posymodelo,($result ? pg_result($result,$i,$nomecam) : null));    
     }
   }
   $pdf->Output();

@@ -1,0 +1,6 @@
+# id	motivo
+# Chaves = ids NAMESPACED da bateria PHP (regressao/php/bateria.py): sintaxe:<arq>, classe:<arq>,
+# tela:<tela>, post:<tela>, relatorio:<tela>[?<query>]. Uma divergencia conhecida cobre so a etapa do id.
+# Bateria Laravel (regressao/laravel/bateria.py): ids de caso como escritos: rota:<METHOD>:<uri>, auth-..., escrita-...
+# (ex.: rota:GET:/v4/api/xyz); laravel:boot/laravel:baseline etc. sao erros de ambiente e nao entram aqui.
+# So entra divergencia PREEXISTENTE com prova (rodada na baseline antes da migracao); decisao do usuario.

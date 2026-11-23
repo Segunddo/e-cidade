@@ -1,0 +1,119 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/escola/alunoAtendimentosEspecial/busca-recursos",
+  "json": {
+    "data": [
+      {
+        "ed198_codigo": 0,
+        "ed198_descricao": "Teclado com colméia"
+      },
+      {
+        "ed198_codigo": 1,
+        "ed198_descricao": "Acionador de pressão"
+      },
+      {
+        "ed198_codigo": 2,
+        "ed198_descricao": "Mouse com entrada para acionador"
+      },
+      {
+        "ed198_codigo": 3,
+        "ed198_descricao": "Lupa eletrônica"
+      },
+      {
+        "ed198_codigo": 4,
+        "ed198_descricao": "Soroban"
+      },
+      {
+        "ed198_codigo": 5,
+        "ed198_descricao": "Guia de Assinatura"
+      },
+      {
+        "ed198_codigo": 6,
+        "ed198_descricao": "Kit Desenho Geométrico"
+      },
+      {
+        "ed198_codigo": 7,
+        "ed198_descricao": "Calculadora Sonora"
+      },
+      {
+        "ed198_codigo": 8,
+        "ed198_descricao": "Material Dourado"
+      },
+      {
+        "ed198_codigo": 9,
+        "ed198_descricao": "Esquema Corporal"
+      },
+      {
+        "ed198_codigo": 10,
+        "ed198_descricao": "Bandinha Rítmica"
+      },
+      {
+        "ed198_codigo": 11,
+        "ed198_descricao": "Memória de Numerais l"
+      },
+      {
+        "ed198_codigo": 12,
+        "ed198_descricao": "Tapete Alfabético Encaixado"
+      },
+      {
+        "ed198_codigo": 13,
+        "ed198_descricao": "Software Comunicação Alternativa"
+      },
+      {
+        "ed198_codigo": 14,
+        "ed198_descricao": "Sacolão Criativo Monta Tudo"
+      },
+      {
+        "ed198_codigo": 15,
+        "ed198_descricao": "Quebra Cabeças - sequência lógica"
+      },
+      {
+        "ed198_codigo": 16,
+        "ed198_descricao": "Dominó de Associação de Ideias"
+      },
+      {
+        "ed198_codigo": 17,
+        "ed198_descricao": "Dominó de Frases"
+      },
+      {
+        "ed198_codigo": 18,
+        "ed198_descricao": "Dominó de Animais em Libras"
+      },
+      {
+        "ed198_codigo": 19,
+        "ed198_descricao": "Dominó de Frutas em Libras"
+      },
+      {
+        "ed198_codigo": 20,
+        "ed198_descricao": "Dominó tátil"
+      },
+      {
+        "ed198_codigo": 21,
+        "ed198_descricao": "Alfabeto Braille"
+      },
+      {
+        "ed198_codigo": 22,
+        "ed198_descricao": "Lupas manuais"
+      },
+      {
+        "ed198_codigo": 23,
+        "ed198_descricao": "Plano inclinado - suporte para leitura"
+      },
+      {
+        "ed198_codigo": 24,
+        "ed198_descricao": "Memória Tátil"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "a206d523c5ac8cd5aab353b53c8ab6b22fcdd3098bfb76bc4b7e23d4a154434f",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

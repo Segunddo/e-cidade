@@ -34,7 +34,7 @@ require_once(modification("classes/db_orcdotacao_classe.php"));
 require_once(modification("libs/db_liborcamento.php"));
 require_once(modification("classes/db_orcparametro_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clorcdotacao = new cl_orcdotacao;
 $clorcdotacao->rotulo->label("o58_anousu");
 $clorcdotacao->rotulo->label("o58_coddot");

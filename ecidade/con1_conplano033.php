@@ -49,7 +49,7 @@ require_once(modification("classes/db_db_config_classe.php"));
 require_once(modification("classes/db_conplanogrupo_classe.php"));
 require_once(modification("classes/db_conplanoref_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $clestrutura_sistema     = new cl_estrutura_sistema;

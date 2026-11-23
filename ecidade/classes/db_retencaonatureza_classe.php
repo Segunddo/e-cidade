@@ -69,11 +69,11 @@ class cl_retencaonatureza {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e30_sequencial = ($this->e30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_sequencial"]:$this->e30_sequencial);
+       $this->e30_sequencial = ($this->e30_sequencial === 0 || $this->e30_sequencial === 0.0 || $this->e30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_sequencial"]:$this->e30_sequencial);
        $this->e30_codigo = ($this->e30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_codigo"]:$this->e30_codigo);
        $this->e30_descricao = ($this->e30_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_descricao"]:$this->e30_descricao);
      }else{
-       $this->e30_sequencial = ($this->e30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_sequencial"]:$this->e30_sequencial);
+       $this->e30_sequencial = ($this->e30_sequencial === 0 || $this->e30_sequencial === 0.0 || $this->e30_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e30_sequencial"]:$this->e30_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_retencaonatureza {
          $this->e30_sequencial = $e30_sequencial;
        }
      }
-     if(($this->e30_sequencial == null) || ($this->e30_sequencial == "") ){
+     if(($this->e30_sequencial == null) || ($this->e30_sequencial === 0 || $this->e30_sequencial === 0.0 || $this->e30_sequencial == "") ){
        $this->erro_sql = " Campo e30_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

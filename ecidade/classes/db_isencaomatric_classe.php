@@ -69,11 +69,11 @@ class cl_isencaomatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v15_sequencial = ($this->v15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_sequencial"]:$this->v15_sequencial);
-       $this->v15_isencao = ($this->v15_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_isencao"]:$this->v15_isencao);
-       $this->v15_matric = ($this->v15_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_matric"]:$this->v15_matric);
+       $this->v15_sequencial = ($this->v15_sequencial === 0 || $this->v15_sequencial === 0.0 || $this->v15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_sequencial"]:$this->v15_sequencial);
+       $this->v15_isencao = ($this->v15_isencao === 0 || $this->v15_isencao === 0.0 || $this->v15_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_isencao"]:$this->v15_isencao);
+       $this->v15_matric = ($this->v15_matric === 0 || $this->v15_matric === 0.0 || $this->v15_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_matric"]:$this->v15_matric);
      }else{
-       $this->v15_sequencial = ($this->v15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_sequencial"]:$this->v15_sequencial);
+       $this->v15_sequencial = ($this->v15_sequencial === 0 || $this->v15_sequencial === 0.0 || $this->v15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v15_sequencial"]:$this->v15_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_isencaomatric {
          $this->v15_sequencial = $v15_sequencial;
        }
      }
-     if(($this->v15_sequencial == null) || ($this->v15_sequencial == "") ){
+     if(($this->v15_sequencial == null) || ($this->v15_sequencial === 0 || $this->v15_sequencial === 0.0 || $this->v15_sequencial == "") ){
        $this->erro_sql = " Campo v15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

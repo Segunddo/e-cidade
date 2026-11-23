@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_turmaacmatricula_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clturmaacmatricula = new cl_turmaacmatricula;
 $clturmaacmatricula->rotulo->label("ed269_i_codigo");
 $clturmaacmatricula->rotulo->label("ed269_i_codigo");

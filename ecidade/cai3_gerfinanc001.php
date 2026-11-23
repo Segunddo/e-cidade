@@ -47,7 +47,7 @@ require_once(modification("classes/db_cfiptu_classe.php"));
 use App\Domain\Tributario\Fiscalizacao\Services\CheckUseModuloFiscalizacaoService;
 use App\Domain\Tributario\ISSQN\Services\WebIss\ConsultaSituacaoContribuinteService;
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if (session_is_registered("DB_tipodebitoparcel")) {
     db_putsession("DB_tipodebitoparcel", "");
@@ -1708,7 +1708,7 @@ if (isset($_POST["pesquisar"]) || isset($matricula) || isset($inscricao)) {
                                             echo "<b> <font color=red> - LOTEAMENTO - </b>";
                                         }
 
-                                        parse_str($arg);
+                                        parse_str($arg, $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
                                         if (isset($matric)) {
                                             $sTipoChavePesquisa = "matricula";
                                             if (!$bloqueiaLinkCTM) {

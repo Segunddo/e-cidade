@@ -69,11 +69,11 @@ class cl_termoanusimula {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v20_sequencial = ($this->v20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_sequencial"]:$this->v20_sequencial);
-       $this->v20_termosimula = ($this->v20_termosimula == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_termosimula"]:$this->v20_termosimula);
-       $this->v20_termoanu = ($this->v20_termoanu == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_termoanu"]:$this->v20_termoanu);
+       $this->v20_sequencial = ($this->v20_sequencial === 0 || $this->v20_sequencial === 0.0 || $this->v20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_sequencial"]:$this->v20_sequencial);
+       $this->v20_termosimula = ($this->v20_termosimula === 0 || $this->v20_termosimula === 0.0 || $this->v20_termosimula == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_termosimula"]:$this->v20_termosimula);
+       $this->v20_termoanu = ($this->v20_termoanu === 0 || $this->v20_termoanu === 0.0 || $this->v20_termoanu == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_termoanu"]:$this->v20_termoanu);
      }else{
-       $this->v20_sequencial = ($this->v20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_sequencial"]:$this->v20_sequencial);
+       $this->v20_sequencial = ($this->v20_sequencial === 0 || $this->v20_sequencial === 0.0 || $this->v20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v20_sequencial"]:$this->v20_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_termoanusimula {
          $this->v20_sequencial = $v20_sequencial;
        }
      }
-     if(($this->v20_sequencial == null) || ($this->v20_sequencial == "") ){
+     if(($this->v20_sequencial == null) || ($this->v20_sequencial === 0 || $this->v20_sequencial === 0.0 || $this->v20_sequencial == "") ){
        $this->erro_sql = " Campo v20_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

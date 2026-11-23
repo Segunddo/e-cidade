@@ -29,7 +29,7 @@
 // ini_set('display_startup_errors', 1);
 // error_reporting(E_ALL);
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 require(modification("libs/db_stdlib.php"));
 require_once(modification("libs/db_utils.php"));

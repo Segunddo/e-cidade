@@ -69,12 +69,12 @@ class cl_pagordemrec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e52_codord = ($this->e52_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e52_codord"]:$this->e52_codord);
-       $this->e52_receit = ($this->e52_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["e52_receit"]:$this->e52_receit);
-       $this->e52_valor = ($this->e52_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e52_valor"]:$this->e52_valor);
+       $this->e52_codord = ($this->e52_codord === 0 || $this->e52_codord === 0.0 || $this->e52_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e52_codord"]:$this->e52_codord);
+       $this->e52_receit = ($this->e52_receit === 0 || $this->e52_receit === 0.0 || $this->e52_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["e52_receit"]:$this->e52_receit);
+       $this->e52_valor = ($this->e52_valor === 0 || $this->e52_valor === 0.0 || $this->e52_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["e52_valor"]:$this->e52_valor);
      }else{
-       $this->e52_codord = ($this->e52_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e52_codord"]:$this->e52_codord);
-       $this->e52_receit = ($this->e52_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["e52_receit"]:$this->e52_receit);
+       $this->e52_codord = ($this->e52_codord === 0 || $this->e52_codord === 0.0 || $this->e52_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e52_codord"]:$this->e52_codord);
+       $this->e52_receit = ($this->e52_receit === 0 || $this->e52_receit === 0.0 || $this->e52_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["e52_receit"]:$this->e52_receit);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_pagordemrec {
      }
        $this->e52_codord = $e52_codord;
        $this->e52_receit = $e52_receit;
-     if(($this->e52_codord == null) || ($this->e52_codord == "") ){
+     if(($this->e52_codord == null) || ($this->e52_codord === 0 || $this->e52_codord === 0.0 || $this->e52_codord == "") ){
        $this->erro_sql = " Campo e52_codord nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_pagordemrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->e52_receit == null) || ($this->e52_receit == "") ){
+     if(($this->e52_receit == null) || ($this->e52_receit === 0 || $this->e52_receit === 0.0 || $this->e52_receit == "") ){
        $this->erro_sql = " Campo e52_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

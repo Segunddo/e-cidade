@@ -83,7 +83,7 @@ class cl_recibounica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
        if($this->k00_dtvenc == ""){
          $this->k00_dtvenc_dia = ($this->k00_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtvenc_dia"]:$this->k00_dtvenc_dia);
          $this->k00_dtvenc_mes = ($this->k00_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtvenc_mes"]:$this->k00_dtvenc_mes);
@@ -100,12 +100,12 @@ class cl_recibounica {
             $this->k00_dtoper = $this->k00_dtoper_ano."-".$this->k00_dtoper_mes."-".$this->k00_dtoper_dia;
          }
        }
-       $this->k00_percdes = ($this->k00_percdes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_percdes"]:$this->k00_percdes);
+       $this->k00_percdes = ($this->k00_percdes === 0 || $this->k00_percdes === 0.0 || $this->k00_percdes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_percdes"]:$this->k00_percdes);
        $this->k00_tipoger = ($this->k00_tipoger == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_tipoger"]:$this->k00_tipoger);
-       $this->k00_recibounicageracao = ($this->k00_recibounicageracao == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_recibounicageracao"]:$this->k00_recibounicageracao);
-       $this->k00_sequencial = ($this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
+       $this->k00_recibounicageracao = ($this->k00_recibounicageracao === 0 || $this->k00_recibounicageracao === 0.0 || $this->k00_recibounicageracao == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_recibounicageracao"]:$this->k00_recibounicageracao);
+       $this->k00_sequencial = ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
      }else{
-       $this->k00_sequencial = ($this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
+       $this->k00_sequencial = ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
      }
    }
    // funcao para inclusao
@@ -189,7 +189,7 @@ class cl_recibounica {
          $this->k00_sequencial = $k00_sequencial;
        }
      }
-     if(($this->k00_sequencial == null) || ($this->k00_sequencial == "") ){
+     if(($this->k00_sequencial == null) || ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == "") ){
        $this->erro_sql = " Campo k00_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

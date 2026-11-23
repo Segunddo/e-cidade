@@ -1,0 +1,31 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/saude/ambulatorial/consulta/microarea",
+  "json": {
+    "data": [
+      {
+        "descricao": "MICROÁREA 1",
+        "id": 1
+      },
+      {
+        "descricao": "MICROÁREA 2",
+        "id": 2
+      },
+      {
+        "descricao": "MICROÁREA 3",
+        "id": 3
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "3648bd2227ef9a1948c61511b21aee9d1948d327939e06f3306b3cd447911c4e",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

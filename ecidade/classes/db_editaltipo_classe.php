@@ -67,10 +67,10 @@ class cl_editaltipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d03_tipos = ($this->d03_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d03_tipos"]:$this->d03_tipos);
+       $this->d03_tipos = ($this->d03_tipos === 0 || $this->d03_tipos === 0.0 || $this->d03_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d03_tipos"]:$this->d03_tipos);
        $this->d03_descr = ($this->d03_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["d03_descr"]:$this->d03_descr);
      }else{
-       $this->d03_tipos = ($this->d03_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d03_tipos"]:$this->d03_tipos);
+       $this->d03_tipos = ($this->d03_tipos === 0 || $this->d03_tipos === 0.0 || $this->d03_tipos == ""?@$GLOBALS["HTTP_POST_VARS"]["d03_tipos"]:$this->d03_tipos);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_editaltipo {
          $this->d03_tipos = $d03_tipos;
        }
      }
-     if(($this->d03_tipos == null) || ($this->d03_tipos == "") ){
+     if(($this->d03_tipos == null) || ($this->d03_tipos === 0 || $this->d03_tipos === 0.0 || $this->d03_tipos == "") ){
        $this->erro_sql = " Campo d03_tipos nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

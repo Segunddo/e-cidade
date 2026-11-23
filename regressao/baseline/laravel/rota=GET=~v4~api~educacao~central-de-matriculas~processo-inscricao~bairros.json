@@ -1,0 +1,43 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/bairros",
+  "json": {
+    "data": [
+      {
+        "codigo": 2,
+        "municipio": "PORTO ALEGRE",
+        "nome": "BAIRRO A",
+        "uf": "RS"
+      },
+      {
+        "codigo": 3,
+        "municipio": "PORTO ALEGRE",
+        "nome": "BAIRRO B",
+        "uf": "RS"
+      },
+      {
+        "codigo": 1,
+        "municipio": "PORTO ALEGRE",
+        "nome": "CENTRO",
+        "uf": "RS"
+      },
+      {
+        "codigo": 0,
+        "municipio": "PORTO ALEGRE",
+        "nome": "NAO INFORMADO",
+        "uf": "RS"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "afcc58e00fc6d4ae7c9f473f10663cb20c3e0ceb11515b7faeb62534416ff005",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

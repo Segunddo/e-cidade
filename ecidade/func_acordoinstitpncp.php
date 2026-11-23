@@ -38,7 +38,7 @@ $iTipoFiltro = 0;
 $lAtivo = '';
 db_postmemory($_POST);
 db_postmemory($_GET);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clacordo = new cl_acordo;
 $clacordo->rotulo->label("ac16_sequencial");

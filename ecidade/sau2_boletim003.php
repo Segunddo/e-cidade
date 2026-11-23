@@ -30,7 +30,7 @@ include(modification("libs/db_sql.php"));
 include(modification("classes/db_prontuarios_classe.php"));
 include(modification("classes/db_unidades_classe.php"));
 include(modification("classes/db_unidademedicos_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 set_time_limit(0);
 $clunidades = new cl_unidades;
 $clunidademedicos = new cl_unidademedicos;

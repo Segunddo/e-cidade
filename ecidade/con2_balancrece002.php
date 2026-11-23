@@ -44,7 +44,7 @@ $tipo_impressao = 1;
 // 2 = balanco
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $xinstit =explode("-",$db_selinstit);
@@ -52,7 +52,7 @@ $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config wher
 $descr_inst = '';
 $xvirg      = '';
 $flag_abrev = false;
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
     if (strlen(trim($nomeinstabrev)) > 0){
          $descr_inst .= $xvirg.$nomeinstabrev;
@@ -79,7 +79,7 @@ if($recurso==0){
 }else{
   $head2 = "BALANCETE DA RECEITA ";
   $resrec = db_query("select o15_descr from orctiporec where o15_codigo = $recurso");
-  $head3 = "Recurso: ".$recurso."-".substr(pg_result($resrec,0,0),0,30);
+  $head3 = "Recurso: ".$recurso."-".substr(($resrec ? pg_result($resrec,0,0) : null),0,30);
   $db_filtro .= " and o70_codigo = $recurso";
 }
 $head4 = "EXERCÍCIO: ".db_getsession("DB_anousu")." - ".$xtipo;
@@ -133,7 +133,7 @@ $total_saldo_arrecadado          =0;
 $total_saldo_arrecadado_acumulado=0;
 $total_saldo_a_arrecadar        = 0;
 
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
 //  if($o57_fonte == '400000000000000'){
   if(db_conplano_grupo($anousu,$o57_fonte,9004) == true){
@@ -150,7 +150,7 @@ for($i=0;$i<pg_numrows($result);$i++){
 $pagina = 1;
 $tottotal = 0;
 $analitica=false;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $elemento = $o57_fonte;
   $descr    = $o57_descr;

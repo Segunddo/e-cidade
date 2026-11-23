@@ -67,11 +67,11 @@ class cl_editalruaproj {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d11_contri = ($this->d11_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d11_contri"]:$this->d11_contri);
-       $this->d11_codproj = ($this->d11_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["d11_codproj"]:$this->d11_codproj);
+       $this->d11_contri = ($this->d11_contri === 0 || $this->d11_contri === 0.0 || $this->d11_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d11_contri"]:$this->d11_contri);
+       $this->d11_codproj = ($this->d11_codproj === 0 || $this->d11_codproj === 0.0 || $this->d11_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["d11_codproj"]:$this->d11_codproj);
      }else{
-       $this->d11_contri = ($this->d11_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d11_contri"]:$this->d11_contri);
-       $this->d11_codproj = ($this->d11_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["d11_codproj"]:$this->d11_codproj);
+       $this->d11_contri = ($this->d11_contri === 0 || $this->d11_contri === 0.0 || $this->d11_contri == ""?@$GLOBALS["HTTP_POST_VARS"]["d11_contri"]:$this->d11_contri);
+       $this->d11_codproj = ($this->d11_codproj === 0 || $this->d11_codproj === 0.0 || $this->d11_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["d11_codproj"]:$this->d11_codproj);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_editalruaproj {
       $this->atualizacampos();
        $this->d11_contri = $d11_contri;
        $this->d11_codproj = $d11_codproj;
-     if(($this->d11_contri == null) || ($this->d11_contri == "") ){
+     if(($this->d11_contri == null) || ($this->d11_contri === 0 || $this->d11_contri === 0.0 || $this->d11_contri == "") ){
        $this->erro_sql = " Campo d11_contri nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_editalruaproj {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->d11_codproj == null) || ($this->d11_codproj == "") ){
+     if(($this->d11_codproj == null) || ($this->d11_codproj === 0 || $this->d11_codproj === 0.0 || $this->d11_codproj == "") ){
        $this->erro_sql = " Campo d11_codproj nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

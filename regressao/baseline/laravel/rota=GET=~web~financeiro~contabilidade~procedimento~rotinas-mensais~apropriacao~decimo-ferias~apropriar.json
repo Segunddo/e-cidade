@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/procedimento/rotinas-mensais/apropriacao/decimo-ferias/apropriar",
+  "json": null,
+  "sha256": "5cdc16f948f172e4d0e86ff0b1e9d7eee93bc6e79fd7c7411b363f183afbc137",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

@@ -78,8 +78,8 @@ class cl_aidofcanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y03_codigo = ($this->y03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_codigo"]:$this->y03_codigo);
-       $this->y03_aidof = ($this->y03_aidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_aidof"]:$this->y03_aidof);
+       $this->y03_codigo = ($this->y03_codigo === 0 || $this->y03_codigo === 0.0 || $this->y03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_codigo"]:$this->y03_codigo);
+       $this->y03_aidof = ($this->y03_aidof === 0 || $this->y03_aidof === 0.0 || $this->y03_aidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_aidof"]:$this->y03_aidof);
        if($this->y03_data == ""){
          $this->y03_data_dia = ($this->y03_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_data_dia"]:$this->y03_data_dia);
          $this->y03_data_mes = ($this->y03_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_data_mes"]:$this->y03_data_mes);
@@ -88,11 +88,11 @@ class cl_aidofcanc {
             $this->y03_data = $this->y03_data_ano."-".$this->y03_data_mes."-".$this->y03_data_dia;
          }
        }
-       $this->y03_usuario = ($this->y03_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_usuario"]:$this->y03_usuario);
+       $this->y03_usuario = ($this->y03_usuario === 0 || $this->y03_usuario === 0.0 || $this->y03_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_usuario"]:$this->y03_usuario);
        $this->y03_obs = ($this->y03_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_obs"]:$this->y03_obs);
        $this->y03_tipocanc = ($this->y03_tipocanc == "f"?@$GLOBALS["HTTP_POST_VARS"]["y03_tipocanc"]:$this->y03_tipocanc);
      }else{
-       $this->y03_codigo = ($this->y03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_codigo"]:$this->y03_codigo);
+       $this->y03_codigo = ($this->y03_codigo === 0 || $this->y03_codigo === 0.0 || $this->y03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y03_codigo"]:$this->y03_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_aidofcanc {
          $this->y03_codigo = $y03_codigo;
        }
      }
-     if(($this->y03_codigo == null) || ($this->y03_codigo == "") ){
+     if(($this->y03_codigo == null) || ($this->y03_codigo === 0 || $this->y03_codigo === 0.0 || $this->y03_codigo == "") ){
        $this->erro_sql = " Campo y03_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

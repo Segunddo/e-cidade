@@ -67,11 +67,11 @@ class cl_aguacondominiomat {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x40_matric = ($this->x40_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_matric"]:$this->x40_matric);
-       $this->x40_codcondominio = ($this->x40_codcondominio == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_codcondominio"]:$this->x40_codcondominio);
+       $this->x40_matric = ($this->x40_matric === 0 || $this->x40_matric === 0.0 || $this->x40_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_matric"]:$this->x40_matric);
+       $this->x40_codcondominio = ($this->x40_codcondominio === 0 || $this->x40_codcondominio === 0.0 || $this->x40_codcondominio == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_codcondominio"]:$this->x40_codcondominio);
      }else{
-       $this->x40_matric = ($this->x40_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_matric"]:$this->x40_matric);
-       $this->x40_codcondominio = ($this->x40_codcondominio == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_codcondominio"]:$this->x40_codcondominio);
+       $this->x40_matric = ($this->x40_matric === 0 || $this->x40_matric === 0.0 || $this->x40_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_matric"]:$this->x40_matric);
+       $this->x40_codcondominio = ($this->x40_codcondominio === 0 || $this->x40_codcondominio === 0.0 || $this->x40_codcondominio == ""?@$GLOBALS["HTTP_POST_VARS"]["x40_codcondominio"]:$this->x40_codcondominio);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_aguacondominiomat {
       $this->atualizacampos();
        $this->x40_codcondominio = $x40_codcondominio;
        $this->x40_matric = $x40_matric;
-     if(($this->x40_codcondominio == null) || ($this->x40_codcondominio == "") ){
+     if(($this->x40_codcondominio == null) || ($this->x40_codcondominio === 0 || $this->x40_codcondominio === 0.0 || $this->x40_codcondominio == "") ){
        $this->erro_sql = " Campo x40_codcondominio nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_aguacondominiomat {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x40_matric == null) || ($this->x40_matric == "") ){
+     if(($this->x40_matric == null) || ($this->x40_matric === 0 || $this->x40_matric === 0.0 || $this->x40_matric == "") ){
        $this->erro_sql = " Campo x40_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

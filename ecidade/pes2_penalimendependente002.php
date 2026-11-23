@@ -36,7 +36,7 @@ require_once(modification("libs/db_app.utils.php"));
 $oDaoSelecao = new cl_selecao();
 $oDaoPensao  = new cl_pensao();
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if (!empty($iMesInicial) && !empty($iAnoInicial)) {
 

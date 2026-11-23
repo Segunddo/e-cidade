@@ -75,10 +75,10 @@ alert = function(sMensagem, tipo) {
 }';
 $stdClass = new db_stdClass();
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if (isset($sAuth)) {
-  parse_str( base64_decode($sAuth) );
+  parse_str( base64_decode($sAuth) , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 }
 
 if (isset($_GET["logOut"])) {
@@ -158,7 +158,7 @@ db_putsession("DB_senha",    $DB_SENHA);
 db_putsession("DB_user",     $DB_USUARIO);
 
 include(modification("classes/db_db_versao_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $versao = $_GET["version"];
 if (defined("ECIDADE_EXTENSION_VERSION")) {
   $versao =  \ECidade\V3\Extension\Manager::isEnabled('Desktop', $DB_login) ? 3 : 2;

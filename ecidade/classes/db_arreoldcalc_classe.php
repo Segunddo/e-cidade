@@ -86,11 +86,11 @@ class cl_arreoldcalc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_arreoldcalc = ($this->k00_arreoldcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_arreoldcalc"]:$this->k00_arreoldcalc);
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
-       $this->k00_receit = ($this->k00_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_receit"]:$this->k00_receit);
-       $this->k00_hist = ($this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
+       $this->k00_arreoldcalc = ($this->k00_arreoldcalc === 0 || $this->k00_arreoldcalc === 0.0 || $this->k00_arreoldcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_arreoldcalc"]:$this->k00_arreoldcalc);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = ($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->k00_receit = ($this->k00_receit === 0 || $this->k00_receit === 0.0 || $this->k00_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_receit"]:$this->k00_receit);
+       $this->k00_hist = ($this->k00_hist === 0 || $this->k00_hist === 0.0 || $this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
        if($this->k00_dtcalc == ""){
          $this->k00_dtcalc_dia = ($this->k00_dtcalc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtcalc_dia"]:$this->k00_dtcalc_dia);
          $this->k00_dtcalc_mes = ($this->k00_dtcalc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_dtcalc_mes"]:$this->k00_dtcalc_mes);
@@ -99,12 +99,12 @@ class cl_arreoldcalc {
             $this->k00_dtcalc = $this->k00_dtcalc_ano."-".$this->k00_dtcalc_mes."-".$this->k00_dtcalc_dia;
          }
        }
-       $this->k00_vlrcor = ($this->k00_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrcor"]:$this->k00_vlrcor);
-       $this->k00_vlrjur = ($this->k00_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrjur"]:$this->k00_vlrjur);
-       $this->k00_vlrmul = ($this->k00_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrmul"]:$this->k00_vlrmul);
-       $this->k00_vlrdes = ($this->k00_vlrdes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrdes"]:$this->k00_vlrdes);
+       $this->k00_vlrcor = ($this->k00_vlrcor === 0 || $this->k00_vlrcor === 0.0 || $this->k00_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrcor"]:$this->k00_vlrcor);
+       $this->k00_vlrjur = ($this->k00_vlrjur === 0 || $this->k00_vlrjur === 0.0 || $this->k00_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrjur"]:$this->k00_vlrjur);
+       $this->k00_vlrmul = ($this->k00_vlrmul === 0 || $this->k00_vlrmul === 0.0 || $this->k00_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrmul"]:$this->k00_vlrmul);
+       $this->k00_vlrdes = ($this->k00_vlrdes === 0 || $this->k00_vlrdes === 0.0 || $this->k00_vlrdes == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrdes"]:$this->k00_vlrdes);
      }else{
-       $this->k00_arreoldcalc = ($this->k00_arreoldcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_arreoldcalc"]:$this->k00_arreoldcalc);
+       $this->k00_arreoldcalc = ($this->k00_arreoldcalc === 0 || $this->k00_arreoldcalc === 0.0 || $this->k00_arreoldcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_arreoldcalc"]:$this->k00_arreoldcalc);
      }
    }
    // funcao para inclusao
@@ -215,7 +215,7 @@ class cl_arreoldcalc {
          $this->k00_arreoldcalc = $k00_arreoldcalc; 
        }
      }
-     if(($this->k00_arreoldcalc == null) || ($this->k00_arreoldcalc == "") ){ 
+     if(($this->k00_arreoldcalc == null) || ($this->k00_arreoldcalc === 0 || $this->k00_arreoldcalc === 0.0 || $this->k00_arreoldcalc == "") ){ 
        $this->erro_sql = " Campo k00_arreoldcalc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

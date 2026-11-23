@@ -83,9 +83,9 @@ class cl_ruashistorico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j136_sequencial = ($this->j136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_sequencial"]:$this->j136_sequencial);
-       $this->j136_ruas = ($this->j136_ruas == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_ruas"]:$this->j136_ruas);
-       $this->j136_ruastipo = ($this->j136_ruastipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_ruastipo"]:$this->j136_ruastipo);
+       $this->j136_sequencial = ($this->j136_sequencial === 0 || $this->j136_sequencial === 0.0 || $this->j136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_sequencial"]:$this->j136_sequencial);
+       $this->j136_ruas = ($this->j136_ruas === 0 || $this->j136_ruas === 0.0 || $this->j136_ruas == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_ruas"]:$this->j136_ruas);
+       $this->j136_ruastipo = ($this->j136_ruastipo === 0 || $this->j136_ruastipo === 0.0 || $this->j136_ruastipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_ruastipo"]:$this->j136_ruastipo);
        $this->j136_lei = ($this->j136_lei == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_lei"]:$this->j136_lei);
        if($this->j136_datalei == ""){
          $this->j136_datalei_dia = ($this->j136_datalei_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_datalei_dia"]:$this->j136_datalei_dia);
@@ -105,7 +105,7 @@ class cl_ruashistorico {
          }
        }
      }else{
-       $this->j136_sequencial = ($this->j136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_sequencial"]:$this->j136_sequencial);
+       $this->j136_sequencial = ($this->j136_sequencial === 0 || $this->j136_sequencial === 0.0 || $this->j136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j136_sequencial"]:$this->j136_sequencial);
      }
    }
    // funcao para inclusao
@@ -174,7 +174,7 @@ class cl_ruashistorico {
          $this->j136_sequencial = $j136_sequencial;
        }
      }
-     if(($this->j136_sequencial == null) || ($this->j136_sequencial == "") ){
+     if(($this->j136_sequencial == null) || ($this->j136_sequencial === 0 || $this->j136_sequencial === 0.0 || $this->j136_sequencial == "") ){
        $this->erro_sql = " Campo j136_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -76,7 +76,7 @@ class cl_db_sysmodulo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codmod = ($this->codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["codmod"]:$this->codmod);
+       $this->codmod = ($this->codmod === 0 || $this->codmod === 0.0 || $this->codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["codmod"]:$this->codmod);
        $this->nomemod = ($this->nomemod == ""?@$GLOBALS["HTTP_POST_VARS"]["nomemod"]:$this->nomemod);
        $this->descricao = ($this->descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["descricao"]:$this->descricao);
        if($this->dataincl == ""){
@@ -89,7 +89,7 @@ class cl_db_sysmodulo {
        }
        $this->ativo = ($this->ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ativo"]:$this->ativo);
      }else{
-       $this->codmod = ($this->codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["codmod"]:$this->codmod);
+       $this->codmod = ($this->codmod === 0 || $this->codmod === 0.0 || $this->codmod == ""?@$GLOBALS["HTTP_POST_VARS"]["codmod"]:$this->codmod);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_db_sysmodulo {
          $this->codmod = $codmod;
        }
      }
-     if(($this->codmod == null) || ($this->codmod == "") ){
+     if(($this->codmod == null) || ($this->codmod === 0 || $this->codmod === 0.0 || $this->codmod == "") ){
        $this->erro_sql = " Campo codmod nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/balancete-receita-por-complemento",
+  "json": {
+    "error": true,
+    "message": "Undefined index: dataInicio"
+  },
+  "sha256": "511de185687898f7efcc62e7ae406acb01907185b30dc113c52529a97a60afae",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

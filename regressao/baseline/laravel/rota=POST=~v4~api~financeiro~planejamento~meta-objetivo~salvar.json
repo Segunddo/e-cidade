@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/meta-objetivo/salvar",
+  "json": {
+    "errors": {
+      "pl21_objetivosprogramaestrategico": [
+        "O campo \"Objetivo\" deve ser informado."
+      ],
+      "pl21_texto": [
+        "O campo \"Meta\" deve ser informado."
+      ],
+      "valores": [
+        "Deve ser informado uma coleção de valores."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "706b297d82923bbb36075d77f73f978c3d9991abeef79a37cc66af9cd770b032",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

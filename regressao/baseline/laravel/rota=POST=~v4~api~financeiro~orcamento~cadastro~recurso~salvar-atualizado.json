@@ -1,0 +1,36 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/orcamento/cadastro/recurso/salvar-atualizado",
+  "json": {
+    "errors": {
+      "classificacao": [
+        "O campo classificacao é obrigatório."
+      ],
+      "codificacao": [
+        "O campo codificacao é obrigatório."
+      ],
+      "complemento": [
+        "O campo complemento é obrigatório."
+      ],
+      "descricao": [
+        "O campo descricao é obrigatório."
+      ],
+      "finalidade": [
+        "O campo finalidade é obrigatório."
+      ],
+      "recursoSiconfi": [
+        "O campo recurso siconfi é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "2944afcd1536005c865fcb11164092623d3a17ce4f939a41b87dbdfdb04cbe93",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

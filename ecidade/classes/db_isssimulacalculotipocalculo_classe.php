@@ -78,10 +78,10 @@ class cl_isssimulacalculotipocalculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q132_sequencial = ($this->q132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_sequencial"]:$this->q132_sequencial);
-       $this->q132_isssimulacalculo = ($this->q132_isssimulacalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_isssimulacalculo"]:$this->q132_isssimulacalculo);
-       $this->q132_tipcalc = ($this->q132_tipcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_tipcalc"]:$this->q132_tipcalc);
-       $this->q132_parcela = ($this->q132_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_parcela"]:$this->q132_parcela);
+       $this->q132_sequencial = ($this->q132_sequencial === 0 || $this->q132_sequencial === 0.0 || $this->q132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_sequencial"]:$this->q132_sequencial);
+       $this->q132_isssimulacalculo = ($this->q132_isssimulacalculo === 0 || $this->q132_isssimulacalculo === 0.0 || $this->q132_isssimulacalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_isssimulacalculo"]:$this->q132_isssimulacalculo);
+       $this->q132_tipcalc = ($this->q132_tipcalc === 0 || $this->q132_tipcalc === 0.0 || $this->q132_tipcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_tipcalc"]:$this->q132_tipcalc);
+       $this->q132_parcela = ($this->q132_parcela === 0 || $this->q132_parcela === 0.0 || $this->q132_parcela == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_parcela"]:$this->q132_parcela);
        if($this->q132_vencimento == ""){
          $this->q132_vencimento_dia = ($this->q132_vencimento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_vencimento_dia"]:$this->q132_vencimento_dia);
          $this->q132_vencimento_mes = ($this->q132_vencimento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_vencimento_mes"]:$this->q132_vencimento_mes);
@@ -90,9 +90,9 @@ class cl_isssimulacalculotipocalculo {
             $this->q132_vencimento = $this->q132_vencimento_ano."-".$this->q132_vencimento_mes."-".$this->q132_vencimento_dia;
          }
        }
-       $this->q132_valor = ($this->q132_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_valor"]:$this->q132_valor);
+       $this->q132_valor = ($this->q132_valor === 0 || $this->q132_valor === 0.0 || $this->q132_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_valor"]:$this->q132_valor);
      }else{
-       $this->q132_sequencial = ($this->q132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_sequencial"]:$this->q132_sequencial);
+       $this->q132_sequencial = ($this->q132_sequencial === 0 || $this->q132_sequencial === 0.0 || $this->q132_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q132_sequencial"]:$this->q132_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_isssimulacalculotipocalculo {
          $this->q132_sequencial = $q132_sequencial;
        }
      }
-     if(($this->q132_sequencial == null) || ($this->q132_sequencial == "") ){
+     if(($this->q132_sequencial == null) || ($this->q132_sequencial === 0 || $this->q132_sequencial === 0.0 || $this->q132_sequencial == "") ){
        $this->erro_sql = " Campo q132_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

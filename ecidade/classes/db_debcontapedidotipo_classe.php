@@ -69,11 +69,11 @@ class cl_debcontapedidotipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d66_sequencial = ($this->d66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d66_sequencial"]:$this->d66_sequencial);
-       $this->d66_codigo = ($this->d66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d66_codigo"]:$this->d66_codigo);
-       $this->d66_arretipo = ($this->d66_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d66_arretipo"]:$this->d66_arretipo);
+       $this->d66_sequencial = ($this->d66_sequencial === 0 || $this->d66_sequencial === 0.0 || $this->d66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d66_sequencial"]:$this->d66_sequencial);
+       $this->d66_codigo = ($this->d66_codigo === 0 || $this->d66_codigo === 0.0 || $this->d66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d66_codigo"]:$this->d66_codigo);
+       $this->d66_arretipo = ($this->d66_arretipo === 0 || $this->d66_arretipo === 0.0 || $this->d66_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d66_arretipo"]:$this->d66_arretipo);
      }else{
-       $this->d66_sequencial = ($this->d66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d66_sequencial"]:$this->d66_sequencial);
+       $this->d66_sequencial = ($this->d66_sequencial === 0 || $this->d66_sequencial === 0.0 || $this->d66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d66_sequencial"]:$this->d66_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_debcontapedidotipo {
          $this->d66_sequencial = $d66_sequencial;
        }
      }
-     if(($this->d66_sequencial == null) || ($this->d66_sequencial == "") ){
+     if(($this->d66_sequencial == null) || ($this->d66_sequencial === 0 || $this->d66_sequencial === 0.0 || $this->d66_sequencial == "") ){
        $this->erro_sql = " Campo d66_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -50,8 +50,8 @@ class cl_programacaofinanceira {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k117_sequencial = ($this->k117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k117_sequencial"]:$this->k117_sequencial);
-       $this->k117_id_usuario = ($this->k117_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k117_id_usuario"]:$this->k117_id_usuario);
+       $this->k117_sequencial = ($this->k117_sequencial === 0 || $this->k117_sequencial === 0.0 || $this->k117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k117_sequencial"]:$this->k117_sequencial);
+       $this->k117_id_usuario = ($this->k117_id_usuario === 0 || $this->k117_id_usuario === 0.0 || $this->k117_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k117_id_usuario"]:$this->k117_id_usuario);
        if($this->k117_data == ""){
          $this->k117_data_dia = ($this->k117_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k117_data_dia"]:$this->k117_data_dia);
          $this->k117_data_mes = ($this->k117_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k117_data_mes"]:$this->k117_data_mes);
@@ -61,9 +61,9 @@ class cl_programacaofinanceira {
          }
        }
        $this->k117_despesaantecipada = ($this->k117_despesaantecipada == "f"?@$GLOBALS["HTTP_POST_VARS"]["k117_despesaantecipada"]:$this->k117_despesaantecipada);
-       $this->k117_conta = ($this->k117_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k117_conta"]:$this->k117_conta);
+       $this->k117_conta = ($this->k117_conta === 0 || $this->k117_conta === 0.0 || $this->k117_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["k117_conta"]:$this->k117_conta);
      }else{
-       $this->k117_sequencial = ($this->k117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k117_sequencial"]:$this->k117_sequencial);
+       $this->k117_sequencial = ($this->k117_sequencial === 0 || $this->k117_sequencial === 0.0 || $this->k117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k117_sequencial"]:$this->k117_sequencial);
      }
    }
    // funcao para Inclusão
@@ -123,7 +123,7 @@ class cl_programacaofinanceira {
          $this->k117_sequencial = $k117_sequencial;
        }
      }
-     if(($this->k117_sequencial == null) || ($this->k117_sequencial == "") ){
+     if(($this->k117_sequencial == null) || ($this->k117_sequencial === 0 || $this->k117_sequencial === 0.0 || $this->k117_sequencial == "") ){
        $this->erro_sql = " Campo k117_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

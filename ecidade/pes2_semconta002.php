@@ -42,7 +42,7 @@
   $sOrdem   = "";
   $sCampo   = "";
   
-  parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   
   $head2 = "RELATÓRIO DE FUNCIONÁRIOS SEM CONTA";
   $head3 = "PERÍODO : " . $mes . " / " . $ano;

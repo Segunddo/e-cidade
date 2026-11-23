@@ -69,12 +69,12 @@ class cl_orcimpactorecmovmes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o97_sequen = ($this->o97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_sequen"]:$this->o97_sequen);
-       $this->o97_mes = ($this->o97_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_mes"]:$this->o97_mes);
-       $this->o97_valor = ($this->o97_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_valor"]:$this->o97_valor);
+       $this->o97_sequen = ($this->o97_sequen === 0 || $this->o97_sequen === 0.0 || $this->o97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_sequen"]:$this->o97_sequen);
+       $this->o97_mes = ($this->o97_mes === 0 || $this->o97_mes === 0.0 || $this->o97_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_mes"]:$this->o97_mes);
+       $this->o97_valor = ($this->o97_valor === 0 || $this->o97_valor === 0.0 || $this->o97_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_valor"]:$this->o97_valor);
      }else{
-       $this->o97_sequen = ($this->o97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_sequen"]:$this->o97_sequen);
-       $this->o97_mes = ($this->o97_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_mes"]:$this->o97_mes);
+       $this->o97_sequen = ($this->o97_sequen === 0 || $this->o97_sequen === 0.0 || $this->o97_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_sequen"]:$this->o97_sequen);
+       $this->o97_mes = ($this->o97_mes === 0 || $this->o97_mes === 0.0 || $this->o97_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o97_mes"]:$this->o97_mes);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_orcimpactorecmovmes {
      }
        $this->o97_sequen = $o97_sequen;
        $this->o97_mes = $o97_mes;
-     if(($this->o97_sequen == null) || ($this->o97_sequen == "") ){
+     if(($this->o97_sequen == null) || ($this->o97_sequen === 0 || $this->o97_sequen === 0.0 || $this->o97_sequen == "") ){
        $this->erro_sql = " Campo o97_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_orcimpactorecmovmes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o97_mes == null) || ($this->o97_mes == "") ){
+     if(($this->o97_mes == null) || ($this->o97_mes === 0 || $this->o97_mes === 0.0 || $this->o97_mes == "") ){
        $this->erro_sql = " Campo o97_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -62,7 +62,7 @@ class cl_isscalc {
                  q01_valorisencao = float4 = Valor da isenção
                  ";
    //funcao construtor da classe
-   public function cl_isscalc() {
+   public function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("isscalc");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);

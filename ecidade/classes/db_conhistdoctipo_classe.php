@@ -67,10 +67,10 @@ class cl_conhistdoctipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c57_sequencial = ($this->c57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c57_sequencial"]:$this->c57_sequencial);
+       $this->c57_sequencial = ($this->c57_sequencial === 0 || $this->c57_sequencial === 0.0 || $this->c57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c57_sequencial"]:$this->c57_sequencial);
        $this->c57_descricao = ($this->c57_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["c57_descricao"]:$this->c57_descricao);
      }else{
-       $this->c57_sequencial = ($this->c57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c57_sequencial"]:$this->c57_sequencial);
+       $this->c57_sequencial = ($this->c57_sequencial === 0 || $this->c57_sequencial === 0.0 || $this->c57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c57_sequencial"]:$this->c57_sequencial);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_conhistdoctipo {
        return false;
      }
        $this->c57_sequencial = $c57_sequencial;
-     if(($this->c57_sequencial == null) || ($this->c57_sequencial == "") ){
+     if(($this->c57_sequencial == null) || ($this->c57_sequencial === 0 || $this->c57_sequencial === 0.0 || $this->c57_sequencial == "") ){
        $this->erro_sql = " Campo c57_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

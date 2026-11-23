@@ -104,7 +104,7 @@ class cl_divida
                  v01_dtprocesso = date = Data do Processo
                  ";
    //funcao construtor da classe
-    function cl_divida()
+    function __construct()
     {
       //classes dos rotulos dos campos
         $this->rotulo = new rotulo("divida");
@@ -124,8 +124,8 @@ class cl_divida
     function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->v01_coddiv = ($this->v01_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
-            $this->v01_numcgm = ($this->v01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_numcgm"]:$this->v01_numcgm);
+            $this->v01_coddiv = ($this->v01_coddiv === 0 || $this->v01_coddiv === 0.0 || $this->v01_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
+            $this->v01_numcgm = ($this->v01_numcgm === 0 || $this->v01_numcgm === 0.0 || $this->v01_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_numcgm"]:$this->v01_numcgm);
             if ($this->v01_dtinsc == "") {
                 $this->v01_dtinsc_dia = ($this->v01_dtinsc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_dtinsc_dia"]:$this->v01_dtinsc_dia);
                 $this->v01_dtinsc_mes = ($this->v01_dtinsc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_dtinsc_mes"]:$this->v01_dtinsc_mes);
@@ -134,14 +134,14 @@ class cl_divida
                      $this->v01_dtinsc = $this->v01_dtinsc_ano."-".$this->v01_dtinsc_mes."-".$this->v01_dtinsc_dia;
                 }
             }
-            $this->v01_exerc = ($this->v01_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_exerc"]:$this->v01_exerc);
-            $this->v01_numpre = ($this->v01_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_numpre"]:$this->v01_numpre);
-            $this->v01_numpar = ($this->v01_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_numpar"]:$this->v01_numpar);
-            $this->v01_numtot = ($this->v01_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_numtot"]:$this->v01_numtot);
-            $this->v01_vlrhis = ($this->v01_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_vlrhis"]:$this->v01_vlrhis);
-            $this->v01_proced = ($this->v01_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_proced"]:$this->v01_proced);
-            $this->v01_livro = ($this->v01_livro == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_livro"]:$this->v01_livro);
-            $this->v01_folha = ($this->v01_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_folha"]:$this->v01_folha);
+            $this->v01_exerc = ($this->v01_exerc === 0 || $this->v01_exerc === 0.0 || $this->v01_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_exerc"]:$this->v01_exerc);
+            $this->v01_numpre = ($this->v01_numpre === 0 || $this->v01_numpre === 0.0 || $this->v01_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_numpre"]:$this->v01_numpre);
+            $this->v01_numpar = ($this->v01_numpar === 0 || $this->v01_numpar === 0.0 || $this->v01_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_numpar"]:$this->v01_numpar);
+            $this->v01_numtot = ($this->v01_numtot === 0 || $this->v01_numtot === 0.0 || $this->v01_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_numtot"]:$this->v01_numtot);
+            $this->v01_vlrhis = ($this->v01_vlrhis === 0 || $this->v01_vlrhis === 0.0 || $this->v01_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_vlrhis"]:$this->v01_vlrhis);
+            $this->v01_proced = ($this->v01_proced === 0 || $this->v01_proced === 0.0 || $this->v01_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_proced"]:$this->v01_proced);
+            $this->v01_livro = ($this->v01_livro === 0 || $this->v01_livro === 0.0 || $this->v01_livro == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_livro"]:$this->v01_livro);
+            $this->v01_folha = ($this->v01_folha === 0 || $this->v01_folha === 0.0 || $this->v01_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_folha"]:$this->v01_folha);
             if ($this->v01_dtvenc == "") {
                 $this->v01_dtvenc_dia = ($this->v01_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_dtvenc_dia"]:$this->v01_dtvenc_dia);
                 $this->v01_dtvenc_mes = ($this->v01_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_dtvenc_mes"]:$this->v01_dtvenc_mes);
@@ -158,10 +158,10 @@ class cl_divida
                     $this->v01_dtoper = $this->v01_dtoper_ano."-".$this->v01_dtoper_mes."-".$this->v01_dtoper_dia;
                 }
             }
-            $this->v01_valor = ($this->v01_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_valor"]:$this->v01_valor);
+            $this->v01_valor = ($this->v01_valor === 0 || $this->v01_valor === 0.0 || $this->v01_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_valor"]:$this->v01_valor);
             $this->v01_obs = ($this->v01_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_obs"]:$this->v01_obs);
-            $this->v01_numdig = ($this->v01_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_numdig"]:$this->v01_numdig);
-            $this->v01_instit = ($this->v01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_instit"]:$this->v01_instit);
+            $this->v01_numdig = ($this->v01_numdig === 0 || $this->v01_numdig === 0.0 || $this->v01_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_numdig"]:$this->v01_numdig);
+            $this->v01_instit = ($this->v01_instit === 0 || $this->v01_instit === 0.0 || $this->v01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_instit"]:$this->v01_instit);
             if ($this->v01_dtinclusao == "") {
                 $this->v01_dtinclusao_dia = ($this->v01_dtinclusao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_dtinclusao_dia"]:$this->v01_dtinclusao_dia);
                 $this->v01_dtinclusao_mes = ($this->v01_dtinclusao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_dtinclusao_mes"]:$this->v01_dtinclusao_mes);
@@ -181,7 +181,7 @@ class cl_divida
                 }
             }
         } else {
-            $this->v01_coddiv = ($this->v01_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
+            $this->v01_coddiv = ($this->v01_coddiv === 0 || $this->v01_coddiv === 0.0 || $this->v01_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v01_coddiv"]:$this->v01_coddiv);
         }
     }
    // funcao para inclusao
@@ -347,7 +347,7 @@ class cl_divida
                 $this->v01_coddiv = $v01_coddiv;
             }
         }
-        if (($this->v01_coddiv == null) || ($this->v01_coddiv == "")) {
+        if (($this->v01_coddiv == null) || ($this->v01_coddiv === 0 || $this->v01_coddiv === 0.0 || $this->v01_coddiv == "")) {
             $this->erro_sql = " Campo v01_coddiv nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

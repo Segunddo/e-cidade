@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/receita/natureza-receita",
+  "json": {
+    "error": true,
+    "message": "Undefined index: rows"
+  },
+  "sha256": "0146b9cdd823c49e7914700d5d47892cf1b88aa039bac0a21bee4e021161d0fc",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

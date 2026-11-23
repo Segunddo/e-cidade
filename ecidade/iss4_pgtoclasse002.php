@@ -133,12 +133,12 @@ $sql = "select q03_ativ,
 	        where q82_classe in ($dados)"; 
 
 $result = db_query($sql);
-if(pg_numrows($result) == 0 ){
+if(($result ? pg_numrows($result) : null) == 0 ){
   db_redireciona("db_erros.php?fechar=true&db_erro=Não Existe Atividade Para o Intervalo Digitado.&pagina_retorno=iss4_pgtoclasse001.php");
   exit;
 }
 
-$numrows = pg_numrows($result);
+$numrows = ($result ? pg_numrows($result) : null);
   echo "<form name=\"form1\" id=\"form1\" method=\"post\" target=\"relatorio\">\n";
   echo "<table valign=\"top\" border=\"0\" cellspacing=\"1\" cellpadding=\"0\">\n";
   echo "<tr align=\"top\">";

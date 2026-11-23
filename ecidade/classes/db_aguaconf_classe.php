@@ -87,18 +87,18 @@ class cl_aguaconf {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x18_anousu = ($this->x18_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_anousu"]:$this->x18_anousu);
-       $this->x18_carsemesgoto = ($this->x18_carsemesgoto == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_carsemesgoto"]:$this->x18_carsemesgoto);
-       $this->x18_carsemagua = ($this->x18_carsemagua == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_carsemagua"]:$this->x18_carsemagua);
-       $this->x18_arretipo = ($this->x18_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_arretipo"]:$this->x18_arretipo);
-       $this->x18_caresgoto = ($this->x18_caresgoto == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_caresgoto"]:$this->x18_caresgoto);
-       $this->x18_caragua = ($this->x18_caragua == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_caragua"]:$this->x18_caragua);
-       $this->x18_consumoexcesso = ($this->x18_consumoexcesso == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_consumoexcesso"]:$this->x18_consumoexcesso);
-       $this->x18_consumoesgoto = ($this->x18_consumoesgoto == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_consumoesgoto"]:$this->x18_consumoesgoto);
-       $this->x18_consumoagua = ($this->x18_consumoagua == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_consumoagua"]:$this->x18_consumoagua);
-       $this->x18_cartipoimovei = ($this->x18_cartipoimovei == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_cartipoimovei"]:$this->x18_cartipoimovei);
-       $this->x18_receitadebitorecalculo = ($this->x18_receitadebitorecalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_receitadebitorecalculo"]:$this->x18_receitadebitorecalculo);
-       $this->x18_receitacreditorecalculo = ($this->x18_receitacreditorecalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_receitacreditorecalculo"]:$this->x18_receitacreditorecalculo);
+       $this->x18_anousu = ($this->x18_anousu === 0 || $this->x18_anousu === 0.0 || $this->x18_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_anousu"]:$this->x18_anousu);
+       $this->x18_carsemesgoto = ($this->x18_carsemesgoto === 0 || $this->x18_carsemesgoto === 0.0 || $this->x18_carsemesgoto == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_carsemesgoto"]:$this->x18_carsemesgoto);
+       $this->x18_carsemagua = ($this->x18_carsemagua === 0 || $this->x18_carsemagua === 0.0 || $this->x18_carsemagua == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_carsemagua"]:$this->x18_carsemagua);
+       $this->x18_arretipo = ($this->x18_arretipo === 0 || $this->x18_arretipo === 0.0 || $this->x18_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_arretipo"]:$this->x18_arretipo);
+       $this->x18_caresgoto = ($this->x18_caresgoto === 0 || $this->x18_caresgoto === 0.0 || $this->x18_caresgoto == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_caresgoto"]:$this->x18_caresgoto);
+       $this->x18_caragua = ($this->x18_caragua === 0 || $this->x18_caragua === 0.0 || $this->x18_caragua == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_caragua"]:$this->x18_caragua);
+       $this->x18_consumoexcesso = ($this->x18_consumoexcesso === 0 || $this->x18_consumoexcesso === 0.0 || $this->x18_consumoexcesso == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_consumoexcesso"]:$this->x18_consumoexcesso);
+       $this->x18_consumoesgoto = ($this->x18_consumoesgoto === 0 || $this->x18_consumoesgoto === 0.0 || $this->x18_consumoesgoto == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_consumoesgoto"]:$this->x18_consumoesgoto);
+       $this->x18_consumoagua = ($this->x18_consumoagua === 0 || $this->x18_consumoagua === 0.0 || $this->x18_consumoagua == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_consumoagua"]:$this->x18_consumoagua);
+       $this->x18_cartipoimovei = ($this->x18_cartipoimovei === 0 || $this->x18_cartipoimovei === 0.0 || $this->x18_cartipoimovei == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_cartipoimovei"]:$this->x18_cartipoimovei);
+       $this->x18_receitadebitorecalculo = ($this->x18_receitadebitorecalculo === 0 || $this->x18_receitadebitorecalculo === 0.0 || $this->x18_receitadebitorecalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_receitadebitorecalculo"]:$this->x18_receitadebitorecalculo);
+       $this->x18_receitacreditorecalculo = ($this->x18_receitacreditorecalculo === 0 || $this->x18_receitacreditorecalculo === 0.0 || $this->x18_receitacreditorecalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["x18_receitacreditorecalculo"]:$this->x18_receitacreditorecalculo);
      }else{
      }
    }

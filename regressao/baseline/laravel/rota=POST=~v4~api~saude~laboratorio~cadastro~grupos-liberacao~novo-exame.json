@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/laboratorio/cadastro/grupos-liberacao/novo-exame",
+  "json": {
+    "errors": {
+      "exame": [
+        "Obrigatório informar o exame!"
+      ],
+      "grupo": [
+        "Obrigatório informar a qual grupo o exame será adicionado!"
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "e9a6005e92c6a38847f72afa052a028ab6c132d799bb317e54c801fcd68d8ac9",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

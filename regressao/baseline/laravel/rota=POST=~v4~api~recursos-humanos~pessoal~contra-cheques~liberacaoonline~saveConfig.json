@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/contra-cheques/liberacaoonline/saveConfig",
+  "json": {
+    "errors": {
+      "configuracoes": [
+        "Nenhuma configuração informada."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "61218c2aff61eb01f89aa9f330415fbdae4744f989feeb9d8941b2bd64207e8c",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

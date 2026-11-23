@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/despesa/naturezas-despesas",
+  "json": {
+    "error": true,
+    "message": "Undefined index: rows"
+  },
+  "sha256": "4fefcbe918a421d2a2a09f8bc49f830ef74311cacf55a0b43f063be75218599e",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

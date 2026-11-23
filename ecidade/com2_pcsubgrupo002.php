@@ -39,7 +39,7 @@ $clrotulo->label('pc03_descrgrupo');
 $clrotulo->label('pc04_codtipo');
 $clrotulo->label('pc05_descr');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 if($grupo == "a") {

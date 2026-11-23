@@ -1,0 +1,67 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/consulta/orcamentario/receita/padrao",
+  "json": {
+    "data": [
+      {
+        "categoria": 1,
+        "classe": 9,
+        "conta": "900000000000000",
+        "created_at": "2026-11-18T06:07:01.000000Z",
+        "desdobramento1": "0",
+        "desdobramento2": "00",
+        "desdobramento3": "0",
+        "desdobramento4": "00",
+        "desdobramento5": "00",
+        "desdobramento6": "00",
+        "especie": 0,
+        "estruturalAteNivel": "9",
+        "exercicio": 2023,
+        "funcao": "Agrega os registros referentes às deduções das Receitas Orçamentárias, que são representadas pelo dígito \"9\" inserido no início do código da conta, sem suprimir nenhum outro dígito da codificação.",
+        "id": 7,
+        "mascara": "9.0.0.0.0.00.0.0.00.00.00",
+        "nome": "( R ) Deduções da Receita",
+        "origem": 0,
+        "sintetica": true,
+        "tipo": 0,
+        "uniao": false,
+        "updated_at": "2026-11-18T06:07:01.000000Z"
+      },
+      {
+        "categoria": 1,
+        "classe": 9,
+        "conta": "900000000000000",
+        "created_at": "2026-11-18T06:28:10.655637Z",
+        "desdobramento1": "0",
+        "desdobramento2": "00",
+        "desdobramento3": "0",
+        "desdobramento4": "00",
+        "desdobramento5": "00",
+        "desdobramento6": "00",
+        "especie": 0,
+        "estruturalAteNivel": "9",
+        "exercicio": 2024,
+        "funcao": "Agrega os registros referentes às deduções das Receitas Orçamentárias, que são representadas pelo dígito \"9\" inserido no início do código da conta, sem suprimir nenhum outro dígito da codificação.",
+        "id": 8,
+        "mascara": "9.0.0.0.0.00.0.0.00.00.00",
+        "nome": "( R ) Deduções da Receita",
+        "origem": 0,
+        "sintetica": true,
+        "tipo": 0,
+        "uniao": false,
+        "updated_at": "2026-11-18T06:28:10.655637Z"
+      }
+    ],
+    "error": false,
+    "message": "Contas encontradas."
+  },
+  "sha256": "384921cfc857651ac326c72e6e78a2a0ebf732eb66425a5b2af482d71859f2a8",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

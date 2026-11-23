@@ -55,7 +55,7 @@ $clrotulo->label('k80_instit');
 $clrotulo->label('k80_dtaut');
 $clrotulo->label('k13_descr');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_GET_VARS,2);
 
 
@@ -134,8 +134,8 @@ $sql =  " select distinct k80_codpla,
 		      order by k80_codpla" ; 
 			    
 $result = db_query($sql);
-$total  = pg_num_rows($result);
-if (pg_numrows($result) == 0){
+$total  = ($result ? pg_num_rows($result) : null);
+if (($result ? pg_numrows($result) : null) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 
 }
@@ -162,7 +162,7 @@ $prenc      = 0;
 $alt        = 4;
 $iCodPlaOld = 0;
 $sPlaStorno = '';
-for($x = 0; $x < pg_num_rows($result);$x++){
+for($x = 0; $x < ($result ? pg_num_rows($result) : null);$x++){
    
 	 $fVlTotal = 0;
 	 $troca    = 1;
@@ -207,9 +207,9 @@ for($x = 0; $x < pg_num_rows($result);$x++){
 						 	 and k81_codpla = ".$oPla->k80_codpla;
    
    $rsRec = db_query($sqlRec);
-	 if (pg_num_rows($rsRec) > 0){
+	 if (($rsRec ? pg_num_rows($rsRec) : null) > 0){
 
-     for ($i = 0;$i < pg_num_rows($rsRec);$i++){
+     for ($i = 0;$i < ($rsRec ? pg_num_rows($rsRec) : null);$i++){
 
        $oRec  = db_utils::fieldsMemory($rsRec,$i);
 				

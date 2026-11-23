@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/escola/relatorios/alunos/ficha-matricula",
+  "json": null,
+  "sha256": "b14fcb9e6e11278bf8be8f0fb04b20e401619895970946aff853dd9713780bd8",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

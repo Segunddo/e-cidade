@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/alunoAtendimentosEspecial/atualizar",
+  "json": {
+    "error": true,
+    "message": "Undefined index: codigo"
+  },
+  "sha256": "105f2793c59b8bd816cddaebbc87ffc77b1c8d1211e4f8cbf843b418554ca8a8",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

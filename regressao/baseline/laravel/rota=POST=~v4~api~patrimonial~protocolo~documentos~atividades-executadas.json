@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/documentos/atividades-executadas",
+  "json": {
+    "error": true,
+    "message": "Argument 1 passed to App\\Domain\\Patrimonial\\Protocolo\\Factories\\DocumentoAndamentoFactory::getService() must be an instance of App\\Domain\\Patrimonial\\Protocolo\\Model\\DocumentoAndamento, null given, called in /var/www/html/app/Domain/Patrimonial/Protocolo/Controller/DocumentoAndamentoController.php on line 145"
+  },
+  "sha256": "0998a0a0e8948da7c15db07e5410240c3832eb6d8e900d7feba285340df677bf",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

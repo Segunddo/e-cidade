@@ -35,7 +35,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_mer_tpcardapioturma_classe.php"));
 include(modification("classes/db_mer_cardapioescola_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmer_tpcardapioturma = new cl_mer_tpcardapioturma;
 $clmer_cardapioescola = new cl_mer_cardapioescola;
 if(isset($coddisciplinas)){

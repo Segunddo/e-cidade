@@ -36,7 +36,7 @@ include(modification("classes/db_alunoaltcampos_classe.php"));
 include(modification("classes/db_alunoaltconf_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("libs/db_jsplibwebseller.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $claluno = new cl_aluno;
 $clalunoalt = new cl_alunoalt;

@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/objetivo-programa/salvar",
+  "json": {
+    "errors": {
+      "pl11_descricao": [
+        "O campo \"Descrição\" deve ser informado."
+      ],
+      "pl11_numero": [
+        "O campo \"Número do Objetivo\" deve ser informado."
+      ],
+      "pl9_codigo": [
+        "O campo \"Código do programa estratégico\" deve ser informado."
+      ],
+      "valores": [
+        "Deve ser informado uma coleção de valores."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "4ba624bef803f6c2f8f56b7e6e096dab7f3478cb672d48158383810df4c7efaa",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

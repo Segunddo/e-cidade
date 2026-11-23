@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """15a lacuna: classes COM NAMESPACE (src/, app/, api/) carregadas por autoload PSR-4.
 
-Nenhuma das oito frentes do enumera.py as segue: elas resolvem include, `new cl_*`,
+Nenhuma das oito frentes anteriores do enumera.py as segue: elas resolvem include, `new cl_*`,
 `getDao()` e as classes de model/ e std/ por nome curto. Uma tela legada que faz
 `new \\ECidade\\Patrimonial\\Protocolo\\Container` (ou `use ...;` + `Container::`) carrega
 src/Patrimonial/Protocolo/Container.php sem que nenhum universo o liste.
@@ -9,7 +9,18 @@ src/Patrimonial/Protocolo/Container.php sem que nenhum universo o liste.
 Mapa (bootstrap.php e composer.json):  ECidade\\Api\\ -> api/   ECidade\\ -> src/   App\\ -> app/
 
 Uso:  python3 scratchpad/ns_fecho.py <lista de arquivos (relativos a ecidade/)> [<saida>]
-Saida: os arquivos de src/app/api alcancados (transitivamente) que NAO estao na lista.
+Saida: os arquivos de src/app/api alcancados (transitivamente) que NAO estao na lista;
+  grava-os em <saida> (um por linha), se informada, e imprime a contagem.
+
+Como faz: em cada arquivo (sem comentarios) acha nomes de classe por quatro vias --
+  servicos pedidos por chave ao container do bootstrap.php (`->get('chave')`), nomes
+  totalmente qualificados (ECidade\\..., App\\...), `use X [as Y];` e nomes curtos depois de
+  new/extends/implements/instanceof/:: (resolvidos pelo `use` ou pelo namespace do proprio
+  arquivo) -- e converte cada um em caminho pelo mapa PSR-4 abaixo. Repete a partir dos
+  arquivos novos ate nao aparecer nenhum.
+Entradas: a lista (caminhos relativos a ecidade/), ecidade/bootstrap.php e os arquivos.
+Usado em: passos 1-3 do guia, sempre por dentro do enumera.py; sozinho, para medir a
+  lacuna retroativamente sobre uma lista (ex.: tudo o que o 8.5 ja serve).
 
 Tambem e importado pelo enumera.py como a 9a frente (`refs()`), com o cwd ja em ecidade/.
 """
@@ -17,14 +28,20 @@ import os, re, sys
 
 if __name__ == "__main__":
     os.chdir(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'ecidade'))
+# Mapa PSR-4, do mais especifico para o mais geral: ECidade\Api\ tem de vir antes de ECidade\.
 PREFIXOS = [("ECidade\\Api\\", "api/"), ("ECidade\\", "src/"), ("App\\", "app/")]
 
+# `namespace A\B;` -- o namespace do arquivo, para resolver nome curto sem `use`
 RX_NS    = re.compile(rb'^\s*namespace\s+([\w\\]+)\s*;', re.M)
+# `use A\B\C;` ou `use A\B\C as D;` (so a forma simples, uma classe por `use`)
 RX_USE   = re.compile(rb'^\s*use\s+([\w\\]+)(?:\s+as\s+(\w+))?\s*;', re.M | re.I)
 RX_FQ    = re.compile(rb'\\?\b((?:ECidade|App)(?:\\\w+)+)')          # nomes qualificados no codigo
+# nome curto depois de new/extends/implements/instanceof (grupo 1) ou antes de :: (grupo 2)
 RX_CURTO = re.compile(rb'(?:new|extends|implements|instanceof)\s+(\w+)|\b(\w+)::', re.I)
 
 def arquivo(fqcn):
+    """Nome qualificado (str, com ou sem a barra inicial) -> caminho .php relativo a
+    ecidade/ pelo mapa PREFIXOS; None se fora do mapa ou se o arquivo nao existe."""
     fqcn = fqcn.lstrip("\\")
     for pref, base in PREFIXOS:
         if fqcn.startswith(pref):
@@ -38,13 +55,18 @@ def arquivo(fqcn):
 # e pedidos assim: Registry::get('app.container')->get('patrimonial.container').
 # Sem isto o fecho nao chega a src/Patrimonial/Protocolo/Container.php -- o arquivo que
 # revelou a lacuna (ouv4_solicitacaoprocessoeletronico.RPC.php).
+# chave do servico (bytes) -> arquivos das classes citadas no corpo da funcao que o registra
 SERVICOS = {}
 _b = open("bootstrap.php", "rb").read()
 for m in re.finditer(rb"->register\('([\w.]+)',\s*function[^{]*\{(.*?)\n\}\);", _b, re.S):
     SERVICOS[m.group(1)] = {a for a in (arquivo(x.group(1).decode()) for x in RX_FQ.finditer(m.group(2))) if a}
+# pedido de servico por chave: ->get('patrimonial.container')
 RX_GET = re.compile(rb"->get\('([\w.]+)'\)")
 
 def refs(p):
+    """Arquivos de src/app/api que p referencia DIRETAMENTE (set de caminhos relativos a
+    ecidade/). Comentarios sao removidos antes, para nao seguir classe citada em texto.
+    Arquivo ilegivel devolve conjunto vazio."""
     try: b = open(p, "rb").read()
     except OSError: return set()
     b = re.sub(rb'/\*.*?\*/', b'', b, flags=re.S)                     # comentario de bloco
@@ -68,6 +90,7 @@ def refs(p):
     return out
 
 if __name__ == "__main__":
+    # fecho transitivo a partir da lista; so o que ficou de FORA dela e reportado
     inicio = [l.strip() for l in open(sys.argv[1]) if l.strip()]
     vistos, fila = set(inicio), list(inicio)
     while fila:

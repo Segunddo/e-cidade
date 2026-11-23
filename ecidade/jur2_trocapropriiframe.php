@@ -37,7 +37,7 @@ include(modification("classes/db_propri_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 include(modification("classes/db_socios_classe.php"));
 include(modification("classes/db_inicialnomes_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 db_postmemory($HTTP_POST_VARS);
 
@@ -180,10 +180,10 @@ if(isset($j01_matric)){
   $matriz1= explode("X",$numini);
   $igual="false";
   $m=0;
-  for($u=0; $u<sizeof($matriz1); $u++){
+  for($u=0; $u<sizeof((array)$matriz1); $u++){
     if($matriz1[$u]!=""){
       $matriz2= explode("X",$numcgms);
-      for($w=0; $w<sizeof($matriz2); $w++){
+      for($w=0; $w<sizeof((array)$matriz2); $w++){
         if($matriz2[$w]!=""){
           if($matriz1[$u]==$matriz2[$w]){
             $m++;
@@ -193,7 +193,7 @@ if(isset($j01_matric)){
       }
     }
   }
-  if($m==sizeof($matriz1) && $m==sizeof($matriz2)){
+  if($m==sizeof((array)$matriz1) && $m==sizeof((array)$matriz2)){
     echo "<script>parent.location.href='jur2_trocapropri.php?notroca=true';</script>";
 
   }
@@ -228,10 +228,10 @@ if(isset($j01_matric)){
   $matriz1= explode("X",$numini);
   $igual="false";
   $m=0;
-  for($u=0; $u<sizeof($matriz1); $u++){
+  for($u=0; $u<sizeof((array)$matriz1); $u++){
     if($matriz1[$u]!=""){
       $matriz2= explode("X",$numcgms);
-      for($w=0; $w<sizeof($matriz2); $w++){
+      for($w=0; $w<sizeof((array)$matriz2); $w++){
         if($matriz2[$w]!=""){
           if($matriz1[$u]==$matriz2[$w]){
             $m++;
@@ -241,7 +241,7 @@ if(isset($j01_matric)){
       }
     }
   }
-  if($m==sizeof($matriz1) && $m==sizeof($matriz2)){
+  if($m==sizeof((array)$matriz1) && $m==sizeof((array)$matriz2)){
     //echo "<script>parent.location.href='jur2_trocapropri.php?notroca=true';</script>";
     die("sem inicialnomes");
   }
@@ -253,7 +253,7 @@ echo "<tr>
 <tr><td colspan='2'><b>ANTIGOS PROPRIETÁRIOS</b></td></tr>
 ";
 
-for($u=0; $u<sizeof($matriz1); $u++){
+for($u=0; $u<sizeof((array)$matriz1); $u++){
   if($matriz1[$u]!=""){
     $resulti = $clcgm->sql_record($clcgm->sql_query_file($matriz1[$u],"z01_nome"));
     db_fieldsmemory($resulti,0);
@@ -268,7 +268,7 @@ echo "  </table>
 <tr><td colspan='2'><b>ATUAIS PROPRIETÁRIOS</b></td></tr>";
 $ond = "";
 $on="";
-for($u=0; $u<sizeof($matriz2); $u++){
+for($u=0; $u<sizeof((array)$matriz2); $u++){
   if($matriz2[$u]!=""){
     $ond .= $on." z01_numcgm=".$matriz2[$u];
     $on =" or ";

@@ -45,7 +45,7 @@ if(!isset($lote)) {
 	$lote = '';
 }
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clitbi = new cl_itbi;
 $clitbi->rotulo->label("it01_guia");
 $clitbi->rotulo->label("it01_guia");

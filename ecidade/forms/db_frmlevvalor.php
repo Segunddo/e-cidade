@@ -169,7 +169,7 @@ db_input('y63_sequencia',10,$Iy63_sequencia,true,'text',3);
       $anos=array();
 
       //Pega os exercícios do periodo
-      for($i=$ini; $i<$fim+1; $i++){
+      for($i=$ini; $i<(int)$fim+1; $i++){
        $anos[$i]=$i;
       }
 

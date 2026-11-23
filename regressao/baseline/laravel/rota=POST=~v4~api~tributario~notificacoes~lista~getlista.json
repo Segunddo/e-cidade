@@ -1,0 +1,48 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/notificacoes/lista/getlista",
+  "json": {
+    "data": {
+      "current_page": 1,
+      "data": [],
+      "first_page_url": "http://localhost:8074/v4/api/tributario/notificacoes/lista/getlista?page=1",
+      "from": null,
+      "last_page": 1,
+      "last_page_url": "http://localhost:8074/v4/api/tributario/notificacoes/lista/getlista?page=1",
+      "links": [
+        {
+          "active": false,
+          "label": "&laquo; Anterior",
+          "url": null
+        },
+        {
+          "active": true,
+          "label": "1",
+          "url": "http://localhost:8074/v4/api/tributario/notificacoes/lista/getlista?page=1"
+        },
+        {
+          "active": false,
+          "label": "Próxima &raquo;",
+          "url": null
+        }
+      ],
+      "next_page_url": null,
+      "path": "http://localhost:8074/v4/api/tributario/notificacoes/lista/getlista",
+      "per_page": 10,
+      "prev_page_url": null,
+      "to": null,
+      "total": 0
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "412ab1e2ea4549b91ca92aa158556c71fad30819717f3ece32bf56ce7394bd63",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -75,14 +75,14 @@ class cl_arrecadcompos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_sequencial = ($this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
-       $this->k00_arreckey = ($this->k00_arreckey == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_arreckey"]:$this->k00_arreckey);
-       $this->k00_vlrhist = ($this->k00_vlrhist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrhist"]:$this->k00_vlrhist);
-       $this->k00_correcao = ($this->k00_correcao == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_correcao"]:$this->k00_correcao);
-       $this->k00_juros = ($this->k00_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_juros"]:$this->k00_juros);
-       $this->k00_multa = ($this->k00_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_multa"]:$this->k00_multa);
+       $this->k00_sequencial = ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
+       $this->k00_arreckey = ($this->k00_arreckey === 0 || $this->k00_arreckey === 0.0 || $this->k00_arreckey == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_arreckey"]:$this->k00_arreckey);
+       $this->k00_vlrhist = ($this->k00_vlrhist === 0 || $this->k00_vlrhist === 0.0 || $this->k00_vlrhist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_vlrhist"]:$this->k00_vlrhist);
+       $this->k00_correcao = ($this->k00_correcao === 0 || $this->k00_correcao === 0.0 || $this->k00_correcao == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_correcao"]:$this->k00_correcao);
+       $this->k00_juros = ($this->k00_juros === 0 || $this->k00_juros === 0.0 || $this->k00_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_juros"]:$this->k00_juros);
+       $this->k00_multa = ($this->k00_multa === 0 || $this->k00_multa === 0.0 || $this->k00_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_multa"]:$this->k00_multa);
      }else{
-       $this->k00_sequencial = ($this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
+       $this->k00_sequencial = ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_sequencial"]:$this->k00_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_arrecadcompos {
          $this->k00_sequencial = $k00_sequencial;
        }
      }
-     if(($this->k00_sequencial == null) || ($this->k00_sequencial == "") ){
+     if(($this->k00_sequencial == null) || ($this->k00_sequencial === 0 || $this->k00_sequencial === 0.0 || $this->k00_sequencial == "") ){
        $this->erro_sql = " Campo k00_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

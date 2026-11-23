@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/ambulatorial/cadastro/unidades-encaminhadoras/save",
+  "json": {
+    "errors": {
+      "ativo": [
+        "O campo ativo é obrigatório."
+      ],
+      "descricao": [
+        "O campo descricao é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "466d2c53ae4efa2879d80c2c459522aa9651ed6851fd1040a23d4420712ec8ac",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

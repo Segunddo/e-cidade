@@ -567,7 +567,7 @@ $iMesImplantacao = $aImplantacao[1];
                             <tr>
                               <td class="tabcols" title="Clique Aqui para ver os dados cadastrais." nowrap>
                                 <?php
-                                parse_str($arg);
+                                parse_str($arg, $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
                                 $Label = "<a href='' onclick='js_mostrapessoal();return false;'>$Lr01_regist</a>";
                                 echo "<strong style=\"color:blue\">$Label</strong>";
                                 ?>

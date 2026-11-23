@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/documentos-assinar/atualizar-assinado-por",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Configuracao\\DocumentosAssinatura\\Controller\\DocumentosAssinatura::updateSignedSigners does not exist."
+  },
+  "sha256": "523306ce70ff8158b535e28a1ba6cd15cc5915969759c46bda5e103fb851c8d0",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

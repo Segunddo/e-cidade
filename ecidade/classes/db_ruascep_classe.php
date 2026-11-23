@@ -56,7 +56,7 @@ class cl_ruascep {
                  j29_lado = int4 = Lado
                  ";
    //funcao construtor da classe
-   function cl_ruascep() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("ruascep");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -73,14 +73,14 @@ class cl_ruascep {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j29_codigo = ($this->j29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_codigo"]:$this->j29_codigo);
-       $this->j29_inicio = ($this->j29_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_inicio"]:$this->j29_inicio);
-       $this->j29_final  = ($this->j29_final == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_final"]:$this->j29_final);
+       $this->j29_codigo = ($this->j29_codigo === 0 || $this->j29_codigo === 0.0 || $this->j29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_codigo"]:$this->j29_codigo);
+       $this->j29_inicio = ($this->j29_inicio === 0 || $this->j29_inicio === 0.0 || $this->j29_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_inicio"]:$this->j29_inicio);
+       $this->j29_final  = ($this->j29_final === 0 || $this->j29_final === 0.0 || $this->j29_final == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_final"]:$this->j29_final);
        $this->j29_cep    = ($this->j29_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_cep"]:$this->j29_cep);
-       $this->j29_lado   = ($this->j29_lado == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_lado"]:$this->j29_lado);
+       $this->j29_lado   = ($this->j29_lado === 0 || $this->j29_lado === 0.0 || $this->j29_lado == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_lado"]:$this->j29_lado);
      }else{
-       $this->j29_codigo = ($this->j29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_codigo"]:$this->j29_codigo);
-       $this->j29_inicio = ($this->j29_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_inicio"]:$this->j29_inicio);
+       $this->j29_codigo = ($this->j29_codigo === 0 || $this->j29_codigo === 0.0 || $this->j29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_codigo"]:$this->j29_codigo);
+       $this->j29_inicio = ($this->j29_inicio === 0 || $this->j29_inicio === 0.0 || $this->j29_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["j29_inicio"]:$this->j29_inicio);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_ruascep {
      }
        $this->j29_codigo = $j29_codigo;
        $this->j29_inicio = $j29_inicio;
-     if(($this->j29_codigo == null) || ($this->j29_codigo == "") ){
+     if(($this->j29_codigo == null) || ($this->j29_codigo === 0 || $this->j29_codigo === 0.0 || $this->j29_codigo == "") ){
        $this->erro_sql = " Campo j29_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -123,7 +123,7 @@ class cl_ruascep {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j29_inicio == null) || ($this->j29_inicio == "") ){
+     if(($this->j29_inicio == null) || ($this->j29_inicio === 0 || $this->j29_inicio === 0.0 || $this->j29_inicio == "") ){
        $this->erro_sql = " Campo j29_inicio nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

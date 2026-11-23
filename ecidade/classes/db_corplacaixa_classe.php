@@ -74,7 +74,7 @@ class cl_corplacaixa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k82_id = ($this->k82_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_id"]:$this->k82_id);
+       $this->k82_id = ($this->k82_id === 0 || $this->k82_id === 0.0 || $this->k82_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_id"]:$this->k82_id);
        if($this->k82_data == ""){
          $this->k82_data_dia = ($this->k82_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_data_dia"]:$this->k82_data_dia);
          $this->k82_data_mes = ($this->k82_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_data_mes"]:$this->k82_data_mes);
@@ -83,12 +83,12 @@ class cl_corplacaixa {
             $this->k82_data = $this->k82_data_ano."-".$this->k82_data_mes."-".$this->k82_data_dia;
          }
        }
-       $this->k82_autent = ($this->k82_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_autent"]:$this->k82_autent);
-       $this->k82_seqpla = ($this->k82_seqpla == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_seqpla"]:$this->k82_seqpla);
+       $this->k82_autent = ($this->k82_autent === 0 || $this->k82_autent === 0.0 || $this->k82_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_autent"]:$this->k82_autent);
+       $this->k82_seqpla = ($this->k82_seqpla === 0 || $this->k82_seqpla === 0.0 || $this->k82_seqpla == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_seqpla"]:$this->k82_seqpla);
      }else{
-       $this->k82_id = ($this->k82_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_id"]:$this->k82_id);
+       $this->k82_id = ($this->k82_id === 0 || $this->k82_id === 0.0 || $this->k82_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_id"]:$this->k82_id);
        $this->k82_data = ($this->k82_data == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_data_ano"]."-".@$GLOBALS["HTTP_POST_VARS"]["k82_data_mes"]."-".@$GLOBALS["HTTP_POST_VARS"]["k82_data_dia"]:$this->k82_data);
-       $this->k82_autent = ($this->k82_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_autent"]:$this->k82_autent);
+       $this->k82_autent = ($this->k82_autent === 0 || $this->k82_autent === 0.0 || $this->k82_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k82_autent"]:$this->k82_autent);
      }
    }
    // funcao para inclusao
@@ -106,7 +106,7 @@ class cl_corplacaixa {
        $this->k82_id = $k82_id;
        $this->k82_data = $k82_data;
        $this->k82_autent = $k82_autent;
-     if(($this->k82_id == null) || ($this->k82_id == "") ){
+     if(($this->k82_id == null) || ($this->k82_id === 0 || $this->k82_id === 0.0 || $this->k82_id == "") ){
        $this->erro_sql = " Campo k82_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -122,7 +122,7 @@ class cl_corplacaixa {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k82_autent == null) || ($this->k82_autent == "") ){
+     if(($this->k82_autent == null) || ($this->k82_autent === 0 || $this->k82_autent === 0.0 || $this->k82_autent == "") ){
        $this->erro_sql = " Campo k82_autent nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

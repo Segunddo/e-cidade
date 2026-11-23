@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/bancos",
+  "json": {
+    "error": true,
+    "message": "Call to undefined method Illuminate\\Database\\Eloquent\\Builder::all()"
+  },
+  "sha256": "de299d34b770c4a30562757e25413bcba78e5475a25229e2ad2fd198a4830b49",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

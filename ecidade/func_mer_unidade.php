@@ -34,7 +34,7 @@ include(modification("classes/db_mer_cardapio_classe.php"));
 include(modification("classes/db_matunid_classe.php"));
 include(modification("classes/db_mer_unidade_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmer_cardapio = new cl_mer_cardapio;
 $clmatunid = new cl_matunid;
 $clmer_unidade = new cl_mer_unidade;

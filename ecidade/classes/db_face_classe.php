@@ -90,21 +90,21 @@ class cl_face
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->j37_face = ($this->j37_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_face"]:$this->j37_face);
+       $this->j37_face = ($this->j37_face === 0 || $this->j37_face === 0.0 || $this->j37_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_face"]:$this->j37_face);
        $this->j37_setor = ($this->j37_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_setor"]:$this->j37_setor);
        $this->j37_quadra = ($this->j37_quadra == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_quadra"]:$this->j37_quadra);
-       $this->j37_codigo = ($this->j37_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_codigo"]:$this->j37_codigo);
+       $this->j37_codigo = ($this->j37_codigo === 0 || $this->j37_codigo === 0.0 || $this->j37_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_codigo"]:$this->j37_codigo);
        $this->j37_lado = ($this->j37_lado == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_lado"]:$this->j37_lado);
        $this->j37_valor = ($this->j37_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_valor"]:$this->j37_valor);
-       $this->j37_exten = ($this->j37_exten == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_exten"]:$this->j37_exten);
-       $this->j37_profr = ($this->j37_profr == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_profr"]:$this->j37_profr);
+       $this->j37_exten = ($this->j37_exten === 0 || $this->j37_exten === 0.0 || $this->j37_exten == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_exten"]:$this->j37_exten);
+       $this->j37_profr = ($this->j37_profr === 0 || $this->j37_profr === 0.0 || $this->j37_profr == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_profr"]:$this->j37_profr);
        $this->j37_outros = ($this->j37_outros == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_outros"]:$this->j37_outros);
        $this->j37_vlcons = ($this->j37_vlcons == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_vlcons"]:$this->j37_vlcons);
-       $this->j37_zona = ($this->j37_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_zona"]:$this->j37_zona);
-       $this->j37_segmento = ($this->j37_segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_segmento"]:$this->j37_segmento);
-       $this->j37_sequencia = ($this->j37_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_sequencia"]:$this->j37_sequencia);
+       $this->j37_zona = ($this->j37_zona === 0 || $this->j37_zona === 0.0 || $this->j37_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_zona"]:$this->j37_zona);
+       $this->j37_segmento = ($this->j37_segmento === 0 || $this->j37_segmento === 0.0 || $this->j37_segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_segmento"]:$this->j37_segmento);
+       $this->j37_sequencia = ($this->j37_sequencia === 0 || $this->j37_sequencia === 0.0 || $this->j37_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_sequencia"]:$this->j37_sequencia);
      }else{
-       $this->j37_face = ($this->j37_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_face"]:$this->j37_face);
+       $this->j37_face = ($this->j37_face === 0 || $this->j37_face === 0.0 || $this->j37_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j37_face"]:$this->j37_face);
      }
    }
 
@@ -204,7 +204,7 @@ class cl_face
          $this->j37_face = $j37_face; 
        }
      }
-     if(($this->j37_face == null) || ($this->j37_face == "") ){ 
+     if(($this->j37_face == null) || ($this->j37_face === 0 || $this->j37_face === 0.0 || $this->j37_face == "") ){ 
        $this->erro_sql = " Campo j37_face não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

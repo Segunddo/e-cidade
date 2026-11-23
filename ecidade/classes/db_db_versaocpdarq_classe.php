@@ -73,13 +73,13 @@ class cl_db_versaocpdarq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db34_codarq = ($this->db34_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["db34_codarq"]:$this->db34_codarq);
-       $this->db34_codcpd = ($this->db34_codcpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db34_codcpd"]:$this->db34_codcpd);
+       $this->db34_codarq = ($this->db34_codarq === 0 || $this->db34_codarq === 0.0 || $this->db34_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["db34_codarq"]:$this->db34_codarq);
+       $this->db34_codcpd = ($this->db34_codcpd === 0 || $this->db34_codcpd === 0.0 || $this->db34_codcpd == ""?@$GLOBALS["HTTP_POST_VARS"]["db34_codcpd"]:$this->db34_codcpd);
        $this->db34_descr = ($this->db34_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db34_descr"]:$this->db34_descr);
        $this->db34_obs = ($this->db34_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["db34_obs"]:$this->db34_obs);
        $this->db34_arq = ($this->db34_arq == ""?@$GLOBALS["HTTP_POST_VARS"]["db34_arq"]:$this->db34_arq);
      }else{
-       $this->db34_codarq = ($this->db34_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["db34_codarq"]:$this->db34_codarq);
+       $this->db34_codarq = ($this->db34_codarq === 0 || $this->db34_codarq === 0.0 || $this->db34_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["db34_codarq"]:$this->db34_codarq);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_db_versaocpdarq {
          $this->db34_codarq = $db34_codarq;
        }
      }
-     if(($this->db34_codarq == null) || ($this->db34_codarq == "") ){
+     if(($this->db34_codarq == null) || ($this->db34_codarq === 0 || $this->db34_codarq === 0.0 || $this->db34_codarq == "") ){
        $this->erro_sql = " Campo db34_codarq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

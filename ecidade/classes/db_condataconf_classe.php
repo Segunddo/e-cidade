@@ -74,8 +74,8 @@ class cl_condataconf {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c99_anousu = ($this->c99_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_anousu"]:$this->c99_anousu);
-       $this->c99_instit = ($this->c99_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_instit"]:$this->c99_instit);
+       $this->c99_anousu = ($this->c99_anousu === 0 || $this->c99_anousu === 0.0 || $this->c99_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_anousu"]:$this->c99_anousu);
+       $this->c99_instit = ($this->c99_instit === 0 || $this->c99_instit === 0.0 || $this->c99_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_instit"]:$this->c99_instit);
        if($this->c99_data == ""){
          $this->c99_data_dia = ($this->c99_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_data_dia"]:$this->c99_data_dia);
          $this->c99_data_mes = ($this->c99_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_data_mes"]:$this->c99_data_mes);
@@ -84,10 +84,10 @@ class cl_condataconf {
             $this->c99_data = $this->c99_data_ano."-".$this->c99_data_mes."-".$this->c99_data_dia;
          }
        }
-       $this->c99_usuario = ($this->c99_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_usuario"]:$this->c99_usuario);
+       $this->c99_usuario = ($this->c99_usuario === 0 || $this->c99_usuario === 0.0 || $this->c99_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_usuario"]:$this->c99_usuario);
      }else{
-       $this->c99_anousu = ($this->c99_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_anousu"]:$this->c99_anousu);
-       $this->c99_instit = ($this->c99_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_instit"]:$this->c99_instit);
+       $this->c99_anousu = ($this->c99_anousu === 0 || $this->c99_anousu === 0.0 || $this->c99_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_anousu"]:$this->c99_anousu);
+       $this->c99_instit = ($this->c99_instit === 0 || $this->c99_instit === 0.0 || $this->c99_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c99_instit"]:$this->c99_instit);
      }
    }
    // funcao para inclusao
@@ -107,7 +107,7 @@ class cl_condataconf {
      }
        $this->c99_anousu = $c99_anousu;
        $this->c99_instit = $c99_instit;
-     if(($this->c99_anousu == null) || ($this->c99_anousu == "") ){
+     if(($this->c99_anousu == null) || ($this->c99_anousu === 0 || $this->c99_anousu === 0.0 || $this->c99_anousu == "") ){
        $this->erro_sql = " Campo c99_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -115,7 +115,7 @@ class cl_condataconf {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c99_instit == null) || ($this->c99_instit == "") ){
+     if(($this->c99_instit == null) || ($this->c99_instit === 0 || $this->c99_instit === 0.0 || $this->c99_instit == "") ){
        $this->erro_sql = " Campo c99_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

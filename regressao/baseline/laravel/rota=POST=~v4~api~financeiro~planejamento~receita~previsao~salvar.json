@@ -1,0 +1,51 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/receita/previsao/salvar",
+  "json": {
+    "errors": {
+      "anoorcamento": [
+        "O campo \"Exercício do Orçamento\" deve ser informado."
+      ],
+      "concarpeculiar_id": [
+        "O campo \"Caracteristica Peculiar\" deve ser informado."
+      ],
+      "esferaorcamentaria": [
+        "O campo \"Esfera Orçamentária\" deve ser informado."
+      ],
+      "instituicao_id": [
+        "O campo \"Código da Instituição\" deve ser informado."
+      ],
+      "natureza": [
+        "O campo \"Natureza\" deve ser informado."
+      ],
+      "orcfontes_id": [
+        "O campo \"Código da Natureza da Receita\" deve ser informado."
+      ],
+      "orcorgao_id": [
+        "O campo \"Código do Órgão\" deve ser informado."
+      ],
+      "orcunidade_id": [
+        "O campo \"Código da unidade\" deve ser informado."
+      ],
+      "planejamento_id": [
+        "O campo \"Código do Planejamento\" deve ser informado."
+      ],
+      "recurso_id": [
+        "O campo \"Código do Recurso\" deve ser informado."
+      ],
+      "valores": [
+        "Deve ser informado uma coleção de valores."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "d2e1a5697d5f68f67f4af003f726ebacb274dded61e31329150c9ed619396483",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

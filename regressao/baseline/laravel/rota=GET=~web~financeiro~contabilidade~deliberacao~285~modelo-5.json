@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/deliberacao/285/modelo-5",
+  "json": null,
+  "sha256": "4d4ff351de1fb55a53c3301a48d33dee11b4ddd1d15c0b6034ce7b6410da0305",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

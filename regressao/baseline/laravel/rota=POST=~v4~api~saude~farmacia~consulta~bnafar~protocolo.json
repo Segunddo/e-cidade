@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/farmacia/consulta/bnafar/protocolo",
+  "json": {
+    "errors": {
+      "DB_coddepto": [
+        "O campo d b coddepto é obrigatório."
+      ],
+      "competencia": [
+        "O campo competencia é obrigatório."
+      ],
+      "pagina": [
+        "O campo pagina é obrigatório."
+      ],
+      "tamanho": [
+        "O campo tamanho é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "f2e79c28f32c40b047d00e0027c67e5058c4d385517b1ed0b8cba308ababe4d2",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

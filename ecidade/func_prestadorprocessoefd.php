@@ -8,7 +8,7 @@ require_once modification('dbforms/db_funcoes.php');
 require_once modification('classes/db_prestadorprocessoefd_classe.php');
 
 db_postmemory($_POST);
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clprestadorprocessoefd = new cl_prestadorprocessoefd();
 $clprestadorprocessoefd->rotulo->label('e287_sequencial');
 $clprestadorprocessoefd->rotulo->label('e287_sequencial');

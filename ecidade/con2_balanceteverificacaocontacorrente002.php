@@ -40,7 +40,7 @@ $tipo = "A";
 $agrupa_estrutural = 1;
 $conta = 'S';
 $movimento = 'S';
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $stringFiltro = str_replace("\\", "", $_GET["filtros_conta_corrente"]);
 $filtros = json_decode($stringFiltro);

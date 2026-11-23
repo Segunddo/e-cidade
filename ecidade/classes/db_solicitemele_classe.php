@@ -67,11 +67,11 @@ class cl_solicitemele {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc18_solicitem = ($this->pc18_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_solicitem"]:$this->pc18_solicitem);
-       $this->pc18_codele = ($this->pc18_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_codele"]:$this->pc18_codele);
+       $this->pc18_solicitem = ($this->pc18_solicitem === 0 || $this->pc18_solicitem === 0.0 || $this->pc18_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_solicitem"]:$this->pc18_solicitem);
+       $this->pc18_codele = ($this->pc18_codele === 0 || $this->pc18_codele === 0.0 || $this->pc18_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_codele"]:$this->pc18_codele);
      }else{
-       $this->pc18_solicitem = ($this->pc18_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_solicitem"]:$this->pc18_solicitem);
-       $this->pc18_codele = ($this->pc18_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_codele"]:$this->pc18_codele);
+       $this->pc18_solicitem = ($this->pc18_solicitem === 0 || $this->pc18_solicitem === 0.0 || $this->pc18_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_solicitem"]:$this->pc18_solicitem);
+       $this->pc18_codele = ($this->pc18_codele === 0 || $this->pc18_codele === 0.0 || $this->pc18_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc18_codele"]:$this->pc18_codele);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_solicitemele {
       $this->atualizacampos();
        $this->pc18_solicitem = $pc18_solicitem;
        $this->pc18_codele = $pc18_codele;
-     if(($this->pc18_solicitem == null) || ($this->pc18_solicitem == "") ){
+     if(($this->pc18_solicitem == null) || ($this->pc18_solicitem === 0 || $this->pc18_solicitem === 0.0 || $this->pc18_solicitem == "") ){
        $this->erro_sql = " Campo pc18_solicitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_solicitemele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pc18_codele == null) || ($this->pc18_codele == "") ){
+     if(($this->pc18_codele == null) || ($this->pc18_codele === 0 || $this->pc18_codele === 0.0 || $this->pc18_codele == "") ){
        $this->erro_sql = " Campo pc18_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

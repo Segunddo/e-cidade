@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/farmacia/procedimento/bnafar/validar",
+  "json": {
+    "errors": {
+      "DB_coddepto": [
+        "O campo d b coddepto é obrigatório."
+      ],
+      "periodoFim": [
+        "O campo periodo fim é obrigatório."
+      ],
+      "periodoInicio": [
+        "O campo periodo inicio é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "01015292104440b3414085ffd13b30babb28d6bf8bd802058f57422c6f4fe92c",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

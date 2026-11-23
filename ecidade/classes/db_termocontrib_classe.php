@@ -87,21 +87,21 @@ class cl_termocontrib {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->parcel = ($this->parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["parcel"]:$this->parcel);
-       $this->contricalc = ($this->contricalc == ""?@$GLOBALS["HTTP_POST_VARS"]["contricalc"]:$this->contricalc);
-       $this->valor = ($this->valor == ""?@$GLOBALS["HTTP_POST_VARS"]["valor"]:$this->valor);
-       $this->juros = ($this->juros == ""?@$GLOBALS["HTTP_POST_VARS"]["juros"]:$this->juros);
-       $this->multa = ($this->multa == ""?@$GLOBALS["HTTP_POST_VARS"]["multa"]:$this->multa);
-       $this->total = ($this->total == ""?@$GLOBALS["HTTP_POST_VARS"]["total"]:$this->total);
-       $this->desconto = ($this->desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["desconto"]:$this->desconto);
-       $this->numpreant = ($this->numpreant == ""?@$GLOBALS["HTTP_POST_VARS"]["numpreant"]:$this->numpreant);
-       $this->perc = ($this->perc == ""?@$GLOBALS["HTTP_POST_VARS"]["perc"]:$this->perc);
-       $this->vlrcor = ($this->vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrcor"]:$this->vlrcor);
-       $this->vlrdescmul = ($this->vlrdescmul == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrdescmul"]:$this->vlrdescmul);
-       $this->vlrdescjur = ($this->vlrdescjur == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrdescjur"]:$this->vlrdescjur);
+       $this->parcel = ($this->parcel === 0 || $this->parcel === 0.0 || $this->parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["parcel"]:$this->parcel);
+       $this->contricalc = ($this->contricalc === 0 || $this->contricalc === 0.0 || $this->contricalc == ""?@$GLOBALS["HTTP_POST_VARS"]["contricalc"]:$this->contricalc);
+       $this->valor = ($this->valor === 0 || $this->valor === 0.0 || $this->valor == ""?@$GLOBALS["HTTP_POST_VARS"]["valor"]:$this->valor);
+       $this->juros = ($this->juros === 0 || $this->juros === 0.0 || $this->juros == ""?@$GLOBALS["HTTP_POST_VARS"]["juros"]:$this->juros);
+       $this->multa = ($this->multa === 0 || $this->multa === 0.0 || $this->multa == ""?@$GLOBALS["HTTP_POST_VARS"]["multa"]:$this->multa);
+       $this->total = ($this->total === 0 || $this->total === 0.0 || $this->total == ""?@$GLOBALS["HTTP_POST_VARS"]["total"]:$this->total);
+       $this->desconto = ($this->desconto === 0 || $this->desconto === 0.0 || $this->desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["desconto"]:$this->desconto);
+       $this->numpreant = ($this->numpreant === 0 || $this->numpreant === 0.0 || $this->numpreant == ""?@$GLOBALS["HTTP_POST_VARS"]["numpreant"]:$this->numpreant);
+       $this->perc = ($this->perc === 0 || $this->perc === 0.0 || $this->perc == ""?@$GLOBALS["HTTP_POST_VARS"]["perc"]:$this->perc);
+       $this->vlrcor = ($this->vlrcor === 0 || $this->vlrcor === 0.0 || $this->vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrcor"]:$this->vlrcor);
+       $this->vlrdescmul = ($this->vlrdescmul === 0 || $this->vlrdescmul === 0.0 || $this->vlrdescmul == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrdescmul"]:$this->vlrdescmul);
+       $this->vlrdescjur = ($this->vlrdescjur === 0 || $this->vlrdescjur === 0.0 || $this->vlrdescjur == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrdescjur"]:$this->vlrdescjur);
      }else{
-       $this->parcel = ($this->parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["parcel"]:$this->parcel);
-       $this->contricalc = ($this->contricalc == ""?@$GLOBALS["HTTP_POST_VARS"]["contricalc"]:$this->contricalc);
+       $this->parcel = ($this->parcel === 0 || $this->parcel === 0.0 || $this->parcel == ""?@$GLOBALS["HTTP_POST_VARS"]["parcel"]:$this->parcel);
+       $this->contricalc = ($this->contricalc === 0 || $this->contricalc === 0.0 || $this->contricalc == ""?@$GLOBALS["HTTP_POST_VARS"]["contricalc"]:$this->contricalc);
      }
    }
    // funcao para inclusao
@@ -199,7 +199,7 @@ class cl_termocontrib {
      }
        $this->parcel = $parcel; 
        $this->contricalc = $contricalc; 
-     if(($this->parcel == null) || ($this->parcel == "") ){ 
+     if(($this->parcel == null) || ($this->parcel === 0 || $this->parcel === 0.0 || $this->parcel == "") ){ 
        $this->erro_sql = " Campo parcel nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -207,7 +207,7 @@ class cl_termocontrib {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->contricalc == null) || ($this->contricalc == "") ){ 
+     if(($this->contricalc == null) || ($this->contricalc === 0 || $this->contricalc === 0.0 || $this->contricalc == "") ){ 
        $this->erro_sql = " Campo contricalc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

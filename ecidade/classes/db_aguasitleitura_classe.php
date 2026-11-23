@@ -69,11 +69,11 @@ class cl_aguasitleitura {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x17_codigo = ($this->x17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_codigo"]:$this->x17_codigo);
+       $this->x17_codigo = ($this->x17_codigo === 0 || $this->x17_codigo === 0.0 || $this->x17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_codigo"]:$this->x17_codigo);
        $this->x17_descr = ($this->x17_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_descr"]:$this->x17_descr);
-       $this->x17_regra = ($this->x17_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_regra"]:$this->x17_regra);
+       $this->x17_regra = ($this->x17_regra === 0 || $this->x17_regra === 0.0 || $this->x17_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_regra"]:$this->x17_regra);
      }else{
-       $this->x17_codigo = ($this->x17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_codigo"]:$this->x17_codigo);
+       $this->x17_codigo = ($this->x17_codigo === 0 || $this->x17_codigo === 0.0 || $this->x17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x17_codigo"]:$this->x17_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_aguasitleitura {
          $this->x17_codigo = $x17_codigo;
        }
      }
-     if(($this->x17_codigo == null) || ($this->x17_codigo == "") ){
+     if(($this->x17_codigo == null) || ($this->x17_codigo === 0 || $this->x17_codigo === 0.0 || $this->x17_codigo == "") ){
        $this->erro_sql = " Campo x17_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

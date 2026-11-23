@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/orcamento/relatorios/recursos/confere-vinculo",
+  "json": null,
+  "sha256": "16c7a65bf5eb2985533c26add006e4f880d9757477f0fa7f9b850e9c65cdfb37",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

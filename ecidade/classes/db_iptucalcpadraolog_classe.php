@@ -76,9 +76,9 @@ class cl_iptucalcpadraolog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j19_sequencial = ($this->j19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_sequencial"]:$this->j19_sequencial);
-       $this->j19_iptucalcpadrao = ($this->j19_iptucalcpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_iptucalcpadrao"]:$this->j19_iptucalcpadrao);
-       $this->j19_usuario = ($this->j19_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_usuario"]:$this->j19_usuario);
+       $this->j19_sequencial = ($this->j19_sequencial === 0 || $this->j19_sequencial === 0.0 || $this->j19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_sequencial"]:$this->j19_sequencial);
+       $this->j19_iptucalcpadrao = ($this->j19_iptucalcpadrao === 0 || $this->j19_iptucalcpadrao === 0.0 || $this->j19_iptucalcpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_iptucalcpadrao"]:$this->j19_iptucalcpadrao);
+       $this->j19_usuario = ($this->j19_usuario === 0 || $this->j19_usuario === 0.0 || $this->j19_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_usuario"]:$this->j19_usuario);
        if($this->j19_data == ""){
          $this->j19_data_dia = ($this->j19_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_data_dia"]:$this->j19_data_dia);
          $this->j19_data_mes = ($this->j19_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_data_mes"]:$this->j19_data_mes);
@@ -89,7 +89,7 @@ class cl_iptucalcpadraolog {
        }
        $this->j19_hora = ($this->j19_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_hora"]:$this->j19_hora);
      }else{
-       $this->j19_sequencial = ($this->j19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_sequencial"]:$this->j19_sequencial);
+       $this->j19_sequencial = ($this->j19_sequencial === 0 || $this->j19_sequencial === 0.0 || $this->j19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j19_sequencial"]:$this->j19_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_iptucalcpadraolog {
          $this->j19_sequencial = $j19_sequencial;
        }
      }
-     if(($this->j19_sequencial == null) || ($this->j19_sequencial == "") ){
+     if(($this->j19_sequencial == null) || ($this->j19_sequencial === 0 || $this->j19_sequencial === 0.0 || $this->j19_sequencial == "") ){
        $this->erro_sql = " Campo j19_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

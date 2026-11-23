@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/tesouraria/decendio/receitas",
+  "json": {
+    "errors": {
+      "desdobramentos": [
+        "Você deve informar os desdobramentos."
+      ],
+      "exercicio": [
+        "Você deve informar o exercício."
+      ],
+      "receitas": [
+        "Você deve informar as receitas."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "8e66d2007a8dadd6154541e3d916f61987d17fe5f10d60ab63bfd01b30d99c90",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

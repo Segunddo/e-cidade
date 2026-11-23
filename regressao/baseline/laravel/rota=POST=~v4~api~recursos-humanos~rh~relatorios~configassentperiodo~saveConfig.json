@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/relatorios/configassentperiodo/saveConfig",
+  "json": {
+    "data": "",
+    "error": true,
+    "message": "Undefined property: stdClass::$rh512_filtroadicionais"
+  },
+  "sha256": "b1392698e8451cab62f8ecd7bc2771cd7f9f911e6587f243cca4fcb05133a6fe",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

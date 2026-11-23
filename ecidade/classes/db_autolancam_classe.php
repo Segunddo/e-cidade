@@ -72,8 +72,8 @@ class cl_autolancam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y88_codtermo = ($this->y88_codtermo == ""?@$GLOBALS["HTTP_POST_VARS"]["y88_codtermo"]:$this->y88_codtermo);
-       $this->y88_codlev = ($this->y88_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y88_codlev"]:$this->y88_codlev);
+       $this->y88_codtermo = ($this->y88_codtermo === 0 || $this->y88_codtermo === 0.0 || $this->y88_codtermo == ""?@$GLOBALS["HTTP_POST_VARS"]["y88_codtermo"]:$this->y88_codtermo);
+       $this->y88_codlev = ($this->y88_codlev === 0 || $this->y88_codlev === 0.0 || $this->y88_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y88_codlev"]:$this->y88_codlev);
        if($this->y88_data == ""){
          $this->y88_data_dia = ($this->y88_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y88_data_dia"]:$this->y88_data_dia);
          $this->y88_data_mes = ($this->y88_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y88_data_mes"]:$this->y88_data_mes);
@@ -83,7 +83,7 @@ class cl_autolancam {
          }
        }
      }else{
-       $this->y88_codtermo = ($this->y88_codtermo == ""?@$GLOBALS["HTTP_POST_VARS"]["y88_codtermo"]:$this->y88_codtermo);
+       $this->y88_codtermo = ($this->y88_codtermo === 0 || $this->y88_codtermo === 0.0 || $this->y88_codtermo == ""?@$GLOBALS["HTTP_POST_VARS"]["y88_codtermo"]:$this->y88_codtermo);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_autolancam {
          $this->y88_codtermo = $y88_codtermo; 
        }
      }
-     if(($this->y88_codtermo == null) || ($this->y88_codtermo == "") ){ 
+     if(($this->y88_codtermo == null) || ($this->y88_codtermo === 0 || $this->y88_codtermo === 0.0 || $this->y88_codtermo == "") ){ 
        $this->erro_sql = " Campo y88_codtermo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/esf/relatorio/indicador-desempenho",
+  "json": {
+    "error": true,
+    "message": "Plugin ESF não instalado."
+  },
+  "sha256": "a472d9b1381d5963cd756f04a4fea2450c30a9ce93af2856c3e99d253d76adad",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/anexo-dois",
+  "json": {
+    "errors": {
+      "codigo_relatorio": [
+        "O Código do Relatório deve ser informado."
+      ],
+      "instituicoes": [
+        "Deve ser informado a(s) Instituições."
+      ],
+      "periodo": [
+        "O Código do Período deve ser informado."
+      ],
+      "planejamento_id": [
+        "O campo \"Código\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "025dd0585eab440bd9ce93e599993875051be4420e41e2e7c2e53dc5fe26213e",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

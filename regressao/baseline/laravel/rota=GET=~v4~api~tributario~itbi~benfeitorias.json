@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/itbi/benfeitorias",
+  "json": {
+    "errors": {
+      "matricula": [
+        "O campo matricula é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "04587cc3d433eeab0185644b013f78c216b61fc8f63658ecc5a0eafb7f9d6613",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

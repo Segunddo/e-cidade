@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:POST:/api/v1/matriculaonline/inscricao",
+  "json": null,
+  "sha256": "37fc0763c33430d54ad7f1bb43b4a1a03f98f9ee0cb15162e1ca099c99423627",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

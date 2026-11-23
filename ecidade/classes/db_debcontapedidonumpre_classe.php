@@ -67,10 +67,10 @@ class cl_debcontapedidonumpre {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d71_codigo = ($this->d71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_codigo"]:$this->d71_codigo);
-       $this->d71_numpre = ($this->d71_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_numpre"]:$this->d71_numpre);
+       $this->d71_codigo = ($this->d71_codigo === 0 || $this->d71_codigo === 0.0 || $this->d71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_codigo"]:$this->d71_codigo);
+       $this->d71_numpre = ($this->d71_numpre === 0 || $this->d71_numpre === 0.0 || $this->d71_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_numpre"]:$this->d71_numpre);
      }else{
-       $this->d71_codigo = ($this->d71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_codigo"]:$this->d71_codigo);
+       $this->d71_codigo = ($this->d71_codigo === 0 || $this->d71_codigo === 0.0 || $this->d71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d71_codigo"]:$this->d71_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_debcontapedidonumpre {
        return false;
      }
        $this->d71_codigo = $d71_codigo;
-     if(($this->d71_codigo == null) || ($this->d71_codigo == "") ){
+     if(($this->d71_codigo == null) || ($this->d71_codigo === 0 || $this->d71_codigo === 0.0 || $this->d71_codigo == "") ){
        $this->erro_sql = " Campo d71_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

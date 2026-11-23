@@ -73,15 +73,15 @@ class cl_conplanoextra {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c33_anousu = ($this->c33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_anousu"]:$this->c33_anousu);
-       $this->c33_instit = ($this->c33_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_instit"]:$this->c33_instit);
-       $this->c33_reduz = ($this->c33_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_reduz"]:$this->c33_reduz);
+       $this->c33_anousu = ($this->c33_anousu === 0 || $this->c33_anousu === 0.0 || $this->c33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_anousu"]:$this->c33_anousu);
+       $this->c33_instit = ($this->c33_instit === 0 || $this->c33_instit === 0.0 || $this->c33_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_instit"]:$this->c33_instit);
+       $this->c33_reduz = ($this->c33_reduz === 0 || $this->c33_reduz === 0.0 || $this->c33_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_reduz"]:$this->c33_reduz);
        $this->c33_tipo = ($this->c33_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_tipo"]:$this->c33_tipo);
-       $this->c33_codcla = ($this->c33_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_codcla"]:$this->c33_codcla);
+       $this->c33_codcla = ($this->c33_codcla === 0 || $this->c33_codcla === 0.0 || $this->c33_codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_codcla"]:$this->c33_codcla);
      }else{
-       $this->c33_anousu = ($this->c33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_anousu"]:$this->c33_anousu);
-       $this->c33_instit = ($this->c33_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_instit"]:$this->c33_instit);
-       $this->c33_reduz = ($this->c33_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_reduz"]:$this->c33_reduz);
+       $this->c33_anousu = ($this->c33_anousu === 0 || $this->c33_anousu === 0.0 || $this->c33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_anousu"]:$this->c33_anousu);
+       $this->c33_instit = ($this->c33_instit === 0 || $this->c33_instit === 0.0 || $this->c33_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_instit"]:$this->c33_instit);
+       $this->c33_reduz = ($this->c33_reduz === 0 || $this->c33_reduz === 0.0 || $this->c33_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c33_reduz"]:$this->c33_reduz);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_conplanoextra {
        $this->c33_anousu = $c33_anousu;
        $this->c33_instit = $c33_instit;
        $this->c33_reduz = $c33_reduz;
-     if(($this->c33_anousu == null) || ($this->c33_anousu == "") ){
+     if(($this->c33_anousu == null) || ($this->c33_anousu === 0 || $this->c33_anousu === 0.0 || $this->c33_anousu == "") ){
        $this->erro_sql = " Campo c33_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -116,7 +116,7 @@ class cl_conplanoextra {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c33_instit == null) || ($this->c33_instit == "") ){
+     if(($this->c33_instit == null) || ($this->c33_instit === 0 || $this->c33_instit === 0.0 || $this->c33_instit == "") ){
        $this->erro_sql = " Campo c33_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -124,7 +124,7 @@ class cl_conplanoextra {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c33_reduz == null) || ($this->c33_reduz == "") ){
+     if(($this->c33_reduz == null) || ($this->c33_reduz === 0 || $this->c33_reduz === 0.0 || $this->c33_reduz == "") ){
        $this->erro_sql = " Campo c33_reduz nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

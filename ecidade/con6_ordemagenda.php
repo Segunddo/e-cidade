@@ -29,13 +29,13 @@ require(modification("libs/db_stdlib.php"));
 require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 
 function carrega_destinatario(){
  $texto = "";
  $res = db_query("select id_usuario,nome from db_usuarios order by nome ");    
- for ($x=0;$x < pg_numrows($res);$x++){
+ for ($x=0;$x < ($res ? pg_numrows($res) : null);$x++){
         db_fieldsmemory($res,$x);
 	global $id_usuario,$nome,$cod_destinatario;
 	if ($cod_destinatario==$id_usuario){
@@ -81,7 +81,7 @@ function checa_eventos($dia,$mes,$ano){
               order by nome_modulo		   
              ";
     $res = @db_query($sql);    
-    for ($x=0;$x < @pg_numrows($res);$x++){
+    for ($x=0;$x < @($res ? pg_numrows($res) : null);$x++){
         db_fieldsmemory($res,$x);
 	global $nome_modulo,$codordem,$status;
 	$retorno.="<tr><td nowrap>[".$codordem."] ".$nome_modulo."/".$status."</td></tr>";

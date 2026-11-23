@@ -30,7 +30,7 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if(isset($retorno)) {
   $sql = "select j.v50_codigo,j.v50_numero,to_char(j.v50_dataen,'DD') as data_dia,to_char(j.v50_dataen,'MM') as data_mes,

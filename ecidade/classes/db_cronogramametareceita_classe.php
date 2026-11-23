@@ -73,13 +73,13 @@ class cl_cronogramametareceita {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o127_sequencial = ($this->o127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_sequencial"]:$this->o127_sequencial);
-       $this->o127_cronogramaperspectivareceita = ($this->o127_cronogramaperspectivareceita == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_cronogramaperspectivareceita"]:$this->o127_cronogramaperspectivareceita);
-       $this->o127_mes = ($this->o127_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_mes"]:$this->o127_mes);
-       $this->o127_percentual = ($this->o127_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_percentual"]:$this->o127_percentual);
-       $this->o127_valor = ($this->o127_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_valor"]:$this->o127_valor);
+       $this->o127_sequencial = ($this->o127_sequencial === 0 || $this->o127_sequencial === 0.0 || $this->o127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_sequencial"]:$this->o127_sequencial);
+       $this->o127_cronogramaperspectivareceita = ($this->o127_cronogramaperspectivareceita === 0 || $this->o127_cronogramaperspectivareceita === 0.0 || $this->o127_cronogramaperspectivareceita == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_cronogramaperspectivareceita"]:$this->o127_cronogramaperspectivareceita);
+       $this->o127_mes = ($this->o127_mes === 0 || $this->o127_mes === 0.0 || $this->o127_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_mes"]:$this->o127_mes);
+       $this->o127_percentual = ($this->o127_percentual === 0 || $this->o127_percentual === 0.0 || $this->o127_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_percentual"]:$this->o127_percentual);
+       $this->o127_valor = ($this->o127_valor === 0 || $this->o127_valor === 0.0 || $this->o127_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_valor"]:$this->o127_valor);
      }else{
-       $this->o127_sequencial = ($this->o127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_sequencial"]:$this->o127_sequencial);
+       $this->o127_sequencial = ($this->o127_sequencial === 0 || $this->o127_sequencial === 0.0 || $this->o127_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o127_sequencial"]:$this->o127_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_cronogramametareceita {
          $this->o127_sequencial = $o127_sequencial;
        }
      }
-     if(($this->o127_sequencial == null) || ($this->o127_sequencial == "") ){
+     if(($this->o127_sequencial == null) || ($this->o127_sequencial === 0 || $this->o127_sequencial === 0.0 || $this->o127_sequencial == "") ){
        $this->erro_sql = " Campo o127_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

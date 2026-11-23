@@ -98,17 +98,17 @@ class cl_issvarlancval {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q50_seq = ($this->q50_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_seq"]:$this->q50_seq);
-       $this->q50_codigo = ($this->q50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_codigo"]:$this->q50_codigo);
-       $this->q50_numpre = ($this->q50_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_numpre"]:$this->q50_numpre);
-       $this->q50_numpar = ($this->q50_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_numpar"]:$this->q50_numpar);
-       $this->q50_valor = ($this->q50_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_valor"]:$this->q50_valor);
-       $this->q50_ano = ($this->q50_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_ano"]:$this->q50_ano);
-       $this->q50_mes = ($this->q50_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_mes"]:$this->q50_mes);
+       $this->q50_seq = ($this->q50_seq === 0 || $this->q50_seq === 0.0 || $this->q50_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_seq"]:$this->q50_seq);
+       $this->q50_codigo = ($this->q50_codigo === 0 || $this->q50_codigo === 0.0 || $this->q50_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_codigo"]:$this->q50_codigo);
+       $this->q50_numpre = ($this->q50_numpre === 0 || $this->q50_numpre === 0.0 || $this->q50_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_numpre"]:$this->q50_numpre);
+       $this->q50_numpar = ($this->q50_numpar === 0 || $this->q50_numpar === 0.0 || $this->q50_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_numpar"]:$this->q50_numpar);
+       $this->q50_valor = ($this->q50_valor === 0 || $this->q50_valor === 0.0 || $this->q50_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_valor"]:$this->q50_valor);
+       $this->q50_ano = ($this->q50_ano === 0 || $this->q50_ano === 0.0 || $this->q50_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_ano"]:$this->q50_ano);
+       $this->q50_mes = ($this->q50_mes === 0 || $this->q50_mes === 0.0 || $this->q50_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_mes"]:$this->q50_mes);
        $this->q50_histor = ($this->q50_histor == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_histor"]:$this->q50_histor);
-       $this->q50_aliq = ($this->q50_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_aliq"]:$this->q50_aliq);
-       $this->q50_bruto = ($this->q50_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_bruto"]:$this->q50_bruto);
-       $this->q50_vlrinf = ($this->q50_vlrinf == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_vlrinf"]:$this->q50_vlrinf);
+       $this->q50_aliq = ($this->q50_aliq === 0 || $this->q50_aliq === 0.0 || $this->q50_aliq == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_aliq"]:$this->q50_aliq);
+       $this->q50_bruto = ($this->q50_bruto === 0 || $this->q50_bruto === 0.0 || $this->q50_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_bruto"]:$this->q50_bruto);
+       $this->q50_vlrinf = ($this->q50_vlrinf === 0 || $this->q50_vlrinf === 0.0 || $this->q50_vlrinf == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_vlrinf"]:$this->q50_vlrinf);
        $this->q50_ip = ($this->q50_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_ip"]:$this->q50_ip);
        if($this->q50_data == ""){
          $this->q50_data_dia = ($this->q50_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_data_dia"]:$this->q50_data_dia);
@@ -120,9 +120,9 @@ class cl_issvarlancval {
        }
        $this->q50_hora = ($this->q50_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_hora"]:$this->q50_hora);
        $this->q50_arquivo = ($this->q50_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_arquivo"]:$this->q50_arquivo);
-       $this->q50_idusuario = ($this->q50_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_idusuario"]:$this->q50_idusuario);
+       $this->q50_idusuario = ($this->q50_idusuario === 0 || $this->q50_idusuario === 0.0 || $this->q50_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_idusuario"]:$this->q50_idusuario);
      }else{
-       $this->q50_seq = ($this->q50_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_seq"]:$this->q50_seq);
+       $this->q50_seq = ($this->q50_seq === 0 || $this->q50_seq === 0.0 || $this->q50_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q50_seq"]:$this->q50_seq);
      }
    }
    // funcao para inclusao
@@ -272,7 +272,7 @@ class cl_issvarlancval {
          $this->q50_seq = $q50_seq; 
        }
      }
-     if(($this->q50_seq == null) || ($this->q50_seq == "") ){ 
+     if(($this->q50_seq == null) || ($this->q50_seq === 0 || $this->q50_seq === 0.0 || $this->q50_seq == "") ){ 
        $this->erro_sql = " Campo q50_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

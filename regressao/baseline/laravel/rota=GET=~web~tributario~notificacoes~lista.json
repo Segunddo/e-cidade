@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/notificacoes/lista",
+  "json": null,
+  "sha256": "8e6181d24cfe46d3a9eb2e0d6c1be21416a5b4cc82310fa2e403d2af06915c05",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

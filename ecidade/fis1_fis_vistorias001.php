@@ -44,7 +44,7 @@ include(modification("classes/db_fis_vistoriaandam_classe.php"));
 include(modification("classes/db_fis_fandam_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_fis_procfiscalvistorias_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 // var_dump($HTTP_SERVER_VARS['QUERY_STRING']); exit();
 if(isset($cgm)){
   $junto = "cgm=1";

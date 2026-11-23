@@ -48,9 +48,9 @@ class cl_taxavaloresreferencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y121_sequencial = ($this->y121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y121_sequencial"]:$this->y121_sequencial);
+       $this->y121_sequencial = ($this->y121_sequencial === 0 || $this->y121_sequencial === 0.0 || $this->y121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y121_sequencial"]:$this->y121_sequencial);
        $this->y121_descricao = ($this->y121_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["y121_descricao"]:$this->y121_descricao);
-       $this->y121_valor = ($this->y121_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y121_valor"]:$this->y121_valor);
+       $this->y121_valor = ($this->y121_valor === 0 || $this->y121_valor === 0.0 || $this->y121_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y121_valor"]:$this->y121_valor);
        if($this->y121_data_base == ""){
          $this->y121_data_base_dia = ($this->y121_data_base_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y121_data_base_dia"]:$this->y121_data_base_dia);
          $this->y121_data_base_mes = ($this->y121_data_base_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y121_data_base_mes"]:$this->y121_data_base_mes);
@@ -60,7 +60,7 @@ class cl_taxavaloresreferencia {
          }
        }
      }else{
-       $this->y121_sequencial = ($this->y121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y121_sequencial"]:$this->y121_sequencial);
+       $this->y121_sequencial = ($this->y121_sequencial === 0 || $this->y121_sequencial === 0.0 || $this->y121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y121_sequencial"]:$this->y121_sequencial);
      }
    }
    // funcao para Inclusão
@@ -117,7 +117,7 @@ class cl_taxavaloresreferencia {
          $this->y121_sequencial = $y121_sequencial; 
        }
      }
-     if(($this->y121_sequencial == null) || ($this->y121_sequencial == "") ){ 
+     if(($this->y121_sequencial == null) || ($this->y121_sequencial === 0 || $this->y121_sequencial === 0.0 || $this->y121_sequencial == "") ){ 
        $this->erro_sql = " Campo y121_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

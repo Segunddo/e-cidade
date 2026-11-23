@@ -8,7 +8,7 @@ require_once(modification("classes/db_importacaoplanoconta_classe.php"));
 db_postmemory($_POST);
 $oGet = db_utils::postMemory($_GET);
 $oPost = db_utils::postMemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $climportacaoplanoconta = new cl_importacaoplanoconta;
 $climportacaoplanoconta->rotulo->label("c96_sequencial");
 $climportacaoplanoconta->rotulo->label("c96_data");

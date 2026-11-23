@@ -76,9 +76,9 @@ class cl_db_versaoclientes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db19_sequen = ($this->db19_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_sequen"]:$this->db19_sequen);
-       $this->db19_codver = ($this->db19_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_codver"]:$this->db19_codver);
-       $this->db19_codcli = ($this->db19_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_codcli"]:$this->db19_codcli);
+       $this->db19_sequen = ($this->db19_sequen === 0 || $this->db19_sequen === 0.0 || $this->db19_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_sequen"]:$this->db19_sequen);
+       $this->db19_codver = ($this->db19_codver === 0 || $this->db19_codver === 0.0 || $this->db19_codver == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_codver"]:$this->db19_codver);
+       $this->db19_codcli = ($this->db19_codcli === 0 || $this->db19_codcli === 0.0 || $this->db19_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_codcli"]:$this->db19_codcli);
        if($this->db19_data == ""){
          $this->db19_data_dia = ($this->db19_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_data_dia"]:$this->db19_data_dia);
          $this->db19_data_mes = ($this->db19_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_data_mes"]:$this->db19_data_mes);
@@ -89,7 +89,7 @@ class cl_db_versaoclientes {
        }
        $this->db19_obs = ($this->db19_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_obs"]:$this->db19_obs);
      }else{
-       $this->db19_sequen = ($this->db19_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_sequen"]:$this->db19_sequen);
+       $this->db19_sequen = ($this->db19_sequen === 0 || $this->db19_sequen === 0.0 || $this->db19_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["db19_sequen"]:$this->db19_sequen);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_db_versaoclientes {
          $this->db19_sequen = $db19_sequen;
        }
      }
-     if(($this->db19_sequen == null) || ($this->db19_sequen == "") ){
+     if(($this->db19_sequen == null) || ($this->db19_sequen === 0 || $this->db19_sequen === 0.0 || $this->db19_sequen == "") ){
        $this->erro_sql = " Campo db19_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

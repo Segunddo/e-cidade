@@ -64,7 +64,7 @@ class BalancoFinanceiroRPPS extends RelatoriosLegaisBase {
   /**
    * return array Linhas com os dados processados do relatorio
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $oDaoRestosAPagar = new cl_empresto();
 

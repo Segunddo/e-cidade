@@ -71,12 +71,12 @@ class cl_db_relatcabec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db95_codigo = ($this->db95_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codigo"]:$this->db95_codigo);
-       $this->db95_codrel = ($this->db95_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codrel"]:$this->db95_codrel);
+       $this->db95_codigo = ($this->db95_codigo === 0 || $this->db95_codigo === 0.0 || $this->db95_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codigo"]:$this->db95_codigo);
+       $this->db95_codrel = ($this->db95_codrel === 0 || $this->db95_codrel === 0.0 || $this->db95_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codrel"]:$this->db95_codrel);
        $this->db95_compl = ($this->db95_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_compl"]:$this->db95_compl);
-       $this->db95_linha = ($this->db95_linha == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_linha"]:$this->db95_linha);
+       $this->db95_linha = ($this->db95_linha === 0 || $this->db95_linha === 0.0 || $this->db95_linha == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_linha"]:$this->db95_linha);
      }else{
-       $this->db95_codigo = ($this->db95_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codigo"]:$this->db95_codigo);
+       $this->db95_codigo = ($this->db95_codigo === 0 || $this->db95_codigo === 0.0 || $this->db95_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db95_codigo"]:$this->db95_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_db_relatcabec {
          $this->db95_codigo = $db95_codigo;
        }
      }
-     if(($this->db95_codigo == null) || ($this->db95_codigo == "") ){
+     if(($this->db95_codigo == null) || ($this->db95_codigo === 0 || $this->db95_codigo === 0.0 || $this->db95_codigo == "") ){
        $this->erro_sql = " Campo db95_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

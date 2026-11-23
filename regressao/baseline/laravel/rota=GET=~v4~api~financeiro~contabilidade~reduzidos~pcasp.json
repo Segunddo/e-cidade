@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/reduzidos/pcasp",
+  "json": {
+    "data": {
+      "reduzidos": [],
+      "totalRegistros": 0
+    },
+    "error": false,
+    "message": "Reduzidos encontrados"
+  },
+  "sha256": "258a9a6679cd5fbd6634b6e9c9cb8f4daf8ce6846c75082bfc5fcf310f18c7ce",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

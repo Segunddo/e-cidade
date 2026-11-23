@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/api/v1/protocolo/cgm",
+  "json": null,
+  "sha256": "97c509fc4eb7454086401b95171cba4d5ac744e8602987633c70dc9fbe016aa6",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

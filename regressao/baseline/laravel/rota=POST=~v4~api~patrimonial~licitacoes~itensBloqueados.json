@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/licitacoes/itensBloqueados",
+  "json": {
+    "error": true,
+    "message": "pg_query(): Query failed: ERRO:  erro de sintaxe no fim da entrada\nLINE 15:                 where l21_codliclicita = \n                                                  ^"
+  },
+  "sha256": "13f5868887f41d548da04239d0e939fdedaa8d7d466491b4c295ef1507d4a2e9",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

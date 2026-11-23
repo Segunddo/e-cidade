@@ -36,7 +36,7 @@ require_once(modification("classes/db_solicitaregistropreco_classe.php"));
 
 $oGet  = db_utils::postMemory($_GET,0);
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clsolicitaregistropreco = new cl_solicitaregistropreco;
 $clsolicita = new cl_solicita;
 $clsolicitaregistropreco->rotulo->label("pc54_solicita");

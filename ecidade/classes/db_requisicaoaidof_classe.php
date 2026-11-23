@@ -88,11 +88,11 @@ class cl_requisicaoaidof {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y116_id = ($this->y116_id == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_id"]:$this->y116_id);
-       $this->y116_tipodocumento = ($this->y116_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_tipodocumento"]:$this->y116_tipodocumento);
-       $this->y116_codigografica = ($this->y116_codigografica == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_codigografica"]:$this->y116_codigografica);
-       $this->y116_idusuario = ($this->y116_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_idusuario"]:$this->y116_idusuario);
-       $this->y116_inscricaomunicipal = ($this->y116_inscricaomunicipal == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_inscricaomunicipal"]:$this->y116_inscricaomunicipal);
+       $this->y116_id = ($this->y116_id === 0 || $this->y116_id === 0.0 || $this->y116_id == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_id"]:$this->y116_id);
+       $this->y116_tipodocumento = ($this->y116_tipodocumento === 0 || $this->y116_tipodocumento === 0.0 || $this->y116_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_tipodocumento"]:$this->y116_tipodocumento);
+       $this->y116_codigografica = ($this->y116_codigografica === 0 || $this->y116_codigografica === 0.0 || $this->y116_codigografica == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_codigografica"]:$this->y116_codigografica);
+       $this->y116_idusuario = ($this->y116_idusuario === 0 || $this->y116_idusuario === 0.0 || $this->y116_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_idusuario"]:$this->y116_idusuario);
+       $this->y116_inscricaomunicipal = ($this->y116_inscricaomunicipal === 0 || $this->y116_inscricaomunicipal === 0.0 || $this->y116_inscricaomunicipal == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_inscricaomunicipal"]:$this->y116_inscricaomunicipal);
        if($this->y116_datalancamento == ""){
          $this->y116_datalancamento_dia = ($this->y116_datalancamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_datalancamento_dia"]:$this->y116_datalancamento_dia);
          $this->y116_datalancamento_mes = ($this->y116_datalancamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_datalancamento_mes"]:$this->y116_datalancamento_mes);
@@ -101,13 +101,13 @@ class cl_requisicaoaidof {
             $this->y116_datalancamento = $this->y116_datalancamento_ano."-".$this->y116_datalancamento_mes."-".$this->y116_datalancamento_dia;
          }
        }
-       $this->y116_quantidadesolicitada = ($this->y116_quantidadesolicitada == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_quantidadesolicitada"]:$this->y116_quantidadesolicitada);
-       $this->y116_quantidadeLiberada = ($this->y116_quantidadeLiberada == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_quantidadeLiberada"]:$this->y116_quantidadeLiberada);
+       $this->y116_quantidadesolicitada = ($this->y116_quantidadesolicitada === 0 || $this->y116_quantidadesolicitada === 0.0 || $this->y116_quantidadesolicitada == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_quantidadesolicitada"]:$this->y116_quantidadesolicitada);
+       $this->y116_quantidadeLiberada = ($this->y116_quantidadeLiberada === 0 || $this->y116_quantidadeLiberada === 0.0 || $this->y116_quantidadeLiberada == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_quantidadeLiberada"]:$this->y116_quantidadeLiberada);
        $this->y116_status = ($this->y116_status == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_status"]:$this->y116_status);
        $this->y116_observacao = ($this->y116_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_observacao"]:$this->y116_observacao);
-       $this->y116_codigoaidof = ($this->y116_codigoaidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_codigoaidof"]:$this->y116_codigoaidof);
+       $this->y116_codigoaidof = ($this->y116_codigoaidof === 0 || $this->y116_codigoaidof === 0.0 || $this->y116_codigoaidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_codigoaidof"]:$this->y116_codigoaidof);
      }else{
-       $this->y116_id = ($this->y116_id == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_id"]:$this->y116_id);
+       $this->y116_id = ($this->y116_id === 0 || $this->y116_id === 0.0 || $this->y116_id == ""?@$GLOBALS["HTTP_POST_VARS"]["y116_id"]:$this->y116_id);
      }
    }
    // funcao para inclusao
@@ -200,7 +200,7 @@ class cl_requisicaoaidof {
          $this->y116_id = $y116_id;
        }
      }
-     if(($this->y116_id == null) || ($this->y116_id == "") ){
+     if(($this->y116_id == null) || ($this->y116_id === 0 || $this->y116_id === 0.0 || $this->y116_id == "") ){
        $this->erro_sql = " Campo y116_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

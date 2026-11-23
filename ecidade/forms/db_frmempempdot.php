@@ -149,7 +149,7 @@ $clrotulo->label("o56_elemento");
  		            $tot= number_format(($atual_menos_reservado- $e54_valor),2,",",".");
 		         }
 		         if (isset($e54_valor))
-		            $e54_valor=number_format($e54_valor,2,",",".");
+		            $e54_valor=(is_numeric($e54_valor) ? number_format($e54_valor,2,",",".") : null);
 		     }
 		   ?>
 	        <td><?php db_input('e54_valor',13,"",true,'text',3,""); ?></td>

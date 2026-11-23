@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "ecidade": {
+      "command": "${workspaceFolder}/.mcp/.venv/bin/python",
+      "args": ["${workspaceFolder}/.mcp/servidor/main.py"]
+    }
+  }
+}

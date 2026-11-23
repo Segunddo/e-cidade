@@ -34,7 +34,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_disciplina_professor_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldisciplina_professor = new cl_disciplina_professor;
 $cldisciplina_professor->rotulo->label("ed12_i_codigo");
 $cldisciplina_professor->rotulo->label("ed12_f_ch");

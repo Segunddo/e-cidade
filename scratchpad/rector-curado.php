@@ -3,13 +3,36 @@
  * Config CURADA do Rector para o e-cidade.
  *
  * Parte dos conjuntos por versao (o "grupo (a)" da taxonomia do TCC de referencia:
- * so o que a versao de destino EXIGE) e exclui 14 regras, cada uma com motivo medido.
+ * so o que a versao de destino EXIGE) e exclui 40 regras (denylist do withSkip),
+ * cada uma com motivo medido. (O texto original dizia "14": era o tamanho da denylist
+ * quando o cabecalho foi escrito; ela cresceu a cada lote que disparou regra inedita.)
  * A restricao central do projeto e que o MESMO arquivo precisa rodar em PHP 5.6 e 8.5,
  * porque os dois containers montam o mesmo diretorio.
  *
- * Uso (de dentro do container 8.5):
- *   ALVOS=/var/www/html/tmp/iss_alvos.txt \
- *   tmp/rector/vendor/bin/rector process --config scratchpad/rector-curado.php --dry-run
+ * O QUE FAZ: e o arquivo de configuracao lido pelo Rector (nao e executado sozinho).
+ * Define: (1) os arquivos-alvo, lidos da lista indicada na variavel de ambiente ALVOS
+ * (um caminho relativo a ecidade/ por linha; os que nao existem sao ignorados; sem
+ * nenhum alvo, sai com codigo 2 e "SEM ALVOS"); (2) o pin de versao PHP 8.0 e o
+ * conjunto php80; (3) as duas regras proprias de scratchpad/rector-rules/; (4) a
+ * denylist (withSkip) das regras vetadas.
+ *
+ * ONDE E USADO: passo 4 do guia (docs/migrar-um-modulo.md, "Passo 4 -- transformar com
+ * o Rector"), normalmente pelo scratchpad/rector_lote.py, que copia este arquivo e a
+ * pasta rector-rules/ para ecidade/tmp/rector/ (scratchpad/ NAO e montado no container)
+ * e confere a sintaxe com php -l antes de rodar. Esta copia versionada e a que vale:
+ * editar so a de ecidade/tmp/rector/ (ignorada pelo git) perde a alteracao.
+ * Para banir uma regra nova: guia, "Como banir uma regra" (acrescentar aqui no withSkip).
+ *
+ * Uso (de dentro do container 8.5, com a copia ja feita):
+ *   docker exec -i -e ALVOS=/var/www/html/tmp/<pref>_alvos.txt ecidade_php85 \
+ *     php -d memory_limit=3G /var/www/html/tmp/rector/vendor/bin/rector process --dry-run \
+ *     --config /var/www/html/tmp/rector/rector-curado.php --no-progress-bar --output-format=json
+ * (O uso antigo aqui, `--config scratchpad/rector-curado.php`, nao funciona de dentro do
+ * container: scratchpad/ fica fora do bind mount.)
+ *
+ * Entradas: ALVOS (padrao: /var/www/html/tmp/iss_alvos.txt, resto do piloto do `iss`).
+ * Saidas/efeitos: nenhum por si; o Rector, sem --dry-run, REESCREVE os arquivos-alvo.
+ * Roda no PHP 8.5 (dentro do Rector); nao precisa parsear no 5.6.
  */
 require_once __DIR__ . '/rector-rules/GuardaComparacaoLiteralRector.php';
 require_once __DIR__ . '/rector-rules/ParseStrComExtractRector.php';
@@ -19,6 +42,8 @@ use ECidade\RectorRules\ParseStrComExtractRector;
 use Rector\Config\RectorConfig;
 use Rector\ValueObject\PhpVersion;
 
+// Os alvos vem de uma lista em arquivo (e nao de um diretorio) porque o universo de um
+// lote sao arquivos espalhados pela raiz de ecidade/ (gerado pelo enumera.py).
 $lista = getenv('ALVOS') ?: '/var/www/html/tmp/iss_alvos.txt';
 $raiz  = '/var/www/html/';
 $paths = [];
@@ -30,6 +55,12 @@ if (!$paths) { fwrite(STDERR, "SEM ALVOS em $lista\n"); exit(2); }
 
 return RectorConfig::configure()
     ->withPaths($paths)
+    // 2 processos em paralelo. O padrao do Rector 2.x e um por nucleo (ate 16), e cada um chega a 1,2 GB:
+    // num notebook de 12 nucleos e 7,4 GB a maquina travou, e com 4 processos ainda faltou memoria (19/11/2026). So muda a
+    // velocidade, nao o resultado. (timeout por lote em segundos, processos, arquivos por lote)
+    // NAO use 1 processo: com um so, o Rector 2.6.7 para depois de 9 lotes (144 arquivos) e reporta sucesso, sem
+    // erro -- medido em 20/11/2026: 1 processo = 144 de 516 alterados, 2 processos = 514. Para a memoria, use o vigia.
+    ->withParallel(120, 2, 16)
     // OBRIGATORIO. Sem este pin, o Rector resolve a versao alvo do composer.json do
     // projeto (">=5.6.4") e DESLIGA EM SILENCIO toda regra com version bonding --
     // inclusive Php4ConstructorRector (122 arquivos) e EregToPregMatchRector (118).
@@ -42,6 +73,11 @@ return RectorConfig::configure()
         GuardaComparacaoLiteralRector::class,
         ParseStrComExtractRector::class,
     ])
+    // DENYLIST: regras do php80 (ou de conjuntos que ele puxa) que NUNCA devem rodar.
+    // Cada uma entrou depois de disparar num lote e ser medida como nociva. O nome
+    // precisa ser o FQCN exato: com o namespace errado o Rector nao reclama e a regra
+    // simplesmente nao e vetada (ja aconteceu com 4 de 8 nomes no PHPExcel.phar).
+    // O rector_lote.py conta as entradas daqui (::class ate o "]);") para o resumo.
     ->withSkip([
         // --- emitem sintaxe de PHP 7+ -> parse error no 5.6, derruba a REFERENCIA ---
         Rector\Php74\Rector\If_\IfToNullCoalescingAssignRector::class,

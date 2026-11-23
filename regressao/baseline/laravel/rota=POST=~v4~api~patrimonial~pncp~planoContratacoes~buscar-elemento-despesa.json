@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/planoContratacoes/buscar-elemento-despesa",
+  "json": {
+    "error": true,
+    "message": "Undefined index: "
+  },
+  "sha256": "a107fb7d92364434bef7b4eead735728be9d5e0fd157bdfd70e6f47c0016991c",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

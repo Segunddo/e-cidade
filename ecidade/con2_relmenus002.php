@@ -29,7 +29,7 @@ include(modification("fpdf151/pdf.php"));
 include(modification("classes/db_db_versao_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //echo "mod = $mod";
 
 $cldb_versao = new cl_db_versao;
@@ -56,7 +56,7 @@ $sql = "select m.id_item,nome_modulo
 
 $res = db_query($sql);
 
-$numrows = pg_numrows($res);
+$numrows = ($res ? pg_numrows($res) : null);
 
 for($i=0;$i<$numrows;$i++){
 
@@ -93,10 +93,10 @@ for($i=0;$i<$numrows;$i++){
                   from db_itensmenu
                   where id_item = ".$impmat[$imp]." and itemativo = 1";
           $resi = db_query($sql);
-          $linhas = pg_num_rows($resi);
+          $linhas = ($resi ? pg_num_rows($resi) : null);
           if($linhas >0){
-            $descr = pg_result($resi,0,0);
-            $funcao = pg_result($resi,0,1);
+            $descr = ($resi ? pg_result($resi,0,0) : null);
+            $funcao = ($resi ? pg_result($resi,0,1) : null);
 	          //$pdf->Cell($imp*5,4,$matriz_item_seleciona[$x],0,0,"L");
 	          $pdf->Cell($imp*5,4,'',0,0,"L");
 

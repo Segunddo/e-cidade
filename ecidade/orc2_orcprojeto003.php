@@ -38,7 +38,7 @@ require_once(modification("classes/db_db_paragrafo_classe.php"));
 
 db_app::import("orcamento.suplementacao.*");
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $classinatura = new cl_assinatura;
 $cldbconfig = new cl_db_config;

@@ -33,7 +33,7 @@ require_once(modification("libs/db_usuariosonline.php"));
 require_once(modification("classes/db_fiscallocal_classe.php"));
 // require_once(modification("classes/db_fiscalexec_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clfiscal      = new cl_fis_fiscal;
 // $clfiscallocal = new cl_fis_fiscallocal;

@@ -71,12 +71,12 @@ class cl_orcprogramavinculoobjetivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o144_sequencial = ($this->o144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o144_sequencial"]:$this->o144_sequencial);
-       $this->o144_orcprogramaprograma = ($this->o144_orcprogramaprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["o144_orcprogramaprograma"]:$this->o144_orcprogramaprograma);
-       $this->o144_orcprogramaanousu = ($this->o144_orcprogramaanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o144_orcprogramaanousu"]:$this->o144_orcprogramaanousu);
-       $this->o144_orcobjetivo = ($this->o144_orcobjetivo == ""?@$GLOBALS["HTTP_POST_VARS"]["o144_orcobjetivo"]:$this->o144_orcobjetivo);
+       $this->o144_sequencial = ($this->o144_sequencial === 0 || $this->o144_sequencial === 0.0 || $this->o144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o144_sequencial"]:$this->o144_sequencial);
+       $this->o144_orcprogramaprograma = ($this->o144_orcprogramaprograma === 0 || $this->o144_orcprogramaprograma === 0.0 || $this->o144_orcprogramaprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["o144_orcprogramaprograma"]:$this->o144_orcprogramaprograma);
+       $this->o144_orcprogramaanousu = ($this->o144_orcprogramaanousu === 0 || $this->o144_orcprogramaanousu === 0.0 || $this->o144_orcprogramaanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o144_orcprogramaanousu"]:$this->o144_orcprogramaanousu);
+       $this->o144_orcobjetivo = ($this->o144_orcobjetivo === 0 || $this->o144_orcobjetivo === 0.0 || $this->o144_orcobjetivo == ""?@$GLOBALS["HTTP_POST_VARS"]["o144_orcobjetivo"]:$this->o144_orcobjetivo);
      }else{
-       $this->o144_sequencial = ($this->o144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o144_sequencial"]:$this->o144_sequencial);
+       $this->o144_sequencial = ($this->o144_sequencial === 0 || $this->o144_sequencial === 0.0 || $this->o144_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o144_sequencial"]:$this->o144_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_orcprogramavinculoobjetivo {
          $this->o144_sequencial = $o144_sequencial;
        }
      }
-     if(($this->o144_sequencial == null) || ($this->o144_sequencial == "") ){
+     if(($this->o144_sequencial == null) || ($this->o144_sequencial === 0 || $this->o144_sequencial === 0.0 || $this->o144_sequencial == "") ){
        $this->erro_sql = " Campo o144_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

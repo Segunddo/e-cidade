@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/diario-classe/registro-aula/update-conteudos-lote",
+  "json": {
+    "error": true,
+    "message": "Argument 1 passed to App\\Domain\\Educacao\\Escola\\Services\\RegistroAulaService::updateConteudosLote() must be of the type array, null given, called in /var/www/html/app/Domain/Educacao/Escola/Controllers/RegistroAulaController.php on line 117"
+  },
+  "sha256": "a6878e25c18b9762fb74ae25a2745c3c2f9576cb28ad8982d775d4afb6924f51",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

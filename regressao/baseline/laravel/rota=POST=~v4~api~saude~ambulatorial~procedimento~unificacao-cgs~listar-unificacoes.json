@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/ambulatorial/procedimento/unificacao-cgs/listar-unificacoes",
+  "json": {
+    "error": true,
+    "message": "Undefined index: rows"
+  },
+  "sha256": "22d4636cf673f636fc4183890221ca4e1d1a85b4a600665bd98940711edd1b4d",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

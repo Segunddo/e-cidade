@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/recursos-humanos/rh/relatorios/certidao_tempo_contribuicao",
+  "json": null,
+  "sha256": "ccc52f8cb7d9b1bb01d8d33c4af732db7c9500998a79b2b89f4bbb25aca9fca3",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

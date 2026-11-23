@@ -35,7 +35,7 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_disciplina_classe.php"));
 require_once(modification("classes/db_caddisciplina_classe.php"));
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldisciplina = new cl_disciplina;
 $clcaddisciplina = new cl_caddisciplina;
 $cldisciplina->rotulo->label("ed12_i_codigo");

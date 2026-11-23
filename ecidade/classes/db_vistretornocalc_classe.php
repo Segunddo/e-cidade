@@ -67,10 +67,10 @@ class cl_vistretornocalc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y04_codmsg = ($this->y04_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y04_codmsg"]:$this->y04_codmsg);
+       $this->y04_codmsg = ($this->y04_codmsg === 0 || $this->y04_codmsg === 0.0 || $this->y04_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y04_codmsg"]:$this->y04_codmsg);
        $this->y04_msgretorno = ($this->y04_msgretorno == ""?@$GLOBALS["HTTP_POST_VARS"]["y04_msgretorno"]:$this->y04_msgretorno);
      }else{
-       $this->y04_codmsg = ($this->y04_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y04_codmsg"]:$this->y04_codmsg);
+       $this->y04_codmsg = ($this->y04_codmsg === 0 || $this->y04_codmsg === 0.0 || $this->y04_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y04_codmsg"]:$this->y04_codmsg);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_vistretornocalc {
        return false;
      }
        $this->y04_codmsg = $y04_codmsg;
-     if(($this->y04_codmsg == null) || ($this->y04_codmsg == "") ){
+     if(($this->y04_codmsg == null) || ($this->y04_codmsg === 0 || $this->y04_codmsg === 0.0 || $this->y04_codmsg == "") ){
        $this->erro_sql = " Campo y04_codmsg nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

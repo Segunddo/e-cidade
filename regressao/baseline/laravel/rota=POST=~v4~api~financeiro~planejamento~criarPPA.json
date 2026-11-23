@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/criarPPA",
+  "json": {
+    "error": true,
+    "message": "Você deve o código do plano base."
+  },
+  "sha256": "ccfdc7c9c20ba83a41c272b9d080fd27f332db6b657585c4191598bad63fb9c8",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/ambulatorial/procedimento/unificacao-cgs/salvar",
+  "json": {
+    "error": true,
+    "message": "O campo cgs correto é obrigatório."
+  },
+  "sha256": "d38452aad40749d7de30484436f2f6e7fe83432d633e1dd2a4ea59d7417ab44c",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

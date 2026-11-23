@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/login",
+  "json": {
+    "errors": {
+      "password": [
+        "O campo password deve ser presente."
+      ],
+      "username": [
+        "Login Inválido."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "c4817a36bb059588f3973c19e6f5d9a25483c96119a14b2413acb1f42ea6784f",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

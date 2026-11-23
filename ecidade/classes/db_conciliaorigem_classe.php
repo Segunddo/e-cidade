@@ -67,10 +67,10 @@ class cl_conciliaorigem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k96_sequencial = ($this->k96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k96_sequencial"]:$this->k96_sequencial);
+       $this->k96_sequencial = ($this->k96_sequencial === 0 || $this->k96_sequencial === 0.0 || $this->k96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k96_sequencial"]:$this->k96_sequencial);
        $this->k96_descr = ($this->k96_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k96_descr"]:$this->k96_descr);
      }else{
-       $this->k96_sequencial = ($this->k96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k96_sequencial"]:$this->k96_sequencial);
+       $this->k96_sequencial = ($this->k96_sequencial === 0 || $this->k96_sequencial === 0.0 || $this->k96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k96_sequencial"]:$this->k96_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_conciliaorigem {
          $this->k96_sequencial = $k96_sequencial;
        }
      }
-     if(($this->k96_sequencial == null) || ($this->k96_sequencial == "") ){
+     if(($this->k96_sequencial == null) || ($this->k96_sequencial === 0 || $this->k96_sequencial === 0.0 || $this->k96_sequencial == "") ){
        $this->erro_sql = " Campo k96_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

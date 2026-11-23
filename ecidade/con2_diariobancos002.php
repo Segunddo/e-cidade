@@ -29,14 +29,14 @@ include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 include(modification("libs/db_libcontabilidade.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $xinstit =explode("-",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++) {
   db_fieldsmemory($resultinst,$xins);
   $descr_inst .= $xvirg.$nomeinst ;
   $xvirg = ', ';
@@ -77,7 +77,7 @@ $total_debitos  = 0;
 $total_creditos = 0;
 $total_final    = 0;
 
-for ($x = 0; $x < pg_numrows($result);$x++) {
+for ($x = 0; $x < ($result ? pg_numrows($result) : null);$x++) {
   db_fieldsmemory($result,$x);
 
    if( ( $tipo == "S" ) && ( $c61_reduz != 0 ) ) {
@@ -169,7 +169,7 @@ SQL;
 
 
    $resconta = db_query( $sSqlContaBancaria ) or die ($sSqlContaBancaria);
-   if($resconta and pg_num_rows($resconta) > 0) {
+   if($resconta and ($resconta ? pg_num_rows($resconta) : null) > 0) {
      db_fieldsmemory($resconta,0);
    }
 
@@ -179,7 +179,7 @@ SQL;
 
    $pdf->cell(25,$alt,db_formatar($estrutural,'receita_int'),0,0,"L",0,0);
    $pdf->cell(15,$alt,($c61_reduz == 0?'':$c61_reduz),0,0,"C",0,0);
-   $pdf->cell(130,$alt,(pg_numrows($resconta) == 0?$espaco.$c60_descr:$espaco.$c60_descr.'   ( Bco: '.$c63_banco.'  Ag: '.$c63_agencia.'  Cta: '.$c63_conta),0,0,"L",0,0,'.');
+   $pdf->cell(130,$alt,(($resconta ? pg_numrows($resconta) : null) == 0?$espaco.$c60_descr:$espaco.$c60_descr.'   ( Bco: '.$c63_banco.'  Ag: '.$c63_agencia.'  Cta: '.$c63_conta),0,0,"L",0,0,'.');
    $pdf->cell(20,$alt,($c61_reduz == 0?'':$c61_codigo),0,0,"C",0);
    $pdf->cell(20,$alt,db_formatar($saldo_anterior,'f') ,0,0,"R",0);
    $pdf->cell(2,$alt,$sinal_anterior,0,0,"R",0);

@@ -45,12 +45,12 @@ class cl_setorlocvalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j05_sequencial = ($this->j05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_sequencial"]:$this->j05_sequencial);
-       $this->j05_setorloc = ($this->j05_setorloc == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_setorloc"]:$this->j05_setorloc);
-       $this->j05_anousu = ($this->j05_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_anousu"]:$this->j05_anousu);
-       $this->j05_valor = ($this->j05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_valor"]:$this->j05_valor);
+       $this->j05_sequencial = ($this->j05_sequencial === 0 || $this->j05_sequencial === 0.0 || $this->j05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_sequencial"]:$this->j05_sequencial);
+       $this->j05_setorloc = ($this->j05_setorloc === 0 || $this->j05_setorloc === 0.0 || $this->j05_setorloc == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_setorloc"]:$this->j05_setorloc);
+       $this->j05_anousu = ($this->j05_anousu === 0 || $this->j05_anousu === 0.0 || $this->j05_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_anousu"]:$this->j05_anousu);
+       $this->j05_valor = ($this->j05_valor === 0 || $this->j05_valor === 0.0 || $this->j05_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_valor"]:$this->j05_valor);
      }else{
-       $this->j05_sequencial = ($this->j05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_sequencial"]:$this->j05_sequencial);
+       $this->j05_sequencial = ($this->j05_sequencial === 0 || $this->j05_sequencial === 0.0 || $this->j05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j05_sequencial"]:$this->j05_sequencial);
      }
    }
    // funcao para inclusao
@@ -107,7 +107,7 @@ class cl_setorlocvalor {
          $this->j05_sequencial = $j05_sequencial; 
        }
      }
-     if(($this->j05_sequencial == null) || ($this->j05_sequencial == "") ){ 
+     if(($this->j05_sequencial == null) || ($this->j05_sequencial === 0 || $this->j05_sequencial === 0.0 || $this->j05_sequencial == "") ){ 
        $this->erro_sql = " Campo j05_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

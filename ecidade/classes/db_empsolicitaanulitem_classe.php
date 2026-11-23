@@ -73,13 +73,13 @@ class cl_empsolicitaanulitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e36_sequencial = ($this->e36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_sequencial"]:$this->e36_sequencial);
-       $this->e36_empempitem = ($this->e36_empempitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_empempitem"]:$this->e36_empempitem);
-       $this->e36_empsolicitaanul = ($this->e36_empsolicitaanul == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_empsolicitaanul"]:$this->e36_empsolicitaanul);
-       $this->e36_vrlanu = ($this->e36_vrlanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_vrlanu"]:$this->e36_vrlanu);
-       $this->e36_qtdanu = ($this->e36_qtdanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_qtdanu"]:$this->e36_qtdanu);
+       $this->e36_sequencial = ($this->e36_sequencial === 0 || $this->e36_sequencial === 0.0 || $this->e36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_sequencial"]:$this->e36_sequencial);
+       $this->e36_empempitem = ($this->e36_empempitem === 0 || $this->e36_empempitem === 0.0 || $this->e36_empempitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_empempitem"]:$this->e36_empempitem);
+       $this->e36_empsolicitaanul = ($this->e36_empsolicitaanul === 0 || $this->e36_empsolicitaanul === 0.0 || $this->e36_empsolicitaanul == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_empsolicitaanul"]:$this->e36_empsolicitaanul);
+       $this->e36_vrlanu = ($this->e36_vrlanu === 0 || $this->e36_vrlanu === 0.0 || $this->e36_vrlanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_vrlanu"]:$this->e36_vrlanu);
+       $this->e36_qtdanu = ($this->e36_qtdanu === 0 || $this->e36_qtdanu === 0.0 || $this->e36_qtdanu == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_qtdanu"]:$this->e36_qtdanu);
      }else{
-       $this->e36_sequencial = ($this->e36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_sequencial"]:$this->e36_sequencial);
+       $this->e36_sequencial = ($this->e36_sequencial === 0 || $this->e36_sequencial === 0.0 || $this->e36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e36_sequencial"]:$this->e36_sequencial);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_empsolicitaanulitem {
          $this->e36_sequencial = $e36_sequencial;
        }
      }
-     if(($this->e36_sequencial == null) || ($this->e36_sequencial == "") ){
+     if(($this->e36_sequencial == null) || ($this->e36_sequencial === 0 || $this->e36_sequencial === 0.0 || $this->e36_sequencial == "") ){
        $this->erro_sql = " Campo e36_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

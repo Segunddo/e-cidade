@@ -50,7 +50,7 @@ class cl_termoinscr
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->v92_termo = ($this->v92_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["v92_termo"]:$this->v92_termo);
+       $this->v92_termo = ($this->v92_termo === 0 || $this->v92_termo === 0.0 || $this->v92_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["v92_termo"]:$this->v92_termo);
        if($this->v92_dtinsc == ""){
          $this->v92_dtinsc_dia = ($this->v92_dtinsc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v92_dtinsc_dia"]:$this->v92_dtinsc_dia);
          $this->v92_dtinsc_mes = ($this->v92_dtinsc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v92_dtinsc_mes"]:$this->v92_dtinsc_mes);
@@ -59,10 +59,10 @@ class cl_termoinscr
             $this->v92_dtinsc = $this->v92_dtinsc_ano."-".$this->v92_dtinsc_mes."-".$this->v92_dtinsc_dia;
          }
        }
-       $this->v92_usuario = ($this->v92_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v92_usuario"]:$this->v92_usuario);
-       $this->v92_instit = ($this->v92_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v92_instit"]:$this->v92_instit);
+       $this->v92_usuario = ($this->v92_usuario === 0 || $this->v92_usuario === 0.0 || $this->v92_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v92_usuario"]:$this->v92_usuario);
+       $this->v92_instit = ($this->v92_instit === 0 || $this->v92_instit === 0.0 || $this->v92_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v92_instit"]:$this->v92_instit);
      }else{
-       $this->v92_termo = ($this->v92_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["v92_termo"]:$this->v92_termo);
+       $this->v92_termo = ($this->v92_termo === 0 || $this->v92_termo === 0.0 || $this->v92_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["v92_termo"]:$this->v92_termo);
      }
    }
 
@@ -120,7 +120,7 @@ class cl_termoinscr
          $this->v92_termo = $v92_termo; 
        }
      }
-     if(($this->v92_termo == null) || ($this->v92_termo == "") ){ 
+     if(($this->v92_termo == null) || ($this->v92_termo === 0 || $this->v92_termo === 0.0 || $this->v92_termo == "") ){ 
        $this->erro_sql = " Campo v92_termo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

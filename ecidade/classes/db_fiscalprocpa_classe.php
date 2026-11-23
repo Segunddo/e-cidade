@@ -67,10 +67,10 @@ class cl_fiscalprocpa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y61_codpa = ($this->y61_codpa == ""?@$GLOBALS["HTTP_POST_VARS"]["y61_codpa"]:$this->y61_codpa);
-       $this->y61_codtipo = ($this->y61_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y61_codtipo"]:$this->y61_codtipo);
+       $this->y61_codpa = ($this->y61_codpa === 0 || $this->y61_codpa === 0.0 || $this->y61_codpa == ""?@$GLOBALS["HTTP_POST_VARS"]["y61_codpa"]:$this->y61_codpa);
+       $this->y61_codtipo = ($this->y61_codtipo === 0 || $this->y61_codtipo === 0.0 || $this->y61_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y61_codtipo"]:$this->y61_codtipo);
      }else{
-       $this->y61_codpa = ($this->y61_codpa == ""?@$GLOBALS["HTTP_POST_VARS"]["y61_codpa"]:$this->y61_codpa);
+       $this->y61_codpa = ($this->y61_codpa === 0 || $this->y61_codpa === 0.0 || $this->y61_codpa == ""?@$GLOBALS["HTTP_POST_VARS"]["y61_codpa"]:$this->y61_codpa);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_fiscalprocpa {
        return false;
      }
        $this->y61_codpa = $y61_codpa;
-     if(($this->y61_codpa == null) || ($this->y61_codpa == "") ){
+     if(($this->y61_codpa == null) || ($this->y61_codpa === 0 || $this->y61_codpa === 0.0 || $this->y61_codpa == "") ){
        $this->erro_sql = " Campo y61_codpa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

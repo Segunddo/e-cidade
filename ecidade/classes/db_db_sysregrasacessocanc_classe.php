@@ -74,8 +74,8 @@ class cl_db_sysregrasacessocanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db49_idacesso = ($this->db49_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_idacesso"]:$this->db49_idacesso);
-       $this->db49_id_usuario = ($this->db49_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_id_usuario"]:$this->db49_id_usuario);
+       $this->db49_idacesso = ($this->db49_idacesso === 0 || $this->db49_idacesso === 0.0 || $this->db49_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_idacesso"]:$this->db49_idacesso);
+       $this->db49_id_usuario = ($this->db49_id_usuario === 0 || $this->db49_id_usuario === 0.0 || $this->db49_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_id_usuario"]:$this->db49_id_usuario);
        if($this->db49_dtcancela == ""){
          $this->db49_dtcancela_dia = ($this->db49_dtcancela_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_dtcancela_dia"]:$this->db49_dtcancela_dia);
          $this->db49_dtcancela_mes = ($this->db49_dtcancela_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_dtcancela_mes"]:$this->db49_dtcancela_mes);
@@ -86,7 +86,7 @@ class cl_db_sysregrasacessocanc {
        }
        $this->db49_observ = ($this->db49_observ == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_observ"]:$this->db49_observ);
      }else{
-       $this->db49_idacesso = ($this->db49_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_idacesso"]:$this->db49_idacesso);
+       $this->db49_idacesso = ($this->db49_idacesso === 0 || $this->db49_idacesso === 0.0 || $this->db49_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db49_idacesso"]:$this->db49_idacesso);
      }
    }
    // funcao para inclusao
@@ -111,7 +111,7 @@ class cl_db_sysregrasacessocanc {
        return false;
      }
        $this->db49_idacesso = $db49_idacesso;
-     if(($this->db49_idacesso == null) || ($this->db49_idacesso == "") ){
+     if(($this->db49_idacesso == null) || ($this->db49_idacesso === 0 || $this->db49_idacesso === 0.0 || $this->db49_idacesso == "") ){
        $this->erro_sql = " Campo db49_idacesso nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

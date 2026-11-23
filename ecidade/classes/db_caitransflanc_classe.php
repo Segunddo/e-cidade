@@ -75,14 +75,14 @@ class cl_caitransflanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k93_transf = ($this->k93_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_transf"]:$this->k93_transf);
-       $this->k93_sequen = ($this->k93_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_sequen"]:$this->k93_sequen);
-       $this->k93_instit = ($this->k93_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_instit"]:$this->k93_instit);
-       $this->k93_debito = ($this->k93_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_debito"]:$this->k93_debito);
-       $this->k93_credito = ($this->k93_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_credito"]:$this->k93_credito);
+       $this->k93_transf = ($this->k93_transf === 0 || $this->k93_transf === 0.0 || $this->k93_transf == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_transf"]:$this->k93_transf);
+       $this->k93_sequen = ($this->k93_sequen === 0 || $this->k93_sequen === 0.0 || $this->k93_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_sequen"]:$this->k93_sequen);
+       $this->k93_instit = ($this->k93_instit === 0 || $this->k93_instit === 0.0 || $this->k93_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_instit"]:$this->k93_instit);
+       $this->k93_debito = ($this->k93_debito === 0 || $this->k93_debito === 0.0 || $this->k93_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_debito"]:$this->k93_debito);
+       $this->k93_credito = ($this->k93_credito === 0 || $this->k93_credito === 0.0 || $this->k93_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_credito"]:$this->k93_credito);
        $this->k93_finalidade = ($this->k93_finalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_finalidade"]:$this->k93_finalidade);
      }else{
-       $this->k93_sequen = ($this->k93_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_sequen"]:$this->k93_sequen);
+       $this->k93_sequen = ($this->k93_sequen === 0 || $this->k93_sequen === 0.0 || $this->k93_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["k93_sequen"]:$this->k93_sequen);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_caitransflanc {
          $this->k93_sequen = $k93_sequen;
        }
      }
-     if(($this->k93_sequen == null) || ($this->k93_sequen == "") ){
+     if(($this->k93_sequen == null) || ($this->k93_sequen === 0 || $this->k93_sequen === 0.0 || $this->k93_sequen == "") ){
        $this->erro_sql = " Campo k93_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

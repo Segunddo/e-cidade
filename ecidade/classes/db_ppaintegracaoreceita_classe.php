@@ -73,13 +73,13 @@ class cl_ppaintegracaoreceita {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o122_sequencial = ($this->o122_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_sequencial"]:$this->o122_sequencial);
-       $this->o122_ppaintegracao = ($this->o122_ppaintegracao == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_ppaintegracao"]:$this->o122_ppaintegracao);
-       $this->o122_codrec = ($this->o122_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_codrec"]:$this->o122_codrec);
-       $this->o122_anousu = ($this->o122_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_anousu"]:$this->o122_anousu);
-       $this->o122_ppaestimativareceita = ($this->o122_ppaestimativareceita == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_ppaestimativareceita"]:$this->o122_ppaestimativareceita);
+       $this->o122_sequencial = ($this->o122_sequencial === 0 || $this->o122_sequencial === 0.0 || $this->o122_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_sequencial"]:$this->o122_sequencial);
+       $this->o122_ppaintegracao = ($this->o122_ppaintegracao === 0 || $this->o122_ppaintegracao === 0.0 || $this->o122_ppaintegracao == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_ppaintegracao"]:$this->o122_ppaintegracao);
+       $this->o122_codrec = ($this->o122_codrec === 0 || $this->o122_codrec === 0.0 || $this->o122_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_codrec"]:$this->o122_codrec);
+       $this->o122_anousu = ($this->o122_anousu === 0 || $this->o122_anousu === 0.0 || $this->o122_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_anousu"]:$this->o122_anousu);
+       $this->o122_ppaestimativareceita = ($this->o122_ppaestimativareceita === 0 || $this->o122_ppaestimativareceita === 0.0 || $this->o122_ppaestimativareceita == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_ppaestimativareceita"]:$this->o122_ppaestimativareceita);
      }else{
-       $this->o122_sequencial = ($this->o122_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_sequencial"]:$this->o122_sequencial);
+       $this->o122_sequencial = ($this->o122_sequencial === 0 || $this->o122_sequencial === 0.0 || $this->o122_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o122_sequencial"]:$this->o122_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_ppaintegracaoreceita {
          $this->o122_sequencial = $o122_sequencial;
        }
      }
-     if(($this->o122_sequencial == null) || ($this->o122_sequencial == "") ){
+     if(($this->o122_sequencial == null) || ($this->o122_sequencial === 0 || $this->o122_sequencial === 0.0 || $this->o122_sequencial == "") ){
        $this->erro_sql = " Campo o122_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

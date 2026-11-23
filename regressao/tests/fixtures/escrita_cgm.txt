@@ -1,0 +1,8 @@
+classes/db_cgm_classe.php	query_sql	NULL
+classes/db_cgm_classe.php	numrows	0
+classes/db_cgm_classe.php	numrows_incluir	0
+classes/db_cgm_classe.php	z01_genero	'1094'
+classes/db_cgm_classe.php	campos	'
+                 z01_numcgm = int4 = Numcgm
+                 z01_nome = varchar(40) = Nome/Razão Social
+                 '

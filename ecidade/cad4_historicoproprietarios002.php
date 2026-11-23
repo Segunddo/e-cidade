@@ -35,7 +35,7 @@ require_once(modification("classes/db_historicoproprietarios_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("dbforms/db_classesgenericas.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $cliptubase = new cl_iptubase;
@@ -149,7 +149,7 @@ if (isset($incluir)) {
     }
 } else if (isset($opcao)) {    
     $result = db_query($clhistoricoproprietarios->sqlHistoricoProprietarios("j172_sequencial = $j172_sequencial"));
-    if ($result != false && pg_num_rows($result) > 0) {
+    if ($result != false && ($result ? pg_num_rows($result) : null) > 0) {
         db_fieldsmemory($result, 0);
     }
 
@@ -259,7 +259,7 @@ if (isset($db_opcaoal)) {
                             // Tipo Proprietário
                             $rsDescricaoTipoProprietario = db_query("SELECT j163_tipoproprietario,j163_descricao FROM tipoproprietario ORDER BY j163_tipoproprietario;");
                             $arrayTipoProprietario = [];
-                            foreach (pg_fetch_all($rsDescricaoTipoProprietario) as $key => $value) {
+                            foreach (($rsDescricaoTipoProprietario ? pg_fetch_all($rsDescricaoTipoProprietario) : null) as $key => $value) {
                                 $arrayTipoProprietario[$value['j163_tipoproprietario']] = $value['j163_descricao'];
                             }
                             db_select('j172_tipoproprietario', $arrayTipoProprietario, true, $db_opcao, "style=width:200px;");
@@ -267,7 +267,7 @@ if (isset($db_opcaoal)) {
                             // Tipo Promitente
                             $rsDescricaoTipoPromitente = db_query("SELECT j164_tipopromitente,j164_descricao FROM tipopromitente ORDER BY j164_tipopromitente;");
                             $arrayTipoPromitente = [];
-                            foreach (pg_fetch_all($rsDescricaoTipoPromitente) as $key => $value) {
+                            foreach (($rsDescricaoTipoPromitente ? pg_fetch_all($rsDescricaoTipoPromitente) : null) as $key => $value) {
                                 $arrayTipoPromitente[$value['j164_tipopromitente']] = $value['j164_descricao'];
                             }
                             db_select('j172_tipopromitente', $arrayTipoPromitente, true, $db_opcao, "style=width:200px");

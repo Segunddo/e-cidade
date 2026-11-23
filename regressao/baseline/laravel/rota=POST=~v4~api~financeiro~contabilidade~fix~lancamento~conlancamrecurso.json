@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/fix/lancamento/conlancamrecurso",
+  "json": {
+    "error": true,
+    "message": "<X>"
+  },
+  "sha256": "f2b74cffee8215f7d42f50ae4ffe81d6bb555d9b39429234ea62bb6e2c6a5a6a",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {
+    "message": [
+      "str"
+    ]
+  }
+}

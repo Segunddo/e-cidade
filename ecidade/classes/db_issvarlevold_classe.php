@@ -67,8 +67,8 @@ class cl_issvarlevold {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y85_codlev = ($this->y85_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y85_codlev"]:$this->y85_codlev);
-       $this->y85_codissvar = ($this->y85_codissvar == ""?@$GLOBALS["HTTP_POST_VARS"]["y85_codissvar"]:$this->y85_codissvar);
+       $this->y85_codlev = ($this->y85_codlev === 0 || $this->y85_codlev === 0.0 || $this->y85_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y85_codlev"]:$this->y85_codlev);
+       $this->y85_codissvar = ($this->y85_codissvar === 0 || $this->y85_codissvar === 0.0 || $this->y85_codissvar == ""?@$GLOBALS["HTTP_POST_VARS"]["y85_codissvar"]:$this->y85_codissvar);
      }else{
      }
    }

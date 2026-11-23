@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/anexos4320/anexo2",
+  "json": {
+    "error": true,
+    "message": "Você deve selecionar o planejamento."
+  },
+  "sha256": "20a795e5c96ac4cfd4e41d4bdb0586133c4ee15b43c5fb01a42388524d0b4f52",
+  "sql_negocio": [],
+  "status": 403,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

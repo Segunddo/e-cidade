@@ -97,7 +97,7 @@ class cl_recibocanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p99_numcgm = ($this->p99_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numcgm"]:$this->p99_numcgm);
+       $this->p99_numcgm = ($this->p99_numcgm === 0 || $this->p99_numcgm === 0.0 || $this->p99_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numcgm"]:$this->p99_numcgm);
        if($this->p99_dtoper == ""){
          $this->p99_dtoper_dia = ($this->p99_dtoper_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_dtoper_dia"]:$this->p99_dtoper_dia);
          $this->p99_dtoper_mes = ($this->p99_dtoper_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_dtoper_mes"]:$this->p99_dtoper_mes);
@@ -106,9 +106,9 @@ class cl_recibocanc {
             $this->p99_dtoper = $this->p99_dtoper_ano."-".$this->p99_dtoper_mes."-".$this->p99_dtoper_dia;
          }
        }
-       $this->p99_receit = ($this->p99_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_receit"]:$this->p99_receit);
-       $this->p99_hist = ($this->p99_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_hist"]:$this->p99_hist);
-       $this->p99_valor = ($this->p99_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_valor"]:$this->p99_valor);
+       $this->p99_receit = ($this->p99_receit === 0 || $this->p99_receit === 0.0 || $this->p99_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_receit"]:$this->p99_receit);
+       $this->p99_hist = ($this->p99_hist === 0 || $this->p99_hist === 0.0 || $this->p99_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_hist"]:$this->p99_hist);
+       $this->p99_valor = ($this->p99_valor === 0 || $this->p99_valor === 0.0 || $this->p99_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_valor"]:$this->p99_valor);
        if($this->p99_dtvenc == ""){
          $this->p99_dtvenc_dia = ($this->p99_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_dtvenc_dia"]:$this->p99_dtvenc_dia);
          $this->p99_dtvenc_mes = ($this->p99_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_dtvenc_mes"]:$this->p99_dtvenc_mes);
@@ -117,14 +117,14 @@ class cl_recibocanc {
             $this->p99_dtvenc = $this->p99_dtvenc_ano."-".$this->p99_dtvenc_mes."-".$this->p99_dtvenc_dia;
          }
        }
-       $this->p99_numpre = ($this->p99_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numpre"]:$this->p99_numpre);
-       $this->p99_numpar = ($this->p99_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numpar"]:$this->p99_numpar);
-       $this->p99_numtot = ($this->p99_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numtot"]:$this->p99_numtot);
-       $this->p99_numdig = ($this->p99_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numdig"]:$this->p99_numdig);
-       $this->p99_tipo = ($this->p99_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_tipo"]:$this->p99_tipo);
-       $this->p99_tipojm = ($this->p99_tipojm == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_tipojm"]:$this->p99_tipojm);
-       $this->p99_numnov = ($this->p99_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numnov"]:$this->p99_numnov);
-       $this->p99_codsubrec = ($this->p99_codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_codsubrec"]:$this->p99_codsubrec);
+       $this->p99_numpre = ($this->p99_numpre === 0 || $this->p99_numpre === 0.0 || $this->p99_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numpre"]:$this->p99_numpre);
+       $this->p99_numpar = ($this->p99_numpar === 0 || $this->p99_numpar === 0.0 || $this->p99_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numpar"]:$this->p99_numpar);
+       $this->p99_numtot = ($this->p99_numtot === 0 || $this->p99_numtot === 0.0 || $this->p99_numtot == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numtot"]:$this->p99_numtot);
+       $this->p99_numdig = ($this->p99_numdig === 0 || $this->p99_numdig === 0.0 || $this->p99_numdig == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numdig"]:$this->p99_numdig);
+       $this->p99_tipo = ($this->p99_tipo === 0 || $this->p99_tipo === 0.0 || $this->p99_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_tipo"]:$this->p99_tipo);
+       $this->p99_tipojm = ($this->p99_tipojm === 0 || $this->p99_tipojm === 0.0 || $this->p99_tipojm == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_tipojm"]:$this->p99_tipojm);
+       $this->p99_numnov = ($this->p99_numnov === 0 || $this->p99_numnov === 0.0 || $this->p99_numnov == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_numnov"]:$this->p99_numnov);
+       $this->p99_codsubrec = ($this->p99_codsubrec === 0 || $this->p99_codsubrec === 0.0 || $this->p99_codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["p99_codsubrec"]:$this->p99_codsubrec);
      }else{
      }
    }

@@ -67,10 +67,10 @@ class cl_vara {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v53_codvara = ($this->v53_codvara == ""?@$GLOBALS["HTTP_POST_VARS"]["v53_codvara"]:$this->v53_codvara);
+       $this->v53_codvara = ($this->v53_codvara === 0 || $this->v53_codvara === 0.0 || $this->v53_codvara == ""?@$GLOBALS["HTTP_POST_VARS"]["v53_codvara"]:$this->v53_codvara);
        $this->v53_descr = ($this->v53_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["v53_descr"]:$this->v53_descr);
      }else{
-       $this->v53_codvara = ($this->v53_codvara == ""?@$GLOBALS["HTTP_POST_VARS"]["v53_codvara"]:$this->v53_codvara);
+       $this->v53_codvara = ($this->v53_codvara === 0 || $this->v53_codvara === 0.0 || $this->v53_codvara == ""?@$GLOBALS["HTTP_POST_VARS"]["v53_codvara"]:$this->v53_codvara);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_vara {
          $this->v53_codvara = $v53_codvara;
        }
      }
-     if(($this->v53_codvara == null) || ($this->v53_codvara == "") ){
+     if(($this->v53_codvara == null) || ($this->v53_codvara === 0 || $this->v53_codvara === 0.0 || $this->v53_codvara == "") ){
        $this->erro_sql = " Campo v53_codvara nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

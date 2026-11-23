@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/veiculos/veiculo",
+  "json": {
+    "errors": {
+      "q172_issbase": [
+        "Inscrição não informada."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "6ee3e89d7d3436fff3f81e176c94884e0f003657fa6cb998a5919f2913bf3e18",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

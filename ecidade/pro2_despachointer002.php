@@ -43,7 +43,7 @@ if (isset($oGet->codproc) && !empty($oGet->codproc)) {
     $codproc = $oGet->codproc;
 }
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $sTipoDespacho = "Despacho";
 $result_procandamint = $clprocandamint->sql_record($clprocandamint->sql_query_sim($codprocandamint));

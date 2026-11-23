@@ -69,11 +69,11 @@ class cl_cairetordem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k32_sequencia = ($this->k32_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_sequencia"]:$this->k32_sequencia);
-       $this->k32_numpre = ($this->k32_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_numpre"]:$this->k32_numpre);
-       $this->k32_ordpag = ($this->k32_ordpag == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_ordpag"]:$this->k32_ordpag);
+       $this->k32_sequencia = ($this->k32_sequencia === 0 || $this->k32_sequencia === 0.0 || $this->k32_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_sequencia"]:$this->k32_sequencia);
+       $this->k32_numpre = ($this->k32_numpre === 0 || $this->k32_numpre === 0.0 || $this->k32_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_numpre"]:$this->k32_numpre);
+       $this->k32_ordpag = ($this->k32_ordpag === 0 || $this->k32_ordpag === 0.0 || $this->k32_ordpag == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_ordpag"]:$this->k32_ordpag);
      }else{
-       $this->k32_sequencia = ($this->k32_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_sequencia"]:$this->k32_sequencia);
+       $this->k32_sequencia = ($this->k32_sequencia === 0 || $this->k32_sequencia === 0.0 || $this->k32_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k32_sequencia"]:$this->k32_sequencia);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cairetordem {
          $this->k32_sequencia = $k32_sequencia;
        }
      }
-     if(($this->k32_sequencia == null) || ($this->k32_sequencia == "") ){
+     if(($this->k32_sequencia == null) || ($this->k32_sequencia === 0 || $this->k32_sequencia === 0.0 || $this->k32_sequencia == "") ){
        $this->erro_sql = " Campo k32_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

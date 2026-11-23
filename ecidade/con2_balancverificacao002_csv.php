@@ -32,7 +32,7 @@ require_once(modification("libs/db_sessoes.php"));
 require_once(modification("libs/db_sql.php"));
 require_once(modification("libs/db_libcontabilidade.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $sArquivo = "tmp/con2_balancverificacaocsv002.csv";
 $fArquivo = fopen($sArquivo, "w+");
@@ -47,7 +47,7 @@ $sSqlInstituicao = "
    from db_config
   where codigo in ({$db_selinstit})";
 $resultinst = db_query($sSqlInstituicao);
-$numero_instit = pg_num_rows($resultinst);
+$numero_instit = ($resultinst ? pg_num_rows($resultinst) : null);
 
 $descr_inst = '';
 $xvirg = '';
@@ -60,7 +60,7 @@ if ($numero_instit > 0) {
 if ($totalInstituicao == $numero_instit) {
     $descr_inst = "CONSOLIDAÇÃO GERAL";
 } else {
-    for ($xins = 0; $xins < pg_num_rows($resultinst); $xins++) {
+    for ($xins = 0; $xins < ($resultinst ? pg_num_rows($resultinst) : null); $xins++) {
         db_fieldsmemory($resultinst, $xins);
         if (strlen(trim($nomeinstabrev)) > 0) {
             $descr_inst .= $xvirg . "($codigo)" . $nomeinstabrev;
@@ -181,7 +181,7 @@ $sLinha .= "SALDO";
 $aTextoSaida[] = $sLinha;
 
 $ultimoEstrutural = '';
-for ($x = 0; $x < pg_num_rows($result); $x++) {
+for ($x = 0; $x < ($result ? pg_num_rows($result) : null); $x++) {
     db_fieldsmemory($result, $x);
     if (($tipo == "S") && ($c61_reduz != 0)) {
         continue;
@@ -253,7 +253,7 @@ for ($x = 0; $x < pg_num_rows($result); $x++) {
                            and c63_reduz = {$c61_reduz}
                            and c63_anousu = {$anousu} ");
 
-    if (pg_num_rows($resconta) > 0) {
+    if (($resconta ? pg_num_rows($resconta) : null) > 0) {
         db_fieldsmemory($resconta, 0);
     }
 
@@ -273,7 +273,7 @@ for ($x = 0; $x < pg_num_rows($result); $x++) {
     }
 
     if ($conta == 'S') {
-        $sLinha .= (pg_num_rows($resconta) == 0 ? $espaco . $c60_descr : $espaco . $c60_descr . '   ( Bco: ' . $c63_banco . '  Ag: ' . $c63_agencia . '  Cta: ' . $c63_conta . ')') . "|";
+        $sLinha .= (($resconta ? pg_num_rows($resconta) : null) == 0 ? $espaco . $c60_descr : $espaco . $c60_descr . '   ( Bco: ' . $c63_banco . '  Ag: ' . $c63_agencia . '  Cta: ' . $c63_conta . ')') . "|";
     } else {
         $sLinha .= ($espaco . $c60_descr) . "|";
     }

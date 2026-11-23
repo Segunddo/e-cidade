@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/matricula-online/configuracao/campos-opcionais",
+  "json": null,
+  "sha256": "752618aedd8b11d1f5366d0317d60f43900c2f6911c9fc8c93c12f6e04ef67c9",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

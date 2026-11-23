@@ -28,7 +28,7 @@
 require_once(modification("fpdf151/pdf.php"));
 require_once(modification("libs/db_sql.php"));
 
-parse_str( $_SERVER['QUERY_STRING'] );
+parse_str( $_SERVER['QUERY_STRING'] , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clprontproced = new cl_prontproced;
 $clprontproced->rotulo->label();

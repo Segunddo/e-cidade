@@ -27,11 +27,40 @@
 #                 aparecer no log. Acrescentar a tabela filha citada
 #                 na mensagem ao 2o argumento (filha primeiro), ou escolher outra tela
 #
-# Exige o ambiente no ar (5.6, 8.5 e banco). Nao altera nada de forma permanente:
+# Exige o ambiente no ar (5.6, 8.5 e banco). Nao altera nada de forma permanente
+# (salvo ABORTADO, acima, ou escrita de gatilho em tabela nao listada):
 # as tabelas sao restauradas a cada rodada, a classe volta ao estado do git e o
 # log_statement do banco e desligado no fim, mesmo se algo falhar no meio.
+#
+# Como faz:
+#   1. confere os tres containers e acha a sessao autenticada mais recente do 5.6
+#      (ou usa $SID);
+#   2. liga log_statement='all' e arma um trap EXIT que o desliga (e, no modo
+#      demo, devolve a classe ao git) aconteca o que acontecer;
+#   3. monta o formulario com o payload_auto.py, lendo a tela que o 5.6 emite;
+#   4. roda o escrita_post.py (foto, POST 5.6, restore, POST 8.5, restore,
+#      comparacao do SQL). No modo demo, tres vezes: a 2a com a guarda 0 == ""
+#      da classe cl_cemiterioisencao trocada pela forma original (so em disco,
+#      durante a rodada), para provar que o teste DETECTA o defeito.
+#
+# Efeitos colaterais: GRAVA NO BANCO (o POST real, desfeito pelo restore); liga e
+# desliga o log_statement do banco inteiro; no modo demo EDITA
+# ecidade/classes/db_cemiterioisencao_classe.php e a devolve com git checkout
+# (por isso exige a classe sem alteracao local); sobrescreve o arquivo de sessao.
+# Codigo de saida (modo tela): o do escrita_post.py (0 IDENTICO, 1 DIVERGE ou
+# ABORTADO, 2 INCONCLUSIVO).
+#
+# Usado em: demonstracao do nivel 3 (docs/como-testamos.md; docs/migrar-laravel.md,
+# rotas que gravam) e na amostra de nivel 3 da Saude (docs/registro/area-saude.md).
+# No guia docs/migrar-um-modulo.md o nivel 3 de rotina e o nivel3.py, que
+# substitui este roteiro para uma tela qualquer.
 set -u
 cd "$(dirname "$0")/.."
+# o escrita_post.py le portas e containers de regressao/nucleo/ambiente.py (padrao: ambiente e74 da suite);
+# esta demonstracao usa a pilha da RAIZ, salvo se as variaveis ja vierem exportadas
+export REGRESSAO_REF_URL=${REGRESSAO_REF_URL:-http://localhost:8080} REGRESSAO_PHP_NOVO_URL=${REGRESSAO_PHP_NOVO_URL:-http://localhost:8085} \
+       REGRESSAO_CONTAINER_REF=${REGRESSAO_CONTAINER_REF:-ecidade_php74} REGRESSAO_CONTAINER_PHP_NOVO=${REGRESSAO_CONTAINER_PHP_NOVO:-ecidade_php85} \
+       REGRESSAO_CONTAINER_BANCO=${REGRESSAO_CONTAINER_BANCO:-ecidade_database}
 
 DB="docker exec -i ecidade_database psql -U postgres -d ecidade"
 
@@ -55,9 +84,11 @@ else
   echo "uso: $0 [<tela.php> <tabelas,separadas,por,virgula>]"; exit 1
 fi
 
+# sessao autenticada mais recente (ls -t sobre as que tem DB_modulo, isto e, logadas)
 SID=${SID:-$(docker exec ecidade_php74 sh -c 'ls -t $(grep -la DB_modulo /var/lib/php/sessions/sess_*) 2>/dev/null | head -1' | sed 's#.*/sess_##')}
 [ -n "$SID" ] || { echo "nenhuma sessao autenticada encontrada -- faca login em http://localhost:8080"; exit 1; }
 
+# roda na saida (trap EXIT), inclusive por erro ou Ctrl-C: devolve a classe e desliga o log
 limpar() {
   [ "$MODO" = demo ] && git checkout -q -- "$CLASSE"
   $DB -qc "ALTER DATABASE ecidade RESET log_statement;" </dev/null >/dev/null
@@ -80,6 +111,7 @@ if [ "$MODO" = tela ]; then
   exit $rc
 fi
 
+# uma rodada da demonstracao; tail -4 mostra so a escrita de negocio e o veredito
 rodada() {
   echo; echo "=== $1 ==="
   sleep 3   # o opcache do 8.5 revalida a cada 2 s
@@ -88,6 +120,10 @@ rodada() {
 
 rodada "1. codigo migrado (esperado: IDENTICO)"
 
+# Rodada 2: troca, SO em disco, a guarda que a migracao pos na classe
+# (=== 0 || === 0.0 || == "") pela comparacao original == "". No 5.6, 0 == "" e
+# true; no PHP 8 e false -- sem a guarda o 8.5 decide diferente e o SQL diverge.
+# O assert garante que a guarda existe exatamente uma vez antes de trocar.
 python3 - "$CLASSE" <<'EOF'
 import sys
 p = sys.argv[1]; b = open(p, 'rb').read()   # arquivo LATIN-1: editar em bytes

@@ -86,21 +86,21 @@ class cl_isscalcant
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->q15_anousu = ($this->q15_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_anousu"]:$this->q15_anousu);
-       $this->q15_inscr = ($this->q15_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_inscr"]:$this->q15_inscr);
-       $this->q15_cadcal = ($this->q15_cadcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_cadcal"]:$this->q15_cadcal);
-       $this->q15_recei = ($this->q15_recei == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_recei"]:$this->q15_recei);
-       $this->q15_numpre = ($this->q15_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_numpre"]:$this->q15_numpre);
-       $this->q15_valor = ($this->q15_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_valor"]:$this->q15_valor);
+       $this->q15_anousu = ($this->q15_anousu === 0 || $this->q15_anousu === 0.0 || $this->q15_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_anousu"]:$this->q15_anousu);
+       $this->q15_inscr = ($this->q15_inscr === 0 || $this->q15_inscr === 0.0 || $this->q15_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_inscr"]:$this->q15_inscr);
+       $this->q15_cadcal = ($this->q15_cadcal === 0 || $this->q15_cadcal === 0.0 || $this->q15_cadcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_cadcal"]:$this->q15_cadcal);
+       $this->q15_recei = ($this->q15_recei === 0 || $this->q15_recei === 0.0 || $this->q15_recei == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_recei"]:$this->q15_recei);
+       $this->q15_numpre = ($this->q15_numpre === 0 || $this->q15_numpre === 0.0 || $this->q15_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_numpre"]:$this->q15_numpre);
+       $this->q15_valor = ($this->q15_valor === 0 || $this->q15_valor === 0.0 || $this->q15_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_valor"]:$this->q15_valor);
        $this->q15_manual = ($this->q15_manual == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_manual"]:$this->q15_manual);
-       $this->q15_valorisencao = ($this->q15_valorisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_valorisencao"]:$this->q15_valorisencao);
-       $this->q15_usuario = ($this->q15_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_usuario"]:$this->q15_usuario);
+       $this->q15_valorisencao = ($this->q15_valorisencao === 0 || $this->q15_valorisencao === 0.0 || $this->q15_valorisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_valorisencao"]:$this->q15_valorisencao);
+       $this->q15_usuario = ($this->q15_usuario === 0 || $this->q15_usuario === 0.0 || $this->q15_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_usuario"]:$this->q15_usuario);
      }else{
-       $this->q15_anousu = ($this->q15_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_anousu"]:$this->q15_anousu);
-       $this->q15_inscr = ($this->q15_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_inscr"]:$this->q15_inscr);
-       $this->q15_cadcal = ($this->q15_cadcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_cadcal"]:$this->q15_cadcal);
-       $this->q15_recei = ($this->q15_recei == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_recei"]:$this->q15_recei);
-       $this->q15_numpre = ($this->q15_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_numpre"]:$this->q15_numpre);
+       $this->q15_anousu = ($this->q15_anousu === 0 || $this->q15_anousu === 0.0 || $this->q15_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_anousu"]:$this->q15_anousu);
+       $this->q15_inscr = ($this->q15_inscr === 0 || $this->q15_inscr === 0.0 || $this->q15_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_inscr"]:$this->q15_inscr);
+       $this->q15_cadcal = ($this->q15_cadcal === 0 || $this->q15_cadcal === 0.0 || $this->q15_cadcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_cadcal"]:$this->q15_cadcal);
+       $this->q15_recei = ($this->q15_recei === 0 || $this->q15_recei === 0.0 || $this->q15_recei == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_recei"]:$this->q15_recei);
+       $this->q15_numpre = ($this->q15_numpre === 0 || $this->q15_numpre === 0.0 || $this->q15_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_numpre"]:$this->q15_numpre);
      }
    }
 
@@ -148,7 +148,7 @@ class cl_isscalcant
        $this->q15_cadcal = $q15_cadcal; 
        $this->q15_recei = $q15_recei; 
        $this->q15_numpre = $q15_numpre; 
-     if(($this->q15_anousu == null) || ($this->q15_anousu == "") ){ 
+     if(($this->q15_anousu == null) || ($this->q15_anousu === 0 || $this->q15_anousu === 0.0 || $this->q15_anousu == "") ){ 
        $this->erro_sql = " Campo q15_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -156,7 +156,7 @@ class cl_isscalcant
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q15_inscr == null) || ($this->q15_inscr == "") ){ 
+     if(($this->q15_inscr == null) || ($this->q15_inscr === 0 || $this->q15_inscr === 0.0 || $this->q15_inscr == "") ){ 
        $this->erro_sql = " Campo q15_inscr não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -164,7 +164,7 @@ class cl_isscalcant
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q15_cadcal == null) || ($this->q15_cadcal == "") ){ 
+     if(($this->q15_cadcal == null) || ($this->q15_cadcal === 0 || $this->q15_cadcal === 0.0 || $this->q15_cadcal == "") ){ 
        $this->erro_sql = " Campo q15_cadcal não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -172,7 +172,7 @@ class cl_isscalcant
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q15_recei == null) || ($this->q15_recei == "") ){ 
+     if(($this->q15_recei == null) || ($this->q15_recei === 0 || $this->q15_recei === 0.0 || $this->q15_recei == "") ){ 
        $this->erro_sql = " Campo q15_recei não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -180,7 +180,7 @@ class cl_isscalcant
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q15_numpre == null) || ($this->q15_numpre == "") ){ 
+     if(($this->q15_numpre == null) || ($this->q15_numpre === 0 || $this->q15_numpre === 0.0 || $this->q15_numpre == "") ){ 
        $this->erro_sql = " Campo q15_numpre não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

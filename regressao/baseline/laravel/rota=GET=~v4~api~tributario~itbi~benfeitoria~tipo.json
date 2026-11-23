@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/itbi/benfeitoria/tipo",
+  "json": {
+    "errors": {
+      "tipoItbi": [
+        "O campo tipo itbi é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "edb911f4ed359cdccb5555987da8e103d3682615bc05a50c4096c37d6639a635",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

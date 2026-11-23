@@ -77,15 +77,15 @@ class cl_aguacoletorexportadadosleitura {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x51_sequencial = ($this->x51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_sequencial"]:$this->x51_sequencial);
-       $this->x51_aguacoletorexportadados = ($this->x51_aguacoletorexportadados == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_aguacoletorexportadados"]:$this->x51_aguacoletorexportadados);
-       $this->x51_agualeitura = ($this->x51_agualeitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_agualeitura"]:$this->x51_agualeitura);
-       $this->x51_diasultimaleitura = ($this->x51_diasultimaleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_diasultimaleitura"]:$this->x51_diasultimaleitura);
-       $this->x51_mesesultimaleitura = ($this->x51_mesesultimaleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_mesesultimaleitura"]:$this->x51_mesesultimaleitura);
-       $this->x51_tipoleitura = ($this->x51_tipoleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_tipoleitura"]:$this->x51_tipoleitura);
-       $this->x51_numcgm = ($this->x51_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_numcgm"]:$this->x51_numcgm);
+       $this->x51_sequencial = ($this->x51_sequencial === 0 || $this->x51_sequencial === 0.0 || $this->x51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_sequencial"]:$this->x51_sequencial);
+       $this->x51_aguacoletorexportadados = ($this->x51_aguacoletorexportadados === 0 || $this->x51_aguacoletorexportadados === 0.0 || $this->x51_aguacoletorexportadados == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_aguacoletorexportadados"]:$this->x51_aguacoletorexportadados);
+       $this->x51_agualeitura = ($this->x51_agualeitura === 0 || $this->x51_agualeitura === 0.0 || $this->x51_agualeitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_agualeitura"]:$this->x51_agualeitura);
+       $this->x51_diasultimaleitura = ($this->x51_diasultimaleitura === 0 || $this->x51_diasultimaleitura === 0.0 || $this->x51_diasultimaleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_diasultimaleitura"]:$this->x51_diasultimaleitura);
+       $this->x51_mesesultimaleitura = ($this->x51_mesesultimaleitura === 0 || $this->x51_mesesultimaleitura === 0.0 || $this->x51_mesesultimaleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_mesesultimaleitura"]:$this->x51_mesesultimaleitura);
+       $this->x51_tipoleitura = ($this->x51_tipoleitura === 0 || $this->x51_tipoleitura === 0.0 || $this->x51_tipoleitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_tipoleitura"]:$this->x51_tipoleitura);
+       $this->x51_numcgm = ($this->x51_numcgm === 0 || $this->x51_numcgm === 0.0 || $this->x51_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_numcgm"]:$this->x51_numcgm);
      }else{
-       $this->x51_sequencial = ($this->x51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_sequencial"]:$this->x51_sequencial);
+       $this->x51_sequencial = ($this->x51_sequencial === 0 || $this->x51_sequencial === 0.0 || $this->x51_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x51_sequencial"]:$this->x51_sequencial);
      }
    }
    // funcao para inclusao
@@ -163,7 +163,7 @@ class cl_aguacoletorexportadadosleitura {
          $this->x51_sequencial = $x51_sequencial;
        }
      }
-     if(($this->x51_sequencial == null) || ($this->x51_sequencial == "") ){
+     if(($this->x51_sequencial == null) || ($this->x51_sequencial === 0 || $this->x51_sequencial === 0.0 || $this->x51_sequencial == "") ){
        $this->erro_sql = " Campo x51_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -37,7 +37,7 @@ if (!isset($arqinclude)){ // se este arquivo não esta incluido por outro
  include(modification("classes/db_conrelinfo_classe.php"));
  include(modification("classes/db_orcparamrel_classe.php"));
  
- parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+ parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
  db_postmemory($HTTP_SERVER_VARS);
  
  $classinatura = new cl_assinatura;

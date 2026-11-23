@@ -67,10 +67,10 @@ class cl_procjurtiporegra {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v61_sequencial = ($this->v61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v61_sequencial"]:$this->v61_sequencial);
+       $this->v61_sequencial = ($this->v61_sequencial === 0 || $this->v61_sequencial === 0.0 || $this->v61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v61_sequencial"]:$this->v61_sequencial);
        $this->v61_descricao = ($this->v61_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["v61_descricao"]:$this->v61_descricao);
      }else{
-       $this->v61_sequencial = ($this->v61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v61_sequencial"]:$this->v61_sequencial);
+       $this->v61_sequencial = ($this->v61_sequencial === 0 || $this->v61_sequencial === 0.0 || $this->v61_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v61_sequencial"]:$this->v61_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_procjurtiporegra {
          $this->v61_sequencial = $v61_sequencial;
        }
      }
-     if(($this->v61_sequencial == null) || ($this->v61_sequencial == "") ){
+     if(($this->v61_sequencial == null) || ($this->v61_sequencial === 0 || $this->v61_sequencial === 0.0 || $this->v61_sequencial == "") ){
        $this->erro_sql = " Campo v61_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

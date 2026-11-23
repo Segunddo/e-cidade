@@ -72,8 +72,8 @@ class cl_carlote {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j35_idbql = ($this->j35_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j35_idbql"]:$this->j35_idbql);
-       $this->j35_caract = ($this->j35_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j35_caract"]:$this->j35_caract);
+       $this->j35_idbql = ($this->j35_idbql === 0 || $this->j35_idbql === 0.0 || $this->j35_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j35_idbql"]:$this->j35_idbql);
+       $this->j35_caract = ($this->j35_caract === 0 || $this->j35_caract === 0.0 || $this->j35_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j35_caract"]:$this->j35_caract);
        if($this->j35_dtlanc == ""){
          $this->j35_dtlanc_dia = ($this->j35_dtlanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j35_dtlanc_dia"]:$this->j35_dtlanc_dia);
          $this->j35_dtlanc_mes = ($this->j35_dtlanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j35_dtlanc_mes"]:$this->j35_dtlanc_mes);
@@ -83,8 +83,8 @@ class cl_carlote {
          }
        }
      }else{
-       $this->j35_idbql = ($this->j35_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j35_idbql"]:$this->j35_idbql);
-       $this->j35_caract = ($this->j35_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j35_caract"]:$this->j35_caract);
+       $this->j35_idbql = ($this->j35_idbql === 0 || $this->j35_idbql === 0.0 || $this->j35_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j35_idbql"]:$this->j35_idbql);
+       $this->j35_caract = ($this->j35_caract === 0 || $this->j35_caract === 0.0 || $this->j35_caract == ""?@$GLOBALS["HTTP_POST_VARS"]["j35_caract"]:$this->j35_caract);
      }
    }
    // funcao para inclusao
@@ -92,7 +92,7 @@ class cl_carlote {
       $this->atualizacampos();
       $this->j35_idbql = $j35_idbql;
       $this->j35_caract = $j35_caract;
-     if(($this->j35_idbql == null) || ($this->j35_idbql == "") ){
+     if(($this->j35_idbql == null) || ($this->j35_idbql === 0 || $this->j35_idbql === 0.0 || $this->j35_idbql == "") ){
        $this->erro_sql = " Campo j35_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -100,7 +100,7 @@ class cl_carlote {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j35_caract == null) || ($this->j35_caract == "") ){
+     if(($this->j35_caract == null) || ($this->j35_caract === 0 || $this->j35_caract === 0.0 || $this->j35_caract == "") ){
        $this->erro_sql = " Campo j35_caract nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

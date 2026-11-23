@@ -35,7 +35,7 @@ require_once(modification("dbforms/db_funcoes.php"));
 
 $cldb_config = new cl_db_config;
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_SERVER);
 
 $clorcdotacao   = new cl_orcdotacao;

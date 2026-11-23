@@ -73,8 +73,8 @@ class cl_pardiver {
      if($exclusao==false){
        $this->dv08_qv = ($this->dv08_qv == "f"?@$GLOBALS["HTTP_POST_VARS"]["dv08_qv"]:$this->dv08_qv);
        $this->dv08_inflat = ($this->dv08_inflat == ""?@$GLOBALS["HTTP_POST_VARS"]["dv08_inflat"]:$this->dv08_inflat);
-       $this->dv08_hist = ($this->dv08_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["dv08_hist"]:$this->dv08_hist);
-       $this->dv08_instit = ($this->dv08_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["dv08_instit"]:$this->dv08_instit);
+       $this->dv08_hist = ($this->dv08_hist === 0 || $this->dv08_hist === 0.0 || $this->dv08_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["dv08_hist"]:$this->dv08_hist);
+       $this->dv08_instit = ($this->dv08_instit === 0 || $this->dv08_instit === 0.0 || $this->dv08_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["dv08_instit"]:$this->dv08_instit);
      }else{
      }
    }

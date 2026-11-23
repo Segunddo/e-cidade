@@ -62,8 +62,8 @@ class cl_publicidadesigapfiscal
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c136_codigo = ($this->c136_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_codigo"]:$this->c136_codigo);
-       $this->c136_ano = ($this->c136_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_ano"]:$this->c136_ano);
+       $this->c136_codigo = ($this->c136_codigo === 0 || $this->c136_codigo === 0.0 || $this->c136_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_codigo"]:$this->c136_codigo);
+       $this->c136_ano = ($this->c136_ano === 0 || $this->c136_ano === 0.0 || $this->c136_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_ano"]:$this->c136_ano);
        $this->c136_descricao = ($this->c136_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_descricao"]:$this->c136_descricao);
        if($this->c136_data_publicacao == ""){
          $this->c136_data_publicacao_dia = ($this->c136_data_publicacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_data_publicacao_dia"]:$this->c136_data_publicacao_dia);
@@ -73,14 +73,14 @@ class cl_publicidadesigapfiscal
             $this->c136_data_publicacao = $this->c136_data_publicacao_ano."-".$this->c136_data_publicacao_mes."-".$this->c136_data_publicacao_dia;
          }
        }
-       $this->c136_tipo_relatorio = ($this->c136_tipo_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_tipo_relatorio"]:$this->c136_tipo_relatorio);
-       $this->c136_meio_comunicacao = ($this->c136_meio_comunicacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_meio_comunicacao"]:$this->c136_meio_comunicacao);
-       $this->c136_periodo = ($this->c136_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_periodo"]:$this->c136_periodo);
+       $this->c136_tipo_relatorio = ($this->c136_tipo_relatorio === 0 || $this->c136_tipo_relatorio === 0.0 || $this->c136_tipo_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_tipo_relatorio"]:$this->c136_tipo_relatorio);
+       $this->c136_meio_comunicacao = ($this->c136_meio_comunicacao === 0 || $this->c136_meio_comunicacao === 0.0 || $this->c136_meio_comunicacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_meio_comunicacao"]:$this->c136_meio_comunicacao);
+       $this->c136_periodo = ($this->c136_periodo === 0 || $this->c136_periodo === 0.0 || $this->c136_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_periodo"]:$this->c136_periodo);
        $this->c136_link = ($this->c136_link == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_link"]:$this->c136_link);
        $this->c136_local_publicacao = ($this->c136_local_publicacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_local_publicacao"]:$this->c136_local_publicacao);
-       $this->c136_instituicao = ($this->c136_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_instituicao"]:$this->c136_instituicao);
+       $this->c136_instituicao = ($this->c136_instituicao === 0 || $this->c136_instituicao === 0.0 || $this->c136_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_instituicao"]:$this->c136_instituicao);
      }else{
-       $this->c136_codigo = ($this->c136_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_codigo"]:$this->c136_codigo);
+       $this->c136_codigo = ($this->c136_codigo === 0 || $this->c136_codigo === 0.0 || $this->c136_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["c136_codigo"]:$this->c136_codigo);
      }
    }
 
@@ -174,7 +174,7 @@ class cl_publicidadesigapfiscal
          $this->c136_codigo = $c136_codigo; 
        }
      }
-     if(($this->c136_codigo == null) || ($this->c136_codigo == "") ){ 
+     if(($this->c136_codigo == null) || ($this->c136_codigo === 0 || $this->c136_codigo === 0.0 || $this->c136_codigo == "") ){ 
        $this->erro_sql = " Campo c136_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

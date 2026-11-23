@@ -59,8 +59,8 @@ class cl_empagemovslips
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->k107_sequencial = ($this->k107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k107_sequencial"]:$this->k107_sequencial);
-            $this->k107_empagemov = ($this->k107_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["k107_empagemov"]:$this->k107_empagemov);
+            $this->k107_sequencial = ($this->k107_sequencial === 0 || $this->k107_sequencial === 0.0 || $this->k107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k107_sequencial"]:$this->k107_sequencial);
+            $this->k107_empagemov = ($this->k107_empagemov === 0 || $this->k107_empagemov === 0.0 || $this->k107_empagemov == ""?@$GLOBALS["HTTP_POST_VARS"]["k107_empagemov"]:$this->k107_empagemov);
             if ($this->k107_data == "") {
                 $this->k107_data_dia = ($this->k107_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k107_data_dia"]:$this->k107_data_dia);
                 $this->k107_data_mes = ($this->k107_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k107_data_mes"]:$this->k107_data_mes);
@@ -69,12 +69,12 @@ class cl_empagemovslips
                      $this->k107_data = $this->k107_data_ano."-".$this->k107_data_mes."-".$this->k107_data_dia;
                 }
             }
-            $this->k107_valor = ($this->k107_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k107_valor"]:$this->k107_valor);
+            $this->k107_valor = ($this->k107_valor === 0 || $this->k107_valor === 0.0 || $this->k107_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["k107_valor"]:$this->k107_valor);
             $this->k107_ctacredito = !empty($_POST["k107_ctacredito"]) ? $_POST["k107_ctacredito"] : $this->k107_ctacredito;
             $this->k107_ctadebito = !empty($_POST["k107_ctadebito"]) ? $_POST["k107_ctadebito"] : $this->k107_ctadebito;
             $this->k107_retencao = !empty($_POST["k107_retencao"]) ? $_POST["k107_retencao"] : $this->k107_retencao;
         } else {
-            $this->k107_sequencial = ($this->k107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k107_sequencial"]:$this->k107_sequencial);
+            $this->k107_sequencial = ($this->k107_sequencial === 0 || $this->k107_sequencial === 0.0 || $this->k107_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k107_sequencial"]:$this->k107_sequencial);
         }
     }
    // funcao para Inclusão
@@ -153,7 +153,7 @@ class cl_empagemovslips
                 $this->k107_sequencial = $k107_sequencial;
             }
         }
-        if (($this->k107_sequencial == null) || ($this->k107_sequencial == "")) {
+        if (($this->k107_sequencial == null) || ($this->k107_sequencial === 0 || $this->k107_sequencial === 0.0 || $this->k107_sequencial == "")) {
             $this->erro_sql = " Campo k107_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

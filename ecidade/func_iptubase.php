@@ -40,7 +40,7 @@ $oPost = db_utils::postMemory($_POST);
 
 db_postmemory($_POST);
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $cliptubase = new cl_iptubase;
 $clsetorloc = new cl_setorloc();

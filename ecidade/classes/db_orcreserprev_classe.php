@@ -75,17 +75,17 @@ class cl_orcreserprev {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o33_anousu = ($this->o33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_anousu"]:$this->o33_anousu);
-       $this->o33_projativ = ($this->o33_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_projativ"]:$this->o33_projativ);
-       $this->o33_codigo = ($this->o33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_codigo"]:$this->o33_codigo);
-       $this->o33_mes = ($this->o33_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_mes"]:$this->o33_mes);
-       $this->o33_perc = ($this->o33_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_perc"]:$this->o33_perc);
-       $this->o33_valor = ($this->o33_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_valor"]:$this->o33_valor);
+       $this->o33_anousu = ($this->o33_anousu === 0 || $this->o33_anousu === 0.0 || $this->o33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_anousu"]:$this->o33_anousu);
+       $this->o33_projativ = ($this->o33_projativ === 0 || $this->o33_projativ === 0.0 || $this->o33_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_projativ"]:$this->o33_projativ);
+       $this->o33_codigo = ($this->o33_codigo === 0 || $this->o33_codigo === 0.0 || $this->o33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_codigo"]:$this->o33_codigo);
+       $this->o33_mes = ($this->o33_mes === 0 || $this->o33_mes === 0.0 || $this->o33_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_mes"]:$this->o33_mes);
+       $this->o33_perc = ($this->o33_perc === 0 || $this->o33_perc === 0.0 || $this->o33_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_perc"]:$this->o33_perc);
+       $this->o33_valor = ($this->o33_valor === 0 || $this->o33_valor === 0.0 || $this->o33_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_valor"]:$this->o33_valor);
      }else{
-       $this->o33_anousu = ($this->o33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_anousu"]:$this->o33_anousu);
-       $this->o33_projativ = ($this->o33_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_projativ"]:$this->o33_projativ);
-       $this->o33_codigo = ($this->o33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_codigo"]:$this->o33_codigo);
-       $this->o33_mes = ($this->o33_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_mes"]:$this->o33_mes);
+       $this->o33_anousu = ($this->o33_anousu === 0 || $this->o33_anousu === 0.0 || $this->o33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_anousu"]:$this->o33_anousu);
+       $this->o33_projativ = ($this->o33_projativ === 0 || $this->o33_projativ === 0.0 || $this->o33_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_projativ"]:$this->o33_projativ);
+       $this->o33_codigo = ($this->o33_codigo === 0 || $this->o33_codigo === 0.0 || $this->o33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_codigo"]:$this->o33_codigo);
+       $this->o33_mes = ($this->o33_mes === 0 || $this->o33_mes === 0.0 || $this->o33_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o33_mes"]:$this->o33_mes);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_orcreserprev {
        $this->o33_projativ = $o33_projativ;
        $this->o33_codigo = $o33_codigo;
        $this->o33_mes = $o33_mes;
-     if(($this->o33_anousu == null) || ($this->o33_anousu == "") ){
+     if(($this->o33_anousu == null) || ($this->o33_anousu === 0 || $this->o33_anousu === 0.0 || $this->o33_anousu == "") ){
        $this->erro_sql = " Campo o33_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -121,7 +121,7 @@ class cl_orcreserprev {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o33_projativ == null) || ($this->o33_projativ == "") ){
+     if(($this->o33_projativ == null) || ($this->o33_projativ === 0 || $this->o33_projativ === 0.0 || $this->o33_projativ == "") ){
        $this->erro_sql = " Campo o33_projativ nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -129,7 +129,7 @@ class cl_orcreserprev {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o33_codigo == null) || ($this->o33_codigo == "") ){
+     if(($this->o33_codigo == null) || ($this->o33_codigo === 0 || $this->o33_codigo === 0.0 || $this->o33_codigo == "") ){
        $this->erro_sql = " Campo o33_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -137,7 +137,7 @@ class cl_orcreserprev {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o33_mes == null) || ($this->o33_mes == "") ){
+     if(($this->o33_mes == null) || ($this->o33_mes === 0 || $this->o33_mes === 0.0 || $this->o33_mes == "") ){
        $this->erro_sql = " Campo o33_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

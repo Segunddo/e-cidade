@@ -67,10 +67,10 @@ class cl_db_tarefasit {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db80_codigo = ($this->db80_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db80_codigo"]:$this->db80_codigo);
+       $this->db80_codigo = ($this->db80_codigo === 0 || $this->db80_codigo === 0.0 || $this->db80_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db80_codigo"]:$this->db80_codigo);
        $this->db80_descr = ($this->db80_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db80_descr"]:$this->db80_descr);
      }else{
-       $this->db80_codigo = ($this->db80_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db80_codigo"]:$this->db80_codigo);
+       $this->db80_codigo = ($this->db80_codigo === 0 || $this->db80_codigo === 0.0 || $this->db80_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db80_codigo"]:$this->db80_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_db_tarefasit {
          $this->db80_codigo = $db80_codigo;
        }
      }
-     if(($this->db80_codigo == null) || ($this->db80_codigo == "") ){
+     if(($this->db80_codigo == null) || ($this->db80_codigo === 0 || $this->db80_codigo === 0.0 || $this->db80_codigo == "") ){
        $this->erro_sql = " Campo db80_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

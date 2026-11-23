@@ -73,14 +73,14 @@ class cl_orcdotacaorp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o73_anousu = ($this->o73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_anousu"]:$this->o73_anousu);
-       $this->o73_coddot = ($this->o73_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_coddot"]:$this->o73_coddot);
-       $this->o73_funcao = ($this->o73_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_funcao"]:$this->o73_funcao);
-       $this->o73_subfuncao = ($this->o73_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_subfuncao"]:$this->o73_subfuncao);
-       $this->o73_subprograma = ($this->o73_subprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_subprograma"]:$this->o73_subprograma);
+       $this->o73_anousu = ($this->o73_anousu === 0 || $this->o73_anousu === 0.0 || $this->o73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_anousu"]:$this->o73_anousu);
+       $this->o73_coddot = ($this->o73_coddot === 0 || $this->o73_coddot === 0.0 || $this->o73_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_coddot"]:$this->o73_coddot);
+       $this->o73_funcao = ($this->o73_funcao === 0 || $this->o73_funcao === 0.0 || $this->o73_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_funcao"]:$this->o73_funcao);
+       $this->o73_subfuncao = ($this->o73_subfuncao === 0 || $this->o73_subfuncao === 0.0 || $this->o73_subfuncao == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_subfuncao"]:$this->o73_subfuncao);
+       $this->o73_subprograma = ($this->o73_subprograma === 0 || $this->o73_subprograma === 0.0 || $this->o73_subprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_subprograma"]:$this->o73_subprograma);
      }else{
-       $this->o73_anousu = ($this->o73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_anousu"]:$this->o73_anousu);
-       $this->o73_coddot = ($this->o73_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_coddot"]:$this->o73_coddot);
+       $this->o73_anousu = ($this->o73_anousu === 0 || $this->o73_anousu === 0.0 || $this->o73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_anousu"]:$this->o73_anousu);
+       $this->o73_coddot = ($this->o73_coddot === 0 || $this->o73_coddot === 0.0 || $this->o73_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["o73_coddot"]:$this->o73_coddot);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_orcdotacaorp {
      }
        $this->o73_anousu = $o73_anousu; 
        $this->o73_coddot = $o73_coddot; 
-     if(($this->o73_anousu == null) || ($this->o73_anousu == "") ){ 
+     if(($this->o73_anousu == null) || ($this->o73_anousu === 0 || $this->o73_anousu === 0.0 || $this->o73_anousu == "") ){ 
        $this->erro_sql = " Campo o73_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -123,7 +123,7 @@ class cl_orcdotacaorp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o73_coddot == null) || ($this->o73_coddot == "") ){ 
+     if(($this->o73_coddot == null) || ($this->o73_coddot === 0 || $this->o73_coddot === 0.0 || $this->o73_coddot == "") ){ 
        $this->erro_sql = " Campo o73_coddot nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

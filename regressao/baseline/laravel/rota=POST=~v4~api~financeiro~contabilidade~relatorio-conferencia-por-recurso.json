@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio-conferencia-por-recurso",
+  "json": {
+    "error": true,
+    "message": "O campo data inicial é obrigatório."
+  },
+  "sha256": "f85cc7681847699278ade942d9dc9ec2c604a35fd994dc4ff13e76b855760148",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

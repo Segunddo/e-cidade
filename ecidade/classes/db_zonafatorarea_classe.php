@@ -75,14 +75,14 @@ class cl_zonafatorarea {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j113_sequencial = ($this->j113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_sequencial"]:$this->j113_sequencial);
-       $this->j113_zona = ($this->j113_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_zona"]:$this->j113_zona);
-       $this->j113_areaini = ($this->j113_areaini == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_areaini"]:$this->j113_areaini);
-       $this->j113_areafim = ($this->j113_areafim == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_areafim"]:$this->j113_areafim);
-       $this->j113_fator = ($this->j113_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_fator"]:$this->j113_fator);
-       $this->j113_anousu = ($this->j113_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_anousu"]:$this->j113_anousu);
+       $this->j113_sequencial = ($this->j113_sequencial === 0 || $this->j113_sequencial === 0.0 || $this->j113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_sequencial"]:$this->j113_sequencial);
+       $this->j113_zona = ($this->j113_zona === 0 || $this->j113_zona === 0.0 || $this->j113_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_zona"]:$this->j113_zona);
+       $this->j113_areaini = ($this->j113_areaini === 0 || $this->j113_areaini === 0.0 || $this->j113_areaini == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_areaini"]:$this->j113_areaini);
+       $this->j113_areafim = ($this->j113_areafim === 0 || $this->j113_areafim === 0.0 || $this->j113_areafim == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_areafim"]:$this->j113_areafim);
+       $this->j113_fator = ($this->j113_fator === 0 || $this->j113_fator === 0.0 || $this->j113_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_fator"]:$this->j113_fator);
+       $this->j113_anousu = ($this->j113_anousu === 0 || $this->j113_anousu === 0.0 || $this->j113_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_anousu"]:$this->j113_anousu);
      }else{
-       $this->j113_sequencial = ($this->j113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_sequencial"]:$this->j113_sequencial);
+       $this->j113_sequencial = ($this->j113_sequencial === 0 || $this->j113_sequencial === 0.0 || $this->j113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j113_sequencial"]:$this->j113_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_zonafatorarea {
          $this->j113_sequencial = $j113_sequencial;
        }
      }
-     if(($this->j113_sequencial == null) || ($this->j113_sequencial == "") ){
+     if(($this->j113_sequencial == null) || ($this->j113_sequencial === 0 || $this->j113_sequencial === 0.0 || $this->j113_sequencial == "") ){
        $this->erro_sql = " Campo j113_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

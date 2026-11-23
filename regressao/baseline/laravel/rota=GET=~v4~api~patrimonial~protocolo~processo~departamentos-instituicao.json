@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/protocolo/processo/departamentos-instituicao",
+  "json": {
+    "data": [],
+    "error": true,
+    "message": "Erro ao buscar instituições"
+  },
+  "sha256": "f990c14cb9c17145ba33ffbc4273876884e29110d73b678d5dbde17d4ffab331",
+  "sql_negocio": [],
+  "status": 400,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

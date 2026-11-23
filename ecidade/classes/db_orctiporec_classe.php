@@ -70,11 +70,11 @@ class cl_orctiporec
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->o15_codigo = ($this->o15_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_codigo"] : $this->o15_codigo);
+            $this->o15_codigo = ($this->o15_codigo === 0 || $this->o15_codigo === 0.0 || $this->o15_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_codigo"] : $this->o15_codigo);
             $this->o15_descr = ($this->o15_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_descr"] : $this->o15_descr);
             $this->o15_codtri = ($this->o15_codtri == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_codtri"] : $this->o15_codtri);
             $this->o15_finali = ($this->o15_finali == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_finali"] : $this->o15_finali);
-            $this->o15_tipo = ($this->o15_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_tipo"] : $this->o15_tipo);
+            $this->o15_tipo = ($this->o15_tipo === 0 || $this->o15_tipo === 0.0 || $this->o15_tipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_tipo"] : $this->o15_tipo);
             if ($this->o15_datalimite == "") {
                 $this->o15_datalimite_dia = ($this->o15_datalimite_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_datalimite_dia"] : $this->o15_datalimite_dia);
                 $this->o15_datalimite_mes = ($this->o15_datalimite_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_datalimite_mes"] : $this->o15_datalimite_mes);
@@ -83,7 +83,7 @@ class cl_orctiporec
                     $this->o15_datalimite = $this->o15_datalimite_ano . "-" . $this->o15_datalimite_mes . "-" . $this->o15_datalimite_dia;
                 }
             }
-            $this->o15_db_estruturavalor = ($this->o15_db_estruturavalor == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_db_estruturavalor"] : $this->o15_db_estruturavalor);
+            $this->o15_db_estruturavalor = ($this->o15_db_estruturavalor === 0 || $this->o15_db_estruturavalor === 0.0 || $this->o15_db_estruturavalor == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_db_estruturavalor"] : $this->o15_db_estruturavalor);
             $this->o15_codigosiconfi = ($this->o15_codigosiconfi == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_codigosiconfi"] : $this->o15_codigosiconfi);
             $this->o15_loaidentificadoruso = ($this->o15_loaidentificadoruso === "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_loaidentificadoruso"] : $this->o15_loaidentificadoruso);
             $this->o15_loatipo = ($this->o15_loatipo === "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_loatipo"] : $this->o15_loatipo);
@@ -92,7 +92,7 @@ class cl_orctiporec
             $this->o15_complemento = ($this->o15_complemento === "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_complemento"] : $this->o15_complemento);
             $this->o15_recurso = ($this->o15_recurso == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_recurso"] : $this->o15_recurso);
         } else {
-            $this->o15_codigo = ($this->o15_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_codigo"] : $this->o15_codigo);
+            $this->o15_codigo = ($this->o15_codigo === 0 || $this->o15_codigo === 0.0 || $this->o15_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["o15_codigo"] : $this->o15_codigo);
         }
     }
 
@@ -185,7 +185,7 @@ class cl_orctiporec
                 $this->o15_codigo = $o15_codigo;
             }
         }
-        if (($this->o15_codigo == null) || ($this->o15_codigo == "")) {
+        if (($this->o15_codigo == null) || ($this->o15_codigo === 0 || $this->o15_codigo === 0.0 || $this->o15_codigo == "")) {
             $this->erro_sql = " Campo o15_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

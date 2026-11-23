@@ -1,0 +1,78 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/api/educacao/files/duvidas",
+  "json": [
+    {
+      "ativa": true,
+      "codigo": 1,
+      "ordem": 1,
+      "pergunta": "Como posso realizar a inscrição para o  Chamada Escolar 2024?",
+      "respostas": [
+        "<p>Pelo endereço eletrônico:<a href=\"https://matricula2024.portovelho.ro.gov.br/#/\" target=\"_self\">https://matricula2024.portovelho.ro.gov.br/#/</a> que ficará disponível entre os dias 22/11/2023 a 04/12/2023.\n        </p>"
+      ]
+    },
+    {
+      "ativa": true,
+      "codigo": 2,
+      "ordem": 2,
+      "pergunta": "Quais os documentos necessários para fazer a inscrição?",
+      "respostas": [
+        "<table role=\"table\" class=\"p-datatable-table p-datatable-scrollable-table\" data-pc-section=\"table\"><tbody class=\"p-datatable-tbody\" role=\"rowgroup\" data-pc-section=\"tbody\"><tr class=\"\" tabindex=\"-1\" role=\"row\" data-pc-section=\"bodyrow\" data-p-selectable-row=\"false\" draggable=\"false\"><td class=\"\" role=\"cell\" data-pc-section=\"bodycell\" data-pc-name=\"bodycell\" data-p-selection-column=\"false\" data-p-editable-column=\"false\" data-p-cell-editing=\"false\"><ul><li>I. Certidão de Nascimento da criança/adolescente; </li><li>II. Número do CPF da criança/adolescente; </li><li>III. Cartão do SUS; </li><li>IV. RG e CPF do responsável legal;</li><li>V. Comprovante de endereço; </li><li>VI. Cartão do Programa Bolsa Família, se for beneficiário; </li><li>VII. Número de telefone para contato;</li><li>VIII. Endereço de e-mail;</li><li>IX. Se estudante com vida escolar, Histórico Escolar ou Declaração de\nEscolaridade; </li><li>X. Qual a renda mensal de sua família (some a sua renda com a renda dos\nfamiliares que residem na mesma residência).</li></ul><p data-v-2e6855f2=\"\"><p data-v-2e6855f2=\"\"><br></p><p data-v-2e6855f2=\"\">OBS.:  <strong> É dever do responsável fornecer informações fidedignas durante o cadastro, caso contrário a inscrição não será validada. </strong></p></p></td><td class=\"\" role=\"cell\" data-pc-section=\"bodycell\" data-pc-name=\"bodycell\" data-p-selection-column=\"false\" data-p-editable-column=\"false\" data-p-cell-editing=\"false\"><i data-v-2e6855f2=\"\" class=\"pi pi-trash text-red-600\" style=\"font-size: 1rem;\"></i><br></td></tr></tbody></table>"
+      ]
+    },
+    {
+      "ativa": true,
+      "codigo": 3,
+      "ordem": 3,
+      "pergunta": "Como saber a etapa de ensino para a idade do meu filho?",
+      "respostas": [
+        "<p style=\"text-align: justify;\">Para o ingresso do estudante na Rede Municipal de Ensino serão consideradas as Resoluções nº 02/2018/CNE/CEB, de 09 de outubro de 2018, Art. 3º §2º e §3º, para a Educação Infantil e Art. 4º §1º para o Ensino Fundamental, que define a idade para validação de ingresso até 31 de março do ano em que ocorrer a matrícula e para a composição das turmas a Resolução nº 04/CME/2021 nos Art. 12º e 15º.</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I. Etapa: Educação Infantil:<br></p><ul><li>a) Creche II (2 anos completos ou a completar até 31/03/2024);</li><li>b) Creche III (3 anos completos ou a completar até 31/03/2024);</li><li>c) Pré-I (4 anos completos ou a completar até 31/03/2024);</li><li>d) Pré-II (5 anos completos ou a completar até 31/03/2024),</li></ul><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; II. Etapa: Ensino Fundamental Anos Iniciais (1º ao 5º ano):<br></p><ul><li>a) 1º Ano do Ensino Fundamental (6 anos completos ou a completar até 31/03/2024), a criança que não tenha cursado a Educação Infantil mas possui</li><li>a idade conforme a referência;</li><li>b) A partir do 1º ano do Ensino Fundamental cursado deve apresentar declaração de escolaridade emitida pela escola para escolher o ano escolar</li><li>correspondente para cursar em 2024;</li><li>c) Estudantes em idade escolar para ingresso no 2º até o 5º Ano</li></ul>"
+      ]
+    },
+    {
+      "ativa": true,
+      "codigo": 4,
+      "ordem": 4,
+      "pergunta": "Como realizo o cadastro de filhos gêmeos?",
+      "respostas": [
+        "<p data-v-2e6855f2=\"\"><p>Ao realizar a inscrição, na aba <strong>OUTROS</strong> terá um campo chamado <strong>Candidato \nTem Irmão Gêmeo</strong>, este campo deverá ser informado com a opção<strong> SIM</strong> para \nambos os cadastros.&nbsp;</p><p>Para que o sistema reconheça os irmãos, o CPF do \nresponsável deverá ser o mesmo em ambas as inscrições.\n        </p></p>"
+      ]
+    },
+    {
+      "ativa": true,
+      "codigo": 5,
+      "ordem": 5,
+      "pergunta": "Meu filho(a) não está na etapa (série) conforme a idade, está adiantado ou atrasado, o que fazer?",
+      "respostas": [
+        "<p>Os casos de crianças com distorção idade/ano (crianças atrasadas ou adiantadas) os\nresponsáveis deverão se dirigir a uma Unidade Escolar para que seja feita sua inscrição.</p>"
+      ]
+    },
+    {
+      "ativa": true,
+      "codigo": 6,
+      "ordem": 6,
+      "pergunta": "Quais os documentos necessários deve entregar no ato da matrícula na Unidade Escolar?",
+      "respostas": [
+        "<p>No ato da matrícula, o pai ou responsável legal deverá entregar na secretaria da Unidade\nEscolar os seguintes documentos (original e fotocópia):</p><p><br></p><ul><li>I. Certidão de Nascimento da criança/adolescente;&nbsp;</li><li>II. CPF do candidato;</li><li>III. Cartão do SUS (Sistema Único de Saúde) do estudante;</li><li>IV. Carteira de vacinação atualizada;</li><li>V. Declaração Vacinal (disponível nas Unidades de Saúde);</li><li>VI. Duas (02) fotos 3x4 do candidato;</li><li>VII. Cartão do Programa Federal Bolsa Família, se for o caso;</li><li>VIII. Comprovante de residência atualizado;</li><li>IX. RG e CPF do responsável legal;</li><li>X. Laudo Médico, para Pessoa com Deficiência (PcD);</li><li>XI. Histórico Escolar ou Declaração de Escolaridade;</li><li>XII. Documento Judicial de Guarda do menor se for o caso</li></ul>"
+      ]
+    },
+    {
+      "ativa": true,
+      "codigo": 7,
+      "ordem": 7,
+      "pergunta": "Para os critérios de prioridade, os responsáveis deverão apresentar os seguintes documentos comprobatórios, no ato da matrícula:",
+      "respostas": [
+        "<p><br><br></p><table class=\"dados table-zebrada\"><tbody><tr><th>Grupos Prioritários </th>  \n            <th>Documento de comprovação </th>\n        </tr>\n        <tr>\n            <td> I- Estudante caracterizado PcD (Pessoa com Deficiência)<br><br></td>  \n            <td>  (I) Laudo Médico.<br><br></td>\n        </tr>\n        <tr>\n            <td> II- Crianças que estejam sob a guarda de mulher vítima de violência doméstica ou familiar.<br><br></td>  \n            <td> (II) Cópia do boletim de ocorrência ou do processo judicial em curso.<br><br><br></td>\n        </tr>\n        <tr>\n            <td> III- Famílias beneficiadas pelo Programa Federal&nbsp; \"Bolsa Família\";<br><br></td>  \n            <td> (III) Folha resumo V7 (Disponível pelo CRAS e/ou Central do Cadastro Único).<br><br></td>\n        </tr>\n        <tr>\n            <td> IV- Famílias com mães economicamente ativas. </td>  \n            <td> (IV) Carteira de trabalho;Contra-cheque; ou Autodeclaração (prestador de serviços)</td></tr></tbody></table>"
+      ]
+    }
+  ],
+  "sha256": "d2e97ea095ebacf10d182b4d0bf3ced8c4d6c786500392a2e74dafc179bffeb3",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -5,7 +5,7 @@ require_once modification("classes/db_saltes_classe.php");
 
 $clsaltes = new cl_saltes;
 
-parse_str(base64_decode($_SERVER['QUERY_STRING']));
+parse_str(base64_decode($_SERVER['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $motivo = "";
 // Dados
@@ -114,7 +114,7 @@ try {
     $dados = db_query($sql);
     $sEvento = "";
 
-    if (pg_numrows($dados) > 0){
+    if (($dados ? pg_numrows($dados) : null) > 0){
 
         $aMotivo = db_fieldsMemory($dados,0);
         $motivo  = $k18_motivo;
@@ -137,8 +137,8 @@ try {
     $recursos  = db_query($sql);
     // se houverem registros, monta um array
     $array_recursos =  array();
-    if (pg_numrows($recursos)>0){
-        for($x=0;$x < pg_numrows($recursos);$x++){
+    if (($recursos ? pg_numrows($recursos) : null)>0){
+        for($x=0;$x < ($recursos ? pg_numrows($recursos) : null);$x++){
             db_fieldsmemory($recursos,$x);
             $array_recursos[] = "$k29_recurso#$o15_descr#$k29_valor";
         }
@@ -149,7 +149,7 @@ try {
     // print_r($array_recursos); exit;
 
 
-    if (pg_numrows($dados) == 0) {
+    if (($dados ? pg_numrows($dados) : null) == 0) {
         throw new Exception('Documento de Slip não Cadastrado.');
     }
 
@@ -161,7 +161,7 @@ try {
                                 inner join fonterecurso on orctiporec_id = o15_codigo and exercicio = {$exercicio}
                                 where k181_slip in ( {$numslip} )";
         $rsRecursoSlip = db_query($sqlRecursoSlip);
-        if (pg_num_rows($rsRecursoSlip) > 0) {
+        if (($rsRecursoSlip ? pg_num_rows($rsRecursoSlip) : null) > 0) {
             $recursoSlip = db_utils::fieldsMemory($rsRecursoSlip, 0);
         }
     }
@@ -169,7 +169,7 @@ try {
 
     $sqlcai = "select * from caiparametro where k29_instit = ".db_getsession('DB_instit');
     $resultcai = db_query($sqlcai) or die($sqlcai);
-    if (pg_numrows($resultcai) == 0) {
+    if (($resultcai ? pg_numrows($resultcai) : null) == 0) {
         $k29_modslipnormal = 36;
         $k29_modsliptransf = 36;
     } else {
@@ -265,7 +265,7 @@ try {
     /**
      * Dados bancarios da conta padrao
      */
-    if ( pg_num_rows($rsDadosCredor) > 0 && !in_array($tipo_operacao, $tipoVinculoLimiteSaque)) {
+    if ( ($rsDadosCredor ? pg_num_rows($rsDadosCredor) : null) > 0 && !in_array($tipo_operacao, $tipoVinculoLimiteSaque)) {
 
         $oDadosCredor         = db_utils::fieldsMemory($rsDadosCredor, 0);
         $oDadosBancarioCredor = new StdClass();

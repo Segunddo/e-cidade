@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/acompanhamento-ppa-ldo",
+  "json": {
+    "error": true,
+    "message": "Não foi informado o planejamento."
+  },
+  "sha256": "4703b1a1e382845b5ff6bbfefaabaee56904c330d857d3cc23584508fab10841",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -67,8 +67,8 @@ class cl_empautpresta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e58_autori = ($this->e58_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e58_autori"]:$this->e58_autori);
-       $this->e58_tipo = ($this->e58_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e58_tipo"]:$this->e58_tipo);
+       $this->e58_autori = ($this->e58_autori === 0 || $this->e58_autori === 0.0 || $this->e58_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e58_autori"]:$this->e58_autori);
+       $this->e58_tipo = ($this->e58_tipo === 0 || $this->e58_tipo === 0.0 || $this->e58_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e58_tipo"]:$this->e58_tipo);
      }else{
      }
    }

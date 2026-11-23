@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/transposicao/relatorio",
+  "json": {
+    "error": true,
+    "message": "Undefined offset: 0"
+  },
+  "sha256": "9619fa21df44dec23e2079b4c2fee209548fc1c4e7e0facc4446c04b2a1fc651",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

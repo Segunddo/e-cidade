@@ -73,14 +73,14 @@ class cl_socios {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q95_cgmpri = ($this->q95_cgmpri == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_cgmpri"]:$this->q95_cgmpri);
-       $this->q95_numcgm = ($this->q95_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_numcgm"]:$this->q95_numcgm);
-       $this->q95_perc = ($this->q95_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_perc"]:$this->q95_perc);
-       $this->q95_tipo = ($this->q95_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_tipo"]:$this->q95_tipo);
-       $this->q95_qualificacaosocio = ($this->q95_qualificacaosocio == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_qualificacaosocio"]:$this->q95_qualificacaosocio);
+       $this->q95_cgmpri = ($this->q95_cgmpri === 0 || $this->q95_cgmpri === 0.0 || $this->q95_cgmpri == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_cgmpri"]:$this->q95_cgmpri);
+       $this->q95_numcgm = ($this->q95_numcgm === 0 || $this->q95_numcgm === 0.0 || $this->q95_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_numcgm"]:$this->q95_numcgm);
+       $this->q95_perc = ($this->q95_perc === 0 || $this->q95_perc === 0.0 || $this->q95_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_perc"]:$this->q95_perc);
+       $this->q95_tipo = ($this->q95_tipo === 0 || $this->q95_tipo === 0.0 || $this->q95_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_tipo"]:$this->q95_tipo);
+       $this->q95_qualificacaosocio = ($this->q95_qualificacaosocio === 0 || $this->q95_qualificacaosocio === 0.0 || $this->q95_qualificacaosocio == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_qualificacaosocio"]:$this->q95_qualificacaosocio);
      }else{
-       $this->q95_cgmpri = ($this->q95_cgmpri == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_cgmpri"]:$this->q95_cgmpri);
-       $this->q95_numcgm = ($this->q95_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_numcgm"]:$this->q95_numcgm);
+       $this->q95_cgmpri = ($this->q95_cgmpri === 0 || $this->q95_cgmpri === 0.0 || $this->q95_cgmpri == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_cgmpri"]:$this->q95_cgmpri);
+       $this->q95_numcgm = ($this->q95_numcgm === 0 || $this->q95_numcgm === 0.0 || $this->q95_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q95_numcgm"]:$this->q95_numcgm);
      }
    }
    // funcao para inclusao
@@ -106,7 +106,7 @@ class cl_socios {
      }
        $this->q95_cgmpri = $q95_cgmpri;
        $this->q95_numcgm = $q95_numcgm;
-     if(($this->q95_cgmpri == null) || ($this->q95_cgmpri == "") ){
+     if(($this->q95_cgmpri == null) || ($this->q95_cgmpri === 0 || $this->q95_cgmpri === 0.0 || $this->q95_cgmpri == "") ){
        $this->erro_sql = " Campo q95_cgmpri nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -114,7 +114,7 @@ class cl_socios {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q95_numcgm == null) || ($this->q95_numcgm == "") ){
+     if(($this->q95_numcgm == null) || ($this->q95_numcgm === 0 || $this->q95_numcgm === 0.0 || $this->q95_numcgm == "") ){
        $this->erro_sql = " Campo q95_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

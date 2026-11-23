@@ -1,0 +1,33 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/procedimento/manutencao/fonte-recurso/receita/lancamentos",
+  "json": {
+    "errors": {
+      "codigoReceita": [
+        "O código da receita deve ser preenchido se não informado o recurso."
+      ],
+      "dataFinal": [
+        "Data Final é obrigatório."
+      ],
+      "dataInicio": [
+        "Data Inicial é obrigatória."
+      ],
+      "gestao": [
+        "A Fonte de Gestão é obrigatório quando não informado a receita."
+      ],
+      "subrecurso": [
+        "O subrecurso é obrigatório quando não informado a receita."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "583f220694bde596bd8037c2b5044c0e0f882f715558ac281487671d13f5aa16",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

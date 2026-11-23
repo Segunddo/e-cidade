@@ -86,11 +86,11 @@ class cl_histocorrencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar23_sequencial = ($this->ar23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_sequencial"]:$this->ar23_sequencial);
-       $this->ar23_id_usuario = ($this->ar23_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_id_usuario"]:$this->ar23_id_usuario);
-       $this->ar23_instit = ($this->ar23_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_instit"]:$this->ar23_instit);
-       $this->ar23_modulo = ($this->ar23_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_modulo"]:$this->ar23_modulo);
-       $this->ar23_id_itensmenu = ($this->ar23_id_itensmenu == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_id_itensmenu"]:$this->ar23_id_itensmenu);
+       $this->ar23_sequencial = ($this->ar23_sequencial === 0 || $this->ar23_sequencial === 0.0 || $this->ar23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_sequencial"]:$this->ar23_sequencial);
+       $this->ar23_id_usuario = ($this->ar23_id_usuario === 0 || $this->ar23_id_usuario === 0.0 || $this->ar23_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_id_usuario"]:$this->ar23_id_usuario);
+       $this->ar23_instit = ($this->ar23_instit === 0 || $this->ar23_instit === 0.0 || $this->ar23_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_instit"]:$this->ar23_instit);
+       $this->ar23_modulo = ($this->ar23_modulo === 0 || $this->ar23_modulo === 0.0 || $this->ar23_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_modulo"]:$this->ar23_modulo);
+       $this->ar23_id_itensmenu = ($this->ar23_id_itensmenu === 0 || $this->ar23_id_itensmenu === 0.0 || $this->ar23_id_itensmenu == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_id_itensmenu"]:$this->ar23_id_itensmenu);
        if($this->ar23_data == ""){
          $this->ar23_data_dia = ($this->ar23_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_data_dia"]:$this->ar23_data_dia);
          $this->ar23_data_mes = ($this->ar23_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_data_mes"]:$this->ar23_data_mes);
@@ -100,11 +100,11 @@ class cl_histocorrencia {
          }
        }
        $this->ar23_hora = ($this->ar23_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_hora"]:$this->ar23_hora);
-       $this->ar23_tipo = ($this->ar23_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_tipo"]:$this->ar23_tipo);
+       $this->ar23_tipo = ($this->ar23_tipo === 0 || $this->ar23_tipo === 0.0 || $this->ar23_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_tipo"]:$this->ar23_tipo);
        $this->ar23_descricao = ($this->ar23_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_descricao"]:$this->ar23_descricao);
        $this->ar23_ocorrencia = ($this->ar23_ocorrencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_ocorrencia"]:$this->ar23_ocorrencia);
      }else{
-       $this->ar23_sequencial = ($this->ar23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_sequencial"]:$this->ar23_sequencial);
+       $this->ar23_sequencial = ($this->ar23_sequencial === 0 || $this->ar23_sequencial === 0.0 || $this->ar23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar23_sequencial"]:$this->ar23_sequencial);
      }
    }
    // funcao para inclusao
@@ -215,7 +215,7 @@ class cl_histocorrencia {
          $this->ar23_sequencial = $ar23_sequencial;
        }
      }
-     if(($this->ar23_sequencial == null) || ($this->ar23_sequencial == "") ){
+     if(($this->ar23_sequencial == null) || ($this->ar23_sequencial === 0 || $this->ar23_sequencial === 0.0 || $this->ar23_sequencial == "") ){
        $this->erro_sql = " Campo ar23_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

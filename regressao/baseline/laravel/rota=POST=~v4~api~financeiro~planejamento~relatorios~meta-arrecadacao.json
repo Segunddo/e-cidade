@@ -1,0 +1,33 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/meta-arrecadacao",
+  "json": {
+    "errors": {
+      "agruparPor": [
+        "O campo \"Agrupar por\" deve ser informado."
+      ],
+      "exercicio": [
+        "O campo \"Exercício\" deve ser informado."
+      ],
+      "instituicoes": [
+        "O campo \"Instituições\" deve ser informado."
+      ],
+      "periodicidade": [
+        "O campo \"Periodicidade\" deve ser informado."
+      ],
+      "planejamento_id": [
+        "O campo \"Código\" deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "83fc5ebe2f6b2a291d9f95928f0280b9a97ae3830dead80a5e43abd9de8ea8d9",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

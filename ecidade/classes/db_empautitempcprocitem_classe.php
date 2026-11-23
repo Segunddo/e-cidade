@@ -71,13 +71,13 @@ class cl_empautitempcprocitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e73_sequencial = ($this->e73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequencial"]:$this->e73_sequencial);
-       $this->e73_autori = ($this->e73_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_autori"]:$this->e73_autori);
-       $this->e73_sequen = ($this->e73_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequen"]:$this->e73_sequen);
-       $this->e73_pcprocitem = ($this->e73_pcprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_pcprocitem"]:$this->e73_pcprocitem);
+       $this->e73_sequencial = ($this->e73_sequencial === 0 || $this->e73_sequencial === 0.0 || $this->e73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequencial"]:$this->e73_sequencial);
+       $this->e73_autori = ($this->e73_autori === 0 || $this->e73_autori === 0.0 || $this->e73_autori == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_autori"]:$this->e73_autori);
+       $this->e73_sequen = ($this->e73_sequen === 0 || $this->e73_sequen === 0.0 || $this->e73_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequen"]:$this->e73_sequen);
+       $this->e73_pcprocitem = ($this->e73_pcprocitem === 0 || $this->e73_pcprocitem === 0.0 || $this->e73_pcprocitem == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_pcprocitem"]:$this->e73_pcprocitem);
      }else{
-       $this->e73_sequencial = ($this->e73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequencial"]:$this->e73_sequencial);
-       $this->e73_sequen = ($this->e73_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequen"]:$this->e73_sequen);
+       $this->e73_sequencial = ($this->e73_sequencial === 0 || $this->e73_sequencial === 0.0 || $this->e73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequencial"]:$this->e73_sequencial);
+       $this->e73_sequen = ($this->e73_sequen === 0 || $this->e73_sequen === 0.0 || $this->e73_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["e73_sequen"]:$this->e73_sequen);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_empautitempcprocitem {
          $this->e73_sequencial = $e73_sequencial;
        }
      }
-     if(($this->e73_sequencial == null) || ($this->e73_sequencial == "") ){
+     if(($this->e73_sequencial == null) || ($this->e73_sequencial === 0 || $this->e73_sequencial === 0.0 || $this->e73_sequencial == "") ){
        $this->erro_sql = " Campo e73_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

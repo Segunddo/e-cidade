@@ -67,10 +67,10 @@ class cl_iptutabelas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j121_sequencial = ($this->j121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j121_sequencial"]:$this->j121_sequencial);
-       $this->j121_codarq = ($this->j121_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["j121_codarq"]:$this->j121_codarq);
+       $this->j121_sequencial = ($this->j121_sequencial === 0 || $this->j121_sequencial === 0.0 || $this->j121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j121_sequencial"]:$this->j121_sequencial);
+       $this->j121_codarq = ($this->j121_codarq === 0 || $this->j121_codarq === 0.0 || $this->j121_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["j121_codarq"]:$this->j121_codarq);
      }else{
-       $this->j121_sequencial = ($this->j121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j121_sequencial"]:$this->j121_sequencial);
+       $this->j121_sequencial = ($this->j121_sequencial === 0 || $this->j121_sequencial === 0.0 || $this->j121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j121_sequencial"]:$this->j121_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_iptutabelas {
          $this->j121_sequencial = $j121_sequencial;
        }
      }
-     if(($this->j121_sequencial == null) || ($this->j121_sequencial == "") ){
+     if(($this->j121_sequencial == null) || ($this->j121_sequencial === 0 || $this->j121_sequencial === 0.0 || $this->j121_sequencial == "") ){
        $this->erro_sql = " Campo j121_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

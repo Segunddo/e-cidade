@@ -69,11 +69,11 @@ class cl_cadtipoitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k09_sequencial = ($this->k09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k09_sequencial"]:$this->k09_sequencial);
-       $this->k09_cadtipo = ($this->k09_cadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k09_cadtipo"]:$this->k09_cadtipo);
-       $this->k09_cadtipoitemgrupo = ($this->k09_cadtipoitemgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k09_cadtipoitemgrupo"]:$this->k09_cadtipoitemgrupo);
+       $this->k09_sequencial = ($this->k09_sequencial === 0 || $this->k09_sequencial === 0.0 || $this->k09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k09_sequencial"]:$this->k09_sequencial);
+       $this->k09_cadtipo = ($this->k09_cadtipo === 0 || $this->k09_cadtipo === 0.0 || $this->k09_cadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k09_cadtipo"]:$this->k09_cadtipo);
+       $this->k09_cadtipoitemgrupo = ($this->k09_cadtipoitemgrupo === 0 || $this->k09_cadtipoitemgrupo === 0.0 || $this->k09_cadtipoitemgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k09_cadtipoitemgrupo"]:$this->k09_cadtipoitemgrupo);
      }else{
-       $this->k09_sequencial = ($this->k09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k09_sequencial"]:$this->k09_sequencial);
+       $this->k09_sequencial = ($this->k09_sequencial === 0 || $this->k09_sequencial === 0.0 || $this->k09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k09_sequencial"]:$this->k09_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cadtipoitem {
          $this->k09_sequencial = $k09_sequencial;
        }
      }
-     if(($this->k09_sequencial == null) || ($this->k09_sequencial == "") ){
+     if(($this->k09_sequencial == null) || ($this->k09_sequencial === 0 || $this->k09_sequencial === 0.0 || $this->k09_sequencial == "") ){
        $this->erro_sql = " Campo k09_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

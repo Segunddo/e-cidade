@@ -67,10 +67,10 @@ class cl_db_tipohelp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_codtipo = ($this->id_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["id_codtipo"]:$this->id_codtipo);
+       $this->id_codtipo = ($this->id_codtipo === 0 || $this->id_codtipo === 0.0 || $this->id_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["id_codtipo"]:$this->id_codtipo);
        $this->descrtipohelp = ($this->descrtipohelp == ""?@$GLOBALS["HTTP_POST_VARS"]["descrtipohelp"]:$this->descrtipohelp);
      }else{
-       $this->id_codtipo = ($this->id_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["id_codtipo"]:$this->id_codtipo);
+       $this->id_codtipo = ($this->id_codtipo === 0 || $this->id_codtipo === 0.0 || $this->id_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["id_codtipo"]:$this->id_codtipo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_db_tipohelp {
          $this->id_codtipo = $id_codtipo;
        }
      }
-     if(($this->id_codtipo == null) || ($this->id_codtipo == "") ){
+     if(($this->id_codtipo == null) || ($this->id_codtipo === 0 || $this->id_codtipo === 0.0 || $this->id_codtipo == "") ){
        $this->erro_sql = " Campo id_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

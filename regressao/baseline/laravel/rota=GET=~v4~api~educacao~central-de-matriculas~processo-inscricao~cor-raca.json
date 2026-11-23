@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/cor-raca",
+  "json": {
+    "error": true,
+    "message": "cURL error 3:  (see https://curl.haxx.se/libcurl/c/libcurl-errors.html) for /oauth/token"
+  },
+  "sha256": "820c540deca726c33611069b218470a83851ddc47009f8bc88d36ec7744b9c9e",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/farmacia/relatorio/bnafar/protocolo",
+  "json": {
+    "errors": {
+      "data": [
+        "O campo data é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "d41564d54cf2df85188d3b8dc8bb4581cad30081c69c33cafad24d8f16a2fbc3",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

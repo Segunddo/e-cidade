@@ -67,10 +67,10 @@ class cl_empagetipotransmissao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e57_sequencial = ($this->e57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_sequencial"]:$this->e57_sequencial);
+       $this->e57_sequencial = ($this->e57_sequencial === 0 || $this->e57_sequencial === 0.0 || $this->e57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_sequencial"]:$this->e57_sequencial);
        $this->e57_descricao = ($this->e57_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_descricao"]:$this->e57_descricao);
      }else{
-       $this->e57_sequencial = ($this->e57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_sequencial"]:$this->e57_sequencial);
+       $this->e57_sequencial = ($this->e57_sequencial === 0 || $this->e57_sequencial === 0.0 || $this->e57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e57_sequencial"]:$this->e57_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_empagetipotransmissao {
          $this->e57_sequencial = $e57_sequencial;
        }
      }
-     if(($this->e57_sequencial == null) || ($this->e57_sequencial == "") ){
+     if(($this->e57_sequencial == null) || ($this->e57_sequencial === 0 || $this->e57_sequencial === 0.0 || $this->e57_sequencial == "") ){
        $this->erro_sql = " Campo e57_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -28,7 +28,7 @@
 require_once(modification("fpdf151/pdf.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $head4 = "CARACTERÍSTICAS DE CONSTRUÇÕES";
 $oPdf  = new PDF();

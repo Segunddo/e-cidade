@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_mer_desperdicio_classe.php"));
 include(modification("classes/db_mer_cardapio_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmer_desperdicio = new cl_mer_desperdicio;
 $clmer_cardapio = new cl_mer_cardapio;
 $clmer_desperdicio->rotulo->label("me22_i_codigo");

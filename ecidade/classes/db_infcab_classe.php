@@ -81,9 +81,9 @@ class cl_infcab {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->i03_codigo = ($this->i03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_codigo"]:$this->i03_codigo);
+       $this->i03_codigo = ($this->i03_codigo === 0 || $this->i03_codigo === 0.0 || $this->i03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_codigo"]:$this->i03_codigo);
        $this->i03_descr = ($this->i03_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_descr"]:$this->i03_descr);
-       $this->i03_numcgm = ($this->i03_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_numcgm"]:$this->i03_numcgm);
+       $this->i03_numcgm = ($this->i03_numcgm === 0 || $this->i03_numcgm === 0.0 || $this->i03_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_numcgm"]:$this->i03_numcgm);
        if($this->i03_dtbase == ""){
          $this->i03_dtbase_dia = ($this->i03_dtbase_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_dtbase_dia"]:$this->i03_dtbase_dia);
          $this->i03_dtbase_mes = ($this->i03_dtbase_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_dtbase_mes"]:$this->i03_dtbase_mes);
@@ -100,9 +100,9 @@ class cl_infcab {
             $this->i03_dtlanc = $this->i03_dtlanc_ano."-".$this->i03_dtlanc_mes."-".$this->i03_dtlanc_dia;
          }
        }
-       $this->i03_id_usuario = ($this->i03_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_id_usuario"]:$this->i03_id_usuario);
+       $this->i03_id_usuario = ($this->i03_id_usuario === 0 || $this->i03_id_usuario === 0.0 || $this->i03_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_id_usuario"]:$this->i03_id_usuario);
      }else{
-       $this->i03_codigo = ($this->i03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_codigo"]:$this->i03_codigo);
+       $this->i03_codigo = ($this->i03_codigo === 0 || $this->i03_codigo === 0.0 || $this->i03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["i03_codigo"]:$this->i03_codigo);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_infcab {
          $this->i03_codigo = $i03_codigo;
        }
      }
-     if(($this->i03_codigo == null) || ($this->i03_codigo == "") ){
+     if(($this->i03_codigo == null) || ($this->i03_codigo === 0 || $this->i03_codigo === 0.0 || $this->i03_codigo == "") ){
        $this->erro_sql = " Campo i03_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

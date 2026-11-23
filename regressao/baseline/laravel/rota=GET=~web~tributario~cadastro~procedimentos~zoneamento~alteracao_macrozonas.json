@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/cadastro/procedimentos/zoneamento/alteracao_macrozonas",
+  "json": null,
+  "sha256": "a525ecf2ad95a040ec026c303bcac2df4ad304c5f0673189a76d38dfd1994c44",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

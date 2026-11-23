@@ -69,11 +69,11 @@ class cl_averbaregimovel {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j78_averbacao = ($this->j78_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j78_averbacao"]:$this->j78_averbacao);
+       $this->j78_averbacao = ($this->j78_averbacao === 0 || $this->j78_averbacao === 0.0 || $this->j78_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j78_averbacao"]:$this->j78_averbacao);
        $this->j78_matric = ($this->j78_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j78_matric"]:$this->j78_matric);
        $this->j78_protocolo = ($this->j78_protocolo == ""?@$GLOBALS["HTTP_POST_VARS"]["j78_protocolo"]:$this->j78_protocolo);
      }else{
-       $this->j78_averbacao = ($this->j78_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j78_averbacao"]:$this->j78_averbacao);
+       $this->j78_averbacao = ($this->j78_averbacao === 0 || $this->j78_averbacao === 0.0 || $this->j78_averbacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j78_averbacao"]:$this->j78_averbacao);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_averbaregimovel {
        return false;
      }
        $this->j78_averbacao = $j78_averbacao;
-     if(($this->j78_averbacao == null) || ($this->j78_averbacao == "") ){
+     if(($this->j78_averbacao == null) || ($this->j78_averbacao === 0 || $this->j78_averbacao === 0.0 || $this->j78_averbacao == "") ){
        $this->erro_sql = " Campo j78_averbacao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

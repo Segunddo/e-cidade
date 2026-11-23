@@ -33,7 +33,7 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_liclicitaweb_classe.php"));
 require_once(modification("classes/db_liclicita_classe.php"));
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clliclicitaweb = new cl_liclicitaweb;
 $clliclicita = new cl_liclicita;
 $clliclicitaweb->rotulo->label("l29_sequencial");

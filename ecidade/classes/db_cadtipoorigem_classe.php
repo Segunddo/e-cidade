@@ -69,11 +69,11 @@ class cl_cadtipoorigem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k14_sequencial = ($this->k14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_sequencial"]:$this->k14_sequencial);
-       $this->k14_cadtipo = ($this->k14_cadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_cadtipo"]:$this->k14_cadtipo);
-       $this->k14_cadorigem = ($this->k14_cadorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_cadorigem"]:$this->k14_cadorigem);
+       $this->k14_sequencial = ($this->k14_sequencial === 0 || $this->k14_sequencial === 0.0 || $this->k14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_sequencial"]:$this->k14_sequencial);
+       $this->k14_cadtipo = ($this->k14_cadtipo === 0 || $this->k14_cadtipo === 0.0 || $this->k14_cadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_cadtipo"]:$this->k14_cadtipo);
+       $this->k14_cadorigem = ($this->k14_cadorigem === 0 || $this->k14_cadorigem === 0.0 || $this->k14_cadorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_cadorigem"]:$this->k14_cadorigem);
      }else{
-       $this->k14_sequencial = ($this->k14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_sequencial"]:$this->k14_sequencial);
+       $this->k14_sequencial = ($this->k14_sequencial === 0 || $this->k14_sequencial === 0.0 || $this->k14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k14_sequencial"]:$this->k14_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cadtipoorigem {
          $this->k14_sequencial = $k14_sequencial;
        }
      }
-     if(($this->k14_sequencial == null) || ($this->k14_sequencial == "") ){
+     if(($this->k14_sequencial == null) || ($this->k14_sequencial === 0 || $this->k14_sequencial === 0.0 || $this->k14_sequencial == "") ){
        $this->erro_sql = " Campo k14_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,11 +67,11 @@ class cl_itbicgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it02_guia = ($this->it02_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_guia"]:$this->it02_guia);
-       $this->it02_numcgm = ($this->it02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_numcgm"]:$this->it02_numcgm);
+       $this->it02_guia = ($this->it02_guia === 0 || $this->it02_guia === 0.0 || $this->it02_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_guia"]:$this->it02_guia);
+       $this->it02_numcgm = ($this->it02_numcgm === 0 || $this->it02_numcgm === 0.0 || $this->it02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_numcgm"]:$this->it02_numcgm);
      }else{
-       $this->it02_guia = ($this->it02_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_guia"]:$this->it02_guia);
-       $this->it02_numcgm = ($this->it02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_numcgm"]:$this->it02_numcgm);
+       $this->it02_guia = ($this->it02_guia === 0 || $this->it02_guia === 0.0 || $this->it02_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_guia"]:$this->it02_guia);
+       $this->it02_numcgm = ($this->it02_numcgm === 0 || $this->it02_numcgm === 0.0 || $this->it02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["it02_numcgm"]:$this->it02_numcgm);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_itbicgm {
       $this->atualizacampos();
        $this->it02_guia = $it02_guia;
        $this->it02_numcgm = $it02_numcgm;
-     if(($this->it02_guia == null) || ($this->it02_guia == "") ){
+     if(($this->it02_guia == null) || ($this->it02_guia === 0 || $this->it02_guia === 0.0 || $this->it02_guia == "") ){
        $this->erro_sql = " Campo it02_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_itbicgm {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->it02_numcgm == null) || ($this->it02_numcgm == "") ){
+     if(($this->it02_numcgm == null) || ($this->it02_numcgm === 0 || $this->it02_numcgm === 0.0 || $this->it02_numcgm == "") ){
        $this->erro_sql = " Campo it02_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

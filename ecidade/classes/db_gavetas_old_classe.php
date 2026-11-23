@@ -87,11 +87,11 @@ class cl_gavetas_old {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm13_i_codigo = ($this->cm13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_codigo"]:$this->cm13_i_codigo);
-       $this->cm13_i_jazigo = ($this->cm13_i_jazigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_jazigo"]:$this->cm13_i_jazigo);
-       $this->cm13_i_sepultamento = ($this->cm13_i_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_sepultamento"]:$this->cm13_i_sepultamento);
-       $this->cm13_i_gaveta = ($this->cm13_i_gaveta == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_gaveta"]:$this->cm13_i_gaveta);
-       $this->cm13_i_medico = ($this->cm13_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_medico"]:$this->cm13_i_medico);
+       $this->cm13_i_codigo = ($this->cm13_i_codigo === 0 || $this->cm13_i_codigo === 0.0 || $this->cm13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_codigo"]:$this->cm13_i_codigo);
+       $this->cm13_i_jazigo = ($this->cm13_i_jazigo === 0 || $this->cm13_i_jazigo === 0.0 || $this->cm13_i_jazigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_jazigo"]:$this->cm13_i_jazigo);
+       $this->cm13_i_sepultamento = ($this->cm13_i_sepultamento === 0 || $this->cm13_i_sepultamento === 0.0 || $this->cm13_i_sepultamento == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_sepultamento"]:$this->cm13_i_sepultamento);
+       $this->cm13_i_gaveta = ($this->cm13_i_gaveta === 0 || $this->cm13_i_gaveta === 0.0 || $this->cm13_i_gaveta == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_gaveta"]:$this->cm13_i_gaveta);
+       $this->cm13_i_medico = ($this->cm13_i_medico === 0 || $this->cm13_i_medico === 0.0 || $this->cm13_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_medico"]:$this->cm13_i_medico);
        if($this->cm13_d_exumprevista == ""){
          $this->cm13_d_exumprevista_dia = ($this->cm13_d_exumprevista_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_d_exumprevista_dia"]:$this->cm13_d_exumprevista_dia);
          $this->cm13_d_exumprevista_mes = ($this->cm13_d_exumprevista_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_d_exumprevista_mes"]:$this->cm13_d_exumprevista_mes);
@@ -111,7 +111,7 @@ class cl_gavetas_old {
        $this->cm13_c_ossario = ($this->cm13_c_ossario == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_c_ossario"]:$this->cm13_c_ossario);
        $this->cm13_c_campa = ($this->cm13_c_campa == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_c_campa"]:$this->cm13_c_campa);
      }else{
-       $this->cm13_i_codigo = ($this->cm13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_codigo"]:$this->cm13_i_codigo);
+       $this->cm13_i_codigo = ($this->cm13_i_codigo === 0 || $this->cm13_i_codigo === 0.0 || $this->cm13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["cm13_i_codigo"]:$this->cm13_i_codigo);
      }
    }
    // funcao para inclusao
@@ -213,7 +213,7 @@ class cl_gavetas_old {
          $this->cm13_i_codigo = $cm13_i_codigo;
        }
      }
-     if(($this->cm13_i_codigo == null) || ($this->cm13_i_codigo == "") ){
+     if(($this->cm13_i_codigo == null) || ($this->cm13_i_codigo === 0 || $this->cm13_i_codigo === 0.0 || $this->cm13_i_codigo == "") ){
        $this->erro_sql = " Campo cm13_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

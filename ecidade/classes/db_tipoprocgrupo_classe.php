@@ -67,10 +67,10 @@ class cl_tipoprocgrupo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p40_sequencial = ($this->p40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p40_sequencial"]:$this->p40_sequencial);
+       $this->p40_sequencial = ($this->p40_sequencial === 0 || $this->p40_sequencial === 0.0 || $this->p40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p40_sequencial"]:$this->p40_sequencial);
        $this->p40_descricao = ($this->p40_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["p40_descricao"]:$this->p40_descricao);
      }else{
-       $this->p40_sequencial = ($this->p40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p40_sequencial"]:$this->p40_sequencial);
+       $this->p40_sequencial = ($this->p40_sequencial === 0 || $this->p40_sequencial === 0.0 || $this->p40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p40_sequencial"]:$this->p40_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tipoprocgrupo {
          $this->p40_sequencial = $p40_sequencial;
        }
      }
-     if(($this->p40_sequencial == null) || ($this->p40_sequencial == "") ){
+     if(($this->p40_sequencial == null) || ($this->p40_sequencial === 0 || $this->p40_sequencial === 0.0 || $this->p40_sequencial == "") ){
        $this->erro_sql = " Campo p40_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -64,7 +64,7 @@ class AnexoVRGF extends RelatoriosLegaisBase  {
    *                               ->disponibilidadeliquida
    * @return Object - Colecao de stdClass
    */
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
   	
     
     /**

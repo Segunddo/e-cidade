@@ -71,12 +71,12 @@ class cl_recibocodbar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
        $this->k00_codbar = ($this->k00_codbar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_codbar"]:$this->k00_codbar);
        $this->k00_linhadigitavel = ($this->k00_linhadigitavel == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_linhadigitavel"]:$this->k00_linhadigitavel);
        $this->k00_nossonumero = ($this->k00_nossonumero == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_nossonumero"]:$this->k00_nossonumero);
      }else{
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
      }
    }
    // funcao para Inclusão
@@ -104,7 +104,7 @@ class cl_recibocodbar {
        $this->k00_nossonumero = "";
      }
        $this->k00_numpre = $k00_numpre;
-     if(($this->k00_numpre == null) || ($this->k00_numpre == "") ){
+     if(($this->k00_numpre == null) || ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "") ){
        $this->erro_sql = " Campo k00_numpre não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -57,7 +57,7 @@ if(isset($m51_codordem) && $m51_codordem!=''){
               where m51_codordem = $m51_codordem ";
 
      $result = db_query($sql);
-     if (pg_numrows($result)==0){
+     if (($result ? pg_numrows($result) : null)==0){
 
      }
      db_fieldsmemory($result,0);
@@ -75,7 +75,7 @@ if(isset($m51_codordem) && $m51_codordem!=''){
  ");
 
 
- $rs = pg_fetch_assoc($aux);
+ $rs = ($aux ? pg_fetch_assoc($aux) : null);
 
  $labelDepartamento = $rs['pc01_servico'] == 't' ? 'Departamento' : 'Depósito';
 
@@ -208,7 +208,7 @@ if(isset($m51_codordem) && $m51_codordem!=''){
 									//die($sSqlOrigemEmpenho);
 									$rsOrigemEmpenho   = db_query($sSqlOrigemEmpenho);
 
-                        			for ($i = 0; $i < pg_num_rows($rsOrigemEmpenho); $i++) {
+                        			for ($i = 0; $i < ($rsOrigemEmpenho ? pg_num_rows($rsOrigemEmpenho) : null); $i++) {
                         			  $oOrigemEmpenho = db_utils::fieldsMemory($rsOrigemEmpenho,$i);
                         			  $aDeptoEmp[]	  = $oOrigemEmpenho->ridepto;
                         			}

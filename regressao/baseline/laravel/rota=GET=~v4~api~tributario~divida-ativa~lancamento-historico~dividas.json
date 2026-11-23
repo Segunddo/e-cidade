@@ -1,0 +1,48 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/divida-ativa/lancamento-historico/dividas",
+  "json": {
+    "data": {
+      "current_page": 1,
+      "data": [],
+      "first_page_url": "http://localhost:8074/v4/api/tributario/divida-ativa/lancamento-historico/dividas?page=1",
+      "from": null,
+      "last_page": 1,
+      "last_page_url": "http://localhost:8074/v4/api/tributario/divida-ativa/lancamento-historico/dividas?page=1",
+      "links": [
+        {
+          "active": false,
+          "label": "&laquo; Anterior",
+          "url": null
+        },
+        {
+          "active": true,
+          "label": "1",
+          "url": "http://localhost:8074/v4/api/tributario/divida-ativa/lancamento-historico/dividas?page=1"
+        },
+        {
+          "active": false,
+          "label": "Próxima &raquo;",
+          "url": null
+        }
+      ],
+      "next_page_url": null,
+      "path": "http://localhost:8074/v4/api/tributario/divida-ativa/lancamento-historico/dividas",
+      "per_page": 15,
+      "prev_page_url": null,
+      "to": null,
+      "total": 0
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "e843eb5d0a1f360bc9345494f2fa7566946c6691a8167873ef3e22924c9ef65a",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

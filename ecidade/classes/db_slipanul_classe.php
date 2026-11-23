@@ -67,17 +67,17 @@ class cl_slipanul {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k18_codigo = ($this->k18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k18_codigo"]:$this->k18_codigo);
+       $this->k18_codigo = ($this->k18_codigo === 0 || $this->k18_codigo === 0.0 || $this->k18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k18_codigo"]:$this->k18_codigo);
        $this->k18_motivo = ($this->k18_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["k18_motivo"]:$this->k18_motivo);
      }else{
-       $this->k18_codigo = ($this->k18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k18_codigo"]:$this->k18_codigo);
+       $this->k18_codigo = ($this->k18_codigo === 0 || $this->k18_codigo === 0.0 || $this->k18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k18_codigo"]:$this->k18_codigo);
      }
    }
    // funcao para inclusao
    public function incluir ($k18_codigo){
       $this->atualizacampos();
        $this->k18_codigo = $k18_codigo;
-     if(($this->k18_codigo == null) || ($this->k18_codigo == "") ){
+     if(($this->k18_codigo == null) || ($this->k18_codigo === 0 || $this->k18_codigo === 0.0 || $this->k18_codigo == "") ){
        $this->erro_sql = " Campo k18_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -40,7 +40,7 @@ include(modification("classes/db_itburbano_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //echo $HTTP_SERVER_VARS["QUERY_STRING"];
 //exit;
 

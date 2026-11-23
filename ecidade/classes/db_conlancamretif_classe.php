@@ -74,8 +74,8 @@ class cl_conlancamretif {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c79_codlan = ($this->c79_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c79_codlan"]:$this->c79_codlan);
-       $this->c79_codsup = ($this->c79_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["c79_codsup"]:$this->c79_codsup);
+       $this->c79_codlan = ($this->c79_codlan === 0 || $this->c79_codlan === 0.0 || $this->c79_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c79_codlan"]:$this->c79_codlan);
+       $this->c79_codsup = ($this->c79_codsup === 0 || $this->c79_codsup === 0.0 || $this->c79_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["c79_codsup"]:$this->c79_codsup);
        if($this->c79_data == ""){
          $this->c79_data_dia = ($this->c79_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c79_data_dia"]:$this->c79_data_dia);
          $this->c79_data_mes = ($this->c79_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c79_data_mes"]:$this->c79_data_mes);
@@ -84,9 +84,9 @@ class cl_conlancamretif {
             $this->c79_data = $this->c79_data_ano."-".$this->c79_data_mes."-".$this->c79_data_dia;
          }
        }
-       $this->c79_coddoc = ($this->c79_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c79_coddoc"]:$this->c79_coddoc);
+       $this->c79_coddoc = ($this->c79_coddoc === 0 || $this->c79_coddoc === 0.0 || $this->c79_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c79_coddoc"]:$this->c79_coddoc);
      }else{
-       $this->c79_codlan = ($this->c79_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c79_codlan"]:$this->c79_codlan);
+       $this->c79_codlan = ($this->c79_codlan === 0 || $this->c79_codlan === 0.0 || $this->c79_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c79_codlan"]:$this->c79_codlan);
      }
    }
    // funcao para inclusao
@@ -120,7 +120,7 @@ class cl_conlancamretif {
        return false;
      }
        $this->c79_codlan = $c79_codlan;
-     if(($this->c79_codlan == null) || ($this->c79_codlan == "") ){
+     if(($this->c79_codlan == null) || ($this->c79_codlan === 0 || $this->c79_codlan === 0.0 || $this->c79_codlan == "") ){
        $this->erro_sql = " Campo c79_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

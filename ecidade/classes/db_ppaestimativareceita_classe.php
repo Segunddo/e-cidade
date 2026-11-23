@@ -75,14 +75,14 @@ class cl_ppaestimativareceita {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o06_sequencial = ($this->o06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_sequencial"]:$this->o06_sequencial);
-       $this->o06_ppaestimativa = ($this->o06_ppaestimativa == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_ppaestimativa"]:$this->o06_ppaestimativa);
-       $this->o06_codrec = ($this->o06_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_codrec"]:$this->o06_codrec);
-       $this->o06_anousu = ($this->o06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_anousu"]:$this->o06_anousu);
-       $this->o06_ppaversao = ($this->o06_ppaversao == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_ppaversao"]:$this->o06_ppaversao);
+       $this->o06_sequencial = ($this->o06_sequencial === 0 || $this->o06_sequencial === 0.0 || $this->o06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_sequencial"]:$this->o06_sequencial);
+       $this->o06_ppaestimativa = ($this->o06_ppaestimativa === 0 || $this->o06_ppaestimativa === 0.0 || $this->o06_ppaestimativa == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_ppaestimativa"]:$this->o06_ppaestimativa);
+       $this->o06_codrec = ($this->o06_codrec === 0 || $this->o06_codrec === 0.0 || $this->o06_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_codrec"]:$this->o06_codrec);
+       $this->o06_anousu = ($this->o06_anousu === 0 || $this->o06_anousu === 0.0 || $this->o06_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_anousu"]:$this->o06_anousu);
+       $this->o06_ppaversao = ($this->o06_ppaversao === 0 || $this->o06_ppaversao === 0.0 || $this->o06_ppaversao == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_ppaversao"]:$this->o06_ppaversao);
        $this->o06_concarpeculiar = ($this->o06_concarpeculiar == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_concarpeculiar"]:$this->o06_concarpeculiar);
      }else{
-       $this->o06_sequencial = ($this->o06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_sequencial"]:$this->o06_sequencial);
+       $this->o06_sequencial = ($this->o06_sequencial === 0 || $this->o06_sequencial === 0.0 || $this->o06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o06_sequencial"]:$this->o06_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_ppaestimativareceita {
          $this->o06_sequencial = $o06_sequencial;
        }
      }
-     if(($this->o06_sequencial == null) || ($this->o06_sequencial == "") ){
+     if(($this->o06_sequencial == null) || ($this->o06_sequencial === 0 || $this->o06_sequencial === 0.0 || $this->o06_sequencial == "") ){
        $this->erro_sql = " Campo o06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

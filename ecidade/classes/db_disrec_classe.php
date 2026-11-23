@@ -73,11 +73,11 @@ class cl_disrec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codcla = ($this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
-       $this->k00_receit = ($this->k00_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_receit"]:$this->k00_receit);
-       $this->vlrrec = ($this->vlrrec == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrrec"]:$this->vlrrec);
-       $this->idret = ($this->idret == ""?@$GLOBALS["HTTP_POST_VARS"]["idret"]:$this->idret);
-       $this->instit = ($this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
+       $this->codcla = ($this->codcla === 0 || $this->codcla === 0.0 || $this->codcla == ""?@$GLOBALS["HTTP_POST_VARS"]["codcla"]:$this->codcla);
+       $this->k00_receit = ($this->k00_receit === 0 || $this->k00_receit === 0.0 || $this->k00_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_receit"]:$this->k00_receit);
+       $this->vlrrec = ($this->vlrrec === 0 || $this->vlrrec === 0.0 || $this->vlrrec == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrrec"]:$this->vlrrec);
+       $this->idret = ($this->idret === 0 || $this->idret === 0.0 || $this->idret == ""?@$GLOBALS["HTTP_POST_VARS"]["idret"]:$this->idret);
+       $this->instit = ($this->instit === 0 || $this->instit === 0.0 || $this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
      }else{
      }
    }

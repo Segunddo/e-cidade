@@ -85,21 +85,21 @@ class cl_gerfres {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r20_anousu = ($this->r20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_anousu"]:$this->r20_anousu);
-       $this->r20_mesusu = ($this->r20_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_mesusu"]:$this->r20_mesusu);
-       $this->r20_regist = ($this->r20_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_regist"]:$this->r20_regist);
+       $this->r20_anousu = ($this->r20_anousu === 0 || $this->r20_anousu === 0.0 || $this->r20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_anousu"]:$this->r20_anousu);
+       $this->r20_mesusu = ($this->r20_mesusu === 0 || $this->r20_mesusu === 0.0 || $this->r20_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_mesusu"]:$this->r20_mesusu);
+       $this->r20_regist = ($this->r20_regist === 0 || $this->r20_regist === 0.0 || $this->r20_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_regist"]:$this->r20_regist);
        $this->r20_rubric = ($this->r20_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_rubric"]:$this->r20_rubric);
-       $this->r20_valor = ($this->r20_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_valor"]:$this->r20_valor);
-       $this->r20_pd = ($this->r20_pd == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_pd"]:$this->r20_pd);
-       $this->r20_quant = ($this->r20_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_quant"]:$this->r20_quant);
+       $this->r20_valor = ($this->r20_valor === 0 || $this->r20_valor === 0.0 || $this->r20_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_valor"]:$this->r20_valor);
+       $this->r20_pd = ($this->r20_pd === 0 || $this->r20_pd === 0.0 || $this->r20_pd == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_pd"]:$this->r20_pd);
+       $this->r20_quant = ($this->r20_quant === 0 || $this->r20_quant === 0.0 || $this->r20_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_quant"]:$this->r20_quant);
        $this->r20_lotac = ($this->r20_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_lotac"]:$this->r20_lotac);
-       $this->r20_semest = ($this->r20_semest == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_semest"]:$this->r20_semest);
+       $this->r20_semest = ($this->r20_semest === 0 || $this->r20_semest === 0.0 || $this->r20_semest == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_semest"]:$this->r20_semest);
        $this->r20_tpp = ($this->r20_tpp == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_tpp"]:$this->r20_tpp);
-       $this->r20_instit = ($this->r20_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_instit"]:$this->r20_instit);
+       $this->r20_instit = ($this->r20_instit === 0 || $this->r20_instit === 0.0 || $this->r20_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_instit"]:$this->r20_instit);
      }else{
-       $this->r20_anousu = ($this->r20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_anousu"]:$this->r20_anousu);
-       $this->r20_mesusu = ($this->r20_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_mesusu"]:$this->r20_mesusu);
-       $this->r20_regist = ($this->r20_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_regist"]:$this->r20_regist);
+       $this->r20_anousu = ($this->r20_anousu === 0 || $this->r20_anousu === 0.0 || $this->r20_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_anousu"]:$this->r20_anousu);
+       $this->r20_mesusu = ($this->r20_mesusu === 0 || $this->r20_mesusu === 0.0 || $this->r20_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_mesusu"]:$this->r20_mesusu);
+       $this->r20_regist = ($this->r20_regist === 0 || $this->r20_regist === 0.0 || $this->r20_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_regist"]:$this->r20_regist);
        $this->r20_rubric = ($this->r20_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_rubric"]:$this->r20_rubric);
        $this->r20_tpp = ($this->r20_tpp == ""?@$GLOBALS["HTTP_POST_VARS"]["r20_tpp"]:$this->r20_tpp);
      }
@@ -166,7 +166,7 @@ class cl_gerfres {
        $this->r20_regist = $r20_regist;
        $this->r20_rubric = $r20_rubric;
        $this->r20_tpp = $r20_tpp;
-     if(($this->r20_anousu == null) || ($this->r20_anousu == "") ){
+     if(($this->r20_anousu == null) || ($this->r20_anousu === 0 || $this->r20_anousu === 0.0 || $this->r20_anousu == "") ){
        $this->erro_sql = " Campo r20_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -174,7 +174,7 @@ class cl_gerfres {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r20_mesusu == null) || ($this->r20_mesusu == "") ){
+     if(($this->r20_mesusu == null) || ($this->r20_mesusu === 0 || $this->r20_mesusu === 0.0 || $this->r20_mesusu == "") ){
        $this->erro_sql = " Campo r20_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -182,7 +182,7 @@ class cl_gerfres {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r20_regist == null) || ($this->r20_regist == "") ){
+     if(($this->r20_regist == null) || ($this->r20_regist === 0 || $this->r20_regist === 0.0 || $this->r20_regist == "") ){
        $this->erro_sql = " Campo r20_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

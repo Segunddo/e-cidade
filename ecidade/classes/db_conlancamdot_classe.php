@@ -74,9 +74,9 @@ class cl_conlancamdot {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c73_codlan = ($this->c73_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c73_codlan"]:$this->c73_codlan);
-       $this->c73_anousu = ($this->c73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c73_anousu"]:$this->c73_anousu);
-       $this->c73_coddot = ($this->c73_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["c73_coddot"]:$this->c73_coddot);
+       $this->c73_codlan = ($this->c73_codlan === 0 || $this->c73_codlan === 0.0 || $this->c73_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c73_codlan"]:$this->c73_codlan);
+       $this->c73_anousu = ($this->c73_anousu === 0 || $this->c73_anousu === 0.0 || $this->c73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c73_anousu"]:$this->c73_anousu);
+       $this->c73_coddot = ($this->c73_coddot === 0 || $this->c73_coddot === 0.0 || $this->c73_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["c73_coddot"]:$this->c73_coddot);
        if($this->c73_data == ""){
          $this->c73_data_dia = ($this->c73_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c73_data_dia"]:$this->c73_data_dia);
          $this->c73_data_mes = ($this->c73_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c73_data_mes"]:$this->c73_data_mes);
@@ -86,7 +86,7 @@ class cl_conlancamdot {
          }
        }
      }else{
-       $this->c73_codlan = ($this->c73_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c73_codlan"]:$this->c73_codlan);
+       $this->c73_codlan = ($this->c73_codlan === 0 || $this->c73_codlan === 0.0 || $this->c73_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c73_codlan"]:$this->c73_codlan);
      }
    }
    // funcao para inclusao
@@ -120,7 +120,7 @@ class cl_conlancamdot {
        return false;
      }
        $this->c73_codlan = $c73_codlan;
-     if(($this->c73_codlan == null) || ($this->c73_codlan == "") ){
+     if(($this->c73_codlan == null) || ($this->c73_codlan === 0 || $this->c73_codlan === 0.0 || $this->c73_codlan == "") ){
        $this->erro_sql = " Campo c73_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

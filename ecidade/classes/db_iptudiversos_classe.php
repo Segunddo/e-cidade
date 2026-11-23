@@ -69,11 +69,11 @@ class cl_iptudiversos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j80_matric = ($this->j80_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_matric"]:$this->j80_matric);
-       $this->j80_areatrib = ($this->j80_areatrib == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_areatrib"]:$this->j80_areatrib);
-       $this->j80_profund = ($this->j80_profund == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_profund"]:$this->j80_profund);
+       $this->j80_matric = ($this->j80_matric === 0 || $this->j80_matric === 0.0 || $this->j80_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_matric"]:$this->j80_matric);
+       $this->j80_areatrib = ($this->j80_areatrib === 0 || $this->j80_areatrib === 0.0 || $this->j80_areatrib == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_areatrib"]:$this->j80_areatrib);
+       $this->j80_profund = ($this->j80_profund === 0 || $this->j80_profund === 0.0 || $this->j80_profund == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_profund"]:$this->j80_profund);
      }else{
-       $this->j80_matric = ($this->j80_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_matric"]:$this->j80_matric);
+       $this->j80_matric = ($this->j80_matric === 0 || $this->j80_matric === 0.0 || $this->j80_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j80_matric"]:$this->j80_matric);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_iptudiversos {
        return false;
      }
        $this->j80_matric = $j80_matric;
-     if(($this->j80_matric == null) || ($this->j80_matric == "") ){
+     if(($this->j80_matric == null) || ($this->j80_matric === 0 || $this->j80_matric === 0.0 || $this->j80_matric == "") ){
        $this->erro_sql = " Campo j80_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

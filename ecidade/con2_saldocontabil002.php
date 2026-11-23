@@ -31,7 +31,7 @@ require_once(modification("libs/db_utils.php"));
 require_once(modification("libs/db_libcontabilidade.php"));
 require_once(modification("classes/db_empresto_classe.php"));
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $anoSessao = db_getsession("DB_anousu");
 $instituicao = db_getsession("DB_instit");

@@ -67,10 +67,10 @@ class cl_orientacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j64_sequencial = ($this->j64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j64_sequencial"]:$this->j64_sequencial);
+       $this->j64_sequencial = ($this->j64_sequencial === 0 || $this->j64_sequencial === 0.0 || $this->j64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j64_sequencial"]:$this->j64_sequencial);
        $this->j64_descricao = ($this->j64_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["j64_descricao"]:$this->j64_descricao);
      }else{
-       $this->j64_sequencial = ($this->j64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j64_sequencial"]:$this->j64_sequencial);
+       $this->j64_sequencial = ($this->j64_sequencial === 0 || $this->j64_sequencial === 0.0 || $this->j64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j64_sequencial"]:$this->j64_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_orientacao {
          $this->j64_sequencial = $j64_sequencial;
        }
      }
-     if(($this->j64_sequencial == null) || ($this->j64_sequencial == "") ){
+     if(($this->j64_sequencial == null) || ($this->j64_sequencial === 0 || $this->j64_sequencial === 0.0 || $this->j64_sequencial == "") ){
        $this->erro_sql = " Campo j64_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

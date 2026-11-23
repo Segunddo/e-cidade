@@ -67,11 +67,11 @@ class cl_orcimpactovalele {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o94_codseqimp = ($this->o94_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o94_codseqimp"]:$this->o94_codseqimp);
-       $this->o94_codele = ($this->o94_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o94_codele"]:$this->o94_codele);
+       $this->o94_codseqimp = ($this->o94_codseqimp === 0 || $this->o94_codseqimp === 0.0 || $this->o94_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o94_codseqimp"]:$this->o94_codseqimp);
+       $this->o94_codele = ($this->o94_codele === 0 || $this->o94_codele === 0.0 || $this->o94_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o94_codele"]:$this->o94_codele);
      }else{
-       $this->o94_codseqimp = ($this->o94_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o94_codseqimp"]:$this->o94_codseqimp);
-       $this->o94_codele = ($this->o94_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o94_codele"]:$this->o94_codele);
+       $this->o94_codseqimp = ($this->o94_codseqimp === 0 || $this->o94_codseqimp === 0.0 || $this->o94_codseqimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o94_codseqimp"]:$this->o94_codseqimp);
+       $this->o94_codele = ($this->o94_codele === 0 || $this->o94_codele === 0.0 || $this->o94_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["o94_codele"]:$this->o94_codele);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_orcimpactovalele {
       $this->atualizacampos();
        $this->o94_codseqimp = $o94_codseqimp;
        $this->o94_codele = $o94_codele;
-     if(($this->o94_codseqimp == null) || ($this->o94_codseqimp == "") ){
+     if(($this->o94_codseqimp == null) || ($this->o94_codseqimp === 0 || $this->o94_codseqimp === 0.0 || $this->o94_codseqimp == "") ){
        $this->erro_sql = " Campo o94_codseqimp nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_orcimpactovalele {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o94_codele == null) || ($this->o94_codele == "") ){
+     if(($this->o94_codele == null) || ($this->o94_codele === 0 || $this->o94_codele === 0.0 || $this->o94_codele == "") ){
        $this->erro_sql = " Campo o94_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

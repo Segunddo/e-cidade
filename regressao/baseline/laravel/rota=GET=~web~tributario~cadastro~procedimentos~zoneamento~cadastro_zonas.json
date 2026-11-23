@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/cadastro/procedimentos/zoneamento/cadastro_zonas",
+  "json": null,
+  "sha256": "daffcfdf649649667e0c40f87d7d76721a46e8ca30a00c318b578761725c1847",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

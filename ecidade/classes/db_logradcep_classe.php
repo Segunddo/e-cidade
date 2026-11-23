@@ -67,8 +67,8 @@ class cl_logradcep {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j65_lograd = ($this->j65_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["j65_lograd"]:$this->j65_lograd);
-       $this->j65_ceplog = ($this->j65_ceplog == ""?@$GLOBALS["HTTP_POST_VARS"]["j65_ceplog"]:$this->j65_ceplog);
+       $this->j65_lograd = ($this->j65_lograd === 0 || $this->j65_lograd === 0.0 || $this->j65_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["j65_lograd"]:$this->j65_lograd);
+       $this->j65_ceplog = ($this->j65_ceplog === 0 || $this->j65_ceplog === 0.0 || $this->j65_ceplog == ""?@$GLOBALS["HTTP_POST_VARS"]["j65_ceplog"]:$this->j65_ceplog);
      }else{
      }
    }

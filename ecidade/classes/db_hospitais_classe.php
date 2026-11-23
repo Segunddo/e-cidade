@@ -65,16 +65,16 @@ class cl_hospitais {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cm18_i_hospital = ($this->cm18_i_hospital == ""?@$GLOBALS["HTTP_POST_VARS"]["cm18_i_hospital"]:$this->cm18_i_hospital);
+       $this->cm18_i_hospital = ($this->cm18_i_hospital === 0 || $this->cm18_i_hospital === 0.0 || $this->cm18_i_hospital == ""?@$GLOBALS["HTTP_POST_VARS"]["cm18_i_hospital"]:$this->cm18_i_hospital);
      }else{
-       $this->cm18_i_hospital = ($this->cm18_i_hospital == ""?@$GLOBALS["HTTP_POST_VARS"]["cm18_i_hospital"]:$this->cm18_i_hospital);
+       $this->cm18_i_hospital = ($this->cm18_i_hospital === 0 || $this->cm18_i_hospital === 0.0 || $this->cm18_i_hospital == ""?@$GLOBALS["HTTP_POST_VARS"]["cm18_i_hospital"]:$this->cm18_i_hospital);
      }
    }
    // funcao para inclusao
    public function incluir ($cm18_i_hospital){
       $this->atualizacampos();
        $this->cm18_i_hospital = $cm18_i_hospital;
-     if(($this->cm18_i_hospital == null) || ($this->cm18_i_hospital == "") ){
+     if(($this->cm18_i_hospital == null) || ($this->cm18_i_hospital === 0 || $this->cm18_i_hospital === 0.0 || $this->cm18_i_hospital == "") ){
        $this->erro_sql = " Campo cm18_i_hospital nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -74,8 +74,8 @@ class cl_correnteid {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k56_sequencial = ($this->k56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_sequencial"]:$this->k56_sequencial);
-       $this->k56_id = ($this->k56_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_id"]:$this->k56_id);
+       $this->k56_sequencial = ($this->k56_sequencial === 0 || $this->k56_sequencial === 0.0 || $this->k56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_sequencial"]:$this->k56_sequencial);
+       $this->k56_id = ($this->k56_id === 0 || $this->k56_id === 0.0 || $this->k56_id == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_id"]:$this->k56_id);
        if($this->k56_data == ""){
          $this->k56_data_dia = ($this->k56_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_data_dia"]:$this->k56_data_dia);
          $this->k56_data_mes = ($this->k56_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_data_mes"]:$this->k56_data_mes);
@@ -84,9 +84,9 @@ class cl_correnteid {
             $this->k56_data = $this->k56_data_ano."-".$this->k56_data_mes."-".$this->k56_data_dia;
          }
        }
-       $this->k56_autent = ($this->k56_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_autent"]:$this->k56_autent);
+       $this->k56_autent = ($this->k56_autent === 0 || $this->k56_autent === 0.0 || $this->k56_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_autent"]:$this->k56_autent);
      }else{
-       $this->k56_sequencial = ($this->k56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_sequencial"]:$this->k56_sequencial);
+       $this->k56_sequencial = ($this->k56_sequencial === 0 || $this->k56_sequencial === 0.0 || $this->k56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k56_sequencial"]:$this->k56_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_correnteid {
          $this->k56_sequencial = $k56_sequencial;
        }
      }
-     if(($this->k56_sequencial == null) || ($this->k56_sequencial == "") ){
+     if(($this->k56_sequencial == null) || ($this->k56_sequencial === 0 || $this->k56_sequencial === 0.0 || $this->k56_sequencial == "") ){
        $this->erro_sql = " Campo k56_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

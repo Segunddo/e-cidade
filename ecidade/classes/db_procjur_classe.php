@@ -94,8 +94,8 @@ class cl_procjur {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v62_sequencial = ($this->v62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_sequencial"]:$this->v62_sequencial);
-       $this->v62_procjurtipo = ($this->v62_procjurtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_procjurtipo"]:$this->v62_procjurtipo);
+       $this->v62_sequencial = ($this->v62_sequencial === 0 || $this->v62_sequencial === 0.0 || $this->v62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_sequencial"]:$this->v62_sequencial);
+       $this->v62_procjurtipo = ($this->v62_procjurtipo === 0 || $this->v62_procjurtipo === 0.0 || $this->v62_procjurtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_procjurtipo"]:$this->v62_procjurtipo);
        $this->v62_descricao = ($this->v62_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_descricao"]:$this->v62_descricao);
        if($this->v62_data == ""){
          $this->v62_data_dia = ($this->v62_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_data_dia"]:$this->v62_data_dia);
@@ -106,7 +106,7 @@ class cl_procjur {
          }
        }
        $this->v62_hora = ($this->v62_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_hora"]:$this->v62_hora);
-       $this->v62_usuario = ($this->v62_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_usuario"]:$this->v62_usuario);
+       $this->v62_usuario = ($this->v62_usuario === 0 || $this->v62_usuario === 0.0 || $this->v62_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_usuario"]:$this->v62_usuario);
        if($this->v62_dataini == ""){
          $this->v62_dataini_dia = ($this->v62_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_dataini_dia"]:$this->v62_dataini_dia);
          $this->v62_dataini_mes = ($this->v62_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_dataini_mes"]:$this->v62_dataini_mes);
@@ -123,11 +123,11 @@ class cl_procjur {
             $this->v62_datafim = $this->v62_datafim_ano."-".$this->v62_datafim_mes."-".$this->v62_datafim_dia;
          }
        }
-       $this->v62_situacao = ($this->v62_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_situacao"]:$this->v62_situacao);
+       $this->v62_situacao = ($this->v62_situacao === 0 || $this->v62_situacao === 0.0 || $this->v62_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_situacao"]:$this->v62_situacao);
        $this->v62_obs = ($this->v62_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_obs"]:$this->v62_obs);
-       $this->v62_instit = ($this->v62_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_instit"]:$this->v62_instit);
+       $this->v62_instit = ($this->v62_instit === 0 || $this->v62_instit === 0.0 || $this->v62_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_instit"]:$this->v62_instit);
      }else{
-       $this->v62_sequencial = ($this->v62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_sequencial"]:$this->v62_sequencial);
+       $this->v62_sequencial = ($this->v62_sequencial === 0 || $this->v62_sequencial === 0.0 || $this->v62_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v62_sequencial"]:$this->v62_sequencial);
      }
    }
    // funcao para Inclusão
@@ -232,7 +232,7 @@ class cl_procjur {
          $this->v62_sequencial = $v62_sequencial;
        }
      }
-     if(($this->v62_sequencial == null) || ($this->v62_sequencial == "") ){
+     if(($this->v62_sequencial == null) || ($this->v62_sequencial === 0 || $this->v62_sequencial === 0.0 || $this->v62_sequencial == "") ){
        $this->erro_sql = " Campo v62_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

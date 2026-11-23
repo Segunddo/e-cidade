@@ -35,7 +35,7 @@ $clrotulo->label('ve35_depart');
 $clrotulo->label('ve34_numcgm');
 $clrotulo->label('descrdepto');
 $clrotulo->label('z01_nome');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if($ordem == "a") {
 	$desc_ordem = "Alfabética";
 	$order_by = "z01_nome,descrdepto";

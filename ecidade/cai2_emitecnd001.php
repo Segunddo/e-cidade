@@ -47,7 +47,7 @@ require_once(modification("std/DBLargeObject.php"));
 require_once(modification("classes/db_db_certidaoweb_classe.php"));
 require_once(modification("model/configuracao/InstituicaoRepository.model.php"));
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if (isset ($cadrecibo) && $cadrecibo == 't') {
 	require_once(modification('fpdf151/scpdf.php'));

@@ -69,11 +69,11 @@ class cl_procjurtipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v66_sequencial = ($this->v66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v66_sequencial"]:$this->v66_sequencial);
-       $this->v66_procjurtiporegra = ($this->v66_procjurtiporegra == ""?@$GLOBALS["HTTP_POST_VARS"]["v66_procjurtiporegra"]:$this->v66_procjurtiporegra);
+       $this->v66_sequencial = ($this->v66_sequencial === 0 || $this->v66_sequencial === 0.0 || $this->v66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v66_sequencial"]:$this->v66_sequencial);
+       $this->v66_procjurtiporegra = ($this->v66_procjurtiporegra === 0 || $this->v66_procjurtiporegra === 0.0 || $this->v66_procjurtiporegra == ""?@$GLOBALS["HTTP_POST_VARS"]["v66_procjurtiporegra"]:$this->v66_procjurtiporegra);
        $this->v66_descr = ($this->v66_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["v66_descr"]:$this->v66_descr);
      }else{
-       $this->v66_sequencial = ($this->v66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v66_sequencial"]:$this->v66_sequencial);
+       $this->v66_sequencial = ($this->v66_sequencial === 0 || $this->v66_sequencial === 0.0 || $this->v66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v66_sequencial"]:$this->v66_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procjurtipo {
          $this->v66_sequencial = $v66_sequencial;
        }
      }
-     if(($this->v66_sequencial == null) || ($this->v66_sequencial == "") ){
+     if(($this->v66_sequencial == null) || ($this->v66_sequencial === 0 || $this->v66_sequencial === 0.0 || $this->v66_sequencial == "") ){
        $this->erro_sql = " Campo v66_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -73,13 +73,13 @@ class cl_cadarrecadacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar16_sequencial = ($this->ar16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_sequencial"]:$this->ar16_sequencial);
-       $this->ar16_instit = ($this->ar16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_instit"]:$this->ar16_instit);
+       $this->ar16_sequencial = ($this->ar16_sequencial === 0 || $this->ar16_sequencial === 0.0 || $this->ar16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_sequencial"]:$this->ar16_sequencial);
+       $this->ar16_instit = ($this->ar16_instit === 0 || $this->ar16_instit === 0.0 || $this->ar16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_instit"]:$this->ar16_instit);
        $this->ar16_convenio = ($this->ar16_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_convenio"]:$this->ar16_convenio);
-       $this->ar16_segmento = ($this->ar16_segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_segmento"]:$this->ar16_segmento);
-       $this->ar16_formatovenc = ($this->ar16_formatovenc == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_formatovenc"]:$this->ar16_formatovenc);
+       $this->ar16_segmento = ($this->ar16_segmento === 0 || $this->ar16_segmento === 0.0 || $this->ar16_segmento == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_segmento"]:$this->ar16_segmento);
+       $this->ar16_formatovenc = ($this->ar16_formatovenc === 0 || $this->ar16_formatovenc === 0.0 || $this->ar16_formatovenc == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_formatovenc"]:$this->ar16_formatovenc);
      }else{
-       $this->ar16_sequencial = ($this->ar16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_sequencial"]:$this->ar16_sequencial);
+       $this->ar16_sequencial = ($this->ar16_sequencial === 0 || $this->ar16_sequencial === 0.0 || $this->ar16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar16_sequencial"]:$this->ar16_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_cadarrecadacao {
          $this->ar16_sequencial = $ar16_sequencial;
        }
      }
-     if(($this->ar16_sequencial == null) || ($this->ar16_sequencial == "") ){
+     if(($this->ar16_sequencial == null) || ($this->ar16_sequencial === 0 || $this->ar16_sequencial === 0.0 || $this->ar16_sequencial == "") ){
        $this->erro_sql = " Campo ar16_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

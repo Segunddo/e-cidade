@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/concessaodireitos/assentperc",
+  "json": {
+    "error": true,
+    "message": "Undefined index: rh501_seqasentconf"
+  },
+  "sha256": "91eed6b9d854f4fd3c502587a9a2f9681007702556a5b41c25e13228b2486967",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

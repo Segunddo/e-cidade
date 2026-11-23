@@ -69,13 +69,13 @@ class cl_listadeb {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k61_codigo = ($this->k61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_codigo"]:$this->k61_codigo);
-       $this->k61_numpre = ($this->k61_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_numpre"]:$this->k61_numpre);
-       $this->k61_numpar = ($this->k61_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_numpar"]:$this->k61_numpar);
+       $this->k61_codigo = ($this->k61_codigo === 0 || $this->k61_codigo === 0.0 || $this->k61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_codigo"]:$this->k61_codigo);
+       $this->k61_numpre = ($this->k61_numpre === 0 || $this->k61_numpre === 0.0 || $this->k61_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_numpre"]:$this->k61_numpre);
+       $this->k61_numpar = ($this->k61_numpar === 0 || $this->k61_numpar === 0.0 || $this->k61_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_numpar"]:$this->k61_numpar);
      }else{
-       $this->k61_codigo = ($this->k61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_codigo"]:$this->k61_codigo);
-       $this->k61_numpre = ($this->k61_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_numpre"]:$this->k61_numpre);
-       $this->k61_numpar = ($this->k61_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_numpar"]:$this->k61_numpar);
+       $this->k61_codigo = ($this->k61_codigo === 0 || $this->k61_codigo === 0.0 || $this->k61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_codigo"]:$this->k61_codigo);
+       $this->k61_numpre = ($this->k61_numpre === 0 || $this->k61_numpre === 0.0 || $this->k61_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_numpre"]:$this->k61_numpre);
+       $this->k61_numpar = ($this->k61_numpar === 0 || $this->k61_numpar === 0.0 || $this->k61_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k61_numpar"]:$this->k61_numpar);
      }
    }
    // funcao para inclusao
@@ -84,7 +84,7 @@ class cl_listadeb {
        $this->k61_codigo = $k61_codigo;
        $this->k61_numpre = $k61_numpre;
        $this->k61_numpar = $k61_numpar;
-     if(($this->k61_codigo == null) || ($this->k61_codigo == "") ){
+     if(($this->k61_codigo == null) || ($this->k61_codigo === 0 || $this->k61_codigo === 0.0 || $this->k61_codigo == "") ){
        $this->erro_sql = " Campo k61_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -92,7 +92,7 @@ class cl_listadeb {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k61_numpre == null) || ($this->k61_numpre == "") ){
+     if(($this->k61_numpre == null) || ($this->k61_numpre === 0 || $this->k61_numpre === 0.0 || $this->k61_numpre == "") ){
        $this->erro_sql = " Campo k61_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -100,7 +100,7 @@ class cl_listadeb {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k61_numpar == null) || ($this->k61_numpar == "") ){
+     if(($this->k61_numpar == null) || ($this->k61_numpar === 0 || $this->k61_numpar === 0.0 || $this->k61_numpar == "") ){
        $this->erro_sql = " Campo k61_numpar nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

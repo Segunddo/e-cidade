@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/plano-contas/orcamentario/receita/vinculo-geral",
+  "json": {
+    "error": true,
+    "message": "Undefined index: tipoPlano"
+  },
+  "sha256": "520a8cf14ca5f61d1d2927afe90f52a950af1c12aca4634b56db9b4012cda4cc",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

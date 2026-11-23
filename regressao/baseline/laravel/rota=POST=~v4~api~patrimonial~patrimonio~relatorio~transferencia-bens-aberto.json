@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/patrimonio/relatorio/transferencia-bens-aberto",
+  "json": {
+    "error": true,
+    "message": "Undefined property: stdClass::$dataInicial"
+  },
+  "sha256": "f3608adbc4a376a988b3d22f241ede1d313fc58ba483f0a2c1c8c89fd3bf66ec",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

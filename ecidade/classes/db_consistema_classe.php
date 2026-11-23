@@ -69,11 +69,11 @@ class cl_consistema {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c52_codsis = ($this->c52_codsis == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_codsis"]:$this->c52_codsis);
+       $this->c52_codsis = ($this->c52_codsis === 0 || $this->c52_codsis === 0.0 || $this->c52_codsis == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_codsis"]:$this->c52_codsis);
        $this->c52_descr = ($this->c52_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_descr"]:$this->c52_descr);
        $this->c52_descrred = ($this->c52_descrred == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_descrred"]:$this->c52_descrred);
      }else{
-       $this->c52_codsis = ($this->c52_codsis == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_codsis"]:$this->c52_codsis);
+       $this->c52_codsis = ($this->c52_codsis === 0 || $this->c52_codsis === 0.0 || $this->c52_codsis == ""?@$GLOBALS["HTTP_POST_VARS"]["c52_codsis"]:$this->c52_codsis);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_consistema {
        return false;
      }
        $this->c52_codsis = $c52_codsis;
-     if(($this->c52_codsis == null) || ($this->c52_codsis == "") ){
+     if(($this->c52_codsis == null) || ($this->c52_codsis === 0 || $this->c52_codsis === 0.0 || $this->c52_codsis == "") ){
        $this->erro_sql = " Campo c52_codsis nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

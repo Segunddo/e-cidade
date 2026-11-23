@@ -41,7 +41,7 @@ $xinstit =explode("-", $db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-', ', ', $db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins ++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins ++) {
 	db_fieldsmemory($resultinst, $xins);
 	$descr_inst .= $xvirg.$nomeinst;
 	$xvirg = ', ';
@@ -135,7 +135,7 @@ $total_exercicio = 0;
 $total_ant_1 = 0;
 $total_ant_2 = 0;
 $total_ant_3 = 0;
-for ($i = 0; $i < pg_numrows($result); $i ++) {
+for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i ++) {
 	db_fieldsmemory($result, $i);
 
 	if ($pdf->gety() > $pdf->h - 30 || $pagina == 1) {

@@ -65,7 +65,7 @@ class cl_itbipartipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it12_grupo = ($this->it12_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["it12_grupo"]:$this->it12_grupo);
+       $this->it12_grupo = ($this->it12_grupo === 0 || $this->it12_grupo === 0.0 || $this->it12_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["it12_grupo"]:$this->it12_grupo);
      }else{
      }
    }

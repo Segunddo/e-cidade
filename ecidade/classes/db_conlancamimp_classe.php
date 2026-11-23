@@ -65,16 +65,16 @@ class cl_conlancamimp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c88_codlan = ($this->c88_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_codlan"]:$this->c88_codlan);
+       $this->c88_codlan = ($this->c88_codlan === 0 || $this->c88_codlan === 0.0 || $this->c88_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_codlan"]:$this->c88_codlan);
      }else{
-       $this->c88_codlan = ($this->c88_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_codlan"]:$this->c88_codlan);
+       $this->c88_codlan = ($this->c88_codlan === 0 || $this->c88_codlan === 0.0 || $this->c88_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c88_codlan"]:$this->c88_codlan);
      }
    }
    // funcao para inclusao
    public function incluir ($c88_codlan){
       $this->atualizacampos();
        $this->c88_codlan = $c88_codlan;
-     if(($this->c88_codlan == null) || ($this->c88_codlan == "") ){
+     if(($this->c88_codlan == null) || ($this->c88_codlan === 0 || $this->c88_codlan === 0.0 || $this->c88_codlan == "") ){
        $this->erro_sql = " Campo c88_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

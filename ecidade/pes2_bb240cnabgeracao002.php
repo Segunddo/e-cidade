@@ -39,7 +39,7 @@ require_once(modification("classes/db_rhgeracaofolhaarquivo_classe.php"));
 require_once(modification("classes/db_rhgeracaofolhaarquivoreg_classe.php"));
 require_once(modification("libs/db_utils.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $oGet = db_utils::postMemory($_GET);
 

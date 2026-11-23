@@ -76,8 +76,8 @@ class cl_conlancamcorrente {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c86_sequencial = ($this->c86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_sequencial"]:$this->c86_sequencial);
-       $this->c86_id = ($this->c86_id == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_id"]:$this->c86_id);
+       $this->c86_sequencial = ($this->c86_sequencial === 0 || $this->c86_sequencial === 0.0 || $this->c86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_sequencial"]:$this->c86_sequencial);
+       $this->c86_id = ($this->c86_id === 0 || $this->c86_id === 0.0 || $this->c86_id == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_id"]:$this->c86_id);
        if($this->c86_data == ""){
          $this->c86_data_dia = ($this->c86_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_data_dia"]:$this->c86_data_dia);
          $this->c86_data_mes = ($this->c86_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_data_mes"]:$this->c86_data_mes);
@@ -86,10 +86,10 @@ class cl_conlancamcorrente {
             $this->c86_data = $this->c86_data_ano."-".$this->c86_data_mes."-".$this->c86_data_dia;
          }
        }
-       $this->c86_autent = ($this->c86_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_autent"]:$this->c86_autent);
-       $this->c86_conlancam = ($this->c86_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_conlancam"]:$this->c86_conlancam);
+       $this->c86_autent = ($this->c86_autent === 0 || $this->c86_autent === 0.0 || $this->c86_autent == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_autent"]:$this->c86_autent);
+       $this->c86_conlancam = ($this->c86_conlancam === 0 || $this->c86_conlancam === 0.0 || $this->c86_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_conlancam"]:$this->c86_conlancam);
      }else{
-       $this->c86_sequencial = ($this->c86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_sequencial"]:$this->c86_sequencial);
+       $this->c86_sequencial = ($this->c86_sequencial === 0 || $this->c86_sequencial === 0.0 || $this->c86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c86_sequencial"]:$this->c86_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_conlancamcorrente {
          $this->c86_sequencial = $c86_sequencial;
        }
      }
-     if(($this->c86_sequencial == null) || ($this->c86_sequencial == "") ){
+     if(($this->c86_sequencial == null) || ($this->c86_sequencial === 0 || $this->c86_sequencial === 0.0 || $this->c86_sequencial == "") ){
        $this->erro_sql = " Campo c86_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_custoplanilhaorigem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->cc14_sequencial = ($this->cc14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc14_sequencial"]:$this->cc14_sequencial);
+       $this->cc14_sequencial = ($this->cc14_sequencial === 0 || $this->cc14_sequencial === 0.0 || $this->cc14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc14_sequencial"]:$this->cc14_sequencial);
        $this->cc14_descricao = ($this->cc14_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["cc14_descricao"]:$this->cc14_descricao);
      }else{
-       $this->cc14_sequencial = ($this->cc14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc14_sequencial"]:$this->cc14_sequencial);
+       $this->cc14_sequencial = ($this->cc14_sequencial === 0 || $this->cc14_sequencial === 0.0 || $this->cc14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["cc14_sequencial"]:$this->cc14_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_custoplanilhaorigem {
          $this->cc14_sequencial = $cc14_sequencial;
        }
      }
-     if(($this->cc14_sequencial == null) || ($this->cc14_sequencial == "") ){
+     if(($this->cc14_sequencial == null) || ($this->cc14_sequencial === 0 || $this->cc14_sequencial === 0.0 || $this->cc14_sequencial == "") ){
        $this->erro_sql = " Campo cc14_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -84,9 +84,9 @@ class cl_debcontapedido {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d63_codigo = ($this->d63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_codigo"]:$this->d63_codigo);
-       $this->d63_instit = ($this->d63_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_instit"]:$this->d63_instit);
-       $this->d63_banco = ($this->d63_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_banco"]:$this->d63_banco);
+       $this->d63_codigo = ($this->d63_codigo === 0 || $this->d63_codigo === 0.0 || $this->d63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_codigo"]:$this->d63_codigo);
+       $this->d63_instit = ($this->d63_instit === 0 || $this->d63_instit === 0.0 || $this->d63_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_instit"]:$this->d63_instit);
+       $this->d63_banco = ($this->d63_banco === 0 || $this->d63_banco === 0.0 || $this->d63_banco == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_banco"]:$this->d63_banco);
        $this->d63_agencia = ($this->d63_agencia == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_agencia"]:$this->d63_agencia);
        $this->d63_conta = ($this->d63_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_conta"]:$this->d63_conta);
        if($this->d63_datalanc == ""){
@@ -98,10 +98,10 @@ class cl_debcontapedido {
          }
        }
        $this->d63_horalanc = ($this->d63_horalanc == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_horalanc"]:$this->d63_horalanc);
-       $this->d63_status = ($this->d63_status == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_status"]:$this->d63_status);
+       $this->d63_status = ($this->d63_status === 0 || $this->d63_status === 0.0 || $this->d63_status == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_status"]:$this->d63_status);
        $this->d63_idempresa = ($this->d63_idempresa == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_idempresa"]:$this->d63_idempresa);
      }else{
-       $this->d63_codigo = ($this->d63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_codigo"]:$this->d63_codigo);
+       $this->d63_codigo = ($this->d63_codigo === 0 || $this->d63_codigo === 0.0 || $this->d63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d63_codigo"]:$this->d63_codigo);
      }
    }
    // funcao para inclusao
@@ -194,7 +194,7 @@ class cl_debcontapedido {
          $this->d63_codigo = $d63_codigo;
        }
      }
-     if(($this->d63_codigo == null) || ($this->d63_codigo == "") ){
+     if(($this->d63_codigo == null) || ($this->d63_codigo === 0 || $this->d63_codigo === 0.0 || $this->d63_codigo == "") ){
        $this->erro_sql = " Campo d63_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

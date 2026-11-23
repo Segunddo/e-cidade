@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/issqn/redesim/dados-estabelecimento",
+  "json": {
+    "error": true,
+    "message": "Estabelecimento não encontrado."
+  },
+  "sha256": "1abf5947d8d84ccd5b91ee6425efffca686660492ead9ad90c6b961059ffc323",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

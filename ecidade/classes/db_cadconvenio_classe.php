@@ -71,12 +71,12 @@ class cl_cadconvenio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar11_sequencial = ($this->ar11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar11_sequencial"]:$this->ar11_sequencial);
-       $this->ar11_cadtipoconvenio = ($this->ar11_cadtipoconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["ar11_cadtipoconvenio"]:$this->ar11_cadtipoconvenio);
-       $this->ar11_instit = ($this->ar11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ar11_instit"]:$this->ar11_instit);
+       $this->ar11_sequencial = ($this->ar11_sequencial === 0 || $this->ar11_sequencial === 0.0 || $this->ar11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar11_sequencial"]:$this->ar11_sequencial);
+       $this->ar11_cadtipoconvenio = ($this->ar11_cadtipoconvenio === 0 || $this->ar11_cadtipoconvenio === 0.0 || $this->ar11_cadtipoconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["ar11_cadtipoconvenio"]:$this->ar11_cadtipoconvenio);
+       $this->ar11_instit = ($this->ar11_instit === 0 || $this->ar11_instit === 0.0 || $this->ar11_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["ar11_instit"]:$this->ar11_instit);
        $this->ar11_nome = ($this->ar11_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ar11_nome"]:$this->ar11_nome);
      }else{
-       $this->ar11_sequencial = ($this->ar11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar11_sequencial"]:$this->ar11_sequencial);
+       $this->ar11_sequencial = ($this->ar11_sequencial === 0 || $this->ar11_sequencial === 0.0 || $this->ar11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar11_sequencial"]:$this->ar11_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_cadconvenio {
          $this->ar11_sequencial = $ar11_sequencial;
        }
      }
-     if(($this->ar11_sequencial == null) || ($this->ar11_sequencial == "") ){
+     if(($this->ar11_sequencial == null) || ($this->ar11_sequencial === 0 || $this->ar11_sequencial === 0.0 || $this->ar11_sequencial == "") ){
        $this->erro_sql = " Campo ar11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

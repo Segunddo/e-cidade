@@ -67,11 +67,11 @@ class cl_aguabasecar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x30_codigo = ($this->x30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x30_codigo"]:$this->x30_codigo);
-       $this->x30_matric = ($this->x30_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x30_matric"]:$this->x30_matric);
+       $this->x30_codigo = ($this->x30_codigo === 0 || $this->x30_codigo === 0.0 || $this->x30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x30_codigo"]:$this->x30_codigo);
+       $this->x30_matric = ($this->x30_matric === 0 || $this->x30_matric === 0.0 || $this->x30_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x30_matric"]:$this->x30_matric);
      }else{
-       $this->x30_codigo = ($this->x30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x30_codigo"]:$this->x30_codigo);
-       $this->x30_matric = ($this->x30_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x30_matric"]:$this->x30_matric);
+       $this->x30_codigo = ($this->x30_codigo === 0 || $this->x30_codigo === 0.0 || $this->x30_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["x30_codigo"]:$this->x30_codigo);
+       $this->x30_matric = ($this->x30_matric === 0 || $this->x30_matric === 0.0 || $this->x30_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x30_matric"]:$this->x30_matric);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_aguabasecar {
       $this->atualizacampos();
        $this->x30_matric = $x30_matric;
        $this->x30_codigo = $x30_codigo;
-     if(($this->x30_matric == null) || ($this->x30_matric == "") ){
+     if(($this->x30_matric == null) || ($this->x30_matric === 0 || $this->x30_matric === 0.0 || $this->x30_matric == "") ){
        $this->erro_sql = " Campo x30_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_aguabasecar {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->x30_codigo == null) || ($this->x30_codigo == "") ){
+     if(($this->x30_codigo == null) || ($this->x30_codigo === 0 || $this->x30_codigo === 0.0 || $this->x30_codigo == "") ){
        $this->erro_sql = " Campo x30_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

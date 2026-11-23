@@ -36,7 +36,7 @@ class PadArquivoEscritorTXT extends PadArquivoEscritor {
 	 * @param iPadArquivoTXTBase $oArquivo
 	 * @return caminho do arquivo
 	 */
-	public function  criarArquivo(iPadArquivoTXTBase $oArquivo) {
+	public function  criarArquivo(iPadArquivoBase $oArquivo) {
 		
 		/**
 		 * Instância dos objetos que serão utilizados para

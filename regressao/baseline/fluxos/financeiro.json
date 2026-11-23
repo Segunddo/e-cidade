@@ -1,0 +1,105 @@
+{
+ "console": [
+  "Permissions policy violation: unload is not allowed in this document."
+ ],
+ "descricao": "Orcamento: inclusao de funcao orcamentaria (orc1_orcfuncao001) com efeito no banco",
+ "falhas": [],
+ "id": "financeiro",
+ "passos": [
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": null,
+   "dom_sha256": null,
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "entrada",
+   "ok": true,
+   "requisicoes": [],
+   "runtime": {},
+   "url": null
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<html>\n<head>\n<title>DBSeller Informática Ltda - Página Inicial</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta http-equiv=\"Expires\" content=\"0\">\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/scripts.js\">\n</script>\n<link href=\"estilos.css\" rel=\"stylesheet\" type=\"text/css\">\n<script type=\"text/javascript\">\n</script>\n<link href=\"http://localhost:8190/skins/estilos.php?file=widgets/DBModal.css\" rel=\"stylesheet\">\n<link href=\"http://localhost:8190/estilos/widgets/DBModalBase.css\" rel=\"stylesheet\">\n</head>\n<body class=\"no-menu\">\n<form class=\"container\" name=\"form1\" method=\"post\" action=\"\">\n<fieldset>\n<legend>InclusÃ£o de FunÃ§Ã£o</legend>\n<table class=\"form-container\">\n<tbody>\n<tr>\n<td nowrap=\"\" title=\"Código da Função do orçamento Campo:o52_funcao \">\n<strong>Função:</strong>\n</td>\n<td>\n<input title=\"Código da Função do orçamento Campo:o52_funcao \" name=\"o52_funcao\" type=\"text\" id=\"o52_funcao\" value=\"\" size=\"2\" maxlength=\"2\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,1,'Função','f','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Função\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Descrição Função Campo:o52_descr \">\n<strong>Descrição:</strong>\n</td>\n<td>\n<input title=\"Descrição Função Campo:o52_descr \" name=\"o52_descr\" type=\"text\" id=\"o52_descr\" value=\"\" size=\"40\" maxlength=\"40\" style=\"text-transform:uppercase;\" onkeyup=\"js_ValidaMaiusculo(this,'t',event);\" oninput=\"js_ValidaCampos(this,0,'Descrição','f','t',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Código Siconfi vai na matríz de saldo contábil Campo:o52_siconfi \">\n<strong>Código Siconfi:</strong>\n</td>\n<td>\n<input title=\"Código Siconfi vai na matríz de saldo contábil Campo:o52_siconfi \" name=\"o52_siconfi\" type=\"text\" id=\"o52_siconfi\" value=\"\" size=\"10\" maxlength=\"2\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,1,'Código Siconfi','f','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Código Siconfi\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Código do tribunal Campo:o52_codtri \">\n<strong>Código do tribunal:</strong>\n</td>\n<td>\n<input title=\"Código do tribunal Campo:o52_codtri \" name=\"o52_codtri\" type=\"text\" id=\"o52_codtri\" value=\"\" size=\"10\" maxlength=\"10\" style=\"text-transform:uppercase;\" onkeyup=\"js_ValidaMaiusculo(this,'t',event);\" oninput=\"js_ValidaCampos(this,1,'Código do tribunal','f','t',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Código do tribunal\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Finalidade da Função Campo:o52_finali \">\n<strong>Finalidade:</strong>\n</td>\n<td>\n<textarea labelvalidacao=\"Finalidade\" title=\"Finalidade da Função Campo:o52_finali \" name=\"o52_finali\" type=\"text\" id=\"o52_finali\" rows=\"0\" cols=\"40\" style=\"text-transform:uppercase;\" onblur=\" js_ValidaMaiusculo(this,'t',event); \" onkeyup=\" js_ValidaCampos(this,0,'Finalidade','t','t',event); \" oninput=\"\" autocomplete=\"off\">\n</textarea>\n</td>\n</tr>\n</tbody>\n</table>\n</fieldset>\n<input name=\"db_opcao\" type=\"submit\" id=\"db_opcao\" value=\"Incluir\">\n<input name=\"pesquisar\" type=\"button\" id=\"pesquisar\" value=\"Pesquisar\" onclick=\"js_pesquisa();\">\n</form>\n<script>\n</script>\n<style>\n</style>\n<script>\n</script>\n<div id=\"db-tooltip\" class=\"db-tooltip\">\n</div>\n<script type=\"text/javascript\" src=\"scripts/classes/configuracao/DBViewHelpInline.classe.js\">\n</script>\n<script type=\"text/javascript\">\n</script>\n</body>\n</html>",
+   "dom_sha256": "33153a76e2f4c1ceedcb813b2cbafccf59a6eaf4d6cd01417298bab4fc21bc3e",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {},
+   "nome": "tela-cadastro",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 //w/1/extension/desktop/menu/getMenuArquivo/?file",
+    "GET 200 /w/1/con4_dbhelp.RPC.php?json",
+    "GET 200 /w/1/extension/desktop/window/bottom",
+    "GET 200 /w/1/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId",
+    "GET 200 /w/1/orc1_orcfuncao001.php"
+   ],
+   "runtime": {
+    "//w/1/extension/desktop/menu/getMenuArquivo/?file": "PHP-7.4 (referencia)",
+    "/w/1/con4_dbhelp.RPC.php?json": "PHP-7.4 (referencia)",
+    "/w/1/extension/desktop/window/bottom": "PHP-7.4 (referencia)",
+    "/w/1/extension/desktop/window/index/?action&iAreaId&iInstitId&iModuloId": "PHP-7.4 (referencia)",
+    "/w/1/orc1_orcfuncao001.php": "PHP-7.4 (referencia)"
+   },
+   "url": "/w/1/orc1_orcfuncao001.php"
+  },
+  {
+   "banco": null,
+   "dialogos": [],
+   "dom": "<html>\n<head>\n<title>DBSeller Informática Ltda - Página Inicial</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta http-equiv=\"Expires\" content=\"0\">\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/scripts.js\">\n</script>\n<link href=\"estilos.css\" rel=\"stylesheet\" type=\"text/css\">\n<script type=\"text/javascript\">\n</script>\n<link href=\"http://localhost:8190/skins/estilos.php?file=widgets/DBModal.css\" rel=\"stylesheet\">\n<link href=\"http://localhost:8190/estilos/widgets/DBModalBase.css\" rel=\"stylesheet\">\n</head>\n<body class=\"no-menu\">\n<form class=\"container\" name=\"form1\" method=\"post\" action=\"\">\n<fieldset>\n<legend>InclusÃ£o de FunÃ§Ã£o</legend>\n<table class=\"form-container\">\n<tbody>\n<tr>\n<td nowrap=\"\" title=\"Código da Função do orçamento Campo:o52_funcao \">\n<strong>Função:</strong>\n</td>\n<td>\n<input title=\"Código da Função do orçamento Campo:o52_funcao \" name=\"o52_funcao\" type=\"text\" id=\"o52_funcao\" value=\"\" size=\"2\" maxlength=\"2\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,1,'Função','f','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Função\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Descrição Função Campo:o52_descr \">\n<strong>Descrição:</strong>\n</td>\n<td>\n<input title=\"Descrição Função Campo:o52_descr \" name=\"o52_descr\" type=\"text\" id=\"o52_descr\" value=\"\" size=\"40\" maxlength=\"40\" style=\"text-transform:uppercase;\" onkeyup=\"js_ValidaMaiusculo(this,'t',event);\" oninput=\"js_ValidaCampos(this,0,'Descrição','f','t',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Código Siconfi vai na matríz de saldo contábil Campo:o52_siconfi \">\n<strong>Código Siconfi:</strong>\n</td>\n<td>\n<input title=\"Código Siconfi vai na matríz de saldo contábil Campo:o52_siconfi \" name=\"o52_siconfi\" type=\"text\" id=\"o52_siconfi\" value=\"\" size=\"10\" maxlength=\"2\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,1,'Código Siconfi','f','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Código Siconfi\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Código do tribunal Campo:o52_codtri \">\n<strong>Código do tribunal:</strong>\n</td>\n<td>\n<input title=\"Código do tribunal Campo:o52_codtri \" name=\"o52_codtri\" type=\"text\" id=\"o52_codtri\" value=\"\" size=\"10\" maxlength=\"10\" style=\"text-transform:uppercase;\" onkeyup=\"js_ValidaMaiusculo(this,'t',event);\" oninput=\"js_ValidaCampos(this,1,'Código do tribunal','f','t',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Código do tribunal\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Finalidade da Função Campo:o52_finali \">\n<strong>Finalidade:</strong>\n</td>\n<td>\n<textarea labelvalidacao=\"Finalidade\" title=\"Finalidade da Função Campo:o52_finali \" name=\"o52_finali\" type=\"text\" id=\"o52_finali\" rows=\"0\" cols=\"40\" style=\"text-transform:uppercase;\" onblur=\" js_ValidaMaiusculo(this,'t',event); \" onkeyup=\" js_ValidaCampos(this,0,'Finalidade','t','t',event); \" oninput=\"\" autocomplete=\"off\">\n</textarea>\n</td>\n</tr>\n</tbody>\n</table>\n</fieldset>\n<input name=\"db_opcao\" type=\"submit\" id=\"db_opcao\" value=\"Incluir\">\n<input name=\"pesquisar\" type=\"button\" id=\"pesquisar\" value=\"Pesquisar\" onclick=\"js_pesquisa();\">\n</form>\n<script>\n</script>\n<style>\n</style>\n<script>\n</script>\n<div id=\"db-tooltip\" class=\"db-tooltip\">\n</div>\n<script type=\"text/javascript\" src=\"scripts/classes/configuracao/DBViewHelpInline.classe.js\">\n</script>\n<script type=\"text/javascript\">\n</script>\n</body>\n</html>",
+   "dom_sha256": "33153a76e2f4c1ceedcb813b2cbafccf59a6eaf4d6cd01417298bab4fc21bc3e",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {
+    "valores": {
+     "o52_codtri": "1",
+     "o52_descr": "TESTE_FLUXO",
+     "o52_finali": "OBS_FLUXO",
+     "o52_funcao": "91",
+     "o52_siconfi": "1"
+    }
+   },
+   "nome": "preenche",
+   "ok": true,
+   "requisicoes": [],
+   "runtime": {},
+   "url": "/w/1/orc1_orcfuncao001.php"
+  },
+  {
+   "banco": {
+    "orcamento.orcfuncao": "8041540e297eca556dd54877fe99d841"
+   },
+   "dialogos": [],
+   "dom": "<html>\n<head>\n<title>DBSeller Informática Ltda - Página Inicial</title>\n<meta http-equiv=\"Content-Type\" content=\"text/html; charset=iso-8859-1\">\n<meta http-equiv=\"Expires\" content=\"0\">\n<script language=\"JavaScript\" type=\"text/javascript\" src=\"scripts/scripts.js\">\n</script>\n<link href=\"estilos.css\" rel=\"stylesheet\" type=\"text/css\">\n<script type=\"text/javascript\">\n</script>\n<link href=\"http://localhost:8190/skins/estilos.php?file=widgets/DBModal.css\" rel=\"stylesheet\">\n<link href=\"http://localhost:8190/estilos/widgets/DBModalBase.css\" rel=\"stylesheet\">\n</head>\n<body class=\"no-menu\">\n<form class=\"container\" name=\"form1\" method=\"post\" action=\"\">\n<fieldset>\n<legend>InclusÃ£o de FunÃ§Ã£o</legend>\n<table class=\"form-container\">\n<tbody>\n<tr>\n<td nowrap=\"\" title=\"Código da Função do orçamento Campo:o52_funcao \">\n<strong>Função:</strong>\n</td>\n<td>\n<input title=\"Código da Função do orçamento Campo:o52_funcao \" name=\"o52_funcao\" type=\"text\" id=\"o52_funcao\" value=\"\" size=\"2\" maxlength=\"2\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,1,'Função','f','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Função\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Descrição Função Campo:o52_descr \">\n<strong>Descrição:</strong>\n</td>\n<td>\n<input title=\"Descrição Função Campo:o52_descr \" name=\"o52_descr\" type=\"text\" id=\"o52_descr\" value=\"\" size=\"40\" maxlength=\"40\" style=\"text-transform:uppercase;\" onkeyup=\"js_ValidaMaiusculo(this,'t',event);\" oninput=\"js_ValidaCampos(this,0,'Descrição','f','t',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Descrição\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Código Siconfi vai na matríz de saldo contábil Campo:o52_siconfi \">\n<strong>Código Siconfi:</strong>\n</td>\n<td>\n<input title=\"Código Siconfi vai na matríz de saldo contábil Campo:o52_siconfi \" name=\"o52_siconfi\" type=\"text\" id=\"o52_siconfi\" value=\"\" size=\"10\" maxlength=\"2\" onkeyup=\"js_ValidaMaiusculo(this,'f',event);\" oninput=\"js_ValidaCampos(this,1,'Código Siconfi','f','f',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Código Siconfi\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Código do tribunal Campo:o52_codtri \">\n<strong>Código do tribunal:</strong>\n</td>\n<td>\n<input title=\"Código do tribunal Campo:o52_codtri \" name=\"o52_codtri\" type=\"text\" id=\"o52_codtri\" value=\"\" size=\"10\" maxlength=\"10\" style=\"text-transform:uppercase;\" onkeyup=\"js_ValidaMaiusculo(this,'t',event);\" oninput=\"js_ValidaCampos(this,1,'Código do tribunal','f','t',event);\" onkeydown=\"return js_controla_tecla_enter(this,event);\" autocomplete=\"off\" labelvalidacao=\"Código do tribunal\" ismandatory=\"true\">\n</td>\n</tr>\n<tr>\n<td nowrap=\"\" title=\"Finalidade da Função Campo:o52_finali \">\n<strong>Finalidade:</strong>\n</td>\n<td>\n<textarea labelvalidacao=\"Finalidade\" title=\"Finalidade da Função Campo:o52_finali \" name=\"o52_finali\" type=\"text\" id=\"o52_finali\" rows=\"0\" cols=\"40\" style=\"text-transform:uppercase;\" onblur=\" js_ValidaMaiusculo(this,'t',event); \" onkeyup=\" js_ValidaCampos(this,0,'Finalidade','t','t',event); \" oninput=\"\" autocomplete=\"off\">\n</textarea>\n</td>\n</tr>\n</tbody>\n</table>\n</fieldset>\n<input name=\"db_opcao\" type=\"submit\" id=\"db_opcao\" value=\"Incluir\">\n<input name=\"pesquisar\" type=\"button\" id=\"pesquisar\" value=\"Pesquisar\" onclick=\"js_pesquisa();\">\n</form>\n<script>\n</script>\n<style>\n</style>\n<script>\n</script>\n<div id=\"db-tooltip\" class=\"db-tooltip\">\n</div>\n<script type=\"text/javascript\" src=\"scripts/classes/configuracao/DBViewHelpInline.classe.js\">\n</script>\n<script type=\"text/javascript\">\n</script>\n</body>\n</html>",
+   "dom_sha256": "33153a76e2f4c1ceedcb813b2cbafccf59a6eaf4d6cd01417298bab4fc21bc3e",
+   "dom_truncado": false,
+   "erro": null,
+   "extra": {
+    "hash_antes": {
+     "orcamento.orcfuncao": "8a3daad1a409c947b560a0c38dd32037"
+    },
+    "linhas_antes": {
+     "orcamento.orcfuncao": 29
+    },
+    "linhas_depois": {
+     "orcamento.orcfuncao": 30
+    }
+   },
+   "nome": "salvar",
+   "ok": true,
+   "requisicoes": [
+    "GET 200 /w/1/con4_dbhelp.RPC.php?json",
+    "GET 200 /w/1/orc1_orcfuncao001.php",
+    "POST 200 /w/1/orc1_orcfuncao001.php"
+   ],
+   "runtime": {
+    "/w/1/con4_dbhelp.RPC.php?json": "PHP-7.4 (referencia)",
+    "/w/1/orc1_orcfuncao001.php": "PHP-7.4 (referencia)"
+   },
+   "url": "/w/1/orc1_orcfuncao001.php"
+  }
+ ]
+}

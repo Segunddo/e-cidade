@@ -73,6 +73,7 @@ $oRetorno = new stdClass();
 $oRetorno->iStatus   = 1;
 $oRetorno->message = '';
 
+if (!$oParam) { $oParam = new stdClass(); }
 $oParam->sObservacao = 'Lançamento automático de depreciação';
 
 $oDataImplantacao         = new DBDate(date("Y-m-d", db_getsession('DB_datausu')));

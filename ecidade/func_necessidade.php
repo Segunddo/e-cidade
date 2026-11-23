@@ -35,7 +35,7 @@ require_once(modification("dbforms/db_funcoes.php"));
 require_once(modification("classes/db_necessidade_classe.php"));
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clnecessidade = new cl_necessidade;
 $clnecessidade->rotulo->label("ed48_i_codigo");
 $clnecessidade->rotulo->label("ed48_c_descr");

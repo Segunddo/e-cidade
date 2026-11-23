@@ -1,0 +1,33 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/dbpref/dbpref-pix/gerar",
+  "json": {
+    "errors": {
+      "codigo_arrecadacao": [
+        "Códido de arrecadação não informado."
+      ],
+      "convenio": [
+        "Códido do convenio não informado"
+      ],
+      "modelo": [
+        "Modelo não informado."
+      ],
+      "tipo_debito": [
+        "Tipo de Débito não informado."
+      ],
+      "vencimento": [
+        "Data vencimento não informada"
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "6df1a7e7c24195f89ded352e50ffc75ec81fb20c368d60bacedda0774606761e",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

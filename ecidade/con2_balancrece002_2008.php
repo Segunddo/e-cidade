@@ -164,7 +164,7 @@ $tipo_impressao = 1;
 // 1 = orcamento
 // 2 = balanco
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $xinstit = explode("-", $db_selinstit);
 $listaInstituicoes = str_replace('-', ', ', $db_selinstit);

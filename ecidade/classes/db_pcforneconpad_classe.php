@@ -65,16 +65,16 @@ class cl_pcforneconpad {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc64_contabanco = ($this->pc64_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["pc64_contabanco"]:$this->pc64_contabanco);
+       $this->pc64_contabanco = ($this->pc64_contabanco === 0 || $this->pc64_contabanco === 0.0 || $this->pc64_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["pc64_contabanco"]:$this->pc64_contabanco);
      }else{
-       $this->pc64_contabanco = ($this->pc64_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["pc64_contabanco"]:$this->pc64_contabanco);
+       $this->pc64_contabanco = ($this->pc64_contabanco === 0 || $this->pc64_contabanco === 0.0 || $this->pc64_contabanco == ""?@$GLOBALS["HTTP_POST_VARS"]["pc64_contabanco"]:$this->pc64_contabanco);
      }
    }
    // funcao para inclusao
    public function incluir ($pc64_contabanco){
       $this->atualizacampos();
        $this->pc64_contabanco = $pc64_contabanco;
-     if(($this->pc64_contabanco == null) || ($this->pc64_contabanco == "") ){
+     if(($this->pc64_contabanco == null) || ($this->pc64_contabanco === 0 || $this->pc64_contabanco === 0.0 || $this->pc64_contabanco == "") ){
        $this->erro_sql = " Campo pc64_contabanco nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

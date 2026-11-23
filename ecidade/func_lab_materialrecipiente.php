@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_lab_materialrecipiente_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cllab_materialrecipiente = new cl_lab_materialrecipiente;
 $cllab_materialrecipiente->rotulo->label("la17_i_codigo");
 $cllab_materialrecipiente->rotulo->label("la14_c_descr");

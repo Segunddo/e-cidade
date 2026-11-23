@@ -81,17 +81,17 @@ class cl_notidebitosreg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k43_sequencial = ($this->k43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_sequencial"]:$this->k43_sequencial);
-       $this->k43_numpar = ($this->k43_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_numpar"]:$this->k43_numpar);
-       $this->k43_numpre = ($this->k43_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_numpre"]:$this->k43_numpre);
-       $this->k43_notifica = ($this->k43_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_notifica"]:$this->k43_notifica);
-       $this->k43_receit = ($this->k43_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_receit"]:$this->k43_receit);
-       $this->k43_vlrcor = ($this->k43_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_vlrcor"]:$this->k43_vlrcor);
-       $this->k43_vlrjur = ($this->k43_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_vlrjur"]:$this->k43_vlrjur);
-       $this->k43_vlrmul = ($this->k43_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_vlrmul"]:$this->k43_vlrmul);
-       $this->k43_vlrdes = ($this->k43_vlrdes == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_vlrdes"]:$this->k43_vlrdes);
+       $this->k43_sequencial = ($this->k43_sequencial === 0 || $this->k43_sequencial === 0.0 || $this->k43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_sequencial"]:$this->k43_sequencial);
+       $this->k43_numpar = ($this->k43_numpar === 0 || $this->k43_numpar === 0.0 || $this->k43_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_numpar"]:$this->k43_numpar);
+       $this->k43_numpre = ($this->k43_numpre === 0 || $this->k43_numpre === 0.0 || $this->k43_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_numpre"]:$this->k43_numpre);
+       $this->k43_notifica = ($this->k43_notifica === 0 || $this->k43_notifica === 0.0 || $this->k43_notifica == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_notifica"]:$this->k43_notifica);
+       $this->k43_receit = ($this->k43_receit === 0 || $this->k43_receit === 0.0 || $this->k43_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_receit"]:$this->k43_receit);
+       $this->k43_vlrcor = ($this->k43_vlrcor === 0 || $this->k43_vlrcor === 0.0 || $this->k43_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_vlrcor"]:$this->k43_vlrcor);
+       $this->k43_vlrjur = ($this->k43_vlrjur === 0 || $this->k43_vlrjur === 0.0 || $this->k43_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_vlrjur"]:$this->k43_vlrjur);
+       $this->k43_vlrmul = ($this->k43_vlrmul === 0 || $this->k43_vlrmul === 0.0 || $this->k43_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_vlrmul"]:$this->k43_vlrmul);
+       $this->k43_vlrdes = ($this->k43_vlrdes === 0 || $this->k43_vlrdes === 0.0 || $this->k43_vlrdes == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_vlrdes"]:$this->k43_vlrdes);
      }else{
-       $this->k43_sequencial = ($this->k43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_sequencial"]:$this->k43_sequencial);
+       $this->k43_sequencial = ($this->k43_sequencial === 0 || $this->k43_sequencial === 0.0 || $this->k43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k43_sequencial"]:$this->k43_sequencial);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_notidebitosreg {
          $this->k43_sequencial = $k43_sequencial;
        }
      }
-     if(($this->k43_sequencial == null) || ($this->k43_sequencial == "") ){
+     if(($this->k43_sequencial == null) || ($this->k43_sequencial === 0 || $this->k43_sequencial === 0.0 || $this->k43_sequencial == "") ){
        $this->erro_sql = " Campo k43_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

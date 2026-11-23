@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/dbpref/dbpref-pix/validar",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Tributario\\Arrecadacao\\Controller\\RecibobarpixController::validaEmissao does not exist."
+  },
+  "sha256": "a5c784585d3fed89e585a81536d38f4ecf169407f9ec14089614c3da60ee198a",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

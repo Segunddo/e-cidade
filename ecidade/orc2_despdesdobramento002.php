@@ -55,7 +55,7 @@ $w_elemento = $clselorcdotacao->getElemento();
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in $instits");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_num_rows($resultinst); $xins++) {
+for ($xins = 0; $xins < ($resultinst ? pg_num_rows($resultinst) : null); $xins++) {
     db_fieldsmemory($resultinst, $xins);
     $descr_inst .= $xvirg . $nomeinstabrev;
     $xvirg = ', ';
@@ -70,7 +70,7 @@ if ($w_elemento != "") {
     $w_elemento = " and o58_codele in  ({$w_elemento}) ";
 }
 $result = db_query($cldesdobramento->sql($sele_work, $dtini, $dtfim, $instits));
-$rows = pg_num_rows($result);
+$rows = ($result ? pg_num_rows($result) : null);
 
 
 $d1 = $DBtxt21;

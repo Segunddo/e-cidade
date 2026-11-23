@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/saude/ambulatorial/consulta/statuspaciente/buscapacienteprontuario",
+  "json": {
+    "errors": {
+      "paciente": [
+        "O campo paciente é obrigatório quando paciente nome não está presente."
+      ],
+      "pacienteNome": [
+        "O campo paciente nome é obrigatório quando paciente não está presente."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "b981f142669c120d4407d05b139e8a8ccb960bcf43ff6253efda325ec0965e93",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -251,7 +251,7 @@ $clmer_item = new cl_mer_item;
 $clmer_estoque = new cl_mer_estoque;
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $db_botao                 = true;
 
 if (isset($incluir)) {

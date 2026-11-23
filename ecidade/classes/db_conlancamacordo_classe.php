@@ -69,11 +69,11 @@ class cl_conlancamacordo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c87_sequencial = ($this->c87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c87_sequencial"]:$this->c87_sequencial);
-       $this->c87_codlan = ($this->c87_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c87_codlan"]:$this->c87_codlan);
-       $this->c87_acordo = ($this->c87_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["c87_acordo"]:$this->c87_acordo);
+       $this->c87_sequencial = ($this->c87_sequencial === 0 || $this->c87_sequencial === 0.0 || $this->c87_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c87_sequencial"]:$this->c87_sequencial);
+       $this->c87_codlan = ($this->c87_codlan === 0 || $this->c87_codlan === 0.0 || $this->c87_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c87_codlan"]:$this->c87_codlan);
+       $this->c87_acordo = ($this->c87_acordo === 0 || $this->c87_acordo === 0.0 || $this->c87_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["c87_acordo"]:$this->c87_acordo);
      }else{
-       $this->c87_codlan = ($this->c87_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c87_codlan"]:$this->c87_codlan);
+       $this->c87_codlan = ($this->c87_codlan === 0 || $this->c87_codlan === 0.0 || $this->c87_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c87_codlan"]:$this->c87_codlan);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_conlancamacordo {
          $this->c87_sequencial = $c87_sequencial;
        }
      }
-     if(($this->c87_codlan == null) || ($this->c87_codlan == "") ){
+     if(($this->c87_codlan == null) || ($this->c87_codlan === 0 || $this->c87_codlan === 0.0 || $this->c87_codlan == "") ){
        $this->erro_sql = " Campo c87_codlan nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

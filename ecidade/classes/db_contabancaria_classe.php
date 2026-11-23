@@ -86,19 +86,19 @@ class cl_contabancaria
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->db83_sequencial = ($this->db83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_sequencial"]:$this->db83_sequencial);
+       $this->db83_sequencial = ($this->db83_sequencial === 0 || $this->db83_sequencial === 0.0 || $this->db83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_sequencial"]:$this->db83_sequencial);
        $this->db83_descricao = ($this->db83_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_descricao"]:$this->db83_descricao);
-       $this->db83_bancoagencia = ($this->db83_bancoagencia == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_bancoagencia"]:$this->db83_bancoagencia);
+       $this->db83_bancoagencia = ($this->db83_bancoagencia === 0 || $this->db83_bancoagencia === 0.0 || $this->db83_bancoagencia == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_bancoagencia"]:$this->db83_bancoagencia);
        $this->db83_conta = ($this->db83_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_conta"]:$this->db83_conta);
        $this->db83_dvconta = ($this->db83_dvconta == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_dvconta"]:$this->db83_dvconta);
        $this->db83_identificador = ($this->db83_identificador == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_identificador"]:$this->db83_identificador);
        $this->db83_codigooperacao = ($this->db83_codigooperacao == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_codigooperacao"]:$this->db83_codigooperacao);
-       $this->db83_tipoconta = ($this->db83_tipoconta == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_tipoconta"]:$this->db83_tipoconta);
+       $this->db83_tipoconta = ($this->db83_tipoconta === 0 || $this->db83_tipoconta === 0.0 || $this->db83_tipoconta == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_tipoconta"]:$this->db83_tipoconta);
        $this->db83_contaplano = ($this->db83_contaplano == "f"?@$GLOBALS["HTTP_POST_VARS"]["db83_contaplano"]:$this->db83_contaplano);
        $this->db83_contaunica = ($this->db83_contaunica == "f"?@$GLOBALS["HTTP_POST_VARS"]["db83_contaunica"]:$this->db83_contaunica);
-       $this->db83_instit = ($this->db83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_instit"]:$this->db83_instit);
+       $this->db83_instit = ($this->db83_instit === 0 || $this->db83_instit === 0.0 || $this->db83_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_instit"]:$this->db83_instit);
      }else{
-       $this->db83_sequencial = ($this->db83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_sequencial"]:$this->db83_sequencial);
+       $this->db83_sequencial = ($this->db83_sequencial === 0 || $this->db83_sequencial === 0.0 || $this->db83_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db83_sequencial"]:$this->db83_sequencial);
      }
    }
 
@@ -171,7 +171,7 @@ class cl_contabancaria
        $this->erro_status = "0";
        return false;
      }
-     if ($this->db83_instit == '' || !isset($GLOBALS["HTTP_POST_VARS"]["db83_instit"])) {
+     if ($this->db83_instit === 0 || $this->db83_instit === 0.0 || $this->db83_instit == '' || !isset($GLOBALS["HTTP_POST_VARS"]["db83_instit"])) {
        $this->db83_instit = 'NULL';
      }
      if($db83_sequencial == "" || $db83_sequencial == null ){
@@ -198,7 +198,7 @@ class cl_contabancaria
          $this->db83_sequencial = $db83_sequencial; 
        }
      }
-     if(($this->db83_sequencial == null) || ($this->db83_sequencial == "") ){ 
+     if(($this->db83_sequencial == null) || ($this->db83_sequencial === 0 || $this->db83_sequencial === 0.0 || $this->db83_sequencial == "") ){ 
        $this->erro_sql = " Campo db83_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

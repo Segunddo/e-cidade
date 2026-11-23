@@ -87,18 +87,18 @@ class cl_contranslan
     function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->c46_seqtranslan = ($this->c46_seqtranslan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_seqtranslan"] : $this->c46_seqtranslan);
-            $this->c46_seqtrans = ($this->c46_seqtrans == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_seqtrans"] : $this->c46_seqtrans);
-            $this->c46_codhist = ($this->c46_codhist == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_codhist"] : $this->c46_codhist);
+            $this->c46_seqtranslan = ($this->c46_seqtranslan === 0 || $this->c46_seqtranslan === 0.0 || $this->c46_seqtranslan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_seqtranslan"] : $this->c46_seqtranslan);
+            $this->c46_seqtrans = ($this->c46_seqtrans === 0 || $this->c46_seqtrans === 0.0 || $this->c46_seqtrans == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_seqtrans"] : $this->c46_seqtrans);
+            $this->c46_codhist = ($this->c46_codhist === 0 || $this->c46_codhist === 0.0 || $this->c46_codhist == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_codhist"] : $this->c46_codhist);
             $this->c46_obs = ($this->c46_obs == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_obs"] : $this->c46_obs);
-            $this->c46_valor = ($this->c46_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_valor"] : $this->c46_valor);
+            $this->c46_valor = ($this->c46_valor === 0 || $this->c46_valor === 0.0 || $this->c46_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_valor"] : $this->c46_valor);
             $this->c46_obrigatorio = ($this->c46_obrigatorio == "f" ? @$GLOBALS["HTTP_POST_VARS"]["c46_obrigatorio"] : $this->c46_obrigatorio);
-            $this->c46_evento = ($this->c46_evento == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_evento"] : $this->c46_evento);
+            $this->c46_evento = ($this->c46_evento === 0 || $this->c46_evento === 0.0 || $this->c46_evento == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_evento"] : $this->c46_evento);
             $this->c46_descricao = ($this->c46_descricao == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_descricao"] : $this->c46_descricao);
-            $this->c46_ordem = ($this->c46_ordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_ordem"] : $this->c46_ordem);
+            $this->c46_ordem = ($this->c46_ordem === 0 || $this->c46_ordem === 0.0 || $this->c46_ordem == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_ordem"] : $this->c46_ordem);
         } else {
-            $this->c46_seqtranslan = ($this->c46_seqtranslan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_seqtranslan"] : $this->c46_seqtranslan);
-            $this->c46_seqtrans = ($this->c46_seqtrans == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_seqtrans"] : $this->c46_seqtrans);
+            $this->c46_seqtranslan = ($this->c46_seqtranslan === 0 || $this->c46_seqtranslan === 0.0 || $this->c46_seqtranslan == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_seqtranslan"] : $this->c46_seqtranslan);
+            $this->c46_seqtrans = ($this->c46_seqtrans === 0 || $this->c46_seqtrans === 0.0 || $this->c46_seqtrans == "" ? @$GLOBALS["HTTP_POST_VARS"]["c46_seqtrans"] : $this->c46_seqtrans);
         }
     }
 
@@ -184,7 +184,7 @@ class cl_contranslan
                 $this->c46_seqtranslan = $c46_seqtranslan;
             }
         }
-        if (($this->c46_seqtranslan == null) || ($this->c46_seqtranslan == "")) {
+        if (($this->c46_seqtranslan == null) || ($this->c46_seqtranslan === 0 || $this->c46_seqtranslan === 0.0 || $this->c46_seqtranslan == "")) {
             $this->erro_sql = " Campo c46_seqtranslan nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

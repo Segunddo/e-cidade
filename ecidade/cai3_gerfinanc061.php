@@ -37,7 +37,7 @@ $clnotificacao = new cl_notificacao;
 $clrotulo = new rotulocampo;
 $clrotulo->label("k50_notifica");
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if(isset($db_datausu)){
   if(!checkdate(substr($db_datausu,5,2),substr($db_datausu,8,2),substr($db_datausu,0,4))){

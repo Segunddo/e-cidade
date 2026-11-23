@@ -72,12 +72,12 @@ class cl_db_ordemimagens {
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->codordem = ($this->codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["codordem"]:$this->codordem);
-       $this->codimg = ($this->codimg == ""?@$GLOBALS["HTTP_POST_VARS"]["codimg"]:$this->codimg);
+       $this->codimg = ($this->codimg === 0 || $this->codimg === 0.0 || $this->codimg == ""?@$GLOBALS["HTTP_POST_VARS"]["codimg"]:$this->codimg);
        $this->arquivo = ($this->arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["arquivo"]:$this->arquivo);
        $this->descrimg = ($this->descrimg == ""?@$GLOBALS["HTTP_POST_VARS"]["descrimg"]:$this->descrimg);
      }else{
        $this->codordem = ($this->codordem == ""?@$GLOBALS["HTTP_POST_VARS"]["codordem"]:$this->codordem);
-       $this->codimg = ($this->codimg == ""?@$GLOBALS["HTTP_POST_VARS"]["codimg"]:$this->codimg);
+       $this->codimg = ($this->codimg === 0 || $this->codimg === 0.0 || $this->codimg == ""?@$GLOBALS["HTTP_POST_VARS"]["codimg"]:$this->codimg);
      }
    }
    // funcao para inclusao
@@ -111,7 +111,7 @@ class cl_db_ordemimagens {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->codimg == null) || ($this->codimg == "") ){
+     if(($this->codimg == null) || ($this->codimg === 0 || $this->codimg === 0.0 || $this->codimg == "") ){
        $this->erro_sql = " Campo codimg nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

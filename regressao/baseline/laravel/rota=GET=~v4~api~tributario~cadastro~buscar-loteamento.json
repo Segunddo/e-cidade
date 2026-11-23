@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/buscar-loteamento",
+  "json": {
+    "data": null,
+    "error": true,
+    "message": "Erro Interno ao buscar loteamentos."
+  },
+  "sha256": "c70e2aeea3ded3374c34cc1d1362e877b26510bbb65b0f44562a5f332d3fff73",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

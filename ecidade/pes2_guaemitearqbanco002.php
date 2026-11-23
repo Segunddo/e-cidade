@@ -36,7 +36,7 @@ require_once(modification("classes/db_rharqbanco_classe.php"));
 require_once(modification("classes/db_orctiporec_classe.php"));
 require_once(modification("classes/db_rhpessoalmov_classe.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]));
+parse_str(base64_decode($HTTP_SERVER_VARS["QUERY_STRING"]), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $cllayouts_bb     = new LayoutBB;

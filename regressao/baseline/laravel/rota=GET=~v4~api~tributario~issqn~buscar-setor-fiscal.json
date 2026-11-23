@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/issqn/buscar-setor-fiscal",
+  "json": {
+    "data": null,
+    "error": true,
+    "message": "Erro interno ao buscar setores fiscais."
+  },
+  "sha256": "d65904363ec8ececdb45da0a7a52d5d30b04cb73e5422b36b66a1199d1c1b223",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

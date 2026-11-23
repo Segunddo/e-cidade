@@ -69,11 +69,11 @@ class cl_issplaninscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q24_sequencial = ($this->q24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_sequencial"]:$this->q24_sequencial);
-       $this->q24_planilha = ($this->q24_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_planilha"]:$this->q24_planilha);
-       $this->q24_inscr = ($this->q24_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_inscr"]:$this->q24_inscr);
+       $this->q24_sequencial = ($this->q24_sequencial === 0 || $this->q24_sequencial === 0.0 || $this->q24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_sequencial"]:$this->q24_sequencial);
+       $this->q24_planilha = ($this->q24_planilha === 0 || $this->q24_planilha === 0.0 || $this->q24_planilha == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_planilha"]:$this->q24_planilha);
+       $this->q24_inscr = ($this->q24_inscr === 0 || $this->q24_inscr === 0.0 || $this->q24_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_inscr"]:$this->q24_inscr);
      }else{
-       $this->q24_sequencial = ($this->q24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_sequencial"]:$this->q24_sequencial);
+       $this->q24_sequencial = ($this->q24_sequencial === 0 || $this->q24_sequencial === 0.0 || $this->q24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q24_sequencial"]:$this->q24_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_issplaninscr {
          $this->q24_sequencial = $q24_sequencial;
        }
      }
-     if(($this->q24_sequencial == null) || ($this->q24_sequencial == "") ){
+     if(($this->q24_sequencial == null) || ($this->q24_sequencial === 0 || $this->q24_sequencial === 0.0 || $this->q24_sequencial == "") ){
        $this->erro_sql = " Campo q24_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

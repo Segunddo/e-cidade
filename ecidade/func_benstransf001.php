@@ -34,7 +34,7 @@ require_once(modification("classes/db_benstransf_classe.php"));
 require_once(modification("classes/db_benstransfdes_classe.php"));
 require_once(modification("classes/db_benstransfconf_classe.php"));
 db_postmemory($_SERVER);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clbenstransf = new cl_benstransf;
 $clbenstransfdes = new cl_benstransfdes;
 $clbenstransfconf = new cl_benstransfconf;

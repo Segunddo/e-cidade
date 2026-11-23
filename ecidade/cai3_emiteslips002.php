@@ -31,7 +31,7 @@ include(modification("classes/db_saltes_classe.php"));
 
 $clsaltes = new cl_saltes;
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']));
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 // Dados
 $sql = "select slip.*,
@@ -68,7 +68,7 @@ $array_recursos =  array();
 // print_r($array_recursos); exit;
 
 
-if (pg_numrows($dados) == 0) {
+if (($dados ? pg_numrows($dados) : null) == 0) {
 	echo "<script>
 	         alert('Documento de Slip não Cadastrado.');
 	         window.close();
@@ -82,7 +82,7 @@ $usuario = UsuarioSistemaRepository::getPorCodigo($k17_idusuario);
 
 $sqlcai = "select * from caiparametro where k29_instit = ".db_getsession('DB_instit');
 $resultcai = db_query($sqlcai) or die($sqlcai);
-if (pg_numrows($resultcai) == 0) {
+if (($resultcai ? pg_numrows($resultcai) : null) == 0) {
 	$k29_modslipnormal = 36;
 	$k29_modsliptransf = 36;
 } else {

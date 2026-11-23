@@ -179,7 +179,7 @@ if ( $iLinhasDadosTaxaInf > 0 ) {
 }
 
 foreach ( $aListaTodosAnos as $iIndAno => $iAno ){
-	if ( !array_key_exists($iAno,$aValTaxaDefla)) {
+	if ( !(is_array($aValTaxaDefla) && array_key_exists($iAno,$aValTaxaDefla))) {
 		$sMsgErro = "Não consta informação sobre o valor da taxa de inflação no cenário macroeconômico para o ano {$iAno}!";
 	  db_redireciona("db_erros.php?fechar=true&db_erro={$sMsgErro}");
 	}

@@ -67,10 +67,10 @@ class cl_debcontatiporetorno {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d61_codigo = ($this->d61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d61_codigo"]:$this->d61_codigo);
+       $this->d61_codigo = ($this->d61_codigo === 0 || $this->d61_codigo === 0.0 || $this->d61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d61_codigo"]:$this->d61_codigo);
        $this->d61_descr = ($this->d61_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["d61_descr"]:$this->d61_descr);
      }else{
-       $this->d61_codigo = ($this->d61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d61_codigo"]:$this->d61_codigo);
+       $this->d61_codigo = ($this->d61_codigo === 0 || $this->d61_codigo === 0.0 || $this->d61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d61_codigo"]:$this->d61_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_debcontatiporetorno {
        return false;
      }
        $this->d61_codigo = $d61_codigo; 
-     if(($this->d61_codigo == null) || ($this->d61_codigo == "") ){ 
+     if(($this->d61_codigo == null) || ($this->d61_codigo === 0 || $this->d61_codigo === 0.0 || $this->d61_codigo == "") ){ 
        $this->erro_sql = " Campo d61_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

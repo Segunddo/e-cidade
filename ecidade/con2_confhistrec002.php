@@ -39,7 +39,7 @@ $classinatura = new cl_assinatura;
 $clorctiporec = new cl_orctiporec;
 $clempresto   = new cl_empresto;
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 // GET //
 // db_selinstit
@@ -52,7 +52,7 @@ $xinstit =explode("-", $db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-', ', ', $db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins ++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins ++) {
 	db_fieldsmemory($resultinst, $xins);
 	$descr_inst .= $xvirg.$nomeinst;
 	$xvirg = ', ';
@@ -70,8 +70,8 @@ $result_contas_inicial = db_query(sql_saldo_bancario($anousu, $anousu."-01-01", 
 $result_contas = db_query(sql_saldo_bancario($anousu, $data_limite, $db_selinstit, $where_recurso));
 
 //  db_criatabela($result_contas_inicial);
-$nrows_inicial = pg_numrows($result_contas_inicial);
-$nrows = pg_numrows($result_contas);
+$nrows_inicial = ($result_contas_inicial ? pg_numrows($result_contas_inicial) : null);
+$nrows = ($result_contas ? pg_numrows($result_contas) : null);
 // exit;
 $saldo_bancario_inicial = 0;
 $saldo_bancario_atual = 0;
@@ -113,7 +113,7 @@ $sql_restos = " select sum(coalesce(round(e91_vlremp,2),0)) - sum(coalesce(round
               ";
 
 $result_restos  = db_query($sql_restos);
-if (pg_numrows($result_restos) > 0 ){
+if (($result_restos ? pg_numrows($result_restos) : null) > 0 ){
   db_fieldsmemory($result_restos,0);
    //  echo "<br> rp incial em 31/12 ".$saldo_inicial_rp;
    // echo "<br> rp saldo atual ".$saldo_atual_rp;
@@ -127,7 +127,7 @@ if ($recurso > 0) {
    $sql_where = " o70_codigo = ".$recurso;
 }
 $result_receita = db_receitasaldo(1,3,3,true,$sql_where,$anousu,$anousu."-01-01",$data_limite);
-if (pg_numrows($result_receita)>0){
+if (($result_receita ? pg_numrows($result_receita) : null)>0){
 	 db_fieldsmemory($result_receita,0);
 }
 
@@ -145,7 +145,7 @@ $sql_baldesp = "select (sum(empenhado_acumulado)-sum(anulado_acumulado)) as empe
                            from ($sql_baldesp) as x
                           ";
 $result_baldesp = db_query($sql_baldesp);
-if (pg_numrows($result_baldesp) > 0 ){
+if (($result_baldesp ? pg_numrows($result_baldesp) : null) > 0 ){
   db_fieldsmemory($result_baldesp,0);
 
   //echo "<br> empenhado ".$empenhado;

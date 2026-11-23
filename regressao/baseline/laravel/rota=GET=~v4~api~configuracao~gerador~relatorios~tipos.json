@@ -1,0 +1,27 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/gerador/relatorios/tipos",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "Relatório"
+      },
+      {
+        "codigo": 2,
+        "descricao": "Documento"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "76e115676963ac8f29c7293aaf228e8d53cd73c3a6256e71acd2dac7959bc80b",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

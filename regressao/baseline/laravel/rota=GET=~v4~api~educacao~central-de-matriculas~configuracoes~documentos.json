@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/configuracoes/documentos",
+  "json": {
+    "error": true,
+    "message": "Call to undefined method App\\Domain\\Educacao\\CentralMatriculas\\Services\\ConfiguracoesService::getDocumentos()"
+  },
+  "sha256": "530fcbfb47806aefbc785fd5f8ab9227a55877619fd8cb0a454bba9b73742d5d",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

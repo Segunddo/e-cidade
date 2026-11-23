@@ -103,7 +103,7 @@ try {
     //echo $sql; die();
     $resultcontasmovimento = db_query($sql);
 
-    if (pg_num_rows($resultcontasmovimento) == 0) {
+    if (($resultcontasmovimento ? pg_num_rows($resultcontasmovimento) : null) == 0) {
         throw new Exception('Não existem dados neste periodo.');
     }
 
@@ -112,7 +112,7 @@ try {
 
     $aContas = array();
 
-    $numrows = pg_num_rows($resultcontasmovimento);
+    $numrows = ($resultcontasmovimento ? pg_num_rows($resultcontasmovimento) : null);
     for ($linha = 0; $linha < $numrows; $linha++) {
         db_fieldsmemory($resultcontasmovimento, $linha);
 
@@ -738,8 +738,8 @@ SQL;
         $saldo_dia_debito = 0;
         $saldo_dia_credito = 0;
 
-        if (pg_num_rows($resmovimentacao) > 0) {
-            for ($i = 0; $i < pg_num_rows($resmovimentacao); $i++) {
+        if (($resmovimentacao ? pg_num_rows($resmovimentacao) : null) > 0) {
+            for ($i = 0; $i < ($resmovimentacao ? pg_num_rows($resmovimentacao) : null); $i++) {
                 db_fieldsmemory($resmovimentacao, $i);
 
                 if (isset($considerar_retencoes) && $considerar_retencoes == 'n') {
@@ -842,7 +842,7 @@ SQL;
 
                     $res_rec = db_query($sql);
                     $c61_reduz = '';
-                    if (pg_num_rows($res_rec) > 0) {
+                    if (($res_rec ? pg_num_rows($res_rec) : null) > 0) {
                         db_fieldsmemory($res_rec, 0);
                     }
                 }

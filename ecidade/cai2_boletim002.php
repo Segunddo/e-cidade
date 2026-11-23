@@ -38,7 +38,7 @@ $clrotulo->label('k11_anousu');
 $clrotulo->label('k11_libera');
 $clrotulo->label('nomeinst');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 //verifica se as datas estão setadas para montar o where
@@ -101,14 +101,14 @@ $sql = "select * from ($sql) as x where 1=1 $where $wheremov order by k11_instit
 //echo "$sql";exit;
 $result = pg_query($sql);
 
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro= Informação não encontrada ! ');
 }
 
 $sql_descr_instit = "select array_to_string ( array_accum(codigo || '-' ||nomeinstabrev),', ') from ( select codigo, nomeinstabrev from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") group by codigo order by codigo) as x";
 $rs_descr_instit = pg_query($sql_descr_instit) or die($sql_descr_instit);
-$descr_instit = pg_result($rs_descr_instit,0,0);
+$descr_instit = ($rs_descr_instit ? pg_result($rs_descr_instit,0,0) : null);
 
 $head4 = "INSTITUICOES: $descr_instit";
 $head3 = "RELATÓRIO DE BOLETINS";
@@ -128,7 +128,7 @@ $instit = 0;
 
 $nomeinstituicao=null;
 
-for($x = 0; $x < pg_numrows($result);$x++){
+for($x = 0; $x < ($result ? pg_numrows($result) : null);$x++){
    db_fieldsmemory($result,$x,true);
 /*
 echo "k12_instit:$k12_instit<br>";

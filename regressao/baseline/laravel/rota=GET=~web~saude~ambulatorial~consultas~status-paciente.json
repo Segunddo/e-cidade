@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/saude/ambulatorial/consultas/status-paciente",
+  "json": null,
+  "sha256": "ac2bf1045aea16ad4cd68576ae53ebcfef7430f10ad766ce303558f11d2c25f7",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

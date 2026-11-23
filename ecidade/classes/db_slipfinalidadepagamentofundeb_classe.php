@@ -69,11 +69,11 @@ class cl_slipfinalidadepagamentofundeb {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e153_sequencial = ($this->e153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_sequencial"]:$this->e153_sequencial);
-       $this->e153_slip = ($this->e153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_slip"]:$this->e153_slip);
-       $this->e153_finalidadepagamentofundeb = ($this->e153_finalidadepagamentofundeb == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_finalidadepagamentofundeb"]:$this->e153_finalidadepagamentofundeb);
+       $this->e153_sequencial = ($this->e153_sequencial === 0 || $this->e153_sequencial === 0.0 || $this->e153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_sequencial"]:$this->e153_sequencial);
+       $this->e153_slip = ($this->e153_slip === 0 || $this->e153_slip === 0.0 || $this->e153_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_slip"]:$this->e153_slip);
+       $this->e153_finalidadepagamentofundeb = ($this->e153_finalidadepagamentofundeb === 0 || $this->e153_finalidadepagamentofundeb === 0.0 || $this->e153_finalidadepagamentofundeb == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_finalidadepagamentofundeb"]:$this->e153_finalidadepagamentofundeb);
      }else{
-       $this->e153_sequencial = ($this->e153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_sequencial"]:$this->e153_sequencial);
+       $this->e153_sequencial = ($this->e153_sequencial === 0 || $this->e153_sequencial === 0.0 || $this->e153_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e153_sequencial"]:$this->e153_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_slipfinalidadepagamentofundeb {
          $this->e153_sequencial = $e153_sequencial;
        }
      }
-     if(($this->e153_sequencial == null) || ($this->e153_sequencial == "") ){
+     if(($this->e153_sequencial == null) || ($this->e153_sequencial === 0 || $this->e153_sequencial === 0.0 || $this->e153_sequencial == "") ){
        $this->erro_sql = " Campo e153_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

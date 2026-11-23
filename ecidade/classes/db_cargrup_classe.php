@@ -69,11 +69,11 @@ class cl_cargrup {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j32_grupo = ($this->j32_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_grupo"]:$this->j32_grupo);
+       $this->j32_grupo = ($this->j32_grupo === 0 || $this->j32_grupo === 0.0 || $this->j32_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_grupo"]:$this->j32_grupo);
        $this->j32_descr = ($this->j32_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_descr"]:$this->j32_descr);
        $this->j32_tipo = ($this->j32_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_tipo"]:$this->j32_tipo);
      }else{
-       $this->j32_grupo = ($this->j32_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_grupo"]:$this->j32_grupo);
+       $this->j32_grupo = ($this->j32_grupo === 0 || $this->j32_grupo === 0.0 || $this->j32_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["j32_grupo"]:$this->j32_grupo);
      }
    }
    // funcao para Inclusão
@@ -121,7 +121,7 @@ class cl_cargrup {
          $this->j32_grupo = $j32_grupo;
        }
      }
-     if(($this->j32_grupo == null) || ($this->j32_grupo == "") ){
+     if(($this->j32_grupo == null) || ($this->j32_grupo === 0 || $this->j32_grupo === 0.0 || $this->j32_grupo == "") ){
        $this->erro_sql = " Campo j32_grupo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

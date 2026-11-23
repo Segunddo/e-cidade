@@ -71,13 +71,13 @@ class cl_issvarnotas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q06_codigo = ($this->q06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_codigo"]:$this->q06_codigo);
-       $this->q06_seq = ($this->q06_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_seq"]:$this->q06_seq);
+       $this->q06_codigo = ($this->q06_codigo === 0 || $this->q06_codigo === 0.0 || $this->q06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_codigo"]:$this->q06_codigo);
+       $this->q06_seq = ($this->q06_seq === 0 || $this->q06_seq === 0.0 || $this->q06_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_seq"]:$this->q06_seq);
        $this->q06_nota = ($this->q06_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_nota"]:$this->q06_nota);
-       $this->q06_valor = ($this->q06_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_valor"]:$this->q06_valor);
+       $this->q06_valor = ($this->q06_valor === 0 || $this->q06_valor === 0.0 || $this->q06_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_valor"]:$this->q06_valor);
      }else{
-       $this->q06_codigo = ($this->q06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_codigo"]:$this->q06_codigo);
-       $this->q06_seq = ($this->q06_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_seq"]:$this->q06_seq);
+       $this->q06_codigo = ($this->q06_codigo === 0 || $this->q06_codigo === 0.0 || $this->q06_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_codigo"]:$this->q06_codigo);
+       $this->q06_seq = ($this->q06_seq === 0 || $this->q06_seq === 0.0 || $this->q06_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["q06_seq"]:$this->q06_seq);
      }
    }
    // funcao para inclusao
@@ -94,7 +94,7 @@ class cl_issvarnotas {
      }
        $this->q06_codigo = $q06_codigo;
        $this->q06_seq = $q06_seq;
-     if(($this->q06_codigo == null) || ($this->q06_codigo == "") ){
+     if(($this->q06_codigo == null) || ($this->q06_codigo === 0 || $this->q06_codigo === 0.0 || $this->q06_codigo == "") ){
        $this->erro_sql = " Campo q06_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -102,7 +102,7 @@ class cl_issvarnotas {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q06_seq == null) || ($this->q06_seq == "") ){
+     if(($this->q06_seq == null) || ($this->q06_seq === 0 || $this->q06_seq === 0.0 || $this->q06_seq == "") ){
        $this->erro_sql = " Campo q06_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

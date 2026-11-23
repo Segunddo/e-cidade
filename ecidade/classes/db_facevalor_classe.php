@@ -73,13 +73,13 @@ class cl_facevalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j81_codigo = ($this->j81_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_codigo"]:$this->j81_codigo);
-       $this->j81_face = ($this->j81_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_face"]:$this->j81_face);
-       $this->j81_anousu = ($this->j81_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_anousu"]:$this->j81_anousu);
-       $this->j81_valorterreno = ($this->j81_valorterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_valorterreno"]:$this->j81_valorterreno);
-       $this->j81_valorconstr = ($this->j81_valorconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_valorconstr"]:$this->j81_valorconstr);
+       $this->j81_codigo = ($this->j81_codigo === 0 || $this->j81_codigo === 0.0 || $this->j81_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_codigo"]:$this->j81_codigo);
+       $this->j81_face = ($this->j81_face === 0 || $this->j81_face === 0.0 || $this->j81_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_face"]:$this->j81_face);
+       $this->j81_anousu = ($this->j81_anousu === 0 || $this->j81_anousu === 0.0 || $this->j81_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_anousu"]:$this->j81_anousu);
+       $this->j81_valorterreno = ($this->j81_valorterreno === 0 || $this->j81_valorterreno === 0.0 || $this->j81_valorterreno == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_valorterreno"]:$this->j81_valorterreno);
+       $this->j81_valorconstr = ($this->j81_valorconstr === 0 || $this->j81_valorconstr === 0.0 || $this->j81_valorconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_valorconstr"]:$this->j81_valorconstr);
      }else{
-       $this->j81_codigo = ($this->j81_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_codigo"]:$this->j81_codigo);
+       $this->j81_codigo = ($this->j81_codigo === 0 || $this->j81_codigo === 0.0 || $this->j81_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j81_codigo"]:$this->j81_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_facevalor {
          $this->j81_codigo = $j81_codigo;
        }
      }
-     if(($this->j81_codigo == null) || ($this->j81_codigo == "") ){
+     if(($this->j81_codigo == null) || ($this->j81_codigo === 0 || $this->j81_codigo === 0.0 || $this->j81_codigo == "") ){
        $this->erro_sql = " Campo j81_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

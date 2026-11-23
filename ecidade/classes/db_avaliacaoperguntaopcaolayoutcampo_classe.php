@@ -73,13 +73,13 @@ class cl_avaliacaoperguntaopcaolayoutcampo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed313_sequencial = ($this->ed313_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_sequencial"]:$this->ed313_sequencial);
-       $this->ed313_ano = ($this->ed313_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_ano"]:$this->ed313_ano);
-       $this->ed313_db_layoutcampo = ($this->ed313_db_layoutcampo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_db_layoutcampo"]:$this->ed313_db_layoutcampo);
-       $this->ed313_avaliacaoperguntaopcao = ($this->ed313_avaliacaoperguntaopcao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_avaliacaoperguntaopcao"]:$this->ed313_avaliacaoperguntaopcao);
+       $this->ed313_sequencial = ($this->ed313_sequencial === 0 || $this->ed313_sequencial === 0.0 || $this->ed313_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_sequencial"]:$this->ed313_sequencial);
+       $this->ed313_ano = ($this->ed313_ano === 0 || $this->ed313_ano === 0.0 || $this->ed313_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_ano"]:$this->ed313_ano);
+       $this->ed313_db_layoutcampo = ($this->ed313_db_layoutcampo === 0 || $this->ed313_db_layoutcampo === 0.0 || $this->ed313_db_layoutcampo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_db_layoutcampo"]:$this->ed313_db_layoutcampo);
+       $this->ed313_avaliacaoperguntaopcao = ($this->ed313_avaliacaoperguntaopcao === 0 || $this->ed313_avaliacaoperguntaopcao === 0.0 || $this->ed313_avaliacaoperguntaopcao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_avaliacaoperguntaopcao"]:$this->ed313_avaliacaoperguntaopcao);
        $this->ed313_layoutvalorcampo = ($this->ed313_layoutvalorcampo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_layoutvalorcampo"]:$this->ed313_layoutvalorcampo);
      }else{
-       $this->ed313_sequencial = ($this->ed313_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_sequencial"]:$this->ed313_sequencial);
+       $this->ed313_sequencial = ($this->ed313_sequencial === 0 || $this->ed313_sequencial === 0.0 || $this->ed313_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed313_sequencial"]:$this->ed313_sequencial);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_avaliacaoperguntaopcaolayoutcampo {
          $this->ed313_sequencial = $ed313_sequencial;
        }
      }
-     if(($this->ed313_sequencial == null) || ($this->ed313_sequencial == "") ){
+     if(($this->ed313_sequencial == null) || ($this->ed313_sequencial === 0 || $this->ed313_sequencial === 0.0 || $this->ed313_sequencial == "") ){
        $this->erro_sql = " Campo ed313_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

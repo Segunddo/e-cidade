@@ -35,7 +35,7 @@ require_once(modification("std/db_stdClass.php"));
 $clrotulo = new rotulocampo;
 $clrotulo->label('j40_refant');
 $clrotulo->label('q02_inscmu');
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $oInstit = db_stdClass::getDadosInstit();
 $head1     = "";
@@ -50,7 +50,7 @@ $sqlparag .= "   and db03_instit = " . db_getsession("DB_instit") . " ";
 $sqlparag .= " order by db04_ordem ";
 $resparag = db_query($sqlparag);
 
-if (pg_numrows($resparag) == 0) {
+if (($resparag ? pg_numrows($resparag) : null) == 0) {
   $head3 = "SECRETARIA DA FAZENDA";
 } else {
   db_fieldsmemory($resparag, 0);
@@ -314,7 +314,7 @@ $sSqlCreditosDisponiveis .= "select k125_sequencial,
 
 //echo $sSqlCreditosDisponiveis; die;
 $rsCreditosDisponiveis    = db_query($sSqlCreditosDisponiveis);
-$iLinhasCreditos          = pg_num_rows($rsCreditosDisponiveis);
+$iLinhasCreditos          = ($rsCreditosDisponiveis ? pg_num_rows($rsCreditosDisponiveis) : null);
 if ($iLinhasCreditos > 0) {
 }
 
@@ -401,7 +401,7 @@ if ($iLinhasCreditos > 0) {
                                 WHERE c.k00_numpre = {$oCredito->k00_numpre}";
     $rsSqlOrigemCredito = db_query($sqlOrigemCredito);
     if ($rsSqlOrigemCredito) {
-      $iLinhasOrigemCredito = pg_num_rows($rsSqlOrigemCredito);
+      $iLinhasOrigemCredito = ($rsSqlOrigemCredito ? pg_num_rows($rsSqlOrigemCredito) : null);
       $aCreditos = array();
       for ($xInd = 0; $xInd < $iLinhasOrigemCredito; $xInd++) {
         $oOrigemCredito = db_utils::fieldsMemory($rsSqlOrigemCredito, $xInd);

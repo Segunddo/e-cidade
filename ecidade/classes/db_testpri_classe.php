@@ -69,12 +69,12 @@ class cl_testpri {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j49_idbql = ($this->j49_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j49_idbql"]:$this->j49_idbql);
-       $this->j49_face = ($this->j49_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j49_face"]:$this->j49_face);
-       $this->j49_codigo = ($this->j49_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j49_codigo"]:$this->j49_codigo);
+       $this->j49_idbql = ($this->j49_idbql === 0 || $this->j49_idbql === 0.0 || $this->j49_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j49_idbql"]:$this->j49_idbql);
+       $this->j49_face = ($this->j49_face === 0 || $this->j49_face === 0.0 || $this->j49_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j49_face"]:$this->j49_face);
+       $this->j49_codigo = ($this->j49_codigo === 0 || $this->j49_codigo === 0.0 || $this->j49_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j49_codigo"]:$this->j49_codigo);
      }else{
-       $this->j49_idbql = ($this->j49_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j49_idbql"]:$this->j49_idbql);
-       $this->j49_face = ($this->j49_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j49_face"]:$this->j49_face);
+       $this->j49_idbql = ($this->j49_idbql === 0 || $this->j49_idbql === 0.0 || $this->j49_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j49_idbql"]:$this->j49_idbql);
+       $this->j49_face = ($this->j49_face === 0 || $this->j49_face === 0.0 || $this->j49_face == ""?@$GLOBALS["HTTP_POST_VARS"]["j49_face"]:$this->j49_face);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_testpri {
      }
        $this->j49_idbql = $j49_idbql;
        $this->j49_face = $j49_face;
-     if(($this->j49_idbql == null) || ($this->j49_idbql == "") ){
+     if(($this->j49_idbql == null) || ($this->j49_idbql === 0 || $this->j49_idbql === 0.0 || $this->j49_idbql == "") ){
        $this->erro_sql = " Campo j49_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_testpri {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j49_face == null) || ($this->j49_face == "") ){
+     if(($this->j49_face == null) || ($this->j49_face === 0 || $this->j49_face === 0.0 || $this->j49_face == "") ){
        $this->erro_sql = " Campo j49_face nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

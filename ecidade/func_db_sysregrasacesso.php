@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_db_sysregrasacesso_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldb_sysregrasacesso = new cl_db_sysregrasacesso;
 $cldb_sysregrasacesso->rotulo->label("db46_idacesso");
 $cldb_sysregrasacesso->rotulo->label("db46_observ");

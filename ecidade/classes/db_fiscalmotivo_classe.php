@@ -67,10 +67,10 @@ class cl_fiscalmotivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y46_motivo = ($this->y46_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["y46_motivo"]:$this->y46_motivo);
+       $this->y46_motivo = ($this->y46_motivo === 0 || $this->y46_motivo === 0.0 || $this->y46_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["y46_motivo"]:$this->y46_motivo);
        $this->y46_descr = ($this->y46_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y46_descr"]:$this->y46_descr);
      }else{
-       $this->y46_motivo = ($this->y46_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["y46_motivo"]:$this->y46_motivo);
+       $this->y46_motivo = ($this->y46_motivo === 0 || $this->y46_motivo === 0.0 || $this->y46_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["y46_motivo"]:$this->y46_motivo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_fiscalmotivo {
          $this->y46_motivo = $y46_motivo; 
        }
      }
-     if(($this->y46_motivo == null) || ($this->y46_motivo == "") ){ 
+     if(($this->y46_motivo == null) || ($this->y46_motivo === 0 || $this->y46_motivo === 0.0 || $this->y46_motivo == "") ){ 
        $this->erro_sql = " Campo y46_motivo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

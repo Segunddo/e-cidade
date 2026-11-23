@@ -71,12 +71,12 @@ class cl_contacorrentedetalheconlancamval {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c28_sequencial = ($this->c28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c28_sequencial"]:$this->c28_sequencial);
-       $this->c28_contacorrentedetalhe = ($this->c28_contacorrentedetalhe == ""?@$GLOBALS["HTTP_POST_VARS"]["c28_contacorrentedetalhe"]:$this->c28_contacorrentedetalhe);
-       $this->c28_conlancamval = ($this->c28_conlancamval == ""?@$GLOBALS["HTTP_POST_VARS"]["c28_conlancamval"]:$this->c28_conlancamval);
+       $this->c28_sequencial = ($this->c28_sequencial === 0 || $this->c28_sequencial === 0.0 || $this->c28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c28_sequencial"]:$this->c28_sequencial);
+       $this->c28_contacorrentedetalhe = ($this->c28_contacorrentedetalhe === 0 || $this->c28_contacorrentedetalhe === 0.0 || $this->c28_contacorrentedetalhe == ""?@$GLOBALS["HTTP_POST_VARS"]["c28_contacorrentedetalhe"]:$this->c28_contacorrentedetalhe);
+       $this->c28_conlancamval = ($this->c28_conlancamval === 0 || $this->c28_conlancamval === 0.0 || $this->c28_conlancamval == ""?@$GLOBALS["HTTP_POST_VARS"]["c28_conlancamval"]:$this->c28_conlancamval);
        $this->c28_tipo = ($this->c28_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c28_tipo"]:$this->c28_tipo);
      }else{
-       $this->c28_sequencial = ($this->c28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c28_sequencial"]:$this->c28_sequencial);
+       $this->c28_sequencial = ($this->c28_sequencial === 0 || $this->c28_sequencial === 0.0 || $this->c28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c28_sequencial"]:$this->c28_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_contacorrentedetalheconlancamval {
          $this->c28_sequencial = $c28_sequencial;
        }
      }
-     if(($this->c28_sequencial == null) || ($this->c28_sequencial == "") ){
+     if(($this->c28_sequencial == null) || ($this->c28_sequencial === 0 || $this->c28_sequencial === 0.0 || $this->c28_sequencial == "") ){
        $this->erro_sql = " Campo c28_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

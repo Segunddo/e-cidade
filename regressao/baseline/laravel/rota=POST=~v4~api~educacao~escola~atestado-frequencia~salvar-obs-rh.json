@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/atestado-frequencia/salvar-obs-rh",
+  "json": {
+    "error": true,
+    "message": "O campo rechumanoescola é obrigatório."
+  },
+  "sha256": "84c19e34f8cc48693e4caefd6b54a22993b8ad9e86a6e4e87469be28a686680e",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

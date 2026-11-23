@@ -116,9 +116,9 @@ class cl_debitos {
             $this->k22_data = $this->k22_data_ano."-".$this->k22_data_mes."-".$this->k22_data_dia;
          }
        }
-       $this->k22_numpre = ($this->k22_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_numpre"]:$this->k22_numpre);
-       $this->k22_numpar = ($this->k22_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_numpar"]:$this->k22_numpar);
-       $this->k22_receit = ($this->k22_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_receit"]:$this->k22_receit);
+       $this->k22_numpre = ($this->k22_numpre === 0 || $this->k22_numpre === 0.0 || $this->k22_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_numpre"]:$this->k22_numpre);
+       $this->k22_numpar = ($this->k22_numpar === 0 || $this->k22_numpar === 0.0 || $this->k22_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_numpar"]:$this->k22_numpar);
+       $this->k22_receit = ($this->k22_receit === 0 || $this->k22_receit === 0.0 || $this->k22_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_receit"]:$this->k22_receit);
        if($this->k22_dtvenc == ""){
          $this->k22_dtvenc_dia = ($this->k22_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_dtvenc_dia"]:$this->k22_dtvenc_dia);
          $this->k22_dtvenc_mes = ($this->k22_dtvenc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_dtvenc_mes"]:$this->k22_dtvenc_mes);
@@ -135,18 +135,18 @@ class cl_debitos {
             $this->k22_dtoper = $this->k22_dtoper_ano."-".$this->k22_dtoper_mes."-".$this->k22_dtoper_dia;
          }
        }
-       $this->k22_hist = ($this->k22_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_hist"]:$this->k22_hist);
-       $this->k22_numcgm = ($this->k22_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_numcgm"]:$this->k22_numcgm);
-       $this->k22_matric = ($this->k22_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_matric"]:$this->k22_matric);
-       $this->k22_inscr = ($this->k22_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_inscr"]:$this->k22_inscr);
-       $this->k22_tipo = ($this->k22_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_tipo"]:$this->k22_tipo);
-       $this->k22_vlrhis = ($this->k22_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_vlrhis"]:$this->k22_vlrhis);
-       $this->k22_vlrcor = ($this->k22_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_vlrcor"]:$this->k22_vlrcor);
-       $this->k22_juros = ($this->k22_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_juros"]:$this->k22_juros);
-       $this->k22_multa = ($this->k22_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_multa"]:$this->k22_multa);
-       $this->k22_desconto = ($this->k22_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_desconto"]:$this->k22_desconto);
-       $this->k22_exerc = ($this->k22_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_exerc"]:$this->k22_exerc);
-       $this->k22_instit = ($this->k22_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_instit"]:$this->k22_instit);
+       $this->k22_hist = ($this->k22_hist === 0 || $this->k22_hist === 0.0 || $this->k22_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_hist"]:$this->k22_hist);
+       $this->k22_numcgm = ($this->k22_numcgm === 0 || $this->k22_numcgm === 0.0 || $this->k22_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_numcgm"]:$this->k22_numcgm);
+       $this->k22_matric = ($this->k22_matric === 0 || $this->k22_matric === 0.0 || $this->k22_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_matric"]:$this->k22_matric);
+       $this->k22_inscr = ($this->k22_inscr === 0 || $this->k22_inscr === 0.0 || $this->k22_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_inscr"]:$this->k22_inscr);
+       $this->k22_tipo = ($this->k22_tipo === 0 || $this->k22_tipo === 0.0 || $this->k22_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_tipo"]:$this->k22_tipo);
+       $this->k22_vlrhis = ($this->k22_vlrhis === 0 || $this->k22_vlrhis === 0.0 || $this->k22_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_vlrhis"]:$this->k22_vlrhis);
+       $this->k22_vlrcor = ($this->k22_vlrcor === 0 || $this->k22_vlrcor === 0.0 || $this->k22_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_vlrcor"]:$this->k22_vlrcor);
+       $this->k22_juros = ($this->k22_juros === 0 || $this->k22_juros === 0.0 || $this->k22_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_juros"]:$this->k22_juros);
+       $this->k22_multa = ($this->k22_multa === 0 || $this->k22_multa === 0.0 || $this->k22_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_multa"]:$this->k22_multa);
+       $this->k22_desconto = ($this->k22_desconto === 0 || $this->k22_desconto === 0.0 || $this->k22_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_desconto"]:$this->k22_desconto);
+       $this->k22_exerc = ($this->k22_exerc === 0 || $this->k22_exerc === 0.0 || $this->k22_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_exerc"]:$this->k22_exerc);
+       $this->k22_instit = ($this->k22_instit === 0 || $this->k22_instit === 0.0 || $this->k22_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k22_instit"]:$this->k22_instit);
      }else{
      }
    }

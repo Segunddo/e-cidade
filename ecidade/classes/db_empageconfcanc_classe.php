@@ -76,7 +76,7 @@ class cl_empageconfcanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e88_codmov = ($this->e88_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_codmov"]:$this->e88_codmov);
+       $this->e88_codmov = ($this->e88_codmov === 0 || $this->e88_codmov === 0.0 || $this->e88_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_codmov"]:$this->e88_codmov);
        if($this->e88_data == ""){
          $this->e88_data_dia = ($this->e88_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_data_dia"]:$this->e88_data_dia);
          $this->e88_data_mes = ($this->e88_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_data_mes"]:$this->e88_data_mes);
@@ -86,10 +86,10 @@ class cl_empageconfcanc {
          }
        }
        $this->e88_cheque = ($this->e88_cheque == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_cheque"]:$this->e88_cheque);
-       $this->e88_codgera = ($this->e88_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_codgera"]:$this->e88_codgera);
-       $this->e88_seqerro = ($this->e88_seqerro == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_seqerro"]:$this->e88_seqerro);
+       $this->e88_codgera = ($this->e88_codgera === 0 || $this->e88_codgera === 0.0 || $this->e88_codgera == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_codgera"]:$this->e88_codgera);
+       $this->e88_seqerro = ($this->e88_seqerro === 0 || $this->e88_seqerro === 0.0 || $this->e88_seqerro == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_seqerro"]:$this->e88_seqerro);
      }else{
-       $this->e88_codmov = ($this->e88_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_codmov"]:$this->e88_codmov);
+       $this->e88_codmov = ($this->e88_codmov === 0 || $this->e88_codmov === 0.0 || $this->e88_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["e88_codmov"]:$this->e88_codmov);
      }
    }
    // funcao para inclusao
@@ -132,7 +132,7 @@ class cl_empageconfcanc {
        return false;
      }
        $this->e88_codmov = $e88_codmov;
-     if(($this->e88_codmov == null) || ($this->e88_codmov == "") ){
+     if(($this->e88_codmov == null) || ($this->e88_codmov === 0 || $this->e88_codmov === 0.0 || $this->e88_codmov == "") ){
        $this->erro_sql = " Campo e88_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

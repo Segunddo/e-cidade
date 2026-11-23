@@ -29,7 +29,7 @@ include(modification("dbforms/db_classesgenericas.php"));
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;
 $cllancrespons->rotulo->label();
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_responsavel.location.href='fis1_fis_lancrespons002.php?chavepesquisa=$nl12_codlanc&chavepesquisa1=$db_numcgm'</script>";

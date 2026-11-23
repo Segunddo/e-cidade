@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/ajudacusto/config-salvar",
+  "json": {
+    "errors": {
+      "rubrica": [
+        "A Rubrica deve ser informada."
+      ],
+      "valor_limite": [
+        "O valor limite deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "e7c4e1794ff650804237f543b2617c93e755af9c098ca6274c8c0d8ec6e489ff",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -80,10 +80,10 @@ class cl_bancoshistmov {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k66_sequencial = ($this->k66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_sequencial"]:$this->k66_sequencial);
-       $this->k66_codbco = ($this->k66_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_codbco"]:$this->k66_codbco);
-       $this->k66_bancoshistmovcategoria = ($this->k66_bancoshistmovcategoria == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_bancoshistmovcategoria"]:$this->k66_bancoshistmovcategoria);
-       $this->k66_historico = ($this->k66_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_historico"]:$this->k66_historico);
+       $this->k66_sequencial = ($this->k66_sequencial === 0 || $this->k66_sequencial === 0.0 || $this->k66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_sequencial"]:$this->k66_sequencial);
+       $this->k66_codbco = ($this->k66_codbco === 0 || $this->k66_codbco === 0.0 || $this->k66_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_codbco"]:$this->k66_codbco);
+       $this->k66_bancoshistmovcategoria = ($this->k66_bancoshistmovcategoria === 0 || $this->k66_bancoshistmovcategoria === 0.0 || $this->k66_bancoshistmovcategoria == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_bancoshistmovcategoria"]:$this->k66_bancoshistmovcategoria);
+       $this->k66_historico = ($this->k66_historico === 0 || $this->k66_historico === 0.0 || $this->k66_historico == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_historico"]:$this->k66_historico);
        $this->k66_descricao = ($this->k66_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_descricao"]:$this->k66_descricao);
        if($this->k66_vigencia == ""){
          $this->k66_vigencia_dia = ($this->k66_vigencia_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_vigencia_dia"]:$this->k66_vigencia_dia);
@@ -95,7 +95,7 @@ class cl_bancoshistmov {
        }
        $this->k66_sigla = ($this->k66_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_sigla"]:$this->k66_sigla);
      }else{
-       $this->k66_sequencial = ($this->k66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_sequencial"]:$this->k66_sequencial);
+       $this->k66_sequencial = ($this->k66_sequencial === 0 || $this->k66_sequencial === 0.0 || $this->k66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k66_sequencial"]:$this->k66_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_bancoshistmov {
          $this->k66_sequencial = $k66_sequencial;
        }
      }
-     if(($this->k66_sequencial == null) || ($this->k66_sequencial == "") ){
+     if(($this->k66_sequencial == null) || ($this->k66_sequencial === 0 || $this->k66_sequencial === 0.0 || $this->k66_sequencial == "") ){
        $this->erro_sql = " Campo k66_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

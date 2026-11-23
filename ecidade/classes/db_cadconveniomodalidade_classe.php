@@ -67,10 +67,10 @@ class cl_cadconveniomodalidade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar15_sequencial = ($this->ar15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar15_sequencial"]:$this->ar15_sequencial);
+       $this->ar15_sequencial = ($this->ar15_sequencial === 0 || $this->ar15_sequencial === 0.0 || $this->ar15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar15_sequencial"]:$this->ar15_sequencial);
        $this->ar15_nome = ($this->ar15_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ar15_nome"]:$this->ar15_nome);
      }else{
-       $this->ar15_sequencial = ($this->ar15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar15_sequencial"]:$this->ar15_sequencial);
+       $this->ar15_sequencial = ($this->ar15_sequencial === 0 || $this->ar15_sequencial === 0.0 || $this->ar15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar15_sequencial"]:$this->ar15_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_cadconveniomodalidade {
          $this->ar15_sequencial = $ar15_sequencial;
        }
      }
-     if(($this->ar15_sequencial == null) || ($this->ar15_sequencial == "") ){
+     if(($this->ar15_sequencial == null) || ($this->ar15_sequencial === 0 || $this->ar15_sequencial === 0.0 || $this->ar15_sequencial == "") ){
        $this->erro_sql = " Campo ar15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_localmarca {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ma04_i_codigo = ($this->ma04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma04_i_codigo"]:$this->ma04_i_codigo);
+       $this->ma04_i_codigo = ($this->ma04_i_codigo === 0 || $this->ma04_i_codigo === 0.0 || $this->ma04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma04_i_codigo"]:$this->ma04_i_codigo);
        $this->ma04_c_descr = ($this->ma04_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ma04_c_descr"]:$this->ma04_c_descr);
        $this->ma04_c_subdistrito = ($this->ma04_c_subdistrito == ""?@$GLOBALS["HTTP_POST_VARS"]["ma04_c_subdistrito"]:$this->ma04_c_subdistrito);
      }else{
-       $this->ma04_i_codigo = ($this->ma04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma04_i_codigo"]:$this->ma04_i_codigo);
+       $this->ma04_i_codigo = ($this->ma04_i_codigo === 0 || $this->ma04_i_codigo === 0.0 || $this->ma04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ma04_i_codigo"]:$this->ma04_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_localmarca {
          $this->ma04_i_codigo = $ma04_i_codigo;
        }
      }
-     if(($this->ma04_i_codigo == null) || ($this->ma04_i_codigo == "") ){
+     if(($this->ma04_i_codigo == null) || ($this->ma04_i_codigo === 0 || $this->ma04_i_codigo === 0.0 || $this->ma04_i_codigo == "") ){
        $this->erro_sql = " Campo ma04_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

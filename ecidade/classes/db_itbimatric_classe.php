@@ -67,11 +67,11 @@ class cl_itbimatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it06_guia = ($this->it06_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_guia"]:$this->it06_guia);
-       $this->it06_matric = ($this->it06_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_matric"]:$this->it06_matric);
+       $this->it06_guia = ($this->it06_guia === 0 || $this->it06_guia === 0.0 || $this->it06_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_guia"]:$this->it06_guia);
+       $this->it06_matric = ($this->it06_matric === 0 || $this->it06_matric === 0.0 || $this->it06_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_matric"]:$this->it06_matric);
      }else{
-       $this->it06_guia = ($this->it06_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_guia"]:$this->it06_guia);
-       $this->it06_matric = ($this->it06_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_matric"]:$this->it06_matric);
+       $this->it06_guia = ($this->it06_guia === 0 || $this->it06_guia === 0.0 || $this->it06_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_guia"]:$this->it06_guia);
+       $this->it06_matric = ($this->it06_matric === 0 || $this->it06_matric === 0.0 || $this->it06_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["it06_matric"]:$this->it06_matric);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_itbimatric {
       $this->atualizacampos();
        $this->it06_guia = $it06_guia;
        $this->it06_matric = $it06_matric;
-     if(($this->it06_guia == null) || ($this->it06_guia == "") ){
+     if(($this->it06_guia == null) || ($this->it06_guia === 0 || $this->it06_guia === 0.0 || $this->it06_guia == "") ){
        $this->erro_sql = " Campo it06_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_itbimatric {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->it06_matric == null) || ($this->it06_matric == "") ){
+     if(($this->it06_matric == null) || ($this->it06_matric === 0 || $this->it06_matric === 0.0 || $this->it06_matric == "") ){
        $this->erro_sql = " Campo it06_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

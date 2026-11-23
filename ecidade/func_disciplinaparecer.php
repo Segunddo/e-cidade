@@ -35,7 +35,7 @@ include(modification("classes/db_disciplina_classe.php"));
 include(modification("classes/db_caddisciplina_classe.php"));
 include(modification("classes/db_cursoescola_classe.php"));
 db_postmemory($_POST);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldisciplina     = new cl_disciplina;
 $clcaddisciplina  = new cl_caddisciplina;
 $clcursoescola    = new cl_cursoescola();

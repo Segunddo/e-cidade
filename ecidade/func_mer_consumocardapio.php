@@ -33,7 +33,7 @@ include(modification("dbforms/db_funcoes.php"));
 include(modification("classes/db_mer_consumocardapio_classe.php"));
 include(modification("classes/db_mer_tipocardapio_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clmer_consumocardapio = new cl_mer_consumocardapio;
 $clmer_tipocardapio = new cl_mer_tipocardapio;
 $clmer_consumocardapio->rotulo->label("me37_i_codigo");

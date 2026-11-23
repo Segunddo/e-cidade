@@ -69,11 +69,11 @@ class cl_pactoitempcmater {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o89_sequencial = ($this->o89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o89_sequencial"]:$this->o89_sequencial);
-       $this->o89_pactoitem = ($this->o89_pactoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["o89_pactoitem"]:$this->o89_pactoitem);
-       $this->o89_pcmater = ($this->o89_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["o89_pcmater"]:$this->o89_pcmater);
+       $this->o89_sequencial = ($this->o89_sequencial === 0 || $this->o89_sequencial === 0.0 || $this->o89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o89_sequencial"]:$this->o89_sequencial);
+       $this->o89_pactoitem = ($this->o89_pactoitem === 0 || $this->o89_pactoitem === 0.0 || $this->o89_pactoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["o89_pactoitem"]:$this->o89_pactoitem);
+       $this->o89_pcmater = ($this->o89_pcmater === 0 || $this->o89_pcmater === 0.0 || $this->o89_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["o89_pcmater"]:$this->o89_pcmater);
      }else{
-       $this->o89_sequencial = ($this->o89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o89_sequencial"]:$this->o89_sequencial);
+       $this->o89_sequencial = ($this->o89_sequencial === 0 || $this->o89_sequencial === 0.0 || $this->o89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o89_sequencial"]:$this->o89_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_pactoitempcmater {
          $this->o89_sequencial = $o89_sequencial;
        }
      }
-     if(($this->o89_sequencial == null) || ($this->o89_sequencial == "") ){
+     if(($this->o89_sequencial == null) || ($this->o89_sequencial === 0 || $this->o89_sequencial === 0.0 || $this->o89_sequencial == "") ){
        $this->erro_sql = " Campo o89_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

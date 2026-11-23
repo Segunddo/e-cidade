@@ -71,12 +71,12 @@ class cl_db_arquivos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codfilho = ($this->codfilho == ""?@$GLOBALS["HTTP_POST_VARS"]["codfilho"]:$this->codfilho);
+       $this->codfilho = ($this->codfilho === 0 || $this->codfilho === 0.0 || $this->codfilho == ""?@$GLOBALS["HTTP_POST_VARS"]["codfilho"]:$this->codfilho);
        $this->arqfilho = ($this->arqfilho == ""?@$GLOBALS["HTTP_POST_VARS"]["arqfilho"]:$this->arqfilho);
        $this->descfilho = ($this->descfilho == ""?@$GLOBALS["HTTP_POST_VARS"]["descfilho"]:$this->descfilho);
        $this->id_versao = ($this->id_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["id_versao"]:$this->id_versao);
      }else{
-       $this->codfilho = ($this->codfilho == ""?@$GLOBALS["HTTP_POST_VARS"]["codfilho"]:$this->codfilho);
+       $this->codfilho = ($this->codfilho === 0 || $this->codfilho === 0.0 || $this->codfilho == ""?@$GLOBALS["HTTP_POST_VARS"]["codfilho"]:$this->codfilho);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_db_arquivos {
          $this->codfilho = $codfilho;
        }
      }
-     if(($this->codfilho == null) || ($this->codfilho == "") ){
+     if(($this->codfilho == null) || ($this->codfilho === 0 || $this->codfilho === 0.0 || $this->codfilho == "") ){
        $this->erro_sql = " Campo codfilho nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

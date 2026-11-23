@@ -69,11 +69,11 @@ class cl_conhist {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c50_codhist = ($this->c50_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c50_codhist"]:$this->c50_codhist);
+       $this->c50_codhist = ($this->c50_codhist === 0 || $this->c50_codhist === 0.0 || $this->c50_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c50_codhist"]:$this->c50_codhist);
        $this->c50_compl = ($this->c50_compl == "f"?@$GLOBALS["HTTP_POST_VARS"]["c50_compl"]:$this->c50_compl);
        $this->c50_descr = ($this->c50_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c50_descr"]:$this->c50_descr);
      }else{
-       $this->c50_codhist = ($this->c50_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c50_codhist"]:$this->c50_codhist);
+       $this->c50_codhist = ($this->c50_codhist === 0 || $this->c50_codhist === 0.0 || $this->c50_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["c50_codhist"]:$this->c50_codhist);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_conhist {
        return false;
      }
        $this->c50_codhist = $c50_codhist;
-     if(($this->c50_codhist == null) || ($this->c50_codhist == "") ){
+     if(($this->c50_codhist == null) || ($this->c50_codhist === 0 || $this->c50_codhist === 0.0 || $this->c50_codhist == "") ){
        $this->erro_sql = " Campo c50_codhist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/oauth/clients",
+  "json": {
+    "error": true,
+    "message": "Unauthenticated."
+  },
+  "sha256": "7d56ed478b22e76f1b8bfb8f474ea29a4256690f776757e4ffe57e255f6bd95c",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

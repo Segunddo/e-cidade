@@ -54,8 +54,8 @@ class cl_sagresarquivogerado
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c141_sequencial = ($this->c141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_sequencial"]:$this->c141_sequencial);
-       $this->c141_usuario = ($this->c141_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_usuario"]:$this->c141_usuario);
+       $this->c141_sequencial = ($this->c141_sequencial === 0 || $this->c141_sequencial === 0.0 || $this->c141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_sequencial"]:$this->c141_sequencial);
+       $this->c141_usuario = ($this->c141_usuario === 0 || $this->c141_usuario === 0.0 || $this->c141_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_usuario"]:$this->c141_usuario);
        if($this->c141_data == ""){
          $this->c141_data_dia = ($this->c141_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_data_dia"]:$this->c141_data_dia);
          $this->c141_data_mes = ($this->c141_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_data_mes"]:$this->c141_data_mes);
@@ -64,11 +64,11 @@ class cl_sagresarquivogerado
             $this->c141_data = $this->c141_data_ano."-".$this->c141_data_mes."-".$this->c141_data_dia;
          }
        }
-       $this->c141_codlayout = ($this->c141_codlayout == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_codlayout"]:$this->c141_codlayout);
+       $this->c141_codlayout = ($this->c141_codlayout === 0 || $this->c141_codlayout === 0.0 || $this->c141_codlayout == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_codlayout"]:$this->c141_codlayout);
        $this->c141_nomearquivo = ($this->c141_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_nomearquivo"]:$this->c141_nomearquivo);
        $this->c141_json = ($this->c141_json == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_json"]:$this->c141_json);
      }else{
-       $this->c141_sequencial = ($this->c141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_sequencial"]:$this->c141_sequencial);
+       $this->c141_sequencial = ($this->c141_sequencial === 0 || $this->c141_sequencial === 0.0 || $this->c141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c141_sequencial"]:$this->c141_sequencial);
      }
    }
 
@@ -144,7 +144,7 @@ class cl_sagresarquivogerado
          $this->c141_sequencial = $c141_sequencial; 
        }
      }
-     if(($this->c141_sequencial == null) || ($this->c141_sequencial == "") ){ 
+     if(($this->c141_sequencial == null) || ($this->c141_sequencial === 0 || $this->c141_sequencial === 0.0 || $this->c141_sequencial == "") ){ 
        $this->erro_sql = " Campo c141_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/conta-corrente/cadastro/verificaExistenciaExeContaCorrente",
+  "json": {
+    "error": true,
+    "message": "Undefined index: reduzido"
+  },
+  "sha256": "ab6c196de69dcef9aaa6eb132bfcb5e3be8ca303e78f12442dd157247ffc10d6",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

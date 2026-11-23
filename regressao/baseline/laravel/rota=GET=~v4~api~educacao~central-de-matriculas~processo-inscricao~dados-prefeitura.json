@@ -1,0 +1,22 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/dados-prefeitura",
+  "json": {
+    "data": {
+      "endereco": "RUA GENERAL CAMARA, 406 - PORTO ALEGRE - RS",
+      "nome": "PREFEITURA DBSELLER",
+      "telefone": "05130765101"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "3207737c1603bb7026d61f0a0b77887b3c785c2bd5b297d2e6888474521d4532",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

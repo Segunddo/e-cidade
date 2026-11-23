@@ -1,0 +1,20 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/notificacoes/lista/verificatodoscda",
+  "json": {
+    "data": {
+      "parcelamento": false
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "dcef84aa9a9cbf38644b929cc0e8364a5dae41d0a70941b3563e391501df51fb",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

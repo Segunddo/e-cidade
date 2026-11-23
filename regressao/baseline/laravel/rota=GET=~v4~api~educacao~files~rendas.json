@@ -1,0 +1,35 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/api/educacao/files/rendas",
+  "json": [
+    {
+      "label": "NENHUMA RENDA",
+      "value": 1
+    },
+    {
+      "label": "ATÉ UM SALÁRIO MÍNIMO",
+      "value": 2
+    },
+    {
+      "label": "ATÉ 2 SALÁRIOS MÍNIMOS",
+      "value": 3
+    },
+    {
+      "label": "ATÉ 3 SALÁRIOS MÍNIMOS",
+      "value": 4
+    },
+    {
+      "label": "ACIMA DE 3 SALÁRIOS MÍNIMOS",
+      "value": 5
+    }
+  ],
+  "sha256": "5658e305855f97533002513a0c02fae337ff97d117bae39d2dd01a2f3ac6e1a5",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -24,7 +24,7 @@ class cl_empnotasigfistipodocliquidacao {
                  e178_sigfistipodocliquidacao = int4 = Sequencial do documento
                  ";
    //funcao construtor da classe
-   function cl_empnotasigfistipodocliquidacao() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("empnotasigfistipodocliquidacao");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -41,11 +41,11 @@ class cl_empnotasigfistipodocliquidacao {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e178_sequencial = ($this->e178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e178_sequencial"]:$this->e178_sequencial);
-       $this->e178_empnota = ($this->e178_empnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e178_empnota"]:$this->e178_empnota);
-       $this->e178_sigfistipodocliquidacao = ($this->e178_sigfistipodocliquidacao == ""?@$GLOBALS["HTTP_POST_VARS"]["e178_sigfistipodocliquidacao"]:$this->e178_sigfistipodocliquidacao);
+       $this->e178_sequencial = ($this->e178_sequencial === 0 || $this->e178_sequencial === 0.0 || $this->e178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e178_sequencial"]:$this->e178_sequencial);
+       $this->e178_empnota = ($this->e178_empnota === 0 || $this->e178_empnota === 0.0 || $this->e178_empnota == ""?@$GLOBALS["HTTP_POST_VARS"]["e178_empnota"]:$this->e178_empnota);
+       $this->e178_sigfistipodocliquidacao = ($this->e178_sigfistipodocliquidacao === 0 || $this->e178_sigfistipodocliquidacao === 0.0 || $this->e178_sigfistipodocliquidacao == ""?@$GLOBALS["HTTP_POST_VARS"]["e178_sigfistipodocliquidacao"]:$this->e178_sigfistipodocliquidacao);
      }else{
-       $this->e178_sequencial = ($this->e178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e178_sequencial"]:$this->e178_sequencial);
+       $this->e178_sequencial = ($this->e178_sequencial === 0 || $this->e178_sequencial === 0.0 || $this->e178_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e178_sequencial"]:$this->e178_sequencial);
      }
    }
    // funcao para inclusao
@@ -93,7 +93,7 @@ class cl_empnotasigfistipodocliquidacao {
          $this->e178_sequencial = $e178_sequencial;
        }
      }
-     if(($this->e178_sequencial == null) || ($this->e178_sequencial == "") ){
+     if(($this->e178_sequencial == null) || ($this->e178_sequencial === 0 || $this->e178_sequencial === 0.0 || $this->e178_sequencial == "") ){
        $this->erro_sql = " Campo e178_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

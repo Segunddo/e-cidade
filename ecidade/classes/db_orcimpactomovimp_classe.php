@@ -67,11 +67,11 @@ class cl_orcimpactomovimp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o68_codimpmov = ($this->o68_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimpmov"]:$this->o68_codimpmov);
-       $this->o68_codimp = ($this->o68_codimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimp"]:$this->o68_codimp);
+       $this->o68_codimpmov = ($this->o68_codimpmov === 0 || $this->o68_codimpmov === 0.0 || $this->o68_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimpmov"]:$this->o68_codimpmov);
+       $this->o68_codimp = ($this->o68_codimp === 0 || $this->o68_codimp === 0.0 || $this->o68_codimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimp"]:$this->o68_codimp);
      }else{
-       $this->o68_codimpmov = ($this->o68_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimpmov"]:$this->o68_codimpmov);
-       $this->o68_codimp = ($this->o68_codimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimp"]:$this->o68_codimp);
+       $this->o68_codimpmov = ($this->o68_codimpmov === 0 || $this->o68_codimpmov === 0.0 || $this->o68_codimpmov == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimpmov"]:$this->o68_codimpmov);
+       $this->o68_codimp = ($this->o68_codimp === 0 || $this->o68_codimp === 0.0 || $this->o68_codimp == ""?@$GLOBALS["HTTP_POST_VARS"]["o68_codimp"]:$this->o68_codimp);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_orcimpactomovimp {
       $this->atualizacampos();
        $this->o68_codimpmov = $o68_codimpmov;
        $this->o68_codimp = $o68_codimp;
-     if(($this->o68_codimpmov == null) || ($this->o68_codimpmov == "") ){
+     if(($this->o68_codimpmov == null) || ($this->o68_codimpmov === 0 || $this->o68_codimpmov === 0.0 || $this->o68_codimpmov == "") ){
        $this->erro_sql = " Campo o68_codimpmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_orcimpactomovimp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o68_codimp == null) || ($this->o68_codimp == "") ){
+     if(($this->o68_codimp == null) || ($this->o68_codimp === 0 || $this->o68_codimp === 0.0 || $this->o68_codimp == "") ){
        $this->erro_sql = " Campo o68_codimp nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,11 +67,11 @@ class cl_resptecnico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y22_codsani = ($this->y22_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y22_codsani"]:$this->y22_codsani);
-       $this->y22_numcgm = ($this->y22_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y22_numcgm"]:$this->y22_numcgm);
+       $this->y22_codsani = ($this->y22_codsani === 0 || $this->y22_codsani === 0.0 || $this->y22_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y22_codsani"]:$this->y22_codsani);
+       $this->y22_numcgm = ($this->y22_numcgm === 0 || $this->y22_numcgm === 0.0 || $this->y22_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y22_numcgm"]:$this->y22_numcgm);
      }else{
-       $this->y22_codsani = ($this->y22_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y22_codsani"]:$this->y22_codsani);
-       $this->y22_numcgm = ($this->y22_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y22_numcgm"]:$this->y22_numcgm);
+       $this->y22_codsani = ($this->y22_codsani === 0 || $this->y22_codsani === 0.0 || $this->y22_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y22_codsani"]:$this->y22_codsani);
+       $this->y22_numcgm = ($this->y22_numcgm === 0 || $this->y22_numcgm === 0.0 || $this->y22_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y22_numcgm"]:$this->y22_numcgm);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_resptecnico {
       $this->atualizacampos();
        $this->y22_codsani = $y22_codsani;
        $this->y22_numcgm = $y22_numcgm;
-     if(($this->y22_codsani == null) || ($this->y22_codsani == "") ){
+     if(($this->y22_codsani == null) || ($this->y22_codsani === 0 || $this->y22_codsani === 0.0 || $this->y22_codsani == "") ){
        $this->erro_sql = " Campo y22_codsani nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_resptecnico {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y22_numcgm == null) || ($this->y22_numcgm == "") ){
+     if(($this->y22_numcgm == null) || ($this->y22_numcgm === 0 || $this->y22_numcgm === 0.0 || $this->y22_numcgm == "") ){
        $this->erro_sql = " Campo y22_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

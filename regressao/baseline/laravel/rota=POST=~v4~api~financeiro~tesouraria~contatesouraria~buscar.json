@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/tesouraria/contatesouraria/buscar",
+  "json": {
+    "data": [],
+    "error": false,
+    "message": "Busca feita com sucesso."
+  },
+  "sha256": "431a4de42708d690fb9c94c8482f64c27bb1fd1095e430fd0e2f918382c95768",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

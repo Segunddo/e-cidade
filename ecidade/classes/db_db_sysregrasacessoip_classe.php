@@ -71,12 +71,12 @@ class cl_db_sysregrasacessoip {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db48_idacesso = ($this->db48_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_idacesso"]:$this->db48_idacesso);
+       $this->db48_idacesso = ($this->db48_idacesso === 0 || $this->db48_idacesso === 0.0 || $this->db48_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_idacesso"]:$this->db48_idacesso);
        $this->db48_ip = ($this->db48_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_ip"]:$this->db48_ip);
        $this->db48_tokenpublico = ($this->db48_tokenpublico == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_tokenpublico"]:$this->db48_tokenpublico);
        $this->db48_tokenprivado = ($this->db48_tokenprivado == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_tokenprivado"]:$this->db48_tokenprivado);
      }else{
-       $this->db48_idacesso = ($this->db48_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_idacesso"]:$this->db48_idacesso);
+       $this->db48_idacesso = ($this->db48_idacesso === 0 || $this->db48_idacesso === 0.0 || $this->db48_idacesso == ""?@$GLOBALS["HTTP_POST_VARS"]["db48_idacesso"]:$this->db48_idacesso);
      }
    }
    // funcao para Inclusão
@@ -92,7 +92,7 @@ class cl_db_sysregrasacessoip {
        return false;
      }
        $this->db48_idacesso = $db48_idacesso;
-     if(($this->db48_idacesso == null) || ($this->db48_idacesso == "") ){
+     if(($this->db48_idacesso == null) || ($this->db48_idacesso === 0 || $this->db48_idacesso === 0.0 || $this->db48_idacesso == "") ){
        $this->erro_sql = " Campo db48_idacesso não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

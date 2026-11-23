@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/vagas-pcd",
+  "json": {
+    "error": true,
+    "message": "O campo fase é obrigatório."
+  },
+  "sha256": "c3cfa9c6c828c37ca3adcef0a59ce79fecdbc89bfef203f08e5222df3325fe7f",
+  "sql_negocio": [],
+  "status": 406,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

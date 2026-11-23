@@ -25,7 +25,7 @@
  *                                licenca/licenca_pt.txt
  */
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 include(modification("fpdf151/pdf.php"));
 
 $head3 = "RELATORIO  DA RECEITA ";
@@ -73,7 +73,7 @@ order by c70_codlan
 	        ";
 
 $result = db_query(analiseQueryPlanoOrcamento($sql));
-if (pg_numrows($result) == 0 ){
+if (($result ? pg_numrows($result) : null) == 0 ){
   db_redireciona("db_erros.php?fechar=true&db_erro=Nenhum registro encontrado");
 }
 
@@ -84,7 +84,7 @@ $total_estornado= 0;
 // db_criatabela($result);
 
 $imprime=true ;
-for($i=0;$i<pg_numrows($result);$i++){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i );
 
   if($pdf->gety()>$pdf->h-30 ){

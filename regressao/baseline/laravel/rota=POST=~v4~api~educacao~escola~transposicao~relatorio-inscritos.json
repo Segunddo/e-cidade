@@ -1,0 +1,29 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/transposicao/relatorio-inscritos",
+  "json": {
+    "data": {
+      "name": "Relatório de Inscritos CSV",
+      "path": "<X>",
+      "url": "<X>"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "f99e19d7c21deebddf26c553ceba844e1b828a07673b791db5bc141700f73e6b",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {
+    "data.path": [
+      "str"
+    ],
+    "data.url": [
+      "str"
+    ]
+  }
+}

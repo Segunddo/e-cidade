@@ -88,7 +88,7 @@ class cl_acompanhamentocronogramareceita
             $this->novembro = ($this->novembro === null ? 0 : $this->novembro);
             $this->dezembro = ($this->dezembro === null ? 0 : $this->dezembro);
         } else {
-            $this->id = ($this->id == "" ? @$GLOBALS["HTTP_POST_VARS"]["id"] : $this->id);
+            $this->id = ($this->id === 0 || $this->id === 0.0 || $this->id == "" ? @$GLOBALS["HTTP_POST_VARS"]["id"] : $this->id);
         }
     }
 
@@ -248,7 +248,7 @@ class cl_acompanhamentocronogramareceita
                 $this->id = $id;
             }
         }
-        if (($this->id == null) || ($this->id == "")) {
+        if (($this->id == null) || ($this->id === 0 || $this->id === 0.0 || $this->id == "")) {
             $this->erro_sql = " Campo id não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

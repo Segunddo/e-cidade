@@ -1,0 +1,51 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/censo/tabelas-censo/unidades-curriculares",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "nome": "Eletivas"
+      },
+      {
+        "codigo": 2,
+        "nome": "Libras"
+      },
+      {
+        "codigo": 3,
+        "nome": "Língua Indígena"
+      },
+      {
+        "codigo": 4,
+        "nome": "Língua/Literatura estrangeira - Espanhol"
+      },
+      {
+        "codigo": 5,
+        "nome": "Língua/Literatura estrangeira - Francês"
+      },
+      {
+        "codigo": 6,
+        "nome": "Língua/Literatura estrangeira - Outra"
+      },
+      {
+        "codigo": 7,
+        "nome": "Projeto de Vida"
+      },
+      {
+        "codigo": 8,
+        "nome": "Trilhas de aprofundamento/aprendizagens"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "194111561eaca7b53b4a7039fc14b7e1e3e6ea0ee4de60395b7351080b82462a",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

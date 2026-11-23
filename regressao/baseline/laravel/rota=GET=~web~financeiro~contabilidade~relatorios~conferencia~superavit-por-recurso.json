@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/relatorios/conferencia/superavit-por-recurso",
+  "json": null,
+  "sha256": "24698d5ed01a57c0eb8d575eaee6d6c1e744b508212534ee7e747104fca3e8ef",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

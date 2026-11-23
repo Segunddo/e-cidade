@@ -46,7 +46,7 @@ $tipo_impressao = 1;
 
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);
 
 $xinstit =explode("-",$db_selinstit);
@@ -54,7 +54,7 @@ $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config wher
 $descr_inst = '';
 $xvirg = '';
 $flag_abrev = false;
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
     if (strlen(trim($nomeinstabrev)) > 0){
          $descr_inst .= $xvirg.$nomeinstabrev;
@@ -110,7 +110,7 @@ if($opcao == 2){
 $result = db_receitasaldo(11,1,3,true,'o70_instit in (' . str_replace('-',', ',$db_selinstit) . ')',$anousu,$dataini,$datafin);
 
 //db_criatabela($result); exit;
-if(pg_numrows($result) == 0)
+if(($result ? pg_numrows($result) : null) == 0)
 db_redireciona('db_erros.php?fechar=true&db_erro=Movimentação no período de '.db_formatar($dataini,'d').' a '.db_formatar($datafin,'d'));
 $pagina = 1;
 $tottotal = 0;
@@ -120,7 +120,7 @@ $total_para_menos  = 0;
 (float)$saldo_relatorio = 0;
 $total_saldo_inicial    = 0;
 $total_saldo_arrecadado = 0;
-for($i=0;$i < pg_numrows($result);$i++){
+for($i=0;$i < ($result ? pg_numrows($result) : null);$i++){
   db_fieldsmemory($result,$i);
   $saldo_relatorio = $previsaoreceita=="atualizada"?$saldo_inicial_prevadic:$saldo_inicial;
   $elemento = $o57_fonte;

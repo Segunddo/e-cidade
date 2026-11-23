@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/avaliacaoparcial/salvar-formaobtencao",
+  "json": {
+    "error": true,
+    "message": "Call to a member function save() on null"
+  },
+  "sha256": "7f3cea644c2319a24397c024638a8479502e04c29fb66525ffd936b68179c5ff",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

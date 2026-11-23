@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio-tce/exportar",
+  "json": {
+    "errors": {
+      "anousu": [
+        "O ano deve ser informada."
+      ],
+      "mes": [
+        "O mes deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "ff5ebc9f1140931d0694858eb74bf240ed32d7e891eca14ce8efa4622d0ffaed",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

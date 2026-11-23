@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/escolas-por-bairro",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42P01]: Undefined table: 7 ERRO:  não existe a relação \"plugins.escbairro\"\nLINE 1: select * from \"plugins\".\"escbairro\"\n                      ^ (SQL: select * from \"plugins\".\"escbairro\")"
+  },
+  "sha256": "b477744e5dc783c7ed3b1bc919d19d20c5f11b3af84a5f6f95ac501c91b776d4",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

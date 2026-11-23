@@ -1,0 +1,51 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:GET:/v4/api/educacao/files/campos-opcionais",
+  "json": {
+    "bolsa_familia": {
+      "apresenta": true,
+      "obrigatorio": false
+    },
+    "cartao_sus": {
+      "apresenta": true,
+      "obrigatorio": false
+    },
+    "cor_raca": {
+      "apresenta": true,
+      "obrigatorio": true
+    },
+    "cpf_aluno": {
+      "apresenta": true,
+      "obrigatorio": true
+    },
+    "estado_civil": {
+      "apresenta": true,
+      "obrigatorio": false
+    },
+    "mae_vitima_violencia": {
+      "apresenta": true,
+      "obrigatorio": false
+    },
+    "matricula_servidor_publico": {
+      "apresenta": false,
+      "obrigatorio": false
+    },
+    "nome_social": {
+      "apresenta": true,
+      "obrigatorio": false
+    },
+    "renda_familiar": {
+      "apresenta": true,
+      "obrigatorio": false
+    }
+  },
+  "sha256": "53d318f5d5bbabe6344acdec35a15a5b0738a29159db38c7c4a7997d6d7c2641",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

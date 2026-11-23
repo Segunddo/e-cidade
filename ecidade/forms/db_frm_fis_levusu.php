@@ -34,7 +34,7 @@ $clrotulo->label("y60_contato");
 include(modification("dbforms/db_classesgenericas.php"));
 $cliframe_alterar_excluir = new cl_iframe_alterar_excluir;
 $rsConsultaProc = db_query(" select y112_procfiscal as procfiscal from fiscalizacao.fis_procfiscallevanta where y112_levanta = $y61_codlev");
-if( pg_num_rows( $rsConsultaProc ) > 0 ){
+if( ($rsConsultaProc ? pg_num_rows( $rsConsultaProc ) : null) > 0 ){
     db_fieldsmemory($rsConsultaProc,0);
 } 
 

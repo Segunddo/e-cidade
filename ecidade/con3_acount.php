@@ -62,8 +62,8 @@ db_postmemory($HTTP_POST_VARS);
              <option value="0">Nenhum...</option>
              <?php
 			         $result = db_query("select codmod,nomemod from db_sysmodulo order by nomemod");
-			         for($i=0;$i<pg_numrows($result);$i++){
-			           echo '<option value="'.pg_result($result,$i,"codmod").'" '.(isset($HTTP_POST_VARS["dbh_modulo"]) && $HTTP_POST_VARS["dbh_modulo"] == pg_result($result,$i,"codmod")?"selected":"").'>'.pg_result($result,$i,"nomemod").'</option>';
+			         for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
+			           echo '<option value="'.($result ? pg_result($result,$i,"codmod") : null).'" '.(isset($HTTP_POST_VARS["dbh_modulo"]) && $HTTP_POST_VARS["dbh_modulo"] == ($result ? pg_result($result,$i,"codmod") : null)?"selected":"").'>'.($result ? pg_result($result,$i,"nomemod") : null).'</option>';
 			         }
 			        ?>
            </select> 
@@ -79,8 +79,8 @@ db_postmemory($HTTP_POST_VARS);
     		      $sql .= " where m.codmod = ".$HTTP_POST_VARS["dbh_modulo"];						  
   			      $sql .= " order by nomearq";
   			      $result = db_query($sql);
-  			      for ($i=0;$i<pg_numrows($result);$i++) {
-  			        echo '<option value="'.pg_result($result,$i,"codarq").'" '.(isset($HTTP_POST_VARS["dbh_tabela"]) && $HTTP_POST_VARS["dbh_tabela"] == pg_result($result,$i,"codarq")?"selected":"").'>'.pg_result($result,$i,"nomearq").'</option>';
+  			      for ($i=0;$i<($result ? pg_numrows($result) : null);$i++) {
+  			        echo '<option value="'.($result ? pg_result($result,$i,"codarq") : null).'" '.(isset($HTTP_POST_VARS["dbh_tabela"]) && $HTTP_POST_VARS["dbh_tabela"] == ($result ? pg_result($result,$i,"codarq") : null)?"selected":"").'>'.($result ? pg_result($result,$i,"nomearq") : null).'</option>';
   			      }
   			     ?>
            </select>
@@ -98,8 +98,8 @@ db_postmemory($HTTP_POST_VARS);
   		        $sql .= " where m.codarq = ".$HTTP_POST_VARS["dbh_tabela"];						  
   			      $sql .= " order by m.seqarq";
   			      $result = db_query($sql);
-  			      for($i=0;$i<pg_numrows($result);$i++){
-  			        echo '<option value="'.pg_result($result,$i,"codcam").'" '.(isset($HTTP_POST_VARS["dbh_campo"]) && $HTTP_POST_VARS["dbh_campo"] == pg_result($result,$i,"codcam")?"selected":"").'>'.pg_result($result,$i,"nomecam").'</option>';
+  			      for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
+  			        echo '<option value="'.($result ? pg_result($result,$i,"codcam") : null).'" '.(isset($HTTP_POST_VARS["dbh_campo"]) && $HTTP_POST_VARS["dbh_campo"] == ($result ? pg_result($result,$i,"codcam") : null)?"selected":"").'>'.($result ? pg_result($result,$i,"nomecam") : null).'</option>';
   			      }
   			     ?>
            </select>
@@ -113,8 +113,8 @@ db_postmemory($HTTP_POST_VARS);
 			                   from db_usuarios
 			                  order by nome";
 			         $result = db_query($sql);
-			         for ($i=0;$i<pg_numrows($result);$i++) {
-			          echo '<option value="'.pg_result($result,$i,"id_usuario").'" '.(isset($HTTP_POST_VARS["dbh_usuario"]) && $HTTP_POST_VARS["dbh_usuario"] == pg_result($result,$i,"id_usuario")?"selected":"").'>'.str_pad(pg_result($result,$i,"login"),20).'</option>';
+			         for ($i=0;$i<($result ? pg_numrows($result) : null);$i++) {
+			          echo '<option value="'.($result ? pg_result($result,$i,"id_usuario") : null).'" '.(isset($HTTP_POST_VARS["dbh_usuario"]) && $HTTP_POST_VARS["dbh_usuario"] == ($result ? pg_result($result,$i,"id_usuario") : null)?"selected":"").'>'.str_pad(($result ? pg_result($result,$i,"login") : null),20).'</option>';
 			         }
 			       ?>
            </select>
@@ -140,7 +140,7 @@ db_postmemory($HTTP_POST_VARS);
 						      	                        inner join db_syscampo c on c.codcam = p.codcam
 					        				            where codarq = $dbh_tabela");
  				         $clrotulocampo = new rotulocampo;
-				         for ($x=0;$x<pg_numrows($result);$x++) {
+				         for ($x=0;$x<($result ? pg_numrows($result) : null);$x++) {
 				           db_fieldsmemory($result,$x);
 				           
 				           $qcampos[$x] = $codcam;
@@ -215,30 +215,31 @@ db_postmemory($HTTP_POST_VARS);
                 $sql .= " ( select id_acount from db_acountkey ".($sqlkey!=""?" where ".$sqlkey:"")." group by id_acount having count(*) = $contador ) ";
               }
               
-		          if ($dbh_campo!=0) {
+		          if ($dbh_campo!=0 && !(is_string($dbh_campo) && !is_numeric($dbh_campo))) {
 		             $sql .= " and d.codcam = $dbh_campo ";
 		          }
 		          
-		          if ($dbh_usuario!=0) {
+		          if ($dbh_usuario!=0 && !(is_string($dbh_usuario) && !is_numeric($dbh_usuario))) {
 		             $sql .= " and d.id_usuario = $dbh_usuario ";
 		          }
 		          
-		          if ($k00_dtoper_dia!=0) {
-		             $sql .= " and d.datahr >= ".mktime(0,0,0,$k00_dtoper_mes,$k00_dtoper_dia,$k00_dtoper_ano);
+		          if ($k00_dtoper_dia!=0 && !(is_string($k00_dtoper_dia) && !is_numeric($k00_dtoper_dia))) {
+		             try { $iTsDtoper = mktime(0,0,0,$k00_dtoper_mes ?? 0,$k00_dtoper_dia,$k00_dtoper_ano ?? 0); } catch (\Throwable $e) { $iTsDtoper = false; }
+		             $sql .= " and d.datahr >= ".$iTsDtoper;
 		          }
 		  
          		  $sql .= " order by id_acount ";
 
 		          $result = db_query($sql);
-              if ( pg_numrows($result) > 0 ) {
-                $id_acount_ant = pg_result($result,0,"id_acount");
+              if ( ($result ? pg_numrows($result) : null) > 0 ) {
+                $id_acount_ant = ($result ? pg_result($result,0,"id_acount") : null);
                 $cor="#CCCCCC";
               }
 
-		          for ($x=0;$x<pg_numrows($result);$x++) {
+		          for ($x=0;$x<($result ? pg_numrows($result) : null);$x++) {
               
-                if ( pg_result($result,$x,"id_acount") != $id_acount_ant ) {
-                  $id_acount_ant = pg_result($result,$x,"id_acount");
+                if ( ($result ? pg_result($result,$x,"id_acount") : null) != $id_acount_ant ) {
+                  $id_acount_ant = ($result ? pg_result($result,$x,"id_acount") : null);
                   if ( $cor=="#7F7F7F" ) {
                     $cor="#CCCCCC";
                   } else {
@@ -256,14 +257,14 @@ db_postmemory($HTTP_POST_VARS);
                          where id_acount = $id_acount";
                 $res = db_query($sql);
                 if ($res!=false) {
-                  for ($ii=0;$ii<pg_numrows($res);$ii++) {
+                  for ($ii=0;$ii<($res ? pg_numrows($res) : null);$ii++) {
                     db_fieldsmemory($res,$ii);
                     $chavetitle .= $nomecamkey."->".$keychave."\n";
                   }
 		            }
 
 		            $processa = true;
-                if ($dbh_campo!=0) {
+                if ($dbh_campo!=0 && !(is_string($dbh_campo) && !is_numeric($dbh_campo))) {
 		              if ($dbh_campo != $codcam ) {
                      $processa = false;
                   }

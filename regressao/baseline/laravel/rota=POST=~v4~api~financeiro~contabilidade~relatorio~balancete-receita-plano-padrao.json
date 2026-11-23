@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/balancete-receita-plano-padrao",
+  "json": {
+    "error": true,
+    "message": "Undefined index: dataInicio"
+  },
+  "sha256": "bfb6a38865bd157ab34488da0cbfe1feddcfaf0b3c91d2988070464bbc0d7d6e",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

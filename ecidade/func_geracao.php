@@ -34,7 +34,7 @@ require_once(modification("classes/db_cadtipo_classe.php"));
 require_once(modification("libs/db_app.utils.php"));
 require_once(modification("libs/db_utils.php"));
 db_postmemory($HTTP_GET_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   db_app::load("scripts.js");
   db_app::load("prototype.js");
   db_app::load("datagrid.widget.js");

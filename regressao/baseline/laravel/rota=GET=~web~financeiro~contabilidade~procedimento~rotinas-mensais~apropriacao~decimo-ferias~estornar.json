@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/procedimento/rotinas-mensais/apropriacao/decimo-ferias/estornar",
+  "json": null,
+  "sha256": "7c7d06e6b57aa57b882458be965651b1266eaa1583db4857faf35c487f49c124",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

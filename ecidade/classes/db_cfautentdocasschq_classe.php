@@ -69,11 +69,11 @@ class cl_cfautentdocasschq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k39_sequencial = ($this->k39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k39_sequencial"]:$this->k39_sequencial);
-       $this->k39_cfautent = ($this->k39_cfautent == ""?@$GLOBALS["HTTP_POST_VARS"]["k39_cfautent"]:$this->k39_cfautent);
-       $this->k39_documento = ($this->k39_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["k39_documento"]:$this->k39_documento);
+       $this->k39_sequencial = ($this->k39_sequencial === 0 || $this->k39_sequencial === 0.0 || $this->k39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k39_sequencial"]:$this->k39_sequencial);
+       $this->k39_cfautent = ($this->k39_cfautent === 0 || $this->k39_cfautent === 0.0 || $this->k39_cfautent == ""?@$GLOBALS["HTTP_POST_VARS"]["k39_cfautent"]:$this->k39_cfautent);
+       $this->k39_documento = ($this->k39_documento === 0 || $this->k39_documento === 0.0 || $this->k39_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["k39_documento"]:$this->k39_documento);
      }else{
-       $this->k39_sequencial = ($this->k39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k39_sequencial"]:$this->k39_sequencial);
+       $this->k39_sequencial = ($this->k39_sequencial === 0 || $this->k39_sequencial === 0.0 || $this->k39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k39_sequencial"]:$this->k39_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cfautentdocasschq {
          $this->k39_sequencial = $k39_sequencial;
        }
      }
-     if(($this->k39_sequencial == null) || ($this->k39_sequencial == "") ){
+     if(($this->k39_sequencial == null) || ($this->k39_sequencial === 0 || $this->k39_sequencial === 0.0 || $this->k39_sequencial == "") ){
        $this->erro_sql = " Campo k39_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

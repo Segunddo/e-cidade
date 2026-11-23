@@ -67,10 +67,10 @@ class cl_conlancamslip {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c84_conlancam = ($this->c84_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_conlancam"]:$this->c84_conlancam);
-       $this->c84_slip = ($this->c84_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_slip"]:$this->c84_slip);
+       $this->c84_conlancam = ($this->c84_conlancam === 0 || $this->c84_conlancam === 0.0 || $this->c84_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_conlancam"]:$this->c84_conlancam);
+       $this->c84_slip = ($this->c84_slip === 0 || $this->c84_slip === 0.0 || $this->c84_slip == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_slip"]:$this->c84_slip);
      }else{
-       $this->c84_conlancam = ($this->c84_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_conlancam"]:$this->c84_conlancam);
+       $this->c84_conlancam = ($this->c84_conlancam === 0 || $this->c84_conlancam === 0.0 || $this->c84_conlancam == ""?@$GLOBALS["HTTP_POST_VARS"]["c84_conlancam"]:$this->c84_conlancam);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_conlancamslip {
        return false;
      }
        $this->c84_conlancam = $c84_conlancam;
-     if(($this->c84_conlancam == null) || ($this->c84_conlancam == "") ){
+     if(($this->c84_conlancam == null) || ($this->c84_conlancam === 0 || $this->c84_conlancam === 0.0 || $this->c84_conlancam == "") ){
        $this->erro_sql = " Campo c84_conlancam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

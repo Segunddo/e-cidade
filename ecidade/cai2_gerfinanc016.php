@@ -35,7 +35,7 @@ $clcgm    = new cl_cgm;
 $clrotulo = new rotulocampo;
 $clrotulo->label("t64_class"); //classificação
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $sqlCondCgm = "";
 

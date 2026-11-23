@@ -67,10 +67,10 @@ class cl_cadtipodocumento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db123_sequencial = ($this->db123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db123_sequencial"]:$this->db123_sequencial);
+       $this->db123_sequencial = ($this->db123_sequencial === 0 || $this->db123_sequencial === 0.0 || $this->db123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db123_sequencial"]:$this->db123_sequencial);
        $this->db123_tipo = ($this->db123_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db123_tipo"]:$this->db123_tipo);
      }else{
-       $this->db123_sequencial = ($this->db123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db123_sequencial"]:$this->db123_sequencial);
+       $this->db123_sequencial = ($this->db123_sequencial === 0 || $this->db123_sequencial === 0.0 || $this->db123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db123_sequencial"]:$this->db123_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_cadtipodocumento {
          $this->db123_sequencial = $db123_sequencial;
        }
      }
-     if(($this->db123_sequencial == null) || ($this->db123_sequencial == "") ){
+     if(($this->db123_sequencial == null) || ($this->db123_sequencial === 0 || $this->db123_sequencial === 0.0 || $this->db123_sequencial == "") ){
        $this->erro_sql = " Campo db123_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

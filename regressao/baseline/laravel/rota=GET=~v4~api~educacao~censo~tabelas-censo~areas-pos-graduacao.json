@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/censo/tabelas-censo/areas-pos-graduacao",
+  "json": {
+    "data": {
+      "1": "Educação",
+      "10": "Serviços",
+      "2": "Artes e humanidades",
+      "3": "Ciências sociais, comunicação e informação",
+      "4": "Negócios, administração e direito",
+      "5": "Ciências naturais, matemática e estatística",
+      "6": "Computação e Tecnologias da Informação e Comunicação (TIC)",
+      "7": "Engenharia, produção e construção",
+      "8": "Agricultura, silvicultura, pesca e veterinária",
+      "9": "Saúde e bem-estar",
+      "99": "Programas básicos"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "cf81c07aa832a935c841c0417e2b788ede937dc04f936757c8f9612991e190d3",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

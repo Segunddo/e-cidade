@@ -1,0 +1,20 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/arrecadacao/procedimentos/getprocessamentocancelamentoparcel",
+  "json": {
+    "data": {
+      "processamento": false
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "bb1fb9723c3d9787469ac4bd2daa0501fe4246f2b0c1b13afa5aac08ed4b7cd4",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

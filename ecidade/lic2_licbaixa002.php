@@ -34,7 +34,7 @@ $cllicbaixa = new cl_licbaixa;
 $clliclicita->rotulo->label();
 $clrotulo = new rotulocampo;
 $clrotulo->label('l03_descr');
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $where = "";
 $and = "";

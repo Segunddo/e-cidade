@@ -71,13 +71,13 @@ class cl_conveniocobrancaseq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar20_sequencial = ($this->ar20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_sequencial"]:$this->ar20_sequencial);
-       $this->ar20_conveniocobranca = ($this->ar20_conveniocobranca == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_conveniocobranca"]:$this->ar20_conveniocobranca);
-       $this->ar20_sequencia = ($this->ar20_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_sequencia"]:$this->ar20_sequencia);
-       $this->ar20_valor = ($this->ar20_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_valor"]:$this->ar20_valor);
+       $this->ar20_sequencial = ($this->ar20_sequencial === 0 || $this->ar20_sequencial === 0.0 || $this->ar20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_sequencial"]:$this->ar20_sequencial);
+       $this->ar20_conveniocobranca = ($this->ar20_conveniocobranca === 0 || $this->ar20_conveniocobranca === 0.0 || $this->ar20_conveniocobranca == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_conveniocobranca"]:$this->ar20_conveniocobranca);
+       $this->ar20_sequencia = ($this->ar20_sequencia === 0 || $this->ar20_sequencia === 0.0 || $this->ar20_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_sequencia"]:$this->ar20_sequencia);
+       $this->ar20_valor = ($this->ar20_valor === 0 || $this->ar20_valor === 0.0 || $this->ar20_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_valor"]:$this->ar20_valor);
      }else{
-       $this->ar20_sequencial = ($this->ar20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_sequencial"]:$this->ar20_sequencial);
-       $this->ar20_sequencia = ($this->ar20_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_sequencia"]:$this->ar20_sequencia);
+       $this->ar20_sequencial = ($this->ar20_sequencial === 0 || $this->ar20_sequencial === 0.0 || $this->ar20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_sequencial"]:$this->ar20_sequencial);
+       $this->ar20_sequencia = ($this->ar20_sequencia === 0 || $this->ar20_sequencia === 0.0 || $this->ar20_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ar20_sequencia"]:$this->ar20_sequencia);
      }
    }
    // funcao para inclusao
@@ -125,7 +125,7 @@ class cl_conveniocobrancaseq {
          $this->ar20_sequencial = $ar20_sequencial;
        }
      }
-     if(($this->ar20_sequencial == null) || ($this->ar20_sequencial == "") ){
+     if(($this->ar20_sequencial == null) || ($this->ar20_sequencial === 0 || $this->ar20_sequencial === 0.0 || $this->ar20_sequencial == "") ){
        $this->erro_sql = " Campo ar20_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

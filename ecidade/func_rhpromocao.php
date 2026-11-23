@@ -37,7 +37,7 @@ require_once(modification("classes/db_rhpromocao_classe.php"));
 $oGet = db_utils::postmemory($HTTP_GET_VARS);
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clrhpromocao = new cl_rhpromocao;
 $clrhpromocao->rotulo->label("h72_sequencial");

@@ -69,11 +69,11 @@ class cl_conplanosis {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c64_codpla = ($this->c64_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_codpla"]:$this->c64_codpla);
+       $this->c64_codpla = ($this->c64_codpla === 0 || $this->c64_codpla === 0.0 || $this->c64_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_codpla"]:$this->c64_codpla);
        $this->c64_estrut = ($this->c64_estrut == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_estrut"]:$this->c64_estrut);
        $this->c64_descr = ($this->c64_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_descr"]:$this->c64_descr);
      }else{
-       $this->c64_codpla = ($this->c64_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_codpla"]:$this->c64_codpla);
+       $this->c64_codpla = ($this->c64_codpla === 0 || $this->c64_codpla === 0.0 || $this->c64_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["c64_codpla"]:$this->c64_codpla);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_conplanosis {
          $this->c64_codpla = $c64_codpla;
        }
      }
-     if(($this->c64_codpla == null) || ($this->c64_codpla == "") ){
+     if(($this->c64_codpla == null) || ($this->c64_codpla === 0 || $this->c64_codpla === 0.0 || $this->c64_codpla == "") ){
        $this->erro_sql = " Campo c64_codpla nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -70,11 +70,11 @@ class cl_saltesextra
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->k109_sequencial = ($this->k109_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["k109_sequencial"] : $this->k109_sequencial);
-            $this->k109_saltes = ($this->k109_saltes == "" ? @$GLOBALS["HTTP_POST_VARS"]["k109_saltes"] : $this->k109_saltes);
-            $this->k109_contaextra = ($this->k109_contaextra == "" ? @$GLOBALS["HTTP_POST_VARS"]["k109_contaextra"] : $this->k109_contaextra);
+            $this->k109_sequencial = ($this->k109_sequencial === 0 || $this->k109_sequencial === 0.0 || $this->k109_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["k109_sequencial"] : $this->k109_sequencial);
+            $this->k109_saltes = ($this->k109_saltes === 0 || $this->k109_saltes === 0.0 || $this->k109_saltes == "" ? @$GLOBALS["HTTP_POST_VARS"]["k109_saltes"] : $this->k109_saltes);
+            $this->k109_contaextra = ($this->k109_contaextra === 0 || $this->k109_contaextra === 0.0 || $this->k109_contaextra == "" ? @$GLOBALS["HTTP_POST_VARS"]["k109_contaextra"] : $this->k109_contaextra);
         } else {
-            $this->k109_sequencial = ($this->k109_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["k109_sequencial"] : $this->k109_sequencial);
+            $this->k109_sequencial = ($this->k109_sequencial === 0 || $this->k109_sequencial === 0.0 || $this->k109_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["k109_sequencial"] : $this->k109_sequencial);
         }
     }
 
@@ -123,7 +123,7 @@ class cl_saltesextra
                 $this->k109_sequencial = $k109_sequencial;
             }
         }
-        if (($this->k109_sequencial == null) || ($this->k109_sequencial == "")) {
+        if (($this->k109_sequencial == null) || ($this->k109_sequencial === 0 || $this->k109_sequencial === 0.0 || $this->k109_sequencial == "")) {
             $this->erro_sql = " Campo k109_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

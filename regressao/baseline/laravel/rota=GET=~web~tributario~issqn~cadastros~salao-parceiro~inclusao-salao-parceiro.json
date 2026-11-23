@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/issqn/cadastros/salao-parceiro/inclusao-salao-parceiro",
+  "json": null,
+  "sha256": "1505e79c1647d9f705e4434552b48889edeb564a4da5d51c689cb53a4b494c79",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

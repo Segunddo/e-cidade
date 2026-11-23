@@ -73,13 +73,13 @@ class cl_diverimportaold {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->dv13_sequencial = ($this->dv13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_sequencial"]:$this->dv13_sequencial);
-       $this->dv13_diversos = ($this->dv13_diversos == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_diversos"]:$this->dv13_diversos);
-       $this->dv13_numpre = ($this->dv13_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_numpre"]:$this->dv13_numpre);
-       $this->dv13_numpar = ($this->dv13_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_numpar"]:$this->dv13_numpar);
-       $this->dv13_receita = ($this->dv13_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_receita"]:$this->dv13_receita);
+       $this->dv13_sequencial = ($this->dv13_sequencial === 0 || $this->dv13_sequencial === 0.0 || $this->dv13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_sequencial"]:$this->dv13_sequencial);
+       $this->dv13_diversos = ($this->dv13_diversos === 0 || $this->dv13_diversos === 0.0 || $this->dv13_diversos == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_diversos"]:$this->dv13_diversos);
+       $this->dv13_numpre = ($this->dv13_numpre === 0 || $this->dv13_numpre === 0.0 || $this->dv13_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_numpre"]:$this->dv13_numpre);
+       $this->dv13_numpar = ($this->dv13_numpar === 0 || $this->dv13_numpar === 0.0 || $this->dv13_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_numpar"]:$this->dv13_numpar);
+       $this->dv13_receita = ($this->dv13_receita === 0 || $this->dv13_receita === 0.0 || $this->dv13_receita == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_receita"]:$this->dv13_receita);
      }else{
-       $this->dv13_sequencial = ($this->dv13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_sequencial"]:$this->dv13_sequencial);
+       $this->dv13_sequencial = ($this->dv13_sequencial === 0 || $this->dv13_sequencial === 0.0 || $this->dv13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["dv13_sequencial"]:$this->dv13_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_diverimportaold {
          $this->dv13_sequencial = $dv13_sequencial;
        }
      }
-     if(($this->dv13_sequencial == null) || ($this->dv13_sequencial == "") ){
+     if(($this->dv13_sequencial == null) || ($this->dv13_sequencial === 0 || $this->dv13_sequencial === 0.0 || $this->dv13_sequencial == "") ){
        $this->erro_sql = " Campo dv13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

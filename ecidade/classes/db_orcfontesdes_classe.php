@@ -69,12 +69,12 @@ class cl_orcfontesdes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o60_codfon = ($this->o60_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_codfon"]:$this->o60_codfon);
-       $this->o60_anousu = ($this->o60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_anousu"]:$this->o60_anousu);
-       $this->o60_perc = ($this->o60_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_perc"]:$this->o60_perc);
+       $this->o60_codfon = ($this->o60_codfon === 0 || $this->o60_codfon === 0.0 || $this->o60_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_codfon"]:$this->o60_codfon);
+       $this->o60_anousu = ($this->o60_anousu === 0 || $this->o60_anousu === 0.0 || $this->o60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_anousu"]:$this->o60_anousu);
+       $this->o60_perc = ($this->o60_perc === 0 || $this->o60_perc === 0.0 || $this->o60_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_perc"]:$this->o60_perc);
      }else{
-       $this->o60_codfon = ($this->o60_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_codfon"]:$this->o60_codfon);
-       $this->o60_anousu = ($this->o60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_anousu"]:$this->o60_anousu);
+       $this->o60_codfon = ($this->o60_codfon === 0 || $this->o60_codfon === 0.0 || $this->o60_codfon == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_codfon"]:$this->o60_codfon);
+       $this->o60_anousu = ($this->o60_anousu === 0 || $this->o60_anousu === 0.0 || $this->o60_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o60_anousu"]:$this->o60_anousu);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_orcfontesdes {
      }
        $this->o60_anousu = $o60_anousu;
        $this->o60_codfon = $o60_codfon;
-     if(($this->o60_anousu == null) || ($this->o60_anousu == "") ){
+     if(($this->o60_anousu == null) || ($this->o60_anousu === 0 || $this->o60_anousu === 0.0 || $this->o60_anousu == "") ){
        $this->erro_sql = " Campo o60_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_orcfontesdes {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o60_codfon == null) || ($this->o60_codfon == "") ){
+     if(($this->o60_codfon == null) || ($this->o60_codfon === 0 || $this->o60_codfon === 0.0 || $this->o60_codfon == "") ){
        $this->erro_sql = " Campo o60_codfon nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

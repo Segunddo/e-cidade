@@ -67,10 +67,10 @@ class cl_itbilogin {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it13_guia = ($this->it13_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it13_guia"]:$this->it13_guia);
-       $this->it13_id_usuario = ($this->it13_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["it13_id_usuario"]:$this->it13_id_usuario);
+       $this->it13_guia = ($this->it13_guia === 0 || $this->it13_guia === 0.0 || $this->it13_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it13_guia"]:$this->it13_guia);
+       $this->it13_id_usuario = ($this->it13_id_usuario === 0 || $this->it13_id_usuario === 0.0 || $this->it13_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["it13_id_usuario"]:$this->it13_id_usuario);
      }else{
-       $this->it13_guia = ($this->it13_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it13_guia"]:$this->it13_guia);
+       $this->it13_guia = ($this->it13_guia === 0 || $this->it13_guia === 0.0 || $this->it13_guia == ""?@$GLOBALS["HTTP_POST_VARS"]["it13_guia"]:$this->it13_guia);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_itbilogin {
        return false;
      }
        $this->it13_guia = $it13_guia;
-     if(($this->it13_guia == null) || ($this->it13_guia == "") ){
+     if(($this->it13_guia == null) || ($this->it13_guia === 0 || $this->it13_guia === 0.0 || $this->it13_guia == "") ){
        $this->erro_sql = " Campo it13_guia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

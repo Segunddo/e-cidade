@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/fiscalizacao/vistoria/tipos-vistorias-calculados",
+  "json": {
+    "errors": {
+      "numcgm": [
+        "O campo numcgm é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "0757aeb2c2cd7553c4e843b03c954f179fb241df819217228e3f0039de5e97c5",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -101,7 +101,7 @@ class cl_fis_fiscal
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y30_codnoti = ($this->y30_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_codnoti"]:$this->y30_codnoti);
+            $this->y30_codnoti = ($this->y30_codnoti === 0 || $this->y30_codnoti === 0.0 || $this->y30_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_codnoti"]:$this->y30_codnoti);
             if ($this->y30_data == "") {
                 $this->y30_data_dia = ($this->y30_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_data_dia"]:$this->y30_data_dia);
                 $this->y30_data_mes = ($this->y30_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_data_mes"]:$this->y30_data_mes);
@@ -112,7 +112,7 @@ class cl_fis_fiscal
             }
             $this->y30_hora = ($this->y30_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_hora"]:$this->y30_hora);
             $this->y30_obs = ($this->y30_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_obs"]:$this->y30_obs);
-            $this->y30_setor = ($this->y30_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_setor"]:$this->y30_setor);
+            $this->y30_setor = ($this->y30_setor === 0 || $this->y30_setor === 0.0 || $this->y30_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_setor"]:$this->y30_setor);
             $this->y30_nome = ($this->y30_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_nome"]:$this->y30_nome);
             if ($this->y30_dtvenc == "") {
                 $this->y30_dtvenc_dia = ($this->y30_dtvenc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_dtvenc_dia"]:$this->y30_dtvenc_dia);
@@ -139,9 +139,9 @@ class cl_fis_fiscal
                     $this->y30_dtlanc = $this->y30_dtlanc_ano."-".$this->y30_dtlanc_mes."-".$this->y30_dtlanc_dia;
                 }
             }
-            $this->y30_instit = ($this->y30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_instit"]:$this->y30_instit);
+            $this->y30_instit = ($this->y30_instit === 0 || $this->y30_instit === 0.0 || $this->y30_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_instit"]:$this->y30_instit);
         } else {
-            $this->y30_codnoti = ($this->y30_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_codnoti"]:$this->y30_codnoti);
+            $this->y30_codnoti = ($this->y30_codnoti === 0 || $this->y30_codnoti === 0.0 || $this->y30_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y30_codnoti"]:$this->y30_codnoti);
         }
     }
    // funcao para inclusao

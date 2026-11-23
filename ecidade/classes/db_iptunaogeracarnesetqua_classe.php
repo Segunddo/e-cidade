@@ -71,12 +71,12 @@ class cl_iptunaogeracarnesetqua {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j67_sequencial = ($this->j67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j67_sequencial"]:$this->j67_sequencial);
-       $this->j67_naogeracarne = ($this->j67_naogeracarne == ""?@$GLOBALS["HTTP_POST_VARS"]["j67_naogeracarne"]:$this->j67_naogeracarne);
+       $this->j67_sequencial = ($this->j67_sequencial === 0 || $this->j67_sequencial === 0.0 || $this->j67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j67_sequencial"]:$this->j67_sequencial);
+       $this->j67_naogeracarne = ($this->j67_naogeracarne === 0 || $this->j67_naogeracarne === 0.0 || $this->j67_naogeracarne == ""?@$GLOBALS["HTTP_POST_VARS"]["j67_naogeracarne"]:$this->j67_naogeracarne);
        $this->j67_setor = ($this->j67_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["j67_setor"]:$this->j67_setor);
        $this->j67_quadra = ($this->j67_quadra == ""?@$GLOBALS["HTTP_POST_VARS"]["j67_quadra"]:$this->j67_quadra);
      }else{
-       $this->j67_sequencial = ($this->j67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j67_sequencial"]:$this->j67_sequencial);
+       $this->j67_sequencial = ($this->j67_sequencial === 0 || $this->j67_sequencial === 0.0 || $this->j67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j67_sequencial"]:$this->j67_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_iptunaogeracarnesetqua {
          $this->j67_sequencial = $j67_sequencial;
        }
      }
-     if(($this->j67_sequencial == null) || ($this->j67_sequencial == "") ){
+     if(($this->j67_sequencial == null) || ($this->j67_sequencial === 0 || $this->j67_sequencial === 0.0 || $this->j67_sequencial == "") ){
        $this->erro_sql = " Campo j67_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

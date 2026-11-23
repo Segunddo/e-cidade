@@ -70,7 +70,7 @@ class cl_cadescrito {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q86_numcgm = ($this->q86_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q86_numcgm"]:$this->q86_numcgm);
+       $this->q86_numcgm = ($this->q86_numcgm === 0 || $this->q86_numcgm === 0.0 || $this->q86_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q86_numcgm"]:$this->q86_numcgm);
        if($this->q86_datalimite == ""){
          $this->q86_datalimite_dia = ($this->q86_datalimite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q86_datalimite_dia"]:$this->q86_datalimite_dia);
          $this->q86_datalimite_mes = ($this->q86_datalimite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q86_datalimite_mes"]:$this->q86_datalimite_mes);
@@ -80,7 +80,7 @@ class cl_cadescrito {
          }
        }
      }else{
-       $this->q86_numcgm = ($this->q86_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q86_numcgm"]:$this->q86_numcgm);
+       $this->q86_numcgm = ($this->q86_numcgm === 0 || $this->q86_numcgm === 0.0 || $this->q86_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["q86_numcgm"]:$this->q86_numcgm);
      }
    }
    // funcao para inclusao
@@ -90,7 +90,7 @@ class cl_cadescrito {
        $this->q86_datalimite = "null";
      }
        $this->q86_numcgm = $q86_numcgm;
-     if(($this->q86_numcgm == null) || ($this->q86_numcgm == "") ){
+     if(($this->q86_numcgm == null) || ($this->q86_numcgm === 0 || $this->q86_numcgm === 0.0 || $this->q86_numcgm == "") ){
        $this->erro_sql = " Campo q86_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

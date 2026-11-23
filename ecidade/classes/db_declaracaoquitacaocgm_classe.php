@@ -71,12 +71,12 @@ class cl_declaracaoquitacaocgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ar34_sequencial = ($this->ar34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar34_sequencial"]:$this->ar34_sequencial);
-       $this->ar34_numcgm = ($this->ar34_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ar34_numcgm"]:$this->ar34_numcgm);
-       $this->ar34_declaracaoquitacao = ($this->ar34_declaracaoquitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar34_declaracaoquitacao"]:$this->ar34_declaracaoquitacao);
+       $this->ar34_sequencial = ($this->ar34_sequencial === 0 || $this->ar34_sequencial === 0.0 || $this->ar34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar34_sequencial"]:$this->ar34_sequencial);
+       $this->ar34_numcgm = ($this->ar34_numcgm === 0 || $this->ar34_numcgm === 0.0 || $this->ar34_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ar34_numcgm"]:$this->ar34_numcgm);
+       $this->ar34_declaracaoquitacao = ($this->ar34_declaracaoquitacao === 0 || $this->ar34_declaracaoquitacao === 0.0 || $this->ar34_declaracaoquitacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ar34_declaracaoquitacao"]:$this->ar34_declaracaoquitacao);
        $this->ar34_somentecgm = ($this->ar34_somentecgm == "f"?@$GLOBALS["HTTP_POST_VARS"]["ar34_somentecgm"]:$this->ar34_somentecgm);
      }else{
-       $this->ar34_sequencial = ($this->ar34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar34_sequencial"]:$this->ar34_sequencial);
+       $this->ar34_sequencial = ($this->ar34_sequencial === 0 || $this->ar34_sequencial === 0.0 || $this->ar34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ar34_sequencial"]:$this->ar34_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_declaracaoquitacaocgm {
          $this->ar34_sequencial = $ar34_sequencial;
        }
      }
-     if(($this->ar34_sequencial == null) || ($this->ar34_sequencial == "") ){
+     if(($this->ar34_sequencial == null) || ($this->ar34_sequencial === 0 || $this->ar34_sequencial === 0.0 || $this->ar34_sequencial == "") ){
        $this->erro_sql = " Campo ar34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/protocolo/processo/search",
+  "json": {
+    "error": true,
+    "message": "pg_fetch_object() expects parameter 1 to be resource, bool given"
+  },
+  "sha256": "a57a2d467e32ddc928177816d6900f00837a7d94e83b6477efd0281180dd61d9",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

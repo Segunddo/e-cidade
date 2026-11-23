@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/arrecadacao/data-lancamento-debito/labels",
+  "json": {
+    "data": {
+      "k00_dtoper": "DT.Lanc",
+      "k00_numpar": "Parcela",
+      "k00_numpre": "Numero de arrecadacao",
+      "k00_tipo": "Tipo de Débito",
+      "k163_data": "Data da Geração"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "31dd1c17217539861078be34d45411dad7595d13d10c1212cb395c712c0cb8ab",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

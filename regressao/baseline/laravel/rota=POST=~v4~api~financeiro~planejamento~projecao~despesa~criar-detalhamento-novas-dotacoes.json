@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/projecao/despesa/criar-detalhamento-novas-dotacoes",
+  "json": {
+    "errors": {
+      "planejamento": [
+        "Planejamento deve ser informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "1645a15cb8503f092e9c1ebc915c43f2677bf50091c12f52330e1eb20375e130",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/jobs/failed",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Configuracao\\Job\\Controller\\JobsFailedController::store does not exist."
+  },
+  "sha256": "8eadd788716b695b80a1b5d4fdfbc5c1ba7d9a07663eff25228e5012305a5ac3",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

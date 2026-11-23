@@ -120,13 +120,13 @@ class cl_empautoriza
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e54_autori = ($this->e54_autori == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_autori"] : $this->e54_autori);
-            $this->e54_numcgm = ($this->e54_numcgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_numcgm"] : $this->e54_numcgm);
-            $this->e54_login = ($this->e54_login == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_login"] : $this->e54_login);
-            $this->e54_codcom = ($this->e54_codcom == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_codcom"] : $this->e54_codcom);
+            $this->e54_autori = ($this->e54_autori === 0 || $this->e54_autori === 0.0 || $this->e54_autori == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_autori"] : $this->e54_autori);
+            $this->e54_numcgm = ($this->e54_numcgm === 0 || $this->e54_numcgm === 0.0 || $this->e54_numcgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_numcgm"] : $this->e54_numcgm);
+            $this->e54_login = ($this->e54_login === 0 || $this->e54_login === 0.0 || $this->e54_login == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_login"] : $this->e54_login);
+            $this->e54_codcom = ($this->e54_codcom === 0 || $this->e54_codcom === 0.0 || $this->e54_codcom == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_codcom"] : $this->e54_codcom);
             $this->e54_destin = ($this->e54_destin == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_destin"] : $this->e54_destin);
-            $this->e54_valor = ($this->e54_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_valor"] : $this->e54_valor);
-            $this->e54_anousu = ($this->e54_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_anousu"] : $this->e54_anousu);
+            $this->e54_valor = ($this->e54_valor === 0 || $this->e54_valor === 0.0 || $this->e54_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_valor"] : $this->e54_valor);
+            $this->e54_anousu = ($this->e54_anousu === 0 || $this->e54_anousu === 0.0 || $this->e54_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_anousu"] : $this->e54_anousu);
             $this->e54_tipol = ($this->e54_tipol == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_tipol"] : $this->e54_tipol);
             $this->e54_numerl = ($this->e54_numerl == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_numerl"] : $this->e54_numerl);
             $this->e54_praent = ($this->e54_praent == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_praent"] : $this->e54_praent);
@@ -135,7 +135,7 @@ class cl_empautoriza
             $this->e54_codout = ($this->e54_codout == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_codout"] : $this->e54_codout);
             $this->e54_contat = ($this->e54_contat == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_contat"] : $this->e54_contat);
             $this->e54_telef = ($this->e54_telef == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_telef"] : $this->e54_telef);
-            $this->e54_numsol = ($this->e54_numsol == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_numsol"] : $this->e54_numsol);
+            $this->e54_numsol = ($this->e54_numsol === 0 || $this->e54_numsol === 0.0 || $this->e54_numsol == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_numsol"] : $this->e54_numsol);
             if ($this->e54_anulad == "") {
                 $this->e54_anulad_dia = ($this->e54_anulad_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_anulad_dia"] : $this->e54_anulad_dia);
                 $this->e54_anulad_mes = ($this->e54_anulad_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_anulad_mes"] : $this->e54_anulad_mes);
@@ -153,14 +153,14 @@ class cl_empautoriza
                 }
             }
             $this->e54_resumo = ($this->e54_resumo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_resumo"] : $this->e54_resumo);
-            $this->e54_codtipo = ($this->e54_codtipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_codtipo"] : $this->e54_codtipo);
-            $this->e54_instit = ($this->e54_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_instit"] : $this->e54_instit);
-            $this->e54_depto = ($this->e54_depto == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_depto"] : $this->e54_depto);
+            $this->e54_codtipo = ($this->e54_codtipo === 0 || $this->e54_codtipo === 0.0 || $this->e54_codtipo == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_codtipo"] : $this->e54_codtipo);
+            $this->e54_instit = ($this->e54_instit === 0 || $this->e54_instit === 0.0 || $this->e54_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_instit"] : $this->e54_instit);
+            $this->e54_depto = ($this->e54_depto === 0 || $this->e54_depto === 0.0 || $this->e54_depto == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_depto"] : $this->e54_depto);
             $this->e54_concarpeculiar = ($this->e54_concarpeculiar == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_concarpeculiar"] : $this->e54_concarpeculiar);
-            $this->e54_logincriador = ($this->e54_logincriador == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_logincriador"] : $this->e54_logincriador);
-            $this->e54_institlic = ($this->e54_institlic == ""?@$GLOBALS["HTTP_POST_VARS"]["e54_institlic"]:$this->e54_institlic);
+            $this->e54_logincriador = ($this->e54_logincriador === 0 || $this->e54_logincriador === 0.0 || $this->e54_logincriador == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_logincriador"] : $this->e54_logincriador);
+            $this->e54_institlic = ($this->e54_institlic === 0 || $this->e54_institlic === 0.0 || $this->e54_institlic == ""?@$GLOBALS["HTTP_POST_VARS"]["e54_institlic"]:$this->e54_institlic);
         } else {
-            $this->e54_autori = ($this->e54_autori == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_autori"] : $this->e54_autori);
+            $this->e54_autori = ($this->e54_autori === 0 || $this->e54_autori === 0.0 || $this->e54_autori == "" ? @$GLOBALS["HTTP_POST_VARS"]["e54_autori"] : $this->e54_autori);
         }
     }
 
@@ -287,7 +287,7 @@ class cl_empautoriza
                 $this->e54_autori = $e54_autori;
             }
         }
-        if (($this->e54_autori == null) || ($this->e54_autori == "")) {
+        if (($this->e54_autori == null) || ($this->e54_autori === 0 || $this->e54_autori === 0.0 || $this->e54_autori == "")) {
             $this->erro_sql = " Campo e54_autori não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

@@ -67,10 +67,10 @@ class cl_bancoshistmovexcecao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k166_sequencial = ($this->k166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_sequencial"]:$this->k166_sequencial);
-       $this->k166_bancoshistmov = ($this->k166_bancoshistmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_bancoshistmov"]:$this->k166_bancoshistmov);
+       $this->k166_sequencial = ($this->k166_sequencial === 0 || $this->k166_sequencial === 0.0 || $this->k166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_sequencial"]:$this->k166_sequencial);
+       $this->k166_bancoshistmov = ($this->k166_bancoshistmov === 0 || $this->k166_bancoshistmov === 0.0 || $this->k166_bancoshistmov == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_bancoshistmov"]:$this->k166_bancoshistmov);
      }else{
-       $this->k166_sequencial = ($this->k166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_sequencial"]:$this->k166_sequencial);
+       $this->k166_sequencial = ($this->k166_sequencial === 0 || $this->k166_sequencial === 0.0 || $this->k166_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k166_sequencial"]:$this->k166_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_bancoshistmovexcecao {
          $this->k166_sequencial = $k166_sequencial;
        }
      }
-     if(($this->k166_sequencial == null) || ($this->k166_sequencial == "") ){
+     if(($this->k166_sequencial == null) || ($this->k166_sequencial === 0 || $this->k166_sequencial === 0.0 || $this->k166_sequencial == "") ){
        $this->erro_sql = " Campo k166_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

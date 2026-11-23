@@ -44,7 +44,7 @@ if ($clbiblioteca->numrows != 0) {
   db_fieldsmemory($result, 0);
 }
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if ($filtro != "") {
   
   $filtro      = " and bi06_tipoitem = $filtro";

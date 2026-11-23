@@ -1,0 +1,33 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/alvaraeventos/alvaraevento/update",
+  "json": {
+    "errors": {
+      "q170_certidaobombeiro": [
+        "Certidão de bombeiros não informada."
+      ],
+      "q170_codigo": [
+        "Código não informado."
+      ],
+      "q170_observacao": [
+        "Observação não informada."
+      ],
+      "q170_ordemservico": [
+        "Ordem de serviço não informada."
+      ],
+      "q170_tipoalvara": [
+        "Tipo de alvará não informado."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "06edfe0b43a99d52a02d6cfed92bc21d7fbd6d7bb46e2b3f4491353e01106be3",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

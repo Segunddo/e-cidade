@@ -52,7 +52,7 @@ if ( isset($submit) && $submit == "Incluir" ) {
     $dtDia         = $dtImplantacao[0];
     $dtMes         = $dtImplantacao[1];
     $dtAno         = $dtImplantacao[2];
-    $dtImplantacao = date('Y-m-d', mktime(0,0,0, $dtMes, $dtDia-1, $dtAno));
+    try { $dtImplantacao = date('Y-m-d', mktime(0,0,0, $dtMes ?? 0, (int)$dtDia-1, $dtAno ?? 0)); } catch (\Throwable $e) { $dtImplantacao = date('Y-m-d', false); }
 
     $clsaltes->k13_dtimplantacao = $dtImplantacao;
     $clsaltes->incluir($k13_reduz);

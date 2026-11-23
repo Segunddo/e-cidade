@@ -37,7 +37,7 @@ include(modification("classes/db_carconstr_classe.php")); // nao escrituradas
 include(modification("classes/db_constrcar_classe.php")); // escrituradas
 include(modification("classes/db_caracter_classe.php")); // escrituradas
 include(modification("classes/db_carpadrao_classe.php")); // escrituradas
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //$tipogrupo = 'F';
 //$codigo = 1;
 //echo "<br>".$HTTP_SERVER_VARS["QUERY_STRING"]."<br>";

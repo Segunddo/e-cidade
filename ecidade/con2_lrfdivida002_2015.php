@@ -46,7 +46,7 @@ if (! isset($arqinclude)) {
   $cldb_config        = new cl_db_config();
   $clorcparamelemento = new cl_orcparamelemento();
 
-  parse_str($HTTP_SERVER_VARS ['QUERY_STRING']);
+  parse_str($HTTP_SERVER_VARS ['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
   db_postmemory($HTTP_SERVER_VARS);
 
 }
@@ -379,13 +379,13 @@ for ($iLinha = 1; $iLinha <= 28; $iLinha++) {
   foreach ($aColunas as $aColunas) {
 
 
-    $aLinhasRelatorio[$iLinha]["saldoanterior"]   += $aColunas->colunas[1]->o117_valor;
-    $aLinhasRelatorio[$iLinha]["primeiroperiodo"] += $aColunas->colunas[2]->o117_valor;
+    $aLinhasRelatorio[$iLinha]["saldoanterior"]   += (float) $aColunas->colunas[1]->o117_valor;
+    $aLinhasRelatorio[$iLinha]["primeiroperiodo"] += (float) $aColunas->colunas[2]->o117_valor;
     if ($sSiglaPeriodo == "2S" || $sSiglaPeriodo == "2Q" || $sSiglaPeriodo == "3Q") {
-      $aLinhasRelatorio[$iLinha]["segundoperiodo"]  += $aColunas->colunas[3]->o117_valor;
+      $aLinhasRelatorio[$iLinha]["segundoperiodo"]  += (float) $aColunas->colunas[3]->o117_valor;
     }
     if ($sSiglaPeriodo == "3Q") {
-      $aLinhasRelatorio[$iLinha]["terceiroperiodo"] += $aColunas->colunas[4]->o117_valor;
+      $aLinhasRelatorio[$iLinha]["terceiroperiodo"] += (float) $aColunas->colunas[4]->o117_valor;
     }
 
     /**
@@ -774,26 +774,18 @@ $aTotalizadores[4]["terceiroperiodo"] = somaRCLPeriodo($aMesesRCLAtual, $aMesesR
 /**
  * Totalizamos a total da DC /RCL
  */
-$aTotalizadores[5]["saldoanterior"]   = ($aTotalizadores[0]["saldoanterior"] /
-                                         $aTotalizadores[4]["saldoanterior"])*100;
-$aTotalizadores[5]["primeiroperiodo"] = ($aTotalizadores[0]["primeiroperiodo"] /
-                                         $aTotalizadores[4]["primeiroperiodo"])*100;
-$aTotalizadores[5]["segundoperiodo"]  = @($aTotalizadores[0]["segundoperiodo"] /
-                                         $aTotalizadores[4]["segundoperiodo"])*100 ;
-$aTotalizadores[5]["terceiroperiodo"] = @($aTotalizadores[0]["terceiroperiodo"] /
-                                         $aTotalizadores[4]["terceiroperiodo"])*100 ;
+$aTotalizadores[5]["saldoanterior"]   = ((float) $aTotalizadores[4]["saldoanterior"] == 0 ? (float) $aTotalizadores[0]["saldoanterior"] > 0 ? INF : ((float) $aTotalizadores[0]["saldoanterior"] < 0 ? -INF : NAN) : $aTotalizadores[0]["saldoanterior"] / $aTotalizadores[4]["saldoanterior"])*100;
+$aTotalizadores[5]["primeiroperiodo"] = ((float) $aTotalizadores[4]["primeiroperiodo"] == 0 ? (float) $aTotalizadores[0]["primeiroperiodo"] > 0 ? INF : ((float) $aTotalizadores[0]["primeiroperiodo"] < 0 ? -INF : NAN) : $aTotalizadores[0]["primeiroperiodo"] / $aTotalizadores[4]["primeiroperiodo"])*100;
+$aTotalizadores[5]["segundoperiodo"]  = @((float) $aTotalizadores[4]["segundoperiodo"] == 0 ? (float) $aTotalizadores[0]["segundoperiodo"] > 0 ? INF : ((float) $aTotalizadores[0]["segundoperiodo"] < 0 ? -INF : NAN) : $aTotalizadores[0]["segundoperiodo"] / $aTotalizadores[4]["segundoperiodo"])*100 ;
+$aTotalizadores[5]["terceiroperiodo"] = @((float) $aTotalizadores[4]["terceiroperiodo"] == 0 ? (float) $aTotalizadores[0]["terceiroperiodo"] > 0 ? INF : ((float) $aTotalizadores[0]["terceiroperiodo"] < 0 ? -INF : NAN) : $aTotalizadores[0]["terceiroperiodo"] / $aTotalizadores[4]["terceiroperiodo"])*100 ;
 
 /**
  * Totalizamos a total da DCL /RCL
  */
-$aTotalizadores[6]["saldoanterior"]   = ($aTotalizadores[3]["saldoanterior"] /
-                                        $aTotalizadores[4]["saldoanterior"])*100;
-$aTotalizadores[6]["primeiroperiodo"] = ($aTotalizadores[3]["primeiroperiodo"] /
-                                         $aTotalizadores[4]["primeiroperiodo"])*100;
-$aTotalizadores[6]["segundoperiodo"]  = @($aTotalizadores[3]["segundoperiodo"] /
-                                         $aTotalizadores[4]["segundoperiodo"])*100 ;
-$aTotalizadores[6]["terceiroperiodo"] = @($aTotalizadores[3]["terceiroperiodo"] /
-                                         $aTotalizadores[4]["terceiroperiodo"])*100 ;
+$aTotalizadores[6]["saldoanterior"]   = ((float) $aTotalizadores[4]["saldoanterior"] == 0 ? (float) $aTotalizadores[3]["saldoanterior"] > 0 ? INF : ((float) $aTotalizadores[3]["saldoanterior"] < 0 ? -INF : NAN) : $aTotalizadores[3]["saldoanterior"] / $aTotalizadores[4]["saldoanterior"])*100;
+$aTotalizadores[6]["primeiroperiodo"] = ((float) $aTotalizadores[4]["primeiroperiodo"] == 0 ? (float) $aTotalizadores[3]["primeiroperiodo"] > 0 ? INF : ((float) $aTotalizadores[3]["primeiroperiodo"] < 0 ? -INF : NAN) : $aTotalizadores[3]["primeiroperiodo"] / $aTotalizadores[4]["primeiroperiodo"])*100;
+$aTotalizadores[6]["segundoperiodo"]  = @((float) $aTotalizadores[4]["segundoperiodo"] == 0 ? (float) $aTotalizadores[3]["segundoperiodo"] > 0 ? INF : ((float) $aTotalizadores[3]["segundoperiodo"] < 0 ? -INF : NAN) : $aTotalizadores[3]["segundoperiodo"] / $aTotalizadores[4]["segundoperiodo"])*100 ;
+$aTotalizadores[6]["terceiroperiodo"] = @((float) $aTotalizadores[4]["terceiroperiodo"] == 0 ? (float) $aTotalizadores[3]["terceiroperiodo"] > 0 ? INF : ((float) $aTotalizadores[3]["terceiroperiodo"] < 0 ? -INF : NAN) : $aTotalizadores[3]["terceiroperiodo"] / $aTotalizadores[4]["terceiroperiodo"])*100 ;
 
 
 /**

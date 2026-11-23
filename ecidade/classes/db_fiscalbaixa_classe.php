@@ -74,7 +74,7 @@ class cl_fiscalbaixa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y47_codnoti = ($this->y47_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_codnoti"]:$this->y47_codnoti);
+       $this->y47_codnoti = ($this->y47_codnoti === 0 || $this->y47_codnoti === 0.0 || $this->y47_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_codnoti"]:$this->y47_codnoti);
        if($this->y47_data == ""){
          $this->y47_data_dia = ($this->y47_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_data_dia"]:$this->y47_data_dia);
          $this->y47_data_mes = ($this->y47_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_data_mes"]:$this->y47_data_mes);
@@ -83,10 +83,10 @@ class cl_fiscalbaixa {
             $this->y47_data = $this->y47_data_ano."-".$this->y47_data_mes."-".$this->y47_data_dia;
          }
        }
-       $this->y47_motivo = ($this->y47_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_motivo"]:$this->y47_motivo);
+       $this->y47_motivo = ($this->y47_motivo === 0 || $this->y47_motivo === 0.0 || $this->y47_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_motivo"]:$this->y47_motivo);
        $this->y47_obs = ($this->y47_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_obs"]:$this->y47_obs);
      }else{
-       $this->y47_codnoti = ($this->y47_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_codnoti"]:$this->y47_codnoti);
+       $this->y47_codnoti = ($this->y47_codnoti === 0 || $this->y47_codnoti === 0.0 || $this->y47_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y47_codnoti"]:$this->y47_codnoti);
      }
    }
    // funcao para inclusao
@@ -120,7 +120,7 @@ class cl_fiscalbaixa {
        return false;
      }
        $this->y47_codnoti = $y47_codnoti;
-     if(($this->y47_codnoti == null) || ($this->y47_codnoti == "") ){
+     if(($this->y47_codnoti == null) || ($this->y47_codnoti === 0 || $this->y47_codnoti === 0.0 || $this->y47_codnoti == "") ){
        $this->erro_sql = " Campo y47_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

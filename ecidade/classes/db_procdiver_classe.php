@@ -86,14 +86,14 @@ class cl_procdiver {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->dv09_procdiver = ($this->dv09_procdiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_procdiver"]:$this->dv09_procdiver);
+       $this->dv09_procdiver = ($this->dv09_procdiver === 0 || $this->dv09_procdiver === 0.0 || $this->dv09_procdiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_procdiver"]:$this->dv09_procdiver);
        $this->dv09_descra = ($this->dv09_descra == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_descra"]:$this->dv09_descra);
        $this->dv09_descr = ($this->dv09_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_descr"]:$this->dv09_descr);
-       $this->dv09_receit = ($this->dv09_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_receit"]:$this->dv09_receit);
-       $this->dv09_hist = ($this->dv09_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_hist"]:$this->dv09_hist);
-       $this->dv09_proced = ($this->dv09_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_proced"]:$this->dv09_proced);
-       $this->dv09_tipo = ($this->dv09_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_tipo"]:$this->dv09_tipo);
-       $this->dv09_instit = ($this->dv09_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_instit"]:$this->dv09_instit);
+       $this->dv09_receit = ($this->dv09_receit === 0 || $this->dv09_receit === 0.0 || $this->dv09_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_receit"]:$this->dv09_receit);
+       $this->dv09_hist = ($this->dv09_hist === 0 || $this->dv09_hist === 0.0 || $this->dv09_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_hist"]:$this->dv09_hist);
+       $this->dv09_proced = ($this->dv09_proced === 0 || $this->dv09_proced === 0.0 || $this->dv09_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_proced"]:$this->dv09_proced);
+       $this->dv09_tipo = ($this->dv09_tipo === 0 || $this->dv09_tipo === 0.0 || $this->dv09_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_tipo"]:$this->dv09_tipo);
+       $this->dv09_instit = ($this->dv09_instit === 0 || $this->dv09_instit === 0.0 || $this->dv09_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_instit"]:$this->dv09_instit);
        if($this->dv09_dtlimite == ""){
          $this->dv09_dtlimite_dia = ($this->dv09_dtlimite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_dtlimite_dia"]:$this->dv09_dtlimite_dia);
          $this->dv09_dtlimite_mes = ($this->dv09_dtlimite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_dtlimite_mes"]:$this->dv09_dtlimite_mes);
@@ -104,7 +104,7 @@ class cl_procdiver {
        }
        $this->dv09_cobranca = ($this->dv09_cobranca == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_cobranca"]:$this->dv09_cobranca);
      }else{
-       $this->dv09_procdiver = ($this->dv09_procdiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_procdiver"]:$this->dv09_procdiver);
+       $this->dv09_procdiver = ($this->dv09_procdiver === 0 || $this->dv09_procdiver === 0.0 || $this->dv09_procdiver == ""?@$GLOBALS["HTTP_POST_VARS"]["dv09_procdiver"]:$this->dv09_procdiver);
      }
    }
    // funcao para inclusao
@@ -209,7 +209,7 @@ class cl_procdiver {
          $this->dv09_procdiver = $dv09_procdiver;
        }
      }
-     if(($this->dv09_procdiver == null) || ($this->dv09_procdiver == "") ){
+     if(($this->dv09_procdiver == null) || ($this->dv09_procdiver === 0 || $this->dv09_procdiver === 0.0 || $this->dv09_procdiver == "") ){
        $this->erro_sql = " Campo dv09_procdiver nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

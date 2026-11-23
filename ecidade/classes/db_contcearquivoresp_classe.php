@@ -77,15 +77,15 @@ class cl_contcearquivoresp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c12_sequencial = ($this->c12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_sequencial"]:$this->c12_sequencial);
+       $this->c12_sequencial = ($this->c12_sequencial === 0 || $this->c12_sequencial === 0.0 || $this->c12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_sequencial"]:$this->c12_sequencial);
        $this->c12_nome = ($this->c12_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_nome"]:$this->c12_nome);
        $this->c12_cargo = ($this->c12_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_cargo"]:$this->c12_cargo);
-       $this->c12_contcearquivo = ($this->c12_contcearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_contcearquivo"]:$this->c12_contcearquivo);
+       $this->c12_contcearquivo = ($this->c12_contcearquivo === 0 || $this->c12_contcearquivo === 0.0 || $this->c12_contcearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_contcearquivo"]:$this->c12_contcearquivo);
        $this->c12_nrodoc = ($this->c12_nrodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_nrodoc"]:$this->c12_nrodoc);
-       $this->c12_tipodoc = ($this->c12_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_tipodoc"]:$this->c12_tipodoc);
-       $this->c12_tipo = ($this->c12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_tipo"]:$this->c12_tipo);
+       $this->c12_tipodoc = ($this->c12_tipodoc === 0 || $this->c12_tipodoc === 0.0 || $this->c12_tipodoc == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_tipodoc"]:$this->c12_tipodoc);
+       $this->c12_tipo = ($this->c12_tipo === 0 || $this->c12_tipo === 0.0 || $this->c12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_tipo"]:$this->c12_tipo);
      }else{
-       $this->c12_sequencial = ($this->c12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_sequencial"]:$this->c12_sequencial);
+       $this->c12_sequencial = ($this->c12_sequencial === 0 || $this->c12_sequencial === 0.0 || $this->c12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c12_sequencial"]:$this->c12_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_contcearquivoresp {
          $this->c12_sequencial = $c12_sequencial;
        }
      }
-     if(($this->c12_sequencial == null) || ($this->c12_sequencial == "") ){
+     if(($this->c12_sequencial == null) || ($this->c12_sequencial === 0 || $this->c12_sequencial === 0.0 || $this->c12_sequencial == "") ){
        $this->erro_sql = " Campo c12_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

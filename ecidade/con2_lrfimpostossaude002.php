@@ -43,7 +43,7 @@ if (!isset($arqinclude)){ // se este arquivo não esta incluido por outro
  $orcparamrel = new cl_orcparamrel;
  $clconrelinfo = new cl_conrelinfo;
  
- parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+ parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
  
  $anousu  = db_getsession("DB_anousu");
  $dt = data_periodo($anousu,$periodo); // no dbforms/db_funcoes.php

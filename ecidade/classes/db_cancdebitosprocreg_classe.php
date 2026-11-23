@@ -79,16 +79,16 @@ class cl_cancdebitosprocreg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k24_sequencia = ($this->k24_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_sequencia"]:$this->k24_sequencia);
-       $this->k24_codigo = ($this->k24_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_codigo"]:$this->k24_codigo);
-       $this->k24_cancdebitosreg = ($this->k24_cancdebitosreg == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_cancdebitosreg"]:$this->k24_cancdebitosreg);
-       $this->k24_vlrhis = ($this->k24_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_vlrhis"]:$this->k24_vlrhis);
-       $this->k24_vlrcor = ($this->k24_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_vlrcor"]:$this->k24_vlrcor);
-       $this->k24_juros = ($this->k24_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_juros"]:$this->k24_juros);
-       $this->k24_multa = ($this->k24_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_multa"]:$this->k24_multa);
-       $this->k24_desconto = ($this->k24_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_desconto"]:$this->k24_desconto);
+       $this->k24_sequencia = ($this->k24_sequencia === 0 || $this->k24_sequencia === 0.0 || $this->k24_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_sequencia"]:$this->k24_sequencia);
+       $this->k24_codigo = ($this->k24_codigo === 0 || $this->k24_codigo === 0.0 || $this->k24_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_codigo"]:$this->k24_codigo);
+       $this->k24_cancdebitosreg = ($this->k24_cancdebitosreg === 0 || $this->k24_cancdebitosreg === 0.0 || $this->k24_cancdebitosreg == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_cancdebitosreg"]:$this->k24_cancdebitosreg);
+       $this->k24_vlrhis = ($this->k24_vlrhis === 0 || $this->k24_vlrhis === 0.0 || $this->k24_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_vlrhis"]:$this->k24_vlrhis);
+       $this->k24_vlrcor = ($this->k24_vlrcor === 0 || $this->k24_vlrcor === 0.0 || $this->k24_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_vlrcor"]:$this->k24_vlrcor);
+       $this->k24_juros = ($this->k24_juros === 0 || $this->k24_juros === 0.0 || $this->k24_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_juros"]:$this->k24_juros);
+       $this->k24_multa = ($this->k24_multa === 0 || $this->k24_multa === 0.0 || $this->k24_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_multa"]:$this->k24_multa);
+       $this->k24_desconto = ($this->k24_desconto === 0 || $this->k24_desconto === 0.0 || $this->k24_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_desconto"]:$this->k24_desconto);
      }else{
-       $this->k24_sequencia = ($this->k24_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_sequencia"]:$this->k24_sequencia);
+       $this->k24_sequencia = ($this->k24_sequencia === 0 || $this->k24_sequencia === 0.0 || $this->k24_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["k24_sequencia"]:$this->k24_sequencia);
      }
    }
    // funcao para inclusao
@@ -181,7 +181,7 @@ class cl_cancdebitosprocreg {
          $this->k24_sequencia = $k24_sequencia;
        }
      }
-     if(($this->k24_sequencia == null) || ($this->k24_sequencia == "") ){
+     if(($this->k24_sequencia == null) || ($this->k24_sequencia === 0 || $this->k24_sequencia === 0.0 || $this->k24_sequencia == "") ){
        $this->erro_sql = " Campo k24_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

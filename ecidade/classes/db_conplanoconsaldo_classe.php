@@ -75,17 +75,17 @@ class cl_conplanoconsaldo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c59_anoexe = ($this->c59_anoexe == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_anoexe"]:$this->c59_anoexe);
-       $this->c59_codcon = ($this->c59_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_codcon"]:$this->c59_codcon);
-       $this->c59_instit = ($this->c59_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_instit"]:$this->c59_instit);
-       $this->c59_mes = ($this->c59_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_mes"]:$this->c59_mes);
-       $this->c59_debito = ($this->c59_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_debito"]:$this->c59_debito);
-       $this->c59_credito = ($this->c59_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_credito"]:$this->c59_credito);
+       $this->c59_anoexe = ($this->c59_anoexe === 0 || $this->c59_anoexe === 0.0 || $this->c59_anoexe == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_anoexe"]:$this->c59_anoexe);
+       $this->c59_codcon = ($this->c59_codcon === 0 || $this->c59_codcon === 0.0 || $this->c59_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_codcon"]:$this->c59_codcon);
+       $this->c59_instit = ($this->c59_instit === 0 || $this->c59_instit === 0.0 || $this->c59_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_instit"]:$this->c59_instit);
+       $this->c59_mes = ($this->c59_mes === 0 || $this->c59_mes === 0.0 || $this->c59_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_mes"]:$this->c59_mes);
+       $this->c59_debito = ($this->c59_debito === 0 || $this->c59_debito === 0.0 || $this->c59_debito == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_debito"]:$this->c59_debito);
+       $this->c59_credito = ($this->c59_credito === 0 || $this->c59_credito === 0.0 || $this->c59_credito == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_credito"]:$this->c59_credito);
      }else{
-       $this->c59_anoexe = ($this->c59_anoexe == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_anoexe"]:$this->c59_anoexe);
-       $this->c59_codcon = ($this->c59_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_codcon"]:$this->c59_codcon);
-       $this->c59_instit = ($this->c59_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_instit"]:$this->c59_instit);
-       $this->c59_mes = ($this->c59_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_mes"]:$this->c59_mes);
+       $this->c59_anoexe = ($this->c59_anoexe === 0 || $this->c59_anoexe === 0.0 || $this->c59_anoexe == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_anoexe"]:$this->c59_anoexe);
+       $this->c59_codcon = ($this->c59_codcon === 0 || $this->c59_codcon === 0.0 || $this->c59_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_codcon"]:$this->c59_codcon);
+       $this->c59_instit = ($this->c59_instit === 0 || $this->c59_instit === 0.0 || $this->c59_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_instit"]:$this->c59_instit);
+       $this->c59_mes = ($this->c59_mes === 0 || $this->c59_mes === 0.0 || $this->c59_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c59_mes"]:$this->c59_mes);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_conplanoconsaldo {
        $this->c59_codcon = $c59_codcon;
        $this->c59_instit = $c59_instit;
        $this->c59_mes = $c59_mes;
-     if(($this->c59_anoexe == null) || ($this->c59_anoexe == "") ){
+     if(($this->c59_anoexe == null) || ($this->c59_anoexe === 0 || $this->c59_anoexe === 0.0 || $this->c59_anoexe == "") ){
        $this->erro_sql = " Campo c59_anoexe nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -121,7 +121,7 @@ class cl_conplanoconsaldo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c59_codcon == null) || ($this->c59_codcon == "") ){
+     if(($this->c59_codcon == null) || ($this->c59_codcon === 0 || $this->c59_codcon === 0.0 || $this->c59_codcon == "") ){
        $this->erro_sql = " Campo c59_codcon nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -129,7 +129,7 @@ class cl_conplanoconsaldo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c59_instit == null) || ($this->c59_instit == "") ){
+     if(($this->c59_instit == null) || ($this->c59_instit === 0 || $this->c59_instit === 0.0 || $this->c59_instit == "") ){
        $this->erro_sql = " Campo c59_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -137,7 +137,7 @@ class cl_conplanoconsaldo {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->c59_mes == null) || ($this->c59_mes == "") ){
+     if(($this->c59_mes == null) || ($this->c59_mes === 0 || $this->c59_mes === 0.0 || $this->c59_mes == "") ){
        $this->erro_sql = " Campo c59_mes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

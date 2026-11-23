@@ -1,0 +1,67 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/orcamento/cadastro/complemento",
+  "json": {
+    "data": [
+      {
+        "codigo": 0,
+        "descricao": "NÃO SE APLICA",
+        "msc": false,
+        "tribunal": false
+      },
+      {
+        "codigo": 1001,
+        "descricao": "Identificação das despesas com manutenção e desenvolvimento do ensino",
+        "msc": false,
+        "tribunal": false
+      },
+      {
+        "codigo": 1070,
+        "descricao": "Identificação do percentual aplicado no pagamento da remuneração dos profissionais da educação básica em efetivo exercício",
+        "msc": false,
+        "tribunal": false
+      },
+      {
+        "codigo": 3110,
+        "descricao": "Emendas Parlamentares Individuais",
+        "msc": true,
+        "tribunal": false
+      },
+      {
+        "codigo": 3120,
+        "descricao": "Emendas Parlamentares Bancada",
+        "msc": true,
+        "tribunal": false
+      },
+      {
+        "codigo": 3140,
+        "descricao": "Emendas Parlamentares Individuais - COVID 19",
+        "msc": false,
+        "tribunal": false
+      },
+      {
+        "codigo": 3150,
+        "descricao": "Emendas Parlamentares Bancada - COVID 19",
+        "msc": false,
+        "tribunal": false
+      },
+      {
+        "codigo": 3160,
+        "descricao": "COVID 19",
+        "msc": false,
+        "tribunal": false
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "53c959017c9ef259e91f1247fc63dab4ae29c32b975d8fe8bb4cfcb5e168195c",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

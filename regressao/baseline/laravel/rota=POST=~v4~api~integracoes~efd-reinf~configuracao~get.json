@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/integracoes/efd-reinf/configuracao/get",
+  "json": {
+    "data": null,
+    "error": false,
+    "message": ""
+  },
+  "sha256": "1733624854159ff6df19b8e4b11c6bbaa51bb38c3d7e47bee508fc5236dbabf4",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

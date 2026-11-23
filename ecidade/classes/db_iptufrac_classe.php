@@ -71,13 +71,13 @@ class cl_iptufrac {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j25_anousu = ($this->j25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_anousu"]:$this->j25_anousu);
-       $this->j25_matric = ($this->j25_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_matric"]:$this->j25_matric);
-       $this->j25_idbql = ($this->j25_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_idbql"]:$this->j25_idbql);
-       $this->j25_fracao = ($this->j25_fracao == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_fracao"]:$this->j25_fracao);
+       $this->j25_anousu = ($this->j25_anousu === 0 || $this->j25_anousu === 0.0 || $this->j25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_anousu"]:$this->j25_anousu);
+       $this->j25_matric = ($this->j25_matric === 0 || $this->j25_matric === 0.0 || $this->j25_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_matric"]:$this->j25_matric);
+       $this->j25_idbql = ($this->j25_idbql === 0 || $this->j25_idbql === 0.0 || $this->j25_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_idbql"]:$this->j25_idbql);
+       $this->j25_fracao = ($this->j25_fracao === 0 || $this->j25_fracao === 0.0 || $this->j25_fracao == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_fracao"]:$this->j25_fracao);
      }else{
-       $this->j25_anousu = ($this->j25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_anousu"]:$this->j25_anousu);
-       $this->j25_matric = ($this->j25_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_matric"]:$this->j25_matric);
+       $this->j25_anousu = ($this->j25_anousu === 0 || $this->j25_anousu === 0.0 || $this->j25_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_anousu"]:$this->j25_anousu);
+       $this->j25_matric = ($this->j25_matric === 0 || $this->j25_matric === 0.0 || $this->j25_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j25_matric"]:$this->j25_matric);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_iptufrac {
      }
        $this->j25_anousu = $j25_anousu; 
        $this->j25_matric = $j25_matric; 
-     if(($this->j25_anousu == null) || ($this->j25_anousu == "") ){ 
+     if(($this->j25_anousu == null) || ($this->j25_anousu === 0 || $this->j25_anousu === 0.0 || $this->j25_anousu == "") ){ 
        $this->erro_sql = " Campo j25_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_iptufrac {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j25_matric == null) || ($this->j25_matric == "") ){ 
+     if(($this->j25_matric == null) || ($this->j25_matric === 0 || $this->j25_matric === 0.0 || $this->j25_matric == "") ){ 
        $this->erro_sql = " Campo j25_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

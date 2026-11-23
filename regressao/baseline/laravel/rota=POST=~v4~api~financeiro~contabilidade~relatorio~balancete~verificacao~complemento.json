@@ -1,0 +1,54 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/balancete/verificacao/complemento",
+  "json": {
+    "errors": {
+      "comEncerramento": [
+        "O campo com encerramento é obrigatório."
+      ],
+      "consolidarPorReduzido": [
+        "O campo consolidar por reduzido é obrigatório."
+      ],
+      "contasComMovimento": [
+        "O campo contas com movimento é obrigatório."
+      ],
+      "dataFinal": [
+        "A Data Final deve ser informada."
+      ],
+      "dataInicial": [
+        "A Data Inicial deve ser informada"
+      ],
+      "exercicio": [
+        "O Exercício deve ser informado."
+      ],
+      "exibirContaBancaria": [
+        "O campo exibir conta bancaria é obrigatório."
+      ],
+      "indicadorSuperavit": [
+        "O campo indicador superavit é obrigatório."
+      ],
+      "instituicoes": [
+        "Ao menos uma instituição deve ser informada."
+      ],
+      "sintetico": [
+        "O campo sintetico é obrigatório."
+      ],
+      "sistemaContas": [
+        "O campo sistema contas é obrigatório."
+      ],
+      "tipoPlano": [
+        "O campo tipo plano é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "f37d89d4fa59d1a2ac946df5eb0d83347d41680e5f185f6e6b671faa4f75841d",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

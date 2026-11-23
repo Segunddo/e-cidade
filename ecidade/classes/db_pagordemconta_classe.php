@@ -67,10 +67,10 @@ class cl_pagordemconta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e49_codord = ($this->e49_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_codord"]:$this->e49_codord);
-       $this->e49_numcgm = ($this->e49_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_numcgm"]:$this->e49_numcgm);
+       $this->e49_codord = ($this->e49_codord === 0 || $this->e49_codord === 0.0 || $this->e49_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_codord"]:$this->e49_codord);
+       $this->e49_numcgm = ($this->e49_numcgm === 0 || $this->e49_numcgm === 0.0 || $this->e49_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_numcgm"]:$this->e49_numcgm);
      }else{
-       $this->e49_codord = ($this->e49_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_codord"]:$this->e49_codord);
+       $this->e49_codord = ($this->e49_codord === 0 || $this->e49_codord === 0.0 || $this->e49_codord == ""?@$GLOBALS["HTTP_POST_VARS"]["e49_codord"]:$this->e49_codord);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_pagordemconta {
        return false;
      }
        $this->e49_codord = $e49_codord;
-     if(($this->e49_codord == null) || ($this->e49_codord == "") ){
+     if(($this->e49_codord == null) || ($this->e49_codord === 0 || $this->e49_codord === 0.0 || $this->e49_codord == "") ){
        $this->erro_sql = " Campo e49_codord nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

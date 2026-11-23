@@ -78,7 +78,7 @@ class cl_cancdebitosproc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k23_codigo = ($this->k23_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_codigo"]:$this->k23_codigo);
+       $this->k23_codigo = ($this->k23_codigo === 0 || $this->k23_codigo === 0.0 || $this->k23_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_codigo"]:$this->k23_codigo);
        if($this->k23_data == ""){
          $this->k23_data_dia = ($this->k23_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_data_dia"]:$this->k23_data_dia);
          $this->k23_data_mes = ($this->k23_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_data_mes"]:$this->k23_data_mes);
@@ -88,11 +88,11 @@ class cl_cancdebitosproc {
          }
        }
        $this->k23_hora = ($this->k23_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_hora"]:$this->k23_hora);
-       $this->k23_usuario = ($this->k23_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_usuario"]:$this->k23_usuario);
+       $this->k23_usuario = ($this->k23_usuario === 0 || $this->k23_usuario === 0.0 || $this->k23_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_usuario"]:$this->k23_usuario);
        $this->k23_obs = ($this->k23_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_obs"]:$this->k23_obs);
-       $this->k23_cancdebitostipo = ($this->k23_cancdebitostipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_cancdebitostipo"]:$this->k23_cancdebitostipo);
+       $this->k23_cancdebitostipo = ($this->k23_cancdebitostipo === 0 || $this->k23_cancdebitostipo === 0.0 || $this->k23_cancdebitostipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_cancdebitostipo"]:$this->k23_cancdebitostipo);
      }else{
-       $this->k23_codigo = ($this->k23_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_codigo"]:$this->k23_codigo);
+       $this->k23_codigo = ($this->k23_codigo === 0 || $this->k23_codigo === 0.0 || $this->k23_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k23_codigo"]:$this->k23_codigo);
      }
    }
    // funcao para inclusao
@@ -158,7 +158,7 @@ class cl_cancdebitosproc {
          $this->k23_codigo = $k23_codigo;
        }
      }
-     if(($this->k23_codigo == null) || ($this->k23_codigo == "") ){
+     if(($this->k23_codigo == null) || ($this->k23_codigo === 0 || $this->k23_codigo === 0.0 || $this->k23_codigo == "") ){
        $this->erro_sql = " Campo k23_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/contabilidade/lancamento-manual/nota-lancamento",
+  "json": {
+    "error": true,
+    "message": "Trying to get property 'lancamentos' of non-object"
+  },
+  "sha256": "4a5e45cb600cca804ebad2751164876ba9d0500964f67f50b74e6f5a60297850",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

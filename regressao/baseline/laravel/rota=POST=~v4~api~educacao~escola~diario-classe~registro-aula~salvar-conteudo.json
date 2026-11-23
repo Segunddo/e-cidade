@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/diario-classe/registro-aula/salvar-conteudo",
+  "json": {
+    "error": true,
+    "message": "Trying to get property 'calendario' of non-object"
+  },
+  "sha256": "c33ced0bb067b766711274e366e757d62b8313fa90551987ca16f9426459fdd8",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

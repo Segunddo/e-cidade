@@ -67,8 +67,8 @@ class cl_isenproc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j61_codigo = ($this->j61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j61_codigo"]:$this->j61_codigo);
-       $this->j61_codproc = ($this->j61_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j61_codproc"]:$this->j61_codproc);
+       $this->j61_codigo = ($this->j61_codigo === 0 || $this->j61_codigo === 0.0 || $this->j61_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j61_codigo"]:$this->j61_codigo);
+       $this->j61_codproc = ($this->j61_codproc === 0 || $this->j61_codproc === 0.0 || $this->j61_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j61_codproc"]:$this->j61_codproc);
      }else{
      }
    }

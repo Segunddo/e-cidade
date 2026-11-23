@@ -78,8 +78,8 @@ class cl_vistoriasanu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y28_codigo = ($this->y28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_codigo"]:$this->y28_codigo);
-       $this->y28_codvist = ($this->y28_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_codvist"]:$this->y28_codvist);
+       $this->y28_codigo = ($this->y28_codigo === 0 || $this->y28_codigo === 0.0 || $this->y28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_codigo"]:$this->y28_codigo);
+       $this->y28_codvist = ($this->y28_codvist === 0 || $this->y28_codvist === 0.0 || $this->y28_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_codvist"]:$this->y28_codvist);
        if($this->y28_data == ""){
          $this->y28_data_dia = ($this->y28_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_data_dia"]:$this->y28_data_dia);
          $this->y28_data_mes = ($this->y28_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_data_mes"]:$this->y28_data_mes);
@@ -89,10 +89,10 @@ class cl_vistoriasanu {
          }
        }
        $this->y28_hora = ($this->y28_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_hora"]:$this->y28_hora);
-       $this->y28_usuario = ($this->y28_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_usuario"]:$this->y28_usuario);
+       $this->y28_usuario = ($this->y28_usuario === 0 || $this->y28_usuario === 0.0 || $this->y28_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_usuario"]:$this->y28_usuario);
        $this->y28_motivo = ($this->y28_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_motivo"]:$this->y28_motivo);
      }else{
-       $this->y28_codigo = ($this->y28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_codigo"]:$this->y28_codigo);
+       $this->y28_codigo = ($this->y28_codigo === 0 || $this->y28_codigo === 0.0 || $this->y28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y28_codigo"]:$this->y28_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_vistoriasanu {
          $this->y28_codigo = $y28_codigo;
        }
      }
-     if(($this->y28_codigo == null) || ($this->y28_codigo == "") ){
+     if(($this->y28_codigo == null) || ($this->y28_codigo === 0 || $this->y28_codigo === 0.0 || $this->y28_codigo == "") ){
        $this->erro_sql = " Campo y28_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -76,14 +76,14 @@ class cl_orcparamrecursoval
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->o48_seq = ($this->o48_seq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_seq"] : $this->o48_seq);
-            $this->o48_grupo = ($this->o48_grupo == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_grupo"] : $this->o48_grupo);
-            $this->o48_anousu = ($this->o48_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_anousu"] : $this->o48_anousu);
-            $this->o48_codrec = ($this->o48_codrec == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_codrec"] : $this->o48_codrec);
-            $this->o48_instit = ($this->o48_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_instit"] : $this->o48_instit);
-            $this->o48_valor = ($this->o48_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_valor"] : $this->o48_valor);
+            $this->o48_seq = ($this->o48_seq === 0 || $this->o48_seq === 0.0 || $this->o48_seq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_seq"] : $this->o48_seq);
+            $this->o48_grupo = ($this->o48_grupo === 0 || $this->o48_grupo === 0.0 || $this->o48_grupo == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_grupo"] : $this->o48_grupo);
+            $this->o48_anousu = ($this->o48_anousu === 0 || $this->o48_anousu === 0.0 || $this->o48_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_anousu"] : $this->o48_anousu);
+            $this->o48_codrec = ($this->o48_codrec === 0 || $this->o48_codrec === 0.0 || $this->o48_codrec == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_codrec"] : $this->o48_codrec);
+            $this->o48_instit = ($this->o48_instit === 0 || $this->o48_instit === 0.0 || $this->o48_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_instit"] : $this->o48_instit);
+            $this->o48_valor = ($this->o48_valor === 0 || $this->o48_valor === 0.0 || $this->o48_valor == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_valor"] : $this->o48_valor);
         } else {
-            $this->o48_seq = ($this->o48_seq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_seq"] : $this->o48_seq);
+            $this->o48_seq = ($this->o48_seq === 0 || $this->o48_seq === 0.0 || $this->o48_seq == "" ? @$GLOBALS["HTTP_POST_VARS"]["o48_seq"] : $this->o48_seq);
         }
     }
 
@@ -159,7 +159,7 @@ class cl_orcparamrecursoval
                 $this->o48_seq = $o48_seq;
             }
         }
-        if (($this->o48_seq == null) || ($this->o48_seq == "")) {
+        if (($this->o48_seq == null) || ($this->o48_seq === 0 || $this->o48_seq === 0.0 || $this->o48_seq == "")) {
             $this->erro_sql = " Campo o48_seq não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

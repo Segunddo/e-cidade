@@ -51,12 +51,12 @@ class cl_termoinscrreg
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->v93_termo = ($this->v93_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_termo"]:$this->v93_termo);
-       $this->v93_coddiv = ($this->v93_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_coddiv"]:$this->v93_coddiv);
-       $this->v93_vlrhis = ($this->v93_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_vlrhis"]:$this->v93_vlrhis);
-       $this->v93_vlrcor = ($this->v93_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_vlrcor"]:$this->v93_vlrcor);
-       $this->v93_vlrjur = ($this->v93_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_vlrjur"]:$this->v93_vlrjur);
-       $this->v93_vlrmul = ($this->v93_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_vlrmul"]:$this->v93_vlrmul);
+       $this->v93_termo = ($this->v93_termo === 0 || $this->v93_termo === 0.0 || $this->v93_termo == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_termo"]:$this->v93_termo);
+       $this->v93_coddiv = ($this->v93_coddiv === 0 || $this->v93_coddiv === 0.0 || $this->v93_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_coddiv"]:$this->v93_coddiv);
+       $this->v93_vlrhis = ($this->v93_vlrhis === 0 || $this->v93_vlrhis === 0.0 || $this->v93_vlrhis == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_vlrhis"]:$this->v93_vlrhis);
+       $this->v93_vlrcor = ($this->v93_vlrcor === 0 || $this->v93_vlrcor === 0.0 || $this->v93_vlrcor == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_vlrcor"]:$this->v93_vlrcor);
+       $this->v93_vlrjur = ($this->v93_vlrjur === 0 || $this->v93_vlrjur === 0.0 || $this->v93_vlrjur == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_vlrjur"]:$this->v93_vlrjur);
+       $this->v93_vlrmul = ($this->v93_vlrmul === 0 || $this->v93_vlrmul === 0.0 || $this->v93_vlrmul == ""?@$GLOBALS["HTTP_POST_VARS"]["v93_vlrmul"]:$this->v93_vlrmul);
      }else{
      }
    }

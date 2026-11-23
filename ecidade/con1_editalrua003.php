@@ -39,7 +39,7 @@ include(modification("classes/db_editalruaproj_classe.php"));
 include(modification("classes/db_editalserv_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clcontlot = new cl_contlot;
 $clcontrib = new cl_contrib;

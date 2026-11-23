@@ -73,13 +73,13 @@ class cl_carzonafator {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j96_sequencial = ($this->j96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_sequencial"]:$this->j96_sequencial);
-       $this->j96_caracter = ($this->j96_caracter == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_caracter"]:$this->j96_caracter);
-       $this->j96_zona = ($this->j96_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_zona"]:$this->j96_zona);
-       $this->j96_anousu = ($this->j96_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_anousu"]:$this->j96_anousu);
-       $this->j96_fator = ($this->j96_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_fator"]:$this->j96_fator);
+       $this->j96_sequencial = ($this->j96_sequencial === 0 || $this->j96_sequencial === 0.0 || $this->j96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_sequencial"]:$this->j96_sequencial);
+       $this->j96_caracter = ($this->j96_caracter === 0 || $this->j96_caracter === 0.0 || $this->j96_caracter == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_caracter"]:$this->j96_caracter);
+       $this->j96_zona = ($this->j96_zona === 0 || $this->j96_zona === 0.0 || $this->j96_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_zona"]:$this->j96_zona);
+       $this->j96_anousu = ($this->j96_anousu === 0 || $this->j96_anousu === 0.0 || $this->j96_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_anousu"]:$this->j96_anousu);
+       $this->j96_fator = ($this->j96_fator === 0 || $this->j96_fator === 0.0 || $this->j96_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_fator"]:$this->j96_fator);
      }else{
-       $this->j96_sequencial = ($this->j96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_sequencial"]:$this->j96_sequencial);
+       $this->j96_sequencial = ($this->j96_sequencial === 0 || $this->j96_sequencial === 0.0 || $this->j96_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j96_sequencial"]:$this->j96_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_carzonafator {
          $this->j96_sequencial = $j96_sequencial;
        }
      }
-     if(($this->j96_sequencial == null) || ($this->j96_sequencial == "") ){
+     if(($this->j96_sequencial == null) || ($this->j96_sequencial === 0 || $this->j96_sequencial === 0.0 || $this->j96_sequencial == "") ){
        $this->erro_sql = " Campo j96_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

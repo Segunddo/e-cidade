@@ -81,8 +81,8 @@ class cl_acordoposicaoperiodo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac36_sequencial = ($this->ac36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_sequencial"]:$this->ac36_sequencial);
-       $this->ac36_acordoposicao = ($this->ac36_acordoposicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_acordoposicao"]:$this->ac36_acordoposicao);
+       $this->ac36_sequencial = ($this->ac36_sequencial === 0 || $this->ac36_sequencial === 0.0 || $this->ac36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_sequencial"]:$this->ac36_sequencial);
+       $this->ac36_acordoposicao = ($this->ac36_acordoposicao === 0 || $this->ac36_acordoposicao === 0.0 || $this->ac36_acordoposicao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_acordoposicao"]:$this->ac36_acordoposicao);
        if($this->ac36_datainicial == ""){
          $this->ac36_datainicial_dia = ($this->ac36_datainicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_datainicial_dia"]:$this->ac36_datainicial_dia);
          $this->ac36_datainicial_mes = ($this->ac36_datainicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_datainicial_mes"]:$this->ac36_datainicial_mes);
@@ -100,9 +100,9 @@ class cl_acordoposicaoperiodo {
          }
        }
        $this->ac36_descricao = ($this->ac36_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_descricao"]:$this->ac36_descricao);
-       $this->ac36_numero = ($this->ac36_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_numero"]:$this->ac36_numero);
+       $this->ac36_numero = ($this->ac36_numero === 0 || $this->ac36_numero === 0.0 || $this->ac36_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_numero"]:$this->ac36_numero);
      }else{
-       $this->ac36_sequencial = ($this->ac36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_sequencial"]:$this->ac36_sequencial);
+       $this->ac36_sequencial = ($this->ac36_sequencial === 0 || $this->ac36_sequencial === 0.0 || $this->ac36_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac36_sequencial"]:$this->ac36_sequencial);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_acordoposicaoperiodo {
          $this->ac36_sequencial = $ac36_sequencial;
        }
      }
-     if(($this->ac36_sequencial == null) || ($this->ac36_sequencial == "") ){
+     if(($this->ac36_sequencial == null) || ($this->ac36_sequencial === 0 || $this->ac36_sequencial === 0.0 || $this->ac36_sequencial == "") ){
        $this->erro_sql = " Campo ac36_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

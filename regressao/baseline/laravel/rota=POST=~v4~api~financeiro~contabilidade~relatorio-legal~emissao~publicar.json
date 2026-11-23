@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio-legal/emissao/publicar",
+  "json": {
+    "error": true,
+    "message": "SQLSTATE[42P01]: Undefined table: 7 ERRO:  não existe a relação \"contabilidade.emissoeslrf\"\nLINE 1: select * from \"contabilidade\".\"emissoeslrf\" where \"contabili...\n                      ^ (SQL: select * from \"contabilidade\".\"emissoeslrf\" where \"contabilidade\".\"emissoeslrf\".\"c181_codigo\" is null limit 1)"
+  },
+  "sha256": "19a29ab1ca753aa491fc102c646b92c5b8968e2182a6a33afc45e12537a75807",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

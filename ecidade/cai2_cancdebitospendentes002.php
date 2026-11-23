@@ -30,7 +30,7 @@ include(modification("libs/db_sql.php"));
 include(modification("classes/db_cancdebitos_classe.php"));
 include(modification("classes/db_cancdebitosreg_classe.php"));
 include(modification("classes/db_cgm_classe.php"));
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clcancdebitos    = new cl_cancdebitos;
 $clcancdebitosreg = new cl_cancdebitosreg;
 $clcgm = new cl_cgm;

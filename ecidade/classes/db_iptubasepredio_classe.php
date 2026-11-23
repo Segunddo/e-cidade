@@ -69,11 +69,11 @@ class cl_iptubasepredio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j109_sequencial = ($this->j109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j109_sequencial"]:$this->j109_sequencial);
-       $this->j109_predio = ($this->j109_predio == ""?@$GLOBALS["HTTP_POST_VARS"]["j109_predio"]:$this->j109_predio);
-       $this->j109_matric = ($this->j109_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j109_matric"]:$this->j109_matric);
+       $this->j109_sequencial = ($this->j109_sequencial === 0 || $this->j109_sequencial === 0.0 || $this->j109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j109_sequencial"]:$this->j109_sequencial);
+       $this->j109_predio = ($this->j109_predio === 0 || $this->j109_predio === 0.0 || $this->j109_predio == ""?@$GLOBALS["HTTP_POST_VARS"]["j109_predio"]:$this->j109_predio);
+       $this->j109_matric = ($this->j109_matric === 0 || $this->j109_matric === 0.0 || $this->j109_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j109_matric"]:$this->j109_matric);
      }else{
-       $this->j109_sequencial = ($this->j109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j109_sequencial"]:$this->j109_sequencial);
+       $this->j109_sequencial = ($this->j109_sequencial === 0 || $this->j109_sequencial === 0.0 || $this->j109_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j109_sequencial"]:$this->j109_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_iptubasepredio {
          $this->j109_sequencial = $j109_sequencial;
        }
      }
-     if(($this->j109_sequencial == null) || ($this->j109_sequencial == "") ){
+     if(($this->j109_sequencial == null) || ($this->j109_sequencial === 0 || $this->j109_sequencial === 0.0 || $this->j109_sequencial == "") ){
        $this->erro_sql = " Campo j109_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

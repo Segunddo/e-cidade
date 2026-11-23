@@ -69,11 +69,11 @@ class cl_debcontaarquivotipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d79_sequencial = ($this->d79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d79_sequencial"]:$this->d79_sequencial);
-       $this->d79_codigo = ($this->d79_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d79_codigo"]:$this->d79_codigo);
-       $this->d79_arretipo = ($this->d79_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d79_arretipo"]:$this->d79_arretipo);
+       $this->d79_sequencial = ($this->d79_sequencial === 0 || $this->d79_sequencial === 0.0 || $this->d79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d79_sequencial"]:$this->d79_sequencial);
+       $this->d79_codigo = ($this->d79_codigo === 0 || $this->d79_codigo === 0.0 || $this->d79_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d79_codigo"]:$this->d79_codigo);
+       $this->d79_arretipo = ($this->d79_arretipo === 0 || $this->d79_arretipo === 0.0 || $this->d79_arretipo == ""?@$GLOBALS["HTTP_POST_VARS"]["d79_arretipo"]:$this->d79_arretipo);
      }else{
-       $this->d79_sequencial = ($this->d79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d79_sequencial"]:$this->d79_sequencial);
+       $this->d79_sequencial = ($this->d79_sequencial === 0 || $this->d79_sequencial === 0.0 || $this->d79_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["d79_sequencial"]:$this->d79_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_debcontaarquivotipo {
          $this->d79_sequencial = $d79_sequencial;
        }
      }
-     if(($this->d79_sequencial == null) || ($this->d79_sequencial == "") ){
+     if(($this->d79_sequencial == null) || ($this->d79_sequencial === 0 || $this->d79_sequencial === 0.0 || $this->d79_sequencial == "") ){
        $this->erro_sql = " Campo d79_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

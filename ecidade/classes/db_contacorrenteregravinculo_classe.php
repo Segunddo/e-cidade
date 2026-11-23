@@ -69,11 +69,11 @@ class cl_contacorrenteregravinculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c27_sequencial = ($this->c27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c27_sequencial"]:$this->c27_sequencial);
-       $this->c27_contacorrente = ($this->c27_contacorrente == ""?@$GLOBALS["HTTP_POST_VARS"]["c27_contacorrente"]:$this->c27_contacorrente);
+       $this->c27_sequencial = ($this->c27_sequencial === 0 || $this->c27_sequencial === 0.0 || $this->c27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c27_sequencial"]:$this->c27_sequencial);
+       $this->c27_contacorrente = ($this->c27_contacorrente === 0 || $this->c27_contacorrente === 0.0 || $this->c27_contacorrente == ""?@$GLOBALS["HTTP_POST_VARS"]["c27_contacorrente"]:$this->c27_contacorrente);
        $this->c27_estrutural = ($this->c27_estrutural == ""?@$GLOBALS["HTTP_POST_VARS"]["c27_estrutural"]:$this->c27_estrutural);
      }else{
-       $this->c27_sequencial = ($this->c27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c27_sequencial"]:$this->c27_sequencial);
+       $this->c27_sequencial = ($this->c27_sequencial === 0 || $this->c27_sequencial === 0.0 || $this->c27_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c27_sequencial"]:$this->c27_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_contacorrenteregravinculo {
          $this->c27_sequencial = $c27_sequencial;
        }
      }
-     if(($this->c27_sequencial == null) || ($this->c27_sequencial == "") ){
+     if(($this->c27_sequencial == null) || ($this->c27_sequencial === 0 || $this->c27_sequencial === 0.0 || $this->c27_sequencial == "") ){
        $this->erro_sql = " Campo c27_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

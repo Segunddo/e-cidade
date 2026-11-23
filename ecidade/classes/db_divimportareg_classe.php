@@ -67,8 +67,8 @@ class cl_divimportareg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v04_divimporta = ($this->v04_divimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_divimporta"]:$this->v04_divimporta);
-       $this->v04_coddiv = ($this->v04_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_coddiv"]:$this->v04_coddiv);
+       $this->v04_divimporta = ($this->v04_divimporta === 0 || $this->v04_divimporta === 0.0 || $this->v04_divimporta == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_divimporta"]:$this->v04_divimporta);
+       $this->v04_coddiv = ($this->v04_coddiv === 0 || $this->v04_coddiv === 0.0 || $this->v04_coddiv == ""?@$GLOBALS["HTTP_POST_VARS"]["v04_coddiv"]:$this->v04_coddiv);
      }else{
      }
    }

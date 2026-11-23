@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/itbi/benfeitoria/padrao-construtivo",
+  "json": {
+    "error": true,
+    "message": "Erro ao bsucar os parâmetros do ITBI."
+  },
+  "sha256": "2ac9361996b623402dde3695936011119c85f9dff3b25f68fb2b3d560c514d45",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

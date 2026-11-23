@@ -48,7 +48,7 @@ $clorctiporec          = new cl_orctiporec;
 $clorcimpactovalmovmes->rotulo->label();
 $clrotulo = new rotulocampo;
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 if(isset($recurso) && $recurso !='' && $recurso !=0){
   $result = $clorctiporec->sql_record($clorctiporec->sql_query_file($recurso));

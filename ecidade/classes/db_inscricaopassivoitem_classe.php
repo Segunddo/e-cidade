@@ -77,15 +77,15 @@ class cl_inscricaopassivoitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c38_sequencial = ($this->c38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_sequencial"]:$this->c38_sequencial);
-       $this->c38_inscricaopassivo = ($this->c38_inscricaopassivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_inscricaopassivo"]:$this->c38_inscricaopassivo);
-       $this->c38_pcmater = ($this->c38_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_pcmater"]:$this->c38_pcmater);
-       $this->c38_quantidade = ($this->c38_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_quantidade"]:$this->c38_quantidade);
-       $this->c38_valorunitario = ($this->c38_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_valorunitario"]:$this->c38_valorunitario);
-       $this->c38_valortotal = ($this->c38_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_valortotal"]:$this->c38_valortotal);
+       $this->c38_sequencial = ($this->c38_sequencial === 0 || $this->c38_sequencial === 0.0 || $this->c38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_sequencial"]:$this->c38_sequencial);
+       $this->c38_inscricaopassivo = ($this->c38_inscricaopassivo === 0 || $this->c38_inscricaopassivo === 0.0 || $this->c38_inscricaopassivo == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_inscricaopassivo"]:$this->c38_inscricaopassivo);
+       $this->c38_pcmater = ($this->c38_pcmater === 0 || $this->c38_pcmater === 0.0 || $this->c38_pcmater == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_pcmater"]:$this->c38_pcmater);
+       $this->c38_quantidade = ($this->c38_quantidade === 0 || $this->c38_quantidade === 0.0 || $this->c38_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_quantidade"]:$this->c38_quantidade);
+       $this->c38_valorunitario = ($this->c38_valorunitario === 0 || $this->c38_valorunitario === 0.0 || $this->c38_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_valorunitario"]:$this->c38_valorunitario);
+       $this->c38_valortotal = ($this->c38_valortotal === 0 || $this->c38_valortotal === 0.0 || $this->c38_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_valortotal"]:$this->c38_valortotal);
        $this->c38_observacao = ($this->c38_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_observacao"]:$this->c38_observacao);
      }else{
-       $this->c38_sequencial = ($this->c38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_sequencial"]:$this->c38_sequencial);
+       $this->c38_sequencial = ($this->c38_sequencial === 0 || $this->c38_sequencial === 0.0 || $this->c38_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c38_sequencial"]:$this->c38_sequencial);
      }
    }
    // funcao para inclusao
@@ -160,7 +160,7 @@ class cl_inscricaopassivoitem {
          $this->c38_sequencial = $c38_sequencial;
        }
      }
-     if(($this->c38_sequencial == null) || ($this->c38_sequencial == "") ){
+     if(($this->c38_sequencial == null) || ($this->c38_sequencial === 0 || $this->c38_sequencial === 0.0 || $this->c38_sequencial == "") ){
        $this->erro_sql = " Campo c38_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

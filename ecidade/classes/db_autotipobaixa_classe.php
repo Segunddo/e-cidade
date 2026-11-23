@@ -67,10 +67,10 @@ class cl_autotipobaixa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y86_codautotipo = ($this->y86_codautotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y86_codautotipo"]:$this->y86_codautotipo);
-       $this->y86_codbaixaproc = ($this->y86_codbaixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y86_codbaixaproc"]:$this->y86_codbaixaproc);
+       $this->y86_codautotipo = ($this->y86_codautotipo === 0 || $this->y86_codautotipo === 0.0 || $this->y86_codautotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y86_codautotipo"]:$this->y86_codautotipo);
+       $this->y86_codbaixaproc = ($this->y86_codbaixaproc === 0 || $this->y86_codbaixaproc === 0.0 || $this->y86_codbaixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y86_codbaixaproc"]:$this->y86_codbaixaproc);
      }else{
-       $this->y86_codautotipo = ($this->y86_codautotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y86_codautotipo"]:$this->y86_codautotipo);
+       $this->y86_codautotipo = ($this->y86_codautotipo === 0 || $this->y86_codautotipo === 0.0 || $this->y86_codautotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y86_codautotipo"]:$this->y86_codautotipo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_autotipobaixa {
        return false;
      }
        $this->y86_codautotipo = $y86_codautotipo;
-     if(($this->y86_codautotipo == null) || ($this->y86_codautotipo == "") ){
+     if(($this->y86_codautotipo == null) || ($this->y86_codautotipo === 0 || $this->y86_codautotipo === 0.0 || $this->y86_codautotipo == "") ){
        $this->erro_sql = " Campo y86_codautotipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

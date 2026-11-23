@@ -69,11 +69,11 @@ class cl_db_sysprocedarq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sequencial = ($this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
-       $this->codproced = ($this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
+       $this->sequencial = ($this->sequencial === 0 || $this->sequencial === 0.0 || $this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codproced = ($this->codproced === 0 || $this->codproced === 0.0 || $this->codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["codproced"]:$this->codproced);
      }else{
-       $this->sequencial = ($this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
+       $this->sequencial = ($this->sequencial === 0 || $this->sequencial === 0.0 || $this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_sysprocedarq {
          $this->sequencial = $sequencial;
        }
      }
-     if(($this->sequencial == null) || ($this->sequencial == "") ){
+     if(($this->sequencial == null) || ($this->sequencial === 0 || $this->sequencial === 0.0 || $this->sequencial == "") ){
        $this->erro_sql = " Campo sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

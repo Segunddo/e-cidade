@@ -72,7 +72,7 @@ class cl_averbacao {
                  j75_responsavel = int4 =  Servidor Responsável
                  ";
    //funcao construtor da classe 
-   public function cl_averbacao() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("averbacao"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -89,8 +89,8 @@ class cl_averbacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j75_codigo = ($this->j75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_codigo"]:$this->j75_codigo);
-       $this->j75_matric = ($this->j75_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_matric"]:$this->j75_matric);
+       $this->j75_codigo = ($this->j75_codigo === 0 || $this->j75_codigo === 0.0 || $this->j75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_codigo"]:$this->j75_codigo);
+       $this->j75_matric = ($this->j75_matric === 0 || $this->j75_matric === 0.0 || $this->j75_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_matric"]:$this->j75_matric);
        if($this->j75_data == ""){
          $this->j75_data_dia = ($this->j75_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_data_dia"]:$this->j75_data_dia);
          $this->j75_data_mes = ($this->j75_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_data_mes"]:$this->j75_data_mes);
@@ -100,7 +100,7 @@ class cl_averbacao {
          }
        }
        $this->j75_obs = ($this->j75_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_obs"]:$this->j75_obs);
-       $this->j75_tipo = ($this->j75_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_tipo"]:$this->j75_tipo);
+       $this->j75_tipo = ($this->j75_tipo === 0 || $this->j75_tipo === 0.0 || $this->j75_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_tipo"]:$this->j75_tipo);
        if($this->j75_dttipo == ""){
          $this->j75_dttipo_dia = ($this->j75_dttipo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_dttipo_dia"]:$this->j75_dttipo_dia);
          $this->j75_dttipo_mes = ($this->j75_dttipo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_dttipo_mes"]:$this->j75_dttipo_mes);
@@ -109,11 +109,11 @@ class cl_averbacao {
             $this->j75_dttipo = $this->j75_dttipo_ano."-".$this->j75_dttipo_mes."-".$this->j75_dttipo_dia;
          }
        }
-       $this->j75_situacao = ($this->j75_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_situacao"]:$this->j75_situacao);
-       $this->j75_regra = ($this->j75_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_regra"]:$this->j75_regra);
-       $this->j75_responsavel = ($this->j75_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_responsavel"]:$this->j75_responsavel);
+       $this->j75_situacao = ($this->j75_situacao === 0 || $this->j75_situacao === 0.0 || $this->j75_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_situacao"]:$this->j75_situacao);
+       $this->j75_regra = ($this->j75_regra === 0 || $this->j75_regra === 0.0 || $this->j75_regra == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_regra"]:$this->j75_regra);
+       $this->j75_responsavel = ($this->j75_responsavel === 0 || $this->j75_responsavel === 0.0 || $this->j75_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_responsavel"]:$this->j75_responsavel);
      }else{
-       $this->j75_codigo = ($this->j75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_codigo"]:$this->j75_codigo);
+       $this->j75_codigo = ($this->j75_codigo === 0 || $this->j75_codigo === 0.0 || $this->j75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["j75_codigo"]:$this->j75_codigo);
      }
    }
    // funcao para inclusao
@@ -209,7 +209,7 @@ class cl_averbacao {
          $this->j75_codigo = $j75_codigo; 
        }
      }
-     if(($this->j75_codigo == null) || ($this->j75_codigo == "") ){ 
+     if(($this->j75_codigo == null) || ($this->j75_codigo === 0 || $this->j75_codigo === 0.0 || $this->j75_codigo == "") ){ 
        $this->erro_sql = " Campo j75_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

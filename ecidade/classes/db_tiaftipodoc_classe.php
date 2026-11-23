@@ -67,10 +67,10 @@ class cl_tiaftipodoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y98_tiafdoc = ($this->y98_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
+       $this->y98_tiafdoc = ($this->y98_tiafdoc === 0 || $this->y98_tiafdoc === 0.0 || $this->y98_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
        $this->y98_descr = ($this->y98_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_descr"]:$this->y98_descr);
      }else{
-       $this->y98_tiafdoc = ($this->y98_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
+       $this->y98_tiafdoc = ($this->y98_tiafdoc === 0 || $this->y98_tiafdoc === 0.0 || $this->y98_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tiaftipodoc {
          $this->y98_tiafdoc = $y98_tiafdoc;
        }
      }
-     if(($this->y98_tiafdoc == null) || ($this->y98_tiafdoc == "") ){
+     if(($this->y98_tiafdoc == null) || ($this->y98_tiafdoc === 0 || $this->y98_tiafdoc === 0.0 || $this->y98_tiafdoc == "") ){
        $this->erro_sql = " Campo y98_tiafdoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

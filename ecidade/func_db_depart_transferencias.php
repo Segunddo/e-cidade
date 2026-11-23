@@ -34,7 +34,7 @@ include(modification("classes/db_db_depart_classe.php"));
 include(modification("classes/db_db_config_classe.php"));
 include(modification("classes/db_orcorgao_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldb_depart   = new cl_db_depart;
 $cldb_config   = new cl_db_config;
 $clorcorgao = new cl_orcorgao;

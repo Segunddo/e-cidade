@@ -75,14 +75,14 @@ class cl_iptucalcconfrec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j23_sequencial = ($this->j23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_sequencial"]:$this->j23_sequencial);
-       $this->j23_matric = ($this->j23_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_matric"]:$this->j23_matric);
-       $this->j23_anousu = ($this->j23_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_anousu"]:$this->j23_anousu);
-       $this->j23_recorg = ($this->j23_recorg == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_recorg"]:$this->j23_recorg);
-       $this->j23_recdst = ($this->j23_recdst == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_recdst"]:$this->j23_recdst);
-       $this->j23_tipo = ($this->j23_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_tipo"]:$this->j23_tipo);
+       $this->j23_sequencial = ($this->j23_sequencial === 0 || $this->j23_sequencial === 0.0 || $this->j23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_sequencial"]:$this->j23_sequencial);
+       $this->j23_matric = ($this->j23_matric === 0 || $this->j23_matric === 0.0 || $this->j23_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_matric"]:$this->j23_matric);
+       $this->j23_anousu = ($this->j23_anousu === 0 || $this->j23_anousu === 0.0 || $this->j23_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_anousu"]:$this->j23_anousu);
+       $this->j23_recorg = ($this->j23_recorg === 0 || $this->j23_recorg === 0.0 || $this->j23_recorg == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_recorg"]:$this->j23_recorg);
+       $this->j23_recdst = ($this->j23_recdst === 0 || $this->j23_recdst === 0.0 || $this->j23_recdst == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_recdst"]:$this->j23_recdst);
+       $this->j23_tipo = ($this->j23_tipo === 0 || $this->j23_tipo === 0.0 || $this->j23_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_tipo"]:$this->j23_tipo);
      }else{
-       $this->j23_sequencial = ($this->j23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_sequencial"]:$this->j23_sequencial);
+       $this->j23_sequencial = ($this->j23_sequencial === 0 || $this->j23_sequencial === 0.0 || $this->j23_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j23_sequencial"]:$this->j23_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_iptucalcconfrec {
          $this->j23_sequencial = $j23_sequencial;
        }
      }
-     if(($this->j23_sequencial == null) || ($this->j23_sequencial == "") ){
+     if(($this->j23_sequencial == null) || ($this->j23_sequencial === 0 || $this->j23_sequencial === 0.0 || $this->j23_sequencial == "") ){
        $this->erro_sql = " Campo j23_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

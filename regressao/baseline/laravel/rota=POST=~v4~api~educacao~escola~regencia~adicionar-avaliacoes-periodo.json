@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/regencia/adicionar-avaliacoes-periodo",
+  "json": {
+    "error": true,
+    "message": "Call to a member function getAvaliacoes() on null"
+  },
+  "sha256": "4a533aa628e443b7077a020fdaaeb52d2e967ff6ca899ef0703f75537f3b50d7",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

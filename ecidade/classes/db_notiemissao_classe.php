@@ -76,8 +76,8 @@ class cl_notiemissao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k136_sequencial = ($this->k136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_sequencial"]:$this->k136_sequencial);
-       $this->k136_notificatipogeracao = ($this->k136_notificatipogeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_notificatipogeracao"]:$this->k136_notificatipogeracao);
+       $this->k136_sequencial = ($this->k136_sequencial === 0 || $this->k136_sequencial === 0.0 || $this->k136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_sequencial"]:$this->k136_sequencial);
+       $this->k136_notificatipogeracao = ($this->k136_notificatipogeracao === 0 || $this->k136_notificatipogeracao === 0.0 || $this->k136_notificatipogeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_notificatipogeracao"]:$this->k136_notificatipogeracao);
        $this->k136_recibo = ($this->k136_recibo == "f"?@$GLOBALS["HTTP_POST_VARS"]["k136_recibo"]:$this->k136_recibo);
        if($this->k136_data == ""){
          $this->k136_data_dia = ($this->k136_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_data_dia"]:$this->k136_data_dia);
@@ -87,9 +87,9 @@ class cl_notiemissao {
             $this->k136_data = $this->k136_data_ano."-".$this->k136_data_mes."-".$this->k136_data_dia;
          }
        }
-       $this->k136_usuario = ($this->k136_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_usuario"]:$this->k136_usuario);
+       $this->k136_usuario = ($this->k136_usuario === 0 || $this->k136_usuario === 0.0 || $this->k136_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_usuario"]:$this->k136_usuario);
      }else{
-       $this->k136_sequencial = ($this->k136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_sequencial"]:$this->k136_sequencial);
+       $this->k136_sequencial = ($this->k136_sequencial === 0 || $this->k136_sequencial === 0.0 || $this->k136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k136_sequencial"]:$this->k136_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_notiemissao {
          $this->k136_sequencial = $k136_sequencial;
        }
      }
-     if(($this->k136_sequencial == null) || ($this->k136_sequencial == "") ){
+     if(($this->k136_sequencial == null) || ($this->k136_sequencial === 0 || $this->k136_sequencial === 0.0 || $this->k136_sequencial == "") ){
        $this->erro_sql = " Campo k136_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/documentos/buscar-por-identificador",
+  "json": {
+    "data": [],
+    "error": true,
+    "message": "Informe o cÃ³digo identificador do arquivo."
+  },
+  "sha256": "ec4c2a9570b451d0d16544d86277c02ad0ab56553697254e3735cf460ad51c6b",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

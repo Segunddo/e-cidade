@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/financeiro/contabilidade/procedimento/lancamento/manual",
+  "json": null,
+  "sha256": "147bfdbffb7e4ce91027ed9cade321f8952198c524dcd9ca653d86bb2ec57c30",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

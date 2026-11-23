@@ -67,10 +67,10 @@ class cl_cadtipomod {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k46_sequencial = ($this->k46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k46_sequencial"]:$this->k46_sequencial);
+       $this->k46_sequencial = ($this->k46_sequencial === 0 || $this->k46_sequencial === 0.0 || $this->k46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k46_sequencial"]:$this->k46_sequencial);
        $this->k46_descr = ($this->k46_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k46_descr"]:$this->k46_descr);
      }else{
-       $this->k46_sequencial = ($this->k46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k46_sequencial"]:$this->k46_sequencial);
+       $this->k46_sequencial = ($this->k46_sequencial === 0 || $this->k46_sequencial === 0.0 || $this->k46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k46_sequencial"]:$this->k46_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_cadtipomod {
          $this->k46_sequencial = $k46_sequencial;
        }
      }
-     if(($this->k46_sequencial == null) || ($this->k46_sequencial == "") ){
+     if(($this->k46_sequencial == null) || ($this->k46_sequencial === 0 || $this->k46_sequencial === 0.0 || $this->k46_sequencial == "") ){
        $this->erro_sql = " Campo k46_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

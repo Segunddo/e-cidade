@@ -78,9 +78,9 @@ class cl_emparquivopitanulado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e16_sequencial = ($this->e16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_sequencial"]:$this->e16_sequencial);
-       $this->e16_idusuario = ($this->e16_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_idusuario"]:$this->e16_idusuario);
-       $this->e16_emparquivopit = ($this->e16_emparquivopit == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_emparquivopit"]:$this->e16_emparquivopit);
+       $this->e16_sequencial = ($this->e16_sequencial === 0 || $this->e16_sequencial === 0.0 || $this->e16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_sequencial"]:$this->e16_sequencial);
+       $this->e16_idusuario = ($this->e16_idusuario === 0 || $this->e16_idusuario === 0.0 || $this->e16_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_idusuario"]:$this->e16_idusuario);
+       $this->e16_emparquivopit = ($this->e16_emparquivopit === 0 || $this->e16_emparquivopit === 0.0 || $this->e16_emparquivopit == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_emparquivopit"]:$this->e16_emparquivopit);
        if($this->e16_dtanulacao == ""){
          $this->e16_dtanulacao_dia = ($this->e16_dtanulacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_dtanulacao_dia"]:$this->e16_dtanulacao_dia);
          $this->e16_dtanulacao_mes = ($this->e16_dtanulacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_dtanulacao_mes"]:$this->e16_dtanulacao_mes);
@@ -92,7 +92,7 @@ class cl_emparquivopitanulado {
        $this->e16_horaanulacao = ($this->e16_horaanulacao == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_horaanulacao"]:$this->e16_horaanulacao);
        $this->e16_motivo = ($this->e16_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_motivo"]:$this->e16_motivo);
      }else{
-       $this->e16_sequencial = ($this->e16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_sequencial"]:$this->e16_sequencial);
+       $this->e16_sequencial = ($this->e16_sequencial === 0 || $this->e16_sequencial === 0.0 || $this->e16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["e16_sequencial"]:$this->e16_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_emparquivopitanulado {
          $this->e16_sequencial = $e16_sequencial;
        }
      }
-     if(($this->e16_sequencial == null) || ($this->e16_sequencial == "") ){
+     if(($this->e16_sequencial == null) || ($this->e16_sequencial === 0 || $this->e16_sequencial === 0.0 || $this->e16_sequencial == "") ){
        $this->erro_sql = " Campo e16_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

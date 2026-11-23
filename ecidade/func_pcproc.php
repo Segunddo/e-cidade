@@ -34,7 +34,7 @@ require_once modification("dbforms/db_funcoes.php");
 
 db_postmemory($_POST);
 
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clpcproc 	  = new cl_pcproc;
 $clpcprocitem = new cl_pcprocitem;

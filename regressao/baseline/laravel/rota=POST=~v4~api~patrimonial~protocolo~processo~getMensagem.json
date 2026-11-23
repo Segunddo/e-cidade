@@ -1,0 +1,20 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/protocolo/processo/getMensagem",
+  "json": {
+    "errors": {
+      "processo": [
+        "O campo processo é obrigatório."
+      ]
+    }
+  },
+  "sha256": "7d1385b615e834710ce488af3fb563933e793f7f35c3c21c9c87fd2a79077bba",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

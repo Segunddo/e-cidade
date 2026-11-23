@@ -82,7 +82,7 @@ class cl_parjuridico
                  v19_parcelacustasmanual = bool = Parcela custas com autorização";
 
     //funcao construtor da classe
-    public function cl_parjuridico()
+    public function __construct()
     {
         //classes dos rotulos dos campos
         $this->rotulo = new rotulo("parjuridico");
@@ -104,15 +104,15 @@ class cl_parjuridico
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->v19_anousu = ($this->v19_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_anousu"] : $this->v19_anousu);
-            $this->v19_instit = ($this->v19_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_instit"] : $this->v19_instit);
-            $this->v19_envolinicialiptu = ($this->v19_envolinicialiptu == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_envolinicialiptu"] : $this->v19_envolinicialiptu);
-            $this->v19_envolinicialiss = ($this->v19_envolinicialiss == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_envolinicialiss"] : $this->v19_envolinicialiss);
+            $this->v19_anousu = ($this->v19_anousu === 0 || $this->v19_anousu === 0.0 || $this->v19_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_anousu"] : $this->v19_anousu);
+            $this->v19_instit = ($this->v19_instit === 0 || $this->v19_instit === 0.0 || $this->v19_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_instit"] : $this->v19_instit);
+            $this->v19_envolinicialiptu = ($this->v19_envolinicialiptu === 0 || $this->v19_envolinicialiptu === 0.0 || $this->v19_envolinicialiptu == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_envolinicialiptu"] : $this->v19_envolinicialiptu);
+            $this->v19_envolinicialiss = ($this->v19_envolinicialiss === 0 || $this->v19_envolinicialiss === 0.0 || $this->v19_envolinicialiss == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_envolinicialiss"] : $this->v19_envolinicialiss);
             $this->v19_envolprinciptu = ($this->v19_envolprinciptu == "f" ? @$GLOBALS["HTTP_POST_VARS"]["v19_envolprinciptu"] : $this->v19_envolprinciptu);
-            $this->v19_vlrexecmin = ($this->v19_vlrexecmin == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_vlrexecmin"] : $this->v19_vlrexecmin);
+            $this->v19_vlrexecmin = ($this->v19_vlrexecmin === 0 || $this->v19_vlrexecmin === 0.0 || $this->v19_vlrexecmin == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_vlrexecmin"] : $this->v19_vlrexecmin);
             $this->v19_partilha = ($this->v19_partilha == "f" ? @$GLOBALS["HTTP_POST_VARS"]["v19_partilha"] : $this->v19_partilha);
-            $this->v19_templateinicialquitada = ($this->v19_templateinicialquitada == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_templateinicialquitada"] : $this->v19_templateinicialquitada);
-            $this->v19_templateparcelamento = ($this->v19_templateparcelamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_templateparcelamento"] : $this->v19_templateparcelamento);
+            $this->v19_templateinicialquitada = ($this->v19_templateinicialquitada === 0 || $this->v19_templateinicialquitada === 0.0 || $this->v19_templateinicialquitada == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_templateinicialquitada"] : $this->v19_templateinicialquitada);
+            $this->v19_templateparcelamento = ($this->v19_templateparcelamento === 0 || $this->v19_templateparcelamento === 0.0 || $this->v19_templateparcelamento == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_templateparcelamento"] : $this->v19_templateparcelamento);
             $this->v19_urlwebservice = ($this->v19_urlwebservice == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_urlwebservice"] : $this->v19_urlwebservice);
             $this->v19_login = ($this->v19_login == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_login"] : $this->v19_login);
             $this->v19_senha = ($this->v19_senha == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_senha"] : $this->v19_senha);
@@ -121,8 +121,8 @@ class cl_parjuridico
             $this->v19_parcelahonorariosmanual = ($this->v19_parcelahonorariosmanual == "f" ? @$GLOBALS["HTTP_POST_VARS"]["v19_parcelahonorariosmanual"] : $this->v19_parcelahonorariosmanual);
             $this->v19_parcelacustasmanual = ($this->v19_parcelacustasmanual == "f" ? @$GLOBALS["HTTP_POST_VARS"]["v19_parcelacustasmanual"] : $this->v19_parcelacustasmanual);
         } else {
-            $this->v19_anousu = ($this->v19_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_anousu"] : $this->v19_anousu);
-            $this->v19_instit = ($this->v19_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_instit"] : $this->v19_instit);
+            $this->v19_anousu = ($this->v19_anousu === 0 || $this->v19_anousu === 0.0 || $this->v19_anousu == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_anousu"] : $this->v19_anousu);
+            $this->v19_instit = ($this->v19_instit === 0 || $this->v19_instit === 0.0 || $this->v19_instit == "" ? @$GLOBALS["HTTP_POST_VARS"]["v19_instit"] : $this->v19_instit);
         }
     }
 
@@ -210,7 +210,7 @@ class cl_parjuridico
         }
         $this->v19_anousu = $v19_anousu;
         $this->v19_instit = $v19_instit;
-        if (($this->v19_anousu == null) || ($this->v19_anousu == "")) {
+        if (($this->v19_anousu == null) || ($this->v19_anousu === 0 || $this->v19_anousu === 0.0 || $this->v19_anousu == "")) {
             $this->erro_sql = " Campo v19_anousu não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -218,7 +218,7 @@ class cl_parjuridico
             $this->erro_status = "0";
             return false;
         }
-        if (($this->v19_instit == null) || ($this->v19_instit == "")) {
+        if (($this->v19_instit == null) || ($this->v19_instit === 0 || $this->v19_instit === 0.0 || $this->v19_instit == "")) {
             $this->erro_sql = " Campo v19_instit não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

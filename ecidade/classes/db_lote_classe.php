@@ -91,22 +91,22 @@ class cl_lote {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j34_idbql = ($this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
+       $this->j34_idbql = ($this->j34_idbql === 0 || $this->j34_idbql === 0.0 || $this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
        $this->j34_setor = ($this->j34_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_setor"]:$this->j34_setor);
        $this->j34_quadra = ($this->j34_quadra == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_quadra"]:$this->j34_quadra);
        $this->j34_lote = ($this->j34_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_lote"]:$this->j34_lote);
-       $this->j34_area = ($this->j34_area == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_area"]:$this->j34_area);
-       $this->j34_bairro = ($this->j34_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_bairro"]:$this->j34_bairro);
-       $this->j34_areal = ($this->j34_areal == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areal"]:$this->j34_areal);
-       $this->j34_totcon = ($this->j34_totcon == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_totcon"]:$this->j34_totcon);
-       $this->j34_zona = ($this->j34_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_zona"]:$this->j34_zona);
-       $this->j34_quamat = ($this->j34_quamat == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_quamat"]:$this->j34_quamat);
-       $this->j34_areapreservada = ($this->j34_areapreservada == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areapreservada"]:$this->j34_areapreservada);
-       $this->j34_areaprivativa = ($this->j34_areaprivativa == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areaprivativa"]:$this->j34_areaprivativa);
-       $this->j34_areausocomum = ($this->j34_areausocomum == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areausocomum"]:$this->j34_areausocomum);
+       $this->j34_area = ($this->j34_area === 0 || $this->j34_area === 0.0 || $this->j34_area == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_area"]:$this->j34_area);
+       $this->j34_bairro = ($this->j34_bairro === 0 || $this->j34_bairro === 0.0 || $this->j34_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_bairro"]:$this->j34_bairro);
+       $this->j34_areal = ($this->j34_areal === 0 || $this->j34_areal === 0.0 || $this->j34_areal == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areal"]:$this->j34_areal);
+       $this->j34_totcon = ($this->j34_totcon === 0 || $this->j34_totcon === 0.0 || $this->j34_totcon == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_totcon"]:$this->j34_totcon);
+       $this->j34_zona = ($this->j34_zona === 0 || $this->j34_zona === 0.0 || $this->j34_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_zona"]:$this->j34_zona);
+       $this->j34_quamat = ($this->j34_quamat === 0 || $this->j34_quamat === 0.0 || $this->j34_quamat == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_quamat"]:$this->j34_quamat);
+       $this->j34_areapreservada = ($this->j34_areapreservada === 0 || $this->j34_areapreservada === 0.0 || $this->j34_areapreservada == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areapreservada"]:$this->j34_areapreservada);
+       $this->j34_areaprivativa = ($this->j34_areaprivativa === 0 || $this->j34_areaprivativa === 0.0 || $this->j34_areaprivativa == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areaprivativa"]:$this->j34_areaprivativa);
+       $this->j34_areausocomum = ($this->j34_areausocomum === 0 || $this->j34_areausocomum === 0.0 || $this->j34_areausocomum == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_areausocomum"]:$this->j34_areausocomum);
        $this->j34_zonadesurb = ($this->j34_zonadesurb == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_zonadesurb"]:$this->j34_zonadesurb);
      }else{
-       $this->j34_idbql = ($this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
+       $this->j34_idbql = ($this->j34_idbql === 0 || $this->j34_idbql === 0.0 || $this->j34_idbql == ""?@$GLOBALS["HTTP_POST_VARS"]["j34_idbql"]:$this->j34_idbql);
      }
    }
    // funcao para inclusao
@@ -221,7 +221,7 @@ class cl_lote {
          $this->j34_idbql = $j34_idbql;
        }
      }
-     if(($this->j34_idbql == null) || ($this->j34_idbql == "") ){
+     if(($this->j34_idbql == null) || ($this->j34_idbql === 0 || $this->j34_idbql === 0.0 || $this->j34_idbql == "") ){
        $this->erro_sql = " Campo j34_idbql nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

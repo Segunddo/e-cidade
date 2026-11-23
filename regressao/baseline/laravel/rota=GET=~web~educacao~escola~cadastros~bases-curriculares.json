@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/educacao/escola/cadastros/bases-curriculares",
+  "json": null,
+  "sha256": "6efa7eace1e01ffe46c7df003296e2f1b5d79ce5ded3eb62315723b9403cf9a3",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

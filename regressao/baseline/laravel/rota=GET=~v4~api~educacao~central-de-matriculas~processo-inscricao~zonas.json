@@ -1,0 +1,43 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/processo-inscricao/zonas",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "nome": "Urbana"
+      },
+      {
+        "codigo": 2,
+        "nome": "Rural"
+      },
+      {
+        "codigo": 3,
+        "nome": "Urbana/Norte"
+      },
+      {
+        "codigo": 4,
+        "nome": "Urbana/Sul"
+      },
+      {
+        "codigo": 5,
+        "nome": "Urbana/Leste"
+      },
+      {
+        "codigo": 6,
+        "nome": "Urbana/Oeste"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "8f33f94bde1525f23bb71f394eef9f429937ede623182e575156c66c99f76b1f",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

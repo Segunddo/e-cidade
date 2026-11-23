@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/integracoes/efd-reinf/retencao/composicao-base-calculo",
+  "json": {
+    "errors": {
+      "evento": [
+        "O campo evento é obrigatório."
+      ],
+      "retencao": [
+        "O campo retencao é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "cfa82d37c499f76fe1394250e9350053cf2666c88daab240d2f9b31ab0a2f944",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/caixa/vinculoreceitaprocedencia",
+  "json": {
+    "errors": {
+      "receita": [
+        "O campo receita é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "26053afbaea080e2365c26502720ac7a9f467a0e43a1bae0284638c9f2e29399",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -31,7 +31,7 @@ $sSqlValidaDataConciliacao .= "  from condataconf ";
 $sSqlValidaDataConciliacao .= " where 1 = 2 and c99_instit = ".db_getsession("DB_instit");
 $sSqlValidaDataConciliacao .= " having max(c99_data) >= '{$data}'";
 $rsValidaDataConciliacao   = db_query($sSqlValidaDataConciliacao);
-if (pg_num_rows($rsValidaDataConciliacao) > 0) {
+if (($rsValidaDataConciliacao ? pg_num_rows($rsValidaDataConciliacao) : null) > 0) {
   $lLiberado = false;
 }
 
@@ -41,7 +41,7 @@ $sSqlValidaUltimaData .= "  from concilia ";
 $sSqlValidaUltimaData .= " where k68_contabancaria = {$conta}";
 $sSqlValidaUltimaData .= " having max(k68_data) = '{$data}'";
 $rsValidaUltimaData   = db_query($sSqlValidaUltimaData);
-if (pg_num_rows($rsValidaUltimaData) > 0) {
+if (($rsValidaUltimaData ? pg_num_rows($rsValidaUltimaData) : null) > 0) {
   $lUltimaData = true;
 }
 
@@ -55,7 +55,7 @@ $sSqlValidaUltimaConciliacao .= " where k68_contabancaria = {$conta} ";
 $sSqlValidaUltimaConciliacao .= "   and k68_conciliastatus in(1,3)";
 $sSqlValidaUltimaConciliacao .= " having max(k68_data) > '{$data}' ";
 $rsValidaUltimaConciliacao   = db_query($sSqlValidaUltimaConciliacao);
-if (pg_num_rows($rsValidaUltimaConciliacao) > 0) {
+if (($rsValidaUltimaConciliacao ? pg_num_rows($rsValidaUltimaConciliacao) : null) > 0) {
   $lDataMenorUltimaConciliacao = true;
 }
 
@@ -72,7 +72,7 @@ $sqlDadosConta .= "        inner join bancoagencia on bancoagencia.db89_sequenci
 $sqlDadosConta .= "        inner join db_bancos    on db_bancos.db90_codban        = bancoagencia.db89_db_bancos ";
 $sqlDadosConta .= "  where contabancaria.db83_sequencial = {$conta} ";
 $rsDadosConta   = db_query($sqlDadosConta);
-if($rsDadosConta && pg_num_rows($rsDadosConta) > 0){
+if($rsDadosConta && ($rsDadosConta ? pg_num_rows($rsDadosConta) : null) > 0){
   db_fieldsmemory($rsDadosConta,0);
 }
 
@@ -235,8 +235,8 @@ if($rsDadosConta && pg_num_rows($rsDadosConta) > 0){
                                             order by k68_data desc";
 
                   $rsDadosContaDatas1   = db_query($sqlDadosContaDatas1);
-                  if($rsDadosContaDatas1 && pg_num_rows($rsDadosContaDatas1) > 0){
-                    for ($i=0;$i<pg_num_rows($rsDadosContaDatas1);$i++){
+                  if($rsDadosContaDatas1 && ($rsDadosContaDatas1 ? pg_num_rows($rsDadosContaDatas1) : null) > 0){
+                    for ($i=0;$i<($rsDadosContaDatas1 ? pg_num_rows($rsDadosContaDatas1) : null);$i++){
                       db_fieldsmemory($rsDadosContaDatas1,$i);
                       echo "<option value='$k68_sequencial1' ".($k68_sequencial1==$concilia?' selected ':'').">".db_formatar($k68_data1,'d')."</option>";
                     }
@@ -253,9 +253,9 @@ if($rsDadosConta && pg_num_rows($rsDadosConta) > 0){
                                             where k68_contabancaria = {$reduzido}
                                             order by k68_data desc";
                   $rsDadosContaDatas   = db_query($sqlDadosContaDatas);
-                  if($rsDadosContaDatas && pg_num_rows($rsDadosContaDatas) > 0){
+                  if($rsDadosContaDatas && ($rsDadosContaDatas ? pg_num_rows($rsDadosContaDatas) : null) > 0){
                     global $k68_data;
-                    for ($i=0;$i<pg_num_rows($rsDadosContaDatas);$i++){
+                    for ($i=0;$i<($rsDadosContaDatas ? pg_num_rows($rsDadosContaDatas) : null);$i++){
                       db_fieldsmemory($rsDadosContaDatas,$i);
                       echo "<option value='$k68_sequencial' ".($k68_sequencial==$concilia?' selected ':'').">".db_formatar($k68_data,'d')."</option>";
                     }

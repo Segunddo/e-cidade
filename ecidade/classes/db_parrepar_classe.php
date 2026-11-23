@@ -65,7 +65,7 @@ class cl_parrepar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_hist = ($this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
+       $this->k00_hist = ($this->k00_hist === 0 || $this->k00_hist === 0.0 || $this->k00_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_hist"]:$this->k00_hist);
      }else{
      }
    }

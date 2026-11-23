@@ -1,0 +1,55 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/arrecadacao/tipos-ordenacao-cgf/buscar",
+  "json": {
+    "data": [
+      {
+        "descricao": "Numpre",
+        "sequencial": "1"
+      },
+      {
+        "descricao": "Numpar",
+        "sequencial": "2"
+      },
+      {
+        "descricao": "Receita",
+        "sequencial": "3"
+      },
+      {
+        "descricao": "Data de Vencimento",
+        "sequencial": "4"
+      },
+      {
+        "descricao": "Data de Operação",
+        "sequencial": "5"
+      },
+      {
+        "descricao": "Origem",
+        "sequencial": "6"
+      },
+      {
+        "descricao": "Inicial",
+        "sequencial": "7"
+      },
+      {
+        "descricao": "Data Inicial",
+        "sequencial": "8"
+      },
+      {
+        "descricao": "Processo do Foro",
+        "sequencial": "9"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "b47cdbca9bb60dc3a430b5884dc1ab6c8002f1ae4369afbfecfb4efadb256d6e",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

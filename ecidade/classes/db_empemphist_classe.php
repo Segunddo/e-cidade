@@ -67,10 +67,10 @@ class cl_empemphist {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e63_numemp = ($this->e63_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_numemp"]:$this->e63_numemp);
-       $this->e63_codhist = ($this->e63_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_codhist"]:$this->e63_codhist);
+       $this->e63_numemp = ($this->e63_numemp === 0 || $this->e63_numemp === 0.0 || $this->e63_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_numemp"]:$this->e63_numemp);
+       $this->e63_codhist = ($this->e63_codhist === 0 || $this->e63_codhist === 0.0 || $this->e63_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_codhist"]:$this->e63_codhist);
      }else{
-       $this->e63_numemp = ($this->e63_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_numemp"]:$this->e63_numemp);
+       $this->e63_numemp = ($this->e63_numemp === 0 || $this->e63_numemp === 0.0 || $this->e63_numemp == ""?@$GLOBALS["HTTP_POST_VARS"]["e63_numemp"]:$this->e63_numemp);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_empemphist {
        return false;
      }
        $this->e63_numemp = $e63_numemp;
-     if(($this->e63_numemp == null) || ($this->e63_numemp == "") ){
+     if(($this->e63_numemp == null) || ($this->e63_numemp === 0 || $this->e63_numemp === 0.0 || $this->e63_numemp == "") ){
        $this->erro_sql = " Campo e63_numemp nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

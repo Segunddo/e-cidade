@@ -71,12 +71,12 @@ class cl_conplanogrupo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c21_sequencial = ($this->c21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c21_sequencial"]:$this->c21_sequencial);
-       $this->c21_anousu = ($this->c21_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c21_anousu"]:$this->c21_anousu);
-       $this->c21_codcon = ($this->c21_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c21_codcon"]:$this->c21_codcon);
-       $this->c21_congrupo = ($this->c21_congrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["c21_congrupo"]:$this->c21_congrupo);
+       $this->c21_sequencial = ($this->c21_sequencial === 0 || $this->c21_sequencial === 0.0 || $this->c21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c21_sequencial"]:$this->c21_sequencial);
+       $this->c21_anousu = ($this->c21_anousu === 0 || $this->c21_anousu === 0.0 || $this->c21_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["c21_anousu"]:$this->c21_anousu);
+       $this->c21_codcon = ($this->c21_codcon === 0 || $this->c21_codcon === 0.0 || $this->c21_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c21_codcon"]:$this->c21_codcon);
+       $this->c21_congrupo = ($this->c21_congrupo === 0 || $this->c21_congrupo === 0.0 || $this->c21_congrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["c21_congrupo"]:$this->c21_congrupo);
      }else{
-       $this->c21_sequencial = ($this->c21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c21_sequencial"]:$this->c21_sequencial);
+       $this->c21_sequencial = ($this->c21_sequencial === 0 || $this->c21_sequencial === 0.0 || $this->c21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c21_sequencial"]:$this->c21_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_conplanogrupo {
          $this->c21_sequencial = $c21_sequencial;
        }
      }
-     if(($this->c21_sequencial == null) || ($this->c21_sequencial == "") ){
+     if(($this->c21_sequencial == null) || ($this->c21_sequencial === 0 || $this->c21_sequencial === 0.0 || $this->c21_sequencial == "") ){
        $this->erro_sql = " Campo c21_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

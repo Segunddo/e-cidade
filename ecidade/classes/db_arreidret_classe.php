@@ -71,13 +71,13 @@ class cl_arreidret {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
-       $this->idret = ($this->idret == ""?@$GLOBALS["HTTP_POST_VARS"]["idret"]:$this->idret);
-       $this->k00_instit = ($this->k00_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_instit"]:$this->k00_instit);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = ($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->idret = ($this->idret === 0 || $this->idret === 0.0 || $this->idret == ""?@$GLOBALS["HTTP_POST_VARS"]["idret"]:$this->idret);
+       $this->k00_instit = ($this->k00_instit === 0 || $this->k00_instit === 0.0 || $this->k00_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_instit"]:$this->k00_instit);
      }else{
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = ($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_arreidret {
      }
        $this->k00_numpre = $k00_numpre;
        $this->k00_numpar = $k00_numpar;
-     if(($this->k00_numpre == null) || ($this->k00_numpre == "") ){
+     if(($this->k00_numpre == null) || ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == "") ){
        $this->erro_sql = " Campo k00_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_arreidret {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k00_numpar == null) || ($this->k00_numpar == "") ){
+     if(($this->k00_numpar == null) || ($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == "") ){
        $this->erro_sql = " Campo k00_numpar nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

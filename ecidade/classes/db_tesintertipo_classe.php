@@ -67,10 +67,10 @@ class cl_tesintertipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j92_sequencial = ($this->j92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j92_sequencial"]:$this->j92_sequencial);
+       $this->j92_sequencial = ($this->j92_sequencial === 0 || $this->j92_sequencial === 0.0 || $this->j92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j92_sequencial"]:$this->j92_sequencial);
        $this->j92_descr = ($this->j92_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j92_descr"]:$this->j92_descr);
      }else{
-       $this->j92_sequencial = ($this->j92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j92_sequencial"]:$this->j92_sequencial);
+       $this->j92_sequencial = ($this->j92_sequencial === 0 || $this->j92_sequencial === 0.0 || $this->j92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j92_sequencial"]:$this->j92_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tesintertipo {
          $this->j92_sequencial = $j92_sequencial;
        }
      }
-     if(($this->j92_sequencial == null) || ($this->j92_sequencial == "") ){
+     if(($this->j92_sequencial == null) || ($this->j92_sequencial === 0 || $this->j92_sequencial === 0.0 || $this->j92_sequencial == "") ){
        $this->erro_sql = " Campo j92_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

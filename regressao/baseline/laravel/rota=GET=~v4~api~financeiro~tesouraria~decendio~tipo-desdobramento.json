@@ -1,0 +1,55 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/financeiro/tesouraria/decendio/tipo-desdobramento",
+  "json": {
+    "data": [
+      {
+        "codigo": 1,
+        "descricao": "MDE",
+        "percentual": 0,
+        "recursos": []
+      },
+      {
+        "codigo": 2,
+        "descricao": "ASPS",
+        "percentual": 0,
+        "recursos": []
+      },
+      {
+        "codigo": 3,
+        "descricao": "FUNDEB",
+        "percentual": 0,
+        "recursos": []
+      },
+      {
+        "codigo": 4,
+        "descricao": "MDE",
+        "percentual": 0,
+        "recursos": []
+      },
+      {
+        "codigo": 5,
+        "descricao": "ASPS",
+        "percentual": 0,
+        "recursos": []
+      },
+      {
+        "codigo": 6,
+        "descricao": "FUNDEB",
+        "percentual": 0,
+        "recursos": []
+      }
+    ],
+    "error": false,
+    "message": "Tipos de desdobramento"
+  },
+  "sha256": "dfb9ff90591ecc5d8be0e47d225efbfa641d98caff85484b5673ceba32e87272",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

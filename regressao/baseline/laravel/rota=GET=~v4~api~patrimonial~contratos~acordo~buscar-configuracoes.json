@@ -1,0 +1,35 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/patrimonial/contratos/acordo/buscar-configuracoes",
+  "json": {
+    "data": {
+      "ac51_assunto": "Contrato [numero]/[ano] irá vencer",
+      "ac51_mensagem": "O contrato [numero]/[ano] irá vencer em [dias] dias.\n            Vigência: [data_inicial] - [data_final]",
+      "ac51_sequencial": 2,
+      "created_at": "<X>",
+      "dias": [],
+      "instituicao_id": 1,
+      "updated_at": "<X>"
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "8aba837145ebdea91ac333641cb29411ef3b5d69d50e7a7fc20c2e878fe7d745",
+  "sql_negocio": [
+    "insert into \"mensageriaacordo\" (\"instituicao_id\", \"ac51_assunto\", \"ac51_mensagem\", \"updated_at\", \"created_at\") values ($1, $2, $3, $4, $5) returning \"ac51_sequencial\" parameters: $1 = '1', $2 = 'Contrato [numero]/[ano] ir� vencer', $3 = 'O contrato [numero]/[ano] ir� vencer em [dias] dias."
+  ],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {
+    "data.created_at": [
+      "str"
+    ],
+    "data.updated_at": [
+      "str"
+    ]
+  }
+}

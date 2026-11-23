@@ -57,11 +57,11 @@ db_fieldsmemory($sParam,0);
 $rsPrazodt      = db_query("select fc_proximo_dia_util(cast('".$diaciencia."' as date)+1) as dataciencia");
 db_fieldsmemory($rsPrazodt,0);
 $rsPrazo      = db_query("select fc_proximo_dia_util(cast('".$dataciencia."' as date)+".$pa01_autodvenc.") as diavencimento2");
-if( pg_num_rows( $rsPrazo ) > 0 ){
+if( ($rsPrazo ? pg_num_rows( $rsPrazo ) : null) > 0 ){
   db_fieldsmemory($rsPrazo,0);
   $rsVencimento = db_query("select fc_proximo_dia_util('".$diavencimento2."') as vencimento");
 
-  if(pg_num_rows($rsVencimento) > 0){
+  if(($rsVencimento ? pg_num_rows($rsVencimento) : null) > 0){
     db_fieldsmemory($rsVencimento,0);
     $sRetornoV = explode("-", $vencimento);
     $sRetornoV_dia = $sRetornoV[2];
@@ -71,7 +71,7 @@ if( pg_num_rows( $rsPrazo ) > 0 ){
 }
 
 $rsPrazo = db_query("select fc_proximo_dia_util(cast('".$diaciencia."' as date)+1) as dataciencia");
-if( pg_num_rows( $rsPrazo ) > 0 ){
+if( ($rsPrazo ? pg_num_rows( $rsPrazo ) : null) > 0 ){
   db_fieldsmemory($rsPrazo,0);
   $rsDias      = db_query("select fc_proximo_dia_util(cast('".$dataciencia."' as date)+".$pa01_autodprazo.") as recurso");
   db_fieldsmemory($rsDias,0);

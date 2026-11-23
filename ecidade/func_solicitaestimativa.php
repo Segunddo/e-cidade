@@ -33,7 +33,7 @@ require_once modification("dbforms/db_funcoes.php");
 
 db_postmemory($_POST);
 db_postmemory($_GET);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $clsolicita = new cl_solicita;
 $clsolicita->rotulo->label("pc10_numero");

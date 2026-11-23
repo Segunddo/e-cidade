@@ -67,10 +67,10 @@ class cl_iptucadtaxa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j07_iptucadtaxa = ($this->j07_iptucadtaxa == ""?@$GLOBALS["HTTP_POST_VARS"]["j07_iptucadtaxa"]:$this->j07_iptucadtaxa);
+       $this->j07_iptucadtaxa = ($this->j07_iptucadtaxa === 0 || $this->j07_iptucadtaxa === 0.0 || $this->j07_iptucadtaxa == ""?@$GLOBALS["HTTP_POST_VARS"]["j07_iptucadtaxa"]:$this->j07_iptucadtaxa);
        $this->j07_descr = ($this->j07_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j07_descr"]:$this->j07_descr);
      }else{
-       $this->j07_iptucadtaxa = ($this->j07_iptucadtaxa == ""?@$GLOBALS["HTTP_POST_VARS"]["j07_iptucadtaxa"]:$this->j07_iptucadtaxa);
+       $this->j07_iptucadtaxa = ($this->j07_iptucadtaxa === 0 || $this->j07_iptucadtaxa === 0.0 || $this->j07_iptucadtaxa == ""?@$GLOBALS["HTTP_POST_VARS"]["j07_iptucadtaxa"]:$this->j07_iptucadtaxa);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_iptucadtaxa {
          $this->j07_iptucadtaxa = $j07_iptucadtaxa;
        }
      }
-     if(($this->j07_iptucadtaxa == null) || ($this->j07_iptucadtaxa == "") ){
+     if(($this->j07_iptucadtaxa == null) || ($this->j07_iptucadtaxa === 0 || $this->j07_iptucadtaxa === 0.0 || $this->j07_iptucadtaxa == "") ){
        $this->erro_sql = " Campo j07_iptucadtaxa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/concessaodireitos/assentform",
+  "json": {
+    "error": true,
+    "message": "Undefined index: rh502_seqassentconf"
+  },
+  "sha256": "c95863949377c4d9b8b3bb22cdae96c3e0971efb1531abfd2296395beedaff10",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

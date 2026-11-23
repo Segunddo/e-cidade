@@ -73,13 +73,13 @@ class cl_procjurjudicial {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->v63_sequencial = ($this->v63_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_sequencial"]:$this->v63_sequencial);
-       $this->v63_localiza = ($this->v63_localiza == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_localiza"]:$this->v63_localiza);
-       $this->v63_procjur = ($this->v63_procjur == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_procjur"]:$this->v63_procjur);
+       $this->v63_sequencial = ($this->v63_sequencial === 0 || $this->v63_sequencial === 0.0 || $this->v63_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_sequencial"]:$this->v63_sequencial);
+       $this->v63_localiza = ($this->v63_localiza === 0 || $this->v63_localiza === 0.0 || $this->v63_localiza == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_localiza"]:$this->v63_localiza);
+       $this->v63_procjur = ($this->v63_procjur === 0 || $this->v63_procjur === 0.0 || $this->v63_procjur == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_procjur"]:$this->v63_procjur);
        $this->v63_processoforo = ($this->v63_processoforo == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_processoforo"]:$this->v63_processoforo);
-       $this->v63_vara = ($this->v63_vara == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_vara"]:$this->v63_vara);
+       $this->v63_vara = ($this->v63_vara === 0 || $this->v63_vara === 0.0 || $this->v63_vara == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_vara"]:$this->v63_vara);
      }else{
-       $this->v63_sequencial = ($this->v63_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_sequencial"]:$this->v63_sequencial);
+       $this->v63_sequencial = ($this->v63_sequencial === 0 || $this->v63_sequencial === 0.0 || $this->v63_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v63_sequencial"]:$this->v63_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_procjurjudicial {
          $this->v63_sequencial = $v63_sequencial;
        }
      }
-     if(($this->v63_sequencial == null) || ($this->v63_sequencial == "") ){
+     if(($this->v63_sequencial == null) || ($this->v63_sequencial === 0 || $this->v63_sequencial === 0.0 || $this->v63_sequencial == "") ){
        $this->erro_sql = " Campo v63_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

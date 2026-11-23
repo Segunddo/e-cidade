@@ -73,14 +73,14 @@ class cl_orcfuncaorp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o30_anousu = ($this->o30_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_anousu"]:$this->o30_anousu);
-       $this->o30_funcao = ($this->o30_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_funcao"]:$this->o30_funcao);
+       $this->o30_anousu = ($this->o30_anousu === 0 || $this->o30_anousu === 0.0 || $this->o30_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_anousu"]:$this->o30_anousu);
+       $this->o30_funcao = ($this->o30_funcao === 0 || $this->o30_funcao === 0.0 || $this->o30_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_funcao"]:$this->o30_funcao);
        $this->o30_descr = ($this->o30_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_descr"]:$this->o30_descr);
        $this->o30_codtri = ($this->o30_codtri == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_codtri"]:$this->o30_codtri);
        $this->o30_finali = ($this->o30_finali == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_finali"]:$this->o30_finali);
      }else{
-       $this->o30_anousu = ($this->o30_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_anousu"]:$this->o30_anousu);
-       $this->o30_funcao = ($this->o30_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_funcao"]:$this->o30_funcao);
+       $this->o30_anousu = ($this->o30_anousu === 0 || $this->o30_anousu === 0.0 || $this->o30_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_anousu"]:$this->o30_anousu);
+       $this->o30_funcao = ($this->o30_funcao === 0 || $this->o30_funcao === 0.0 || $this->o30_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["o30_funcao"]:$this->o30_funcao);
      }
    }
    // funcao para inclusao
@@ -106,7 +106,7 @@ class cl_orcfuncaorp {
      }
        $this->o30_anousu = $o30_anousu; 
        $this->o30_funcao = $o30_funcao; 
-     if(($this->o30_anousu == null) || ($this->o30_anousu == "") ){ 
+     if(($this->o30_anousu == null) || ($this->o30_anousu === 0 || $this->o30_anousu === 0.0 || $this->o30_anousu == "") ){ 
        $this->erro_sql = " Campo o30_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -114,7 +114,7 @@ class cl_orcfuncaorp {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o30_funcao == null) || ($this->o30_funcao == "") ){ 
+     if(($this->o30_funcao == null) || ($this->o30_funcao === 0 || $this->o30_funcao === 0.0 || $this->o30_funcao == "") ){ 
        $this->erro_sql = " Campo o30_funcao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

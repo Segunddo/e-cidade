@@ -75,15 +75,15 @@ class cl_zonassetorvalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j141_sequencial = ($this->j141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_sequencial"]:$this->j141_sequencial);
-       $this->j141_anousu = ($this->j141_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_anousu"]:$this->j141_anousu);
-       $this->j141_zonas = ($this->j141_zonas == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_zonas"]:$this->j141_zonas);
+       $this->j141_sequencial = ($this->j141_sequencial === 0 || $this->j141_sequencial === 0.0 || $this->j141_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_sequencial"]:$this->j141_sequencial);
+       $this->j141_anousu = ($this->j141_anousu === 0 || $this->j141_anousu === 0.0 || $this->j141_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_anousu"]:$this->j141_anousu);
+       $this->j141_zonas = ($this->j141_zonas === 0 || $this->j141_zonas === 0.0 || $this->j141_zonas == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_zonas"]:$this->j141_zonas);
        $this->j141_setor = ($this->j141_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_setor"]:$this->j141_setor);
-       $this->j141_valorminimo = ($this->j141_valorminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_valorminimo"]:$this->j141_valorminimo);
-       $this->j141_valorm2 = ($this->j141_valorm2 == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_valorm2"]:$this->j141_valorm2);
+       $this->j141_valorminimo = ($this->j141_valorminimo === 0 || $this->j141_valorminimo === 0.0 || $this->j141_valorminimo == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_valorminimo"]:$this->j141_valorminimo);
+       $this->j141_valorm2 = ($this->j141_valorm2 === 0 || $this->j141_valorm2 === 0.0 || $this->j141_valorm2 == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_valorm2"]:$this->j141_valorm2);
      }else{
-       $this->j141_anousu = ($this->j141_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_anousu"]:$this->j141_anousu);
-       $this->j141_zonas = ($this->j141_zonas == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_zonas"]:$this->j141_zonas);
+       $this->j141_anousu = ($this->j141_anousu === 0 || $this->j141_anousu === 0.0 || $this->j141_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_anousu"]:$this->j141_anousu);
+       $this->j141_zonas = ($this->j141_zonas === 0 || $this->j141_zonas === 0.0 || $this->j141_zonas == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_zonas"]:$this->j141_zonas);
        $this->j141_setor = ($this->j141_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["j141_setor"]:$this->j141_setor);
      }
    }
@@ -141,7 +141,7 @@ class cl_zonassetorvalor {
          $this->j141_sequencial = $j141_sequencial;
        }
      }
-     if(($this->j141_anousu == null) || ($this->j141_anousu == "") ){
+     if(($this->j141_anousu == null) || ($this->j141_anousu === 0 || $this->j141_anousu === 0.0 || $this->j141_anousu == "") ){
        $this->erro_sql = " Campo j141_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -149,7 +149,7 @@ class cl_zonassetorvalor {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->j141_zonas == null) || ($this->j141_zonas == "") ){
+     if(($this->j141_zonas == null) || ($this->j141_zonas === 0 || $this->j141_zonas === 0.0 || $this->j141_zonas == "") ){
        $this->erro_sql = " Campo j141_zonas nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,39 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/ajudacusto/lancamento",
+  "json": {
+    "errors": {
+      "competencia": [
+        "Competência deve ser informada."
+      ],
+      "especializacao": [
+        "Campo Especialização é obrigatório"
+      ],
+      "graduacao": [
+        "Campo graduação é obrigatório"
+      ],
+      "local": [
+        "Campo Local é obrigatório"
+      ],
+      "matricula": [
+        "A Matricula do servidor deve ser informada"
+      ],
+      "quantidade": [
+        "Campo quantidade é obrigatório"
+      ],
+      "unidade_ensino": [
+        "Campo Unidade de Ensino é obrigatório"
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "66665472b1b7a9c2ef7dda241a8625a4d275ac101c09d81e6885d6cde57233e1",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

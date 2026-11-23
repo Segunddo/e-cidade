@@ -122,7 +122,7 @@ $sSQlContas .= " where c45_coddoc = $iCodDoc";
 $sSQlContas .= "   and c45_instit = ".$iInstit;
 $sSQlContas .= "   and c45_anousu = ".$iAnoUsu;
 $rsContas    = db_query($sSQlContas);
-$iNumRowsLan = pg_num_rows($rsContas);
+$iNumRowsLan = ($rsContas ? pg_num_rows($rsContas) : null);
 if ($rsContas){
     $rsEnce   = $clconencerramento->sql_record($clconencerramento->sql_query(null,"*",null," c42_instit       = $iInstit
                                                                and  c42_anousu           = $iAnoUsu
@@ -146,7 +146,7 @@ if ($rsContas){
       exit;
 
    }
-   for ($i = 0;$i < pg_num_rows($rsContas); $i++){
+   for ($i = 0;$i < ($rsContas ? pg_num_rows($rsContas) : null); $i++){
 
        $oContas = db_utils::fieldsMemory($rsContas,$i);
        if ($oContas->c47_compara == 1){
@@ -163,7 +163,7 @@ if ($rsContas){
                                            and c61_instit= ".db_getsession("DB_instit"), '', 'true','true');
           $rsPlan=db_query($sSQlPlan);
           db_query("drop table work_pl");
-          if (pg_num_rows($rsPlan) > 0){
+          if (($rsPlan ? pg_num_rows($rsPlan) : null) > 0){
 
              $oPlan        = db_utils::fieldsMemory($rsPlan,0);
              $nValorLancar = $oPlan->saldo_final;

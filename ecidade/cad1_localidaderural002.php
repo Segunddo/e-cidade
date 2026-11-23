@@ -33,7 +33,7 @@
 	require_once(modification("classes/db_localidaderural_classe.php"));
 	require_once(modification("dbforms/db_funcoes.php"));
 	
-	parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+	parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 	
 	foreach ($_POST as $sChave=>$sValor) {
 		$_POST[$sChave] = stripslashes($sValor);

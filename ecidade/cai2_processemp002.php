@@ -135,7 +135,7 @@ if ($tipo == 'e') {
   order by o58_orgao,o58_unidade,o56_elemento,o58_projativ,o58_codigo,{$xdata} ";
     
 $result = db_query($sql);
-if (pg_num_rows($result) == 0) {
+if (($result ? pg_num_rows($result) : null) == 0) {
     $url  = "db_erros.php?fechar=true";
     $url .= "&db_erro=Nenhum processo encontrado com as seguintes informações passadas: <br> $msg_1 <br> $msg_3";
     db_redireciona($url);
@@ -164,7 +164,7 @@ $pdf->init(false);
 
 $quebra = '';
 
-for ($i=0; $i<pg_num_rows($result); $i++) {
+for ($i=0; $i<($result ? pg_num_rows($result) : null); $i++) {
     db_fieldsmemory($result, $i, true);
     if ($pdf->gety() > $pdf->geth() - 40 || $i==0) {
         $pdf->addpage();

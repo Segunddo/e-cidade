@@ -169,18 +169,6 @@ CIDADÃO                  1    40     35     5   1828   709        28
 ```
 
 `Menu` são as telas de menu da área, `Faltam` as que ainda vão ao 5.6, `Fant.` as que o menu cita mas não existem em disco
-<<<<<<< HEAD
-(quebram igual nos dois; só se registram), `A alterar` os arquivos que o lote vai mudar. Para cada prefixo da área, decida
-**como ele será roteado** — é o que define o lote:
-
-| Situação do prefixo | Roteamento | Lote |
-| --- | --- | --- |
-| só esta área usa (ou o resto já foi migrado) | **`location`** por prefixo (passo 8) | o prefixo inteiro: `python3 scratchpad/enumera.py <pref>` |
-| outras áreas ainda pendentes também usam | **`map`** por lista, gerada do banco (*Passo D* de *Quando o prefixo serve várias áreas*) | só as telas da área: `TELAS=@/tmp/telas_lote.txt python3 scratchpad/enumera.py <nome-do-lote>` (uma tela por linha, com a grafia do disco e caminho **absoluto** — o script muda para `ecidade/`; o `<nome-do-lote>` vira só o nome dos arquivos de saída) |
-
-A seção *Quando o prefixo serve várias áreas* mostra como medir quantas telas de outras áreas um prefixo arrastaria. Lote
-grande (mais de ~300 arquivos a alterar) se divide por subprefixo (`sau1_`, `sau2_`…). Registre a divisão em
-=======
 (quebram igual nos dois; só se registram), `A alterar` os arquivos que o lote vai mudar.
 
 #### Quais prefixos migrar
@@ -230,7 +218,6 @@ arquivos do prefixo ao 8.5 — inclusive os de outras áreas —, então todos p
 Vários prefixos pequenos podem ir num lote só (a Assistência Social é um lote: `soc` + `hab`, com
 `python3 scratchpad/enumera.py soc` e `python3 scratchpad/enumera.py hab`, e o Rector rodado sobre as duas listas de
 alvos). Lote grande (mais de ~300 arquivos a alterar) se divide por subprefixo (`sau1_`, `sau2_`…). Registre a divisão em
->>>>>>> 315a98973 (feat: Atualiza o procedimento de como migrar um módulo)
 `docs/registro/area-<área>.md` antes de começar.
 
 ### C. Um lote por vez

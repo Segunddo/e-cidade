@@ -40,7 +40,7 @@ $oParametrosJuridico = $oDaoParjuridico->getParametrosJuridico(db_getsession("DB
 $oParametrosJuridico = $oParametrosJuridico[0];
 
 db_postmemory($_SERVER);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $DB_DATACALC = mktime(0, 0, 0, substr($db_datausu, 5, 2), substr($db_datausu, 8, 2), substr($db_datausu, 0, 4));
 

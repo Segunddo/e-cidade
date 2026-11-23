@@ -80,11 +80,11 @@ class cl_varfixval {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q34_codigo = ($this->q34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_codigo"]:$this->q34_codigo);
-       $this->q34_numpar = ($this->q34_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_numpar"]:$this->q34_numpar);
-       $this->q34_mes = ($this->q34_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_mes"]:$this->q34_mes);
-       $this->q34_ano = ($this->q34_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_ano"]:$this->q34_ano);
-       $this->q34_valor = ($this->q34_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_valor"]:$this->q34_valor);
+       $this->q34_codigo = ($this->q34_codigo === 0 || $this->q34_codigo === 0.0 || $this->q34_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_codigo"]:$this->q34_codigo);
+       $this->q34_numpar = ($this->q34_numpar === 0 || $this->q34_numpar === 0.0 || $this->q34_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_numpar"]:$this->q34_numpar);
+       $this->q34_mes = ($this->q34_mes === 0 || $this->q34_mes === 0.0 || $this->q34_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_mes"]:$this->q34_mes);
+       $this->q34_ano = ($this->q34_ano === 0 || $this->q34_ano === 0.0 || $this->q34_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_ano"]:$this->q34_ano);
+       $this->q34_valor = ($this->q34_valor === 0 || $this->q34_valor === 0.0 || $this->q34_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_valor"]:$this->q34_valor);
        $this->q34_inflat = ($this->q34_inflat == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_inflat"]:$this->q34_inflat);
        if($this->q34_dtval == ""){
          $this->q34_dtval_dia = ($this->q34_dtval_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q34_dtval_dia"]:$this->q34_dtval_dia);

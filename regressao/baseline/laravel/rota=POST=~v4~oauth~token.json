@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/oauth/token",
+  "json": {
+    "error": true,
+    "message": "The authorization grant type is not supported by the authorization server."
+  },
+  "sha256": "5576c9d5dd7151969873d31a577be0962b4edbe89d0179434b2e085c515272d0",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

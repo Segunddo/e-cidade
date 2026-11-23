@@ -67,10 +67,10 @@ class cl_debcontapedidonet {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->d64_codigo = ($this->d64_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d64_codigo"]:$this->d64_codigo);
+       $this->d64_codigo = ($this->d64_codigo === 0 || $this->d64_codigo === 0.0 || $this->d64_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d64_codigo"]:$this->d64_codigo);
        $this->d64_ip = ($this->d64_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["d64_ip"]:$this->d64_ip);
      }else{
-       $this->d64_codigo = ($this->d64_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d64_codigo"]:$this->d64_codigo);
+       $this->d64_codigo = ($this->d64_codigo === 0 || $this->d64_codigo === 0.0 || $this->d64_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["d64_codigo"]:$this->d64_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_debcontapedidonet {
        return false;
      }
        $this->d64_codigo = $d64_codigo;
-     if(($this->d64_codigo == null) || ($this->d64_codigo == "") ){
+     if(($this->d64_codigo == null) || ($this->d64_codigo === 0 || $this->d64_codigo === 0.0 || $this->d64_codigo == "") ){
        $this->erro_sql = " Campo d64_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

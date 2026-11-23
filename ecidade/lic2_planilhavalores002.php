@@ -46,7 +46,7 @@ $resultpref        = db_query($sqlpref);
 db_fieldsmemory($resultpref,0);
 $rsParam           = $clpcparam->sql_record($clpcparam->sql_query(db_getsession("DB_instit"),"*"));
 $oParam            = db_utils::fieldsMemory($rsParam,0);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $sCampos    = "distinct db_config.*,l20_numero, l20_anousu,l20_dataaber,l20_horaaber,pc11_numero,pc80_codproc,(CASE WHEN l20_procadmin = ' ' THEN p58_numero||'/'||p58_ano WHEN l20_procadmin IS NULL THEN p58_numero||'/'||p58_ano ELSE l20_procadmin END) AS l20_procadmin,l20_prazoentrega,l20_localentrega";
 $sSqlLicita = sql_query_julgamento_licitacao($l20_codigo,$sCampos);

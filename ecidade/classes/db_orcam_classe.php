@@ -72,14 +72,14 @@ class cl_orcam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o02_anousu = ($this->o02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_anousu"]:$this->o02_anousu);
+       $this->o02_anousu = ($this->o02_anousu === 0 || $this->o02_anousu === 0.0 || $this->o02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_anousu"]:$this->o02_anousu);
        $this->o02_codigo = ($this->o02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_codigo"]:$this->o02_codigo);
        $this->o02_descr = ($this->o02_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_descr"]:$this->o02_descr);
-       $this->o02_valor = ($this->o02_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_valor"]:$this->o02_valor);
+       $this->o02_valor = ($this->o02_valor === 0 || $this->o02_valor === 0.0 || $this->o02_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_valor"]:$this->o02_valor);
        $this->o02_codtce = ($this->o02_codtce == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_codtce"]:$this->o02_codtce);
-       $this->o02_percen = ($this->o02_percen == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_percen"]:$this->o02_percen);
+       $this->o02_percen = ($this->o02_percen === 0 || $this->o02_percen === 0.0 || $this->o02_percen == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_percen"]:$this->o02_percen);
      }else{
-       $this->o02_anousu = ($this->o02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_anousu"]:$this->o02_anousu);
+       $this->o02_anousu = ($this->o02_anousu === 0 || $this->o02_anousu === 0.0 || $this->o02_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_anousu"]:$this->o02_anousu);
        $this->o02_codigo = ($this->o02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["o02_codigo"]:$this->o02_codigo);
      }
    }
@@ -103,7 +103,7 @@ class cl_orcam {
      }
        $this->o02_anousu = $o02_anousu;
        $this->o02_codigo = $o02_codigo;
-     if(($this->o02_anousu == null) || ($this->o02_anousu == "") ){
+     if(($this->o02_anousu == null) || ($this->o02_anousu === 0 || $this->o02_anousu === 0.0 || $this->o02_anousu == "") ){
        $this->erro_sql = " Campo o02_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

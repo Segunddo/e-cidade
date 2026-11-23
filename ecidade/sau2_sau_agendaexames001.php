@@ -34,7 +34,7 @@ include(modification("classes/db_cgm_classe.php"));
 include(modification("classes/db_sau_agendaexames_ext_classe.php"));
 
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 set_time_limit(0);
 
 $clsau_agendaexames = new cl_sau_agendaexames_ext;

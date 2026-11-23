@@ -71,13 +71,13 @@ class cl_tipovistoriasrec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y78_codtipo = ($this->y78_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_codtipo"]:$this->y78_codtipo);
-       $this->y78_receit = ($this->y78_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_receit"]:$this->y78_receit);
-       $this->y78_valor = ($this->y78_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_valor"]:$this->y78_valor);
+       $this->y78_codtipo = ($this->y78_codtipo === 0 || $this->y78_codtipo === 0.0 || $this->y78_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_codtipo"]:$this->y78_codtipo);
+       $this->y78_receit = ($this->y78_receit === 0 || $this->y78_receit === 0.0 || $this->y78_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_receit"]:$this->y78_receit);
+       $this->y78_valor = ($this->y78_valor === 0 || $this->y78_valor === 0.0 || $this->y78_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_valor"]:$this->y78_valor);
        $this->y78_descr = ($this->y78_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_descr"]:$this->y78_descr);
      }else{
-       $this->y78_codtipo = ($this->y78_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_codtipo"]:$this->y78_codtipo);
-       $this->y78_receit = ($this->y78_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_receit"]:$this->y78_receit);
+       $this->y78_codtipo = ($this->y78_codtipo === 0 || $this->y78_codtipo === 0.0 || $this->y78_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_codtipo"]:$this->y78_codtipo);
+       $this->y78_receit = ($this->y78_receit === 0 || $this->y78_receit === 0.0 || $this->y78_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y78_receit"]:$this->y78_receit);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_tipovistoriasrec {
      }
        $this->y78_codtipo = $y78_codtipo;
        $this->y78_receit = $y78_receit;
-     if(($this->y78_codtipo == null) || ($this->y78_codtipo == "") ){
+     if(($this->y78_codtipo == null) || ($this->y78_codtipo === 0 || $this->y78_codtipo === 0.0 || $this->y78_codtipo == "") ){
        $this->erro_sql = " Campo y78_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_tipovistoriasrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y78_receit == null) || ($this->y78_receit == "") ){
+     if(($this->y78_receit == null) || ($this->y78_receit === 0 || $this->y78_receit === 0.0 || $this->y78_receit == "") ){
        $this->erro_sql = " Campo y78_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -91,13 +91,13 @@ class cl_tabdesc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codsubrec = ($this->codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["codsubrec"]:$this->codsubrec);
-       $this->k07_codigo = ($this->k07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_codigo"]:$this->k07_codigo);
+       $this->codsubrec = ($this->codsubrec === 0 || $this->codsubrec === 0.0 || $this->codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["codsubrec"]:$this->codsubrec);
+       $this->k07_codigo = ($this->k07_codigo === 0 || $this->k07_codigo === 0.0 || $this->k07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_codigo"]:$this->k07_codigo);
        $this->k07_descr = ($this->k07_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_descr"]:$this->k07_descr);
-       $this->k07_valorf = ($this->k07_valorf == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_valorf"]:$this->k07_valorf);
-       $this->k07_valorv = ($this->k07_valorv == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_valorv"]:$this->k07_valorv);
-       $this->k07_quamin = ($this->k07_quamin == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_quamin"]:$this->k07_quamin);
-       $this->k07_percde = ($this->k07_percde == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_percde"]:$this->k07_percde);
+       $this->k07_valorf = ($this->k07_valorf === 0 || $this->k07_valorf === 0.0 || $this->k07_valorf == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_valorf"]:$this->k07_valorf);
+       $this->k07_valorv = ($this->k07_valorv === 0 || $this->k07_valorv === 0.0 || $this->k07_valorv == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_valorv"]:$this->k07_valorv);
+       $this->k07_quamin = ($this->k07_quamin === 0 || $this->k07_quamin === 0.0 || $this->k07_quamin == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_quamin"]:$this->k07_quamin);
+       $this->k07_percde = ($this->k07_percde === 0 || $this->k07_percde === 0.0 || $this->k07_percde == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_percde"]:$this->k07_percde);
        if($this->k07_data == ""){
          $this->k07_data_dia = ($this->k07_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_data_dia"]:$this->k07_data_dia);
          $this->k07_data_mes = ($this->k07_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_data_mes"]:$this->k07_data_mes);
@@ -115,9 +115,9 @@ class cl_tabdesc {
             $this->k07_dtval = $this->k07_dtval_ano."-".$this->k07_dtval_mes."-".$this->k07_dtval_dia;
          }
        }
-       $this->k07_instit = ($this->k07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_instit"]:$this->k07_instit);
+       $this->k07_instit = ($this->k07_instit === 0 || $this->k07_instit === 0.0 || $this->k07_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k07_instit"]:$this->k07_instit);
      }else{
-       $this->codsubrec = ($this->codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["codsubrec"]:$this->codsubrec);
+       $this->codsubrec = ($this->codsubrec === 0 || $this->codsubrec === 0.0 || $this->codsubrec == ""?@$GLOBALS["HTTP_POST_VARS"]["codsubrec"]:$this->codsubrec);
      }
    }
    // funcao para inclusao
@@ -231,7 +231,7 @@ class cl_tabdesc {
          $this->codsubrec = $codsubrec;
        }
      }
-     if(($this->codsubrec == null) || ($this->codsubrec == "") ){
+     if(($this->codsubrec == null) || ($this->codsubrec === 0 || $this->codsubrec === 0.0 || $this->codsubrec == "") ){
        $this->erro_sql = " Campo codsubrec nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

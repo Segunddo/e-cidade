@@ -33,7 +33,7 @@ include modification("dbforms/db_funcoes.php");
 //include modification("classes/db_fis_fiscal_classe.php");
 require_once(modification('classes/db_fis_fiscal_estendida_classe.php'));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clfiscal = new cl_fis_fiscal_estendida;
 $clfiscal->rotulo->label("y30_codnoti");
 $clfiscal->rotulo->label("y30_data");

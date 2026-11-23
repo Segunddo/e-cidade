@@ -39,7 +39,7 @@ $clcontricalc = new cl_contricalc;
 $clcontlotv = new cl_contlotv;
 $cleditalserv = new cl_editalserv;
 $cleditalrua = new cl_editalrua;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $sSqlEditalRua = $cleditalrua->sql_query("","d01_numero,d02_contri,j14_nome,d01_data","j14_nome","d02_codedi=$edital");
 $rsEditalRua   = $cleditalrua->sql_record($sSqlEditalRua);

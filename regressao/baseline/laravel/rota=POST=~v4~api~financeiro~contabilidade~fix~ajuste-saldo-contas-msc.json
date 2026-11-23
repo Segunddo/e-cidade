@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/fix/ajuste-saldo-contas-msc",
+  "json": {
+    "error": true,
+    "message": "Argument 1 passed to App\\Domain\\Financeiro\\Contabilidade\\Services\\Fix\\LoteLancamentoManualService::processarCsv() must be an instance of Illuminate\\Http\\UploadedFile, null given, called in /var/www/html/app/Domain/Financeiro/Contabilidade/Controllers/ManutencaoLancamentosController.php on line 75"
+  },
+  "sha256": "f8be872be01e2f1c3d028c8b96e145edf2c3eb58b8490323dd24d31113373aa9",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

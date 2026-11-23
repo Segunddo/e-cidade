@@ -71,12 +71,12 @@ class cl_meiocomunicacaosigap {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c49_sequencial = ($this->c49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c49_sequencial"]:$this->c49_sequencial);
+       $this->c49_sequencial = ($this->c49_sequencial === 0 || $this->c49_sequencial === 0.0 || $this->c49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c49_sequencial"]:$this->c49_sequencial);
        $this->c49_codigocomunicacao = ($this->c49_codigocomunicacao == ""?@$GLOBALS["HTTP_POST_VARS"]["c49_codigocomunicacao"]:$this->c49_codigocomunicacao);
        $this->c49_descricao = ($this->c49_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["c49_descricao"]:$this->c49_descricao);
        $this->c49_uf = ($this->c49_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["c49_uf"]:$this->c49_uf);
      }else{
-       $this->c49_sequencial = ($this->c49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c49_sequencial"]:$this->c49_sequencial);
+       $this->c49_sequencial = ($this->c49_sequencial === 0 || $this->c49_sequencial === 0.0 || $this->c49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c49_sequencial"]:$this->c49_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_meiocomunicacaosigap {
          $this->c49_sequencial = $c49_sequencial;
        }
      }
-     if(($this->c49_sequencial == null) || ($this->c49_sequencial == "") ){
+     if(($this->c49_sequencial == null) || ($this->c49_sequencial === 0 || $this->c49_sequencial === 0.0 || $this->c49_sequencial == "") ){
        $this->erro_sql = " Campo c49_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

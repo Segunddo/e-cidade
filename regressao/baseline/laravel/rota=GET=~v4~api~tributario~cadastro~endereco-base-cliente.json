@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/endereco-base-cliente",
+  "json": {
+    "errors": {
+      "cep": [
+        "O campo cep é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "76221b04b18d6aa69371bd5c92c621d03356dd15453c11767dcacb2713ff406a",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

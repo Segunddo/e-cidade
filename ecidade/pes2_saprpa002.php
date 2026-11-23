@@ -33,7 +33,7 @@ $clrotulo->label('r13_codigo');
 $clrotulo->label('r13_descr');
 $clrotulo->label('r13_descro');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $head3 = "RELAÇÃO DE RPAs";
 $head5 = "PERÍODO : ".db_formatar($dataini,'d')." A ".db_formatar($datafin,'d');

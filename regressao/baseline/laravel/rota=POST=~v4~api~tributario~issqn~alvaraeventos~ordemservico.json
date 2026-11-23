@@ -1,0 +1,54 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/alvaraeventos/ordemservico",
+  "json": {
+    "errors": {
+      "q168_cgm": [
+        "CGM ou Inscrição devem ser informados!"
+      ],
+      "q168_datafim": [
+        "Data de fim não informada."
+      ],
+      "q168_datainicio": [
+        "Data de inicio não informada."
+      ],
+      "q168_dataprocessoexterno": [
+        "Processo ou Processo Externo devem ser informados!"
+      ],
+      "q168_descricao": [
+        "Descricao não informada."
+      ],
+      "q168_horafim": [
+        "Hora final não informada."
+      ],
+      "q168_horainicio": [
+        "Hora de inicio não informada."
+      ],
+      "q168_inscricao": [
+        "CGM ou Inscrição devem ser informados!"
+      ],
+      "q168_localizacao": [
+        "Localização não informada."
+      ],
+      "q168_processo": [
+        "Processo ou Processo Externo devem ser informados!"
+      ],
+      "q168_processoexterno": [
+        "Processo ou Processo Externo devem ser informados!"
+      ],
+      "q168_titularprocessoexterno": [
+        "Processo ou Processo Externo devem ser informados!"
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "be690c97d660ee64fa308fce9e1a3104794e8f3aa7b02a22c9cb69ee296057ff",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

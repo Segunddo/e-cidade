@@ -69,11 +69,11 @@ class cl_conlancamreconhecimentocontabil {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c113_sequencial = ($this->c113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_sequencial"]:$this->c113_sequencial);
-       $this->c113_reconhecimentocontabil = ($this->c113_reconhecimentocontabil == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_reconhecimentocontabil"]:$this->c113_reconhecimentocontabil);
-       $this->c113_codlan = ($this->c113_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_codlan"]:$this->c113_codlan);
+       $this->c113_sequencial = ($this->c113_sequencial === 0 || $this->c113_sequencial === 0.0 || $this->c113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_sequencial"]:$this->c113_sequencial);
+       $this->c113_reconhecimentocontabil = ($this->c113_reconhecimentocontabil === 0 || $this->c113_reconhecimentocontabil === 0.0 || $this->c113_reconhecimentocontabil == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_reconhecimentocontabil"]:$this->c113_reconhecimentocontabil);
+       $this->c113_codlan = ($this->c113_codlan === 0 || $this->c113_codlan === 0.0 || $this->c113_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_codlan"]:$this->c113_codlan);
      }else{
-       $this->c113_sequencial = ($this->c113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_sequencial"]:$this->c113_sequencial);
+       $this->c113_sequencial = ($this->c113_sequencial === 0 || $this->c113_sequencial === 0.0 || $this->c113_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c113_sequencial"]:$this->c113_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_conlancamreconhecimentocontabil {
          $this->c113_sequencial = $c113_sequencial;
        }
      }
-     if(($this->c113_sequencial == null) || ($this->c113_sequencial == "") ){
+     if(($this->c113_sequencial == null) || ($this->c113_sequencial === 0 || $this->c113_sequencial === 0.0 || $this->c113_sequencial == "") ){
        $this->erro_sql = " Campo c113_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

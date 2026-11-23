@@ -73,13 +73,13 @@ class cl_orcobjetivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o143_sequencial = ($this->o143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_sequencial"]:$this->o143_sequencial);
-       $this->o143_orcorgaoorgao = ($this->o143_orcorgaoorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_orcorgaoorgao"]:$this->o143_orcorgaoorgao);
-       $this->o143_orcorgaoanousu = ($this->o143_orcorgaoanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_orcorgaoanousu"]:$this->o143_orcorgaoanousu);
+       $this->o143_sequencial = ($this->o143_sequencial === 0 || $this->o143_sequencial === 0.0 || $this->o143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_sequencial"]:$this->o143_sequencial);
+       $this->o143_orcorgaoorgao = ($this->o143_orcorgaoorgao === 0 || $this->o143_orcorgaoorgao === 0.0 || $this->o143_orcorgaoorgao == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_orcorgaoorgao"]:$this->o143_orcorgaoorgao);
+       $this->o143_orcorgaoanousu = ($this->o143_orcorgaoanousu === 0 || $this->o143_orcorgaoanousu === 0.0 || $this->o143_orcorgaoanousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_orcorgaoanousu"]:$this->o143_orcorgaoanousu);
        $this->o143_descricao = ($this->o143_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_descricao"]:$this->o143_descricao);
        $this->o143_objetivo = ($this->o143_objetivo == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_objetivo"]:$this->o143_objetivo);
      }else{
-       $this->o143_sequencial = ($this->o143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_sequencial"]:$this->o143_sequencial);
+       $this->o143_sequencial = ($this->o143_sequencial === 0 || $this->o143_sequencial === 0.0 || $this->o143_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["o143_sequencial"]:$this->o143_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_orcobjetivo {
          $this->o143_sequencial = $o143_sequencial;
        }
      }
-     if(($this->o143_sequencial == null) || ($this->o143_sequencial == "") ){
+     if(($this->o143_sequencial == null) || ($this->o143_sequencial === 0 || $this->o143_sequencial === 0.0 || $this->o143_sequencial == "") ){
        $this->erro_sql = " Campo o143_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

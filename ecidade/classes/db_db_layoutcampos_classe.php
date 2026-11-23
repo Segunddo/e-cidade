@@ -89,21 +89,21 @@ class cl_db_layoutcampos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db52_codigo = ($this->db52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_codigo"]:$this->db52_codigo);
-       $this->db52_layoutlinha = ($this->db52_layoutlinha == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_layoutlinha"]:$this->db52_layoutlinha);
+       $this->db52_codigo = ($this->db52_codigo === 0 || $this->db52_codigo === 0.0 || $this->db52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_codigo"]:$this->db52_codigo);
+       $this->db52_layoutlinha = ($this->db52_layoutlinha === 0 || $this->db52_layoutlinha === 0.0 || $this->db52_layoutlinha == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_layoutlinha"]:$this->db52_layoutlinha);
        $this->db52_nome = ($this->db52_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_nome"]:$this->db52_nome);
        $this->db52_descr = ($this->db52_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_descr"]:$this->db52_descr);
-       $this->db52_layoutformat = ($this->db52_layoutformat == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_layoutformat"]:$this->db52_layoutformat);
-       $this->db52_posicao = ($this->db52_posicao == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_posicao"]:$this->db52_posicao);
+       $this->db52_layoutformat = ($this->db52_layoutformat === 0 || $this->db52_layoutformat === 0.0 || $this->db52_layoutformat == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_layoutformat"]:$this->db52_layoutformat);
+       $this->db52_posicao = ($this->db52_posicao === 0 || $this->db52_posicao === 0.0 || $this->db52_posicao == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_posicao"]:$this->db52_posicao);
        $this->db52_default = ($this->db52_default == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_default"]:$this->db52_default);
-       $this->db52_tamanho = ($this->db52_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_tamanho"]:$this->db52_tamanho);
+       $this->db52_tamanho = ($this->db52_tamanho === 0 || $this->db52_tamanho === 0.0 || $this->db52_tamanho == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_tamanho"]:$this->db52_tamanho);
        $this->db52_ident = ($this->db52_ident == "f"?@$GLOBALS["HTTP_POST_VARS"]["db52_ident"]:$this->db52_ident);
        $this->db52_imprimir = ($this->db52_imprimir == "f"?@$GLOBALS["HTTP_POST_VARS"]["db52_imprimir"]:$this->db52_imprimir);
        $this->db52_alinha = ($this->db52_alinha == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_alinha"]:$this->db52_alinha);
        $this->db52_obs = ($this->db52_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_obs"]:$this->db52_obs);
-       $this->db52_quebraapos = ($this->db52_quebraapos == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_quebraapos"]:$this->db52_quebraapos);
+       $this->db52_quebraapos = ($this->db52_quebraapos === 0 || $this->db52_quebraapos === 0.0 || $this->db52_quebraapos == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_quebraapos"]:$this->db52_quebraapos);
      }else{
-       $this->db52_codigo = ($this->db52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_codigo"]:$this->db52_codigo);
+       $this->db52_codigo = ($this->db52_codigo === 0 || $this->db52_codigo === 0.0 || $this->db52_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db52_codigo"]:$this->db52_codigo);
      }
    }
    // funcao para inclusao
@@ -211,7 +211,7 @@ class cl_db_layoutcampos {
          $this->db52_codigo = $db52_codigo;
        }
      }
-     if(($this->db52_codigo == null) || ($this->db52_codigo == "") ){
+     if(($this->db52_codigo == null) || ($this->db52_codigo === 0 || $this->db52_codigo === 0.0 || $this->db52_codigo == "") ){
        $this->erro_sql = " Campo db52_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

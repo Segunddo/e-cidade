@@ -77,15 +77,15 @@ class cl_aguacorresp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x02_codcorresp = ($this->x02_codcorresp == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codcorresp"]:$this->x02_codcorresp);
-       $this->x02_codbairro = ($this->x02_codbairro == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codbairro"]:$this->x02_codbairro);
-       $this->x02_codrua = ($this->x02_codrua == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codrua"]:$this->x02_codrua);
-       $this->x02_numero = ($this->x02_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_numero"]:$this->x02_numero);
-       $this->x02_rota = ($this->x02_rota == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_rota"]:$this->x02_rota);
+       $this->x02_codcorresp = ($this->x02_codcorresp === 0 || $this->x02_codcorresp === 0.0 || $this->x02_codcorresp == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codcorresp"]:$this->x02_codcorresp);
+       $this->x02_codbairro = ($this->x02_codbairro === 0 || $this->x02_codbairro === 0.0 || $this->x02_codbairro == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codbairro"]:$this->x02_codbairro);
+       $this->x02_codrua = ($this->x02_codrua === 0 || $this->x02_codrua === 0.0 || $this->x02_codrua == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codrua"]:$this->x02_codrua);
+       $this->x02_numero = ($this->x02_numero === 0 || $this->x02_numero === 0.0 || $this->x02_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_numero"]:$this->x02_numero);
+       $this->x02_rota = ($this->x02_rota === 0 || $this->x02_rota === 0.0 || $this->x02_rota == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_rota"]:$this->x02_rota);
        $this->x02_orientacao = ($this->x02_orientacao == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_orientacao"]:$this->x02_orientacao);
        $this->x02_complemento = ($this->x02_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_complemento"]:$this->x02_complemento);
      }else{
-       $this->x02_codcorresp = ($this->x02_codcorresp == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codcorresp"]:$this->x02_codcorresp);
+       $this->x02_codcorresp = ($this->x02_codcorresp === 0 || $this->x02_codcorresp === 0.0 || $this->x02_codcorresp == ""?@$GLOBALS["HTTP_POST_VARS"]["x02_codcorresp"]:$this->x02_codcorresp);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_aguacorresp {
          $this->x02_codcorresp = $x02_codcorresp;
        }
      }
-     if(($this->x02_codcorresp == null) || ($this->x02_codcorresp == "") ){
+     if(($this->x02_codcorresp == null) || ($this->x02_codcorresp === 0 || $this->x02_codcorresp === 0.0 || $this->x02_codcorresp == "") ){
        $this->erro_sql = " Campo x02_codcorresp nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

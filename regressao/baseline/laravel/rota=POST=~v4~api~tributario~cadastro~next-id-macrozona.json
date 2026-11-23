@@ -1,0 +1,14 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "text/html; charset=UTF-8"
+  },
+  "id": "rota:POST:/v4/api/tributario/cadastro/next-id-macrozona",
+  "json": 1,
+  "sha256": "941065d6d0d22fd926c949505414fa58c2a8da7551e4f462128c86c2b1927ef2",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

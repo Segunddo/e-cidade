@@ -35,7 +35,7 @@ require_once modification("libs/db_utils.php");
 require_once modification("libs/db_app.utils.php");
 require_once modification("std/DBDate.php");
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 
 $resultedu               = eduparametros(db_getsession("DB_coddepto"));

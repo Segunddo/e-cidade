@@ -32,7 +32,7 @@ include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_fis_cadfiscais_classe.php"));
 require_once(modification('classes/db_fis_datalimitefiscal_classe.php'));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $clcadfiscais = new cl_fis_cadfiscais;
 $cldatalimite = new cl_fis_datalimitefiscal;

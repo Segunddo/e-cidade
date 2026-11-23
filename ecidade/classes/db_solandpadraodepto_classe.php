@@ -67,10 +67,10 @@ class cl_solandpadraodepto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc48_solandpadrao = ($this->pc48_solandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc48_solandpadrao"]:$this->pc48_solandpadrao);
-       $this->pc48_depto = ($this->pc48_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc48_depto"]:$this->pc48_depto);
+       $this->pc48_solandpadrao = ($this->pc48_solandpadrao === 0 || $this->pc48_solandpadrao === 0.0 || $this->pc48_solandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc48_solandpadrao"]:$this->pc48_solandpadrao);
+       $this->pc48_depto = ($this->pc48_depto === 0 || $this->pc48_depto === 0.0 || $this->pc48_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc48_depto"]:$this->pc48_depto);
      }else{
-       $this->pc48_solandpadrao = ($this->pc48_solandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc48_solandpadrao"]:$this->pc48_solandpadrao);
+       $this->pc48_solandpadrao = ($this->pc48_solandpadrao === 0 || $this->pc48_solandpadrao === 0.0 || $this->pc48_solandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc48_solandpadrao"]:$this->pc48_solandpadrao);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_solandpadraodepto {
        return false;
      }
        $this->pc48_solandpadrao = $pc48_solandpadrao;
-     if(($this->pc48_solandpadrao == null) || ($this->pc48_solandpadrao == "") ){
+     if(($this->pc48_solandpadrao == null) || ($this->pc48_solandpadrao === 0 || $this->pc48_solandpadrao === 0.0 || $this->pc48_solandpadrao == "") ){
        $this->erro_sql = " Campo pc48_solandpadrao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

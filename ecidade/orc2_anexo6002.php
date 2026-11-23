@@ -32,7 +32,7 @@ require_once(modification("libs/db_utils.php"));
 require_once(modification("libs/db_liborcamento.php"));
 require_once(modification("dbforms/db_funcoes.php"));
 
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 
 $classinatura = new cl_assinatura;
@@ -44,7 +44,7 @@ $xinstit =explode("-", $db_selinstit);
 $resultinst = db_query("select codigo,nomeinstabrev from db_config where codigo in (".str_replace('-', ', ', $db_selinstit).") ");
 $descr_inst = '';
 $xvirg = '';
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins ++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins ++) {
 	db_fieldsmemory($resultinst, $xins);
 	$descr_inst .= $xvirg.$nomeinstabrev;
 	$xvirg = ', ';
@@ -170,7 +170,7 @@ if ($origem == "O") {
 $result = db_dotacaosaldo(8, 1, 3, true, $sele_work, $anousu, $dataini, $datafin, $grupoini, $grupofin,false,$tipo_balanco);
 //$result = db_dotacaosaldo(8,1,2,true,$sele_work,$anousu,$dataini,$datafin,1,6);
 //db_criatabela($result);exit;
-$iTotalLinhas     = pg_num_rows($result);
+$iTotalLinhas     = ($result ? pg_num_rows($result) : null);
 $aLinhasRelatorio = array();
 if ($tipo_agrupa == 1) {
 

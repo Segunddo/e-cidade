@@ -71,13 +71,13 @@ class cl_orcsuplemrec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o85_codsup = ($this->o85_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codsup"]:$this->o85_codsup);
-       $this->o85_codrec = ($this->o85_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codrec"]:$this->o85_codrec);
-       $this->o85_anousu = ($this->o85_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_anousu"]:$this->o85_anousu);
-       $this->o85_valor = ($this->o85_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_valor"]:$this->o85_valor);
+       $this->o85_codsup = ($this->o85_codsup === 0 || $this->o85_codsup === 0.0 || $this->o85_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codsup"]:$this->o85_codsup);
+       $this->o85_codrec = ($this->o85_codrec === 0 || $this->o85_codrec === 0.0 || $this->o85_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codrec"]:$this->o85_codrec);
+       $this->o85_anousu = ($this->o85_anousu === 0 || $this->o85_anousu === 0.0 || $this->o85_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_anousu"]:$this->o85_anousu);
+       $this->o85_valor = ($this->o85_valor === 0 || $this->o85_valor === 0.0 || $this->o85_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_valor"]:$this->o85_valor);
      }else{
-       $this->o85_codsup = ($this->o85_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codsup"]:$this->o85_codsup);
-       $this->o85_codrec = ($this->o85_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codrec"]:$this->o85_codrec);
+       $this->o85_codsup = ($this->o85_codsup === 0 || $this->o85_codsup === 0.0 || $this->o85_codsup == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codsup"]:$this->o85_codsup);
+       $this->o85_codrec = ($this->o85_codrec === 0 || $this->o85_codrec === 0.0 || $this->o85_codrec == ""?@$GLOBALS["HTTP_POST_VARS"]["o85_codrec"]:$this->o85_codrec);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_orcsuplemrec {
      }
        $this->o85_codsup = $o85_codsup;
        $this->o85_codrec = $o85_codrec;
-     if(($this->o85_codsup == null) || ($this->o85_codsup == "") ){
+     if(($this->o85_codsup == null) || ($this->o85_codsup === 0 || $this->o85_codsup === 0.0 || $this->o85_codsup == "") ){
        $this->erro_sql = " Campo o85_codsup nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_orcsuplemrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->o85_codrec == null) || ($this->o85_codrec == "") ){
+     if(($this->o85_codrec == null) || ($this->o85_codrec === 0 || $this->o85_codrec === 0.0 || $this->o85_codrec == "") ){
        $this->erro_sql = " Campo o85_codrec nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

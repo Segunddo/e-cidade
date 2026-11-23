@@ -65,7 +65,7 @@ class cl_itbiparespecie {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->it11_grupo = ($this->it11_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["it11_grupo"]:$this->it11_grupo);
+       $this->it11_grupo = ($this->it11_grupo === 0 || $this->it11_grupo === 0.0 || $this->it11_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["it11_grupo"]:$this->it11_grupo);
      }else{
      }
    }

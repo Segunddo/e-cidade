@@ -78,9 +78,9 @@ class cl_issplanitold {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q73_sequencial = ($this->q73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_sequencial"]:$this->q73_sequencial);
-       $this->q73_issplanitorigem = ($this->q73_issplanitorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_issplanitorigem"]:$this->q73_issplanitorigem);
-       $this->q73_issplanitdestino = ($this->q73_issplanitdestino == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_issplanitdestino"]:$this->q73_issplanitdestino);
+       $this->q73_sequencial = ($this->q73_sequencial === 0 || $this->q73_sequencial === 0.0 || $this->q73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_sequencial"]:$this->q73_sequencial);
+       $this->q73_issplanitorigem = ($this->q73_issplanitorigem === 0 || $this->q73_issplanitorigem === 0.0 || $this->q73_issplanitorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_issplanitorigem"]:$this->q73_issplanitorigem);
+       $this->q73_issplanitdestino = ($this->q73_issplanitdestino === 0 || $this->q73_issplanitdestino === 0.0 || $this->q73_issplanitdestino == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_issplanitdestino"]:$this->q73_issplanitdestino);
        if($this->q73_data == ""){
          $this->q73_data_dia = ($this->q73_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_data_dia"]:$this->q73_data_dia);
          $this->q73_data_mes = ($this->q73_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_data_mes"]:$this->q73_data_mes);
@@ -92,7 +92,7 @@ class cl_issplanitold {
        $this->q73_hora = ($this->q73_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_hora"]:$this->q73_hora);
        $this->q73_ip = ($this->q73_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_ip"]:$this->q73_ip);
      }else{
-       $this->q73_sequencial = ($this->q73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_sequencial"]:$this->q73_sequencial);
+       $this->q73_sequencial = ($this->q73_sequencial === 0 || $this->q73_sequencial === 0.0 || $this->q73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q73_sequencial"]:$this->q73_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_issplanitold {
          $this->q73_sequencial = $q73_sequencial;
        }
      }
-     if(($this->q73_sequencial == null) || ($this->q73_sequencial == "") ){
+     if(($this->q73_sequencial == null) || ($this->q73_sequencial === 0 || $this->q73_sequencial === 0.0 || $this->q73_sequencial == "") ){
        $this->erro_sql = " Campo q73_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

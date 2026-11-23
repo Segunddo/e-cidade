@@ -46,7 +46,7 @@ for($i = 0;$i < sizeof($conta);$i++) {
                                                  c61_instit = ".db_getsession("DB_instit");
   $pdf->SetFont('Arial','B',9);
   $pdf->SetY($pdf->GetY() + 3);
-  $pdf->Cell(80,6,$conta[$i]." - ".pg_result($des,0,0),0,2,"L",0);
+  $pdf->Cell(80,6,$conta[$i]." - ".(is_string($des) ? null : ($des ? pg_result($des,0,0) : null)),0,2,"L",0);
   $DATAi = false;
   $DATAf = false;
   if(isset($datai) && trim($datai)!=""){
@@ -86,7 +86,7 @@ for($i = 0;$i < sizeof($conta);$i++) {
                      order by c.k12_hora";
 //		     die($sql);
   $result = db_query($sql);
-  $numrows = pg_numrows($result);
+  $numrows = ($result ? pg_numrows($result) : null);
   $pdf->SetFont('Arial','B',8);
   $pdf->setX(20);
   $pdf->Cell(16,3,"Data","LRB",0,"C",0);
@@ -98,23 +98,23 @@ for($i = 0;$i < sizeof($conta);$i++) {
   $pdf->SetFont('Arial','',7);
   for($j = 0;$j < $numrows;$j++) {
     $pdf->setX(20);
-    $pdf->Cell(16,3,pg_result($result,$j,"data"),"LR",0,"L",0);
-    $pdf->Cell(9,3,pg_result($result,$j,"k12_hora"),"R",0,"L",0);
-    $pdf->Cell(9,3,pg_result($result,$j,"k12_autent"),"R",0,"l",0);
-	if(pg_result($result,$j,"conta") != "") {
-	  if(pg_result($result,$j,"conta") == $conta[$i]) {
-        $pdf->Cell(30,3,pg_result($result,$j,"codigo")." Conta: ".pg_result($result,$j,"k12_conta"),"R",0,"L",0);
+    $pdf->Cell(16,3,($result ? pg_result($result,$j,"data") : null),"LR",0,"L",0);
+    $pdf->Cell(9,3,($result ? pg_result($result,$j,"k12_hora") : null),"R",0,"L",0);
+    $pdf->Cell(9,3,($result ? pg_result($result,$j,"k12_autent") : null),"R",0,"l",0);
+	if(($result ? pg_result($result,$j,"conta") : null) != "") {
+	  if(($result ? pg_result($result,$j,"conta") : null) == $conta[$i]) {
+        $pdf->Cell(30,3,($result ? pg_result($result,$j,"codigo") : null)." Conta: ".($result ? pg_result($result,$j,"k12_conta") : null),"R",0,"L",0);
         $pdf->Cell(15,3,"0","R",0,"R",0);
-        $pdf->Cell(15,3,number_format(pg_result($result,$j,"k12_valor"),2,".",","),"R",1,"R",0);
+        $pdf->Cell(15,3,number_format(($result ? pg_result($result,$j,"k12_valor") : null),2,".",","),"R",1,"R",0);
 	  } else {
-        $pdf->Cell(30,3,pg_result($result,$j,"codigo")." Conta: ".pg_result($result,$j,"conta"),"R",0,"L",0);
-        $pdf->Cell(15,3,number_format(pg_result($result,$j,"k12_valor"),2,".",","),"R",0,"R",0);
+        $pdf->Cell(30,3,($result ? pg_result($result,$j,"codigo") : null)." Conta: ".($result ? pg_result($result,$j,"conta") : null),"R",0,"L",0);
+        $pdf->Cell(15,3,number_format(($result ? pg_result($result,$j,"k12_valor") : null),2,".",","),"R",0,"R",0);
         $pdf->Cell(15,3,"0","R",1,"R",0);
 	  }
 	} else {
-      $pdf->Cell(30,3,pg_result($result,$j,"codigo"),"R",0,"L",0);
-      $pdf->Cell(15,3,((float)pg_result($result,$j,"k12_valor") >= 0)?number_format(pg_result($result,$j,"k12_valor"),2,".",","):"","R",0,"R",0);
-      $pdf->Cell(15,3,((float)pg_result($result,$j,"k12_valor") < 0)?number_format(pg_result($result,$j,"k12_valor"),2,".",","):"","R",1,"R",0);
+      $pdf->Cell(30,3,($result ? pg_result($result,$j,"codigo") : null),"R",0,"L",0);
+      $pdf->Cell(15,3,((float)($result ? pg_result($result,$j,"k12_valor") : null) >= 0)?number_format(($result ? pg_result($result,$j,"k12_valor") : null),2,".",","):"","R",0,"R",0);
+      $pdf->Cell(15,3,((float)($result ? pg_result($result,$j,"k12_valor") : null) < 0)?number_format(($result ? pg_result($result,$j,"k12_valor") : null),2,".",","):"","R",1,"R",0);
     }
   }
 }

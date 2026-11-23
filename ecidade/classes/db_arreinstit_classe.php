@@ -67,8 +67,8 @@ class cl_arreinstit {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_instit = ($this->k00_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_instit"]:$this->k00_instit);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_instit = ($this->k00_instit === 0 || $this->k00_instit === 0.0 || $this->k00_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_instit"]:$this->k00_instit);
      }else{
      }
    }

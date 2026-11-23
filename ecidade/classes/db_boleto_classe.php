@@ -80,7 +80,7 @@ class cl_boleto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k139_sequencial = ($this->k139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_sequencial"]:$this->k139_sequencial);
+       $this->k139_sequencial = ($this->k139_sequencial === 0 || $this->k139_sequencial === 0.0 || $this->k139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_sequencial"]:$this->k139_sequencial);
        if($this->k139_data == ""){
          $this->k139_data_dia = ($this->k139_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_data_dia"]:$this->k139_data_dia);
          $this->k139_data_mes = ($this->k139_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_data_mes"]:$this->k139_data_mes);
@@ -90,12 +90,12 @@ class cl_boleto {
          }
        }
        $this->k139_hora = ($this->k139_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_hora"]:$this->k139_hora);
-       $this->k139_usuario = ($this->k139_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_usuario"]:$this->k139_usuario);
-       $this->k139_conveniocobranca = ($this->k139_conveniocobranca == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_conveniocobranca"]:$this->k139_conveniocobranca);
-       $this->K139_regraemissao = ($this->K139_regraemissao == ""?@$GLOBALS["HTTP_POST_VARS"]["K139_regraemissao"]:$this->K139_regraemissao);
+       $this->k139_usuario = ($this->k139_usuario === 0 || $this->k139_usuario === 0.0 || $this->k139_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_usuario"]:$this->k139_usuario);
+       $this->k139_conveniocobranca = ($this->k139_conveniocobranca === 0 || $this->k139_conveniocobranca === 0.0 || $this->k139_conveniocobranca == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_conveniocobranca"]:$this->k139_conveniocobranca);
+       $this->K139_regraemissao = ($this->K139_regraemissao === 0 || $this->K139_regraemissao === 0.0 || $this->K139_regraemissao == ""?@$GLOBALS["HTTP_POST_VARS"]["K139_regraemissao"]:$this->K139_regraemissao);
        $this->k139_codigobarras = ($this->k139_codigobarras == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_codigobarras"]:$this->k139_codigobarras);
      }else{
-       $this->k139_sequencial = ($this->k139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_sequencial"]:$this->k139_sequencial);
+       $this->k139_sequencial = ($this->k139_sequencial === 0 || $this->k139_sequencial === 0.0 || $this->k139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k139_sequencial"]:$this->k139_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_boleto {
          $this->k139_sequencial = $k139_sequencial;
        }
      }
-     if(($this->k139_sequencial == null) || ($this->k139_sequencial == "") ){
+     if(($this->k139_sequencial == null) || ($this->k139_sequencial === 0 || $this->k139_sequencial === 0.0 || $this->k139_sequencial == "") ){
        $this->erro_sql = " Campo k139_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

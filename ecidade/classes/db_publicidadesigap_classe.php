@@ -82,11 +82,11 @@ class cl_publicidadesigap {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c48_sequencial = ($this->c48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_sequencial"]:$this->c48_sequencial);
-       $this->c48_meiocomunicacaosigap = ($this->c48_meiocomunicacaosigap == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_meiocomunicacaosigap"]:$this->c48_meiocomunicacaosigap);
-       $this->c48_instit = ($this->c48_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_instit"]:$this->c48_instit);
-       $this->c48_mes = ($this->c48_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_mes"]:$this->c48_mes);
-       $this->c48_ano = ($this->c48_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_ano"]:$this->c48_ano);
+       $this->c48_sequencial = ($this->c48_sequencial === 0 || $this->c48_sequencial === 0.0 || $this->c48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_sequencial"]:$this->c48_sequencial);
+       $this->c48_meiocomunicacaosigap = ($this->c48_meiocomunicacaosigap === 0 || $this->c48_meiocomunicacaosigap === 0.0 || $this->c48_meiocomunicacaosigap == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_meiocomunicacaosigap"]:$this->c48_meiocomunicacaosigap);
+       $this->c48_instit = ($this->c48_instit === 0 || $this->c48_instit === 0.0 || $this->c48_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_instit"]:$this->c48_instit);
+       $this->c48_mes = ($this->c48_mes === 0 || $this->c48_mes === 0.0 || $this->c48_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_mes"]:$this->c48_mes);
+       $this->c48_ano = ($this->c48_ano === 0 || $this->c48_ano === 0.0 || $this->c48_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_ano"]:$this->c48_ano);
        $this->c48_descricao = ($this->c48_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_descricao"]:$this->c48_descricao);
        if($this->c48_datapublicacao == ""){
          $this->c48_datapublicacao_dia = ($this->c48_datapublicacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_datapublicacao_dia"]:$this->c48_datapublicacao_dia);
@@ -96,9 +96,9 @@ class cl_publicidadesigap {
             $this->c48_datapublicacao = $this->c48_datapublicacao_ano."-".$this->c48_datapublicacao_mes."-".$this->c48_datapublicacao_dia;
          }
        }
-       $this->c48_tiporelatoriofiscal = ($this->c48_tiporelatoriofiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_tiporelatoriofiscal"]:$this->c48_tiporelatoriofiscal);
+       $this->c48_tiporelatoriofiscal = ($this->c48_tiporelatoriofiscal === 0 || $this->c48_tiporelatoriofiscal === 0.0 || $this->c48_tiporelatoriofiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_tiporelatoriofiscal"]:$this->c48_tiporelatoriofiscal);
      }else{
-       $this->c48_sequencial = ($this->c48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_sequencial"]:$this->c48_sequencial);
+       $this->c48_sequencial = ($this->c48_sequencial === 0 || $this->c48_sequencial === 0.0 || $this->c48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c48_sequencial"]:$this->c48_sequencial);
      }
    }
    // funcao para inclusao
@@ -191,7 +191,7 @@ class cl_publicidadesigap {
          $this->c48_sequencial = $c48_sequencial;
        }
      }
-     if(($this->c48_sequencial == null) || ($this->c48_sequencial == "") ){
+     if(($this->c48_sequencial == null) || ($this->c48_sequencial === 0 || $this->c48_sequencial === 0.0 || $this->c48_sequencial == "") ){
        $this->erro_sql = " Campo c48_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -35,7 +35,7 @@ include(modification("classes/db_turmaac_classe.php"));
 include(modification("classes/db_calendario_classe.php"));
 include(modification("classes/db_turno_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $clturmaac = new cl_turmaac;
 $clcalendario = new cl_calendario;
 $clturno = new cl_turno;

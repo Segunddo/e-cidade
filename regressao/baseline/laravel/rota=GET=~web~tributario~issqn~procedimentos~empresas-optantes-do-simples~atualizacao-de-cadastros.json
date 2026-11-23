@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/issqn/procedimentos/empresas-optantes-do-simples/atualizacao-de-cadastros",
+  "json": null,
+  "sha256": "bdb802c51ca0b957e0a7c01d2f040626d70a8ec5e01704e5afe9bb2e7bd74d4e",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

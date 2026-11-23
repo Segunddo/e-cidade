@@ -32,7 +32,7 @@ $clvistestem->rotulo->label();
 $clrotulo = new rotulocampo;
 $clrotulo->label("y70_id_usuario");
 $clrotulo->label("z01_nome");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 if(isset($opcao) && $opcao == "alterar"){
   echo "<script>parent.iframe_testem.location.href='fis1_fis_vistestem002.php?chavepesquisa=$y25_codvist&chavepesquisa1=$y25_numcgm'</script>";

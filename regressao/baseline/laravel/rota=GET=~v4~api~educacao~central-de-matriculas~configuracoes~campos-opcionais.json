@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/central-de-matriculas/configuracoes/campos-opcionais",
+  "json": {
+    "error": true,
+    "message": "Method App\\Domain\\Educacao\\CentralMatriculas\\Controllers\\ConfiguracoesController::getCamposOpcionais does not exist."
+  },
+  "sha256": "772a64af3563d3e08d0a90c67e63d0c370a1582611d63a793c73e9d8e684dc41",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

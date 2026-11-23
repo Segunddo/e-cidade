@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/arrecadacao/cadastros/grupo-de-taxas",
+  "json": null,
+  "sha256": "d11559b69135aa9b4ef8cb6ad35aec4b9443f6cbfc6825a17a89a8ce41233563",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

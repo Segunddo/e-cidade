@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/issqn/alvaraeventos/ordemservico/show",
+  "json": {
+    "errors": {
+      "q168_codigo": [
+        "O campo q168 codigo é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "35da55a8b025ae62f4395317d7b2ee3ada171e556cd21623556342c3b877d750",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

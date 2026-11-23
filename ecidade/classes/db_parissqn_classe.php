@@ -131,7 +131,7 @@ class cl_parissqn {
                  q60_riscoautomatico = bool = Risco Automa?tico
                  ";
    //funcao construtor da classe
-   public function cl_parissqn() 
+   public function __construct() 
    {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("parissqn");

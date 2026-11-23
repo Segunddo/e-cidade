@@ -34,7 +34,7 @@ require_once(modification("classes/db_empagemov_classe.php"));
 $clempagemov = new cl_empagemov;
 $clrotulo = new rotulocampo;
 
-parse_str(base64_decode($_SERVER["QUERY_STRING"]));
+parse_str(base64_decode($_SERVER["QUERY_STRING"]), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 
 $clrotulo->label("e60_numemp");

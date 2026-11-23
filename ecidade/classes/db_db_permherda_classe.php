@@ -67,11 +67,11 @@ class cl_db_permherda {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
-       $this->id_perfil = ($this->id_perfil == ""?@$GLOBALS["HTTP_POST_VARS"]["id_perfil"]:$this->id_perfil);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_perfil = ($this->id_perfil === 0 || $this->id_perfil === 0.0 || $this->id_perfil == ""?@$GLOBALS["HTTP_POST_VARS"]["id_perfil"]:$this->id_perfil);
      }else{
-       $this->id_usuario = ($this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
-       $this->id_perfil = ($this->id_perfil == ""?@$GLOBALS["HTTP_POST_VARS"]["id_perfil"]:$this->id_perfil);
+       $this->id_usuario = ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["id_usuario"]:$this->id_usuario);
+       $this->id_perfil = ($this->id_perfil === 0 || $this->id_perfil === 0.0 || $this->id_perfil == ""?@$GLOBALS["HTTP_POST_VARS"]["id_perfil"]:$this->id_perfil);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_db_permherda {
       $this->atualizacampos();
        $this->id_usuario = $id_usuario;
        $this->id_perfil = $id_perfil;
-     if(($this->id_usuario == null) || ($this->id_usuario == "") ){
+     if(($this->id_usuario == null) || ($this->id_usuario === 0 || $this->id_usuario === 0.0 || $this->id_usuario == "") ){
        $this->erro_sql = " Campo id_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_db_permherda {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->id_perfil == null) || ($this->id_perfil == "") ){
+     if(($this->id_perfil == null) || ($this->id_perfil === 0 || $this->id_perfil === 0.0 || $this->id_perfil == "") ){
        $this->erro_sql = " Campo id_perfil nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

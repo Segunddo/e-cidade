@@ -77,15 +77,15 @@ class cl_padsigapsubsidiosvereadores {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c16_sequencial = ($this->c16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_sequencial"]:$this->c16_sequencial);
-       $this->c16_mes = ($this->c16_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_mes"]:$this->c16_mes);
-       $this->c16_ano = ($this->c16_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_ano"]:$this->c16_ano);
-       $this->c16_numcgm = ($this->c16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_numcgm"]:$this->c16_numcgm);
-       $this->c16_instit = ($this->c16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_instit"]:$this->c16_instit);
-       $this->c16_subsidiomensal = ($this->c16_subsidiomensal == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_subsidiomensal"]:$this->c16_subsidiomensal);
-       $this->c16_subsidioextraordinario = ($this->c16_subsidioextraordinario == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_subsidioextraordinario"]:$this->c16_subsidioextraordinario);
+       $this->c16_sequencial = ($this->c16_sequencial === 0 || $this->c16_sequencial === 0.0 || $this->c16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_sequencial"]:$this->c16_sequencial);
+       $this->c16_mes = ($this->c16_mes === 0 || $this->c16_mes === 0.0 || $this->c16_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_mes"]:$this->c16_mes);
+       $this->c16_ano = ($this->c16_ano === 0 || $this->c16_ano === 0.0 || $this->c16_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_ano"]:$this->c16_ano);
+       $this->c16_numcgm = ($this->c16_numcgm === 0 || $this->c16_numcgm === 0.0 || $this->c16_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_numcgm"]:$this->c16_numcgm);
+       $this->c16_instit = ($this->c16_instit === 0 || $this->c16_instit === 0.0 || $this->c16_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_instit"]:$this->c16_instit);
+       $this->c16_subsidiomensal = ($this->c16_subsidiomensal === 0 || $this->c16_subsidiomensal === 0.0 || $this->c16_subsidiomensal == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_subsidiomensal"]:$this->c16_subsidiomensal);
+       $this->c16_subsidioextraordinario = ($this->c16_subsidioextraordinario === 0 || $this->c16_subsidioextraordinario === 0.0 || $this->c16_subsidioextraordinario == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_subsidioextraordinario"]:$this->c16_subsidioextraordinario);
      }else{
-       $this->c16_sequencial = ($this->c16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_sequencial"]:$this->c16_sequencial);
+       $this->c16_sequencial = ($this->c16_sequencial === 0 || $this->c16_sequencial === 0.0 || $this->c16_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c16_sequencial"]:$this->c16_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_padsigapsubsidiosvereadores {
          $this->c16_sequencial = $c16_sequencial;
        }
      }
-     if(($this->c16_sequencial == null) || ($this->c16_sequencial == "") ){
+     if(($this->c16_sequencial == null) || ($this->c16_sequencial === 0 || $this->c16_sequencial === 0.0 || $this->c16_sequencial == "") ){
        $this->erro_sql = " Campo c16_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

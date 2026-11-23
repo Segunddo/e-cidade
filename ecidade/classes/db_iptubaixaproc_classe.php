@@ -67,10 +67,10 @@ class cl_iptubaixaproc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j03_matric = ($this->j03_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j03_matric"]:$this->j03_matric);
-       $this->j03_codproc = ($this->j03_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j03_codproc"]:$this->j03_codproc);
+       $this->j03_matric = ($this->j03_matric === 0 || $this->j03_matric === 0.0 || $this->j03_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j03_matric"]:$this->j03_matric);
+       $this->j03_codproc = ($this->j03_codproc === 0 || $this->j03_codproc === 0.0 || $this->j03_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["j03_codproc"]:$this->j03_codproc);
      }else{
-       $this->j03_matric = ($this->j03_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j03_matric"]:$this->j03_matric);
+       $this->j03_matric = ($this->j03_matric === 0 || $this->j03_matric === 0.0 || $this->j03_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j03_matric"]:$this->j03_matric);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_iptubaixaproc {
        return false;
      }
        $this->j03_matric = $j03_matric;
-     if(($this->j03_matric == null) || ($this->j03_matric == "") ){
+     if(($this->j03_matric == null) || ($this->j03_matric === 0 || $this->j03_matric === 0.0 || $this->j03_matric == "") ){
        $this->erro_sql = " Campo j03_matric nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

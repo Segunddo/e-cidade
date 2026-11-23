@@ -28,7 +28,7 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("fpdf151/assinatura.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_SERVER_VARS);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -74,19 +74,19 @@ if(strlen($dbwhere)>0) {
 //    db_criatabela($resultado); exit;
 }
 
-if(@pg_numrows($resultado)==0) {
+if(@($resultado ? pg_numrows($resultado) : null)==0) {
     db_redireciona('db_erros.php?fechar=true&db_erro=<center>Não existem Lançamento de lotes.</center>');
     exit;
 }
 
-$numrows = pg_numrows($resultado);
+$numrows = ($resultado ? pg_numrows($resultado) : null);
 
 $xinstit =explode("-",$db_selinstit);
 $resultinst = db_query("select codigo,nomeinst from db_config where codigo in (".str_replace('-',', ',$db_selinstit).") ");
 
 $descr_inst = '';
 $xvirg = '';
-for($xins = 0; $xins < pg_numrows($resultinst); $xins++){
+for($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins++){
     db_fieldsmemory($resultinst,$xins);
     $descr_inst .= $xvirg.$nomeinst ;
     $xvirg = ', ';

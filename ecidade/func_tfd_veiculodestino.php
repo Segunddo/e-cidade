@@ -34,7 +34,7 @@ require_once(modification("classes/db_tfd_veiculodestino_classe.php"));
 
 db_postmemory($HTTP_POST_VARS);
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $oDaotfd_veiculodestino = new cl_tfd_veiculodestino;
 $oDaotfd_veiculodestino->rotulo->label('tf18_i_codigo');

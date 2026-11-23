@@ -55,10 +55,10 @@ class cl_remessacobrancaregistrada {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k147_sequencial = ($this->k147_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_sequencial"]:$this->k147_sequencial);
-       $this->k147_instit = ($this->k147_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_instit"]:$this->k147_instit);
-       $this->k147_convenio = ($this->k147_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_convenio"]:$this->k147_convenio);
-       $this->k147_sequencialremessa = ($this->k147_sequencialremessa == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_sequencialremessa"]:$this->k147_sequencialremessa);
+       $this->k147_sequencial = ($this->k147_sequencial === 0 || $this->k147_sequencial === 0.0 || $this->k147_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_sequencial"]:$this->k147_sequencial);
+       $this->k147_instit = ($this->k147_instit === 0 || $this->k147_instit === 0.0 || $this->k147_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_instit"]:$this->k147_instit);
+       $this->k147_convenio = ($this->k147_convenio === 0 || $this->k147_convenio === 0.0 || $this->k147_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_convenio"]:$this->k147_convenio);
+       $this->k147_sequencialremessa = ($this->k147_sequencialremessa === 0 || $this->k147_sequencialremessa === 0.0 || $this->k147_sequencialremessa == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_sequencialremessa"]:$this->k147_sequencialremessa);
        if($this->k147_dataemissao == ""){
          $this->k147_dataemissao_dia = ($this->k147_dataemissao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_dataemissao_dia"]:$this->k147_dataemissao_dia);
          $this->k147_dataemissao_mes = ($this->k147_dataemissao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_dataemissao_mes"]:$this->k147_dataemissao_mes);
@@ -71,7 +71,7 @@ class cl_remessacobrancaregistrada {
        $this->k147_arquivoremessa = ($this->k147_arquivoremessa == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_arquivoremessa"]:$this->k147_arquivoremessa);
        $this->k147_tiposemissao = ($this->k147_tiposemissao == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_tiposemissao"]:$this->k147_tiposemissao);
      }else{
-       $this->k147_sequencial = ($this->k147_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_sequencial"]:$this->k147_sequencial);
+       $this->k147_sequencial = ($this->k147_sequencial === 0 || $this->k147_sequencial === 0.0 || $this->k147_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k147_sequencial"]:$this->k147_sequencial);
      }
    }
    // funcao para Inclusão
@@ -146,7 +146,7 @@ class cl_remessacobrancaregistrada {
          $this->k147_sequencial = $k147_sequencial; 
        }
      }
-     if(($this->k147_sequencial == null) || ($this->k147_sequencial == "") ){ 
+     if(($this->k147_sequencial == null) || ($this->k147_sequencial === 0 || $this->k147_sequencial === 0.0 || $this->k147_sequencial == "") ){ 
        $this->erro_sql = " Campo k147_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -77,15 +77,15 @@ class cl_abatimentoarreckeyarrecadcompos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k129_sequencial = ($this->k129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_sequencial"]:$this->k129_sequencial);
-       $this->k129_abatimentoarreckey = ($this->k129_abatimentoarreckey == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_abatimentoarreckey"]:$this->k129_abatimentoarreckey);
-       $this->k129_arrecadcompos = ($this->k129_arrecadcompos == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_arrecadcompos"]:$this->k129_arrecadcompos);
-       $this->k129_vlrhist = ($this->k129_vlrhist == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_vlrhist"]:$this->k129_vlrhist);
-       $this->k129_correcao = ($this->k129_correcao == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_correcao"]:$this->k129_correcao);
-       $this->k129_juros = ($this->k129_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_juros"]:$this->k129_juros);
-       $this->k129_multa = ($this->k129_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_multa"]:$this->k129_multa);
+       $this->k129_sequencial = ($this->k129_sequencial === 0 || $this->k129_sequencial === 0.0 || $this->k129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_sequencial"]:$this->k129_sequencial);
+       $this->k129_abatimentoarreckey = ($this->k129_abatimentoarreckey === 0 || $this->k129_abatimentoarreckey === 0.0 || $this->k129_abatimentoarreckey == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_abatimentoarreckey"]:$this->k129_abatimentoarreckey);
+       $this->k129_arrecadcompos = ($this->k129_arrecadcompos === 0 || $this->k129_arrecadcompos === 0.0 || $this->k129_arrecadcompos == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_arrecadcompos"]:$this->k129_arrecadcompos);
+       $this->k129_vlrhist = ($this->k129_vlrhist === 0 || $this->k129_vlrhist === 0.0 || $this->k129_vlrhist == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_vlrhist"]:$this->k129_vlrhist);
+       $this->k129_correcao = ($this->k129_correcao === 0 || $this->k129_correcao === 0.0 || $this->k129_correcao == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_correcao"]:$this->k129_correcao);
+       $this->k129_juros = ($this->k129_juros === 0 || $this->k129_juros === 0.0 || $this->k129_juros == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_juros"]:$this->k129_juros);
+       $this->k129_multa = ($this->k129_multa === 0 || $this->k129_multa === 0.0 || $this->k129_multa == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_multa"]:$this->k129_multa);
      }else{
-       $this->k129_sequencial = ($this->k129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_sequencial"]:$this->k129_sequencial);
+       $this->k129_sequencial = ($this->k129_sequencial === 0 || $this->k129_sequencial === 0.0 || $this->k129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k129_sequencial"]:$this->k129_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_abatimentoarreckeyarrecadcompos {
          $this->k129_sequencial = $k129_sequencial;
        }
      }
-     if(($this->k129_sequencial == null) || ($this->k129_sequencial == "") ){
+     if(($this->k129_sequencial == null) || ($this->k129_sequencial === 0 || $this->k129_sequencial === 0.0 || $this->k129_sequencial == "") ){
        $this->erro_sql = " Campo k129_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

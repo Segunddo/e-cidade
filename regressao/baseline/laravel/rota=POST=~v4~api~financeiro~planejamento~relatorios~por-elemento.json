@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/planejamento/relatorios/por-elemento",
+  "json": {
+    "error": true,
+    "message": "Undefined index: planejamento_id"
+  },
+  "sha256": "b22496c91d3981e33b3006d74d825196a7d8525fa32fa495b818c98e3dced925",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

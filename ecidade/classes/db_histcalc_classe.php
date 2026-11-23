@@ -52,7 +52,7 @@ class cl_histcalc {
                  k01_tipo = char(5) = Tipo do historico de calculo 
                  ";
    //funcao construtor da classe 
-   public function cl_histcalc() { 
+   public function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("histcalc"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_histcalc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k01_codigo = ($this->k01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k01_codigo"]:$this->k01_codigo);
+       $this->k01_codigo = ($this->k01_codigo === 0 || $this->k01_codigo === 0.0 || $this->k01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k01_codigo"]:$this->k01_codigo);
        $this->k01_descr = ($this->k01_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k01_descr"]:$this->k01_descr);
        $this->k01_tipo = ($this->k01_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["k01_tipo"]:$this->k01_tipo);
      }else{
-       $this->k01_codigo = ($this->k01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k01_codigo"]:$this->k01_codigo);
+       $this->k01_codigo = ($this->k01_codigo === 0 || $this->k01_codigo === 0.0 || $this->k01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["k01_codigo"]:$this->k01_codigo);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_histcalc {
        return false;
      }
        $this->k01_codigo = $k01_codigo; 
-     if(($this->k01_codigo == null) || ($this->k01_codigo == "") ){ 
+     if(($this->k01_codigo == null) || ($this->k01_codigo === 0 || $this->k01_codigo === 0.0 || $this->k01_codigo == "") ){ 
        $this->erro_sql = " Campo k01_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

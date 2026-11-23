@@ -69,11 +69,11 @@ class cl_db_relatselecionados {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db93_codigo = ($this->db93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db93_codigo"]:$this->db93_codigo);
-       $this->db93_codrel = ($this->db93_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db93_codrel"]:$this->db93_codrel);
-       $this->db93_codcam = ($this->db93_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db93_codcam"]:$this->db93_codcam);
+       $this->db93_codigo = ($this->db93_codigo === 0 || $this->db93_codigo === 0.0 || $this->db93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db93_codigo"]:$this->db93_codigo);
+       $this->db93_codrel = ($this->db93_codrel === 0 || $this->db93_codrel === 0.0 || $this->db93_codrel == ""?@$GLOBALS["HTTP_POST_VARS"]["db93_codrel"]:$this->db93_codrel);
+       $this->db93_codcam = ($this->db93_codcam === 0 || $this->db93_codcam === 0.0 || $this->db93_codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["db93_codcam"]:$this->db93_codcam);
      }else{
-       $this->db93_codigo = ($this->db93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db93_codigo"]:$this->db93_codigo);
+       $this->db93_codigo = ($this->db93_codigo === 0 || $this->db93_codigo === 0.0 || $this->db93_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db93_codigo"]:$this->db93_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_relatselecionados {
          $this->db93_codigo = $db93_codigo;
        }
      }
-     if(($this->db93_codigo == null) || ($this->db93_codigo == "") ){
+     if(($this->db93_codigo == null) || ($this->db93_codigo === 0 || $this->db93_codigo === 0.0 || $this->db93_codigo == "") ){
        $this->erro_sql = " Campo db93_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

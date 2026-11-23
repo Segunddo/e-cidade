@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/saude/ambulatorial/cadastros/unidade-origem",
+  "json": null,
+  "sha256": "2f5abcfbb25ad262b252b6f43df52f84803c4f5b2e64239730f6c53660c18bbd",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

@@ -90,9 +90,9 @@ class cl_saniatividade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y83_codsani = ($this->y83_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_codsani"]:$this->y83_codsani);
-       $this->y83_seq = ($this->y83_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_seq"]:$this->y83_seq);
-       $this->y83_ativ = ($this->y83_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_ativ"]:$this->y83_ativ);
+       $this->y83_codsani = ($this->y83_codsani === 0 || $this->y83_codsani === 0.0 || $this->y83_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_codsani"]:$this->y83_codsani);
+       $this->y83_seq = ($this->y83_seq === 0 || $this->y83_seq === 0.0 || $this->y83_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_seq"]:$this->y83_seq);
+       $this->y83_ativ = ($this->y83_ativ === 0 || $this->y83_ativ === 0.0 || $this->y83_ativ == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_ativ"]:$this->y83_ativ);
        if($this->y83_dtini == ""){
          $this->y83_dtini_dia = ($this->y83_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_dtini_dia"]:$this->y83_dtini_dia);
          $this->y83_dtini_mes = ($this->y83_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_dtini_mes"]:$this->y83_dtini_mes);
@@ -109,7 +109,7 @@ class cl_saniatividade {
             $this->y83_dtfim = $this->y83_dtfim_ano."-".$this->y83_dtfim_mes."-".$this->y83_dtfim_dia;
          }
        }
-       $this->y83_area = ($this->y83_area == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_area"]:$this->y83_area);
+       $this->y83_area = ($this->y83_area === 0 || $this->y83_area === 0.0 || $this->y83_area == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_area"]:$this->y83_area);
        $this->y83_ativprinc = ($this->y83_ativprinc == "f"?@$GLOBALS["HTTP_POST_VARS"]["y83_ativprinc"]:$this->y83_ativprinc);
        $this->y83_perman = ($this->y83_perman == "f"?@$GLOBALS["HTTP_POST_VARS"]["y83_perman"]:$this->y83_perman);
        if($this->y83_databx == ""){
@@ -121,8 +121,8 @@ class cl_saniatividade {
          }
        }
      }else{
-       $this->y83_codsani = ($this->y83_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_codsani"]:$this->y83_codsani);
-       $this->y83_seq = ($this->y83_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_seq"]:$this->y83_seq);
+       $this->y83_codsani = ($this->y83_codsani === 0 || $this->y83_codsani === 0.0 || $this->y83_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_codsani"]:$this->y83_codsani);
+       $this->y83_seq = ($this->y83_seq === 0 || $this->y83_seq === 0.0 || $this->y83_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["y83_seq"]:$this->y83_seq);
      }
    }
    // funcao para inclusao
@@ -175,7 +175,7 @@ class cl_saniatividade {
      }
        $this->y83_codsani = $y83_codsani;
        $this->y83_seq = $y83_seq;
-     if(($this->y83_codsani == null) || ($this->y83_codsani == "") ){
+     if(($this->y83_codsani == null) || ($this->y83_codsani === 0 || $this->y83_codsani === 0.0 || $this->y83_codsani == "") ){
        $this->erro_sql = " Campo y83_codsani nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -183,7 +183,7 @@ class cl_saniatividade {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y83_seq == null) || ($this->y83_seq == "") ){
+     if(($this->y83_seq == null) || ($this->y83_seq === 0 || $this->y83_seq === 0.0 || $this->y83_seq == "") ){
        $this->erro_sql = " Campo y83_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

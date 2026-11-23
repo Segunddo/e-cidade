@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/saude/ambulatorial/consultas/consulta-cgs-unificado",
+  "json": null,
+  "sha256": "772dfc090ddb1e23274596ff877e1545cf9024c58038bf8501dbe9ed56ac965a",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

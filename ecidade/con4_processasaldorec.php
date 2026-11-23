@@ -132,14 +132,14 @@ if ($clconencerramento->numrows == 0){
 
 }
 $result = db_planocontassaldo_matriz($anousu,$dt_ini,$dt_fin,false,"substr(c60_estrut,1,1) in ('3','4','9') and c61_instit= ".db_getsession("DB_instit"),'','true','true');
-$iNumRowsLan = pg_num_rows($result);
+$iNumRowsLan = ($result ? pg_num_rows($result) : null);
 if ($debug==true){
       echo "processando receita, zera contas conta 511, documento 1001 à debito";
       db_criatabela($result);
 }
 //db_criatabela($result);
 //exit;
-for ($x=0;$x< pg_numrows($result);$x++) {
+for ($x=0;$x< ($result ? pg_numrows($result) : null);$x++) {
 
 	$oConta = db_utils::fieldsmemory($result,$x);
 

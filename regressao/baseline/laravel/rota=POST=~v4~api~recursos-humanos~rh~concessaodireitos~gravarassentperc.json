@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/rh/concessaodireitos/gravarassentperc",
+  "json": {
+    "data": [],
+    "error": true,
+    "message": "{\"rh501_ordem\":[\"O campo rh501 ordem \\u00e9 obrigat\\u00f3rio.\"],\"rh501_perc\":[\"O campo rh501 perc \\u00e9 obrigat\\u00f3rio.\"],\"rh501_unidade\":[\"O campo rh501 unidade \\u00e9 obrigat\\u00f3rio.\"]}"
+  },
+  "sha256": "02ca382298b921cda47a1b679be4d5c2938506783164db33ff6bb4e694b5a8f5",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

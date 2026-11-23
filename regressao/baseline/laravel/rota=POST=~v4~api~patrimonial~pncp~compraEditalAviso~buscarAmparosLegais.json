@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/patrimonial/pncp/compraEditalAviso/buscarAmparosLegais",
+  "json": {
+    "error": true,
+    "message": "Undefined index: "
+  },
+  "sha256": "ea178c334554dab28dab2ef3d38d702d42b05c54445bedb698f6562a634178af",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

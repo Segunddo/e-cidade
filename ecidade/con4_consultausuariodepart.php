@@ -38,7 +38,7 @@ $sqldepart = "select distinct db_depart.coddepto, descrdepto,instit
               where db_depusu.id_usuario = $id_usuario
               ";
 $resultdepart = db_query($sqldepart);
-$linhasdepart = pg_num_rows($resultdepart);
+$linhasdepart = ($resultdepart ? pg_num_rows($resultdepart) : null);
 ?>
 <html>
 <head>

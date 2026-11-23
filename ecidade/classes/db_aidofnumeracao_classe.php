@@ -65,16 +65,16 @@ class cl_aidofnumeracao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y115_numeracao = ($this->y115_numeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["y115_numeracao"]:$this->y115_numeracao);
+       $this->y115_numeracao = ($this->y115_numeracao === 0 || $this->y115_numeracao === 0.0 || $this->y115_numeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["y115_numeracao"]:$this->y115_numeracao);
      }else{
-       $this->y115_numeracao = ($this->y115_numeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["y115_numeracao"]:$this->y115_numeracao);
+       $this->y115_numeracao = ($this->y115_numeracao === 0 || $this->y115_numeracao === 0.0 || $this->y115_numeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["y115_numeracao"]:$this->y115_numeracao);
      }
    }
    // funcao para inclusao
    public function incluir ($y115_numeracao){
       $this->atualizacampos();
        $this->y115_numeracao = $y115_numeracao;
-     if(($this->y115_numeracao == null) || ($this->y115_numeracao == "") ){
+     if(($this->y115_numeracao == null) || ($this->y115_numeracao === 0 || $this->y115_numeracao === 0.0 || $this->y115_numeracao == "") ){
        $this->erro_sql = " Campo y115_numeracao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

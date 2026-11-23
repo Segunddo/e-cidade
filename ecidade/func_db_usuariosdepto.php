@@ -34,7 +34,7 @@ include(modification("classes/db_db_usuarios_classe.php"));
 include(modification("classes/db_db_depusu_classe.php"));
 include(modification("classes/db_cadfiscais_classe.php"));
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldb_usuarios = new cl_db_usuarios;
 $cldb_depusu   = new cl_db_depusu;
 $clcadfiscais  = new cl_cadfiscais;

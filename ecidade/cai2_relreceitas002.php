@@ -28,7 +28,7 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 $pdf = new PDF();
 $pdf->Open();
@@ -44,7 +44,7 @@ if ( $codrec == '') {
 
    $sql    = "select upper(k02_drecei) as k07_descr from tabrec where k02_codigo = $codrec";
    $result = db_query($sql);
-   $head4  = $codrec.' - '.pg_result($result,0,'k07_descr');
+   $head4  = $codrec.' - '.($result ? pg_result($result,0,'k07_descr') : null);
    $ordem  = ' order by g.k02_codigo, f.k00_dtpaga, e.z01_nome ';
    $where  = ' f.k00_receit = '.$codrec.' and ';
 }
@@ -182,7 +182,7 @@ if ($agrupar == 't') {
  //echo $sql;exit;
 
 $result = db_query($sql);
-$xxnum  = pg_num_rows($result);
+$xxnum  = ($result ? pg_num_rows($result) : null);
 if ($xxnum == 0) {
 
   $sMsgErro  = "db_erros.php?fechar=true&db_erro=Não existem lançamentos para a receita ";
@@ -232,7 +232,7 @@ if ($agrupar == 't') {
   $pdf->SetTextColor(0,0,0);
   $pdf->SetFillColor(220);
   $pdf->SetFont('Arial','B',7);
-  $receita = trim(pg_result($result,0,'k02_codigo')).' - '.trim(strtoupper(pg_result($result,0,'k02_drecei')));
+  $receita = trim(($result ? pg_result($result,0,'k02_codigo') : null)).' - '.trim(strtoupper(($result ? pg_result($result,0,'k02_drecei') : null)));
   $pdf->multicell(0,6,$receita,0,"L",0);
   $pdf->Cell(12,6,"NUMPRE",1,0,"C",1);
   $pdf->Cell(60,6,"NOME",1,0,"C",1);

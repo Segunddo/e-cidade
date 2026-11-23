@@ -1,0 +1,131 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/cadastro/estados",
+  "json": {
+    "data": [
+      {
+        "codigo": "AC",
+        "descricao": "ACRE"
+      },
+      {
+        "codigo": "AL",
+        "descricao": "ALAGOAS"
+      },
+      {
+        "codigo": "AP",
+        "descricao": "AMAPA"
+      },
+      {
+        "codigo": "AM",
+        "descricao": "AMAZONAS"
+      },
+      {
+        "codigo": "BA",
+        "descricao": "BAHIA"
+      },
+      {
+        "codigo": "CE",
+        "descricao": "CEARA"
+      },
+      {
+        "codigo": "CH",
+        "descricao": "CHILE"
+      },
+      {
+        "codigo": "DF",
+        "descricao": "DISTRITO FEDERAL"
+      },
+      {
+        "codigo": "ES",
+        "descricao": "ESPIRITO SANTO"
+      },
+      {
+        "codigo": "GO",
+        "descricao": "GOIAS"
+      },
+      {
+        "codigo": "MA",
+        "descricao": "MARANHAO"
+      },
+      {
+        "codigo": "MT",
+        "descricao": "MATO GROSSO"
+      },
+      {
+        "codigo": "MS",
+        "descricao": "MATO GROSSO DO SUL"
+      },
+      {
+        "codigo": "MG",
+        "descricao": "MINAS GERAIS"
+      },
+      {
+        "codigo": "PA",
+        "descricao": "PARA"
+      },
+      {
+        "codigo": "PB",
+        "descricao": "PARAIBA"
+      },
+      {
+        "codigo": "PR",
+        "descricao": "PARANA"
+      },
+      {
+        "codigo": "PE",
+        "descricao": "PERNAMBUCO"
+      },
+      {
+        "codigo": "PI",
+        "descricao": "PIAUI"
+      },
+      {
+        "codigo": "RJ",
+        "descricao": "RIO DE JANEIRO"
+      },
+      {
+        "codigo": "RN",
+        "descricao": "RIO GRANDE DO NORTE"
+      },
+      {
+        "codigo": "RS",
+        "descricao": "RIO GRANDE DO SUL"
+      },
+      {
+        "codigo": "RO",
+        "descricao": "RONDONIA"
+      },
+      {
+        "codigo": "RR",
+        "descricao": "RORAIMA"
+      },
+      {
+        "codigo": "SC",
+        "descricao": "SANTA CATARINA"
+      },
+      {
+        "codigo": "SP",
+        "descricao": "SAO PAULO"
+      },
+      {
+        "codigo": "SE",
+        "descricao": "SERGIPE"
+      },
+      {
+        "codigo": "TO",
+        "descricao": "TOCANTINS"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "d658f265d0486149eed6f255f335ad9a93fd93c1c84cdd93eaf4f9985af19569",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

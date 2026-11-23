@@ -36,7 +36,7 @@ $clrotulo->label('pc02_codobjeto');
 $clrotulo->label('pc02_descrobjeto');
 $clrotulo->label('pc02_complobjeto');
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 if($ordem == "a") {

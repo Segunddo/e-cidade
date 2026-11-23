@@ -69,11 +69,11 @@ class cl_issvarsemmovreg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q15_sequencial = ($this->q15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_sequencial"]:$this->q15_sequencial);
-       $this->q15_issvarsemmov = ($this->q15_issvarsemmov == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_issvarsemmov"]:$this->q15_issvarsemmov);
-       $this->q15_issvar = ($this->q15_issvar == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_issvar"]:$this->q15_issvar);
+       $this->q15_sequencial = ($this->q15_sequencial === 0 || $this->q15_sequencial === 0.0 || $this->q15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_sequencial"]:$this->q15_sequencial);
+       $this->q15_issvarsemmov = ($this->q15_issvarsemmov === 0 || $this->q15_issvarsemmov === 0.0 || $this->q15_issvarsemmov == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_issvarsemmov"]:$this->q15_issvarsemmov);
+       $this->q15_issvar = ($this->q15_issvar === 0 || $this->q15_issvar === 0.0 || $this->q15_issvar == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_issvar"]:$this->q15_issvar);
      }else{
-       $this->q15_sequencial = ($this->q15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_sequencial"]:$this->q15_sequencial);
+       $this->q15_sequencial = ($this->q15_sequencial === 0 || $this->q15_sequencial === 0.0 || $this->q15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q15_sequencial"]:$this->q15_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_issvarsemmovreg {
          $this->q15_sequencial = $q15_sequencial;
        }
      }
-     if(($this->q15_sequencial == null) || ($this->q15_sequencial == "") ){
+     if(($this->q15_sequencial == null) || ($this->q15_sequencial === 0 || $this->q15_sequencial === 0.0 || $this->q15_sequencial == "") ){
        $this->erro_sql = " Campo q15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

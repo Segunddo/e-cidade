@@ -73,13 +73,13 @@ class cl_tipoisen {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j45_tipo = ($this->j45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j45_tipo"]:$this->j45_tipo);
+       $this->j45_tipo = ($this->j45_tipo === 0 || $this->j45_tipo === 0.0 || $this->j45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j45_tipo"]:$this->j45_tipo);
        $this->j45_descr = ($this->j45_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j45_descr"]:$this->j45_descr);
-       $this->j45_tipis = ($this->j45_tipis == ""?@$GLOBALS["HTTP_POST_VARS"]["j45_tipis"]:$this->j45_tipis);
+       $this->j45_tipis = ($this->j45_tipis === 0 || $this->j45_tipis === 0.0 || $this->j45_tipis == ""?@$GLOBALS["HTTP_POST_VARS"]["j45_tipis"]:$this->j45_tipis);
        $this->j45_taxas = ($this->j45_taxas == "f"?@$GLOBALS["HTTP_POST_VARS"]["j45_taxas"]:$this->j45_taxas);
        $this->j45_obscertidao = ($this->j45_obscertidao == ""?@$GLOBALS["HTTP_POST_VARS"]["j45_obscertidao"]:$this->j45_obscertidao);
      }else{
-       $this->j45_tipo = ($this->j45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j45_tipo"]:$this->j45_tipo);
+       $this->j45_tipo = ($this->j45_tipo === 0 || $this->j45_tipo === 0.0 || $this->j45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["j45_tipo"]:$this->j45_tipo);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_tipoisen {
          $this->j45_tipo = $j45_tipo;
        }
      }
-     if(($this->j45_tipo == null) || ($this->j45_tipo == "") ){
+     if(($this->j45_tipo == null) || ($this->j45_tipo === 0 || $this->j45_tipo === 0.0 || $this->j45_tipo == "") ){
        $this->erro_sql = " Campo j45_tipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -78,13 +78,13 @@ class cl_iptunumpold {
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->j130_sequencial = ($this->j130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_sequencial"]:$this->j130_sequencial);
-       $this->j130_anousu = ($this->j130_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_anousu"]:$this->j130_anousu);
-       $this->j130_matric = ($this->j130_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_matric"]:$this->j130_matric);
-       $this->j130_numpre = ($this->j130_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_numpre"]:$this->j130_numpre);
-       $this->j130_iptucalclog = ($this->j130_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_iptucalclog"]:$this->j130_iptucalclog);
+       $this->j130_sequencial = ($this->j130_sequencial === 0 || $this->j130_sequencial === 0.0 || $this->j130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_sequencial"]:$this->j130_sequencial);
+       $this->j130_anousu = ($this->j130_anousu === 0 || $this->j130_anousu === 0.0 || $this->j130_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_anousu"]:$this->j130_anousu);
+       $this->j130_matric = ($this->j130_matric === 0 || $this->j130_matric === 0.0 || $this->j130_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_matric"]:$this->j130_matric);
+       $this->j130_numpre = ($this->j130_numpre === 0 || $this->j130_numpre === 0.0 || $this->j130_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_numpre"]:$this->j130_numpre);
+       $this->j130_iptucalclog = ($this->j130_iptucalclog === 0 || $this->j130_iptucalclog === 0.0 || $this->j130_iptucalclog == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_iptucalclog"]:$this->j130_iptucalclog);
      }else{
-       $this->j130_sequencial = ($this->j130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_sequencial"]:$this->j130_sequencial);
+       $this->j130_sequencial = ($this->j130_sequencial === 0 || $this->j130_sequencial === 0.0 || $this->j130_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j130_sequencial"]:$this->j130_sequencial);
      }
    }
 
@@ -152,7 +152,7 @@ class cl_iptunumpold {
          $this->j130_sequencial = $j130_sequencial;
        }
      }
-     if(($this->j130_sequencial == null) || ($this->j130_sequencial == "") ){
+     if(($this->j130_sequencial == null) || ($this->j130_sequencial === 0 || $this->j130_sequencial === 0.0 || $this->j130_sequencial == "") ){
        $this->erro_sql = " Campo j130_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

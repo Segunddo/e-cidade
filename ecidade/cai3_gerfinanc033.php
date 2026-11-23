@@ -71,7 +71,7 @@ $oPost = db_utils::postMemory($aDados);
 
 db_postmemory($aDados);
 db_postmemory($_GET);
-parse_str($_SERVER['QUERY_STRING']);
+parse_str($_SERVER['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $vlrjuros = 0;
 $vlrmulta = 0;
 $nDesconto = 0;
@@ -98,7 +98,7 @@ $histinf = "";
 $result = db_query("select codmodelo, k03_tipo, to_char(k00_txban,'99.99') as tx_banc
                     from arretipo where k00_tipo = $tipo_debito and k00_instit = " . db_getsession("DB_instit"));
 db_fieldsmemory($result, 0);
-pg_free_result($result);
+($result ? pg_free_result($result) : null);
 $aParcelasSemInflatores = array();
 $aNumpresProcessados    = array();
 $aNumpresUnicas         = array();
@@ -227,7 +227,7 @@ $sqlparag .= "   and db03_instit = " . db_getsession("DB_instit") . " ";
 $sqlparag .= " order by db04_ordem ";
 $resparag = db_query($sqlparag);
 
-if (pg_num_rows($resparag) == 0) {
+if (($resparag ? pg_num_rows($resparag) : null) == 0) {
     $pdf1->secretaria = 'SECRETARIA DE FINANÇAS';
 } else {
     db_fieldsmemory($resparag, 0);
@@ -296,7 +296,7 @@ if (isset($oPost->marcarvencidas) && isset($oPost->marcartodas)) {
             $sSqlArrecad .= "     and k00_numpar   = {$iNumpar}     ";
             $sSqlArrecad .= "     and k00_dtvenc   > '{$sDataVenc}' ";
             $rsSqlArrecad = db_query($sSqlArrecad);
-            $iNumRows = pg_num_rows($rsSqlArrecad);
+            $iNumRows = ($rsSqlArrecad ? pg_num_rows($rsSqlArrecad) : null);
 
             if ($iNumRows == 0) {
                 if ($_POST["tipo_debito"] == 3 || $_POST["tipo_debito"] == 5) {
@@ -388,10 +388,10 @@ if (!empty($listaDeNumpres)) {
     $pdf1->msgcontribuintecodforo = '';
 
     $sHistoricoIniciaisParcelamento = "";
-    if (pg_num_rows($rsIniciaisParcelamento) > 0) {
+    if (($rsIniciaisParcelamento ? pg_num_rows($rsIniciaisParcelamento) : null) > 0) {
         $aCodProcessoForo = array();
 
-        for ($xy=0; $xy < pg_num_rows($rsIniciaisParcelamento); $xy++) {
+        for ($xy=0; $xy < ($rsIniciaisParcelamento ? pg_num_rows($rsIniciaisParcelamento) : null); $xy++) {
             $oDadosInicial = db_utils::fieldsmemory($rsIniciaisParcelamento, $xy);
 
             if (!empty($oDadosInicial->v70_sequencial)) {
@@ -463,7 +463,7 @@ if ($unica != "1") {
                 $sSqlArrecad .= "  where k00_numpre   = {$k00_numpre} ";
                 $sSqlArrecad .= "    and k00_numpar   = {$k00_numpar} ";
                 $rsSqlArrecad = db_query($sSqlArrecad);
-                $iNumRows = pg_num_rows($rsSqlArrecad);
+                $iNumRows = ($rsSqlArrecad ? pg_num_rows($rsSqlArrecad) : null);
                 if ($iNumRows == 0) {
                     $oArrecad = db_utils::fieldsMemory($rsSqlArrecad, 0);
                     $sDataUsuCarnes = $oArrecad->k00_dtvenc;
@@ -537,7 +537,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
 
     $resultDescTaxa = db_query($sqlDescTaxa);
 
-    if (pg_num_rows($resultDescTaxa) > 0) {
+    if (($resultDescTaxa ? pg_num_rows($resultDescTaxa) : null) > 0) {
         db_fieldsmemory($resultDescTaxa, 0);
 
         if (!empty($j07_descr)) {
@@ -563,7 +563,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
         $sql28 .= " where dv05_numpre = $k00_numpre limit 1                                  ";
 
         $result28 = db_query($sql28);
-        if (pg_num_rows($result28) > 0) {
+        if (($result28 ? pg_num_rows($result28) : null) > 0) {
             db_fieldsmemory($result28, 0);
             $pdf1->tipodebito = 'PARCELAMENTO DE ' . $dv09_descr;
             $pdf1->pretipodebito = "PARCELAMENTO DE  $dv09_descr  N- $v10_parcel";
@@ -593,7 +593,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
 
         $result25 = db_query($sql25) or die($sql25);
 
-        if (pg_num_rows($result25) > 0) {
+        if (($result25 ? pg_num_rows($result25) : null) > 0) {
             db_fieldsmemory($result25, 0);
             $obs = substr($obs, 0, 20);
             $pdf1->tipodebito = $dv09_descr;
@@ -605,7 +605,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
         } else {
             $obs = "";
             $rstermo = db_query(" select v07_parcel from termo where v07_numpre = $k00_numpre ");
-            if (pg_num_rows($rstermo) > 0) {
+            if (($rstermo ? pg_num_rows($rstermo) : null) > 0) {
                 db_fieldsmemory($rstermo, 0);
                 $codparcel = " N- $v07_parcel ";
                 $pdf1->parcel = $v07_parcel;
@@ -636,7 +636,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
     $xbairro = '';
 
     $rstermo = db_query(" select v07_parcel from termo where v07_numpre = $k00_numpre ");
-    if (pg_num_rows($rstermo) > 0) {
+    if (($rstermo ? pg_num_rows($rstermo) : null) > 0) {
         db_fieldsmemory($rstermo, 0);
         $codparcel = " N- $v07_parcel ";
         $pdf1->pretipodebito = $k00_descr . $codparcel;
@@ -672,7 +672,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
     $sqlorigem .= " where arrecad.k00_numpre = $k00_numpre limit 1";
     $rsOrigem = db_query($sqlorigem) or die($sqlorigem);
 
-    if (pg_num_rows($rsOrigem) > 0) {
+    if (($rsOrigem ? pg_num_rows($rsOrigem) : null) > 0) {
         db_fieldsmemory($rsOrigem, 0);
     } else {
         db_msgbox("Nao encontrou registros do numpre: $k00_numpre!");
@@ -685,7 +685,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
         $sSqlIdentificacao .= " limit 1                    ";
         $Identificacao = db_query($sSqlIdentificacao);
 
-        if (pg_num_rows($Identificacao) == 0) {
+        if (($Identificacao ? pg_num_rows($Identificacao) : null) == 0) {
             db_redireciona('db_erros.php?fechar=true&db_erro=Problemas no Cadastro da Matricula ' . $origem);
         }
         db_fieldsmemory($Identificacao, 0);
@@ -708,7 +708,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
              where j20_numpre = $k00_numpre
                and j22_matric = $j01_matric";
         $sqlres = db_query($sql);
-        if (pg_num_rows($sqlres) > 0) {
+        if (($sqlres ? pg_num_rows($sqlres) : null) > 0) {
             db_fieldsmemory($sqlres, 0);
         } else {
             $vlredi = 0;
@@ -725,7 +725,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                and j23_matric = $j01_matric";
         $sqlres = db_query($sql);
 
-        if (pg_num_rows($sqlres) > 0) {
+        if (($sqlres ? pg_num_rows($sqlres) : null) > 0) {
             db_fieldsmemory($sqlres, 0);
             $pdf1->iptj23_aliq = $j23_aliq;
         } else {
@@ -770,7 +770,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                                               z01_bairro as j13_descr
                                          from empresa where q02_inscr = $origem");
 
-            if (pg_num_rows($Identificacao) == 0) {
+            if (($Identificacao ? pg_num_rows($Identificacao) : null) == 0) {
                 db_redireciona('db_erros.php?fechar=true&db_erro=Problemas no Cadastro da Inscrição ' . $origem);
             }
 
@@ -783,7 +783,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                                  from cgm
                                 where z01_numcgm = $origem");
 
-            if (pg_num_rows($Identificacao) == 0) {
+            if (($Identificacao ? pg_num_rows($Identificacao) : null) == 0) {
                 db_redireciona('db_erros.php?fechar=true&db_erro=Problemas no Cadastro do CGM ' . $origem);
             }
 
@@ -842,7 +842,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                       inner join cgm on z.z01_numcgm = cgm.z01_numcgm ";
 
         $resulttipodeb = db_query($sqltipodeb);
-        if (pg_num_rows($resulttipodeb) == 0) {
+        if (($resulttipodeb ? pg_num_rows($resulttipodeb) : null) == 0) {
             db_redireciona('db_erros.php?fechar=true&db_erro=Parcelamento sem termo cadastrado.');
             exit;
         } else {
@@ -860,8 +860,8 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
         $resultdivida = db_query($sqldivida);
         $traco = '';
         $exercicio = ' - Exerc : ';
-        for ($k = 0; $k < pg_num_rows($resultdivida); $k++) {
-            $exercicio .= $traco . substr(pg_fetch_result($resultdivida, $k, "v01_exerc"), 0, 4);
+        for ($k = 0; $k < ($resultdivida ? pg_num_rows($resultdivida) : null); $k++) {
+            $exercicio .= $traco . substr(($resultdivida ? pg_fetch_result($resultdivida, $k, "v01_exerc") : null), 0, 4);
             $traco = ', ';
         }
     }
@@ -921,7 +921,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
 
         $resultfin = db_query($sql) or die($sql);
         if ($resultfin != false) {
-            for ($unicont = 0; $unicont < pg_num_rows($resultfin); $unicont++) {
+            for ($unicont = 0; $unicont < ($resultfin ? pg_num_rows($resultfin) : null); $unicont++) {
                 $oMensagem = DBTributario::getMensagensParcela($k00_numpre, null, null);
                 $pdf1->sMensagemContribuinte = $oMensagem->sMensagemContribuinte;
                 $pdf1->sMensagemCaixa = $oMensagem->sMensagemCaixa;
@@ -1223,7 +1223,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                                 where j01_matric = $j01_matric limit 1";
 
                     $rsresultender = db_query($sqlEnder);
-                    $intNumrowsEnder = pg_num_rows($rsresultender);
+                    $intNumrowsEnder = ($rsresultender ? pg_num_rows($rsresultender) : null);
                     if ($intNumrowsEnder > 0) {
                         db_fieldsmemory($rsresultender, 0);
                     }
@@ -1366,7 +1366,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
 
                 $rsReceitas = db_query($sqlReceitas);
 
-                $intnumrows = pg_num_rows($rsReceitas);
+                $intnumrows = ($rsReceitas ? pg_num_rows($rsReceitas) : null);
 
                 $vlrjuros = 0;
                 $vlrmulta = 0;
@@ -1432,13 +1432,13 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
 
                 //BUSCA A MSG DE PAGAMENTO E AS INSTRU??ES DA TABELA NUMPREF
                 $rsmsgcarne = db_query("select k03_msgcarne, k03_msgbanco from numpref where k03_anousu = " . db_getsession("DB_anousu"));
-                if (pg_num_rows($rsmsgcarne) > 0) {
+                if (($rsmsgcarne ? pg_num_rows($rsmsgcarne) : null) > 0) {
                     db_fieldsmemory($rsmsgcarne, 0);
                 }
 
                 $sqlMsgCarne = " select k00_msguni2 from arretipo where k00_tipo = $k00_tipo ";
                 $rsMsgCarneUnica = db_query($sqlMsgCarne);
-                $intNumrowsMsgCarne = pg_num_rows($rsMsgCarneUnica);
+                $intNumrowsMsgCarne = ($rsMsgCarneUnica ? pg_num_rows($rsMsgCarneUnica) : null);
 
                 if ($intNumrowsMsgCarne > 0) {
                     db_fieldsmemory($rsMsgCarneUnica, 0);
@@ -1459,7 +1459,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                         $sqlaliq .= "   and q05_numpar = $k00_numpar ";
 
                         $rsIssvarano = db_query($sqlaliq);
-                        $intNumrows = pg_num_rows($rsIssvarano);
+                        $intNumrows = ($rsIssvarano ? pg_num_rows($rsIssvarano) : null);
 
                         if ($intNumrows == 0) {
                             db_redireciona('db_erros.php?fechar=true&db_erro=Ano não encontrado na tabela issvar. Contate o suporte');
@@ -1491,7 +1491,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
 
                 $sqlmsg = "select k00_tipo, k00_msguni, k00_msguni2 from arretipo where k00_tipo = " . $k00_tipo;
                 $resultmsg = db_query($sqlmsg);
-                $linhasmsg = pg_num_rows($resultmsg);
+                $linhasmsg = ($resultmsg ? pg_num_rows($resultmsg) : null);
                 db_fieldsmemory($resultmsg, 0);
 
                 $desconto = $k00_percdes;
@@ -1578,8 +1578,8 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                                            ar36_descricao,
                                            v76_tipolancamento ";
                         $rsDadosPartilhaReciboPaga = db_query($sSqlPartilhaReciboPaga);
-                        if (pg_num_rows($rsDadosPartilhaReciboPaga) > 0) {
-                            for ($iInd=0; $iInd < pg_num_rows($rsDadosPartilhaReciboPaga); $iInd++) {
+                        if (($rsDadosPartilhaReciboPaga ? pg_num_rows($rsDadosPartilhaReciboPaga) : null) > 0) {
+                            for ($iInd=0; $iInd < ($rsDadosPartilhaReciboPaga ? pg_num_rows($rsDadosPartilhaReciboPaga) : null); $iInd++) {
                                 $aDadosPartilha = db_utils::fieldsMemory($rsDadosPartilhaReciboPaga, $iInd);
 
                                 $aTaxas[$iInd]["sequencial"] = $aDadosPartilha->ar36_sequencial;
@@ -1649,7 +1649,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                                 $rsDadosPartilha = db_query($sSqlPartilha);
 
                                 if ($rsDadosPartilha) {
-                                    $iLinhasPartilha = pg_num_rows($rsDadosPartilha);
+                                    $iLinhasPartilha = ($rsDadosPartilha ? pg_num_rows($rsDadosPartilha) : null);
                                     for ($iInd=0; $iInd < $iLinhasPartilha; $iInd++) {
                                         $aDadosPartilha = db_utils::fieldsMemory($rsDadosPartilha, $iInd);
 
@@ -1768,8 +1768,8 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                     $oDaoPropri = new cl_propri();
                     $rsOutrosProprietarios = db_query($oDaoPropri->sql_outrosProprietarios($matric));
 
-                    $existeOutroProprietario    = pg_num_rows($rsOutrosProprietarios) == 1;
-                    $existemOutrosProprietarios = pg_num_rows($rsOutrosProprietarios) > 1;
+                    $existeOutroProprietario    = ($rsOutrosProprietarios ? pg_num_rows($rsOutrosProprietarios) : null) == 1;
+                    $existemOutrosProprietarios = ($rsOutrosProprietarios ? pg_num_rows($rsOutrosProprietarios) : null) > 1;
                     $sulfixoOutroProprietario   = $existeOutroProprietario ? ' E OUTRO' : ($existemOutrosProprietarios ? ' E OUTROS' : '');
 
                     $pdf1->descr3_1        = $pdf1->descr3_1 . $sulfixoOutroProprietario;
@@ -1842,7 +1842,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
             $sSqlArrecad .= "  where k00_numpre   = {$k00_numpre} ";
             $sSqlArrecad .= "    and k00_numpar   = {$k00_numpar} ";
             $rsSqlArrecad = db_query($sSqlArrecad);
-            $iNumRows = pg_num_rows($rsSqlArrecad);
+            $iNumRows = ($rsSqlArrecad ? pg_num_rows($rsSqlArrecad) : null);
 
             if ($iNumRows == 0) {
                 $oArrecad = db_utils::fieldsMemory($rsSqlArrecad, 0);
@@ -1859,7 +1859,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
         $sSqlArrecadVencimento .= "  where k00_numpre   = {$k00_numpre} ";
         $sSqlArrecadVencimento .= "    and k00_numpar   = {$k00_numpar} ";
         $rsSqlArrecadVencimento = db_query($sSqlArrecadVencimento);
-        $iNumRows = pg_num_rows($rsSqlArrecadVencimento);
+        $iNumRows = ($rsSqlArrecadVencimento ? pg_num_rows($rsSqlArrecadVencimento) : null);
 
         if ($rsSqlArrecadVencimento && $iNumRows > 0) {
             $oArrecadVencimento = db_utils::fieldsMemory($rsSqlArrecadVencimento, 0);
@@ -1955,7 +1955,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
             );
             $rsReciboPaga = db_query($sSqlReciboPaga);
 
-            if (!$rsReciboPaga || pg_num_rows($rsReciboPaga) == 0) {
+            if (!$rsReciboPaga || ($rsReciboPaga ? pg_num_rows($rsReciboPaga) : null) == 0) {
                 throw new DBException("Erro ao emitir o Recibo.");
             }
 
@@ -2088,7 +2088,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
 
             $rsAbatimentoCustas = db_query($sSqlAbatimentoCustas);
 
-            if (pg_num_rows($rsAbatimentoCustas) > 0) {
+            if (($rsAbatimentoCustas ? pg_num_rows($rsAbatimentoCustas) : null) > 0) {
                 db_fieldsmemory($rsAbatimentoCustas, 0);
                 if ($pdf1->valorTotalCustas <> $vlr_honorarios && $vlr_honorarios > 0) {
                     $pdf1->valorTotalCustas = $vlr_honorarios;
@@ -2104,7 +2104,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
     if ($k00_impval == 't') {
         if ($k03_tipo == 3) {
             $rsAnoissvar = db_query("select q05_ano from issvar where q05_numpre = $k00_numpre");
-            $intAnoissvar = pg_num_rows($rsAnoissvar);
+            $intAnoissvar = ($rsAnoissvar ? pg_num_rows($rsAnoissvar) : null);
             db_fieldsmemory($rsAnoissvar, 0);
 
             if ($intAnoissvar > 0 && $q05_ano <= date("Y", $H_DATAUSU)) {
@@ -2276,7 +2276,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                 false, 
                 $aEmitirPor, 
                 $emitePix,
-                pg_fetch_result($getNumparPix, 0, 'k00_numpar')
+                ($getNumparPix ? pg_fetch_result($getNumparPix, 0, 'k00_numpar') : null)
             );
         }
     } catch (Exception $oErro) {
@@ -2447,7 +2447,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
     } else {
         $sqlReceitas = " select k00_tipo as codtipo from arrecad where k00_numpre = $k00_numpre ";
         $rsReceitas = db_query($sqlReceitas);
-        if (pg_num_rows($rsReceitas) == 0) {
+        if (($rsReceitas ? pg_num_rows($rsReceitas) : null) == 0) {
             db_msgbox("Não encontrado arrecad ($k00_numpre).");
             exit;
         }
@@ -2529,7 +2529,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
     }
 
     $rsReceitas = db_query($sqlReceitas);
-    $intnumrows = pg_num_rows($rsReceitas);
+    $intnumrows = ($rsReceitas ? pg_num_rows($rsReceitas) : null);
 
     $lReceitasIguais = false;
     $vlrjuros     = 0;
@@ -2647,7 +2647,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
             where j01_matric = $numero limit 1";
 
         $rsresultender   = db_query($sqlEnder);
-        $intNumrowsEnder = pg_num_rows($rsresultender);
+        $intNumrowsEnder = ($rsresultender ? pg_num_rows($rsresultender) : null);
 
         if ($intNumrowsEnder > 0) {
             db_fieldsmemory($rsresultender, 0);
@@ -2873,7 +2873,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                        where v07_numpre = $k00_numpre";
             $resultdiversos = db_query($sqldiversos);
 
-            if (pg_num_rows($resultdiversos) > 0) {
+            if (($resultdiversos ? pg_num_rows($resultdiversos) : null) > 0) {
                 db_fieldsmemory($resultdiversos, 0, true);
                 $pdf1->descr4_2    = substr($dv05_obs, 0, 100);
                 $pdf1->predescr4_2 = substr($dv05_obs, 0, 100);
@@ -2884,7 +2884,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                 $sqldiversos = "select distinct dv05_obs from diversos where dv05_numpre = $k00_numpre";
                 $resultdiversos = db_query($sqldiversos);
 
-                if (pg_num_rows($resultdiversos) > 0) {
+                if (($resultdiversos ? pg_num_rows($resultdiversos) : null) > 0) {
                     db_fieldsmemory($resultdiversos, 0, true);
                     $pdf1->descr4_2 = substr($dv05_obs, 0, 100);
                     $pdf1->predescr4_2 = substr($dv05_obs, 0, 100);
@@ -2912,7 +2912,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
     $rsvistorias = db_query($sqlvistorias);
     /***********************************************************************************/
 
-    if (pg_num_rows($rsvistorias) > 0) {
+    if (($rsvistorias ? pg_num_rows($rsvistorias) : null) > 0) {
         db_fieldsmemory($rsvistorias, 0);
         $pdf1->tipodebito = $y77_descricao . " - $ano_vistoria";
         $pdf1->pretipodebito = $y77_descricao . " - $ano_vistoria";
@@ -2984,7 +2984,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
         if ($k03_tipo == 3) {
             $sqlaliq = "select q05_aliq, q05_ano from issvar where q05_numpre = $k00_numpre and q05_numpar = $k00_numpar";
             $rsIssvarano = db_query($sqlaliq);
-            $intNumrows  = pg_num_rows($rsIssvarano);
+            $intNumrows  = ($rsIssvarano ? pg_num_rows($rsIssvarano) : null);
             if ($intNumrows == 0) {
                 db_redireciona('db_erros.php?fechar=true&db_erro=Ano não encontrado na tabela issvar. Contate o suporte');
                 exit;
@@ -3037,7 +3037,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
 
     $rsmsgcarne = db_query($sSqlCarne);
 
-    if (pg_num_rows($rsmsgcarne) > 0) {
+    if (($rsmsgcarne ? pg_num_rows($rsmsgcarne) : null) > 0) {
         db_fieldsmemory($rsmsgcarne, 0);
     }
 
@@ -3122,7 +3122,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
             $pdf1->predescr16_2 = substr($k03_msgcarne, 50, 50);
             $pdf1->predescr16_3 = substr($k03_msgcarne, 100, 50);
         } else {
-            if (pg_num_rows($resparag) == 0) {
+            if (($resparag ? pg_num_rows($resparag) : null) == 0) {
                 $db02_texto = "";
             } else {
                 db_fieldsmemory($resparag, 0);
@@ -3144,7 +3144,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
 
     $sql = 'select nome from db_usuarios where login = \''.db_getsession('DB_login').'\'';
     $rSql = db_query($sql);
-    $pdf1->texto =  substr(pg_fetch_all($rSql)[0]['nome'], 0, 30) . ' - ' . date("d-m-Y - H-i") . '   ' . db_base_ativa();
+    $pdf1->texto =  substr(($rSql ? pg_fetch_all($rSql) : null)[0]['nome'], 0, 30) . ' - ' . date("d-m-Y - H-i") . '   ' . db_base_ativa();
     $imprimircodbar = true;
 
     $sqltermo       = "select k40_forma
@@ -3153,7 +3153,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                       where v07_numpre = $k00_numpre";
     $resulttermo = db_query($sqltermo) or die($sqltermo);
 
-    if (pg_num_rows($resulttermo) > 0) {
+    if (($resulttermo ? pg_num_rows($resulttermo) : null) > 0) {
         db_fieldsmemory($resulttermo, 0);
         if ($k40_forma == 2 and $k00_numpar == $k00_numtot) {
             $imprimircodbar = false;
@@ -3195,7 +3195,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
                      and k00_numpar = $k00_numpar ";
 
     $resultVerParcel = db_query($sqlVerParcel);
-    $linhasVerParcel = pg_num_rows($resultVerParcel);
+    $linhasVerParcel = ($resultVerParcel ? pg_num_rows($resultVerParcel) : null);
 
     $pdf1->descr4_2 = preg_replace("/\n\r|\n|\r/", '', $pdf1->descr4_2);
 
@@ -3222,7 +3222,7 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
             $sqlDesconto = "select npercretprinc, npercdesccorre, npercdescjuros, npercdescmulta, iretcodregra, sretdescrregra ";
             $sqlDesconto .= "from fc_recibodesconto($k00_numpre,$k00_numpar,$v07_totpar,$k00_receit,$k00_tipo,'$k00_dtvenc','$k00_dtvenc')";
             $resultDesconto = db_query($sqlDesconto);
-            $linhasDesconto = pg_num_rows($resultDesconto);
+            $linhasDesconto = ($resultDesconto ? pg_num_rows($resultDesconto) : null);
 
             $pdf1->descr4_2 = str_pad("Valor da parcela", 51, ' ', STR_PAD_RIGHT)." R$" . db_formatar($nTotalDebito, "f") . "\n";
             if ($vlrjuros > 0) {
@@ -3344,11 +3344,11 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
         $sqlArretipo = "select k00_taxaadm from arretipo where k00_tipo = $k00_tipo";
         $rArretipo = db_query($sqlArretipo);
 
-        if(pg_fetch_result($rArretipo,0) == 't'){
+        if(($rArretipo ? pg_fetch_result($rArretipo,0) : null) == 't'){
             $sqlTabrec = "select k02_drecei from tabrec where  k02_codigo = ".$reciboPaga->getReceit();
             $rTabrec = db_query($sqlTabrec);
-            if(pg_num_rows($rTabrec) > 0){
-                $pdf1->taxaExpediente = pg_fetch_result($rTabrec,0) . " = " . trim(db_formatar($reciboPaga->getValor(), 'f'));
+            if(($rTabrec ? pg_num_rows($rTabrec) : null) > 0){
+                $pdf1->taxaExpediente = ($rTabrec ? pg_fetch_result($rTabrec,0) : null) . " = " . trim(db_formatar($reciboPaga->getValor(), 'f'));
             }
         }
     }
@@ -3357,8 +3357,8 @@ for ($volta = 1; $volta < sizeof($numpres); $volta ++) {
         $oDaoPropri = new cl_propri();
         $rsOutrosProprietarios = db_query($oDaoPropri->sql_outrosProprietarios($matric));
 
-        $existeOutroProprietario    = pg_num_rows($rsOutrosProprietarios) == 1;
-        $existemOutrosProprietarios = pg_num_rows($rsOutrosProprietarios) > 1;
+        $existeOutroProprietario    = ($rsOutrosProprietarios ? pg_num_rows($rsOutrosProprietarios) : null) == 1;
+        $existemOutrosProprietarios = ($rsOutrosProprietarios ? pg_num_rows($rsOutrosProprietarios) : null) > 1;
         $sulfixoOutroProprietario   = $existeOutroProprietario ? ' E OUTRO' : ($existemOutrosProprietarios ? ' E OUTROS' : '');
 
         $pdf1->descr3_1        = $pdf1->descr3_1 . $sulfixoOutroProprietario;

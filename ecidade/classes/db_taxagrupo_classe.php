@@ -67,10 +67,10 @@ class cl_taxagrupo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k06_taxagrupo = ($this->k06_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k06_taxagrupo"]:$this->k06_taxagrupo);
+       $this->k06_taxagrupo = ($this->k06_taxagrupo === 0 || $this->k06_taxagrupo === 0.0 || $this->k06_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k06_taxagrupo"]:$this->k06_taxagrupo);
        $this->k06_descr = ($this->k06_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["k06_descr"]:$this->k06_descr);
      }else{
-       $this->k06_taxagrupo = ($this->k06_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k06_taxagrupo"]:$this->k06_taxagrupo);
+       $this->k06_taxagrupo = ($this->k06_taxagrupo === 0 || $this->k06_taxagrupo === 0.0 || $this->k06_taxagrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["k06_taxagrupo"]:$this->k06_taxagrupo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_taxagrupo {
          $this->k06_taxagrupo = $k06_taxagrupo;
        }
      }
-     if(($this->k06_taxagrupo == null) || ($this->k06_taxagrupo == "") ){
+     if(($this->k06_taxagrupo == null) || ($this->k06_taxagrupo === 0 || $this->k06_taxagrupo === 0.0 || $this->k06_taxagrupo == "") ){
        $this->erro_sql = " Campo k06_taxagrupo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

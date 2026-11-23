@@ -43,7 +43,7 @@ if (is_dir($dir)) {
 				$count = count($arr);
 				//pega somente db_* _classe.php
 				if($arr[0]=="db" and $arr[$count-1]=="classe.php" and $count >= 3){
-					$numero= $numero + 1;
+					$numero= (float)$numero + 1;
 					// print "arquivo: $file - tipo: " . filetype($dir . $file) . " classe ".$arr[1]."<br>";
 					//print "$numero - $file <br><br> ";
 					echo "<br><b>classe $numero : $file </b><br><br>";

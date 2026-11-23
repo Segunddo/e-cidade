@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/recursos-humanos/pessoal/rotinas_mensais/liberacao_contracheque_online",
+  "json": null,
+  "sha256": "171d45ac415976b35b28b04dbd257365cecb5bee9157e175165d82ab923a5836",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

@@ -71,12 +71,12 @@ class cl_aguaconsumotipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x25_codconsumotipo = ($this->x25_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_codconsumotipo"]:$this->x25_codconsumotipo);
-       $this->x25_receit = ($this->x25_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_receit"]:$this->x25_receit);
+       $this->x25_codconsumotipo = ($this->x25_codconsumotipo === 0 || $this->x25_codconsumotipo === 0.0 || $this->x25_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_codconsumotipo"]:$this->x25_codconsumotipo);
+       $this->x25_receit = ($this->x25_receit === 0 || $this->x25_receit === 0.0 || $this->x25_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_receit"]:$this->x25_receit);
        $this->x25_descr = ($this->x25_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_descr"]:$this->x25_descr);
-       $this->x25_codhist = ($this->x25_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_codhist"]:$this->x25_codhist);
+       $this->x25_codhist = ($this->x25_codhist === 0 || $this->x25_codhist === 0.0 || $this->x25_codhist == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_codhist"]:$this->x25_codhist);
      }else{
-       $this->x25_codconsumotipo = ($this->x25_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_codconsumotipo"]:$this->x25_codconsumotipo);
+       $this->x25_codconsumotipo = ($this->x25_codconsumotipo === 0 || $this->x25_codconsumotipo === 0.0 || $this->x25_codconsumotipo == ""?@$GLOBALS["HTTP_POST_VARS"]["x25_codconsumotipo"]:$this->x25_codconsumotipo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_aguaconsumotipo {
          $this->x25_codconsumotipo = $x25_codconsumotipo;
        }
      }
-     if(($this->x25_codconsumotipo == null) || ($this->x25_codconsumotipo == "") ){
+     if(($this->x25_codconsumotipo == null) || ($this->x25_codconsumotipo === 0 || $this->x25_codconsumotipo === 0.0 || $this->x25_codconsumotipo == "") ){
        $this->erro_sql = " Campo x25_codconsumotipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

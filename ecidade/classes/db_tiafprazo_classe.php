@@ -72,8 +72,8 @@ class cl_tiafprazo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y96_codigo = ($this->y96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
-       $this->y96_codtiaf = ($this->y96_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codtiaf"]:$this->y96_codtiaf);
+       $this->y96_codigo = ($this->y96_codigo === 0 || $this->y96_codigo === 0.0 || $this->y96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
+       $this->y96_codtiaf = ($this->y96_codtiaf === 0 || $this->y96_codtiaf === 0.0 || $this->y96_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codtiaf"]:$this->y96_codtiaf);
        if($this->y96_prazo == ""){
          $this->y96_prazo_dia = ($this->y96_prazo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_prazo_dia"]:$this->y96_prazo_dia);
          $this->y96_prazo_mes = ($this->y96_prazo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_prazo_mes"]:$this->y96_prazo_mes);
@@ -83,7 +83,7 @@ class cl_tiafprazo {
          }
        }
      }else{
-       $this->y96_codigo = ($this->y96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
+       $this->y96_codigo = ($this->y96_codigo === 0 || $this->y96_codigo === 0.0 || $this->y96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_tiafprazo {
          $this->y96_codigo = $y96_codigo;
        }
      }
-     if(($this->y96_codigo == null) || ($this->y96_codigo == "") ){
+     if(($this->y96_codigo == null) || ($this->y96_codigo === 0 || $this->y96_codigo === 0.0 || $this->y96_codigo == "") ){
        $this->erro_sql = " Campo y96_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

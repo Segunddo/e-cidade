@@ -67,10 +67,10 @@ class cl_setorregimovel {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j69_sequencial = ($this->j69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_sequencial"]:$this->j69_sequencial);
+       $this->j69_sequencial = ($this->j69_sequencial === 0 || $this->j69_sequencial === 0.0 || $this->j69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_sequencial"]:$this->j69_sequencial);
        $this->j69_descr = ($this->j69_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_descr"]:$this->j69_descr);
      }else{
-       $this->j69_sequencial = ($this->j69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_sequencial"]:$this->j69_sequencial);
+       $this->j69_sequencial = ($this->j69_sequencial === 0 || $this->j69_sequencial === 0.0 || $this->j69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j69_sequencial"]:$this->j69_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_setorregimovel {
          $this->j69_sequencial = $j69_sequencial;
        }
      }
-     if(($this->j69_sequencial == null) || ($this->j69_sequencial == "") ){
+     if(($this->j69_sequencial == null) || ($this->j69_sequencial === 0 || $this->j69_sequencial === 0.0 || $this->j69_sequencial == "") ){
        $this->erro_sql = " Campo j69_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

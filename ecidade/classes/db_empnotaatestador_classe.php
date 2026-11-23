@@ -47,11 +47,11 @@ class cl_empnotaatestador
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->e169_sequencial = ($this->e169_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e169_sequencial"] : $this->e169_sequencial);
+            $this->e169_sequencial = ($this->e169_sequencial === 0 || $this->e169_sequencial === 0.0 || $this->e169_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e169_sequencial"] : $this->e169_sequencial);
             $this->e169_empnota = ($this->e169_empnota == "" ? @$GLOBALS["HTTP_POST_VARS"]["e169_empnota"] : $this->e169_empnota);
             $this->e169_numcgm = ($this->e169_numcgm == "" ? @$GLOBALS["HTTP_POST_VARS"]["e169_numcgm"] : $this->e169_numcgm);
         } else {
-            $this->e169_sequencial = ($this->e169_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e169_sequencial"] : $this->e169_sequencial);
+            $this->e169_sequencial = ($this->e169_sequencial === 0 || $this->e169_sequencial === 0.0 || $this->e169_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["e169_sequencial"] : $this->e169_sequencial);
         }
     }
 
@@ -103,7 +103,7 @@ class cl_empnotaatestador
                 $this->e169_sequencial = $e169_sequencial;
             }
         }
-        if (($this->e169_sequencial == null) || ($this->e169_sequencial == "")) {
+        if (($this->e169_sequencial == null) || ($this->e169_sequencial === 0 || $this->e169_sequencial === 0.0 || $this->e169_sequencial == "")) {
             $this->erro_sql = " Campo e169_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

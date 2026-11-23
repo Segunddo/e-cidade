@@ -30,7 +30,7 @@ include(modification("libs/db_sql.php"));
 include(modification("libs/db_utils.php"));
 include(modification("classes/db_sau_agendatransporte_ext_classe.php"));
 $clsau_agendatransporte = new cl_sau_agendatransporte_ext;
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 set_time_limit(0);
 
 

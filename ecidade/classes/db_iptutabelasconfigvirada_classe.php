@@ -69,11 +69,11 @@ class cl_iptutabelasconfigvirada {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j129_sequencial = ($this->j129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j129_sequencial"]:$this->j129_sequencial);
-       $this->j129_iptutabelasconfig = ($this->j129_iptutabelasconfig == ""?@$GLOBALS["HTTP_POST_VARS"]["j129_iptutabelasconfig"]:$this->j129_iptutabelasconfig);
-       $this->j129_anousu = ($this->j129_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j129_anousu"]:$this->j129_anousu);
+       $this->j129_sequencial = ($this->j129_sequencial === 0 || $this->j129_sequencial === 0.0 || $this->j129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j129_sequencial"]:$this->j129_sequencial);
+       $this->j129_iptutabelasconfig = ($this->j129_iptutabelasconfig === 0 || $this->j129_iptutabelasconfig === 0.0 || $this->j129_iptutabelasconfig == ""?@$GLOBALS["HTTP_POST_VARS"]["j129_iptutabelasconfig"]:$this->j129_iptutabelasconfig);
+       $this->j129_anousu = ($this->j129_anousu === 0 || $this->j129_anousu === 0.0 || $this->j129_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["j129_anousu"]:$this->j129_anousu);
      }else{
-       $this->j129_sequencial = ($this->j129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j129_sequencial"]:$this->j129_sequencial);
+       $this->j129_sequencial = ($this->j129_sequencial === 0 || $this->j129_sequencial === 0.0 || $this->j129_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j129_sequencial"]:$this->j129_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_iptutabelasconfigvirada {
          $this->j129_sequencial = $j129_sequencial;
        }
      }
-     if(($this->j129_sequencial == null) || ($this->j129_sequencial == "") ){
+     if(($this->j129_sequencial == null) || ($this->j129_sequencial === 0 || $this->j129_sequencial === 0.0 || $this->j129_sequencial == "") ){
        $this->erro_sql = " Campo j129_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -72,7 +72,7 @@ class cl_db_imgsitbi {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->matricula = ($this->matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["matricula"]:$this->matricula);
+       $this->matricula = ($this->matricula === 0 || $this->matricula === 0.0 || $this->matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["matricula"]:$this->matricula);
        if($this->data == ""){
          $this->data_dia = ($this->data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["data_dia"]:$this->data_dia);
          $this->data_mes = ($this->data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["data_mes"]:$this->data_mes);
@@ -81,7 +81,7 @@ class cl_db_imgsitbi {
             $this->data = $this->data_ano."-".$this->data_mes."-".$this->data_dia;
          }
        }
-       $this->arq = ($this->arq == ""?@$GLOBALS["HTTP_POST_VARS"]["arq"]:$this->arq);
+       $this->arq = ($this->arq === 0 || $this->arq === 0.0 || $this->arq == ""?@$GLOBALS["HTTP_POST_VARS"]["arq"]:$this->arq);
      }else{
      }
    }

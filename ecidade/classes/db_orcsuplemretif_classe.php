@@ -78,11 +78,11 @@ class cl_orcsuplemretif {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->o48_seq = ($this->o48_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_seq"]:$this->o48_seq);
-       $this->o48_projeto = ($this->o48_projeto == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_projeto"]:$this->o48_projeto);
-       $this->o48_retificado = ($this->o48_retificado == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_retificado"]:$this->o48_retificado);
+       $this->o48_seq = ($this->o48_seq === 0 || $this->o48_seq === 0.0 || $this->o48_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_seq"]:$this->o48_seq);
+       $this->o48_projeto = ($this->o48_projeto === 0 || $this->o48_projeto === 0.0 || $this->o48_projeto == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_projeto"]:$this->o48_projeto);
+       $this->o48_retificado = ($this->o48_retificado === 0 || $this->o48_retificado === 0.0 || $this->o48_retificado == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_retificado"]:$this->o48_retificado);
        $this->o48_texto = ($this->o48_texto == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_texto"]:$this->o48_texto);
-       $this->o48_id_usuario = ($this->o48_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_id_usuario"]:$this->o48_id_usuario);
+       $this->o48_id_usuario = ($this->o48_id_usuario === 0 || $this->o48_id_usuario === 0.0 || $this->o48_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_id_usuario"]:$this->o48_id_usuario);
        if($this->o48_data == ""){
          $this->o48_data_dia = ($this->o48_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_data_dia"]:$this->o48_data_dia);
          $this->o48_data_mes = ($this->o48_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_data_mes"]:$this->o48_data_mes);
@@ -92,7 +92,7 @@ class cl_orcsuplemretif {
          }
        }
      }else{
-       $this->o48_seq = ($this->o48_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_seq"]:$this->o48_seq);
+       $this->o48_seq = ($this->o48_seq === 0 || $this->o48_seq === 0.0 || $this->o48_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["o48_seq"]:$this->o48_seq);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_orcsuplemretif {
          $this->o48_seq = $o48_seq;
        }
      }
-     if(($this->o48_seq == null) || ($this->o48_seq == "") ){
+     if(($this->o48_seq == null) || ($this->o48_seq === 0 || $this->o48_seq === 0.0 || $this->o48_seq == "") ){
        $this->erro_sql = " Campo o48_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

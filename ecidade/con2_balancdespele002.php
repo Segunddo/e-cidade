@@ -35,7 +35,7 @@ include(modification("dbforms/db_balanc_desp.php"));
 $classinatura = new cl_assinatura;
 
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $estrut = str_replace('.', '', $elemento);
 //echo $estrut;exit;
@@ -48,7 +48,7 @@ $resultinst = db_query("select codigo,nomeinst,nomeinstabrev from db_config wher
 $descr_inst = '';
 $xvirg = '';
 $flag_abrev = false;
-for ($xins = 0; $xins < pg_numrows($resultinst); $xins ++) {
+for ($xins = 0; $xins < ($resultinst ? pg_numrows($resultinst) : null); $xins ++) {
 	db_fieldsmemory($resultinst, $xins);
   if (strlen(trim($nomeinstabrev)) > 0){
        $descr_inst .= $xvirg.$nomeinstabrev;
@@ -110,7 +110,7 @@ $r_totgeralatual_a_pagar_liquidado = $totgeralatual_a_pagar_liquidado = 0;
 
 //db_criatabela($result);exit;
 
-for ($i = 0; $i < pg_numrows($result); $i ++) {
+for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i ++) {
 
 	db_fieldsmemory($result, $i);
 	$codigo = db_formatar($o58_elemento, 'elemento');
@@ -330,7 +330,7 @@ $pdf->multicell($largura, 2, $ass_pref, 0, "C", 0, 0);
 $pdf->setxy($largura, $pos);
 $pdf->multicell($largura, 2, $ass_cont, 0, "C", 0, 0);
 
-pg_free_result($result);
+($result ? pg_free_result($result) : null);
 //include(modification("fpdf151/geraarquivo.php"));
 $pdf->Output();
 ?>

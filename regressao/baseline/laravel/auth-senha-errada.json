@@ -1,0 +1,29 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, private",
+    "content-type": "application/json; charset=UTF-8"
+  },
+  "id": "auth-senha-errada",
+  "json": {
+    "access_token": "<X>",
+    "expires_in": "<X>",
+    "refresh_token": "<X>",
+    "token_type": "Bearer"
+  },
+  "sha256": "f1175102a5986b0acc3d1722e7d6d8755effdfbe98b78f84aed75271cd0fd30b",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {
+    "access_token": [
+      "str"
+    ],
+    "expires_in": [
+      "int"
+    ],
+    "refresh_token": [
+      "str"
+    ]
+  }
+}

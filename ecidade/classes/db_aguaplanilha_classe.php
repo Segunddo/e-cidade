@@ -87,17 +87,17 @@ class cl_aguaplanilha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x24_matric = ($this->x24_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_matric"]:$this->x24_matric);
-       $this->x24_exerc = ($this->x24_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_exerc"]:$this->x24_exerc);
-       $this->x24_mes = ($this->x24_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_mes"]:$this->x24_mes);
+       $this->x24_matric = ($this->x24_matric === 0 || $this->x24_matric === 0.0 || $this->x24_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_matric"]:$this->x24_matric);
+       $this->x24_exerc = ($this->x24_exerc === 0 || $this->x24_exerc === 0.0 || $this->x24_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_exerc"]:$this->x24_exerc);
+       $this->x24_mes = ($this->x24_mes === 0 || $this->x24_mes === 0.0 || $this->x24_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_mes"]:$this->x24_mes);
        $this->x24_nome = ($this->x24_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_nome"]:$this->x24_nome);
-       $this->x24_codrua = ($this->x24_codrua == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_codrua"]:$this->x24_codrua);
+       $this->x24_codrua = ($this->x24_codrua === 0 || $this->x24_codrua === 0.0 || $this->x24_codrua == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_codrua"]:$this->x24_codrua);
        $this->x24_nomerua = ($this->x24_nomerua == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_nomerua"]:$this->x24_nomerua);
-       $this->x24_numero = ($this->x24_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_numero"]:$this->x24_numero);
+       $this->x24_numero = ($this->x24_numero === 0 || $this->x24_numero === 0.0 || $this->x24_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_numero"]:$this->x24_numero);
        $this->x24_complemento = ($this->x24_complemento == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_complemento"]:$this->x24_complemento);
-       $this->x24_zona = ($this->x24_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_zona"]:$this->x24_zona);
-       $this->x24_rota = ($this->x24_rota == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_rota"]:$this->x24_rota);
-       $this->x24_pagina = ($this->x24_pagina == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_pagina"]:$this->x24_pagina);
+       $this->x24_zona = ($this->x24_zona === 0 || $this->x24_zona === 0.0 || $this->x24_zona == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_zona"]:$this->x24_zona);
+       $this->x24_rota = ($this->x24_rota === 0 || $this->x24_rota === 0.0 || $this->x24_rota == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_rota"]:$this->x24_rota);
+       $this->x24_pagina = ($this->x24_pagina === 0 || $this->x24_pagina === 0.0 || $this->x24_pagina == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_pagina"]:$this->x24_pagina);
        $this->x24_nrohidro = ($this->x24_nrohidro == ""?@$GLOBALS["HTTP_POST_VARS"]["x24_nrohidro"]:$this->x24_nrohidro);
      }else{
      }

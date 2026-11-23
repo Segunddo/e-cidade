@@ -1,0 +1,34 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/educacao/escola/tiposAtendimentos",
+  "json": {
+    "data": [
+      "Ensino do Sistema Braille",
+      "",
+      "Ensino do uso de recursos ópticos e não ópticos",
+      "Estratégias para o desenvolvimento de processos mentais",
+      "Técnicas de orientação e mobilidade",
+      "Ensino de Língua Brasileira de Sinais - Libras",
+      "Ensino de uso da Comunicação Alternativa e Aumentativa - CAA",
+      "Estratégias para enriquecimento curricular",
+      "Ensino das técnicas de cálculo no Soroban",
+      "Ensino da usabilidade e das funcionalidades da informática acessível",
+      "Ensino da Língua Portuguesa na modalidade escrita",
+      "Estratégias para autonomia no ambiente escolar",
+      "Desenvolvimento de funçðes cognitivas",
+      "Desenvolvimento de vida autônoma",
+      "Ensino da Língua Portuguesa como Segunda Língua"
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "67af4d960e019d1d3402208c8732f5edad141cb1aa1ac1f15eff8de323892c13",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

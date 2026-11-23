@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/issqn/redesim/eventos",
+  "json": {
+    "error": true,
+    "message": "Estabelecimento não encontrado."
+  },
+  "sha256": "6ba79218c1317ab3aa7fbbe847ceade67a23d7eef9b4557c83f89475b60e34eb",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

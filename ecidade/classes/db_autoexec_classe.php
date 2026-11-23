@@ -73,13 +73,13 @@ class cl_autoexec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y15_codauto = ($this->y15_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_codauto"]:$this->y15_codauto);
-       $this->y15_codigo = ($this->y15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_codigo"]:$this->y15_codigo);
-       $this->y15_codi = ($this->y15_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_codi"]:$this->y15_codi);
-       $this->y15_numero = ($this->y15_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_numero"]:$this->y15_numero);
+       $this->y15_codauto = ($this->y15_codauto === 0 || $this->y15_codauto === 0.0 || $this->y15_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_codauto"]:$this->y15_codauto);
+       $this->y15_codigo = ($this->y15_codigo === 0 || $this->y15_codigo === 0.0 || $this->y15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_codigo"]:$this->y15_codigo);
+       $this->y15_codi = ($this->y15_codi === 0 || $this->y15_codi === 0.0 || $this->y15_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_codi"]:$this->y15_codi);
+       $this->y15_numero = ($this->y15_numero === 0 || $this->y15_numero === 0.0 || $this->y15_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_numero"]:$this->y15_numero);
        $this->y15_compl = ($this->y15_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_compl"]:$this->y15_compl);
      }else{
-       $this->y15_codauto = ($this->y15_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_codauto"]:$this->y15_codauto);
+       $this->y15_codauto = ($this->y15_codauto === 0 || $this->y15_codauto === 0.0 || $this->y15_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y15_codauto"]:$this->y15_codauto);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_autoexec {
        return false;
      }
        $this->y15_codauto = $y15_codauto;
-     if(($this->y15_codauto == null) || ($this->y15_codauto == "") ){
+     if(($this->y15_codauto == null) || ($this->y15_codauto === 0 || $this->y15_codauto === 0.0 || $this->y15_codauto == "") ){
        $this->erro_sql = " Campo y15_codauto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -43,7 +43,7 @@ $cldebitos = new cl_debitos;
 $clrotulo = new rotulocampo;
 $clrotulo->label('');
 $instit = db_getsession("DB_instit");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 //db_postmemory($HTTP_SERVER_VARS,2);exit;
 
 $result_ult_data = $cldebitos->sql_record($cldebitos->sql_query_file(null,"k22_data as ult_data","k22_data desc limit 1"," k22_instit = $instit"));

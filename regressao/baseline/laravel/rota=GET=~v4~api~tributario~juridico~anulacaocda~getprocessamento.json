@@ -1,0 +1,20 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/juridico/anulacaocda/getprocessamento",
+  "json": {
+    "data": {
+      "processamento": false
+    },
+    "error": false,
+    "message": ""
+  },
+  "sha256": "aa3d7425a901dcea4294adc92ad932f0afba934e1df874e3654bc38405e23d4d",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

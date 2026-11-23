@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/educacao/escola/relatorios/ata-resultados-finais-siga",
+  "json": {
+    "error": true,
+    "message": "Selecione uma turma"
+  },
+  "sha256": "bbc56f2857a25adbc512314ef916e6bdb96a6536c0c7dc1f319a78baef8a6469",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -34,7 +34,7 @@ require_once(modification("classes/db_db_config_classe.php"));
 require_once(modification("classes/db_db_userinst_classe.php"));
 
 db_postmemory($_POST);
-parse_str($_SERVER["QUERY_STRING"]);
+parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $cl_db_userinst = new cl_db_userinst;
 $cldb_config = new cl_db_config;

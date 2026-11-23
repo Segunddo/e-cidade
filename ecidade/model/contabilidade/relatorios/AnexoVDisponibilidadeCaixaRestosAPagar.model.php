@@ -66,7 +66,7 @@ class AnexoVDisponibilidadeCaixaRestosAPagar extends RelatoriosLegaisBase {
 
   private $iColumnWidth = 27;
 
-  public function getDados() {
+  public function getDados($trazerConfiguracaoPadrao = true) {
 
     $this->aLinhasRelatorio = parent::getLinhasRelatorio();
     $this->carregarBalanceteVerificacaoCaixaBruta();

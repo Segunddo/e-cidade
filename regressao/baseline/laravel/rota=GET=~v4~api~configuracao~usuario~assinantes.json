@@ -1,0 +1,17 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/configuracao/usuario/assinantes",
+  "json": {
+    "error": true,
+    "message": "Propriedades de autenticação não existentes."
+  },
+  "sha256": "0ab6c60fef2f3045660ada8ee931321a739ed6a325fc0402887f82fca254f86d",
+  "sql_negocio": [],
+  "status": 500,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

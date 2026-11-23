@@ -71,12 +71,12 @@ class cl_agualeiturasaldoutilizado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->x34_sequencial = ($this->x34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_sequencial"]:$this->x34_sequencial);
-       $this->x34_agualeitura = ($this->x34_agualeitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_agualeitura"]:$this->x34_agualeitura);
-       $this->x34_agualeiturautilizada = ($this->x34_agualeiturautilizada == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_agualeiturautilizada"]:$this->x34_agualeiturautilizada);
-       $this->x34_saldoutilizado = ($this->x34_saldoutilizado == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_saldoutilizado"]:$this->x34_saldoutilizado);
+       $this->x34_sequencial = ($this->x34_sequencial === 0 || $this->x34_sequencial === 0.0 || $this->x34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_sequencial"]:$this->x34_sequencial);
+       $this->x34_agualeitura = ($this->x34_agualeitura === 0 || $this->x34_agualeitura === 0.0 || $this->x34_agualeitura == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_agualeitura"]:$this->x34_agualeitura);
+       $this->x34_agualeiturautilizada = ($this->x34_agualeiturautilizada === 0 || $this->x34_agualeiturautilizada === 0.0 || $this->x34_agualeiturautilizada == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_agualeiturautilizada"]:$this->x34_agualeiturautilizada);
+       $this->x34_saldoutilizado = ($this->x34_saldoutilizado === 0 || $this->x34_saldoutilizado === 0.0 || $this->x34_saldoutilizado == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_saldoutilizado"]:$this->x34_saldoutilizado);
      }else{
-       $this->x34_sequencial = ($this->x34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_sequencial"]:$this->x34_sequencial);
+       $this->x34_sequencial = ($this->x34_sequencial === 0 || $this->x34_sequencial === 0.0 || $this->x34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["x34_sequencial"]:$this->x34_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_agualeiturasaldoutilizado {
          $this->x34_sequencial = $x34_sequencial;
        }
      }
-     if(($this->x34_sequencial == null) || ($this->x34_sequencial == "") ){
+     if(($this->x34_sequencial == null) || ($this->x34_sequencial === 0 || $this->x34_sequencial === 0.0 || $this->x34_sequencial == "") ){
        $this->erro_sql = " Campo x34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

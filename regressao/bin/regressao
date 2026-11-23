@@ -1,0 +1,157 @@
+#!/usr/bin/env bash
+# Atalhos da suite de regressao (base PHP 7.4 -> PHP 8.5). Uso: regressao/bin/regressao <comando> [args]
+# Explicacao para quem nao participou do projeto: regressao/COMO-USAR.md.
+#
+# Mexe SO no ambiente isolado da regressao (projetos compose `e74` e `e74-lar12`, conteineres ecidade74_*).
+# Nao para, nao apaga e nao recria conteiner de outro projeto; nao guarda nem imprime senha.
+set -euo pipefail
+
+RAIZ="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
+cd "$RAIZ"
+
+PY="$RAIZ/regressao/.venv/bin/python"
+RODADAS="${REGRESSAO_RODADAS:-$HOME/rodadas}"
+TRAVA="$RODADAS/.em-andamento"
+REF_URL="${REGRESSAO_REF_URL:-http://localhost:8074}"
+# a rodada pequena mede 3 grupos de telas (cadastros, relatorios e um modulo inteiro pequeno)
+PREFIXOS_PEQUENA=('^arr1_(procjurtipo|grupotaxa)001\.php$' '^cem1_cemiterio00' '^(con2_relinstituicoes|iss2_tipcalc)00')
+
+compose_e74() { docker compose -p e74 -f regressao/lab/docker-compose.e74.yml "$@"; }
+compose_lab() { docker compose -p e74-lar12 -f regressao/lab/docker-compose.lar12.yml "$@"; }
+
+ajuda() {
+    cat <<'FIM'
+Uso: regressao/bin/regressao <comando>
+
+  ambiente-sobe            sobe o ambiente da regressao (7.4 :8074, 8.5 :8185, proxy :8190, laboratorio :8187, banco)
+  ambiente-para            para so os conteineres ecidade74_* (nada e apagado)
+  rodada-pequena [args]    rodada completa reduzida (~25 min): 3 grupos de telas PHP, Laravel contra a
+                           propria referencia, 6 fluxos de navegador. Roda em segundo plano.
+  rodada-completa [args]   rodada completa (HORAS): todas as telas PHP, Laravel contra o laboratorio
+                           (ou --alvo-laravel URL), fluxos. Roda em segundo plano.
+  comparar ANTES DEPOIS    compara duas rodadas completas (pastas) e escreve comparacao.md em DEPOIS
+  ver-ultimo               mostra o andamento da rodada em curso ou, sem rodada em curso, o resumo da mais
+                           recente (por data) entre as pastas AAAAMMDD-HHMMSS-<tipo> criadas por este atalho
+
+Rodadas ficam em $REGRESSAO_RODADAS (padrao ~/rodadas). Argumentos extras de rodada-* vao para
+python -m regressao.completa.orquestra (ex.: --sem-fluxos, --area tributario, --alvo-laravel URL).
+FIM
+}
+
+precisa_venv() {
+    if [ ! -x "$PY" ]; then
+        echo "erro: falta o venv da regressao ($PY). Veja regressao/COMO-USAR.md, 'Preparar uma vez'." >&2
+        exit 2
+    fi
+}
+
+em_andamento() {
+    [ -f "$TRAVA" ] && kill -0 "$(cut -f1 "$TRAVA")" 2>/dev/null
+}
+
+ambiente_sobe() {
+    compose_e74 up -d
+    compose_lab up -d
+    printf 'esperando a referencia responder em %s ' "$REF_URL"
+    for _ in $(seq 1 60); do
+        if curl -fsS -o /dev/null --max-time 5 "$REF_URL/login.php"; then
+            echo "ok"
+            precisa_venv
+            "$PY" -c 'from regressao.nucleo.ambiente import alvos_do_ambiente, verifica
+p = verifica(alvos_do_ambiente())
+print("\n".join(p) if p else "ambiente ok: referencia, 8.5, laboratorio, proxy e banco respondem")'
+            return 0
+        fi
+        printf '.'
+        sleep 5
+    done
+    echo
+    echo "erro: a referencia nao respondeu em 5 min (docker ps; docker logs ecidade74_php74)" >&2
+    exit 2
+}
+
+ambiente_para() {
+    compose_lab stop
+    compose_e74 stop
+}
+
+rodada() {  # rodada <nome> <args do orquestrador...>
+    precisa_venv
+    local nome="$1"; shift
+    mkdir -p "$RODADAS"
+    if em_andamento; then
+        echo "erro: ja ha uma rodada em andamento: $(cut -f2 "$TRAVA") (uma por vez: o banco e restaurado a cada bateria)" >&2
+        exit 2
+    fi
+    # rodada disparada a mao ou pelo MCP (python -m regressao.<bateria>) tambem conta
+    if pgrep -f -- '-m regressao\.(completa|php|laravel)\.' > /dev/null; then
+        echo "erro: ha uma bateria da regressao rodando (pgrep -af 'm regressao\\.'); espere ela terminar" >&2
+        exit 2
+    fi
+    local saida
+    saida="$RODADAS/$(date +%Y%m%d-%H%M%S)-$nome"
+    mkdir -p "$saida"
+    # aspas simples de proposito: as variaveis sao do bash filho ($1..$N), nao deste
+    # shellcheck disable=SC2016
+    setsid nohup bash -c '
+        "$1" -m regressao.completa.orquestra --saida "$2" "${@:4}"
+        echo "fim: saida $? em $(date -Is)"
+        rm -f "$3"' _ "$PY" "$saida" "$TRAVA" "$@" > "$saida/execucao.log" 2>&1 < /dev/null &
+    local pid=$!
+    disown "$pid" 2>/dev/null || true
+    printf '%s\t%s\n' "$pid" "$saida" > "$TRAVA"
+    # confere que a rodada ficou de pe (ex.: chamada por `wsl -- ...` que fecha logo em seguida)
+    sleep 5
+    if ! kill -0 "$pid" 2>/dev/null && ! grep -q '^fim:' "$saida/execucao.log"; then
+        rm -f "$TRAVA"
+        echo "erro: a rodada terminou logo ao iniciar; veja $saida/execucao.log" >&2
+        exit 2
+    fi
+    echo "rodada iniciada em segundo plano: $saida"
+    echo "acompanhe com: regressao/bin/regressao ver-ultimo"
+}
+
+ver_ultimo() {
+    # a rodada viva (trava) vem primeiro; senao a mais recente por data de modificacao entre as pastas que o atalho
+    # cria (AAAAMMDD-HHMMSS-<tipo>). Ordenar por nome errava: pastas criadas a mao (ex.: antes74) iam para o fim.
+    local ultima=""
+    if em_andamento; then
+        ultima="$(cut -f2 "$TRAVA")"
+    else
+        ultima="$(find "$RODADAS" -mindepth 1 -maxdepth 1 -type d -regextype posix-extended \
+            -regex '.*/[0-9]{8}-[0-9]{6}-[^/]+' -printf '%T@\t%p\n' 2>/dev/null | sort -rn | head -n 1 | cut -f2- || true)"
+    fi
+    if [ -z "$ultima" ]; then
+        echo "nenhuma rodada em $RODADAS"
+        return 0
+    fi
+    echo "rodada: $ultima"
+    if em_andamento && [ "$(cut -f2 "$TRAVA")" = "$ultima" ]; then
+        echo "ainda em andamento; ultimas linhas do log:"
+        tail -n 5 "$ultima/execucao.log" 2>/dev/null || true
+    elif [ -f "$ultima/resumo.md" ]; then
+        cat "$ultima/resumo.md"
+    else
+        echo "sem resumo.md (rodada interrompida?); log:"
+        tail -n 20 "$ultima/execucao.log" 2>/dev/null || true
+    fi
+}
+
+case "${1:-ajuda}" in
+    ambiente-sobe) ambiente_sobe ;;
+    ambiente-para) ambiente_para ;;
+    rodada-pequena)
+        shift
+        args=()
+        for p in "${PREFIXOS_PEQUENA[@]}"; do args+=(--prefixo "$p"); done
+        rodada pequena "${args[@]}" --alvo-laravel "$REF_URL" "$@" ;;
+    rodada-completa) shift; rodada completa "$@" ;;
+    comparar)
+        if [ "$#" -ne 3 ]; then echo "uso: regressao/bin/regressao comparar ANTES DEPOIS" >&2; exit 2; fi
+        precisa_venv
+        "$PY" -m regressao.completa.orquestra --comparar "$2" "$3"
+        echo "comparacao: $3/comparacao.md" ;;
+    ver-ultimo) ver_ultimo ;;
+    ajuda|-h|--help) ajuda ;;
+    *) echo "comando desconhecido: $1" >&2; ajuda >&2; exit 2 ;;
+esac

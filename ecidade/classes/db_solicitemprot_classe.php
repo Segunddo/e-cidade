@@ -67,10 +67,10 @@ class cl_solicitemprot {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc49_solicitem = ($this->pc49_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc49_solicitem"]:$this->pc49_solicitem);
-       $this->pc49_protprocesso = ($this->pc49_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["pc49_protprocesso"]:$this->pc49_protprocesso);
+       $this->pc49_solicitem = ($this->pc49_solicitem === 0 || $this->pc49_solicitem === 0.0 || $this->pc49_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc49_solicitem"]:$this->pc49_solicitem);
+       $this->pc49_protprocesso = ($this->pc49_protprocesso === 0 || $this->pc49_protprocesso === 0.0 || $this->pc49_protprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["pc49_protprocesso"]:$this->pc49_protprocesso);
      }else{
-       $this->pc49_solicitem = ($this->pc49_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc49_solicitem"]:$this->pc49_solicitem);
+       $this->pc49_solicitem = ($this->pc49_solicitem === 0 || $this->pc49_solicitem === 0.0 || $this->pc49_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc49_solicitem"]:$this->pc49_solicitem);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_solicitemprot {
        return false;
      }
        $this->pc49_solicitem = $pc49_solicitem;
-     if(($this->pc49_solicitem == null) || ($this->pc49_solicitem == "") ){
+     if(($this->pc49_solicitem == null) || ($this->pc49_solicitem === 0 || $this->pc49_solicitem === 0.0 || $this->pc49_solicitem == "") ){
        $this->erro_sql = " Campo pc49_solicitem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

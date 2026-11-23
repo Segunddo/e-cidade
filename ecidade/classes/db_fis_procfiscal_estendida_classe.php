@@ -40,7 +40,7 @@ class cl_fis_procfiscal_estendida extends cl_fis_procfiscal
 	 * @param integer $y100_sequencial
 	 * @return bool
 	 */
-	public function incluir($y100_sequencial) {
+	public function incluir($y100_sequencial = null) {
 		$this->atualizacampos();
 
 		if($this->y100_coddepto == null ){
@@ -282,7 +282,7 @@ class cl_fis_procfiscal_estendida extends cl_fis_procfiscal
 		}
 	} // end function alterar
 
-	public function sql_query($campos = "",$ordem = "",$where = ""){
+	public function sql_query($campos = "",$ordem = "",$where = "",$dbwhere = ""){
 
 		if($campos == ""){
 			$campos = "y100_sequencial,

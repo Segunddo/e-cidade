@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "escrita-jetom-funcao-incluir",
+  "json": {
+    "data": {
+      "id": 1
+    },
+    "error": false,
+    "message": "Inclusão da função realizada com sucesso."
+  },
+  "sha256": "9f1c58176902545bb6e762efdd65f2d8dd5a664d855a03e1287a8dc76891aaf0",
+  "sql_negocio": [
+    "insert into \"pessoal\".\"jetomfuncao\" (\"rh241_descricao\", \"rh241_instit\", \"rh241_sequencial\") values ($1, $2, $3) returning \"rh241_sequencial\" parameters: $1 = 'REGRESSAO FUNCAO JETOM', $2 = '1', $3 = '1'"
+  ],
+  "status": 200,
+  "tabelas": {
+    "pessoal.jetomfuncao": "42a814c6bcda8b189927168ac6d01b60"
+  },
+  "texto": "",
+  "tipos": {}
+}

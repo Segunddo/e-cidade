@@ -67,10 +67,10 @@ class cl_corchequecgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k12_codcorcheque = ($this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
-       $this->k12_numcgm = ($this->k12_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numcgm"]:$this->k12_numcgm);
+       $this->k12_codcorcheque = ($this->k12_codcorcheque === 0 || $this->k12_codcorcheque === 0.0 || $this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
+       $this->k12_numcgm = ($this->k12_numcgm === 0 || $this->k12_numcgm === 0.0 || $this->k12_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_numcgm"]:$this->k12_numcgm);
      }else{
-       $this->k12_codcorcheque = ($this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
+       $this->k12_codcorcheque = ($this->k12_codcorcheque === 0 || $this->k12_codcorcheque === 0.0 || $this->k12_codcorcheque == ""?@$GLOBALS["HTTP_POST_VARS"]["k12_codcorcheque"]:$this->k12_codcorcheque);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_corchequecgm {
        return false;
      }
        $this->k12_codcorcheque = $k12_codcorcheque;
-     if(($this->k12_codcorcheque == null) || ($this->k12_codcorcheque == "") ){
+     if(($this->k12_codcorcheque == null) || ($this->k12_codcorcheque === 0 || $this->k12_codcorcheque === 0.0 || $this->k12_codcorcheque == "") ){
        $this->erro_sql = " Campo k12_codcorcheque nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,69 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/configuracao/gerador/relatorios",
+  "json": {
+    "errors": {
+      "campos": [
+        "O campo campos é obrigatório."
+      ],
+      "filtros": [
+        "O campo filtros deve ser presente."
+      ],
+      "grupo": [
+        "O campo grupo é obrigatório."
+      ],
+      "layout": [
+        "O campo layout é obrigatório."
+      ],
+      "layout.formato": [
+        "O campo layout.formato é obrigatório."
+      ],
+      "layout.layout": [
+        "O campo layout.layout é obrigatório."
+      ],
+      "layout.margem": [
+        "O campo layout.margem deve ser presente."
+      ],
+      "layout.nome": [
+        "O campo layout.nome é obrigatório."
+      ],
+      "layout.orientacao": [
+        "O campo layout.orientacao é obrigatório."
+      ],
+      "layout.tipoSaida": [
+        "O campo layout.tipo saida é obrigatório."
+      ],
+      "layout.versao": [
+        "O campo layout.versao é obrigatório."
+      ],
+      "ordem": [
+        "O campo ordem deve ser presente."
+      ],
+      "origem": [
+        "O campo origem é obrigatório."
+      ],
+      "sql": [
+        "O campo sql é obrigatório."
+      ],
+      "tipo": [
+        "O campo tipo é obrigatório."
+      ],
+      "tipoVisualizacao": [
+        "O campo tipo visualizacao é obrigatório."
+      ],
+      "variaveis": [
+        "O campo variaveis deve ser presente."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "37ad2570cb88bf1e57cc230aa87160b86227b824484a485c1971b886c9e38fde",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

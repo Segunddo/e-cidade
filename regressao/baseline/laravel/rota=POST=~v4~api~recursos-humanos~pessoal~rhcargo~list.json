@@ -1,0 +1,34 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/rhcargo/list",
+  "json": {
+    "data": [
+      {
+        "rh04_codigo": 1,
+        "rh04_descr": "LOCAL1",
+        "rh04_instit": 1
+      },
+      {
+        "rh04_codigo": 2,
+        "rh04_descr": "LOCAL2",
+        "rh04_instit": 1
+      },
+      {
+        "rh04_codigo": 3,
+        "rh04_descr": "LOCAL3",
+        "rh04_instit": 1
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "d6b3da2c2da2d79a0dd7ca2d68054c62d8ffa2a893bff12d4df77e7e1776ffe0",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

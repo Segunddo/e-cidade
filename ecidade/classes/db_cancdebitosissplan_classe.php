@@ -69,11 +69,11 @@ class cl_cancdebitosissplan {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q78_sequencial = ($this->q78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_sequencial"]:$this->q78_sequencial);
-       $this->q78_cancdebitos = ($this->q78_cancdebitos == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_cancdebitos"]:$this->q78_cancdebitos);
-       $this->q78_issplan = ($this->q78_issplan == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_issplan"]:$this->q78_issplan);
+       $this->q78_sequencial = ($this->q78_sequencial === 0 || $this->q78_sequencial === 0.0 || $this->q78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_sequencial"]:$this->q78_sequencial);
+       $this->q78_cancdebitos = ($this->q78_cancdebitos === 0 || $this->q78_cancdebitos === 0.0 || $this->q78_cancdebitos == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_cancdebitos"]:$this->q78_cancdebitos);
+       $this->q78_issplan = ($this->q78_issplan === 0 || $this->q78_issplan === 0.0 || $this->q78_issplan == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_issplan"]:$this->q78_issplan);
      }else{
-       $this->q78_sequencial = ($this->q78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_sequencial"]:$this->q78_sequencial);
+       $this->q78_sequencial = ($this->q78_sequencial === 0 || $this->q78_sequencial === 0.0 || $this->q78_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["q78_sequencial"]:$this->q78_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cancdebitosissplan {
          $this->q78_sequencial = $q78_sequencial;
        }
      }
-     if(($this->q78_sequencial == null) || ($this->q78_sequencial == "") ){
+     if(($this->q78_sequencial == null) || ($this->q78_sequencial === 0 || $this->q78_sequencial === 0.0 || $this->q78_sequencial == "") ){
        $this->erro_sql = " Campo q78_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

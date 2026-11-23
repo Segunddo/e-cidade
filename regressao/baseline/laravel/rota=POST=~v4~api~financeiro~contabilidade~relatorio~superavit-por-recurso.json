@@ -1,0 +1,30 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/financeiro/contabilidade/relatorio/superavit-por-recurso",
+  "json": {
+    "errors": {
+      "apresentarRecurso": [
+        "O campo apresentar recurso é obrigatório."
+      ],
+      "dataFinal": [
+        "O campo data final é obrigatório."
+      ],
+      "dataInicial": [
+        "O campo data inicial é obrigatório."
+      ],
+      "instituicoes": [
+        "O campo instituicoes é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "5adfbc1d6e65608e73a47aff5ef45fa5ec5dd0ab8a97fa29678eb6993334bcdb",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -1,0 +1,18 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/juridico/inclusaoiniciallista/gethistorico",
+  "json": {
+    "data": [],
+    "error": true,
+    "message": "Informe o codigo da lista"
+  },
+  "sha256": "7c9b8a7270654655dc18f78866376d047a00b0ece5ba75b8d58de3bb3d28d37a",
+  "sql_negocio": [],
+  "status": 400,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

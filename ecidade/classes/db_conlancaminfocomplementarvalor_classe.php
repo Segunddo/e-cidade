@@ -80,14 +80,14 @@ class cl_conlancaminfocomplementarvalor
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->c126_sequencial = ($this->c126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_sequencial"]:$this->c126_sequencial);
-       $this->c126_codlan = ($this->c126_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_codlan"]:$this->c126_codlan);
-       $this->c126_reduz = ($this->c126_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_reduz"]:$this->c126_reduz);
-       $this->c126_infocomplementar = ($this->c126_infocomplementar == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_infocomplementar"]:$this->c126_infocomplementar);
+       $this->c126_sequencial = ($this->c126_sequencial === 0 || $this->c126_sequencial === 0.0 || $this->c126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_sequencial"]:$this->c126_sequencial);
+       $this->c126_codlan = ($this->c126_codlan === 0 || $this->c126_codlan === 0.0 || $this->c126_codlan == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_codlan"]:$this->c126_codlan);
+       $this->c126_reduz = ($this->c126_reduz === 0 || $this->c126_reduz === 0.0 || $this->c126_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_reduz"]:$this->c126_reduz);
+       $this->c126_infocomplementar = ($this->c126_infocomplementar === 0 || $this->c126_infocomplementar === 0.0 || $this->c126_infocomplementar == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_infocomplementar"]:$this->c126_infocomplementar);
        $this->c126_valor = ($this->c126_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_valor"]:$this->c126_valor);
-       $this->c126_tiposistema = ($this->c126_tiposistema == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_tiposistema"]:$this->c126_tiposistema);
+       $this->c126_tiposistema = ($this->c126_tiposistema === 0 || $this->c126_tiposistema === 0.0 || $this->c126_tiposistema == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_tiposistema"]:$this->c126_tiposistema);
      }else{
-       $this->c126_sequencial = ($this->c126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_sequencial"]:$this->c126_sequencial);
+       $this->c126_sequencial = ($this->c126_sequencial === 0 || $this->c126_sequencial === 0.0 || $this->c126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c126_sequencial"]:$this->c126_sequencial);
      }
    }
 
@@ -163,7 +163,7 @@ class cl_conlancaminfocomplementarvalor
          $this->c126_sequencial = $c126_sequencial;
        }
      }
-     if(($this->c126_sequencial == null) || ($this->c126_sequencial == "") ){
+     if(($this->c126_sequencial == null) || ($this->c126_sequencial === 0 || $this->c126_sequencial === 0.0 || $this->c126_sequencial == "") ){
        $this->erro_sql = " Campo c126_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

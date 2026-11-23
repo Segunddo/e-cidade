@@ -52,7 +52,7 @@ class cl_condominiocgm {
                  j106_numcgm = int4 = Cód. CGM
                  ";
    //funcao construtor da classe
-   public function cl_condominiocgm() {
+   public function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("condominiocgm");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -69,11 +69,11 @@ class cl_condominiocgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->j106_sequencial = ($this->j106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j106_sequencial"]:$this->j106_sequencial);
-       $this->j106_condominio = ($this->j106_condominio == ""?@$GLOBALS["HTTP_POST_VARS"]["j106_condominio"]:$this->j106_condominio);
-       $this->j106_numcgm = ($this->j106_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j106_numcgm"]:$this->j106_numcgm);
+       $this->j106_sequencial = ($this->j106_sequencial === 0 || $this->j106_sequencial === 0.0 || $this->j106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j106_sequencial"]:$this->j106_sequencial);
+       $this->j106_condominio = ($this->j106_condominio === 0 || $this->j106_condominio === 0.0 || $this->j106_condominio == ""?@$GLOBALS["HTTP_POST_VARS"]["j106_condominio"]:$this->j106_condominio);
+       $this->j106_numcgm = ($this->j106_numcgm === 0 || $this->j106_numcgm === 0.0 || $this->j106_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["j106_numcgm"]:$this->j106_numcgm);
      }else{
-       $this->j106_sequencial = ($this->j106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j106_sequencial"]:$this->j106_sequencial);
+       $this->j106_sequencial = ($this->j106_sequencial === 0 || $this->j106_sequencial === 0.0 || $this->j106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["j106_sequencial"]:$this->j106_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_condominiocgm {
          $this->j106_sequencial = $j106_sequencial;
        }
      }
-     if(($this->j106_sequencial == null) || ($this->j106_sequencial == "") ){
+     if(($this->j106_sequencial == null) || ($this->j106_sequencial === 0 || $this->j106_sequencial === 0.0 || $this->j106_sequencial == "") ){
        $this->erro_sql = " Campo j106_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

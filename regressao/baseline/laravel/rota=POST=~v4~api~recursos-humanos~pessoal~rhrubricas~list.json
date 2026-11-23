@@ -1,0 +1,489 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/recursos-humanos/pessoal/rhrubricas/list",
+  "json": {
+    "data": [
+      {
+        "rh27_descr": "BASE P/SALARIO FAMILIA",
+        "rh27_instit": 1,
+        "rh27_rubric": "R917"
+      },
+      {
+        "rh27_descr": "SALARIO FAMILIA EXTRA-QUADRO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R920"
+      },
+      {
+        "rh27_descr": "SALARIO FAMILIA CLT EXTINCAO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R921"
+      },
+      {
+        "rh27_descr": "ARREDONDAMENTO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R926"
+      },
+      {
+        "rh27_descr": "ADIANTAMENTO INSUF.SALDO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R928"
+      },
+      {
+        "rh27_descr": "13 SALARIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R935"
+      },
+      {
+        "rh27_descr": "INDENIZACAO ART 479 CLT",
+        "rh27_instit": 1,
+        "rh27_rubric": "R937"
+      },
+      {
+        "rh27_descr": "FGTS (DO MES)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R938"
+      },
+      {
+        "rh27_descr": "FGTS (40% S/ DEP DEVIDOS)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R939"
+      },
+      {
+        "rh27_descr": "BASE BRUTA FOLHA COMPLEMENTAR",
+        "rh27_instit": 1,
+        "rh27_rubric": "R948"
+      },
+      {
+        "rh27_descr": "1/3 DE ABONO PECUNIARIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R932"
+      },
+      {
+        "rh27_descr": "ADIANTAMENTO FERIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R940"
+      },
+      {
+        "rh27_descr": "ABONO FAMILIA INATIVOS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R918"
+      },
+      {
+        "rh27_descr": "SALARIO FAMILIA",
+        "rh27_instit": 1,
+        "rh27_rubric": "R919"
+      },
+      {
+        "rh27_descr": "100% DE FERIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R931"
+      },
+      {
+        "rh27_descr": "VENCIMENTO BASICO S/ FÉRIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "2001"
+      },
+      {
+        "rh27_descr": "VENCIMENTO BASICO S/ 13o SALÁR",
+        "rh27_instit": 1,
+        "rh27_rubric": "4001"
+      },
+      {
+        "rh27_descr": "ADICIONAL NOTURNO S/ FÉRIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "2002"
+      },
+      {
+        "rh27_descr": "ADICIONAL NOTURNO S/ 13o SALÁR",
+        "rh27_instit": 1,
+        "rh27_rubric": "4002"
+      },
+      {
+        "rh27_descr": "PROVENTOS  S/ FÉRIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "2003"
+      },
+      {
+        "rh27_descr": "PROVENTOS  S/ 13o SALÁRIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "4003"
+      },
+      {
+        "rh27_descr": "PROVENTOS  S/ RESCISÃO",
+        "rh27_instit": 1,
+        "rh27_rubric": "6003"
+      },
+      {
+        "rh27_descr": "TRIENIOS S/ FÉRIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "2006"
+      },
+      {
+        "rh27_descr": "TRIENIOS S/ 13o SALÁRIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "4006"
+      },
+      {
+        "rh27_descr": "HORAS EXTRAS 100% S/ FÉRIA",
+        "rh27_instit": 1,
+        "rh27_rubric": "2004"
+      },
+      {
+        "rh27_descr": "HORAS EXTRAS 100% S/ 13O S",
+        "rh27_instit": 1,
+        "rh27_rubric": "4004"
+      },
+      {
+        "rh27_descr": "HORAS EXTRAS 50% S/ FÉRIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "2005"
+      },
+      {
+        "rh27_descr": "HORAS EXTRAS 50% S/ 13o SALÁRI",
+        "rh27_instit": 1,
+        "rh27_rubric": "4005"
+      },
+      {
+        "rh27_descr": "VENCIMENTO BASICO",
+        "rh27_instit": 1,
+        "rh27_rubric": "0001"
+      },
+      {
+        "rh27_descr": "ADICIONAL NOTURNO",
+        "rh27_instit": 1,
+        "rh27_rubric": "0002"
+      },
+      {
+        "rh27_descr": "PROVENTOS",
+        "rh27_instit": 1,
+        "rh27_rubric": "0003"
+      },
+      {
+        "rh27_descr": "HORAS EXTRAS 100%",
+        "rh27_instit": 1,
+        "rh27_rubric": "0004"
+      },
+      {
+        "rh27_descr": "HORAS EXTRAS 50%",
+        "rh27_instit": 1,
+        "rh27_rubric": "0005"
+      },
+      {
+        "rh27_descr": "TRIENIOS",
+        "rh27_instit": 1,
+        "rh27_rubric": "0006"
+      },
+      {
+        "rh27_descr": "% Inss - Inativos S/ SALÁRIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R907"
+      },
+      {
+        "rh27_descr": "% Inss - Inativos S/ 13o SALÁR",
+        "rh27_instit": 1,
+        "rh27_rubric": "R908"
+      },
+      {
+        "rh27_descr": "% Inss - Inativos S/ FÉRIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R909"
+      },
+      {
+        "rh27_descr": "% TESTE S/ SALÁRIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R910"
+      },
+      {
+        "rh27_descr": "% TESTE S/ 13o SALÁRIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R911"
+      },
+      {
+        "rh27_descr": "% TESTE S/ FÉRIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R912"
+      },
+      {
+        "rh27_descr": "% IRRF S/13. SALARIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R914"
+      },
+      {
+        "rh27_descr": "VALE TRANSPORTE",
+        "rh27_instit": 1,
+        "rh27_rubric": "R916"
+      },
+      {
+        "rh27_descr": "VALE TRANSP MES ANTERIOR",
+        "rh27_instit": 1,
+        "rh27_rubric": "R922"
+      },
+      {
+        "rh27_descr": "ARREDONDAMENTO ANTERIOR",
+        "rh27_instit": 1,
+        "rh27_rubric": "R927"
+      },
+      {
+        "rh27_descr": "DESC.ADIANTAMENTO INSUF. SALDO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R929"
+      },
+      {
+        "rh27_descr": "DESC ADTO FERIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R930"
+      },
+      {
+        "rh27_descr": "ADIANT. 13 SAL S/FERIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R933"
+      },
+      {
+        "rh27_descr": "DESC ADIANT 13O SALARIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R934"
+      },
+      {
+        "rh27_descr": "DESCONTO ADIANT. 13o SALARIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R936"
+      },
+      {
+        "rh27_descr": "DESCONTOS FOLHA COMPLEMENTAR",
+        "rh27_instit": 1,
+        "rh27_rubric": "R947"
+      },
+      {
+        "rh27_descr": "LIQUIDO FOLHA COMPLEMENTAR",
+        "rh27_instit": 1,
+        "rh27_rubric": "R949"
+      },
+      {
+        "rh27_descr": "% IRRF S/SALARIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R913"
+      },
+      {
+        "rh27_descr": "% Fundo Aposent S/ SALÁRIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R904"
+      },
+      {
+        "rh27_descr": "% Fundo Aposent S/ 13o SALÁRIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R905"
+      },
+      {
+        "rh27_descr": "% Fundo Aposent S/ FÉRIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R906"
+      },
+      {
+        "rh27_descr": "% IRRF S/FERIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R915"
+      },
+      {
+        "rh27_descr": "PENSAO ALIMENTICIA",
+        "rh27_instit": 1,
+        "rh27_rubric": "0500"
+      },
+      {
+        "rh27_descr": "MENSALIDADE DO SINDICATO",
+        "rh27_instit": 1,
+        "rh27_rubric": "0501"
+      },
+      {
+        "rh27_descr": "BASE IRRF SALARIO-COMPLEMENTAR",
+        "rh27_instit": 1,
+        "rh27_rubric": "R950"
+      },
+      {
+        "rh27_descr": "BASE IRRF 13.SAL.-COMPLEMENTAR",
+        "rh27_instit": 1,
+        "rh27_rubric": "R951"
+      },
+      {
+        "rh27_descr": "BASE IRRF FERIAS -COMPLEMENTAR",
+        "rh27_instit": 1,
+        "rh27_rubric": "R952"
+      },
+      {
+        "rh27_descr": "BASE PREV.SALARIO - COMPLEMENT",
+        "rh27_instit": 1,
+        "rh27_rubric": "R953"
+      },
+      {
+        "rh27_descr": "BASE PREV.13.SAL. - COMPLEMENT",
+        "rh27_instit": 1,
+        "rh27_rubric": "R954"
+      },
+      {
+        "rh27_descr": "BASE PREV.FERIAS  - COMPLEMENT",
+        "rh27_instit": 1,
+        "rh27_rubric": "R955"
+      },
+      {
+        "rh27_descr": "BASE FGTS FOLHA COMPLEMENTAR",
+        "rh27_instit": 1,
+        "rh27_rubric": "R956"
+      },
+      {
+        "rh27_descr": "DEDUCAO IRRF MP220 DE 23/07/04",
+        "rh27_instit": 1,
+        "rh27_rubric": "R976"
+      },
+      {
+        "rh27_descr": "BASE TOTAL PREVIDENCIA FERIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R977"
+      },
+      {
+        "rh27_descr": "DESC.TOTAL PREVIDENCIA FERIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R978"
+      },
+      {
+        "rh27_descr": "DEDUCOES P/IRRF (FERIAS)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R979"
+      },
+      {
+        "rh27_descr": "DESCONTO ADIA.PENSAO AL.S/13S.",
+        "rh27_instit": 1,
+        "rh27_rubric": "R980"
+      },
+      {
+        "rh27_descr": "BASE IRF SALARIO (BRUTA)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R981"
+      },
+      {
+        "rh27_descr": "BASE IRF 13O SAL (BRUTA)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R982"
+      },
+      {
+        "rh27_descr": "BASE IRF FERIAS  (BRUTA)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R983"
+      },
+      {
+        "rh27_descr": "VLR REF DEPENDENTES P/ IRF",
+        "rh27_instit": 1,
+        "rh27_rubric": "R984"
+      },
+      {
+        "rh27_descr": "BASE PREVIDENCIA (SALARIO)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R985"
+      },
+      {
+        "rh27_descr": "BASE PREVIDENCIA (13O SAL)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R986"
+      },
+      {
+        "rh27_descr": "BASE PREVIDENCIA (FERIAS)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R987"
+      },
+      {
+        "rh27_descr": "DEDUCOES P/IRRF(SALAR./FERIAS)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R988"
+      },
+      {
+        "rh27_descr": "DEDUCOES P/IRRF(13.SALARIO)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R989"
+      },
+      {
+        "rh27_descr": "BASE PREVID.PATRONAL (21%INSS)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R990"
+      },
+      {
+        "rh27_descr": "BASE FGTS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R991"
+      },
+      {
+        "rh27_descr": "DESC PREVIDENCIA",
+        "rh27_instit": 1,
+        "rh27_rubric": "R993"
+      },
+      {
+        "rh27_descr": "BASE IRRF (LIQUIDA)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R994"
+      },
+      {
+        "rh27_descr": "DEDUCOES (PREVIDENCIA)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R995"
+      },
+      {
+        "rh27_descr": "BASE FGTS (FERIAS ANTECIP)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R996"
+      },
+      {
+        "rh27_descr": "DEDUCAO INAT/PENS +65ANOS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R997"
+      },
+      {
+        "rh27_descr": "FGTS DO MES (CONVERSAO)",
+        "rh27_instit": 1,
+        "rh27_rubric": "R998"
+      },
+      {
+        "rh27_descr": "DEDUCAO INAT/PENS+65ANOS 13SAL",
+        "rh27_instit": 1,
+        "rh27_rubric": "R999"
+      },
+      {
+        "rh27_descr": "BASE PREVIDENCIA",
+        "rh27_instit": 1,
+        "rh27_rubric": "R992"
+      },
+      {
+        "rh27_descr": "%INSS S/ SALÁRIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R901"
+      },
+      {
+        "rh27_descr": "%INSS S/13o SALÁRIO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R902"
+      },
+      {
+        "rh27_descr": "%INSS S/ FÉRIAS",
+        "rh27_instit": 1,
+        "rh27_rubric": "R903"
+      },
+      {
+        "rh27_descr": "ISENÇÃO IR AUX. DOENÇA E AC. TRABALHO",
+        "rh27_instit": 1,
+        "rh27_rubric": "R960"
+      },
+      {
+        "rh27_descr": "Diferença de Deducoes",
+        "rh27_instit": 1,
+        "rh27_rubric": "R957"
+      }
+    ],
+    "error": false,
+    "message": ""
+  },
+  "sha256": "373851d126b0cf3c793ba9a068738850c69e2703347ce8d905409becd16dfbbf",
+  "sql_negocio": [],
+  "status": 200,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

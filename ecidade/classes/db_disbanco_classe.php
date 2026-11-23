@@ -119,9 +119,9 @@ class cl_disbanco {
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->k00_numbco = ($this->k00_numbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numbco"]:$this->k00_numbco);
-       $this->k15_codbco = ($this->k15_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codbco"]:$this->k15_codbco);
+       $this->k15_codbco = ($this->k15_codbco === 0 || $this->k15_codbco === 0.0 || $this->k15_codbco == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codbco"]:$this->k15_codbco);
        $this->k15_codage = ($this->k15_codage == ""?@$GLOBALS["HTTP_POST_VARS"]["k15_codage"]:$this->k15_codage);
-       $this->codret = ($this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
+       $this->codret = ($this->codret === 0 || $this->codret === 0.0 || $this->codret == ""?@$GLOBALS["HTTP_POST_VARS"]["codret"]:$this->codret);
        if($this->dtarq == ""){
          $this->dtarq_dia = ($this->dtarq_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dtarq_dia"]:$this->dtarq_dia);
          $this->dtarq_mes = ($this->dtarq_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dtarq_mes"]:$this->dtarq_mes);
@@ -138,20 +138,20 @@ class cl_disbanco {
             $this->dtpago = $this->dtpago_ano."-".$this->dtpago_mes."-".$this->dtpago_dia;
          }
        }
-       $this->vlrpago = ($this->vlrpago == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrpago"]:$this->vlrpago);
-       $this->vlrjuros = ($this->vlrjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrjuros"]:$this->vlrjuros);
-       $this->vlrmulta = ($this->vlrmulta == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrmulta"]:$this->vlrmulta);
-       $this->vlracres = ($this->vlracres == ""?@$GLOBALS["HTTP_POST_VARS"]["vlracres"]:$this->vlracres);
-       $this->vlrdesco = ($this->vlrdesco == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrdesco"]:$this->vlrdesco);
-       $this->vlrtot = ($this->vlrtot == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrtot"]:$this->vlrtot);
+       $this->vlrpago = ($this->vlrpago === 0 || $this->vlrpago === 0.0 || $this->vlrpago == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrpago"]:$this->vlrpago);
+       $this->vlrjuros = ($this->vlrjuros === 0 || $this->vlrjuros === 0.0 || $this->vlrjuros == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrjuros"]:$this->vlrjuros);
+       $this->vlrmulta = ($this->vlrmulta === 0 || $this->vlrmulta === 0.0 || $this->vlrmulta == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrmulta"]:$this->vlrmulta);
+       $this->vlracres = ($this->vlracres === 0 || $this->vlracres === 0.0 || $this->vlracres == ""?@$GLOBALS["HTTP_POST_VARS"]["vlracres"]:$this->vlracres);
+       $this->vlrdesco = ($this->vlrdesco === 0 || $this->vlrdesco === 0.0 || $this->vlrdesco == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrdesco"]:$this->vlrdesco);
+       $this->vlrtot = ($this->vlrtot === 0 || $this->vlrtot === 0.0 || $this->vlrtot == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrtot"]:$this->vlrtot);
        $this->cedente = ($this->cedente == ""?@$GLOBALS["HTTP_POST_VARS"]["cedente"]:$this->cedente);
-       $this->vlrcalc = ($this->vlrcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrcalc"]:$this->vlrcalc);
-       $this->idret = ($this->idret == ""?@$GLOBALS["HTTP_POST_VARS"]["idret"]:$this->idret);
+       $this->vlrcalc = ($this->vlrcalc === 0 || $this->vlrcalc === 0.0 || $this->vlrcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["vlrcalc"]:$this->vlrcalc);
+       $this->idret = ($this->idret === 0 || $this->idret === 0.0 || $this->idret == ""?@$GLOBALS["HTTP_POST_VARS"]["idret"]:$this->idret);
        $this->classi = ($this->classi == "f"?@$GLOBALS["HTTP_POST_VARS"]["classi"]:$this->classi);
-       $this->k00_numpre = ($this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
-       $this->k00_numpar = ($this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
+       $this->k00_numpre = ($this->k00_numpre === 0 || $this->k00_numpre === 0.0 || $this->k00_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpre"]:$this->k00_numpre);
+       $this->k00_numpar = ($this->k00_numpar === 0 || $this->k00_numpar === 0.0 || $this->k00_numpar == ""?@$GLOBALS["HTTP_POST_VARS"]["k00_numpar"]:$this->k00_numpar);
        $this->convenio = ($this->convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["convenio"]:$this->convenio);
-       $this->instit = ($this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
+       $this->instit = ($this->instit === 0 || $this->instit === 0.0 || $this->instit == ""?@$GLOBALS["HTTP_POST_VARS"]["instit"]:$this->instit);
        if($this->dtcredito == ""){
          $this->dtcredito_dia = ($this->dtcredito_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["dtcredito_dia"]:$this->dtcredito_dia);
          $this->dtcredito_mes = ($this->dtcredito_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["dtcredito_mes"]:$this->dtcredito_mes);
@@ -163,7 +163,7 @@ class cl_disbanco {
        $this->bancopagamento = ($this->bancopagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["bancopagamento"]:$this->bancopagamento);
        $this->agenciapagamento = ($this->agenciapagamento == ""?@$GLOBALS["HTTP_POST_VARS"]["agenciapagamento"]:$this->agenciapagamento);
      }else{
-       $this->idret = ($this->idret == ""?@$GLOBALS["HTTP_POST_VARS"]["idret"]:$this->idret);
+       $this->idret = ($this->idret === 0 || $this->idret === 0.0 || $this->idret == ""?@$GLOBALS["HTTP_POST_VARS"]["idret"]:$this->idret);
      }
    }
    // funcao para inclusao
@@ -322,7 +322,7 @@ class cl_disbanco {
          $this->idret = $idret;
        }
      }
-     if(($this->idret == null) || ($this->idret == "") ){
+     if(($this->idret == null) || ($this->idret === 0 || $this->idret === 0.0 || $this->idret == "") ){
        $this->erro_sql = " Campo idret nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/tributario/issqn/cadastros/salao-parceiro/alterar-salao-parceiro",
+  "json": null,
+  "sha256": "f0853ade8343e4e10c327a33154a3fbcc6d871ba82d2eb5cc83542448d19f27e",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

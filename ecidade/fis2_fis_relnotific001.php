@@ -132,7 +132,7 @@ function js_emite(){
 																										                  and y30_instit = ".db_getsession('DB_instit')."
   					                                 GROUP BY coddepto, descrdepto ORDER BY descrdepto");
 	    
-	    while ($row = pg_fetch_row($resultTipoFiscaliza)){
+	    while ($row = ($resultTipoFiscaliza ? pg_fetch_row($resultTipoFiscaliza) : null)){
 	       $i++;
 	       $select[$row[0]] = "$row[1]";
 	    }

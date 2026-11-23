@@ -1,0 +1,13 @@
+{
+  "cabecalhos": {
+    "content-type": "text/html; charset=ISO-8859-1"
+  },
+  "id": "rota:GET:/web/integracoes/efd-reinf/retencao/manutencaoR4020",
+  "json": null,
+  "sha256": "bae49328cff5fe5aea7b28f3db4ba6e98e034041998dfac6065d2a28126994d3",
+  "sql_negocio": [],
+  "status": 404,
+  "tabelas": {},
+  "texto": "Array\n(\n    [message] => Página não encontrada: \n)\n",
+  "tipos": {}
+}

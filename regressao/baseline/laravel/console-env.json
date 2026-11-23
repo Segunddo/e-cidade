@@ -1,0 +1,11 @@
+{
+  "cabecalhos": {},
+  "id": "console-env",
+  "json": null,
+  "sha256": "bb9e605c078790bf6c5cfb454f8df00407880282f5327a86be92b0b46b6225de",
+  "sql_negocio": [],
+  "status": 0,
+  "tabelas": {},
+  "texto": "Current application environment: local\n",
+  "tipos": {}
+}

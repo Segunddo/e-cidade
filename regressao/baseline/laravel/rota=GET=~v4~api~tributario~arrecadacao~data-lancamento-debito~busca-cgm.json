@@ -1,0 +1,21 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:GET:/v4/api/tributario/arrecadacao/data-lancamento-debito/busca-cgm",
+  "json": {
+    "errors": {
+      "cgm": [
+        "O campo cgm é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "294740c0b3ad8ca45d67b4508e5f5e636aaffe4d1d5c2928578f0c49749f86af",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

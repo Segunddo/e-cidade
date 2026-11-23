@@ -1,0 +1,24 @@
+{
+  "cabecalhos": {
+    "cache-control": "no-store, no-cache, must-revalidate, no-cache, private",
+    "content-type": "application/json"
+  },
+  "id": "rota:POST:/v4/api/tributario/issqn/update-parceiro",
+  "json": {
+    "errors": {
+      "q203_dtinicial": [
+        "O campo q203 dtinicial é obrigatório."
+      ],
+      "q203_sequencial": [
+        "O campo q203 sequencial é obrigatório."
+      ]
+    },
+    "message": "The given data was invalid."
+  },
+  "sha256": "e40c34c1bcf04802bea8b98ed32dd93b35c7eb519a881a59550eba495ae57743",
+  "sql_negocio": [],
+  "status": 422,
+  "tabelas": {},
+  "texto": "",
+  "tipos": {}
+}

@@ -44,7 +44,7 @@ $clrotulo->label("pc71_codigo");
 $clrotulo->label("pc71_descr");
 
 db_postmemory($HTTP_POST_VARS);
-parse_str($HTTP_SERVER_VARS['QUERY_STRING']);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 $DB_coddepto = db_getsession("DB_coddepto");
 $oParam = db_utils::fieldsMemory($clpcparam->sql_record($clpcparam->sql_query_file(db_getsession("DB_instit"))),0);

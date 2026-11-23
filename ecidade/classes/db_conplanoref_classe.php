@@ -67,10 +67,10 @@ class cl_conplanoref {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c65_codcon = ($this->c65_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_codcon"]:$this->c65_codcon);
-       $this->c65_codpla = ($this->c65_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_codpla"]:$this->c65_codpla);
+       $this->c65_codcon = ($this->c65_codcon === 0 || $this->c65_codcon === 0.0 || $this->c65_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_codcon"]:$this->c65_codcon);
+       $this->c65_codpla = ($this->c65_codpla === 0 || $this->c65_codpla === 0.0 || $this->c65_codpla == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_codpla"]:$this->c65_codpla);
      }else{
-       $this->c65_codcon = ($this->c65_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_codcon"]:$this->c65_codcon);
+       $this->c65_codcon = ($this->c65_codcon === 0 || $this->c65_codcon === 0.0 || $this->c65_codcon == ""?@$GLOBALS["HTTP_POST_VARS"]["c65_codcon"]:$this->c65_codcon);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_conplanoref {
        return false;
      }
        $this->c65_codcon = $c65_codcon;
-     if(($this->c65_codcon == null) || ($this->c65_codcon == "") ){
+     if(($this->c65_codcon == null) || ($this->c65_codcon === 0 || $this->c65_codcon === 0.0 || $this->c65_codcon == "") ){
        $this->erro_sql = " Campo c65_codcon nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

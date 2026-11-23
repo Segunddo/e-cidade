@@ -69,12 +69,12 @@ class cl_arreparc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k26_numpre = ($this->k26_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k26_numpre"]:$this->k26_numpre);
-       $this->k26_receit = ($this->k26_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k26_receit"]:$this->k26_receit);
-       $this->k26_perc = ($this->k26_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["k26_perc"]:$this->k26_perc);
+       $this->k26_numpre = ($this->k26_numpre === 0 || $this->k26_numpre === 0.0 || $this->k26_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k26_numpre"]:$this->k26_numpre);
+       $this->k26_receit = ($this->k26_receit === 0 || $this->k26_receit === 0.0 || $this->k26_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k26_receit"]:$this->k26_receit);
+       $this->k26_perc = ($this->k26_perc === 0 || $this->k26_perc === 0.0 || $this->k26_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["k26_perc"]:$this->k26_perc);
      }else{
-       $this->k26_numpre = ($this->k26_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k26_numpre"]:$this->k26_numpre);
-       $this->k26_receit = ($this->k26_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k26_receit"]:$this->k26_receit);
+       $this->k26_numpre = ($this->k26_numpre === 0 || $this->k26_numpre === 0.0 || $this->k26_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["k26_numpre"]:$this->k26_numpre);
+       $this->k26_receit = ($this->k26_receit === 0 || $this->k26_receit === 0.0 || $this->k26_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["k26_receit"]:$this->k26_receit);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_arreparc {
      }
        $this->k26_numpre = $k26_numpre; 
        $this->k26_receit = $k26_receit; 
-     if(($this->k26_numpre == null) || ($this->k26_numpre == "") ){ 
+     if(($this->k26_numpre == null) || ($this->k26_numpre === 0 || $this->k26_numpre === 0.0 || $this->k26_numpre == "") ){ 
        $this->erro_sql = " Campo k26_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_arreparc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->k26_receit == null) || ($this->k26_receit == "") ){ 
+     if(($this->k26_receit == null) || ($this->k26_receit === 0 || $this->k26_receit === 0.0 || $this->k26_receit == "") ){ 
        $this->erro_sql = " Campo k26_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

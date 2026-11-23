@@ -72,12 +72,12 @@ class cl_programacaofinanceiraitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->k175_sequencial = ($this->k175_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k175_sequencial"]:$this->k175_sequencial);
-       $this->k175_item = ($this->k175_item == ""?@$GLOBALS["HTTP_POST_VARS"]["k175_item"]:$this->k175_item);
-       $this->k175_programaacaofinanceira = ($this->k175_programaacaofinanceira == ""?@$GLOBALS["HTTP_POST_VARS"]["k175_programaacaofinanceira"]:$this->k175_programaacaofinanceira);
-       $this->k175_valortotal = ($this->k175_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["k175_valortotal"]:$this->k175_valortotal);
+       $this->k175_sequencial = ($this->k175_sequencial === 0 || $this->k175_sequencial === 0.0 || $this->k175_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k175_sequencial"]:$this->k175_sequencial);
+       $this->k175_item = ($this->k175_item === 0 || $this->k175_item === 0.0 || $this->k175_item == ""?@$GLOBALS["HTTP_POST_VARS"]["k175_item"]:$this->k175_item);
+       $this->k175_programaacaofinanceira = ($this->k175_programaacaofinanceira === 0 || $this->k175_programaacaofinanceira === 0.0 || $this->k175_programaacaofinanceira == ""?@$GLOBALS["HTTP_POST_VARS"]["k175_programaacaofinanceira"]:$this->k175_programaacaofinanceira);
+       $this->k175_valortotal = ($this->k175_valortotal === 0 || $this->k175_valortotal === 0.0 || $this->k175_valortotal == ""?@$GLOBALS["HTTP_POST_VARS"]["k175_valortotal"]:$this->k175_valortotal);
      }else{
-       $this->k175_sequencial = ($this->k175_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k175_sequencial"]:$this->k175_sequencial);
+       $this->k175_sequencial = ($this->k175_sequencial === 0 || $this->k175_sequencial === 0.0 || $this->k175_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["k175_sequencial"]:$this->k175_sequencial);
      }
    }
    // funcao para Inclusão
@@ -134,7 +134,7 @@ class cl_programacaofinanceiraitem {
          $this->k175_sequencial = $k175_sequencial;
        }
      }
-     if(($this->k175_sequencial == null) || ($this->k175_sequencial == "") ){
+     if(($this->k175_sequencial == null) || ($this->k175_sequencial === 0 || $this->k175_sequencial === 0.0 || $this->k175_sequencial == "") ){
        $this->erro_sql = " Campo k175_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
