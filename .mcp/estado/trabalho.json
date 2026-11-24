@@ -32997,129 +32997,491 @@
     }
   },
   "reivindicacoes": {
-    "ecidade/con1_caditens004.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:44:12Z",
-      "expira": "2026-11-24T01:44:12Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_acordocomissaotipomembro_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con1_db_config005.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_acordoempempenho_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con1_db_config006.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_acordogrupodocumento_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con1_db_depart002.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_autorizacaocirculacaoveiculo_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con1_db_depart003.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_cgmdocumento_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con1_db_permemp003.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_db_cepmunic_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con1_db_versaotarefa_001.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_formareclamacao_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con1_tipoempresa002.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T22:58:28Z",
-      "expira": "2026-11-24T02:58:28Z",
-      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
-      "quem": "maria-julia"
+    "ecidade/classes/db_mensageriaacordoprocessados_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con1_tipoempresa003.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T22:58:28Z",
-      "expira": "2026-11-24T02:58:28Z",
-      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
-      "quem": "maria-julia"
+    "ecidade/classes/db_ouvidor_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con2_relmenus001.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T22:58:28Z",
-      "expira": "2026-11-24T02:58:28Z",
-      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
-      "quem": "maria-julia"
+    "ecidade/classes/db_ouvidoriaatendimentocgm_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con3_usuonline013.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T22:58:28Z",
-      "expira": "2026-11-24T02:58:28Z",
-      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
-      "quem": "maria-julia"
+    "ecidade/classes/db_ouvidoriaatendimentodoc_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con3_versao005.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_ouvidoriaatendimentolocal_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con3_versao006.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_ouvidoriaatendimentoretorno_classe.php": {
+      "desde": "2026-11-24T14:34:19Z",
+      "expira": "2026-11-24T18:34:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con4_docpadrao010.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:44:12Z",
-      "expira": "2026-11-24T01:44:12Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_ouvidoriaatendimentoretornoemail_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con4_docparag010.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:44:12Z",
-      "expira": "2026-11-24T01:44:12Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
+    "ecidade/classes/db_ouvidoriaatendimentoretornoender_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/con4_registrosinconsistentes003.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T22:58:28Z",
-      "expira": "2026-11-24T02:58:28Z",
-      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
-      "quem": "maria-julia"
+    "ecidade/classes/db_ouvidoriaatendimentoretornotelefone_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/sys3_modulos002.php": {
-      "desde": "2026-11-23T21:02:28Z",
-      "expira": "2026-11-24T01:02:28Z",
-      "motivo": "parse_str_1_arg em Configuração",
-      "quem": "maria-julia"
+    "ecidade/classes/db_ouvidoriaatendimentotiporetorno_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     },
-    "ecidade/sys4_processa008.php": {
-      "desde": "2026-11-23T21:07:36Z",
-      "expira": "2026-11-24T01:07:36Z",
-      "motivo": "parse_str_1_arg em Configuração",
-      "quem": "maria-julia"
+    "ecidade/classes/db_ouvidoriacadlocal_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriacadlocaldepart_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriacadlocalender_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriacadlocalgeral_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcgrupo_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcsubgrupo_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_planocontratacao_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_procdoctipo_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_situacaoouvidoriaatendimento_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_tipoprocdepto_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_tipoprocformareclamacao_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicabast_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicabastanu_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicabastposto_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicabastpostoempnota_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicabastretirada_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicbaixa_classe.php": {
+      "desde": "2026-11-24T14:34:20Z",
+      "expira": "2026-11-24T18:34:20Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcateg_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcategcnh_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcentral_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcentraldepart_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcomb_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadconvenio_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadconveniocgm_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcor_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccaditensobrig_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccaditensobrigtipobaixa_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadmarca_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadmodelo_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadmotoristasit_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadoficinas_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadposto_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadpostoexterno_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadpostointerno_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadpotencia_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadproced_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadtipo_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadtipobaixa_classe.php": {
+      "desde": "2026-11-24T14:34:21Z",
+      "expira": "2026-11-24T18:34:21Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadtipocapacidade_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadtiposervico_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadutilizacao_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccentral_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicdevolucao_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicitensobrig_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicitensobrigbaixa_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanut_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutencaomedida_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutencaomedidacancela_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutitem_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutitempcmater_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutoficina_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutretirada_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmotoristas_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmotoristascentral_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicparam_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicpatri_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicresp_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicretirada_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veictipoabast_classe.php": {
+      "desde": "2026-11-24T14:34:22Z",
+      "expira": "2026-11-24T18:34:22Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiculos_classe.php": {
+      "desde": "2026-11-24T14:34:23Z",
+      "expira": "2026-11-24T18:34:23Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiculoscomb_classe.php": {
+      "desde": "2026-11-24T14:34:23Z",
+      "expira": "2026-11-24T18:34:23Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicutilizacao_classe.php": {
+      "desde": "2026-11-24T14:34:23Z",
+      "expira": "2026-11-24T18:34:23Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicutilizacaobem_classe.php": {
+      "desde": "2026-11-24T14:34:23Z",
+      "expira": "2026-11-24T18:34:23Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicutilizacaoconvenio_classe.php": {
+      "desde": "2026-11-24T14:34:23Z",
+      "expira": "2026-11-24T18:34:23Z",
+      "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
     }
   },
   "versao": 1
