@@ -289,3 +289,47 @@ sua área. As 168 telas do lote 1 de Patrimonial: todas idênticas.
 
 **Lição, a 15ª da mesma família:** a verificação partia da lista que a enumeração produziu, e a enumeração não
 conhecia um terceiro mecanismo de carga de classe. Quem achou foi a bateria: uma tela que quebrou.
+
+---
+
+# Área Patrimonial na `base-php85` (branch `patrimonial/php85-migrado`, issue #20)
+
+### Dimensionada e dividida em lotes (24/11/2026)
+
+`scratchpad/dimensiona.py` sobre a `base-php85` (núcleo e as outras áreas já migrados): **769 telas de menu, 713 faltando,
+6 fantasmas, universo 4.453, 195 a alterar.** Nenhum prefixo do Patrimonial é usado por área ainda pendente
+(`prefixos_area.py PATRIM`: coluna de outras áreas vazia em todos).
+
+| Lote | Prefixos | Roteamento | A alterar (prefixo inteiro, `enumera.py`) |
+| --- | --- | --- | --- |
+| 1 | `vei` 61, `ouv` 27, `aco` 8, `ac` 8, `pncp` 8, `bnc` 5, `pca` 4, `processo` 6, `prot` 9 | `location` | 92 únicos |
+| 2 | `pat` 31, `mat` 29, `lic` 38, `com` 51 | `location` | a medir na união |
+| 3 | só as telas de menu de `con` (34), `pro` (67), `emp` (5), `cad` (1), `cai` (1), `func` (4) | `map` | a medir |
+
+Ambiente: o `e74` da suíte de regressão (`ecidade74_*`, banco = `baseline.dump`), que monta esta worktree. As
+ferramentas do `scratchpad/` usam os nomes da pilha da raiz; rodaram sem alteração por um adaptador local (não
+versionado) que troca `ecidade_*` por `ecidade74_*` e encaminha 8080/8085/8090 para 8074/8185/8190.
+
+### Lote 1 — `vei`, `ouv`, `aco`, `ac`, `pncp`, `bnc`, `pca`, `processo`, `prot` (24/11/2026)
+
+Dos 92 arquivos que o `enumera.py` acusou, **81 classes** precisavam de porte. Os outros 11 não:
+- `split(`: o núcleo da `base-php85` define `split()`, e ela responde igual nos dois runtimes (`vei1_veiculos004`,
+  `db_cflicita`, `db_db_syscampo`, `db_divida`, `db_ruascep`);
+- `libs/JSON.php`: o `{}` acusado está num comentário;
+- `model/pessoal/folhapagamento/FolhaPagamento*.model.php`: `each()` em arquivo do RH — avisado, não tocado;
+- `db_isscalc`, `db_parissqn`, `db_setorloc`: concluídas no quadro pelo Tributário — avisado, não tocado.
+
+| Commit | O quê |
+| --- | --- |
+| Rector (`rector_lote.py`) | guarda `0 == ""` em 81 classes (412 linhas), construtor de `cl_veicabast`, `= null` em `cl_veiculos::sql_query_medida_between` |
+| `guarda_ciclo.py` | guarda `pg_*` em 8 arquivos (`ouv`, `prot`, `vei`, `db_frmvincatendprocpesquisa`) |
+| `negada_corrige.py` | forma negada `!= ""` em 15 pontos: `db_cgm`, `db_empagemovslips`, `db_orcparamseq`, `db_veicmanut` |
+| à mão | `Container.php` (`\ ECidade` com espaço: ParseError no 8.0+), `db_frmacordo.php:252` (`pg_fetch_assoc` sobre chamada), `ouv1_prorrogacaoprazo003` (`count(null)`) |
+
+`verifica_lote.py pat-l1` (3.534 arquivos, 1.156 classes): **4b OK, 5 OK, 7 OK — 412/412 telas idênticas.**
+5b, 6, 6b e 6c acusam só arquivos do Tributário já assim na `base-php85` (nenhuma tela do lote quebra por eles):
+`src/Tributario/.../Loteamento.php`, `ReciboCollection.php`, `ArretipoRepository.php` (assinatura incompatível com a
+mãe) e as classes `db_iptuconstr`, `db_parissqn`, `db_isscalc`, `db_setorloc` (leem o formulário errado no 8.5).
+
+Pendentes do lote: nível 3 (o `escrita_post.py` não enxerga o SQL com o log do banco grande; zerar o log antes) e o
+roteamento (passo 8), deixados para quando o proxy da pilha da raiz estiver disponível.
