@@ -33104,6 +33104,18 @@
       "expira": "2026-11-25T02:19:32Z",
       "motivo": "PHP8-05 Patrimonial lote 2: correcoes manuais",
       "quem": "Segundo"
+    },
+    "ecidade/model/impressao.argoxOS214.php": {
+      "desde": "2026-11-24T22:35:33Z",
+      "expira": "2026-11-25T02:35:33Z",
+      "motivo": "PHP8-05 Patrimonial: assinatura de rodarComandos (etiquetas)",
+      "quem": "Segundo"
+    },
+    "ecidade/model/impressao.argoxOS214_plus.php": {
+      "desde": "2026-11-24T22:35:33Z",
+      "expira": "2026-11-25T02:35:33Z",
+      "motivo": "PHP8-05 Patrimonial: assinatura de rodarComandos (etiquetas)",
+      "quem": "Segundo"
     }
   },
   "versao": 1
