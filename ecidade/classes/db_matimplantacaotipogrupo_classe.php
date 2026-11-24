@@ -72,8 +72,8 @@ class cl_matimplantacaotipogrupo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m93_sequencial = ($this->m93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m93_sequencial"]:$this->m93_sequencial);
-       $this->m93_db_usuarios = ($this->m93_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["m93_db_usuarios"]:$this->m93_db_usuarios);
+       $this->m93_sequencial = ($this->m93_sequencial === 0 || $this->m93_sequencial === 0.0 || $this->m93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m93_sequencial"]:$this->m93_sequencial);
+       $this->m93_db_usuarios = ($this->m93_db_usuarios === 0 || $this->m93_db_usuarios === 0.0 || $this->m93_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["m93_db_usuarios"]:$this->m93_db_usuarios);
        if($this->m93_dataimplantacao == ""){
          $this->m93_dataimplantacao_dia = ($this->m93_dataimplantacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["m93_dataimplantacao_dia"]:$this->m93_dataimplantacao_dia);
          $this->m93_dataimplantacao_mes = ($this->m93_dataimplantacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["m93_dataimplantacao_mes"]:$this->m93_dataimplantacao_mes);
@@ -83,7 +83,7 @@ class cl_matimplantacaotipogrupo {
          }
        }
      }else{
-       $this->m93_sequencial = ($this->m93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m93_sequencial"]:$this->m93_sequencial);
+       $this->m93_sequencial = ($this->m93_sequencial === 0 || $this->m93_sequencial === 0.0 || $this->m93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m93_sequencial"]:$this->m93_sequencial);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_matimplantacaotipogrupo {
          $this->m93_sequencial = $m93_sequencial;
        }
      }
-     if(($this->m93_sequencial == null) || ($this->m93_sequencial == "") ){
+     if(($this->m93_sequencial == null) || ($this->m93_sequencial === 0 || $this->m93_sequencial === 0.0 || $this->m93_sequencial == "") ){
        $this->erro_sql = " Campo m93_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

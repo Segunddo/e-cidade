@@ -58,13 +58,13 @@ class cl_planocontratacao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->pn05_codigo = ($this->pn05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_codigo"]:$this->pn05_codigo);
-       $this->pn05_unidade = ($this->pn05_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_unidade"]:$this->pn05_unidade);
-       $this->pn05_ano = ($this->pn05_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_ano"]:$this->pn05_ano);
-       $this->pn05_instituicao = ($this->pn05_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_instituicao"]:$this->pn05_instituicao);
-       $this->pn05_status = ($this->pn05_status == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_status"]:$this->pn05_status);
-       $this->pn05_pncp = ($this->pn05_pncp == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_pncp"]:$this->pn05_pncp);
-       $this->pn05_itens = ($this->pn05_itens == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_itens"]:$this->pn05_itens);
+       $this->pn05_codigo = ($this->pn05_codigo === 0 || $this->pn05_codigo === 0.0 || $this->pn05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_codigo"]:$this->pn05_codigo);
+       $this->pn05_unidade = ($this->pn05_unidade === 0 || $this->pn05_unidade === 0.0 || $this->pn05_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_unidade"]:$this->pn05_unidade);
+       $this->pn05_ano = ($this->pn05_ano === 0 || $this->pn05_ano === 0.0 || $this->pn05_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_ano"]:$this->pn05_ano);
+       $this->pn05_instituicao = ($this->pn05_instituicao === 0 || $this->pn05_instituicao === 0.0 || $this->pn05_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_instituicao"]:$this->pn05_instituicao);
+       $this->pn05_status = ($this->pn05_status === 0 || $this->pn05_status === 0.0 || $this->pn05_status == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_status"]:$this->pn05_status);
+       $this->pn05_pncp = ($this->pn05_pncp === 0 || $this->pn05_pncp === 0.0 || $this->pn05_pncp == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_pncp"]:$this->pn05_pncp);
+       $this->pn05_itens = ($this->pn05_itens === 0 || $this->pn05_itens === 0.0 || $this->pn05_itens == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_itens"]:$this->pn05_itens);
        if($this->pn05_datacadastro == ""){
          $this->pn05_datacadastro_dia = ($this->pn05_datacadastro_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_datacadastro_dia"]:$this->pn05_datacadastro_dia);
          $this->pn05_datacadastro_mes = ($this->pn05_datacadastro_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_datacadastro_mes"]:$this->pn05_datacadastro_mes);
@@ -74,7 +74,7 @@ class cl_planocontratacao
          }
        }
      }else{
-       $this->pn05_codigo = ($this->pn05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_codigo"]:$this->pn05_codigo);
+       $this->pn05_codigo = ($this->pn05_codigo === 0 || $this->pn05_codigo === 0.0 || $this->pn05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pn05_codigo"]:$this->pn05_codigo);
      }
    }
 
@@ -150,7 +150,7 @@ class cl_planocontratacao
          $this->pn05_codigo = $pn05_codigo;
        }
      }
-     if(($this->pn05_codigo == null) || ($this->pn05_codigo == "") ){
+     if(($this->pn05_codigo == null) || ($this->pn05_codigo === 0 || $this->pn05_codigo === 0.0 || $this->pn05_codigo == "") ){
        $this->erro_sql = " Campo pn05_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

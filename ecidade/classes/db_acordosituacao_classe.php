@@ -69,11 +69,11 @@ class cl_acordosituacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac17_sequencial = ($this->ac17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac17_sequencial"]:$this->ac17_sequencial);
+       $this->ac17_sequencial = ($this->ac17_sequencial === 0 || $this->ac17_sequencial === 0.0 || $this->ac17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac17_sequencial"]:$this->ac17_sequencial);
        $this->ac17_descricao = ($this->ac17_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ac17_descricao"]:$this->ac17_descricao);
        $this->ac17_ativo = ($this->ac17_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ac17_ativo"]:$this->ac17_ativo);
      }else{
-       $this->ac17_sequencial = ($this->ac17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac17_sequencial"]:$this->ac17_sequencial);
+       $this->ac17_sequencial = ($this->ac17_sequencial === 0 || $this->ac17_sequencial === 0.0 || $this->ac17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac17_sequencial"]:$this->ac17_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_acordosituacao {
          $this->ac17_sequencial = $ac17_sequencial;
        }
      }
-     if(($this->ac17_sequencial == null) || ($this->ac17_sequencial == "") ){
+     if(($this->ac17_sequencial == null) || ($this->ac17_sequencial === 0 || $this->ac17_sequencial === 0.0 || $this->ac17_sequencial == "") ){
        $this->erro_sql = " Campo ac17_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

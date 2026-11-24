@@ -946,7 +946,7 @@ class materialEstoque
         $sSqlPrecoMedio .= "  order by to_timestamp(m85_data || ' ' || m85_hora, 'YYYY-MM-DD HH24:MI:SS') desc limit 1";
 
         $rsPrecoMedio = db_query($sSqlPrecoMedio);
-        if (pg_num_rows($rsPrecoMedio) > 0) {
+        if (($rsPrecoMedio ? pg_num_rows($rsPrecoMedio) : null) > 0) {
             $nPrecoMedio = db_utils::fieldsMemory($rsPrecoMedio, 0)->m85_precomedio;
         }
         return $nPrecoMedio;
@@ -975,7 +975,7 @@ class materialEstoque
         $sSqlPrecoMedio .= "  order by to_timestamp(m85_data || ' ' || m85_hora, 'YYYY-MM-DD HH24:MI:SS') desc limit 1";
 
         $rsPrecoMedio = db_query($sSqlPrecoMedio);
-        if (pg_num_rows($rsPrecoMedio) > 0) {
+        if (($rsPrecoMedio ? pg_num_rows($rsPrecoMedio) : null) > 0) {
             $nPrecoMedio = db_utils::fieldsMemory($rsPrecoMedio, 0)->m85_precomedio;
         }
         return $nPrecoMedio;

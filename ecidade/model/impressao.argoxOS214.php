@@ -93,7 +93,7 @@ final class impressaoOS214 extends impressao {
 	 * @param string $sFinalizadorCoamando
 	 */
 	
-	function rodarComandos(){
+	function rodarComandos($sFinalizadorComando=""){
 		$sFinalizadorComando = "\n";
 		parent::rodarComandos($sFinalizadorComando);
 	

@@ -134,7 +134,7 @@ try {
                   Acesse para configurar: DB:FINANCEIRO > Contabilidade > Cadastros > Rotinas administrativas > Grupo do Plano orçamentário (novo)");
     }
 
-    if (pg_num_rows($rsGrupoConta) > 0 && pg_num_rows($rsIntegracaoPatrimonial) == 0) {
+    if (($rsGrupoConta ? pg_num_rows($rsGrupoConta) : null) > 0 && ($rsIntegracaoPatrimonial ? pg_num_rows($rsIntegracaoPatrimonial) : null) == 0) {
         throw new Exception("Não foi configurado a Integração do patrimonial <br/> Acesse para configurar: DB:FINANCEIRO > Contabilidade > Procedimentos > Parâmetros > Integração Patrimonial");
     }
 } catch (Exception $oErro) {

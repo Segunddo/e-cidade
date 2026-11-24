@@ -75,14 +75,14 @@ class cl_pcorcamjulgamentologitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc93_sequencial = ($this->pc93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_sequencial"]:$this->pc93_sequencial);
-       $this->pc93_pcorcamjulgamentolog = ($this->pc93_pcorcamjulgamentolog == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_pcorcamjulgamentolog"]:$this->pc93_pcorcamjulgamentolog);
-       $this->pc93_pcorcamitem = ($this->pc93_pcorcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_pcorcamitem"]:$this->pc93_pcorcamitem);
-       $this->pc93_pcorcamforne = ($this->pc93_pcorcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_pcorcamforne"]:$this->pc93_pcorcamforne);
-       $this->pc93_valorunitario = ($this->pc93_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_valorunitario"]:$this->pc93_valorunitario);
-       $this->pc93_pontuacao = ($this->pc93_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_pontuacao"]:$this->pc93_pontuacao);
+       $this->pc93_sequencial = ($this->pc93_sequencial === 0 || $this->pc93_sequencial === 0.0 || $this->pc93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_sequencial"]:$this->pc93_sequencial);
+       $this->pc93_pcorcamjulgamentolog = ($this->pc93_pcorcamjulgamentolog === 0 || $this->pc93_pcorcamjulgamentolog === 0.0 || $this->pc93_pcorcamjulgamentolog == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_pcorcamjulgamentolog"]:$this->pc93_pcorcamjulgamentolog);
+       $this->pc93_pcorcamitem = ($this->pc93_pcorcamitem === 0 || $this->pc93_pcorcamitem === 0.0 || $this->pc93_pcorcamitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_pcorcamitem"]:$this->pc93_pcorcamitem);
+       $this->pc93_pcorcamforne = ($this->pc93_pcorcamforne === 0 || $this->pc93_pcorcamforne === 0.0 || $this->pc93_pcorcamforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_pcorcamforne"]:$this->pc93_pcorcamforne);
+       $this->pc93_valorunitario = ($this->pc93_valorunitario === 0 || $this->pc93_valorunitario === 0.0 || $this->pc93_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_valorunitario"]:$this->pc93_valorunitario);
+       $this->pc93_pontuacao = ($this->pc93_pontuacao === 0 || $this->pc93_pontuacao === 0.0 || $this->pc93_pontuacao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_pontuacao"]:$this->pc93_pontuacao);
      }else{
-       $this->pc93_sequencial = ($this->pc93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_sequencial"]:$this->pc93_sequencial);
+       $this->pc93_sequencial = ($this->pc93_sequencial === 0 || $this->pc93_sequencial === 0.0 || $this->pc93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc93_sequencial"]:$this->pc93_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_pcorcamjulgamentologitem {
          $this->pc93_sequencial = $pc93_sequencial;
        }
      }
-     if(($this->pc93_sequencial == null) || ($this->pc93_sequencial == "") ){
+     if(($this->pc93_sequencial == null) || ($this->pc93_sequencial === 0 || $this->pc93_sequencial === 0.0 || $this->pc93_sequencial == "") ){
        $this->erro_sql = " Campo pc93_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

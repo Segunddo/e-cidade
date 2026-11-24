@@ -64,8 +64,8 @@ class cl_liclicitemlances
   public function atualizacampos($exclusao = false)
   {
     if ($exclusao == false) {
-      $this->l49_sequencial = ($this->l49_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_sequencial"] : $this->l49_sequencial);
-      $this->l49_liclicitem = ($this->l49_liclicitem == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_liclicitem"] : $this->l49_liclicitem);
+      $this->l49_sequencial = ($this->l49_sequencial === 0 || $this->l49_sequencial === 0.0 || $this->l49_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_sequencial"] : $this->l49_sequencial);
+      $this->l49_liclicitem = ($this->l49_liclicitem === 0 || $this->l49_liclicitem === 0.0 || $this->l49_liclicitem == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_liclicitem"] : $this->l49_liclicitem);
       if ($this->l49_data == "") {
         $this->l49_data_dia = ($this->l49_data_dia == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_data_dia"] : $this->l49_data_dia);
         $this->l49_data_mes = ($this->l49_data_mes == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_data_mes"] : $this->l49_data_mes);
@@ -75,15 +75,15 @@ class cl_liclicitemlances
         }
       }
       $this->l49_hora = ($this->l49_hora == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_hora"] : $this->l49_hora);
-      $this->l49_fornecedor = ($this->l49_fornecedor == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_fornecedor"] : $this->l49_fornecedor);
+      $this->l49_fornecedor = ($this->l49_fornecedor === 0 || $this->l49_fornecedor === 0.0 || $this->l49_fornecedor == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_fornecedor"] : $this->l49_fornecedor);
       $this->l49_valido = ($this->l49_valido == null ? @$GLOBALS["HTTP_POST_VARS"]["l49_valido"] : $this->l49_valido);
       $this->l49_cancelado = ($this->l49_cancelado == null ? @$GLOBALS["HTTP_POST_VARS"]["l49_cancelado"] : $this->l49_cancelado);
       $this->l49_justificativa = ($this->l49_justificativa == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_justificativa"] : $this->l49_justificativa);
-      $this->l49_vlrun = ($this->l49_vlrun == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_vlrun"] : $this->l49_vlrun);
-      $this->l49_vlrtot = ($this->l49_vlrtot == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_vlrtot"] : $this->l49_vlrtot);
-      $this->l49_vlrdesc = ($this->l49_vlrdesc == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_vlrdesc"] : $this->l49_vlrdesc);
+      $this->l49_vlrun = ($this->l49_vlrun === 0 || $this->l49_vlrun === 0.0 || $this->l49_vlrun == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_vlrun"] : $this->l49_vlrun);
+      $this->l49_vlrtot = ($this->l49_vlrtot === 0 || $this->l49_vlrtot === 0.0 || $this->l49_vlrtot == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_vlrtot"] : $this->l49_vlrtot);
+      $this->l49_vlrdesc = ($this->l49_vlrdesc === 0 || $this->l49_vlrdesc === 0.0 || $this->l49_vlrdesc == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_vlrdesc"] : $this->l49_vlrdesc);
     } else {
-      $this->l49_sequencial = ($this->l49_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_sequencial"] : $this->l49_sequencial);
+      $this->l49_sequencial = ($this->l49_sequencial === 0 || $this->l49_sequencial === 0.0 || $this->l49_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["l49_sequencial"] : $this->l49_sequencial);
     }
   }
 
@@ -198,7 +198,7 @@ class cl_liclicitemlances
         $this->l49_sequencial = $l49_sequencial;
       }
     }
-    if (($this->l49_sequencial == null) || ($this->l49_sequencial == "")) {
+    if (($this->l49_sequencial == null) || ($this->l49_sequencial === 0 || $this->l49_sequencial === 0.0 || $this->l49_sequencial == "")) {
       $this->erro_sql = " Campo l49_sequencial não declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

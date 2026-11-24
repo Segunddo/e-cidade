@@ -289,7 +289,7 @@ if ( $oParametros->iTipoRelatorio == 0 ) {
  $iAlturalinha   = 4;
 
 $rsSaidas = db_query($sSqlSaidas);
-$iNumRows = pg_num_rows($rsSaidas);
+$iNumRows = ($rsSaidas ? pg_num_rows($rsSaidas) : null);
 $nValorTotalGeral = 0;
 
 if ($iNumRows <= 0 || !$rsSaidas) {

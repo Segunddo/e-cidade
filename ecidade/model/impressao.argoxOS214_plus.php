@@ -96,7 +96,7 @@ final class impressaoOS214_plus extends impressao {
 	 * Método para finalizar os comandos
 	 * @param string $sFinalizadorCoamando
 	 */
-	public function rodarComandos(){
+	public function rodarComandos($sFinalizadorComando=""){
 		$sFinalizadorComando = chr(13);
 		parent::rodarComandos($sFinalizadorComando);
 

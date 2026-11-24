@@ -79,7 +79,7 @@ $sSql .= "       and instit = {$iInstit}                                        
 $sSql .= "  order by m70_coddepto,m80_data,m52_codordem                                                               ";
 
 $rsSql = db_query($sSql);
-$iRows = pg_numrows($rsSql);
+$iRows = ($rsSql ? pg_numrows($rsSql) : null);
 
 if ($iRows == 0){
   $sMsg = "Nenhum registro encontrado.";

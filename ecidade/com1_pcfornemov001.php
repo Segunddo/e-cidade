@@ -83,7 +83,7 @@ if (isset($incluir)) {
 }
 
 if (!isset($z01_nome)) {
-  $z01_nome = pg_result(db_query("select z01_nome from cgm where z01_numcgm = {$pc62_numcgm}"), 0, 0);
+  $z01_nome = (($rsNomeCgm = db_query("select z01_nome from cgm where z01_numcgm = {$pc62_numcgm}")) ? pg_result($rsNomeCgm, 0, 0) : null);
 }
 
 ?>

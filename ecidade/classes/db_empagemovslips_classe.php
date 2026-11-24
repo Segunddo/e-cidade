@@ -358,10 +358,10 @@ class cl_empagemovslips
                     if (isset($GLOBALS["HTTP_POST_VARS"]["k107_valor"]) || $this->k107_valor != "") {
                         $resac = db_query("insert into db_acount values($acount,2174,12460,'".AddSlashes(pg_result($resaco, $conresaco, 'k107_valor'))."','$this->k107_valor',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["k107_ctacredito"]) || $this->k107_ctacredito != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["k107_ctacredito"]) || ($this->k107_ctacredito != "" && $this->k107_ctacredito !== 0 && $this->k107_ctacredito !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,2174,12461,'".AddSlashes(pg_result($resaco, $conresaco, 'k107_ctacredito'))."','$this->k107_ctacredito',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
                     }
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["k107_ctadebito"]) || $this->k107_ctadebito != "") {
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["k107_ctadebito"]) || ($this->k107_ctadebito != "" && $this->k107_ctadebito !== 0 && $this->k107_ctadebito !== 0.0)) {
                         $resac = db_query("insert into db_acount values($acount,2174,12462,'".AddSlashes(pg_result($resaco, $conresaco, 'k107_ctadebito'))."','$this->k107_ctadebito',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
                     }
                     if (isset($GLOBALS["HTTP_POST_VARS"]["k107_retencao"]) || $this->k107_retencao != "") {

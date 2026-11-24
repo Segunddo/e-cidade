@@ -89,7 +89,7 @@ $sSql .= "  order by m45_codigo,                                                
 $sSql .= "           m45_data                                                                                         ";
 
 $rsSql = db_query($sSql);
-$iRows = pg_num_rows($rsSql);
+$iRows = ($rsSql ? pg_num_rows($rsSql) : null);
 
 if ($iRows == 0) {
 

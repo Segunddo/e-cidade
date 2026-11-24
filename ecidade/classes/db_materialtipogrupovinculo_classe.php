@@ -69,11 +69,11 @@ class cl_materialtipogrupovinculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m04_sequencial = ($this->m04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m04_sequencial"]:$this->m04_sequencial);
-       $this->m04_materialtipogrupo = ($this->m04_materialtipogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["m04_materialtipogrupo"]:$this->m04_materialtipogrupo);
-       $this->m04_materialestoquegrupo = ($this->m04_materialestoquegrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["m04_materialestoquegrupo"]:$this->m04_materialestoquegrupo);
+       $this->m04_sequencial = ($this->m04_sequencial === 0 || $this->m04_sequencial === 0.0 || $this->m04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m04_sequencial"]:$this->m04_sequencial);
+       $this->m04_materialtipogrupo = ($this->m04_materialtipogrupo === 0 || $this->m04_materialtipogrupo === 0.0 || $this->m04_materialtipogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["m04_materialtipogrupo"]:$this->m04_materialtipogrupo);
+       $this->m04_materialestoquegrupo = ($this->m04_materialestoquegrupo === 0 || $this->m04_materialestoquegrupo === 0.0 || $this->m04_materialestoquegrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["m04_materialestoquegrupo"]:$this->m04_materialestoquegrupo);
      }else{
-       $this->m04_sequencial = ($this->m04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m04_sequencial"]:$this->m04_sequencial);
+       $this->m04_sequencial = ($this->m04_sequencial === 0 || $this->m04_sequencial === 0.0 || $this->m04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m04_sequencial"]:$this->m04_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_materialtipogrupovinculo {
          $this->m04_sequencial = $m04_sequencial; 
        }
      }
-     if(($this->m04_sequencial == null) || ($this->m04_sequencial == "") ){ 
+     if(($this->m04_sequencial == null) || ($this->m04_sequencial === 0 || $this->m04_sequencial === 0.0 || $this->m04_sequencial == "") ){ 
        $this->erro_sql = " Campo m04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

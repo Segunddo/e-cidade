@@ -76,8 +76,8 @@ class cl_pcorcamjulgamentolog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc92_sequencial = ($this->pc92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_sequencial"]:$this->pc92_sequencial);
-       $this->pc92_usuario = ($this->pc92_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_usuario"]:$this->pc92_usuario);
+       $this->pc92_sequencial = ($this->pc92_sequencial === 0 || $this->pc92_sequencial === 0.0 || $this->pc92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_sequencial"]:$this->pc92_sequencial);
+       $this->pc92_usuario = ($this->pc92_usuario === 0 || $this->pc92_usuario === 0.0 || $this->pc92_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_usuario"]:$this->pc92_usuario);
        if($this->pc92_datajulgamento == ""){
          $this->pc92_datajulgamento_dia = ($this->pc92_datajulgamento_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_datajulgamento_dia"]:$this->pc92_datajulgamento_dia);
          $this->pc92_datajulgamento_mes = ($this->pc92_datajulgamento_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_datajulgamento_mes"]:$this->pc92_datajulgamento_mes);
@@ -89,7 +89,7 @@ class cl_pcorcamjulgamentolog {
        $this->pc92_hora = ($this->pc92_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_hora"]:$this->pc92_hora);
        $this->pc92_ativo = ($this->pc92_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc92_ativo"]:$this->pc92_ativo);
      }else{
-       $this->pc92_sequencial = ($this->pc92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_sequencial"]:$this->pc92_sequencial);
+       $this->pc92_sequencial = ($this->pc92_sequencial === 0 || $this->pc92_sequencial === 0.0 || $this->pc92_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc92_sequencial"]:$this->pc92_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_pcorcamjulgamentolog {
          $this->pc92_sequencial = $pc92_sequencial;
        }
      }
-     if(($this->pc92_sequencial == null) || ($this->pc92_sequencial == "") ){
+     if(($this->pc92_sequencial == null) || ($this->pc92_sequencial === 0 || $this->pc92_sequencial === 0.0 || $this->pc92_sequencial == "") ){
        $this->erro_sql = " Campo pc92_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

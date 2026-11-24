@@ -6885,6 +6885,12 @@
       "quando": "2026-11-20T18:14:44Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_acordocomissaotipomembro_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:08Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_acordodocumento_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -6902,6 +6908,12 @@
       "padroes": [],
       "quando": "2026-11-22T01:05:53Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_acordoempempenho_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:08Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_acordoempempitem_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -6937,6 +6949,12 @@
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-20T18:14:45Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_acordogrupodocumento_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:08Z",
       "quem": "Segundo"
     },
     "ecidade/classes/db_acordogruponumeracao_classe.php": {
@@ -7029,6 +7047,12 @@
       "quando": "2026-11-20T18:14:47Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_acordoorigem_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:08Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_acordoparalisacao_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -7099,6 +7123,12 @@
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-20T18:14:50Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_acordosituacao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:09Z",
       "quem": "Segundo"
     },
     "ecidade/classes/db_acordotipo_classe.php": {
@@ -7617,6 +7647,18 @@
       "quando": "2026-11-22T01:05:55Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_apolice_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:09Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_apolitem_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:09Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_aprovconselho_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -7923,6 +7965,12 @@
       "quando": "2026-11-19T22:49:44Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_atatemplategeral_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:09Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_atendcadarea_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -8090,6 +8138,12 @@
       "padroes": [],
       "quando": "2026-11-20T06:05:07Z",
       "quem": "Thiago432544"
+    },
+    "ecidade/classes/db_autorizacaocirculacaoveiculo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:09Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_autosanitario_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 5 (fis; ver commits)",
@@ -8439,6 +8493,12 @@
       "quando": "2026-11-22T01:05:56Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_bemtipos_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:09Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_bens_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -8457,11 +8517,41 @@
       "quando": "2026-11-22T01:05:57Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_benscadlote_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:09Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_benscedente_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:05:57Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_benscomissao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:09Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_benscomissaousu_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:09Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_benscorlanc_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:09Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_benscorr_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:10Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_bensdepreciacao_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -8493,6 +8583,30 @@
       "quando": "2026-11-22T01:05:57Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_bensetiquetaimpressa_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:10Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_bensguarda_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:10Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_bensguardaitem_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:10Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_bensguardaitemdev_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:10Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_benshistoricocalculo_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -8517,6 +8631,12 @@
       "quando": "2026-11-22T01:05:57Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_bensmarca_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:10Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_bensmater_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -8528,6 +8648,36 @@
       "padroes": [],
       "quando": "2026-11-22T01:05:57Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_bensmedida_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:10Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_bensmodelo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:10Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_bensmodeloetiqueta_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:10Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_bensmodeloetiquetapadrao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:10Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_bensmotbaixa_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:11Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_bensplaca_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -8552,6 +8702,12 @@
       "padroes": [],
       "quando": "2026-11-22T01:05:57Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_benstipoguarda_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:11Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_benstransf_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -9147,6 +9303,12 @@
       "quando": "2026-11-20T18:15:04Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_ceplogradouros_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:11Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_certbaixanumero_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 4 (iss; ver commits)",
       "padroes": [],
@@ -9273,6 +9435,24 @@
       "quando": "2026-11-20T18:15:04Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_cflicitatemplate_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:11Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_cflicitatemplateata_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:11Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_cflicitatemplateminuta_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:11Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_cflicitavalores_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -9310,9 +9490,9 @@
       "quem": "Diego Ribeiro Wanderley"
     },
     "ecidade/classes/db_cgm_classe.php": {
-      "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
       "padroes": [],
-      "quando": "2026-11-20T18:15:04Z",
+      "quando": "2026-11-24T23:10:11Z",
       "quem": "Segundo"
     },
     "ecidade/classes/db_cgmalt_classe.php": {
@@ -9327,6 +9507,18 @@
       "quando": "2026-11-22T01:05:58Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_cgmcorreto_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:11Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_cgmdocumento_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:11Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_cgmendereco_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -9338,6 +9530,12 @@
       "padroes": [],
       "quando": "2026-11-22T01:05:58Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_cgmerrado_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:11Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_cgmestrangeiro_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -10881,6 +11079,18 @@
       "quando": "2026-11-20T03:28:18Z",
       "quem": "Pedro Gomide"
     },
+    "ecidade/classes/db_db_ceplog_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:12Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_db_cepmunic_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:12Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_db_certidaoweb_classe.php": {
       "observacao": "PHP8-41: migracao 7.4 -> 8.5 do Cidadao (ver commits PHP8-41)",
       "padroes": [],
@@ -12173,6 +12383,12 @@
       "quando": "2026-11-20T18:15:07Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_editaltemplategeral_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:12Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_editaltipo_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -12348,9 +12564,9 @@
       "quem": "Segundo"
     },
     "ecidade/classes/db_empagemovslips_classe.php": {
-      "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
       "padroes": [],
-      "quando": "2026-11-19T22:49:46Z",
+      "quando": "2026-11-24T23:10:12Z",
       "quem": "Segundo"
     },
     "ecidade/classes/db_empagemovtipotransmissao_classe.php": {
@@ -12851,6 +13067,12 @@
       "quando": "2026-11-22T01:06:02Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_estoquemovimentacaobnafar_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:12Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_evolucaodividaativa_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 2 (jur, div, arr; ver commits)",
       "padroes": [],
@@ -13134,6 +13356,12 @@
       "padroes": [],
       "quando": "2026-11-22T01:06:03Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_formareclamacao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:12Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_funerarias_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 1 (cem, itb/itbi, mar, not, tri, inf, dvr; ver commits)",
@@ -14773,6 +15001,18 @@
       "quando": "2026-11-20T06:05:20Z",
       "quem": "Thiago432544"
     },
+    "ecidade/classes/db_levantamentopatrimonial_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:12Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_levantamentopatrimonialbens_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:12Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_levantanotas_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 5 (fis; ver commits)",
       "padroes": [],
@@ -14827,6 +15067,30 @@
       "quando": "2026-11-20T06:05:20Z",
       "quem": "Thiago432544"
     },
+    "ecidade/classes/db_liberafornecedor_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:12Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_liberafornecedorpcproc_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:12Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_liberafornecedorsol_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:12Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_licbaixa_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:13Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_liccomissao_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -14838,6 +15102,12 @@
       "padroes": [],
       "quando": "2026-11-22T01:06:04Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_liccomissaocgmcadattdinamicovalorgrupo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:13Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_licitacaoreservacotas_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -14857,11 +15127,29 @@
       "quando": "2026-11-22T01:06:04Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_liclicitaata_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:13Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_liclicitacadattdinamicovalorgrupo_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:04Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_liclicitaedital_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:13Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_liclicitaencerramentolicitacon_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:13Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_liclicitaevento_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -14875,11 +15163,23 @@
       "quando": "2026-11-22T01:06:04Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_liclicitaforne_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:13Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_liclicitaitemlog_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:04Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_liclicitaminuta_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:13Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_liclicitaproc_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -14893,6 +15193,24 @@
       "quando": "2026-11-22T01:06:04Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_liclicitatipoempresa_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:13Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_liclicitatipoevento_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:13Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_liclicitaweb_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:13Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_liclicitem_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -14905,11 +15223,23 @@
       "quando": "2026-11-22T01:06:05Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_liclicitemlances_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:14Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_liclicitemlote_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:05Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_liclocal_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:14Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_licsituacao_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -15139,11 +15469,35 @@
       "quando": "2026-11-22T01:06:05Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_materialtipogrupovinculo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:14Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_matestoque_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:05Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_matestoquedev_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:14Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_matestoquedevitem_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:14Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_matestoquedevitemmei_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:14Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_matestoqueini_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -15181,6 +15535,18 @@
       "quando": "2026-11-22T01:06:05Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_matestoqueinimeimdi_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:14Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_matestoqueinimeipm_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:14Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_matestoqueitem_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -15199,6 +15565,12 @@
       "quando": "2026-11-22T01:06:06Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_matestoqueitemlanc_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:14Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_matestoqueitemlote_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -15210,6 +15582,12 @@
       "padroes": [],
       "quando": "2026-11-22T01:06:06Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_matestoqueitemnotafiscalmanual_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:14Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_matestoqueitemoc_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -15241,11 +15619,29 @@
       "quando": "2026-11-22T01:06:06Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_matfabricante_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:15Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_matimplantacaotipogrupo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:15Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_matmater_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:06Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_matmaterconteudomaterial_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:15Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_matmaterestoque_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -15313,6 +15709,12 @@
       "quando": "2026-11-22T01:06:06Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_matordemitement_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:15Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_matordemmail_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -15325,10 +15727,22 @@
       "quando": "2026-11-20T18:15:08Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_matparamconsulta_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:15Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_matparaminstit_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-20T18:15:08Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_matpedido_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:15Z",
       "quem": "Segundo"
     },
     "ecidade/classes/db_matpedidoitem_classe.php": {
@@ -15354,6 +15768,12 @@
       "padroes": [],
       "quando": "2026-11-22T01:06:06Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_matrequiitemcriteriocustorateio_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:15Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_matricobs_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 6 (cad; ver commits)",
@@ -15521,6 +15941,18 @@
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-20T18:15:08Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_mensageriaacordoprocessados_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:15Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_minutatemplategeral_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:15Z",
       "quem": "Segundo"
     },
     "ecidade/classes/db_mobimportacao_classe.php": {
@@ -16082,9 +16514,9 @@
       "quem": "Segundo"
     },
     "ecidade/classes/db_orcparamseq_classe.php": {
-      "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
       "padroes": [],
-      "quando": "2026-11-19T22:49:49Z",
+      "quando": "2026-11-24T23:10:15Z",
       "quem": "Segundo"
     },
     "ecidade/classes/db_orcparamseqfiltroorcamento_classe.php": {
@@ -16459,17 +16891,95 @@
       "quando": "2026-11-20T06:05:22Z",
       "quem": "Thiago432544"
     },
+    "ecidade/classes/db_ouvidor_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:16Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_ouvidoriaatendimento_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:07Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_ouvidoriaatendimentocgm_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:16Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_ouvidoriaatendimentocidadao_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:07Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_ouvidoriaatendimentodoc_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:16Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriaatendimentolocal_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:16Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriaatendimentoretorno_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:16Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriaatendimentoretornoemail_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:16Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriaatendimentoretornoender_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:16Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriaatendimentoretornotelefone_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:16Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriaatendimentotiporetorno_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:16Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriacadlocal_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:16Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriacadlocaldepart_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriacadlocalender_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ouvidoriacadlocalgeral_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_ouvidoriaparametro_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -16777,6 +17287,78 @@
       "quando": "2026-11-20T06:05:22Z",
       "quem": "Thiago432544"
     },
+    "ecidade/classes/db_pcandpadrao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcandpadraodepto_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pccampanhapublicitaria_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pccertif_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pccflicitanum_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pccflicitapar_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pccontratos_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pccontrcompra_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:17Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pccontrdep_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:18Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pccontrdot_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:18Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pccontrlic_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:18Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcdoccertif_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:18Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_pcdotac_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -16795,6 +17377,30 @@
       "quando": "2026-11-20T18:15:08Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_pcfornecert_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:18Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcfornecertif_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:18Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcfornecertifdoc_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:18Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcfornecertifrenovacao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:18Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_pcfornecon_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -16807,11 +17413,35 @@
       "quando": "2026-11-20T18:15:08Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_pcfornemov_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:18Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_pcfornereprlegal_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:07Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_pcfornesubgrupo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:18Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcfornetipoidentificacaocredorgenerica_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:19Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcgrupo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:19Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_pcmater_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -16823,6 +17453,12 @@
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-20T18:15:08Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcobjeto_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:19Z",
       "quem": "Segundo"
     },
     "ecidade/classes/db_pcorcam_classe.php": {
@@ -16873,6 +17509,12 @@
       "quando": "2026-11-22T01:06:08Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_pcorcamitemresultado_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:19Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_pcorcamitemsol_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -16884,6 +17526,24 @@
       "padroes": [],
       "quando": "2026-11-22T01:06:08Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_pcorcamjulgamentolog_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:19Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcorcamjulgamentologitem_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:19Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pcorcamtroca_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:19Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_pcorcamval_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -16909,11 +17569,47 @@
       "quando": "2026-11-20T18:15:08Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_pcsubgrupo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:19Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_pcsugforn_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:08Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_pctipo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:19Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pctipoandam_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:19Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pctipocertif_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:20Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pctipocertifcom_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:20Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pctipocertifdepartamento_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:20Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_pctipocompra_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -16921,11 +17617,41 @@
       "quando": "2026-11-20T18:15:08Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_pctipocompranumero_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:20Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_pctipocompratribunal_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:08Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_pctipocompravalores_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:20Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pctipocontrato_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:20Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pctipodoccertif_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:20Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_pctipoelemento_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:20Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_pensao_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -16999,6 +17725,30 @@
       "quando": "2026-11-19T22:49:50Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_planilhadistribuicao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:20Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_planilhadistribuicaodepart_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:20Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_planilhadistribuicaomaterial_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:21Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_planocontratacao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:21Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_pontocom_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -17034,6 +17784,12 @@
       "padroes": [],
       "quando": "2026-11-22T01:06:08Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_posicaoestoqueprocessamento_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:21Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_ppadotacao_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -17161,6 +17917,18 @@
       "quando": "2026-11-22T01:06:08Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_procandamintand_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:21Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_procandamintusu_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:21Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_procarquiv_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -17190,6 +17958,18 @@
       "padroes": [],
       "quando": "2026-11-20T06:05:22Z",
       "quem": "Thiago432544"
+    },
+    "ecidade/classes/db_procdoc_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:21Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_procdoctipo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:21Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_proced_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 2 (jur, div, arr; ver commits)",
@@ -17443,6 +18223,12 @@
       "quando": "2026-11-20T06:05:24Z",
       "quem": "Thiago432544"
     },
+    "ecidade/classes/db_procprocessodoc_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:21Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_procrec_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -17471,6 +18257,24 @@
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-20T18:15:08Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_proctransferint_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:21Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_proctransferintand_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:21Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_proctransferintusu_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:22Z",
       "quem": "Segundo"
     },
     "ecidade/classes/db_proctransferproc_classe.php": {
@@ -17616,6 +18420,12 @@
       "padroes": [],
       "quando": "2026-11-20T06:05:24Z",
       "quem": "Thiago432544"
+    },
+    "ecidade/classes/db_protparam_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:22Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_protparamglobal_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -18595,6 +19405,12 @@
       "quando": "2026-11-22T01:06:14Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_seguradoras_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:22Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_selecao_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -18697,6 +19513,12 @@
       "quando": "2026-11-20T06:05:25Z",
       "quem": "Thiago432544"
     },
+    "ecidade/classes/db_situabens_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:22Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_situacao_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 2 (jur, div, arr; ver commits)",
       "padroes": [],
@@ -18708,6 +19530,12 @@
       "padroes": [],
       "quando": "2026-11-22T01:06:14Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_situacaoouvidoriaatendimento_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:22Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_slip_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -18823,6 +19651,12 @@
       "quando": "2026-11-20T18:15:09Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_solandpadrao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:22Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_solandpadraodepto_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -18841,11 +19675,35 @@
       "quando": "2026-11-22T01:06:14Z",
       "quem": "Diego Ribeiro Wanderley"
     },
+    "ecidade/classes/db_solicitalog_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:22Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_solicitapendencia_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:22Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_solicitaprotprocesso_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:22Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_solicitaregistropreco_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
       "quando": "2026-11-22T01:06:14Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_solicitatipo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:22Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_solicitavinculo_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -18888,6 +19746,12 @@
       "padroes": [],
       "quando": "2026-11-22T01:06:14Z",
       "quem": "Diego Ribeiro Wanderley"
+    },
+    "ecidade/classes/db_solicitemveic_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:23Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_solicitemvinculo_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
@@ -19339,6 +20203,12 @@
       "quando": "2026-11-19T22:49:52Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_tipodespacho_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:23Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_tipodocumentosfiscal_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -19363,6 +20233,12 @@
       "quando": "2026-11-20T06:05:27Z",
       "quem": "Thiago432544"
     },
+    "ecidade/classes/db_tipoidentificacaocredorgenerica_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:23Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_tipoingresso_classe.php": {
       "observacao": "PHP8-04: migracao 7.4 -> 8.5 da Assistencia Social, lotes 1 e 2 (ver commits; PR #41)",
       "padroes": [],
@@ -19374,6 +20250,12 @@
       "padroes": [],
       "quando": "2026-11-20T06:05:27Z",
       "quem": "Thiago432544"
+    },
+    "ecidade/classes/db_tipomovimentacaoregistropreco_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:23Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_tipopacto_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -19393,11 +20275,23 @@
       "quando": "2026-11-20T18:15:09Z",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_tipoprocdepto_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:23Z",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_tipoproced_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 2 (jur, div, arr; ver commits)",
       "padroes": [],
       "quando": "2026-11-20T06:05:27Z",
       "quem": "Thiago432544"
+    },
+    "ecidade/classes/db_tipoprocformareclamacao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:23Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_tipoprocgrupo_classe.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -19596,6 +20490,324 @@
       "padroes": [],
       "quando": "2026-11-20T06:05:27Z",
       "quem": "Thiago432544"
+    },
+    "ecidade/classes/db_veicabast_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:23Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicabastanu_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:23Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicabastposto_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:23Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicabastpostoempnota_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:23Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicabastretirada_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:24Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicbaixa_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:24Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcateg_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:24Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcategcnh_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:24Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcentral_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:24Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcentraldepart_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:24Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcomb_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:24Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadconvenio_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:24Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadconveniocgm_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:24Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadcor_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:24Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccaditensobrig_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:25Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccaditensobrigtipobaixa_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:25Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadmarca_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:25Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadmodelo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:25Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadmotoristasit_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:25Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadoficinas_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:25Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadposto_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:25Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadpostoexterno_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:25Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadpostointerno_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:25Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadpotencia_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:25Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadproced_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:26Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadtipo_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:26Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadtipobaixa_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:26Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadtipocapacidade_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:26Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadtiposervico_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:26Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccadutilizacao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:26Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiccentral_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:26Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicdevolucao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:26Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicitensobrig_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:26Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicitensobrigbaixa_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:26Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanut_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:27Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutencaomedida_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:27Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutencaomedidacancela_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:27Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutitem_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:27Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutitempcmater_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:27Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutoficina_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:27Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmanutretirada_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:27Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmotoristas_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:27Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicmotoristascentral_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:27Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicparam_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:27Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicpatri_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:28Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicresp_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:28Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicretirada_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:28Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veictipoabast_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:28Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiculos_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:28Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veiculoscomb_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:28Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicutilizacao_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:28Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicutilizacaobem_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:28Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_veicutilizacaoconvenio_classe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:28Z",
+      "quem": "Segundo"
     },
     "ecidade/classes/db_viabilidade_classe.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 4 (iss; ver commits)",
@@ -19805,6 +21017,12 @@
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-19T22:49:52Z",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/materialestoque.model.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:28Z",
       "quem": "Segundo"
     },
     "ecidade/composer-85.json": {
@@ -26680,6 +27898,18 @@
       "quando": "2026-11-20T06:05:59Z",
       "quem": "Thiago432544"
     },
+    "ecidade/forms/db_frmEntradaOrdemCompra.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:29Z",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frm_bensglobal.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:29Z",
+      "quem": "Segundo"
+    },
     "ecidade/forms/db_frm_fis_auto.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 5 (fis; ver commits)",
       "padroes": [],
@@ -26746,6 +27976,12 @@
       "quando": "2026-11-20T06:05:59Z",
       "quem": "Thiago432544"
     },
+    "ecidade/forms/db_frmacordo.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:29Z",
+      "quem": "Segundo"
+    },
     "ecidade/forms/db_frmaguacortematnumpre.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 3 (agu/agua; ver commits)",
       "padroes": [],
@@ -26762,6 +27998,18 @@
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-19T22:49:54Z",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmbens.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:29Z",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmbensaltlote.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:29Z",
       "quem": "Segundo"
     },
     "ecidade/forms/db_frmcaitransflanc.php": {
@@ -26792,6 +28040,12 @@
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-19T22:49:54Z",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmdespsol.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:29Z",
       "quem": "Segundo"
     },
     "ecidade/forms/db_frmempempdot.php": {
@@ -26844,11 +28098,41 @@
       "quando": "2026-11-19T22:49:54Z",
       "quem": "Segundo"
     },
+    "ecidade/forms/db_frmpcfornecon.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:29Z",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmseldotac.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:29Z",
+      "quem": "Segundo"
+    },
     "ecidade/forms/db_frmsituacaoevento.php": {
       "observacao": "Integracoes (EFD-Reinf): 14 entradas de menu e 15 acoes de leitura dos RPCs identicas no 7.4 e no 8.5; php -l ok nos dois",
       "padroes": [],
       "quando": "2026-11-21T23:34:56Z",
       "quem": "Thiago432544"
+    },
+    "ecidade/forms/db_frmsolicitem.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:29Z",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmsolicitemiframe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:30Z",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmvincatendprocpesquisa.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:30Z",
+      "quem": "Segundo"
     },
     "ecidade/forms/db_frmvistgeral.php": {
       "observacao": "PHP8-01: migracao 7.4 -> 8.5 do Tributario, lote 5 (fis; ver commits)",
@@ -31032,6 +32316,18 @@
       "quando": "2026-11-21T00:25:05Z",
       "quem": "Thiago432544"
     },
+    "ecidade/model/impressao.argoxOS214.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:30Z",
+      "quem": "Segundo"
+    },
+    "ecidade/model/impressao.argoxOS214_plus.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:30Z",
+      "quem": "Segundo"
+    },
     "ecidade/model/modeloAutentTermicaArrecadacao.model.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -31780,6 +33076,18 @@
       "quando": "2026-11-20T03:28:19Z",
       "quem": "Pedro Gomide"
     },
+    "ecidade/prot1_cidadaocgmdetalhe.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:30Z",
+      "quem": "Segundo"
+    },
+    "ecidade/prot2_movcgm002.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:31Z",
+      "quem": "Segundo"
+    },
     "ecidade/sped02_preenchimento.RPC.php": {
       "observacao": "Integracoes (EFD-Reinf): 14 entradas de menu e 15 acoes de leitura dos RPCs identicas no 7.4 e no 8.5; php -l ok nos dois",
       "padroes": [],
@@ -31992,6 +33300,18 @@
       ],
       "quando": "2026-11-20T19:25:00Z",
       "quem": "Gustavo"
+    },
+    "ecidade/src/Patrimonial/Patrimonio/Bem/Model/Bem.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:31Z",
+      "quem": "Segundo"
+    },
+    "ecidade/src/Patrimonial/Protocolo/Container.php": {
+      "observacao": "PHP8-05: migracao 7.4 -> 8.5 do Patrimonial (issue #20); 7.4 x 8.5 IDENTICO na bateria",
+      "padroes": [],
+      "quando": "2026-11-24T23:10:31Z",
+      "quem": "Segundo"
     },
     "ecidade/sys1_campos001.php": {
       "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
@@ -33150,131 +34470,6 @@
       "quem": "Thiago432544"
     }
   },
-  "reivindicacoes": {
-    "ecidade/con1_caditens004.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:44:12Z",
-      "expira": "2026-11-24T01:44:12Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con1_db_config005.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con1_db_config006.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con1_db_depart002.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con1_db_depart003.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con1_db_permemp003.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con1_db_versaotarefa_001.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con1_tipoempresa002.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T22:58:28Z",
-      "expira": "2026-11-24T02:58:28Z",
-      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
-      "quem": "maria-julia"
-    },
-    "ecidade/con1_tipoempresa003.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T22:58:28Z",
-      "expira": "2026-11-24T02:58:28Z",
-      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
-      "quem": "maria-julia"
-    },
-    "ecidade/con2_relmenus001.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T22:58:28Z",
-      "expira": "2026-11-24T02:58:28Z",
-      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
-      "quem": "maria-julia"
-    },
-    "ecidade/con3_usuonline013.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T22:58:28Z",
-      "expira": "2026-11-24T02:58:28Z",
-      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
-      "quem": "maria-julia"
-    },
-    "ecidade/con3_versao005.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con3_versao006.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:30:33Z",
-      "expira": "2026-11-24T01:30:33Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con4_docpadrao010.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:44:12Z",
-      "expira": "2026-11-24T01:44:12Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con4_docparag010.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T21:44:12Z",
-      "expira": "2026-11-24T01:44:12Z",
-      "motivo": "Configuração administrativa, parse_str_1_arg",
-      "quem": "maria-julia"
-    },
-    "ecidade/con4_registrosinconsistentes003.php": {
-      "area": "financeiro",
-      "desde": "2026-11-23T22:58:28Z",
-      "expira": "2026-11-24T02:58:28Z",
-      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
-      "quem": "maria-julia"
-    },
-    "ecidade/sys3_modulos002.php": {
-      "desde": "2026-11-23T21:02:28Z",
-      "expira": "2026-11-24T01:02:28Z",
-      "motivo": "parse_str_1_arg em Configuração",
-      "quem": "maria-julia"
-    },
-    "ecidade/sys4_processa008.php": {
-      "desde": "2026-11-23T21:07:36Z",
-      "expira": "2026-11-24T01:07:36Z",
-      "motivo": "parse_str_1_arg em Configuração",
-      "quem": "maria-julia"
-    }
-  },
+  "reivindicacoes": {},
   "versao": 1
 }
