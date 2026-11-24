@@ -58,7 +58,7 @@ class cl_relac {
                  r55_rubr03 = char(4) = 3.rubrica 
                  ";
    //funcao construtor da classe 
-   function cl_relac() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("relac"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -75,14 +75,14 @@ class cl_relac {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r55_instit = ($this->r55_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r55_instit"]:$this->r55_instit);
+       $this->r55_instit = ($this->r55_instit === 0 || $this->r55_instit === 0.0 || $this->r55_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r55_instit"]:$this->r55_instit);
        $this->r55_codeve = ($this->r55_codeve == ""?@$GLOBALS["HTTP_POST_VARS"]["r55_codeve"]:$this->r55_codeve);
        $this->r55_descr = ($this->r55_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r55_descr"]:$this->r55_descr);
        $this->r55_rubr01 = ($this->r55_rubr01 == ""?@$GLOBALS["HTTP_POST_VARS"]["r55_rubr01"]:$this->r55_rubr01);
        $this->r55_rubr02 = ($this->r55_rubr02 == ""?@$GLOBALS["HTTP_POST_VARS"]["r55_rubr02"]:$this->r55_rubr02);
        $this->r55_rubr03 = ($this->r55_rubr03 == ""?@$GLOBALS["HTTP_POST_VARS"]["r55_rubr03"]:$this->r55_rubr03);
      }else{
-       $this->r55_instit = ($this->r55_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r55_instit"]:$this->r55_instit);
+       $this->r55_instit = ($this->r55_instit === 0 || $this->r55_instit === 0.0 || $this->r55_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r55_instit"]:$this->r55_instit);
        $this->r55_codeve = ($this->r55_codeve == ""?@$GLOBALS["HTTP_POST_VARS"]["r55_codeve"]:$this->r55_codeve);
      }
    }
@@ -108,7 +108,7 @@ class cl_relac {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r55_instit == null) || ($this->r55_instit == "") ){ 
+     if(($this->r55_instit == null) || ($this->r55_instit === 0 || $this->r55_instit === 0.0 || $this->r55_instit == "") ){ 
        $this->erro_sql = " Campo r55_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
