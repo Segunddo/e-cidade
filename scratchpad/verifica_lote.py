@@ -287,13 +287,17 @@ def carregar_conhecidas(caminho):
 
 def achar_sessao():
     """A sessao autenticada MAIS RECENTE do 7.4. O sess_?* exclui o arquivo "sess_" sem
-    identificador (criado por requisicao com cookie vazio), que vinha primeiro e dava SID vazio."""
+    identificador (criado por requisicao com cookie vazio), que vinha primeiro e dava SID vazio.
+    O login completo do e-cidade cria SID de 40 caracteres; uma pagina aberta sem terminar o login cria
+    uma de 26 (o padrao do PHP), que tambem pode ter DB_modulo mas nao vale. Por isso a primeira de 40,
+    da mais recente para a mais antiga -- olhar so a mais recente desistia quando ela era de 26 (23/11/2026)."""
     _, out, _ = sh(["docker", "exec", "-i", "ecidade_php74", "sh", "-c",
-                    "ls -t $(grep -la DB_modulo /var/lib/php/sessions/sess_?*) | head -1"])
-    sid = out.strip().rsplit("sess_", 1)[-1]
-    if len(sid) != 40:
-        sys.exit("ERRO: nenhuma sessao autenticada. Entre em http://localhost:8090 (dbseller/dbseller) e rode de novo.")
-    return sid
+                    "ls -t $(grep -la DB_modulo /var/lib/php/sessions/sess_?*)"])
+    for l in out.split():
+        sid = l.rsplit("sess_", 1)[-1]
+        if len(sid) == 40:
+            return sid
+    sys.exit("ERRO: nenhuma sessao autenticada. Entre em http://localhost:8090 (dbseller/dbseller) e rode de novo.")
 
 # ---------------------------------------------------------------------------------------------
 # Passos

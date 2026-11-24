@@ -29,6 +29,12 @@ chdir('/var/www/html');
 require_once('bootstrap.php');
 require_once('definitions.php');
 require_once(modification("libs/db_stdlib.php"));
+// Data de sessao FIXA, como a de um usuario logado. Sem ela, `date("Y-m-d", db_getsession("DB_datausu"))`
+// recebe null: o 7.4 da 1969-12-31 e o 8.5 a data de hoje, e o `empenho.php` aparecia divergente no passo 6
+// so por isso (22/11/2026). O filtro de artefato nao serve aqui: o passo 6 imprime uma assinatura por classe,
+// e filtrar a classe inteira ja escondeu um construtor PHP 4 real dela (19/11/2026). Com a data fixa, os dois
+// runtimes calculam o mesmo valor e qualquer outra diferenca da classe continua aparecendo.
+$_SESSION['DB_datausu'] = mktime(0, 0, 0, 1, 2, 2026);
 // db_conecta exige sessao valida ("Sessao invalida (12)") e a instanciacao das
 // classes nao depende de conexao -- o que se compara aqui e o ESTADO INICIAL
 // que o construtor produz.
