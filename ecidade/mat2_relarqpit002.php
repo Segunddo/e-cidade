@@ -128,7 +128,7 @@ if($oPost->tipo == 1){
 //die($sQuery);
 }
 $rsQuery = db_query($sQuery);
-$iNumRows = pg_num_rows($rsQuery);
+$iNumRows = ($rsQuery ? pg_num_rows($rsQuery) : null);
 $troca = 1;
 $fill = 1;
 $lAnalitico = true;

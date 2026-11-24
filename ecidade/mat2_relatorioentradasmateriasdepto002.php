@@ -224,7 +224,7 @@ $sSqlSaidas .= "          m41_codmatrequi ";
 $sSqlSaidas .= " order by {$sOrderBy} ";
 
 $rsSaidas = db_query($sSqlSaidas);
-$iNumRows = pg_num_rows($rsSaidas);
+$iNumRows = ($rsSaidas ? pg_num_rows($rsSaidas) : null);
 $aLinhas = array();
 
 for ($i = 0; $i < $iNumRows; $i++) {

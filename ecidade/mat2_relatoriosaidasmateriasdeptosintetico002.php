@@ -280,7 +280,7 @@ $sSqlSaidas = "
 
 
 $rsSaidas = db_query($sSqlSaidas);
-$iNumRows = pg_num_rows($rsSaidas);
+$iNumRows = ($rsSaidas ? pg_num_rows($rsSaidas) : null);
 
 if ($iNumRows <= 0 || !$rsSaidas) {
 

@@ -113,7 +113,7 @@ class Bem
             $sql = $daoBens->sql_query_file($id);
             $postgresResource = $daoBens->sql_record($sql);
             
-            if (pg_num_rows($postgresResource) > 0) {
+            if (($postgresResource ? pg_num_rows($postgresResource) : null) > 0) {
                 $bem = pg_fetch_assoc($postgresResource);
 
                 $this->setId($bem['t52_bem']);

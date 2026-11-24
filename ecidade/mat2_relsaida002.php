@@ -242,7 +242,7 @@ if($listar_serv == "T") {
 
 
 $res_saida_atend = @db_query($sql);
-$numrows_atend   = @pg_numrows($res_saida_atend);
+$numrows_atend   = @($res_saida_atend ? pg_numrows($res_saida_atend) : null);
 
 $pdf = new PDF();
 $pdf->Open();
