@@ -73,13 +73,13 @@ class cl_fis_lancexec{
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl03_codlanc = ($this->nl03_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_codlanc"]:$this->nl03_codlanc);
-       $this->nl03_codigo = ($this->nl03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_codigo"]:$this->nl03_codigo);
-       $this->nl03_codi = ($this->nl03_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_codi"]:$this->nl03_codi);
-       $this->nl03_numero = ($this->nl03_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_numero"]:$this->nl03_numero);
+       $this->nl03_codlanc = ($this->nl03_codlanc === 0 || $this->nl03_codlanc === 0.0 || $this->nl03_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_codlanc"]:$this->nl03_codlanc);
+       $this->nl03_codigo = ($this->nl03_codigo === 0 || $this->nl03_codigo === 0.0 || $this->nl03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_codigo"]:$this->nl03_codigo);
+       $this->nl03_codi = ($this->nl03_codi === 0 || $this->nl03_codi === 0.0 || $this->nl03_codi == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_codi"]:$this->nl03_codi);
+       $this->nl03_numero = ($this->nl03_numero === 0 || $this->nl03_numero === 0.0 || $this->nl03_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_numero"]:$this->nl03_numero);
        $this->nl03_compl = ($this->nl03_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_compl"]:$this->nl03_compl);
      }else{
-       $this->nl03_codlanc = ($this->nl03_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_codlanc"]:$this->nl03_codlanc);
+       $this->nl03_codlanc = ($this->nl03_codlanc === 0 || $this->nl03_codlanc === 0.0 || $this->nl03_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl03_codlanc"]:$this->nl03_codlanc);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_fis_lancexec{
        return false;
      }
        $this->nl03_codlanc = $nl03_codlanc;
-     if(($this->nl03_codlanc == null) || ($this->nl03_codlanc == "") ){
+     if(($this->nl03_codlanc == null) || ($this->nl03_codlanc === 0 || $this->nl03_codlanc === 0.0 || $this->nl03_codlanc == "") ){
        $this->erro_sql = " Campo nl03_codlanc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

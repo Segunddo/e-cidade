@@ -78,8 +78,8 @@ class cl_atendusucli {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at80_codatendcli = ($this->at80_codatendcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at80_codatendcli"]:$this->at80_codatendcli);
-       $this->at80_id_usuario = ($this->at80_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at80_id_usuario"]:$this->at80_id_usuario);
+       $this->at80_codatendcli = ($this->at80_codatendcli === 0 || $this->at80_codatendcli === 0.0 || $this->at80_codatendcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at80_codatendcli"]:$this->at80_codatendcli);
+       $this->at80_id_usuario = ($this->at80_id_usuario === 0 || $this->at80_id_usuario === 0.0 || $this->at80_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at80_id_usuario"]:$this->at80_id_usuario);
        if($this->at80_data == ""){
          $this->at80_data_dia = ($this->at80_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at80_data_dia"]:$this->at80_data_dia);
          $this->at80_data_mes = ($this->at80_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at80_data_mes"]:$this->at80_data_mes);
@@ -92,7 +92,7 @@ class cl_atendusucli {
        $this->at80_baixado = ($this->at80_baixado == "f"?@$GLOBALS["HTTP_POST_VARS"]["at80_baixado"]:$this->at80_baixado);
        $this->at80_obs = ($this->at80_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["at80_obs"]:$this->at80_obs);
      }else{
-       $this->at80_codatendcli = ($this->at80_codatendcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at80_codatendcli"]:$this->at80_codatendcli);
+       $this->at80_codatendcli = ($this->at80_codatendcli === 0 || $this->at80_codatendcli === 0.0 || $this->at80_codatendcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at80_codatendcli"]:$this->at80_codatendcli);
      }
    }
    // funcao para inclusao
@@ -158,7 +158,7 @@ class cl_atendusucli {
          $this->at80_codatendcli = $at80_codatendcli;
        }
      }
-     if(($this->at80_codatendcli == null) || ($this->at80_codatendcli == "") ){
+     if(($this->at80_codatendcli == null) || ($this->at80_codatendcli === 0 || $this->at80_codatendcli === 0.0 || $this->at80_codatendcli == "") ){
        $this->erro_sql = " Campo at80_codatendcli nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

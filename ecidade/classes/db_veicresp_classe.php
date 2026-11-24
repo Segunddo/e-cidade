@@ -69,11 +69,11 @@ class cl_veicresp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve02_codigo = ($this->ve02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_codigo"]:$this->ve02_codigo);
-       $this->ve02_veiculo = ($this->ve02_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_veiculo"]:$this->ve02_veiculo);
-       $this->ve02_numcgm = ($this->ve02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_numcgm"]:$this->ve02_numcgm);
+       $this->ve02_codigo = ($this->ve02_codigo === 0 || $this->ve02_codigo === 0.0 || $this->ve02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_codigo"]:$this->ve02_codigo);
+       $this->ve02_veiculo = ($this->ve02_veiculo === 0 || $this->ve02_veiculo === 0.0 || $this->ve02_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_veiculo"]:$this->ve02_veiculo);
+       $this->ve02_numcgm = ($this->ve02_numcgm === 0 || $this->ve02_numcgm === 0.0 || $this->ve02_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_numcgm"]:$this->ve02_numcgm);
      }else{
-       $this->ve02_codigo = ($this->ve02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_codigo"]:$this->ve02_codigo);
+       $this->ve02_codigo = ($this->ve02_codigo === 0 || $this->ve02_codigo === 0.0 || $this->ve02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve02_codigo"]:$this->ve02_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veicresp {
          $this->ve02_codigo = $ve02_codigo;
        }
      }
-     if(($this->ve02_codigo == null) || ($this->ve02_codigo == "") ){
+     if(($this->ve02_codigo == null) || ($this->ve02_codigo === 0 || $this->ve02_codigo === 0.0 || $this->ve02_codigo == "") ){
        $this->erro_sql = " Campo ve02_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,12 +71,12 @@ class cl_db_sysclasses {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
        $this->nomclasse = ($this->nomclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["nomclasse"]:$this->nomclasse);
        $this->descrclasse = ($this->descrclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["descrclasse"]:$this->descrclasse);
        $this->codigoclass = ($this->codigoclass == ""?@$GLOBALS["HTTP_POST_VARS"]["codigoclass"]:$this->codigoclass);
      }else{
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
        $this->nomclasse = ($this->nomclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["nomclasse"]:$this->nomclasse);
      }
    }
@@ -103,7 +103,7 @@ class cl_db_sysclasses {
      }
        $this->codarq = $codarq;
        $this->nomclasse = $nomclasse;
-     if(($this->codarq == null) || ($this->codarq == "") ){
+     if(($this->codarq == null) || ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == "") ){
        $this->erro_sql = " Campo codarq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

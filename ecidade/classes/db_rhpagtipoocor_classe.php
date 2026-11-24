@@ -71,12 +71,12 @@ class cl_rhpagtipoocor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh59_codigo = ($this->rh59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh59_codigo"]:$this->rh59_codigo);
+       $this->rh59_codigo = ($this->rh59_codigo === 0 || $this->rh59_codigo === 0.0 || $this->rh59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh59_codigo"]:$this->rh59_codigo);
        $this->rh59_descr = ($this->rh59_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh59_descr"]:$this->rh59_descr);
        $this->rh59_tipo = ($this->rh59_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh59_tipo"]:$this->rh59_tipo);
        $this->rh59_obs = ($this->rh59_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["rh59_obs"]:$this->rh59_obs);
      }else{
-       $this->rh59_codigo = ($this->rh59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh59_codigo"]:$this->rh59_codigo);
+       $this->rh59_codigo = ($this->rh59_codigo === 0 || $this->rh59_codigo === 0.0 || $this->rh59_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh59_codigo"]:$this->rh59_codigo);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_rhpagtipoocor {
          $this->rh59_codigo = $rh59_codigo;
        }
      }
-     if(($this->rh59_codigo == null) || ($this->rh59_codigo == "") ){
+     if(($this->rh59_codigo == null) || ($this->rh59_codigo === 0 || $this->rh59_codigo === 0.0 || $this->rh59_codigo == "") ){
        $this->erro_sql = " Campo rh59_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

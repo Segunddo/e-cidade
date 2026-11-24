@@ -76,9 +76,9 @@ class cl_rhestagioavaliacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h56_sequencial = ($this->h56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_sequencial"]:$this->h56_sequencial);
-       $this->h56_rhestagiocomissao = ($this->h56_rhestagiocomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_rhestagiocomissao"]:$this->h56_rhestagiocomissao);
-       $this->h56_rhestagioagenda = ($this->h56_rhestagioagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_rhestagioagenda"]:$this->h56_rhestagioagenda);
+       $this->h56_sequencial = ($this->h56_sequencial === 0 || $this->h56_sequencial === 0.0 || $this->h56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_sequencial"]:$this->h56_sequencial);
+       $this->h56_rhestagiocomissao = ($this->h56_rhestagiocomissao === 0 || $this->h56_rhestagiocomissao === 0.0 || $this->h56_rhestagiocomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_rhestagiocomissao"]:$this->h56_rhestagiocomissao);
+       $this->h56_rhestagioagenda = ($this->h56_rhestagioagenda === 0 || $this->h56_rhestagioagenda === 0.0 || $this->h56_rhestagioagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_rhestagioagenda"]:$this->h56_rhestagioagenda);
        if($this->h56_data == ""){
          $this->h56_data_dia = ($this->h56_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_data_dia"]:$this->h56_data_dia);
          $this->h56_data_mes = ($this->h56_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_data_mes"]:$this->h56_data_mes);
@@ -87,9 +87,9 @@ class cl_rhestagioavaliacao {
             $this->h56_data = $this->h56_data_ano."-".$this->h56_data_mes."-".$this->h56_data_dia;
          }
        }
-       $this->h56_avaliador = ($this->h56_avaliador == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_avaliador"]:$this->h56_avaliador);
+       $this->h56_avaliador = ($this->h56_avaliador === 0 || $this->h56_avaliador === 0.0 || $this->h56_avaliador == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_avaliador"]:$this->h56_avaliador);
      }else{
-       $this->h56_sequencial = ($this->h56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_sequencial"]:$this->h56_sequencial);
+       $this->h56_sequencial = ($this->h56_sequencial === 0 || $this->h56_sequencial === 0.0 || $this->h56_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h56_sequencial"]:$this->h56_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_rhestagioavaliacao {
          $this->h56_sequencial = $h56_sequencial;
        }
      }
-     if(($this->h56_sequencial == null) || ($this->h56_sequencial == "") ){
+     if(($this->h56_sequencial == null) || ($this->h56_sequencial === 0 || $this->h56_sequencial === 0.0 || $this->h56_sequencial == "") ){
        $this->erro_sql = " Campo h56_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

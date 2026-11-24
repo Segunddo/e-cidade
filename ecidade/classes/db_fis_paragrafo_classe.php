@@ -80,16 +80,16 @@ class cl_fis_paragrafo
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->pl09_codigo = ($this->pl09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_codigo"]:$this->pl09_codigo);
-       $this->pl09_tipo = ($this->pl09_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_tipo"]:$this->pl09_tipo);
+       $this->pl09_codigo = ($this->pl09_codigo === 0 || $this->pl09_codigo === 0.0 || $this->pl09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_codigo"]:$this->pl09_codigo);
+       $this->pl09_tipo = ($this->pl09_tipo === 0 || $this->pl09_tipo === 0.0 || $this->pl09_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_tipo"]:$this->pl09_tipo);
        $this->pl09_descr = ($this->pl09_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_descr"]:$this->pl09_descr);
        $this->pl09_resumo = ($this->pl09_resumo == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_resumo"]:$this->pl09_resumo);
        $this->pl09_texto = ($this->pl09_texto == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_texto"]:$this->pl09_texto);
        $this->pl09_status = ($this->pl09_status == "f"?@$GLOBALS["HTTP_POST_VARS"]["pl09_status"]:$this->pl09_status);
-       $this->pl09_paragrafo = ($this->pl09_paragrafo == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_paragrafo"]:$this->pl09_paragrafo);
-       $this->pl09_coddepto = ($this->pl09_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_coddepto"]:$this->pl09_coddepto);
+       $this->pl09_paragrafo = ($this->pl09_paragrafo === 0 || $this->pl09_paragrafo === 0.0 || $this->pl09_paragrafo == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_paragrafo"]:$this->pl09_paragrafo);
+       $this->pl09_coddepto = ($this->pl09_coddepto === 0 || $this->pl09_coddepto === 0.0 || $this->pl09_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_coddepto"]:$this->pl09_coddepto);
      }else{
-       $this->pl09_codigo = ($this->pl09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_codigo"]:$this->pl09_codigo);
+       $this->pl09_codigo = ($this->pl09_codigo === 0 || $this->pl09_codigo === 0.0 || $this->pl09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pl09_codigo"]:$this->pl09_codigo);
      }
    }
 
@@ -120,7 +120,7 @@ class cl_fis_paragrafo
          $this->pl09_codigo = $pl09_codigo;
        }
      }
-     if(($this->pl09_codigo == null) || ($this->pl09_codigo == "") ){
+     if(($this->pl09_codigo == null) || ($this->pl09_codigo === 0 || $this->pl09_codigo === 0.0 || $this->pl09_codigo == "") ){
        $this->erro_sql = " Campo pl09_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

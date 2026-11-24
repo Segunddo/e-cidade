@@ -69,11 +69,11 @@ class cl_atenditemmotivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at34_sequencial = ($this->at34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at34_sequencial"]:$this->at34_sequencial);
-       $this->at34_atenditem = ($this->at34_atenditem == ""?@$GLOBALS["HTTP_POST_VARS"]["at34_atenditem"]:$this->at34_atenditem);
-       $this->at34_tarefacadmotivo = ($this->at34_tarefacadmotivo == ""?@$GLOBALS["HTTP_POST_VARS"]["at34_tarefacadmotivo"]:$this->at34_tarefacadmotivo);
+       $this->at34_sequencial = ($this->at34_sequencial === 0 || $this->at34_sequencial === 0.0 || $this->at34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at34_sequencial"]:$this->at34_sequencial);
+       $this->at34_atenditem = ($this->at34_atenditem === 0 || $this->at34_atenditem === 0.0 || $this->at34_atenditem == ""?@$GLOBALS["HTTP_POST_VARS"]["at34_atenditem"]:$this->at34_atenditem);
+       $this->at34_tarefacadmotivo = ($this->at34_tarefacadmotivo === 0 || $this->at34_tarefacadmotivo === 0.0 || $this->at34_tarefacadmotivo == ""?@$GLOBALS["HTTP_POST_VARS"]["at34_tarefacadmotivo"]:$this->at34_tarefacadmotivo);
      }else{
-       $this->at34_sequencial = ($this->at34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at34_sequencial"]:$this->at34_sequencial);
+       $this->at34_sequencial = ($this->at34_sequencial === 0 || $this->at34_sequencial === 0.0 || $this->at34_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at34_sequencial"]:$this->at34_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_atenditemmotivo {
          $this->at34_sequencial = $at34_sequencial;
        }
      }
-     if(($this->at34_sequencial == null) || ($this->at34_sequencial == "") ){
+     if(($this->at34_sequencial == null) || ($this->at34_sequencial === 0 || $this->at34_sequencial === 0.0 || $this->at34_sequencial == "") ){
        $this->erro_sql = " Campo at34_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

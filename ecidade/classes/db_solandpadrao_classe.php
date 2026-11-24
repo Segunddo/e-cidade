@@ -73,13 +73,13 @@ class cl_solandpadrao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc47_codigo = ($this->pc47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_codigo"]:$this->pc47_codigo);
-       $this->pc47_solicitem = ($this->pc47_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_solicitem"]:$this->pc47_solicitem);
-       $this->pc47_ordem = ($this->pc47_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_ordem"]:$this->pc47_ordem);
-       $this->pc47_dias = ($this->pc47_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_dias"]:$this->pc47_dias);
-       $this->pc47_pctipoandam = ($this->pc47_pctipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_pctipoandam"]:$this->pc47_pctipoandam);
+       $this->pc47_codigo = ($this->pc47_codigo === 0 || $this->pc47_codigo === 0.0 || $this->pc47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_codigo"]:$this->pc47_codigo);
+       $this->pc47_solicitem = ($this->pc47_solicitem === 0 || $this->pc47_solicitem === 0.0 || $this->pc47_solicitem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_solicitem"]:$this->pc47_solicitem);
+       $this->pc47_ordem = ($this->pc47_ordem === 0 || $this->pc47_ordem === 0.0 || $this->pc47_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_ordem"]:$this->pc47_ordem);
+       $this->pc47_dias = ($this->pc47_dias === 0 || $this->pc47_dias === 0.0 || $this->pc47_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_dias"]:$this->pc47_dias);
+       $this->pc47_pctipoandam = ($this->pc47_pctipoandam === 0 || $this->pc47_pctipoandam === 0.0 || $this->pc47_pctipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_pctipoandam"]:$this->pc47_pctipoandam);
      }else{
-       $this->pc47_codigo = ($this->pc47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_codigo"]:$this->pc47_codigo);
+       $this->pc47_codigo = ($this->pc47_codigo === 0 || $this->pc47_codigo === 0.0 || $this->pc47_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc47_codigo"]:$this->pc47_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_solandpadrao {
          $this->pc47_codigo = $pc47_codigo;
        }
      }
-     if(($this->pc47_codigo == null) || ($this->pc47_codigo == "") ){
+     if(($this->pc47_codigo == null) || ($this->pc47_codigo === 0 || $this->pc47_codigo === 0.0 || $this->pc47_codigo == "") ){
        $this->erro_sql = " Campo pc47_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_veiccadoficinas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve27_codigo = ($this->ve27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve27_codigo"]:$this->ve27_codigo);
-       $this->ve27_numcgm = ($this->ve27_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ve27_numcgm"]:$this->ve27_numcgm);
+       $this->ve27_codigo = ($this->ve27_codigo === 0 || $this->ve27_codigo === 0.0 || $this->ve27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve27_codigo"]:$this->ve27_codigo);
+       $this->ve27_numcgm = ($this->ve27_numcgm === 0 || $this->ve27_numcgm === 0.0 || $this->ve27_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ve27_numcgm"]:$this->ve27_numcgm);
      }else{
-       $this->ve27_codigo = ($this->ve27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve27_codigo"]:$this->ve27_codigo);
+       $this->ve27_codigo = ($this->ve27_codigo === 0 || $this->ve27_codigo === 0.0 || $this->ve27_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve27_codigo"]:$this->ve27_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_veiccadoficinas {
          $this->ve27_codigo = $ve27_codigo;
        }
      }
-     if(($this->ve27_codigo == null) || ($this->ve27_codigo == "") ){
+     if(($this->ve27_codigo == null) || ($this->ve27_codigo === 0 || $this->ve27_codigo === 0.0 || $this->ve27_codigo == "") ){
        $this->erro_sql = " Campo ve27_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

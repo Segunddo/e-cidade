@@ -45,12 +45,12 @@ class cl_portariaassinatura {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh136_sequencial = ($this->rh136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh136_sequencial"]:$this->rh136_sequencial);
+       $this->rh136_sequencial = ($this->rh136_sequencial === 0 || $this->rh136_sequencial === 0.0 || $this->rh136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh136_sequencial"]:$this->rh136_sequencial);
        $this->rh136_nome = ($this->rh136_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["rh136_nome"]:$this->rh136_nome);
        $this->rh136_cargo = ($this->rh136_cargo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh136_cargo"]:$this->rh136_cargo);
        $this->rh136_amparo = ($this->rh136_amparo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh136_amparo"]:$this->rh136_amparo);
      }else{
-       $this->rh136_sequencial = ($this->rh136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh136_sequencial"]:$this->rh136_sequencial);
+       $this->rh136_sequencial = ($this->rh136_sequencial === 0 || $this->rh136_sequencial === 0.0 || $this->rh136_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh136_sequencial"]:$this->rh136_sequencial);
      }
    }
    // funcao para inclusao
@@ -107,7 +107,7 @@ class cl_portariaassinatura {
          $this->rh136_sequencial = $rh136_sequencial;
        }
      }
-     if(($this->rh136_sequencial == null) || ($this->rh136_sequencial == "") ){
+     if(($this->rh136_sequencial == null) || ($this->rh136_sequencial === 0 || $this->rh136_sequencial === 0.0 || $this->rh136_sequencial == "") ){
        $this->erro_sql = " Campo rh136_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

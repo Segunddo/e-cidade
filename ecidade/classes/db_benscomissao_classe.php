@@ -79,7 +79,7 @@ class cl_benscomissao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t60_codcom = ($this->t60_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["t60_codcom"]:$this->t60_codcom);
+       $this->t60_codcom = ($this->t60_codcom === 0 || $this->t60_codcom === 0.0 || $this->t60_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["t60_codcom"]:$this->t60_codcom);
        if($this->t60_dataini == ""){
          $this->t60_dataini_dia = ($this->t60_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t60_dataini_dia"]:$this->t60_dataini_dia);
          $this->t60_dataini_mes = ($this->t60_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t60_dataini_mes"]:$this->t60_dataini_mes);
@@ -96,10 +96,10 @@ class cl_benscomissao {
             $this->t60_datafim = $this->t60_datafim_ano."-".$this->t60_datafim_mes."-".$this->t60_datafim_dia;
          }
        }
-       $this->t60_id_usuario = ($this->t60_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t60_id_usuario"]:$this->t60_id_usuario);
-       $this->t60_instit = ($this->t60_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t60_instit"]:$this->t60_instit);
+       $this->t60_id_usuario = ($this->t60_id_usuario === 0 || $this->t60_id_usuario === 0.0 || $this->t60_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t60_id_usuario"]:$this->t60_id_usuario);
+       $this->t60_instit = ($this->t60_instit === 0 || $this->t60_instit === 0.0 || $this->t60_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t60_instit"]:$this->t60_instit);
      }else{
-       $this->t60_codcom = ($this->t60_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["t60_codcom"]:$this->t60_codcom);
+       $this->t60_codcom = ($this->t60_codcom === 0 || $this->t60_codcom === 0.0 || $this->t60_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["t60_codcom"]:$this->t60_codcom);
      }
    }
    // funcao para inclusao
@@ -165,7 +165,7 @@ class cl_benscomissao {
          $this->t60_codcom = $t60_codcom;
        }
      }
-     if(($this->t60_codcom == null) || ($this->t60_codcom == "") ){
+     if(($this->t60_codcom == null) || ($this->t60_codcom === 0 || $this->t60_codcom === 0.0 || $this->t60_codcom == "") ){
        $this->erro_sql = " Campo t60_codcom nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

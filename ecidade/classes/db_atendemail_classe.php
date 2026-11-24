@@ -69,12 +69,12 @@ class cl_atendemail {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at12_codcli = ($this->at12_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at12_codcli"]:$this->at12_codcli);
-       $this->at12_seq = ($this->at12_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at12_seq"]:$this->at12_seq);
+       $this->at12_codcli = ($this->at12_codcli === 0 || $this->at12_codcli === 0.0 || $this->at12_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at12_codcli"]:$this->at12_codcli);
+       $this->at12_seq = ($this->at12_seq === 0 || $this->at12_seq === 0.0 || $this->at12_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at12_seq"]:$this->at12_seq);
        $this->at12_email = ($this->at12_email == ""?@$GLOBALS["HTTP_POST_VARS"]["at12_email"]:$this->at12_email);
      }else{
-       $this->at12_codcli = ($this->at12_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at12_codcli"]:$this->at12_codcli);
-       $this->at12_seq = ($this->at12_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at12_seq"]:$this->at12_seq);
+       $this->at12_codcli = ($this->at12_codcli === 0 || $this->at12_codcli === 0.0 || $this->at12_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at12_codcli"]:$this->at12_codcli);
+       $this->at12_seq = ($this->at12_seq === 0 || $this->at12_seq === 0.0 || $this->at12_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at12_seq"]:$this->at12_seq);
      }
    }
    // funcao para inclusao
@@ -113,7 +113,7 @@ class cl_atendemail {
          $this->at12_seq = $at12_seq;
        }
      }
-     if(($this->at12_codcli == null) || ($this->at12_codcli == "") ){
+     if(($this->at12_codcli == null) || ($this->at12_codcli === 0 || $this->at12_codcli === 0.0 || $this->at12_codcli == "") ){
        $this->erro_sql = " Campo at12_codcli nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -121,7 +121,7 @@ class cl_atendemail {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->at12_seq == null) || ($this->at12_seq == "") ){
+     if(($this->at12_seq == null) || ($this->at12_seq === 0 || $this->at12_seq === 0.0 || $this->at12_seq == "") ){
        $this->erro_sql = " Campo at12_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

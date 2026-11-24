@@ -67,10 +67,10 @@ class cl_clienteatributo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at93_sequencial = ($this->at93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at93_sequencial"]:$this->at93_sequencial);
+       $this->at93_sequencial = ($this->at93_sequencial === 0 || $this->at93_sequencial === 0.0 || $this->at93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at93_sequencial"]:$this->at93_sequencial);
        $this->at93_descricao = ($this->at93_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["at93_descricao"]:$this->at93_descricao);
      }else{
-       $this->at93_sequencial = ($this->at93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at93_sequencial"]:$this->at93_sequencial);
+       $this->at93_sequencial = ($this->at93_sequencial === 0 || $this->at93_sequencial === 0.0 || $this->at93_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at93_sequencial"]:$this->at93_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_clienteatributo {
          $this->at93_sequencial = $at93_sequencial;
        }
      }
-     if(($this->at93_sequencial == null) || ($this->at93_sequencial == "") ){
+     if(($this->at93_sequencial == null) || ($this->at93_sequencial === 0 || $this->at93_sequencial === 0.0 || $this->at93_sequencial == "") ){
        $this->erro_sql = " Campo at93_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

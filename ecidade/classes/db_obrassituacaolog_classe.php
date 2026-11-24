@@ -76,9 +76,9 @@ class cl_obrassituacaolog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob29_sequencial = ($this->ob29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_sequencial"]:$this->ob29_sequencial);
-       $this->ob29_obras = ($this->ob29_obras == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_obras"]:$this->ob29_obras);
-       $this->ob29_obrassituacao = ($this->ob29_obrassituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_obrassituacao"]:$this->ob29_obrassituacao);
+       $this->ob29_sequencial = ($this->ob29_sequencial === 0 || $this->ob29_sequencial === 0.0 || $this->ob29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_sequencial"]:$this->ob29_sequencial);
+       $this->ob29_obras = ($this->ob29_obras === 0 || $this->ob29_obras === 0.0 || $this->ob29_obras == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_obras"]:$this->ob29_obras);
+       $this->ob29_obrassituacao = ($this->ob29_obrassituacao === 0 || $this->ob29_obrassituacao === 0.0 || $this->ob29_obrassituacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_obrassituacao"]:$this->ob29_obrassituacao);
        if($this->ob29_data == ""){
          $this->ob29_data_dia = ($this->ob29_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_data_dia"]:$this->ob29_data_dia);
          $this->ob29_data_mes = ($this->ob29_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_data_mes"]:$this->ob29_data_mes);
@@ -89,7 +89,7 @@ class cl_obrassituacaolog {
        }
        $this->ob29_obs = ($this->ob29_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_obs"]:$this->ob29_obs);
      }else{
-       $this->ob29_sequencial = ($this->ob29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_sequencial"]:$this->ob29_sequencial);
+       $this->ob29_sequencial = ($this->ob29_sequencial === 0 || $this->ob29_sequencial === 0.0 || $this->ob29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob29_sequencial"]:$this->ob29_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_obrassituacaolog {
          $this->ob29_sequencial = $ob29_sequencial;
        }
      }
-     if(($this->ob29_sequencial == null) || ($this->ob29_sequencial == "") ){
+     if(($this->ob29_sequencial == null) || ($this->ob29_sequencial === 0 || $this->ob29_sequencial === 0.0 || $this->ob29_sequencial == "") ){
        $this->erro_sql = " Campo ob29_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

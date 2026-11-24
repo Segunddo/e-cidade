@@ -69,11 +69,11 @@ class cl_veicmanutoficina {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve66_codigo = ($this->ve66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_codigo"]:$this->ve66_codigo);
-       $this->ve66_veicmanut = ($this->ve66_veicmanut == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_veicmanut"]:$this->ve66_veicmanut);
-       $this->ve66_veiccadoficinas = ($this->ve66_veiccadoficinas == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_veiccadoficinas"]:$this->ve66_veiccadoficinas);
+       $this->ve66_codigo = ($this->ve66_codigo === 0 || $this->ve66_codigo === 0.0 || $this->ve66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_codigo"]:$this->ve66_codigo);
+       $this->ve66_veicmanut = ($this->ve66_veicmanut === 0 || $this->ve66_veicmanut === 0.0 || $this->ve66_veicmanut == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_veicmanut"]:$this->ve66_veicmanut);
+       $this->ve66_veiccadoficinas = ($this->ve66_veiccadoficinas === 0 || $this->ve66_veiccadoficinas === 0.0 || $this->ve66_veiccadoficinas == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_veiccadoficinas"]:$this->ve66_veiccadoficinas);
      }else{
-       $this->ve66_codigo = ($this->ve66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_codigo"]:$this->ve66_codigo);
+       $this->ve66_codigo = ($this->ve66_codigo === 0 || $this->ve66_codigo === 0.0 || $this->ve66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_codigo"]:$this->ve66_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veicmanutoficina {
          $this->ve66_codigo = $ve66_codigo;
        }
      }
-     if(($this->ve66_codigo == null) || ($this->ve66_codigo == "") ){
+     if(($this->ve66_codigo == null) || ($this->ve66_codigo === 0 || $this->ve66_codigo === 0.0 || $this->ve66_codigo == "") ){
        $this->erro_sql = " Campo ve66_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

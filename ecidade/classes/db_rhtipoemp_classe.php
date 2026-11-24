@@ -67,10 +67,10 @@ class cl_rhtipoemp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh12_tipo = ($this->rh12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh12_tipo"]:$this->rh12_tipo);
+       $this->rh12_tipo = ($this->rh12_tipo === 0 || $this->rh12_tipo === 0.0 || $this->rh12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh12_tipo"]:$this->rh12_tipo);
        $this->rh12_descr = ($this->rh12_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh12_descr"]:$this->rh12_descr);
      }else{
-       $this->rh12_tipo = ($this->rh12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh12_tipo"]:$this->rh12_tipo);
+       $this->rh12_tipo = ($this->rh12_tipo === 0 || $this->rh12_tipo === 0.0 || $this->rh12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh12_tipo"]:$this->rh12_tipo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhtipoemp {
        return false;
      }
        $this->rh12_tipo = $rh12_tipo;
-     if(($this->rh12_tipo == null) || ($this->rh12_tipo == "") ){
+     if(($this->rh12_tipo == null) || ($this->rh12_tipo === 0 || $this->rh12_tipo === 0.0 || $this->rh12_tipo == "") ){
        $this->erro_sql = " Campo rh12_tipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

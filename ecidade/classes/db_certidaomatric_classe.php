@@ -67,8 +67,8 @@ class cl_certidaomatric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p47_sequencial = ($this->p47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p47_sequencial"]:$this->p47_sequencial);
-       $this->p47_matric = ($this->p47_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["p47_matric"]:$this->p47_matric);
+       $this->p47_sequencial = ($this->p47_sequencial === 0 || $this->p47_sequencial === 0.0 || $this->p47_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p47_sequencial"]:$this->p47_sequencial);
+       $this->p47_matric = ($this->p47_matric === 0 || $this->p47_matric === 0.0 || $this->p47_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["p47_matric"]:$this->p47_matric);
      }else{
      }
    }

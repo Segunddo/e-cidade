@@ -76,7 +76,7 @@ class cl_benscadlote {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t42_codigo = ($this->t42_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_codigo"]:$this->t42_codigo);
+       $this->t42_codigo = ($this->t42_codigo === 0 || $this->t42_codigo === 0.0 || $this->t42_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_codigo"]:$this->t42_codigo);
        $this->t42_descr = ($this->t42_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_descr"]:$this->t42_descr);
        if($this->t42_data == ""){
          $this->t42_data_dia = ($this->t42_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_data_dia"]:$this->t42_data_dia);
@@ -87,9 +87,9 @@ class cl_benscadlote {
          }
        }
        $this->t42_hora = ($this->t42_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_hora"]:$this->t42_hora);
-       $this->t42_usuario = ($this->t42_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_usuario"]:$this->t42_usuario);
+       $this->t42_usuario = ($this->t42_usuario === 0 || $this->t42_usuario === 0.0 || $this->t42_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_usuario"]:$this->t42_usuario);
      }else{
-       $this->t42_codigo = ($this->t42_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_codigo"]:$this->t42_codigo);
+       $this->t42_codigo = ($this->t42_codigo === 0 || $this->t42_codigo === 0.0 || $this->t42_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t42_codigo"]:$this->t42_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_benscadlote {
          $this->t42_codigo = $t42_codigo;
        }
      }
-     if(($this->t42_codigo == null) || ($this->t42_codigo == "") ){
+     if(($this->t42_codigo == null) || ($this->t42_codigo === 0 || $this->t42_codigo === 0.0 || $this->t42_codigo == "") ){
        $this->erro_sql = " Campo t42_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

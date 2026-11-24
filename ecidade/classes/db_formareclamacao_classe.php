@@ -77,7 +77,7 @@ class cl_formareclamacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p42_sequencial = ($this->p42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p42_sequencial"]:$this->p42_sequencial);
+       $this->p42_sequencial = ($this->p42_sequencial === 0 || $this->p42_sequencial === 0.0 || $this->p42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p42_sequencial"]:$this->p42_sequencial);
        $this->p42_descricao = ($this->p42_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["p42_descricao"]:$this->p42_descricao);
        if($this->p42_dtinicio == ""){
          $this->p42_dtinicio_dia = ($this->p42_dtinicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["p42_dtinicio_dia"]:$this->p42_dtinicio_dia);
@@ -96,7 +96,7 @@ class cl_formareclamacao {
          }
        }
      }else{
-       $this->p42_sequencial = ($this->p42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p42_sequencial"]:$this->p42_sequencial);
+       $this->p42_sequencial = ($this->p42_sequencial === 0 || $this->p42_sequencial === 0.0 || $this->p42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p42_sequencial"]:$this->p42_sequencial);
      }
    }
    // funcao para inclusao
@@ -153,7 +153,7 @@ class cl_formareclamacao {
          $this->p42_sequencial = $p42_sequencial;
        }
      }
-     if(($this->p42_sequencial == null) || ($this->p42_sequencial == "") ){
+     if(($this->p42_sequencial == null) || ($this->p42_sequencial === 0 || $this->p42_sequencial === 0.0 || $this->p42_sequencial == "") ){
        $this->erro_sql = " Campo p42_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

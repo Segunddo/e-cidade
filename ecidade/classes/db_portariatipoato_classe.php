@@ -67,10 +67,10 @@ class cl_portariatipoato {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h41_sequencial = ($this->h41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h41_sequencial"]:$this->h41_sequencial);
+       $this->h41_sequencial = ($this->h41_sequencial === 0 || $this->h41_sequencial === 0.0 || $this->h41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h41_sequencial"]:$this->h41_sequencial);
        $this->h41_descr = ($this->h41_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["h41_descr"]:$this->h41_descr);
      }else{
-       $this->h41_sequencial = ($this->h41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h41_sequencial"]:$this->h41_sequencial);
+       $this->h41_sequencial = ($this->h41_sequencial === 0 || $this->h41_sequencial === 0.0 || $this->h41_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h41_sequencial"]:$this->h41_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_portariatipoato {
          $this->h41_sequencial = $h41_sequencial;
        }
      }
-     if(($this->h41_sequencial == null) || ($this->h41_sequencial == "") ){
+     if(($this->h41_sequencial == null) || ($this->h41_sequencial === 0 || $this->h41_sequencial === 0.0 || $this->h41_sequencial == "") ){
        $this->erro_sql = " Campo h41_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_rhfotos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh50_numcgm = ($this->rh50_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh50_numcgm"]:$this->rh50_numcgm);
-       $this->rh50_oid = ($this->rh50_oid == ""?@$GLOBALS["HTTP_POST_VARS"]["rh50_oid"]:$this->rh50_oid);
+       $this->rh50_numcgm = ($this->rh50_numcgm === 0 || $this->rh50_numcgm === 0.0 || $this->rh50_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh50_numcgm"]:$this->rh50_numcgm);
+       $this->rh50_oid = ($this->rh50_oid === 0 || $this->rh50_oid === 0.0 || $this->rh50_oid == ""?@$GLOBALS["HTTP_POST_VARS"]["rh50_oid"]:$this->rh50_oid);
      }else{
-       $this->rh50_numcgm = ($this->rh50_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh50_numcgm"]:$this->rh50_numcgm);
+       $this->rh50_numcgm = ($this->rh50_numcgm === 0 || $this->rh50_numcgm === 0.0 || $this->rh50_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh50_numcgm"]:$this->rh50_numcgm);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhfotos {
        return false;
      }
        $this->rh50_numcgm = $rh50_numcgm;
-     if(($this->rh50_numcgm == null) || ($this->rh50_numcgm == "") ){
+     if(($this->rh50_numcgm == null) || ($this->rh50_numcgm === 0 || $this->rh50_numcgm === 0.0 || $this->rh50_numcgm == "") ){
        $this->erro_sql = " Campo rh50_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

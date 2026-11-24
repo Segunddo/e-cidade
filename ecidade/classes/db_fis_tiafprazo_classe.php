@@ -76,8 +76,8 @@ class cl_fis_tiafprazo
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y96_codigo = ($this->y96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
-            $this->y96_codtiaf = ($this->y96_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codtiaf"]:$this->y96_codtiaf);
+            $this->y96_codigo = ($this->y96_codigo === 0 || $this->y96_codigo === 0.0 || $this->y96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
+            $this->y96_codtiaf = ($this->y96_codtiaf === 0 || $this->y96_codtiaf === 0.0 || $this->y96_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codtiaf"]:$this->y96_codtiaf);
             if ($this->y96_prazo == "") {
                 $this->y96_prazo_dia = ($this->y96_prazo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_prazo_dia"]:$this->y96_prazo_dia);
                 $this->y96_prazo_mes = ($this->y96_prazo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_prazo_mes"]:$this->y96_prazo_mes);
@@ -87,7 +87,7 @@ class cl_fis_tiafprazo
                 }
             }
         } else {
-            $this->y96_codigo = ($this->y96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
+            $this->y96_codigo = ($this->y96_codigo === 0 || $this->y96_codigo === 0.0 || $this->y96_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y96_codigo"]:$this->y96_codigo);
         }
     }
     // funcao para inclusao

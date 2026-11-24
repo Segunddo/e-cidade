@@ -95,31 +95,31 @@ class cl_rhempfolha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh40_instit = ($this->rh40_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_instit"]:$this->rh40_instit);
-       $this->rh40_anousu = ($this->rh40_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_anousu"]:$this->rh40_anousu);
-       $this->rh40_mesusu = ($this->rh40_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_mesusu"]:$this->rh40_mesusu);
-       $this->rh40_orgao = ($this->rh40_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_orgao"]:$this->rh40_orgao);
-       $this->rh40_unidade = ($this->rh40_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_unidade"]:$this->rh40_unidade);
-       $this->rh40_projativ = ($this->rh40_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_projativ"]:$this->rh40_projativ);
-       $this->rh40_recurso = ($this->rh40_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_recurso"]:$this->rh40_recurso);
-       $this->rh40_codele = ($this->rh40_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_codele"]:$this->rh40_codele);
+       $this->rh40_instit = ($this->rh40_instit === 0 || $this->rh40_instit === 0.0 || $this->rh40_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_instit"]:$this->rh40_instit);
+       $this->rh40_anousu = ($this->rh40_anousu === 0 || $this->rh40_anousu === 0.0 || $this->rh40_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_anousu"]:$this->rh40_anousu);
+       $this->rh40_mesusu = ($this->rh40_mesusu === 0 || $this->rh40_mesusu === 0.0 || $this->rh40_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_mesusu"]:$this->rh40_mesusu);
+       $this->rh40_orgao = ($this->rh40_orgao === 0 || $this->rh40_orgao === 0.0 || $this->rh40_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_orgao"]:$this->rh40_orgao);
+       $this->rh40_unidade = ($this->rh40_unidade === 0 || $this->rh40_unidade === 0.0 || $this->rh40_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_unidade"]:$this->rh40_unidade);
+       $this->rh40_projativ = ($this->rh40_projativ === 0 || $this->rh40_projativ === 0.0 || $this->rh40_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_projativ"]:$this->rh40_projativ);
+       $this->rh40_recurso = ($this->rh40_recurso === 0 || $this->rh40_recurso === 0.0 || $this->rh40_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_recurso"]:$this->rh40_recurso);
+       $this->rh40_codele = ($this->rh40_codele === 0 || $this->rh40_codele === 0.0 || $this->rh40_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_codele"]:$this->rh40_codele);
        $this->rh40_rubric = ($this->rh40_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_rubric"]:$this->rh40_rubric);
-       $this->rh40_provento = ($this->rh40_provento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_provento"]:$this->rh40_provento);
-       $this->rh40_desconto = ($this->rh40_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_desconto"]:$this->rh40_desconto);
+       $this->rh40_provento = ($this->rh40_provento === 0 || $this->rh40_provento === 0.0 || $this->rh40_provento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_provento"]:$this->rh40_provento);
+       $this->rh40_desconto = ($this->rh40_desconto === 0 || $this->rh40_desconto === 0.0 || $this->rh40_desconto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_desconto"]:$this->rh40_desconto);
        $this->rh40_siglaarq = ($this->rh40_siglaarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_siglaarq"]:$this->rh40_siglaarq);
        $this->rh40_tipo = ($this->rh40_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_tipo"]:$this->rh40_tipo);
-       $this->rh40_tabprev = ($this->rh40_tabprev == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_tabprev"]:$this->rh40_tabprev);
-       $this->rh40_coddot = ($this->rh40_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_coddot"]:$this->rh40_coddot);
-       $this->rh40_sequencia = ($this->rh40_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_sequencia"]:$this->rh40_sequencia);
+       $this->rh40_tabprev = ($this->rh40_tabprev === 0 || $this->rh40_tabprev === 0.0 || $this->rh40_tabprev == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_tabprev"]:$this->rh40_tabprev);
+       $this->rh40_coddot = ($this->rh40_coddot === 0 || $this->rh40_coddot === 0.0 || $this->rh40_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_coddot"]:$this->rh40_coddot);
+       $this->rh40_sequencia = ($this->rh40_sequencia === 0 || $this->rh40_sequencia === 0.0 || $this->rh40_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_sequencia"]:$this->rh40_sequencia);
      }else{
-       $this->rh40_instit = ($this->rh40_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_instit"]:$this->rh40_instit);
-       $this->rh40_anousu = ($this->rh40_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_anousu"]:$this->rh40_anousu);
-       $this->rh40_mesusu = ($this->rh40_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_mesusu"]:$this->rh40_mesusu);
-       $this->rh40_orgao = ($this->rh40_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_orgao"]:$this->rh40_orgao);
-       $this->rh40_unidade = ($this->rh40_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_unidade"]:$this->rh40_unidade);
-       $this->rh40_projativ = ($this->rh40_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_projativ"]:$this->rh40_projativ);
-       $this->rh40_recurso = ($this->rh40_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_recurso"]:$this->rh40_recurso);
-       $this->rh40_codele = ($this->rh40_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_codele"]:$this->rh40_codele);
+       $this->rh40_instit = ($this->rh40_instit === 0 || $this->rh40_instit === 0.0 || $this->rh40_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_instit"]:$this->rh40_instit);
+       $this->rh40_anousu = ($this->rh40_anousu === 0 || $this->rh40_anousu === 0.0 || $this->rh40_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_anousu"]:$this->rh40_anousu);
+       $this->rh40_mesusu = ($this->rh40_mesusu === 0 || $this->rh40_mesusu === 0.0 || $this->rh40_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_mesusu"]:$this->rh40_mesusu);
+       $this->rh40_orgao = ($this->rh40_orgao === 0 || $this->rh40_orgao === 0.0 || $this->rh40_orgao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_orgao"]:$this->rh40_orgao);
+       $this->rh40_unidade = ($this->rh40_unidade === 0 || $this->rh40_unidade === 0.0 || $this->rh40_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_unidade"]:$this->rh40_unidade);
+       $this->rh40_projativ = ($this->rh40_projativ === 0 || $this->rh40_projativ === 0.0 || $this->rh40_projativ == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_projativ"]:$this->rh40_projativ);
+       $this->rh40_recurso = ($this->rh40_recurso === 0 || $this->rh40_recurso === 0.0 || $this->rh40_recurso == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_recurso"]:$this->rh40_recurso);
+       $this->rh40_codele = ($this->rh40_codele === 0 || $this->rh40_codele === 0.0 || $this->rh40_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_codele"]:$this->rh40_codele);
        $this->rh40_rubric = ($this->rh40_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_rubric"]:$this->rh40_rubric);
        $this->rh40_siglaarq = ($this->rh40_siglaarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh40_siglaarq"]:$this->rh40_siglaarq);
      }
@@ -197,7 +197,7 @@ class cl_rhempfolha {
        $this->rh40_rubric = $rh40_rubric;
        $this->rh40_siglaarq = $rh40_siglaarq;
        $this->rh40_instit = $rh40_instit;
-     if(($this->rh40_anousu == null) || ($this->rh40_anousu == "") ){
+     if(($this->rh40_anousu == null) || ($this->rh40_anousu === 0 || $this->rh40_anousu === 0.0 || $this->rh40_anousu == "") ){
        $this->erro_sql = " Campo rh40_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -205,7 +205,7 @@ class cl_rhempfolha {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh40_mesusu == null) || ($this->rh40_mesusu == "") ){
+     if(($this->rh40_mesusu == null) || ($this->rh40_mesusu === 0 || $this->rh40_mesusu === 0.0 || $this->rh40_mesusu == "") ){
        $this->erro_sql = " Campo rh40_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -213,7 +213,7 @@ class cl_rhempfolha {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh40_orgao == null) || ($this->rh40_orgao == "") ){
+     if(($this->rh40_orgao == null) || ($this->rh40_orgao === 0 || $this->rh40_orgao === 0.0 || $this->rh40_orgao == "") ){
        $this->erro_sql = " Campo rh40_orgao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -221,7 +221,7 @@ class cl_rhempfolha {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh40_unidade == null) || ($this->rh40_unidade == "") ){
+     if(($this->rh40_unidade == null) || ($this->rh40_unidade === 0 || $this->rh40_unidade === 0.0 || $this->rh40_unidade == "") ){
        $this->erro_sql = " Campo rh40_unidade nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -229,7 +229,7 @@ class cl_rhempfolha {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh40_projativ == null) || ($this->rh40_projativ == "") ){
+     if(($this->rh40_projativ == null) || ($this->rh40_projativ === 0 || $this->rh40_projativ === 0.0 || $this->rh40_projativ == "") ){
        $this->erro_sql = " Campo rh40_projativ nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -237,7 +237,7 @@ class cl_rhempfolha {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh40_recurso == null) || ($this->rh40_recurso == "") ){
+     if(($this->rh40_recurso == null) || ($this->rh40_recurso === 0 || $this->rh40_recurso === 0.0 || $this->rh40_recurso == "") ){
        $this->erro_sql = " Campo rh40_recurso nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -245,7 +245,7 @@ class cl_rhempfolha {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh40_codele == null) || ($this->rh40_codele == "") ){
+     if(($this->rh40_codele == null) || ($this->rh40_codele === 0 || $this->rh40_codele === 0.0 || $this->rh40_codele == "") ){
        $this->erro_sql = " Campo rh40_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -269,7 +269,7 @@ class cl_rhempfolha {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh40_instit == null) || ($this->rh40_instit == "") ){
+     if(($this->rh40_instit == null) || ($this->rh40_instit === 0 || $this->rh40_instit === 0.0 || $this->rh40_instit == "") ){
        $this->erro_sql = " Campo rh40_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,13 +71,13 @@ class cl_fis_lancrec {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl22_codlanc = ($this->nl22_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_codlanc"]:$this->nl22_codlanc);
-       $this->nl22_receit = ($this->nl22_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_receit"]:$this->nl22_receit);
+       $this->nl22_codlanc = ($this->nl22_codlanc === 0 || $this->nl22_codlanc === 0.0 || $this->nl22_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_codlanc"]:$this->nl22_codlanc);
+       $this->nl22_receit = ($this->nl22_receit === 0 || $this->nl22_receit === 0.0 || $this->nl22_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_receit"]:$this->nl22_receit);
        $this->nl22_descr = ($this->nl22_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_descr"]:$this->nl22_descr);
-       $this->nl22_valor = ($this->nl22_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_valor"]:$this->nl22_valor);
+       $this->nl22_valor = ($this->nl22_valor === 0 || $this->nl22_valor === 0.0 || $this->nl22_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_valor"]:$this->nl22_valor);
      }else{
-       $this->nl22_codlanc = ($this->nl22_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_codlanc"]:$this->nl22_codlanc);
-       $this->nl22_receit = ($this->nl22_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_receit"]:$this->nl22_receit);
+       $this->nl22_codlanc = ($this->nl22_codlanc === 0 || $this->nl22_codlanc === 0.0 || $this->nl22_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_codlanc"]:$this->nl22_codlanc);
+       $this->nl22_receit = ($this->nl22_receit === 0 || $this->nl22_receit === 0.0 || $this->nl22_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["nl22_receit"]:$this->nl22_receit);
      }
    }
    // funcao para inclusao
@@ -97,7 +97,7 @@ class cl_fis_lancrec {
      }
        $this->nl22_codlanc = $nl22_codlanc;
        $this->nl22_receit = $nl22_receit;
-     if(($this->nl22_codlanc == null) || ($this->nl22_codlanc == "") ){
+     if(($this->nl22_codlanc == null) || ($this->nl22_codlanc === 0 || $this->nl22_codlanc === 0.0 || $this->nl22_codlanc == "") ){
        $this->erro_sql = " Campo nl22_codlanc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -105,7 +105,7 @@ class cl_fis_lancrec {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->nl22_receit == null) || ($this->nl22_receit == "") ){
+     if(($this->nl22_receit == null) || ($this->nl22_receit === 0 || $this->nl22_receit === 0.0 || $this->nl22_receit == "") ){
        $this->erro_sql = " Campo nl22_receit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

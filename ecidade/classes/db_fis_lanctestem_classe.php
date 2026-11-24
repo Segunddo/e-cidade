@@ -67,11 +67,11 @@ class cl_fis_lanctestem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl21_codlanc = ($this->nl21_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl21_codlanc"]:$this->nl21_codlanc);
-       $this->nl21_numcgm = ($this->nl21_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["nl21_numcgm"]:$this->nl21_numcgm);
+       $this->nl21_codlanc = ($this->nl21_codlanc === 0 || $this->nl21_codlanc === 0.0 || $this->nl21_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl21_codlanc"]:$this->nl21_codlanc);
+       $this->nl21_numcgm = ($this->nl21_numcgm === 0 || $this->nl21_numcgm === 0.0 || $this->nl21_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["nl21_numcgm"]:$this->nl21_numcgm);
      }else{
-       $this->nl21_codlanc = ($this->nl21_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl21_codlanc"]:$this->nl21_codlanc);
-       $this->nl21_numcgm = ($this->nl21_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["nl21_numcgm"]:$this->nl21_numcgm);
+       $this->nl21_codlanc = ($this->nl21_codlanc === 0 || $this->nl21_codlanc === 0.0 || $this->nl21_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl21_codlanc"]:$this->nl21_codlanc);
+       $this->nl21_numcgm = ($this->nl21_numcgm === 0 || $this->nl21_numcgm === 0.0 || $this->nl21_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["nl21_numcgm"]:$this->nl21_numcgm);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_fis_lanctestem {
       $this->atualizacampos();
        $this->nl21_codlanc = $nl21_codlanc;
        $this->nl21_numcgm = $nl21_numcgm;
-     if(($this->nl21_codlanc == null) || ($this->nl21_codlanc == "") ){
+     if(($this->nl21_codlanc == null) || ($this->nl21_codlanc === 0 || $this->nl21_codlanc === 0.0 || $this->nl21_codlanc == "") ){
        $this->erro_sql = " Campo nl21_codlanc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_fis_lanctestem {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->nl21_numcgm == null) || ($this->nl21_numcgm == "") ){
+     if(($this->nl21_numcgm == null) || ($this->nl21_numcgm === 0 || $this->nl21_numcgm === 0.0 || $this->nl21_numcgm == "") ){
        $this->erro_sql = " Campo nl21_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

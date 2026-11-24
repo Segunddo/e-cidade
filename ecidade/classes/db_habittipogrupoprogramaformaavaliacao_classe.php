@@ -69,11 +69,11 @@ class cl_habittipogrupoprogramaformaavaliacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ht06_sequencial = ($this->ht06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht06_sequencial"]:$this->ht06_sequencial);
-       $this->ht06_habitformaavaliacao = ($this->ht06_habitformaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht06_habitformaavaliacao"]:$this->ht06_habitformaavaliacao);
-       $this->ht06_habittipogrupoprograma = ($this->ht06_habittipogrupoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht06_habittipogrupoprograma"]:$this->ht06_habittipogrupoprograma);
+       $this->ht06_sequencial = ($this->ht06_sequencial === 0 || $this->ht06_sequencial === 0.0 || $this->ht06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht06_sequencial"]:$this->ht06_sequencial);
+       $this->ht06_habitformaavaliacao = ($this->ht06_habitformaavaliacao === 0 || $this->ht06_habitformaavaliacao === 0.0 || $this->ht06_habitformaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht06_habitformaavaliacao"]:$this->ht06_habitformaavaliacao);
+       $this->ht06_habittipogrupoprograma = ($this->ht06_habittipogrupoprograma === 0 || $this->ht06_habittipogrupoprograma === 0.0 || $this->ht06_habittipogrupoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht06_habittipogrupoprograma"]:$this->ht06_habittipogrupoprograma);
      }else{
-       $this->ht06_sequencial = ($this->ht06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht06_sequencial"]:$this->ht06_sequencial);
+       $this->ht06_sequencial = ($this->ht06_sequencial === 0 || $this->ht06_sequencial === 0.0 || $this->ht06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht06_sequencial"]:$this->ht06_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_habittipogrupoprogramaformaavaliacao {
          $this->ht06_sequencial = $ht06_sequencial;
        }
      }
-     if(($this->ht06_sequencial == null) || ($this->ht06_sequencial == "") ){
+     if(($this->ht06_sequencial == null) || ($this->ht06_sequencial === 0 || $this->ht06_sequencial === 0.0 || $this->ht06_sequencial == "") ){
        $this->erro_sql = " Campo ht06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

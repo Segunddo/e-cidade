@@ -82,9 +82,9 @@ class cl_tarefaanexos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at25_sequencial = ($this->at25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_sequencial"]:$this->at25_sequencial);
-       $this->at25_tarefa = ($this->at25_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_tarefa"]:$this->at25_tarefa);
-       $this->at25_anexo = ($this->at25_anexo == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_anexo"]:$this->at25_anexo);
+       $this->at25_sequencial = ($this->at25_sequencial === 0 || $this->at25_sequencial === 0.0 || $this->at25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_sequencial"]:$this->at25_sequencial);
+       $this->at25_tarefa = ($this->at25_tarefa === 0 || $this->at25_tarefa === 0.0 || $this->at25_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_tarefa"]:$this->at25_tarefa);
+       $this->at25_anexo = ($this->at25_anexo === 0 || $this->at25_anexo === 0.0 || $this->at25_anexo == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_anexo"]:$this->at25_anexo);
        $this->at25_nomearq = ($this->at25_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_nomearq"]:$this->at25_nomearq);
        if($this->at25_data == ""){
          $this->at25_data_dia = ($this->at25_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_data_dia"]:$this->at25_data_dia);
@@ -95,10 +95,10 @@ class cl_tarefaanexos {
          }
        }
        $this->at25_hora = ($this->at25_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_hora"]:$this->at25_hora);
-       $this->at25_usuario = ($this->at25_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_usuario"]:$this->at25_usuario);
+       $this->at25_usuario = ($this->at25_usuario === 0 || $this->at25_usuario === 0.0 || $this->at25_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_usuario"]:$this->at25_usuario);
        $this->at25_obs = ($this->at25_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_obs"]:$this->at25_obs);
      }else{
-       $this->at25_sequencial = ($this->at25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_sequencial"]:$this->at25_sequencial);
+       $this->at25_sequencial = ($this->at25_sequencial === 0 || $this->at25_sequencial === 0.0 || $this->at25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at25_sequencial"]:$this->at25_sequencial);
      }
    }
    // funcao para inclusao
@@ -182,7 +182,7 @@ class cl_tarefaanexos {
          $this->at25_sequencial = $at25_sequencial;
        }
      }
-     if(($this->at25_sequencial == null) || ($this->at25_sequencial == "") ){
+     if(($this->at25_sequencial == null) || ($this->at25_sequencial === 0 || $this->at25_sequencial === 0.0 || $this->at25_sequencial == "") ){
        $this->erro_sql = " Campo at25_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

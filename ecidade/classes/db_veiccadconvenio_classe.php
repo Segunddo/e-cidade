@@ -69,11 +69,11 @@ class cl_veiccadconvenio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve17_sequencial = ($this->ve17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve17_sequencial"]:$this->ve17_sequencial);
+       $this->ve17_sequencial = ($this->ve17_sequencial === 0 || $this->ve17_sequencial === 0.0 || $this->ve17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve17_sequencial"]:$this->ve17_sequencial);
        $this->ve17_descr = ($this->ve17_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve17_descr"]:$this->ve17_descr);
        $this->ve17_obs = ($this->ve17_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ve17_obs"]:$this->ve17_obs);
      }else{
-       $this->ve17_sequencial = ($this->ve17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve17_sequencial"]:$this->ve17_sequencial);
+       $this->ve17_sequencial = ($this->ve17_sequencial === 0 || $this->ve17_sequencial === 0.0 || $this->ve17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve17_sequencial"]:$this->ve17_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veiccadconvenio {
          $this->ve17_sequencial = $ve17_sequencial;
        }
      }
-     if(($this->ve17_sequencial == null) || ($this->ve17_sequencial == "") ){
+     if(($this->ve17_sequencial == null) || ($this->ve17_sequencial === 0 || $this->ve17_sequencial === 0.0 || $this->ve17_sequencial == "") ){
        $this->erro_sql = " Campo ve17_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

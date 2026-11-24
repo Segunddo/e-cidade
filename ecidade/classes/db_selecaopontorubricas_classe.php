@@ -75,14 +75,14 @@ class cl_selecaopontorubricas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r73_sequencial = ($this->r73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_sequencial"]:$this->r73_sequencial);
-       $this->r73_selecaoponto = ($this->r73_selecaoponto == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_selecaoponto"]:$this->r73_selecaoponto);
+       $this->r73_sequencial = ($this->r73_sequencial === 0 || $this->r73_sequencial === 0.0 || $this->r73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_sequencial"]:$this->r73_sequencial);
+       $this->r73_selecaoponto = ($this->r73_selecaoponto === 0 || $this->r73_selecaoponto === 0.0 || $this->r73_selecaoponto == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_selecaoponto"]:$this->r73_selecaoponto);
        $this->r73_rubric = ($this->r73_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_rubric"]:$this->r73_rubric);
-       $this->r73_instit = ($this->r73_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_instit"]:$this->r73_instit);
-       $this->r73_tipo = ($this->r73_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_tipo"]:$this->r73_tipo);
-       $this->r73_valor = ($this->r73_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_valor"]:$this->r73_valor);
+       $this->r73_instit = ($this->r73_instit === 0 || $this->r73_instit === 0.0 || $this->r73_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_instit"]:$this->r73_instit);
+       $this->r73_tipo = ($this->r73_tipo === 0 || $this->r73_tipo === 0.0 || $this->r73_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_tipo"]:$this->r73_tipo);
+       $this->r73_valor = ($this->r73_valor === 0 || $this->r73_valor === 0.0 || $this->r73_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_valor"]:$this->r73_valor);
      }else{
-       $this->r73_sequencial = ($this->r73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_sequencial"]:$this->r73_sequencial);
+       $this->r73_sequencial = ($this->r73_sequencial === 0 || $this->r73_sequencial === 0.0 || $this->r73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r73_sequencial"]:$this->r73_sequencial);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_selecaopontorubricas {
          $this->r73_sequencial = $r73_sequencial;
        }
      }
-     if(($this->r73_sequencial == null) || ($this->r73_sequencial == "") ){
+     if(($this->r73_sequencial == null) || ($this->r73_sequencial === 0 || $this->r73_sequencial === 0.0 || $this->r73_sequencial == "") ){
        $this->erro_sql = " Campo r73_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

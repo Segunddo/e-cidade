@@ -67,8 +67,8 @@ class cl_certidaocgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p49_sequencial = ($this->p49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p49_sequencial"]:$this->p49_sequencial);
-       $this->p49_numcgm = ($this->p49_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["p49_numcgm"]:$this->p49_numcgm);
+       $this->p49_sequencial = ($this->p49_sequencial === 0 || $this->p49_sequencial === 0.0 || $this->p49_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p49_sequencial"]:$this->p49_sequencial);
+       $this->p49_numcgm = ($this->p49_numcgm === 0 || $this->p49_numcgm === 0.0 || $this->p49_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["p49_numcgm"]:$this->p49_numcgm);
      }else{
      }
    }

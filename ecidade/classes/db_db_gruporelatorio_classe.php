@@ -67,10 +67,10 @@ class cl_db_gruporelatorio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db13_sequencial = ($this->db13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db13_sequencial"]:$this->db13_sequencial);
+       $this->db13_sequencial = ($this->db13_sequencial === 0 || $this->db13_sequencial === 0.0 || $this->db13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db13_sequencial"]:$this->db13_sequencial);
        $this->db13_descricao = ($this->db13_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["db13_descricao"]:$this->db13_descricao);
      }else{
-       $this->db13_sequencial = ($this->db13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db13_sequencial"]:$this->db13_sequencial);
+       $this->db13_sequencial = ($this->db13_sequencial === 0 || $this->db13_sequencial === 0.0 || $this->db13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db13_sequencial"]:$this->db13_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_db_gruporelatorio {
          $this->db13_sequencial = $db13_sequencial;
        }
      }
-     if(($this->db13_sequencial == null) || ($this->db13_sequencial == "") ){
+     if(($this->db13_sequencial == null) || ($this->db13_sequencial === 0 || $this->db13_sequencial === 0.0 || $this->db13_sequencial == "") ){
        $this->erro_sql = " Campo db13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

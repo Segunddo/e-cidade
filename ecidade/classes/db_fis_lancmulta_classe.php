@@ -77,14 +77,14 @@ class cl_fis_lancmulta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl28_codigo = ($this->nl28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl28_codigo"]:$this->nl28_codigo);
-       $this->nl28_codlanc = ($this->nl28_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl28_codlanc"]:$this->nl28_codlanc);
-       $this->nl28_codtipo = ($this->nl28_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl28_codtipo"]:$this->nl28_codtipo);
-       $this->nl28_valor = ($this->nl28_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["nl28_valor"]:$this->nl28_valor);
-       $this->nl28_lanctipo = ($this->nl28_lanctipo == ""? 'null' :$this->nl28_lanctipo);
+       $this->nl28_codigo = ($this->nl28_codigo === 0 || $this->nl28_codigo === 0.0 || $this->nl28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl28_codigo"]:$this->nl28_codigo);
+       $this->nl28_codlanc = ($this->nl28_codlanc === 0 || $this->nl28_codlanc === 0.0 || $this->nl28_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl28_codlanc"]:$this->nl28_codlanc);
+       $this->nl28_codtipo = ($this->nl28_codtipo === 0 || $this->nl28_codtipo === 0.0 || $this->nl28_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl28_codtipo"]:$this->nl28_codtipo);
+       $this->nl28_valor = ($this->nl28_valor === 0 || $this->nl28_valor === 0.0 || $this->nl28_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["nl28_valor"]:$this->nl28_valor);
+       $this->nl28_lanctipo = ($this->nl28_lanctipo === 0 || $this->nl28_lanctipo === 0.0 || $this->nl28_lanctipo == ""? 'null' :$this->nl28_lanctipo);
 
      }else{
-       $this->nl28_codigo = ($this->nl28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl28_codigo"]:$this->nl28_codigo);
+       $this->nl28_codigo = ($this->nl28_codigo === 0 || $this->nl28_codigo === 0.0 || $this->nl28_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl28_codigo"]:$this->nl28_codigo);
      }
    }
 
@@ -149,7 +149,7 @@ class cl_fis_lancmulta {
          $this->nl28_codigo = $nl28_codigo;
        }
      }
-     if(($this->nl28_codigo == null) || ($this->nl28_codigo == "") ){
+     if(($this->nl28_codigo == null) || ($this->nl28_codigo === 0 || $this->nl28_codigo === 0.0 || $this->nl28_codigo == "") ){
        $this->erro_sql = " Campo nl28_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_rhiperegist {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh62_sequencia = ($this->rh62_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh62_sequencia"]:$this->rh62_sequencia);
-       $this->rh62_regist = ($this->rh62_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh62_regist"]:$this->rh62_regist);
+       $this->rh62_sequencia = ($this->rh62_sequencia === 0 || $this->rh62_sequencia === 0.0 || $this->rh62_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh62_sequencia"]:$this->rh62_sequencia);
+       $this->rh62_regist = ($this->rh62_regist === 0 || $this->rh62_regist === 0.0 || $this->rh62_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh62_regist"]:$this->rh62_regist);
      }else{
-       $this->rh62_sequencia = ($this->rh62_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh62_sequencia"]:$this->rh62_sequencia);
+       $this->rh62_sequencia = ($this->rh62_sequencia === 0 || $this->rh62_sequencia === 0.0 || $this->rh62_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh62_sequencia"]:$this->rh62_sequencia);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhiperegist {
        return false;
      }
        $this->rh62_sequencia = $rh62_sequencia;
-     if(($this->rh62_sequencia == null) || ($this->rh62_sequencia == "") ){
+     if(($this->rh62_sequencia == null) || ($this->rh62_sequencia === 0 || $this->rh62_sequencia === 0.0 || $this->rh62_sequencia == "") ){
        $this->erro_sql = " Campo rh62_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

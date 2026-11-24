@@ -69,11 +69,11 @@ class cl_veiccadpotencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve31_codigo = ($this->ve31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve31_codigo"]:$this->ve31_codigo);
+       $this->ve31_codigo = ($this->ve31_codigo === 0 || $this->ve31_codigo === 0.0 || $this->ve31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve31_codigo"]:$this->ve31_codigo);
        $this->ve31_descr = ($this->ve31_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve31_descr"]:$this->ve31_descr);
        $this->ve31_descrcompleta = ($this->ve31_descrcompleta == ""?@$GLOBALS["HTTP_POST_VARS"]["ve31_descrcompleta"]:$this->ve31_descrcompleta);
      }else{
-       $this->ve31_codigo = ($this->ve31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve31_codigo"]:$this->ve31_codigo);
+       $this->ve31_codigo = ($this->ve31_codigo === 0 || $this->ve31_codigo === 0.0 || $this->ve31_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve31_codigo"]:$this->ve31_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veiccadpotencia {
          $this->ve31_codigo = $ve31_codigo;
        }
      }
-     if(($this->ve31_codigo == null) || ($this->ve31_codigo == "") ){
+     if(($this->ve31_codigo == null) || ($this->ve31_codigo === 0 || $this->ve31_codigo === 0.0 || $this->ve31_codigo == "") ){
        $this->erro_sql = " Campo ve31_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

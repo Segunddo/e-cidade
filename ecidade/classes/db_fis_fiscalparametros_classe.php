@@ -70,11 +70,11 @@ class cl_fis_fiscalparametros
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->pa01_instit = ($this->pa01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_instit"]:$this->pa01_instit);
-       $this->pa01_autodvenc = ($this->pa01_autodvenc == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_autodvenc"]:$this->pa01_autodvenc);
-       $this->pa01_autodprazo = ($this->pa01_autodprazo == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_autodprazo"]:$this->pa01_autodprazo);
+       $this->pa01_instit = ($this->pa01_instit === 0 || $this->pa01_instit === 0.0 || $this->pa01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_instit"]:$this->pa01_instit);
+       $this->pa01_autodvenc = ($this->pa01_autodvenc === 0 || $this->pa01_autodvenc === 0.0 || $this->pa01_autodvenc == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_autodvenc"]:$this->pa01_autodvenc);
+       $this->pa01_autodprazo = ($this->pa01_autodprazo === 0 || $this->pa01_autodprazo === 0.0 || $this->pa01_autodprazo == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_autodprazo"]:$this->pa01_autodprazo);
      }else{
-       $this->pa01_instit = ($this->pa01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_instit"]:$this->pa01_instit);
+       $this->pa01_instit = ($this->pa01_instit === 0 || $this->pa01_instit === 0.0 || $this->pa01_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_instit"]:$this->pa01_instit);
      }
    }
 
@@ -100,7 +100,7 @@ class cl_fis_fiscalparametros
        return false;
      }
        $this->pa01_instit = $pa01_instit;
-     if(($this->pa01_instit == null) || ($this->pa01_instit == "") ){
+     if(($this->pa01_instit == null) || ($this->pa01_instit === 0 || $this->pa01_instit === 0.0 || $this->pa01_instit == "") ){
        $this->erro_sql = " Campo pa01_instit não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,12 +71,12 @@ class cl_pctipodoccertif {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc72_codigo = ($this->pc72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_codigo"]:$this->pc72_codigo);
-       $this->pc72_pctipocertif = ($this->pc72_pctipocertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_pctipocertif"]:$this->pc72_pctipocertif);
-       $this->pc72_pcdoccertif = ($this->pc72_pcdoccertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_pcdoccertif"]:$this->pc72_pcdoccertif);
+       $this->pc72_codigo = ($this->pc72_codigo === 0 || $this->pc72_codigo === 0.0 || $this->pc72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_codigo"]:$this->pc72_codigo);
+       $this->pc72_pctipocertif = ($this->pc72_pctipocertif === 0 || $this->pc72_pctipocertif === 0.0 || $this->pc72_pctipocertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_pctipocertif"]:$this->pc72_pctipocertif);
+       $this->pc72_pcdoccertif = ($this->pc72_pcdoccertif === 0 || $this->pc72_pcdoccertif === 0.0 || $this->pc72_pcdoccertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_pcdoccertif"]:$this->pc72_pcdoccertif);
        $this->pc72_obrigatorio = ($this->pc72_obrigatorio == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc72_obrigatorio"]:$this->pc72_obrigatorio);
      }else{
-       $this->pc72_codigo = ($this->pc72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_codigo"]:$this->pc72_codigo);
+       $this->pc72_codigo = ($this->pc72_codigo === 0 || $this->pc72_codigo === 0.0 || $this->pc72_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc72_codigo"]:$this->pc72_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_pctipodoccertif {
          $this->pc72_codigo = $pc72_codigo;
        }
      }
-     if(($this->pc72_codigo == null) || ($this->pc72_codigo == "") ){
+     if(($this->pc72_codigo == null) || ($this->pc72_codigo === 0 || $this->pc72_codigo === 0.0 || $this->pc72_codigo == "") ){
        $this->erro_sql = " Campo pc72_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

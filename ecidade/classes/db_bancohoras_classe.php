@@ -80,8 +80,8 @@ class cl_bancohoras {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh126_sequencial = ($this->rh126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_sequencial"]:$this->rh126_sequencial);
-       $this->rh126_regist = ($this->rh126_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_regist"]:$this->rh126_regist);
+       $this->rh126_sequencial = ($this->rh126_sequencial === 0 || $this->rh126_sequencial === 0.0 || $this->rh126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_sequencial"]:$this->rh126_sequencial);
+       $this->rh126_regist = ($this->rh126_regist === 0 || $this->rh126_regist === 0.0 || $this->rh126_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_regist"]:$this->rh126_regist);
        $this->rh126_soma = ($this->rh126_soma == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh126_soma"]:$this->rh126_soma);
        if($this->rh126_data == ""){
          $this->rh126_data_dia = ($this->rh126_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_data_dia"]:$this->rh126_data_dia);
@@ -91,11 +91,11 @@ class cl_bancohoras {
             $this->rh126_data = $this->rh126_data_ano."-".$this->rh126_data_mes."-".$this->rh126_data_dia;
          }
        }
-       $this->rh126_horas = ($this->rh126_horas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_horas"]:$this->rh126_horas);
-       $this->rh126_minutos = ($this->rh126_minutos == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_minutos"]:$this->rh126_minutos);
+       $this->rh126_horas = ($this->rh126_horas === 0 || $this->rh126_horas === 0.0 || $this->rh126_horas == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_horas"]:$this->rh126_horas);
+       $this->rh126_minutos = ($this->rh126_minutos === 0 || $this->rh126_minutos === 0.0 || $this->rh126_minutos == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_minutos"]:$this->rh126_minutos);
        $this->rh126_observacao = ($this->rh126_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_observacao"]:$this->rh126_observacao);
      }else{
-       $this->rh126_sequencial = ($this->rh126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_sequencial"]:$this->rh126_sequencial);
+       $this->rh126_sequencial = ($this->rh126_sequencial === 0 || $this->rh126_sequencial === 0.0 || $this->rh126_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh126_sequencial"]:$this->rh126_sequencial);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_bancohoras {
          $this->rh126_sequencial = $rh126_sequencial;
        }
      }
-     if(($this->rh126_sequencial == null) || ($this->rh126_sequencial == "") ){
+     if(($this->rh126_sequencial == null) || ($this->rh126_sequencial === 0 || $this->rh126_sequencial === 0.0 || $this->rh126_sequencial == "") ){
        $this->erro_sql = " Campo rh126_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

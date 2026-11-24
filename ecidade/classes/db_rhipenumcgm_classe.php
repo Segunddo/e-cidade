@@ -67,10 +67,10 @@ class cl_rhipenumcgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh63_sequencia = ($this->rh63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_sequencia"]:$this->rh63_sequencia);
-       $this->rh63_numcgm = ($this->rh63_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_numcgm"]:$this->rh63_numcgm);
+       $this->rh63_sequencia = ($this->rh63_sequencia === 0 || $this->rh63_sequencia === 0.0 || $this->rh63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_sequencia"]:$this->rh63_sequencia);
+       $this->rh63_numcgm = ($this->rh63_numcgm === 0 || $this->rh63_numcgm === 0.0 || $this->rh63_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_numcgm"]:$this->rh63_numcgm);
      }else{
-       $this->rh63_sequencia = ($this->rh63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_sequencia"]:$this->rh63_sequencia);
+       $this->rh63_sequencia = ($this->rh63_sequencia === 0 || $this->rh63_sequencia === 0.0 || $this->rh63_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh63_sequencia"]:$this->rh63_sequencia);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhipenumcgm {
        return false;
      }
        $this->rh63_sequencia = $rh63_sequencia;
-     if(($this->rh63_sequencia == null) || ($this->rh63_sequencia == "") ){
+     if(($this->rh63_sequencia == null) || ($this->rh63_sequencia === 0 || $this->rh63_sequencia === 0.0 || $this->rh63_sequencia == "") ){
        $this->erro_sql = " Campo rh63_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

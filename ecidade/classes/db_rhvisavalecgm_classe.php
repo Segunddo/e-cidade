@@ -71,12 +71,12 @@ class cl_rhvisavalecgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh48_codigo = ($this->rh48_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh48_codigo"]:$this->rh48_codigo);
-       $this->rh48_instit = ($this->rh48_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh48_instit"]:$this->rh48_instit);
-       $this->rh48_numcgm = ($this->rh48_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh48_numcgm"]:$this->rh48_numcgm);
-       $this->rh48_ordem = ($this->rh48_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh48_ordem"]:$this->rh48_ordem);
+       $this->rh48_codigo = ($this->rh48_codigo === 0 || $this->rh48_codigo === 0.0 || $this->rh48_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh48_codigo"]:$this->rh48_codigo);
+       $this->rh48_instit = ($this->rh48_instit === 0 || $this->rh48_instit === 0.0 || $this->rh48_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh48_instit"]:$this->rh48_instit);
+       $this->rh48_numcgm = ($this->rh48_numcgm === 0 || $this->rh48_numcgm === 0.0 || $this->rh48_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh48_numcgm"]:$this->rh48_numcgm);
+       $this->rh48_ordem = ($this->rh48_ordem === 0 || $this->rh48_ordem === 0.0 || $this->rh48_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh48_ordem"]:$this->rh48_ordem);
      }else{
-       $this->rh48_codigo = ($this->rh48_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh48_codigo"]:$this->rh48_codigo);
+       $this->rh48_codigo = ($this->rh48_codigo === 0 || $this->rh48_codigo === 0.0 || $this->rh48_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh48_codigo"]:$this->rh48_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_rhvisavalecgm {
          $this->rh48_codigo = $rh48_codigo;
        }
      }
-     if(($this->rh48_codigo == null) || ($this->rh48_codigo == "") ){
+     if(($this->rh48_codigo == null) || ($this->rh48_codigo === 0 || $this->rh48_codigo === 0.0 || $this->rh48_codigo == "") ){
        $this->erro_sql = " Campo rh48_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

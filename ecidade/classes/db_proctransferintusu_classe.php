@@ -67,8 +67,8 @@ class cl_proctransferintusu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p89_codtransferint = ($this->p89_codtransferint == ""?@$GLOBALS["HTTP_POST_VARS"]["p89_codtransferint"]:$this->p89_codtransferint);
-       $this->p89_usuario = ($this->p89_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p89_usuario"]:$this->p89_usuario);
+       $this->p89_codtransferint = ($this->p89_codtransferint === 0 || $this->p89_codtransferint === 0.0 || $this->p89_codtransferint == ""?@$GLOBALS["HTTP_POST_VARS"]["p89_codtransferint"]:$this->p89_codtransferint);
+       $this->p89_usuario = ($this->p89_usuario === 0 || $this->p89_usuario === 0.0 || $this->p89_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p89_usuario"]:$this->p89_usuario);
      }else{
      }
    }

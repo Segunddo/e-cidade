@@ -69,11 +69,11 @@ class cl_db_procedusu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at31_sequencial = ($this->at31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at31_sequencial"]:$this->at31_sequencial);
-       $this->at31_proced = ($this->at31_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["at31_proced"]:$this->at31_proced);
-       $this->at31_usuario = ($this->at31_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at31_usuario"]:$this->at31_usuario);
+       $this->at31_sequencial = ($this->at31_sequencial === 0 || $this->at31_sequencial === 0.0 || $this->at31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at31_sequencial"]:$this->at31_sequencial);
+       $this->at31_proced = ($this->at31_proced === 0 || $this->at31_proced === 0.0 || $this->at31_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["at31_proced"]:$this->at31_proced);
+       $this->at31_usuario = ($this->at31_usuario === 0 || $this->at31_usuario === 0.0 || $this->at31_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at31_usuario"]:$this->at31_usuario);
      }else{
-       $this->at31_sequencial = ($this->at31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at31_sequencial"]:$this->at31_sequencial);
+       $this->at31_sequencial = ($this->at31_sequencial === 0 || $this->at31_sequencial === 0.0 || $this->at31_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at31_sequencial"]:$this->at31_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_procedusu {
          $this->at31_sequencial = $at31_sequencial;
        }
      }
-     if(($this->at31_sequencial == null) || ($this->at31_sequencial == "") ){
+     if(($this->at31_sequencial == null) || ($this->at31_sequencial === 0 || $this->at31_sequencial === 0.0 || $this->at31_sequencial == "") ){
        $this->erro_sql = " Campo at31_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

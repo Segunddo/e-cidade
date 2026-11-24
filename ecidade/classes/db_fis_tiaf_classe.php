@@ -76,7 +76,7 @@ class cl_fis_tiaf
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y90_codtiaf = ($this->y90_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y90_codtiaf"]:$this->y90_codtiaf);
+            $this->y90_codtiaf = ($this->y90_codtiaf === 0 || $this->y90_codtiaf === 0.0 || $this->y90_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y90_codtiaf"]:$this->y90_codtiaf);
             if ($this->y90_data == "") {
                 $this->y90_data_dia = ($this->y90_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y90_data_dia"]:$this->y90_data_dia);
                 $this->y90_data_mes = ($this->y90_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y90_data_mes"]:$this->y90_data_mes);
@@ -87,7 +87,7 @@ class cl_fis_tiaf
             }
             $this->y90_atend = ($this->y90_atend == "f"?@$GLOBALS["HTTP_POST_VARS"]["y90_atend"]:$this->y90_atend);
         } else {
-            $this->y90_codtiaf = ($this->y90_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y90_codtiaf"]:$this->y90_codtiaf);
+            $this->y90_codtiaf = ($this->y90_codtiaf === 0 || $this->y90_codtiaf === 0.0 || $this->y90_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y90_codtiaf"]:$this->y90_codtiaf);
         }
     }
    // funcao para inclusao

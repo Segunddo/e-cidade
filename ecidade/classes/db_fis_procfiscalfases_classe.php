@@ -85,8 +85,8 @@ class cl_fis_procfiscalfases
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y108_sequencial = ($this->y108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_sequencial"]:$this->y108_sequencial);
-            $this->y108_procfiscal = ($this->y108_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_procfiscal"]:$this->y108_procfiscal);
+            $this->y108_sequencial = ($this->y108_sequencial === 0 || $this->y108_sequencial === 0.0 || $this->y108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_sequencial"]:$this->y108_sequencial);
+            $this->y108_procfiscal = ($this->y108_procfiscal === 0 || $this->y108_procfiscal === 0.0 || $this->y108_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_procfiscal"]:$this->y108_procfiscal);
             if ($this->y108_dtcriacao == "") {
                 $this->y108_dtcriacao_dia = ($this->y108_dtcriacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_dtcriacao_dia"]:$this->y108_dtcriacao_dia);
                 $this->y108_dtcriacao_mes = ($this->y108_dtcriacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_dtcriacao_mes"]:$this->y108_dtcriacao_mes);
@@ -103,10 +103,10 @@ class cl_fis_procfiscalfases
                     $this->y108_dtassinatura = $this->y108_dtassinatura_ano."-".$this->y108_dtassinatura_mes."-".$this->y108_dtassinatura_dia;
                 }
             }
-            $this->y108_responsavel = ($this->y108_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_responsavel"]:$this->y108_responsavel);
-            $this->y108_tipo = ($this->y108_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_tipo"]:$this->y108_tipo);
+            $this->y108_responsavel = ($this->y108_responsavel === 0 || $this->y108_responsavel === 0.0 || $this->y108_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_responsavel"]:$this->y108_responsavel);
+            $this->y108_tipo = ($this->y108_tipo === 0 || $this->y108_tipo === 0.0 || $this->y108_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_tipo"]:$this->y108_tipo);
         } else {
-            $this->y108_sequencial = ($this->y108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_sequencial"]:$this->y108_sequencial);
+            $this->y108_sequencial = ($this->y108_sequencial === 0 || $this->y108_sequencial === 0.0 || $this->y108_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y108_sequencial"]:$this->y108_sequencial);
         }
     }
    // funcao para inclusao

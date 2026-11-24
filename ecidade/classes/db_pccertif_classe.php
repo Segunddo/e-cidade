@@ -69,11 +69,11 @@ class cl_pccertif {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc59_certif = ($this->pc59_certif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc59_certif"]:$this->pc59_certif);
+       $this->pc59_certif = ($this->pc59_certif === 0 || $this->pc59_certif === 0.0 || $this->pc59_certif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc59_certif"]:$this->pc59_certif);
        $this->pc59_descr = ($this->pc59_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["pc59_descr"]:$this->pc59_descr);
        $this->pc59_obs = ($this->pc59_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["pc59_obs"]:$this->pc59_obs);
      }else{
-       $this->pc59_certif = ($this->pc59_certif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc59_certif"]:$this->pc59_certif);
+       $this->pc59_certif = ($this->pc59_certif === 0 || $this->pc59_certif === 0.0 || $this->pc59_certif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc59_certif"]:$this->pc59_certif);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_pccertif {
          $this->pc59_certif = $pc59_certif;
        }
      }
-     if(($this->pc59_certif == null) || ($this->pc59_certif == "") ){
+     if(($this->pc59_certif == null) || ($this->pc59_certif === 0 || $this->pc59_certif === 0.0 || $this->pc59_certif == "") ){
        $this->erro_sql = " Campo pc59_certif nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

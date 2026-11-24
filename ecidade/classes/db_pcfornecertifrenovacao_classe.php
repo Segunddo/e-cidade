@@ -74,9 +74,9 @@ class cl_pcfornecertifrenovacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc35_sequencial = ($this->pc35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc35_sequencial"]:$this->pc35_sequencial);
-       $this->pc35_pcfornecertiforiginal = ($this->pc35_pcfornecertiforiginal == ""?@$GLOBALS["HTTP_POST_VARS"]["pc35_pcfornecertiforiginal"]:$this->pc35_pcfornecertiforiginal);
-       $this->pc35_fornecertffilho = ($this->pc35_fornecertffilho == ""?@$GLOBALS["HTTP_POST_VARS"]["pc35_fornecertffilho"]:$this->pc35_fornecertffilho);
+       $this->pc35_sequencial = ($this->pc35_sequencial === 0 || $this->pc35_sequencial === 0.0 || $this->pc35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc35_sequencial"]:$this->pc35_sequencial);
+       $this->pc35_pcfornecertiforiginal = ($this->pc35_pcfornecertiforiginal === 0 || $this->pc35_pcfornecertiforiginal === 0.0 || $this->pc35_pcfornecertiforiginal == ""?@$GLOBALS["HTTP_POST_VARS"]["pc35_pcfornecertiforiginal"]:$this->pc35_pcfornecertiforiginal);
+       $this->pc35_fornecertffilho = ($this->pc35_fornecertffilho === 0 || $this->pc35_fornecertffilho === 0.0 || $this->pc35_fornecertffilho == ""?@$GLOBALS["HTTP_POST_VARS"]["pc35_fornecertffilho"]:$this->pc35_fornecertffilho);
        if($this->pc35_datarenovacao == ""){
          $this->pc35_datarenovacao_dia = ($this->pc35_datarenovacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc35_datarenovacao_dia"]:$this->pc35_datarenovacao_dia);
          $this->pc35_datarenovacao_mes = ($this->pc35_datarenovacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc35_datarenovacao_mes"]:$this->pc35_datarenovacao_mes);
@@ -86,7 +86,7 @@ class cl_pcfornecertifrenovacao {
          }
        }
      }else{
-       $this->pc35_sequencial = ($this->pc35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc35_sequencial"]:$this->pc35_sequencial);
+       $this->pc35_sequencial = ($this->pc35_sequencial === 0 || $this->pc35_sequencial === 0.0 || $this->pc35_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc35_sequencial"]:$this->pc35_sequencial);
      }
    }
    // funcao para inclusao
@@ -131,7 +131,7 @@ class cl_pcfornecertifrenovacao {
          $this->pc35_sequencial = $pc35_sequencial;
        }
      }
-     if(($this->pc35_sequencial == null) || ($this->pc35_sequencial == "") ){
+     if(($this->pc35_sequencial == null) || ($this->pc35_sequencial === 0 || $this->pc35_sequencial === 0.0 || $this->pc35_sequencial == "") ){
        $this->erro_sql = " Campo pc35_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

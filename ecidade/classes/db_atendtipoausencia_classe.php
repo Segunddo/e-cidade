@@ -69,11 +69,11 @@ class cl_atendtipoausencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at71_codigo = ($this->at71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at71_codigo"]:$this->at71_codigo);
+       $this->at71_codigo = ($this->at71_codigo === 0 || $this->at71_codigo === 0.0 || $this->at71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at71_codigo"]:$this->at71_codigo);
        $this->at71_descr = ($this->at71_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at71_descr"]:$this->at71_descr);
        $this->at71_tipo = ($this->at71_tipo == "f"?@$GLOBALS["HTTP_POST_VARS"]["at71_tipo"]:$this->at71_tipo);
      }else{
-       $this->at71_codigo = ($this->at71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at71_codigo"]:$this->at71_codigo);
+       $this->at71_codigo = ($this->at71_codigo === 0 || $this->at71_codigo === 0.0 || $this->at71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at71_codigo"]:$this->at71_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_atendtipoausencia {
          $this->at71_codigo = $at71_codigo;
        }
      }
-     if(($this->at71_codigo == null) || ($this->at71_codigo == "") ){
+     if(($this->at71_codigo == null) || ($this->at71_codigo === 0 || $this->at71_codigo === 0.0 || $this->at71_codigo == "") ){
        $this->erro_sql = " Campo at71_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

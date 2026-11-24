@@ -80,10 +80,10 @@ class cl_atendusucliitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at81_seq = ($this->at81_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_seq"]:$this->at81_seq);
-       $this->at81_codatendcli = ($this->at81_codatendcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_codatendcli"]:$this->at81_codatendcli);
+       $this->at81_seq = ($this->at81_seq === 0 || $this->at81_seq === 0.0 || $this->at81_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_seq"]:$this->at81_seq);
+       $this->at81_codatendcli = ($this->at81_codatendcli === 0 || $this->at81_codatendcli === 0.0 || $this->at81_codatendcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_codatendcli"]:$this->at81_codatendcli);
        $this->at81_descr = ($this->at81_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_descr"]:$this->at81_descr);
-       $this->at81_codtipo = ($this->at81_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_codtipo"]:$this->at81_codtipo);
+       $this->at81_codtipo = ($this->at81_codtipo === 0 || $this->at81_codtipo === 0.0 || $this->at81_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_codtipo"]:$this->at81_codtipo);
        if($this->at81_data == ""){
          $this->at81_data_dia = ($this->at81_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_data_dia"]:$this->at81_data_dia);
          $this->at81_data_mes = ($this->at81_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_data_mes"]:$this->at81_data_mes);
@@ -93,9 +93,9 @@ class cl_atendusucliitem {
          }
        }
        $this->at81_hora = ($this->at81_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_hora"]:$this->at81_hora);
-       $this->at81_prioridade = ($this->at81_prioridade == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_prioridade"]:$this->at81_prioridade);
+       $this->at81_prioridade = ($this->at81_prioridade === 0 || $this->at81_prioridade === 0.0 || $this->at81_prioridade == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_prioridade"]:$this->at81_prioridade);
      }else{
-       $this->at81_seq = ($this->at81_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_seq"]:$this->at81_seq);
+       $this->at81_seq = ($this->at81_seq === 0 || $this->at81_seq === 0.0 || $this->at81_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at81_seq"]:$this->at81_seq);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_atendusucliitem {
          $this->at81_seq = $at81_seq;
        }
      }
-     if(($this->at81_seq == null) || ($this->at81_seq == "") ){
+     if(($this->at81_seq == null) || ($this->at81_seq === 0 || $this->at81_seq === 0.0 || $this->at81_seq == "") ){
        $this->erro_sql = " Campo at81_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

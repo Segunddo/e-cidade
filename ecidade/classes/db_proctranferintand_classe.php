@@ -67,8 +67,8 @@ class cl_proctranferintand {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p87_codtransferint = ($this->p87_codtransferint == ""?@$GLOBALS["HTTP_POST_VARS"]["p87_codtransferint"]:$this->p87_codtransferint);
-       $this->p87_codandam = ($this->p87_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["p87_codandam"]:$this->p87_codandam);
+       $this->p87_codtransferint = ($this->p87_codtransferint === 0 || $this->p87_codtransferint === 0.0 || $this->p87_codtransferint == ""?@$GLOBALS["HTTP_POST_VARS"]["p87_codtransferint"]:$this->p87_codtransferint);
+       $this->p87_codandam = ($this->p87_codandam === 0 || $this->p87_codandam === 0.0 || $this->p87_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["p87_codandam"]:$this->p87_codandam);
      }else{
      }
    }

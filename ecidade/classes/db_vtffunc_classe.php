@@ -81,19 +81,19 @@ class cl_vtffunc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r17_anousu = ($this->r17_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_anousu"]:$this->r17_anousu);
-       $this->r17_mesusu = ($this->r17_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_mesusu"]:$this->r17_mesusu);
-       $this->r17_regist = ($this->r17_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_regist"]:$this->r17_regist);
+       $this->r17_anousu = ($this->r17_anousu === 0 || $this->r17_anousu === 0.0 || $this->r17_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_anousu"]:$this->r17_anousu);
+       $this->r17_mesusu = ($this->r17_mesusu === 0 || $this->r17_mesusu === 0.0 || $this->r17_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_mesusu"]:$this->r17_mesusu);
+       $this->r17_regist = ($this->r17_regist === 0 || $this->r17_regist === 0.0 || $this->r17_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_regist"]:$this->r17_regist);
        $this->r17_codigo = ($this->r17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_codigo"]:$this->r17_codigo);
-       $this->r17_quant = ($this->r17_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_quant"]:$this->r17_quant);
+       $this->r17_quant = ($this->r17_quant === 0 || $this->r17_quant === 0.0 || $this->r17_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_quant"]:$this->r17_quant);
        $this->r17_lotac = ($this->r17_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_lotac"]:$this->r17_lotac);
        $this->r17_difere = ($this->r17_difere == "f"?@$GLOBALS["HTTP_POST_VARS"]["r17_difere"]:$this->r17_difere);
        $this->r17_situac = ($this->r17_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_situac"]:$this->r17_situac);
        $this->r17_tipo = ($this->r17_tipo == "f"?@$GLOBALS["HTTP_POST_VARS"]["r17_tipo"]:$this->r17_tipo);
      }else{
-       $this->r17_anousu = ($this->r17_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_anousu"]:$this->r17_anousu);
-       $this->r17_mesusu = ($this->r17_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_mesusu"]:$this->r17_mesusu);
-       $this->r17_regist = ($this->r17_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_regist"]:$this->r17_regist);
+       $this->r17_anousu = ($this->r17_anousu === 0 || $this->r17_anousu === 0.0 || $this->r17_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_anousu"]:$this->r17_anousu);
+       $this->r17_mesusu = ($this->r17_mesusu === 0 || $this->r17_mesusu === 0.0 || $this->r17_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_mesusu"]:$this->r17_mesusu);
+       $this->r17_regist = ($this->r17_regist === 0 || $this->r17_regist === 0.0 || $this->r17_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_regist"]:$this->r17_regist);
        $this->r17_codigo = ($this->r17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r17_codigo"]:$this->r17_codigo);
        $this->r17_difere = ($this->r17_difere == "f"?@$GLOBALS["HTTP_POST_VARS"]["r17_difere"]:$this->r17_difere);
      }
@@ -142,7 +142,7 @@ class cl_vtffunc {
        $this->r17_regist = $r17_regist;
        $this->r17_codigo = $r17_codigo;
        $this->r17_difere = $r17_difere;
-     if(($this->r17_anousu == null) || ($this->r17_anousu == "") ){
+     if(($this->r17_anousu == null) || ($this->r17_anousu === 0 || $this->r17_anousu === 0.0 || $this->r17_anousu == "") ){
        $this->erro_sql = " Campo r17_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -150,7 +150,7 @@ class cl_vtffunc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r17_mesusu == null) || ($this->r17_mesusu == "") ){
+     if(($this->r17_mesusu == null) || ($this->r17_mesusu === 0 || $this->r17_mesusu === 0.0 || $this->r17_mesusu == "") ){
        $this->erro_sql = " Campo r17_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -158,7 +158,7 @@ class cl_vtffunc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r17_regist == null) || ($this->r17_regist == "") ){
+     if(($this->r17_regist == null) || ($this->r17_regist === 0 || $this->r17_regist === 0.0 || $this->r17_regist == "") ){
        $this->erro_sql = " Campo r17_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

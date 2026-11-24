@@ -88,15 +88,15 @@ class cl_veicmanutitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve63_codigo = ($this->ve63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_codigo"]:$this->ve63_codigo);
-       $this->ve63_veicmanut = ($this->ve63_veicmanut == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_veicmanut"]:$this->ve63_veicmanut);
+       $this->ve63_codigo = ($this->ve63_codigo === 0 || $this->ve63_codigo === 0.0 || $this->ve63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_codigo"]:$this->ve63_codigo);
+       $this->ve63_veicmanut = ($this->ve63_veicmanut === 0 || $this->ve63_veicmanut === 0.0 || $this->ve63_veicmanut == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_veicmanut"]:$this->ve63_veicmanut);
        $this->ve63_descr = ($this->ve63_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_descr"]:$this->ve63_descr);
-       $this->ve63_quant = ($this->ve63_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_quant"]:$this->ve63_quant);
-       $this->ve63_vlruni = ($this->ve63_vlruni == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_vlruni"]:$this->ve63_vlruni);
-       $this->ve63_valortotalcomdesconto = ($this->ve63_valortotalcomdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_valortotalcomdesconto"]:$this->ve63_valortotalcomdesconto);
-       $this->ve63_unidade = ($this->ve63_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_unidade"]:$this->ve63_unidade);
-       $this->ve63_tipoitem = ($this->ve63_tipoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_tipoitem"]:$this->ve63_tipoitem);
-       $this->ve63_proximatroca = ($this->ve63_proximatroca == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_proximatroca"]:$this->ve63_proximatroca);
+       $this->ve63_quant = ($this->ve63_quant === 0 || $this->ve63_quant === 0.0 || $this->ve63_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_quant"]:$this->ve63_quant);
+       $this->ve63_vlruni = ($this->ve63_vlruni === 0 || $this->ve63_vlruni === 0.0 || $this->ve63_vlruni == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_vlruni"]:$this->ve63_vlruni);
+       $this->ve63_valortotalcomdesconto = ($this->ve63_valortotalcomdesconto === 0 || $this->ve63_valortotalcomdesconto === 0.0 || $this->ve63_valortotalcomdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_valortotalcomdesconto"]:$this->ve63_valortotalcomdesconto);
+       $this->ve63_unidade = ($this->ve63_unidade === 0 || $this->ve63_unidade === 0.0 || $this->ve63_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_unidade"]:$this->ve63_unidade);
+       $this->ve63_tipoitem = ($this->ve63_tipoitem === 0 || $this->ve63_tipoitem === 0.0 || $this->ve63_tipoitem == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_tipoitem"]:$this->ve63_tipoitem);
+       $this->ve63_proximatroca = ($this->ve63_proximatroca === 0 || $this->ve63_proximatroca === 0.0 || $this->ve63_proximatroca == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_proximatroca"]:$this->ve63_proximatroca);
        if($this->ve63_datanota == ""){
          $this->ve63_datanota_dia = ($this->ve63_datanota_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_datanota_dia"]:$this->ve63_datanota_dia);
          $this->ve63_datanota_mes = ($this->ve63_datanota_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_datanota_mes"]:$this->ve63_datanota_mes);
@@ -107,7 +107,7 @@ class cl_veicmanutitem {
        }
        $this->ve63_numeronota = ($this->ve63_numeronota == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_numeronota"]:$this->ve63_numeronota);
      }else{
-       $this->ve63_codigo = ($this->ve63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_codigo"]:$this->ve63_codigo);
+       $this->ve63_codigo = ($this->ve63_codigo === 0 || $this->ve63_codigo === 0.0 || $this->ve63_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve63_codigo"]:$this->ve63_codigo);
      }
    }
    // funcao para Inclusão
@@ -206,7 +206,7 @@ class cl_veicmanutitem {
          $this->ve63_codigo = $ve63_codigo;
        }
      }
-     if(($this->ve63_codigo == null) || ($this->ve63_codigo == "") ){
+     if(($this->ve63_codigo == null) || ($this->ve63_codigo === 0 || $this->ve63_codigo === 0.0 || $this->ve63_codigo == "") ){
        $this->erro_sql = " Campo ve63_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

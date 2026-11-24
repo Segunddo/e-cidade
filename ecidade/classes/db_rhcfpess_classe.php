@@ -67,8 +67,8 @@ class cl_rhcfpess {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh22_anousu = ($this->rh22_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh22_anousu"]:$this->rh22_anousu);
-       $this->rh22_mesusu = ($this->rh22_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh22_mesusu"]:$this->rh22_mesusu);
+       $this->rh22_anousu = ($this->rh22_anousu === 0 || $this->rh22_anousu === 0.0 || $this->rh22_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh22_anousu"]:$this->rh22_anousu);
+       $this->rh22_mesusu = ($this->rh22_mesusu === 0 || $this->rh22_mesusu === 0.0 || $this->rh22_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh22_mesusu"]:$this->rh22_mesusu);
      }else{
      }
    }

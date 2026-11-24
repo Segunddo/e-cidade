@@ -73,11 +73,11 @@ class cl_fis_procfiscalinscr
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y103_sequencial = ($this->y103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y103_sequencial"]:$this->y103_sequencial);
-            $this->y103_inscr = ($this->y103_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y103_inscr"]:$this->y103_inscr);
-            $this->y103_procfiscal = ($this->y103_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y103_procfiscal"]:$this->y103_procfiscal);
+            $this->y103_sequencial = ($this->y103_sequencial === 0 || $this->y103_sequencial === 0.0 || $this->y103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y103_sequencial"]:$this->y103_sequencial);
+            $this->y103_inscr = ($this->y103_inscr === 0 || $this->y103_inscr === 0.0 || $this->y103_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y103_inscr"]:$this->y103_inscr);
+            $this->y103_procfiscal = ($this->y103_procfiscal === 0 || $this->y103_procfiscal === 0.0 || $this->y103_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y103_procfiscal"]:$this->y103_procfiscal);
         } else {
-            $this->y103_sequencial = ($this->y103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y103_sequencial"]:$this->y103_sequencial);
+            $this->y103_sequencial = ($this->y103_sequencial === 0 || $this->y103_sequencial === 0.0 || $this->y103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y103_sequencial"]:$this->y103_sequencial);
         }
     }
     // funcao para inclusao

@@ -77,15 +77,15 @@ class cl_matestoquedevitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m46_codigo = ($this->m46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codigo"]:$this->m46_codigo);
-       $this->m46_codmatestoquedev = ($this->m46_codmatestoquedev == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatestoquedev"]:$this->m46_codmatestoquedev);
-       $this->m46_codmatrequiitem = ($this->m46_codmatrequiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatrequiitem"]:$this->m46_codmatrequiitem);
-       $this->m46_codatendrequiitem = ($this->m46_codatendrequiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codatendrequiitem"]:$this->m46_codatendrequiitem);
-       $this->m46_codmatmater = ($this->m46_codmatmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatmater"]:$this->m46_codmatmater);
-       $this->m46_quantdev = ($this->m46_quantdev == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_quantdev"]:$this->m46_quantdev);
-       $this->m46_quantexistia = ($this->m46_quantexistia == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_quantexistia"]:$this->m46_quantexistia);
+       $this->m46_codigo = ($this->m46_codigo === 0 || $this->m46_codigo === 0.0 || $this->m46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codigo"]:$this->m46_codigo);
+       $this->m46_codmatestoquedev = ($this->m46_codmatestoquedev === 0 || $this->m46_codmatestoquedev === 0.0 || $this->m46_codmatestoquedev == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatestoquedev"]:$this->m46_codmatestoquedev);
+       $this->m46_codmatrequiitem = ($this->m46_codmatrequiitem === 0 || $this->m46_codmatrequiitem === 0.0 || $this->m46_codmatrequiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatrequiitem"]:$this->m46_codmatrequiitem);
+       $this->m46_codatendrequiitem = ($this->m46_codatendrequiitem === 0 || $this->m46_codatendrequiitem === 0.0 || $this->m46_codatendrequiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codatendrequiitem"]:$this->m46_codatendrequiitem);
+       $this->m46_codmatmater = ($this->m46_codmatmater === 0 || $this->m46_codmatmater === 0.0 || $this->m46_codmatmater == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codmatmater"]:$this->m46_codmatmater);
+       $this->m46_quantdev = ($this->m46_quantdev === 0 || $this->m46_quantdev === 0.0 || $this->m46_quantdev == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_quantdev"]:$this->m46_quantdev);
+       $this->m46_quantexistia = ($this->m46_quantexistia === 0 || $this->m46_quantexistia === 0.0 || $this->m46_quantexistia == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_quantexistia"]:$this->m46_quantexistia);
      }else{
-       $this->m46_codigo = ($this->m46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codigo"]:$this->m46_codigo);
+       $this->m46_codigo = ($this->m46_codigo === 0 || $this->m46_codigo === 0.0 || $this->m46_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m46_codigo"]:$this->m46_codigo);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_matestoquedevitem {
          $this->m46_codigo = $m46_codigo;
        }
      }
-     if(($this->m46_codigo == null) || ($this->m46_codigo == "") ){
+     if(($this->m46_codigo == null) || ($this->m46_codigo === 0 || $this->m46_codigo === 0.0 || $this->m46_codigo == "") ){
        $this->erro_sql = " Campo m46_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

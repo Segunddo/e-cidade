@@ -77,13 +77,13 @@ class cl_fis_tipoandam
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y41_codtipo = ($this->y41_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y41_codtipo"]:$this->y41_codtipo);
+            $this->y41_codtipo = ($this->y41_codtipo === 0 || $this->y41_codtipo === 0.0 || $this->y41_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y41_codtipo"]:$this->y41_codtipo);
             $this->y41_descr = ($this->y41_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y41_descr"]:$this->y41_descr);
             $this->y41_obs = ($this->y41_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y41_obs"]:$this->y41_obs);
             $this->y41_permcalc = ($this->y41_permcalc == "f"?@$GLOBALS["HTTP_POST_VARS"]["y41_permcalc"]:$this->y41_permcalc);
-            $this->y41_instit = ($this->y41_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y41_instit"]:$this->y41_instit);
+            $this->y41_instit = ($this->y41_instit === 0 || $this->y41_instit === 0.0 || $this->y41_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y41_instit"]:$this->y41_instit);
         } else {
-            $this->y41_codtipo = ($this->y41_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y41_codtipo"]:$this->y41_codtipo);
+            $this->y41_codtipo = ($this->y41_codtipo === 0 || $this->y41_codtipo === 0.0 || $this->y41_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y41_codtipo"]:$this->y41_codtipo);
         }
     }
    // funcao para inclusao

@@ -76,10 +76,10 @@ class cl_veicitensobrig {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve09_sequencial = ($this->ve09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_sequencial"]:$this->ve09_sequencial);
-       $this->ve09_usuario = ($this->ve09_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_usuario"]:$this->ve09_usuario);
-       $this->ve09_veiccaditensobrig = ($this->ve09_veiccaditensobrig == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_veiccaditensobrig"]:$this->ve09_veiccaditensobrig);
-       $this->ve09_veiculos = ($this->ve09_veiculos == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_veiculos"]:$this->ve09_veiculos);
+       $this->ve09_sequencial = ($this->ve09_sequencial === 0 || $this->ve09_sequencial === 0.0 || $this->ve09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_sequencial"]:$this->ve09_sequencial);
+       $this->ve09_usuario = ($this->ve09_usuario === 0 || $this->ve09_usuario === 0.0 || $this->ve09_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_usuario"]:$this->ve09_usuario);
+       $this->ve09_veiccaditensobrig = ($this->ve09_veiccaditensobrig === 0 || $this->ve09_veiccaditensobrig === 0.0 || $this->ve09_veiccaditensobrig == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_veiccaditensobrig"]:$this->ve09_veiccaditensobrig);
+       $this->ve09_veiculos = ($this->ve09_veiculos === 0 || $this->ve09_veiculos === 0.0 || $this->ve09_veiculos == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_veiculos"]:$this->ve09_veiculos);
        if($this->ve09_dtinc == ""){
          $this->ve09_dtinc_dia = ($this->ve09_dtinc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_dtinc_dia"]:$this->ve09_dtinc_dia);
          $this->ve09_dtinc_mes = ($this->ve09_dtinc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_dtinc_mes"]:$this->ve09_dtinc_mes);
@@ -89,7 +89,7 @@ class cl_veicitensobrig {
          }
        }
      }else{
-       $this->ve09_sequencial = ($this->ve09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_sequencial"]:$this->ve09_sequencial);
+       $this->ve09_sequencial = ($this->ve09_sequencial === 0 || $this->ve09_sequencial === 0.0 || $this->ve09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve09_sequencial"]:$this->ve09_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_veicitensobrig {
          $this->ve09_sequencial = $ve09_sequencial;
        }
      }
-     if(($this->ve09_sequencial == null) || ($this->ve09_sequencial == "") ){
+     if(($this->ve09_sequencial == null) || ($this->ve09_sequencial === 0 || $this->ve09_sequencial === 0.0 || $this->ve09_sequencial == "") ){
        $this->erro_sql = " Campo ve09_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

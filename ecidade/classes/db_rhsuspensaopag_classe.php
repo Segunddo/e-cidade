@@ -88,8 +88,8 @@ class cl_rhsuspensaopag {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh101_sequencial = ($this->rh101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_sequencial"]:$this->rh101_sequencial);
-       $this->rh101_regist = ($this->rh101_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_regist"]:$this->rh101_regist);
+       $this->rh101_sequencial = ($this->rh101_sequencial === 0 || $this->rh101_sequencial === 0.0 || $this->rh101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_sequencial"]:$this->rh101_sequencial);
+       $this->rh101_regist = ($this->rh101_regist === 0 || $this->rh101_regist === 0.0 || $this->rh101_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_regist"]:$this->rh101_regist);
        if($this->rh101_dtcadastro == ""){
          $this->rh101_dtcadastro_dia = @$GLOBALS["HTTP_POST_VARS"]["rh101_dtcadastro_dia"];
          $this->rh101_dtcadastro_mes = @$GLOBALS["HTTP_POST_VARS"]["rh101_dtcadastro_mes"];
@@ -98,7 +98,7 @@ class cl_rhsuspensaopag {
             $this->rh101_dtcadastro = $this->rh101_dtcadastro_ano."-".$this->rh101_dtcadastro_mes."-".$this->rh101_dtcadastro_dia;
          }
        }
-       $this->rh101_usuario = ($this->rh101_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_usuario"]:$this->rh101_usuario);
+       $this->rh101_usuario = ($this->rh101_usuario === 0 || $this->rh101_usuario === 0.0 || $this->rh101_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_usuario"]:$this->rh101_usuario);
        if($this->rh101_dtinicial == ""){
          $this->rh101_dtinicial_dia = @$GLOBALS["HTTP_POST_VARS"]["rh101_dtinicial_dia"];
          $this->rh101_dtinicial_mes = @$GLOBALS["HTTP_POST_VARS"]["rh101_dtinicial_mes"];
@@ -125,7 +125,7 @@ class cl_rhsuspensaopag {
        }
        $this->rh101_obs = ($this->rh101_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_obs"]:$this->rh101_obs);
      }else{
-       $this->rh101_sequencial = ($this->rh101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_sequencial"]:$this->rh101_sequencial);
+       $this->rh101_sequencial = ($this->rh101_sequencial === 0 || $this->rh101_sequencial === 0.0 || $this->rh101_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh101_sequencial"]:$this->rh101_sequencial);
      }
    }
    // funcao para inclusao
@@ -203,7 +203,7 @@ class cl_rhsuspensaopag {
          $this->rh101_sequencial = $rh101_sequencial;
        }
      }
-     if(($this->rh101_sequencial == null) || ($this->rh101_sequencial == "") ){
+     if(($this->rh101_sequencial == null) || ($this->rh101_sequencial === 0 || $this->rh101_sequencial === 0.0 || $this->rh101_sequencial == "") ){
        $this->erro_sql = " Campo rh101_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

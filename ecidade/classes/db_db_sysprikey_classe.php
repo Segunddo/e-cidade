@@ -73,15 +73,15 @@ class cl_db_sysprikey {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
-       $this->codcam = ($this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
-       $this->sequen = ($this->sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["sequen"]:$this->sequen);
-       $this->referen = ($this->referen == ""?@$GLOBALS["HTTP_POST_VARS"]["referen"]:$this->referen);
-       $this->camiden = ($this->camiden == ""?@$GLOBALS["HTTP_POST_VARS"]["camiden"]:$this->camiden);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codcam = ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
+       $this->sequen = ($this->sequen === 0 || $this->sequen === 0.0 || $this->sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["sequen"]:$this->sequen);
+       $this->referen = ($this->referen === 0 || $this->referen === 0.0 || $this->referen == ""?@$GLOBALS["HTTP_POST_VARS"]["referen"]:$this->referen);
+       $this->camiden = ($this->camiden === 0 || $this->camiden === 0.0 || $this->camiden == ""?@$GLOBALS["HTTP_POST_VARS"]["camiden"]:$this->camiden);
      }else{
-       $this->codarq = ($this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
-       $this->codcam = ($this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
-       $this->sequen = ($this->sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["sequen"]:$this->sequen);
+       $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["codarq"]:$this->codarq);
+       $this->codcam = ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == ""?@$GLOBALS["HTTP_POST_VARS"]["codcam"]:$this->codcam);
+       $this->sequen = ($this->sequen === 0 || $this->sequen === 0.0 || $this->sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["sequen"]:$this->sequen);
      }
    }
    // funcao para inclusao
@@ -108,7 +108,7 @@ class cl_db_sysprikey {
        $this->codcam = $codcam;
        $this->codarq = $codarq;
        $this->sequen = $sequen;
-     if(($this->codcam == null) || ($this->codcam == "") ){
+     if(($this->codcam == null) || ($this->codcam === 0 || $this->codcam === 0.0 || $this->codcam == "") ){
        $this->erro_sql = " Campo codcam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -116,7 +116,7 @@ class cl_db_sysprikey {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->codarq == null) || ($this->codarq == "") ){
+     if(($this->codarq == null) || ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == "") ){
        $this->erro_sql = " Campo codarq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -124,7 +124,7 @@ class cl_db_sysprikey {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sequen == null) || ($this->sequen == "") ){
+     if(($this->sequen == null) || ($this->sequen === 0 || $this->sequen === 0.0 || $this->sequen == "") ){
        $this->erro_sql = " Campo sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

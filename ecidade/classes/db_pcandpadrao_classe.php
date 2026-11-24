@@ -73,13 +73,13 @@ class cl_pcandpadrao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc45_codigo = ($this->pc45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_codigo"]:$this->pc45_codigo);
-       $this->pc45_ordem = ($this->pc45_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_ordem"]:$this->pc45_ordem);
-       $this->pc45_dias = ($this->pc45_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_dias"]:$this->pc45_dias);
-       $this->pc45_pctipoandam = ($this->pc45_pctipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_pctipoandam"]:$this->pc45_pctipoandam);
-       $this->pc45_instit = ($this->pc45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_instit"]:$this->pc45_instit);
+       $this->pc45_codigo = ($this->pc45_codigo === 0 || $this->pc45_codigo === 0.0 || $this->pc45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_codigo"]:$this->pc45_codigo);
+       $this->pc45_ordem = ($this->pc45_ordem === 0 || $this->pc45_ordem === 0.0 || $this->pc45_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_ordem"]:$this->pc45_ordem);
+       $this->pc45_dias = ($this->pc45_dias === 0 || $this->pc45_dias === 0.0 || $this->pc45_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_dias"]:$this->pc45_dias);
+       $this->pc45_pctipoandam = ($this->pc45_pctipoandam === 0 || $this->pc45_pctipoandam === 0.0 || $this->pc45_pctipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_pctipoandam"]:$this->pc45_pctipoandam);
+       $this->pc45_instit = ($this->pc45_instit === 0 || $this->pc45_instit === 0.0 || $this->pc45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_instit"]:$this->pc45_instit);
      }else{
-       $this->pc45_codigo = ($this->pc45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_codigo"]:$this->pc45_codigo);
+       $this->pc45_codigo = ($this->pc45_codigo === 0 || $this->pc45_codigo === 0.0 || $this->pc45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc45_codigo"]:$this->pc45_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_pcandpadrao {
          $this->pc45_codigo = $pc45_codigo;
        }
      }
-     if(($this->pc45_codigo == null) || ($this->pc45_codigo == "") ){
+     if(($this->pc45_codigo == null) || ($this->pc45_codigo === 0 || $this->pc45_codigo === 0.0 || $this->pc45_codigo == "") ){
        $this->erro_sql = " Campo pc45_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

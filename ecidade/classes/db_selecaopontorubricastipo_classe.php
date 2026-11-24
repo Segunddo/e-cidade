@@ -67,10 +67,10 @@ class cl_selecaopontorubricastipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r74_sequencial = ($this->r74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r74_sequencial"]:$this->r74_sequencial);
+       $this->r74_sequencial = ($this->r74_sequencial === 0 || $this->r74_sequencial === 0.0 || $this->r74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r74_sequencial"]:$this->r74_sequencial);
        $this->r74_descricao = ($this->r74_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["r74_descricao"]:$this->r74_descricao);
      }else{
-       $this->r74_sequencial = ($this->r74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r74_sequencial"]:$this->r74_sequencial);
+       $this->r74_sequencial = ($this->r74_sequencial === 0 || $this->r74_sequencial === 0.0 || $this->r74_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r74_sequencial"]:$this->r74_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_selecaopontorubricastipo {
          $this->r74_sequencial = $r74_sequencial;
        }
      }
-     if(($this->r74_sequencial == null) || ($this->r74_sequencial == "") ){
+     if(($this->r74_sequencial == null) || ($this->r74_sequencial === 0 || $this->r74_sequencial === 0.0 || $this->r74_sequencial == "") ){
        $this->erro_sql = " Campo r74_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

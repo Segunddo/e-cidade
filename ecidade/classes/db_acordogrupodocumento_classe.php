@@ -71,12 +71,12 @@ class cl_acordogrupodocumento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac06_sequencial = ($this->ac06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_sequencial"]:$this->ac06_sequencial);
-       $this->ac06_acordogrupo = ($this->ac06_acordogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_acordogrupo"]:$this->ac06_acordogrupo);
-       $this->ac06_tipodocumento = ($this->ac06_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_tipodocumento"]:$this->ac06_tipodocumento);
-       $this->ac06_documentotemplate = ($this->ac06_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_documentotemplate"]:$this->ac06_documentotemplate);
+       $this->ac06_sequencial = ($this->ac06_sequencial === 0 || $this->ac06_sequencial === 0.0 || $this->ac06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_sequencial"]:$this->ac06_sequencial);
+       $this->ac06_acordogrupo = ($this->ac06_acordogrupo === 0 || $this->ac06_acordogrupo === 0.0 || $this->ac06_acordogrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_acordogrupo"]:$this->ac06_acordogrupo);
+       $this->ac06_tipodocumento = ($this->ac06_tipodocumento === 0 || $this->ac06_tipodocumento === 0.0 || $this->ac06_tipodocumento == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_tipodocumento"]:$this->ac06_tipodocumento);
+       $this->ac06_documentotemplate = ($this->ac06_documentotemplate === 0 || $this->ac06_documentotemplate === 0.0 || $this->ac06_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_documentotemplate"]:$this->ac06_documentotemplate);
      }else{
-       $this->ac06_sequencial = ($this->ac06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_sequencial"]:$this->ac06_sequencial);
+       $this->ac06_sequencial = ($this->ac06_sequencial === 0 || $this->ac06_sequencial === 0.0 || $this->ac06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac06_sequencial"]:$this->ac06_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_acordogrupodocumento {
          $this->ac06_sequencial = $ac06_sequencial;
        }
      }
-     if(($this->ac06_sequencial == null) || ($this->ac06_sequencial == "") ){
+     if(($this->ac06_sequencial == null) || ($this->ac06_sequencial === 0 || $this->ac06_sequencial === 0.0 || $this->ac06_sequencial == "") ){
        $this->erro_sql = " Campo ac06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

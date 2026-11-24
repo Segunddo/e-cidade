@@ -81,9 +81,9 @@ class cl_db_projetos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at60_codigo = ($this->at60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codigo"]:$this->at60_codigo);
+       $this->at60_codigo = ($this->at60_codigo === 0 || $this->at60_codigo === 0.0 || $this->at60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codigo"]:$this->at60_codigo);
        $this->at60_descr = ($this->at60_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_descr"]:$this->at60_descr);
-       $this->at60_responsavel = ($this->at60_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_responsavel"]:$this->at60_responsavel);
+       $this->at60_responsavel = ($this->at60_responsavel === 0 || $this->at60_responsavel === 0.0 || $this->at60_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_responsavel"]:$this->at60_responsavel);
        if($this->at60_inicio == ""){
          $this->at60_inicio_dia = ($this->at60_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_inicio_dia"]:$this->at60_inicio_dia);
          $this->at60_inicio_mes = ($this->at60_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_inicio_mes"]:$this->at60_inicio_mes);
@@ -100,9 +100,9 @@ class cl_db_projetos {
             $this->at60_fim = $this->at60_fim_ano."-".$this->at60_fim_mes."-".$this->at60_fim_dia;
          }
        }
-       $this->at60_situacao = ($this->at60_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_situacao"]:$this->at60_situacao);
+       $this->at60_situacao = ($this->at60_situacao === 0 || $this->at60_situacao === 0.0 || $this->at60_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_situacao"]:$this->at60_situacao);
      }else{
-       $this->at60_codigo = ($this->at60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codigo"]:$this->at60_codigo);
+       $this->at60_codigo = ($this->at60_codigo === 0 || $this->at60_codigo === 0.0 || $this->at60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codigo"]:$this->at60_codigo);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_db_projetos {
          $this->at60_codigo = $at60_codigo;
        }
      }
-     if(($this->at60_codigo == null) || ($this->at60_codigo == "") ){
+     if(($this->at60_codigo == null) || ($this->at60_codigo === 0 || $this->at60_codigo === 0.0 || $this->at60_codigo == "") ){
        $this->erro_sql = " Campo at60_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

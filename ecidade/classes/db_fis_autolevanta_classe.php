@@ -73,11 +73,11 @@ class cl_fis_autolevanta
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y117_sequencial = ($this->y117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_sequencial"]:$this->y117_sequencial);
-            $this->y117_auto = ($this->y117_auto == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_auto"]:$this->y117_auto);
-            $this->y117_levanta = ($this->y117_levanta == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_levanta"]:$this->y117_levanta);
+            $this->y117_sequencial = ($this->y117_sequencial === 0 || $this->y117_sequencial === 0.0 || $this->y117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_sequencial"]:$this->y117_sequencial);
+            $this->y117_auto = ($this->y117_auto === 0 || $this->y117_auto === 0.0 || $this->y117_auto == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_auto"]:$this->y117_auto);
+            $this->y117_levanta = ($this->y117_levanta === 0 || $this->y117_levanta === 0.0 || $this->y117_levanta == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_levanta"]:$this->y117_levanta);
         } else {
-            $this->y117_sequencial = ($this->y117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_sequencial"]:$this->y117_sequencial);
+            $this->y117_sequencial = ($this->y117_sequencial === 0 || $this->y117_sequencial === 0.0 || $this->y117_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y117_sequencial"]:$this->y117_sequencial);
         }
     }
     // funcao para inclusao

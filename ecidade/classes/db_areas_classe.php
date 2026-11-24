@@ -67,10 +67,10 @@ class cl_areas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h05_codigo = ($this->h05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h05_codigo"]:$this->h05_codigo);
+       $this->h05_codigo = ($this->h05_codigo === 0 || $this->h05_codigo === 0.0 || $this->h05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h05_codigo"]:$this->h05_codigo);
        $this->h05_descr = ($this->h05_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["h05_descr"]:$this->h05_descr);
      }else{
-       $this->h05_codigo = ($this->h05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h05_codigo"]:$this->h05_codigo);
+       $this->h05_codigo = ($this->h05_codigo === 0 || $this->h05_codigo === 0.0 || $this->h05_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h05_codigo"]:$this->h05_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_areas {
        return false;
      }
        $this->h05_codigo = $h05_codigo;
-     if(($this->h05_codigo == null) || ($this->h05_codigo == "") ){
+     if(($this->h05_codigo == null) || ($this->h05_codigo === 0 || $this->h05_codigo === 0.0 || $this->h05_codigo == "") ){
        $this->erro_sql = " Campo h05_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_obrasiptubase {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob24_sequencial = ($this->ob24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob24_sequencial"]:$this->ob24_sequencial);
-       $this->ob24_obras = ($this->ob24_obras == ""?@$GLOBALS["HTTP_POST_VARS"]["ob24_obras"]:$this->ob24_obras);
-       $this->ob24_iptubase = ($this->ob24_iptubase == ""?@$GLOBALS["HTTP_POST_VARS"]["ob24_iptubase"]:$this->ob24_iptubase);
+       $this->ob24_sequencial = ($this->ob24_sequencial === 0 || $this->ob24_sequencial === 0.0 || $this->ob24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob24_sequencial"]:$this->ob24_sequencial);
+       $this->ob24_obras = ($this->ob24_obras === 0 || $this->ob24_obras === 0.0 || $this->ob24_obras == ""?@$GLOBALS["HTTP_POST_VARS"]["ob24_obras"]:$this->ob24_obras);
+       $this->ob24_iptubase = ($this->ob24_iptubase === 0 || $this->ob24_iptubase === 0.0 || $this->ob24_iptubase == ""?@$GLOBALS["HTTP_POST_VARS"]["ob24_iptubase"]:$this->ob24_iptubase);
      }else{
-       $this->ob24_sequencial = ($this->ob24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob24_sequencial"]:$this->ob24_sequencial);
+       $this->ob24_sequencial = ($this->ob24_sequencial === 0 || $this->ob24_sequencial === 0.0 || $this->ob24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob24_sequencial"]:$this->ob24_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_obrasiptubase {
          $this->ob24_sequencial = $ob24_sequencial;
        }
      }
-     if(($this->ob24_sequencial == null) || ($this->ob24_sequencial == "") ){
+     if(($this->ob24_sequencial == null) || ($this->ob24_sequencial === 0 || $this->ob24_sequencial === 0.0 || $this->ob24_sequencial == "") ){
        $this->erro_sql = " Campo ob24_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_pcfornesubgrupo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc76_codigo = ($this->pc76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_codigo"]:$this->pc76_codigo);
-       $this->pc76_pcforne = ($this->pc76_pcforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_pcforne"]:$this->pc76_pcforne);
-       $this->pc76_pcsubgrupo = ($this->pc76_pcsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_pcsubgrupo"]:$this->pc76_pcsubgrupo);
+       $this->pc76_codigo = ($this->pc76_codigo === 0 || $this->pc76_codigo === 0.0 || $this->pc76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_codigo"]:$this->pc76_codigo);
+       $this->pc76_pcforne = ($this->pc76_pcforne === 0 || $this->pc76_pcforne === 0.0 || $this->pc76_pcforne == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_pcforne"]:$this->pc76_pcforne);
+       $this->pc76_pcsubgrupo = ($this->pc76_pcsubgrupo === 0 || $this->pc76_pcsubgrupo === 0.0 || $this->pc76_pcsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_pcsubgrupo"]:$this->pc76_pcsubgrupo);
      }else{
-       $this->pc76_codigo = ($this->pc76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_codigo"]:$this->pc76_codigo);
+       $this->pc76_codigo = ($this->pc76_codigo === 0 || $this->pc76_codigo === 0.0 || $this->pc76_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc76_codigo"]:$this->pc76_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_pcfornesubgrupo {
          $this->pc76_codigo = $pc76_codigo;
        }
      }
-     if(($this->pc76_codigo == null) || ($this->pc76_codigo == "") ){
+     if(($this->pc76_codigo == null) || ($this->pc76_codigo === 0 || $this->pc76_codigo === 0.0 || $this->pc76_codigo == "") ){
        $this->erro_sql = " Campo pc76_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

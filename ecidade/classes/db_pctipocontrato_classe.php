@@ -69,11 +69,11 @@ class cl_pctipocontrato {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p70_codtipo = ($this->p70_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_codtipo"]:$this->p70_codtipo);
+       $this->p70_codtipo = ($this->p70_codtipo === 0 || $this->p70_codtipo === 0.0 || $this->p70_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_codtipo"]:$this->p70_codtipo);
        $this->p70_descr = ($this->p70_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_descr"]:$this->p70_descr);
        $this->p70_tipo = ($this->p70_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_tipo"]:$this->p70_tipo);
      }else{
-       $this->p70_codtipo = ($this->p70_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_codtipo"]:$this->p70_codtipo);
+       $this->p70_codtipo = ($this->p70_codtipo === 0 || $this->p70_codtipo === 0.0 || $this->p70_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p70_codtipo"]:$this->p70_codtipo);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_pctipocontrato {
        return false;
      }
        $this->p70_codtipo = $p70_codtipo;
-     if(($this->p70_codtipo == null) || ($this->p70_codtipo == "") ){
+     if(($this->p70_codtipo == null) || ($this->p70_codtipo === 0 || $this->p70_codtipo === 0.0 || $this->p70_codtipo == "") ){
        $this->erro_sql = " Campo p70_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

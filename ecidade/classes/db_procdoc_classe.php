@@ -69,11 +69,11 @@ class cl_procdoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p56_coddoc = ($this->p56_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_coddoc"]:$this->p56_coddoc);
+       $this->p56_coddoc = ($this->p56_coddoc === 0 || $this->p56_coddoc === 0.0 || $this->p56_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_coddoc"]:$this->p56_coddoc);
        $this->p56_descr = ($this->p56_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_descr"]:$this->p56_descr);
        $this->p56_ouvidoriatipodado = ($this->p56_ouvidoriatipodado == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_ouvidoriatipodado"]:$this->p56_ouvidoriatipodado);
      }else{
-       $this->p56_coddoc = ($this->p56_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_coddoc"]:$this->p56_coddoc);
+       $this->p56_coddoc = ($this->p56_coddoc === 0 || $this->p56_coddoc === 0.0 || $this->p56_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p56_coddoc"]:$this->p56_coddoc);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_procdoc {
          $this->p56_coddoc = $p56_coddoc;
        }
      }
-     if(($this->p56_coddoc == null) || ($this->p56_coddoc == "") ){
+     if(($this->p56_coddoc == null) || ($this->p56_coddoc === 0 || $this->p56_coddoc === 0.0 || $this->p56_coddoc == "") ){
        $this->erro_sql = " Campo p56_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_db_contatostipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->g02_tipocon = ($this->g02_tipocon == ""?@$GLOBALS["HTTP_POST_VARS"]["g02_tipocon"]:$this->g02_tipocon);
+       $this->g02_tipocon = ($this->g02_tipocon === 0 || $this->g02_tipocon === 0.0 || $this->g02_tipocon == ""?@$GLOBALS["HTTP_POST_VARS"]["g02_tipocon"]:$this->g02_tipocon);
        $this->g02_descr = ($this->g02_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["g02_descr"]:$this->g02_descr);
      }else{
-       $this->g02_tipocon = ($this->g02_tipocon == ""?@$GLOBALS["HTTP_POST_VARS"]["g02_tipocon"]:$this->g02_tipocon);
+       $this->g02_tipocon = ($this->g02_tipocon === 0 || $this->g02_tipocon === 0.0 || $this->g02_tipocon == ""?@$GLOBALS["HTTP_POST_VARS"]["g02_tipocon"]:$this->g02_tipocon);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_db_contatostipo {
          $this->g02_tipocon = $g02_tipocon;
        }
      }
-     if(($this->g02_tipocon == null) || ($this->g02_tipocon == "") ){
+     if(($this->g02_tipocon == null) || ($this->g02_tipocon === 0 || $this->g02_tipocon === 0.0 || $this->g02_tipocon == "") ){
        $this->erro_sql = " Campo g02_tipocon nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

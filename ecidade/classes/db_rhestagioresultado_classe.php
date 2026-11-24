@@ -80,8 +80,8 @@ class cl_rhestagioresultado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h65_sequencial = ($this->h65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_sequencial"]:$this->h65_sequencial);
-       $this->h65_rhestagioagenda = ($this->h65_rhestagioagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_rhestagioagenda"]:$this->h65_rhestagioagenda);
+       $this->h65_sequencial = ($this->h65_sequencial === 0 || $this->h65_sequencial === 0.0 || $this->h65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_sequencial"]:$this->h65_sequencial);
+       $this->h65_rhestagioagenda = ($this->h65_rhestagioagenda === 0 || $this->h65_rhestagioagenda === 0.0 || $this->h65_rhestagioagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_rhestagioagenda"]:$this->h65_rhestagioagenda);
        if($this->h65_data == ""){
          $this->h65_data_dia = ($this->h65_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_data_dia"]:$this->h65_data_dia);
          $this->h65_data_mes = ($this->h65_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_data_mes"]:$this->h65_data_mes);
@@ -90,12 +90,12 @@ class cl_rhestagioresultado {
             $this->h65_data = $this->h65_data_ano."-".$this->h65_data_mes."-".$this->h65_data_dia;
          }
        }
-       $this->h65_rhportaria = ($this->h65_rhportaria == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_rhportaria"]:$this->h65_rhportaria);
+       $this->h65_rhportaria = ($this->h65_rhportaria === 0 || $this->h65_rhportaria === 0.0 || $this->h65_rhportaria == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_rhportaria"]:$this->h65_rhportaria);
        $this->h65_resultado = ($this->h65_resultado == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_resultado"]:$this->h65_resultado);
-       $this->h65_pontos = ($this->h65_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_pontos"]:$this->h65_pontos);
+       $this->h65_pontos = ($this->h65_pontos === 0 || $this->h65_pontos === 0.0 || $this->h65_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_pontos"]:$this->h65_pontos);
        $this->h65_observacao = ($this->h65_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_observacao"]:$this->h65_observacao);
      }else{
-       $this->h65_sequencial = ($this->h65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_sequencial"]:$this->h65_sequencial);
+       $this->h65_sequencial = ($this->h65_sequencial === 0 || $this->h65_sequencial === 0.0 || $this->h65_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h65_sequencial"]:$this->h65_sequencial);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_rhestagioresultado {
          $this->h65_sequencial = $h65_sequencial;
        }
      }
-     if(($this->h65_sequencial == null) || ($this->h65_sequencial == "") ){
+     if(($this->h65_sequencial == null) || ($this->h65_sequencial === 0 || $this->h65_sequencial === 0.0 || $this->h65_sequencial == "") ){
        $this->erro_sql = " Campo h65_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

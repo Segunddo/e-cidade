@@ -67,11 +67,11 @@ class cl_tarefaproced {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at41_tarefa = ($this->at41_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_tarefa"]:$this->at41_tarefa);
-       $this->at41_proced = ($this->at41_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_proced"]:$this->at41_proced);
+       $this->at41_tarefa = ($this->at41_tarefa === 0 || $this->at41_tarefa === 0.0 || $this->at41_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_tarefa"]:$this->at41_tarefa);
+       $this->at41_proced = ($this->at41_proced === 0 || $this->at41_proced === 0.0 || $this->at41_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_proced"]:$this->at41_proced);
      }else{
-       $this->at41_tarefa = ($this->at41_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_tarefa"]:$this->at41_tarefa);
-       $this->at41_proced = ($this->at41_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_proced"]:$this->at41_proced);
+       $this->at41_tarefa = ($this->at41_tarefa === 0 || $this->at41_tarefa === 0.0 || $this->at41_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_tarefa"]:$this->at41_tarefa);
+       $this->at41_proced = ($this->at41_proced === 0 || $this->at41_proced === 0.0 || $this->at41_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_proced"]:$this->at41_proced);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_tarefaproced {
       $this->atualizacampos();
        $this->at41_tarefa = $at41_tarefa;
        $this->at41_proced = $at41_proced;
-     if(($this->at41_tarefa == null) || ($this->at41_tarefa == "") ){
+     if(($this->at41_tarefa == null) || ($this->at41_tarefa === 0 || $this->at41_tarefa === 0.0 || $this->at41_tarefa == "") ){
        $this->erro_sql = " Campo at41_tarefa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_tarefaproced {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->at41_proced == null) || ($this->at41_proced == "") ){
+     if(($this->at41_proced == null) || ($this->at41_proced === 0 || $this->at41_proced === 0.0 || $this->at41_proced == "") ){
        $this->erro_sql = " Campo at41_proced nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

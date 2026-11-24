@@ -67,10 +67,10 @@ class cl_bemtipos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t24_sequencial = ($this->t24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t24_sequencial"]:$this->t24_sequencial);
+       $this->t24_sequencial = ($this->t24_sequencial === 0 || $this->t24_sequencial === 0.0 || $this->t24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t24_sequencial"]:$this->t24_sequencial);
        $this->t24_descricao = ($this->t24_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["t24_descricao"]:$this->t24_descricao);
      }else{
-       $this->t24_sequencial = ($this->t24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t24_sequencial"]:$this->t24_sequencial);
+       $this->t24_sequencial = ($this->t24_sequencial === 0 || $this->t24_sequencial === 0.0 || $this->t24_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t24_sequencial"]:$this->t24_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_bemtipos {
          $this->t24_sequencial = $t24_sequencial;
        }
      }
-     if(($this->t24_sequencial == null) || ($this->t24_sequencial == "") ){
+     if(($this->t24_sequencial == null) || ($this->t24_sequencial === 0 || $this->t24_sequencial === 0.0 || $this->t24_sequencial == "") ){
        $this->erro_sql = " Campo t24_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

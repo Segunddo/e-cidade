@@ -70,8 +70,8 @@ class cl_fis_lancnumpre {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl26_numprelanc = ($this->nl26_numprelanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl26_numprelanc"]:$this->nl26_numprelanc);
-       $this->nl26_codlanc = ($this->nl26_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl26_codlanc"]:$this->nl26_codlanc);
+       $this->nl26_numprelanc = ($this->nl26_numprelanc === 0 || $this->nl26_numprelanc === 0.0 || $this->nl26_numprelanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl26_numprelanc"]:$this->nl26_numprelanc);
+       $this->nl26_codlanc = ($this->nl26_codlanc === 0 || $this->nl26_codlanc === 0.0 || $this->nl26_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl26_codlanc"]:$this->nl26_codlanc);
      }else{
      }
    }

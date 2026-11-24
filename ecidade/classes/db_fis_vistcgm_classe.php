@@ -67,10 +67,10 @@ public function erro($mostra,$retorna) {
    // funcao para atualizar campos
 public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y73_codvist = ($this->y73_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y73_codvist"]:$this->y73_codvist);
-       $this->y73_numcgm = ($this->y73_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y73_numcgm"]:$this->y73_numcgm);
+       $this->y73_codvist = ($this->y73_codvist === 0 || $this->y73_codvist === 0.0 || $this->y73_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y73_codvist"]:$this->y73_codvist);
+       $this->y73_numcgm = ($this->y73_numcgm === 0 || $this->y73_numcgm === 0.0 || $this->y73_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y73_numcgm"]:$this->y73_numcgm);
      }else{
-       $this->y73_codvist = ($this->y73_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y73_codvist"]:$this->y73_codvist);
+       $this->y73_codvist = ($this->y73_codvist === 0 || $this->y73_codvist === 0.0 || $this->y73_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y73_codvist"]:$this->y73_codvist);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ public function incluir ($y73_codvist){
        return false;
      }
        $this->y73_codvist = $y73_codvist;
-     if(($this->y73_codvist == null) || ($this->y73_codvist == "") ){
+     if(($this->y73_codvist == null) || ($this->y73_codvist === 0 || $this->y73_codvist === 0.0 || $this->y73_codvist == "") ){
        $this->erro_sql = " Campo y73_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,9 +69,9 @@ class cl_atendimentoorigem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at11_sequencial = ($this->at11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at11_sequencial"]:$this->at11_sequencial);
-       $this->at11_novoatend = ($this->at11_novoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at11_novoatend"]:$this->at11_novoatend);
-       $this->at11_origematend = ($this->at11_origematend == ""?@$GLOBALS["HTTP_POST_VARS"]["at11_origematend"]:$this->at11_origematend);
+       $this->at11_sequencial = ($this->at11_sequencial === 0 || $this->at11_sequencial === 0.0 || $this->at11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at11_sequencial"]:$this->at11_sequencial);
+       $this->at11_novoatend = ($this->at11_novoatend === 0 || $this->at11_novoatend === 0.0 || $this->at11_novoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at11_novoatend"]:$this->at11_novoatend);
+       $this->at11_origematend = ($this->at11_origematend === 0 || $this->at11_origematend === 0.0 || $this->at11_origematend == ""?@$GLOBALS["HTTP_POST_VARS"]["at11_origematend"]:$this->at11_origematend);
      }else{
      }
    }

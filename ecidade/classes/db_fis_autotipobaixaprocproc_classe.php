@@ -73,11 +73,11 @@ class cl_fis_autotipobaixaprocproc
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y114_sequencial = ($this->y114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_sequencial"]:$this->y114_sequencial);
-            $this->y114_baixaproc = ($this->y114_baixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_baixaproc"]:$this->y114_baixaproc);
-            $this->y114_processo = ($this->y114_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_processo"]:$this->y114_processo);
+            $this->y114_sequencial = ($this->y114_sequencial === 0 || $this->y114_sequencial === 0.0 || $this->y114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_sequencial"]:$this->y114_sequencial);
+            $this->y114_baixaproc = ($this->y114_baixaproc === 0 || $this->y114_baixaproc === 0.0 || $this->y114_baixaproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_baixaproc"]:$this->y114_baixaproc);
+            $this->y114_processo = ($this->y114_processo === 0 || $this->y114_processo === 0.0 || $this->y114_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_processo"]:$this->y114_processo);
         } else {
-            $this->y114_sequencial = ($this->y114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_sequencial"]:$this->y114_sequencial);
+            $this->y114_sequencial = ($this->y114_sequencial === 0 || $this->y114_sequencial === 0.0 || $this->y114_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y114_sequencial"]:$this->y114_sequencial);
         }
     }
    // funcao para inclusao

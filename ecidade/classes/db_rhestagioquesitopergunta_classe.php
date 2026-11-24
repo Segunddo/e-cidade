@@ -69,11 +69,11 @@ class cl_rhestagioquesitopergunta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h53_sequencial = ($this->h53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h53_sequencial"]:$this->h53_sequencial);
-       $this->h53_rhestagioquesito = ($this->h53_rhestagioquesito == ""?@$GLOBALS["HTTP_POST_VARS"]["h53_rhestagioquesito"]:$this->h53_rhestagioquesito);
+       $this->h53_sequencial = ($this->h53_sequencial === 0 || $this->h53_sequencial === 0.0 || $this->h53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h53_sequencial"]:$this->h53_sequencial);
+       $this->h53_rhestagioquesito = ($this->h53_rhestagioquesito === 0 || $this->h53_rhestagioquesito === 0.0 || $this->h53_rhestagioquesito == ""?@$GLOBALS["HTTP_POST_VARS"]["h53_rhestagioquesito"]:$this->h53_rhestagioquesito);
        $this->h53_descr = ($this->h53_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["h53_descr"]:$this->h53_descr);
      }else{
-       $this->h53_sequencial = ($this->h53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h53_sequencial"]:$this->h53_sequencial);
+       $this->h53_sequencial = ($this->h53_sequencial === 0 || $this->h53_sequencial === 0.0 || $this->h53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h53_sequencial"]:$this->h53_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rhestagioquesitopergunta {
          $this->h53_sequencial = $h53_sequencial;
        }
      }
-     if(($this->h53_sequencial == null) || ($this->h53_sequencial == "") ){
+     if(($this->h53_sequencial == null) || ($this->h53_sequencial === 0 || $this->h53_sequencial === 0.0 || $this->h53_sequencial == "") ){
        $this->erro_sql = " Campo h53_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

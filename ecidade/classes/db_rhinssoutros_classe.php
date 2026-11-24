@@ -75,14 +75,14 @@ class cl_rhinssoutros {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh51_seqpes = ($this->rh51_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_seqpes"]:$this->rh51_seqpes);
-       $this->rh51_basefo = ($this->rh51_basefo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_basefo"]:$this->rh51_basefo);
-       $this->rh51_descfo = ($this->rh51_descfo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_descfo"]:$this->rh51_descfo);
-       $this->rh51_b13fo = ($this->rh51_b13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_b13fo"]:$this->rh51_b13fo);
-       $this->rh51_d13fo = ($this->rh51_d13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_d13fo"]:$this->rh51_d13fo);
+       $this->rh51_seqpes = ($this->rh51_seqpes === 0 || $this->rh51_seqpes === 0.0 || $this->rh51_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_seqpes"]:$this->rh51_seqpes);
+       $this->rh51_basefo = ($this->rh51_basefo === 0 || $this->rh51_basefo === 0.0 || $this->rh51_basefo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_basefo"]:$this->rh51_basefo);
+       $this->rh51_descfo = ($this->rh51_descfo === 0 || $this->rh51_descfo === 0.0 || $this->rh51_descfo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_descfo"]:$this->rh51_descfo);
+       $this->rh51_b13fo = ($this->rh51_b13fo === 0 || $this->rh51_b13fo === 0.0 || $this->rh51_b13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_b13fo"]:$this->rh51_b13fo);
+       $this->rh51_d13fo = ($this->rh51_d13fo === 0 || $this->rh51_d13fo === 0.0 || $this->rh51_d13fo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_d13fo"]:$this->rh51_d13fo);
        $this->rh51_ocorre = ($this->rh51_ocorre == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_ocorre"]:$this->rh51_ocorre);
      }else{
-       $this->rh51_seqpes = ($this->rh51_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_seqpes"]:$this->rh51_seqpes);
+       $this->rh51_seqpes = ($this->rh51_seqpes === 0 || $this->rh51_seqpes === 0.0 || $this->rh51_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh51_seqpes"]:$this->rh51_seqpes);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_rhinssoutros {
        return false;
      }
        $this->rh51_seqpes = $rh51_seqpes;
-     if(($this->rh51_seqpes == null) || ($this->rh51_seqpes == "") ){
+     if(($this->rh51_seqpes == null) || ($this->rh51_seqpes === 0 || $this->rh51_seqpes === 0.0 || $this->rh51_seqpes == "") ){
        $this->erro_sql = " Campo rh51_seqpes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -438,7 +438,7 @@ class cl_rhinssoutros {
      }
      return $sql;
   }
-   public function sql_query_retorno ( $rh51_seqpes=null,$campos="*",$ordem=null,$dbwhere="",$anonovo,$mesnovo){
+   public function sql_query_retorno ( $rh51_seqpes=null,$campos="*",$ordem=null,$dbwhere="",$anonovo = null,$mesnovo = null){
      $sql = "select ";
      if($campos != "*" ){
        $campos_sql = explode("#",$campos);

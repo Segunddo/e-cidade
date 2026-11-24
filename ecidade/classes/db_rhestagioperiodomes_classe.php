@@ -69,11 +69,11 @@ class cl_rhestagioperiodomes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h66_sequencial = ($this->h66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h66_sequencial"]:$this->h66_sequencial);
-       $this->h66_rhestagioperiodo = ($this->h66_rhestagioperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["h66_rhestagioperiodo"]:$this->h66_rhestagioperiodo);
-       $this->h66_mes = ($this->h66_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h66_mes"]:$this->h66_mes);
+       $this->h66_sequencial = ($this->h66_sequencial === 0 || $this->h66_sequencial === 0.0 || $this->h66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h66_sequencial"]:$this->h66_sequencial);
+       $this->h66_rhestagioperiodo = ($this->h66_rhestagioperiodo === 0 || $this->h66_rhestagioperiodo === 0.0 || $this->h66_rhestagioperiodo == ""?@$GLOBALS["HTTP_POST_VARS"]["h66_rhestagioperiodo"]:$this->h66_rhestagioperiodo);
+       $this->h66_mes = ($this->h66_mes === 0 || $this->h66_mes === 0.0 || $this->h66_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h66_mes"]:$this->h66_mes);
      }else{
-       $this->h66_sequencial = ($this->h66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h66_sequencial"]:$this->h66_sequencial);
+       $this->h66_sequencial = ($this->h66_sequencial === 0 || $this->h66_sequencial === 0.0 || $this->h66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h66_sequencial"]:$this->h66_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rhestagioperiodomes {
          $this->h66_sequencial = $h66_sequencial;
        }
      }
-     if(($this->h66_sequencial == null) || ($this->h66_sequencial == "") ){
+     if(($this->h66_sequencial == null) || ($this->h66_sequencial === 0 || $this->h66_sequencial === 0.0 || $this->h66_sequencial == "") ){
        $this->erro_sql = " Campo h66_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

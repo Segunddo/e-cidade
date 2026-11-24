@@ -69,12 +69,12 @@ class cl_cgmerrado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z11_codigo = ($this->z11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["z11_codigo"]:$this->z11_codigo);
-       $this->z11_numcgm = ($this->z11_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z11_numcgm"]:$this->z11_numcgm);
+       $this->z11_codigo = ($this->z11_codigo === 0 || $this->z11_codigo === 0.0 || $this->z11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["z11_codigo"]:$this->z11_codigo);
+       $this->z11_numcgm = ($this->z11_numcgm === 0 || $this->z11_numcgm === 0.0 || $this->z11_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z11_numcgm"]:$this->z11_numcgm);
        $this->z11_nome = ($this->z11_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["z11_nome"]:$this->z11_nome);
      }else{
-       $this->z11_codigo = ($this->z11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["z11_codigo"]:$this->z11_codigo);
-       $this->z11_numcgm = ($this->z11_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z11_numcgm"]:$this->z11_numcgm);
+       $this->z11_codigo = ($this->z11_codigo === 0 || $this->z11_codigo === 0.0 || $this->z11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["z11_codigo"]:$this->z11_codigo);
+       $this->z11_numcgm = ($this->z11_numcgm === 0 || $this->z11_numcgm === 0.0 || $this->z11_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z11_numcgm"]:$this->z11_numcgm);
      }
    }
    // funcao para inclusao
@@ -82,7 +82,7 @@ class cl_cgmerrado {
       $this->atualizacampos();
        $this->z11_codigo = $z11_codigo;
        $this->z11_numcgm = $z11_numcgm;
-     if(($this->z11_codigo == null) || ($this->z11_codigo == "") ){
+     if(($this->z11_codigo == null) || ($this->z11_codigo === 0 || $this->z11_codigo === 0.0 || $this->z11_codigo == "") ){
        $this->erro_sql = " Campo z11_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -90,7 +90,7 @@ class cl_cgmerrado {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->z11_numcgm == null) || ($this->z11_numcgm == "") ){
+     if(($this->z11_numcgm == null) || ($this->z11_numcgm === 0 || $this->z11_numcgm === 0.0 || $this->z11_numcgm == "") ){
        $this->erro_sql = " Campo z11_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

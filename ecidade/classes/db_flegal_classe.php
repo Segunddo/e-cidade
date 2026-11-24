@@ -69,11 +69,11 @@ class cl_flegal {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h04_codigo = ($this->h04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_codigo"]:$this->h04_codigo);
+       $this->h04_codigo = ($this->h04_codigo === 0 || $this->h04_codigo === 0.0 || $this->h04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_codigo"]:$this->h04_codigo);
        $this->h04_descr = ($this->h04_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_descr"]:$this->h04_descr);
-       $this->h04_tpfund = ($this->h04_tpfund == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_tpfund"]:$this->h04_tpfund);
+       $this->h04_tpfund = ($this->h04_tpfund === 0 || $this->h04_tpfund === 0.0 || $this->h04_tpfund == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_tpfund"]:$this->h04_tpfund);
      }else{
-       $this->h04_codigo = ($this->h04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_codigo"]:$this->h04_codigo);
+       $this->h04_codigo = ($this->h04_codigo === 0 || $this->h04_codigo === 0.0 || $this->h04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h04_codigo"]:$this->h04_codigo);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_flegal {
        return false;
      }
        $this->h04_codigo = $h04_codigo;
-     if(($this->h04_codigo == null) || ($this->h04_codigo == "") ){
+     if(($this->h04_codigo == null) || ($this->h04_codigo === 0 || $this->h04_codigo === 0.0 || $this->h04_codigo == "") ){
        $this->erro_sql = " Campo h04_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

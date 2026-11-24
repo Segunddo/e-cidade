@@ -85,9 +85,9 @@ class cl_fis_tiafdoc
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y99_coddoc = ($this->y99_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_coddoc"]:$this->y99_coddoc);
-            $this->y99_codtiaf = ($this->y99_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_codtiaf"]:$this->y99_codtiaf);
-            $this->y99_tiafdoc = ($this->y99_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_tiafdoc"]:$this->y99_tiafdoc);
+            $this->y99_coddoc = ($this->y99_coddoc === 0 || $this->y99_coddoc === 0.0 || $this->y99_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_coddoc"]:$this->y99_coddoc);
+            $this->y99_codtiaf = ($this->y99_codtiaf === 0 || $this->y99_codtiaf === 0.0 || $this->y99_codtiaf == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_codtiaf"]:$this->y99_codtiaf);
+            $this->y99_tiafdoc = ($this->y99_tiafdoc === 0 || $this->y99_tiafdoc === 0.0 || $this->y99_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_tiafdoc"]:$this->y99_tiafdoc);
             if ($this->y99_dtini == "") {
                 $this->y99_dtini_dia = ($this->y99_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_dtini_dia"]:$this->y99_dtini_dia);
                 $this->y99_dtini_mes = ($this->y99_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_dtini_mes"]:$this->y99_dtini_mes);
@@ -106,7 +106,7 @@ class cl_fis_tiafdoc
             }
             $this->y99_obs = ($this->y99_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_obs"]:$this->y99_obs);
         } else {
-            $this->y99_coddoc = ($this->y99_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_coddoc"]:$this->y99_coddoc);
+            $this->y99_coddoc = ($this->y99_coddoc === 0 || $this->y99_coddoc === 0.0 || $this->y99_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y99_coddoc"]:$this->y99_coddoc);
         }
     }
     // funcao para inclusao

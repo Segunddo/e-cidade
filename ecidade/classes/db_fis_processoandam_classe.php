@@ -67,17 +67,17 @@ class cl_fis_processoandam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pa01_codandam = ($this->pa01_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_codandam"]:$this->pa01_codandam);
-       $this->pa01_processo = ($this->pa01_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_processo"]:$this->pa01_processo);
+       $this->pa01_codandam = ($this->pa01_codandam === 0 || $this->pa01_codandam === 0.0 || $this->pa01_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_codandam"]:$this->pa01_codandam);
+       $this->pa01_processo = ($this->pa01_processo === 0 || $this->pa01_processo === 0.0 || $this->pa01_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_processo"]:$this->pa01_processo);
      }else{
-       $this->pa01_codandam = ($this->pa01_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_codandam"]:$this->pa01_codandam);
-       $this->pa01_processo = ($this->pa01_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_processo"]:$this->pa01_processo);
+       $this->pa01_codandam = ($this->pa01_codandam === 0 || $this->pa01_codandam === 0.0 || $this->pa01_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_codandam"]:$this->pa01_codandam);
+       $this->pa01_processo = ($this->pa01_processo === 0 || $this->pa01_processo === 0.0 || $this->pa01_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["pa01_processo"]:$this->pa01_processo);
      }
    }
    // funcao para inclusao
    public function incluir(){
       $this->atualizacampos();
-     if(($this->pa01_codandam == null) || ($this->pa01_codandam == "") ){
+     if(($this->pa01_codandam == null) || ($this->pa01_codandam === 0 || $this->pa01_codandam === 0.0 || $this->pa01_codandam == "") ){
        $this->erro_sql    = " Campo Codigo do Andamento nao declarado.";
        $this->erro_banco  = " Chave Estrangeira zerada.";
        $this->erro_msg    = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -85,7 +85,7 @@ class cl_fis_processoandam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pa01_processo == null) || ($this->pa01_processo == "") ){
+     if(($this->pa01_processo == null) || ($this->pa01_processo === 0 || $this->pa01_processo === 0.0 || $this->pa01_processo == "") ){
        $this->erro_sql    = " Campo do Processo nao declarado.";
        $this->erro_banco  = "Chave Primaria zerada.";
        $this->erro_msg    = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,14 +71,14 @@ class cl_rhrubelementoprinc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh24_instit = ($this->rh24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_instit"]:$this->rh24_instit);
+       $this->rh24_instit = ($this->rh24_instit === 0 || $this->rh24_instit === 0.0 || $this->rh24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_instit"]:$this->rh24_instit);
        $this->rh24_rubric = ($this->rh24_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_rubric"]:$this->rh24_rubric);
-       $this->rh4_codele = ($this->rh4_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh4_codele"]:$this->rh4_codele);
-       $this->rh24_codele = ($this->rh24_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_codele"]:$this->rh24_codele);
+       $this->rh4_codele = ($this->rh4_codele === 0 || $this->rh4_codele === 0.0 || $this->rh4_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh4_codele"]:$this->rh4_codele);
+       $this->rh24_codele = ($this->rh24_codele === 0 || $this->rh24_codele === 0.0 || $this->rh24_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_codele"]:$this->rh24_codele);
      }else{
-       $this->rh24_instit = ($this->rh24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_instit"]:$this->rh24_instit);
+       $this->rh24_instit = ($this->rh24_instit === 0 || $this->rh24_instit === 0.0 || $this->rh24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_instit"]:$this->rh24_instit);
        $this->rh24_rubric = ($this->rh24_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh24_rubric"]:$this->rh24_rubric);
-       $this->rh4_codele = ($this->rh4_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh4_codele"]:$this->rh4_codele);
+       $this->rh4_codele = ($this->rh4_codele === 0 || $this->rh4_codele === 0.0 || $this->rh4_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["rh4_codele"]:$this->rh4_codele);
      }
    }
    // funcao para inclusao
@@ -104,7 +104,7 @@ class cl_rhrubelementoprinc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh4_codele == null) || ($this->rh4_codele == "") ){
+     if(($this->rh4_codele == null) || ($this->rh4_codele === 0 || $this->rh4_codele === 0.0 || $this->rh4_codele == "") ){
        $this->erro_sql = " Campo rh4_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -112,7 +112,7 @@ class cl_rhrubelementoprinc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh24_instit == null) || ($this->rh24_instit == "") ){
+     if(($this->rh24_instit == null) || ($this->rh24_instit === 0 || $this->rh24_instit === 0.0 || $this->rh24_instit == "") ){
        $this->erro_sql = " Campo rh24_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

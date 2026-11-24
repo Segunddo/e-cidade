@@ -73,13 +73,13 @@ class cl_rhtipoavaliacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h69_sequencial = ($this->h69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_sequencial"]:$this->h69_sequencial);
+       $this->h69_sequencial = ($this->h69_sequencial === 0 || $this->h69_sequencial === 0.0 || $this->h69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_sequencial"]:$this->h69_sequencial);
        $this->h69_descricao = ($this->h69_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_descricao"]:$this->h69_descricao);
-       $this->h69_rhgrupotipoavaliacao = ($this->h69_rhgrupotipoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_rhgrupotipoavaliacao"]:$this->h69_rhgrupotipoavaliacao);
-       $this->h69_quantminima = ($this->h69_quantminima == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_quantminima"]:$this->h69_quantminima);
-       $this->h69_quantmaxima = ($this->h69_quantmaxima == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_quantmaxima"]:$this->h69_quantmaxima);
+       $this->h69_rhgrupotipoavaliacao = ($this->h69_rhgrupotipoavaliacao === 0 || $this->h69_rhgrupotipoavaliacao === 0.0 || $this->h69_rhgrupotipoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_rhgrupotipoavaliacao"]:$this->h69_rhgrupotipoavaliacao);
+       $this->h69_quantminima = ($this->h69_quantminima === 0 || $this->h69_quantminima === 0.0 || $this->h69_quantminima == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_quantminima"]:$this->h69_quantminima);
+       $this->h69_quantmaxima = ($this->h69_quantmaxima === 0 || $this->h69_quantmaxima === 0.0 || $this->h69_quantmaxima == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_quantmaxima"]:$this->h69_quantmaxima);
      }else{
-       $this->h69_sequencial = ($this->h69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_sequencial"]:$this->h69_sequencial);
+       $this->h69_sequencial = ($this->h69_sequencial === 0 || $this->h69_sequencial === 0.0 || $this->h69_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h69_sequencial"]:$this->h69_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_rhtipoavaliacao {
          $this->h69_sequencial = $h69_sequencial;
        }
      }
-     if(($this->h69_sequencial == null) || ($this->h69_sequencial == "") ){
+     if(($this->h69_sequencial == null) || ($this->h69_sequencial === 0 || $this->h69_sequencial === 0.0 || $this->h69_sequencial == "") ){
        $this->erro_sql = " Campo h69_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_atendusucliitemid {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at83_seq = ($this->at83_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at83_seq"]:$this->at83_seq);
-       $this->at83_usucliitem = ($this->at83_usucliitem == ""?@$GLOBALS["HTTP_POST_VARS"]["at83_usucliitem"]:$this->at83_usucliitem);
-       $this->at83_id_usuario = ($this->at83_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at83_id_usuario"]:$this->at83_id_usuario);
+       $this->at83_seq = ($this->at83_seq === 0 || $this->at83_seq === 0.0 || $this->at83_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at83_seq"]:$this->at83_seq);
+       $this->at83_usucliitem = ($this->at83_usucliitem === 0 || $this->at83_usucliitem === 0.0 || $this->at83_usucliitem == ""?@$GLOBALS["HTTP_POST_VARS"]["at83_usucliitem"]:$this->at83_usucliitem);
+       $this->at83_id_usuario = ($this->at83_id_usuario === 0 || $this->at83_id_usuario === 0.0 || $this->at83_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at83_id_usuario"]:$this->at83_id_usuario);
      }else{
-       $this->at83_seq = ($this->at83_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at83_seq"]:$this->at83_seq);
+       $this->at83_seq = ($this->at83_seq === 0 || $this->at83_seq === 0.0 || $this->at83_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at83_seq"]:$this->at83_seq);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_atendusucliitemid {
          $this->at83_seq = $at83_seq;
        }
      }
-     if(($this->at83_seq == null) || ($this->at83_seq == "") ){
+     if(($this->at83_seq == null) || ($this->at83_seq === 0 || $this->at83_seq === 0.0 || $this->at83_seq == "") ){
        $this->erro_sql = " Campo at83_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

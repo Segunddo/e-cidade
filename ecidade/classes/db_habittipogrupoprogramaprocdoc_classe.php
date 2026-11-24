@@ -73,13 +73,13 @@ class cl_habittipogrupoprogramaprocdoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ht09_sequencial = ($this->ht09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht09_sequencial"]:$this->ht09_sequencial);
-       $this->ht09_habittipogrupoprograma = ($this->ht09_habittipogrupoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht09_habittipogrupoprograma"]:$this->ht09_habittipogrupoprograma);
-       $this->ht09_procdoc = ($this->ht09_procdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["ht09_procdoc"]:$this->ht09_procdoc);
+       $this->ht09_sequencial = ($this->ht09_sequencial === 0 || $this->ht09_sequencial === 0.0 || $this->ht09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht09_sequencial"]:$this->ht09_sequencial);
+       $this->ht09_habittipogrupoprograma = ($this->ht09_habittipogrupoprograma === 0 || $this->ht09_habittipogrupoprograma === 0.0 || $this->ht09_habittipogrupoprograma == ""?@$GLOBALS["HTTP_POST_VARS"]["ht09_habittipogrupoprograma"]:$this->ht09_habittipogrupoprograma);
+       $this->ht09_procdoc = ($this->ht09_procdoc === 0 || $this->ht09_procdoc === 0.0 || $this->ht09_procdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["ht09_procdoc"]:$this->ht09_procdoc);
        $this->ht09_obrigatorio = ($this->ht09_obrigatorio == "f"?@$GLOBALS["HTTP_POST_VARS"]["ht09_obrigatorio"]:$this->ht09_obrigatorio);
        $this->ht09_obs = ($this->ht09_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ht09_obs"]:$this->ht09_obs);
      }else{
-       $this->ht09_sequencial = ($this->ht09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht09_sequencial"]:$this->ht09_sequencial);
+       $this->ht09_sequencial = ($this->ht09_sequencial === 0 || $this->ht09_sequencial === 0.0 || $this->ht09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht09_sequencial"]:$this->ht09_sequencial);
      }
    }
    // funcao para inclusao
@@ -136,7 +136,7 @@ class cl_habittipogrupoprogramaprocdoc {
          $this->ht09_sequencial = $ht09_sequencial;
        }
      }
-     if(($this->ht09_sequencial == null) || ($this->ht09_sequencial == "") ){
+     if(($this->ht09_sequencial == null) || ($this->ht09_sequencial === 0 || $this->ht09_sequencial === 0.0 || $this->ht09_sequencial == "") ){
        $this->erro_sql = " Campo ht09_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

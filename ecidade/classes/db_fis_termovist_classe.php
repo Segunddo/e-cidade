@@ -82,8 +82,8 @@ class cl_fis_termovist
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y91_termovist = ($this->y91_termovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_termovist"]:$this->y91_termovist);
-            $this->y91_inscr = ($this->y91_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_inscr"]:$this->y91_inscr);
+            $this->y91_termovist = ($this->y91_termovist === 0 || $this->y91_termovist === 0.0 || $this->y91_termovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_termovist"]:$this->y91_termovist);
+            $this->y91_inscr = ($this->y91_inscr === 0 || $this->y91_inscr === 0.0 || $this->y91_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_inscr"]:$this->y91_inscr);
             if ($this->y91_datatermo == "") {
                 $this->y91_datatermo_dia = ($this->y91_datatermo_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_datatermo_dia"]:$this->y91_datatermo_dia);
                 $this->y91_datatermo_mes = ($this->y91_datatermo_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_datatermo_mes"]:$this->y91_datatermo_mes);
@@ -92,11 +92,11 @@ class cl_fis_termovist
                     $this->y91_datatermo = $this->y91_datatermo_ano."-".$this->y91_datatermo_mes."-".$this->y91_datatermo_dia;
                 }
             }
-            $this->y91_exerc = ($this->y91_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_exerc"]:$this->y91_exerc);
-            $this->y91_codigo = ($this->y91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_codigo"]:$this->y91_codigo);
+            $this->y91_exerc = ($this->y91_exerc === 0 || $this->y91_exerc === 0.0 || $this->y91_exerc == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_exerc"]:$this->y91_exerc);
+            $this->y91_codigo = ($this->y91_codigo === 0 || $this->y91_codigo === 0.0 || $this->y91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_codigo"]:$this->y91_codigo);
             $this->y91_tipo = ($this->y91_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_tipo"]:$this->y91_tipo);
         } else {
-            $this->y91_termovist = ($this->y91_termovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_termovist"]:$this->y91_termovist);
+            $this->y91_termovist = ($this->y91_termovist === 0 || $this->y91_termovist === 0.0 || $this->y91_termovist == ""?@$GLOBALS["HTTP_POST_VARS"]["y91_termovist"]:$this->y91_termovist);
         }
     }
    // funcao para inclusao

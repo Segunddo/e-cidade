@@ -69,11 +69,11 @@ class cl_tarefalogclientes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at68_sequen = ($this->at68_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["at68_sequen"]:$this->at68_sequen);
-       $this->at68_codmov = ($this->at68_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["at68_codmov"]:$this->at68_codmov);
-       $this->at68_codcli = ($this->at68_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at68_codcli"]:$this->at68_codcli);
+       $this->at68_sequen = ($this->at68_sequen === 0 || $this->at68_sequen === 0.0 || $this->at68_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["at68_sequen"]:$this->at68_sequen);
+       $this->at68_codmov = ($this->at68_codmov === 0 || $this->at68_codmov === 0.0 || $this->at68_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["at68_codmov"]:$this->at68_codmov);
+       $this->at68_codcli = ($this->at68_codcli === 0 || $this->at68_codcli === 0.0 || $this->at68_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at68_codcli"]:$this->at68_codcli);
      }else{
-       $this->at68_sequen = ($this->at68_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["at68_sequen"]:$this->at68_sequen);
+       $this->at68_sequen = ($this->at68_sequen === 0 || $this->at68_sequen === 0.0 || $this->at68_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["at68_sequen"]:$this->at68_sequen);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tarefalogclientes {
          $this->at68_sequen = $at68_sequen;
        }
      }
-     if(($this->at68_sequen == null) || ($this->at68_sequen == "") ){
+     if(($this->at68_sequen == null) || ($this->at68_sequen === 0 || $this->at68_sequen === 0.0 || $this->at68_sequen == "") ){
        $this->erro_sql = " Campo at68_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

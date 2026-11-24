@@ -69,13 +69,13 @@ class cl_obrasenvioreg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob17_codobrasenvioreg = ($this->ob17_codobrasenvioreg == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvioreg"]:$this->ob17_codobrasenvioreg);
-       $this->ob17_codobrasenvio = ($this->ob17_codobrasenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvio"]:$this->ob17_codobrasenvio);
-       $this->ob17_codobra = ($this->ob17_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobra"]:$this->ob17_codobra);
+       $this->ob17_codobrasenvioreg = ($this->ob17_codobrasenvioreg === 0 || $this->ob17_codobrasenvioreg === 0.0 || $this->ob17_codobrasenvioreg == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvioreg"]:$this->ob17_codobrasenvioreg);
+       $this->ob17_codobrasenvio = ($this->ob17_codobrasenvio === 0 || $this->ob17_codobrasenvio === 0.0 || $this->ob17_codobrasenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvio"]:$this->ob17_codobrasenvio);
+       $this->ob17_codobra = ($this->ob17_codobra === 0 || $this->ob17_codobra === 0.0 || $this->ob17_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobra"]:$this->ob17_codobra);
      }else{
-       $this->ob17_codobrasenvioreg = ($this->ob17_codobrasenvioreg == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvioreg"]:$this->ob17_codobrasenvioreg);
-       $this->ob17_codobrasenvio = ($this->ob17_codobrasenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvio"]:$this->ob17_codobrasenvio);
-       $this->ob17_codobra = ($this->ob17_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobra"]:$this->ob17_codobra);
+       $this->ob17_codobrasenvioreg = ($this->ob17_codobrasenvioreg === 0 || $this->ob17_codobrasenvioreg === 0.0 || $this->ob17_codobrasenvioreg == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvioreg"]:$this->ob17_codobrasenvioreg);
+       $this->ob17_codobrasenvio = ($this->ob17_codobrasenvio === 0 || $this->ob17_codobrasenvio === 0.0 || $this->ob17_codobrasenvio == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobrasenvio"]:$this->ob17_codobrasenvio);
+       $this->ob17_codobra = ($this->ob17_codobra === 0 || $this->ob17_codobra === 0.0 || $this->ob17_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob17_codobra"]:$this->ob17_codobra);
      }
    }
    // funcao para inclusao
@@ -105,7 +105,7 @@ class cl_obrasenvioreg {
          $this->ob17_codobrasenvioreg = $ob17_codobrasenvioreg;
        }
      }
-     if(($this->ob17_codobrasenvioreg == null) || ($this->ob17_codobrasenvioreg == "") ){
+     if(($this->ob17_codobrasenvioreg == null) || ($this->ob17_codobrasenvioreg === 0 || $this->ob17_codobrasenvioreg === 0.0 || $this->ob17_codobrasenvioreg == "") ){
        $this->erro_sql = " Campo ob17_codobrasenvioreg nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

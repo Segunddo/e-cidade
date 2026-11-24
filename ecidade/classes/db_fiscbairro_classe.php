@@ -64,10 +64,10 @@ class cl_fiscbairro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y32_codnoti = ($this->y32_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_codnoti"]:$this->y32_codnoti);
-       $this->y32_codbai = ($this->y32_codbai == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_codbai"]:$this->y32_codbai);
+       $this->y32_codnoti = ($this->y32_codnoti === 0 || $this->y32_codnoti === 0.0 || $this->y32_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_codnoti"]:$this->y32_codnoti);
+       $this->y32_codbai = ($this->y32_codbai === 0 || $this->y32_codbai === 0.0 || $this->y32_codbai == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_codbai"]:$this->y32_codbai);
      }else{
-       $this->y32_codnoti = ($this->y32_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_codnoti"]:$this->y32_codnoti);
+       $this->y32_codnoti = ($this->y32_codnoti === 0 || $this->y32_codnoti === 0.0 || $this->y32_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y32_codnoti"]:$this->y32_codnoti);
      }
    }
    // funcao para inclusao
@@ -83,7 +83,7 @@ class cl_fiscbairro {
        return false;
      }
        $this->y32_codnoti = $y32_codnoti;
-     if(($this->y32_codnoti == null) || ($this->y32_codnoti == "") ){
+     if(($this->y32_codnoti == null) || ($this->y32_codnoti === 0 || $this->y32_codnoti === 0.0 || $this->y32_codnoti == "") ){
        $this->erro_sql = " Campo y32_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

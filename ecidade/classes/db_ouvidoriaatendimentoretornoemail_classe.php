@@ -69,11 +69,11 @@ class cl_ouvidoriaatendimentoretornoemail {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov13_sequencial = ($this->ov13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov13_sequencial"]:$this->ov13_sequencial);
-       $this->ov13_ouvidoriaantendimento = ($this->ov13_ouvidoriaantendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov13_ouvidoriaantendimento"]:$this->ov13_ouvidoriaantendimento);
+       $this->ov13_sequencial = ($this->ov13_sequencial === 0 || $this->ov13_sequencial === 0.0 || $this->ov13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov13_sequencial"]:$this->ov13_sequencial);
+       $this->ov13_ouvidoriaantendimento = ($this->ov13_ouvidoriaantendimento === 0 || $this->ov13_ouvidoriaantendimento === 0.0 || $this->ov13_ouvidoriaantendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov13_ouvidoriaantendimento"]:$this->ov13_ouvidoriaantendimento);
        $this->ov13_email = ($this->ov13_email == ""?@$GLOBALS["HTTP_POST_VARS"]["ov13_email"]:$this->ov13_email);
      }else{
-       $this->ov13_sequencial = ($this->ov13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov13_sequencial"]:$this->ov13_sequencial);
+       $this->ov13_sequencial = ($this->ov13_sequencial === 0 || $this->ov13_sequencial === 0.0 || $this->ov13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov13_sequencial"]:$this->ov13_sequencial);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_ouvidoriaatendimentoretornoemail {
          $this->ov13_sequencial = $ov13_sequencial;
        }
      }
-     if(($this->ov13_sequencial == null) || ($this->ov13_sequencial == "") ){
+     if(($this->ov13_sequencial == null) || ($this->ov13_sequencial === 0 || $this->ov13_sequencial === 0.0 || $this->ov13_sequencial == "") ){
        $this->erro_sql = " Campo ov13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

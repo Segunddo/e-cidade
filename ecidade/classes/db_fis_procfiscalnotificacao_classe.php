@@ -73,11 +73,11 @@ class cl_fis_procfiscalnotificacao
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y110_sequencial = ($this->y110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y110_sequencial"]:$this->y110_sequencial);
-            $this->y110_notificacaofiscal = ($this->y110_notificacaofiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y110_notificacaofiscal"]:$this->y110_notificacaofiscal);
-            $this->y110_procfiscal = ($this->y110_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y110_procfiscal"]:$this->y110_procfiscal);
+            $this->y110_sequencial = ($this->y110_sequencial === 0 || $this->y110_sequencial === 0.0 || $this->y110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y110_sequencial"]:$this->y110_sequencial);
+            $this->y110_notificacaofiscal = ($this->y110_notificacaofiscal === 0 || $this->y110_notificacaofiscal === 0.0 || $this->y110_notificacaofiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y110_notificacaofiscal"]:$this->y110_notificacaofiscal);
+            $this->y110_procfiscal = ($this->y110_procfiscal === 0 || $this->y110_procfiscal === 0.0 || $this->y110_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y110_procfiscal"]:$this->y110_procfiscal);
         } else {
-            $this->y110_sequencial = ($this->y110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y110_sequencial"]:$this->y110_sequencial);
+            $this->y110_sequencial = ($this->y110_sequencial === 0 || $this->y110_sequencial === 0.0 || $this->y110_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y110_sequencial"]:$this->y110_sequencial);
         }
     }
    // funcao para inclusao

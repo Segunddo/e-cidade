@@ -65,7 +65,7 @@ class cl_parobrastipocons {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob12_grupo = ($this->ob12_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob12_grupo"]:$this->ob12_grupo);
+       $this->ob12_grupo = ($this->ob12_grupo === 0 || $this->ob12_grupo === 0.0 || $this->ob12_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob12_grupo"]:$this->ob12_grupo);
      }else{
      }
    }

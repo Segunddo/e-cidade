@@ -67,10 +67,10 @@ class cl_procandamintusu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p79_codandamint = ($this->p79_codandamint == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_codandamint"]:$this->p79_codandamint);
-       $this->p79_usuario = ($this->p79_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_usuario"]:$this->p79_usuario);
+       $this->p79_codandamint = ($this->p79_codandamint === 0 || $this->p79_codandamint === 0.0 || $this->p79_codandamint == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_codandamint"]:$this->p79_codandamint);
+       $this->p79_usuario = ($this->p79_usuario === 0 || $this->p79_usuario === 0.0 || $this->p79_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_usuario"]:$this->p79_usuario);
      }else{
-       $this->p79_codandamint = ($this->p79_codandamint == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_codandamint"]:$this->p79_codandamint);
+       $this->p79_codandamint = ($this->p79_codandamint === 0 || $this->p79_codandamint === 0.0 || $this->p79_codandamint == ""?@$GLOBALS["HTTP_POST_VARS"]["p79_codandamint"]:$this->p79_codandamint);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_procandamintusu {
        return false;
      }
        $this->p79_codandamint = $p79_codandamint;
-     if(($this->p79_codandamint == null) || ($this->p79_codandamint == "") ){
+     if(($this->p79_codandamint == null) || ($this->p79_codandamint === 0 || $this->p79_codandamint === 0.0 || $this->p79_codandamint == "") ){
        $this->erro_sql = " Campo p79_codandamint nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

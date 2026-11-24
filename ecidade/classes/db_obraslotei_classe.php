@@ -71,12 +71,12 @@ class cl_obraslotei {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob06_codobra = ($this->ob06_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_codobra"]:$this->ob06_codobra);
+       $this->ob06_codobra = ($this->ob06_codobra === 0 || $this->ob06_codobra === 0.0 || $this->ob06_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_codobra"]:$this->ob06_codobra);
        $this->ob06_setor = ($this->ob06_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_setor"]:$this->ob06_setor);
        $this->ob06_quadra = ($this->ob06_quadra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_quadra"]:$this->ob06_quadra);
        $this->ob06_lote = ($this->ob06_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_lote"]:$this->ob06_lote);
      }else{
-       $this->ob06_codobra = ($this->ob06_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_codobra"]:$this->ob06_codobra);
+       $this->ob06_codobra = ($this->ob06_codobra === 0 || $this->ob06_codobra === 0.0 || $this->ob06_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob06_codobra"]:$this->ob06_codobra);
      }
    }
    // funcao para inclusao
@@ -110,7 +110,7 @@ class cl_obraslotei {
        return false;
      }
        $this->ob06_codobra = $ob06_codobra;
-     if(($this->ob06_codobra == null) || ($this->ob06_codobra == "") ){
+     if(($this->ob06_codobra == null) || ($this->ob06_codobra === 0 || $this->ob06_codobra === 0.0 || $this->ob06_codobra == "") ){
        $this->erro_sql = " Campo ob06_codobra nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

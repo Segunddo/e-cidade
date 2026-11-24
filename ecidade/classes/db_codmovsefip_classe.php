@@ -79,8 +79,8 @@ class cl_codmovsefip {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r66_anousu = ($this->r66_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_anousu"]:$this->r66_anousu);
-       $this->r66_mesusu = ($this->r66_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_mesusu"]:$this->r66_mesusu);
+       $this->r66_anousu = ($this->r66_anousu === 0 || $this->r66_anousu === 0.0 || $this->r66_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_anousu"]:$this->r66_anousu);
+       $this->r66_mesusu = ($this->r66_mesusu === 0 || $this->r66_mesusu === 0.0 || $this->r66_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_mesusu"]:$this->r66_mesusu);
        $this->r66_codigo = ($this->r66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_codigo"]:$this->r66_codigo);
        $this->r66_descr = ($this->r66_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_descr"]:$this->r66_descr);
        $this->r66_tipo = ($this->r66_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_tipo"]:$this->r66_tipo);
@@ -88,8 +88,8 @@ class cl_codmovsefip {
        $this->r66_ifgtsc = ($this->r66_ifgtsc == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_ifgtsc"]:$this->r66_ifgtsc);
        $this->r66_ifgtse = ($this->r66_ifgtse == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_ifgtse"]:$this->r66_ifgtse);
      }else{
-       $this->r66_anousu = ($this->r66_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_anousu"]:$this->r66_anousu);
-       $this->r66_mesusu = ($this->r66_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_mesusu"]:$this->r66_mesusu);
+       $this->r66_anousu = ($this->r66_anousu === 0 || $this->r66_anousu === 0.0 || $this->r66_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_anousu"]:$this->r66_anousu);
+       $this->r66_mesusu = ($this->r66_mesusu === 0 || $this->r66_mesusu === 0.0 || $this->r66_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_mesusu"]:$this->r66_mesusu);
        $this->r66_codigo = ($this->r66_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r66_codigo"]:$this->r66_codigo);
      }
    }
@@ -132,7 +132,7 @@ class cl_codmovsefip {
        $this->r66_anousu = $r66_anousu;
        $this->r66_mesusu = $r66_mesusu;
        $this->r66_codigo = $r66_codigo;
-     if(($this->r66_anousu == null) || ($this->r66_anousu == "") ){
+     if(($this->r66_anousu == null) || ($this->r66_anousu === 0 || $this->r66_anousu === 0.0 || $this->r66_anousu == "") ){
        $this->erro_sql = " Campo r66_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -140,7 +140,7 @@ class cl_codmovsefip {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r66_mesusu == null) || ($this->r66_mesusu == "") ){
+     if(($this->r66_mesusu == null) || ($this->r66_mesusu === 0 || $this->r66_mesusu === 0.0 || $this->r66_mesusu == "") ){
        $this->erro_sql = " Campo r66_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

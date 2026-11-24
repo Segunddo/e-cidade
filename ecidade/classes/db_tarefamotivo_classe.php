@@ -67,8 +67,8 @@ class cl_tarefamotivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at55_tarefa = ($this->at55_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at55_tarefa"]:$this->at55_tarefa);
-       $this->at55_motivo = ($this->at55_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["at55_motivo"]:$this->at55_motivo);
+       $this->at55_tarefa = ($this->at55_tarefa === 0 || $this->at55_tarefa === 0.0 || $this->at55_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at55_tarefa"]:$this->at55_tarefa);
+       $this->at55_motivo = ($this->at55_motivo === 0 || $this->at55_motivo === 0.0 || $this->at55_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["at55_motivo"]:$this->at55_motivo);
      }else{
      }
    }

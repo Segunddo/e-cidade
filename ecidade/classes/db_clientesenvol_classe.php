@@ -71,12 +71,12 @@ class cl_clientesenvol {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at57_sequencial = ($this->at57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at57_sequencial"]:$this->at57_sequencial);
-       $this->at57_cliente = ($this->at57_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at57_cliente"]:$this->at57_cliente);
-       $this->at57_usuario = ($this->at57_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at57_usuario"]:$this->at57_usuario);
-       $this->at57_percpadrao = ($this->at57_percpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["at57_percpadrao"]:$this->at57_percpadrao);
+       $this->at57_sequencial = ($this->at57_sequencial === 0 || $this->at57_sequencial === 0.0 || $this->at57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at57_sequencial"]:$this->at57_sequencial);
+       $this->at57_cliente = ($this->at57_cliente === 0 || $this->at57_cliente === 0.0 || $this->at57_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at57_cliente"]:$this->at57_cliente);
+       $this->at57_usuario = ($this->at57_usuario === 0 || $this->at57_usuario === 0.0 || $this->at57_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at57_usuario"]:$this->at57_usuario);
+       $this->at57_percpadrao = ($this->at57_percpadrao === 0 || $this->at57_percpadrao === 0.0 || $this->at57_percpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["at57_percpadrao"]:$this->at57_percpadrao);
      }else{
-       $this->at57_sequencial = ($this->at57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at57_sequencial"]:$this->at57_sequencial);
+       $this->at57_sequencial = ($this->at57_sequencial === 0 || $this->at57_sequencial === 0.0 || $this->at57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at57_sequencial"]:$this->at57_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_clientesenvol {
          $this->at57_sequencial = $at57_sequencial;
        }
      }
-     if(($this->at57_sequencial == null) || ($this->at57_sequencial == "") ){
+     if(($this->at57_sequencial == null) || ($this->at57_sequencial === 0 || $this->at57_sequencial === 0.0 || $this->at57_sequencial == "") ){
        $this->erro_sql = " Campo at57_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

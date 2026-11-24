@@ -73,13 +73,13 @@ class cl_relrubrelrubcampos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh121_sequencial = ($this->rh121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_sequencial"]:$this->rh121_sequencial);
-       $this->rh121_instit = ($this->rh121_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_instit"]:$this->rh121_instit);
-       $this->rh121_relrub = ($this->rh121_relrub == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_relrub"]:$this->rh121_relrub);
-       $this->rh121_relrubcampos = ($this->rh121_relrubcampos == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_relrubcampos"]:$this->rh121_relrubcampos);
-       $this->rh121_ordem = ($this->rh121_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_ordem"]:$this->rh121_ordem);
+       $this->rh121_sequencial = ($this->rh121_sequencial === 0 || $this->rh121_sequencial === 0.0 || $this->rh121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_sequencial"]:$this->rh121_sequencial);
+       $this->rh121_instit = ($this->rh121_instit === 0 || $this->rh121_instit === 0.0 || $this->rh121_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_instit"]:$this->rh121_instit);
+       $this->rh121_relrub = ($this->rh121_relrub === 0 || $this->rh121_relrub === 0.0 || $this->rh121_relrub == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_relrub"]:$this->rh121_relrub);
+       $this->rh121_relrubcampos = ($this->rh121_relrubcampos === 0 || $this->rh121_relrubcampos === 0.0 || $this->rh121_relrubcampos == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_relrubcampos"]:$this->rh121_relrubcampos);
+       $this->rh121_ordem = ($this->rh121_ordem === 0 || $this->rh121_ordem === 0.0 || $this->rh121_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_ordem"]:$this->rh121_ordem);
      }else{
-       $this->rh121_sequencial = ($this->rh121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_sequencial"]:$this->rh121_sequencial);
+       $this->rh121_sequencial = ($this->rh121_sequencial === 0 || $this->rh121_sequencial === 0.0 || $this->rh121_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh121_sequencial"]:$this->rh121_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_relrubrelrubcampos {
          $this->rh121_sequencial = $rh121_sequencial;
        }
      }
-     if(($this->rh121_sequencial == null) || ($this->rh121_sequencial == "") ){
+     if(($this->rh121_sequencial == null) || ($this->rh121_sequencial === 0 || $this->rh121_sequencial === 0.0 || $this->rh121_sequencial == "") ){
        $this->erro_sql = " Campo rh121_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

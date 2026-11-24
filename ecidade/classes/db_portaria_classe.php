@@ -96,11 +96,11 @@ class cl_portaria {
      if(!$exclusao) {
             $this->h31_portaria = ($this->h31_portaria != null) ? $this->h31_portaria : (($GLOBALS["h31_portariaseq"] == "") ? null : $GLOBALS["h31_portariaseq"]);
             $this->h31_status = ($this->h31_status != null) ? $this->h31_status : (isset($_POST['h31_status']) && $_POST['h31_status'] != "" ? $_POST['h31_status'] : null);
-            $this->h31_sequencial = ($this->h31_sequencial != "") ? $this->h31_sequencial : (isset($_POST["h31_sequencial"]) ? $_POST["h31_sequencial"] : $this->h31_sequencial);
-            $this->h31_portariatipo = ($this->h31_portariatipo != "") ? $this->h31_portariatipo : (isset($_POST["h31_portariatipo"]) ? $_POST["h31_portariatipo"] : $this->h31_portariatipo);
-            $this->h31_usuario = ($this->h31_usuario != "") ? $this->h31_usuario : (isset($_POST["h31_usuario"]) ? $_POST["h31_usuario"] : $this->h31_usuario);
+            $this->h31_sequencial = (($this->h31_sequencial != "" && $this->h31_sequencial !== 0 && $this->h31_sequencial !== 0.0)) ? $this->h31_sequencial : (isset($_POST["h31_sequencial"]) ? $_POST["h31_sequencial"] : $this->h31_sequencial);
+            $this->h31_portariatipo = (($this->h31_portariatipo != "" && $this->h31_portariatipo !== 0 && $this->h31_portariatipo !== 0.0)) ? $this->h31_portariatipo : (isset($_POST["h31_portariatipo"]) ? $_POST["h31_portariatipo"] : $this->h31_portariatipo);
+            $this->h31_usuario = (($this->h31_usuario != "" && $this->h31_usuario !== 0 && $this->h31_usuario !== 0.0)) ? $this->h31_usuario : (isset($_POST["h31_usuario"]) ? $_POST["h31_usuario"] : $this->h31_usuario);
             $this->h31_numero = ($this->h31_numero != "") ? $this->h31_numero : (isset($_POST["h31_numero"]) ? $_POST["h31_numero"] : $this->h31_numero);
-            $this->h31_anousu = ($this->h31_anousu != "") ? $this->h31_anousu : (isset($_POST["h31_anousu"]) ? $_POST["h31_anousu"] : $this->h31_anousu);
+            $this->h31_anousu = (($this->h31_anousu != "" && $this->h31_anousu !== 0 && $this->h31_anousu !== 0.0)) ? $this->h31_anousu : (isset($_POST["h31_anousu"]) ? $_POST["h31_anousu"] : $this->h31_anousu);
             if ($this->h31_dtportaria == "") {
                 $this->h31_dtportaria_dia = ($this->h31_dtportaria_dia != "") ? $this->h31_dtportaria_dia : (isset($_POST["h31_dtportaria_dia"]) ? $_POST["h31_dtportaria_dia"] : $this->h31_dtportaria_dia);
                 $this->h31_dtportaria_mes = ($this->h31_dtportaria_mes != "") ? $this->h31_dtportaria_mes : (isset($_POST["h31_dtportaria_mes"]) ? $_POST["h31_dtportaria_mes"] : $this->h31_dtportaria_mes);
@@ -134,7 +134,7 @@ class cl_portaria {
             $this->h31_amparolegal = ($this->h31_amparolegal != "") ? $this->h31_amparolegal : (isset($_POST["h31_amparolegal"]) ? $_POST["h31_amparolegal"] : $this->h31_amparolegal);
             $this->h31_portariaassinatura = ($this->h31_portariaassinatura != "") ? $this->h31_portariaassinatura : (isset($_POST["h31_portariaassinatura"]) ? $_POST["h31_portariaassinatura"] : $this->h31_portariaassinatura);
         } else {
-            $this->h31_sequencial = ($this->h31_sequencial != "") ? $this->h31_sequencial : (isset($_POST["h31_sequencial"]) ? $_POST["h31_sequencial"] : $this->h31_sequencial);
+            $this->h31_sequencial = (($this->h31_sequencial != "" && $this->h31_sequencial !== 0 && $this->h31_sequencial !== 0.0)) ? $this->h31_sequencial : (isset($_POST["h31_sequencial"]) ? $_POST["h31_sequencial"] : $this->h31_sequencial);
         }
     }
 
@@ -255,7 +255,7 @@ class cl_portaria {
          $this->h31_sequencial = $h31_sequencial;
        }
      }
-     if(($this->h31_sequencial == null) || ($this->h31_sequencial == "") ){
+     if(($this->h31_sequencial == null) || ($this->h31_sequencial === 0 || $this->h31_sequencial === 0.0 || $this->h31_sequencial == "") ){
        $this->erro_sql = " Campo h31_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -532,15 +532,15 @@ class cl_portaria {
            $acount = pg_fetch_result($resac,0,0);
            $resac = db_query("insert into db_acountacesso values($acount,".db_getsession("DB_acessado").")");
            $resac = db_query("insert into db_acountkey values($acount,10118,'$this->h31_sequencial','A')");
-           if(isset($GLOBALS["HTTP_POST_VARS"]["h31_sequencial"]) || $this->h31_sequencial != "")
+           if(isset($GLOBALS["HTTP_POST_VARS"]["h31_sequencial"]) || ($this->h31_sequencial != "" && $this->h31_sequencial !== 0 && $this->h31_sequencial !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1741,10118,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'h31_sequencial'))."','$this->h31_sequencial',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if(isset($GLOBALS["HTTP_POST_VARS"]["h31_portariatipo"]) || $this->h31_portariatipo != "")
+           if(isset($GLOBALS["HTTP_POST_VARS"]["h31_portariatipo"]) || ($this->h31_portariatipo != "" && $this->h31_portariatipo !== 0 && $this->h31_portariatipo !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1741,10119,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'h31_portariatipo'))."','$this->h31_portariatipo',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if(isset($GLOBALS["HTTP_POST_VARS"]["h31_usuario"]) || $this->h31_usuario != "")
+           if(isset($GLOBALS["HTTP_POST_VARS"]["h31_usuario"]) || ($this->h31_usuario != "" && $this->h31_usuario !== 0 && $this->h31_usuario !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1741,10120,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'h31_usuario'))."','$this->h31_usuario',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if(isset($GLOBALS["HTTP_POST_VARS"]["h31_numero"]) || $this->h31_numero != "")
              $resac = db_query("insert into db_acount values($acount,1741,10121,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'h31_numero'))."','$this->h31_numero',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
-           if(isset($GLOBALS["HTTP_POST_VARS"]["h31_anousu"]) || $this->h31_anousu != "")
+           if(isset($GLOBALS["HTTP_POST_VARS"]["h31_anousu"]) || ($this->h31_anousu != "" && $this->h31_anousu !== 0 && $this->h31_anousu !== 0.0))
              $resac = db_query("insert into db_acount values($acount,1741,10122,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'h31_anousu'))."','$this->h31_anousu',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");
            if(isset($GLOBALS["HTTP_POST_VARS"]["h31_dtportaria"]) || $this->h31_dtportaria != "")
              $resac = db_query("insert into db_acount values($acount,1741,10123,'".AddSlashes(pg_fetch_result($resaco,$conresaco,'h31_dtportaria'))."','$this->h31_dtportaria',".db_getsession('DB_datausu').",".db_getsession('DB_id_usuario').")");

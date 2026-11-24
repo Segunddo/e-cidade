@@ -67,10 +67,10 @@ class cl_rhtipovale {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh68_sequencial = ($this->rh68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh68_sequencial"]:$this->rh68_sequencial);
+       $this->rh68_sequencial = ($this->rh68_sequencial === 0 || $this->rh68_sequencial === 0.0 || $this->rh68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh68_sequencial"]:$this->rh68_sequencial);
        $this->rh68_descr = ($this->rh68_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh68_descr"]:$this->rh68_descr);
      }else{
-       $this->rh68_sequencial = ($this->rh68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh68_sequencial"]:$this->rh68_sequencial);
+       $this->rh68_sequencial = ($this->rh68_sequencial === 0 || $this->rh68_sequencial === 0.0 || $this->rh68_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh68_sequencial"]:$this->rh68_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_rhtipovale {
          $this->rh68_sequencial = $rh68_sequencial;
        }
      }
-     if(($this->rh68_sequencial == null) || ($this->rh68_sequencial == "") ){
+     if(($this->rh68_sequencial == null) || ($this->rh68_sequencial === 0 || $this->rh68_sequencial === 0.0 || $this->rh68_sequencial == "") ){
        $this->erro_sql = " Campo rh68_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -68,12 +68,12 @@ class cl_fis_fiscalrua {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y33_codnoti = ($this->y33_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_codnoti"]:$this->y33_codnoti);
-       $this->y33_codigo = ($this->y33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_codigo"]:$this->y33_codigo);
-       $this->y33_numero = ($this->y33_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_numero"]:$this->y33_numero);
+       $this->y33_codnoti = ($this->y33_codnoti === 0 || $this->y33_codnoti === 0.0 || $this->y33_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_codnoti"]:$this->y33_codnoti);
+       $this->y33_codigo = ($this->y33_codigo === 0 || $this->y33_codigo === 0.0 || $this->y33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_codigo"]:$this->y33_codigo);
+       $this->y33_numero = ($this->y33_numero === 0 || $this->y33_numero === 0.0 || $this->y33_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_numero"]:$this->y33_numero);
        $this->y33_compl = ($this->y33_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_compl"]:$this->y33_compl);
      }else{
-       $this->y33_codnoti = ($this->y33_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_codnoti"]:$this->y33_codnoti);
+       $this->y33_codnoti = ($this->y33_codnoti === 0 || $this->y33_codnoti === 0.0 || $this->y33_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_codnoti"]:$this->y33_codnoti);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_fis_fiscalrua {
        return false;
      }
        $this->y33_codnoti = $y33_codnoti;
-     if(($this->y33_codnoti == null) || ($this->y33_codnoti == "") ){
+     if(($this->y33_codnoti == null) || ($this->y33_codnoti === 0 || $this->y33_codnoti === 0.0 || $this->y33_codnoti == "") ){
        $this->erro_sql = " Campo y33_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

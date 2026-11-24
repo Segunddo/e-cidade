@@ -79,18 +79,18 @@ class cl_funcao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r37_anousu = ($this->r37_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_anousu"]:$this->r37_anousu);
-       $this->r37_mesusu = ($this->r37_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_mesusu"]:$this->r37_mesusu);
-       $this->r37_funcao = ($this->r37_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_funcao"]:$this->r37_funcao);
+       $this->r37_anousu = ($this->r37_anousu === 0 || $this->r37_anousu === 0.0 || $this->r37_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_anousu"]:$this->r37_anousu);
+       $this->r37_mesusu = ($this->r37_mesusu === 0 || $this->r37_mesusu === 0.0 || $this->r37_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_mesusu"]:$this->r37_mesusu);
+       $this->r37_funcao = ($this->r37_funcao === 0 || $this->r37_funcao === 0.0 || $this->r37_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_funcao"]:$this->r37_funcao);
        $this->r37_descr = ($this->r37_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_descr"]:$this->r37_descr);
-       $this->r37_vagas = ($this->r37_vagas == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_vagas"]:$this->r37_vagas);
+       $this->r37_vagas = ($this->r37_vagas === 0 || $this->r37_vagas === 0.0 || $this->r37_vagas == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_vagas"]:$this->r37_vagas);
        $this->r37_cbo = ($this->r37_cbo == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_cbo"]:$this->r37_cbo);
        $this->r37_lei = ($this->r37_lei == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_lei"]:$this->r37_lei);
        $this->r37_class = ($this->r37_class == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_class"]:$this->r37_class);
      }else{
-       $this->r37_anousu = ($this->r37_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_anousu"]:$this->r37_anousu);
-       $this->r37_mesusu = ($this->r37_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_mesusu"]:$this->r37_mesusu);
-       $this->r37_funcao = ($this->r37_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_funcao"]:$this->r37_funcao);
+       $this->r37_anousu = ($this->r37_anousu === 0 || $this->r37_anousu === 0.0 || $this->r37_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_anousu"]:$this->r37_anousu);
+       $this->r37_mesusu = ($this->r37_mesusu === 0 || $this->r37_mesusu === 0.0 || $this->r37_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_mesusu"]:$this->r37_mesusu);
+       $this->r37_funcao = ($this->r37_funcao === 0 || $this->r37_funcao === 0.0 || $this->r37_funcao == ""?@$GLOBALS["HTTP_POST_VARS"]["r37_funcao"]:$this->r37_funcao);
      }
    }
    // funcao para inclusao
@@ -114,7 +114,7 @@ class cl_funcao {
        $this->r37_anousu = $r37_anousu;
        $this->r37_mesusu = $r37_mesusu;
        $this->r37_funcao = $r37_funcao;
-     if(($this->r37_anousu == null) || ($this->r37_anousu == "") ){
+     if(($this->r37_anousu == null) || ($this->r37_anousu === 0 || $this->r37_anousu === 0.0 || $this->r37_anousu == "") ){
        $this->erro_sql = " Campo r37_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -122,7 +122,7 @@ class cl_funcao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r37_mesusu == null) || ($this->r37_mesusu == "") ){
+     if(($this->r37_mesusu == null) || ($this->r37_mesusu === 0 || $this->r37_mesusu === 0.0 || $this->r37_mesusu == "") ){
        $this->erro_sql = " Campo r37_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -130,7 +130,7 @@ class cl_funcao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r37_funcao == null) || ($this->r37_funcao == "") ){
+     if(($this->r37_funcao == null) || ($this->r37_funcao === 0 || $this->r37_funcao === 0.0 || $this->r37_funcao == "") ){
        $this->erro_sql = " Campo r37_funcao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,13 +71,13 @@ class cl_benscorr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t63_codcor = ($this->t63_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codcor"]:$this->t63_codcor);
-       $this->t63_codbem = ($this->t63_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codbem"]:$this->t63_codbem);
-       $this->t63_valcor = ($this->t63_valcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_valcor"]:$this->t63_valcor);
-       $this->t63_deprec = ($this->t63_deprec == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_deprec"]:$this->t63_deprec);
+       $this->t63_codcor = ($this->t63_codcor === 0 || $this->t63_codcor === 0.0 || $this->t63_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codcor"]:$this->t63_codcor);
+       $this->t63_codbem = ($this->t63_codbem === 0 || $this->t63_codbem === 0.0 || $this->t63_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codbem"]:$this->t63_codbem);
+       $this->t63_valcor = ($this->t63_valcor === 0 || $this->t63_valcor === 0.0 || $this->t63_valcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_valcor"]:$this->t63_valcor);
+       $this->t63_deprec = ($this->t63_deprec === 0 || $this->t63_deprec === 0.0 || $this->t63_deprec == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_deprec"]:$this->t63_deprec);
      }else{
-       $this->t63_codcor = ($this->t63_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codcor"]:$this->t63_codcor);
-       $this->t63_codbem = ($this->t63_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codbem"]:$this->t63_codbem);
+       $this->t63_codcor = ($this->t63_codcor === 0 || $this->t63_codcor === 0.0 || $this->t63_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codcor"]:$this->t63_codcor);
+       $this->t63_codbem = ($this->t63_codbem === 0 || $this->t63_codbem === 0.0 || $this->t63_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t63_codbem"]:$this->t63_codbem);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_benscorr {
      }
        $this->t63_codcor = $t63_codcor;
        $this->t63_codbem = $t63_codbem;
-     if(($this->t63_codcor == null) || ($this->t63_codcor == "") ){
+     if(($this->t63_codcor == null) || ($this->t63_codcor === 0 || $this->t63_codcor === 0.0 || $this->t63_codcor == "") ){
        $this->erro_sql = " Campo t63_codcor nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_benscorr {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->t63_codbem == null) || ($this->t63_codbem == "") ){
+     if(($this->t63_codbem == null) || ($this->t63_codbem === 0 || $this->t63_codbem === 0.0 || $this->t63_codbem == "") ){
        $this->erro_sql = " Campo t63_codbem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

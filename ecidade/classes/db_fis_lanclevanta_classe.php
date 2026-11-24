@@ -69,11 +69,11 @@ class cl_fis_lanclevanta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl15_sequencial = ($this->nl15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["nl15_sequencial"]:$this->nl15_sequencial);
-       $this->nl15_lancamento = ($this->nl15_lancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["nl15_lancamento"]:$this->nl15_lancamento);
-       $this->nl15_levanta = ($this->nl15_levanta == ""?@$GLOBALS["HTTP_POST_VARS"]["nl15_levanta"]:$this->nl15_levanta);
+       $this->nl15_sequencial = ($this->nl15_sequencial === 0 || $this->nl15_sequencial === 0.0 || $this->nl15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["nl15_sequencial"]:$this->nl15_sequencial);
+       $this->nl15_lancamento = ($this->nl15_lancamento === 0 || $this->nl15_lancamento === 0.0 || $this->nl15_lancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["nl15_lancamento"]:$this->nl15_lancamento);
+       $this->nl15_levanta = ($this->nl15_levanta === 0 || $this->nl15_levanta === 0.0 || $this->nl15_levanta == ""?@$GLOBALS["HTTP_POST_VARS"]["nl15_levanta"]:$this->nl15_levanta);
      }else{
-       $this->nl15_sequencial = ($this->nl15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["nl15_sequencial"]:$this->nl15_sequencial);
+       $this->nl15_sequencial = ($this->nl15_sequencial === 0 || $this->nl15_sequencial === 0.0 || $this->nl15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["nl15_sequencial"]:$this->nl15_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_fis_lanclevanta {
          $this->nl15_sequencial = $nl15_sequencial;
        }
      }
-     if(($this->nl15_sequencial == null) || ($this->nl15_sequencial == "") ){
+     if(($this->nl15_sequencial == null) || ($this->nl15_sequencial === 0 || $this->nl15_sequencial === 0.0 || $this->nl15_sequencial == "") ){
        $this->erro_sql = " Campo nl15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

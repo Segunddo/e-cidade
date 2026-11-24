@@ -75,14 +75,14 @@ class cl_tabcurri {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h01_codigo = ($this->h01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_codigo"]:$this->h01_codigo);
-       $this->h01_cgmentid = ($this->h01_cgmentid == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_cgmentid"]:$this->h01_cgmentid);
+       $this->h01_codigo = ($this->h01_codigo === 0 || $this->h01_codigo === 0.0 || $this->h01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_codigo"]:$this->h01_codigo);
+       $this->h01_cgmentid = ($this->h01_cgmentid === 0 || $this->h01_cgmentid === 0.0 || $this->h01_cgmentid == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_cgmentid"]:$this->h01_cgmentid);
        $this->h01_descr = ($this->h01_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_descr"]:$this->h01_descr);
        $this->h01_detalh = ($this->h01_detalh == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_detalh"]:$this->h01_detalh);
-       $this->h01_codtipo = ($this->h01_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_codtipo"]:$this->h01_codtipo);
-       $this->h01_cargahor = ($this->h01_cargahor == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_cargahor"]:$this->h01_cargahor);
+       $this->h01_codtipo = ($this->h01_codtipo === 0 || $this->h01_codtipo === 0.0 || $this->h01_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_codtipo"]:$this->h01_codtipo);
+       $this->h01_cargahor = ($this->h01_cargahor === 0 || $this->h01_cargahor === 0.0 || $this->h01_cargahor == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_cargahor"]:$this->h01_cargahor);
      }else{
-       $this->h01_codigo = ($this->h01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_codigo"]:$this->h01_codigo);
+       $this->h01_codigo = ($this->h01_codigo === 0 || $this->h01_codigo === 0.0 || $this->h01_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h01_codigo"]:$this->h01_codigo);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_tabcurri {
          $this->h01_codigo = $h01_codigo;
        }
      }
-     if(($this->h01_codigo == null) || ($this->h01_codigo == "") ){
+     if(($this->h01_codigo == null) || ($this->h01_codigo === 0 || $this->h01_codigo === 0.0 || $this->h01_codigo == "") ){
        $this->erro_sql = " Campo h01_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

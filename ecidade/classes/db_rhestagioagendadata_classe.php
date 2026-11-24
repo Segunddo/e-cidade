@@ -74,8 +74,8 @@ class cl_rhestagioagendadata {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h64_sequencial = ($this->h64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h64_sequencial"]:$this->h64_sequencial);
-       $this->h64_estagioagenda = ($this->h64_estagioagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["h64_estagioagenda"]:$this->h64_estagioagenda);
+       $this->h64_sequencial = ($this->h64_sequencial === 0 || $this->h64_sequencial === 0.0 || $this->h64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h64_sequencial"]:$this->h64_sequencial);
+       $this->h64_estagioagenda = ($this->h64_estagioagenda === 0 || $this->h64_estagioagenda === 0.0 || $this->h64_estagioagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["h64_estagioagenda"]:$this->h64_estagioagenda);
        if($this->h64_data == ""){
          $this->h64_data_dia = ($this->h64_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h64_data_dia"]:$this->h64_data_dia);
          $this->h64_data_mes = ($this->h64_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h64_data_mes"]:$this->h64_data_mes);
@@ -84,9 +84,9 @@ class cl_rhestagioagendadata {
             $this->h64_data = $this->h64_data_ano."-".$this->h64_data_mes."-".$this->h64_data_dia;
          }
        }
-       $this->h64_seqaval = ($this->h64_seqaval == ""?@$GLOBALS["HTTP_POST_VARS"]["h64_seqaval"]:$this->h64_seqaval);
+       $this->h64_seqaval = ($this->h64_seqaval === 0 || $this->h64_seqaval === 0.0 || $this->h64_seqaval == ""?@$GLOBALS["HTTP_POST_VARS"]["h64_seqaval"]:$this->h64_seqaval);
      }else{
-       $this->h64_sequencial = ($this->h64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h64_sequencial"]:$this->h64_sequencial);
+       $this->h64_sequencial = ($this->h64_sequencial === 0 || $this->h64_sequencial === 0.0 || $this->h64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h64_sequencial"]:$this->h64_sequencial);
      }
    }
    // funcao para inclusao
@@ -137,7 +137,7 @@ class cl_rhestagioagendadata {
          $this->h64_sequencial = $h64_sequencial;
        }
      }
-     if(($this->h64_sequencial == null) || ($this->h64_sequencial == "") ){
+     if(($this->h64_sequencial == null) || ($this->h64_sequencial === 0 || $this->h64_sequencial === 0.0 || $this->h64_sequencial == "") ){
        $this->erro_sql = " Campo h64_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

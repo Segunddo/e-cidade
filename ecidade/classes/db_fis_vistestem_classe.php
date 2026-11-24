@@ -67,11 +67,11 @@ public function erro($mostra,$retorna) {
    // funcao para atualizar campos
 public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y25_codvist = ($this->y25_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y25_codvist"]:$this->y25_codvist);
-       $this->y25_numcgm = ($this->y25_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y25_numcgm"]:$this->y25_numcgm);
+       $this->y25_codvist = ($this->y25_codvist === 0 || $this->y25_codvist === 0.0 || $this->y25_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y25_codvist"]:$this->y25_codvist);
+       $this->y25_numcgm = ($this->y25_numcgm === 0 || $this->y25_numcgm === 0.0 || $this->y25_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y25_numcgm"]:$this->y25_numcgm);
      }else{
-       $this->y25_codvist = ($this->y25_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y25_codvist"]:$this->y25_codvist);
-       $this->y25_numcgm = ($this->y25_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y25_numcgm"]:$this->y25_numcgm);
+       $this->y25_codvist = ($this->y25_codvist === 0 || $this->y25_codvist === 0.0 || $this->y25_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y25_codvist"]:$this->y25_codvist);
+       $this->y25_numcgm = ($this->y25_numcgm === 0 || $this->y25_numcgm === 0.0 || $this->y25_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y25_numcgm"]:$this->y25_numcgm);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ public function incluir ($y25_codvist,$y25_numcgm){
       $this->atualizacampos();
        $this->y25_codvist = $y25_codvist;
        $this->y25_numcgm = $y25_numcgm;
-     if(($this->y25_codvist == null) || ($this->y25_codvist == "") ){
+     if(($this->y25_codvist == null) || ($this->y25_codvist === 0 || $this->y25_codvist === 0.0 || $this->y25_codvist == "") ){
        $this->erro_sql = " Campo y25_codvist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ public function incluir ($y25_codvist,$y25_numcgm){
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y25_numcgm == null) || ($this->y25_numcgm == "") ){
+     if(($this->y25_numcgm == null) || ($this->y25_numcgm === 0 || $this->y25_numcgm === 0.0 || $this->y25_numcgm == "") ){
        $this->erro_sql = " Campo y25_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

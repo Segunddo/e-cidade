@@ -81,8 +81,8 @@ class cl_rhavaliacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h73_sequencial = ($this->h73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_sequencial"]:$this->h73_sequencial);
-       $this->h73_rhpromocao = ($this->h73_rhpromocao == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_rhpromocao"]:$this->h73_rhpromocao);
+       $this->h73_sequencial = ($this->h73_sequencial === 0 || $this->h73_sequencial === 0.0 || $this->h73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_sequencial"]:$this->h73_sequencial);
+       $this->h73_rhpromocao = ($this->h73_rhpromocao === 0 || $this->h73_rhpromocao === 0.0 || $this->h73_rhpromocao == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_rhpromocao"]:$this->h73_rhpromocao);
        if($this->h73_dtavaliacao == ""){
          $this->h73_dtavaliacao_dia = ($this->h73_dtavaliacao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_dtavaliacao_dia"]:$this->h73_dtavaliacao_dia);
          $this->h73_dtavaliacao_mes = ($this->h73_dtavaliacao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_dtavaliacao_mes"]:$this->h73_dtavaliacao_mes);
@@ -99,10 +99,10 @@ class cl_rhavaliacao {
             $this->h73_dtinclusao = $this->h73_dtinclusao_ano."-".$this->h73_dtinclusao_mes."-".$this->h73_dtinclusao_dia;
          }
        }
-       $this->h73_usuario = ($this->h73_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_usuario"]:$this->h73_usuario);
+       $this->h73_usuario = ($this->h73_usuario === 0 || $this->h73_usuario === 0.0 || $this->h73_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_usuario"]:$this->h73_usuario);
        $this->h73_observacao = ($this->h73_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_observacao"]:$this->h73_observacao);
      }else{
-       $this->h73_sequencial = ($this->h73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_sequencial"]:$this->h73_sequencial);
+       $this->h73_sequencial = ($this->h73_sequencial === 0 || $this->h73_sequencial === 0.0 || $this->h73_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h73_sequencial"]:$this->h73_sequencial);
      }
    }
    // funcao para inclusao
@@ -168,7 +168,7 @@ class cl_rhavaliacao {
          $this->h73_sequencial = $h73_sequencial;
        }
      }
-     if(($this->h73_sequencial == null) || ($this->h73_sequencial == "") ){
+     if(($this->h73_sequencial == null) || ($this->h73_sequencial === 0 || $this->h73_sequencial === 0.0 || $this->h73_sequencial == "") ){
        $this->erro_sql = " Campo h73_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

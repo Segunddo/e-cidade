@@ -69,11 +69,11 @@ class cl_tipoidentificacaocredorgenerica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->c25_sequencial = ($this->c25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c25_sequencial"]:$this->c25_sequencial);
-       $this->c25_tipoidentificacaocredor = ($this->c25_tipoidentificacaocredor == ""?@$GLOBALS["HTTP_POST_VARS"]["c25_tipoidentificacaocredor"]:$this->c25_tipoidentificacaocredor);
+       $this->c25_sequencial = ($this->c25_sequencial === 0 || $this->c25_sequencial === 0.0 || $this->c25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c25_sequencial"]:$this->c25_sequencial);
+       $this->c25_tipoidentificacaocredor = ($this->c25_tipoidentificacaocredor === 0 || $this->c25_tipoidentificacaocredor === 0.0 || $this->c25_tipoidentificacaocredor == ""?@$GLOBALS["HTTP_POST_VARS"]["c25_tipoidentificacaocredor"]:$this->c25_tipoidentificacaocredor);
        $this->c25_descricao = ($this->c25_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["c25_descricao"]:$this->c25_descricao);
      }else{
-       $this->c25_sequencial = ($this->c25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c25_sequencial"]:$this->c25_sequencial);
+       $this->c25_sequencial = ($this->c25_sequencial === 0 || $this->c25_sequencial === 0.0 || $this->c25_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["c25_sequencial"]:$this->c25_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tipoidentificacaocredorgenerica {
          $this->c25_sequencial = $c25_sequencial;
        }
      }
-     if(($this->c25_sequencial == null) || ($this->c25_sequencial == "") ){
+     if(($this->c25_sequencial == null) || ($this->c25_sequencial === 0 || $this->c25_sequencial === 0.0 || $this->c25_sequencial == "") ){
        $this->erro_sql = " Campo c25_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

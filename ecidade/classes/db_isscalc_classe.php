@@ -79,20 +79,20 @@ class cl_isscalc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->q01_anousu = ($this->q01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_anousu"]:$this->q01_anousu);
-       $this->q01_inscr = ($this->q01_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_inscr"]:$this->q01_inscr);
-       $this->q01_cadcal = ($this->q01_cadcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_cadcal"]:$this->q01_cadcal);
-       $this->q01_recei = ($this->q01_recei == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_recei"]:$this->q01_recei);
-       $this->q01_numpre = ($this->q01_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_numpre"]:$this->q01_numpre);
-       $this->q01_valor = ($this->q01_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_valor"]:$this->q01_valor);
-       $this->q01_valorisencao = ($this->q01_valorisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_valorisencao"]:$this->q01_valorisencao);
+       $this->q01_anousu = ($this->q01_anousu === 0 || $this->q01_anousu === 0.0 || $this->q01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_anousu"]:$this->q01_anousu);
+       $this->q01_inscr = ($this->q01_inscr === 0 || $this->q01_inscr === 0.0 || $this->q01_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_inscr"]:$this->q01_inscr);
+       $this->q01_cadcal = ($this->q01_cadcal === 0 || $this->q01_cadcal === 0.0 || $this->q01_cadcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_cadcal"]:$this->q01_cadcal);
+       $this->q01_recei = ($this->q01_recei === 0 || $this->q01_recei === 0.0 || $this->q01_recei == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_recei"]:$this->q01_recei);
+       $this->q01_numpre = ($this->q01_numpre === 0 || $this->q01_numpre === 0.0 || $this->q01_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_numpre"]:$this->q01_numpre);
+       $this->q01_valor = ($this->q01_valor === 0 || $this->q01_valor === 0.0 || $this->q01_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_valor"]:$this->q01_valor);
+       $this->q01_valorisencao = ($this->q01_valorisencao === 0 || $this->q01_valorisencao === 0.0 || $this->q01_valorisencao == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_valorisencao"]:$this->q01_valorisencao);
        $this->q01_manual = ($this->q01_manual == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_manual"]:$this->q01_manual);
      }else{
-       $this->q01_anousu = ($this->q01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_anousu"]:$this->q01_anousu);
-       $this->q01_inscr = ($this->q01_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_inscr"]:$this->q01_inscr);
-       $this->q01_cadcal = ($this->q01_cadcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_cadcal"]:$this->q01_cadcal);
-       $this->q01_recei = ($this->q01_recei == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_recei"]:$this->q01_recei);
-       $this->q01_numpre = ($this->q01_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_numpre"]:$this->q01_numpre);
+       $this->q01_anousu = ($this->q01_anousu === 0 || $this->q01_anousu === 0.0 || $this->q01_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_anousu"]:$this->q01_anousu);
+       $this->q01_inscr = ($this->q01_inscr === 0 || $this->q01_inscr === 0.0 || $this->q01_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_inscr"]:$this->q01_inscr);
+       $this->q01_cadcal = ($this->q01_cadcal === 0 || $this->q01_cadcal === 0.0 || $this->q01_cadcal == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_cadcal"]:$this->q01_cadcal);
+       $this->q01_recei = ($this->q01_recei === 0 || $this->q01_recei === 0.0 || $this->q01_recei == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_recei"]:$this->q01_recei);
+       $this->q01_numpre = ($this->q01_numpre === 0 || $this->q01_numpre === 0.0 || $this->q01_numpre == ""?@$GLOBALS["HTTP_POST_VARS"]["q01_numpre"]:$this->q01_numpre);
      }
    }
    // funcao para inclusao
@@ -130,7 +130,7 @@ class cl_isscalc {
        $this->q01_cadcal = $q01_cadcal;
        $this->q01_recei = $q01_recei;
        $this->q01_numpre = $q01_numpre;
-     if(($this->q01_anousu == null) || ($this->q01_anousu == "") ){
+     if(($this->q01_anousu == null) || ($this->q01_anousu === 0 || $this->q01_anousu === 0.0 || $this->q01_anousu == "") ){
        $this->erro_sql = " Campo q01_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -138,7 +138,7 @@ class cl_isscalc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q01_inscr == null) || ($this->q01_inscr == "") ){
+     if(($this->q01_inscr == null) || ($this->q01_inscr === 0 || $this->q01_inscr === 0.0 || $this->q01_inscr == "") ){
        $this->erro_sql = " Campo q01_inscr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -146,7 +146,7 @@ class cl_isscalc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q01_cadcal == null) || ($this->q01_cadcal == "") ){
+     if(($this->q01_cadcal == null) || ($this->q01_cadcal === 0 || $this->q01_cadcal === 0.0 || $this->q01_cadcal == "") ){
        $this->erro_sql = " Campo q01_cadcal nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -154,7 +154,7 @@ class cl_isscalc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q01_recei == null) || ($this->q01_recei == "") ){
+     if(($this->q01_recei == null) || ($this->q01_recei === 0 || $this->q01_recei === 0.0 || $this->q01_recei == "") ){
        $this->erro_sql = " Campo q01_recei nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -162,7 +162,7 @@ class cl_isscalc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->q01_numpre == null) || ($this->q01_numpre == "") ){
+     if(($this->q01_numpre == null) || ($this->q01_numpre === 0 || $this->q01_numpre === 0.0 || $this->q01_numpre == "") ){
        $this->erro_sql = " Campo q01_numpre nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

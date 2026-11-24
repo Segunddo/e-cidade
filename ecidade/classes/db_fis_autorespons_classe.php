@@ -69,13 +69,13 @@ class cl_fis_autorespons {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y124_codauto = ($this->y124_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_codauto"]:$this->y124_codauto);
-       $this->y124_numcgm = ($this->y124_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_numcgm"]:$this->y124_numcgm);
-       $this->y124_tipo = ($this->y124_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_tipo"]:$this->y124_tipo);
+       $this->y124_codauto = ($this->y124_codauto === 0 || $this->y124_codauto === 0.0 || $this->y124_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_codauto"]:$this->y124_codauto);
+       $this->y124_numcgm = ($this->y124_numcgm === 0 || $this->y124_numcgm === 0.0 || $this->y124_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_numcgm"]:$this->y124_numcgm);
+       $this->y124_tipo = ($this->y124_tipo === 0 || $this->y124_tipo === 0.0 || $this->y124_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_tipo"]:$this->y124_tipo);
      }else{
-       $this->y124_codauto = ($this->y124_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_codauto"]:$this->y124_codauto);
-       $this->y124_numcgm = ($this->y124_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_numcgm"]:$this->y124_numcgm);
-       $this->y124_tipo = ($this->y124_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_tipo"]:$this->y124_tipo);
+       $this->y124_codauto = ($this->y124_codauto === 0 || $this->y124_codauto === 0.0 || $this->y124_codauto == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_codauto"]:$this->y124_codauto);
+       $this->y124_numcgm = ($this->y124_numcgm === 0 || $this->y124_numcgm === 0.0 || $this->y124_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_numcgm"]:$this->y124_numcgm);
+       $this->y124_tipo = ($this->y124_tipo === 0 || $this->y124_tipo === 0.0 || $this->y124_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y124_tipo"]:$this->y124_tipo);
      }
    }
    // funcao para inclusao
@@ -84,7 +84,7 @@ class cl_fis_autorespons {
        $this->y124_codauto = $y124_codauto;
        $this->y124_numcgm  = $y124_numcgm;
        $this->y124_tipo    = $y124_tipo;
-     if(($this->y124_codauto == null) || ($this->y124_codauto == "") ){
+     if(($this->y124_codauto == null) || ($this->y124_codauto === 0 || $this->y124_codauto === 0.0 || $this->y124_codauto == "") ){
        $this->erro_sql = " Campo Código do Auto de Infração nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -92,7 +92,7 @@ class cl_fis_autorespons {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y124_numcgm == null) || ($this->y124_numcgm == "") ){
+     if(($this->y124_numcgm == null) || ($this->y124_numcgm === 0 || $this->y124_numcgm === 0.0 || $this->y124_numcgm == "") ){
        $this->erro_sql = " Campo Numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -100,7 +100,7 @@ class cl_fis_autorespons {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y124_tipo == null) || ($this->y124_tipo == "") || ($this->y124_tipo == 0) ){
+     if(($this->y124_tipo == null) || ($this->y124_tipo === 0 || $this->y124_tipo === 0.0 || $this->y124_tipo == "") || ($this->y124_tipo == 0) ){
        $this->erro_sql = " Campo Tipo nao declarado.";
        $this->erro_banco = "Tipo não informado.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

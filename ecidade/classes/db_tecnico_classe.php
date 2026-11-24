@@ -67,11 +67,11 @@ class cl_tecnico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at03_codatend = ($this->at03_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at03_codatend"]:$this->at03_codatend);
-       $this->at03_id_usuario = ($this->at03_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at03_id_usuario"]:$this->at03_id_usuario);
+       $this->at03_codatend = ($this->at03_codatend === 0 || $this->at03_codatend === 0.0 || $this->at03_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at03_codatend"]:$this->at03_codatend);
+       $this->at03_id_usuario = ($this->at03_id_usuario === 0 || $this->at03_id_usuario === 0.0 || $this->at03_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at03_id_usuario"]:$this->at03_id_usuario);
      }else{
-       $this->at03_codatend = ($this->at03_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at03_codatend"]:$this->at03_codatend);
-       $this->at03_id_usuario = ($this->at03_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at03_id_usuario"]:$this->at03_id_usuario);
+       $this->at03_codatend = ($this->at03_codatend === 0 || $this->at03_codatend === 0.0 || $this->at03_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at03_codatend"]:$this->at03_codatend);
+       $this->at03_id_usuario = ($this->at03_id_usuario === 0 || $this->at03_id_usuario === 0.0 || $this->at03_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at03_id_usuario"]:$this->at03_id_usuario);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_tecnico {
       $this->atualizacampos();
        $this->at03_codatend = $at03_codatend;
        $this->at03_id_usuario = $at03_id_usuario;
-     if(($this->at03_codatend == null) || ($this->at03_codatend == "") ){
+     if(($this->at03_codatend == null) || ($this->at03_codatend === 0 || $this->at03_codatend === 0.0 || $this->at03_codatend == "") ){
        $this->erro_sql = " Campo at03_codatend nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_tecnico {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->at03_id_usuario == null) || ($this->at03_id_usuario == "") ){
+     if(($this->at03_id_usuario == null) || ($this->at03_id_usuario === 0 || $this->at03_id_usuario === 0.0 || $this->at03_id_usuario == "") ){
        $this->erro_sql = " Campo at03_id_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

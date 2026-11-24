@@ -67,10 +67,10 @@ class cl_db_procedcadgrupos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at51_codigo = ($this->at51_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at51_codigo"]:$this->at51_codigo);
+       $this->at51_codigo = ($this->at51_codigo === 0 || $this->at51_codigo === 0.0 || $this->at51_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at51_codigo"]:$this->at51_codigo);
        $this->at51_descr = ($this->at51_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at51_descr"]:$this->at51_descr);
      }else{
-       $this->at51_codigo = ($this->at51_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at51_codigo"]:$this->at51_codigo);
+       $this->at51_codigo = ($this->at51_codigo === 0 || $this->at51_codigo === 0.0 || $this->at51_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at51_codigo"]:$this->at51_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_db_procedcadgrupos {
          $this->at51_codigo = $at51_codigo;
        }
      }
-     if(($this->at51_codigo == null) || ($this->at51_codigo == "") ){
+     if(($this->at51_codigo == null) || ($this->at51_codigo === 0 || $this->at51_codigo === 0.0 || $this->at51_codigo == "") ){
        $this->erro_sql = " Campo at51_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

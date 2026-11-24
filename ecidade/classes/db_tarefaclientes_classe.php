@@ -69,11 +69,11 @@ class cl_tarefaclientes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at70_sequencial = ($this->at70_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at70_sequencial"]:$this->at70_sequencial);
-       $this->at70_tarefa = ($this->at70_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at70_tarefa"]:$this->at70_tarefa);
-       $this->at70_cliente = ($this->at70_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at70_cliente"]:$this->at70_cliente);
+       $this->at70_sequencial = ($this->at70_sequencial === 0 || $this->at70_sequencial === 0.0 || $this->at70_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at70_sequencial"]:$this->at70_sequencial);
+       $this->at70_tarefa = ($this->at70_tarefa === 0 || $this->at70_tarefa === 0.0 || $this->at70_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at70_tarefa"]:$this->at70_tarefa);
+       $this->at70_cliente = ($this->at70_cliente === 0 || $this->at70_cliente === 0.0 || $this->at70_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at70_cliente"]:$this->at70_cliente);
      }else{
-       $this->at70_sequencial = ($this->at70_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at70_sequencial"]:$this->at70_sequencial);
+       $this->at70_sequencial = ($this->at70_sequencial === 0 || $this->at70_sequencial === 0.0 || $this->at70_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at70_sequencial"]:$this->at70_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tarefaclientes {
          $this->at70_sequencial = $at70_sequencial;
        }
      }
-     if(($this->at70_sequencial == null) || ($this->at70_sequencial == "") ){
+     if(($this->at70_sequencial == null) || ($this->at70_sequencial === 0 || $this->at70_sequencial === 0.0 || $this->at70_sequencial == "") ){
        $this->erro_sql = " Campo at70_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

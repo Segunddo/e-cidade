@@ -80,11 +80,11 @@ class cl_obrastec {
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ob15_sequencial = ($this->ob15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_sequencial"]:$this->ob15_sequencial);
-       $this->ob15_numcgm = ($this->ob15_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_numcgm"]:$this->ob15_numcgm);
+       $this->ob15_sequencial = ($this->ob15_sequencial === 0 || $this->ob15_sequencial === 0.0 || $this->ob15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_sequencial"]:$this->ob15_sequencial);
+       $this->ob15_numcgm = ($this->ob15_numcgm === 0 || $this->ob15_numcgm === 0.0 || $this->ob15_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_numcgm"]:$this->ob15_numcgm);
        $this->ob15_crea = ($this->ob15_crea == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_crea"]:$this->ob15_crea);
-       $this->ob15_tipo = ($this->ob15_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_tipo"]:$this->ob15_tipo);
-       $this->ob15_profissao = ($this->ob15_profissao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_profissao"]:$this->ob15_profissao);
+       $this->ob15_tipo = ($this->ob15_tipo === 0 || $this->ob15_tipo === 0.0 || $this->ob15_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_tipo"]:$this->ob15_tipo);
+       $this->ob15_profissao = ($this->ob15_profissao === 0 || $this->ob15_profissao === 0.0 || $this->ob15_profissao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_profissao"]:$this->ob15_profissao);
        if($this->ob15_datalimite == ""){
          $this->ob15_datalimite_dia = ($this->ob15_datalimite_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_datalimite_dia"]:$this->ob15_datalimite_dia);
          $this->ob15_datalimite_mes = ($this->ob15_datalimite_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_datalimite_mes"]:$this->ob15_datalimite_mes);
@@ -94,7 +94,7 @@ class cl_obrastec {
          }
        }
      }else{
-       $this->ob15_sequencial = ($this->ob15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_sequencial"]:$this->ob15_sequencial);
+       $this->ob15_sequencial = ($this->ob15_sequencial === 0 || $this->ob15_sequencial === 0.0 || $this->ob15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ob15_sequencial"]:$this->ob15_sequencial);
      }
    }
 
@@ -162,7 +162,7 @@ class cl_obrastec {
          $this->ob15_sequencial = $ob15_sequencial; 
        }
      }
-     if(($this->ob15_sequencial == null) || ($this->ob15_sequencial == "") ){ 
+     if(($this->ob15_sequencial == null) || ($this->ob15_sequencial === 0 || $this->ob15_sequencial === 0.0 || $this->ob15_sequencial == "") ){ 
        $this->erro_sql = " Campo ob15_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

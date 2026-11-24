@@ -67,10 +67,10 @@ class cl_tarefaprevisaocadfase {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at84_sequencial = ($this->at84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_sequencial"]:$this->at84_sequencial);
+       $this->at84_sequencial = ($this->at84_sequencial === 0 || $this->at84_sequencial === 0.0 || $this->at84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_sequencial"]:$this->at84_sequencial);
        $this->at84_descricao = ($this->at84_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_descricao"]:$this->at84_descricao);
      }else{
-       $this->at84_sequencial = ($this->at84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_sequencial"]:$this->at84_sequencial);
+       $this->at84_sequencial = ($this->at84_sequencial === 0 || $this->at84_sequencial === 0.0 || $this->at84_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_sequencial"]:$this->at84_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tarefaprevisaocadfase {
          $this->at84_sequencial = $at84_sequencial;
        }
      }
-     if(($this->at84_sequencial == null) || ($this->at84_sequencial == "") ){
+     if(($this->at84_sequencial == null) || ($this->at84_sequencial === 0 || $this->at84_sequencial === 0.0 || $this->at84_sequencial == "") ){
        $this->erro_sql = " Campo at84_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

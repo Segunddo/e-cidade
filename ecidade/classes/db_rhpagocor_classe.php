@@ -78,10 +78,10 @@ class cl_rhpagocor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh58_codigo = ($this->rh58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_codigo"]:$this->rh58_codigo);
-       $this->rh58_seq = ($this->rh58_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_seq"]:$this->rh58_seq);
-       $this->rh58_tipoocor = ($this->rh58_tipoocor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_tipoocor"]:$this->rh58_tipoocor);
-       $this->rh58_valor = ($this->rh58_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_valor"]:$this->rh58_valor);
+       $this->rh58_codigo = ($this->rh58_codigo === 0 || $this->rh58_codigo === 0.0 || $this->rh58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_codigo"]:$this->rh58_codigo);
+       $this->rh58_seq = ($this->rh58_seq === 0 || $this->rh58_seq === 0.0 || $this->rh58_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_seq"]:$this->rh58_seq);
+       $this->rh58_tipoocor = ($this->rh58_tipoocor === 0 || $this->rh58_tipoocor === 0.0 || $this->rh58_tipoocor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_tipoocor"]:$this->rh58_tipoocor);
+       $this->rh58_valor = ($this->rh58_valor === 0 || $this->rh58_valor === 0.0 || $this->rh58_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_valor"]:$this->rh58_valor);
        $this->rh58_obs = ($this->rh58_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_obs"]:$this->rh58_obs);
        if($this->rh58_data == ""){
          $this->rh58_data_dia = ($this->rh58_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_data_dia"]:$this->rh58_data_dia);
@@ -92,7 +92,7 @@ class cl_rhpagocor {
          }
        }
      }else{
-       $this->rh58_codigo = ($this->rh58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_codigo"]:$this->rh58_codigo);
+       $this->rh58_codigo = ($this->rh58_codigo === 0 || $this->rh58_codigo === 0.0 || $this->rh58_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh58_codigo"]:$this->rh58_codigo);
      }
    }
    // funcao para inclusao
@@ -158,7 +158,7 @@ class cl_rhpagocor {
          $this->rh58_codigo = $rh58_codigo;
        }
      }
-     if(($this->rh58_codigo == null) || ($this->rh58_codigo == "") ){
+     if(($this->rh58_codigo == null) || ($this->rh58_codigo === 0 || $this->rh58_codigo === 0.0 || $this->rh58_codigo == "") ){
        $this->erro_sql = " Campo rh58_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

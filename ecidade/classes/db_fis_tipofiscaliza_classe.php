@@ -73,11 +73,11 @@ class cl_fis_tipofiscaliza
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y27_codtipo = ($this->y27_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
+            $this->y27_codtipo = ($this->y27_codtipo === 0 || $this->y27_codtipo === 0.0 || $this->y27_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
             $this->y27_descr = ($this->y27_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_descr"]:$this->y27_descr);
-            $this->y27_instit = ($this->y27_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_instit"]:$this->y27_instit);
+            $this->y27_instit = ($this->y27_instit === 0 || $this->y27_instit === 0.0 || $this->y27_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_instit"]:$this->y27_instit);
         } else {
-            $this->y27_codtipo = ($this->y27_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
+            $this->y27_codtipo = ($this->y27_codtipo === 0 || $this->y27_codtipo === 0.0 || $this->y27_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y27_codtipo"]:$this->y27_codtipo);
         }
     }
     // funcao para inclusao

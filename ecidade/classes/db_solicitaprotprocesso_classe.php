@@ -69,11 +69,11 @@ class cl_solicitaprotprocesso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc90_sequencial = ($this->pc90_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc90_sequencial"]:$this->pc90_sequencial);
-       $this->pc90_solicita = ($this->pc90_solicita == ""?@$GLOBALS["HTTP_POST_VARS"]["pc90_solicita"]:$this->pc90_solicita);
+       $this->pc90_sequencial = ($this->pc90_sequencial === 0 || $this->pc90_sequencial === 0.0 || $this->pc90_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc90_sequencial"]:$this->pc90_sequencial);
+       $this->pc90_solicita = ($this->pc90_solicita === 0 || $this->pc90_solicita === 0.0 || $this->pc90_solicita == ""?@$GLOBALS["HTTP_POST_VARS"]["pc90_solicita"]:$this->pc90_solicita);
        $this->pc90_numeroprocesso = ($this->pc90_numeroprocesso == ""?@$GLOBALS["HTTP_POST_VARS"]["pc90_numeroprocesso"]:$this->pc90_numeroprocesso);
      }else{
-       $this->pc90_sequencial = ($this->pc90_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc90_sequencial"]:$this->pc90_sequencial);
+       $this->pc90_sequencial = ($this->pc90_sequencial === 0 || $this->pc90_sequencial === 0.0 || $this->pc90_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc90_sequencial"]:$this->pc90_sequencial);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_solicitaprotprocesso {
          $this->pc90_sequencial = $pc90_sequencial;
        }
      }
-     if(($this->pc90_sequencial == null) || ($this->pc90_sequencial == "") ){
+     if(($this->pc90_sequencial == null) || ($this->pc90_sequencial === 0 || $this->pc90_sequencial === 0.0 || $this->pc90_sequencial == "") ){
        $this->erro_sql = " Campo pc90_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -78,14 +78,14 @@ class cl_rhpesbanco {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh44_seqpes = ($this->rh44_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh44_seqpes"]:$this->rh44_seqpes);
+       $this->rh44_seqpes = ($this->rh44_seqpes === 0 || $this->rh44_seqpes === 0.0 || $this->rh44_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh44_seqpes"]:$this->rh44_seqpes);
        $this->rh44_codban = ($this->rh44_codban == ""?@$GLOBALS["HTTP_POST_VARS"]["rh44_codban"]:$this->rh44_codban);
        $this->rh44_agencia = ($this->rh44_agencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh44_agencia"]:$this->rh44_agencia);
        $this->rh44_dvagencia = ($this->rh44_dvagencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh44_dvagencia"]:$this->rh44_dvagencia);
        $this->rh44_conta = ($this->rh44_conta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh44_conta"]:$this->rh44_conta);
        $this->rh44_dvconta = ($this->rh44_dvconta == ""?@$GLOBALS["HTTP_POST_VARS"]["rh44_dvconta"]:$this->rh44_dvconta);
      }else{
-       $this->rh44_seqpes = ($this->rh44_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh44_seqpes"]:$this->rh44_seqpes);
+       $this->rh44_seqpes = ($this->rh44_seqpes === 0 || $this->rh44_seqpes === 0.0 || $this->rh44_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh44_seqpes"]:$this->rh44_seqpes);
      }
    }
    function atualiza_incluir (){
@@ -140,7 +140,7 @@ class cl_rhpesbanco {
        return false;
      }
        $this->rh44_seqpes = $rh44_seqpes;
-     if(($this->rh44_seqpes == null) || ($this->rh44_seqpes == "") ){
+     if(($this->rh44_seqpes == null) || ($this->rh44_seqpes === 0 || $this->rh44_seqpes === 0.0 || $this->rh44_seqpes == "") ){
        $this->erro_sql = " Campo rh44_seqpes nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

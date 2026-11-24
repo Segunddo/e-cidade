@@ -71,12 +71,12 @@ class cl_rhavaliacaotipoavaliacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h76_sequencial = ($this->h76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h76_sequencial"]:$this->h76_sequencial);
-       $this->h76_rhtipoavaliacao = ($this->h76_rhtipoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h76_rhtipoavaliacao"]:$this->h76_rhtipoavaliacao);
-       $this->h76_rhavaliacao = ($this->h76_rhavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h76_rhavaliacao"]:$this->h76_rhavaliacao);
-       $this->h76_pontos = ($this->h76_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["h76_pontos"]:$this->h76_pontos);
+       $this->h76_sequencial = ($this->h76_sequencial === 0 || $this->h76_sequencial === 0.0 || $this->h76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h76_sequencial"]:$this->h76_sequencial);
+       $this->h76_rhtipoavaliacao = ($this->h76_rhtipoavaliacao === 0 || $this->h76_rhtipoavaliacao === 0.0 || $this->h76_rhtipoavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h76_rhtipoavaliacao"]:$this->h76_rhtipoavaliacao);
+       $this->h76_rhavaliacao = ($this->h76_rhavaliacao === 0 || $this->h76_rhavaliacao === 0.0 || $this->h76_rhavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h76_rhavaliacao"]:$this->h76_rhavaliacao);
+       $this->h76_pontos = ($this->h76_pontos === 0 || $this->h76_pontos === 0.0 || $this->h76_pontos == ""?@$GLOBALS["HTTP_POST_VARS"]["h76_pontos"]:$this->h76_pontos);
      }else{
-       $this->h76_sequencial = ($this->h76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h76_sequencial"]:$this->h76_sequencial);
+       $this->h76_sequencial = ($this->h76_sequencial === 0 || $this->h76_sequencial === 0.0 || $this->h76_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h76_sequencial"]:$this->h76_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_rhavaliacaotipoavaliacao {
          $this->h76_sequencial = $h76_sequencial;
        }
      }
-     if(($this->h76_sequencial == null) || ($this->h76_sequencial == "") ){
+     if(($this->h76_sequencial == null) || ($this->h76_sequencial === 0 || $this->h76_sequencial === 0.0 || $this->h76_sequencial == "") ){
        $this->erro_sql = " Campo h76_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

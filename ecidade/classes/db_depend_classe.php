@@ -88,9 +88,9 @@ class cl_depend {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r03_anousu = ($this->r03_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_anousu"]:$this->r03_anousu);
-       $this->r03_mesusu = ($this->r03_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_mesusu"]:$this->r03_mesusu);
-       $this->r03_regist = ($this->r03_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_regist"]:$this->r03_regist);
+       $this->r03_anousu = ($this->r03_anousu === 0 || $this->r03_anousu === 0.0 || $this->r03_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_anousu"]:$this->r03_anousu);
+       $this->r03_mesusu = ($this->r03_mesusu === 0 || $this->r03_mesusu === 0.0 || $this->r03_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_mesusu"]:$this->r03_mesusu);
+       $this->r03_regist = ($this->r03_regist === 0 || $this->r03_regist === 0.0 || $this->r03_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_regist"]:$this->r03_regist);
        $this->r03_nome = ($this->r03_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_nome"]:$this->r03_nome);
        if($this->r03_dtnasc == ""){
          $this->r03_dtnasc_dia = ($this->r03_dtnasc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_dtnasc_dia"]:$this->r03_dtnasc_dia);
@@ -103,13 +103,13 @@ class cl_depend {
        $this->r03_lotac = ($this->r03_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_lotac"]:$this->r03_lotac);
        $this->r03_gparen = ($this->r03_gparen == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_gparen"]:$this->r03_gparen);
        $this->r03_depend = ($this->r03_depend == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_depend"]:$this->r03_depend);
-       $this->r03_seq = ($this->r03_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_seq"]:$this->r03_seq);
+       $this->r03_seq = ($this->r03_seq === 0 || $this->r03_seq === 0.0 || $this->r03_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_seq"]:$this->r03_seq);
        $this->r03_irf = ($this->r03_irf == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_irf"]:$this->r03_irf);
        $this->r03_especi = ($this->r03_especi == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_especi"]:$this->r03_especi);
      }else{
-       $this->r03_anousu = ($this->r03_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_anousu"]:$this->r03_anousu);
-       $this->r03_mesusu = ($this->r03_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_mesusu"]:$this->r03_mesusu);
-       $this->r03_regist = ($this->r03_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_regist"]:$this->r03_regist);
+       $this->r03_anousu = ($this->r03_anousu === 0 || $this->r03_anousu === 0.0 || $this->r03_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_anousu"]:$this->r03_anousu);
+       $this->r03_mesusu = ($this->r03_mesusu === 0 || $this->r03_mesusu === 0.0 || $this->r03_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_mesusu"]:$this->r03_mesusu);
+       $this->r03_regist = ($this->r03_regist === 0 || $this->r03_regist === 0.0 || $this->r03_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_regist"]:$this->r03_regist);
        $this->r03_nome = ($this->r03_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["r03_nome"]:$this->r03_nome);
      }
    }
@@ -183,7 +183,7 @@ class cl_depend {
        $this->r03_mesusu = $r03_mesusu;
        $this->r03_regist = $r03_regist;
        $this->r03_nome = $r03_nome;
-     if(($this->r03_anousu == null) || ($this->r03_anousu == "") ){
+     if(($this->r03_anousu == null) || ($this->r03_anousu === 0 || $this->r03_anousu === 0.0 || $this->r03_anousu == "") ){
        $this->erro_sql = " Campo r03_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -191,7 +191,7 @@ class cl_depend {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r03_mesusu == null) || ($this->r03_mesusu == "") ){
+     if(($this->r03_mesusu == null) || ($this->r03_mesusu === 0 || $this->r03_mesusu === 0.0 || $this->r03_mesusu == "") ){
        $this->erro_sql = " Campo r03_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -199,7 +199,7 @@ class cl_depend {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r03_regist == null) || ($this->r03_regist == "") ){
+     if(($this->r03_regist == null) || ($this->r03_regist === 0 || $this->r03_regist === 0.0 || $this->r03_regist == "") ){
        $this->erro_sql = " Campo r03_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

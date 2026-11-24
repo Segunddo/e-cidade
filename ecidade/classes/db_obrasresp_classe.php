@@ -67,10 +67,10 @@ class cl_obrasresp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob10_codobra = ($this->ob10_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_codobra"]:$this->ob10_codobra);
-       $this->ob10_numcgm = ($this->ob10_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_numcgm"]:$this->ob10_numcgm);
+       $this->ob10_codobra = ($this->ob10_codobra === 0 || $this->ob10_codobra === 0.0 || $this->ob10_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_codobra"]:$this->ob10_codobra);
+       $this->ob10_numcgm = ($this->ob10_numcgm === 0 || $this->ob10_numcgm === 0.0 || $this->ob10_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_numcgm"]:$this->ob10_numcgm);
      }else{
-       $this->ob10_codobra = ($this->ob10_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_codobra"]:$this->ob10_codobra);
+       $this->ob10_codobra = ($this->ob10_codobra === 0 || $this->ob10_codobra === 0.0 || $this->ob10_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob10_codobra"]:$this->ob10_codobra);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_obrasresp {
        return false;
      }
        $this->ob10_codobra = $ob10_codobra;
-     if(($this->ob10_codobra == null) || ($this->ob10_codobra == "") ){
+     if(($this->ob10_codobra == null) || ($this->ob10_codobra === 0 || $this->ob10_codobra === 0.0 || $this->ob10_codobra == "") ){
        $this->erro_sql = " Campo ob10_codobra nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
