@@ -34155,10 +34155,34 @@
       "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
       "quem": "Segundo"
     },
+    "ecidade/classes/materialestoque.model.php": {
+      "desde": "2026-11-24T16:16:16Z",
+      "expira": "2026-11-24T20:16:16Z",
+      "motivo": "Patrimonial lote 2 (PHP8-05): guardas pg_*",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmEntradaOrdemCompra.php": {
+      "desde": "2026-11-24T16:16:16Z",
+      "expira": "2026-11-24T20:16:16Z",
+      "motivo": "Patrimonial lote 2 (PHP8-05): guardas pg_*",
+      "quem": "Segundo"
+    },
     "ecidade/forms/db_frmacordo.php": {
       "desde": "2026-11-24T15:06:19Z",
       "expira": "2026-11-24T19:06:19Z",
       "motivo": "Patrimonial lote 1 (PHP8-05): correcoes da verificacao",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmdespsol.php": {
+      "desde": "2026-11-24T16:16:16Z",
+      "expira": "2026-11-24T20:16:16Z",
+      "motivo": "Patrimonial lote 2 (PHP8-05): guardas pg_*",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmpcfornecon.php": {
+      "desde": "2026-11-24T16:16:16Z",
+      "expira": "2026-11-24T20:16:16Z",
+      "motivo": "Patrimonial lote 2 (PHP8-05): guardas pg_*",
       "quem": "Segundo"
     },
     "ecidade/forms/db_frmvincatendprocpesquisa.php": {
@@ -34177,6 +34201,12 @@
       "desde": "2026-11-24T15:06:19Z",
       "expira": "2026-11-24T19:06:19Z",
       "motivo": "Patrimonial lote 1 (PHP8-05): correcoes da verificacao",
+      "quem": "Segundo"
+    },
+    "ecidade/src/Patrimonial/Patrimonio/Bem/Model/Bem.php": {
+      "desde": "2026-11-24T16:16:16Z",
+      "expira": "2026-11-24T20:16:16Z",
+      "motivo": "Patrimonial lote 2 (PHP8-05): guardas pg_*",
       "quem": "Segundo"
     },
     "ecidade/src/Patrimonial/Protocolo/Container.php": {
