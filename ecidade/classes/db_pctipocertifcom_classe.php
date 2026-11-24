@@ -69,11 +69,11 @@ class cl_pctipocertifcom {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc77_codigo = ($this->pc77_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc77_codigo"]:$this->pc77_codigo);
-       $this->pc77_pctipocertif = ($this->pc77_pctipocertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc77_pctipocertif"]:$this->pc77_pctipocertif);
-       $this->pc77_liccomissao = ($this->pc77_liccomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc77_liccomissao"]:$this->pc77_liccomissao);
+       $this->pc77_codigo = ($this->pc77_codigo === 0 || $this->pc77_codigo === 0.0 || $this->pc77_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc77_codigo"]:$this->pc77_codigo);
+       $this->pc77_pctipocertif = ($this->pc77_pctipocertif === 0 || $this->pc77_pctipocertif === 0.0 || $this->pc77_pctipocertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc77_pctipocertif"]:$this->pc77_pctipocertif);
+       $this->pc77_liccomissao = ($this->pc77_liccomissao === 0 || $this->pc77_liccomissao === 0.0 || $this->pc77_liccomissao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc77_liccomissao"]:$this->pc77_liccomissao);
      }else{
-       $this->pc77_codigo = ($this->pc77_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc77_codigo"]:$this->pc77_codigo);
+       $this->pc77_codigo = ($this->pc77_codigo === 0 || $this->pc77_codigo === 0.0 || $this->pc77_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc77_codigo"]:$this->pc77_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_pctipocertifcom {
          $this->pc77_codigo = $pc77_codigo;
        }
      }
-     if(($this->pc77_codigo == null) || ($this->pc77_codigo == "") ){
+     if(($this->pc77_codigo == null) || ($this->pc77_codigo === 0 || $this->pc77_codigo === 0.0 || $this->pc77_codigo == "") ){
        $this->erro_sql = " Campo pc77_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

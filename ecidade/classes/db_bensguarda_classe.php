@@ -78,9 +78,9 @@ class cl_bensguarda {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t21_codigo = ($this->t21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_codigo"]:$this->t21_codigo);
-       $this->t21_numcgm = ($this->t21_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_numcgm"]:$this->t21_numcgm);
-       $this->t21_tipoguarda = ($this->t21_tipoguarda == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_tipoguarda"]:$this->t21_tipoguarda);
+       $this->t21_codigo = ($this->t21_codigo === 0 || $this->t21_codigo === 0.0 || $this->t21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_codigo"]:$this->t21_codigo);
+       $this->t21_numcgm = ($this->t21_numcgm === 0 || $this->t21_numcgm === 0.0 || $this->t21_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_numcgm"]:$this->t21_numcgm);
+       $this->t21_tipoguarda = ($this->t21_tipoguarda === 0 || $this->t21_tipoguarda === 0.0 || $this->t21_tipoguarda == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_tipoguarda"]:$this->t21_tipoguarda);
        if($this->t21_data == ""){
          $this->t21_data_dia = ($this->t21_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_data_dia"]:$this->t21_data_dia);
          $this->t21_data_mes = ($this->t21_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_data_mes"]:$this->t21_data_mes);
@@ -90,9 +90,9 @@ class cl_bensguarda {
          }
        }
        $this->t21_obs = ($this->t21_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_obs"]:$this->t21_obs);
-       $this->t21_instit = ($this->t21_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_instit"]:$this->t21_instit);
+       $this->t21_instit = ($this->t21_instit === 0 || $this->t21_instit === 0.0 || $this->t21_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_instit"]:$this->t21_instit);
      }else{
-       $this->t21_codigo = ($this->t21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_codigo"]:$this->t21_codigo);
+       $this->t21_codigo = ($this->t21_codigo === 0 || $this->t21_codigo === 0.0 || $this->t21_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t21_codigo"]:$this->t21_codigo);
      }
    }
    // funcao para inclusao
@@ -158,7 +158,7 @@ class cl_bensguarda {
          $this->t21_codigo = $t21_codigo;
        }
      }
-     if(($this->t21_codigo == null) || ($this->t21_codigo == "") ){
+     if(($this->t21_codigo == null) || ($this->t21_codigo === 0 || $this->t21_codigo === 0.0 || $this->t21_codigo == "") ){
        $this->erro_sql = " Campo t21_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

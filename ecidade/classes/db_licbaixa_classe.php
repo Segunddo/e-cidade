@@ -88,7 +88,7 @@ class cl_licbaixa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l28_sequencial = ($this->l28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_sequencial"]:$this->l28_sequencial);
+       $this->l28_sequencial = ($this->l28_sequencial === 0 || $this->l28_sequencial === 0.0 || $this->l28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_sequencial"]:$this->l28_sequencial);
        $this->l28_nome = ($this->l28_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_nome"]:$this->l28_nome);
        $this->l28_cnpj = ($this->l28_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_cnpj"]:$this->l28_cnpj);
        $this->l28_email = ($this->l28_email == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_email"]:$this->l28_email);
@@ -105,9 +105,9 @@ class cl_licbaixa {
        }
        $this->l28_hora = ($this->l28_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_hora"]:$this->l28_hora);
        $this->l28_ip = ($this->l28_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_ip"]:$this->l28_ip);
-       $this->l28_liclicita = ($this->l28_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_liclicita"]:$this->l28_liclicita);
+       $this->l28_liclicita = ($this->l28_liclicita === 0 || $this->l28_liclicita === 0.0 || $this->l28_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_liclicita"]:$this->l28_liclicita);
      }else{
-       $this->l28_sequencial = ($this->l28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_sequencial"]:$this->l28_sequencial);
+       $this->l28_sequencial = ($this->l28_sequencial === 0 || $this->l28_sequencial === 0.0 || $this->l28_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l28_sequencial"]:$this->l28_sequencial);
      }
    }
    // funcao para inclusao
@@ -218,7 +218,7 @@ class cl_licbaixa {
          $this->l28_sequencial = $l28_sequencial;
        }
      }
-     if(($this->l28_sequencial == null) || ($this->l28_sequencial == "") ){
+     if(($this->l28_sequencial == null) || ($this->l28_sequencial === 0 || $this->l28_sequencial === 0.0 || $this->l28_sequencial == "") ){
        $this->erro_sql = " Campo l28_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

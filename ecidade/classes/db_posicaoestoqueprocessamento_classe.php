@@ -74,8 +74,8 @@ class cl_posicaoestoqueprocessamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m05_sequencial = ($this->m05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m05_sequencial"]:$this->m05_sequencial);
-       $this->m05_usuario = ($this->m05_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["m05_usuario"]:$this->m05_usuario);
+       $this->m05_sequencial = ($this->m05_sequencial === 0 || $this->m05_sequencial === 0.0 || $this->m05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m05_sequencial"]:$this->m05_sequencial);
+       $this->m05_usuario = ($this->m05_usuario === 0 || $this->m05_usuario === 0.0 || $this->m05_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["m05_usuario"]:$this->m05_usuario);
        if($this->m05_data == ""){
          $this->m05_data_dia = ($this->m05_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["m05_data_dia"]:$this->m05_data_dia);
          $this->m05_data_mes = ($this->m05_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["m05_data_mes"]:$this->m05_data_mes);
@@ -84,9 +84,9 @@ class cl_posicaoestoqueprocessamento {
             $this->m05_data = $this->m05_data_ano."-".$this->m05_data_mes."-".$this->m05_data_dia;
          }
        }
-       $this->m05_instit = ($this->m05_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m05_instit"]:$this->m05_instit);
+       $this->m05_instit = ($this->m05_instit === 0 || $this->m05_instit === 0.0 || $this->m05_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m05_instit"]:$this->m05_instit);
      }else{
-       $this->m05_sequencial = ($this->m05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m05_sequencial"]:$this->m05_sequencial);
+       $this->m05_sequencial = ($this->m05_sequencial === 0 || $this->m05_sequencial === 0.0 || $this->m05_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m05_sequencial"]:$this->m05_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_posicaoestoqueprocessamento {
          $this->m05_sequencial = $m05_sequencial;
        }
      }
-     if(($this->m05_sequencial == null) || ($this->m05_sequencial == "") ){
+     if(($this->m05_sequencial == null) || ($this->m05_sequencial === 0 || $this->m05_sequencial === 0.0 || $this->m05_sequencial == "") ){
        $this->erro_sql = " Campo m05_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,9 +69,9 @@ class cl_pccflicitanum {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l24_instit = ($this->l24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["l24_instit"]:$this->l24_instit);
-       $this->l24_anousu = ($this->l24_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["l24_anousu"]:$this->l24_anousu);
-       $this->l24_numero = ($this->l24_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["l24_numero"]:$this->l24_numero);
+       $this->l24_instit = ($this->l24_instit === 0 || $this->l24_instit === 0.0 || $this->l24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["l24_instit"]:$this->l24_instit);
+       $this->l24_anousu = ($this->l24_anousu === 0 || $this->l24_anousu === 0.0 || $this->l24_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["l24_anousu"]:$this->l24_anousu);
+       $this->l24_numero = ($this->l24_numero === 0 || $this->l24_numero === 0.0 || $this->l24_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["l24_numero"]:$this->l24_numero);
      }else{
      }
    }

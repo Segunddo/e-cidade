@@ -67,11 +67,11 @@ class cl_apolitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t82_codapo = ($this->t82_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codapo"]:$this->t82_codapo);
-       $this->t82_codbem = ($this->t82_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codbem"]:$this->t82_codbem);
+       $this->t82_codapo = ($this->t82_codapo === 0 || $this->t82_codapo === 0.0 || $this->t82_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codapo"]:$this->t82_codapo);
+       $this->t82_codbem = ($this->t82_codbem === 0 || $this->t82_codbem === 0.0 || $this->t82_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codbem"]:$this->t82_codbem);
      }else{
-       $this->t82_codapo = ($this->t82_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codapo"]:$this->t82_codapo);
-       $this->t82_codbem = ($this->t82_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codbem"]:$this->t82_codbem);
+       $this->t82_codapo = ($this->t82_codapo === 0 || $this->t82_codapo === 0.0 || $this->t82_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codapo"]:$this->t82_codapo);
+       $this->t82_codbem = ($this->t82_codbem === 0 || $this->t82_codbem === 0.0 || $this->t82_codbem == ""?@$GLOBALS["HTTP_POST_VARS"]["t82_codbem"]:$this->t82_codbem);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_apolitem {
       $this->atualizacampos();
        $this->t82_codapo = $t82_codapo;
        $this->t82_codbem = $t82_codbem;
-     if(($this->t82_codapo == null) || ($this->t82_codapo == "") ){
+     if(($this->t82_codapo == null) || ($this->t82_codapo === 0 || $this->t82_codapo === 0.0 || $this->t82_codapo == "") ){
        $this->erro_sql = " Campo t82_codapo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_apolitem {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->t82_codbem == null) || ($this->t82_codbem == "") ){
+     if(($this->t82_codbem == null) || ($this->t82_codbem === 0 || $this->t82_codbem === 0.0 || $this->t82_codbem == "") ){
        $this->erro_sql = " Campo t82_codbem nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

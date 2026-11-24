@@ -67,10 +67,10 @@ class cl_situabens {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t70_situac = ($this->t70_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["t70_situac"]:$this->t70_situac);
+       $this->t70_situac = ($this->t70_situac === 0 || $this->t70_situac === 0.0 || $this->t70_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["t70_situac"]:$this->t70_situac);
        $this->t70_descr = ($this->t70_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["t70_descr"]:$this->t70_descr);
      }else{
-       $this->t70_situac = ($this->t70_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["t70_situac"]:$this->t70_situac);
+       $this->t70_situac = ($this->t70_situac === 0 || $this->t70_situac === 0.0 || $this->t70_situac == ""?@$GLOBALS["HTTP_POST_VARS"]["t70_situac"]:$this->t70_situac);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_situabens {
          $this->t70_situac = $t70_situac;
        }
      }
-     if(($this->t70_situac == null) || ($this->t70_situac == "") ){
+     if(($this->t70_situac == null) || ($this->t70_situac === 0 || $this->t70_situac === 0.0 || $this->t70_situac == "") ){
        $this->erro_sql = " Campo t70_situac nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

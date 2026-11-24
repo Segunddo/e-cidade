@@ -69,7 +69,7 @@ class cl_pcobjeto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc02_codobjeto = ($this->pc02_codobjeto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc02_codobjeto"]:$this->pc02_codobjeto);
+       $this->pc02_codobjeto = ($this->pc02_codobjeto === 0 || $this->pc02_codobjeto === 0.0 || $this->pc02_codobjeto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc02_codobjeto"]:$this->pc02_codobjeto);
        $this->pc02_descrobjeto = ($this->pc02_descrobjeto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc02_descrobjeto"]:$this->pc02_descrobjeto);
        $this->pc02_complobjeto = ($this->pc02_complobjeto == ""?@$GLOBALS["HTTP_POST_VARS"]["pc02_complobjeto"]:$this->pc02_complobjeto);
      }else{

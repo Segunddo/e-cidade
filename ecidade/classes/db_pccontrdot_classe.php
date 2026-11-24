@@ -71,13 +71,13 @@ class cl_pccontrdot {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p73_codcontr = ($this->p73_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_codcontr"]:$this->p73_codcontr);
-       $this->p73_anousu = ($this->p73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_anousu"]:$this->p73_anousu);
-       $this->p73_coddot = ($this->p73_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_coddot"]:$this->p73_coddot);
-       $this->p73_valor = ($this->p73_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_valor"]:$this->p73_valor);
+       $this->p73_codcontr = ($this->p73_codcontr === 0 || $this->p73_codcontr === 0.0 || $this->p73_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_codcontr"]:$this->p73_codcontr);
+       $this->p73_anousu = ($this->p73_anousu === 0 || $this->p73_anousu === 0.0 || $this->p73_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_anousu"]:$this->p73_anousu);
+       $this->p73_coddot = ($this->p73_coddot === 0 || $this->p73_coddot === 0.0 || $this->p73_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_coddot"]:$this->p73_coddot);
+       $this->p73_valor = ($this->p73_valor === 0 || $this->p73_valor === 0.0 || $this->p73_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_valor"]:$this->p73_valor);
      }else{
-       $this->p73_codcontr = ($this->p73_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_codcontr"]:$this->p73_codcontr);
-       $this->p73_coddot = ($this->p73_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_coddot"]:$this->p73_coddot);
+       $this->p73_codcontr = ($this->p73_codcontr === 0 || $this->p73_codcontr === 0.0 || $this->p73_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_codcontr"]:$this->p73_codcontr);
+       $this->p73_coddot = ($this->p73_coddot === 0 || $this->p73_coddot === 0.0 || $this->p73_coddot == ""?@$GLOBALS["HTTP_POST_VARS"]["p73_coddot"]:$this->p73_coddot);
      }
    }
    // funcao para inclusao
@@ -103,7 +103,7 @@ class cl_pccontrdot {
      }
        $this->p73_codcontr = $p73_codcontr;
        $this->p73_coddot = $p73_coddot;
-     if(($this->p73_codcontr == null) || ($this->p73_codcontr == "") ){
+     if(($this->p73_codcontr == null) || ($this->p73_codcontr === 0 || $this->p73_codcontr === 0.0 || $this->p73_codcontr == "") ){
        $this->erro_sql = " Campo p73_codcontr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -111,7 +111,7 @@ class cl_pccontrdot {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p73_coddot == null) || ($this->p73_coddot == "") ){
+     if(($this->p73_coddot == null) || ($this->p73_coddot === 0 || $this->p73_coddot === 0.0 || $this->p73_coddot == "") ){
        $this->erro_sql = " Campo p73_coddot nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

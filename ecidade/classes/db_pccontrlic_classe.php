@@ -69,11 +69,11 @@ class cl_pccontrlic {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p75_codcontr = ($this->p75_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p75_codcontr"]:$this->p75_codcontr);
+       $this->p75_codcontr = ($this->p75_codcontr === 0 || $this->p75_codcontr === 0.0 || $this->p75_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p75_codcontr"]:$this->p75_codcontr);
        $this->p75_tipo = ($this->p75_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["p75_tipo"]:$this->p75_tipo);
        $this->p75_numero = ($this->p75_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["p75_numero"]:$this->p75_numero);
      }else{
-       $this->p75_codcontr = ($this->p75_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p75_codcontr"]:$this->p75_codcontr);
+       $this->p75_codcontr = ($this->p75_codcontr === 0 || $this->p75_codcontr === 0.0 || $this->p75_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p75_codcontr"]:$this->p75_codcontr);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_pccontrlic {
        return false;
      }
        $this->p75_codcontr = $p75_codcontr;
-     if(($this->p75_codcontr == null) || ($this->p75_codcontr == "") ){
+     if(($this->p75_codcontr == null) || ($this->p75_codcontr === 0 || $this->p75_codcontr === 0.0 || $this->p75_codcontr == "") ){
        $this->erro_sql = " Campo p75_codcontr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

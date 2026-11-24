@@ -85,9 +85,9 @@ class cl_pcfornecertifdoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc75_codigo = ($this->pc75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_codigo"]:$this->pc75_codigo);
-       $this->pc75_pcfornecertif = ($this->pc75_pcfornecertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_pcfornecertif"]:$this->pc75_pcfornecertif);
-       $this->pc75_pcdoccertif = ($this->pc75_pcdoccertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_pcdoccertif"]:$this->pc75_pcdoccertif);
+       $this->pc75_codigo = ($this->pc75_codigo === 0 || $this->pc75_codigo === 0.0 || $this->pc75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_codigo"]:$this->pc75_codigo);
+       $this->pc75_pcfornecertif = ($this->pc75_pcfornecertif === 0 || $this->pc75_pcfornecertif === 0.0 || $this->pc75_pcfornecertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_pcfornecertif"]:$this->pc75_pcfornecertif);
+       $this->pc75_pcdoccertif = ($this->pc75_pcdoccertif === 0 || $this->pc75_pcdoccertif === 0.0 || $this->pc75_pcdoccertif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_pcdoccertif"]:$this->pc75_pcdoccertif);
        if($this->pc75_validade == ""){
          $this->pc75_validade_dia = ($this->pc75_validade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_validade_dia"]:$this->pc75_validade_dia);
          $this->pc75_validade_mes = ($this->pc75_validade_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_validade_mes"]:$this->pc75_validade_mes);
@@ -98,7 +98,7 @@ class cl_pcfornecertifdoc {
        }
        $this->pc75_obrigatorio = ($this->pc75_obrigatorio == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc75_obrigatorio"]:$this->pc75_obrigatorio);
        $this->pc75_obs = ($this->pc75_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_obs"]:$this->pc75_obs);
-       $this->pc75_apresentado = ($this->pc75_apresentado == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_apresentado"]:$this->pc75_apresentado);
+       $this->pc75_apresentado = ($this->pc75_apresentado === 0 || $this->pc75_apresentado === 0.0 || $this->pc75_apresentado == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_apresentado"]:$this->pc75_apresentado);
        if($this->pc75_dataemissao == ""){
          $this->pc75_dataemissao_dia = ($this->pc75_dataemissao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_dataemissao_dia"]:$this->pc75_dataemissao_dia);
          $this->pc75_dataemissao_mes = ($this->pc75_dataemissao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_dataemissao_mes"]:$this->pc75_dataemissao_mes);
@@ -108,7 +108,7 @@ class cl_pcfornecertifdoc {
          }
        }
      }else{
-       $this->pc75_codigo = ($this->pc75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_codigo"]:$this->pc75_codigo);
+       $this->pc75_codigo = ($this->pc75_codigo === 0 || $this->pc75_codigo === 0.0 || $this->pc75_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc75_codigo"]:$this->pc75_codigo);
      }
    }
    // funcao para inclusao
@@ -186,7 +186,7 @@ class cl_pcfornecertifdoc {
          $this->pc75_codigo = $pc75_codigo;
        }
      }
-     if(($this->pc75_codigo == null) || ($this->pc75_codigo == "") ){
+     if(($this->pc75_codigo == null) || ($this->pc75_codigo === 0 || $this->pc75_codigo === 0.0 || $this->pc75_codigo == "") ){
        $this->erro_sql = " Campo pc75_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

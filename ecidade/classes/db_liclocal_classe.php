@@ -75,14 +75,14 @@ class cl_liclocal {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l26_codigo = ($this->l26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_codigo"]:$this->l26_codigo);
-       $this->l26_lograd = ($this->l26_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_lograd"]:$this->l26_lograd);
-       $this->l26_numero = ($this->l26_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_numero"]:$this->l26_numero);
+       $this->l26_codigo = ($this->l26_codigo === 0 || $this->l26_codigo === 0.0 || $this->l26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_codigo"]:$this->l26_codigo);
+       $this->l26_lograd = ($this->l26_lograd === 0 || $this->l26_lograd === 0.0 || $this->l26_lograd == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_lograd"]:$this->l26_lograd);
+       $this->l26_numero = ($this->l26_numero === 0 || $this->l26_numero === 0.0 || $this->l26_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_numero"]:$this->l26_numero);
        $this->l26_compl = ($this->l26_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_compl"]:$this->l26_compl);
-       $this->l26_bairro = ($this->l26_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_bairro"]:$this->l26_bairro);
+       $this->l26_bairro = ($this->l26_bairro === 0 || $this->l26_bairro === 0.0 || $this->l26_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_bairro"]:$this->l26_bairro);
        $this->l26_obs = ($this->l26_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_obs"]:$this->l26_obs);
      }else{
-       $this->l26_codigo = ($this->l26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_codigo"]:$this->l26_codigo);
+       $this->l26_codigo = ($this->l26_codigo === 0 || $this->l26_codigo === 0.0 || $this->l26_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l26_codigo"]:$this->l26_codigo);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_liclocal {
          $this->l26_codigo = $l26_codigo;
        }
      }
-     if(($this->l26_codigo == null) || ($this->l26_codigo == "") ){
+     if(($this->l26_codigo == null) || ($this->l26_codigo === 0 || $this->l26_codigo === 0.0 || $this->l26_codigo == "") ){
        $this->erro_sql = " Campo l26_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

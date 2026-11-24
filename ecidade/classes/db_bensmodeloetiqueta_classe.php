@@ -69,11 +69,11 @@ class cl_bensmodeloetiqueta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t71_sequencial = ($this->t71_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t71_sequencial"]:$this->t71_sequencial);
+       $this->t71_sequencial = ($this->t71_sequencial === 0 || $this->t71_sequencial === 0.0 || $this->t71_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t71_sequencial"]:$this->t71_sequencial);
        $this->t71_descr = ($this->t71_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["t71_descr"]:$this->t71_descr);
        $this->t71_strxml = ($this->t71_strxml == ""?@$GLOBALS["HTTP_POST_VARS"]["t71_strxml"]:$this->t71_strxml);
      }else{
-       $this->t71_sequencial = ($this->t71_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t71_sequencial"]:$this->t71_sequencial);
+       $this->t71_sequencial = ($this->t71_sequencial === 0 || $this->t71_sequencial === 0.0 || $this->t71_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t71_sequencial"]:$this->t71_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_bensmodeloetiqueta {
          $this->t71_sequencial = $t71_sequencial;
        }
      }
-     if(($this->t71_sequencial == null) || ($this->t71_sequencial == "") ){
+     if(($this->t71_sequencial == null) || ($this->t71_sequencial === 0 || $this->t71_sequencial === 0.0 || $this->t71_sequencial == "") ){
        $this->erro_sql = " Campo t71_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

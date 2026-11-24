@@ -76,9 +76,9 @@ class cl_solicitapendencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc91_sequencial = ($this->pc91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc91_sequencial"]:$this->pc91_sequencial);
-       $this->pc91_solicita = ($this->pc91_solicita == ""?@$GLOBALS["HTTP_POST_VARS"]["pc91_solicita"]:$this->pc91_solicita);
-       $this->pc91_usuario = ($this->pc91_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc91_usuario"]:$this->pc91_usuario);
+       $this->pc91_sequencial = ($this->pc91_sequencial === 0 || $this->pc91_sequencial === 0.0 || $this->pc91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc91_sequencial"]:$this->pc91_sequencial);
+       $this->pc91_solicita = ($this->pc91_solicita === 0 || $this->pc91_solicita === 0.0 || $this->pc91_solicita == ""?@$GLOBALS["HTTP_POST_VARS"]["pc91_solicita"]:$this->pc91_solicita);
+       $this->pc91_usuario = ($this->pc91_usuario === 0 || $this->pc91_usuario === 0.0 || $this->pc91_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc91_usuario"]:$this->pc91_usuario);
        $this->pc91_pendencia = ($this->pc91_pendencia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc91_pendencia"]:$this->pc91_pendencia);
        if($this->pc91_datainclusao == ""){
          $this->pc91_datainclusao_dia = ($this->pc91_datainclusao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc91_datainclusao_dia"]:$this->pc91_datainclusao_dia);
@@ -89,7 +89,7 @@ class cl_solicitapendencia {
          }
        }
      }else{
-       $this->pc91_sequencial = ($this->pc91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc91_sequencial"]:$this->pc91_sequencial);
+       $this->pc91_sequencial = ($this->pc91_sequencial === 0 || $this->pc91_sequencial === 0.0 || $this->pc91_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc91_sequencial"]:$this->pc91_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_solicitapendencia {
          $this->pc91_sequencial = $pc91_sequencial;
        }
      }
-     if(($this->pc91_sequencial == null) || ($this->pc91_sequencial == "") ){
+     if(($this->pc91_sequencial == null) || ($this->pc91_sequencial === 0 || $this->pc91_sequencial === 0.0 || $this->pc91_sequencial == "") ){
        $this->erro_sql = " Campo pc91_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

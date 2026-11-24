@@ -67,10 +67,10 @@ class cl_bensmodelo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t66_sequencial = ($this->t66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t66_sequencial"]:$this->t66_sequencial);
+       $this->t66_sequencial = ($this->t66_sequencial === 0 || $this->t66_sequencial === 0.0 || $this->t66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t66_sequencial"]:$this->t66_sequencial);
        $this->t66_descricao = ($this->t66_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["t66_descricao"]:$this->t66_descricao);
      }else{
-       $this->t66_sequencial = ($this->t66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t66_sequencial"]:$this->t66_sequencial);
+       $this->t66_sequencial = ($this->t66_sequencial === 0 || $this->t66_sequencial === 0.0 || $this->t66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["t66_sequencial"]:$this->t66_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_bensmodelo {
          $this->t66_sequencial = $t66_sequencial;
        }
      }
-     if(($this->t66_sequencial == null) || ($this->t66_sequencial == "") ){
+     if(($this->t66_sequencial == null) || ($this->t66_sequencial === 0 || $this->t66_sequencial === 0.0 || $this->t66_sequencial == "") ){
        $this->erro_sql = " Campo t66_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

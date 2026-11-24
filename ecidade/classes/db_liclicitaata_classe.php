@@ -73,13 +73,13 @@ class cl_liclicitaata {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l39_sequencial = ($this->l39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_sequencial"]:$this->l39_sequencial);
-       $this->l39_arquivo = ($this->l39_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_arquivo"]:$this->l39_arquivo);
+       $this->l39_sequencial = ($this->l39_sequencial === 0 || $this->l39_sequencial === 0.0 || $this->l39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_sequencial"]:$this->l39_sequencial);
+       $this->l39_arquivo = ($this->l39_arquivo === 0 || $this->l39_arquivo === 0.0 || $this->l39_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_arquivo"]:$this->l39_arquivo);
        $this->l39_arqnome = ($this->l39_arqnome == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_arqnome"]:$this->l39_arqnome);
-       $this->l39_liclicita = ($this->l39_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_liclicita"]:$this->l39_liclicita);
+       $this->l39_liclicita = ($this->l39_liclicita === 0 || $this->l39_liclicita === 0.0 || $this->l39_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_liclicita"]:$this->l39_liclicita);
        $this->l39_posicaoinicial = ($this->l39_posicaoinicial == "f"?@$GLOBALS["HTTP_POST_VARS"]["l39_posicaoinicial"]:$this->l39_posicaoinicial);
      }else{
-       $this->l39_sequencial = ($this->l39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_sequencial"]:$this->l39_sequencial);
+       $this->l39_sequencial = ($this->l39_sequencial === 0 || $this->l39_sequencial === 0.0 || $this->l39_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l39_sequencial"]:$this->l39_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_liclicitaata {
          $this->l39_sequencial = $l39_sequencial;
        }
      }
-     if(($this->l39_sequencial == null) || ($this->l39_sequencial == "") ){
+     if(($this->l39_sequencial == null) || ($this->l39_sequencial === 0 || $this->l39_sequencial === 0.0 || $this->l39_sequencial == "") ){
        $this->erro_sql = " Campo l39_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

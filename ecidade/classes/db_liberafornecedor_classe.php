@@ -94,9 +94,9 @@ class cl_liberafornecedor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc82_sequencial = ($this->pc82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc82_sequencial"]:$this->pc82_sequencial);
-       $this->pc82_id_usuario = ($this->pc82_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc82_id_usuario"]:$this->pc82_id_usuario);
-       $this->pc82_numcgm = ($this->pc82_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc82_numcgm"]:$this->pc82_numcgm);
+       $this->pc82_sequencial = ($this->pc82_sequencial === 0 || $this->pc82_sequencial === 0.0 || $this->pc82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc82_sequencial"]:$this->pc82_sequencial);
+       $this->pc82_id_usuario = ($this->pc82_id_usuario === 0 || $this->pc82_id_usuario === 0.0 || $this->pc82_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc82_id_usuario"]:$this->pc82_id_usuario);
+       $this->pc82_numcgm = ($this->pc82_numcgm === 0 || $this->pc82_numcgm === 0.0 || $this->pc82_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc82_numcgm"]:$this->pc82_numcgm);
        if($this->pc82_dataini == ""){
          $this->pc82_dataini_dia = ($this->pc82_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc82_dataini_dia"]:$this->pc82_dataini_dia);
          $this->pc82_dataini_mes = ($this->pc82_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc82_dataini_mes"]:$this->pc82_dataini_mes);
@@ -127,7 +127,7 @@ class cl_liberafornecedor {
        $this->pc82_liberaaut = ($this->pc82_liberaaut == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc82_liberaaut"]:$this->pc82_liberaaut);
        $this->pc82_ativo = ($this->pc82_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc82_ativo"]:$this->pc82_ativo);
      }else{
-       $this->pc82_sequencial = ($this->pc82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc82_sequencial"]:$this->pc82_sequencial);
+       $this->pc82_sequencial = ($this->pc82_sequencial === 0 || $this->pc82_sequencial === 0.0 || $this->pc82_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["pc82_sequencial"]:$this->pc82_sequencial);
      }
    }
    // funcao para inclusao
@@ -226,7 +226,7 @@ class cl_liberafornecedor {
          $this->pc82_sequencial = $pc82_sequencial;
        }
      }
-     if(($this->pc82_sequencial == null) || ($this->pc82_sequencial == "") ){
+     if(($this->pc82_sequencial == null) || ($this->pc82_sequencial === 0 || $this->pc82_sequencial === 0.0 || $this->pc82_sequencial == "") ){
        $this->erro_sql = " Campo pc82_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

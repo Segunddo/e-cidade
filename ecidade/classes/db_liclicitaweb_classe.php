@@ -82,8 +82,8 @@ class cl_liclicitaweb {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l29_sequencial = ($this->l29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_sequencial"]:$this->l29_sequencial);
-       $this->l29_liclicita = ($this->l29_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_liclicita"]:$this->l29_liclicita);
+       $this->l29_sequencial = ($this->l29_sequencial === 0 || $this->l29_sequencial === 0.0 || $this->l29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_sequencial"]:$this->l29_sequencial);
+       $this->l29_liclicita = ($this->l29_liclicita === 0 || $this->l29_liclicita === 0.0 || $this->l29_liclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_liclicita"]:$this->l29_liclicita);
        if($this->l29_datapublic == ""){
          $this->l29_datapublic_dia = ($this->l29_datapublic_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_datapublic_dia"]:$this->l29_datapublic_dia);
          $this->l29_datapublic_mes = ($this->l29_datapublic_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_datapublic_mes"]:$this->l29_datapublic_mes);
@@ -96,9 +96,9 @@ class cl_liclicitaweb {
        $this->l29_email = ($this->l29_email == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_email"]:$this->l29_email);
        $this->l29_telefone = ($this->l29_telefone == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_telefone"]:$this->l29_telefone);
        $this->l29_obs = ($this->l29_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_obs"]:$this->l29_obs);
-       $this->l29_liberaedital = ($this->l29_liberaedital == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_liberaedital"]:$this->l29_liberaedital);
+       $this->l29_liberaedital = ($this->l29_liberaedital === 0 || $this->l29_liberaedital === 0.0 || $this->l29_liberaedital == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_liberaedital"]:$this->l29_liberaedital);
      }else{
-       $this->l29_sequencial = ($this->l29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_sequencial"]:$this->l29_sequencial);
+       $this->l29_sequencial = ($this->l29_sequencial === 0 || $this->l29_sequencial === 0.0 || $this->l29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l29_sequencial"]:$this->l29_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_liclicitaweb {
          $this->l29_sequencial = $l29_sequencial;
        }
      }
-     if(($this->l29_sequencial == null) || ($this->l29_sequencial == "") ){
+     if(($this->l29_sequencial == null) || ($this->l29_sequencial === 0 || $this->l29_sequencial === 0.0 || $this->l29_sequencial == "") ){
        $this->erro_sql = " Campo l29_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

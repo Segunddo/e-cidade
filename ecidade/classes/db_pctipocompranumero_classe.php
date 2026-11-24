@@ -69,9 +69,9 @@ class cl_pctipocompranumero {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc51_codtipocom = ($this->pc51_codtipocom == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_codtipocom"]:$this->pc51_codtipocom);
-       $this->pc51_anonumer = ($this->pc51_anonumer == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_anonumer"]:$this->pc51_anonumer);
-       $this->pc51_numeracao = ($this->pc51_numeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_numeracao"]:$this->pc51_numeracao);
+       $this->pc51_codtipocom = ($this->pc51_codtipocom === 0 || $this->pc51_codtipocom === 0.0 || $this->pc51_codtipocom == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_codtipocom"]:$this->pc51_codtipocom);
+       $this->pc51_anonumer = ($this->pc51_anonumer === 0 || $this->pc51_anonumer === 0.0 || $this->pc51_anonumer == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_anonumer"]:$this->pc51_anonumer);
+       $this->pc51_numeracao = ($this->pc51_numeracao === 0 || $this->pc51_numeracao === 0.0 || $this->pc51_numeracao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc51_numeracao"]:$this->pc51_numeracao);
      }else{
      }
    }

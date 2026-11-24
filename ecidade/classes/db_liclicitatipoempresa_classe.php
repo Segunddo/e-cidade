@@ -69,11 +69,11 @@ class cl_liclicitatipoempresa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l32_sequencial = ($this->l32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l32_sequencial"]:$this->l32_sequencial);
+       $this->l32_sequencial = ($this->l32_sequencial === 0 || $this->l32_sequencial === 0.0 || $this->l32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l32_sequencial"]:$this->l32_sequencial);
        $this->l32_descricao = ($this->l32_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["l32_descricao"]:$this->l32_descricao);
-       $this->l32_percentual = ($this->l32_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["l32_percentual"]:$this->l32_percentual);
+       $this->l32_percentual = ($this->l32_percentual === 0 || $this->l32_percentual === 0.0 || $this->l32_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["l32_percentual"]:$this->l32_percentual);
      }else{
-       $this->l32_sequencial = ($this->l32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l32_sequencial"]:$this->l32_sequencial);
+       $this->l32_sequencial = ($this->l32_sequencial === 0 || $this->l32_sequencial === 0.0 || $this->l32_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l32_sequencial"]:$this->l32_sequencial);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_liclicitatipoempresa {
        return false;
      }
        $this->l32_sequencial = $l32_sequencial;
-     if(($this->l32_sequencial == null) || ($this->l32_sequencial == "") ){
+     if(($this->l32_sequencial == null) || ($this->l32_sequencial === 0 || $this->l32_sequencial === 0.0 || $this->l32_sequencial == "") ){
        $this->erro_sql = " Campo l32_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

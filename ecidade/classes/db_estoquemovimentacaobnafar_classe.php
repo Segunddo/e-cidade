@@ -49,13 +49,13 @@ class cl_estoquemovimentacaobnafar
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fa69_codigo = ($this->fa69_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_codigo"]:$this->fa69_codigo);
-       $this->fa69_matestoqueini = ($this->fa69_matestoqueini == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_matestoqueini"]:$this->fa69_matestoqueini);
-       $this->fa69_tipomovimentacao = ($this->fa69_tipomovimentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_tipomovimentacao"]:$this->fa69_tipomovimentacao);
-       $this->fa69_cgm = ($this->fa69_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_cgm"]:$this->fa69_cgm);
-       $this->fa69_unidade = ($this->fa69_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_unidade"]:$this->fa69_unidade);
+       $this->fa69_codigo = ($this->fa69_codigo === 0 || $this->fa69_codigo === 0.0 || $this->fa69_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_codigo"]:$this->fa69_codigo);
+       $this->fa69_matestoqueini = ($this->fa69_matestoqueini === 0 || $this->fa69_matestoqueini === 0.0 || $this->fa69_matestoqueini == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_matestoqueini"]:$this->fa69_matestoqueini);
+       $this->fa69_tipomovimentacao = ($this->fa69_tipomovimentacao === 0 || $this->fa69_tipomovimentacao === 0.0 || $this->fa69_tipomovimentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_tipomovimentacao"]:$this->fa69_tipomovimentacao);
+       $this->fa69_cgm = ($this->fa69_cgm === 0 || $this->fa69_cgm === 0.0 || $this->fa69_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_cgm"]:$this->fa69_cgm);
+       $this->fa69_unidade = ($this->fa69_unidade === 0 || $this->fa69_unidade === 0.0 || $this->fa69_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_unidade"]:$this->fa69_unidade);
      }else{
-       $this->fa69_codigo = ($this->fa69_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_codigo"]:$this->fa69_codigo);
+       $this->fa69_codigo = ($this->fa69_codigo === 0 || $this->fa69_codigo === 0.0 || $this->fa69_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa69_codigo"]:$this->fa69_codigo);
      }
    }
 
@@ -110,7 +110,7 @@ class cl_estoquemovimentacaobnafar
          $this->fa69_codigo = $fa69_codigo;
        }
      }
-     if(($this->fa69_codigo == null) || ($this->fa69_codigo == "") ){
+     if(($this->fa69_codigo == null) || ($this->fa69_codigo === 0 || $this->fa69_codigo === 0.0 || $this->fa69_codigo == "") ){
        $this->erro_sql = " Campo fa69_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -439,7 +439,7 @@ class cl_estoquemovimentacaobnafar
      return $sql;
   }
 
-	public function sql_query_estoquemovimentacoesbnafar($iCodigo = null, $sCampos="*", $sOrder, $sWhere)
+	public function sql_query_estoquemovimentacoesbnafar($iCodigo = null, $sCampos="*", $sOrder = null, $sWhere = null)
 	{
 		$sSql  = "select {$sCampos}";
 		$sSql .= " from estoquemovimentacaobnafar";
