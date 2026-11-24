@@ -125,14 +125,17 @@ def candidatas(prefixos):
           "A tabela e a da PRIMEIRA classe que a tela instancia: se a tela gravar outra (ou mais de uma), use --tabelas.")
 
 # Sessao autenticada mais recente do 7.4 (as que tem DB_modulo sao as logadas). O sess_?* exclui um
-# arquivo "sess_" sem identificador (cookie vazio), que dava SID vazio. SID valido tem 40 caracteres.
+# arquivo "sess_" sem identificador (cookie vazio), que dava SID vazio. SID valido tem 40 caracteres:
+# a de 26 vem de pagina aberta sem terminar o login. Fica a primeira de 40, da mais recente para a mais
+# antiga -- olhar so a mais recente desistia quando ela era de 26 (23/11/2026).
 def achar_sessao():
     _, out, _ = sh(["docker", "exec", "-i", "ecidade_php74", "sh", "-c",
-                    "ls -t $(grep -la DB_modulo /var/lib/php/sessions/sess_?*) | head -1"])
-    sid = out.strip().rsplit("sess_", 1)[-1]
-    if len(sid) != 40:
-        erro("nenhuma sessao autenticada. Entre em http://localhost:8090 (dbseller/dbseller) e rode de novo.")
-    return sid
+                    "ls -t $(grep -la DB_modulo /var/lib/php/sessions/sess_?*)"])
+    for l in out.split():
+        sid = l.rsplit("sess_", 1)[-1]
+        if len(sid) == 40:
+            return sid
+    erro("nenhuma sessao autenticada. Entre em http://localhost:8090 (dbseller/dbseller) e rode de novo.")
 
 def preparar_sessao(sid):
     """Guarda a sessao em /tmp/_d.bak (de onde o payload_auto.py a restaura) e faz a prova de fumaca:
