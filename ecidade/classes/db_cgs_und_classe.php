@@ -3096,7 +3096,7 @@ class cl_cgs_und
                 return false;
             }
         }
-        if ($this->z01_b_faleceu != "") {
+        if (($this->z01_b_faleceu != "" && $this->z01_b_faleceu !== 0 && $this->z01_b_faleceu !== 0.0)) {
             $sql .= $virgula . " z01_b_faleceu = '{$this->z01_b_faleceu}' ";
             $virgula = ",";
         }
