@@ -334,22 +334,42 @@ mãe) e as classes `db_iptuconstr`, `db_parissqn`, `db_isscalc`, `db_setorloc` (
 Pendentes do lote: nível 3 (o `escrita_post.py` não enxerga o SQL com o log do banco grande; zerar o log antes) e o
 roteamento (passo 8), deixados para quando o proxy da pilha da raiz estiver disponível.
 
-### Lote 2 — `pat`, `mat`, `lic`, `com` (24/11/2026, EM ANDAMENTO)
+### Lote 2 — `pat`, `mat`, `lic`, `com` (24/11/2026)
 
-- Rector em **109 classes** (534 linhas; construtor de `cl_pctipo`; `= null` em
-  `cl_estoquemovimentacaobnafar::sql_query_estoquemovimentacoesbnafar`, sem filhas).
-- `verifica_lote.py pat-l2` (4.387 arquivos, 1.127 classes): 4b e 5 OK; 5b/6/6b/6c só com os arquivos do Tributário
-  do lote 1; **7: 1.042/1.081 idênticas, 39 divergentes.**
-- `guarda_ciclo.py` nas 39: guarda `pg_*` em **23 arquivos**.
+| Commit | O quê |
+| --- | --- |
+| Rector (`rector_lote.py`) | guarda `0 == ""` em **109 classes** (534 linhas); construtor de `cl_pctipo`; `= null` em `cl_estoquemovimentacaobnafar::sql_query_estoquemovimentacoesbnafar` (sem filhas) |
+| `guarda_ciclo.py` | guarda `pg_*` em **23 arquivos** |
+| à mão | `pg_*` sobre `false` (`com1_pcfornemov001:86`, `pat4_criteriumexportaarquivos002:75`, placa em `forms/db_frmbens.php`); `count(null)` (`pat2_solicitacoesliberadas002`, `pat4_criteriumexportaarquivos002`); `null - ""` (`forms/db_frmseldotac.php`, forma `($x === "" ? 0 : $x)`, igual ao 7.4 nos casos testados); propriedade em `null` (`mat2_controlest011`); `0 == ""` em formulário: `$t06_codcla` (`db_frmbens`, `db_frmbensaltlote`, `db_frm_bensglobal`, `pat2_classifbens001` — o form põe `0` e testa `!= ""`, e no 8.5 a página morria no `exit` de `cl_estrutura::db_mascara`), `$quant_rest == 0` (`db_frmsolicitem`), `$pc11_vlrun != ""` (`db_frmsolicitemiframe`) |
+| à mão (achado no 5b) | `model/impressao.argoxOS214*.php`: `rodarComandos()` sem o parâmetro opcional da mãe (aviso no 7.4, fatal no 8.5); usadas por `pat1_bensmodeloetiqueta002`. O parâmetro é sobrescrito na 1ª linha. |
 
-**Onde paramos (falta):**
-1. 5 casos à mão: `com1_pcfornemov001.php:86` (`pg_result(db_query(...))`, argumento é chamada),
-   `forms/db_frmseldotac.php:53` (`null - string`), `mat2_controlest011.php:93` (propriedade em `null`),
-   `pat2_solicitacoesliberadas002.php:125` e `pat4_criteriumexportaarquivos002.php:68` (`count(null)`).
-2. Reconferir as "silenciosas" (200 nos dois, conteúdo diferente): `com1_pcfornecon001`, `com1_solicitem001`,
-   `com1_solicitemiframe001`, `lic1_trocpcorcamtroca001`, `pat1_bens004/005`, `pat1_bensaltlote001/005`,
-   `pat1_bensglobal001`, `pat2_classifbens001` — várias tinham `pg_*` num formulário incluído e podem ter sido
-   resolvidas pelas guardas.
-3. Rodar `verifica_lote.py pat-l2 pat mat lic com` de novo.
-4. Lote 3 (112 telas do `map`: `TELAS=@ecidade/tmp/pat/lote3_telas.txt enumera.py patl3` → 13 classes `== literal`).
-5. Bateria de regressão do grupo, nível 3, envio e texto do PR (como no Financeiro).
+`verifica_lote.py pat-l2b` (depois das correções): 4b e 5 OK; 5b/6/6b/6c só com os arquivos do Tributário do lote 1
+(e `classes/empenho.php`, do Financeiro: `datausu` `1969-12-31` × data de hoje no 6b, já assim antes); **7: 1.080/1.081
+idênticas.** A restante, `lic1_trocpcorcamtroca001`, difere só no id aleatório do `Sfdump` (mesmo tamanho).
+
+### Lote 3 — as 112 telas de menu de `con`, `pro`, `emp`, `cad`, `cai`, `func` (24/11/2026)
+
+`enumera.py patl3` acusou 19 arquivos; ficaram **12 classes** (`$this->X == literal`). Fora: `db_parissqn` e `libs/JSON.php`
+(concluídos pelo Tributário), `FolhaPagamento*.model.php` (RH), `split(` (núcleo resolve igual nos dois).
+Rector (`GuardaComparacaoLiteralRector`) nas 12; `verifica_lote.py pat-l3 --telas <112>`: 4b, 5, 5b, 6 OK; 6b/6c só
+`db_parissqn`/`empenho.php`; **7: 111/112.** A restante, **`pro4_protprocessovolume`** (500 no 8.5), quebra em
+`classes/db_protparamglobal_classe.php:440` (`pg_fetch_assoc($r, 'p06_tipo')`: no 7.4 aviso e `null`, no 8.5
+`TypeError`). A classe foi **concluída pela Assistência Social (Diego, PHP8-04)**: avisado, não tocado.
+
+### Bateria do grupo, nível 3 e quadro (24/11/2026)
+
+**Bateria** (`python -m regressao.php.bateria --area patrimonial --prefixo "$RX"`, `RX` = prefixos dos lotes 1 e 2 +
+as 112 telas do lote 3, em `ecidade/tmp/pat/rx_area.txt`; `baseline.dump` sha256 `9725157…0fad`; árvore limpa):
+**3.604 casos — 3.530 IDÊNTICOS, 2 DIVERGE, 72 INCONCLUSIVOS, 0 ERRO_AMBIENTE** (16 min). As 2: `lic1_trocpcorcamtroca001`
+(Sfdump) e `pro4_protprocessovolume` (classe da Assistência Social, acima). Os inconclusivos são página de erro ou
+resposta vazia iguais nos dois lados.
+
+**Nível 3** (`nivel3.py` lendo o log pelo fim, `post_tail.py`): SQL de escrita **idêntico** em `vei1_veiccadcor001`,
+`ouv1_ouvidoriaparametro001`, `aco1_acordocategoria001`, `pat1_situabens001`, `mat1_matunid001`, `mat1_matfabricante001`,
+`lic1_licsituacao001`, `com1_pcgrupo001` e `pro1_procdoc001` (classe do lote 3). Banco conferido sem sobra. PNCP
+não testado (integração com serviço externo). `mat1_matestoquetipo001` não grava em nenhum dos dois (a classe exige
+campos que o formulário não tem).
+
+**Quadro:** 252 arquivos marcados como concluídos (PHP8-05). Nenhuma entrada de outra pessoa alterada.
+
+**Não feito:** roteamento (passo 8) — mesma situação do Financeiro; o proxy do e74 manda tudo ao 7.4.
