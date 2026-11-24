@@ -50,8 +50,8 @@ if($clsolicitem->numrows>0){
 $result_dotacvlqnt = $clpcdotac->sql_record($clpcdotac->sql_query_file($pc13_codigo,null,null,"sum(pc13_quant) as pc13_quantmax,sum(pc13_valor) as pc13_valormax"));
 if($clpcdotac->numrows>0){
   db_fieldsmemory($result_dotacvlqnt,0);
-  $pc13_quantmax = $pc11_quant - $pc13_quantmax;
-  $pc13_valormax = $pc11_vlrun - $pc13_valormax;
+  $pc13_quantmax = ($pc11_quant === "" ? 0 : $pc11_quant) - ($pc13_quantmax === "" ? 0 : $pc13_quantmax);
+  $pc13_valormax = ($pc11_vlrun === "" ? 0 : $pc11_vlrun) - ($pc13_valormax === "" ? 0 : $pc13_valormax);
 }else if(isset($pc11_quant) && isset($pc11_vlrun)){
   $pc13_quantmax = $pc11_quant;
   $pc13_valormax = $pc11_vlrun;

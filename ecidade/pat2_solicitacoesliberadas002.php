@@ -122,7 +122,7 @@ switch ($oGet->iSituacao) {
     break;
 }
 
-if (count($oGet->aDepartamentos) > 0) {
+if (count((array)$oGet->aDepartamentos) > 0) {
   
   $sWhereBuscaSolicitacoes .= " pc10_depto IN ( ";
   foreach ($oGet->aDepartamentos as $iDepartameto) {

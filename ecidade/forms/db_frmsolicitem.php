@@ -616,7 +616,7 @@ if (isset($pc11_codigo) && $pc11_codigo != '') {
   <center>
     <?php
     $des = "false";
-    if (isset ($quant_rest) && $quant_rest == 0) {
+    if (isset ($quant_rest) && ($quant_rest == 0 || (is_string($quant_rest) && !is_numeric($quant_rest)))) {
       $des = "true";
     }
     $qry = "pc11_numero=" . @$pc11_numero;
