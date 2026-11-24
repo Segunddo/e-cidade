@@ -143,7 +143,6 @@ comentários.
 | `enumera.py` | só segue `include`/`require` de arquivos `.php`; os `.class` e `.inc` do `dbagata/` ficam fora do universo (issue #31) | as classes do Agata não passam pelos passos 5 a 6c |
 | `enumera.py` | não tem detector de ternário aninhado sem parênteses (`a ? b : c ? d : e`) | um arquivo que só tem isso não entra nos alvos do Rector; o `php -l` do 8.5 (passo 5) é quem acusa |
 | `rector-curado.php` | a `ParenthesizeNestedTernaryRector` só parentesa o nível de fora: com três níveis o resultado continua não compilando no 8.5, e a passada seguinte diz "nada a mudar" (medido em 23/11/2026 no `Falta.php` do ponto eletrônico) | o Rector termina sem erro com o arquivo quebrado; corrigir à mão (receituário do guia) |
-| `verifica_lote.py` | no passo 6, o artefato do `empenho.php` (campo `datausu`, `1969-12-31` sem sessão) não é filtrado: o filtro só pega a linha do campo, que existe no 6b | o `empenho.php` aparece como divergente no 6 sem defeito (conferido em 22/11/2026) |
 | `nivel3.py` | o `--candidatas` classifica como "boa" uma tela que grava por RPC | o teste sai `INCONCLUSIVO`; trocar de tela |
 | `nivel3.py` | não reconhece a partição `db_logsacessa_AAAAMM_N` como tabela de log | avisa "escrita em outra tabela" por causa do log de acesso, não de dado de teste |
 
@@ -170,6 +169,14 @@ comentários.
 | Arquivo | Defeito | Como foi conferido |
 | --- | --- | --- |
 | `escrita_post.py` | o restore apagava as tabelas na ordem do `--tabelas`: com a mãe antes da filha, o `DELETE` esbarrava na FK, o teste abortava depois do POST do 7.4 e deixava a linha de teste no banco. Agora `filhas_primeiro()` ordena pelas FKs (commit `52438e311`) | `hab1_workflowativ001` com a mãe primeiro: IDÊNTICO, sem abortar; banco restaurado |
+
+**Corrigidos em 23/11/2026**, achados no teste da Educação e das PRs:
+
+| Arquivo | Defeito | Como foi conferido |
+| --- | --- | --- |
+| `enumera.py` | o detector de `$this->X == "<literal>"` contava também a forma já guardada (`$this->X === 0 \|\| ... \|\| $this->X == ""`): toda classe portada voltava a ser alvo. Agora pula a comparação com `=== 0` na mesma linha, e grava `tmp/<pref>_categorias.tsv` | `mer`: de 5.914 ocorrências em 931 arquivos para 251 em 44, o mesmo de uma contagem independente; universo idêntico |
+| `instancia_classes.php` | sem sessão, `date("Y-m-d", db_getsession("DB_datausu"))` dava `1969-12-31` no 7.4 e hoje no 8.5: o `empenho.php` aparecia divergente no passo 6. Agora o harness fixa `DB_datausu` | `empenho` igual nos dois; controle: a `db_relac` com o construtor PHP 4 antigo continua divergente |
+| `verifica_lote.py`, `nivel3.py` | olhavam só a sessão mais recente e desistiam quando ela tinha 26 caracteres (página aberta sem login completo). Agora ficam com a primeira de 40 | simulação: 26 primeiro e 40 depois dá a de 40; só 26 dá o erro |
 
 ## Testes (`testes/`)
 

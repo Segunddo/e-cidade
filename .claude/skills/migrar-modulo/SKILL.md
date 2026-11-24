@@ -68,8 +68,10 @@ moldura estão em `docs/migrar-um-modulo.md`, seção *O fluxo de uma área*. Os
   plantar um defeito que quebra de verdade, use `array_find()` (8.4).
 - Nível 3: passe todas as tabelas em `--tabelas`, em qualquer ordem (o restore vai das filhas às mães). `INCONCLUSIVO`
   por falta de registro pai: passe `--payload` com um pai que exista no banco.
-- Passo 6: o `empenho.php` aparece com assinatura diferente só por causa do `datausu` (o harness roda sem sessão). É
-  artefato; o filtro do script ainda não o pega no passo 6.
+- Passo 6: até 23/11/2026, o `empenho.php` aparecia com assinatura diferente só por causa do `datausu` (o harness
+  rodava sem sessão). Agora o `instancia_classes.php` fixa a data de sessão, e ele sai igual nos dois.
+- `enumera.py`: desde 23/11/2026 não conta como "a alterar" a comparação que já tem a guarda `=== 0`, e grava
+  `tmp/<pref>_categorias.tsv`. `verifica_lote.py` e `nivel3.py` pegam a sessão de 40 caracteres mais recente.
 
 **Nunca alterar `docker-compose.yml`** — é a referência funcional.
 **Nunca commitar** `docker/database/ecidade_base.sql` (314 MB) nem encenar a remoção do `.gz`.

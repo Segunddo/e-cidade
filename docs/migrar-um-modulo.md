@@ -425,9 +425,11 @@ ls ecidade | grep -ioE '^<pref>[a-z]*[0-9]*_' | sort -u
 > universo hoje sai bem maior — a 9ª frente segue as classes com namespace de `src/` até `classes/` (no lote 1 de
 > Patrimonial, de 1.727 para 2.801 arquivos). É normal: a maior parte já está paga.
 >
-> **`A ALTERAR` é uma cota superior, não o que o Rector vai mudar.** O detector de `$this->X == <literal>` casa com a
-> própria guarda já aplicada (ver *As armadilhas*), então arquivos já portados voltam na lista. No `soc` (12/11/2026):
-> `A ALTERAR: 20`, e o Rector mudou **3**. Quem diz o número real é o passo 4.
+> **`A ALTERAR` é uma cota superior, não o que o Rector vai mudar.** Até 23/11/2026, o detector de `$this->X == <literal>`
+> casava com a própria guarda já aplicada (ver *As armadilhas*), então arquivos já portados voltavam na lista. No `soc`
+> (12/11/2026): `A ALTERAR: 20`, e o Rector mudou **3**; no `mer` (22/11/2026), 934 contra 49 de verdade. Desde
+> 23/11/2026 ele pula a comparação com a guarda `=== 0` na mesma linha, e grava os alvos por categoria em
+> `ecidade/tmp/<pref>_categorias.tsv`. Mesmo assim, quem diz o número real é o passo 4.
 
 ### Por que nove frentes, e não só o prefixo
 
@@ -1011,7 +1013,7 @@ registrados em Patrimonial, Financeiro e Saúde; o último na Assistência Socia
 | --- | --- | --- |
 | `RequisicaoMaterial`, `solicitacaoCompra` | `ArgumentCountError` só no 8.5 | o harness faz `new X()` sem argumentos e o construtor exige um; o 7.4 só avisava. O sistema sempre passa o argumento |
 | `cl_avaliacaogruporespostatrabalhointermitente` | `ERRO ... .dd.xml não encontrado` só no 8.5, e um "pulado" a mais no 7.4 | o construtor lança exceção por falta de um arquivo da base; o 8.5 a captura, o 7.4 morre. Falha nos dois |
-| `empenho` (`classes/empenho.php`) | assinatura diferente, com o mesmo número de propriedades | o construtor faz `date("Y-m-d", db_getsession("DB_datausu"))` e o harness roda sem sessão: o campo `datausu` sai `1969-12-31` no 7.4 e a data de hoje no 8.5. Com usuário logado, os dois dão a mesma data. **O `verifica_lote.py` ainda não filtra este caso no passo 6** (o filtro dele pega só a linha do campo, que existe no 6b): conferido em 22/11/2026, é a única diferença da classe |
+| `empenho` (`classes/empenho.php`) | assinatura diferente, com o mesmo número de propriedades | o construtor faz `date("Y-m-d", db_getsession("DB_datausu"))` e o harness roda sem sessão: o campo `datausu` sai `1969-12-31` no 7.4 e a data de hoje no 8.5. Com usuário logado, os dois dão a mesma data. Conferido em 22/11/2026, é a única diferença da classe. **Resolvido em 23/11/2026:** o `instancia_classes.php` passou a dar ao harness uma data de sessão fixa, e o `empenho` sai igual nos dois. Não se filtra a classe inteira: foi assim que um construtor PHP 4 real dela ficou escondido em 19/11/2026 |
 
 Qualquer **outra** linha no diff é para investigar.
 
