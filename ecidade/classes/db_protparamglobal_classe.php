@@ -437,7 +437,8 @@ class cl_protparamglobal {
 
     $pgObject = db_query($sql);
 
-    return pg_fetch_assoc($pgObject, 'p06_tipo');
+    // o 7.4 convertia o texto 'p06_tipo' para a linha 0; o 8.5 recusa texto (TypeError)
+    return pg_fetch_assoc($pgObject, 0);
   }
 }
 ?>

@@ -106,7 +106,7 @@ for($x=0;$x<$numrows;$x++){
   $pdf->cell(60,$alt,$j14_nome,0,0,"L",1);
   $pdf->cell(15,$alt,$j13_codi,0,0,"R",1);
   $pdf->cell(60,$alt,$j13_descr,0,0,"L",1);
-  $pdf->cell(15,$alt,($j29_cep == 0?$j29_cep:db_formatar($j29_cep,'cep')),0,1,"R",1);
+  $pdf->cell(15,$alt,((float)$j29_cep == 0?$j29_cep:db_formatar($j29_cep,'cep')),0,1,"R",1);
   $total++;
 }
 

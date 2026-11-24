@@ -139,7 +139,7 @@ if (isset($telaNova)) {
 
     $rspara = db_query($sqlpara);
 
-    if (pg_num_rows($rspara) == 0) {
+    if (($rspara ? pg_num_rows($rspara) : null) == 0) {
 
         db_redireciona('db_erros.php?fechar=true&db_erro=Sem processos nesta transferência!');
         exit;

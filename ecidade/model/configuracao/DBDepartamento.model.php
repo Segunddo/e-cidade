@@ -414,7 +414,7 @@ class DBDepartamento
         $rsUsuarios = db_query($sql);
         $usuarios  = array();
 
-        $rs = pg_fetch_all($rsUsuarios);
+        $rs = ($rsUsuarios ? pg_fetch_all($rsUsuarios) : null);
         foreach($rs as $usuario){
             $usuarios[] = (object) $usuario;
         }

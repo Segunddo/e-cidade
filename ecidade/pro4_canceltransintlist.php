@@ -99,7 +99,7 @@ function js_marca(obj){
        $sSqlProcessos .= "       inner join cgm          on z01_numcgm   = p58_numcgm ";
        $sSqlProcessos .= " where p87_codtransferint={$cod}";
        $result=db_query($sSqlProcessos);
-       $numrows=pg_numrows($result);
+       $numrows=($result ? pg_numrows($result) : null);
        if($numrows>0){ 
           echo "
 	  <br><br>
