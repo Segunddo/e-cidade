@@ -135,7 +135,7 @@ function getFormulario($tipoProcesso)
         "",
         "");
     $result = $Formulario->sql_record($sql);
-    return pg_fetch_object($result);
+    return ($result ? pg_fetch_object($result) : null);
 }
 
 ?>

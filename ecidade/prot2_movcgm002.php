@@ -109,7 +109,7 @@ $head4 = "$info1";
 $head5 = "$info2";
 $head6 = "$info3";
 
-if (pg_numrows($result)==0){
+if (($result ? pg_numrows($result) : null)==0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem registros cadastrados.');
 }
       
