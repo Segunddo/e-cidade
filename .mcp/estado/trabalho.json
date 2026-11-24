@@ -32997,6 +32997,78 @@
     }
   },
   "reivindicacoes": {
+    "ecidade/classes/db_acordoorigem_classe.php": {
+      "desde": "2026-11-24T22:20:21Z",
+      "expira": "2026-11-25T02:20:21Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_acordosituacao_classe.php": {
+      "desde": "2026-11-24T22:20:21Z",
+      "expira": "2026-11-25T02:20:21Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_ceplogradouros_classe.php": {
+      "desde": "2026-11-24T22:20:21Z",
+      "expira": "2026-11-25T02:20:21Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_cgmcorreto_classe.php": {
+      "desde": "2026-11-24T22:20:21Z",
+      "expira": "2026-11-25T02:20:21Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_cgmerrado_classe.php": {
+      "desde": "2026-11-24T22:20:21Z",
+      "expira": "2026-11-25T02:20:21Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_db_ceplog_classe.php": {
+      "desde": "2026-11-24T22:20:21Z",
+      "expira": "2026-11-25T02:20:21Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_procandamintand_classe.php": {
+      "desde": "2026-11-24T22:20:21Z",
+      "expira": "2026-11-25T02:20:21Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_procdoc_classe.php": {
+      "desde": "2026-11-24T22:20:22Z",
+      "expira": "2026-11-25T02:20:22Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_procprocessodoc_classe.php": {
+      "desde": "2026-11-24T22:20:22Z",
+      "expira": "2026-11-25T02:20:22Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_proctransferint_classe.php": {
+      "desde": "2026-11-24T22:20:22Z",
+      "expira": "2026-11-25T02:20:22Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_proctransferintusu_classe.php": {
+      "desde": "2026-11-24T22:20:22Z",
+      "expira": "2026-11-25T02:20:22Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_tipodespacho_classe.php": {
+      "desde": "2026-11-24T22:20:22Z",
+      "expira": "2026-11-25T02:20:22Z",
+      "motivo": "PHP8-05 Patrimonial lote 3: Rector nas classes",
+      "quem": "Segundo"
+    },
     "ecidade/forms/db_frm_bensglobal.php": {
       "desde": "2026-11-24T22:19:31Z",
       "expira": "2026-11-25T02:19:31Z",
