@@ -249,7 +249,7 @@ $Lac16_resumoobjeto = isset($Lac16_resumoobjeto) ? $Lac16_resumoobjeto : null;
                                             $cl_acordoparam = new cl_acordoparam;
                                             $iInstituicaoSessao = db_getsession('DB_instit');
                                             $sql = $cl_acordoparam->sql_query_file(null, "*", null, "ac59_instituicao = {$iInstituicaoSessao}");
-                                            $retorno = pg_fetch_assoc($cl_acordoparam->sql_record($sql));
+                                            $retorno = (($rsAcordoParam = $cl_acordoparam->sql_record($sql)) ? pg_fetch_assoc($rsAcordoParam) : null);
                                             $parametro_exibe_fiscal = $retorno['ac59_cadastrocomissoesfiscal'] === 't' ? true : false; ?>
                                             <tr>
                                                 <td nowrap title="<?= $Tac16_acordocomissao ?>">

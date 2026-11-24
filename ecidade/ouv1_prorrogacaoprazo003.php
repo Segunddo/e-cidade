@@ -200,7 +200,7 @@ $pdf->Cell(190,2,"",'B',1,"L",0);
 
 
 
-$iNumRows 	= count($aDadosProrrogacao);
+$iNumRows 	= count((array)$aDadosProrrogacao);
 $background = 0;
 $prorrogacao = "Não";
 
