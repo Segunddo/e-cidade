@@ -36,7 +36,7 @@ parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs[
 
 $where_ati = '';
 if($tipo == 'r'){
-  
+
   $xtipo = 'Todas';
   if($ativos != 'i'){
     $xtipo = 'Ativas';
@@ -45,16 +45,16 @@ if($tipo == 'r'){
       $xtipo = 'Inativas';
     }
   }
-  
+
   if($base != ''){
     $where_ati .= " and r08_codigo = '$base' ";
     $head5 = 'BASE : '.$base.'-'.$descr_base;
   }
 
-  
+
   $head3 = "RELATÓRIO DE RUBRICAS MARCADAS NAS BASES";
   $head7 = "TIPO : ".$xtipo;
-  
+
   $sql = "
   select r08_codigo,
          r08_descr,
@@ -67,7 +67,7 @@ if($tipo == 'r'){
                              and r09_instit = r08_instit
         inner join rhrubricas on r09_rubric = rh27_rubric
                              and r09_instit = rh27_instit
-  
+
   where r08_anousu = $ano
     and r08_mesusu = $mes
     and r08_instit = ".db_getsession("DB_instit")."		 
@@ -75,14 +75,14 @@ if($tipo == 'r'){
   order by r09_base, r09_rubric
          ";
   //echo $sql ; exit;
-  
+
   $result = db_query($sql);
   $xxnum = pg_numrows($result);
   if ($xxnum == 0){
      db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Códigos cadastrados no período de '.$mes.' / '.$ano);
-  
+
   }
-  
+
   $pdf = new PDF(); 
   $pdf->Open(); 
   $pdf->AliasNbPages(); 
@@ -166,7 +166,7 @@ if($tipo == 'r'){
   //echo $sql ; exit;
   
   $result = db_query($sql);
-  $xxnum = pg_numrows($result);
+  $xxnum = ($result ? pg_numrows($result) : null);
   if ($xxnum == 0){
      db_redireciona('db_erros.php?fechar=true&db_erro=Não existe Nenhuma Rubrica com a base '.$base.' em suas fórmulas.');
   

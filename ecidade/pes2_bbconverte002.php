@@ -81,7 +81,7 @@ function ConverteArquivo($AArquivo){
 
   $cArquivoSaida = "/tmp/bbconsig.txt";
 
-  $LinhasArquivo = file($AArquivo);
+  $LinhasArquivo = ((string)$AArquivo !== "" ? file($AArquivo) : false); // file(""): false no 5.6
 
   if(($handle_saida = fopen($cArquivoSaida,'w')) === FALSE){
 		return "Erro na criacao do arquivo ".$cArquivoSaida;
@@ -89,7 +89,7 @@ function ConverteArquivo($AArquivo){
 
 	$nRegistro = 0;
 
-  for($cL=0;$cL<count($LinhasArquivo);$cL++) {
+  for($cL=0;$cL<count((array)$LinhasArquivo);$cL++) {
     $cLinha = $LinhasArquivo[$cL];     
 //echo "<br> cLinhas --> $cLinha";
     $nRegistro++;
@@ -123,16 +123,16 @@ function ConverteArquivo($AArquivo){
 				$nMatricula = $pessoal[0]["r01_regist"];
 			}
 
-			
+
 			// leitura do valor a ser lancado na folha
 			$nValor    = db_val(db_substr($cLinha, 144, 9));
 
 			$nParcela  = db_val(db_substr($cLinha, 106, 2));
 			$nParcelas = db_val(db_substr($cLinha, 108, 2));
-			
+
 			$cLinhaGrava  =  db_str($nMatricula,5,0,"0");
       $cLinhaGrava .=  valor_10($nValor).valor_8($nParcela*100).valor_6($nParcelas)."\n";
-							
+
 //echo "<br>  cLinhaGrava --> $cLinhaGrava";
 			fputs($handle_saida,$cLinhaGrava);
 

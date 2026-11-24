@@ -212,7 +212,7 @@ $condicaoaux = " where h19_tipo = ".db_sqlformat( $tipo_vantagem );
 global $protelac,$tipoasse;
 db_selectmax("protelac","select * from protelac ".$condicaoaux." order by h19_assent, h19_tipo" );
 
-for($Iprotelac=0;$Iprotelac< count($protelac);$Iprotelac++){
+for($Iprotelac=0;$Iprotelac< count((array)$protelac);$Iprotelac++){
       $i++;
       $tab_protelac[$i] = $protelac[$Iprotelac]["h19_assent"];
       $tab_soma[$i] = 1;

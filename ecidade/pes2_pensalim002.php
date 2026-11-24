@@ -248,7 +248,7 @@ if (DBPessoal::verificarUtilizacaoEstruturaSuplementar() && isset($iTipoFolha)) 
 }
 
 $rsResult = db_query($sSql);
-if (!pg_num_rows($rsResult)) {
+if (!($rsResult ? pg_num_rows($rsResult) : null)) {
   db_redireciona("db_erros.php?fechar=true&db_erro=Não existem lançamentos no período de {$oGet->mes}/{$oGet->ano}");
 }
 

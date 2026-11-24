@@ -77,7 +77,7 @@ $sql = "select rh31_regist,
 //// da variável $sql no banco
 $resultado_sql = db_query($sql);
 //// pg_numrows - verifica quantas linhas vieram no RECORDSET e coloca o resultado na variávei $qtd_linhas_sql
-$qtd_linhas_sql = pg_numrows($resultado_sql);
+$qtd_linhas_sql = ($resultado_sql ? pg_numrows($resultado_sql) : null);
 if($qtd_linhas_sql == 0){
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários cadastrados no período.');
 }

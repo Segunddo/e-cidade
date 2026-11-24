@@ -238,7 +238,7 @@ if ($tipoSaida == 'pdf'){
       $pdf->setfont("arial",$put_b,6);
       $pdf->cell(13,$alt,$rh01_regist,$put_t,0,"C",$pre);
       $pdf->cell(56,$alt,$z01_nome,$put_t,0,"L",$pre);
-      $pdf->cell(50,$alt,substr($$valorImprime,0,40),$put_t,0,"L",$pre);
+      $pdf->cell(50,$alt,substr(${$valorImprime},0,40),$put_t,0,"L",$pre);
       $pdf->cell(15,$alt,db_formatar($rh01_admiss,"d"),$put_t,0,"C",$pre);
       $pdf->cell(15,$alt,db_formatar($rh05_recis,"d"),$put_t,0,"C",$pre);
       $pdf->cell(13,$alt,$rh03_padrao,$put_t,0,"C",$pre);
@@ -323,7 +323,7 @@ if ($tipoSaida == 'pdf'){
       $pdf->cell(56,$alt,$z01_nome,$put_t,0,"L",$pre);
       $pdf->cell(18,$alt,$rh01_nasc,$put_t,0,"C",$pre);
       $pdf->cell(8,$alt,$rh01_sexo,$put_t,0,"C",$pre);
-      $pdf->cell(50,$alt,substr($$valorImprime,0,40),$put_t,0,"L",$pre);
+      $pdf->cell(50,$alt,substr(${$valorImprime},0,40),$put_t,0,"L",$pre);
       $pdf->cell(15,$alt,db_formatar($rh01_admiss,"d"),$put_t,0,"C",$pre);
       $pdf->cell(15,$alt,db_formatar($rh05_recis,"d"),$put_t,0,"C",$pre);
       $pdf->cell(13,$alt,$rh03_padrao,$put_t,1,"C",$pre);

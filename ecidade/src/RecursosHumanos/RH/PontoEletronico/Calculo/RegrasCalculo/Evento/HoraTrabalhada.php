@@ -52,7 +52,7 @@ class HoraTrabalhada extends Evento
      * @param DiaTrabalho|null $diaTrabalho
      * @param Horas $horas
      */
-    public function __construct(DiaTrabalho $diaTrabalho = null, Horas $horas)
+    public function __construct(DiaTrabalho $diaTrabalho = null, ?Horas $horas = null)
     {
         parent::__construct($diaTrabalho, $horas);
 

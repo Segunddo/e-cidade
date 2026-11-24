@@ -107,7 +107,7 @@ order by recurso
 //echo $sql ; exit;
 
 $result = db_query($sql);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem descontos de mensalidadedo sindicato no período de '.$mes.' / '.$ano);
 

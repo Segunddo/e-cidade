@@ -79,7 +79,7 @@ global $subpes,$ponto;
                                order by rh66_pis");
 //echo "<BR> ".$sql;exit;      
       db_criatermometro('calculo_folha','Concluido...','blue',1,'Inserindo rubrica no ponto');
-      for($Ipes=0;$Ipes < count($rhfopag);$Ipes++){
+      for($Ipes=0;$Ipes < count((array)$rhfopag);$Ipes++){
           db_atutermometro($Ipes,count($rhfopag),'calculo_folha',1);
           if($ponto == 's'){
               $condicaoaux = " and r10_rubric = ".db_sqlformat($rh27_rubric)." and r10_regist = ".db_sqlformat( $rhfopag[$Ipes]["rh66_regist"] );

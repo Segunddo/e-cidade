@@ -162,7 +162,7 @@ global $fopag_geracao,
       $func  = 0;
 
       db_criatermometro('calculo_folha','Concluido...','blue',1,'Lendo os não Pagos (PASEP)');
-      for($Ipes=0;$Ipes < count($rhfopag);$Ipes++){
+      for($Ipes=0;$Ipes < count((array)$rhfopag);$Ipes++){
           db_atutermometro($Ipes,count($rhfopag),'calculo_folha',1);
           if ($pdf->gety() > $pdf->h - 30 || $troca != 0 ){
              $pdf->addpage();

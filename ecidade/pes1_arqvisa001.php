@@ -59,7 +59,7 @@ if(isset($gerarq)){
   for($i=0; $i<$clrhvisavale->numrows; $i++){
   	db_fieldsmemory($result_dadosvisavale, $i);
   	$interloc  = "inter".($i+1);
-  	$$interloc = $inter;
+  	${$interloc} = $inter;
   }
 
 	$result_instituicao = $cldb_config->sql_record($cldb_config->sql_query_file(db_getsession("DB_instit"),"*"));

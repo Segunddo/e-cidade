@@ -68,7 +68,7 @@ if(!$result_arqbanco || pg_num_rows($result_arqbanco) == 0) {
   $sqlerro = true;
   $erro_msg = "Arquivo não encontrado";
 }
-$clrharqbanco->numrows = pg_num_rows($result_arqbanco);
+$clrharqbanco->numrows = ($result_arqbanco ? pg_num_rows($result_arqbanco) : null);
 
 if($clrharqbanco->numrows>0){
 

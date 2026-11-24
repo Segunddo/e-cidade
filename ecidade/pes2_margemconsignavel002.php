@@ -143,7 +143,7 @@ $sql = "
 
 $result = db_query($sql);
 //db_criatabela($result);exit;
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    //db_msgbox('Não existem Cálculo no período de '.$mes.' / '.$ano);
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Cálculo no período de '.$mes.' / '.$ano);

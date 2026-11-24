@@ -74,7 +74,7 @@ $sql_dados = $gerasql->gerador_sql(null, $ano, $mes, null, null,
                                    $dbordem, $dbwhere);
 //echo $sql_dados;exit;
 $result_dados = db_query($sql_dados);
-$numrows_dados = pg_numrows($result_dados);
+$numrows_dados = ($result_dados ? pg_numrows($result_dados) : null);
 if($numrows_dados == 0){
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários cadastrados no período de '.$mes.' / '.$ano);
 }

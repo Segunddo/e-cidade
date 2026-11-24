@@ -69,7 +69,7 @@ $sSql .= "  and rh30_vinculo = 'A'                                  ";
 $sSql .= "order by o40_orgao, z01_nome                              ";
 
 $result = db_query($sSql);
-$xxnum  = pg_numrows($result);
+$xxnum  = ($result ? pg_numrows($result) : null);
 
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem funcionários cadastrados no intervalo para o período de '.$mes.' / '.$ano);

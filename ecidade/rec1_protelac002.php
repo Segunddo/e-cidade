@@ -53,11 +53,11 @@ if (isset($alterar)) {
     for ($i = 1; $i < 11; $i++) {
         $campodia = "h19_dia" . ($i < 10 ? ("0" . $i) : $i);
         $campoper = "h19_per" . ($i < 10 ? ("0" . $i) : $i);
-        if (trim($$campodia) == 0) {
-            $$campodia = "";
+        if (trim(${$campodia}) == 0) {
+            ${$campodia} = "";
         }
-        if (trim($$campoper) == 0) {
-            $$campoper = "";
+        if (trim(${$campoper}) == 0) {
+            ${$campoper} = "";
         }
     }
     $db_botao = true;

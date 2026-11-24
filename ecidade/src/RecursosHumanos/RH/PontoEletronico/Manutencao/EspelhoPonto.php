@@ -415,15 +415,15 @@ class EspelhoPonto
         $oDados->ext75noturnas = $this->validaHoraZerada($oDiaTrabalho->getHorasExtra75Noturna() != '' ? new \DateTime($oDiaTrabalho->getHorasExtra75Noturna()) : '');
         $oDados->ext100diurnas = $this->validaHoraZerada($oDiaTrabalho->getHorasExtra100() != '' ? new \DateTime($oDiaTrabalho->getHorasExtra100()) : '');
         $oDados->ext100noturnas = $this->validaHoraZerada($oDiaTrabalho->getHorasExtra100Noturna() != '' ? new \DateTime($oDiaTrabalho->getHorasExtra100Noturna()) : '');
-        $oDados->ext50 = $this->validaHoraZerada(new \DateTime($this->somarTotalizador(array(
+        $oDados->ext50 = $this->validaHoraZerada(new \DateTime(static::somarTotalizador(array(
             $oDados->ext50diurnas,
             $oDados->ext50noturnas
         ))), true);
-        $oDados->ext75 = $this->validaHoraZerada(new \DateTime($this->somarTotalizador(array(
+        $oDados->ext75 = $this->validaHoraZerada(new \DateTime(static::somarTotalizador(array(
             $oDados->ext75diurnas,
             $oDados->ext75noturnas
         ))), true);
-        $oDados->ext100 = $this->validaHoraZerada(new \DateTime($this->somarTotalizador(array(
+        $oDados->ext100 = $this->validaHoraZerada(new \DateTime(static::somarTotalizador(array(
             $oDados->ext100diurnas,
             $oDados->ext100noturnas
         ))), true);
@@ -784,7 +784,7 @@ class EspelhoPonto
         if (!empty($assentamentos)) {
             foreach ($assentamentos as $assentamento) {
                 $horasAutorizadas[] = $assentamento->getHora();
-                return $this->somarTotalizador($horasAutorizadas);
+                return static::somarTotalizador($horasAutorizadas);
             }
         }
 
@@ -897,8 +897,8 @@ class EspelhoPonto
                 $horasDiurnas = $assentamentosAgrupados[$assentamento->getTipoAssentamento()]->horasDiurnas;
                 $horasNoturnas = $assentamentosAgrupados[$assentamento->getTipoAssentamento()]->horasNoturnas;
 
-                $assentamentosAgrupados[$assentamento->getTipoAssentamento()]->horasDiurnas = $this->somarTotalizador(array($horasDiurnas, $assentamento->getHoraDiurna()));
-                $assentamentosAgrupados[$assentamento->getTipoAssentamento()]->horasNoturnas = $this->somarTotalizador(array($horasNoturnas, $assentamento->getHoraNoturna()));
+                $assentamentosAgrupados[$assentamento->getTipoAssentamento()]->horasDiurnas = static::somarTotalizador(array($horasDiurnas, $assentamento->getHoraDiurna()));
+                $assentamentosAgrupados[$assentamento->getTipoAssentamento()]->horasNoturnas = static::somarTotalizador(array($horasNoturnas, $assentamento->getHoraNoturna()));
             }
         }
 

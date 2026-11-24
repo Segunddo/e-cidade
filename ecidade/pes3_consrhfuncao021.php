@@ -176,7 +176,7 @@ if(isset($selecao) && !empty($selecao)) {
            order by funcao ";
 
 		    $result_funcoes = db_query($sql1);
-			  $numrows = pg_numrows($result_funcoes);
+			  $numrows = ($result_funcoes ? pg_numrows($result_funcoes) : null);	
         if($numrows == 0){
       	  db_msgbox("Nenhum cargo encontrado");
       	  echo "<script>parent.location.href = 'pes3_consrhfuncao001.php'</script>";
@@ -317,8 +317,8 @@ if ($porfuncao == true) {
     $anterior   = "";
     $saldo      = 0;
 
-    $totalfunc = pg_numrows($result_funcoes);
-    for ($x = 0; $x < pg_numrows($result_funcoes); $x ++) {
+    $totalfunc = ($result_funcoes ? pg_numrows($result_funcoes) : null);
+    for ($x = 0; $x < ($result_funcoes ? pg_numrows($result_funcoes) : null); $x ++) {
         db_fieldsmemory($result_funcoes, $x);
         if ($cor == "#EFE029"){
             $cor = "#E4F471";

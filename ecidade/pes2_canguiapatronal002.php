@@ -57,7 +57,7 @@ $res_nome = db_query($sql_nome);
 $virg_nome = '';
 $descr_nome = '';
 
-for($inome=0;$inome<pg_numrows($res_nome);$inome++){
+for($inome=0;$inome<($res_nome ? pg_numrows($res_nome) : null);$inome++){
  db_fieldsmemory($res_nome,$inome);
  $descr_nome .= $virg_nome.$r33_nome;
  $virg_nome   = ', '; 
@@ -78,7 +78,7 @@ $dev      = 0;
 $desco    = 0;
 $patronal = 0;
 
-for($inome=0;$inome<pg_numrows($res_nome);$inome++){
+for($inome=0;$inome<($res_nome ? pg_numrows($res_nome) : null);$inome++){
     db_fieldsmemory($res_nome,$inome);
 
     if($recurso == 'g'){

@@ -294,7 +294,7 @@ if ($opcao != 'previden' && $opcao != 'irf'){
 <?php
 
 $cor="#F0F0F0";
-    for($x=0;$x<pg_numrows($result);$x++){
+    for($x=0;$x<($result ? pg_numrows($result) : null);$x++){
 	  db_fieldsmemory($result,$x,true);
         if($cor=="#F0F0F0")
            $cor="#FFF";

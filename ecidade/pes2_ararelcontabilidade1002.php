@@ -177,7 +177,7 @@ $tot_prov  = 0;
 $tot_desc  = 0;
 $tot_liq   = 0;
 $pre = 0;
-for($x = 0; $x < pg_numrows($res_basico);$x++){
+for($x = 0; $x < ($res_basico ? pg_numrows($res_basico) : null);$x++){
    db_fieldsmemory($res_basico,$x);
    if(isset($quebra)){  
      if($troca != $quebra){

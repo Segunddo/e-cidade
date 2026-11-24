@@ -34,7 +34,7 @@ require_once modification("libs/JSON.php");
 require_once modification("dbforms/db_funcoes.php");
 
 $oJson                = JSON::create();
-$oParam               = JSON::parse(str_replace("\\","",$_POST["json"]));
+$oParam               = JSON::create()->parse(str_replace("\\","",$_POST["json"]));
 
 $oRetorno           = new stdClass();
 $oRetorno->erro     = false;
@@ -126,4 +126,4 @@ try {
   $oRetorno->sMensagem = $e->getMessage();
 }
 
-echo JSON::stringify($oRetorno);
+echo JSON::create()->stringify($oRetorno);

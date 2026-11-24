@@ -112,7 +112,7 @@ $sql_padrao =
 
 $rsPadrao = db_query($sql_padrao);
 // echo $sql_padrao;db_criatabela($rsPadrao);exit;
-if (pg_numrows($rsPadrao) == 0 ) {
+if (($rsPadrao ? pg_numrows($rsPadrao) : null) == 0 ) {
 		db_redireciona('db_erros.php?fechar=true&db_erro=Não existem valores para o padrão '.$sPadrao.', no período de '.$iAno1.' a '.$iAno2);
 } 
 

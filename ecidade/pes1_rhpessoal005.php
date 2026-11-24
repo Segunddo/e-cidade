@@ -108,9 +108,9 @@ if(isset($alterar)){
 
         // Registra alteração para envio do formulário S2205
         foreach(S2205::getCamposControleAlteracao() as $campo){
-            if(isset($$campo)){
+            if(isset(${$campo})){
                 if(isset($dadosAtuais->$campo)){
-                    if( $dadosAtuais->$campo != $$campo){
+                    if( $dadosAtuais->$campo != ${$campo}){
                         $servidorAlteracao = ServidorAlteracao::findMatriculaByLayout($rh01_regist, Tipo::S2205);
                         $servidorAlteracao->setDataS2205(new DBDate(date('Y-m-d')));
                         $servidorAlteracao->save();
@@ -337,9 +337,9 @@ if(isset($alterar)){
                 $dadosAtuais = pg_fetch_object($resultadoImigrante,0);
 
                 foreach (S2205::getCamposControleAlteracao() as $campo) {
-                    if (isset($$campo)) {
+                    if (isset(${$campo})) {
                         if (isset($dadosAtuais->$campo)) {
-                            if ($dadosAtuais->$campo != $$campo) {
+                            if ($dadosAtuais->$campo != ${$campo}) {
                                 $servidorAlteracao = ServidorAlteracao::findMatriculaByLayout($rh01_regist, Tipo::S2205);
                                 $servidorAlteracao->setDataS2205(new DBDate(date('Y-m-d')));
                                 $servidorAlteracao->save();

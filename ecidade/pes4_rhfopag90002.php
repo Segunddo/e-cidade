@@ -183,7 +183,7 @@ global $fopag_dtpago,
       global $pessoal;
       db_selectmax("pessoal", $sql);
 //echo "<BR> ".$sql;exit;      
-      while($Ipes < count($pessoal)){
+      while($Ipes < count((array)$pessoal)){
          $pis = $pessoal[$Ipes]["r01_pis"];
          $tem_pis_igual = false;
          while($Ipes < count($pessoal) && $pis == $pessoal[$Ipes]["r01_pis"]){

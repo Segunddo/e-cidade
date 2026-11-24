@@ -218,8 +218,8 @@ if(isset($salvarrelatorio)){
   for($i=1; $i<4; $i++){
 	  if($sqlerro == false){
 	  	$variavelteste = "campo_camporecb_filtro".$i;
-	  	if(trim($$variavelteste) != ""){
-		  	$arr_filtros_selecionados1 =explode("#",$$variavelteste);
+	  	if(trim(${$variavelteste}) != ""){
+		  	$arr_filtros_selecionados1 =explode("#",${$variavelteste});
 		  	$campofiltro01 = $arr_filtros_selecionados1[0];
 		  	$valorfiltro11 = $arr_filtros_selecionados1[1];
 		  	$valorfiltro12 = "";
@@ -243,10 +243,10 @@ if(isset($salvarrelatorio)){
   for($i=1; $i<7; $i++){
 	  if($sqlerro == false){
 	  	$variavelteste = "campo_camporecb_comple".$i;
-	  	if(trim($$variavelteste) != ""){
+	  	if(trim(${$variavelteste}) != ""){
         $linha = ($i+1);
 			  $cldb_relatcabec->db95_codrel = $db91_codrel;
-			  $cldb_relatcabec->db95_compl  = $$variavelteste;
+			  $cldb_relatcabec->db95_compl  = ${$variavelteste};
 			  $cldb_relatcabec->db95_linha  = $linha;
 			  $cldb_relatcabec->incluir(null);
 				if($cldb_relatcabec->erro_status == 0) {
@@ -340,10 +340,10 @@ if(isset($salvarrelatorio)){
   	$campo_seleciona_filtros.= $virgul.$db94_codcam;
   	$camporecebefiltro = "campo_camporecb_filtro".($i+1);
   	$camporecebedadosf = "filtro".($i+1);
-  	$$camporecebefiltro = $db94_codcam."#".$db94_valini;
-  	$$camporecebedadosf = $db94_codcam;
+  	${$camporecebefiltro} = $db94_codcam."#".$db94_valini;
+  	${$camporecebedadosf} = $db94_codcam;
   	if(trim($db94_valfim) != ""){
-  	  $$camporecebefiltro.= "#".$db94_valfim;
+  	  ${$camporecebefiltro}.= "#".$db94_valfim;
   	}
   	$virgul = ",";
   }
@@ -358,7 +358,7 @@ if(isset($salvarrelatorio)){
   for($i=0; $i<$cldb_relatcabec->numrows; $i++){
   	db_fieldsmemory($result_cabec, $i);
   	$campocomplementar = "campo_camporecb_comple".($db95_linha-1);
-  	$$campocomplementar = $db95_compl;
+  	${$campocomplementar} = $db95_compl;
   }
 
   $virgul = "";

@@ -203,7 +203,7 @@ $sSqlDadosFolha .= "    and rh79_mesusu      = {$oParam->iMesFolha} ";
 $sSqlDadosFolha .= "  limit 1 ";
 
 $rsDadosFolha      = db_query($sSqlDadosFolha);
-$iLinhasDadosFolha = pg_num_rows($rsDadosFolha);
+$iLinhasDadosFolha = ($rsDadosFolha ? pg_num_rows($rsDadosFolha) : null);
 
 if ( $iLinhasDadosFolha > 0 ) {
 	$sDisabled = '';

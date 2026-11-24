@@ -37,7 +37,7 @@ $db_opcao = 1;
 $db_botao = true;
 if(isset($incluir)){
   db_inicio_transacao();
-  $arr_dados_iframe =explode("|", $anos_perc_inf);
+  $arr_dados_iframe = preg_split("#\|#m", $anos_perc_inf);
   for($i=0; $i<count($arr_dados_iframe); $i++){
     $arr_valores =explode("-", $arr_dados_iframe[$i]);
     $anos = $arr_valores[0];

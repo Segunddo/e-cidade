@@ -147,7 +147,7 @@ order by rh02_lota, z01_nome;
 $result = db_query($sql);
 //db_criatabela($result);exit;
 include(modification("libs/db_conecta.php"));
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 //if ($xxnum == 0){
 //   db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Códigos cadastrados no período de '.$mes.' / '.$ano);
 //}
@@ -177,7 +177,7 @@ if($ano == 2005){
   $patr = 14;
   $func =  8;
 }
-for($x = 0; $x < pg_numrows($result);$x++){
+for($x = 0; $x < ($result ? pg_numrows($result) : null);$x++){
    db_fieldsmemory($result,$x);
    $pdf1->nome     = $z01_nome;
    $pdf1->cnpj     = $z01_cgccpf;

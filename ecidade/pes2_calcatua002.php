@@ -527,8 +527,8 @@ where rh30_vinculo = 'A'
 
 //  echo $sql;
   $result = db_query($sql);
-  $num = pg_numrows($result);
-  for($x = 0;$x < pg_numrows($result);$x++){
+  $num = ($result ? pg_numrows($result) : null);
+  for($x = 0;$x < ($result ? pg_numrows($result) : null);$x++){
 //    echo 'Total de : '.$num.' / '.$x."\r";
 
    db_atutermometro($x,$num,'calculo_folha',1);
@@ -642,8 +642,8 @@ where rh30_vinculo = 'I'
   
 //  echo $sql;
   $result = db_query($sql);
-  $num = pg_numrows($result);
-  for($x = 0;$x < pg_numrows($result);$x++){
+  $num = ($result ? pg_numrows($result) : null);
+  for($x = 0;$x < ($result ? pg_numrows($result) : null);$x++){
     //echo 'Total de : '.$num.' / '.$x."\r";
     
     db_atutermometro($x,$num,'calculo_folha1',1);
@@ -764,8 +764,8 @@ where rh30_vinculo = 'P'
   
 //  echo $sql;
   $result = db_query($sql);
-  $num = pg_numrows($result);
-  for($x = 0;$x < pg_numrows($result);$x++){
+  $num = ($result ? pg_numrows($result) : null);
+  for($x = 0;$x < ($result ? pg_numrows($result) : null);$x++){
   //  echo 'Total de : '.$num.' / '.$x."\r";
     
     db_atutermometro($x,$num,'calculo_folha2',1);
