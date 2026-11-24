@@ -53,7 +53,27 @@ As áreas se sobrepõem em alguns prefixos, então a soma das linhas é maior qu
   DIVERGE na rodada anterior, sem edição do arquivo; tratar como oscilação até rodar de novo.
 - Áreas ainda em PR aberto (Configuração #44, Educação #46, RH #42, Saúde #35) podem já estar
   parcialmente em base-php85; não foi conferido o que cada PR aberto acrescenta.
+﻿
+## Sintaxe e classes (rodada à parte, mesma base-php85)
 
+`php -l` e carga das classes nos dois lados (7.4 e 8.5), sobre 13.065 arquivos de tela e 2.629 classes.
+
+| Etapa | IDENTICO | DIVERGE | INCONCLUSIVO | Antes (DIVERGE) |
+|---|---|---|---|---|
+| Sintaxe | 13.057 | **2** | 6 | 4 |
+| Classes | 1.552 | **1.018** | 59 | 2.532 |
+
+- **Sintaxe: 2 arquivos ainda não compilam no 8.5 e compilam no 7.4:** `edu2_certconclusao002.php` e
+  `edu4_verifexportcenso003.php`. São correção direta e pequena (erro de compilação).
+- 6 arquivos não compilam em nenhum dos dois runtimes (defeito que já existe no 7.4; registrar e avisar
+  o dono, não corrigir): `bib3_leitorcons002`, `edu1_diarioavaliacao001`, `edu1_diarioavaliacaoobs001`,
+  `fis1_fis_vistorias003`, `mer1_mer_desper_und003`, `pes1_reajusteprog001`.
+- **Classes: 1.018 ainda divergem.** O padrão é o mesmo em todas: os campos da classe vêm com um código
+  (por exemplo `1013`) no 7.4 e com `0` no 8.5. A hipótese de construtor no estilo PHP 4 está
+  descartada (as classes já usam `__construct`). A causa ainda não foi isolada; pode ser a consulta de
+  rótulos ao banco, que responde diferente no 8.5, ou um efeito do próprio teste. Não tratar como
+  defeito de cada classe antes de diagnosticar.
+- 57 dos 59 INCONCLUSIVO em classes são "sem saída nos dois lados" (classe não exercitada).
 ## Como reproduzir
 
 ```bash
