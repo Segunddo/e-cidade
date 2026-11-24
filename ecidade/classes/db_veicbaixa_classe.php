@@ -80,8 +80,8 @@ class cl_veicbaixa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve04_codigo = ($this->ve04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_codigo"]:$this->ve04_codigo);
-       $this->ve04_veiculo = ($this->ve04_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_veiculo"]:$this->ve04_veiculo);
+       $this->ve04_codigo = ($this->ve04_codigo === 0 || $this->ve04_codigo === 0.0 || $this->ve04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_codigo"]:$this->ve04_codigo);
+       $this->ve04_veiculo = ($this->ve04_veiculo === 0 || $this->ve04_veiculo === 0.0 || $this->ve04_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_veiculo"]:$this->ve04_veiculo);
        if($this->ve04_data == ""){
          $this->ve04_data_dia = ($this->ve04_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_data_dia"]:$this->ve04_data_dia);
          $this->ve04_data_mes = ($this->ve04_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_data_mes"]:$this->ve04_data_mes);
@@ -91,11 +91,11 @@ class cl_veicbaixa {
          }
        }
        $this->ve04_hora = ($this->ve04_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_hora"]:$this->ve04_hora);
-       $this->ve04_usuario = ($this->ve04_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_usuario"]:$this->ve04_usuario);
+       $this->ve04_usuario = ($this->ve04_usuario === 0 || $this->ve04_usuario === 0.0 || $this->ve04_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_usuario"]:$this->ve04_usuario);
        $this->ve04_motivo = ($this->ve04_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_motivo"]:$this->ve04_motivo);
-       $this->ve04_veiccadtipobaixa = ($this->ve04_veiccadtipobaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_veiccadtipobaixa"]:$this->ve04_veiccadtipobaixa);
+       $this->ve04_veiccadtipobaixa = ($this->ve04_veiccadtipobaixa === 0 || $this->ve04_veiccadtipobaixa === 0.0 || $this->ve04_veiccadtipobaixa == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_veiccadtipobaixa"]:$this->ve04_veiccadtipobaixa);
      }else{
-       $this->ve04_codigo = ($this->ve04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_codigo"]:$this->ve04_codigo);
+       $this->ve04_codigo = ($this->ve04_codigo === 0 || $this->ve04_codigo === 0.0 || $this->ve04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve04_codigo"]:$this->ve04_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_veicbaixa {
          $this->ve04_codigo = $ve04_codigo;
        }
      }
-     if(($this->ve04_codigo == null) || ($this->ve04_codigo == "") ){
+     if(($this->ve04_codigo == null) || ($this->ve04_codigo === 0 || $this->ve04_codigo === 0.0 || $this->ve04_codigo == "") ){
        $this->erro_sql = " Campo ve04_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

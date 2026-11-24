@@ -78,9 +78,9 @@ class cl_veicmanutencaomedidacancela {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve67_sequencial = ($this->ve67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_sequencial"]:$this->ve67_sequencial);
-       $this->ve67_veicmanutencaomedida = ($this->ve67_veicmanutencaomedida == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_veicmanutencaomedida"]:$this->ve67_veicmanutencaomedida);
-       $this->ve67_usuario = ($this->ve67_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_usuario"]:$this->ve67_usuario);
+       $this->ve67_sequencial = ($this->ve67_sequencial === 0 || $this->ve67_sequencial === 0.0 || $this->ve67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_sequencial"]:$this->ve67_sequencial);
+       $this->ve67_veicmanutencaomedida = ($this->ve67_veicmanutencaomedida === 0 || $this->ve67_veicmanutencaomedida === 0.0 || $this->ve67_veicmanutencaomedida == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_veicmanutencaomedida"]:$this->ve67_veicmanutencaomedida);
+       $this->ve67_usuario = ($this->ve67_usuario === 0 || $this->ve67_usuario === 0.0 || $this->ve67_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_usuario"]:$this->ve67_usuario);
        $this->ve67_motivo = ($this->ve67_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_motivo"]:$this->ve67_motivo);
        if($this->ve67_data == ""){
          $this->ve67_data_dia = ($this->ve67_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_data_dia"]:$this->ve67_data_dia);
@@ -92,7 +92,7 @@ class cl_veicmanutencaomedidacancela {
        }
        $this->ve67_hora = ($this->ve67_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_hora"]:$this->ve67_hora);
      }else{
-       $this->ve67_sequencial = ($this->ve67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_sequencial"]:$this->ve67_sequencial);
+       $this->ve67_sequencial = ($this->ve67_sequencial === 0 || $this->ve67_sequencial === 0.0 || $this->ve67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve67_sequencial"]:$this->ve67_sequencial);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_veicmanutencaomedidacancela {
          $this->ve67_sequencial = $ve67_sequencial;
        }
      }
-     if(($this->ve67_sequencial == null) || ($this->ve67_sequencial == "") ){
+     if(($this->ve67_sequencial == null) || ($this->ve67_sequencial === 0 || $this->ve67_sequencial === 0.0 || $this->ve67_sequencial == "") ){
        $this->erro_sql = " Campo ve67_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

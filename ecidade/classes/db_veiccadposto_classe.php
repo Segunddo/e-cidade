@@ -67,10 +67,10 @@ class cl_veiccadposto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve29_codigo = ($this->ve29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve29_codigo"]:$this->ve29_codigo);
-       $this->ve29_tipo = ($this->ve29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve29_tipo"]:$this->ve29_tipo);
+       $this->ve29_codigo = ($this->ve29_codigo === 0 || $this->ve29_codigo === 0.0 || $this->ve29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve29_codigo"]:$this->ve29_codigo);
+       $this->ve29_tipo = ($this->ve29_tipo === 0 || $this->ve29_tipo === 0.0 || $this->ve29_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve29_tipo"]:$this->ve29_tipo);
      }else{
-       $this->ve29_codigo = ($this->ve29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve29_codigo"]:$this->ve29_codigo);
+       $this->ve29_codigo = ($this->ve29_codigo === 0 || $this->ve29_codigo === 0.0 || $this->ve29_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve29_codigo"]:$this->ve29_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_veiccadposto {
          $this->ve29_codigo = $ve29_codigo;
        }
      }
-     if(($this->ve29_codigo == null) || ($this->ve29_codigo == "") ){
+     if(($this->ve29_codigo == null) || ($this->ve29_codigo === 0 || $this->ve29_codigo === 0.0 || $this->ve29_codigo == "") ){
        $this->erro_sql = " Campo ve29_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

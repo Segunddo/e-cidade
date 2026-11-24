@@ -76,11 +76,11 @@ class cl_veictipoabast
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ve07_sequencial = ($this->ve07_sequencial == "" ? $_POST["ve07_sequencial"] : $this->ve07_sequencial);
+            $this->ve07_sequencial = ($this->ve07_sequencial === 0 || $this->ve07_sequencial === 0.0 || $this->ve07_sequencial == "" ? $_POST["ve07_sequencial"] : $this->ve07_sequencial);
             $this->ve07_descr = ($this->ve07_descr == "" ? $_POST["ve07_descr"] : $this->ve07_descr);
             $this->ve07_sigla = ($this->ve07_sigla == "" ? $_POST["ve07_sigla"] : $this->ve07_sigla);
         } else {
-            $this->ve07_sequencial = ($this->ve07_sequencial == "" ? $_POST["ve07_sequencial"] : $this->ve07_sequencial);
+            $this->ve07_sequencial = ($this->ve07_sequencial === 0 || $this->ve07_sequencial === 0.0 || $this->ve07_sequencial == "" ? $_POST["ve07_sequencial"] : $this->ve07_sequencial);
         }
     }
 
@@ -138,7 +138,7 @@ class cl_veictipoabast
                 $this->ve07_sequencial = $ve07_sequencial;
             }
         }
-        if (($this->ve07_sequencial == null) || ($this->ve07_sequencial == "")) {
+        if (($this->ve07_sequencial == null) || ($this->ve07_sequencial === 0 || $this->ve07_sequencial === 0.0 || $this->ve07_sequencial == "")) {
             $this->erro_sql = " Campo ve07_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

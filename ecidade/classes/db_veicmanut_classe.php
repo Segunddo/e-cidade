@@ -103,8 +103,8 @@ class cl_veicmanut {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve62_codigo = ($this->ve62_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_codigo"]:$this->ve62_codigo);
-       $this->ve62_veiculos = ($this->ve62_veiculos == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_veiculos"]:$this->ve62_veiculos);
+       $this->ve62_codigo = ($this->ve62_codigo === 0 || $this->ve62_codigo === 0.0 || $this->ve62_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_codigo"]:$this->ve62_codigo);
+       $this->ve62_veiculos = ($this->ve62_veiculos === 0 || $this->ve62_veiculos === 0.0 || $this->ve62_veiculos == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_veiculos"]:$this->ve62_veiculos);
        if($this->ve62_dtmanut == ""){
          $this->ve62_dtmanut_dia = ($this->ve62_dtmanut_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_dtmanut_dia"]:$this->ve62_dtmanut_dia);
          $this->ve62_dtmanut_mes = ($this->ve62_dtmanut_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_dtmanut_mes"]:$this->ve62_dtmanut_mes);
@@ -117,8 +117,8 @@ class cl_veicmanut {
        $this->ve62_vlrmobra = (($this->ve62_vlrmobra === "" || $this->ve62_vlrmobra === null) ? @$GLOBALS["HTTP_POST_VARS"]["ve62_vlrmobra"] : $this->ve62_vlrmobra);
        $this->ve62_descr = ($this->ve62_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_descr"]:$this->ve62_descr);
        $this->ve62_notafisc = ($this->ve62_notafisc == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_notafisc"]:$this->ve62_notafisc);
-       $this->ve62_veiccadtiposervico = ($this->ve62_veiccadtiposervico == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_veiccadtiposervico"]:$this->ve62_veiccadtiposervico);
-       $this->ve62_usuario = ($this->ve62_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_usuario"]:$this->ve62_usuario);
+       $this->ve62_veiccadtiposervico = ($this->ve62_veiccadtiposervico === 0 || $this->ve62_veiccadtiposervico === 0.0 || $this->ve62_veiccadtiposervico == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_veiccadtiposervico"]:$this->ve62_veiccadtiposervico);
+       $this->ve62_usuario = ($this->ve62_usuario === 0 || $this->ve62_usuario === 0.0 || $this->ve62_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_usuario"]:$this->ve62_usuario);
        if($this->ve62_data == ""){
          $this->ve62_data_dia = ($this->ve62_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_data_dia"]:$this->ve62_data_dia);
          $this->ve62_data_mes = ($this->ve62_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_data_mes"]:$this->ve62_data_mes);
@@ -128,14 +128,14 @@ class cl_veicmanut {
          }
        }
        $this->ve62_hora = ($this->ve62_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_hora"]:$this->ve62_hora);
-       $this->ve62_medida = ($this->ve62_medida == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_medida"]:$this->ve62_medida);
+       $this->ve62_medida = ($this->ve62_medida === 0 || $this->ve62_medida === 0.0 || $this->ve62_medida == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_medida"]:$this->ve62_medida);
        $this->ve62_observacao = ($this->ve62_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_observacao"]:$this->ve62_observacao);
-       $this->ve62_situacao = ($this->ve62_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_situacao"]:$this->ve62_situacao);
+       $this->ve62_situacao = ($this->ve62_situacao === 0 || $this->ve62_situacao === 0.0 || $this->ve62_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_situacao"]:$this->ve62_situacao);
        $this->ve62_numero = ($this->ve62_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_numero"]:$this->ve62_numero);
        $this->ve62_anousu = ($this->ve62_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_anousu"]:$this->ve62_anousu);
        $this->ve62_veicmotoristas = ($this->ve62_veicmotoristas == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_veicmotoristas"]:$this->ve62_veicmotoristas);
      }else{
-       $this->ve62_codigo = ($this->ve62_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_codigo"]:$this->ve62_codigo);
+       $this->ve62_codigo = ($this->ve62_codigo === 0 || $this->ve62_codigo === 0.0 || $this->ve62_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve62_codigo"]:$this->ve62_codigo);
      }
    }
    // funcao para Inclusão
@@ -264,7 +264,7 @@ class cl_veicmanut {
          $this->ve62_codigo = $ve62_codigo;
        }
      }
-     if(($this->ve62_codigo == null) || ($this->ve62_codigo == "") ){
+     if(($this->ve62_codigo == null) || ($this->ve62_codigo === 0 || $this->ve62_codigo === 0.0 || $this->ve62_codigo == "") ){
        $this->erro_sql = " Campo ve62_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -299,11 +299,11 @@ class cl_veicmanut {
                                ,$this->ve62_vlrpecas
                                ,'$this->ve62_descr'
                                ,'$this->ve62_notafisc'
-                               ,".($this->ve62_veiccadtiposervico == "null" || $this->ve62_veiccadtiposervico == ""?"null":"'".$this->ve62_veiccadtiposervico."'")."
+                               ,".($this->ve62_veiccadtiposervico === 0 || $this->ve62_veiccadtiposervico === 0.0 || $this->ve62_veiccadtiposervico == "null" || ($this->ve62_veiccadtiposervico === 0 || $this->ve62_veiccadtiposervico === 0.0 || $this->ve62_veiccadtiposervico == "")?"null":"'".$this->ve62_veiccadtiposervico."'")."
                                ,$this->ve62_usuario
                                ,".($this->ve62_data == "null" || $this->ve62_data == ""?"null":"'".$this->ve62_data."'")."
                                ,'$this->ve62_hora'
-                               ,".($this->ve62_medida == "null" || $this->ve62_medida == ""?"null":"'".$this->ve62_medida."'")."
+                               ,".($this->ve62_medida === 0 || $this->ve62_medida === 0.0 || $this->ve62_medida == "null" || ($this->ve62_medida === 0 || $this->ve62_medida === 0.0 || $this->ve62_medida == "")?"null":"'".$this->ve62_medida."'")."
                                ,'$this->ve62_observacao'
                                ,$this->ve62_situacao
                                ,$this->ve62_numero

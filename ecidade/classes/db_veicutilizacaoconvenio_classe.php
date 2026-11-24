@@ -69,11 +69,11 @@ class cl_veicutilizacaoconvenio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve19_sequencial = ($this->ve19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve19_sequencial"]:$this->ve19_sequencial);
-       $this->ve19_veiccadconvenio = ($this->ve19_veiccadconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["ve19_veiccadconvenio"]:$this->ve19_veiccadconvenio);
-       $this->ve19_veicutilizacao = ($this->ve19_veicutilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ve19_veicutilizacao"]:$this->ve19_veicutilizacao);
+       $this->ve19_sequencial = ($this->ve19_sequencial === 0 || $this->ve19_sequencial === 0.0 || $this->ve19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve19_sequencial"]:$this->ve19_sequencial);
+       $this->ve19_veiccadconvenio = ($this->ve19_veiccadconvenio === 0 || $this->ve19_veiccadconvenio === 0.0 || $this->ve19_veiccadconvenio == ""?@$GLOBALS["HTTP_POST_VARS"]["ve19_veiccadconvenio"]:$this->ve19_veiccadconvenio);
+       $this->ve19_veicutilizacao = ($this->ve19_veicutilizacao === 0 || $this->ve19_veicutilizacao === 0.0 || $this->ve19_veicutilizacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ve19_veicutilizacao"]:$this->ve19_veicutilizacao);
      }else{
-       $this->ve19_sequencial = ($this->ve19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve19_sequencial"]:$this->ve19_sequencial);
+       $this->ve19_sequencial = ($this->ve19_sequencial === 0 || $this->ve19_sequencial === 0.0 || $this->ve19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve19_sequencial"]:$this->ve19_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veicutilizacaoconvenio {
          $this->ve19_sequencial = $ve19_sequencial;
        }
      }
-     if(($this->ve19_sequencial == null) || ($this->ve19_sequencial == "") ){
+     if(($this->ve19_sequencial == null) || ($this->ve19_sequencial === 0 || $this->ve19_sequencial === 0.0 || $this->ve19_sequencial == "") ){
        $this->erro_sql = " Campo ve19_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -43,11 +43,11 @@ class cl_mensageriaacordoprocessados {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ac53_sequencial = ($this->ac53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_sequencial"]:$this->ac53_sequencial);
-       $this->ac53_mensageriaacordodb_usuarios = ($this->ac53_mensageriaacordodb_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_mensageriaacordodb_usuarios"]:$this->ac53_mensageriaacordodb_usuarios);
-       $this->ac53_acordo = ($this->ac53_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_acordo"]:$this->ac53_acordo);
+       $this->ac53_sequencial = ($this->ac53_sequencial === 0 || $this->ac53_sequencial === 0.0 || $this->ac53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_sequencial"]:$this->ac53_sequencial);
+       $this->ac53_mensageriaacordodb_usuarios = ($this->ac53_mensageriaacordodb_usuarios === 0 || $this->ac53_mensageriaacordodb_usuarios === 0.0 || $this->ac53_mensageriaacordodb_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_mensageriaacordodb_usuarios"]:$this->ac53_mensageriaacordodb_usuarios);
+       $this->ac53_acordo = ($this->ac53_acordo === 0 || $this->ac53_acordo === 0.0 || $this->ac53_acordo == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_acordo"]:$this->ac53_acordo);
      }else{
-       $this->ac53_sequencial = ($this->ac53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_sequencial"]:$this->ac53_sequencial);
+       $this->ac53_sequencial = ($this->ac53_sequencial === 0 || $this->ac53_sequencial === 0.0 || $this->ac53_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ac53_sequencial"]:$this->ac53_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_mensageriaacordoprocessados {
          $this->ac53_sequencial = $ac53_sequencial;
        }
      }
-     if(($this->ac53_sequencial == null) || ($this->ac53_sequencial == "") ){
+     if(($this->ac53_sequencial == null) || ($this->ac53_sequencial === 0 || $this->ac53_sequencial === 0.0 || $this->ac53_sequencial == "") ){
        $this->erro_sql = " Campo ac53_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

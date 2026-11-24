@@ -69,11 +69,11 @@ class cl_veicpatri {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve03_codigo = ($this->ve03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve03_codigo"]:$this->ve03_codigo);
-       $this->ve03_veiculo = ($this->ve03_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve03_veiculo"]:$this->ve03_veiculo);
-       $this->ve03_bem = ($this->ve03_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["ve03_bem"]:$this->ve03_bem);
+       $this->ve03_codigo = ($this->ve03_codigo === 0 || $this->ve03_codigo === 0.0 || $this->ve03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve03_codigo"]:$this->ve03_codigo);
+       $this->ve03_veiculo = ($this->ve03_veiculo === 0 || $this->ve03_veiculo === 0.0 || $this->ve03_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve03_veiculo"]:$this->ve03_veiculo);
+       $this->ve03_bem = ($this->ve03_bem === 0 || $this->ve03_bem === 0.0 || $this->ve03_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["ve03_bem"]:$this->ve03_bem);
      }else{
-       $this->ve03_codigo = ($this->ve03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve03_codigo"]:$this->ve03_codigo);
+       $this->ve03_codigo = ($this->ve03_codigo === 0 || $this->ve03_codigo === 0.0 || $this->ve03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve03_codigo"]:$this->ve03_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veicpatri {
          $this->ve03_codigo = $ve03_codigo;
        }
      }
-     if(($this->ve03_codigo == null) || ($this->ve03_codigo == "") ){
+     if(($this->ve03_codigo == null) || ($this->ve03_codigo === 0 || $this->ve03_codigo === 0.0 || $this->ve03_codigo == "") ){
        $this->erro_sql = " Campo ve03_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

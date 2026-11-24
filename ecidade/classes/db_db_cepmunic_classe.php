@@ -73,13 +73,13 @@ class cl_db_cepmunic {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db10_codigo = ($this->db10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codigo"]:$this->db10_codigo);
+       $this->db10_codigo = ($this->db10_codigo === 0 || $this->db10_codigo === 0.0 || $this->db10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codigo"]:$this->db10_codigo);
        $this->db10_munic = ($this->db10_munic == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_munic"]:$this->db10_munic);
        $this->db10_cep = ($this->db10_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_cep"]:$this->db10_cep);
-       $this->db10_uf = ($this->db10_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_uf"]:$this->db10_uf);
-       $this->db10_codibge = ($this->db10_codibge == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codibge"]:$this->db10_codibge);
+       $this->db10_uf = ($this->db10_uf === 0 || $this->db10_uf === 0.0 || $this->db10_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_uf"]:$this->db10_uf);
+       $this->db10_codibge = ($this->db10_codibge === 0 || $this->db10_codibge === 0.0 || $this->db10_codibge == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codibge"]:$this->db10_codibge);
      }else{
-       $this->db10_codigo = ($this->db10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codigo"]:$this->db10_codigo);
+       $this->db10_codigo = ($this->db10_codigo === 0 || $this->db10_codigo === 0.0 || $this->db10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db10_codigo"]:$this->db10_codigo);
      }
    }
    // funcao para inclusao
@@ -139,7 +139,7 @@ class cl_db_cepmunic {
          $this->db10_codigo = $db10_codigo;
        }
      }
-     if(($this->db10_codigo == null) || ($this->db10_codigo == "") ){
+     if(($this->db10_codigo == null) || ($this->db10_codigo === 0 || $this->db10_codigo === 0.0 || $this->db10_codigo == "") ){
        $this->erro_sql = " Campo db10_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
