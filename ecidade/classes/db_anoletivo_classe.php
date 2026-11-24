@@ -81,9 +81,9 @@ class cl_anoletivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed28_i_codigo = ($this->ed28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed28_i_codigo"]:$this->ed28_i_codigo);
-       $this->ed28_i_escola = ($this->ed28_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed28_i_escola"]:$this->ed28_i_escola);
-       $this->ed28_i_ano = ($this->ed28_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed28_i_ano"]:$this->ed28_i_ano);
+       $this->ed28_i_codigo = ($this->ed28_i_codigo === 0 || $this->ed28_i_codigo === 0.0 || $this->ed28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed28_i_codigo"]:$this->ed28_i_codigo);
+       $this->ed28_i_escola = ($this->ed28_i_escola === 0 || $this->ed28_i_escola === 0.0 || $this->ed28_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed28_i_escola"]:$this->ed28_i_escola);
+       $this->ed28_i_ano = ($this->ed28_i_ano === 0 || $this->ed28_i_ano === 0.0 || $this->ed28_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed28_i_ano"]:$this->ed28_i_ano);
        if($this->ed28_d_inicio == ""){
          $this->ed28_d_inicio_dia = ($this->ed28_d_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed28_d_inicio_dia"]:$this->ed28_d_inicio_dia);
          $this->ed28_d_inicio_mes = ($this->ed28_d_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed28_d_inicio_mes"]:$this->ed28_d_inicio_mes);
@@ -102,7 +102,7 @@ class cl_anoletivo {
        }
        $this->ed28_l_encerrado = ($this->ed28_l_encerrado == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed28_l_encerrado"]:$this->ed28_l_encerrado);
      }else{
-       $this->ed28_i_codigo = ($this->ed28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed28_i_codigo"]:$this->ed28_i_codigo);
+       $this->ed28_i_codigo = ($this->ed28_i_codigo === 0 || $this->ed28_i_codigo === 0.0 || $this->ed28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed28_i_codigo"]:$this->ed28_i_codigo);
      }
    }
    // funcao para inclusao
@@ -177,7 +177,7 @@ class cl_anoletivo {
          $this->ed28_i_codigo = $ed28_i_codigo;
        }
      }
-     if(($this->ed28_i_codigo == null) || ($this->ed28_i_codigo == "") ){
+     if(($this->ed28_i_codigo == null) || ($this->ed28_i_codigo === 0 || $this->ed28_i_codigo === 0.0 || $this->ed28_i_codigo == "") ){
        $this->erro_sql = " Campo ed28_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

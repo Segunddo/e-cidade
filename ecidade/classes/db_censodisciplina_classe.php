@@ -74,10 +74,10 @@ class cl_censodisciplina
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed265_i_codigo = ($this->ed265_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed265_i_codigo"] : $this->ed265_i_codigo);
+            $this->ed265_i_codigo = ($this->ed265_i_codigo === 0 || $this->ed265_i_codigo === 0.0 || $this->ed265_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed265_i_codigo"] : $this->ed265_i_codigo);
             $this->ed265_c_descr = ($this->ed265_c_descr == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed265_c_descr"] : $this->ed265_c_descr);
         } else {
-            $this->ed265_i_codigo = ($this->ed265_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed265_i_codigo"] : $this->ed265_i_codigo);
+            $this->ed265_i_codigo = ($this->ed265_i_codigo === 0 || $this->ed265_i_codigo === 0.0 || $this->ed265_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed265_i_codigo"] : $this->ed265_i_codigo);
         }
     }
 
@@ -95,7 +95,7 @@ class cl_censodisciplina
             return false;
         }
         $this->ed265_i_codigo = $ed265_i_codigo;
-        if (($this->ed265_i_codigo == null) || ($this->ed265_i_codigo == "")) {
+        if (($this->ed265_i_codigo == null) || ($this->ed265_i_codigo === 0 || $this->ed265_i_codigo === 0.0 || $this->ed265_i_codigo == "")) {
             $this->erro_sql = " Campo ed265_i_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

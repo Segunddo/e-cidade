@@ -76,8 +76,8 @@ class cl_ocorrencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed103_sequencial = ($this->ed103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_sequencial"]:$this->ed103_sequencial);
-       $this->ed103_matricula = ($this->ed103_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_matricula"]:$this->ed103_matricula);
+       $this->ed103_sequencial = ($this->ed103_sequencial === 0 || $this->ed103_sequencial === 0.0 || $this->ed103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_sequencial"]:$this->ed103_sequencial);
+       $this->ed103_matricula = ($this->ed103_matricula === 0 || $this->ed103_matricula === 0.0 || $this->ed103_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_matricula"]:$this->ed103_matricula);
        if($this->ed103_dataocorrencia == ""){
          $this->ed103_dataocorrencia_dia = ($this->ed103_dataocorrencia_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_dataocorrencia_dia"]:$this->ed103_dataocorrencia_dia);
          $this->ed103_dataocorrencia_mes = ($this->ed103_dataocorrencia_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_dataocorrencia_mes"]:$this->ed103_dataocorrencia_mes);
@@ -86,10 +86,10 @@ class cl_ocorrencia {
             $this->ed103_dataocorrencia = $this->ed103_dataocorrencia_ano."-".$this->ed103_dataocorrencia_mes."-".$this->ed103_dataocorrencia_dia;
          }
        }
-       $this->ed103_ocorrenciatipo = ($this->ed103_ocorrenciatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_ocorrenciatipo"]:$this->ed103_ocorrenciatipo);
+       $this->ed103_ocorrenciatipo = ($this->ed103_ocorrenciatipo === 0 || $this->ed103_ocorrenciatipo === 0.0 || $this->ed103_ocorrenciatipo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_ocorrenciatipo"]:$this->ed103_ocorrenciatipo);
        $this->ed103_texto = ($this->ed103_texto == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_texto"]:$this->ed103_texto);
      }else{
-       $this->ed103_sequencial = ($this->ed103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_sequencial"]:$this->ed103_sequencial);
+       $this->ed103_sequencial = ($this->ed103_sequencial === 0 || $this->ed103_sequencial === 0.0 || $this->ed103_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_sequencial"]:$this->ed103_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_ocorrencia {
          $this->ed103_sequencial = $ed103_sequencial;
        }
      }
-     if(($this->ed103_sequencial == null) || ($this->ed103_sequencial == "") ){
+     if(($this->ed103_sequencial == null) || ($this->ed103_sequencial === 0 || $this->ed103_sequencial === 0.0 || $this->ed103_sequencial == "") ){
        $this->erro_sql = " Campo ed103_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

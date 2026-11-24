@@ -87,11 +87,11 @@ class cl_sau_receitamedica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s158_i_codigo = ($this->s158_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_codigo"]:$this->s158_i_codigo);
-       $this->s158_i_profissional = ($this->s158_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_profissional"]:$this->s158_i_profissional);
-       $this->s158_i_tiporeceita = ($this->s158_i_tiporeceita == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_tiporeceita"]:$this->s158_i_tiporeceita);
+       $this->s158_i_codigo = ($this->s158_i_codigo === 0 || $this->s158_i_codigo === 0.0 || $this->s158_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_codigo"]:$this->s158_i_codigo);
+       $this->s158_i_profissional = ($this->s158_i_profissional === 0 || $this->s158_i_profissional === 0.0 || $this->s158_i_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_profissional"]:$this->s158_i_profissional);
+       $this->s158_i_tiporeceita = ($this->s158_i_tiporeceita === 0 || $this->s158_i_tiporeceita === 0.0 || $this->s158_i_tiporeceita == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_tiporeceita"]:$this->s158_i_tiporeceita);
        $this->s158_t_prescricao = ($this->s158_t_prescricao == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_t_prescricao"]:$this->s158_t_prescricao);
-       $this->s158_i_situacao = ($this->s158_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_situacao"]:$this->s158_i_situacao);
+       $this->s158_i_situacao = ($this->s158_i_situacao === 0 || $this->s158_i_situacao === 0.0 || $this->s158_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_situacao"]:$this->s158_i_situacao);
        if($this->s158_d_validade == ""){
          $this->s158_d_validade_dia = ($this->s158_d_validade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_d_validade_dia"]:$this->s158_d_validade_dia);
          $this->s158_d_validade_mes = ($this->s158_d_validade_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_d_validade_mes"]:$this->s158_d_validade_mes);
@@ -100,7 +100,7 @@ class cl_sau_receitamedica {
             $this->s158_d_validade = $this->s158_d_validade_ano."-".$this->s158_d_validade_mes."-".$this->s158_d_validade_dia;
          }
        }
-       $this->s158_i_login = ($this->s158_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_login"]:$this->s158_i_login);
+       $this->s158_i_login = ($this->s158_i_login === 0 || $this->s158_i_login === 0.0 || $this->s158_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_login"]:$this->s158_i_login);
        if($this->s158_d_data == ""){
          $this->s158_d_data_dia = ($this->s158_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_d_data_dia"]:$this->s158_d_data_dia);
          $this->s158_d_data_mes = ($this->s158_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_d_data_mes"]:$this->s158_d_data_mes);
@@ -111,7 +111,7 @@ class cl_sau_receitamedica {
        }
        $this->s158_c_hora = ($this->s158_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_c_hora"]:$this->s158_c_hora);
      }else{
-       $this->s158_i_codigo = ($this->s158_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_codigo"]:$this->s158_i_codigo);
+       $this->s158_i_codigo = ($this->s158_i_codigo === 0 || $this->s158_i_codigo === 0.0 || $this->s158_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s158_i_codigo"]:$this->s158_i_codigo);
      }
    }
    // funcao para inclusao
@@ -213,7 +213,7 @@ class cl_sau_receitamedica {
          $this->s158_i_codigo = $s158_i_codigo;
        }
      }
-     if(($this->s158_i_codigo == null) || ($this->s158_i_codigo == "") ){
+     if(($this->s158_i_codigo == null) || ($this->s158_i_codigo === 0 || $this->s158_i_codigo === 0.0 || $this->s158_i_codigo == "") ){
        $this->erro_sql = " Campo s158_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

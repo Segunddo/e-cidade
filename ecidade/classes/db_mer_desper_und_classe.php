@@ -73,13 +73,13 @@ class cl_mer_desper_und {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me23_i_codigo = ($this->me23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_i_codigo"]:$this->me23_i_codigo);
-       $this->me23_f_quant = ($this->me23_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_f_quant"]:$this->me23_f_quant);
+       $this->me23_i_codigo = ($this->me23_i_codigo === 0 || $this->me23_i_codigo === 0.0 || $this->me23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_i_codigo"]:$this->me23_i_codigo);
+       $this->me23_f_quant = ($this->me23_f_quant === 0 || $this->me23_f_quant === 0.0 || $this->me23_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_f_quant"]:$this->me23_f_quant);
        $this->me23_t_obs = ($this->me23_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_t_obs"]:$this->me23_t_obs);
-       $this->me23_i_unidade = ($this->me23_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_i_unidade"]:$this->me23_i_unidade);
-       $this->me23_i_desperdicio = ($this->me23_i_desperdicio == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_i_desperdicio"]:$this->me23_i_desperdicio);
+       $this->me23_i_unidade = ($this->me23_i_unidade === 0 || $this->me23_i_unidade === 0.0 || $this->me23_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_i_unidade"]:$this->me23_i_unidade);
+       $this->me23_i_desperdicio = ($this->me23_i_desperdicio === 0 || $this->me23_i_desperdicio === 0.0 || $this->me23_i_desperdicio == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_i_desperdicio"]:$this->me23_i_desperdicio);
      }else{
-       $this->me23_i_codigo = ($this->me23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_i_codigo"]:$this->me23_i_codigo);
+       $this->me23_i_codigo = ($this->me23_i_codigo === 0 || $this->me23_i_codigo === 0.0 || $this->me23_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me23_i_codigo"]:$this->me23_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_mer_desper_und {
          $this->me23_i_codigo = $me23_i_codigo;
        }
      }
-     if(($this->me23_i_codigo == null) || ($this->me23_i_codigo == "") ){
+     if(($this->me23_i_codigo == null) || ($this->me23_i_codigo === 0 || $this->me23_i_codigo === 0.0 || $this->me23_i_codigo == "") ){
        $this->erro_sql = " Campo me23_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

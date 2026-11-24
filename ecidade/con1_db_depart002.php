@@ -44,7 +44,7 @@ $cldb_depart    = new cl_db_depart;
 $cldb_departorg = new cl_db_departorg;
 $cldb_config    = new cl_db_config;
 
-parse_str($_SERVER["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($_SERVER["QUERY_STRING"] ?? '', $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($_POST);
 
 if(isset($troca)) {

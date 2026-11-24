@@ -87,7 +87,7 @@ class RelatorioRepositorio extends Repositorio
      * @param Relatorio|null $relatorio
      * @throws Exception
      */
-    public function delete(Relatorio $relatorio = null)
+    public function delete(?Relatorio $relatorio = null)
     {
         $id = $relatorio instanceof Relatorio ? $relatorio->getSequencial() : null;
 

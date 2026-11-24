@@ -40,7 +40,7 @@ $result_cardapio = $clmer_tipocardapio->sql_record($clmer_tipocardapio->sql_quer
                                                                                   "",
                                                                                   "me27_i_codigo = $cardapio"
                                                                                  ));
-$ed52_i_ano = pg_result($result_cardapio,0,0);
+$ed52_i_ano = ($result_cardapio ? pg_result($result_cardapio,0,0) : null);
 
 function montasemana($dData, $iSemana = null, $iAno = null) {
 

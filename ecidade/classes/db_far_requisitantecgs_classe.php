@@ -69,11 +69,11 @@ class cl_far_requisitantecgs {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa38_i_codigo = ($this->fa38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa38_i_codigo"]:$this->fa38_i_codigo);
-       $this->fa38_i_requisitante = ($this->fa38_i_requisitante == ""?@$GLOBALS["HTTP_POST_VARS"]["fa38_i_requisitante"]:$this->fa38_i_requisitante);
-       $this->fa38_i_cgs = ($this->fa38_i_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["fa38_i_cgs"]:$this->fa38_i_cgs);
+       $this->fa38_i_codigo = ($this->fa38_i_codigo === 0 || $this->fa38_i_codigo === 0.0 || $this->fa38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa38_i_codigo"]:$this->fa38_i_codigo);
+       $this->fa38_i_requisitante = ($this->fa38_i_requisitante === 0 || $this->fa38_i_requisitante === 0.0 || $this->fa38_i_requisitante == ""?@$GLOBALS["HTTP_POST_VARS"]["fa38_i_requisitante"]:$this->fa38_i_requisitante);
+       $this->fa38_i_cgs = ($this->fa38_i_cgs === 0 || $this->fa38_i_cgs === 0.0 || $this->fa38_i_cgs == ""?@$GLOBALS["HTTP_POST_VARS"]["fa38_i_cgs"]:$this->fa38_i_cgs);
      }else{
-       $this->fa38_i_codigo = ($this->fa38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa38_i_codigo"]:$this->fa38_i_codigo);
+       $this->fa38_i_codigo = ($this->fa38_i_codigo === 0 || $this->fa38_i_codigo === 0.0 || $this->fa38_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa38_i_codigo"]:$this->fa38_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_far_requisitantecgs {
          $this->fa38_i_codigo = $fa38_i_codigo;
        }
      }
-     if(($this->fa38_i_codigo == null) || ($this->fa38_i_codigo == "") ){
+     if(($this->fa38_i_codigo == null) || ($this->fa38_i_codigo === 0 || $this->fa38_i_codigo === 0.0 || $this->fa38_i_codigo == "") ){
        $this->erro_sql = " Campo fa38_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_cgs_cgm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z01_i_cgscgm = ($this->z01_i_cgscgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_cgscgm"]:$this->z01_i_cgscgm);
-       $this->z01_i_numcgm = ($this->z01_i_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_numcgm"]:$this->z01_i_numcgm);
+       $this->z01_i_cgscgm = ($this->z01_i_cgscgm === 0 || $this->z01_i_cgscgm === 0.0 || $this->z01_i_cgscgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_cgscgm"]:$this->z01_i_cgscgm);
+       $this->z01_i_numcgm = ($this->z01_i_numcgm === 0 || $this->z01_i_numcgm === 0.0 || $this->z01_i_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_numcgm"]:$this->z01_i_numcgm);
      }else{
-       $this->z01_i_cgscgm = ($this->z01_i_cgscgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_cgscgm"]:$this->z01_i_cgscgm);
+       $this->z01_i_cgscgm = ($this->z01_i_cgscgm === 0 || $this->z01_i_cgscgm === 0.0 || $this->z01_i_cgscgm == ""?@$GLOBALS["HTTP_POST_VARS"]["z01_i_cgscgm"]:$this->z01_i_cgscgm);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_cgs_cgm {
        return false;
      }
        $this->z01_i_cgscgm = $z01_i_cgscgm; 
-     if(($this->z01_i_cgscgm == null) || ($this->z01_i_cgscgm == "") ){ 
+     if(($this->z01_i_cgscgm == null) || ($this->z01_i_cgscgm === 0 || $this->z01_i_cgscgm === 0.0 || $this->z01_i_cgscgm == "") ){ 
        $this->erro_sql = " Campo z01_i_cgscgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -54,7 +54,7 @@ $oRetorno->message  = "";
 $sXml         = "";
 $iCodigo      = 0;
 $sFileNameXml = "";
-$sDescr = utf8_decode($_POST["sdescr"]);
+$sDescr = mb_convert_encoding($_POST["sdescr"] ?? '', 'ISO-8859-1', 'UTF-8');
 
 if(isset($_POST["sxml"]) && trim($_POST["sxml"]) != ""){
   $sXml = db_stdClass::db_stripTagsJson($_POST["sxml"]);

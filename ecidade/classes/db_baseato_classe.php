@@ -69,11 +69,11 @@ class cl_baseato {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed278_i_codigo = ($this->ed278_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed278_i_codigo"]:$this->ed278_i_codigo);
-       $this->ed278_i_escolabase = ($this->ed278_i_escolabase == ""?@$GLOBALS["HTTP_POST_VARS"]["ed278_i_escolabase"]:$this->ed278_i_escolabase);
-       $this->ed278_i_atolegal = ($this->ed278_i_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed278_i_atolegal"]:$this->ed278_i_atolegal);
+       $this->ed278_i_codigo = ($this->ed278_i_codigo === 0 || $this->ed278_i_codigo === 0.0 || $this->ed278_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed278_i_codigo"]:$this->ed278_i_codigo);
+       $this->ed278_i_escolabase = ($this->ed278_i_escolabase === 0 || $this->ed278_i_escolabase === 0.0 || $this->ed278_i_escolabase == ""?@$GLOBALS["HTTP_POST_VARS"]["ed278_i_escolabase"]:$this->ed278_i_escolabase);
+       $this->ed278_i_atolegal = ($this->ed278_i_atolegal === 0 || $this->ed278_i_atolegal === 0.0 || $this->ed278_i_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed278_i_atolegal"]:$this->ed278_i_atolegal);
      }else{
-       $this->ed278_i_codigo = ($this->ed278_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed278_i_codigo"]:$this->ed278_i_codigo);
+       $this->ed278_i_codigo = ($this->ed278_i_codigo === 0 || $this->ed278_i_codigo === 0.0 || $this->ed278_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed278_i_codigo"]:$this->ed278_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_baseato {
          $this->ed278_i_codigo = $ed278_i_codigo;
        }
      }
-     if(($this->ed278_i_codigo == null) || ($this->ed278_i_codigo == "") ){
+     if(($this->ed278_i_codigo == null) || ($this->ed278_i_codigo === 0 || $this->ed278_i_codigo === 0.0 || $this->ed278_i_codigo == "") ){
        $this->erro_sql = " Campo ed278_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

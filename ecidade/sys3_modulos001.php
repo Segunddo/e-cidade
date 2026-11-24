@@ -103,7 +103,7 @@ input {
 	$cor1 = "#A4CCF9";
 	$cor2 = "#A4BDF9";
 	$cor = "";
-	$numrows = pg_numrows($result);
+	$numrows = pg_num_rows($result);
 	for($i = 0;$i < $numrows;$i++) {
 	  db_fieldsmemory($result,$i);
       echo "<tr bgcolor=\"".($cor = $cor==$cor1?$cor2:$cor1)."\" >\n";

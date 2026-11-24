@@ -67,10 +67,10 @@ class cl_motivoexclusao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed249_i_codigo = ($this->ed249_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed249_i_codigo"]:$this->ed249_i_codigo);
+       $this->ed249_i_codigo = ($this->ed249_i_codigo === 0 || $this->ed249_i_codigo === 0.0 || $this->ed249_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed249_i_codigo"]:$this->ed249_i_codigo);
        $this->ed249_c_motivo = ($this->ed249_c_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed249_c_motivo"]:$this->ed249_c_motivo);
      }else{
-       $this->ed249_i_codigo = ($this->ed249_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed249_i_codigo"]:$this->ed249_i_codigo);
+       $this->ed249_i_codigo = ($this->ed249_i_codigo === 0 || $this->ed249_i_codigo === 0.0 || $this->ed249_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed249_i_codigo"]:$this->ed249_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_motivoexclusao {
          $this->ed249_i_codigo = $ed249_i_codigo;
        }
      }
-     if(($this->ed249_i_codigo == null) || ($this->ed249_i_codigo == "") ){
+     if(($this->ed249_i_codigo == null) || ($this->ed249_i_codigo === 0 || $this->ed249_i_codigo === 0.0 || $this->ed249_i_codigo == "") ){
        $this->erro_sql = " Campo ed249_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

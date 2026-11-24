@@ -71,12 +71,12 @@ class cl_sau_agendaexameconfirmaresultado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s134_i_codigo = ($this->s134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_codigo"]:$this->s134_i_codigo);
-       $this->s134_i_agendaexameconfirma = ($this->s134_i_agendaexameconfirma == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_agendaexameconfirma"]:$this->s134_i_agendaexameconfirma);
-       $this->s134_i_examesatributos = ($this->s134_i_examesatributos == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_examesatributos"]:$this->s134_i_examesatributos);
+       $this->s134_i_codigo = ($this->s134_i_codigo === 0 || $this->s134_i_codigo === 0.0 || $this->s134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_codigo"]:$this->s134_i_codigo);
+       $this->s134_i_agendaexameconfirma = ($this->s134_i_agendaexameconfirma === 0 || $this->s134_i_agendaexameconfirma === 0.0 || $this->s134_i_agendaexameconfirma == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_agendaexameconfirma"]:$this->s134_i_agendaexameconfirma);
+       $this->s134_i_examesatributos = ($this->s134_i_examesatributos === 0 || $this->s134_i_examesatributos === 0.0 || $this->s134_i_examesatributos == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_examesatributos"]:$this->s134_i_examesatributos);
        $this->s134_c_valor = ($this->s134_c_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_c_valor"]:$this->s134_c_valor);
      }else{
-       $this->s134_i_codigo = ($this->s134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_codigo"]:$this->s134_i_codigo);
+       $this->s134_i_codigo = ($this->s134_i_codigo === 0 || $this->s134_i_codigo === 0.0 || $this->s134_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s134_i_codigo"]:$this->s134_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_sau_agendaexameconfirmaresultado {
          $this->s134_i_codigo = $s134_i_codigo;
        }
      }
-     if(($this->s134_i_codigo == null) || ($this->s134_i_codigo == "") ){
+     if(($this->s134_i_codigo == null) || ($this->s134_i_codigo === 0 || $this->s134_i_codigo === 0.0 || $this->s134_i_codigo == "") ){
        $this->erro_sql = " Campo s134_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

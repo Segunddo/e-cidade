@@ -130,7 +130,7 @@ order by rh26_orgao
 
 $result = db_query($sql);
 //db_criatabela($result);
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=No existem movimentos no perodo de '.$mes.' / '.$ano);
 
@@ -227,7 +227,7 @@ for($x = 0; $x < pg_numrows($result);$x++){
      $pdf->cell(20,$alt,db_formatar(($fund60/100*8),'f'),0,1,"R",0);
     // $pdf->cell(20,$alt,db_formatar(($fund60/100*0.5),'f'),0,0,"R",0);
 //     $pdf->cell(20,$alt,db_formatar(($fund60/100*8)+($fund60/100*0.5),'f'),0,1,"R",0);
-     
+
      $pdf->cell(25,$alt,'',0,0,"C",0);
      $pat40 = $fund40 / 100 * 21;
      $pdf->cell(80,$alt,'FUNDEB 40%',0,0,"L",0);

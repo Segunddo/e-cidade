@@ -51,14 +51,14 @@ class cl_lab_labsetor
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->la24_i_codigo = ($this->la24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_i_codigo"]:$this->la24_i_codigo);
-       $this->la24_i_resp = ($this->la24_i_resp == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_i_resp"]:$this->la24_i_resp);
-       $this->la24_i_setor = ($this->la24_i_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_i_setor"]:$this->la24_i_setor);
-       $this->la24_i_laboratorio = ($this->la24_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_i_laboratorio"]:$this->la24_i_laboratorio);
+       $this->la24_i_codigo = ($this->la24_i_codigo === 0 || $this->la24_i_codigo === 0.0 || $this->la24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_i_codigo"]:$this->la24_i_codigo);
+       $this->la24_i_resp = ($this->la24_i_resp === 0 || $this->la24_i_resp === 0.0 || $this->la24_i_resp == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_i_resp"]:$this->la24_i_resp);
+       $this->la24_i_setor = ($this->la24_i_setor === 0 || $this->la24_i_setor === 0.0 || $this->la24_i_setor == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_i_setor"]:$this->la24_i_setor);
+       $this->la24_i_laboratorio = ($this->la24_i_laboratorio === 0 || $this->la24_i_laboratorio === 0.0 || $this->la24_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_i_laboratorio"]:$this->la24_i_laboratorio);
        $this->la24_o_assinatura = ($this->la24_o_assinatura == "" && strlen(@$GLOBALS["HTTP_POST_VARS"]["la24_o_assinatura"]) > 0?@$GLOBALS["HTTP_POST_VARS"]["la24_o_assinatura"]:$this->la24_o_assinatura);
        $this->la24_c_nomearq = ($this->la24_c_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_c_nomearq"]:$this->la24_c_nomearq);
      }else{
-       $this->la24_i_codigo = ($this->la24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_i_codigo"]:$this->la24_i_codigo);
+       $this->la24_i_codigo = ($this->la24_i_codigo === 0 || $this->la24_i_codigo === 0.0 || $this->la24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la24_i_codigo"]:$this->la24_i_codigo);
      }
    }
 
@@ -116,7 +116,7 @@ class cl_lab_labsetor
          $this->la24_i_codigo = $la24_i_codigo; 
        }
      }
-     if(($this->la24_i_codigo == null) || ($this->la24_i_codigo == "") ){ 
+     if(($this->la24_i_codigo == null) || ($this->la24_i_codigo === 0 || $this->la24_i_codigo === 0.0 || $this->la24_i_codigo == "") ){ 
        $this->erro_sql = " Campo la24_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

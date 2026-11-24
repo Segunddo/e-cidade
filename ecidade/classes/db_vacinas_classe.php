@@ -71,7 +71,7 @@ class cl_vacinas {
      if($exclusao==false){
        $this->sd07_c_codigo = ($this->sd07_c_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd07_c_codigo"]:$this->sd07_c_codigo);
        $this->sd07_c_nome = ($this->sd07_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd07_c_nome"]:$this->sd07_c_nome);
-       $this->sd07_i_doses = ($this->sd07_i_doses == ""?@$GLOBALS["HTTP_POST_VARS"]["sd07_i_doses"]:$this->sd07_i_doses);
+       $this->sd07_i_doses = ($this->sd07_i_doses === 0 || $this->sd07_i_doses === 0.0 || $this->sd07_i_doses == ""?@$GLOBALS["HTTP_POST_VARS"]["sd07_i_doses"]:$this->sd07_i_doses);
      }else{
        $this->sd07_c_codigo = ($this->sd07_c_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd07_c_codigo"]:$this->sd07_c_codigo);
      }

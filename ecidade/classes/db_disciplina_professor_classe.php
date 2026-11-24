@@ -73,13 +73,13 @@ class cl_disciplina_professor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed12_i_codigo = ($this->ed12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_i_codigo"]:$this->ed12_i_codigo);
-       $this->ed12_i_professores = ($this->ed12_i_professores == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_i_professores"]:$this->ed12_i_professores);
-       $this->ed12_i_disciplina = ($this->ed12_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_i_disciplina"]:$this->ed12_i_disciplina);
-       $this->ed12_f_ch = ($this->ed12_f_ch == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_f_ch"]:$this->ed12_f_ch);
-       $this->ed12_f_frequencia = ($this->ed12_f_frequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_f_frequencia"]:$this->ed12_f_frequencia);
+       $this->ed12_i_codigo = ($this->ed12_i_codigo === 0 || $this->ed12_i_codigo === 0.0 || $this->ed12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_i_codigo"]:$this->ed12_i_codigo);
+       $this->ed12_i_professores = ($this->ed12_i_professores === 0 || $this->ed12_i_professores === 0.0 || $this->ed12_i_professores == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_i_professores"]:$this->ed12_i_professores);
+       $this->ed12_i_disciplina = ($this->ed12_i_disciplina === 0 || $this->ed12_i_disciplina === 0.0 || $this->ed12_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_i_disciplina"]:$this->ed12_i_disciplina);
+       $this->ed12_f_ch = ($this->ed12_f_ch === 0 || $this->ed12_f_ch === 0.0 || $this->ed12_f_ch == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_f_ch"]:$this->ed12_f_ch);
+       $this->ed12_f_frequencia = ($this->ed12_f_frequencia === 0 || $this->ed12_f_frequencia === 0.0 || $this->ed12_f_frequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_f_frequencia"]:$this->ed12_f_frequencia);
      }else{
-       $this->ed12_i_codigo = ($this->ed12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_i_codigo"]:$this->ed12_i_codigo);
+       $this->ed12_i_codigo = ($this->ed12_i_codigo === 0 || $this->ed12_i_codigo === 0.0 || $this->ed12_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed12_i_codigo"]:$this->ed12_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_disciplina_professor {
          $this->ed12_i_codigo = $ed12_i_codigo;
        }
      }
-     if(($this->ed12_i_codigo == null) || ($this->ed12_i_codigo == "") ){
+     if(($this->ed12_i_codigo == null) || ($this->ed12_i_codigo === 0 || $this->ed12_i_codigo === 0.0 || $this->ed12_i_codigo == "") ){
        $this->erro_sql = " Campo ed12_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

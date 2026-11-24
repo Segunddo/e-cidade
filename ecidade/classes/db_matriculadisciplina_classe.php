@@ -69,11 +69,11 @@ class cl_matriculadisciplina {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed298_sequencial = ($this->ed298_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_sequencial"]:$this->ed298_sequencial);
-       $this->ed298_matriculadependencia = ($this->ed298_matriculadependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_matriculadependencia"]:$this->ed298_matriculadependencia);
-       $this->ed298_disciplina = ($this->ed298_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_disciplina"]:$this->ed298_disciplina);
+       $this->ed298_sequencial = ($this->ed298_sequencial === 0 || $this->ed298_sequencial === 0.0 || $this->ed298_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_sequencial"]:$this->ed298_sequencial);
+       $this->ed298_matriculadependencia = ($this->ed298_matriculadependencia === 0 || $this->ed298_matriculadependencia === 0.0 || $this->ed298_matriculadependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_matriculadependencia"]:$this->ed298_matriculadependencia);
+       $this->ed298_disciplina = ($this->ed298_disciplina === 0 || $this->ed298_disciplina === 0.0 || $this->ed298_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_disciplina"]:$this->ed298_disciplina);
      }else{
-       $this->ed298_sequencial = ($this->ed298_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_sequencial"]:$this->ed298_sequencial);
+       $this->ed298_sequencial = ($this->ed298_sequencial === 0 || $this->ed298_sequencial === 0.0 || $this->ed298_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed298_sequencial"]:$this->ed298_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_matriculadisciplina {
          $this->ed298_sequencial = $ed298_sequencial;
        }
      }
-     if(($this->ed298_sequencial == null) || ($this->ed298_sequencial == "") ){
+     if(($this->ed298_sequencial == null) || ($this->ed298_sequencial === 0 || $this->ed298_sequencial === 0.0 || $this->ed298_sequencial == "") ){
        $this->erro_sql = " Campo ed298_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

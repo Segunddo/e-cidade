@@ -69,11 +69,11 @@ class cl_tfd_tipotratamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf04_i_codigo = ($this->tf04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf04_i_codigo"]:$this->tf04_i_codigo);
+       $this->tf04_i_codigo = ($this->tf04_i_codigo === 0 || $this->tf04_i_codigo === 0.0 || $this->tf04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf04_i_codigo"]:$this->tf04_i_codigo);
        $this->tf04_c_descr = ($this->tf04_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["tf04_c_descr"]:$this->tf04_c_descr);
        $this->tf04_c_abreviatura = ($this->tf04_c_abreviatura == ""?@$GLOBALS["HTTP_POST_VARS"]["tf04_c_abreviatura"]:$this->tf04_c_abreviatura);
      }else{
-       $this->tf04_i_codigo = ($this->tf04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf04_i_codigo"]:$this->tf04_i_codigo);
+       $this->tf04_i_codigo = ($this->tf04_i_codigo === 0 || $this->tf04_i_codigo === 0.0 || $this->tf04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf04_i_codigo"]:$this->tf04_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tfd_tipotratamento {
          $this->tf04_i_codigo = $tf04_i_codigo;
        }
      }
-     if(($this->tf04_i_codigo == null) || ($this->tf04_i_codigo == "") ){
+     if(($this->tf04_i_codigo == null) || ($this->tf04_i_codigo === 0 || $this->tf04_i_codigo === 0.0 || $this->tf04_i_codigo == "") ){
        $this->erro_sql = " Campo tf04_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

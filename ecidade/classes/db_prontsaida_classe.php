@@ -80,12 +80,12 @@ class cl_prontsaida {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd27_i_codigo = ($this->sd27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_codigo"]:$this->sd27_i_codigo);
-       $this->sd27_i_prontuario = ($this->sd27_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_prontuario"]:$this->sd27_i_prontuario);
-       $this->sd27_i_departamento = ($this->sd27_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_departamento"]:$this->sd27_i_departamento);
-       $this->sd27_i_material = ($this->sd27_i_material == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_material"]:$this->sd27_i_material);
-       $this->sd27_i_quantidade = ($this->sd27_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_quantidade"]:$this->sd27_i_quantidade);
-       $this->sd27_i_usuario = ($this->sd27_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_usuario"]:$this->sd27_i_usuario);
+       $this->sd27_i_codigo = ($this->sd27_i_codigo === 0 || $this->sd27_i_codigo === 0.0 || $this->sd27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_codigo"]:$this->sd27_i_codigo);
+       $this->sd27_i_prontuario = ($this->sd27_i_prontuario === 0 || $this->sd27_i_prontuario === 0.0 || $this->sd27_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_prontuario"]:$this->sd27_i_prontuario);
+       $this->sd27_i_departamento = ($this->sd27_i_departamento === 0 || $this->sd27_i_departamento === 0.0 || $this->sd27_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_departamento"]:$this->sd27_i_departamento);
+       $this->sd27_i_material = ($this->sd27_i_material === 0 || $this->sd27_i_material === 0.0 || $this->sd27_i_material == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_material"]:$this->sd27_i_material);
+       $this->sd27_i_quantidade = ($this->sd27_i_quantidade === 0 || $this->sd27_i_quantidade === 0.0 || $this->sd27_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_quantidade"]:$this->sd27_i_quantidade);
+       $this->sd27_i_usuario = ($this->sd27_i_usuario === 0 || $this->sd27_i_usuario === 0.0 || $this->sd27_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_usuario"]:$this->sd27_i_usuario);
        if($this->sd27_d_data == ""){
          $this->sd27_d_data_dia = ($this->sd27_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_d_data_dia"]:$this->sd27_d_data_dia);
          $this->sd27_d_data_mes = ($this->sd27_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_d_data_mes"]:$this->sd27_d_data_mes);
@@ -95,7 +95,7 @@ class cl_prontsaida {
          }
        }
      }else{
-       $this->sd27_i_codigo = ($this->sd27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_codigo"]:$this->sd27_i_codigo);
+       $this->sd27_i_codigo = ($this->sd27_i_codigo === 0 || $this->sd27_i_codigo === 0.0 || $this->sd27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd27_i_codigo"]:$this->sd27_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_prontsaida {
          $this->sd27_i_codigo = $sd27_i_codigo;
        }
      }
-     if(($this->sd27_i_codigo == null) || ($this->sd27_i_codigo == "") ){
+     if(($this->sd27_i_codigo == null) || ($this->sd27_i_codigo === 0 || $this->sd27_i_codigo === 0.0 || $this->sd27_i_codigo == "") ){
        $this->erro_sql = " Campo sd27_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

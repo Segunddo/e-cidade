@@ -90,10 +90,10 @@ class cl_reserva {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi14_codigo = ($this->bi14_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_codigo"]:$this->bi14_codigo);
-       $this->bi14_carteira = ($this->bi14_carteira == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_carteira"]:$this->bi14_carteira);
-       $this->bi14_usuario = ($this->bi14_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_usuario"]:$this->bi14_usuario);
-       $this->bi14_acervo = ($this->bi14_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_acervo"]:$this->bi14_acervo);
+       $this->bi14_codigo = ($this->bi14_codigo === 0 || $this->bi14_codigo === 0.0 || $this->bi14_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_codigo"]:$this->bi14_codigo);
+       $this->bi14_carteira = ($this->bi14_carteira === 0 || $this->bi14_carteira === 0.0 || $this->bi14_carteira == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_carteira"]:$this->bi14_carteira);
+       $this->bi14_usuario = ($this->bi14_usuario === 0 || $this->bi14_usuario === 0.0 || $this->bi14_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_usuario"]:$this->bi14_usuario);
+       $this->bi14_acervo = ($this->bi14_acervo === 0 || $this->bi14_acervo === 0.0 || $this->bi14_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_acervo"]:$this->bi14_acervo);
        if($this->bi14_data == ""){
          $this->bi14_data_dia = ($this->bi14_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_data_dia"]:$this->bi14_data_dia);
          $this->bi14_data_mes = ($this->bi14_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_data_mes"]:$this->bi14_data_mes);
@@ -121,7 +121,7 @@ class cl_reserva {
        }
        $this->bi14_situacao = ($this->bi14_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_situacao"]:$this->bi14_situacao);
      }else{
-       $this->bi14_codigo = ($this->bi14_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_codigo"]:$this->bi14_codigo);
+       $this->bi14_codigo = ($this->bi14_codigo === 0 || $this->bi14_codigo === 0.0 || $this->bi14_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi14_codigo"]:$this->bi14_codigo);
      }
    }
    // funcao para inclusao
@@ -208,7 +208,7 @@ class cl_reserva {
          $this->bi14_codigo = $bi14_codigo;
        }
      }
-     if(($this->bi14_codigo == null) || ($this->bi14_codigo == "") ){
+     if(($this->bi14_codigo == null) || ($this->bi14_codigo === 0 || $this->bi14_codigo === 0.0 || $this->bi14_codigo == "") ){
        $this->erro_sql = " Campo bi14_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -73,13 +73,13 @@ class cl_leitorcategoria {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi07_codigo = ($this->bi07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_codigo"]:$this->bi07_codigo);
+       $this->bi07_codigo = ($this->bi07_codigo === 0 || $this->bi07_codigo === 0.0 || $this->bi07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_codigo"]:$this->bi07_codigo);
        $this->bi07_nome = ($this->bi07_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_nome"]:$this->bi07_nome);
-       $this->bi07_qtdlivros = ($this->bi07_qtdlivros == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_qtdlivros"]:$this->bi07_qtdlivros);
-       $this->bi07_tempo = ($this->bi07_tempo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_tempo"]:$this->bi07_tempo);
-       $this->bi07_biblioteca = ($this->bi07_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_biblioteca"]:$this->bi07_biblioteca);
+       $this->bi07_qtdlivros = ($this->bi07_qtdlivros === 0 || $this->bi07_qtdlivros === 0.0 || $this->bi07_qtdlivros == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_qtdlivros"]:$this->bi07_qtdlivros);
+       $this->bi07_tempo = ($this->bi07_tempo === 0 || $this->bi07_tempo === 0.0 || $this->bi07_tempo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_tempo"]:$this->bi07_tempo);
+       $this->bi07_biblioteca = ($this->bi07_biblioteca === 0 || $this->bi07_biblioteca === 0.0 || $this->bi07_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_biblioteca"]:$this->bi07_biblioteca);
      }else{
-       $this->bi07_codigo = ($this->bi07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_codigo"]:$this->bi07_codigo);
+       $this->bi07_codigo = ($this->bi07_codigo === 0 || $this->bi07_codigo === 0.0 || $this->bi07_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi07_codigo"]:$this->bi07_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_leitorcategoria {
          $this->bi07_codigo = $bi07_codigo;
        }
      }
-     if(($this->bi07_codigo == null) || ($this->bi07_codigo == "") ){
+     if(($this->bi07_codigo == null) || ($this->bi07_codigo === 0 || $this->bi07_codigo === 0.0 || $this->bi07_codigo == "") ){
        $this->erro_sql = " Campo bi07_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

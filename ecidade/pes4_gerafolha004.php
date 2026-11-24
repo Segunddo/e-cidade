@@ -465,9 +465,9 @@ function calculos_especificos_17_ajuste($registro_, $lotac_){
       $rubrica_varia = substr("#". $pontofs_[$Ipontofs_]["r10_rubric"],2,3 );
 
       $valor_liquido = "valor_liquido".$rubrica_varia;
-      $$valor_liquido = $pontofs_[$Ipontofs_]["r10_valor"];
+      ${$valor_liquido} = $pontofs_[$Ipontofs_]["r10_valor"];
       $calcula_valor = "calcula_valor_".$rubrica_varia;
-      $$calcula_valor = true;
+      ${$calcula_valor} = true;
 
       if( !db_empty($pontofs_[$Ipontofs_]["r10_valor"])){
         if( !db_empty($valor_proventos_base)){
@@ -478,20 +478,20 @@ function calculos_especificos_17_ajuste($registro_, $lotac_){
               // diferenca entre o lancado e o limite de 20%;
               $valor = $pontofs_[$Ipontofs_]["r10_valor"] - $limite_desconto;
               if( $valor > $saldo_rateio){
-                $$valor_liquido -= $saldo_rateio;
+                ${$valor_liquido} -= $saldo_rateio;
                 $saldo_rateio = 0;
               }else{
-                $$valor_liquido = $limite_desconto;
+                ${$valor_liquido} = $limite_desconto;
                 $saldo_rateio -= $valor                       ;
               }
             }else{
               // lanca o restante do valor a descontar (saldo final);
-              $$valor_liquido = $pontofs_[$Ipontofs_]["r10_valor"];
+              ${$valor_liquido} = $pontofs_[$Ipontofs_]["r10_valor"];
             }
           }else{
-            $$valor_liquido = $pontofs_[$Ipontofs_]["r10_valor"];
+            ${$valor_liquido} = $pontofs_[$Ipontofs_]["r10_valor"];
           }
-          $tot_valor_liquido += $$valor_liquido;
+          $tot_valor_liquido += ${$valor_liquido};
 
         }
       }
@@ -528,13 +528,13 @@ function calculos_especificos_17_ajuste($registro_, $lotac_){
     $calcula_valor = "calcula_valor_".$rubrica_varia;
     $valor_liquido = "valor_liquido".$rubrica_varia;
 
-    if( $$calcula_valor ){
-      if(  $$valor_liquido > 0){
+    if( ${$calcula_valor} ){
+      if(  ${$valor_liquido} > 0){
         $proporcao = 0;
         if( $rateio > 0){
-          $proporcao = ( $rateio * ( ( $$valor_liquido*100 )/ $tot_valor_liquido) )/100;
+          $proporcao = ( $rateio * ( ( ${$valor_liquido}*100 )/ $tot_valor_liquido) )/100;
         }
-        $valor_a_gravar = ( $$valor_liquido - $proporcao );
+        $valor_a_gravar = ( ${$valor_liquido} - $proporcao );
         if( $valor_a_gravar < 0 ){
           $valor_a_gravar = 0;
         }
@@ -957,7 +957,7 @@ function calculos_desconto_liquido_generico_ajuste($registro_, $lotac_){
       $rubrica_ = $pontofs_[$Ipontofs_]["r10_rubric"] ;
       $calcula_valor = "calcula_valor_".$rubrica_;
       global ${$calcula_valor};
-      $$calcula_valor = true;
+      ${$calcula_valor} = true;
     }
   }else{
     return;
@@ -1017,7 +1017,7 @@ function calculos_desconto_liquido_generico_ajuste($registro_, $lotac_){
     $rubrica_varia = substr("#". $rubricas_,$I,4 );
     $verifica_calcula_valor = "calcula_valor_".$rubrica_varia;
     global ${$verifica_calcula_valor};
-    if( ( $$verifica_calcula_valor )){
+    if( ( ${$verifica_calcula_valor} )){
       $condicaoaux  = " and rh27_instit = $DB_instit and rh27_rubric = ".db_sqlformat( $rubrica_varia );
       global $rubr_;
       db_selectmax( "rubr_", "select rh27_pd from rhrubricas ".$condicaoaux );
@@ -1648,7 +1648,7 @@ function gerffer($opcao_geral=null,$opcao_tipo=1){
       global ${$chamada_geral_arquivo};
       if ( db_selectmax( $chamada_geral_arquivo, "select * from ".$chamada_geral_arquivo." ".bb_condicaosubpes( $siglag ).$condicaoaux )) {
 
-        $arquivo      = $$chamada_geral_arquivo;
+        $arquivo      = ${$chamada_geral_arquivo};
         $iTotalLinhas = count($arquivo);
         for ($Iarquivo = 0; $Iarquivo < $iTotalLinhas; $Iarquivo++) {
 
@@ -2455,7 +2455,7 @@ function gerfres($opcao_geral=null,$opcao_tipo=1){
 
       if (db_selectmax( $chamada_geral_arquivo, "select * from ".$chamada_geral_arquivo." ".bb_condicaosubpes( $siglag ).$condicaoaux )){
 
-        $arquivo = $$chamada_geral_arquivo;
+        $arquivo = ${$chamada_geral_arquivo};
 
         for($Iarquivo=0;$Iarquivo< count($arquivo);$Iarquivo++){
 
@@ -3549,7 +3549,7 @@ function gerfs13($opcao_geral=null,$opcao_tipo=1) {
       global ${$chamada_geral_arquivo};
       if( db_selectmax( $chamada_geral_arquivo, "select * from ".$chamada_geral_arquivo." ".bb_condicaosubpes( $siglag ).$condicaoaux )){
 
-        $arquivo = $$chamada_geral_arquivo;
+        $arquivo = ${$chamada_geral_arquivo};
 
         for ($Iarquivo=0;$Iarquivo< count($arquivo);$Iarquivo++) {
 
@@ -4043,7 +4043,7 @@ function gerfsal( $opcao_geral=null, $opcao_tipo = TIPO_CALCULO_PARCIAL ) {
       } else {
 
          if (db_selectmax($chamada_geral_arquivo, "select * from ".$chamada_geral_arquivo." ".bb_condicaosubpes($siglag ).$condicaoaux )) {
-            $arq_ = $$chamada_geral_arquivo;
+            $arq_ = ${$chamada_geral_arquivo};
     
             /**
              * Aqui remove os registyro da tabela de salario
@@ -4281,7 +4281,7 @@ function gerfsal( $opcao_geral=null, $opcao_tipo = TIPO_CALCULO_PARCIAL ) {
         //public calcula_xvalor_&rubrica_desconto;
         $calcula_yvalor = "calcula_xvalor_".$rubrica_desconto;
         global ${$calcula_yvalor};
-        $$calcula_yvalor = false;
+        ${$calcula_yvalor} = false;
 
         $rubricas_calculos_especiais .= "'".$rubrica_desconto."',";
       }
@@ -4309,9 +4309,9 @@ function gerfsal( $opcao_geral=null, $opcao_tipo = TIPO_CALCULO_PARCIAL ) {
     }
 
     if ($opcao_geral == 1) {
-      $quant_pontofs = count($pontofs);
+      $quant_pontofs = count((array)$pontofs);
     } else {
-      $quant_pontofs = count($pontocom);
+      $quant_pontofs = count((array)$pontocom);
     }
     if ($quant_pontofs ==0) {
       if ($opcao_geral == PONTO_SALARIO) {
@@ -4483,7 +4483,7 @@ function gerfsal( $opcao_geral=null, $opcao_tipo = TIPO_CALCULO_PARCIAL ) {
           $rub = $pontofs[$Iponto]["r10_rubric"] ;
           $calcula_xvalor = "calcula_xvalor_".$rub;
           global ${$calcula_xvalor};
-          $$calcula_xvalor = true;
+          ${$calcula_xvalor} = true;
           LogCalculoFolha::write("Saiu achou Rubrica 0514... continue");
           continue;
         }
@@ -7105,7 +7105,7 @@ function le_var_bxxx($formula=null, $area0=null, $area1=null, $sigla=null, $sigl
           $condicaoaux  = " and r53_regist = ".db_sqlformat($r110_regist );
           global $transacao;
           db_selectmax("transacao", "select * from gerffx ".bb_condicaosubpes("r53_" ).$condicaoaux);
-          $iTotalLinhasTransacao = count($transacao);
+          $iTotalLinhasTransacao = count((array)$transacao);
           for ($pos = 0; $pos < $iTotalLinhasTransacao; $pos++) {
             $mrubr[$pos+1] = $transacao[$pos]["r53_rubric"];
           }
@@ -7173,7 +7173,7 @@ function le_var_bxxx($formula=null, $area0=null, $area1=null, $sigla=null, $sigl
           $proc_ler_var_bxxx = true;
         }
         if ($proc_ler_var_bxxx ) {
-          $arq_ = $$area0;
+          $arq_ = ${$area0};
           // Percorre o Ponto (pontofs, pontofx,pontocom, etc..)
 
           $iTotalArq_ = count($arq_);
@@ -8577,7 +8577,7 @@ function rle_var_bxxx ($formula=null, $area0=null, $area1=null, $sigla=null, $si
 
           //echo "<BR> base 1.3 --> $base";
           LogCalculoFolha::write("Percorrendo os dados da tabela $area0");
-          $iTotalLinhasArea0 = count($$area0);
+          $iTotalLinhasArea0 = count(${$area0});
           for ($i = 0; $i < $iTotalLinhasArea0; $i++) {
 
             eval('$campo_rubrica = $'.$area0."[$i]['".$sigla."_rubric'];");
@@ -9542,7 +9542,7 @@ function calculos_especificos($r110_regist,$r110_lotac){
       $variavel = "calcula_xvalor_".$rub;
       global ${$variavel};
       //echo "<BR><BR>$variavel --- ".($$variavel==true?"true":"false");
-      $calcula_xvalor = ($$variavel == true);
+      $calcula_xvalor = (${$variavel} == true);
       if( $calcula_xvalor){
         $condicaoaux  = " and r10_regist = ".db_sqlformat( $r110_regist );
         $condicaoaux .= " and r10_rubric = ".db_sqlformat( $rub );
@@ -9806,7 +9806,7 @@ function calcula_r928 ($r110_regist,$r110_lotac,$opcao_geral) {
     if ($tot_prov > $tot_desc) {
 
       $r01_rubric = "R926";
-      $tot_liq   = $tot_prov + $salfamilia - $tot_desc;
+      $tot_liq   = ($tot_prov === '' ? 0 : $tot_prov) + $salfamilia - ($tot_desc === '' ? 0 : $tot_desc); // "" em aritmetica: 0 no 5.6, TypeError no 8
       if ($db_debug == true) {
         LogCalculoFolha::write("Total Liquido: $tot_liq Critério:".$cfpess[0]["r11_arredn"]);
       }

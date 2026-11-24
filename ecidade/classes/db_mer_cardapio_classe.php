@@ -75,14 +75,14 @@ class cl_mer_cardapio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me01_i_codigo = ($this->me01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_i_codigo"]:$this->me01_i_codigo);
+       $this->me01_i_codigo = ($this->me01_i_codigo === 0 || $this->me01_i_codigo === 0.0 || $this->me01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_i_codigo"]:$this->me01_i_codigo);
        $this->me01_c_nome = ($this->me01_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_c_nome"]:$this->me01_c_nome);
-       $this->me01_i_percapita = ($this->me01_i_percapita == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_i_percapita"]:$this->me01_i_percapita);
-       $this->me01_f_versao = ($this->me01_f_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_f_versao"]:$this->me01_f_versao);
-       $this->me01_i_id = ($this->me01_i_id == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_i_id"]:$this->me01_i_id);
-       $this->me01_i_tipocardapio = ($this->me01_i_tipocardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_i_tipocardapio"]:$this->me01_i_tipocardapio);
+       $this->me01_i_percapita = ($this->me01_i_percapita === 0 || $this->me01_i_percapita === 0.0 || $this->me01_i_percapita == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_i_percapita"]:$this->me01_i_percapita);
+       $this->me01_f_versao = ($this->me01_f_versao === 0 || $this->me01_f_versao === 0.0 || $this->me01_f_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_f_versao"]:$this->me01_f_versao);
+       $this->me01_i_id = ($this->me01_i_id === 0 || $this->me01_i_id === 0.0 || $this->me01_i_id == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_i_id"]:$this->me01_i_id);
+       $this->me01_i_tipocardapio = ($this->me01_i_tipocardapio === 0 || $this->me01_i_tipocardapio === 0.0 || $this->me01_i_tipocardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_i_tipocardapio"]:$this->me01_i_tipocardapio);
      }else{
-       $this->me01_i_codigo = ($this->me01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_i_codigo"]:$this->me01_i_codigo);
+       $this->me01_i_codigo = ($this->me01_i_codigo === 0 || $this->me01_i_codigo === 0.0 || $this->me01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me01_i_codigo"]:$this->me01_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_mer_cardapio {
          $this->me01_i_codigo = $me01_i_codigo;
        }
      }
-     if(($this->me01_i_codigo == null) || ($this->me01_i_codigo == "") ){
+     if(($this->me01_i_codigo == null) || ($this->me01_i_codigo === 0 || $this->me01_i_codigo === 0.0 || $this->me01_i_codigo == "") ){
        $this->erro_sql = " Campo me01_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

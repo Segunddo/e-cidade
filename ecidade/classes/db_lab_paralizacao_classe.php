@@ -83,8 +83,8 @@ class cl_lab_paralizacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la37_i_codigo = ($this->la37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_i_codigo"]:$this->la37_i_codigo);
-       $this->la37_i_laboratorio = ($this->la37_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_i_laboratorio"]:$this->la37_i_laboratorio);
+       $this->la37_i_codigo = ($this->la37_i_codigo === 0 || $this->la37_i_codigo === 0.0 || $this->la37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_i_codigo"]:$this->la37_i_codigo);
+       $this->la37_i_laboratorio = ($this->la37_i_laboratorio === 0 || $this->la37_i_laboratorio === 0.0 || $this->la37_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_i_laboratorio"]:$this->la37_i_laboratorio);
        if($this->la37_d_ini == ""){
          $this->la37_d_ini_dia = ($this->la37_d_ini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_d_ini_dia"]:$this->la37_d_ini_dia);
          $this->la37_d_ini_mes = ($this->la37_d_ini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_d_ini_mes"]:$this->la37_d_ini_mes);
@@ -103,9 +103,9 @@ class cl_lab_paralizacao {
        }
        $this->la37_c_horaini = ($this->la37_c_horaini == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_c_horaini"]:$this->la37_c_horaini);
        $this->la37_c_horafim = ($this->la37_c_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_c_horafim"]:$this->la37_c_horafim);
-       $this->la37_i_motivo = ($this->la37_i_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_i_motivo"]:$this->la37_i_motivo);
+       $this->la37_i_motivo = ($this->la37_i_motivo === 0 || $this->la37_i_motivo === 0.0 || $this->la37_i_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_i_motivo"]:$this->la37_i_motivo);
      }else{
-       $this->la37_i_codigo = ($this->la37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_i_codigo"]:$this->la37_i_codigo);
+       $this->la37_i_codigo = ($this->la37_i_codigo === 0 || $this->la37_i_codigo === 0.0 || $this->la37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la37_i_codigo"]:$this->la37_i_codigo);
      }
    }
    // funcao para inclusao
@@ -171,7 +171,7 @@ class cl_lab_paralizacao {
          $this->la37_i_codigo = $la37_i_codigo;
        }
      }
-     if(($this->la37_i_codigo == null) || ($this->la37_i_codigo == "") ){
+     if(($this->la37_i_codigo == null) || ($this->la37_i_codigo === 0 || $this->la37_i_codigo === 0.0 || $this->la37_i_codigo == "") ){
        $this->erro_sql = " Campo la37_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

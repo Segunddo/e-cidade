@@ -67,10 +67,10 @@ class cl_censoorgemissrg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed132_i_codigo = ($this->ed132_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_i_codigo"]:$this->ed132_i_codigo);
+       $this->ed132_i_codigo = ($this->ed132_i_codigo === 0 || $this->ed132_i_codigo === 0.0 || $this->ed132_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_i_codigo"]:$this->ed132_i_codigo);
        $this->ed132_c_descr = ($this->ed132_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_c_descr"]:$this->ed132_c_descr);
      }else{
-       $this->ed132_i_codigo = ($this->ed132_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_i_codigo"]:$this->ed132_i_codigo);
+       $this->ed132_i_codigo = ($this->ed132_i_codigo === 0 || $this->ed132_i_codigo === 0.0 || $this->ed132_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed132_i_codigo"]:$this->ed132_i_codigo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_censoorgemissrg {
        return false;
      }
        $this->ed132_i_codigo = $ed132_i_codigo;
-     if(($this->ed132_i_codigo == null) || ($this->ed132_i_codigo == "") ){
+     if(($this->ed132_i_codigo == null) || ($this->ed132_i_codigo === 0 || $this->ed132_i_codigo === 0.0 || $this->ed132_i_codigo == "") ){
        $this->erro_sql = " Campo ed132_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

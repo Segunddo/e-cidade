@@ -184,6 +184,7 @@ $sDisabled 							 = 'disabled';
 
 foreach ($aSiglas as $sSigla) {
 	
+	if ($oParam === null || $oParam === false || $oParam === "") { $oParam = new stdClass(); } // o 5.6 criava stdClass sozinho para null/false/""
 	$oParam->sSigla  = $sSigla;
 
 	$sSqlDadosFolha  = " select rh72_sequencial as codigo               \n";
@@ -211,7 +212,7 @@ foreach ($aSiglas as $sSigla) {
 	$sSqlDadosFolha .= "  limit 1 																			\n";
 	
 	$rsDadosFolha      = db_query($sSqlDadosFolha);
-	$iLinhasDadosFolha = pg_num_rows($rsDadosFolha);                          
+	$iLinhasDadosFolha = ($rsDadosFolha ? pg_num_rows($rsDadosFolha) : null);                          
 	if ( $iLinhasDadosFolha > 0 ) {
 		$sDisabled = '';
 	} 

@@ -137,7 +137,7 @@ class importacaoAtualizacaoAluno2010 extends importacaoCenso {
    * Funcao que seleciona o codigo  do cartorio para utilizarmos na inclusao do aluno e do docente(RecHumano)
    * @param varchar $sNomeCartorio
    */
-  function getCartorio($sNomeCartorio) {
+  function getCartorio($sNomeCartorio = null, $sNaoUsado1 = null, $sNaoUsado2 = null) { // LSP: a mae (importacaoCenso) tem 3 parametros opcionais
     
     $oDaoCensoCartorio = db_utils::getdao('censocartorio');
     $sWhere            = "ed291_c_nome = '".$sNomeCartorio. "'";

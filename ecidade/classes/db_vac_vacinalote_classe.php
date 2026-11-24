@@ -80,11 +80,11 @@ class cl_vac_vacinalote {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc15_i_codigo = ($this->vc15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_i_codigo"]:$this->vc15_i_codigo);
-       $this->vc15_i_lote = ($this->vc15_i_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_i_lote"]:$this->vc15_i_lote);
-       $this->vc15_i_vacina = ($this->vc15_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_i_vacina"]:$this->vc15_i_vacina);
-       $this->vc15_n_quant = ($this->vc15_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_n_quant"]:$this->vc15_n_quant);
-       $this->vc15_i_logim = ($this->vc15_i_logim == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_i_logim"]:$this->vc15_i_logim);
+       $this->vc15_i_codigo = ($this->vc15_i_codigo === 0 || $this->vc15_i_codigo === 0.0 || $this->vc15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_i_codigo"]:$this->vc15_i_codigo);
+       $this->vc15_i_lote = ($this->vc15_i_lote === 0 || $this->vc15_i_lote === 0.0 || $this->vc15_i_lote == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_i_lote"]:$this->vc15_i_lote);
+       $this->vc15_i_vacina = ($this->vc15_i_vacina === 0 || $this->vc15_i_vacina === 0.0 || $this->vc15_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_i_vacina"]:$this->vc15_i_vacina);
+       $this->vc15_n_quant = ($this->vc15_n_quant === 0 || $this->vc15_n_quant === 0.0 || $this->vc15_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_n_quant"]:$this->vc15_n_quant);
+       $this->vc15_i_logim = ($this->vc15_i_logim === 0 || $this->vc15_i_logim === 0.0 || $this->vc15_i_logim == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_i_logim"]:$this->vc15_i_logim);
        $this->vc15_c_hora = ($this->vc15_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_c_hora"]:$this->vc15_c_hora);
        if($this->vc15_d_data == ""){
          $this->vc15_d_data_dia = ($this->vc15_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_d_data_dia"]:$this->vc15_d_data_dia);
@@ -95,7 +95,7 @@ class cl_vac_vacinalote {
          }
        }
      }else{
-       $this->vc15_i_codigo = ($this->vc15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_i_codigo"]:$this->vc15_i_codigo);
+       $this->vc15_i_codigo = ($this->vc15_i_codigo === 0 || $this->vc15_i_codigo === 0.0 || $this->vc15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc15_i_codigo"]:$this->vc15_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_vac_vacinalote {
          $this->vc15_i_codigo = $vc15_i_codigo;
        }
      }
-     if(($this->vc15_i_codigo == null) || ($this->vc15_i_codigo == "") ){
+     if(($this->vc15_i_codigo == null) || ($this->vc15_i_codigo === 0 || $this->vc15_i_codigo === 0.0 || $this->vc15_i_codigo == "") ){
        $this->erro_sql = " Campo vc15_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

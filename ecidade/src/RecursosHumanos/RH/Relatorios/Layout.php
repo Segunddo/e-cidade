@@ -57,7 +57,7 @@ abstract class Layout
     /**
      * @param string $orientacao
      */
-    final private function inicializarPdf($orientacao)
+    private function inicializarPdf($orientacao)
     {
         $pdf = new PDFDocument($orientacao);
         $pdf->Open();
@@ -97,7 +97,7 @@ abstract class Layout
     /**
      * @return $this
      */
-    final private function montarEnteFederativo()
+    private function montarEnteFederativo()
     {
         $this->pdf->addHeaderDescription($this->instituicao->getDescricao());
 

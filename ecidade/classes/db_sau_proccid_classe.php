@@ -75,14 +75,14 @@ class cl_sau_proccid {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd72_i_codigo = ($this->sd72_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_codigo"]:$this->sd72_i_codigo);
-       $this->sd72_i_procedimento = ($this->sd72_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_procedimento"]:$this->sd72_i_procedimento);
-       $this->sd72_i_cid = ($this->sd72_i_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_cid"]:$this->sd72_i_cid);
+       $this->sd72_i_codigo = ($this->sd72_i_codigo === 0 || $this->sd72_i_codigo === 0.0 || $this->sd72_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_codigo"]:$this->sd72_i_codigo);
+       $this->sd72_i_procedimento = ($this->sd72_i_procedimento === 0 || $this->sd72_i_procedimento === 0.0 || $this->sd72_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_procedimento"]:$this->sd72_i_procedimento);
+       $this->sd72_i_cid = ($this->sd72_i_cid === 0 || $this->sd72_i_cid === 0.0 || $this->sd72_i_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_cid"]:$this->sd72_i_cid);
        $this->sd72_c_principal = ($this->sd72_c_principal == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_c_principal"]:$this->sd72_c_principal);
-       $this->sd72_i_anocomp = ($this->sd72_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_anocomp"]:$this->sd72_i_anocomp);
-       $this->sd72_i_mescomp = ($this->sd72_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_mescomp"]:$this->sd72_i_mescomp);
+       $this->sd72_i_anocomp = ($this->sd72_i_anocomp === 0 || $this->sd72_i_anocomp === 0.0 || $this->sd72_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_anocomp"]:$this->sd72_i_anocomp);
+       $this->sd72_i_mescomp = ($this->sd72_i_mescomp === 0 || $this->sd72_i_mescomp === 0.0 || $this->sd72_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_mescomp"]:$this->sd72_i_mescomp);
      }else{
-       $this->sd72_i_codigo = ($this->sd72_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_codigo"]:$this->sd72_i_codigo);
+       $this->sd72_i_codigo = ($this->sd72_i_codigo === 0 || $this->sd72_i_codigo === 0.0 || $this->sd72_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd72_i_codigo"]:$this->sd72_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_sau_proccid {
          $this->sd72_i_codigo = $sd72_i_codigo;
        }
      }
-     if(($this->sd72_i_codigo == null) || ($this->sd72_i_codigo == "") ){
+     if(($this->sd72_i_codigo == null) || ($this->sd72_i_codigo === 0 || $this->sd72_i_codigo === 0.0 || $this->sd72_i_codigo == "") ){
        $this->erro_sql = " Campo sd72_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

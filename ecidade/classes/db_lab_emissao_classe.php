@@ -82,10 +82,10 @@ class cl_lab_emissao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la34_i_codigo = ($this->la34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_i_codigo"]:$this->la34_i_codigo);
-       $this->la34_i_forma = ($this->la34_i_forma == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_i_forma"]:$this->la34_i_forma);
-       $this->la34_i_usuario = ($this->la34_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_i_usuario"]:$this->la34_i_usuario);
-       $this->la34_i_requiitem = ($this->la34_i_requiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_i_requiitem"]:$this->la34_i_requiitem);
+       $this->la34_i_codigo = ($this->la34_i_codigo === 0 || $this->la34_i_codigo === 0.0 || $this->la34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_i_codigo"]:$this->la34_i_codigo);
+       $this->la34_i_forma = ($this->la34_i_forma === 0 || $this->la34_i_forma === 0.0 || $this->la34_i_forma == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_i_forma"]:$this->la34_i_forma);
+       $this->la34_i_usuario = ($this->la34_i_usuario === 0 || $this->la34_i_usuario === 0.0 || $this->la34_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_i_usuario"]:$this->la34_i_usuario);
+       $this->la34_i_requiitem = ($this->la34_i_requiitem === 0 || $this->la34_i_requiitem === 0.0 || $this->la34_i_requiitem == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_i_requiitem"]:$this->la34_i_requiitem);
        if($this->la34_d_data == ""){
          $this->la34_d_data_dia = ($this->la34_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_d_data_dia"]:$this->la34_d_data_dia);
          $this->la34_d_data_mes = ($this->la34_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_d_data_mes"]:$this->la34_d_data_mes);
@@ -95,10 +95,10 @@ class cl_lab_emissao {
          }
        }
        $this->la34_c_hora = ($this->la34_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_c_hora"]:$this->la34_c_hora);
-       $this->la34_o_laudo = ($this->la34_o_laudo == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_o_laudo"]:$this->la34_o_laudo);
+       $this->la34_o_laudo = ($this->la34_o_laudo === 0 || $this->la34_o_laudo === 0.0 || $this->la34_o_laudo == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_o_laudo"]:$this->la34_o_laudo);
        $this->la34_c_nomearq = ($this->la34_c_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_c_nomearq"]:$this->la34_c_nomearq);
      }else{
-       $this->la34_i_codigo = ($this->la34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_i_codigo"]:$this->la34_i_codigo);
+       $this->la34_i_codigo = ($this->la34_i_codigo === 0 || $this->la34_i_codigo === 0.0 || $this->la34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la34_i_codigo"]:$this->la34_i_codigo);
      }
    }
    // funcao para inclusao
@@ -191,7 +191,7 @@ class cl_lab_emissao {
          $this->la34_i_codigo = $la34_i_codigo;
        }
      }
-     if(($this->la34_i_codigo == null) || ($this->la34_i_codigo == "") ){
+     if(($this->la34_i_codigo == null) || ($this->la34_i_codigo === 0 || $this->la34_i_codigo === 0.0 || $this->la34_i_codigo == "") ){
        $this->erro_sql = " Campo la34_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

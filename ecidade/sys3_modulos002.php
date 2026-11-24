@@ -28,7 +28,13 @@
 include(modification("fpdf151/pdf.php"));
 include(modification("libs/db_sql.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'] ?? '', $queryString);
+if (isset($queryString['xarquivo'])) {
+  $xarquivo = $queryString['xarquivo'];
+}
+if (isset($queryString['xmodulo'])) {
+  $xmodulo = $queryString['xmodulo'];
+}
 db_postmemory($HTTP_SERVER_VARS);
 
 //phpinfo();

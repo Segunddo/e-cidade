@@ -86,14 +86,14 @@ class cl_atestvaga {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed102_i_codigo = ($this->ed102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_codigo"]:$this->ed102_i_codigo);
-       $this->ed102_i_escola = ($this->ed102_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_escola"]:$this->ed102_i_escola);
-       $this->ed102_i_aluno = ($this->ed102_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_aluno"]:$this->ed102_i_aluno);
-       $this->ed102_i_base = ($this->ed102_i_base == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_base"]:$this->ed102_i_base);
-       $this->ed102_i_calendario = ($this->ed102_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_calendario"]:$this->ed102_i_calendario);
-       $this->ed102_i_serie = ($this->ed102_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_serie"]:$this->ed102_i_serie);
-       $this->ed102_i_turno = ($this->ed102_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_turno"]:$this->ed102_i_turno);
-       $this->ed102_i_usuario = ($this->ed102_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_usuario"]:$this->ed102_i_usuario);
+       $this->ed102_i_codigo = ($this->ed102_i_codigo === 0 || $this->ed102_i_codigo === 0.0 || $this->ed102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_codigo"]:$this->ed102_i_codigo);
+       $this->ed102_i_escola = ($this->ed102_i_escola === 0 || $this->ed102_i_escola === 0.0 || $this->ed102_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_escola"]:$this->ed102_i_escola);
+       $this->ed102_i_aluno = ($this->ed102_i_aluno === 0 || $this->ed102_i_aluno === 0.0 || $this->ed102_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_aluno"]:$this->ed102_i_aluno);
+       $this->ed102_i_base = ($this->ed102_i_base === 0 || $this->ed102_i_base === 0.0 || $this->ed102_i_base == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_base"]:$this->ed102_i_base);
+       $this->ed102_i_calendario = ($this->ed102_i_calendario === 0 || $this->ed102_i_calendario === 0.0 || $this->ed102_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_calendario"]:$this->ed102_i_calendario);
+       $this->ed102_i_serie = ($this->ed102_i_serie === 0 || $this->ed102_i_serie === 0.0 || $this->ed102_i_serie == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_serie"]:$this->ed102_i_serie);
+       $this->ed102_i_turno = ($this->ed102_i_turno === 0 || $this->ed102_i_turno === 0.0 || $this->ed102_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_turno"]:$this->ed102_i_turno);
+       $this->ed102_i_usuario = ($this->ed102_i_usuario === 0 || $this->ed102_i_usuario === 0.0 || $this->ed102_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_usuario"]:$this->ed102_i_usuario);
        if($this->ed102_d_data == ""){
          $this->ed102_d_data_dia = ($this->ed102_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_d_data_dia"]:$this->ed102_d_data_dia);
          $this->ed102_d_data_mes = ($this->ed102_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_d_data_mes"]:$this->ed102_d_data_mes);
@@ -104,7 +104,7 @@ class cl_atestvaga {
        }
        $this->ed102_t_obs = ($this->ed102_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_t_obs"]:$this->ed102_t_obs);
      }else{
-       $this->ed102_i_codigo = ($this->ed102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_codigo"]:$this->ed102_i_codigo);
+       $this->ed102_i_codigo = ($this->ed102_i_codigo === 0 || $this->ed102_i_codigo === 0.0 || $this->ed102_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed102_i_codigo"]:$this->ed102_i_codigo);
      }
    }
    // funcao para inclusao
@@ -206,7 +206,7 @@ class cl_atestvaga {
          $this->ed102_i_codigo = $ed102_i_codigo;
        }
      }
-     if(($this->ed102_i_codigo == null) || ($this->ed102_i_codigo == "") ){
+     if(($this->ed102_i_codigo == null) || ($this->ed102_i_codigo === 0 || $this->ed102_i_codigo === 0.0 || $this->ed102_i_codigo == "") ){
        $this->erro_sql = " Campo ed102_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

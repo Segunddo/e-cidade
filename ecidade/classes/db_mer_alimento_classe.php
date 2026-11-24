@@ -77,15 +77,15 @@ class cl_mer_alimento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me35_i_codigo = ($this->me35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_codigo"]:$this->me35_i_codigo);
+       $this->me35_i_codigo = ($this->me35_i_codigo === 0 || $this->me35_i_codigo === 0.0 || $this->me35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_codigo"]:$this->me35_i_codigo);
        $this->me35_c_nomealimento = ($this->me35_c_nomealimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_c_nomealimento"]:$this->me35_c_nomealimento);
        $this->me35_c_nomecientifico = ($this->me35_c_nomecientifico == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_c_nomecientifico"]:$this->me35_c_nomecientifico);
-       $this->me35_i_grupoalimentar = ($this->me35_i_grupoalimentar == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_grupoalimentar"]:$this->me35_i_grupoalimentar);
+       $this->me35_i_grupoalimentar = ($this->me35_i_grupoalimentar === 0 || $this->me35_i_grupoalimentar === 0.0 || $this->me35_i_grupoalimentar == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_grupoalimentar"]:$this->me35_i_grupoalimentar);
        $this->me35_c_fonteinformacao = ($this->me35_c_fonteinformacao == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_c_fonteinformacao"]:$this->me35_c_fonteinformacao);
-       $this->me35_i_unidade = ($this->me35_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_unidade"]:$this->me35_i_unidade);
+       $this->me35_i_unidade = ($this->me35_i_unidade === 0 || $this->me35_i_unidade === 0.0 || $this->me35_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_unidade"]:$this->me35_i_unidade);
        $this->me35_c_quant = ($this->me35_c_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_c_quant"]:$this->me35_c_quant);
      }else{
-       $this->me35_i_codigo = ($this->me35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_codigo"]:$this->me35_i_codigo);
+       $this->me35_i_codigo = ($this->me35_i_codigo === 0 || $this->me35_i_codigo === 0.0 || $this->me35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me35_i_codigo"]:$this->me35_i_codigo);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_mer_alimento {
          $this->me35_i_codigo = $me35_i_codigo;
        }
      }
-     if(($this->me35_i_codigo == null) || ($this->me35_i_codigo == "") ){
+     if(($this->me35_i_codigo == null) || ($this->me35_i_codigo === 0 || $this->me35_i_codigo === 0.0 || $this->me35_i_codigo == "") ){
        $this->erro_sql = " Campo me35_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

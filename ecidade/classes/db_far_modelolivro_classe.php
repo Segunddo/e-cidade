@@ -67,10 +67,10 @@ class cl_far_modelolivro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa16_i_codigo = ($this->fa16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa16_i_codigo"]:$this->fa16_i_codigo);
+       $this->fa16_i_codigo = ($this->fa16_i_codigo === 0 || $this->fa16_i_codigo === 0.0 || $this->fa16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa16_i_codigo"]:$this->fa16_i_codigo);
        $this->fa16_c_livro = ($this->fa16_c_livro == ""?@$GLOBALS["HTTP_POST_VARS"]["fa16_c_livro"]:$this->fa16_c_livro);
      }else{
-       $this->fa16_i_codigo = ($this->fa16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa16_i_codigo"]:$this->fa16_i_codigo);
+       $this->fa16_i_codigo = ($this->fa16_i_codigo === 0 || $this->fa16_i_codigo === 0.0 || $this->fa16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa16_i_codigo"]:$this->fa16_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_far_modelolivro {
          $this->fa16_i_codigo = $fa16_i_codigo;
        }
      }
-     if(($this->fa16_i_codigo == null) || ($this->fa16_i_codigo == "") ){
+     if(($this->fa16_i_codigo == null) || ($this->fa16_i_codigo === 0 || $this->fa16_i_codigo === 0.0 || $this->fa16_i_codigo == "") ){
        $this->erro_sql = " Campo fa16_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

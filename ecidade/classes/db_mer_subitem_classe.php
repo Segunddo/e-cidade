@@ -87,11 +87,11 @@ class cl_mer_subitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me29_i_codigo = ($this->me29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_codigo"]:$this->me29_i_codigo);
-       $this->me29_i_refeicao = ($this->me29_i_refeicao == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_refeicao"]:$this->me29_i_refeicao);
-       $this->me29_i_alimentonovo = ($this->me29_i_alimentonovo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_alimentonovo"]:$this->me29_i_alimentonovo);
-       $this->me29_i_alimentoorig = ($this->me29_i_alimentoorig == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_alimentoorig"]:$this->me29_i_alimentoorig);
-       $this->me29_f_quantidade = ($this->me29_f_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_f_quantidade"]:$this->me29_f_quantidade);
+       $this->me29_i_codigo = ($this->me29_i_codigo === 0 || $this->me29_i_codigo === 0.0 || $this->me29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_codigo"]:$this->me29_i_codigo);
+       $this->me29_i_refeicao = ($this->me29_i_refeicao === 0 || $this->me29_i_refeicao === 0.0 || $this->me29_i_refeicao == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_refeicao"]:$this->me29_i_refeicao);
+       $this->me29_i_alimentonovo = ($this->me29_i_alimentonovo === 0 || $this->me29_i_alimentonovo === 0.0 || $this->me29_i_alimentonovo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_alimentonovo"]:$this->me29_i_alimentonovo);
+       $this->me29_i_alimentoorig = ($this->me29_i_alimentoorig === 0 || $this->me29_i_alimentoorig === 0.0 || $this->me29_i_alimentoorig == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_alimentoorig"]:$this->me29_i_alimentoorig);
+       $this->me29_f_quantidade = ($this->me29_f_quantidade === 0 || $this->me29_f_quantidade === 0.0 || $this->me29_f_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_f_quantidade"]:$this->me29_f_quantidade);
        $this->me29_c_medidacaseira = ($this->me29_c_medidacaseira == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_c_medidacaseira"]:$this->me29_c_medidacaseira);
        if($this->me29_d_inicio == ""){
          $this->me29_d_inicio_dia = ($this->me29_d_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_d_inicio_dia"]:$this->me29_d_inicio_dia);
@@ -111,7 +111,7 @@ class cl_mer_subitem {
        }
        $this->me29_t_obs = ($this->me29_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_t_obs"]:$this->me29_t_obs);
      }else{
-       $this->me29_i_codigo = ($this->me29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_codigo"]:$this->me29_i_codigo);
+       $this->me29_i_codigo = ($this->me29_i_codigo === 0 || $this->me29_i_codigo === 0.0 || $this->me29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me29_i_codigo"]:$this->me29_i_codigo);
      }
    }
    // funcao para inclusao
@@ -213,7 +213,7 @@ class cl_mer_subitem {
          $this->me29_i_codigo = $me29_i_codigo;
        }
      }
-     if(($this->me29_i_codigo == null) || ($this->me29_i_codigo == "") ){
+     if(($this->me29_i_codigo == null) || ($this->me29_i_codigo === 0 || $this->me29_i_codigo === 0.0 || $this->me29_i_codigo == "") ){
        $this->erro_sql = " Campo me29_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -213,7 +213,7 @@ echo "</table>";
   $IND =  $_POST;
   $indice =@ $_POST["indice"];
   fputs($fd,"--DROP TABLE:\n");
-  while (list($campo,$valor) = each($_POST)){
+  foreach ($_POST as $campo => $valor) {
      if (substr($campo,0,3) == "chk"){
           $campos  = db_query("select a.codarq,a.nomearq,m.codmod,m.nomemod
                               from   db_sysmodulo m
@@ -232,7 +232,7 @@ echo "</table>";
   }
   //cria drop sequences;
   fputs($fd,"--Criando drop sequences\n");
-  while (list($campo1,$valor1) = each($sequencias)){
+  foreach ($sequencias as $campo1 => $valor1) {
      if (substr($campo1,0,3) == "chk"){
          $seq = db_query("select s.nomesequencia,s.incrseq,s.minvalueseq,maxvalueseq,startseq,s.cacheseq
 	                  from db_syssequencia s
@@ -248,7 +248,7 @@ echo "</table>";
  }
   //cria  sequences;
   fputs($fd, "\n\n-- Criando  sequences\n");
-  while (list($campo2,$valor2) = each($csequencias)){
+  foreach ($csequencias as $campo2 => $valor2) {
      if (substr($campo2,0,3) == "chk"){
          $cseq = db_query("select s.nomesequencia,s.incrseq,s.minvalueseq,maxvalueseq,startseq,s.cacheseq
 	                  from db_syssequencia s
@@ -270,7 +270,7 @@ echo "</table>";
    }
    //cria as tabelas e sua estrutura
      fputs($fd,"-- TABELAS E ESTRUTURA\n");
-    while (list($campo3,$valor3) = each($camp)){;
+    foreach ($camp as $campo3 => $valor3) {
        if (substr($campo3,0,3) == "chk"){
           $tabela  = db_query("select a.codarq,a.nomearq,m.codmod,m.nomemod
                               from   db_sysmodulo m
@@ -367,7 +367,7 @@ echo "</table>";
 // Foreign Key
 if (isset($fk)) {
    fputs ($fd,"\n\n\n-- CHAVE ESTRANGEIRA\n\n\n");
-   while (list($campo5,$valor5) = each($FKs)){
+   foreach ($FKs as $campo5 => $valor5) {
       if (substr($campo5,0,3) == "chk"){
           $grupo = db_query("select count(referen),referen
                             from db_sysforkey
@@ -418,7 +418,7 @@ if (isset($fk)) {
 // Indices
 if (isset($indice)) {
    fputs ($fd,"\n\n\n-- INDICES\n\n\n");
-   while (list($campo6,$valor6) = each($IND)){
+   foreach ($IND as $campo6 => $valor6) {
       if (substr($campo6,0,3) == "chk"){
          $ind = db_query("select i.codind,i.nomeind,i.campounico
                          from db_sysindices i
@@ -479,7 +479,8 @@ if(isset($views)) {
 
 //triggers
 if(isset($triggers)) {
-  while (list($campo7,$valor7) = each($IND)){
+  // No PHP 7.4, o laco de indices ja consumiu $IND quando selecionado.
+  foreach ((isset($indice) ? [] : $IND) as $campo7 => $valor7) {
      if (substr($campo7,0,3) == "chk"){
          $meta = "where a.codarq=$valor7";
      }else{

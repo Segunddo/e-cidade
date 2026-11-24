@@ -45,11 +45,11 @@ class cl_necessidadesubdivisao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed185_sequencial = ($this->ed185_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed185_sequencial"]:$this->ed185_sequencial);
-       $this->ed185_necessidade = ($this->ed185_necessidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed185_necessidade"]:$this->ed185_necessidade);
+       $this->ed185_sequencial = ($this->ed185_sequencial === 0 || $this->ed185_sequencial === 0.0 || $this->ed185_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed185_sequencial"]:$this->ed185_sequencial);
+       $this->ed185_necessidade = ($this->ed185_necessidade === 0 || $this->ed185_necessidade === 0.0 || $this->ed185_necessidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed185_necessidade"]:$this->ed185_necessidade);
        $this->ed185_descricao = ($this->ed185_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed185_descricao"]:$this->ed185_descricao);
      }else{
-       $this->ed185_sequencial = ($this->ed185_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed185_sequencial"]:$this->ed185_sequencial);
+       $this->ed185_sequencial = ($this->ed185_sequencial === 0 || $this->ed185_sequencial === 0.0 || $this->ed185_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed185_sequencial"]:$this->ed185_sequencial);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_necessidadesubdivisao
          $this->ed185_sequencial = $ed185_sequencial; 
        }
      }
-     if(($this->ed185_sequencial == null) || ($this->ed185_sequencial == "") ){ 
+     if(($this->ed185_sequencial == null) || ($this->ed185_sequencial === 0 || $this->ed185_sequencial === 0.0 || $this->ed185_sequencial == "") ){ 
        $this->erro_sql = " Campo ed185_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

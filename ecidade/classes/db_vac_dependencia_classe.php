@@ -71,12 +71,12 @@ class cl_vac_dependencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc09_i_codigo = ($this->vc09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_codigo"]:$this->vc09_i_codigo);
-       $this->vc09_i_dependente = ($this->vc09_i_dependente == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_dependente"]:$this->vc09_i_dependente);
-       $this->vc09_i_dependencia = ($this->vc09_i_dependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_dependencia"]:$this->vc09_i_dependencia);
-       $this->vc09_i_situacao = ($this->vc09_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_situacao"]:$this->vc09_i_situacao);
+       $this->vc09_i_codigo = ($this->vc09_i_codigo === 0 || $this->vc09_i_codigo === 0.0 || $this->vc09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_codigo"]:$this->vc09_i_codigo);
+       $this->vc09_i_dependente = ($this->vc09_i_dependente === 0 || $this->vc09_i_dependente === 0.0 || $this->vc09_i_dependente == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_dependente"]:$this->vc09_i_dependente);
+       $this->vc09_i_dependencia = ($this->vc09_i_dependencia === 0 || $this->vc09_i_dependencia === 0.0 || $this->vc09_i_dependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_dependencia"]:$this->vc09_i_dependencia);
+       $this->vc09_i_situacao = ($this->vc09_i_situacao === 0 || $this->vc09_i_situacao === 0.0 || $this->vc09_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_situacao"]:$this->vc09_i_situacao);
      }else{
-       $this->vc09_i_codigo = ($this->vc09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_codigo"]:$this->vc09_i_codigo);
+       $this->vc09_i_codigo = ($this->vc09_i_codigo === 0 || $this->vc09_i_codigo === 0.0 || $this->vc09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc09_i_codigo"]:$this->vc09_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_vac_dependencia {
          $this->vc09_i_codigo = $vc09_i_codigo;
        }
      }
-     if(($this->vc09_i_codigo == null) || ($this->vc09_i_codigo == "") ){
+     if(($this->vc09_i_codigo == null) || ($this->vc09_i_codigo === 0 || $this->vc09_i_codigo === 0.0 || $this->vc09_i_codigo == "") ){
        $this->erro_sql = " Campo vc09_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -122,7 +122,7 @@ if (isset($processar) || isset($incluir)) {
    $sSql  = "SELECT  1  FROM rhferias WHERE rh109_regist = ". $oRequest->rh109_regist .";";   
    $rsSql = db_query($sSql);   
 
-   if (pg_num_rows($rsSql) == 0) {
+   if (($rsSql ? pg_num_rows($rsSql) : null) == 0) {
        $db_opcao = 4;
    } else {
        $db_opcao = 3;

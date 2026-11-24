@@ -65,16 +65,16 @@ class cl_professores {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed01_i_codigo = ($this->ed01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_i_codigo"]:$this->ed01_i_codigo);
+       $this->ed01_i_codigo = ($this->ed01_i_codigo === 0 || $this->ed01_i_codigo === 0.0 || $this->ed01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_i_codigo"]:$this->ed01_i_codigo);
      }else{
-       $this->ed01_i_codigo = ($this->ed01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_i_codigo"]:$this->ed01_i_codigo);
+       $this->ed01_i_codigo = ($this->ed01_i_codigo === 0 || $this->ed01_i_codigo === 0.0 || $this->ed01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed01_i_codigo"]:$this->ed01_i_codigo);
      }
    }
    // funcao para inclusao
    public function incluir ($ed01_i_codigo){
       $this->atualizacampos();
        $this->ed01_i_codigo = $ed01_i_codigo;
-     if(($this->ed01_i_codigo == null) || ($this->ed01_i_codigo == "") ){
+     if(($this->ed01_i_codigo == null) || ($this->ed01_i_codigo === 0 || $this->ed01_i_codigo === 0.0 || $this->ed01_i_codigo == "") ){
        $this->erro_sql = " Campo ed01_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

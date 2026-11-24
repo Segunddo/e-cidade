@@ -75,14 +75,14 @@ class cl_far_retiradaitens {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa06_i_codigo = ($this->fa06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_codigo"]:$this->fa06_i_codigo);
+       $this->fa06_i_codigo = ($this->fa06_i_codigo === 0 || $this->fa06_i_codigo === 0.0 || $this->fa06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_codigo"]:$this->fa06_i_codigo);
        $this->fa06_t_posologia = ($this->fa06_t_posologia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_t_posologia"]:$this->fa06_t_posologia);
-       $this->fa06_i_retirada = ($this->fa06_i_retirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_retirada"]:$this->fa06_i_retirada);
-       $this->fa06_i_matersaude = ($this->fa06_i_matersaude == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_matersaude"]:$this->fa06_i_matersaude);
-       $this->fa06_f_quant = ($this->fa06_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_f_quant"]:$this->fa06_f_quant);
+       $this->fa06_i_retirada = ($this->fa06_i_retirada === 0 || $this->fa06_i_retirada === 0.0 || $this->fa06_i_retirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_retirada"]:$this->fa06_i_retirada);
+       $this->fa06_i_matersaude = ($this->fa06_i_matersaude === 0 || $this->fa06_i_matersaude === 0.0 || $this->fa06_i_matersaude == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_matersaude"]:$this->fa06_i_matersaude);
+       $this->fa06_f_quant = ($this->fa06_f_quant === 0 || $this->fa06_f_quant === 0.0 || $this->fa06_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_f_quant"]:$this->fa06_f_quant);
        $this->fa06_t_controlado = ($this->fa06_t_controlado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_t_controlado"]:$this->fa06_t_controlado);
      }else{
-       $this->fa06_i_codigo = ($this->fa06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_codigo"]:$this->fa06_i_codigo);
+       $this->fa06_i_codigo = ($this->fa06_i_codigo === 0 || $this->fa06_i_codigo === 0.0 || $this->fa06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa06_i_codigo"]:$this->fa06_i_codigo);
      }
     }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_far_retiradaitens {
          $this->fa06_i_codigo = $fa06_i_codigo; 
        }
      }
-     if(($this->fa06_i_codigo == null) || ($this->fa06_i_codigo == "") ){ 
+     if(($this->fa06_i_codigo == null) || ($this->fa06_i_codigo === 0 || $this->fa06_i_codigo === 0.0 || $this->fa06_i_codigo == "") ){ 
        $this->erro_sql = " Campo fa06_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

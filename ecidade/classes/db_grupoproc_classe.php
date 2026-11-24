@@ -71,7 +71,7 @@ class cl_grupoproc {
      if($exclusao==false){
        $this->sd11_c_codigo = ($this->sd11_c_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd11_c_codigo"]:$this->sd11_c_codigo);
        $this->sd11_c_descr = ($this->sd11_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["sd11_c_descr"]:$this->sd11_c_descr);
-       $this->sd11_f_orcamento = ($this->sd11_f_orcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd11_f_orcamento"]:$this->sd11_f_orcamento);
+       $this->sd11_f_orcamento = ($this->sd11_f_orcamento === 0 || $this->sd11_f_orcamento === 0.0 || $this->sd11_f_orcamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd11_f_orcamento"]:$this->sd11_f_orcamento);
      }else{
        $this->sd11_c_codigo = ($this->sd11_c_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd11_c_codigo"]:$this->sd11_c_codigo);
      }

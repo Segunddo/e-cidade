@@ -176,7 +176,7 @@ abstract class importacaoCenso
      * @param integer $iAnoEscolhido
      * @param integer $iCodigoInepEscola
      */
-    public function __construct($iAnoEscolhido, $iCodigoInepEscola = null, $iCodigoLayout)
+    public function __construct($iAnoEscolhido, $iCodigoInepEscola = null, $iCodigoLayout = null)
     {
 
         $oDaoSecParametros = db_utils::getdao('sec_parametros');

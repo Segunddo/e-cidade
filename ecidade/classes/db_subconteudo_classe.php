@@ -69,11 +69,11 @@ class cl_subconteudo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed239_i_codigo = ($this->ed239_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed239_i_codigo"]:$this->ed239_i_codigo);
+       $this->ed239_i_codigo = ($this->ed239_i_codigo === 0 || $this->ed239_i_codigo === 0.0 || $this->ed239_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed239_i_codigo"]:$this->ed239_i_codigo);
        $this->ed239_c_descr = ($this->ed239_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed239_c_descr"]:$this->ed239_c_descr);
-       $this->ed239_i_conteudo = ($this->ed239_i_conteudo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed239_i_conteudo"]:$this->ed239_i_conteudo);
+       $this->ed239_i_conteudo = ($this->ed239_i_conteudo === 0 || $this->ed239_i_conteudo === 0.0 || $this->ed239_i_conteudo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed239_i_conteudo"]:$this->ed239_i_conteudo);
      }else{
-       $this->ed239_i_codigo = ($this->ed239_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed239_i_codigo"]:$this->ed239_i_codigo);
+       $this->ed239_i_codigo = ($this->ed239_i_codigo === 0 || $this->ed239_i_codigo === 0.0 || $this->ed239_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed239_i_codigo"]:$this->ed239_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_subconteudo {
          $this->ed239_i_codigo = $ed239_i_codigo; 
        }
      }
-     if(($this->ed239_i_codigo == null) || ($this->ed239_i_codigo == "") ){ 
+     if(($this->ed239_i_codigo == null) || ($this->ed239_i_codigo === 0 || $this->ed239_i_codigo === 0.0 || $this->ed239_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed239_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

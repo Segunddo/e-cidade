@@ -67,10 +67,10 @@ class cl_familia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd33_i_codigo = ($this->sd33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd33_i_codigo"]:$this->sd33_i_codigo);
+       $this->sd33_i_codigo = ($this->sd33_i_codigo === 0 || $this->sd33_i_codigo === 0.0 || $this->sd33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd33_i_codigo"]:$this->sd33_i_codigo);
        $this->sd33_v_descricao = ($this->sd33_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd33_v_descricao"]:$this->sd33_v_descricao);
      }else{
-       $this->sd33_i_codigo = ($this->sd33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd33_i_codigo"]:$this->sd33_i_codigo);
+       $this->sd33_i_codigo = ($this->sd33_i_codigo === 0 || $this->sd33_i_codigo === 0.0 || $this->sd33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd33_i_codigo"]:$this->sd33_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_familia {
          $this->sd33_i_codigo = $sd33_i_codigo;
        }
      }
-     if(($this->sd33_i_codigo == null) || ($this->sd33_i_codigo == "") ){
+     if(($this->sd33_i_codigo == null) || ($this->sd33_i_codigo === 0 || $this->sd33_i_codigo === 0.0 || $this->sd33_i_codigo == "") ){
        $this->erro_sql = " Campo sd33_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

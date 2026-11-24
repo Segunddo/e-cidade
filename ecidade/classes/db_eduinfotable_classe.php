@@ -67,10 +67,10 @@ class cl_eduinfotable {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->e200_c_tabela = ($this->e200_c_tabela == ""?@$GLOBALS["HTTP_POST_VARS"]["e200_c_tabela"]:$this->e200_c_tabela);
+       $this->e200_c_tabela = ($this->e200_c_tabela === 0 || $this->e200_c_tabela === 0.0 || $this->e200_c_tabela == ""?@$GLOBALS["HTTP_POST_VARS"]["e200_c_tabela"]:$this->e200_c_tabela);
        $this->e200_c_tipo = ($this->e200_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["e200_c_tipo"]:$this->e200_c_tipo);
      }else{
-       $this->e200_c_tabela = ($this->e200_c_tabela == ""?@$GLOBALS["HTTP_POST_VARS"]["e200_c_tabela"]:$this->e200_c_tabela);
+       $this->e200_c_tabela = ($this->e200_c_tabela === 0 || $this->e200_c_tabela === 0.0 || $this->e200_c_tabela == ""?@$GLOBALS["HTTP_POST_VARS"]["e200_c_tabela"]:$this->e200_c_tabela);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_eduinfotable {
        return false;
      }
        $this->e200_c_tabela = $e200_c_tabela;
-     if(($this->e200_c_tabela == null) || ($this->e200_c_tabela == "") ){
+     if(($this->e200_c_tabela == null) || ($this->e200_c_tabela === 0 || $this->e200_c_tabela === 0.0 || $this->e200_c_tabela == "") ){
        $this->erro_sql = " Campo e200_c_tabela nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

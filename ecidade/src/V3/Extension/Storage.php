@@ -121,7 +121,7 @@ class Storage {
 
     $this->data = $this->serialize ? unserialize($data) : $data;
 
-    return (boolean) $this->data;
+    return (bool) $this->data;
   }
 
   /**

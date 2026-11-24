@@ -34,7 +34,7 @@ include(modification("classes/db_db_itenshelp_classe.php"));
 include(modification("classes/db_db_tipohelp_classe.php"));
 include(modification("classes/db_db_modulos_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? '', $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 
 ?>
 <html>

@@ -33,7 +33,10 @@ include(modification("libs/db_usuariosonline.php"));
 db_postmemory($_POST);
 db_postmemory($_GET);
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $queryString);
+if (isset($queryString['retorno'])) {
+  $retorno = $queryString['retorno'];
+}
 if(isset($retorno)) {
   $sql = "select *,
                  to_char(dataincl,'DD') as dataincl_dia,

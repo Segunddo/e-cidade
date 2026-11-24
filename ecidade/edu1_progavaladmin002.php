@@ -54,11 +54,11 @@ if(isset($alterar)){
   $ed116_i_opcaoquestao = "ed116_i_opcaoquestao".$t;
   $ed116_i_codigo = "ed116_i_codigo".$t;
   db_inicio_transacao();
-  $clprogavaladmin->ed116_i_questaoaval = $$ed116_i_questaoaval;
-  $clprogavaladmin->ed116_i_opcaoquestao = $$ed116_i_opcaoquestao;
+  $clprogavaladmin->ed116_i_questaoaval = ${$ed116_i_questaoaval};
+  $clprogavaladmin->ed116_i_opcaoquestao = ${$ed116_i_opcaoquestao};
   $clprogavaladmin->ed116_i_usuario = db_getsession("DB_id_usuario");
-  $clprogavaladmin->ed116_i_codigo = $$ed116_i_codigo;
-  $clprogavaladmin->alterar($$ed116_i_codigo);
+  $clprogavaladmin->ed116_i_codigo = ${$ed116_i_codigo};
+  $clprogavaladmin->alterar(${$ed116_i_codigo});
   db_fim_transacao();
  }
 }elseif(isset($ed112_i_rhpessoal)){

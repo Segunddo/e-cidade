@@ -40,8 +40,9 @@ foreach ($queryString as $key => $value) {
 }
 
 $tabela = isset($HTTP_POST_VARS["tabela"]) ? $HTTP_POST_VARS["tabela"] : $tabela;
-$nomearq = db_query("select nomearq from db_sysarquivo where codarq = $tabela");
-$nomearq = pg_result($nomearq, 0, 0);
+$codigoTabelaSql = $tabela ?? 'NULL';
+$nomearq = db_query("select nomearq from db_sysarquivo where codarq = $codigoTabelaSql");
+$nomearq = pg_fetch_result($nomearq, 0, 0);
 
 ?>
 <!doctype html>
@@ -93,8 +94,8 @@ $nomearq = pg_result($nomearq, 0, 0);
 			           on c.codcam = ci.codcam
 			           where i.codind = $ind
 			           order by ci.sequen");
-                    $num_linhas = pg_numrows($result);
-                    $nome_ind = pg_result($result, 0, "nome_indice");
+                    $num_linhas = pg_num_rows($result);
+                    $nome_ind = pg_fetch_result($result, 0, "nome_indice");
                 } ?>
                 <form method="post" name="f_campo" onSubmit="return js_submeter(this)">
                     <fieldset style="width:500px">
@@ -122,7 +123,7 @@ $nomearq = pg_result($nomearq, 0, 0);
 
                 if (isset($ind)) {
                     for ($i = 0; $i < $num_linhas; $i++) {
-                        echo trim(pg_result($result, $i, "nome_campo")) . "\n";
+                        echo trim(pg_fetch_result($result, $i, "nome_campo")) . "\n";
                     }
                 } ?>
             </textarea>
@@ -137,8 +138,8 @@ $nomearq = pg_result($nomearq, 0, 0);
                                            value="unico"
                                         <?php
 
-                                        echo @pg_result($result, 0, "campounico") == "0" ||
-                                        @pg_result($result, 0, "campounico") == ""
+                                        echo @pg_fetch_result($result, 0, "campounico") == "0" ||
+                                        @pg_fetch_result($result, 0, "campounico") == ""
                                             ? ""
                                             : "checked"; ?>
                                     >
@@ -173,7 +174,7 @@ $nomearq = pg_result($nomearq, 0, 0);
                         $result = db_query("select codind
                            from db_sysindices
                            where nomeind = '$nome_ind'") or die("Erro(97) selecionando db_sysindices");
-                        $ind = pg_result($result, 0, 0);
+                        $ind = pg_fetch_result($result, 0, 0);
                         $alt_ind =explode("\r\n", $alt_ind);
                         for ($i = 0; $i < sizeof($alt_ind) - 1; $i++) {
                             if ($alt_ind[$i] != "" && $alt_ind[$i] != " " && $alt_ind[$i] != "  ") {
@@ -181,7 +182,7 @@ $nomearq = pg_result($nomearq, 0, 0);
                                 $alt_ind[$i] = trim(str_replace("#", "", $alt_ind[$i]));
                                 $result = db_query("select codcam from db_syscampo where nomecam = '$alt_ind[$i]'") or die("Erro(102) selecionando db_syscampo");
                                 $s = $i + 1;
-                                db_query("insert into db_syscadind values($ind," . pg_result(
+                                db_query("insert into db_syscadind values($ind," . pg_fetch_result(
                                     $result,
                                     0,
                                     "codcam"
@@ -204,7 +205,7 @@ $nomearq = pg_result($nomearq, 0, 0);
                                 $s = $i + 1;
                                 $result = db_query($conn, "
 					insert into db_syscadind
-					values($ind," . pg_result(
+					values($ind," . pg_fetch_result(
                                     $result,
                                     0,
                                     "codcam"

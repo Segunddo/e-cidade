@@ -49,14 +49,14 @@ class cl_setorambulatorial
     public function atualizacampos($exclusao = false)
     {
         if($exclusao==false){
-            $this->sd91_codigo = ($this->sd91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_codigo"]:$this->sd91_codigo);
-            $this->sd91_unidades = ($this->sd91_unidades == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_unidades"]:$this->sd91_unidades);
+            $this->sd91_codigo = ($this->sd91_codigo === 0 || $this->sd91_codigo === 0.0 || $this->sd91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_codigo"]:$this->sd91_codigo);
+            $this->sd91_unidades = ($this->sd91_unidades === 0 || $this->sd91_unidades === 0.0 || $this->sd91_unidades == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_unidades"]:$this->sd91_unidades);
             $this->sd91_descricao = ($this->sd91_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_descricao"]:$this->sd91_descricao);
-            $this->sd91_local = ($this->sd91_local == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_local"]:$this->sd91_local);
+            $this->sd91_local = ($this->sd91_local === 0 || $this->sd91_local === 0.0 || $this->sd91_local == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_local"]:$this->sd91_local);
             $sd91_situacao = isset($GLOBALS["HTTP_POST_VARS"]["sd91_situacao"]) ? $GLOBALS["HTTP_POST_VARS"]["sd91_situacao"] : 'f';
             $this->sd91_situacao = $sd91_situacao;
         }else{
-            $this->sd91_codigo = ($this->sd91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_codigo"]:$this->sd91_codigo);
+            $this->sd91_codigo = ($this->sd91_codigo === 0 || $this->sd91_codigo === 0.0 || $this->sd91_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd91_codigo"]:$this->sd91_codigo);
         }
     }
 
@@ -123,7 +123,7 @@ class cl_setorambulatorial
                 $this->sd91_codigo = $sd91_codigo;
             }
         }
-        if(($this->sd91_codigo == null) || ($this->sd91_codigo == "") ){
+        if(($this->sd91_codigo == null) || ($this->sd91_codigo === 0 || $this->sd91_codigo === 0.0 || $this->sd91_codigo == "") ){
             $this->erro_sql = " Campo sd91_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

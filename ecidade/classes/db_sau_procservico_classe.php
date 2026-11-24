@@ -75,14 +75,14 @@ class cl_sau_procservico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd88_i_codigo = ($this->sd88_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_codigo"]:$this->sd88_i_codigo);
-       $this->sd88_i_procedimento = ($this->sd88_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_procedimento"]:$this->sd88_i_procedimento);
-       $this->sd88_i_classificacao = ($this->sd88_i_classificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_classificacao"]:$this->sd88_i_classificacao);
-       $this->sd88_i_servico = ($this->sd88_i_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_servico"]:$this->sd88_i_servico);
-       $this->sd88_i_anocomp = ($this->sd88_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_anocomp"]:$this->sd88_i_anocomp);
-       $this->sd88_i_mescomp = ($this->sd88_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_mescomp"]:$this->sd88_i_mescomp);
+       $this->sd88_i_codigo = ($this->sd88_i_codigo === 0 || $this->sd88_i_codigo === 0.0 || $this->sd88_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_codigo"]:$this->sd88_i_codigo);
+       $this->sd88_i_procedimento = ($this->sd88_i_procedimento === 0 || $this->sd88_i_procedimento === 0.0 || $this->sd88_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_procedimento"]:$this->sd88_i_procedimento);
+       $this->sd88_i_classificacao = ($this->sd88_i_classificacao === 0 || $this->sd88_i_classificacao === 0.0 || $this->sd88_i_classificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_classificacao"]:$this->sd88_i_classificacao);
+       $this->sd88_i_servico = ($this->sd88_i_servico === 0 || $this->sd88_i_servico === 0.0 || $this->sd88_i_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_servico"]:$this->sd88_i_servico);
+       $this->sd88_i_anocomp = ($this->sd88_i_anocomp === 0 || $this->sd88_i_anocomp === 0.0 || $this->sd88_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_anocomp"]:$this->sd88_i_anocomp);
+       $this->sd88_i_mescomp = ($this->sd88_i_mescomp === 0 || $this->sd88_i_mescomp === 0.0 || $this->sd88_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_mescomp"]:$this->sd88_i_mescomp);
      }else{
-       $this->sd88_i_codigo = ($this->sd88_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_codigo"]:$this->sd88_i_codigo);
+       $this->sd88_i_codigo = ($this->sd88_i_codigo === 0 || $this->sd88_i_codigo === 0.0 || $this->sd88_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd88_i_codigo"]:$this->sd88_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_sau_procservico {
          $this->sd88_i_codigo = $sd88_i_codigo;
        }
      }
-     if(($this->sd88_i_codigo == null) || ($this->sd88_i_codigo == "") ){
+     if(($this->sd88_i_codigo == null) || ($this->sd88_i_codigo === 0 || $this->sd88_i_codigo === 0.0 || $this->sd88_i_codigo == "") ){
        $this->erro_sql = " Campo sd88_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

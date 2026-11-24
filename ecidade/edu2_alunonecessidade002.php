@@ -216,7 +216,7 @@ $sSql .= " ORDER BY ed57_i_escola,";
 $sSql .= " ed11_c_descr,";
 $sSql .= " ed47_v_nome,ed57_i_codigo";
 $rsAlunos = db_query($sSql);
-$iLinhasMatricula = pg_num_rows($rsAlunos);
+$iLinhasMatricula = ($rsAlunos ? pg_num_rows($rsAlunos) : null);
 
 if ($iLinhasMatricula == 0) {
     db_redireciona("db_erros.php?fechar=true&db_erro=Nenhum registro encontrado para os filtros selecionados.");

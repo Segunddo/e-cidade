@@ -229,7 +229,7 @@ class cl_bnccdisciplinas
                     $acount = pg_result($resac, 0, 0);
                     $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
                     $resac = db_query("insert into db_acountkey values($acount,1010922,'$this->ed149_sequencial','A')");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed149_sequencial"]) || $this->ed149_sequencial != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed149_sequencial"]) || ($this->ed149_sequencial != "" && $this->ed149_sequencial !== 0 && $this->ed149_sequencial !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010504,1010922,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed149_sequencial')) . "','$this->ed149_sequencial'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                     if (isset($GLOBALS["HTTP_POST_VARS"]["ed149_nome"]) || $this->ed149_nome != "")
                         $resac = db_query("insert into db_acount values($acount,1010504,1010923,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed149_nome')) . "','$this->ed149_nome'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");

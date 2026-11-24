@@ -91,7 +91,7 @@ $iDepto = db_getsession('DB_coddepto');
               $rsLaboratorios = db_query($sSql);
               $labs = [];
               
-              for($i=0; $i < pg_num_rows($rsLaboratorios); $i++){
+              for($i=0; $i < ($rsLaboratorios ? pg_num_rows($rsLaboratorios) : null); $i++){
                 $unidade = db_utils::fieldsMemory($rsLaboratorios,$i);
                 $labs[$unidade->la02_i_codigo] = $unidade->la02_c_descr;                 
               }              

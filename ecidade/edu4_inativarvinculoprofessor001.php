@@ -16,7 +16,10 @@ $conn = @pg_connect("host=".$_SESSION["DB_servidor"]." dbname=".$_SESSION["DB_ba
 db_log( "- BASE PARA AJUSTES: host=".$_SESSION["DB_servidor"]." dbname=".$_SESSION["DB_base"]." port=".$_SESSION["DB_porta"]." user=".$_SESSION["DB_usuario"]." password=".$_SESSION["DB_senha"], $nome_arquivo, 0);
 
 if (!($conn)) {
-  db_log("Erro ao conectar no Banco de Dados...".pg_last_error(), $nome_arquivo, 0);
+  // No 7.4 pg_last_error() sem conexao devolve false (com aviso); no PHP 8 lanca Error.
+  $sErroPg = false;
+  try { $sErroPg = pg_last_error(); } catch (Throwable $e) {}
+  db_log("Erro ao conectar no Banco de Dados...".$sErroPg, $nome_arquivo, 0);
   die();
 }
 

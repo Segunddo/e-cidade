@@ -92,11 +92,11 @@ class cl_lab_labresp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la06_i_codigo = ($this->la06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_codigo"]:$this->la06_i_codigo);
-       $this->la06_i_uf = ($this->la06_i_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_uf"]:$this->la06_i_uf);
-       $this->la06_i_laboratorio = ($this->la06_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_laboratorio"]:$this->la06_i_laboratorio);
-       $this->la06_i_cgm = ($this->la06_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_cgm"]:$this->la06_i_cgm);
-       $this->la06_i_cbo = ($this->la06_i_cbo == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_cbo"]:$this->la06_i_cbo);
+       $this->la06_i_codigo = ($this->la06_i_codigo === 0 || $this->la06_i_codigo === 0.0 || $this->la06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_codigo"]:$this->la06_i_codigo);
+       $this->la06_i_uf = ($this->la06_i_uf === 0 || $this->la06_i_uf === 0.0 || $this->la06_i_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_uf"]:$this->la06_i_uf);
+       $this->la06_i_laboratorio = ($this->la06_i_laboratorio === 0 || $this->la06_i_laboratorio === 0.0 || $this->la06_i_laboratorio == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_laboratorio"]:$this->la06_i_laboratorio);
+       $this->la06_i_cgm = ($this->la06_i_cgm === 0 || $this->la06_i_cgm === 0.0 || $this->la06_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_cgm"]:$this->la06_i_cgm);
+       $this->la06_i_cbo = ($this->la06_i_cbo === 0 || $this->la06_i_cbo === 0.0 || $this->la06_i_cbo == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_cbo"]:$this->la06_i_cbo);
        if($this->la06_d_inicio == ""){
          $this->la06_d_inicio_dia = ($this->la06_d_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_d_inicio_dia"]:$this->la06_d_inicio_dia);
          $this->la06_d_inicio_mes = ($this->la06_d_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_d_inicio_mes"]:$this->la06_d_inicio_mes);
@@ -113,13 +113,13 @@ class cl_lab_labresp {
             $this->la06_d_fim = $this->la06_d_fim_ano."-".$this->la06_d_fim_mes."-".$this->la06_d_fim_dia;
          }
        }
-       $this->la06_i_tipo = ($this->la06_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_tipo"]:$this->la06_i_tipo);
+       $this->la06_i_tipo = ($this->la06_i_tipo === 0 || $this->la06_i_tipo === 0.0 || $this->la06_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_tipo"]:$this->la06_i_tipo);
        $this->la06_c_orgaoclasse = ($this->la06_c_orgaoclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_c_orgaoclasse"]:$this->la06_c_orgaoclasse);
        $this->la06_c_sigla = ($this->la06_c_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_c_sigla"]:$this->la06_c_sigla);
        $this->la06_c_cns = ($this->la06_c_cns == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_c_cns"]:$this->la06_c_cns);
        $this->la06_permitidoconferencia = ($this->la06_permitidoconferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_permitidoconferencia"]:$this->la06_permitidoconferencia);
      }else{
-       $this->la06_i_codigo = ($this->la06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_codigo"]:$this->la06_i_codigo);
+       $this->la06_i_codigo = ($this->la06_i_codigo === 0 || $this->la06_i_codigo === 0.0 || $this->la06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la06_i_codigo"]:$this->la06_i_codigo);
      }
    }
    // funcao para inclusao
@@ -222,7 +222,7 @@ class cl_lab_labresp {
       $this->la06_permitidoconferencia = $this->la06_permitidoconferencia ? "'t'" : "'f'";
     }
 
-     if(($this->la06_i_codigo == null) || ($this->la06_i_codigo == "") ){
+     if(($this->la06_i_codigo == null) || ($this->la06_i_codigo === 0 || $this->la06_i_codigo === 0.0 || $this->la06_i_codigo == "") ){
        $this->erro_sql = " Campo la06_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -75,14 +75,14 @@ class cl_sau_subgrupo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd61_i_codigo = ($this->sd61_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_i_codigo"]:$this->sd61_i_codigo);
+       $this->sd61_i_codigo = ($this->sd61_i_codigo === 0 || $this->sd61_i_codigo === 0.0 || $this->sd61_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_i_codigo"]:$this->sd61_i_codigo);
        $this->sd61_c_subgrupo = ($this->sd61_c_subgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_c_subgrupo"]:$this->sd61_c_subgrupo);
-       $this->sd61_i_grupo = ($this->sd61_i_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_i_grupo"]:$this->sd61_i_grupo);
+       $this->sd61_i_grupo = ($this->sd61_i_grupo === 0 || $this->sd61_i_grupo === 0.0 || $this->sd61_i_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_i_grupo"]:$this->sd61_i_grupo);
        $this->sd61_c_nome = ($this->sd61_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_c_nome"]:$this->sd61_c_nome);
-       $this->sd61_i_anocomp = ($this->sd61_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_i_anocomp"]:$this->sd61_i_anocomp);
-       $this->sd61_i_mescomp = ($this->sd61_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_i_mescomp"]:$this->sd61_i_mescomp);
+       $this->sd61_i_anocomp = ($this->sd61_i_anocomp === 0 || $this->sd61_i_anocomp === 0.0 || $this->sd61_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_i_anocomp"]:$this->sd61_i_anocomp);
+       $this->sd61_i_mescomp = ($this->sd61_i_mescomp === 0 || $this->sd61_i_mescomp === 0.0 || $this->sd61_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_i_mescomp"]:$this->sd61_i_mescomp);
      }else{
-       $this->sd61_i_codigo = ($this->sd61_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_i_codigo"]:$this->sd61_i_codigo);
+       $this->sd61_i_codigo = ($this->sd61_i_codigo === 0 || $this->sd61_i_codigo === 0.0 || $this->sd61_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd61_i_codigo"]:$this->sd61_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_sau_subgrupo {
          $this->sd61_i_codigo = $sd61_i_codigo;
        }
      }
-     if(($this->sd61_i_codigo == null) || ($this->sd61_i_codigo == "") ){
+     if(($this->sd61_i_codigo == null) || ($this->sd61_i_codigo === 0 || $this->sd61_i_codigo === 0.0 || $this->sd61_i_codigo == "") ){
        $this->erro_sql = " Campo sd61_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

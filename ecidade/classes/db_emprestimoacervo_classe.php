@@ -81,11 +81,11 @@ class cl_emprestimoacervo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi19_codigo = ($this->bi19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_codigo"]:$this->bi19_codigo);
-       $this->bi19_emprestimo = ($this->bi19_emprestimo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_emprestimo"]:$this->bi19_emprestimo);
-       $this->bi19_exemplar = ($this->bi19_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_exemplar"]:$this->bi19_exemplar);
+       $this->bi19_codigo = ($this->bi19_codigo === 0 || $this->bi19_codigo === 0.0 || $this->bi19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_codigo"]:$this->bi19_codigo);
+       $this->bi19_emprestimo = ($this->bi19_emprestimo === 0 || $this->bi19_emprestimo === 0.0 || $this->bi19_emprestimo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_emprestimo"]:$this->bi19_emprestimo);
+       $this->bi19_exemplar = ($this->bi19_exemplar === 0 || $this->bi19_exemplar === 0.0 || $this->bi19_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_exemplar"]:$this->bi19_exemplar);
      }else{
-       $this->bi19_codigo = ($this->bi19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_codigo"]:$this->bi19_codigo);
+       $this->bi19_codigo = ($this->bi19_codigo === 0 || $this->bi19_codigo === 0.0 || $this->bi19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi19_codigo"]:$this->bi19_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_emprestimoacervo {
          $this->bi19_codigo = $bi19_codigo;
        }
      }
-     if(($this->bi19_codigo == null) || ($this->bi19_codigo == "") ){
+     if(($this->bi19_codigo == null) || ($this->bi19_codigo === 0 || $this->bi19_codigo === 0.0 || $this->bi19_codigo == "") ){
        $this->erro_sql = " Campo bi19_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

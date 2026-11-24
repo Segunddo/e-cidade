@@ -52,7 +52,13 @@ $cldb_sysarqmod = new cl_db_sysarqmod ( );
 	marginheight="0" onLoad="a=1">
 <?php
 
-parse_str ( $HTTP_SERVER_VARS ["QUERY_STRING"] , $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? '', $queryString);
+if (isset($queryString['codarq'])) {
+	$codarq = $queryString['codarq'];
+}
+if (isset($queryString['codfilhos'])) {
+	$codfilhos = $queryString['codfilhos'];
+}
 // Tabelas
 $codarqpai = $codarq;
 
@@ -469,7 +475,16 @@ for($l = 0; $l < count ( $arr_nometabfilho ); $l ++) {
 		fputs ( $fd2, 'include(modification("classes/db_' . $nometabfilho . '_classe.php"));' . "\n" );
 		fputs ( $fd2, 'include(modification("classes/db_' . $nometab . '_classe.php"));' . "\n" );
 		fputs ( $fd2, 'include(modification("dbforms/db_funcoes.php"));' . "\n" );
-		fputs ( $fd2, 'parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);' . "\n" );
+		fputs($fd2, "parse_str(\$HTTP_SERVER_VARS[\"QUERY_STRING\"] ?? '', \$queryString);\n");
+		$queryKeys = ['alterar', 'excluir', 'incluir', 'opcao'];
+		for ($iQueryKey = 0; $iQueryKey < $numrowspk; $iQueryKey++) {
+			$queryKeys[] = trim(pg_result($resultpk, $iQueryKey, 'nomecam'));
+		}
+		foreach ($queryKeys as $queryKey) {
+			$queryIndex = var_export($queryKey, true);
+			fputs($fd2, "if (isset(\$queryString[{$queryIndex}])) {\n");
+			fputs($fd2, "  \${$queryKey} = \$queryString[{$queryIndex}];\n}\n");
+		}
 		fputs ( $fd2, 'db_postmemory($HTTP_POST_VARS);' . "\n" );
 		fputs ( $fd2, '$cl' . $nometabfilho . ' = new cl_' . $nometabfilho . ';' . "\n" );
 		fputs ( $fd2, '$cl' . $nometab . ' = new cl_' . $nometab . ';' . "\n" );

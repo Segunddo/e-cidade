@@ -67,10 +67,10 @@ class cl_microarea {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd34_i_codigo = ($this->sd34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd34_i_codigo"]:$this->sd34_i_codigo);
+       $this->sd34_i_codigo = ($this->sd34_i_codigo === 0 || $this->sd34_i_codigo === 0.0 || $this->sd34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd34_i_codigo"]:$this->sd34_i_codigo);
        $this->sd34_v_descricao = ($this->sd34_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd34_v_descricao"]:$this->sd34_v_descricao);
      }else{
-       $this->sd34_i_codigo = ($this->sd34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd34_i_codigo"]:$this->sd34_i_codigo);
+       $this->sd34_i_codigo = ($this->sd34_i_codigo === 0 || $this->sd34_i_codigo === 0.0 || $this->sd34_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd34_i_codigo"]:$this->sd34_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_microarea {
          $this->sd34_i_codigo = $sd34_i_codigo;
        }
      }
-     if(($this->sd34_i_codigo == null) || ($this->sd34_i_codigo == "") ){
+     if(($this->sd34_i_codigo == null) || ($this->sd34_i_codigo === 0 || $this->sd34_i_codigo === 0.0 || $this->sd34_i_codigo == "") ){
        $this->erro_sql = " Campo sd34_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

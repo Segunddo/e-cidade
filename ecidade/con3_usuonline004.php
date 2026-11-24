@@ -27,7 +27,13 @@
 
 session_start();
 include("libs/db_stdlib.php");
-parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'] ?? '', $queryString);
+if (isset($queryString['arquivo'])) {
+  $arquivo = $queryString['arquivo'];
+}
+if (isset($queryString['usuario'])) {
+  $usuario = $queryString['usuario'];
+}
 
 if(isset($HTTP_POST_VARS["sair"])) {
   $fp = fopen("chat/".$arquivo,"r+");

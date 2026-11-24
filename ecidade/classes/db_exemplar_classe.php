@@ -97,10 +97,10 @@ class cl_exemplar
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->bi23_codigo = ($this->bi23_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_codigo"]:$this->bi23_codigo);
-            $this->bi23_acervo = ($this->bi23_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_acervo"]:$this->bi23_acervo);
-            $this->bi23_codbarras = ($this->bi23_codbarras == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_codbarras"]:$this->bi23_codbarras);
-            $this->bi23_aquisicao = ($this->bi23_aquisicao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_aquisicao"]:$this->bi23_aquisicao);
+            $this->bi23_codigo = ($this->bi23_codigo === 0 || $this->bi23_codigo === 0.0 || $this->bi23_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_codigo"]:$this->bi23_codigo);
+            $this->bi23_acervo = ($this->bi23_acervo === 0 || $this->bi23_acervo === 0.0 || $this->bi23_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_acervo"]:$this->bi23_acervo);
+            $this->bi23_codbarras = ($this->bi23_codbarras === 0 || $this->bi23_codbarras === 0.0 || $this->bi23_codbarras == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_codbarras"]:$this->bi23_codbarras);
+            $this->bi23_aquisicao = ($this->bi23_aquisicao === 0 || $this->bi23_aquisicao === 0.0 || $this->bi23_aquisicao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_aquisicao"]:$this->bi23_aquisicao);
             if ($this->bi23_dataaquisicao == "") {
                 $this->bi23_dataaquisicao_dia = ($this->bi23_dataaquisicao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_dataaquisicao_dia"]:$this->bi23_dataaquisicao_dia);
                 $this->bi23_dataaquisicao_mes = ($this->bi23_dataaquisicao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_dataaquisicao_mes"]:$this->bi23_dataaquisicao_mes);
@@ -110,7 +110,7 @@ class cl_exemplar
                 }
             }
             $this->bi23_situacao = ($this->bi23_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_situacao"]:$this->bi23_situacao);
-            $this->bi23_exemplar = ($this->bi23_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_exemplar"]:$this->bi23_exemplar);
+            $this->bi23_exemplar = ($this->bi23_exemplar === 0 || $this->bi23_exemplar === 0.0 || $this->bi23_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_exemplar"]:$this->bi23_exemplar);
             $this->bi23_edicao = ($this->bi23_edicao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_edicao"]:$this->bi23_edicao);
             $this->bi23_anoedicao = ($this->bi23_anoedicao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_anoedicao"]:$this->bi23_anoedicao);
             $this->bi23_isbn = ($this->bi23_isbn == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_isbn"]:$this->bi23_isbn);
@@ -118,7 +118,7 @@ class cl_exemplar
             $this->bi23_volume = ($this->bi23_volume == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_volume"]:$this->bi23_volume);
             $this->bi23_tomo = ($this->bi23_tomo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_tomo"]:$this->bi23_tomo);
         } else {
-            $this->bi23_codigo = ($this->bi23_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_codigo"]:$this->bi23_codigo);
+            $this->bi23_codigo = ($this->bi23_codigo === 0 || $this->bi23_codigo === 0.0 || $this->bi23_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi23_codigo"]:$this->bi23_codigo);
         }
     }
 
@@ -203,7 +203,7 @@ class cl_exemplar
                 $this->bi23_codigo = $bi23_codigo;
             }
         }
-        if (($this->bi23_codigo == null) || ($this->bi23_codigo == "")) {
+        if (($this->bi23_codigo == null) || ($this->bi23_codigo === 0 || $this->bi23_codigo === 0.0 || $this->bi23_codigo == "")) {
             $this->erro_sql = " Campo bi23_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -565,7 +565,7 @@ class cl_exemplar
     {
         $sql = "select ";
         if ($campos != "*") {
-            $campos_sql = split("#", $campos);
+            $campos_sql = preg_split("#\\##m", $campos);
             $virgula = "";
             for ($i=0; $i<sizeof($campos_sql); $i++) {
                 $sql .= $virgula.$campos_sql[$i];
@@ -595,7 +595,7 @@ class cl_exemplar
         $sql .= $sql2;
         if ($ordem != null) {
             $sql .= " order by ";
-            $campos_sql = split("#", $ordem);
+            $campos_sql = preg_split("#\\##m", $ordem);
             $virgula = "";
             for ($i=0; $i<sizeof($campos_sql); $i++) {
                 $sql .= $virgula.$campos_sql[$i];

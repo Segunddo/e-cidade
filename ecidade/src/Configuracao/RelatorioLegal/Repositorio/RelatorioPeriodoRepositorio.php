@@ -139,7 +139,7 @@ class RelatorioPeriodoRepositorio extends Repositorio
      * @param RelatorioPeriodo $relatorioPeriodo
      * @throws Exception
      */
-    public function delete(RelatorioPeriodo $relatorioPeriodo = null)
+    public function delete(?RelatorioPeriodo $relatorioPeriodo = null)
     {
         $id = $relatorioPeriodo instanceof RelatorioPeriodo ? $relatorioPeriodo->getSequencial() : null;
 

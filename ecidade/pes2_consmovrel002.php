@@ -86,13 +86,13 @@ if(isset($r54_codeve) && $r54_codeve != ""){
   if($clrelac->numrows > 0){
     db_fieldsmemory($result_codeve,0);
     $HEAD8 = "head".$mais;
-    $$HEAD8 = "RELACIONAMENTO: ".$r54_codeve." - ".$descrrelac;
+    ${$HEAD8} = "RELACIONAMENTO: ".$r54_codeve." - ".$descrrelac;
     $mais ++;
   }
 }
 if(isset($nao_lancados)){
   $HEAD9 = "head".$mais;
-  $$HEAD9 = "Não lançados na folha";
+  ${$HEAD9} = "Não lançados na folha";
   $dbwhere .= " and r54_lancad = 'f' ";
 }
 

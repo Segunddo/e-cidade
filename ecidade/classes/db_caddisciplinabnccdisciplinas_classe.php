@@ -200,11 +200,11 @@ class cl_caddisciplinabnccdisciplinas
                     $acount = pg_result($resac, 0, 0);
                     $resac = db_query("insert into db_acountacesso values($acount," . db_getsession("DB_acessado") . ")");
                     $resac = db_query("insert into db_acountkey values($acount,1010930,'$this->ed153_sequencial','A')");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed153_sequencial"]) || $this->ed153_sequencial != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed153_sequencial"]) || ($this->ed153_sequencial != "" && $this->ed153_sequencial !== 0 && $this->ed153_sequencial !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010506,1010930,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed153_sequencial')) . "','$this->ed153_sequencial'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed153_caddisciplina"]) || $this->ed153_caddisciplina != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed153_caddisciplina"]) || ($this->ed153_caddisciplina != "" && $this->ed153_caddisciplina !== 0 && $this->ed153_caddisciplina !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010506,1010931,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed153_caddisciplina')) . "','$this->ed153_caddisciplina'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
-                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed153_bnccdisciplina"]) || $this->ed153_bnccdisciplina != "")
+                    if (isset($GLOBALS["HTTP_POST_VARS"]["ed153_bnccdisciplina"]) || ($this->ed153_bnccdisciplina != "" && $this->ed153_bnccdisciplina !== 0 && $this->ed153_bnccdisciplina !== 0.0))
                         $resac = db_query("insert into db_acount values($acount,1010506,1010932,'" . AddSlashes(pg_result($resaco, $conresaco, 'ed153_bnccdisciplina')) . "','$this->ed153_bnccdisciplina'," . db_getsession('DB_datausu') . "," . db_getsession('DB_id_usuario') . ")");
                 }
             }

@@ -64,7 +64,7 @@ $sql = "SELECT bi06_seq,bi06_titulo,bi06_edicao,bi06_volume,bi06_tipoitem,bi05_n
         ORDER BY count desc
         LIMIT $quant";
 @$result = db_query($sql);
-@$linhas = pg_numrows($result);
+@$linhas = ($result ? pg_numrows($result) : null);
 //db_criatabela($result);
 //exit;
 if($linhas==0){?>

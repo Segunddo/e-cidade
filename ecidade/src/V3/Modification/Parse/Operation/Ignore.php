@@ -17,7 +17,7 @@ class Ignore
             return $this->regex;
         }
 
-        $this->regex = (boolean) $regex;
+        $this->regex = (bool) $regex;
         return $this;
     }
 

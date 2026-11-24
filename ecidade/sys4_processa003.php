@@ -140,7 +140,10 @@ function xx($fd, $parq) {
 </head>
 <body bgcolor=#CCCCCC leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="a=1">
 <?php
-parse_str($HTTP_SERVER_VARS ["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? '', $queryString);
+if (isset($queryString['codarq'])) {
+  $codarq = $queryString['codarq'];
+}
 $root = substr($HTTP_SERVER_VARS ['SCRIPT_FILENAME'], 0, strrpos($HTTP_SERVER_VARS ['SCRIPT_FILENAME'], "/"));
 
 //$codarq = 1594;

@@ -69,11 +69,11 @@ class cl_sau_agendaexternaexame {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s120_i_codigo = ($this->s120_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s120_i_codigo"]:$this->s120_i_codigo);
-       $this->s120_i_agendaexterna = ($this->s120_i_agendaexterna == ""?@$GLOBALS["HTTP_POST_VARS"]["s120_i_agendaexterna"]:$this->s120_i_agendaexterna);
-       $this->s120_i_exame = ($this->s120_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["s120_i_exame"]:$this->s120_i_exame);
+       $this->s120_i_codigo = ($this->s120_i_codigo === 0 || $this->s120_i_codigo === 0.0 || $this->s120_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s120_i_codigo"]:$this->s120_i_codigo);
+       $this->s120_i_agendaexterna = ($this->s120_i_agendaexterna === 0 || $this->s120_i_agendaexterna === 0.0 || $this->s120_i_agendaexterna == ""?@$GLOBALS["HTTP_POST_VARS"]["s120_i_agendaexterna"]:$this->s120_i_agendaexterna);
+       $this->s120_i_exame = ($this->s120_i_exame === 0 || $this->s120_i_exame === 0.0 || $this->s120_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["s120_i_exame"]:$this->s120_i_exame);
      }else{
-       $this->s120_i_codigo = ($this->s120_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s120_i_codigo"]:$this->s120_i_codigo);
+       $this->s120_i_codigo = ($this->s120_i_codigo === 0 || $this->s120_i_codigo === 0.0 || $this->s120_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s120_i_codigo"]:$this->s120_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_sau_agendaexternaexame {
          $this->s120_i_codigo = $s120_i_codigo;
        }
      }
-     if(($this->s120_i_codigo == null) || ($this->s120_i_codigo == "") ){
+     if(($this->s120_i_codigo == null) || ($this->s120_i_codigo === 0 || $this->s120_i_codigo === 0.0 || $this->s120_i_codigo == "") ){
        $this->erro_sql = " Campo s120_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

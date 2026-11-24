@@ -67,10 +67,10 @@ class cl_mer_grupoalimento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me30_i_codigo = ($this->me30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me30_i_codigo"]:$this->me30_i_codigo);
+       $this->me30_i_codigo = ($this->me30_i_codigo === 0 || $this->me30_i_codigo === 0.0 || $this->me30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me30_i_codigo"]:$this->me30_i_codigo);
        $this->me30_c_descricao = ($this->me30_c_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["me30_c_descricao"]:$this->me30_c_descricao);
      }else{
-       $this->me30_i_codigo = ($this->me30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me30_i_codigo"]:$this->me30_i_codigo);
+       $this->me30_i_codigo = ($this->me30_i_codigo === 0 || $this->me30_i_codigo === 0.0 || $this->me30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me30_i_codigo"]:$this->me30_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_mer_grupoalimento {
          $this->me30_i_codigo = $me30_i_codigo;
        }
      }
-     if(($this->me30_i_codigo == null) || ($this->me30_i_codigo == "") ){
+     if(($this->me30_i_codigo == null) || ($this->me30_i_codigo === 0 || $this->me30_i_codigo === 0.0 || $this->me30_i_codigo == "") ){
        $this->erro_sql = " Campo me30_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

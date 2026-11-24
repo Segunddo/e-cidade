@@ -77,15 +77,15 @@ class cl_parametrodependencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed295_sequencial = ($this->ed295_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_sequencial"]:$this->ed295_sequencial);
-       $this->ed295_habilitaprogressao = ($this->ed295_habilitaprogressao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_habilitaprogressao"]:$this->ed295_habilitaprogressao);
-       $this->ed295_qtddiscdependente = ($this->ed295_qtddiscdependente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_qtddiscdependente"]:$this->ed295_qtddiscdependente);
-       $this->ed295_controledependencia = ($this->ed295_controledependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_controledependencia"]:$this->ed295_controledependencia);
-       $this->ed295_controlefreq = ($this->ed295_controlefreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_controlefreq"]:$this->ed295_controlefreq);
-       $this->ed295_disceliminadep = ($this->ed295_disceliminadep == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_disceliminadep"]:$this->ed295_disceliminadep);
-       $this->ed295_escola = ($this->ed295_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_escola"]:$this->ed295_escola);
+       $this->ed295_sequencial = ($this->ed295_sequencial === 0 || $this->ed295_sequencial === 0.0 || $this->ed295_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_sequencial"]:$this->ed295_sequencial);
+       $this->ed295_habilitaprogressao = ($this->ed295_habilitaprogressao === 0 || $this->ed295_habilitaprogressao === 0.0 || $this->ed295_habilitaprogressao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_habilitaprogressao"]:$this->ed295_habilitaprogressao);
+       $this->ed295_qtddiscdependente = ($this->ed295_qtddiscdependente === 0 || $this->ed295_qtddiscdependente === 0.0 || $this->ed295_qtddiscdependente == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_qtddiscdependente"]:$this->ed295_qtddiscdependente);
+       $this->ed295_controledependencia = ($this->ed295_controledependencia === 0 || $this->ed295_controledependencia === 0.0 || $this->ed295_controledependencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_controledependencia"]:$this->ed295_controledependencia);
+       $this->ed295_controlefreq = ($this->ed295_controlefreq === 0 || $this->ed295_controlefreq === 0.0 || $this->ed295_controlefreq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_controlefreq"]:$this->ed295_controlefreq);
+       $this->ed295_disceliminadep = ($this->ed295_disceliminadep === 0 || $this->ed295_disceliminadep === 0.0 || $this->ed295_disceliminadep == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_disceliminadep"]:$this->ed295_disceliminadep);
+       $this->ed295_escola = ($this->ed295_escola === 0 || $this->ed295_escola === 0.0 || $this->ed295_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_escola"]:$this->ed295_escola);
      }else{
-       $this->ed295_sequencial = ($this->ed295_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_sequencial"]:$this->ed295_sequencial);
+       $this->ed295_sequencial = ($this->ed295_sequencial === 0 || $this->ed295_sequencial === 0.0 || $this->ed295_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed295_sequencial"]:$this->ed295_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_parametrodependencia {
          $this->ed295_sequencial = $ed295_sequencial;
        }
      }
-     if(($this->ed295_sequencial == null) || ($this->ed295_sequencial == "") ){
+     if(($this->ed295_sequencial == null) || ($this->ed295_sequencial === 0 || $this->ed295_sequencial === 0.0 || $this->ed295_sequencial == "") ){
        $this->erro_sql = " Campo ed295_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

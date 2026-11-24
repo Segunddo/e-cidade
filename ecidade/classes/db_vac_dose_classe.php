@@ -71,12 +71,12 @@ class cl_vac_dose {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc03_i_codigo = ($this->vc03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc03_i_codigo"]:$this->vc03_i_codigo);
+       $this->vc03_i_codigo = ($this->vc03_i_codigo === 0 || $this->vc03_i_codigo === 0.0 || $this->vc03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc03_i_codigo"]:$this->vc03_i_codigo);
        $this->vc03_c_codpni = ($this->vc03_c_codpni == ""?@$GLOBALS["HTTP_POST_VARS"]["vc03_c_codpni"]:$this->vc03_c_codpni);
        $this->vc03_c_descr = ($this->vc03_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc03_c_descr"]:$this->vc03_c_descr);
-       $this->vc03_i_ordem = ($this->vc03_i_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["vc03_i_ordem"]:$this->vc03_i_ordem);
+       $this->vc03_i_ordem = ($this->vc03_i_ordem === 0 || $this->vc03_i_ordem === 0.0 || $this->vc03_i_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["vc03_i_ordem"]:$this->vc03_i_ordem);
      }else{
-       $this->vc03_i_codigo = ($this->vc03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc03_i_codigo"]:$this->vc03_i_codigo);
+       $this->vc03_i_codigo = ($this->vc03_i_codigo === 0 || $this->vc03_i_codigo === 0.0 || $this->vc03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc03_i_codigo"]:$this->vc03_i_codigo);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_vac_dose {
          $this->vc03_i_codigo = $vc03_i_codigo;
        }
      }
-     if(($this->vc03_i_codigo == null) || ($this->vc03_i_codigo == "") ){
+     if(($this->vc03_i_codigo == null) || ($this->vc03_i_codigo === 0 || $this->vc03_i_codigo === 0.0 || $this->vc03_i_codigo == "") ){
        $this->erro_sql = " Campo vc03_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

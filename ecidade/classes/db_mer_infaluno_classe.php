@@ -82,10 +82,10 @@ class cl_mer_infaluno {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me14_i_codigo = ($this->me14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_codigo"]:$this->me14_i_codigo);
-       $this->me14_f_peso = ($this->me14_f_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_f_peso"]:$this->me14_f_peso);
-       $this->me14_f_altura = ($this->me14_f_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_f_altura"]:$this->me14_f_altura);
-       $this->me14_i_aluno = ($this->me14_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_aluno"]:$this->me14_i_aluno);
+       $this->me14_i_codigo = ($this->me14_i_codigo === 0 || $this->me14_i_codigo === 0.0 || $this->me14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_codigo"]:$this->me14_i_codigo);
+       $this->me14_f_peso = ($this->me14_f_peso === 0 || $this->me14_f_peso === 0.0 || $this->me14_f_peso == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_f_peso"]:$this->me14_f_peso);
+       $this->me14_f_altura = ($this->me14_f_altura === 0 || $this->me14_f_altura === 0.0 || $this->me14_f_altura == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_f_altura"]:$this->me14_f_altura);
+       $this->me14_i_aluno = ($this->me14_i_aluno === 0 || $this->me14_i_aluno === 0.0 || $this->me14_i_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_aluno"]:$this->me14_i_aluno);
        $this->me14_i_ano = ($this->me14_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_ano"]:$this->me14_i_ano);
        $this->me14_i_mes = ($this->me14_i_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_mes"]:$this->me14_i_mes);
        $this->me14_i_periodocalendario = ($this->me14_i_periodocalendario == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_periodocalendario"]:$this->me14_i_periodocalendario);
@@ -98,7 +98,7 @@ class cl_mer_infaluno {
          }
        }
      }else{
-       $this->me14_i_codigo = ($this->me14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_codigo"]:$this->me14_i_codigo);
+       $this->me14_i_codigo = ($this->me14_i_codigo === 0 || $this->me14_i_codigo === 0.0 || $this->me14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me14_i_codigo"]:$this->me14_i_codigo);
      }
    }
    // funcao para inclusao
@@ -173,7 +173,7 @@ class cl_mer_infaluno {
          $this->me14_i_codigo = $me14_i_codigo;
        }
      }
-     if(($this->me14_i_codigo == null) || ($this->me14_i_codigo == "") ){
+     if(($this->me14_i_codigo == null) || ($this->me14_i_codigo === 0 || $this->me14_i_codigo === 0.0 || $this->me14_i_codigo == "") ){
        $this->erro_sql = " Campo me14_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

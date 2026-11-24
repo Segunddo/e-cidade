@@ -69,11 +69,11 @@ class cl_disciplinas_series {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed31_i_codigo = ($this->ed31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed31_i_codigo"]:$this->ed31_i_codigo);
-       $this->ed31_i_disciplina = ($this->ed31_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed31_i_disciplina"]:$this->ed31_i_disciplina);
-       $this->ed31_i_series = ($this->ed31_i_series == ""?@$GLOBALS["HTTP_POST_VARS"]["ed31_i_series"]:$this->ed31_i_series);
+       $this->ed31_i_codigo = ($this->ed31_i_codigo === 0 || $this->ed31_i_codigo === 0.0 || $this->ed31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed31_i_codigo"]:$this->ed31_i_codigo);
+       $this->ed31_i_disciplina = ($this->ed31_i_disciplina === 0 || $this->ed31_i_disciplina === 0.0 || $this->ed31_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed31_i_disciplina"]:$this->ed31_i_disciplina);
+       $this->ed31_i_series = ($this->ed31_i_series === 0 || $this->ed31_i_series === 0.0 || $this->ed31_i_series == ""?@$GLOBALS["HTTP_POST_VARS"]["ed31_i_series"]:$this->ed31_i_series);
      }else{
-       $this->ed31_i_codigo = ($this->ed31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed31_i_codigo"]:$this->ed31_i_codigo);
+       $this->ed31_i_codigo = ($this->ed31_i_codigo === 0 || $this->ed31_i_codigo === 0.0 || $this->ed31_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed31_i_codigo"]:$this->ed31_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_disciplinas_series {
          $this->ed31_i_codigo = $ed31_i_codigo;
        }
      }
-     if(($this->ed31_i_codigo == null) || ($this->ed31_i_codigo == "") ){
+     if(($this->ed31_i_codigo == null) || ($this->ed31_i_codigo === 0 || $this->ed31_i_codigo === 0.0 || $this->ed31_i_codigo == "") ){
        $this->erro_sql = " Campo ed31_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_sau_atividadeensino {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd38_i_cod_ativid = ($this->sd38_i_cod_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["sd38_i_cod_ativid"]:$this->sd38_i_cod_ativid);
+       $this->sd38_i_cod_ativid = ($this->sd38_i_cod_ativid === 0 || $this->sd38_i_cod_ativid === 0.0 || $this->sd38_i_cod_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["sd38_i_cod_ativid"]:$this->sd38_i_cod_ativid);
        $this->sd38_v_descricao = ($this->sd38_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd38_v_descricao"]:$this->sd38_v_descricao);
      }else{
-       $this->sd38_i_cod_ativid = ($this->sd38_i_cod_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["sd38_i_cod_ativid"]:$this->sd38_i_cod_ativid);
+       $this->sd38_i_cod_ativid = ($this->sd38_i_cod_ativid === 0 || $this->sd38_i_cod_ativid === 0.0 || $this->sd38_i_cod_ativid == ""?@$GLOBALS["HTTP_POST_VARS"]["sd38_i_cod_ativid"]:$this->sd38_i_cod_ativid);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sau_atividadeensino {
        return false;
      }
        $this->sd38_i_cod_ativid = $sd38_i_cod_ativid;
-     if(($this->sd38_i_cod_ativid == null) || ($this->sd38_i_cod_ativid == "") ){
+     if(($this->sd38_i_cod_ativid == null) || ($this->sd38_i_cod_ativid === 0 || $this->sd38_i_cod_ativid === 0.0 || $this->sd38_i_cod_ativid == "") ){
        $this->erro_sql = " Campo sd38_i_cod_ativid nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

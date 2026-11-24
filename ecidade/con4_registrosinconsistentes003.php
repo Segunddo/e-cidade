@@ -35,7 +35,10 @@ require_once(modification("libs/db_utils.php"));
 require_once(modification("libs/db_app.utils.php"));
 require_once(modification("dbforms/db_classesgenericas.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? '', $queryString);
+if (isset($queryString['chavepesquisa'])) {
+  $chavepesquisa = $queryString['chavepesquisa'];
+}
 db_postmemory($HTTP_POST_VARS);
 $cldb_registrosinconsistentes = new cl_db_registrosinconsistentes;
 $db_botao = false;

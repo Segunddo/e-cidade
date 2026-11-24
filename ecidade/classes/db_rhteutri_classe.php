@@ -75,7 +75,7 @@ class cl_rhteutri {
                  rh67_valor = float8 = Valor 
                  ";
    //funcao construtor da classe
-   function cl_rhteutri() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("rhteutri");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -92,18 +92,18 @@ class cl_rhteutri {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh67_sequencial = ($this->rh67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_sequencial"]:$this->rh67_sequencial);
-       $this->rh67_regist = ($this->rh67_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_regist"]:$this->rh67_regist);
-       $this->rh67_rhtipovale = ($this->rh67_rhtipovale == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_rhtipovale"]:$this->rh67_rhtipovale);
+       $this->rh67_sequencial = ($this->rh67_sequencial === 0 || $this->rh67_sequencial === 0.0 || $this->rh67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_sequencial"]:$this->rh67_sequencial);
+       $this->rh67_regist = ($this->rh67_regist === 0 || $this->rh67_regist === 0.0 || $this->rh67_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_regist"]:$this->rh67_regist);
+       $this->rh67_rhtipovale = ($this->rh67_rhtipovale === 0 || $this->rh67_rhtipovale === 0.0 || $this->rh67_rhtipovale == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_rhtipovale"]:$this->rh67_rhtipovale);
        $this->rh67_cartao = ($this->rh67_cartao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_cartao"]:$this->rh67_cartao);
-       $this->rh67_grupo = ($this->rh67_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_grupo"]:$this->rh67_grupo);
-       $this->rh67_dias = ($this->rh67_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_dias"]:$this->rh67_dias);
-       $this->rh67_vales = ($this->rh67_vales == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_vales"]:$this->rh67_vales);
+       $this->rh67_grupo = ($this->rh67_grupo === 0 || $this->rh67_grupo === 0.0 || $this->rh67_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_grupo"]:$this->rh67_grupo);
+       $this->rh67_dias = ($this->rh67_dias === 0 || $this->rh67_dias === 0.0 || $this->rh67_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_dias"]:$this->rh67_dias);
+       $this->rh67_vales = ($this->rh67_vales === 0 || $this->rh67_vales === 0.0 || $this->rh67_vales == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_vales"]:$this->rh67_vales);
        $this->rh67_ativo = ($this->rh67_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh67_ativo"]:$this->rh67_ativo);
-       $this->rh67_db_usuarios = ($this->rh67_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_db_usuarios"]:$this->rh67_db_usuarios);
-       $this->rh67_anousu = ($this->rh67_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_anousu"]:$this->rh67_anousu);
-       $this->rh67_mesusu = ($this->rh67_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_mesusu"]:$this->rh67_mesusu);
-       $this->rh67_valor = ($this->rh67_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_valor"]:$this->rh67_valor);
+       $this->rh67_db_usuarios = ($this->rh67_db_usuarios === 0 || $this->rh67_db_usuarios === 0.0 || $this->rh67_db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_db_usuarios"]:$this->rh67_db_usuarios);
+       $this->rh67_anousu = ($this->rh67_anousu === 0 || $this->rh67_anousu === 0.0 || $this->rh67_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_anousu"]:$this->rh67_anousu);
+       $this->rh67_mesusu = ($this->rh67_mesusu === 0 || $this->rh67_mesusu === 0.0 || $this->rh67_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_mesusu"]:$this->rh67_mesusu);
+       $this->rh67_valor = ($this->rh67_valor === 0 || $this->rh67_valor === 0.0 || $this->rh67_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_valor"]:$this->rh67_valor);
        if($this->rh67_data == ""){
          $this->rh67_data_dia = ($this->rh67_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_data_dia"]:$this->rh67_data_dia);
          $this->rh67_data_mes = ($this->rh67_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_data_mes"]:$this->rh67_data_mes);
@@ -113,7 +113,7 @@ class cl_rhteutri {
          }
        }
      }else{
-       $this->rh67_sequencial = ($this->rh67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_sequencial"]:$this->rh67_sequencial);
+       $this->rh67_sequencial = ($this->rh67_sequencial === 0 || $this->rh67_sequencial === 0.0 || $this->rh67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh67_sequencial"]:$this->rh67_sequencial);
      }
    }
    // funcao para inclusao
@@ -218,7 +218,7 @@ class cl_rhteutri {
          $this->rh67_sequencial = $rh67_sequencial;
        }
      }
-     if(($this->rh67_sequencial == null) || ($this->rh67_sequencial == "") ){
+     if(($this->rh67_sequencial == null) || ($this->rh67_sequencial === 0 || $this->rh67_sequencial === 0.0 || $this->rh67_sequencial == "") ){
        $this->erro_sql = " Campo rh67_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -235,7 +235,7 @@ class cl_rhteutri {
       $this->erro_status = "0";
       return false;
     }
-    if(($this->rh67_anousu == null) || ($this->rh67_anousu == "") ){ 
+    if(($this->rh67_anousu == null) || ($this->rh67_anousu === 0 || $this->rh67_anousu === 0.0 || $this->rh67_anousu == "") ){ 
       $this->erro_sql = " Campo rh67_anousu nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -243,7 +243,7 @@ class cl_rhteutri {
       $this->erro_status = "0";
       return false;
     }
-    if(($this->rh67_mesusu == null) || ($this->rh67_mesusu == "") ){ 
+    if(($this->rh67_mesusu == null) || ($this->rh67_mesusu === 0 || $this->rh67_mesusu === 0.0 || $this->rh67_mesusu == "") ){ 
       $this->erro_sql = " Campo rh67_mesusu nao declarado.";
       $this->erro_banco = "Chave Primaria zerada.";
       $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

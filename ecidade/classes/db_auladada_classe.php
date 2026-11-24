@@ -74,7 +74,7 @@ class cl_auladada {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed243_i_codigo = ($this->ed243_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed243_i_codigo"]:$this->ed243_i_codigo);
+       $this->ed243_i_codigo = ($this->ed243_i_codigo === 0 || $this->ed243_i_codigo === 0.0 || $this->ed243_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed243_i_codigo"]:$this->ed243_i_codigo);
        if($this->ed243_d_data == ""){
          $this->ed243_d_data_dia = ($this->ed243_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed243_d_data_dia"]:$this->ed243_d_data_dia);
          $this->ed243_d_data_mes = ($this->ed243_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed243_d_data_mes"]:$this->ed243_d_data_mes);
@@ -83,10 +83,10 @@ class cl_auladada {
             $this->ed243_d_data = $this->ed243_d_data_ano."-".$this->ed243_d_data_mes."-".$this->ed243_d_data_dia;
          }
        }
-       $this->ed243_i_procavaliacao = ($this->ed243_i_procavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed243_i_procavaliacao"]:$this->ed243_i_procavaliacao);
-       $this->ed243_i_regencia = ($this->ed243_i_regencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed243_i_regencia"]:$this->ed243_i_regencia);
+       $this->ed243_i_procavaliacao = ($this->ed243_i_procavaliacao === 0 || $this->ed243_i_procavaliacao === 0.0 || $this->ed243_i_procavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed243_i_procavaliacao"]:$this->ed243_i_procavaliacao);
+       $this->ed243_i_regencia = ($this->ed243_i_regencia === 0 || $this->ed243_i_regencia === 0.0 || $this->ed243_i_regencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed243_i_regencia"]:$this->ed243_i_regencia);
      }else{
-       $this->ed243_i_codigo = ($this->ed243_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed243_i_codigo"]:$this->ed243_i_codigo);
+       $this->ed243_i_codigo = ($this->ed243_i_codigo === 0 || $this->ed243_i_codigo === 0.0 || $this->ed243_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed243_i_codigo"]:$this->ed243_i_codigo);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_auladada {
          $this->ed243_i_codigo = $ed243_i_codigo; 
        }
      }
-     if(($this->ed243_i_codigo == null) || ($this->ed243_i_codigo == "") ){ 
+     if(($this->ed243_i_codigo == null) || ($this->ed243_i_codigo === 0 || $this->ed243_i_codigo === 0.0 || $this->ed243_i_codigo == "") ){ 
        $this->erro_sql = " Campo ed243_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

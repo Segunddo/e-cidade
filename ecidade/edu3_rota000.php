@@ -171,7 +171,7 @@ function js_redireciona(chave){
          ";
       }
       $result_curso = db_query($sql);
-      $linhas= pg_numrows($result_curso);
+      $linhas= ($result_curso ? pg_numrows($result_curso) : null);
       if($linhas==0){
        $x = array(''=>'');
        db_select('ed31_i_curso',$x,true,1," $disabled style='width:300px;'");

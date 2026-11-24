@@ -67,10 +67,10 @@ class cl_lab_materialcoleta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la15_i_codigo = ($this->la15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la15_i_codigo"]:$this->la15_i_codigo);
+       $this->la15_i_codigo = ($this->la15_i_codigo === 0 || $this->la15_i_codigo === 0.0 || $this->la15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la15_i_codigo"]:$this->la15_i_codigo);
        $this->la15_c_descr = ($this->la15_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la15_c_descr"]:$this->la15_c_descr);
      }else{
-       $this->la15_i_codigo = ($this->la15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la15_i_codigo"]:$this->la15_i_codigo);
+       $this->la15_i_codigo = ($this->la15_i_codigo === 0 || $this->la15_i_codigo === 0.0 || $this->la15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la15_i_codigo"]:$this->la15_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_lab_materialcoleta {
          $this->la15_i_codigo = $la15_i_codigo;
        }
      }
-     if(($this->la15_i_codigo == null) || ($this->la15_i_codigo == "") ){
+     if(($this->la15_i_codigo == null) || ($this->la15_i_codigo === 0 || $this->la15_i_codigo === 0.0 || $this->la15_i_codigo == "") ){
        $this->erro_sql = " Campo la15_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

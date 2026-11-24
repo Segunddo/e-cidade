@@ -67,10 +67,10 @@ class cl_far_concentracao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa30_i_codigo = ($this->fa30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa30_i_codigo"]:$this->fa30_i_codigo);
+       $this->fa30_i_codigo = ($this->fa30_i_codigo === 0 || $this->fa30_i_codigo === 0.0 || $this->fa30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa30_i_codigo"]:$this->fa30_i_codigo);
        $this->fa30_c_concentracao = ($this->fa30_c_concentracao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa30_c_concentracao"]:$this->fa30_c_concentracao);
      }else{
-       $this->fa30_i_codigo = ($this->fa30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa30_i_codigo"]:$this->fa30_i_codigo);
+       $this->fa30_i_codigo = ($this->fa30_i_codigo === 0 || $this->fa30_i_codigo === 0.0 || $this->fa30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa30_i_codigo"]:$this->fa30_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_far_concentracao {
          $this->fa30_i_codigo = $fa30_i_codigo;
        }
      }
-     if(($this->fa30_i_codigo == null) || ($this->fa30_i_codigo == "") ){
+     if(($this->fa30_i_codigo == null) || ($this->fa30_i_codigo === 0 || $this->fa30_i_codigo === 0.0 || $this->fa30_i_codigo == "") ){
        $this->erro_sql = " Campo fa30_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

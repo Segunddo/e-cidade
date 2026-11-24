@@ -67,10 +67,10 @@ class cl_sau_nivelhier {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd44_i_codnivhier = ($this->sd44_i_codnivhier == ""?@$GLOBALS["HTTP_POST_VARS"]["sd44_i_codnivhier"]:$this->sd44_i_codnivhier);
+       $this->sd44_i_codnivhier = ($this->sd44_i_codnivhier === 0 || $this->sd44_i_codnivhier === 0.0 || $this->sd44_i_codnivhier == ""?@$GLOBALS["HTTP_POST_VARS"]["sd44_i_codnivhier"]:$this->sd44_i_codnivhier);
        $this->sd44_v_descricao = ($this->sd44_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd44_v_descricao"]:$this->sd44_v_descricao);
      }else{
-       $this->sd44_i_codnivhier = ($this->sd44_i_codnivhier == ""?@$GLOBALS["HTTP_POST_VARS"]["sd44_i_codnivhier"]:$this->sd44_i_codnivhier);
+       $this->sd44_i_codnivhier = ($this->sd44_i_codnivhier === 0 || $this->sd44_i_codnivhier === 0.0 || $this->sd44_i_codnivhier == ""?@$GLOBALS["HTTP_POST_VARS"]["sd44_i_codnivhier"]:$this->sd44_i_codnivhier);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sau_nivelhier {
        return false;
      }
        $this->sd44_i_codnivhier = $sd44_i_codnivhier;
-     if(($this->sd44_i_codnivhier == null) || ($this->sd44_i_codnivhier == "") ){
+     if(($this->sd44_i_codnivhier == null) || ($this->sd44_i_codnivhier === 0 || $this->sd44_i_codnivhier === 0.0 || $this->sd44_i_codnivhier == "") ){
        $this->erro_sql = " Campo sd44_i_codnivhier nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

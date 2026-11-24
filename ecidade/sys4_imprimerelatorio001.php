@@ -90,7 +90,7 @@ if ( isset($_SESSION['objetoXML']) ) {
 	$xml = $api->getReport();
 	
 	$sNomeRelatorio  = $xml["Report"]["Properties"]["Title"];
-	$api->setParameter('$head1',utf8_decode($sNomeRelatorio));
+	$api->setParameter('$head1',mb_convert_encoding($sNomeRelatorio ?? '', 'ISO-8859-1', 'UTF-8'));
 	
 	$aOrdem = $oXML->getOrdem();
 	

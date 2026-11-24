@@ -30,7 +30,7 @@ $sql    = "select me22_i_codigo,me22_i_cardapio,me01_c_nome,me01_f_versao,me22_d
 $sql   .= "       inner join mer_cardapio on me22_i_cardapio=me01_i_codigo ";
 $sql   .= "       where me22_d_data between '".$inicio."' and '".$fim."'";
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 if ($linhas == 0) {?>
 
  <table width='100%'>

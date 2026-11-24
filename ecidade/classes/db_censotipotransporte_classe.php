@@ -67,10 +67,10 @@ class cl_censotipotransporte {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed312_sequencial = ($this->ed312_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed312_sequencial"]:$this->ed312_sequencial);
+       $this->ed312_sequencial = ($this->ed312_sequencial === 0 || $this->ed312_sequencial === 0.0 || $this->ed312_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed312_sequencial"]:$this->ed312_sequencial);
        $this->ed312_descricao = ($this->ed312_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed312_descricao"]:$this->ed312_descricao);
      }else{
-       $this->ed312_sequencial = ($this->ed312_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed312_sequencial"]:$this->ed312_sequencial);
+       $this->ed312_sequencial = ($this->ed312_sequencial === 0 || $this->ed312_sequencial === 0.0 || $this->ed312_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed312_sequencial"]:$this->ed312_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_censotipotransporte {
          $this->ed312_sequencial = $ed312_sequencial;
        }
      }
-     if(($this->ed312_sequencial == null) || ($this->ed312_sequencial == "") ){
+     if(($this->ed312_sequencial == null) || ($this->ed312_sequencial === 0 || $this->ed312_sequencial === 0.0 || $this->ed312_sequencial == "") ){
        $this->erro_sql = " Campo ed312_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

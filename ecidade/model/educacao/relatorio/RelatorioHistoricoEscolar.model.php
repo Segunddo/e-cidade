@@ -421,7 +421,7 @@ class RelatorioHistoricoEscolar
      * @param  string $sTermoFinalEtapa
      * @return mixed|string|null
      */
-    private function termoResultadoFinalEtapa($sResultadoFinal, $sSituacao = null, $sTermoFinalEtapa = null, $aTermos, $fora = false)
+    private function termoResultadoFinalEtapa($sResultadoFinal, $sSituacao = null, $sTermoFinalEtapa = null, $aTermos = null, $fora = false)
     {
         $sTermoFinal = $this->termoFinal($sResultadoFinal, false, $aTermos);
         /**

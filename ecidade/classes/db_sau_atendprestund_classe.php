@@ -71,12 +71,12 @@ class cl_sau_atendprestund {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd48_i_codigo = ($this->sd48_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd48_i_codigo"]:$this->sd48_i_codigo);
-       $this->sd48_i_unidade = ($this->sd48_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd48_i_unidade"]:$this->sd48_i_unidade);
-       $this->sd48_i_atendprestado = ($this->sd48_i_atendprestado == ""?@$GLOBALS["HTTP_POST_VARS"]["sd48_i_atendprestado"]:$this->sd48_i_atendprestado);
-       $this->sd48_i_convenio = ($this->sd48_i_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["sd48_i_convenio"]:$this->sd48_i_convenio);
+       $this->sd48_i_codigo = ($this->sd48_i_codigo === 0 || $this->sd48_i_codigo === 0.0 || $this->sd48_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd48_i_codigo"]:$this->sd48_i_codigo);
+       $this->sd48_i_unidade = ($this->sd48_i_unidade === 0 || $this->sd48_i_unidade === 0.0 || $this->sd48_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd48_i_unidade"]:$this->sd48_i_unidade);
+       $this->sd48_i_atendprestado = ($this->sd48_i_atendprestado === 0 || $this->sd48_i_atendprestado === 0.0 || $this->sd48_i_atendprestado == ""?@$GLOBALS["HTTP_POST_VARS"]["sd48_i_atendprestado"]:$this->sd48_i_atendprestado);
+       $this->sd48_i_convenio = ($this->sd48_i_convenio === 0 || $this->sd48_i_convenio === 0.0 || $this->sd48_i_convenio == ""?@$GLOBALS["HTTP_POST_VARS"]["sd48_i_convenio"]:$this->sd48_i_convenio);
      }else{
-       $this->sd48_i_codigo = ($this->sd48_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd48_i_codigo"]:$this->sd48_i_codigo);
+       $this->sd48_i_codigo = ($this->sd48_i_codigo === 0 || $this->sd48_i_codigo === 0.0 || $this->sd48_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd48_i_codigo"]:$this->sd48_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_sau_atendprestund {
          $this->sd48_i_codigo = $sd48_i_codigo;
        }
      }
-     if(($this->sd48_i_codigo == null) || ($this->sd48_i_codigo == "") ){
+     if(($this->sd48_i_codigo == null) || ($this->sd48_i_codigo === 0 || $this->sd48_i_codigo === 0.0 || $this->sd48_i_codigo == "") ){
        $this->erro_sql = " Campo sd48_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

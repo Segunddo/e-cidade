@@ -101,7 +101,7 @@ if (isset($requisicao)) {
         if ($oDaoLabEmissao->numrows > 0) {
             $oEmissao = db_utils::fieldsmemory($rsEmissao, 0);
             db_inicio_transacao();
-            if (pg_lo_export($oEmissao->la34_o_laudo, 'tmp/' . $oEmissao->la34_c_nomearq, $conn)) {
+            if (pg_lo_export($conn, $oEmissao->la34_o_laudo, 'tmp/' . $oEmissao->la34_c_nomearq)) {
                 ?>
                 <script>
                     jan = window.open('tmp/<?=$oEmissao->la34_c_nomearq?>',

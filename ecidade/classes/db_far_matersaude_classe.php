@@ -94,24 +94,24 @@ class cl_far_matersaude {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa01_i_codigo = ($this->fa01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codigo"]:$this->fa01_i_codigo);
+       $this->fa01_i_codigo = ($this->fa01_i_codigo === 0 || $this->fa01_i_codigo === 0.0 || $this->fa01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codigo"]:$this->fa01_i_codigo);
        $this->fa01_t_obs = ($this->fa01_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_t_obs"]:$this->fa01_t_obs);
-       $this->fa01_i_codmater = ($this->fa01_i_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codmater"]:$this->fa01_i_codmater);
-       $this->fa01_i_class = ($this->fa01_i_class == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_class"]:$this->fa01_i_class);
+       $this->fa01_i_codmater = ($this->fa01_i_codmater === 0 || $this->fa01_i_codmater === 0.0 || $this->fa01_i_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codmater"]:$this->fa01_i_codmater);
+       $this->fa01_i_class = ($this->fa01_i_class === 0 || $this->fa01_i_class === 0.0 || $this->fa01_i_class == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_class"]:$this->fa01_i_class);
        $this->fa01_c_nomegenerico = ($this->fa01_c_nomegenerico == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_c_nomegenerico"]:$this->fa01_c_nomegenerico);
-       $this->fa01_i_medanvisa = ($this->fa01_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medanvisa"]:$this->fa01_i_medanvisa);
-       $this->fa01_i_prescricaomed = ($this->fa01_i_prescricaomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_prescricaomed"]:$this->fa01_i_prescricaomed);
-       $this->fa01_i_classemed = ($this->fa01_i_classemed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_classemed"]:$this->fa01_i_classemed);
-       $this->fa01_i_listacontroladomed = ($this->fa01_i_listacontroladomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_listacontroladomed"]:$this->fa01_i_listacontroladomed);
-       $this->fa01_i_medrefemed = ($this->fa01_i_medrefemed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medrefemed"]:$this->fa01_i_medrefemed);
-       $this->fa01_i_laboratoriomed = ($this->fa01_i_laboratoriomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_laboratoriomed"]:$this->fa01_i_laboratoriomed);
-       $this->fa01_i_formafarmaceuticamed = ($this->fa01_i_formafarmaceuticamed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_formafarmaceuticamed"]:$this->fa01_i_formafarmaceuticamed);
-       $this->fa01_i_concentracaomed = ($this->fa01_i_concentracaomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_concentracaomed"]:$this->fa01_i_concentracaomed);
-       $this->fa01_i_medhiperdia = ($this->fa01_i_medhiperdia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medhiperdia"]:$this->fa01_i_medhiperdia);
+       $this->fa01_i_medanvisa = ($this->fa01_i_medanvisa === 0 || $this->fa01_i_medanvisa === 0.0 || $this->fa01_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medanvisa"]:$this->fa01_i_medanvisa);
+       $this->fa01_i_prescricaomed = ($this->fa01_i_prescricaomed === 0 || $this->fa01_i_prescricaomed === 0.0 || $this->fa01_i_prescricaomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_prescricaomed"]:$this->fa01_i_prescricaomed);
+       $this->fa01_i_classemed = ($this->fa01_i_classemed === 0 || $this->fa01_i_classemed === 0.0 || $this->fa01_i_classemed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_classemed"]:$this->fa01_i_classemed);
+       $this->fa01_i_listacontroladomed = ($this->fa01_i_listacontroladomed === 0 || $this->fa01_i_listacontroladomed === 0.0 || $this->fa01_i_listacontroladomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_listacontroladomed"]:$this->fa01_i_listacontroladomed);
+       $this->fa01_i_medrefemed = ($this->fa01_i_medrefemed === 0 || $this->fa01_i_medrefemed === 0.0 || $this->fa01_i_medrefemed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medrefemed"]:$this->fa01_i_medrefemed);
+       $this->fa01_i_laboratoriomed = ($this->fa01_i_laboratoriomed === 0 || $this->fa01_i_laboratoriomed === 0.0 || $this->fa01_i_laboratoriomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_laboratoriomed"]:$this->fa01_i_laboratoriomed);
+       $this->fa01_i_formafarmaceuticamed = ($this->fa01_i_formafarmaceuticamed === 0 || $this->fa01_i_formafarmaceuticamed === 0.0 || $this->fa01_i_formafarmaceuticamed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_formafarmaceuticamed"]:$this->fa01_i_formafarmaceuticamed);
+       $this->fa01_i_concentracaomed = ($this->fa01_i_concentracaomed === 0 || $this->fa01_i_concentracaomed === 0.0 || $this->fa01_i_concentracaomed == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_concentracaomed"]:$this->fa01_i_concentracaomed);
+       $this->fa01_i_medhiperdia = ($this->fa01_i_medhiperdia === 0 || $this->fa01_i_medhiperdia === 0.0 || $this->fa01_i_medhiperdia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_medhiperdia"]:$this->fa01_i_medhiperdia);
        $this->fa01_codigobarras = ($this->fa01_codigobarras == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_codigobarras"]:$this->fa01_codigobarras);
        $this->fa01_medicamentos = ($this->fa01_medicamentos == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_medicamentos"]:$this->fa01_medicamentos);
      }else{
-       $this->fa01_i_codigo = ($this->fa01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codigo"]:$this->fa01_i_codigo);
+       $this->fa01_i_codigo = ($this->fa01_i_codigo === 0 || $this->fa01_i_codigo === 0.0 || $this->fa01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa01_i_codigo"]:$this->fa01_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -195,7 +195,7 @@ class cl_far_matersaude {
          $this->fa01_i_codigo = $fa01_i_codigo;
        //}
      }
-     if(($this->fa01_i_codigo == null) || ($this->fa01_i_codigo == "") ){
+     if(($this->fa01_i_codigo == null) || ($this->fa01_i_codigo === 0 || $this->fa01_i_codigo === 0.0 || $this->fa01_i_codigo == "") ){
        $this->erro_sql = " Campo fa01_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

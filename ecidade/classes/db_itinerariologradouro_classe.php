@@ -71,12 +71,12 @@ class cl_itinerariologradouro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre10_sequencial = ($this->tre10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_sequencial"]:$this->tre10_sequencial);
-       $this->tre10_linhatransporteitinerario = ($this->tre10_linhatransporteitinerario == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_linhatransporteitinerario"]:$this->tre10_linhatransporteitinerario);
-       $this->tre10_cadenderbairrocadenderrua = ($this->tre10_cadenderbairrocadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_cadenderbairrocadenderrua"]:$this->tre10_cadenderbairrocadenderrua);
-       $this->tre10_ordem = ($this->tre10_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_ordem"]:$this->tre10_ordem);
+       $this->tre10_sequencial = ($this->tre10_sequencial === 0 || $this->tre10_sequencial === 0.0 || $this->tre10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_sequencial"]:$this->tre10_sequencial);
+       $this->tre10_linhatransporteitinerario = ($this->tre10_linhatransporteitinerario === 0 || $this->tre10_linhatransporteitinerario === 0.0 || $this->tre10_linhatransporteitinerario == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_linhatransporteitinerario"]:$this->tre10_linhatransporteitinerario);
+       $this->tre10_cadenderbairrocadenderrua = ($this->tre10_cadenderbairrocadenderrua === 0 || $this->tre10_cadenderbairrocadenderrua === 0.0 || $this->tre10_cadenderbairrocadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_cadenderbairrocadenderrua"]:$this->tre10_cadenderbairrocadenderrua);
+       $this->tre10_ordem = ($this->tre10_ordem === 0 || $this->tre10_ordem === 0.0 || $this->tre10_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_ordem"]:$this->tre10_ordem);
      }else{
-       $this->tre10_sequencial = ($this->tre10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_sequencial"]:$this->tre10_sequencial);
+       $this->tre10_sequencial = ($this->tre10_sequencial === 0 || $this->tre10_sequencial === 0.0 || $this->tre10_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre10_sequencial"]:$this->tre10_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_itinerariologradouro {
          $this->tre10_sequencial = $tre10_sequencial;
        }
      }
-     if(($this->tre10_sequencial == null) || ($this->tre10_sequencial == "") ){
+     if(($this->tre10_sequencial == null) || ($this->tre10_sequencial === 0 || $this->tre10_sequencial === 0.0 || $this->tre10_sequencial == "") ){
        $this->erro_sql = " Campo tre10_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

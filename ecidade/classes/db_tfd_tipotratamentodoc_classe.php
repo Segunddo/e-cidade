@@ -71,12 +71,12 @@ class cl_tfd_tipotratamentodoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf06_i_codigo = ($this->tf06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf06_i_codigo"]:$this->tf06_i_codigo);
-       $this->tf06_i_tipotratamento = ($this->tf06_i_tipotratamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf06_i_tipotratamento"]:$this->tf06_i_tipotratamento);
-       $this->tf06_i_documento = ($this->tf06_i_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf06_i_documento"]:$this->tf06_i_documento);
-       $this->tf06_i_obrigatorio = ($this->tf06_i_obrigatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["tf06_i_obrigatorio"]:$this->tf06_i_obrigatorio);
+       $this->tf06_i_codigo = ($this->tf06_i_codigo === 0 || $this->tf06_i_codigo === 0.0 || $this->tf06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf06_i_codigo"]:$this->tf06_i_codigo);
+       $this->tf06_i_tipotratamento = ($this->tf06_i_tipotratamento === 0 || $this->tf06_i_tipotratamento === 0.0 || $this->tf06_i_tipotratamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf06_i_tipotratamento"]:$this->tf06_i_tipotratamento);
+       $this->tf06_i_documento = ($this->tf06_i_documento === 0 || $this->tf06_i_documento === 0.0 || $this->tf06_i_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf06_i_documento"]:$this->tf06_i_documento);
+       $this->tf06_i_obrigatorio = ($this->tf06_i_obrigatorio === 0 || $this->tf06_i_obrigatorio === 0.0 || $this->tf06_i_obrigatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["tf06_i_obrigatorio"]:$this->tf06_i_obrigatorio);
      }else{
-       $this->tf06_i_codigo = ($this->tf06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf06_i_codigo"]:$this->tf06_i_codigo);
+       $this->tf06_i_codigo = ($this->tf06_i_codigo === 0 || $this->tf06_i_codigo === 0.0 || $this->tf06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf06_i_codigo"]:$this->tf06_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_tfd_tipotratamentodoc {
          $this->tf06_i_codigo = $tf06_i_codigo;
        }
      }
-     if(($this->tf06_i_codigo == null) || ($this->tf06_i_codigo == "") ){
+     if(($this->tf06_i_codigo == null) || ($this->tf06_i_codigo === 0 || $this->tf06_i_codigo === 0.0 || $this->tf06_i_codigo == "") ){
        $this->erro_sql = " Campo tf06_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

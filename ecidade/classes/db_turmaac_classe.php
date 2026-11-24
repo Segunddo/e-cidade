@@ -92,22 +92,22 @@ class cl_turmaac {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed268_i_codigo = ($this->ed268_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_codigo"]:$this->ed268_i_codigo);
-       $this->ed268_i_codigoinep = ($this->ed268_i_codigoinep == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_codigoinep"]:$this->ed268_i_codigoinep);
-       $this->ed268_i_escola = ($this->ed268_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_escola"]:$this->ed268_i_escola);
-       $this->ed268_i_calendario = ($this->ed268_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_calendario"]:$this->ed268_i_calendario);
+       $this->ed268_i_codigo = ($this->ed268_i_codigo === 0 || $this->ed268_i_codigo === 0.0 || $this->ed268_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_codigo"]:$this->ed268_i_codigo);
+       $this->ed268_i_codigoinep = ($this->ed268_i_codigoinep === 0 || $this->ed268_i_codigoinep === 0.0 || $this->ed268_i_codigoinep == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_codigoinep"]:$this->ed268_i_codigoinep);
+       $this->ed268_i_escola = ($this->ed268_i_escola === 0 || $this->ed268_i_escola === 0.0 || $this->ed268_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_escola"]:$this->ed268_i_escola);
+       $this->ed268_i_calendario = ($this->ed268_i_calendario === 0 || $this->ed268_i_calendario === 0.0 || $this->ed268_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_calendario"]:$this->ed268_i_calendario);
        $this->ed268_c_descr = ($this->ed268_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_c_descr"]:$this->ed268_c_descr);
-       $this->ed268_i_turno = ($this->ed268_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_turno"]:$this->ed268_i_turno);
-       $this->ed268_i_sala = ($this->ed268_i_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_sala"]:$this->ed268_i_sala);
-       $this->ed268_i_numvagas = ($this->ed268_i_numvagas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_numvagas"]:$this->ed268_i_numvagas);
-       $this->ed268_i_nummatr = ($this->ed268_i_nummatr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_nummatr"]:$this->ed268_i_nummatr);
+       $this->ed268_i_turno = ($this->ed268_i_turno === 0 || $this->ed268_i_turno === 0.0 || $this->ed268_i_turno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_turno"]:$this->ed268_i_turno);
+       $this->ed268_i_sala = ($this->ed268_i_sala === 0 || $this->ed268_i_sala === 0.0 || $this->ed268_i_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_sala"]:$this->ed268_i_sala);
+       $this->ed268_i_numvagas = ($this->ed268_i_numvagas === 0 || $this->ed268_i_numvagas === 0.0 || $this->ed268_i_numvagas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_numvagas"]:$this->ed268_i_numvagas);
+       $this->ed268_i_nummatr = ($this->ed268_i_nummatr === 0 || $this->ed268_i_nummatr === 0.0 || $this->ed268_i_nummatr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_nummatr"]:$this->ed268_i_nummatr);
        $this->ed268_t_obs = ($this->ed268_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_t_obs"]:$this->ed268_t_obs);
-       $this->ed268_i_tipoatend = ($this->ed268_i_tipoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_tipoatend"]:$this->ed268_i_tipoatend);
-       $this->ed268_i_ativqtd = ($this->ed268_i_ativqtd == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_ativqtd"]:$this->ed268_i_ativqtd);
+       $this->ed268_i_tipoatend = ($this->ed268_i_tipoatend === 0 || $this->ed268_i_tipoatend === 0.0 || $this->ed268_i_tipoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_tipoatend"]:$this->ed268_i_tipoatend);
+       $this->ed268_i_ativqtd = ($this->ed268_i_ativqtd === 0 || $this->ed268_i_ativqtd === 0.0 || $this->ed268_i_ativqtd == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_ativqtd"]:$this->ed268_i_ativqtd);
        $this->ed268_c_aee = ($this->ed268_c_aee == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_c_aee"]:$this->ed268_c_aee);
        $this->ed268_is_bilingue = ($this->ed268_is_bilingue == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_is_bilingue"]:$this->ed268_is_bilingue);
      }else{
-       $this->ed268_i_codigo = ($this->ed268_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_codigo"]:$this->ed268_i_codigo);
+       $this->ed268_i_codigo = ($this->ed268_i_codigo === 0 || $this->ed268_i_codigo === 0.0 || $this->ed268_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed268_i_codigo"]:$this->ed268_i_codigo);
      }
    }
    // funcao para inclusao
@@ -218,7 +218,7 @@ class cl_turmaac {
          $this->ed268_i_codigo = $ed268_i_codigo;
        }
      }
-     if(($this->ed268_i_codigo == null) || ($this->ed268_i_codigo == "") ){
+     if(($this->ed268_i_codigo == null) || ($this->ed268_i_codigo === 0 || $this->ed268_i_codigo === 0.0 || $this->ed268_i_codigo == "") ){
        $this->erro_sql = " Campo ed268_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

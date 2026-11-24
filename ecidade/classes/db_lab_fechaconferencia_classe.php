@@ -71,12 +71,12 @@ class cl_lab_fechaconferencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la58_i_codigo = ($this->la58_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_codigo"]:$this->la58_i_codigo);
-       $this->la58_i_fechamento = ($this->la58_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_fechamento"]:$this->la58_i_fechamento);
-       $this->la58_i_conferencia = ($this->la58_i_conferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_conferencia"]:$this->la58_i_conferencia);
+       $this->la58_i_codigo = ($this->la58_i_codigo === 0 || $this->la58_i_codigo === 0.0 || $this->la58_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_codigo"]:$this->la58_i_codigo);
+       $this->la58_i_fechamento = ($this->la58_i_fechamento === 0 || $this->la58_i_fechamento === 0.0 || $this->la58_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_fechamento"]:$this->la58_i_fechamento);
+       $this->la58_i_conferencia = ($this->la58_i_conferencia === 0 || $this->la58_i_conferencia === 0.0 || $this->la58_i_conferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_conferencia"]:$this->la58_i_conferencia);
        $this->la58_gerado = ($this->la58_gerado == "f"?@$GLOBALS["HTTP_POST_VARS"]["la58_gerado"]:$this->la58_gerado);
      }else{
-       $this->la58_i_codigo = ($this->la58_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_codigo"]:$this->la58_i_codigo);
+       $this->la58_i_codigo = ($this->la58_i_codigo === 0 || $this->la58_i_codigo === 0.0 || $this->la58_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la58_i_codigo"]:$this->la58_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_lab_fechaconferencia {
          $this->la58_i_codigo = $la58_i_codigo;
        }
      }
-     if(($this->la58_i_codigo == null) || ($this->la58_i_codigo == "") ){
+     if(($this->la58_i_codigo == null) || ($this->la58_i_codigo === 0 || $this->la58_i_codigo === 0.0 || $this->la58_i_codigo == "") ){
        $this->erro_sql = " Campo la58_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

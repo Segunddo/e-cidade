@@ -94,11 +94,11 @@ class cl_progmatricula {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed112_i_codigo = ($this->ed112_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_codigo"]:$this->ed112_i_codigo);
-       $this->ed112_i_rhpessoal = ($this->ed112_i_rhpessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_rhpessoal"]:$this->ed112_i_rhpessoal);
-       $this->ed112_i_progclasse = ($this->ed112_i_progclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_progclasse"]:$this->ed112_i_progclasse);
-       $this->ed112_i_nivel = ($this->ed112_i_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_nivel"]:$this->ed112_i_nivel);
-       $this->ed112_i_usuario = ($this->ed112_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_usuario"]:$this->ed112_i_usuario);
+       $this->ed112_i_codigo = ($this->ed112_i_codigo === 0 || $this->ed112_i_codigo === 0.0 || $this->ed112_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_codigo"]:$this->ed112_i_codigo);
+       $this->ed112_i_rhpessoal = ($this->ed112_i_rhpessoal === 0 || $this->ed112_i_rhpessoal === 0.0 || $this->ed112_i_rhpessoal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_rhpessoal"]:$this->ed112_i_rhpessoal);
+       $this->ed112_i_progclasse = ($this->ed112_i_progclasse === 0 || $this->ed112_i_progclasse === 0.0 || $this->ed112_i_progclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_progclasse"]:$this->ed112_i_progclasse);
+       $this->ed112_i_nivel = ($this->ed112_i_nivel === 0 || $this->ed112_i_nivel === 0.0 || $this->ed112_i_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_nivel"]:$this->ed112_i_nivel);
+       $this->ed112_i_usuario = ($this->ed112_i_usuario === 0 || $this->ed112_i_usuario === 0.0 || $this->ed112_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_usuario"]:$this->ed112_i_usuario);
        if($this->ed112_d_database == ""){
          $this->ed112_d_database_dia = ($this->ed112_d_database_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_d_database_dia"]:$this->ed112_d_database_dia);
          $this->ed112_d_database_mes = ($this->ed112_d_database_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_d_database_mes"]:$this->ed112_d_database_mes);
@@ -127,7 +127,7 @@ class cl_progmatricula {
        $this->ed112_c_classeesp = ($this->ed112_c_classeesp == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_c_classeesp"]:$this->ed112_c_classeesp);
        $this->ed112_c_dedicacao = ($this->ed112_c_dedicacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_c_dedicacao"]:$this->ed112_c_dedicacao);
      }else{
-       $this->ed112_i_codigo = ($this->ed112_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_codigo"]:$this->ed112_i_codigo);
+       $this->ed112_i_codigo = ($this->ed112_i_codigo === 0 || $this->ed112_i_codigo === 0.0 || $this->ed112_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed112_i_codigo"]:$this->ed112_i_codigo);
      }
    }
    // funcao para inclusao
@@ -241,7 +241,7 @@ class cl_progmatricula {
          $this->ed112_i_codigo = $ed112_i_codigo;
        }
      }
-     if(($this->ed112_i_codigo == null) || ($this->ed112_i_codigo == "") ){
+     if(($this->ed112_i_codigo == null) || ($this->ed112_i_codigo === 0 || $this->ed112_i_codigo === 0.0 || $this->ed112_i_codigo == "") ){
        $this->erro_sql = " Campo ed112_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

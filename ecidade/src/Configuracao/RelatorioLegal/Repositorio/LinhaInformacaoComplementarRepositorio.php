@@ -232,7 +232,7 @@ class LinhaInformacaoComplementarRepositorio extends Repositorio
      * @param LinhaInformacaoComplementar|null $linhaColunaValorInformacaoComplementar
      * @throws Exception
      */
-    public function delete(LinhaInformacaoComplementar $linhaColunaValorInformacaoComplementar = null)
+    public function delete(?LinhaInformacaoComplementar $linhaColunaValorInformacaoComplementar = null)
     {
         $id = $linhaColunaValorInformacaoComplementar instanceof LinhaInformacaoComplementar
             ? $linhaColunaValorInformacaoComplementar->getSequencial()

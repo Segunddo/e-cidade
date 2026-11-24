@@ -69,9 +69,9 @@ class cl_leitorcidadao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi28_leitor = ($this->bi28_leitor == ""?@$GLOBALS["HTTP_POST_VARS"]["bi28_leitor"]:$this->bi28_leitor);
-       $this->bi28_cidadao_sequencial = ($this->bi28_cidadao_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi28_cidadao_sequencial"]:$this->bi28_cidadao_sequencial);
-       $this->bi28_cidadao_seq = ($this->bi28_cidadao_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["bi28_cidadao_seq"]:$this->bi28_cidadao_seq);
+       $this->bi28_leitor = ($this->bi28_leitor === 0 || $this->bi28_leitor === 0.0 || $this->bi28_leitor == ""?@$GLOBALS["HTTP_POST_VARS"]["bi28_leitor"]:$this->bi28_leitor);
+       $this->bi28_cidadao_sequencial = ($this->bi28_cidadao_sequencial === 0 || $this->bi28_cidadao_sequencial === 0.0 || $this->bi28_cidadao_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi28_cidadao_sequencial"]:$this->bi28_cidadao_sequencial);
+       $this->bi28_cidadao_seq = ($this->bi28_cidadao_seq === 0 || $this->bi28_cidadao_seq === 0.0 || $this->bi28_cidadao_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["bi28_cidadao_seq"]:$this->bi28_cidadao_seq);
      }else{
      }
    }

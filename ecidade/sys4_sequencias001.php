@@ -57,7 +57,7 @@ if(isset($HTTP_POST_VARS["atualizar"])) {
       if($codsequencia == "0") {//sequencia não existe, criar uma
         //$result = db_query("select max(codsequencia) + 1 from db_syssequencia");
         $result = db_query("select nextval('db_syssequencia_codsequencia_se')");
-        $codsequencia = pg_result($result,0,0);
+        $codsequencia = pg_fetch_result($result,0,0);
         db_query("insert into db_syssequencia values($codsequencia,
                                                   '$nomesequencia',
                                                   $incrseq,
@@ -198,18 +198,18 @@ input {
                 <?php
                 if(isset($HTTP_POST_VARS["dbh_tabela"])) {
                   $result = db_query("select c.codcam,c.nomecam,ac.codsequencia from db_syscampo c inner join db_sysarqcamp ac on ac.codcam = c.codcam  where ac.codarq = $dbh_tabela");
-                  $numrows = pg_numrows($result);
+                  $numrows = pg_num_rows($result);
                   if($numrows > 0) {
                     for($i = 0;$i < $numrows;$i++) {
-                      echo "<option value=\"".pg_result($result,$i,"codcam")."#".pg_result($result,$i,"codsequencia")."#".trim(pg_result($result,$i,"nomecam"))."\" ".(pg_result($result,$i,"codsequencia")!=0?"selected":"").">".pg_result($result,$i,"nomecam")."</option>\n";
+                      echo "<option value=\"".pg_fetch_result($result,$i,"codcam")."#".pg_fetch_result($result,$i,"codsequencia")."#".trim(pg_fetch_result($result,$i,"nomecam"))."\" ".(pg_fetch_result($result,$i,"codsequencia")!=0?"selected":"").">".pg_fetch_result($result,$i,"nomecam")."</option>\n";
                     }
                   }
                 }
                 if(!empty($numrows) && $numrows > 0) {
                   $codsequencia = 0;
                   for($i = 0;$i < $numrows;$i++) {
-                    if(pg_result($result,$i,"codsequencia") != "0") {
-                      $codsequencia = pg_result($result,$i,"codsequencia");
+                    if(pg_fetch_result($result,$i,"codsequencia") != "0") {
+                      $codsequencia = pg_fetch_result($result,$i,"codsequencia");
                       break;
                     }
                   }

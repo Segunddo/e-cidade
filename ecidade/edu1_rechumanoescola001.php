@@ -407,7 +407,7 @@ $sWhereRecHumanoEscola = "ed75_i_escola = {$iEscola} AND ed75_i_rechumano = {$oG
 $sSqlValidavinculo = $clrechumanoescola->sql_query_file(null, "ed75_i_codigo", null, $sWhereRecHumanoEscola);
 $rsValidavinculo = db_query($sSqlValidavinculo);
 
-if (pg_num_rows($rsValidavinculo) > 0) {
+if (($rsValidavinculo ? pg_num_rows($rsValidavinculo) : null) > 0) {
 
     $sComplementoUrl = "&identificacao=$identificacao";
     $sComplementoUrl .= "&z01_nome=" . addslashes($z01_nome);

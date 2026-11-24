@@ -71,12 +71,12 @@ class cl_mer_cardapioalunorepet {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me40_i_codigo = ($this->me40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me40_i_codigo"]:$this->me40_i_codigo);
-       $this->me40_i_cardapiodia = ($this->me40_i_cardapiodia == ""?@$GLOBALS["HTTP_POST_VARS"]["me40_i_cardapiodia"]:$this->me40_i_cardapiodia);
-       $this->me40_i_repeticao = ($this->me40_i_repeticao == ""?@$GLOBALS["HTTP_POST_VARS"]["me40_i_repeticao"]:$this->me40_i_repeticao);
-       $this->me40_i_turma = ($this->me40_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["me40_i_turma"]:$this->me40_i_turma);
+       $this->me40_i_codigo = ($this->me40_i_codigo === 0 || $this->me40_i_codigo === 0.0 || $this->me40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me40_i_codigo"]:$this->me40_i_codigo);
+       $this->me40_i_cardapiodia = ($this->me40_i_cardapiodia === 0 || $this->me40_i_cardapiodia === 0.0 || $this->me40_i_cardapiodia == ""?@$GLOBALS["HTTP_POST_VARS"]["me40_i_cardapiodia"]:$this->me40_i_cardapiodia);
+       $this->me40_i_repeticao = ($this->me40_i_repeticao === 0 || $this->me40_i_repeticao === 0.0 || $this->me40_i_repeticao == ""?@$GLOBALS["HTTP_POST_VARS"]["me40_i_repeticao"]:$this->me40_i_repeticao);
+       $this->me40_i_turma = ($this->me40_i_turma === 0 || $this->me40_i_turma === 0.0 || $this->me40_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["me40_i_turma"]:$this->me40_i_turma);
      }else{
-       $this->me40_i_codigo = ($this->me40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me40_i_codigo"]:$this->me40_i_codigo);
+       $this->me40_i_codigo = ($this->me40_i_codigo === 0 || $this->me40_i_codigo === 0.0 || $this->me40_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me40_i_codigo"]:$this->me40_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_mer_cardapioalunorepet {
          $this->me40_i_codigo = $me40_i_codigo;
        }
      }
-     if(($this->me40_i_codigo == null) || ($this->me40_i_codigo == "") ){
+     if(($this->me40_i_codigo == null) || ($this->me40_i_codigo === 0 || $this->me40_i_codigo === 0.0 || $this->me40_i_codigo == "") ){
        $this->erro_sql = " Campo me40_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

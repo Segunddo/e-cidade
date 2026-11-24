@@ -69,11 +69,11 @@ class cl_turmaacmatriculaativ {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed271_i_codigo = ($this->ed271_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed271_i_codigo"]:$this->ed271_i_codigo);
-       $this->ed271_i_turmaacmatricula = ($this->ed271_i_turmaacmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed271_i_turmaacmatricula"]:$this->ed271_i_turmaacmatricula);
-       $this->ed271_i_turmaacativ = ($this->ed271_i_turmaacativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed271_i_turmaacativ"]:$this->ed271_i_turmaacativ);
+       $this->ed271_i_codigo = ($this->ed271_i_codigo === 0 || $this->ed271_i_codigo === 0.0 || $this->ed271_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed271_i_codigo"]:$this->ed271_i_codigo);
+       $this->ed271_i_turmaacmatricula = ($this->ed271_i_turmaacmatricula === 0 || $this->ed271_i_turmaacmatricula === 0.0 || $this->ed271_i_turmaacmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed271_i_turmaacmatricula"]:$this->ed271_i_turmaacmatricula);
+       $this->ed271_i_turmaacativ = ($this->ed271_i_turmaacativ === 0 || $this->ed271_i_turmaacativ === 0.0 || $this->ed271_i_turmaacativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed271_i_turmaacativ"]:$this->ed271_i_turmaacativ);
      }else{
-       $this->ed271_i_codigo = ($this->ed271_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed271_i_codigo"]:$this->ed271_i_codigo);
+       $this->ed271_i_codigo = ($this->ed271_i_codigo === 0 || $this->ed271_i_codigo === 0.0 || $this->ed271_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed271_i_codigo"]:$this->ed271_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_turmaacmatriculaativ {
          $this->ed271_i_codigo = $ed271_i_codigo;
        }
      }
-     if(($this->ed271_i_codigo == null) || ($this->ed271_i_codigo == "") ){
+     if(($this->ed271_i_codigo == null) || ($this->ed271_i_codigo === 0 || $this->ed271_i_codigo === 0.0 || $this->ed271_i_codigo == "") ){
        $this->erro_sql = " Campo ed271_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

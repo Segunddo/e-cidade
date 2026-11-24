@@ -71,12 +71,12 @@ class cl_progclasse {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed107_i_codigo = ($this->ed107_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_i_codigo"]:$this->ed107_i_codigo);
+       $this->ed107_i_codigo = ($this->ed107_i_codigo === 0 || $this->ed107_i_codigo === 0.0 || $this->ed107_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_i_codigo"]:$this->ed107_i_codigo);
        $this->ed107_c_descr = ($this->ed107_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_c_descr"]:$this->ed107_c_descr);
-       $this->ed107_f_percentual = ($this->ed107_f_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_f_percentual"]:$this->ed107_f_percentual);
-       $this->ed107_i_sequencia = ($this->ed107_i_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_i_sequencia"]:$this->ed107_i_sequencia);
+       $this->ed107_f_percentual = ($this->ed107_f_percentual === 0 || $this->ed107_f_percentual === 0.0 || $this->ed107_f_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_f_percentual"]:$this->ed107_f_percentual);
+       $this->ed107_i_sequencia = ($this->ed107_i_sequencia === 0 || $this->ed107_i_sequencia === 0.0 || $this->ed107_i_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_i_sequencia"]:$this->ed107_i_sequencia);
      }else{
-       $this->ed107_i_codigo = ($this->ed107_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_i_codigo"]:$this->ed107_i_codigo);
+       $this->ed107_i_codigo = ($this->ed107_i_codigo === 0 || $this->ed107_i_codigo === 0.0 || $this->ed107_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed107_i_codigo"]:$this->ed107_i_codigo);
      }
    }
    // funcao para inclusao
@@ -127,7 +127,7 @@ class cl_progclasse {
          $this->ed107_i_codigo = $ed107_i_codigo;
        }
      }
-     if(($this->ed107_i_codigo == null) || ($this->ed107_i_codigo == "") ){
+     if(($this->ed107_i_codigo == null) || ($this->ed107_i_codigo === 0 || $this->ed107_i_codigo === 0.0 || $this->ed107_i_codigo == "") ){
        $this->erro_sql = " Campo ed107_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

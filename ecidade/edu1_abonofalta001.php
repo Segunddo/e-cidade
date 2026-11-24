@@ -134,7 +134,7 @@ $sql    .= " AND ed60_c_situacao = 'MATRICULADO' ";
 $sql    .= " AND ed72_i_numfaltas is not null ";
 $sql    .= " ORDER BY ed47_v_nome ";
 $result1 = db_query($sql);
-$linhas1 = pg_num_rows($result1);
+$linhas1 = ($result1 ? pg_num_rows($result1) : null);
 //db_criatabela($result1);
 //exit;
 ?>

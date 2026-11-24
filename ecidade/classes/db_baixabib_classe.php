@@ -50,9 +50,9 @@ class cl_baixabib {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi08_codigo = ($this->bi08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_codigo"]:$this->bi08_codigo);
+       $this->bi08_codigo = ($this->bi08_codigo === 0 || $this->bi08_codigo === 0.0 || $this->bi08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_codigo"]:$this->bi08_codigo);
        $this->bi08_descr = ($this->bi08_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_descr"]:$this->bi08_descr);
-       $this->bi08_exemplar = ($this->bi08_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_exemplar"]:$this->bi08_exemplar);
+       $this->bi08_exemplar = ($this->bi08_exemplar === 0 || $this->bi08_exemplar === 0.0 || $this->bi08_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_exemplar"]:$this->bi08_exemplar);
        if($this->bi08_inclusao == ""){
          $this->bi08_inclusao_dia = ($this->bi08_inclusao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_inclusao_dia"]:$this->bi08_inclusao_dia);
          $this->bi08_inclusao_mes = ($this->bi08_inclusao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_inclusao_mes"]:$this->bi08_inclusao_mes);
@@ -61,9 +61,9 @@ class cl_baixabib {
             $this->bi08_inclusao = $this->bi08_inclusao_ano."-".$this->bi08_inclusao_mes."-".$this->bi08_inclusao_dia;
          }
        }
-       $this->bi08_usuario = ($this->bi08_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_usuario"]:$this->bi08_usuario);
+       $this->bi08_usuario = ($this->bi08_usuario === 0 || $this->bi08_usuario === 0.0 || $this->bi08_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_usuario"]:$this->bi08_usuario);
      }else{
-       $this->bi08_codigo = ($this->bi08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_codigo"]:$this->bi08_codigo);
+       $this->bi08_codigo = ($this->bi08_codigo === 0 || $this->bi08_codigo === 0.0 || $this->bi08_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi08_codigo"]:$this->bi08_codigo);
      }
    }
    // funcao para Inclusão
@@ -129,7 +129,7 @@ class cl_baixabib {
          $this->bi08_codigo = $bi08_codigo;
        }
      }
-     if(($this->bi08_codigo == null) || ($this->bi08_codigo == "") ){
+     if(($this->bi08_codigo == null) || ($this->bi08_codigo === 0 || $this->bi08_codigo === 0.0 || $this->bi08_codigo == "") ){
        $this->erro_sql = " Campo bi08_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

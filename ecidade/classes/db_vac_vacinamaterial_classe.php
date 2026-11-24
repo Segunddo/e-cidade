@@ -71,12 +71,12 @@ class cl_vac_vacinamaterial {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc29_i_dose = ($this->vc29_i_dose == ""?@$GLOBALS["HTTP_POST_VARS"]["vc29_i_dose"]:$this->vc29_i_dose);
-       $this->vc29_i_codigo = ($this->vc29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc29_i_codigo"]:$this->vc29_i_codigo);
-       $this->vc29_i_vacina = ($this->vc29_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc29_i_vacina"]:$this->vc29_i_vacina);
-       $this->vc29_i_material = ($this->vc29_i_material == ""?@$GLOBALS["HTTP_POST_VARS"]["vc29_i_material"]:$this->vc29_i_material);
+       $this->vc29_i_dose = ($this->vc29_i_dose === 0 || $this->vc29_i_dose === 0.0 || $this->vc29_i_dose == ""?@$GLOBALS["HTTP_POST_VARS"]["vc29_i_dose"]:$this->vc29_i_dose);
+       $this->vc29_i_codigo = ($this->vc29_i_codigo === 0 || $this->vc29_i_codigo === 0.0 || $this->vc29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc29_i_codigo"]:$this->vc29_i_codigo);
+       $this->vc29_i_vacina = ($this->vc29_i_vacina === 0 || $this->vc29_i_vacina === 0.0 || $this->vc29_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc29_i_vacina"]:$this->vc29_i_vacina);
+       $this->vc29_i_material = ($this->vc29_i_material === 0 || $this->vc29_i_material === 0.0 || $this->vc29_i_material == ""?@$GLOBALS["HTTP_POST_VARS"]["vc29_i_material"]:$this->vc29_i_material);
      }else{
-       $this->vc29_i_codigo = ($this->vc29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc29_i_codigo"]:$this->vc29_i_codigo);
+       $this->vc29_i_codigo = ($this->vc29_i_codigo === 0 || $this->vc29_i_codigo === 0.0 || $this->vc29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc29_i_codigo"]:$this->vc29_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_vac_vacinamaterial {
          $this->vc29_i_codigo = $vc29_i_codigo;
        }
      }
-     if(($this->vc29_i_codigo == null) || ($this->vc29_i_codigo == "") ){
+     if(($this->vc29_i_codigo == null) || ($this->vc29_i_codigo === 0 || $this->vc29_i_codigo === 0.0 || $this->vc29_i_codigo == "") ){
        $this->erro_sql = " Campo vc29_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

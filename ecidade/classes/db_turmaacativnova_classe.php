@@ -69,11 +69,11 @@ class cl_turmaacativnova {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed274_i_codigo = ($this->ed274_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_codigo"]:$this->ed274_i_codigo);
-       $this->ed274_i_turmaacativ = ($this->ed274_i_turmaacativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_turmaacativ"]:$this->ed274_i_turmaacativ);
+       $this->ed274_i_codigo = ($this->ed274_i_codigo === 0 || $this->ed274_i_codigo === 0.0 || $this->ed274_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_codigo"]:$this->ed274_i_codigo);
+       $this->ed274_i_turmaacativ = ($this->ed274_i_turmaacativ === 0 || $this->ed274_i_turmaacativ === 0.0 || $this->ed274_i_turmaacativ == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_turmaacativ"]:$this->ed274_i_turmaacativ);
        $this->ed274_c_nome = ($this->ed274_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_c_nome"]:$this->ed274_c_nome);
      }else{
-       $this->ed274_i_codigo = ($this->ed274_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_codigo"]:$this->ed274_i_codigo);
+       $this->ed274_i_codigo = ($this->ed274_i_codigo === 0 || $this->ed274_i_codigo === 0.0 || $this->ed274_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed274_i_codigo"]:$this->ed274_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_turmaacativnova {
          $this->ed274_i_codigo = $ed274_i_codigo;
        }
      }
-     if(($this->ed274_i_codigo == null) || ($this->ed274_i_codigo == "") ){
+     if(($this->ed274_i_codigo == null) || ($this->ed274_i_codigo === 0 || $this->ed274_i_codigo === 0.0 || $this->ed274_i_codigo == "") ){
        $this->erro_sql = " Campo ed274_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

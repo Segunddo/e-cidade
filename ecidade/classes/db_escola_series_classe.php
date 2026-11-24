@@ -67,8 +67,8 @@ class cl_escola_series {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed18_i_escolas = ($this->ed18_i_escolas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed18_i_escolas"]:$this->ed18_i_escolas);
-       $this->ed18_i_series = ($this->ed18_i_series == ""?@$GLOBALS["HTTP_POST_VARS"]["ed18_i_series"]:$this->ed18_i_series);
+       $this->ed18_i_escolas = ($this->ed18_i_escolas === 0 || $this->ed18_i_escolas === 0.0 || $this->ed18_i_escolas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed18_i_escolas"]:$this->ed18_i_escolas);
+       $this->ed18_i_series = ($this->ed18_i_series === 0 || $this->ed18_i_series === 0.0 || $this->ed18_i_series == ""?@$GLOBALS["HTTP_POST_VARS"]["ed18_i_series"]:$this->ed18_i_series);
      }else{
      }
    }

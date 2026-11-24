@@ -75,14 +75,14 @@ class cl_avaliacao_matric {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed29_i_codigo = ($this->ed29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_i_codigo"]:$this->ed29_i_codigo);
-       $this->ed29_i_avaliacao = ($this->ed29_i_avaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_i_avaliacao"]:$this->ed29_i_avaliacao);
-       $this->ed29_i_matricula = ($this->ed29_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_i_matricula"]:$this->ed29_i_matricula);
-       $this->ed29_f_nota = ($this->ed29_f_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_f_nota"]:$this->ed29_f_nota);
+       $this->ed29_i_codigo = ($this->ed29_i_codigo === 0 || $this->ed29_i_codigo === 0.0 || $this->ed29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_i_codigo"]:$this->ed29_i_codigo);
+       $this->ed29_i_avaliacao = ($this->ed29_i_avaliacao === 0 || $this->ed29_i_avaliacao === 0.0 || $this->ed29_i_avaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_i_avaliacao"]:$this->ed29_i_avaliacao);
+       $this->ed29_i_matricula = ($this->ed29_i_matricula === 0 || $this->ed29_i_matricula === 0.0 || $this->ed29_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_i_matricula"]:$this->ed29_i_matricula);
+       $this->ed29_f_nota = ($this->ed29_f_nota === 0 || $this->ed29_f_nota === 0.0 || $this->ed29_f_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_f_nota"]:$this->ed29_f_nota);
        $this->ed29_l_presente = ($this->ed29_l_presente == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed29_l_presente"]:$this->ed29_l_presente);
        $this->ed29_c_descr = ($this->ed29_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_c_descr"]:$this->ed29_c_descr);
      }else{
-       $this->ed29_i_codigo = ($this->ed29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_i_codigo"]:$this->ed29_i_codigo);
+       $this->ed29_i_codigo = ($this->ed29_i_codigo === 0 || $this->ed29_i_codigo === 0.0 || $this->ed29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed29_i_codigo"]:$this->ed29_i_codigo);
      }
    }
    // funcao para inclusao
@@ -134,7 +134,7 @@ class cl_avaliacao_matric {
        return false;
      }
        $this->ed29_i_codigo = $ed29_i_codigo;
-     if(($this->ed29_i_codigo == null) || ($this->ed29_i_codigo == "") ){
+     if(($this->ed29_i_codigo == null) || ($this->ed29_i_codigo === 0 || $this->ed29_i_codigo === 0.0 || $this->ed29_i_codigo == "") ){
        $this->erro_sql = " Campo ed29_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_sau_cadsustipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s138_i_codigo = ($this->s138_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s138_i_codigo"]:$this->s138_i_codigo);
+       $this->s138_i_codigo = ($this->s138_i_codigo === 0 || $this->s138_i_codigo === 0.0 || $this->s138_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s138_i_codigo"]:$this->s138_i_codigo);
        $this->s138_b_tipo = ($this->s138_b_tipo == "f"?@$GLOBALS["HTTP_POST_VARS"]["s138_b_tipo"]:$this->s138_b_tipo);
        $this->s138_c_descr = ($this->s138_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["s138_c_descr"]:$this->s138_c_descr);
      }else{
-       $this->s138_i_codigo = ($this->s138_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s138_i_codigo"]:$this->s138_i_codigo);
+       $this->s138_i_codigo = ($this->s138_i_codigo === 0 || $this->s138_i_codigo === 0.0 || $this->s138_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s138_i_codigo"]:$this->s138_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_sau_cadsustipo {
          $this->s138_i_codigo = $s138_i_codigo;
        }
      }
-     if(($this->s138_i_codigo == null) || ($this->s138_i_codigo == "") ){
+     if(($this->s138_i_codigo == null) || ($this->s138_i_codigo === 0 || $this->s138_i_codigo === 0.0 || $this->s138_i_codigo == "") ){
        $this->erro_sql = " Campo s138_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

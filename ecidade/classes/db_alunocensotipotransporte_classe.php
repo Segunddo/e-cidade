@@ -69,11 +69,11 @@ class cl_alunocensotipotransporte {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed311_sequencial = ($this->ed311_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_sequencial"]:$this->ed311_sequencial);
-       $this->ed311_aluno = ($this->ed311_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_aluno"]:$this->ed311_aluno);
-       $this->ed311_censotipotransporte = ($this->ed311_censotipotransporte == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_censotipotransporte"]:$this->ed311_censotipotransporte);
+       $this->ed311_sequencial = ($this->ed311_sequencial === 0 || $this->ed311_sequencial === 0.0 || $this->ed311_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_sequencial"]:$this->ed311_sequencial);
+       $this->ed311_aluno = ($this->ed311_aluno === 0 || $this->ed311_aluno === 0.0 || $this->ed311_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_aluno"]:$this->ed311_aluno);
+       $this->ed311_censotipotransporte = ($this->ed311_censotipotransporte === 0 || $this->ed311_censotipotransporte === 0.0 || $this->ed311_censotipotransporte == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_censotipotransporte"]:$this->ed311_censotipotransporte);
      }else{
-       $this->ed311_sequencial = ($this->ed311_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_sequencial"]:$this->ed311_sequencial);
+       $this->ed311_sequencial = ($this->ed311_sequencial === 0 || $this->ed311_sequencial === 0.0 || $this->ed311_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed311_sequencial"]:$this->ed311_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_alunocensotipotransporte {
          $this->ed311_sequencial = $ed311_sequencial;
        }
      }
-     if(($this->ed311_sequencial == null) || ($this->ed311_sequencial == "") ){
+     if(($this->ed311_sequencial == null) || ($this->ed311_sequencial === 0 || $this->ed311_sequencial === 0.0 || $this->ed311_sequencial == "") ){
        $this->erro_sql = " Campo ed311_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

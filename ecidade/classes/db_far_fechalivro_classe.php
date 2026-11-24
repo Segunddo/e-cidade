@@ -92,10 +92,10 @@ class cl_far_fechalivro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa26_i_codigo = ($this->fa26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_i_codigo"]:$this->fa26_i_codigo);
-       $this->fa26_o_arquivo = ($this->fa26_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_o_arquivo"]:$this->fa26_o_arquivo);
-       $this->fa26_i_livro = ($this->fa26_i_livro == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_i_livro"]:$this->fa26_i_livro);
-       $this->fa26_i_login = ($this->fa26_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_i_login"]:$this->fa26_i_login);
+       $this->fa26_i_codigo = ($this->fa26_i_codigo === 0 || $this->fa26_i_codigo === 0.0 || $this->fa26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_i_codigo"]:$this->fa26_i_codigo);
+       $this->fa26_o_arquivo = ($this->fa26_o_arquivo === 0 || $this->fa26_o_arquivo === 0.0 || $this->fa26_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_o_arquivo"]:$this->fa26_o_arquivo);
+       $this->fa26_i_livro = ($this->fa26_i_livro === 0 || $this->fa26_i_livro === 0.0 || $this->fa26_i_livro == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_i_livro"]:$this->fa26_i_livro);
+       $this->fa26_i_login = ($this->fa26_i_login === 0 || $this->fa26_i_login === 0.0 || $this->fa26_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_i_login"]:$this->fa26_i_login);
        if($this->fa26_d_dataini == ""){
          $this->fa26_d_dataini_dia = ($this->fa26_d_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_d_dataini_dia"]:$this->fa26_d_dataini_dia);
          $this->fa26_d_dataini_mes = ($this->fa26_d_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_d_dataini_mes"]:$this->fa26_d_dataini_mes);
@@ -122,9 +122,9 @@ class cl_far_fechalivro {
        }
        $this->fa26_c_hora = ($this->fa26_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_c_hora"]:$this->fa26_c_hora);
        $this->fa26_c_nomearq = ($this->fa26_c_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_c_nomearq"]:$this->fa26_c_nomearq);
-       $this->fa26_i_numpag = ($this->fa26_i_numpag == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_i_numpag"]:$this->fa26_i_numpag);
+       $this->fa26_i_numpag = ($this->fa26_i_numpag === 0 || $this->fa26_i_numpag === 0.0 || $this->fa26_i_numpag == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_i_numpag"]:$this->fa26_i_numpag);
      }else{
-       $this->fa26_i_codigo = ($this->fa26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_i_codigo"]:$this->fa26_i_codigo);
+       $this->fa26_i_codigo = ($this->fa26_i_codigo === 0 || $this->fa26_i_codigo === 0.0 || $this->fa26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa26_i_codigo"]:$this->fa26_i_codigo);
      }
    }
    // funcao para inclusao
@@ -235,7 +235,7 @@ class cl_far_fechalivro {
          $this->fa26_i_codigo = $fa26_i_codigo;
        }
      }
-     if(($this->fa26_i_codigo == null) || ($this->fa26_i_codigo == "") ){
+     if(($this->fa26_i_codigo == null) || ($this->fa26_i_codigo === 0 || $this->fa26_i_codigo === 0.0 || $this->fa26_i_codigo == "") ){
        $this->erro_sql = " Campo fa26_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

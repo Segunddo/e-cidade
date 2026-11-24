@@ -1125,7 +1125,7 @@ $iMesImplantacao = $aImplantacao[1];
 
                     db_fieldsmemory($result,$x,true);
                     $strrubrica  = $sigla."rubric";
-                    $rubrica     = $$strrubrica;
+                    $rubrica     = ${$strrubrica};
                     $condicaoaux = " where rh27_rubric = ".db_sqlformat( $rubrica) . " AND rh27_instit = {$instituicao}";
                     global $rubr_;
                     db_selectmax( "rubr_", "select * from rhrubricas ".$condicaoaux );

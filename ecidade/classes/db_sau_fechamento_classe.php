@@ -94,8 +94,8 @@ class cl_sau_fechamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd97_i_codigo = ($this->sd97_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_codigo"]:$this->sd97_i_codigo);
-       $this->sd97_i_login = ($this->sd97_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_login"]:$this->sd97_i_login);
+       $this->sd97_i_codigo = ($this->sd97_i_codigo === 0 || $this->sd97_i_codigo === 0.0 || $this->sd97_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_codigo"]:$this->sd97_i_codigo);
+       $this->sd97_i_login = ($this->sd97_i_login === 0 || $this->sd97_i_login === 0.0 || $this->sd97_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_login"]:$this->sd97_i_login);
        if($this->sd97_d_data == ""){
          $this->sd97_d_data_dia = ($this->sd97_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_d_data_dia"]:$this->sd97_d_data_dia);
          $this->sd97_d_data_mes = ($this->sd97_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_d_data_mes"]:$this->sd97_d_data_mes);
@@ -123,11 +123,11 @@ class cl_sau_fechamento {
        }
        $this->sd97_c_descricao = ($this->sd97_c_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_c_descricao"]:$this->sd97_c_descricao);
        $this->sd97_c_tipo = ($this->sd97_c_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_c_tipo"]:$this->sd97_c_tipo);
-       $this->sd97_i_compmes = ($this->sd97_i_compmes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_compmes"]:$this->sd97_i_compmes);
-       $this->sd97_i_compano = ($this->sd97_i_compano == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_compano"]:$this->sd97_i_compano);
-       $this->sd97_i_financiamento = ($this->sd97_i_financiamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_financiamento"]:$this->sd97_i_financiamento);
+       $this->sd97_i_compmes = ($this->sd97_i_compmes === 0 || $this->sd97_i_compmes === 0.0 || $this->sd97_i_compmes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_compmes"]:$this->sd97_i_compmes);
+       $this->sd97_i_compano = ($this->sd97_i_compano === 0 || $this->sd97_i_compano === 0.0 || $this->sd97_i_compano == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_compano"]:$this->sd97_i_compano);
+       $this->sd97_i_financiamento = ($this->sd97_i_financiamento === 0 || $this->sd97_i_financiamento === 0.0 || $this->sd97_i_financiamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_financiamento"]:$this->sd97_i_financiamento);
      }else{
-       $this->sd97_i_codigo = ($this->sd97_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_codigo"]:$this->sd97_i_codigo);
+       $this->sd97_i_codigo = ($this->sd97_i_codigo === 0 || $this->sd97_i_codigo === 0.0 || $this->sd97_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd97_i_codigo"]:$this->sd97_i_codigo);
      }
    }
    // funcao para inclusao
@@ -214,7 +214,7 @@ class cl_sau_fechamento {
          $this->sd97_i_codigo = $sd97_i_codigo;
        }
      }
-     if(($this->sd97_i_codigo == null) || ($this->sd97_i_codigo == "") ){
+     if(($this->sd97_i_codigo == null) || ($this->sd97_i_codigo === 0 || $this->sd97_i_codigo === 0.0 || $this->sd97_i_codigo == "") ){
        $this->erro_sql = " Campo sd97_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

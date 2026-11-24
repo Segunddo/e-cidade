@@ -67,8 +67,8 @@ class cl_procgrupoa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd17_i_procedimento = ($this->sd17_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd17_i_procedimento"]:$this->sd17_i_procedimento);
-       $this->sd17_i_grupoatend = ($this->sd17_i_grupoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["sd17_i_grupoatend"]:$this->sd17_i_grupoatend);
+       $this->sd17_i_procedimento = ($this->sd17_i_procedimento === 0 || $this->sd17_i_procedimento === 0.0 || $this->sd17_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd17_i_procedimento"]:$this->sd17_i_procedimento);
+       $this->sd17_i_grupoatend = ($this->sd17_i_grupoatend === 0 || $this->sd17_i_grupoatend === 0.0 || $this->sd17_i_grupoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["sd17_i_grupoatend"]:$this->sd17_i_grupoatend);
      }else{
      }
    }

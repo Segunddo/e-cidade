@@ -80,8 +80,8 @@ class cl_agendaconsultaanula {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s114_i_codigo = ($this->s114_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_codigo"]:$this->s114_i_codigo);
-       $this->s114_i_agendaconsulta = ($this->s114_i_agendaconsulta == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_agendaconsulta"]:$this->s114_i_agendaconsulta);
+       $this->s114_i_codigo = ($this->s114_i_codigo === 0 || $this->s114_i_codigo === 0.0 || $this->s114_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_codigo"]:$this->s114_i_codigo);
+       $this->s114_i_agendaconsulta = ($this->s114_i_agendaconsulta === 0 || $this->s114_i_agendaconsulta === 0.0 || $this->s114_i_agendaconsulta == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_agendaconsulta"]:$this->s114_i_agendaconsulta);
        if($this->s114_d_data == ""){
          $this->s114_d_data_dia = ($this->s114_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_d_data_dia"]:$this->s114_d_data_dia);
          $this->s114_d_data_mes = ($this->s114_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_d_data_mes"]:$this->s114_d_data_mes);
@@ -91,11 +91,11 @@ class cl_agendaconsultaanula {
          }
        }
        $this->s114_v_motivo = ($this->s114_v_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_v_motivo"]:$this->s114_v_motivo);
-       $this->s114_i_situacao = ($this->s114_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_situacao"]:$this->s114_i_situacao);
-       $this->s114_i_login = ($this->s114_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_login"]:$this->s114_i_login);
+       $this->s114_i_situacao = ($this->s114_i_situacao === 0 || $this->s114_i_situacao === 0.0 || $this->s114_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_situacao"]:$this->s114_i_situacao);
+       $this->s114_i_login = ($this->s114_i_login === 0 || $this->s114_i_login === 0.0 || $this->s114_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_login"]:$this->s114_i_login);
        $this->s114_c_hora = ($this->s114_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_c_hora"]:$this->s114_c_hora);
      }else{
-       $this->s114_i_codigo = ($this->s114_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_codigo"]:$this->s114_i_codigo);
+       $this->s114_i_codigo = ($this->s114_i_codigo === 0 || $this->s114_i_codigo === 0.0 || $this->s114_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s114_i_codigo"]:$this->s114_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_agendaconsultaanula {
          $this->s114_i_codigo = $s114_i_codigo;
        }
      }
-     if(($this->s114_i_codigo == null) || ($this->s114_i_codigo == "") ){
+     if(($this->s114_i_codigo == null) || ($this->s114_i_codigo === 0 || $this->s114_i_codigo === 0.0 || $this->s114_i_codigo == "") ){
        $this->erro_sql = " Campo s114_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

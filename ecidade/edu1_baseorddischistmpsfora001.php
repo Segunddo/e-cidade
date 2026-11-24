@@ -90,7 +90,7 @@ if (isset ( $ordenacao ) ) {
         ";
         $query = db_query($sql);
         $query1 = db_query($sql);
-        $linhas = pg_num_rows($query);
+        $linhas = ($query ? pg_num_rows($query) : null);
       ?>
        <table width="100%" cellspacing="0" cellpading="0" border="0" >
    <tr>

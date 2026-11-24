@@ -69,11 +69,11 @@ class cl_tfd_tipodistancia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf24_i_codigo = ($this->tf24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf24_i_codigo"]:$this->tf24_i_codigo);
+       $this->tf24_i_codigo = ($this->tf24_i_codigo === 0 || $this->tf24_i_codigo === 0.0 || $this->tf24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf24_i_codigo"]:$this->tf24_i_codigo);
        $this->tf24_c_descr = ($this->tf24_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["tf24_c_descr"]:$this->tf24_c_descr);
-       $this->tf24_i_percurso = ($this->tf24_i_percurso == ""?@$GLOBALS["HTTP_POST_VARS"]["tf24_i_percurso"]:$this->tf24_i_percurso);
+       $this->tf24_i_percurso = ($this->tf24_i_percurso === 0 || $this->tf24_i_percurso === 0.0 || $this->tf24_i_percurso == ""?@$GLOBALS["HTTP_POST_VARS"]["tf24_i_percurso"]:$this->tf24_i_percurso);
      }else{
-       $this->tf24_i_codigo = ($this->tf24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf24_i_codigo"]:$this->tf24_i_codigo);
+       $this->tf24_i_codigo = ($this->tf24_i_codigo === 0 || $this->tf24_i_codigo === 0.0 || $this->tf24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf24_i_codigo"]:$this->tf24_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tfd_tipodistancia {
          $this->tf24_i_codigo = $tf24_i_codigo;
        }
      }
-     if(($this->tf24_i_codigo == null) || ($this->tf24_i_codigo == "") ){
+     if(($this->tf24_i_codigo == null) || ($this->tf24_i_codigo === 0 || $this->tf24_i_codigo === 0.0 || $this->tf24_i_codigo == "") ){
        $this->erro_sql = " Campo tf24_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

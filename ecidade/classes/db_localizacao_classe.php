@@ -73,13 +73,13 @@ class cl_localizacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi09_codigo = ($this->bi09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_codigo"]:$this->bi09_codigo);
+       $this->bi09_codigo = ($this->bi09_codigo === 0 || $this->bi09_codigo === 0.0 || $this->bi09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_codigo"]:$this->bi09_codigo);
        $this->bi09_nome = ($this->bi09_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_nome"]:$this->bi09_nome);
-       $this->bi09_biblioteca = ($this->bi09_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_biblioteca"]:$this->bi09_biblioteca);
-       $this->bi09_capacidade = ($this->bi09_capacidade == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_capacidade"]:$this->bi09_capacidade);
+       $this->bi09_biblioteca = ($this->bi09_biblioteca === 0 || $this->bi09_biblioteca === 0.0 || $this->bi09_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_biblioteca"]:$this->bi09_biblioteca);
+       $this->bi09_capacidade = ($this->bi09_capacidade === 0 || $this->bi09_capacidade === 0.0 || $this->bi09_capacidade == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_capacidade"]:$this->bi09_capacidade);
        $this->bi09_abrev = ($this->bi09_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_abrev"]:$this->bi09_abrev);
      }else{
-       $this->bi09_codigo = ($this->bi09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_codigo"]:$this->bi09_codigo);
+       $this->bi09_codigo = ($this->bi09_codigo === 0 || $this->bi09_codigo === 0.0 || $this->bi09_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi09_codigo"]:$this->bi09_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_localizacao {
          $this->bi09_codigo = $bi09_codigo;
        }
      }
-     if(($this->bi09_codigo == null) || ($this->bi09_codigo == "") ){
+     if(($this->bi09_codigo == null) || ($this->bi09_codigo === 0 || $this->bi09_codigo === 0.0 || $this->bi09_codigo == "") ){
        $this->erro_sql = " Campo bi09_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

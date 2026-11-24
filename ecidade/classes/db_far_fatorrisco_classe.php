@@ -69,11 +69,11 @@ class cl_far_fatorrisco {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa44_i_codigo = ($this->fa44_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa44_i_codigo"]:$this->fa44_i_codigo);
+       $this->fa44_i_codigo = ($this->fa44_i_codigo === 0 || $this->fa44_i_codigo === 0.0 || $this->fa44_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa44_i_codigo"]:$this->fa44_i_codigo);
        $this->fa44_c_descr = ($this->fa44_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["fa44_c_descr"]:$this->fa44_c_descr);
-       $this->fa44_i_codrisco = ($this->fa44_i_codrisco == ""?@$GLOBALS["HTTP_POST_VARS"]["fa44_i_codrisco"]:$this->fa44_i_codrisco);
+       $this->fa44_i_codrisco = ($this->fa44_i_codrisco === 0 || $this->fa44_i_codrisco === 0.0 || $this->fa44_i_codrisco == ""?@$GLOBALS["HTTP_POST_VARS"]["fa44_i_codrisco"]:$this->fa44_i_codrisco);
      }else{
-       $this->fa44_i_codigo = ($this->fa44_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa44_i_codigo"]:$this->fa44_i_codigo);
+       $this->fa44_i_codigo = ($this->fa44_i_codigo === 0 || $this->fa44_i_codigo === 0.0 || $this->fa44_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa44_i_codigo"]:$this->fa44_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_far_fatorrisco {
          $this->fa44_i_codigo = $fa44_i_codigo;
        }
      }
-     if(($this->fa44_i_codigo == null) || ($this->fa44_i_codigo == "") ){
+     if(($this->fa44_i_codigo == null) || ($this->fa44_i_codigo === 0 || $this->fa44_i_codigo === 0.0 || $this->fa44_i_codigo == "") ){
        $this->erro_sql = " Campo fa44_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

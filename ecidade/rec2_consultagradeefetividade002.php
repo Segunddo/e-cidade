@@ -71,7 +71,7 @@ $sSqlConfiguracoesDatasEfetividade     = $oDaoConfiguracoesDatasEfetividade->sql
   $sWhereConfiguracoesDatasEfetividade
 );
 $rsConfiguracoesDatasEfetividade       = db_query($sSqlConfiguracoesDatasEfetividade);
-if (pg_num_rows($rsConfiguracoesDatasEfetividade) == 0) {
+if (($rsConfiguracoesDatasEfetividade ? pg_num_rows($rsConfiguracoesDatasEfetividade) : null) == 0) {
   db_redireciona('db_erros.php?fechar=true&db_erro=Período de Efetividade não configurado.');
   exit;
 }

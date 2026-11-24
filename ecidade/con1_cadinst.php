@@ -46,7 +46,10 @@ if (isset($excluir)) {
   $db_opcao = 3;
 }
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING'] ?? ''), $queryString);
+if (isset($queryString['retorno'])) {
+  $retorno = $queryString['retorno'];
+}
 if (isset($retorno)) {
   $sql = "select *,to_char(dtcont,'DD') as dtcont_dia,to_char(dtcont,'MM') as dtcont_mes,to_char(dtcont,'YYYY') as dtcont_ano from db_config where codigo = $retorno";
   $result = db_query($sql);

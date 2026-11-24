@@ -71,12 +71,12 @@ class cl_colecaoacervo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi29_sequencial = ($this->bi29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi29_sequencial"]:$this->bi29_sequencial);
+       $this->bi29_sequencial = ($this->bi29_sequencial === 0 || $this->bi29_sequencial === 0.0 || $this->bi29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi29_sequencial"]:$this->bi29_sequencial);
        $this->bi29_nome = ($this->bi29_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["bi29_nome"]:$this->bi29_nome);
        $this->bi29_abreviatura = ($this->bi29_abreviatura == ""?@$GLOBALS["HTTP_POST_VARS"]["bi29_abreviatura"]:$this->bi29_abreviatura);
        $this->bi29_quantidade = ($this->bi29_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["bi29_quantidade"]:$this->bi29_quantidade);
      }else{
-       $this->bi29_sequencial = ($this->bi29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi29_sequencial"]:$this->bi29_sequencial);
+       $this->bi29_sequencial = ($this->bi29_sequencial === 0 || $this->bi29_sequencial === 0.0 || $this->bi29_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi29_sequencial"]:$this->bi29_sequencial);
      }
    }
    // funcao para inclusao
@@ -126,7 +126,7 @@ class cl_colecaoacervo {
          $this->bi29_sequencial = $bi29_sequencial;
        }
      }
-     if(($this->bi29_sequencial == null) || ($this->bi29_sequencial == "") ){
+     if(($this->bi29_sequencial == null) || ($this->bi29_sequencial === 0 || $this->bi29_sequencial === 0.0 || $this->bi29_sequencial == "") ){
        $this->erro_sql = " Campo bi29_sequencial não declarado.";
        $this->erro_banco = "Chave Primária zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

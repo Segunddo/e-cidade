@@ -67,10 +67,10 @@ class cl_tipotransportemunicipal {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre00_sequencial = ($this->tre00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre00_sequencial"]:$this->tre00_sequencial);
+       $this->tre00_sequencial = ($this->tre00_sequencial === 0 || $this->tre00_sequencial === 0.0 || $this->tre00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre00_sequencial"]:$this->tre00_sequencial);
        $this->tre00_descricao = ($this->tre00_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["tre00_descricao"]:$this->tre00_descricao);
      }else{
-       $this->tre00_sequencial = ($this->tre00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre00_sequencial"]:$this->tre00_sequencial);
+       $this->tre00_sequencial = ($this->tre00_sequencial === 0 || $this->tre00_sequencial === 0.0 || $this->tre00_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre00_sequencial"]:$this->tre00_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tipotransportemunicipal {
          $this->tre00_sequencial = $tre00_sequencial;
        }
      }
-     if(($this->tre00_sequencial == null) || ($this->tre00_sequencial == "") ){
+     if(($this->tre00_sequencial == null) || ($this->tre00_sequencial === 0 || $this->tre00_sequencial === 0.0 || $this->tre00_sequencial == "") ){
        $this->erro_sql = " Campo tre00_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -78,9 +78,9 @@ class cl_chamadas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed22_i_codigo = ($this->ed22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_codigo"]:$this->ed22_i_codigo);
-       $this->ed22_i_disciplina = ($this->ed22_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_disciplina"]:$this->ed22_i_disciplina);
-       $this->ed22_i_matricula = ($this->ed22_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_matricula"]:$this->ed22_i_matricula);
+       $this->ed22_i_codigo = ($this->ed22_i_codigo === 0 || $this->ed22_i_codigo === 0.0 || $this->ed22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_codigo"]:$this->ed22_i_codigo);
+       $this->ed22_i_disciplina = ($this->ed22_i_disciplina === 0 || $this->ed22_i_disciplina === 0.0 || $this->ed22_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_disciplina"]:$this->ed22_i_disciplina);
+       $this->ed22_i_matricula = ($this->ed22_i_matricula === 0 || $this->ed22_i_matricula === 0.0 || $this->ed22_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_matricula"]:$this->ed22_i_matricula);
        if($this->ed22_d_data == ""){
          $this->ed22_d_data_dia = ($this->ed22_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_d_data_dia"]:$this->ed22_d_data_dia);
          $this->ed22_d_data_mes = ($this->ed22_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_d_data_mes"]:$this->ed22_d_data_mes);
@@ -92,7 +92,7 @@ class cl_chamadas {
        $this->ed22_c_presenca = ($this->ed22_c_presenca == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_c_presenca"]:$this->ed22_c_presenca);
        $this->ed22_c_descr = ($this->ed22_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_c_descr"]:$this->ed22_c_descr);
      }else{
-       $this->ed22_i_codigo = ($this->ed22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_codigo"]:$this->ed22_i_codigo);
+       $this->ed22_i_codigo = ($this->ed22_i_codigo === 0 || $this->ed22_i_codigo === 0.0 || $this->ed22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed22_i_codigo"]:$this->ed22_i_codigo);
      }
    }
    // funcao para inclusao
@@ -158,7 +158,7 @@ class cl_chamadas {
          $this->ed22_i_codigo = $ed22_i_codigo;
        }
      }
-     if(($this->ed22_i_codigo == null) || ($this->ed22_i_codigo == "") ){
+     if(($this->ed22_i_codigo == null) || ($this->ed22_i_codigo === 0 || $this->ed22_i_codigo === 0.0 || $this->ed22_i_codigo == "") ){
        $this->erro_sql = " Campo ed22_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

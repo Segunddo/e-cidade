@@ -40,8 +40,9 @@ db_postmemory($_GET);
 db_postmemory($_POST);
 
 $tabela = isset($HTTP_POST_VARS["tabela"]) ? $HTTP_POST_VARS["tabela"] : $tabela;
-$nomearq = db_query("select nomearq from db_sysarquivo where codarq = $tabela");
-$nomearq = pg_result($nomearq, 0, 0);
+$codigoTabelaSql = $tabela ?? 'NULL';
+$nomearq = db_query("select nomearq from db_sysarquivo where codarq = $codigoTabelaSql");
+$nomearq = pg_fetch_result($nomearq, 0, 0);
 ?>
 <html>
 <head>
@@ -101,14 +102,14 @@ $nomearq = pg_result($nomearq, 0, 0);
                      from db_syscampo c
                      inner join db_sysarqcamp p
                      on p.codcam = c.codcam
-                     where p.codarq = $tabela
+                     where p.codarq = $codigoTabelaSql
                      order  by p.seqarq
                      ");
                 $result = db_query("select c.nomecam,p.camiden
                      from db_syscampo c
                      inner join db_sysprikey p
                      on p.codcam = c.codcam
-                     where p.codarq = $tabela
+                     where p.codarq = $codigoTabelaSql
                      order by p.sequen
                      "); ?>
                 <form method="post" name="f_campo">
@@ -123,11 +124,11 @@ $nomearq = pg_result($nomearq, 0, 0);
                                 <td align="right" valign="top"><b>Nome : <b></td>
                                 <td>
                                     <?php
-                                    $numrows = pg_numrows($result);
+                                    $numrows = pg_num_rows($result);
                 if ($numrows > 0) {
                     echo "<textarea name=alt_ind rows='7' cols='40'>";
                     for ($i = 0; $i < $numrows; $i++) {
-                        echo "#" . trim(pg_result($result, $i, "nomecam")) . "#" . "\n";
+                        echo "#" . trim(pg_fetch_result($result, $i, "nomecam")) . "#" . "\n";
                     }
                     echo "</textarea>";
                 } else {
@@ -144,19 +145,19 @@ $nomearq = pg_result($nomearq, 0, 0);
                                         <?php
                                         $camiden = "";
                 if ($result && pg_num_rows($result) > 0) {
-                    $camiden = pg_result($result, 0, "camiden");
+                    $camiden = pg_fetch_result($result, 0, "camiden");
                 }
 
-                for ($i = 0; $i < pg_numrows($resultc); $i++) {
-                    echo "<option value='" . pg_result(
+                for ($i = 0; $i < pg_num_rows($resultc); $i++) {
+                    echo "<option value='" . pg_fetch_result(
                         $resultc,
                         $i,
                         "codcam"
-                                            ) . "' " . ($camiden == pg_result(
+                                            ) . "' " . ($camiden == pg_fetch_result(
                                                 $resultc,
                                                 $i,
                                                 "codcam"
-                                                    ) ? "selected" : "") . ">" . trim(pg_result(
+                                                    ) ? "selected" : "") . ">" . trim(pg_fetch_result(
                                                         $resultc,
                                                         $i,
                                                         "nomecam"
@@ -195,7 +196,7 @@ $nomearq = pg_result($nomearq, 0, 0);
                 from db_syscampo
                 where nomecam = '" . $alt_ind[$i] . "'") or die("Erro(100) selecionando db_syscampo");
                             $s = $i + 1;
-                            $result = db_query("insert into db_sysprikey (codarq,codcam,sequen,camiden) values($tabela," . pg_result(
+                            $result = db_query("insert into db_sysprikey (codarq,codcam,sequen,camiden) values($tabela," . pg_fetch_result(
                                 $result,
                                 0,
                                 'codcam'

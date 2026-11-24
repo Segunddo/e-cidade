@@ -76,14 +76,14 @@ class cl_profissionais
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fm15_codigo = ($this->fm15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_codigo"]:$this->fm15_codigo);
+       $this->fm15_codigo = ($this->fm15_codigo === 0 || $this->fm15_codigo === 0.0 || $this->fm15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_codigo"]:$this->fm15_codigo);
        $this->fm15_nome = ($this->fm15_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_nome"]:$this->fm15_nome);
        $this->fm15_cpf = ($this->fm15_cpf == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_cpf"]:$this->fm15_cpf);
-       $this->fm15_cbo = ($this->fm15_cbo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_cbo"]:$this->fm15_cbo);
+       $this->fm15_cbo = ($this->fm15_cbo === 0 || $this->fm15_cbo === 0.0 || $this->fm15_cbo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_cbo"]:$this->fm15_cbo);
        $this->fm15_regprof = ($this->fm15_regprof == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_regprof"]:$this->fm15_regprof);
-       $this->fm15_orgaoemissor = ($this->fm15_orgaoemissor == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_orgaoemissor"]:$this->fm15_orgaoemissor);
+       $this->fm15_orgaoemissor = ($this->fm15_orgaoemissor === 0 || $this->fm15_orgaoemissor === 0.0 || $this->fm15_orgaoemissor == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_orgaoemissor"]:$this->fm15_orgaoemissor);
      }else{
-       $this->fm15_codigo = ($this->fm15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_codigo"]:$this->fm15_codigo);
+       $this->fm15_codigo = ($this->fm15_codigo === 0 || $this->fm15_codigo === 0.0 || $this->fm15_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm15_codigo"]:$this->fm15_codigo);
      }
    }
 
@@ -141,7 +141,7 @@ class cl_profissionais
          $this->fm15_codigo = $fm15_codigo; 
        }
      }
-     if(($this->fm15_codigo == null) || ($this->fm15_codigo == "") ){ 
+     if(($this->fm15_codigo == null) || ($this->fm15_codigo === 0 || $this->fm15_codigo === 0.0 || $this->fm15_codigo == "") ){ 
        $this->erro_sql = " Campo fm15_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

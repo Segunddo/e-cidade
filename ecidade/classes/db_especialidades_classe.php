@@ -67,10 +67,10 @@ class cl_especialidades {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd05_i_codigo = ($this->sd05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd05_i_codigo"]:$this->sd05_i_codigo);
+       $this->sd05_i_codigo = ($this->sd05_i_codigo === 0 || $this->sd05_i_codigo === 0.0 || $this->sd05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd05_i_codigo"]:$this->sd05_i_codigo);
        $this->sd05_c_descr = ($this->sd05_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["sd05_c_descr"]:$this->sd05_c_descr);
      }else{
-       $this->sd05_i_codigo = ($this->sd05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd05_i_codigo"]:$this->sd05_i_codigo);
+       $this->sd05_i_codigo = ($this->sd05_i_codigo === 0 || $this->sd05_i_codigo === 0.0 || $this->sd05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd05_i_codigo"]:$this->sd05_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_especialidades {
          $this->sd05_i_codigo = $sd05_i_codigo;
        }
      }
-     if(($this->sd05_i_codigo == null) || ($this->sd05_i_codigo == "") ){
+     if(($this->sd05_i_codigo == null) || ($this->sd05_i_codigo === 0 || $this->sd05_i_codigo === 0.0 || $this->sd05_i_codigo == "") ){
        $this->erro_sql = " Campo sd05_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

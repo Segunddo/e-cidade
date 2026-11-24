@@ -361,7 +361,7 @@ class TurmaRepository
             null,
             'ed57_i_codigo, ed11_i_sequencia, ed57_c_descr',
             'ed52_i_ano,ed31_i_codigo, ed11_i_sequencia, ed57_c_descr',
-            implode($where, " AND ")
+            implode(" AND ", $where)
         );
 
         $rsTurma = $oDaoTurma->sql_record($sSqlTurma);

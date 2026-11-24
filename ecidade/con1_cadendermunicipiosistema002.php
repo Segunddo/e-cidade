@@ -31,7 +31,10 @@ require_once(modification("libs/db_sessoes.php"));
 require_once(modification("libs/db_usuariosonline.php"));
 require_once(modification("classes/db_cadendermunicipiosistema_classe.php"));
 require_once(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? "", $queryString);
+if (isset($queryString["chavepesquisa"])) {
+  $chavepesquisa = $queryString["chavepesquisa"];
+}
 db_postmemory($HTTP_POST_VARS);
 $clcadendermunicipiosistema = new cl_cadendermunicipiosistema;
 $db_opcao = 22;

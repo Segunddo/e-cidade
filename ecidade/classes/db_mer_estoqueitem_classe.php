@@ -80,10 +80,10 @@ class cl_mer_estoqueitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me19_i_codigo = ($this->me19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_i_codigo"]:$this->me19_i_codigo);
-       $this->me19_f_quant = ($this->me19_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_f_quant"]:$this->me19_f_quant);
-       $this->me19_f_valor = ($this->me19_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_f_valor"]:$this->me19_f_valor);
-       $this->me19_f_quantatend = ($this->me19_f_quantatend == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_f_quantatend"]:$this->me19_f_quantatend);
+       $this->me19_i_codigo = ($this->me19_i_codigo === 0 || $this->me19_i_codigo === 0.0 || $this->me19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_i_codigo"]:$this->me19_i_codigo);
+       $this->me19_f_quant = ($this->me19_f_quant === 0 || $this->me19_f_quant === 0.0 || $this->me19_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_f_quant"]:$this->me19_f_quant);
+       $this->me19_f_valor = ($this->me19_f_valor === 0 || $this->me19_f_valor === 0.0 || $this->me19_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_f_valor"]:$this->me19_f_valor);
+       $this->me19_f_quantatend = ($this->me19_f_quantatend === 0 || $this->me19_f_quantatend === 0.0 || $this->me19_f_quantatend == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_f_quantatend"]:$this->me19_f_quantatend);
        if($this->me19_d_data == ""){
          $this->me19_d_data_dia = ($this->me19_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_d_data_dia"]:$this->me19_d_data_dia);
          $this->me19_d_data_mes = ($this->me19_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_d_data_mes"]:$this->me19_d_data_mes);
@@ -92,10 +92,10 @@ class cl_mer_estoqueitem {
             $this->me19_d_data = $this->me19_d_data_ano."-".$this->me19_d_data_mes."-".$this->me19_d_data_dia;
          }
        }
-       $this->me19_i_merestoque = ($this->me19_i_merestoque == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_i_merestoque"]:$this->me19_i_merestoque);
-       $this->me19_i_matrequi = ($this->me19_i_matrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_i_matrequi"]:$this->me19_i_matrequi);
+       $this->me19_i_merestoque = ($this->me19_i_merestoque === 0 || $this->me19_i_merestoque === 0.0 || $this->me19_i_merestoque == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_i_merestoque"]:$this->me19_i_merestoque);
+       $this->me19_i_matrequi = ($this->me19_i_matrequi === 0 || $this->me19_i_matrequi === 0.0 || $this->me19_i_matrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_i_matrequi"]:$this->me19_i_matrequi);
      }else{
-       $this->me19_i_codigo = ($this->me19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_i_codigo"]:$this->me19_i_codigo);
+       $this->me19_i_codigo = ($this->me19_i_codigo === 0 || $this->me19_i_codigo === 0.0 || $this->me19_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me19_i_codigo"]:$this->me19_i_codigo);
      }
    }
    // funcao para inclusao
@@ -173,7 +173,7 @@ class cl_mer_estoqueitem {
          $this->me19_i_codigo = $me19_i_codigo;
        }
      }
-     if(($this->me19_i_codigo == null) || ($this->me19_i_codigo == "") ){
+     if(($this->me19_i_codigo == null) || ($this->me19_i_codigo === 0 || $this->me19_i_codigo === 0.0 || $this->me19_i_codigo == "") ){
        $this->erro_sql = " Campo me19_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

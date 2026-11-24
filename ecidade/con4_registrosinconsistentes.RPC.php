@@ -91,7 +91,7 @@ switch ($oParam->sExec) {
 
                 } else {
 
-                    $sValor = utf8_decode($oTabela->aValores[0]);
+                    $sValor = mb_convert_encoding($oTabela->aValores[0] ?? '', 'ISO-8859-1', 'UTF-8');
                     $sWhere .= "{$sAnd} {$oTabela->sCampo} ilike '{$sValor}'";
                 }
 

@@ -69,11 +69,11 @@ class cl_mer_cardapiodiaescola {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me37_i_codigo = ($this->me37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me37_i_codigo"]:$this->me37_i_codigo);
-       $this->me37_i_cardapiodia = ($this->me37_i_cardapiodia == ""?@$GLOBALS["HTTP_POST_VARS"]["me37_i_cardapiodia"]:$this->me37_i_cardapiodia);
-       $this->me37_i_cardapioescola = ($this->me37_i_cardapioescola == ""?@$GLOBALS["HTTP_POST_VARS"]["me37_i_cardapioescola"]:$this->me37_i_cardapioescola);
+       $this->me37_i_codigo = ($this->me37_i_codigo === 0 || $this->me37_i_codigo === 0.0 || $this->me37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me37_i_codigo"]:$this->me37_i_codigo);
+       $this->me37_i_cardapiodia = ($this->me37_i_cardapiodia === 0 || $this->me37_i_cardapiodia === 0.0 || $this->me37_i_cardapiodia == ""?@$GLOBALS["HTTP_POST_VARS"]["me37_i_cardapiodia"]:$this->me37_i_cardapiodia);
+       $this->me37_i_cardapioescola = ($this->me37_i_cardapioescola === 0 || $this->me37_i_cardapioescola === 0.0 || $this->me37_i_cardapioescola == ""?@$GLOBALS["HTTP_POST_VARS"]["me37_i_cardapioescola"]:$this->me37_i_cardapioescola);
      }else{
-       $this->me37_i_codigo = ($this->me37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me37_i_codigo"]:$this->me37_i_codigo);
+       $this->me37_i_codigo = ($this->me37_i_codigo === 0 || $this->me37_i_codigo === 0.0 || $this->me37_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me37_i_codigo"]:$this->me37_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_mer_cardapiodiaescola {
          $this->me37_i_codigo = $me37_i_codigo;
        }
      }
-     if(($this->me37_i_codigo == null) || ($this->me37_i_codigo == "") ){
+     if(($this->me37_i_codigo == null) || ($this->me37_i_codigo === 0 || $this->me37_i_codigo === 0.0 || $this->me37_i_codigo == "") ){
        $this->erro_sql = " Campo me37_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

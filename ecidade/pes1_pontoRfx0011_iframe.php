@@ -381,9 +381,9 @@ if($ponto == "fx" || $ponto == "fs" || $ponto == "fe" || $ponto == "fr"){
         <?=$rh27_rubric?>
         <?php
         $campo_recebe_formula = 'form_'.$rh27_rubric;
-        $$campo_recebe_formula = 'f';
+        ${$campo_recebe_formula} = 'f';
         if($rubrica_tem_formula == true){
-          $$campo_recebe_formula = 't';
+          ${$campo_recebe_formula} = 't';
         }
         db_input('form_'.$rh27_rubric, 15, 0, true, 'hidden', 3, "onfocus='js_mudar_caixa_de_texto(\"$rh27_obs\");'");
         ?>
@@ -395,7 +395,7 @@ if($ponto == "fx" || $ponto == "fs" || $ponto == "fe" || $ponto == "fr"){
       if($ponto == "fx" || $ponto == "fs"){
       	$datlim_recebe_valor_select = "datlim_".$rh27_rubric;
       	if(isset($datlim)){
-      	  $$datlim_recebe_valor_select = $datlim;
+      	  ${$datlim_recebe_valor_select} = $datlim;
       	}
       	if($i == 0 && !isset($setar_foco_campo) && $mostrar_ano_mes_rub != 3){
           $setar_foco_campo = $datlim_recebe_valor_select;
@@ -418,7 +418,7 @@ if($ponto == "fx" || $ponto == "fs" || $ponto == "fe" || $ponto == "fr"){
       }else if($ponto == "fe" || $ponto == "fr"){
       	$tpp_recebe_valor_select = "tpp_".$rh27_rubric;
       	if(isset($tpp)){
-      	  $$tpp_recebe_valor_select = $tpp;
+      	  ${$tpp_recebe_valor_select} = $tpp;
       	}
       	if($i == 0 && !isset($setar_foco_campo)){
           $setar_foco_campo = $tpp_recebe_valor_select;
@@ -435,9 +435,9 @@ if($ponto == "fx" || $ponto == "fs" || $ponto == "fe" || $ponto == "fr"){
       }
       $quant_recebe_valor_select = "quant_".$rh27_rubric;
       if(isset($quant) && trim($quant) != ""){
-      	$$quant_recebe_valor_select = $quant;
+      	${$quant_recebe_valor_select} = $quant;
       }else{
-        $$quant_recebe_valor_select = $rh27_quantidadepadrao;
+        ${$quant_recebe_valor_select} = $rh27_quantidadepadrao;
       }
       if($i == 0 && !isset($setar_foco_campo)){
         $setar_foco_campo = $quant_recebe_valor_select;
@@ -461,9 +461,9 @@ if($ponto == "fx" || $ponto == "fs" || $ponto == "fe" || $ponto == "fr"){
         <?php
         $valor_recebe_valor_select = "valor_".$rh27_rubric;
         if(isset($valor) && trim($valor) != ""){
-      	  $$valor_recebe_valor_select = $valor;
+      	  ${$valor_recebe_valor_select} = $valor;
         }else{
-          $$valor_recebe_valor_select = $rh27_valorpadrao;
+          ${$valor_recebe_valor_select} = $rh27_valorpadrao;
         }
         db_input('valor_'.$rh27_rubric, 15, $Ir90_valor, true, 'text', 1, "onBlur='js_ativa_passa_proximo_campo(this.name);' tabIndex='$tabIndex' onfocus='js_mudar_caixa_de_texto(\"$rh27_obs\");'");
         $tabIndex ++;

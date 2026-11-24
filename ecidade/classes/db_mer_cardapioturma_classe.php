@@ -73,13 +73,13 @@ class cl_mer_cardapioturma {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me39_i_codigo = ($this->me39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_codigo"]:$this->me39_i_codigo);
-       $this->me39_i_repeticao = ($this->me39_i_repeticao == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_repeticao"]:$this->me39_i_repeticao);
-       $this->me39_i_quantidade = ($this->me39_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_quantidade"]:$this->me39_i_quantidade);
-       $this->me39_i_turma = ($this->me39_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_turma"]:$this->me39_i_turma);
-       $this->me39_i_cardapiodia = ($this->me39_i_cardapiodia == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_cardapiodia"]:$this->me39_i_cardapiodia);
+       $this->me39_i_codigo = ($this->me39_i_codigo === 0 || $this->me39_i_codigo === 0.0 || $this->me39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_codigo"]:$this->me39_i_codigo);
+       $this->me39_i_repeticao = ($this->me39_i_repeticao === 0 || $this->me39_i_repeticao === 0.0 || $this->me39_i_repeticao == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_repeticao"]:$this->me39_i_repeticao);
+       $this->me39_i_quantidade = ($this->me39_i_quantidade === 0 || $this->me39_i_quantidade === 0.0 || $this->me39_i_quantidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_quantidade"]:$this->me39_i_quantidade);
+       $this->me39_i_turma = ($this->me39_i_turma === 0 || $this->me39_i_turma === 0.0 || $this->me39_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_turma"]:$this->me39_i_turma);
+       $this->me39_i_cardapiodia = ($this->me39_i_cardapiodia === 0 || $this->me39_i_cardapiodia === 0.0 || $this->me39_i_cardapiodia == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_cardapiodia"]:$this->me39_i_cardapiodia);
      }else{
-       $this->me39_i_codigo = ($this->me39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_codigo"]:$this->me39_i_codigo);
+       $this->me39_i_codigo = ($this->me39_i_codigo === 0 || $this->me39_i_codigo === 0.0 || $this->me39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me39_i_codigo"]:$this->me39_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_mer_cardapioturma {
          $this->me39_i_codigo = $me39_i_codigo;
        }
      }
-     if(($this->me39_i_codigo == null) || ($this->me39_i_codigo == "") ){
+     if(($this->me39_i_codigo == null) || ($this->me39_i_codigo === 0 || $this->me39_i_codigo === 0.0 || $this->me39_i_codigo == "") ){
        $this->erro_sql = " Campo me39_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,12 +71,12 @@ class cl_linhatransportepontoparada {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre11_sequencial = ($this->tre11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_sequencial"]:$this->tre11_sequencial);
-       $this->tre11_pontoparada = ($this->tre11_pontoparada == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_pontoparada"]:$this->tre11_pontoparada);
-       $this->tre11_itinerariologradouro = ($this->tre11_itinerariologradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_itinerariologradouro"]:$this->tre11_itinerariologradouro);
-       $this->tre11_ordem = ($this->tre11_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_ordem"]:$this->tre11_ordem);
+       $this->tre11_sequencial = ($this->tre11_sequencial === 0 || $this->tre11_sequencial === 0.0 || $this->tre11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_sequencial"]:$this->tre11_sequencial);
+       $this->tre11_pontoparada = ($this->tre11_pontoparada === 0 || $this->tre11_pontoparada === 0.0 || $this->tre11_pontoparada == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_pontoparada"]:$this->tre11_pontoparada);
+       $this->tre11_itinerariologradouro = ($this->tre11_itinerariologradouro === 0 || $this->tre11_itinerariologradouro === 0.0 || $this->tre11_itinerariologradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_itinerariologradouro"]:$this->tre11_itinerariologradouro);
+       $this->tre11_ordem = ($this->tre11_ordem === 0 || $this->tre11_ordem === 0.0 || $this->tre11_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_ordem"]:$this->tre11_ordem);
      }else{
-       $this->tre11_sequencial = ($this->tre11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_sequencial"]:$this->tre11_sequencial);
+       $this->tre11_sequencial = ($this->tre11_sequencial === 0 || $this->tre11_sequencial === 0.0 || $this->tre11_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre11_sequencial"]:$this->tre11_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_linhatransportepontoparada {
          $this->tre11_sequencial = $tre11_sequencial;
        }
      }
-     if(($this->tre11_sequencial == null) || ($this->tre11_sequencial == "") ){
+     if(($this->tre11_sequencial == null) || ($this->tre11_sequencial === 0 || $this->tre11_sequencial === 0.0 || $this->tre11_sequencial == "") ){
        $this->erro_sql = " Campo tre11_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -85,9 +85,9 @@ class cl_diarioarearesultado
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed164_codigo = ($this->ed164_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_codigo"] : $this->ed164_codigo);
-            $this->ed164_diarioarea = ($this->ed164_diarioarea == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_diarioarea"] : $this->ed164_diarioarea);
-            $this->ed164_areaprocedimentoresultado = ($this->ed164_areaprocedimentoresultado == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_areaprocedimentoresultado"] : $this->ed164_areaprocedimentoresultado);
+            $this->ed164_codigo = ($this->ed164_codigo === 0 || $this->ed164_codigo === 0.0 || $this->ed164_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_codigo"] : $this->ed164_codigo);
+            $this->ed164_diarioarea = ($this->ed164_diarioarea === 0 || $this->ed164_diarioarea === 0.0 || $this->ed164_diarioarea == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_diarioarea"] : $this->ed164_diarioarea);
+            $this->ed164_areaprocedimentoresultado = ($this->ed164_areaprocedimentoresultado === 0 || $this->ed164_areaprocedimentoresultado === 0.0 || $this->ed164_areaprocedimentoresultado == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_areaprocedimentoresultado"] : $this->ed164_areaprocedimentoresultado);
             $this->ed164_nota = ($this->ed164_nota === "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_nota"] : $this->ed164_nota);
             $this->ed164_parecer = ($this->ed164_parecer == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_parecer"] : $this->ed164_parecer);
             $this->ed164_conceito = ($this->ed164_conceito == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_conceito"] : $this->ed164_conceito);
@@ -95,7 +95,7 @@ class cl_diarioarearesultado
             $this->ed164_resultado_frequencia = ($this->ed164_resultado_frequencia == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_resultado_frequencia"] : $this->ed164_resultado_frequencia);
             $this->ed164_amparado = ($this->ed164_amparado == "f" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_amparado"] : $this->ed164_amparado);
         } else {
-            $this->ed164_codigo = ($this->ed164_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_codigo"] : $this->ed164_codigo);
+            $this->ed164_codigo = ($this->ed164_codigo === 0 || $this->ed164_codigo === 0.0 || $this->ed164_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed164_codigo"] : $this->ed164_codigo);
         }
     }
 
@@ -174,7 +174,7 @@ class cl_diarioarearesultado
                 $this->ed164_codigo = $ed164_codigo;
             }
         }
-        if (($this->ed164_codigo == null) || ($this->ed164_codigo == "")) {
+        if (($this->ed164_codigo == null) || ($this->ed164_codigo === 0 || $this->ed164_codigo === 0.0 || $this->ed164_codigo == "")) {
             $this->erro_sql = " Campo ed164_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

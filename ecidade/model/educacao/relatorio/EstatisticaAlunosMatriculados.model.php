@@ -431,15 +431,15 @@ class EstatisticaAlunosMatriculados
 
             if ($oEnsino->iTotalMatriculaInicial != 0 ) {
 
-                $oEnsino->iPercentualEvadidos         = round(($oEnsino->iTotalEvadidos / $oEnsino->iTotalMatriculaInicial) * 100, 2);
-                $oEnsino->iPercentualCancelados       = round(($oEnsino->iTotalCancelados / $oEnsino->iTotalMatriculaInicial) * 100, 2);
-                $oEnsino->iPercentualTransferidos     = round(($oEnsino->iTotalTransferidos / $oEnsino->iTotalMatriculaInicial) * 100, 2);
-                $oEnsino->iPercentualTrocas           = round(($oEnsino->iTotalTrocas / $oEnsino->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
-                $oEnsino->iPercentualProgredidos      = round(($oEnsino->iTotalProgredidos / $oEnsino->iTotalMatriculaInicial) * 100, 2);
-                $oEnsino->iPercentualObitos           = round(($oEnsino->iTotalObitos / $oEnsino->iTotalMatriculaInicial) * 100, 2);
-                $oEnsino->iPercentualMatriculaEfetiva = round(($oEnsino->iTotalMatriculaEfetiva / $oEnsino->iTotalMatriculaInicial) * 100, 2);
-                $oEnsino->iPercentualMatriculaNEE     = round(($oEnsino->iTotalMatriculaNEE / $oEnsino->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
-                $oEnsino->iPercentualVagasDisponiveis = round(($oEnsino->iTotalVagasDisponiveis / $oEnsino->iTotalVagas) * 100, 2);
+                $oEnsino->iPercentualEvadidos         = round($this->dividirComoPhp74($oEnsino->iTotalEvadidos, $oEnsino->iTotalMatriculaInicial) * 100, 2);
+                $oEnsino->iPercentualCancelados       = round($this->dividirComoPhp74($oEnsino->iTotalCancelados, $oEnsino->iTotalMatriculaInicial) * 100, 2);
+                $oEnsino->iPercentualTransferidos     = round($this->dividirComoPhp74($oEnsino->iTotalTransferidos, $oEnsino->iTotalMatriculaInicial) * 100, 2);
+                $oEnsino->iPercentualTrocas           = round($this->dividirComoPhp74($oEnsino->iTotalTrocas, $oEnsino->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
+                $oEnsino->iPercentualProgredidos      = round($this->dividirComoPhp74($oEnsino->iTotalProgredidos, $oEnsino->iTotalMatriculaInicial) * 100, 2);
+                $oEnsino->iPercentualObitos           = round($this->dividirComoPhp74($oEnsino->iTotalObitos, $oEnsino->iTotalMatriculaInicial) * 100, 2);
+                $oEnsino->iPercentualMatriculaEfetiva = round($this->dividirComoPhp74($oEnsino->iTotalMatriculaEfetiva, $oEnsino->iTotalMatriculaInicial) * 100, 2);
+                $oEnsino->iPercentualMatriculaNEE     = round($this->dividirComoPhp74($oEnsino->iTotalMatriculaNEE, $oEnsino->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
+                $oEnsino->iPercentualVagasDisponiveis = round($this->dividirComoPhp74($oEnsino->iTotalVagasDisponiveis, $oEnsino->iTotalVagas) * 100, 2);
             }
 
             foreach ($oEnsino->aEtapa as $oEtapa) {
@@ -456,17 +456,17 @@ class EstatisticaAlunosMatriculados
 
                 if ($oEtapa->iTotalMatriculaInicial != 0 ) {
 
-                    $oEtapa->iPercentualEvadidos         = round(($oEtapa->iTotalEvadidos / $oEtapa->iTotalMatriculaInicial) * 100, 2);
-                    $oEtapa->iPercentualCancelados       = round(($oEtapa->iTotalCancelados / $oEtapa->iTotalMatriculaInicial) * 100, 2);
-                    $oEtapa->iPercentualTransferidos     = round(($oEtapa->iTotalTransferidos / $oEtapa->iTotalMatriculaInicial) * 100, 2);
-                    $oEtapa->iPercentualTrocas           = round(($oEtapa->iTotalTrocas / $oEtapa->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
-                    $oEtapa->iPercentualProgredidos      = round(($oEtapa->iTotalProgredidos / $oEtapa->iTotalMatriculaInicial) * 100, 2);
-                    $oEtapa->iPercentualObitos           = round(($oEtapa->iTotalObitos / $oEtapa->iTotalMatriculaInicial) * 100, 2);
-                    $oEtapa->iPercentualMatriculaEfetiva = round(($oEtapa->iTotalMatriculaEfetiva / $oEtapa->iTotalMatriculaInicial) * 100, 2);
-                    $oEtapa->iPercentualMatriculaNEE     = round(($oEtapa->iTotalMatriculaNEE / $oEtapa->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
+                    $oEtapa->iPercentualEvadidos         = round($this->dividirComoPhp74($oEtapa->iTotalEvadidos, $oEtapa->iTotalMatriculaInicial) * 100, 2);
+                    $oEtapa->iPercentualCancelados       = round($this->dividirComoPhp74($oEtapa->iTotalCancelados, $oEtapa->iTotalMatriculaInicial) * 100, 2);
+                    $oEtapa->iPercentualTransferidos     = round($this->dividirComoPhp74($oEtapa->iTotalTransferidos, $oEtapa->iTotalMatriculaInicial) * 100, 2);
+                    $oEtapa->iPercentualTrocas           = round($this->dividirComoPhp74($oEtapa->iTotalTrocas, $oEtapa->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
+                    $oEtapa->iPercentualProgredidos      = round($this->dividirComoPhp74($oEtapa->iTotalProgredidos, $oEtapa->iTotalMatriculaInicial) * 100, 2);
+                    $oEtapa->iPercentualObitos           = round($this->dividirComoPhp74($oEtapa->iTotalObitos, $oEtapa->iTotalMatriculaInicial) * 100, 2);
+                    $oEtapa->iPercentualMatriculaEfetiva = round($this->dividirComoPhp74($oEtapa->iTotalMatriculaEfetiva, $oEtapa->iTotalMatriculaInicial) * 100, 2);
+                    $oEtapa->iPercentualMatriculaNEE     = round($this->dividirComoPhp74($oEtapa->iTotalMatriculaNEE, $oEtapa->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
 
                     if(!empty($oEtapa->iTotalVagasDisponiveis) && !empty($oEtapa->iTotalVagas) ) {
-                        $oEtapa->iPercentualVagasDisponiveis = round(($oEtapa->iTotalVagasDisponiveis / $oEtapa->iTotalVagas)  * 100, 2);
+                        $oEtapa->iPercentualVagasDisponiveis = round($this->dividirComoPhp74($oEtapa->iTotalVagasDisponiveis, $oEtapa->iTotalVagas)  * 100, 2);
                     }
                 }
             }
@@ -510,18 +510,29 @@ class EstatisticaAlunosMatriculados
             $oTotalGeral->iTotalCapacidade       += $oEnsino->iTotalCapacidade      ; /* FHSYS */
         }
 
-        $oTotalGeral->iPercentualEvadidos         = round(($oTotalGeral->iTotalEvadidos         / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-        $oTotalGeral->iPercentualCancelados       = round(($oTotalGeral->iTotalCancelados       / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-        $oTotalGeral->iPercentualTransferidos     = round(($oTotalGeral->iTotalTransferidos     / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-        $oTotalGeral->iPercentualTrocas           = round(($oTotalGeral->iTotalTrocas           / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-        $oTotalGeral->iPercentualProgredidos      = round(($oTotalGeral->iTotalProgredidos      / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-        $oTotalGeral->iPercentualObitos           = round(($oTotalGeral->iTotalObitos           / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-        $oTotalGeral->iPercentualMatriculaEfetiva = round(($oTotalGeral->iTotalMatriculaEfetiva / $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
-        $oTotalGeral->iPercentualMatriculaNEE     = round(($oTotalGeral->iTotalMatriculaNEE     / $oTotalGeral->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
-        $oTotalGeral->iPercentualVagasDisponiveis = round(($oTotalGeral->iTotalVagasDisponiveis / $oTotalGeral->iTotalVagas)            * 100, 2);
+        $oTotalGeral->iPercentualEvadidos         = round($this->dividirComoPhp74($oTotalGeral->iTotalEvadidos, $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
+        $oTotalGeral->iPercentualCancelados       = round($this->dividirComoPhp74($oTotalGeral->iTotalCancelados, $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
+        $oTotalGeral->iPercentualTransferidos     = round($this->dividirComoPhp74($oTotalGeral->iTotalTransferidos, $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
+        $oTotalGeral->iPercentualTrocas           = round($this->dividirComoPhp74($oTotalGeral->iTotalTrocas, $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
+        $oTotalGeral->iPercentualProgredidos      = round($this->dividirComoPhp74($oTotalGeral->iTotalProgredidos, $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
+        $oTotalGeral->iPercentualObitos           = round($this->dividirComoPhp74($oTotalGeral->iTotalObitos, $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
+        $oTotalGeral->iPercentualMatriculaEfetiva = round($this->dividirComoPhp74($oTotalGeral->iTotalMatriculaEfetiva, $oTotalGeral->iTotalMatriculaInicial) * 100, 2);
+        $oTotalGeral->iPercentualMatriculaNEE     = round($this->dividirComoPhp74($oTotalGeral->iTotalMatriculaNEE, $oTotalGeral->iTotalMatriculaInicial) * 100, 2); /* FHSYS */
+        $oTotalGeral->iPercentualVagasDisponiveis = round($this->dividirComoPhp74($oTotalGeral->iTotalVagasDisponiveis, $oTotalGeral->iTotalVagas)            * 100, 2);
 
         return $oTotalGeral;
     }
 
+    /**
+     * Divisao com o resultado do PHP 7.4 quando o divisor e zero: INF, -INF ou NAN (o 7.4 so
+     * emite um aviso). No PHP 8 o operador / lanca DivisionByZeroError e derrubaria o relatorio.
+     */
+    private function dividirComoPhp74($nDividendo, $nDivisor)
+    {
+        if ($nDivisor == 0) {
+            return $nDividendo > 0 ? INF : ($nDividendo < 0 ? -INF : NAN);
+        }
+        return $nDividendo / $nDivisor;
+    }
 }
 

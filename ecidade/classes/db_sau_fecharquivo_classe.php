@@ -80,11 +80,11 @@ class cl_sau_fecharquivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd99_i_codigo = ($this->sd99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_codigo"]:$this->sd99_i_codigo);
+       $this->sd99_i_codigo = ($this->sd99_i_codigo === 0 || $this->sd99_i_codigo === 0.0 || $this->sd99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_codigo"]:$this->sd99_i_codigo);
        $this->sd99_t_arquivo = ($this->sd99_t_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_t_arquivo"]:$this->sd99_t_arquivo);
-       $this->sd99_i_fechamento = ($this->sd99_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_fechamento"]:$this->sd99_i_fechamento);
+       $this->sd99_i_fechamento = ($this->sd99_i_fechamento === 0 || $this->sd99_i_fechamento === 0.0 || $this->sd99_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_fechamento"]:$this->sd99_i_fechamento);
        $this->sd99_c_hora = ($this->sd99_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_c_hora"]:$this->sd99_c_hora);
-       $this->sd99_i_login = ($this->sd99_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_login"]:$this->sd99_i_login);
+       $this->sd99_i_login = ($this->sd99_i_login === 0 || $this->sd99_i_login === 0.0 || $this->sd99_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_login"]:$this->sd99_i_login);
        if($this->sd99_d_data == ""){
          $this->sd99_d_data_dia = ($this->sd99_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_d_data_dia"]:$this->sd99_d_data_dia);
          $this->sd99_d_data_mes = ($this->sd99_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_d_data_mes"]:$this->sd99_d_data_mes);
@@ -93,9 +93,9 @@ class cl_sau_fecharquivo {
             $this->sd99_d_data = $this->sd99_d_data_ano."-".$this->sd99_d_data_mes."-".$this->sd99_d_data_dia;
          }
        }
-       $this->sd99_objarquivo = ($this->sd99_objarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_objarquivo"]:$this->sd99_objarquivo);
+       $this->sd99_objarquivo = ($this->sd99_objarquivo === 0 || $this->sd99_objarquivo === 0.0 || $this->sd99_objarquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_objarquivo"]:$this->sd99_objarquivo);
      }else{
-       $this->sd99_i_codigo = ($this->sd99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_codigo"]:$this->sd99_i_codigo);
+       $this->sd99_i_codigo = ($this->sd99_i_codigo === 0 || $this->sd99_i_codigo === 0.0 || $this->sd99_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd99_i_codigo"]:$this->sd99_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_sau_fecharquivo {
          $this->sd99_i_codigo = $sd99_i_codigo;
        }
      }
-     if(($this->sd99_i_codigo == null) || ($this->sd99_i_codigo == "") ){
+     if(($this->sd99_i_codigo == null) || ($this->sd99_i_codigo === 0 || $this->sd99_i_codigo === 0.0 || $this->sd99_i_codigo == "") ){
        $this->erro_sql = " Campo sd99_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

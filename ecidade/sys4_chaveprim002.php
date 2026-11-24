@@ -50,18 +50,19 @@ foreach ($queryString as $key => $value) {
             <td>
                 <select name="sel_cliente" size="10" width="150">
                     <?php
+                    $codigoTabelaSql = $tabela ?? 'NULL';
                     $result = db_query($conn, "
                         select c.nomecam,c.codcam
                         from db_syscampo c
                         inner join db_sysarqcamp a
                         on a.codcam = c.codcam
-                        where a.codarq = $tabela
+                        where a.codarq = $codigoTabelaSql
                         order by a.seqarq
                     ");
-                    $num_linhas = pg_numrows($result);
+                    $num_linhas = pg_num_rows($result);
                     for ($i = 0; $i < $num_linhas; $i++) {
-                        $nome_campo = pg_fieldname($result, 0);
-                        $nome_campo = "#" . trim(pg_result($result, $i, $nome_campo)) . "#";
+                        $nome_campo = pg_field_name($result, 0);
+                        $nome_campo = "#" . trim(pg_fetch_result($result, $i, $nome_campo)) . "#";
                         echo "<option value=\"{$nome_campo}\">{$nome_campo}</option>\n";
                     }
                     ?>

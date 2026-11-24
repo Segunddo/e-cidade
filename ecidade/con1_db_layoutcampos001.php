@@ -34,7 +34,7 @@ include(modification("classes/db_db_layoutcampos_classe.php"));
 include(modification("classes/db_db_layoutlinha_classe.php"));
 include(modification("classes/db_db_layouttxt_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? '', $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 db_postmemory($HTTP_POST_VARS);
 $cldb_layoutcampos = new cl_db_layoutcampos;
 $cldb_layoutlinha = new cl_db_layoutlinha;

@@ -85,7 +85,7 @@ class cl_mer_tipocardapio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me27_i_codigo = ($this->me27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_i_codigo"]:$this->me27_i_codigo);
+       $this->me27_i_codigo = ($this->me27_i_codigo === 0 || $this->me27_i_codigo === 0.0 || $this->me27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_i_codigo"]:$this->me27_i_codigo);
        $this->me27_c_nome = ($this->me27_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_c_nome"]:$this->me27_c_nome);
        $this->me27_c_ativo = ($this->me27_c_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_c_ativo"]:$this->me27_c_ativo);
        if($this->me27_d_inicio == ""){
@@ -104,11 +104,11 @@ class cl_mer_tipocardapio {
             $this->me27_d_fim = $this->me27_d_fim_ano."-".$this->me27_d_fim_mes."-".$this->me27_d_fim_dia;
          }
        }
-       $this->me27_f_versao = ($this->me27_f_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_f_versao"]:$this->me27_f_versao);
-       $this->me27_i_id = ($this->me27_i_id == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_i_id"]:$this->me27_i_id);
-       $this->me27_i_ano = ($this->me27_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_i_ano"]:$this->me27_i_ano);
+       $this->me27_f_versao = ($this->me27_f_versao === 0 || $this->me27_f_versao === 0.0 || $this->me27_f_versao == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_f_versao"]:$this->me27_f_versao);
+       $this->me27_i_id = ($this->me27_i_id === 0 || $this->me27_i_id === 0.0 || $this->me27_i_id == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_i_id"]:$this->me27_i_id);
+       $this->me27_i_ano = ($this->me27_i_ano === 0 || $this->me27_i_ano === 0.0 || $this->me27_i_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_i_ano"]:$this->me27_i_ano);
      }else{
-       $this->me27_i_codigo = ($this->me27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_i_codigo"]:$this->me27_i_codigo);
+       $this->me27_i_codigo = ($this->me27_i_codigo === 0 || $this->me27_i_codigo === 0.0 || $this->me27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me27_i_codigo"]:$this->me27_i_codigo);
      }
    }
    // funcao para inclusao
@@ -195,7 +195,7 @@ class cl_mer_tipocardapio {
          $this->me27_i_codigo = $me27_i_codigo;
        }
      }
-     if(($this->me27_i_codigo == null) || ($this->me27_i_codigo == "") ){
+     if(($this->me27_i_codigo == null) || ($this->me27_i_codigo === 0 || $this->me27_i_codigo === 0.0 || $this->me27_i_codigo == "") ){
        $this->erro_sql = " Campo me27_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,12 +69,12 @@ class cl_usuariosunidade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd25_i_usuario = ($this->sd25_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_usuario"]:$this->sd25_i_usuario);
-       $this->sd25_i_unidade = ($this->sd25_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_unidade"]:$this->sd25_i_unidade);
+       $this->sd25_i_usuario = ($this->sd25_i_usuario === 0 || $this->sd25_i_usuario === 0.0 || $this->sd25_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_usuario"]:$this->sd25_i_usuario);
+       $this->sd25_i_unidade = ($this->sd25_i_unidade === 0 || $this->sd25_i_unidade === 0.0 || $this->sd25_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_unidade"]:$this->sd25_i_unidade);
        $this->sd25_b_ativo = ($this->sd25_b_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["sd25_b_ativo"]:$this->sd25_b_ativo);
      }else{
-       $this->sd25_i_usuario = ($this->sd25_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_usuario"]:$this->sd25_i_usuario);
-       $this->sd25_i_unidade = ($this->sd25_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_unidade"]:$this->sd25_i_unidade);
+       $this->sd25_i_usuario = ($this->sd25_i_usuario === 0 || $this->sd25_i_usuario === 0.0 || $this->sd25_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_usuario"]:$this->sd25_i_usuario);
+       $this->sd25_i_unidade = ($this->sd25_i_unidade === 0 || $this->sd25_i_unidade === 0.0 || $this->sd25_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd25_i_unidade"]:$this->sd25_i_unidade);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_usuariosunidade {
      }
        $this->sd25_i_usuario = $sd25_i_usuario;
        $this->sd25_i_unidade = $sd25_i_unidade;
-     if(($this->sd25_i_usuario == null) || ($this->sd25_i_usuario == "") ){
+     if(($this->sd25_i_usuario == null) || ($this->sd25_i_usuario === 0 || $this->sd25_i_usuario === 0.0 || $this->sd25_i_usuario == "") ){
        $this->erro_sql = " Campo sd25_i_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_usuariosunidade {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sd25_i_unidade == null) || ($this->sd25_i_unidade == "") ){
+     if(($this->sd25_i_unidade == null) || ($this->sd25_i_unidade === 0 || $this->sd25_i_unidade === 0.0 || $this->sd25_i_unidade == "") ){
        $this->erro_sql = " Campo sd25_i_unidade nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

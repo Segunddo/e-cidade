@@ -64,7 +64,7 @@ if(isset($incluir)){
         continue;
       }
       $poslinha = substr($poslinha,1,strlen($poslinha));
-      $arr_poslinha =explode($separador,$poslinha);
+      $arr_poslinha = (preg_match('#(^|[^\\\\])\|(\||$)|^\|#', $separador) ? false : preg_split('#' . str_replace('#', '\#', $separador) . '#m',$poslinha)); // split() POSIX: $separador (digitado) e REGEX, nao literal; alternativa vazia era erro (false)
       $datas = $arr_poslinha[0];
       $valor = $arr_poslinha[1];
 

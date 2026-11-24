@@ -83,7 +83,7 @@ function VerificaFeriado($data_original,$feriado,$msg){
    global $msg;
    $msg = true;
   }
-  $nova_data = date("Y-m-d",mktime (0,0,0,substr($data_original,5,2),substr($data_original,8,2)+1,substr($data_original,0,4)));
+  $nova_data = date("Y-m-d",(is_numeric(substr($data_original,0,4)) ? mktime (0,0,0,(int)substr($data_original,5,2),(int)substr($data_original,8,2)+1,(int)substr($data_original,0,4)) : false));
  }
  if(!isset($nova_data)){
   $nova_data = $data_original;
@@ -92,22 +92,22 @@ function VerificaFeriado($data_original,$feriado,$msg){
 }
 
 function VerificaSabDom($data_original,$msg){
- if(date("w",mktime (0,0,0,substr($data_original,5,2),substr($data_original,8,2),substr($data_original,0,4))) == 6){
+ if(date("w",(is_numeric(substr($data_original,0,4)) ? mktime (0,0,0,(int)substr($data_original,5,2),(int)substr($data_original,8,2),(int)substr($data_original,0,4)) : false)) == 6){
   //Se data for sábado, avança dois dias, para cair na segunda.
   if($msg==false){
    db_msgbox("Data de devolução (".db_formatar($data_original,'d').") é um sábado!\\nO sistema avançou para uma data válida seguinte ao sábado.");
    global $msg;
    $msg = true;
   }
-  $nova_data = date("Y-m-d",mktime (0,0,0,substr($data_original,5,2),substr($data_original,8,2)+2,substr($data_original,0,4)));
- }elseif(date("w",mktime (0,0,0,substr($data_original,5,2),substr($data_original,8,2),substr($data_original,0,4))) == 0){
+  $nova_data = date("Y-m-d",(is_numeric(substr($data_original,0,4)) ? mktime (0,0,0,(int)substr($data_original,5,2),(int)substr($data_original,8,2)+2,(int)substr($data_original,0,4)) : false));
+ }elseif(date("w",(is_numeric(substr($data_original,0,4)) ? mktime (0,0,0,(int)substr($data_original,5,2),(int)substr($data_original,8,2),(int)substr($data_original,0,4)) : false)) == 0){
   //Se data for domingo, avança um dia, para cair na segunda.
   if($msg==false){
    db_msgbox("Data de devolução (".db_formatar($data_original,'d').") é um domingo!\\nO sistema avançou para uma data válida seguinte ao domingo.");
    global $msg;
    $msg = true;
   }
-  $nova_data = date("Y-m-d",mktime (0,0,0,substr($data_original,5,2),substr($data_original,8,2)+1,substr($data_original,0,4)));
+  $nova_data = date("Y-m-d",(is_numeric(substr($data_original,0,4)) ? mktime (0,0,0,(int)substr($data_original,5,2),(int)substr($data_original,8,2)+1,(int)substr($data_original,0,4)) : false));
  }else{
   $nova_data = $data_original;
  }

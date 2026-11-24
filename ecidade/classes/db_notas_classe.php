@@ -76,7 +76,7 @@ class cl_notas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed11_i_codigo = ($this->ed11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_codigo"]:$this->ed11_i_codigo);
+       $this->ed11_i_codigo = ($this->ed11_i_codigo === 0 || $this->ed11_i_codigo === 0.0 || $this->ed11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_codigo"]:$this->ed11_i_codigo);
        if($this->ed11_d_data == ""){
          $this->ed11_d_data_dia = ($this->ed11_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_d_data_dia"]:$this->ed11_d_data_dia);
          $this->ed11_d_data_mes = ($this->ed11_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_d_data_mes"]:$this->ed11_d_data_mes);
@@ -85,11 +85,11 @@ class cl_notas {
             $this->ed11_d_data = $this->ed11_d_data_ano."-".$this->ed11_d_data_mes."-".$this->ed11_d_data_dia;
          }
        }
-       $this->ed11_i_matriculas = ($this->ed11_i_matriculas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_matriculas"]:$this->ed11_i_matriculas);
-       $this->ed11_f_media = ($this->ed11_f_media == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_f_media"]:$this->ed11_f_media);
+       $this->ed11_i_matriculas = ($this->ed11_i_matriculas === 0 || $this->ed11_i_matriculas === 0.0 || $this->ed11_i_matriculas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_matriculas"]:$this->ed11_i_matriculas);
+       $this->ed11_f_media = ($this->ed11_f_media === 0 || $this->ed11_f_media === 0.0 || $this->ed11_f_media == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_f_media"]:$this->ed11_f_media);
        $this->ed11_c_fechado = ($this->ed11_c_fechado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_c_fechado"]:$this->ed11_c_fechado);
      }else{
-       $this->ed11_i_codigo = ($this->ed11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_codigo"]:$this->ed11_i_codigo);
+       $this->ed11_i_codigo = ($this->ed11_i_codigo === 0 || $this->ed11_i_codigo === 0.0 || $this->ed11_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed11_i_codigo"]:$this->ed11_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_notas {
          $this->ed11_i_codigo = $ed11_i_codigo;
        }
      }
-     if(($this->ed11_i_codigo == null) || ($this->ed11_i_codigo == "") ){
+     if(($this->ed11_i_codigo == null) || ($this->ed11_i_codigo === 0 || $this->ed11_i_codigo === 0.0 || $this->ed11_i_codigo == "") ){
        $this->erro_sql = " Campo ed11_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

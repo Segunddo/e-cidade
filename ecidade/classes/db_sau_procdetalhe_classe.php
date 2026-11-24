@@ -73,13 +73,13 @@ class cl_sau_procdetalhe {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd74_i_codigo = ($this->sd74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_codigo"]:$this->sd74_i_codigo);
-       $this->sd74_i_procedimento = ($this->sd74_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_procedimento"]:$this->sd74_i_procedimento);
-       $this->sd74_i_detalhe = ($this->sd74_i_detalhe == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_detalhe"]:$this->sd74_i_detalhe);
-       $this->sd74_i_anocomp = ($this->sd74_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_anocomp"]:$this->sd74_i_anocomp);
-       $this->sd74_i_mescomp = ($this->sd74_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_mescomp"]:$this->sd74_i_mescomp);
+       $this->sd74_i_codigo = ($this->sd74_i_codigo === 0 || $this->sd74_i_codigo === 0.0 || $this->sd74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_codigo"]:$this->sd74_i_codigo);
+       $this->sd74_i_procedimento = ($this->sd74_i_procedimento === 0 || $this->sd74_i_procedimento === 0.0 || $this->sd74_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_procedimento"]:$this->sd74_i_procedimento);
+       $this->sd74_i_detalhe = ($this->sd74_i_detalhe === 0 || $this->sd74_i_detalhe === 0.0 || $this->sd74_i_detalhe == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_detalhe"]:$this->sd74_i_detalhe);
+       $this->sd74_i_anocomp = ($this->sd74_i_anocomp === 0 || $this->sd74_i_anocomp === 0.0 || $this->sd74_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_anocomp"]:$this->sd74_i_anocomp);
+       $this->sd74_i_mescomp = ($this->sd74_i_mescomp === 0 || $this->sd74_i_mescomp === 0.0 || $this->sd74_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_mescomp"]:$this->sd74_i_mescomp);
      }else{
-       $this->sd74_i_codigo = ($this->sd74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_codigo"]:$this->sd74_i_codigo);
+       $this->sd74_i_codigo = ($this->sd74_i_codigo === 0 || $this->sd74_i_codigo === 0.0 || $this->sd74_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd74_i_codigo"]:$this->sd74_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_sau_procdetalhe {
          $this->sd74_i_codigo = $sd74_i_codigo;
        }
      }
-     if(($this->sd74_i_codigo == null) || ($this->sd74_i_codigo == "") ){
+     if(($this->sd74_i_codigo == null) || ($this->sd74_i_codigo === 0 || $this->sd74_i_codigo === 0.0 || $this->sd74_i_codigo == "") ){
        $this->erro_sql = " Campo sd74_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

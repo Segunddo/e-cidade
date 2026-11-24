@@ -45,11 +45,11 @@ class cl_necessidadealunocadeirante
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed189_sequencial = ($this->ed189_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed189_sequencial"]:$this->ed189_sequencial);
-       $this->ed189_aluno = ($this->ed189_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed189_aluno"]:$this->ed189_aluno);
-       $this->ed189_necessidade = ($this->ed189_necessidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed189_necessidade"]:$this->ed189_necessidade);
+       $this->ed189_sequencial = ($this->ed189_sequencial === 0 || $this->ed189_sequencial === 0.0 || $this->ed189_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed189_sequencial"]:$this->ed189_sequencial);
+       $this->ed189_aluno = ($this->ed189_aluno === 0 || $this->ed189_aluno === 0.0 || $this->ed189_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed189_aluno"]:$this->ed189_aluno);
+       $this->ed189_necessidade = ($this->ed189_necessidade === 0 || $this->ed189_necessidade === 0.0 || $this->ed189_necessidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed189_necessidade"]:$this->ed189_necessidade);
      }else{
-       $this->ed189_sequencial = ($this->ed189_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed189_sequencial"]:$this->ed189_sequencial);
+       $this->ed189_sequencial = ($this->ed189_sequencial === 0 || $this->ed189_sequencial === 0.0 || $this->ed189_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed189_sequencial"]:$this->ed189_sequencial);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_necessidadealunocadeirante
          $this->ed189_sequencial = $ed189_sequencial; 
        }
      }
-     if(($this->ed189_sequencial == null) || ($this->ed189_sequencial == "") ){ 
+     if(($this->ed189_sequencial == null) || ($this->ed189_sequencial === 0 || $this->ed189_sequencial === 0.0 || $this->ed189_sequencial == "") ){ 
        $this->erro_sql = " Campo ed189_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

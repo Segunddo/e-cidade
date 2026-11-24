@@ -67,10 +67,10 @@ class cl_mer_intoleranciaalimentar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me33_i_codigo = ($this->me33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me33_i_codigo"]:$this->me33_i_codigo);
+       $this->me33_i_codigo = ($this->me33_i_codigo === 0 || $this->me33_i_codigo === 0.0 || $this->me33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me33_i_codigo"]:$this->me33_i_codigo);
        $this->me33_c_descr = ($this->me33_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["me33_c_descr"]:$this->me33_c_descr);
      }else{
-       $this->me33_i_codigo = ($this->me33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me33_i_codigo"]:$this->me33_i_codigo);
+       $this->me33_i_codigo = ($this->me33_i_codigo === 0 || $this->me33_i_codigo === 0.0 || $this->me33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me33_i_codigo"]:$this->me33_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_mer_intoleranciaalimentar {
          $this->me33_i_codigo = $me33_i_codigo;
        }
      }
-     if(($this->me33_i_codigo == null) || ($this->me33_i_codigo == "") ){
+     if(($this->me33_i_codigo == null) || ($this->me33_i_codigo === 0 || $this->me33_i_codigo === 0.0 || $this->me33_i_codigo == "") ){
        $this->erro_sql = " Campo me33_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

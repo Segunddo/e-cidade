@@ -69,11 +69,11 @@ class cl_procnivel {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd28_i_seq = ($this->sd28_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_seq"]:$this->sd28_i_seq);
-       $this->sd28_i_procedimento = ($this->sd28_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_procedimento"]:$this->sd28_i_procedimento);
-       $this->sd28_i_nivel = ($this->sd28_i_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_nivel"]:$this->sd28_i_nivel);
+       $this->sd28_i_seq = ($this->sd28_i_seq === 0 || $this->sd28_i_seq === 0.0 || $this->sd28_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_seq"]:$this->sd28_i_seq);
+       $this->sd28_i_procedimento = ($this->sd28_i_procedimento === 0 || $this->sd28_i_procedimento === 0.0 || $this->sd28_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_procedimento"]:$this->sd28_i_procedimento);
+       $this->sd28_i_nivel = ($this->sd28_i_nivel === 0 || $this->sd28_i_nivel === 0.0 || $this->sd28_i_nivel == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_nivel"]:$this->sd28_i_nivel);
      }else{
-       $this->sd28_i_seq = ($this->sd28_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_seq"]:$this->sd28_i_seq);
+       $this->sd28_i_seq = ($this->sd28_i_seq === 0 || $this->sd28_i_seq === 0.0 || $this->sd28_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["sd28_i_seq"]:$this->sd28_i_seq);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_procnivel {
          $this->sd28_i_seq = $sd28_i_seq;
        }
      }
-     if(($this->sd28_i_seq == null) || ($this->sd28_i_seq == "") ){
+     if(($this->sd28_i_seq == null) || ($this->sd28_i_seq === 0 || $this->sd28_i_seq === 0.0 || $this->sd28_i_seq == "") ){
        $this->erro_sql = " Campo sd28_i_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

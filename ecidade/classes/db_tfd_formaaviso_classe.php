@@ -67,10 +67,10 @@ class cl_tfd_formaaviso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf20_i_codigo = ($this->tf20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf20_i_codigo"]:$this->tf20_i_codigo);
+       $this->tf20_i_codigo = ($this->tf20_i_codigo === 0 || $this->tf20_i_codigo === 0.0 || $this->tf20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf20_i_codigo"]:$this->tf20_i_codigo);
        $this->tf20_c_descr = ($this->tf20_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["tf20_c_descr"]:$this->tf20_c_descr);
      }else{
-       $this->tf20_i_codigo = ($this->tf20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf20_i_codigo"]:$this->tf20_i_codigo);
+       $this->tf20_i_codigo = ($this->tf20_i_codigo === 0 || $this->tf20_i_codigo === 0.0 || $this->tf20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf20_i_codigo"]:$this->tf20_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tfd_formaaviso {
          $this->tf20_i_codigo = $tf20_i_codigo;
        }
      }
-     if(($this->tf20_i_codigo == null) || ($this->tf20_i_codigo == "") ){
+     if(($this->tf20_i_codigo == null) || ($this->tf20_i_codigo === 0 || $this->tf20_i_codigo === 0.0 || $this->tf20_i_codigo == "") ){
        $this->erro_sql = " Campo tf20_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

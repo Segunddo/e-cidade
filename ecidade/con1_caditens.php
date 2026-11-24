@@ -36,7 +36,7 @@ $cldb_syscadproced = new cl_db_syscadproced;
 $cldb_syscadproced->rotulo->label();
 
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING'] ?? ''), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(isset($retorno)) {
   $sql = "SELECT *
           FROM db_itensmenu i

@@ -67,10 +67,10 @@ class cl_sau_tiposatendimento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s145_i_codigo = ($this->s145_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s145_i_codigo"]:$this->s145_i_codigo);
+       $this->s145_i_codigo = ($this->s145_i_codigo === 0 || $this->s145_i_codigo === 0.0 || $this->s145_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s145_i_codigo"]:$this->s145_i_codigo);
        $this->s145_c_descr = ($this->s145_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["s145_c_descr"]:$this->s145_c_descr);
      }else{
-       $this->s145_i_codigo = ($this->s145_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s145_i_codigo"]:$this->s145_i_codigo);
+       $this->s145_i_codigo = ($this->s145_i_codigo === 0 || $this->s145_i_codigo === 0.0 || $this->s145_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s145_i_codigo"]:$this->s145_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_tiposatendimento {
          $this->s145_i_codigo = $s145_i_codigo;
        }
      }
-     if(($this->s145_i_codigo == null) || ($this->s145_i_codigo == "") ){
+     if(($this->s145_i_codigo == null) || ($this->s145_i_codigo === 0 || $this->s145_i_codigo === 0.0 || $this->s145_i_codigo == "") ){
        $this->erro_sql = " Campo s145_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

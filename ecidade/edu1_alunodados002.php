@@ -56,7 +56,7 @@ $iOpcaoFiliacao = 2;
 $ed47_v_nomesocial = isset($ed47_v_nomesocial) ? $ed47_v_nomesocial : "";
 
 $sqlParametros = "select ed290_habilitarcampostransescolar from secretariadeeducacao.sec_parametros";
-$resultHabilitarCamposTransescolar = pg_fetch_assoc(db_query($sqlParametros));
+$resultHabilitarCamposTransescolar = (($rsParametros = db_query($sqlParametros)) ? pg_fetch_assoc($rsParametros) : null);
 $habilitarCamposTransescolar = $resultHabilitarCamposTransescolar['ed290_habilitarcampostransescolar']  == 't' ? 'S' : 'N';
 
 function TiraEspacoNome($nome)

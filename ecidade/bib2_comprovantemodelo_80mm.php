@@ -1,5 +1,5 @@
 <?php
-$iAcervosEmprestados = count( $oDadosEmprestimos->aAcervos );
+$iAcervosEmprestados = count( (array)$oDadosEmprestimos->aAcervos );
 
 $iAltura  = 150;
 $iAltura += ($iAcervosEmprestados * 4) * 2;

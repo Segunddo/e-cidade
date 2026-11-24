@@ -75,14 +75,14 @@ class cl_edu_anexoatolegal {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed292_sequencial = ($this->ed292_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_sequencial"]:$this->ed292_sequencial);
-       $this->ed292_atolegal = ($this->ed292_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_atolegal"]:$this->ed292_atolegal);
+       $this->ed292_sequencial = ($this->ed292_sequencial === 0 || $this->ed292_sequencial === 0.0 || $this->ed292_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_sequencial"]:$this->ed292_sequencial);
+       $this->ed292_atolegal = ($this->ed292_atolegal === 0 || $this->ed292_atolegal === 0.0 || $this->ed292_atolegal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_atolegal"]:$this->ed292_atolegal);
        $this->ed292_nomearquivo = ($this->ed292_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_nomearquivo"]:$this->ed292_nomearquivo);
-       $this->ed292_arquivo = ($this->ed292_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_arquivo"]:$this->ed292_arquivo);
+       $this->ed292_arquivo = ($this->ed292_arquivo === 0 || $this->ed292_arquivo === 0.0 || $this->ed292_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_arquivo"]:$this->ed292_arquivo);
        $this->ed292_obs = ($this->ed292_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_obs"]:$this->ed292_obs);
-       $this->ed292_ordem = ($this->ed292_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_ordem"]:$this->ed292_ordem);
+       $this->ed292_ordem = ($this->ed292_ordem === 0 || $this->ed292_ordem === 0.0 || $this->ed292_ordem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_ordem"]:$this->ed292_ordem);
      }else{
-       $this->ed292_sequencial = ($this->ed292_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_sequencial"]:$this->ed292_sequencial);
+       $this->ed292_sequencial = ($this->ed292_sequencial === 0 || $this->ed292_sequencial === 0.0 || $this->ed292_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed292_sequencial"]:$this->ed292_sequencial);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_edu_anexoatolegal {
          $this->ed292_sequencial = $ed292_sequencial;
        }
      }
-     if(($this->ed292_sequencial == null) || ($this->ed292_sequencial == "") ){
+     if(($this->ed292_sequencial == null) || ($this->ed292_sequencial === 0 || $this->ed292_sequencial === 0.0 || $this->ed292_sequencial == "") ){
        $this->erro_sql = " Campo ed292_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

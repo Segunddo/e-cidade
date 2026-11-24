@@ -75,14 +75,14 @@ class cl_far_requisitanteoutro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa39_i_codigo = ($this->fa39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_codigo"]:$this->fa39_i_codigo);
-       $this->fa39_i_requisitante = ($this->fa39_i_requisitante == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_requisitante"]:$this->fa39_i_requisitante);
+       $this->fa39_i_codigo = ($this->fa39_i_codigo === 0 || $this->fa39_i_codigo === 0.0 || $this->fa39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_codigo"]:$this->fa39_i_codigo);
+       $this->fa39_i_requisitante = ($this->fa39_i_requisitante === 0 || $this->fa39_i_requisitante === 0.0 || $this->fa39_i_requisitante == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_requisitante"]:$this->fa39_i_requisitante);
        $this->fa39_c_nome = ($this->fa39_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_c_nome"]:$this->fa39_c_nome);
        $this->fa39_c_ender = ($this->fa39_c_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_c_ender"]:$this->fa39_c_ender);
-       $this->fa39_i_numero = ($this->fa39_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_numero"]:$this->fa39_i_numero);
-       $this->fa39_i_ident = ($this->fa39_i_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_ident"]:$this->fa39_i_ident);
+       $this->fa39_i_numero = ($this->fa39_i_numero === 0 || $this->fa39_i_numero === 0.0 || $this->fa39_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_numero"]:$this->fa39_i_numero);
+       $this->fa39_i_ident = ($this->fa39_i_ident === 0 || $this->fa39_i_ident === 0.0 || $this->fa39_i_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_ident"]:$this->fa39_i_ident);
      }else{
-       $this->fa39_i_codigo = ($this->fa39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_codigo"]:$this->fa39_i_codigo);
+       $this->fa39_i_codigo = ($this->fa39_i_codigo === 0 || $this->fa39_i_codigo === 0.0 || $this->fa39_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa39_i_codigo"]:$this->fa39_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_far_requisitanteoutro {
          $this->fa39_i_codigo = $fa39_i_codigo;
        }
      }
-     if(($this->fa39_i_codigo == null) || ($this->fa39_i_codigo == "") ){
+     if(($this->fa39_i_codigo == null) || ($this->fa39_i_codigo === 0 || $this->fa39_i_codigo === 0.0 || $this->fa39_i_codigo == "") ){
        $this->erro_sql = " Campo fa39_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

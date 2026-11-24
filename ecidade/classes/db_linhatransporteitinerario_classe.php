@@ -70,11 +70,11 @@ class cl_linhatransporteitinerario {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre09_sequencial = ($this->tre09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre09_sequencial"]:$this->tre09_sequencial);
-       $this->tre09_linhatransporte = ($this->tre09_linhatransporte == ""?@$GLOBALS["HTTP_POST_VARS"]["tre09_linhatransporte"]:$this->tre09_linhatransporte);
-       $this->tre09_tipo = ($this->tre09_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["tre09_tipo"]:$this->tre09_tipo);
+       $this->tre09_sequencial = ($this->tre09_sequencial === 0 || $this->tre09_sequencial === 0.0 || $this->tre09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre09_sequencial"]:$this->tre09_sequencial);
+       $this->tre09_linhatransporte = ($this->tre09_linhatransporte === 0 || $this->tre09_linhatransporte === 0.0 || $this->tre09_linhatransporte == ""?@$GLOBALS["HTTP_POST_VARS"]["tre09_linhatransporte"]:$this->tre09_linhatransporte);
+       $this->tre09_tipo = ($this->tre09_tipo === 0 || $this->tre09_tipo === 0.0 || $this->tre09_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["tre09_tipo"]:$this->tre09_tipo);
      }else{
-       $this->tre09_sequencial = ($this->tre09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre09_sequencial"]:$this->tre09_sequencial);
+       $this->tre09_sequencial = ($this->tre09_sequencial === 0 || $this->tre09_sequencial === 0.0 || $this->tre09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre09_sequencial"]:$this->tre09_sequencial);
      }
    }
    // funcao para inclusao
@@ -122,7 +122,7 @@ class cl_linhatransporteitinerario {
          $this->tre09_sequencial = $tre09_sequencial;
        }
      }
-     if(($this->tre09_sequencial == null) || ($this->tre09_sequencial == "") ){
+     if(($this->tre09_sequencial == null) || ($this->tre09_sequencial === 0 || $this->tre09_sequencial === 0.0 || $this->tre09_sequencial == "") ){
        $this->erro_sql = " Campo tre09_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

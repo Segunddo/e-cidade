@@ -69,11 +69,11 @@ class cl_sau_triagemprocsf {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s147_i_codigo = ($this->s147_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s147_i_codigo"]:$this->s147_i_codigo);
-       $this->s147_i_triagem = ($this->s147_i_triagem == ""?@$GLOBALS["HTTP_POST_VARS"]["s147_i_triagem"]:$this->s147_i_triagem);
-       $this->s147_i_procsf = ($this->s147_i_procsf == ""?@$GLOBALS["HTTP_POST_VARS"]["s147_i_procsf"]:$this->s147_i_procsf);
+       $this->s147_i_codigo = ($this->s147_i_codigo === 0 || $this->s147_i_codigo === 0.0 || $this->s147_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s147_i_codigo"]:$this->s147_i_codigo);
+       $this->s147_i_triagem = ($this->s147_i_triagem === 0 || $this->s147_i_triagem === 0.0 || $this->s147_i_triagem == ""?@$GLOBALS["HTTP_POST_VARS"]["s147_i_triagem"]:$this->s147_i_triagem);
+       $this->s147_i_procsf = ($this->s147_i_procsf === 0 || $this->s147_i_procsf === 0.0 || $this->s147_i_procsf == ""?@$GLOBALS["HTTP_POST_VARS"]["s147_i_procsf"]:$this->s147_i_procsf);
      }else{
-       $this->s147_i_codigo = ($this->s147_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s147_i_codigo"]:$this->s147_i_codigo);
+       $this->s147_i_codigo = ($this->s147_i_codigo === 0 || $this->s147_i_codigo === 0.0 || $this->s147_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s147_i_codigo"]:$this->s147_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_sau_triagemprocsf {
          $this->s147_i_codigo = $s147_i_codigo;
        }
      }
-     if(($this->s147_i_codigo == null) || ($this->s147_i_codigo == "") ){
+     if(($this->s147_i_codigo == null) || ($this->s147_i_codigo === 0 || $this->s147_i_codigo === 0.0 || $this->s147_i_codigo == "") ){
        $this->erro_sql = " Campo s147_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

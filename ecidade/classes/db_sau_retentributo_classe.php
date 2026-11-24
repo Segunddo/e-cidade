@@ -67,10 +67,10 @@ class cl_sau_retentributo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd39_i_cod_reten = ($this->sd39_i_cod_reten == ""?@$GLOBALS["HTTP_POST_VARS"]["sd39_i_cod_reten"]:$this->sd39_i_cod_reten);
+       $this->sd39_i_cod_reten = ($this->sd39_i_cod_reten === 0 || $this->sd39_i_cod_reten === 0.0 || $this->sd39_i_cod_reten == ""?@$GLOBALS["HTTP_POST_VARS"]["sd39_i_cod_reten"]:$this->sd39_i_cod_reten);
        $this->sd39_v_situacao = ($this->sd39_v_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd39_v_situacao"]:$this->sd39_v_situacao);
      }else{
-       $this->sd39_i_cod_reten = ($this->sd39_i_cod_reten == ""?@$GLOBALS["HTTP_POST_VARS"]["sd39_i_cod_reten"]:$this->sd39_i_cod_reten);
+       $this->sd39_i_cod_reten = ($this->sd39_i_cod_reten === 0 || $this->sd39_i_cod_reten === 0.0 || $this->sd39_i_cod_reten == ""?@$GLOBALS["HTTP_POST_VARS"]["sd39_i_cod_reten"]:$this->sd39_i_cod_reten);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sau_retentributo {
        return false;
      }
        $this->sd39_i_cod_reten = $sd39_i_cod_reten;
-     if(($this->sd39_i_cod_reten == null) || ($this->sd39_i_cod_reten == "") ){
+     if(($this->sd39_i_cod_reten == null) || ($this->sd39_i_cod_reten === 0 || $this->sd39_i_cod_reten === 0.0 || $this->sd39_i_cod_reten == "") ){
        $this->erro_sql = " Campo sd39_i_cod_reten nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

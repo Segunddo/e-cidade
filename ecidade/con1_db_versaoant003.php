@@ -31,7 +31,10 @@ include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_db_versaoant_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? "", $queryString);
+if (isset($queryString["chavepesquisa"])) {
+  $chavepesquisa = $queryString["chavepesquisa"];
+}
 db_postmemory($HTTP_POST_VARS);
 $cldb_versaoant = new cl_db_versaoant;
 $db_botao = false;

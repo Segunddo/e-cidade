@@ -108,10 +108,10 @@ class cl_tfd_pedidotfd {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf01_i_codigo = ($this->tf01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_codigo"]:$this->tf01_i_codigo);
-       $this->tf01_i_cgsund = ($this->tf01_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_cgsund"]:$this->tf01_i_cgsund);
-       $this->tf01_i_tipotransporte = ($this->tf01_i_tipotransporte == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_tipotransporte"]:$this->tf01_i_tipotransporte);
-       $this->tf01_i_rhcbo = ($this->tf01_i_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_rhcbo"]:$this->tf01_i_rhcbo);
+       $this->tf01_i_codigo = ($this->tf01_i_codigo === 0 || $this->tf01_i_codigo === 0.0 || $this->tf01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_codigo"]:$this->tf01_i_codigo);
+       $this->tf01_i_cgsund = ($this->tf01_i_cgsund === 0 || $this->tf01_i_cgsund === 0.0 || $this->tf01_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_cgsund"]:$this->tf01_i_cgsund);
+       $this->tf01_i_tipotransporte = ($this->tf01_i_tipotransporte === 0 || $this->tf01_i_tipotransporte === 0.0 || $this->tf01_i_tipotransporte == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_tipotransporte"]:$this->tf01_i_tipotransporte);
+       $this->tf01_i_rhcbo = ($this->tf01_i_rhcbo === 0 || $this->tf01_i_rhcbo === 0.0 || $this->tf01_i_rhcbo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_rhcbo"]:$this->tf01_i_rhcbo);
        if($this->tf01_d_datapedido == ""){
          $this->tf01_d_datapedido_dia = ($this->tf01_d_datapedido_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_d_datapedido_dia"]:$this->tf01_d_datapedido_dia);
          $this->tf01_d_datapedido_mes = ($this->tf01_d_datapedido_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_d_datapedido_mes"]:$this->tf01_d_datapedido_mes);
@@ -128,10 +128,10 @@ class cl_tfd_pedidotfd {
             $this->tf01_d_datapreferencia = $this->tf01_d_datapreferencia_ano."-".$this->tf01_d_datapreferencia_mes."-".$this->tf01_d_datapreferencia_dia;
          }
        }
-       $this->tf01_i_depto = ($this->tf01_i_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_depto"]:$this->tf01_i_depto);
-       $this->tf01_i_situacao = ($this->tf01_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_situacao"]:$this->tf01_i_situacao);
-       $this->tf01_i_tipotratamento = ($this->tf01_i_tipotratamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_tipotratamento"]:$this->tf01_i_tipotratamento);
-       $this->tf01_i_emergencia = ($this->tf01_i_emergencia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_emergencia"]:$this->tf01_i_emergencia);
+       $this->tf01_i_depto = ($this->tf01_i_depto === 0 || $this->tf01_i_depto === 0.0 || $this->tf01_i_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_depto"]:$this->tf01_i_depto);
+       $this->tf01_i_situacao = ($this->tf01_i_situacao === 0 || $this->tf01_i_situacao === 0.0 || $this->tf01_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_situacao"]:$this->tf01_i_situacao);
+       $this->tf01_i_tipotratamento = ($this->tf01_i_tipotratamento === 0 || $this->tf01_i_tipotratamento === 0.0 || $this->tf01_i_tipotratamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_tipotratamento"]:$this->tf01_i_tipotratamento);
+       $this->tf01_i_emergencia = ($this->tf01_i_emergencia === 0 || $this->tf01_i_emergencia === 0.0 || $this->tf01_i_emergencia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_emergencia"]:$this->tf01_i_emergencia);
        $this->tf01_c_passagemplaca = ($this->tf01_c_passagemplaca == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_c_passagemplaca"]:$this->tf01_c_passagemplaca);
        if($this->tf01_d_datasistema == ""){
          $this->tf01_d_datasistema_dia = ($this->tf01_d_datasistema_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_d_datasistema_dia"]:$this->tf01_d_datasistema_dia);
@@ -142,13 +142,13 @@ class cl_tfd_pedidotfd {
          }
        }
        $this->tf01_c_horasistema = ($this->tf01_c_horasistema == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_c_horasistema"]:$this->tf01_c_horasistema);
-       $this->tf01_i_login = ($this->tf01_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_login"]:$this->tf01_i_login);
+       $this->tf01_i_login = ($this->tf01_i_login === 0 || $this->tf01_i_login === 0.0 || $this->tf01_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_login"]:$this->tf01_i_login);
        $this->tf01_t_obs = ($this->tf01_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_t_obs"]:$this->tf01_t_obs);
-       $this->tf01_i_profissionalsolic = ($this->tf01_i_profissionalsolic == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_profissionalsolic"]:$this->tf01_i_profissionalsolic);
+       $this->tf01_i_profissionalsolic = ($this->tf01_i_profissionalsolic === 0 || $this->tf01_i_profissionalsolic === 0.0 || $this->tf01_i_profissionalsolic == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_profissionalsolic"]:$this->tf01_i_profissionalsolic);
        $this->tf01_complespec = ($this->tf01_complespec == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_complespec"]:$this->tf01_complespec);
-       $this->tf01_rhcbosolicitante = ($this->tf01_rhcbosolicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_rhcbosolicitante"]:$this->tf01_rhcbosolicitante);
+       $this->tf01_rhcbosolicitante = ($this->tf01_rhcbosolicitante === 0 || $this->tf01_rhcbosolicitante === 0.0 || $this->tf01_rhcbosolicitante == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_rhcbosolicitante"]:$this->tf01_rhcbosolicitante);
      }else{
-       $this->tf01_i_codigo = ($this->tf01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_codigo"]:$this->tf01_i_codigo);
+       $this->tf01_i_codigo = ($this->tf01_i_codigo === 0 || $this->tf01_i_codigo === 0.0 || $this->tf01_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf01_i_codigo"]:$this->tf01_i_codigo);
      }
    }
    // funcao para inclusao
@@ -298,7 +298,7 @@ class cl_tfd_pedidotfd {
          $this->tf01_i_codigo = $tf01_i_codigo;
        }
      }
-     if(($this->tf01_i_codigo == null) || ($this->tf01_i_codigo == "") ){
+     if(($this->tf01_i_codigo == null) || ($this->tf01_i_codigo === 0 || $this->tf01_i_codigo === 0.0 || $this->tf01_i_codigo == "") ){
        $this->erro_sql = " Campo tf01_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

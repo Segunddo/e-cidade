@@ -115,7 +115,7 @@ class cl_protelac {
                  h19_tpcalc = varchar(1) = Tipo de cálculo 
                  h19_instit = int4 = Código da Instituição";
    //funcao construtor da classe 
-   function cl_protelac() { 
+   function __construct() { 
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("protelac"); 
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -132,19 +132,19 @@ class cl_protelac {
    // funcao para atualizar campos
    function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h19_codigo = ($this->h19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_codigo"]:$this->h19_codigo);
-       $this->h19_assent = ($this->h19_assent == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_assent"]:$this->h19_assent);
+       $this->h19_codigo = ($this->h19_codigo === 0 || $this->h19_codigo === 0.0 || $this->h19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_codigo"]:$this->h19_codigo);
+       $this->h19_assent = ($this->h19_assent === 0 || $this->h19_assent === 0.0 || $this->h19_assent == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_assent"]:$this->h19_assent);
        $this->h19_tipo = ($this->h19_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_tipo"]:$this->h19_tipo);
-       $this->h19_dia01 = ($this->h19_dia01 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia01"]:$this->h19_dia01);
-       $this->h19_dia02 = ($this->h19_dia02 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia02"]:$this->h19_dia02);
-       $this->h19_dia03 = ($this->h19_dia03 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia03"]:$this->h19_dia03);
-       $this->h19_dia04 = ($this->h19_dia04 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia04"]:$this->h19_dia04);
-       $this->h19_dia05 = ($this->h19_dia05 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia05"]:$this->h19_dia05);
-       $this->h19_dia06 = ($this->h19_dia06 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia06"]:$this->h19_dia06);
-       $this->h19_dia07 = ($this->h19_dia07 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia07"]:$this->h19_dia07);
-       $this->h19_dia08 = ($this->h19_dia08 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia08"]:$this->h19_dia08);
-       $this->h19_dia09 = ($this->h19_dia09 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia09"]:$this->h19_dia09);
-       $this->h19_dia10 = ($this->h19_dia10 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia10"]:$this->h19_dia10);
+       $this->h19_dia01 = ($this->h19_dia01 === 0 || $this->h19_dia01 === 0.0 || $this->h19_dia01 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia01"]:$this->h19_dia01);
+       $this->h19_dia02 = ($this->h19_dia02 === 0 || $this->h19_dia02 === 0.0 || $this->h19_dia02 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia02"]:$this->h19_dia02);
+       $this->h19_dia03 = ($this->h19_dia03 === 0 || $this->h19_dia03 === 0.0 || $this->h19_dia03 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia03"]:$this->h19_dia03);
+       $this->h19_dia04 = ($this->h19_dia04 === 0 || $this->h19_dia04 === 0.0 || $this->h19_dia04 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia04"]:$this->h19_dia04);
+       $this->h19_dia05 = ($this->h19_dia05 === 0 || $this->h19_dia05 === 0.0 || $this->h19_dia05 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia05"]:$this->h19_dia05);
+       $this->h19_dia06 = ($this->h19_dia06 === 0 || $this->h19_dia06 === 0.0 || $this->h19_dia06 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia06"]:$this->h19_dia06);
+       $this->h19_dia07 = ($this->h19_dia07 === 0 || $this->h19_dia07 === 0.0 || $this->h19_dia07 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia07"]:$this->h19_dia07);
+       $this->h19_dia08 = ($this->h19_dia08 === 0 || $this->h19_dia08 === 0.0 || $this->h19_dia08 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia08"]:$this->h19_dia08);
+       $this->h19_dia09 = ($this->h19_dia09 === 0 || $this->h19_dia09 === 0.0 || $this->h19_dia09 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia09"]:$this->h19_dia09);
+       $this->h19_dia10 = ($this->h19_dia10 === 0 || $this->h19_dia10 === 0.0 || $this->h19_dia10 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_dia10"]:$this->h19_dia10);
        $this->h19_op01 = ($this->h19_op01 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_op01"]:$this->h19_op01);
        $this->h19_op02 = ($this->h19_op02 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_op02"]:$this->h19_op02);
        $this->h19_op03 = ($this->h19_op03 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_op03"]:$this->h19_op03);
@@ -155,21 +155,21 @@ class cl_protelac {
        $this->h19_op08 = ($this->h19_op08 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_op08"]:$this->h19_op08);
        $this->h19_op09 = ($this->h19_op09 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_op09"]:$this->h19_op09);
        $this->h19_op10 = ($this->h19_op10 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_op10"]:$this->h19_op10);
-       $this->h19_per01 = ($this->h19_per01 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per01"]:$this->h19_per01);
-       $this->h19_per02 = ($this->h19_per02 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per02"]:$this->h19_per02);
-       $this->h19_per03 = ($this->h19_per03 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per03"]:$this->h19_per03);
-       $this->h19_per04 = ($this->h19_per04 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per04"]:$this->h19_per04);
-       $this->h19_per05 = ($this->h19_per05 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per05"]:$this->h19_per05);
-       $this->h19_per06 = ($this->h19_per06 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per06"]:$this->h19_per06);
-       $this->h19_per07 = ($this->h19_per07 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per07"]:$this->h19_per07);
-       $this->h19_per08 = ($this->h19_per08 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per08"]:$this->h19_per08);
-       $this->h19_per09 = ($this->h19_per09 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per09"]:$this->h19_per09);
-       $this->h19_per10 = ($this->h19_per10 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per10"]:$this->h19_per10);
+       $this->h19_per01 = ($this->h19_per01 === 0 || $this->h19_per01 === 0.0 || $this->h19_per01 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per01"]:$this->h19_per01);
+       $this->h19_per02 = ($this->h19_per02 === 0 || $this->h19_per02 === 0.0 || $this->h19_per02 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per02"]:$this->h19_per02);
+       $this->h19_per03 = ($this->h19_per03 === 0 || $this->h19_per03 === 0.0 || $this->h19_per03 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per03"]:$this->h19_per03);
+       $this->h19_per04 = ($this->h19_per04 === 0 || $this->h19_per04 === 0.0 || $this->h19_per04 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per04"]:$this->h19_per04);
+       $this->h19_per05 = ($this->h19_per05 === 0 || $this->h19_per05 === 0.0 || $this->h19_per05 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per05"]:$this->h19_per05);
+       $this->h19_per06 = ($this->h19_per06 === 0 || $this->h19_per06 === 0.0 || $this->h19_per06 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per06"]:$this->h19_per06);
+       $this->h19_per07 = ($this->h19_per07 === 0 || $this->h19_per07 === 0.0 || $this->h19_per07 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per07"]:$this->h19_per07);
+       $this->h19_per08 = ($this->h19_per08 === 0 || $this->h19_per08 === 0.0 || $this->h19_per08 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per08"]:$this->h19_per08);
+       $this->h19_per09 = ($this->h19_per09 === 0 || $this->h19_per09 === 0.0 || $this->h19_per09 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per09"]:$this->h19_per09);
+       $this->h19_per10 = ($this->h19_per10 === 0 || $this->h19_per10 === 0.0 || $this->h19_per10 == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_per10"]:$this->h19_per10);
        $this->h19_tpcalc = ($this->h19_tpcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_tpcalc"]:$this->h19_tpcalc);
-       $this->h19_instit = ($this->h19_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_instit"]:$this->h19_instit);
+       $this->h19_instit = ($this->h19_instit === 0 || $this->h19_instit === 0.0 || $this->h19_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_instit"]:$this->h19_instit);
      }else{
-       $this->h19_codigo = ($this->h19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_codigo"]:$this->h19_codigo);
-       $this->h19_instit = ($this->h19_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_instit"]:$this->h19_instit);
+       $this->h19_codigo = ($this->h19_codigo === 0 || $this->h19_codigo === 0.0 || $this->h19_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_codigo"]:$this->h19_codigo);
+       $this->h19_instit = ($this->h19_instit === 0 || $this->h19_instit === 0.0 || $this->h19_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["h19_instit"]:$this->h19_instit);
 
      }
    }
@@ -301,7 +301,7 @@ class cl_protelac {
          $this->h19_codigo = $h19_codigo; 
        }
      }
-     if(($this->h19_codigo == null) || ($this->h19_codigo == "") ){ 
+     if(($this->h19_codigo == null) || ($this->h19_codigo === 0 || $this->h19_codigo === 0.0 || $this->h19_codigo == "") ){ 
        $this->erro_sql = " Campo h19_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -310,7 +310,7 @@ class cl_protelac {
        return false;
      }
 
-     if($this->h19_instit == null || ($this->h19_instit == "")){ 
+     if($this->h19_instit == null || ($this->h19_instit === 0 || $this->h19_instit === 0.0 || $this->h19_instit == "")){ 
       $this->erro_sql = " Campo código da instituição não informado.";
       $this->erro_campo = "h19_instit";
       $this->erro_banco = "";

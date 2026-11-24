@@ -79,16 +79,16 @@ class cl_pontoparada {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre04_sequencial = ($this->tre04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_sequencial"]:$this->tre04_sequencial);
-       $this->tre04_cadenderbairrocadenderrua = ($this->tre04_cadenderbairrocadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_cadenderbairrocadenderrua"]:$this->tre04_cadenderbairrocadenderrua);
+       $this->tre04_sequencial = ($this->tre04_sequencial === 0 || $this->tre04_sequencial === 0.0 || $this->tre04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_sequencial"]:$this->tre04_sequencial);
+       $this->tre04_cadenderbairrocadenderrua = ($this->tre04_cadenderbairrocadenderrua === 0 || $this->tre04_cadenderbairrocadenderrua === 0.0 || $this->tre04_cadenderbairrocadenderrua == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_cadenderbairrocadenderrua"]:$this->tre04_cadenderbairrocadenderrua);
        $this->tre04_nome = ($this->tre04_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_nome"]:$this->tre04_nome);
        $this->tre04_abreviatura = ($this->tre04_abreviatura == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_abreviatura"]:$this->tre04_abreviatura);
        $this->tre04_pontoreferencia = ($this->tre04_pontoreferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_pontoreferencia"]:$this->tre04_pontoreferencia);
-       $this->tre04_latitude = ($this->tre04_latitude == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_latitude"]:$this->tre04_latitude);
-       $this->tre04_longitude = ($this->tre04_longitude == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_longitude"]:$this->tre04_longitude);
-       $this->tre04_tipo = ($this->tre04_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_tipo"]:$this->tre04_tipo);
+       $this->tre04_latitude = ($this->tre04_latitude === 0 || $this->tre04_latitude === 0.0 || $this->tre04_latitude == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_latitude"]:$this->tre04_latitude);
+       $this->tre04_longitude = ($this->tre04_longitude === 0 || $this->tre04_longitude === 0.0 || $this->tre04_longitude == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_longitude"]:$this->tre04_longitude);
+       $this->tre04_tipo = ($this->tre04_tipo === 0 || $this->tre04_tipo === 0.0 || $this->tre04_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_tipo"]:$this->tre04_tipo);
      }else{
-       $this->tre04_sequencial = ($this->tre04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_sequencial"]:$this->tre04_sequencial);
+       $this->tre04_sequencial = ($this->tre04_sequencial === 0 || $this->tre04_sequencial === 0.0 || $this->tre04_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre04_sequencial"]:$this->tre04_sequencial);
      }
    }
    // funcao para inclusao
@@ -160,7 +160,7 @@ class cl_pontoparada {
          $this->tre04_sequencial = $tre04_sequencial;
        }
      }
-     if(($this->tre04_sequencial == null) || ($this->tre04_sequencial == "") ){
+     if(($this->tre04_sequencial == null) || ($this->tre04_sequencial === 0 || $this->tre04_sequencial === 0.0 || $this->tre04_sequencial == "") ){
        $this->erro_sql = " Campo tre04_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

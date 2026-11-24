@@ -67,10 +67,10 @@ class cl_tipoato {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed83_i_codigo = ($this->ed83_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed83_i_codigo"]:$this->ed83_i_codigo);
+       $this->ed83_i_codigo = ($this->ed83_i_codigo === 0 || $this->ed83_i_codigo === 0.0 || $this->ed83_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed83_i_codigo"]:$this->ed83_i_codigo);
        $this->ed83_c_descr = ($this->ed83_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed83_c_descr"]:$this->ed83_c_descr);
      }else{
-       $this->ed83_i_codigo = ($this->ed83_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed83_i_codigo"]:$this->ed83_i_codigo);
+       $this->ed83_i_codigo = ($this->ed83_i_codigo === 0 || $this->ed83_i_codigo === 0.0 || $this->ed83_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed83_i_codigo"]:$this->ed83_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_tipoato {
          $this->ed83_i_codigo = $ed83_i_codigo;
        }
      }
-     if(($this->ed83_i_codigo == null) || ($this->ed83_i_codigo == "") ){
+     if(($this->ed83_i_codigo == null) || ($this->ed83_i_codigo === 0 || $this->ed83_i_codigo === 0.0 || $this->ed83_i_codigo == "") ){
        $this->erro_sql = " Campo ed83_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -136,7 +136,7 @@ if ($oGet->iTipoOrdem == 1) {
 
 $rsResult = db_query($sSql);
 
-if (pg_numrows($rsResult) == 0) {
+if (($rsResult ? pg_numrows($rsResult) : null) == 0) {
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Códigos cadastrados no período de '.$iMes.' / '.$iAno);
 
 }

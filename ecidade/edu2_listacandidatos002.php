@@ -84,7 +84,7 @@ $sql     .= "         OR ($where_cal ";
 $sql     .= "         ( alunocurso.ed56_c_situacao='APROVADO' OR alunocurso.ed56_c_situacao='REPETENTE'))) ";
 $sql     .= "  ORDER BY ed52_i_codigo, ed56_c_situacao, ed11_i_sequencia ";
 $result   = db_query( $sql );
-$linhas   = pg_numrows( $result );
+$linhas   = ($result ? pg_numrows( $result ) : null);
 
 if ( $linhas == 0 ) {?>
 

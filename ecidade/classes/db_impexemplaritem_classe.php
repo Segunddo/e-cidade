@@ -69,11 +69,11 @@ class cl_impexemplaritem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi25_codigo = ($this->bi25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi25_codigo"]:$this->bi25_codigo);
-       $this->bi25_impexemplar = ($this->bi25_impexemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi25_impexemplar"]:$this->bi25_impexemplar);
-       $this->bi25_exemplar = ($this->bi25_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi25_exemplar"]:$this->bi25_exemplar);
+       $this->bi25_codigo = ($this->bi25_codigo === 0 || $this->bi25_codigo === 0.0 || $this->bi25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi25_codigo"]:$this->bi25_codigo);
+       $this->bi25_impexemplar = ($this->bi25_impexemplar === 0 || $this->bi25_impexemplar === 0.0 || $this->bi25_impexemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi25_impexemplar"]:$this->bi25_impexemplar);
+       $this->bi25_exemplar = ($this->bi25_exemplar === 0 || $this->bi25_exemplar === 0.0 || $this->bi25_exemplar == ""?@$GLOBALS["HTTP_POST_VARS"]["bi25_exemplar"]:$this->bi25_exemplar);
      }else{
-       $this->bi25_codigo = ($this->bi25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi25_codigo"]:$this->bi25_codigo);
+       $this->bi25_codigo = ($this->bi25_codigo === 0 || $this->bi25_codigo === 0.0 || $this->bi25_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi25_codigo"]:$this->bi25_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_impexemplaritem {
          $this->bi25_codigo = $bi25_codigo;
        }
      }
-     if(($this->bi25_codigo == null) || ($this->bi25_codigo == "") ){
+     if(($this->bi25_codigo == null) || ($this->bi25_codigo === 0 || $this->bi25_codigo === 0.0 || $this->bi25_codigo == "") ){
        $this->erro_sql = " Campo bi25_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

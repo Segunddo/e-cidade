@@ -174,7 +174,7 @@ class LinhaFiltroPadraoRepositorio extends Repositorio
      * @param ConfiguracaoPadrao|null $linhaFiltroPadrao
      * @throws Exception
      */
-    public function delete(ConfiguracaoPadrao $linhaFiltroPadrao = null)
+    public function delete(?ConfiguracaoPadrao $linhaFiltroPadrao = null)
     {
         $id = $linhaFiltroPadrao instanceof ConfiguracaoPadrao ? $linhaFiltroPadrao->getSequencial() : null;
 

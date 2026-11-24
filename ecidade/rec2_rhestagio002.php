@@ -155,7 +155,7 @@ $pdf->setfillcolor(235);
 $troca  = 1;
 $alt    = 4;
 $rsRel  = @db_query($sSQLRel);
-$iNumRows = pg_num_rows($rsRel);
+$iNumRows = ($rsRel ? pg_num_rows($rsRel) : null);
 if ($iNumRows > 0){
 
   for ($iAtual = 0; $iAtual < $iNumRows; $iAtual++){

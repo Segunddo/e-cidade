@@ -67,10 +67,10 @@ class cl_lab_sinonima {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la10_i_codigo = ($this->la10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la10_i_codigo"]:$this->la10_i_codigo);
+       $this->la10_i_codigo = ($this->la10_i_codigo === 0 || $this->la10_i_codigo === 0.0 || $this->la10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la10_i_codigo"]:$this->la10_i_codigo);
        $this->la10_c_descr = ($this->la10_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la10_c_descr"]:$this->la10_c_descr);
      }else{
-       $this->la10_i_codigo = ($this->la10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la10_i_codigo"]:$this->la10_i_codigo);
+       $this->la10_i_codigo = ($this->la10_i_codigo === 0 || $this->la10_i_codigo === 0.0 || $this->la10_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la10_i_codigo"]:$this->la10_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_lab_sinonima {
          $this->la10_i_codigo = $la10_i_codigo;
        }
      }
-     if(($this->la10_i_codigo == null) || ($this->la10_i_codigo == "") ){
+     if(($this->la10_i_codigo == null) || ($this->la10_i_codigo === 0 || $this->la10_i_codigo === 0.0 || $this->la10_i_codigo == "") ){
        $this->erro_sql = " Campo la10_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

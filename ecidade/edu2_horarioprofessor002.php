@@ -93,7 +93,7 @@ $result0 = db_query($sql);
 $escolas = array(); // Criando um array que irá armazenar as escolas de $result0
 $objEscola = new stdClass(); // Criando um objeto para armazenar o código e nome das escolas dentro do array $escolas
 
-for ($x = 0; $x < pg_num_rows($result0); $x++) {
+for ($x = 0; $x < ($result0 ? pg_num_rows($result0) : null); $x++) {
     db_fieldsmemory($result0, $x);
 
     $objEscola = new stdClass();
@@ -170,7 +170,8 @@ $result = $cldiasemana->sql_record($cldiasemana->sql_query_rh(
 ));
 
 $pdf->settextcolor(75, 75, 75);
-$larg_dia = floor(($larg_tabela - $larg_coluna1) / $cldiasemana->numrows);
+// divisor zero: o 7.4 devolve INF/-INF/NAN (com aviso); o 8 lanca DivisionByZeroError
+$larg_dia = floor($cldiasemana->numrows != 0 ? ($larg_tabela - $larg_coluna1) / $cldiasemana->numrows : (($larg_tabela - $larg_coluna1) > 0 ? INF : (($larg_tabela - $larg_coluna1) < 0 ? -INF : NAN)));
 $pdf->cell($larg_coluna1, 5, "", 0, 0, "C", 0);
 $pdf->setY($tabela1_top);
 $pdf->setX($inicioGrade);
@@ -213,7 +214,7 @@ for ($t = $horainicial; $t <= $horafinal; $t++) {
     $pdf->setY($top_ini);
     $hora = strlen($t) == 3 ? "0" . $t : $t;
     $hora = substr($hora, 0, 2) . ":" . substr($hora, 2, 2);
-    if ($hora <= $horafinal) {
+    if ((float)$hora <= $horafinal) {
         if ($t != 2400) {
             if (($t % 100) == 0) {
                 $lastHora = (substr($hora, 0, 2) + 1) . ':00';
@@ -247,7 +248,7 @@ $iIndSimult = -1;
 $sWhereRecHumanoHoraDisp = "ed75_i_rechumano = {$rechumano} AND ed33_ativo is true";
 $sSqlRecHumanoHoraDisp = $oDaoRecHumanoHoraDisp->sql_query(null, "ed75_i_codigo", null, $sWhereRecHumanoHoraDisp);
 $rsRecHumanoHoraDisp = db_query($sSqlRecHumanoHoraDisp);
-$lRecHumanoHoraDisp = pg_num_rows($rsRecHumanoHoraDisp) > 0;
+$lRecHumanoHoraDisp = ($rsRecHumanoHoraDisp ? pg_num_rows($rsRecHumanoHoraDisp) : null) > 0;
 
 if ($lRecHumanoHoraDisp) {
     $ini_top = $tabela1_top + 7;

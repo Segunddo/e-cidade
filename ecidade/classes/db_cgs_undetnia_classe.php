@@ -69,11 +69,11 @@ class cl_cgs_undetnia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s201_codigo = ($this->s201_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_codigo"]:$this->s201_codigo);
-       $this->s201_cgs_unid = ($this->s201_cgs_unid == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_cgs_unid"]:$this->s201_cgs_unid);
-       $this->s201_etnia = ($this->s201_etnia == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_etnia"]:$this->s201_etnia);
+       $this->s201_codigo = ($this->s201_codigo === 0 || $this->s201_codigo === 0.0 || $this->s201_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_codigo"]:$this->s201_codigo);
+       $this->s201_cgs_unid = ($this->s201_cgs_unid === 0 || $this->s201_cgs_unid === 0.0 || $this->s201_cgs_unid == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_cgs_unid"]:$this->s201_cgs_unid);
+       $this->s201_etnia = ($this->s201_etnia === 0 || $this->s201_etnia === 0.0 || $this->s201_etnia == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_etnia"]:$this->s201_etnia);
      }else{
-       $this->s201_codigo = ($this->s201_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_codigo"]:$this->s201_codigo);
+       $this->s201_codigo = ($this->s201_codigo === 0 || $this->s201_codigo === 0.0 || $this->s201_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s201_codigo"]:$this->s201_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_cgs_undetnia {
          $this->s201_codigo = $s201_codigo;
        }
      }
-     if(($this->s201_codigo == null) || ($this->s201_codigo == "") ){
+     if(($this->s201_codigo == null) || ($this->s201_codigo === 0 || $this->s201_codigo === 0.0 || $this->s201_codigo == "") ){
        $this->erro_sql = " Campo s201_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

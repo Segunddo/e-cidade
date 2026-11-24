@@ -72,12 +72,12 @@ class cl_sau_agendaveiculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s121_i_codigo = ($this->s121_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s121_i_codigo"]:$this->s121_i_codigo);
-       $this->s121_i_veiculo = ($this->s121_i_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["s121_i_veiculo"]:$this->s121_i_veiculo);
-       $this->s121_i_motorista = ($this->s121_i_motorista == ""?@$GLOBALS["HTTP_POST_VARS"]["s121_i_motorista"]:$this->s121_i_motorista);
-       $this->s121_i_agendatransporte = ($this->s121_i_agendatransporte == ""?@$GLOBALS["HTTP_POST_VARS"]["s121_i_agendatransporte"]:$this->s121_i_agendatransporte);
+       $this->s121_i_codigo = ($this->s121_i_codigo === 0 || $this->s121_i_codigo === 0.0 || $this->s121_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s121_i_codigo"]:$this->s121_i_codigo);
+       $this->s121_i_veiculo = ($this->s121_i_veiculo === 0 || $this->s121_i_veiculo === 0.0 || $this->s121_i_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["s121_i_veiculo"]:$this->s121_i_veiculo);
+       $this->s121_i_motorista = ($this->s121_i_motorista === 0 || $this->s121_i_motorista === 0.0 || $this->s121_i_motorista == ""?@$GLOBALS["HTTP_POST_VARS"]["s121_i_motorista"]:$this->s121_i_motorista);
+       $this->s121_i_agendatransporte = ($this->s121_i_agendatransporte === 0 || $this->s121_i_agendatransporte === 0.0 || $this->s121_i_agendatransporte == ""?@$GLOBALS["HTTP_POST_VARS"]["s121_i_agendatransporte"]:$this->s121_i_agendatransporte);
      }else{
-       $this->s121_i_codigo = ($this->s121_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s121_i_codigo"]:$this->s121_i_codigo);
+       $this->s121_i_codigo = ($this->s121_i_codigo === 0 || $this->s121_i_codigo === 0.0 || $this->s121_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s121_i_codigo"]:$this->s121_i_codigo);
      }
    }
    // funcao para inclusao
@@ -128,7 +128,7 @@ class cl_sau_agendaveiculo {
          $this->s121_i_codigo = $s121_i_codigo;
        }
      }
-     if(($this->s121_i_codigo == null) || ($this->s121_i_codigo == "") ){
+     if(($this->s121_i_codigo == null) || ($this->s121_i_codigo === 0 || $this->s121_i_codigo === 0.0 || $this->s121_i_codigo == "") ){
        $this->erro_sql = " Campo s121_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

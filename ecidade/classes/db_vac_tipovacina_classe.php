@@ -67,10 +67,10 @@ class cl_vac_tipovacina {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc04_i_codigo = ($this->vc04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc04_i_codigo"]:$this->vc04_i_codigo);
+       $this->vc04_i_codigo = ($this->vc04_i_codigo === 0 || $this->vc04_i_codigo === 0.0 || $this->vc04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc04_i_codigo"]:$this->vc04_i_codigo);
        $this->vc04_c_descr = ($this->vc04_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc04_c_descr"]:$this->vc04_c_descr);
      }else{
-       $this->vc04_i_codigo = ($this->vc04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc04_i_codigo"]:$this->vc04_i_codigo);
+       $this->vc04_i_codigo = ($this->vc04_i_codigo === 0 || $this->vc04_i_codigo === 0.0 || $this->vc04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc04_i_codigo"]:$this->vc04_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_vac_tipovacina {
          $this->vc04_i_codigo = $vc04_i_codigo;
        }
      }
-     if(($this->vc04_i_codigo == null) || ($this->vc04_i_codigo == "") ){
+     if(($this->vc04_i_codigo == null) || ($this->vc04_i_codigo === 0 || $this->vc04_i_codigo === 0.0 || $this->vc04_i_codigo == "") ){
        $this->erro_sql = " Campo vc04_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

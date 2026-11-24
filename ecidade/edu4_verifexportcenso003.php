@@ -304,7 +304,7 @@ $array_registro = array("null"=>"","00"=>"Registro 00 - Identificação","10"=>"Re
                            "Dependência Administrativa    : <b> ".$dep."</b>",
                            "Zona                          : <b> ".($explode_linha[22]=="1"?"URBANA":"RURAL")."</b>",
                            "Categoria de Escola Privada   : <b> ".@$categprivada."</b>",
-                           "Conveniada com Poder Público  : <b> ".$explode_linha[24]=="1"?"ESTADUAL":$explode_linha[24]=="2"?"MUNICIPAL":""."</b>",
+                           ("Conveniada com Poder Público  : <b> ".$explode_linha[24]=="1" ? "ESTADUAL" : $explode_linha[24]=="2")?"MUNICIPAL":""."</b>",
                            "N° CNAS                       : <b> ".trim($explode_linha[25])."</b>",
                            "N° CEBAS                      : <b> ".trim($explode_linha[26])."</b>",
                            "Mantenedora da Escola Privada : <b> ".@$mantprivada."</b>", //27 a 30
@@ -886,7 +886,7 @@ $array_registro = array("null"=>"","00"=>"Registro 00 - Identificação","10"=>"Re
                          "Código INEP do Docente:<b> ".trim($explode_linha[2])."</b>",
                          "Código do Docente na Escola:<b> ".trim($explode_linha[3])." - ".$nome_docente."</b><br>");
              
-                          for ($t = 0; $t < count($array); $t++) {
+                          for ($t = 0; $t < count((array)$array); $t++) {
                               echo $array[$t]."<br>";
                           }
                           $primeiro = 1;
@@ -1100,8 +1100,8 @@ $array_registro = array("null"=>"","00"=>"Registro 00 - Identificação","10"=>"Re
                            "Recebe escolarização em outro espaço      : <b> ".$array_recebe[trim($explode_linha[9])]."</b>",
                            "Transporte Escolar Público                : <b> ".
                             (trim($explode_linha[10])=="0"?"NÃO UTILIZA":"UTILIZA")."</b>",
-                           "Poder Público Responsável pelo Transporte : <b> ".
-                            trim($explode_linha[11])=="1"?"ESTADUAL":trim($explode_linha[11])=="2"?"MUNICIPAL":""."</b>",
+                           ("Poder Público Responsável pelo Transporte : <b> ".
+                            trim($explode_linha[11])=="1" ? "ESTADUAL" : trim($explode_linha[11])=="2")?"MUNICIPAL":""."</b>",
                           );
                     for ($t = 0; $t < count($array); $t++) {
                         echo $array[$t]."<br>";
@@ -1113,7 +1113,7 @@ $array_registro = array("null"=>"","00"=>"Registro 00 - Identificação","10"=>"Re
         }
       
         if ($registro != "51" && $registro != "80" && $registro != "null") {
-            for ($t = 0; $t < count($array); $t++) {
+            for ($t = 0; $t < count((array)$array); $t++) {
                 echo $array[$t]."<br>";
             }
         }

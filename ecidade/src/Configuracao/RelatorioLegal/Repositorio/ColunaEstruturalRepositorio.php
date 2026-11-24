@@ -63,7 +63,7 @@ class ColunaEstruturalRepositorio extends Repositorio
      * @param ColunaEstrutural|null $colunaEstrutural
      * @throws Exception
      */
-    public function delete(ColunaEstrutural $colunaEstrutural = null)
+    public function delete(?ColunaEstrutural $colunaEstrutural = null)
     {
         $id = $colunaEstrutural instanceof ColunaEstrutural ? $colunaEstrutural->getSequencial() : null;
 

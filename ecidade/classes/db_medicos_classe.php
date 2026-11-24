@@ -83,9 +83,9 @@ class cl_medicos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd03_i_codigo = ($this->sd03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_codigo"]:$this->sd03_i_codigo);
-       $this->sd03_i_crm = ($this->sd03_i_crm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_crm"]:$this->sd03_i_crm);
-       $this->sd03_i_numerodias = ($this->sd03_i_numerodias == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_numerodias"]:$this->sd03_i_numerodias);
+       $this->sd03_i_codigo = ($this->sd03_i_codigo === 0 || $this->sd03_i_codigo === 0.0 || $this->sd03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_codigo"]:$this->sd03_i_codigo);
+       $this->sd03_i_crm = ($this->sd03_i_crm === 0 || $this->sd03_i_crm === 0.0 || $this->sd03_i_crm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_crm"]:$this->sd03_i_crm);
+       $this->sd03_i_numerodias = ($this->sd03_i_numerodias === 0 || $this->sd03_i_numerodias === 0.0 || $this->sd03_i_numerodias == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_numerodias"]:$this->sd03_i_numerodias);
        if($this->sd03_d_folgaini == ""){
          $this->sd03_d_folgaini_dia = ($this->sd03_d_folgaini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_d_folgaini_dia"]:$this->sd03_d_folgaini_dia);
          $this->sd03_d_folgaini_mes = ($this->sd03_d_folgaini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_d_folgaini_mes"]:$this->sd03_d_folgaini_mes);
@@ -102,10 +102,10 @@ class cl_medicos {
             $this->sd03_d_folgafim = $this->sd03_d_folgafim_ano."-".$this->sd03_d_folgafim_mes."-".$this->sd03_d_folgafim_dia;
          }
        }
-       $this->sd03_i_cgm = ($this->sd03_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_cgm"]:$this->sd03_i_cgm);
-       $this->sd03_i_tipo = ($this->sd03_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_tipo"]:$this->sd03_i_tipo);
+       $this->sd03_i_cgm = ($this->sd03_i_cgm === 0 || $this->sd03_i_cgm === 0.0 || $this->sd03_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_cgm"]:$this->sd03_i_cgm);
+       $this->sd03_i_tipo = ($this->sd03_i_tipo === 0 || $this->sd03_i_tipo === 0.0 || $this->sd03_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_tipo"]:$this->sd03_i_tipo);
      }else{
-       $this->sd03_i_codigo = ($this->sd03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_codigo"]:$this->sd03_i_codigo);
+       $this->sd03_i_codigo = ($this->sd03_i_codigo === 0 || $this->sd03_i_codigo === 0.0 || $this->sd03_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd03_i_codigo"]:$this->sd03_i_codigo);
      }
    }
    // funcao para inclusao
@@ -159,7 +159,7 @@ class cl_medicos {
          $this->sd03_i_codigo = $sd03_i_codigo;
        }
      }
-     if(($this->sd03_i_codigo == null) || ($this->sd03_i_codigo == "") ){
+     if(($this->sd03_i_codigo == null) || ($this->sd03_i_codigo === 0 || $this->sd03_i_codigo === 0.0 || $this->sd03_i_codigo == "") ){
        $this->erro_sql = " Campo sd03_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

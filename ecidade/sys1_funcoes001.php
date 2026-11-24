@@ -31,7 +31,10 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $queryString);
+if (isset($queryString['retorno'])) {
+  $retorno = $queryString['retorno'];
+}
 if(isset($retorno)) {
   $sql = "select * from db_sysfuncoes where codfuncao = $retorno";
   $result = db_query($sql);

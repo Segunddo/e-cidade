@@ -78,16 +78,16 @@ class cl_censoetapamediacaodidaticopedagogica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed131_codigo = ($this->ed131_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_codigo"]:$this->ed131_codigo);
-       $this->ed131_mediacaodidaticopedagogica = ($this->ed131_mediacaodidaticopedagogica == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_mediacaodidaticopedagogica"]:$this->ed131_mediacaodidaticopedagogica);
-       $this->ed131_censoetapa = ($this->ed131_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_censoetapa"]:$this->ed131_censoetapa);
-       $this->ed131_ano = ($this->ed131_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_ano"]:$this->ed131_ano);
+       $this->ed131_codigo = ($this->ed131_codigo === 0 || $this->ed131_codigo === 0.0 || $this->ed131_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_codigo"]:$this->ed131_codigo);
+       $this->ed131_mediacaodidaticopedagogica = ($this->ed131_mediacaodidaticopedagogica === 0 || $this->ed131_mediacaodidaticopedagogica === 0.0 || $this->ed131_mediacaodidaticopedagogica == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_mediacaodidaticopedagogica"]:$this->ed131_mediacaodidaticopedagogica);
+       $this->ed131_censoetapa = ($this->ed131_censoetapa === 0 || $this->ed131_censoetapa === 0.0 || $this->ed131_censoetapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_censoetapa"]:$this->ed131_censoetapa);
+       $this->ed131_ano = ($this->ed131_ano === 0 || $this->ed131_ano === 0.0 || $this->ed131_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_ano"]:$this->ed131_ano);
        $this->ed131_regular = ($this->ed131_regular == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_regular"]:$this->ed131_regular);
        $this->ed131_especial = ($this->ed131_especial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_especial"]:$this->ed131_especial);
        $this->ed131_eja = ($this->ed131_eja == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_eja"]:$this->ed131_eja);
        $this->ed131_profissional = ($this->ed131_profissional == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_profissional"]:$this->ed131_profissional);
      }else{
-       $this->ed131_codigo = ($this->ed131_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_codigo"]:$this->ed131_codigo);
+       $this->ed131_codigo = ($this->ed131_codigo === 0 || $this->ed131_codigo === 0.0 || $this->ed131_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed131_codigo"]:$this->ed131_codigo);
      }
    }
    // funcao para Inclusão
@@ -180,7 +180,7 @@ class cl_censoetapamediacaodidaticopedagogica {
          $this->ed131_codigo = $ed131_codigo; 
        }
      }
-     if(($this->ed131_codigo == null) || ($this->ed131_codigo == "") ){ 
+     if(($this->ed131_codigo == null) || ($this->ed131_codigo === 0 || $this->ed131_codigo === 0.0 || $this->ed131_codigo == "") ){ 
        $this->erro_sql = " Campo ed131_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

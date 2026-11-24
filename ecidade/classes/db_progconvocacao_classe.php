@@ -71,12 +71,12 @@ class cl_progconvocacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed115_i_codigo = ($this->ed115_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed115_i_codigo"]:$this->ed115_i_codigo);
-       $this->ed115_i_progmatricula = ($this->ed115_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed115_i_progmatricula"]:$this->ed115_i_progmatricula);
-       $this->ed115_i_convocacao = ($this->ed115_i_convocacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed115_i_convocacao"]:$this->ed115_i_convocacao);
-       $this->ed115_i_usuario = ($this->ed115_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed115_i_usuario"]:$this->ed115_i_usuario);
+       $this->ed115_i_codigo = ($this->ed115_i_codigo === 0 || $this->ed115_i_codigo === 0.0 || $this->ed115_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed115_i_codigo"]:$this->ed115_i_codigo);
+       $this->ed115_i_progmatricula = ($this->ed115_i_progmatricula === 0 || $this->ed115_i_progmatricula === 0.0 || $this->ed115_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed115_i_progmatricula"]:$this->ed115_i_progmatricula);
+       $this->ed115_i_convocacao = ($this->ed115_i_convocacao === 0 || $this->ed115_i_convocacao === 0.0 || $this->ed115_i_convocacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed115_i_convocacao"]:$this->ed115_i_convocacao);
+       $this->ed115_i_usuario = ($this->ed115_i_usuario === 0 || $this->ed115_i_usuario === 0.0 || $this->ed115_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed115_i_usuario"]:$this->ed115_i_usuario);
      }else{
-       $this->ed115_i_codigo = ($this->ed115_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed115_i_codigo"]:$this->ed115_i_codigo);
+       $this->ed115_i_codigo = ($this->ed115_i_codigo === 0 || $this->ed115_i_codigo === 0.0 || $this->ed115_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed115_i_codigo"]:$this->ed115_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_progconvocacao {
          $this->ed115_i_codigo = $ed115_i_codigo;
        }
      }
-     if(($this->ed115_i_codigo == null) || ($this->ed115_i_codigo == "") ){
+     if(($this->ed115_i_codigo == null) || ($this->ed115_i_codigo === 0 || $this->ed115_i_codigo === 0.0 || $this->ed115_i_codigo == "") ){
        $this->erro_sql = " Campo ed115_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

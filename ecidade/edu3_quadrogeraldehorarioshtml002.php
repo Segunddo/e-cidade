@@ -135,9 +135,9 @@ foreach ($arrQuadroGeralHorarios as $dados) {
     $arrTempo[$codEscola][$periodo] = $dtTempo;
 }
 
-$arrTurmas = array_unique($arrTurmas, SORT_REGULAR);
-$arrDiaSemana = array_unique($arrDiaSemana, SORT_REGULAR);
-natsort($arrDiaSemana);
+$arrTurmas = (is_array($arrTurmas) ? array_unique($arrTurmas, SORT_REGULAR) : null);
+$arrDiaSemana = (is_array($arrDiaSemana) ? array_unique($arrDiaSemana, SORT_REGULAR) : null);
+if (is_array($arrDiaSemana)) natsort($arrDiaSemana);
 
 ?>
 <!doctype html>

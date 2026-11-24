@@ -85,8 +85,8 @@ class cl_far_farmacia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa13_i_codigo = ($this->fa13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_i_codigo"]:$this->fa13_i_codigo);
-       $this->fa13_i_departamento = ($this->fa13_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_i_departamento"]:$this->fa13_i_departamento);
+       $this->fa13_i_codigo = ($this->fa13_i_codigo === 0 || $this->fa13_i_codigo === 0.0 || $this->fa13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_i_codigo"]:$this->fa13_i_codigo);
+       $this->fa13_i_departamento = ($this->fa13_i_departamento === 0 || $this->fa13_i_departamento === 0.0 || $this->fa13_i_departamento == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_i_departamento"]:$this->fa13_i_departamento);
        $this->fa13_c_autosanitaria = ($this->fa13_c_autosanitaria == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_c_autosanitaria"]:$this->fa13_c_autosanitaria);
        $this->fa13_c_inscestadual = ($this->fa13_c_inscestadual == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_c_inscestadual"]:$this->fa13_c_inscestadual);
        $this->fa13_c_resptecnico = ($this->fa13_c_resptecnico == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_c_resptecnico"]:$this->fa13_c_resptecnico);
@@ -94,10 +94,10 @@ class cl_far_farmacia {
        $this->fa13_c_cnpj = ($this->fa13_c_cnpj == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_c_cnpj"]:$this->fa13_c_cnpj);
        $this->fa13_c_numlicenca = ($this->fa13_c_numlicenca == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_c_numlicenca"]:$this->fa13_c_numlicenca);
        $this->fa13_c_regiao = ($this->fa13_c_regiao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_c_regiao"]:$this->fa13_c_regiao);
-       $this->fa13_i_farprof = ($this->fa13_i_farprof == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_i_farprof"]:$this->fa13_i_farprof);
+       $this->fa13_i_farprof = ($this->fa13_i_farprof === 0 || $this->fa13_i_farprof === 0.0 || $this->fa13_i_farprof == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_i_farprof"]:$this->fa13_i_farprof);
        $this->fa13_c_inscmf = ($this->fa13_c_inscmf == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_c_inscmf"]:$this->fa13_c_inscmf);
      }else{
-       $this->fa13_i_codigo = ($this->fa13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_i_codigo"]:$this->fa13_i_codigo);
+       $this->fa13_i_codigo = ($this->fa13_i_codigo === 0 || $this->fa13_i_codigo === 0.0 || $this->fa13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa13_i_codigo"]:$this->fa13_i_codigo);
      }
    }
    // funcao para inclusao
@@ -217,7 +217,7 @@ class cl_far_farmacia {
          $this->fa13_i_codigo = $fa13_i_codigo;
        }
      }
-     if(($this->fa13_i_codigo == null) || ($this->fa13_i_codigo == "") ){
+     if(($this->fa13_i_codigo == null) || ($this->fa13_i_codigo === 0 || $this->fa13_i_codigo === 0.0 || $this->fa13_i_codigo == "") ){
        $this->erro_sql = " Campo fa13_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

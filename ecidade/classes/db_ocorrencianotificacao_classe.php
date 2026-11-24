@@ -69,11 +69,11 @@ class cl_ocorrencianotificacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed105_sequencial = ($this->ed105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed105_sequencial"]:$this->ed105_sequencial);
-       $this->ed105_ocorrencia = ($this->ed105_ocorrencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed105_ocorrencia"]:$this->ed105_ocorrencia);
-       $this->ed105_mensagemnotificacao = ($this->ed105_mensagemnotificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed105_mensagemnotificacao"]:$this->ed105_mensagemnotificacao);
+       $this->ed105_sequencial = ($this->ed105_sequencial === 0 || $this->ed105_sequencial === 0.0 || $this->ed105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed105_sequencial"]:$this->ed105_sequencial);
+       $this->ed105_ocorrencia = ($this->ed105_ocorrencia === 0 || $this->ed105_ocorrencia === 0.0 || $this->ed105_ocorrencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed105_ocorrencia"]:$this->ed105_ocorrencia);
+       $this->ed105_mensagemnotificacao = ($this->ed105_mensagemnotificacao === 0 || $this->ed105_mensagemnotificacao === 0.0 || $this->ed105_mensagemnotificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed105_mensagemnotificacao"]:$this->ed105_mensagemnotificacao);
      }else{
-       $this->ed105_sequencial = ($this->ed105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed105_sequencial"]:$this->ed105_sequencial);
+       $this->ed105_sequencial = ($this->ed105_sequencial === 0 || $this->ed105_sequencial === 0.0 || $this->ed105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed105_sequencial"]:$this->ed105_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_ocorrencianotificacao {
          $this->ed105_sequencial = $ed105_sequencial;
        }
      }
-     if(($this->ed105_sequencial == null) || ($this->ed105_sequencial == "") ){
+     if(($this->ed105_sequencial == null) || ($this->ed105_sequencial === 0 || $this->ed105_sequencial === 0.0 || $this->ed105_sequencial == "") ){
        $this->erro_sql = " Campo ed105_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,12 +71,12 @@ class cl_far_medicamentohiperdia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa43_i_codigo = ($this->fa43_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa43_i_codigo"]:$this->fa43_i_codigo);
+       $this->fa43_i_codigo = ($this->fa43_i_codigo === 0 || $this->fa43_i_codigo === 0.0 || $this->fa43_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa43_i_codigo"]:$this->fa43_i_codigo);
        $this->fa43_c_codhiperdia = ($this->fa43_c_codhiperdia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa43_c_codhiperdia"]:$this->fa43_c_codhiperdia);
        $this->fa43_c_descr = ($this->fa43_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["fa43_c_descr"]:$this->fa43_c_descr);
-       $this->fa43_n_dosagemmax = ($this->fa43_n_dosagemmax == ""?@$GLOBALS["HTTP_POST_VARS"]["fa43_n_dosagemmax"]:$this->fa43_n_dosagemmax);
+       $this->fa43_n_dosagemmax = ($this->fa43_n_dosagemmax === 0 || $this->fa43_n_dosagemmax === 0.0 || $this->fa43_n_dosagemmax == ""?@$GLOBALS["HTTP_POST_VARS"]["fa43_n_dosagemmax"]:$this->fa43_n_dosagemmax);
      }else{
-       $this->fa43_i_codigo = ($this->fa43_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa43_i_codigo"]:$this->fa43_i_codigo);
+       $this->fa43_i_codigo = ($this->fa43_i_codigo === 0 || $this->fa43_i_codigo === 0.0 || $this->fa43_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa43_i_codigo"]:$this->fa43_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_far_medicamentohiperdia {
          $this->fa43_i_codigo = $fa43_i_codigo;
        }
      }
-     if(($this->fa43_i_codigo == null) || ($this->fa43_i_codigo == "") ){
+     if(($this->fa43_i_codigo == null) || ($this->fa43_i_codigo === 0 || $this->fa43_i_codigo === 0.0 || $this->fa43_i_codigo == "") ){
        $this->erro_sql = " Campo fa43_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

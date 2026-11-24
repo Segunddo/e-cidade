@@ -101,20 +101,20 @@ class cl_unidademedicos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd04_i_codigo = ($this->sd04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_codigo"]:$this->sd04_i_codigo);
-       $this->sd04_i_unidade = ($this->sd04_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_unidade"]:$this->sd04_i_unidade);
-       $this->sd04_i_medico = ($this->sd04_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_medico"]:$this->sd04_i_medico);
-       $this->sd04_i_vinculo = ($this->sd04_i_vinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_vinculo"]:$this->sd04_i_vinculo);
-       $this->sd04_i_tipovinc = ($this->sd04_i_tipovinc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_tipovinc"]:$this->sd04_i_tipovinc);
-       $this->sd04_i_subtipovinc = ($this->sd04_i_subtipovinc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_subtipovinc"]:$this->sd04_i_subtipovinc);
+       $this->sd04_i_codigo = ($this->sd04_i_codigo === 0 || $this->sd04_i_codigo === 0.0 || $this->sd04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_codigo"]:$this->sd04_i_codigo);
+       $this->sd04_i_unidade = ($this->sd04_i_unidade === 0 || $this->sd04_i_unidade === 0.0 || $this->sd04_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_unidade"]:$this->sd04_i_unidade);
+       $this->sd04_i_medico = ($this->sd04_i_medico === 0 || $this->sd04_i_medico === 0.0 || $this->sd04_i_medico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_medico"]:$this->sd04_i_medico);
+       $this->sd04_i_vinculo = ($this->sd04_i_vinculo === 0 || $this->sd04_i_vinculo === 0.0 || $this->sd04_i_vinculo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_vinculo"]:$this->sd04_i_vinculo);
+       $this->sd04_i_tipovinc = ($this->sd04_i_tipovinc === 0 || $this->sd04_i_tipovinc === 0.0 || $this->sd04_i_tipovinc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_tipovinc"]:$this->sd04_i_tipovinc);
+       $this->sd04_i_subtipovinc = ($this->sd04_i_subtipovinc === 0 || $this->sd04_i_subtipovinc === 0.0 || $this->sd04_i_subtipovinc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_subtipovinc"]:$this->sd04_i_subtipovinc);
        $this->sd04_i_horaamb = ($this->sd04_i_horaamb == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_horaamb"]:$this->sd04_i_horaamb);
        $this->sd04_i_horahosp = ($this->sd04_i_horahosp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_horahosp"]:$this->sd04_i_horahosp);
        $this->sd04_i_horaoutros = ($this->sd04_i_horaoutros == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_horaoutros"]:$this->sd04_i_horaoutros);
-       $this->sd04_i_orgaoemissor = ($this->sd04_i_orgaoemissor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_orgaoemissor"]:$this->sd04_i_orgaoemissor);
+       $this->sd04_i_orgaoemissor = ($this->sd04_i_orgaoemissor === 0 || $this->sd04_i_orgaoemissor === 0.0 || $this->sd04_i_orgaoemissor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_orgaoemissor"]:$this->sd04_i_orgaoemissor);
        $this->sd04_c_situacao = ($this->sd04_c_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_c_situacao"]:$this->sd04_c_situacao);
        $this->sd04_v_registroconselho = ($this->sd04_v_registroconselho == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_v_registroconselho"]:$this->sd04_v_registroconselho);
        $this->sd04_c_sus = ($this->sd04_c_sus == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_c_sus"]:$this->sd04_c_sus);
-       $this->sd04_i_numerodias = ($this->sd04_i_numerodias == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_numerodias"]:$this->sd04_i_numerodias);
+       $this->sd04_i_numerodias = ($this->sd04_i_numerodias === 0 || $this->sd04_i_numerodias === 0.0 || $this->sd04_i_numerodias == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_numerodias"]:$this->sd04_i_numerodias);
        if($this->sd04_d_folgaini == ""){
          $this->sd04_d_folgaini_dia = ($this->sd04_d_folgaini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_d_folgaini_dia"]:$this->sd04_d_folgaini_dia);
          $this->sd04_d_folgaini_mes = ($this->sd04_d_folgaini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_d_folgaini_mes"]:$this->sd04_d_folgaini_mes);
@@ -132,7 +132,7 @@ class cl_unidademedicos {
          }
        }
      }else{
-       $this->sd04_i_codigo = ($this->sd04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_codigo"]:$this->sd04_i_codigo);
+       $this->sd04_i_codigo = ($this->sd04_i_codigo === 0 || $this->sd04_i_codigo === 0.0 || $this->sd04_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd04_i_codigo"]:$this->sd04_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -246,7 +246,7 @@ class cl_unidademedicos {
          $this->sd04_i_codigo = $sd04_i_codigo;
        }
      }
-     if(($this->sd04_i_codigo == null) || ($this->sd04_i_codigo == "") ){
+     if(($this->sd04_i_codigo == null) || ($this->sd04_i_codigo === 0 || $this->sd04_i_codigo === 0.0 || $this->sd04_i_codigo == "") ){
        $this->erro_sql = " Campo sd04_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

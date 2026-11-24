@@ -71,12 +71,12 @@ class cl_mer_restriitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me25_i_codigo = ($this->me25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me25_i_codigo"]:$this->me25_i_codigo);
-       $this->me25_i_restricao = ($this->me25_i_restricao == ""?@$GLOBALS["HTTP_POST_VARS"]["me25_i_restricao"]:$this->me25_i_restricao);
-       $this->me25_i_alimento = ($this->me25_i_alimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me25_i_alimento"]:$this->me25_i_alimento);
-       $this->me25_i_alimentosub = ($this->me25_i_alimentosub == ""?@$GLOBALS["HTTP_POST_VARS"]["me25_i_alimentosub"]:$this->me25_i_alimentosub);
+       $this->me25_i_codigo = ($this->me25_i_codigo === 0 || $this->me25_i_codigo === 0.0 || $this->me25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me25_i_codigo"]:$this->me25_i_codigo);
+       $this->me25_i_restricao = ($this->me25_i_restricao === 0 || $this->me25_i_restricao === 0.0 || $this->me25_i_restricao == ""?@$GLOBALS["HTTP_POST_VARS"]["me25_i_restricao"]:$this->me25_i_restricao);
+       $this->me25_i_alimento = ($this->me25_i_alimento === 0 || $this->me25_i_alimento === 0.0 || $this->me25_i_alimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me25_i_alimento"]:$this->me25_i_alimento);
+       $this->me25_i_alimentosub = ($this->me25_i_alimentosub === 0 || $this->me25_i_alimentosub === 0.0 || $this->me25_i_alimentosub == ""?@$GLOBALS["HTTP_POST_VARS"]["me25_i_alimentosub"]:$this->me25_i_alimentosub);
      }else{
-       $this->me25_i_codigo = ($this->me25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me25_i_codigo"]:$this->me25_i_codigo);
+       $this->me25_i_codigo = ($this->me25_i_codigo === 0 || $this->me25_i_codigo === 0.0 || $this->me25_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me25_i_codigo"]:$this->me25_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_mer_restriitem {
          $this->me25_i_codigo = $me25_i_codigo;
        }
      }
-     if(($this->me25_i_codigo == null) || ($this->me25_i_codigo == "") ){
+     if(($this->me25_i_codigo == null) || ($this->me25_i_codigo === 0 || $this->me25_i_codigo === 0.0 || $this->me25_i_codigo == "") ){
        $this->erro_sql = " Campo me25_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

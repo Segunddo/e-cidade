@@ -33,7 +33,7 @@ include(modification("classes/db_db_versaoclientes_classe.php"));
 include(modification("classes/db_clientes_classe.php"));
 include(modification("dbforms/db_funcoes.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? '', $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldb_versaoclientes = new cl_db_versaoclientes;
 $clclientes = new cl_clientes;
 

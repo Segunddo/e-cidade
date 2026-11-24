@@ -73,13 +73,13 @@ class cl_turmaachorario {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed270_i_codigo = ($this->ed270_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_codigo"]:$this->ed270_i_codigo);
-       $this->ed270_i_rechumano = ($this->ed270_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_rechumano"]:$this->ed270_i_rechumano);
-       $this->ed270_i_diasemana = ($this->ed270_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_diasemana"]:$this->ed270_i_diasemana);
-       $this->ed270_i_periodo = ($this->ed270_i_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_periodo"]:$this->ed270_i_periodo);
-       $this->ed270_i_turmaac = ($this->ed270_i_turmaac == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_turmaac"]:$this->ed270_i_turmaac);
+       $this->ed270_i_codigo = ($this->ed270_i_codigo === 0 || $this->ed270_i_codigo === 0.0 || $this->ed270_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_codigo"]:$this->ed270_i_codigo);
+       $this->ed270_i_rechumano = ($this->ed270_i_rechumano === 0 || $this->ed270_i_rechumano === 0.0 || $this->ed270_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_rechumano"]:$this->ed270_i_rechumano);
+       $this->ed270_i_diasemana = ($this->ed270_i_diasemana === 0 || $this->ed270_i_diasemana === 0.0 || $this->ed270_i_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_diasemana"]:$this->ed270_i_diasemana);
+       $this->ed270_i_periodo = ($this->ed270_i_periodo === 0 || $this->ed270_i_periodo === 0.0 || $this->ed270_i_periodo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_periodo"]:$this->ed270_i_periodo);
+       $this->ed270_i_turmaac = ($this->ed270_i_turmaac === 0 || $this->ed270_i_turmaac === 0.0 || $this->ed270_i_turmaac == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_turmaac"]:$this->ed270_i_turmaac);
      }else{
-       $this->ed270_i_codigo = ($this->ed270_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_codigo"]:$this->ed270_i_codigo);
+       $this->ed270_i_codigo = ($this->ed270_i_codigo === 0 || $this->ed270_i_codigo === 0.0 || $this->ed270_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed270_i_codigo"]:$this->ed270_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_turmaachorario {
          $this->ed270_i_codigo = $ed270_i_codigo;
        }
      }
-     if(($this->ed270_i_codigo == null) || ($this->ed270_i_codigo == "") ){
+     if(($this->ed270_i_codigo == null) || ($this->ed270_i_codigo === 0 || $this->ed270_i_codigo === 0.0 || $this->ed270_i_codigo == "") ){
        $this->erro_sql = " Campo ed270_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

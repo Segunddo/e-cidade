@@ -78,9 +78,9 @@ class cl_tfd_documentosentregues {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf22_i_codigo = ($this->tf22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_i_codigo"]:$this->tf22_i_codigo);
-       $this->tf22_i_pedidotfd = ($this->tf22_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_i_pedidotfd"]:$this->tf22_i_pedidotfd);
-       $this->tf22_i_documento = ($this->tf22_i_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_i_documento"]:$this->tf22_i_documento);
+       $this->tf22_i_codigo = ($this->tf22_i_codigo === 0 || $this->tf22_i_codigo === 0.0 || $this->tf22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_i_codigo"]:$this->tf22_i_codigo);
+       $this->tf22_i_pedidotfd = ($this->tf22_i_pedidotfd === 0 || $this->tf22_i_pedidotfd === 0.0 || $this->tf22_i_pedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_i_pedidotfd"]:$this->tf22_i_pedidotfd);
+       $this->tf22_i_documento = ($this->tf22_i_documento === 0 || $this->tf22_i_documento === 0.0 || $this->tf22_i_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_i_documento"]:$this->tf22_i_documento);
        if($this->tf22_d_dataentrega == ""){
          $this->tf22_d_dataentrega_dia = ($this->tf22_d_dataentrega_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_d_dataentrega_dia"]:$this->tf22_d_dataentrega_dia);
          $this->tf22_d_dataentrega_mes = ($this->tf22_d_dataentrega_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_d_dataentrega_mes"]:$this->tf22_d_dataentrega_mes);
@@ -92,7 +92,7 @@ class cl_tfd_documentosentregues {
        $this->tf22_c_horaentrega = ($this->tf22_c_horaentrega == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_c_horaentrega"]:$this->tf22_c_horaentrega);
        $this->tf22_c_numdoc = ($this->tf22_c_numdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_c_numdoc"]:$this->tf22_c_numdoc);
      }else{
-       $this->tf22_i_codigo = ($this->tf22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_i_codigo"]:$this->tf22_i_codigo);
+       $this->tf22_i_codigo = ($this->tf22_i_codigo === 0 || $this->tf22_i_codigo === 0.0 || $this->tf22_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf22_i_codigo"]:$this->tf22_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_tfd_documentosentregues {
          $this->tf22_i_codigo = $tf22_i_codigo;
        }
      }
-     if(($this->tf22_i_codigo == null) || ($this->tf22_i_codigo == "") ){
+     if(($this->tf22_i_codigo == null) || ($this->tf22_i_codigo === 0 || $this->tf22_i_codigo === 0.0 || $this->tf22_i_codigo == "") ){
        $this->erro_sql = " Campo tf22_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -49,8 +49,8 @@ if(isset($incluir)){
   $ed116_i_questaoaval = "ed116_i_questaoaval".$t;
   $ed116_i_opcaoquestao = "ed116_i_opcaoquestao".$t;
   db_inicio_transacao();
-  $clprogavaladmin->ed116_i_questaoaval = $$ed116_i_questaoaval;
-  $clprogavaladmin->ed116_i_opcaoquestao = $$ed116_i_opcaoquestao;
+  $clprogavaladmin->ed116_i_questaoaval = ${$ed116_i_questaoaval};
+  $clprogavaladmin->ed116_i_opcaoquestao = ${$ed116_i_opcaoquestao};
   $clprogavaladmin->ed116_i_usuario = db_getsession("DB_id_usuario");
   $clprogavaladmin->incluir(null);
   db_fim_transacao();

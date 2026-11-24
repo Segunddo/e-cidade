@@ -81,9 +81,9 @@ class cl_acervoreserva {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi20_codigo = ($this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
-       $this->bi20_reserva = ($this->bi20_reserva == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_reserva"]:$this->bi20_reserva);
-       $this->bi20_acervo = ($this->bi20_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_acervo"]:$this->bi20_acervo);
+       $this->bi20_codigo = ($this->bi20_codigo === 0 || $this->bi20_codigo === 0.0 || $this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
+       $this->bi20_reserva = ($this->bi20_reserva === 0 || $this->bi20_reserva === 0.0 || $this->bi20_reserva == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_reserva"]:$this->bi20_reserva);
+       $this->bi20_acervo = ($this->bi20_acervo === 0 || $this->bi20_acervo === 0.0 || $this->bi20_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_acervo"]:$this->bi20_acervo);
        if($this->bi20_data == ""){
          $this->bi20_data_dia = ($this->bi20_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_data_dia"]:$this->bi20_data_dia);
          $this->bi20_data_mes = ($this->bi20_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_data_mes"]:$this->bi20_data_mes);
@@ -102,7 +102,7 @@ class cl_acervoreserva {
          }
        }
      }else{
-       $this->bi20_codigo = ($this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
+       $this->bi20_codigo = ($this->bi20_codigo === 0 || $this->bi20_codigo === 0.0 || $this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
      }
    }
    // funcao para inclusao
@@ -171,7 +171,7 @@ class cl_acervoreserva {
          $this->bi20_codigo = $bi20_codigo;
        }
      }
-     if(($this->bi20_codigo == null) || ($this->bi20_codigo == "") ){
+     if(($this->bi20_codigo == null) || ($this->bi20_codigo === 0 || $this->bi20_codigo === 0.0 || $this->bi20_codigo == "") ){
        $this->erro_sql = " Campo bi20_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -43,11 +43,11 @@ class cl_funcaoatividade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed119_sequencial = ($this->ed119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_sequencial"]:$this->ed119_sequencial);
+       $this->ed119_sequencial = ($this->ed119_sequencial === 0 || $this->ed119_sequencial === 0.0 || $this->ed119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_sequencial"]:$this->ed119_sequencial);
        $this->ed119_descricao = ($this->ed119_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_descricao"]:$this->ed119_descricao);
        $this->ed119_docente = ($this->ed119_docente == "f"?@$GLOBALS["HTTP_POST_VARS"]["ed119_docente"]:$this->ed119_docente);
      }else{
-       $this->ed119_sequencial = ($this->ed119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_sequencial"]:$this->ed119_sequencial);
+       $this->ed119_sequencial = ($this->ed119_sequencial === 0 || $this->ed119_sequencial === 0.0 || $this->ed119_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_sequencial"]:$this->ed119_sequencial);
      }
    }
    // funcao para inclusao
@@ -72,7 +72,7 @@ class cl_funcaoatividade {
        return false;
      }
        $this->ed119_sequencial = $ed119_sequencial;
-     if(($this->ed119_sequencial == null) || ($this->ed119_sequencial == "") ){
+     if(($this->ed119_sequencial == null) || ($this->ed119_sequencial === 0 || $this->ed119_sequencial === 0.0 || $this->ed119_sequencial == "") ){
        $this->erro_sql = " Campo ed119_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

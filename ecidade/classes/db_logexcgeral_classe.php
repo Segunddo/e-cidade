@@ -80,9 +80,9 @@ class cl_logexcgeral {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed256_i_codigo = ($this->ed256_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_i_codigo"]:$this->ed256_i_codigo);
-       $this->ed256_i_usuario = ($this->ed256_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_i_usuario"]:$this->ed256_i_usuario);
-       $this->ed256_i_escola = ($this->ed256_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_i_escola"]:$this->ed256_i_escola);
+       $this->ed256_i_codigo = ($this->ed256_i_codigo === 0 || $this->ed256_i_codigo === 0.0 || $this->ed256_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_i_codigo"]:$this->ed256_i_codigo);
+       $this->ed256_i_usuario = ($this->ed256_i_usuario === 0 || $this->ed256_i_usuario === 0.0 || $this->ed256_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_i_usuario"]:$this->ed256_i_usuario);
+       $this->ed256_i_escola = ($this->ed256_i_escola === 0 || $this->ed256_i_escola === 0.0 || $this->ed256_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_i_escola"]:$this->ed256_i_escola);
        if($this->ed256_d_data == ""){
          $this->ed256_d_data_dia = ($this->ed256_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_d_data_dia"]:$this->ed256_d_data_dia);
          $this->ed256_d_data_mes = ($this->ed256_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_d_data_mes"]:$this->ed256_d_data_mes);
@@ -95,7 +95,7 @@ class cl_logexcgeral {
        $this->ed256_c_evento = ($this->ed256_c_evento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_c_evento"]:$this->ed256_c_evento);
        $this->ed256_t_descr = ($this->ed256_t_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_t_descr"]:$this->ed256_t_descr);
      }else{
-       $this->ed256_i_codigo = ($this->ed256_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_i_codigo"]:$this->ed256_i_codigo);
+       $this->ed256_i_codigo = ($this->ed256_i_codigo === 0 || $this->ed256_i_codigo === 0.0 || $this->ed256_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed256_i_codigo"]:$this->ed256_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_logexcgeral {
          $this->ed256_i_codigo = $ed256_i_codigo;
        }
      }
-     if(($this->ed256_i_codigo == null) || ($this->ed256_i_codigo == "") ){
+     if(($this->ed256_i_codigo == null) || ($this->ed256_i_codigo === 0 || $this->ed256_i_codigo === 0.0 || $this->ed256_i_codigo == "") ){
        $this->erro_sql = " Campo ed256_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -31,7 +31,7 @@ include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 include(modification("classes/db_db_versaotarefa_classe.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? '', $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 $cldb_versaotarefa = new cl_db_versaotarefa;
 ?>
 <html>

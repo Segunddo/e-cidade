@@ -80,9 +80,9 @@ class cl_lab_bpamagnetico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la55_i_codigo = ($this->la55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_codigo"]:$this->la55_i_codigo);
-       $this->la55_i_fechamento = ($this->la55_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_fechamento"]:$this->la55_i_fechamento);
-       $this->la55_i_usuario = ($this->la55_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_usuario"]:$this->la55_i_usuario);
+       $this->la55_i_codigo = ($this->la55_i_codigo === 0 || $this->la55_i_codigo === 0.0 || $this->la55_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_codigo"]:$this->la55_i_codigo);
+       $this->la55_i_fechamento = ($this->la55_i_fechamento === 0 || $this->la55_i_fechamento === 0.0 || $this->la55_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_fechamento"]:$this->la55_i_fechamento);
+       $this->la55_i_usuario = ($this->la55_i_usuario === 0 || $this->la55_i_usuario === 0.0 || $this->la55_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_i_usuario"]:$this->la55_i_usuario);
        if($this->la55_d_data == ""){
          $this->la55_d_data_dia = ($this->la55_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_d_data_dia"]:$this->la55_d_data_dia);
          $this->la55_d_data_mes = ($this->la55_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_d_data_mes"]:$this->la55_d_data_mes);
@@ -93,7 +93,7 @@ class cl_lab_bpamagnetico {
        }
        $this->la55_c_hora = ($this->la55_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_c_hora"]:$this->la55_c_hora);
        $this->la55_t_arquivo = ($this->la55_t_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_t_arquivo"]:$this->la55_t_arquivo);
-       $this->la55_o_arquivo = ($this->la55_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_o_arquivo"]:$this->la55_o_arquivo);
+       $this->la55_o_arquivo = ($this->la55_o_arquivo === 0 || $this->la55_o_arquivo === 0.0 || $this->la55_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["la55_o_arquivo"]:$this->la55_o_arquivo);
      }else{
      }
    }

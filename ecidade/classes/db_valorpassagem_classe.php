@@ -76,10 +76,10 @@ class cl_valorpassagem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed230_i_codigo = ($this->ed230_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_i_codigo"]:$this->ed230_i_codigo);
-       $this->ed230_i_linha = ($this->ed230_i_linha == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_i_linha"]:$this->ed230_i_linha);
-       $this->ed230_i_usuario = ($this->ed230_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_i_usuario"]:$this->ed230_i_usuario);
-       $this->ed230_f_valor = ($this->ed230_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_f_valor"]:$this->ed230_f_valor);
+       $this->ed230_i_codigo = ($this->ed230_i_codigo === 0 || $this->ed230_i_codigo === 0.0 || $this->ed230_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_i_codigo"]:$this->ed230_i_codigo);
+       $this->ed230_i_linha = ($this->ed230_i_linha === 0 || $this->ed230_i_linha === 0.0 || $this->ed230_i_linha == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_i_linha"]:$this->ed230_i_linha);
+       $this->ed230_i_usuario = ($this->ed230_i_usuario === 0 || $this->ed230_i_usuario === 0.0 || $this->ed230_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_i_usuario"]:$this->ed230_i_usuario);
+       $this->ed230_f_valor = ($this->ed230_f_valor === 0 || $this->ed230_f_valor === 0.0 || $this->ed230_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_f_valor"]:$this->ed230_f_valor);
        if($this->ed230_d_datacad == ""){
          $this->ed230_d_datacad_dia = ($this->ed230_d_datacad_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_d_datacad_dia"]:$this->ed230_d_datacad_dia);
          $this->ed230_d_datacad_mes = ($this->ed230_d_datacad_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_d_datacad_mes"]:$this->ed230_d_datacad_mes);
@@ -89,7 +89,7 @@ class cl_valorpassagem {
          }
        }
      }else{
-       $this->ed230_i_codigo = ($this->ed230_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_i_codigo"]:$this->ed230_i_codigo);
+       $this->ed230_i_codigo = ($this->ed230_i_codigo === 0 || $this->ed230_i_codigo === 0.0 || $this->ed230_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed230_i_codigo"]:$this->ed230_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_valorpassagem {
          $this->ed230_i_codigo = $ed230_i_codigo;
        }
      }
-     if(($this->ed230_i_codigo == null) || ($this->ed230_i_codigo == "") ){
+     if(($this->ed230_i_codigo == null) || ($this->ed230_i_codigo === 0 || $this->ed230_i_codigo === 0.0 || $this->ed230_i_codigo == "") ){
        $this->erro_sql = " Campo ed230_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

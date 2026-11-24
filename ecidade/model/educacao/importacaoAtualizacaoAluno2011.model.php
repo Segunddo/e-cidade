@@ -39,7 +39,7 @@ class importacaoAtualizacaoAluno2011 extends importacaoCenso {
    *                              false busca pelo codigo inep do aluno
    * @override 
    */
-  function getDadosAluno($oLinha) {
+  function getDadosAluno($oLinha, $lPesquisaInep = false) { // LSP: parametro da mae, opcional
 
   	$oDaoAluno     = db_utils::getdao('aluno');
   	$sCamposAluno  = "distinct ed47_i_codigo,ed47_v_nome,aluno.*, ed228_i_paisonu, ";

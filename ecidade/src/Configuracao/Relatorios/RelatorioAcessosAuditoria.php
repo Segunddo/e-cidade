@@ -84,7 +84,7 @@ class RelatorioAcessosAuditoria extends FpdfMultiCellBorder
         $fileName = 'tmp/acessos_auditoria_' . time() . '.pdf';
         $this->Output($fileName, false, true);
         return [
-            "name" => utf8_encode("Relatório de Auditorias do e-cidade"),
+            "name" => mb_convert_encoding("Relatório de Auditorias do e-cidade", 'UTF-8', 'ISO-8859-1'),
             "path" => ECIDADE_REQUEST_PATH . $fileName
         ];
     }

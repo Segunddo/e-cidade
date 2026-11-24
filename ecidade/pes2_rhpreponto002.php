@@ -76,7 +76,7 @@ $sSqlRhPrePontoLoteRegistro = "
        ";
 
 $rsRhPrePontoLoteRegistro = db_query($sSqlRhPrePontoLoteRegistro);
-$xxnum = pg_numrows($rsRhPrePontoLoteRegistro);
+$xxnum = ($rsRhPrePontoLoteRegistro ? pg_numrows($rsRhPrePontoLoteRegistro) : null);
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Erro na pesquisa do lote - '.$lote);
 

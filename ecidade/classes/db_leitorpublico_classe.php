@@ -67,8 +67,8 @@ class cl_leitorpublico {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi13_leitor = ($this->bi13_leitor == ""?@$GLOBALS["HTTP_POST_VARS"]["bi13_leitor"]:$this->bi13_leitor);
-       $this->bi13_numcgm = ($this->bi13_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["bi13_numcgm"]:$this->bi13_numcgm);
+       $this->bi13_leitor = ($this->bi13_leitor === 0 || $this->bi13_leitor === 0.0 || $this->bi13_leitor == ""?@$GLOBALS["HTTP_POST_VARS"]["bi13_leitor"]:$this->bi13_leitor);
+       $this->bi13_numcgm = ($this->bi13_numcgm === 0 || $this->bi13_numcgm === 0.0 || $this->bi13_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["bi13_numcgm"]:$this->bi13_numcgm);
      }else{
      }
    }

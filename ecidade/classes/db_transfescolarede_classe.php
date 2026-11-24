@@ -82,11 +82,11 @@ class cl_transfescolarede {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed103_i_codigo = ($this->ed103_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_codigo"]:$this->ed103_i_codigo);
-       $this->ed103_i_matricula = ($this->ed103_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_matricula"]:$this->ed103_i_matricula);
-       $this->ed103_i_escolaorigem = ($this->ed103_i_escolaorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_escolaorigem"]:$this->ed103_i_escolaorigem);
-       $this->ed103_i_atestvaga = ($this->ed103_i_atestvaga == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_atestvaga"]:$this->ed103_i_atestvaga);
-       $this->ed103_i_usuario = ($this->ed103_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_usuario"]:$this->ed103_i_usuario);
+       $this->ed103_i_codigo = ($this->ed103_i_codigo === 0 || $this->ed103_i_codigo === 0.0 || $this->ed103_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_codigo"]:$this->ed103_i_codigo);
+       $this->ed103_i_matricula = ($this->ed103_i_matricula === 0 || $this->ed103_i_matricula === 0.0 || $this->ed103_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_matricula"]:$this->ed103_i_matricula);
+       $this->ed103_i_escolaorigem = ($this->ed103_i_escolaorigem === 0 || $this->ed103_i_escolaorigem === 0.0 || $this->ed103_i_escolaorigem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_escolaorigem"]:$this->ed103_i_escolaorigem);
+       $this->ed103_i_atestvaga = ($this->ed103_i_atestvaga === 0 || $this->ed103_i_atestvaga === 0.0 || $this->ed103_i_atestvaga == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_atestvaga"]:$this->ed103_i_atestvaga);
+       $this->ed103_i_usuario = ($this->ed103_i_usuario === 0 || $this->ed103_i_usuario === 0.0 || $this->ed103_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_usuario"]:$this->ed103_i_usuario);
        if($this->ed103_d_data == ""){
          $this->ed103_d_data_dia = ($this->ed103_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_d_data_dia"]:$this->ed103_d_data_dia);
          $this->ed103_d_data_mes = ($this->ed103_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_d_data_mes"]:$this->ed103_d_data_mes);
@@ -98,7 +98,7 @@ class cl_transfescolarede {
        $this->ed103_t_obs = ($this->ed103_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_t_obs"]:$this->ed103_t_obs);
        $this->ed103_c_situacao = ($this->ed103_c_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_c_situacao"]:$this->ed103_c_situacao);
      }else{
-       $this->ed103_i_codigo = ($this->ed103_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_codigo"]:$this->ed103_i_codigo);
+       $this->ed103_i_codigo = ($this->ed103_i_codigo === 0 || $this->ed103_i_codigo === 0.0 || $this->ed103_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed103_i_codigo"]:$this->ed103_i_codigo);
      }
    }
    // funcao para inclusao
@@ -182,7 +182,7 @@ class cl_transfescolarede {
          $this->ed103_i_codigo = $ed103_i_codigo;
        }
      }
-     if(($this->ed103_i_codigo == null) || ($this->ed103_i_codigo == "") ){
+     if(($this->ed103_i_codigo == null) || ($this->ed103_i_codigo === 0 || $this->ed103_i_codigo === 0.0 || $this->ed103_i_codigo == "") ){
        $this->erro_sql = " Campo ed103_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

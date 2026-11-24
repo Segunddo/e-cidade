@@ -71,12 +71,12 @@ class cl_vac_aplicalote {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc17_i_codigo = ($this->vc17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_codigo"]:$this->vc17_i_codigo);
-       $this->vc17_i_aplica = ($this->vc17_i_aplica == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_aplica"]:$this->vc17_i_aplica);
-       $this->vc17_i_sala = ($this->vc17_i_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_sala"]:$this->vc17_i_sala);
-       $this->vc17_i_matetoqueitemlote = ($this->vc17_i_matetoqueitemlote == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_matetoqueitemlote"]:$this->vc17_i_matetoqueitemlote);
+       $this->vc17_i_codigo = ($this->vc17_i_codigo === 0 || $this->vc17_i_codigo === 0.0 || $this->vc17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_codigo"]:$this->vc17_i_codigo);
+       $this->vc17_i_aplica = ($this->vc17_i_aplica === 0 || $this->vc17_i_aplica === 0.0 || $this->vc17_i_aplica == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_aplica"]:$this->vc17_i_aplica);
+       $this->vc17_i_sala = ($this->vc17_i_sala === 0 || $this->vc17_i_sala === 0.0 || $this->vc17_i_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_sala"]:$this->vc17_i_sala);
+       $this->vc17_i_matetoqueitemlote = ($this->vc17_i_matetoqueitemlote === 0 || $this->vc17_i_matetoqueitemlote === 0.0 || $this->vc17_i_matetoqueitemlote == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_matetoqueitemlote"]:$this->vc17_i_matetoqueitemlote);
      }else{
-       $this->vc17_i_codigo = ($this->vc17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_codigo"]:$this->vc17_i_codigo);
+       $this->vc17_i_codigo = ($this->vc17_i_codigo === 0 || $this->vc17_i_codigo === 0.0 || $this->vc17_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc17_i_codigo"]:$this->vc17_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_vac_aplicalote {
          $this->vc17_i_codigo = $vc17_i_codigo;
        }
      }
-     if(($this->vc17_i_codigo == null) || ($this->vc17_i_codigo == "") ){
+     if(($this->vc17_i_codigo == null) || ($this->vc17_i_codigo === 0 || $this->vc17_i_codigo === 0.0 || $this->vc17_i_codigo == "") ){
        $this->erro_sql = " Campo vc17_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

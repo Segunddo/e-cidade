@@ -71,12 +71,12 @@ class cl_mer_nutricionista {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me02_i_codigo = ($this->me02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me02_i_codigo"]:$this->me02_i_codigo);
+       $this->me02_i_codigo = ($this->me02_i_codigo === 0 || $this->me02_i_codigo === 0.0 || $this->me02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me02_i_codigo"]:$this->me02_i_codigo);
        $this->me02_c_crn = ($this->me02_c_crn == ""?@$GLOBALS["HTTP_POST_VARS"]["me02_c_crn"]:$this->me02_c_crn);
        $this->me02_c_nutriativo = ($this->me02_c_nutriativo == ""?@$GLOBALS["HTTP_POST_VARS"]["me02_c_nutriativo"]:$this->me02_c_nutriativo);
-       $this->me02_i_cgm = ($this->me02_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["me02_i_cgm"]:$this->me02_i_cgm);
+       $this->me02_i_cgm = ($this->me02_i_cgm === 0 || $this->me02_i_cgm === 0.0 || $this->me02_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["me02_i_cgm"]:$this->me02_i_cgm);
      }else{
-       $this->me02_i_codigo = ($this->me02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me02_i_codigo"]:$this->me02_i_codigo);
+       $this->me02_i_codigo = ($this->me02_i_codigo === 0 || $this->me02_i_codigo === 0.0 || $this->me02_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me02_i_codigo"]:$this->me02_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_mer_nutricionista {
          $this->me02_i_codigo = $me02_i_codigo;
        }
      }
-     if(($this->me02_i_codigo == null) || ($this->me02_i_codigo == "") ){
+     if(($this->me02_i_codigo == null) || ($this->me02_i_codigo === 0 || $this->me02_i_codigo === 0.0 || $this->me02_i_codigo == "") ){
        $this->erro_sql = " Campo me02_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -90,12 +90,12 @@ class cl_alunos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed07_i_codigo = ($this->ed07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_codigo"]:$this->ed07_i_codigo);
+       $this->ed07_i_codigo = ($this->ed07_i_codigo === 0 || $this->ed07_i_codigo === 0.0 || $this->ed07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_codigo"]:$this->ed07_i_codigo);
        $this->ed07_c_senha = ($this->ed07_c_senha == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_c_senha"]:$this->ed07_c_senha);
        $this->ed07_c_necessidades = ($this->ed07_c_necessidades == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_c_necessidades"]:$this->ed07_c_necessidades);
        $this->ed07_c_foto = ($this->ed07_c_foto == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_c_foto"]:$this->ed07_c_foto);
        $this->ed07_t_descr = ($this->ed07_t_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_t_descr"]:$this->ed07_t_descr);
-       $this->ed07_i_responsavel = ($this->ed07_i_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_responsavel"]:$this->ed07_i_responsavel);
+       $this->ed07_i_responsavel = ($this->ed07_i_responsavel === 0 || $this->ed07_i_responsavel === 0.0 || $this->ed07_i_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_responsavel"]:$this->ed07_i_responsavel);
        $this->ed07_c_certidao = ($this->ed07_c_certidao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_c_certidao"]:$this->ed07_c_certidao);
        $this->ed07_c_cartorio = ($this->ed07_c_cartorio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_c_cartorio"]:$this->ed07_c_cartorio);
        $this->ed07_c_livro = ($this->ed07_c_livro == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_c_livro"]:$this->ed07_c_livro);
@@ -110,7 +110,7 @@ class cl_alunos {
        }
        $this->ed07_t_pendentes = ($this->ed07_t_pendentes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_t_pendentes"]:$this->ed07_t_pendentes);
      }else{
-       $this->ed07_i_codigo = ($this->ed07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_codigo"]:$this->ed07_i_codigo);
+       $this->ed07_i_codigo = ($this->ed07_i_codigo === 0 || $this->ed07_i_codigo === 0.0 || $this->ed07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_codigo"]:$this->ed07_i_codigo);
      }
    }
    // funcao para inclusao
@@ -207,7 +207,7 @@ class cl_alunos {
        return false;
      }
        $this->ed07_i_codigo = $ed07_i_codigo;
-     if(($this->ed07_i_codigo == null) || ($this->ed07_i_codigo == "") ){
+     if(($this->ed07_i_codigo == null) || ($this->ed07_i_codigo === 0 || $this->ed07_i_codigo === 0.0 || $this->ed07_i_codigo == "") ){
        $this->erro_sql = " Campo ed07_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

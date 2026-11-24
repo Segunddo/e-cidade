@@ -71,12 +71,12 @@ class cl_lab_setorexame {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la09_i_codigo = ($this->la09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la09_i_codigo"]:$this->la09_i_codigo);
-       $this->la09_i_labsetor = ($this->la09_i_labsetor == ""?@$GLOBALS["HTTP_POST_VARS"]["la09_i_labsetor"]:$this->la09_i_labsetor);
-       $this->la09_i_exame = ($this->la09_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la09_i_exame"]:$this->la09_i_exame);
-       $this->la09_i_ativo = ($this->la09_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["la09_i_ativo"]:$this->la09_i_ativo);
+       $this->la09_i_codigo = ($this->la09_i_codigo === 0 || $this->la09_i_codigo === 0.0 || $this->la09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la09_i_codigo"]:$this->la09_i_codigo);
+       $this->la09_i_labsetor = ($this->la09_i_labsetor === 0 || $this->la09_i_labsetor === 0.0 || $this->la09_i_labsetor == ""?@$GLOBALS["HTTP_POST_VARS"]["la09_i_labsetor"]:$this->la09_i_labsetor);
+       $this->la09_i_exame = ($this->la09_i_exame === 0 || $this->la09_i_exame === 0.0 || $this->la09_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la09_i_exame"]:$this->la09_i_exame);
+       $this->la09_i_ativo = ($this->la09_i_ativo === 0 || $this->la09_i_ativo === 0.0 || $this->la09_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["la09_i_ativo"]:$this->la09_i_ativo);
      }else{
-       $this->la09_i_codigo = ($this->la09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la09_i_codigo"]:$this->la09_i_codigo);
+       $this->la09_i_codigo = ($this->la09_i_codigo === 0 || $this->la09_i_codigo === 0.0 || $this->la09_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la09_i_codigo"]:$this->la09_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_lab_setorexame {
          $this->la09_i_codigo = $la09_i_codigo;
        }
      }
-     if(($this->la09_i_codigo == null) || ($this->la09_i_codigo == "") ){
+     if(($this->la09_i_codigo == null) || ($this->la09_i_codigo === 0 || $this->la09_i_codigo === 0.0 || $this->la09_i_codigo == "") ){
        $this->erro_sql = " Campo la09_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

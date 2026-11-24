@@ -75,14 +75,14 @@ class cl_telefonerechumano {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed30_i_codigo = ($this->ed30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_codigo"]:$this->ed30_i_codigo);
-       $this->ed30_i_rechumano = ($this->ed30_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_rechumano"]:$this->ed30_i_rechumano);
-       $this->ed30_i_tipotelefone = ($this->ed30_i_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_tipotelefone"]:$this->ed30_i_tipotelefone);
-       $this->ed30_i_numero = ($this->ed30_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_numero"]:$this->ed30_i_numero);
-       $this->ed30_i_ramal = ($this->ed30_i_ramal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_ramal"]:$this->ed30_i_ramal);
+       $this->ed30_i_codigo = ($this->ed30_i_codigo === 0 || $this->ed30_i_codigo === 0.0 || $this->ed30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_codigo"]:$this->ed30_i_codigo);
+       $this->ed30_i_rechumano = ($this->ed30_i_rechumano === 0 || $this->ed30_i_rechumano === 0.0 || $this->ed30_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_rechumano"]:$this->ed30_i_rechumano);
+       $this->ed30_i_tipotelefone = ($this->ed30_i_tipotelefone === 0 || $this->ed30_i_tipotelefone === 0.0 || $this->ed30_i_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_tipotelefone"]:$this->ed30_i_tipotelefone);
+       $this->ed30_i_numero = ($this->ed30_i_numero === 0 || $this->ed30_i_numero === 0.0 || $this->ed30_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_numero"]:$this->ed30_i_numero);
+       $this->ed30_i_ramal = ($this->ed30_i_ramal === 0 || $this->ed30_i_ramal === 0.0 || $this->ed30_i_ramal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_ramal"]:$this->ed30_i_ramal);
        $this->ed30_t_obs = ($this->ed30_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_t_obs"]:$this->ed30_t_obs);
      }else{
-       $this->ed30_i_codigo = ($this->ed30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_codigo"]:$this->ed30_i_codigo);
+       $this->ed30_i_codigo = ($this->ed30_i_codigo === 0 || $this->ed30_i_codigo === 0.0 || $this->ed30_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed30_i_codigo"]:$this->ed30_i_codigo);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_telefonerechumano {
          $this->ed30_i_codigo = $ed30_i_codigo;
        }
      }
-     if(($this->ed30_i_codigo == null) || ($this->ed30_i_codigo == "") ){
+     if(($this->ed30_i_codigo == null) || ($this->ed30_i_codigo === 0 || $this->ed30_i_codigo === 0.0 || $this->ed30_i_codigo == "") ){
        $this->erro_sql = " Campo ed30_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

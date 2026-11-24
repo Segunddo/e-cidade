@@ -50,11 +50,11 @@ class cl_turmacenso
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed342_sequencial = ($this->ed342_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed342_sequencial"] : $this->ed342_sequencial);
-            $this->ed342_censoetapa = ($this->ed342_censoetapa == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed342_censoetapa"] : $this->ed342_censoetapa);
+            $this->ed342_sequencial = ($this->ed342_sequencial === 0 || $this->ed342_sequencial === 0.0 || $this->ed342_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed342_sequencial"] : $this->ed342_sequencial);
+            $this->ed342_censoetapa = ($this->ed342_censoetapa === 0 || $this->ed342_censoetapa === 0.0 || $this->ed342_censoetapa == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed342_censoetapa"] : $this->ed342_censoetapa);
             $this->ed342_nome = ($this->ed342_nome == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed342_nome"] : $this->ed342_nome);
         } else {
-            $this->ed342_sequencial = ($this->ed342_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed342_sequencial"] : $this->ed342_sequencial);
+            $this->ed342_sequencial = ($this->ed342_sequencial === 0 || $this->ed342_sequencial === 0.0 || $this->ed342_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed342_sequencial"] : $this->ed342_sequencial);
         }
     }
 
@@ -97,7 +97,7 @@ class cl_turmacenso
                 $this->ed342_sequencial = $ed342_sequencial;
             }
         }
-        if (($this->ed342_sequencial == null) || ($this->ed342_sequencial == "")) {
+        if (($this->ed342_sequencial == null) || ($this->ed342_sequencial === 0 || $this->ed342_sequencial === 0.0 || $this->ed342_sequencial == "")) {
             $this->erro_sql = " Campo ed342_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

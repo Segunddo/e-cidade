@@ -43,11 +43,11 @@ class cl_turmamedicaodidaticopedagogica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed345_sequencial = ($this->ed345_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed345_sequencial"]:$this->ed345_sequencial);
-       $this->ed345_turma = ($this->ed345_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed345_turma"]:$this->ed345_turma);
-       $this->ed345_medicaodidaticopedagogica = ($this->ed345_medicaodidaticopedagogica == ""?@$GLOBALS["HTTP_POST_VARS"]["ed345_medicaodidaticopedagogica"]:$this->ed345_medicaodidaticopedagogica);
+       $this->ed345_sequencial = ($this->ed345_sequencial === 0 || $this->ed345_sequencial === 0.0 || $this->ed345_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed345_sequencial"]:$this->ed345_sequencial);
+       $this->ed345_turma = ($this->ed345_turma === 0 || $this->ed345_turma === 0.0 || $this->ed345_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed345_turma"]:$this->ed345_turma);
+       $this->ed345_medicaodidaticopedagogica = ($this->ed345_medicaodidaticopedagogica === 0 || $this->ed345_medicaodidaticopedagogica === 0.0 || $this->ed345_medicaodidaticopedagogica == ""?@$GLOBALS["HTTP_POST_VARS"]["ed345_medicaodidaticopedagogica"]:$this->ed345_medicaodidaticopedagogica);
      }else{
-       $this->ed345_sequencial = ($this->ed345_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed345_sequencial"]:$this->ed345_sequencial);
+       $this->ed345_sequencial = ($this->ed345_sequencial === 0 || $this->ed345_sequencial === 0.0 || $this->ed345_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed345_sequencial"]:$this->ed345_sequencial);
      }
    }
    // funcao para inclusao
@@ -95,7 +95,7 @@ class cl_turmamedicaodidaticopedagogica {
          $this->ed345_sequencial = $ed345_sequencial;
        }
      }
-     if(($this->ed345_sequencial == null) || ($this->ed345_sequencial == "") ){
+     if(($this->ed345_sequencial == null) || ($this->ed345_sequencial === 0 || $this->ed345_sequencial === 0.0 || $this->ed345_sequencial == "") ){
        $this->erro_sql = " Campo ed345_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

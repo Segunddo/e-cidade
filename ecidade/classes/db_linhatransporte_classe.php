@@ -69,11 +69,11 @@ class cl_linhatransporte {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre06_sequencial = ($this->tre06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_sequencial"]:$this->tre06_sequencial);
+       $this->tre06_sequencial = ($this->tre06_sequencial === 0 || $this->tre06_sequencial === 0.0 || $this->tre06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_sequencial"]:$this->tre06_sequencial);
        $this->tre06_nome = ($this->tre06_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_nome"]:$this->tre06_nome);
        $this->tre06_abreviatura = ($this->tre06_abreviatura == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_abreviatura"]:$this->tre06_abreviatura);
      }else{
-       $this->tre06_sequencial = ($this->tre06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_sequencial"]:$this->tre06_sequencial);
+       $this->tre06_sequencial = ($this->tre06_sequencial === 0 || $this->tre06_sequencial === 0.0 || $this->tre06_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre06_sequencial"]:$this->tre06_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_linhatransporte {
          $this->tre06_sequencial = $tre06_sequencial;
        }
      }
-     if(($this->tre06_sequencial == null) || ($this->tre06_sequencial == "") ){
+     if(($this->tre06_sequencial == null) || ($this->tre06_sequencial === 0 || $this->tre06_sequencial === 0.0 || $this->tre06_sequencial == "") ){
        $this->erro_sql = " Campo tre06_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

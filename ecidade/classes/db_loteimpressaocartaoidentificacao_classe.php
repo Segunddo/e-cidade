@@ -74,8 +74,8 @@ class cl_loteimpressaocartaoidentificacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed305_sequencial = ($this->ed305_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_sequencial"]:$this->ed305_sequencial);
-       $this->ed305_usuario = ($this->ed305_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_usuario"]:$this->ed305_usuario);
+       $this->ed305_sequencial = ($this->ed305_sequencial === 0 || $this->ed305_sequencial === 0.0 || $this->ed305_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_sequencial"]:$this->ed305_sequencial);
+       $this->ed305_usuario = ($this->ed305_usuario === 0 || $this->ed305_usuario === 0.0 || $this->ed305_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_usuario"]:$this->ed305_usuario);
        if($this->ed305_data == ""){
          $this->ed305_data_dia = ($this->ed305_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_data_dia"]:$this->ed305_data_dia);
          $this->ed305_data_mes = ($this->ed305_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_data_mes"]:$this->ed305_data_mes);
@@ -86,7 +86,7 @@ class cl_loteimpressaocartaoidentificacao {
        }
        $this->ed305_hora = ($this->ed305_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_hora"]:$this->ed305_hora);
      }else{
-       $this->ed305_sequencial = ($this->ed305_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_sequencial"]:$this->ed305_sequencial);
+       $this->ed305_sequencial = ($this->ed305_sequencial === 0 || $this->ed305_sequencial === 0.0 || $this->ed305_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed305_sequencial"]:$this->ed305_sequencial);
      }
    }
    // funcao para inclusao
@@ -143,7 +143,7 @@ class cl_loteimpressaocartaoidentificacao {
          $this->ed305_sequencial = $ed305_sequencial;
        }
      }
-     if(($this->ed305_sequencial == null) || ($this->ed305_sequencial == "") ){
+     if(($this->ed305_sequencial == null) || ($this->ed305_sequencial === 0 || $this->ed305_sequencial === 0.0 || $this->ed305_sequencial == "") ){
        $this->erro_sql = " Campo ed305_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

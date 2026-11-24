@@ -70,11 +70,11 @@ class cl_lab_tiporeferenciaalfa
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->la29_i_codigo = ($this->la29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_codigo"]:$this->la29_i_codigo);
-       $this->la29_i_valorref = ($this->la29_i_valorref == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_valorref"]:$this->la29_i_valorref);
+       $this->la29_i_codigo = ($this->la29_i_codigo === 0 || $this->la29_i_codigo === 0.0 || $this->la29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_codigo"]:$this->la29_i_codigo);
+       $this->la29_i_valorref = ($this->la29_i_valorref === 0 || $this->la29_i_valorref === 0.0 || $this->la29_i_valorref == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_valorref"]:$this->la29_i_valorref);
        $this->la29_v_fixo = ($this->la29_v_fixo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_v_fixo"]:$this->la29_v_fixo);
      }else{
-       $this->la29_i_codigo = ($this->la29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_codigo"]:$this->la29_i_codigo);
+       $this->la29_i_codigo = ($this->la29_i_codigo === 0 || $this->la29_i_codigo === 0.0 || $this->la29_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la29_i_codigo"]:$this->la29_i_codigo);
      }
    }
 
@@ -114,7 +114,7 @@ class cl_lab_tiporeferenciaalfa
          $this->la29_i_codigo = $la29_i_codigo;
        }
      }
-     if(($this->la29_i_codigo == null) || ($this->la29_i_codigo == "") ){
+     if(($this->la29_i_codigo == null) || ($this->la29_i_codigo === 0 || $this->la29_i_codigo === 0.0 || $this->la29_i_codigo == "") ){
        $this->erro_sql = " Campo la29_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

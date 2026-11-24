@@ -67,10 +67,10 @@ class cl_far_prescricaomedica {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa20_i_codigo = ($this->fa20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa20_i_codigo"]:$this->fa20_i_codigo);
+       $this->fa20_i_codigo = ($this->fa20_i_codigo === 0 || $this->fa20_i_codigo === 0.0 || $this->fa20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa20_i_codigo"]:$this->fa20_i_codigo);
        $this->fa20_c_prescricao = ($this->fa20_c_prescricao == ""?@$GLOBALS["HTTP_POST_VARS"]["fa20_c_prescricao"]:$this->fa20_c_prescricao);
      }else{
-       $this->fa20_i_codigo = ($this->fa20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa20_i_codigo"]:$this->fa20_i_codigo);
+       $this->fa20_i_codigo = ($this->fa20_i_codigo === 0 || $this->fa20_i_codigo === 0.0 || $this->fa20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa20_i_codigo"]:$this->fa20_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_far_prescricaomedica {
          $this->fa20_i_codigo = $fa20_i_codigo;
        }
      }
-     if(($this->fa20_i_codigo == null) || ($this->fa20_i_codigo == "") ){
+     if(($this->fa20_i_codigo == null) || ($this->fa20_i_codigo === 0 || $this->fa20_i_codigo === 0.0 || $this->fa20_i_codigo == "") ){
        $this->erro_sql = " Campo fa20_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

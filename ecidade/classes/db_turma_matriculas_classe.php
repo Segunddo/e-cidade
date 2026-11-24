@@ -67,11 +67,11 @@ class cl_turma_matriculas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed36_i_turma = ($this->ed36_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_turma"]:$this->ed36_i_turma);
-       $this->ed36_i_matricula = ($this->ed36_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_matricula"]:$this->ed36_i_matricula);
+       $this->ed36_i_turma = ($this->ed36_i_turma === 0 || $this->ed36_i_turma === 0.0 || $this->ed36_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_turma"]:$this->ed36_i_turma);
+       $this->ed36_i_matricula = ($this->ed36_i_matricula === 0 || $this->ed36_i_matricula === 0.0 || $this->ed36_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_matricula"]:$this->ed36_i_matricula);
      }else{
-       $this->ed36_i_turma = ($this->ed36_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_turma"]:$this->ed36_i_turma);
-       $this->ed36_i_matricula = ($this->ed36_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_matricula"]:$this->ed36_i_matricula);
+       $this->ed36_i_turma = ($this->ed36_i_turma === 0 || $this->ed36_i_turma === 0.0 || $this->ed36_i_turma == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_turma"]:$this->ed36_i_turma);
+       $this->ed36_i_matricula = ($this->ed36_i_matricula === 0 || $this->ed36_i_matricula === 0.0 || $this->ed36_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed36_i_matricula"]:$this->ed36_i_matricula);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_turma_matriculas {
       $this->atualizacampos();
        $this->ed36_i_turma = $ed36_i_turma;
        $this->ed36_i_matricula = $ed36_i_matricula;
-     if(($this->ed36_i_turma == null) || ($this->ed36_i_turma == "") ){
+     if(($this->ed36_i_turma == null) || ($this->ed36_i_turma === 0 || $this->ed36_i_turma === 0.0 || $this->ed36_i_turma == "") ){
        $this->erro_sql = " Campo ed36_i_turma nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_turma_matriculas {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->ed36_i_matricula == null) || ($this->ed36_i_matricula == "") ){
+     if(($this->ed36_i_matricula == null) || ($this->ed36_i_matricula === 0 || $this->ed36_i_matricula === 0.0 || $this->ed36_i_matricula == "") ){
        $this->erro_sql = " Campo ed36_i_matricula nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

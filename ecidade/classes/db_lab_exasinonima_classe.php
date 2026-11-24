@@ -69,11 +69,11 @@ class cl_lab_exasinonima {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la18_i_codigo = ($this->la18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_codigo"]:$this->la18_i_codigo);
-       $this->la18_i_sinonima = ($this->la18_i_sinonima == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_sinonima"]:$this->la18_i_sinonima);
-       $this->la18_i_exame = ($this->la18_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_exame"]:$this->la18_i_exame);
+       $this->la18_i_codigo = ($this->la18_i_codigo === 0 || $this->la18_i_codigo === 0.0 || $this->la18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_codigo"]:$this->la18_i_codigo);
+       $this->la18_i_sinonima = ($this->la18_i_sinonima === 0 || $this->la18_i_sinonima === 0.0 || $this->la18_i_sinonima == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_sinonima"]:$this->la18_i_sinonima);
+       $this->la18_i_exame = ($this->la18_i_exame === 0 || $this->la18_i_exame === 0.0 || $this->la18_i_exame == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_exame"]:$this->la18_i_exame);
      }else{
-       $this->la18_i_codigo = ($this->la18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_codigo"]:$this->la18_i_codigo);
+       $this->la18_i_codigo = ($this->la18_i_codigo === 0 || $this->la18_i_codigo === 0.0 || $this->la18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la18_i_codigo"]:$this->la18_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_lab_exasinonima {
          $this->la18_i_codigo = $la18_i_codigo;
        }
      }
-     if(($this->la18_i_codigo == null) || ($this->la18_i_codigo == "") ){
+     if(($this->la18_i_codigo == null) || ($this->la18_i_codigo === 0 || $this->la18_i_codigo === 0.0 || $this->la18_i_codigo == "") ){
        $this->erro_sql = " Campo la18_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

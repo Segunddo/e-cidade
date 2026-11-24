@@ -67,10 +67,10 @@ class cl_emprestimolocal {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi20_codigo = ($this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
+       $this->bi20_codigo = ($this->bi20_codigo === 0 || $this->bi20_codigo === 0.0 || $this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
        $this->bi20_descr = ($this->bi20_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_descr"]:$this->bi20_descr);
      }else{
-       $this->bi20_codigo = ($this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
+       $this->bi20_codigo = ($this->bi20_codigo === 0 || $this->bi20_codigo === 0.0 || $this->bi20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi20_codigo"]:$this->bi20_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_emprestimolocal {
          $this->bi20_codigo = $bi20_codigo;
        }
      }
-     if(($this->bi20_codigo == null) || ($this->bi20_codigo == "") ){
+     if(($this->bi20_codigo == null) || ($this->bi20_codigo === 0 || $this->bi20_codigo === 0.0 || $this->bi20_codigo == "") ){
        $this->erro_sql = " Campo bi20_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

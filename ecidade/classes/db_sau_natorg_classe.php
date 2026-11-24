@@ -67,10 +67,10 @@ class cl_sau_natorg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd40_i_cod_natorg = ($this->sd40_i_cod_natorg == ""?@$GLOBALS["HTTP_POST_VARS"]["sd40_i_cod_natorg"]:$this->sd40_i_cod_natorg);
+       $this->sd40_i_cod_natorg = ($this->sd40_i_cod_natorg === 0 || $this->sd40_i_cod_natorg === 0.0 || $this->sd40_i_cod_natorg == ""?@$GLOBALS["HTTP_POST_VARS"]["sd40_i_cod_natorg"]:$this->sd40_i_cod_natorg);
        $this->sd40_v_descricao = ($this->sd40_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd40_v_descricao"]:$this->sd40_v_descricao);
      }else{
-       $this->sd40_i_cod_natorg = ($this->sd40_i_cod_natorg == ""?@$GLOBALS["HTTP_POST_VARS"]["sd40_i_cod_natorg"]:$this->sd40_i_cod_natorg);
+       $this->sd40_i_cod_natorg = ($this->sd40_i_cod_natorg === 0 || $this->sd40_i_cod_natorg === 0.0 || $this->sd40_i_cod_natorg == ""?@$GLOBALS["HTTP_POST_VARS"]["sd40_i_cod_natorg"]:$this->sd40_i_cod_natorg);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sau_natorg {
        return false;
      }
        $this->sd40_i_cod_natorg = $sd40_i_cod_natorg;
-     if(($this->sd40_i_cod_natorg == null) || ($this->sd40_i_cod_natorg == "") ){
+     if(($this->sd40_i_cod_natorg == null) || ($this->sd40_i_cod_natorg === 0 || $this->sd40_i_cod_natorg === 0.0 || $this->sd40_i_cod_natorg == "") ){
        $this->erro_sql = " Campo sd40_i_cod_natorg nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

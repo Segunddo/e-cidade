@@ -33,7 +33,7 @@ class importacaoCenso2015 extends ImportacaoCenso2012
 
     private $iCodigoEscola = null;
 
-    function __construct($iAnoEscolhido, $iCodigoInepEscola = null, $iCodigoLayout)
+    function __construct($iAnoEscolhido, $iCodigoInepEscola = null, $iCodigoLayout = null)
     {
 
         parent::__construct($iAnoEscolhido, $iCodigoInepEscola, $iCodigoLayout);

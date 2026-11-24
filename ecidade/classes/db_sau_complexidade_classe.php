@@ -67,10 +67,10 @@ class cl_sau_complexidade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd69_i_codigo = ($this->sd69_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd69_i_codigo"]:$this->sd69_i_codigo);
+       $this->sd69_i_codigo = ($this->sd69_i_codigo === 0 || $this->sd69_i_codigo === 0.0 || $this->sd69_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd69_i_codigo"]:$this->sd69_i_codigo);
        $this->sd69_c_nome = ($this->sd69_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd69_c_nome"]:$this->sd69_c_nome);
      }else{
-       $this->sd69_i_codigo = ($this->sd69_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd69_i_codigo"]:$this->sd69_i_codigo);
+       $this->sd69_i_codigo = ($this->sd69_i_codigo === 0 || $this->sd69_i_codigo === 0.0 || $this->sd69_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd69_i_codigo"]:$this->sd69_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_complexidade {
          $this->sd69_i_codigo = $sd69_i_codigo;
        }
      }
-     if(($this->sd69_i_codigo == null) || ($this->sd69_i_codigo == "") ){
+     if(($this->sd69_i_codigo == null) || ($this->sd69_i_codigo === 0 || $this->sd69_i_codigo === 0.0 || $this->sd69_i_codigo == "") ){
        $this->erro_sql = " Campo sd69_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

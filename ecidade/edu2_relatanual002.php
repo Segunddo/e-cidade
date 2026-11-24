@@ -40,7 +40,7 @@ $sql0 .= "   AND ed38_i_escola = $iEscola ";
 $sql0 .= "   ORDER BY ed52_i_codigo ";
 $sql0 .= "   LIMIT 1 ";
 $result0 = db_query($sql0);
-$linhas0 = pg_num_rows($result0);
+$linhas0 = ($result0 ? pg_num_rows($result0) : null);
 
 if ($linhas0 > 0) {
     $datarel = pg_result($result0, 0, 0);
@@ -72,7 +72,7 @@ $sql .= " GROUP BY ed11_c_descr,ed11_i_codigo,ed11_i_sequencia,ed11_i_ensino,ed1
 $sql .= " ed10_c_abrev,ed31_i_codigo,ed31_c_descr ";
 $sql .= " ORDER BY ed11_i_ensino,ed11_i_sequencia ";
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 if ($linhas == 0) { ?>
 
     <table width='100%'>

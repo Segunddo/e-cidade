@@ -80,7 +80,7 @@ try {
         $clrhdepend->rh31_fins_previdenciarios = $rh31_fins_previdenciarios == 't'?'t':'f';
         $clrhdepend->rh31_descricaoparentesco = $rh31_descricaoparentesco;
         $clrhdepend->rh31_irfcomplementar = $rh31_irfcomplementar == 't'?'t':'f';
-         
+
 
         (new S2405($rh31_regist))->salvarDataAlteracao();
 
@@ -318,9 +318,9 @@ function alteracaoS2205($rh31_regist, $rh31_dtnasc, $rh31_codigo, &$clrhdepend, 
 
     // Registra alteração para envio do formulário S2205
     foreach(S2205::getCamposControleAlteracao() as $campo){
-        if(isset($$campo)){
+        if(isset(${$campo})){
             if(isset($dadosAtuais->$campo)){
-                if( $dadosAtuais->$campo != $$campo){
+                if( $dadosAtuais->$campo != ${$campo}){
                     $servidorAlteracao = ServidorAlteracao::findMatriculaByLayout($rh31_regist, Tipo::S2205);
                     $servidorAlteracao->setDataS2205(new DBDate(date('Y-m-d')));
                     $servidorAlteracao->save();

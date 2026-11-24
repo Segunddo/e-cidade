@@ -68,7 +68,7 @@ class Dirf extends \ECidade\RecursosHumanos\Pessoal\Arquivos\Dirf\Ano2017\Dirf
         }
 
         $sInformacaoComplementar = '';
-        $sSqlBaseInfPlanoSaude   = implode($aQueryCalculoFinanceiro, 'union');
+        $sSqlBaseInfPlanoSaude   = implode('union', $aQueryCalculoFinanceiro);
         $rsBaseInfPlanoSaude     = \db_query($sSqlBaseInfPlanoSaude);
 
         if ($rsBaseInfPlanoSaude && pg_num_rows($rsBaseInfPlanoSaude) > 0) {

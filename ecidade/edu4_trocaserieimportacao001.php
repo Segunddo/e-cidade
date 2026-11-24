@@ -164,7 +164,7 @@ if (!isset($incluir)) {
                                                   " ed59_i_turma = $turmaorigem and ed59_i_serie in ($etapaorigem)"
                                                  );
           $rs          = $oDaoRegencia->sql_record($sSql);
-          $procorigem  = pg_result($rs, 0, 'procorigem');
+          $procorigem  = ($rs ? pg_result($rs, 0, 'procorigem') : null);
           $linhas      = $oDaoRegencia->numrows;
           $sSql        = $oDaoRegencia->sql_query('', 'ed59_i_codigo as regdestino, ed232_i_codigo as coddestino, '.
                                                   'ed232_c_descr as descrdestino, '.
@@ -173,7 +173,7 @@ if (!isset($incluir)) {
                                                 " ed59_i_turma = $turmadestino and ed59_i_serie in ($codetapadestino)"
                                                  );
           $rs2         = $oDaoRegencia->sql_record($sSql);
-          $procdestino = pg_result($rs2, 0, 'procdestino');
+          $procdestino = ($rs2 ? pg_result($rs2, 0, 'procdestino') : null);
           $linhas1     = $oDaoRegencia->numrows;
           $regmarcadas = '';
           for ($iCont = 0; $iCont < $linhas; $iCont++) {

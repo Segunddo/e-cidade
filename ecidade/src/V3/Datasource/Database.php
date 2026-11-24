@@ -436,6 +436,19 @@ class Database
      */
     public function isConnected()
     {
-        return is_resource($this->oConnection);
+        if (is_resource($this->oConnection)) {
+            return true;
+        }
+
+        if (!$this->oConnection instanceof \PgSql\Connection) {
+            return false;
+        }
+
+        try {
+            pg_connection_status($this->oConnection);
+            return true;
+        } catch (\Error $error) {
+            return false;
+        }
     }
 }

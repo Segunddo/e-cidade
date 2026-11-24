@@ -120,12 +120,12 @@ class cl_cgs_undalt {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->z33_i_seq = ($this->z33_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_i_seq"]:$this->z33_i_seq);
-       $this->z33_i_cgsund = ($this->z33_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_i_cgsund"]:$this->z33_i_cgsund);
+       $this->z33_i_seq = ($this->z33_i_seq === 0 || $this->z33_i_seq === 0.0 || $this->z33_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_i_seq"]:$this->z33_i_seq);
+       $this->z33_i_cgsund = ($this->z33_i_cgsund === 0 || $this->z33_i_cgsund === 0.0 || $this->z33_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_i_cgsund"]:$this->z33_i_cgsund);
        $this->z33_v_cgccpf = ($this->z33_v_cgccpf == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_cgccpf"]:$this->z33_v_cgccpf);
        $this->z33_v_nome = ($this->z33_v_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_nome"]:$this->z33_v_nome);
        $this->z33_v_ender = ($this->z33_v_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_ender"]:$this->z33_v_ender);
-       $this->z33_i_numero = ($this->z33_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_i_numero"]:$this->z33_i_numero);
+       $this->z33_i_numero = ($this->z33_i_numero === 0 || $this->z33_i_numero === 0.0 || $this->z33_i_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_i_numero"]:$this->z33_i_numero);
        $this->z33_v_compl = ($this->z33_v_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_compl"]:$this->z33_v_compl);
        $this->z33_v_bairro = ($this->z33_v_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_bairro"]:$this->z33_v_bairro);
        $this->z33_v_munic = ($this->z33_v_munic == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_munic"]:$this->z33_v_munic);
@@ -141,7 +141,7 @@ class cl_cgs_undalt {
        }
        $this->z33_v_telef = ($this->z33_v_telef == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_telef"]:$this->z33_v_telef);
        $this->z33_v_ident = ($this->z33_v_ident == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_ident"]:$this->z33_v_ident);
-       $this->z30_i_login = ($this->z30_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["z30_i_login"]:$this->z30_i_login);
+       $this->z30_i_login = ($this->z30_i_login === 0 || $this->z30_i_login === 0.0 || $this->z30_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["z30_i_login"]:$this->z30_i_login);
        $this->z33_v_telcel = ($this->z33_v_telcel == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_telcel"]:$this->z33_v_telcel);
        $this->z33_v_email = ($this->z33_v_email == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_email"]:$this->z33_v_email);
        if($this->z33_d_nasc == ""){
@@ -154,7 +154,7 @@ class cl_cgs_undalt {
        }
        $this->z33_v_sexo = ($this->z33_v_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_sexo"]:$this->z33_v_sexo);
        $this->z33_v_tipoalt = ($this->z33_v_tipoalt == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_tipoalt"]:$this->z33_v_tipoalt);
-       $this->z33_i_loginalt = ($this->z33_i_loginalt == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_i_loginalt"]:$this->z33_i_loginalt);
+       $this->z33_i_loginalt = ($this->z33_i_loginalt === 0 || $this->z33_i_loginalt === 0.0 || $this->z33_i_loginalt == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_i_loginalt"]:$this->z33_i_loginalt);
        if($this->z33_d_dataalt == ""){
          $this->z33_d_dataalt_dia = ($this->z33_d_dataalt_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_d_dataalt_dia"]:$this->z33_d_dataalt_dia);
          $this->z33_d_dataalt_mes = ($this->z33_d_dataalt_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_d_dataalt_mes"]:$this->z33_d_dataalt_mes);
@@ -166,7 +166,7 @@ class cl_cgs_undalt {
        $this->z33_c_horaal = ($this->z33_c_horaal == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_c_horaal"]:$this->z33_c_horaal);
        $this->z33_v_rotina = ($this->z33_v_rotina == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_v_rotina"]:$this->z33_v_rotina);
      }else{
-       $this->z33_i_seq = ($this->z33_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_i_seq"]:$this->z33_i_seq);
+       $this->z33_i_seq = ($this->z33_i_seq === 0 || $this->z33_i_seq === 0.0 || $this->z33_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["z33_i_seq"]:$this->z33_i_seq);
      }
    }
    // funcao para inclusao
@@ -403,7 +403,7 @@ class cl_cgs_undalt {
          $this->z33_i_seq = $z33_i_seq; 
        }
      }
-     if(($this->z33_i_seq == null) || ($this->z33_i_seq == "") ){ 
+     if(($this->z33_i_seq == null) || ($this->z33_i_seq === 0 || $this->z33_i_seq === 0.0 || $this->z33_i_seq == "") ){ 
        $this->erro_sql = " Campo z33_i_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

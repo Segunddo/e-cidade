@@ -73,7 +73,7 @@ $where
 order by mo53_nome, j13_descr";
 
 $result = db_query($sqlEscolasBairros);
-$numLinhas = pg_num_rows($result);
+$numLinhas = ($result ? pg_num_rows($result) : null);
 
 if ($numLinhas == 0) {
     db_redireciona('db_erros.php?fechar=true&db_erro=Nenhum registro encontrado.');

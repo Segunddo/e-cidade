@@ -97,7 +97,7 @@ $head6 = "NOME: ".$z01_nome;
 
 $result = db_query($sql);
 //db_criatabela($result);exit;
-$xxnum = pg_numrows($result);
+$xxnum = ($result ? pg_numrows($result) : null);
 
 if ($xxnum == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Não existem Códigos cadastrados no período de '.$mes.' / '.$ano);
@@ -143,7 +143,7 @@ for($x = 0; $x < $xxnum;$x++){
    $yLinha = $pdf->gety();
    $pdf->multicell(20,$alt,$rh236_situacao,0,"C",$pre);
    $yLinhaMulticel_1 = $pdf->getY();  
-   
+
    $pdf->SetXY($pdf->lMargin + 160, $yLinha);
    $pdf->multicell(0,$alt,$h16_histor.' '.$h16_hist2,0,"L",$pre);
    $yLinhaMulticel_2 = $pdf->getY();

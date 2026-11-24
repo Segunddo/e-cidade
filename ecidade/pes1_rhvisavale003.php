@@ -66,9 +66,9 @@ if(isset($excluir)){
    for($i=0; $i<$clrhvisavalecgm->numrows; $i++){
    	 db_fieldsmemory($resultcgm,$i);
    	 $inter  = "inter".($i+1);
-   	 $$inter = $rh48_numcgm;
+   	 ${$inter} = $rh48_numcgm;
    	 $dinter  = "deinter".($i+1);
-   	 $$dinter = $z01_nome;
+   	 ${$dinter} = $z01_nome;
    }
    $db_botao = true;
 }

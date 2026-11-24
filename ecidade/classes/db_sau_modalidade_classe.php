@@ -73,13 +73,13 @@ class cl_sau_modalidade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd82_i_codigo = ($this->sd82_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd82_i_codigo"]:$this->sd82_i_codigo);
+       $this->sd82_i_codigo = ($this->sd82_i_codigo === 0 || $this->sd82_i_codigo === 0.0 || $this->sd82_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd82_i_codigo"]:$this->sd82_i_codigo);
        $this->sd82_c_modalidade = ($this->sd82_c_modalidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd82_c_modalidade"]:$this->sd82_c_modalidade);
        $this->sd82_c_nome = ($this->sd82_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd82_c_nome"]:$this->sd82_c_nome);
-       $this->sd82_i_anocomp = ($this->sd82_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd82_i_anocomp"]:$this->sd82_i_anocomp);
-       $this->sd82_i_mescomp = ($this->sd82_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd82_i_mescomp"]:$this->sd82_i_mescomp);
+       $this->sd82_i_anocomp = ($this->sd82_i_anocomp === 0 || $this->sd82_i_anocomp === 0.0 || $this->sd82_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd82_i_anocomp"]:$this->sd82_i_anocomp);
+       $this->sd82_i_mescomp = ($this->sd82_i_mescomp === 0 || $this->sd82_i_mescomp === 0.0 || $this->sd82_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd82_i_mescomp"]:$this->sd82_i_mescomp);
      }else{
-       $this->sd82_i_codigo = ($this->sd82_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd82_i_codigo"]:$this->sd82_i_codigo);
+       $this->sd82_i_codigo = ($this->sd82_i_codigo === 0 || $this->sd82_i_codigo === 0.0 || $this->sd82_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd82_i_codigo"]:$this->sd82_i_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_sau_modalidade {
          $this->sd82_i_codigo = $sd82_i_codigo;
        }
      }
-     if(($this->sd82_i_codigo == null) || ($this->sd82_i_codigo == "") ){
+     if(($this->sd82_i_codigo == null) || ($this->sd82_i_codigo === 0 || $this->sd82_i_codigo === 0.0 || $this->sd82_i_codigo == "") ){
        $this->erro_sql = " Campo sd82_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

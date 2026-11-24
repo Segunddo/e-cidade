@@ -141,7 +141,7 @@ if(isset($HTTP_POST_VARS["incluir"])) {
 //  exit;  
 }
 
-parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING']), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str(base64_decode($HTTP_SERVER_VARS['QUERY_STRING'] ?? ''), $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(isset($retorno)) {
   $sql = "select u.id_usuario,db_usuacgm.cgmlogin,u.nome,u.login,u.usuarioativo,u.email,u.senha ,u.usuext
           from db_usuarios u

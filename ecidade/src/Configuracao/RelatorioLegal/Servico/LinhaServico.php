@@ -36,7 +36,7 @@ class LinhaServico
      * LinhaServico constructor.
      * @param stdClass $parametros
      */
-    public function __construct(stdClass $parametros = null)
+    public function __construct(?stdClass $parametros = null)
     {
         $this->parametros = $parametros;
     }

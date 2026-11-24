@@ -71,12 +71,12 @@ class cl_obstransferencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed283_i_codigo = ($this->ed283_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_codigo"]:$this->ed283_i_codigo);
+       $this->ed283_i_codigo = ($this->ed283_i_codigo === 0 || $this->ed283_i_codigo === 0.0 || $this->ed283_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_codigo"]:$this->ed283_i_codigo);
        $this->ed283_t_mensagem = ($this->ed283_t_mensagem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_t_mensagem"]:$this->ed283_t_mensagem);
        $this->ed283_c_bolsafamilia = ($this->ed283_c_bolsafamilia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_c_bolsafamilia"]:$this->ed283_c_bolsafamilia);
-       $this->ed283_i_escola = ($this->ed283_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_escola"]:$this->ed283_i_escola);
+       $this->ed283_i_escola = ($this->ed283_i_escola === 0 || $this->ed283_i_escola === 0.0 || $this->ed283_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_escola"]:$this->ed283_i_escola);
      }else{
-       $this->ed283_i_codigo = ($this->ed283_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_codigo"]:$this->ed283_i_codigo);
+       $this->ed283_i_codigo = ($this->ed283_i_codigo === 0 || $this->ed283_i_codigo === 0.0 || $this->ed283_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed283_i_codigo"]:$this->ed283_i_codigo);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_obstransferencia {
          $this->ed283_i_codigo = $ed283_i_codigo;
        }
      }
-     if(($this->ed283_i_codigo == null) || ($this->ed283_i_codigo == "") ){
+     if(($this->ed283_i_codigo == null) || ($this->ed283_i_codigo === 0 || $this->ed283_i_codigo === 0.0 || $this->ed283_i_codigo == "") ){
        $this->erro_sql = " Campo ed283_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

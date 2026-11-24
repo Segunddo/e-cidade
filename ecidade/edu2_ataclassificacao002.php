@@ -70,10 +70,10 @@ try {
     ";
 
     $rsGrade = db_query($sqlGrade);
-    $linhas = pg_num_rows($rsGrade);
+    $linhas = ($rsGrade ? pg_num_rows($rsGrade) : null);
     $listaDisciplinas = [];
     $resultadosDisciplinas = [];
-    for ($i = 0; $i < pg_num_rows($rsGrade); $i++) {
+    for ($i = 0; $i < ($rsGrade ? pg_num_rows($rsGrade) : null); $i++) {
         $dadosDisciplinas = db_utils::fieldsMemory($rsGrade, $i);
         $disciplinaTemp = new stdClass();
         if (!key_exists($dadosDisciplinas->ed232_i_codigo, $listaDisciplinas)) {
@@ -248,7 +248,7 @@ try {
     $contadorAlunos = 1;
     $alunosImpressos = [];
     $pdf->SetFont('Arial', '', 7);
-    for ($i = 0; $i < pg_num_rows($rsGrade); $i++) {
+    for ($i = 0; $i < ($rsGrade ? pg_num_rows($rsGrade) : null); $i++) {
         $dadosGrade = db_utils::fieldsMemory($rsGrade, $i);
         if (!in_array($dadosGrade->ed47_i_codigo, $alunosImpressos)) {
             $pdf->cell($larguraColunaNum, 4, $contadorAlunos, 1, 0, 'C', 0, '');

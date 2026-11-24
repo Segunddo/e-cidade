@@ -28,7 +28,7 @@
 include(modification("libs/db_stdlib.php"));
 include(modification("libs/db_conecta.php"));
 
-parse_str($HTTP_SERVER_VARS['QUERY_STRING'], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS['QUERY_STRING'] ?? '', $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
 if(isset($HTTP_POST_VARS["sair"]) || @$sairfora == 1) {
   //usuario local
   //   uol_chat = uol_chat||'\n"."".db_getsession("DB_id_usuario")."#".time()."#".db_getsession("DB_login")."#"."Usuário ".db_getsession("DB_login")." saiu do chat',

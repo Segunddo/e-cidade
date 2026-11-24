@@ -53,15 +53,15 @@ class cl_turmaachorarioprofissionalsemrec
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed176_sequencial = ($this->ed176_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_sequencial"]:$this->ed176_sequencial);
-       $this->ed176_turmaac = ($this->ed176_turmaac == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_turmaac"]:$this->ed176_turmaac);
-       $this->ed176_funcaoatividade = ($this->ed176_funcaoatividade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_funcaoatividade"]:$this->ed176_funcaoatividade);
-       $this->ed176_rechumano = ($this->ed176_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_rechumano"]:$this->ed176_rechumano);
-       $this->ed176_diasemana = ($this->ed176_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_diasemana"]:$this->ed176_diasemana);
+       $this->ed176_sequencial = ($this->ed176_sequencial === 0 || $this->ed176_sequencial === 0.0 || $this->ed176_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_sequencial"]:$this->ed176_sequencial);
+       $this->ed176_turmaac = ($this->ed176_turmaac === 0 || $this->ed176_turmaac === 0.0 || $this->ed176_turmaac == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_turmaac"]:$this->ed176_turmaac);
+       $this->ed176_funcaoatividade = ($this->ed176_funcaoatividade === 0 || $this->ed176_funcaoatividade === 0.0 || $this->ed176_funcaoatividade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_funcaoatividade"]:$this->ed176_funcaoatividade);
+       $this->ed176_rechumano = ($this->ed176_rechumano === 0 || $this->ed176_rechumano === 0.0 || $this->ed176_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_rechumano"]:$this->ed176_rechumano);
+       $this->ed176_diasemana = ($this->ed176_diasemana === 0 || $this->ed176_diasemana === 0.0 || $this->ed176_diasemana == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_diasemana"]:$this->ed176_diasemana);
        $this->ed176_horainicial = ($this->ed176_horainicial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_horainicial"]:$this->ed176_horainicial);
        $this->ed176_horafinal = ($this->ed176_horafinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_horafinal"]:$this->ed176_horafinal);
      }else{
-       $this->ed176_sequencial = ($this->ed176_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_sequencial"]:$this->ed176_sequencial);
+       $this->ed176_sequencial = ($this->ed176_sequencial === 0 || $this->ed176_sequencial === 0.0 || $this->ed176_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed176_sequencial"]:$this->ed176_sequencial);
      }
    }
 
@@ -125,7 +125,7 @@ class cl_turmaachorarioprofissionalsemrec
                 $this->ed176_sequencial = $ed176_sequencial;
             }
         }
-        if (($this->ed176_sequencial == null) || ($this->ed176_sequencial == "")) {
+        if (($this->ed176_sequencial == null) || ($this->ed176_sequencial === 0 || $this->ed176_sequencial === 0.0 || $this->ed176_sequencial == "")) {
             $this->erro_sql = " Campo ed176_sequencial no declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

@@ -186,7 +186,7 @@ if (isset($incluir)) {
     db_fim_transacao($sqlerro);
   }
 }
-function dias_pagto($registro=null,$r45_dtreto,$r45_dtafas){
+function dias_pagto($registro=null,$r45_dtreto = null,$r45_dtafas = null){
   
   global $dias_pagamento, $data_afastamento, $dtfim,$subpes;
   

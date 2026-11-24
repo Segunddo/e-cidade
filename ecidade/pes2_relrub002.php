@@ -403,8 +403,8 @@ if($tipoarq == 'pdf') {
 	         $pdf->cell(15,$alt,$totalreg,"TB",0,"C",$corT);
 	         for($ii=0; $ii<count($arr_rubricas); $ii++){
 	           $qualtot = 'totalrub'.($ii+1);
-	           $pdf->cell(18,$alt,db_formatar($$qualtot,"f"),"TB",0,"R",$corT);
-	           $$qualtot = 0;
+	           $pdf->cell(18,$alt,db_formatar(${$qualtot},"f"),"TB",0,"R",$corT);
+	           ${$qualtot} = 0;
 	         }
 	         $pdf->cell(18,$alt,db_formatar($totalform,"f"),"RTB",1,"R",$corT);
 	         $totalform = 0;
@@ -430,7 +430,7 @@ if($tipoarq == 'pdf') {
 	         $pdf->cell(15,$alt,$RLrh01_regist,1,0,"C",1);
 	         $pdf->cell(60,$alt,$RLz01_nome,1,0,"C",1);
 	       }else if(isset($testar)){
-	         $pdf->cell((93+(18 * count($arr_rubricas))),$alt,$$testar,1,1,"L",1);
+	         $pdf->cell((93+(18 * count($arr_rubricas))),$alt,${$testar},1,1,"L",1);
 	         $pdf->cell(75,$alt,"TOTAL DE REGISTROS",1,0,"C",1);
 	       }else{
 	         $pdf->cell(75,$alt,"TOTAL DE REGISTROS",1,0,"C",1);
@@ -448,7 +448,7 @@ if($tipoarq == 'pdf') {
 	         $mudapag = true;
 	       }
 	       if($mudapag == true && !isset($sototais)){
-	         $pdf->cell((93+(18 * count($arr_rubricas))),$alt,$$testar,1,1,"L",1);
+	         $pdf->cell((93+(18 * count($arr_rubricas))),$alt,${$testar},1,1,"L",1);
 	       }
 	     }
 	     $cor = 1;
@@ -475,11 +475,11 @@ if($tipoarq == 'pdf') {
 	     $rubrica = $arr_rubricas[$index]." ".$arr_quantval[$index];
 	     $qualrub = 'rub'.($ii+1);
 	     $qualtot = 'totalrub'.($ii+1);
-	     $$qualtot+= $$qualrub;
+	     ${$qualtot}+= ${$qualrub};
 	     $qualtotg = 'totalgrub'.($ii+1);
-	     $$qualtotg+= $$qualrub;
+	     ${$qualtotg}+= ${$qualrub};
 	     if(!isset($sototais)){
-	       $pdf->cell(18,$alt,db_formatar($$qualrub,"f"),0,0,"R",$cor);
+	       $pdf->cell(18,$alt,db_formatar(${$qualrub},"f"),0,0,"R",$cor);
 	     }
 	     next($arr_rubricas);
 	   }
@@ -505,7 +505,7 @@ if($tipoarq == 'pdf') {
 	$pdf->cell(15,$alt,$totalreg,"TB",0,"C",$corT);
 	for($ii=0; $ii<count($arr_rubricas); $ii++){
 	  $qualtot = 'totalrub'.($ii+1);
-	  $pdf->cell(18,$alt,db_formatar($$qualtot,"f"),"TB",0,"R",$corT);
+	  $pdf->cell(18,$alt,db_formatar(${$qualtot},"f"),"TB",0,"R",$corT);
 	}
 	$pdf->cell(18,$alt,db_formatar($totalform,"f"),"RTB",1,"R",$corT);
 
@@ -515,7 +515,7 @@ if($tipoarq == 'pdf') {
 	$pdf->cell(15,$alt,$totalgreg,"TB",0,"C",1);
 	for($ii=0; $ii<count($arr_rubricas); $ii++){
 	  $qualtotg = 'totalgrub'.($ii+1);
-	  $pdf->cell(18,$alt,db_formatar($$qualtotg,"f"),"TB",0,"R",1);
+	  $pdf->cell(18,$alt,db_formatar(${$qualtotg},"f"),"TB",0,"R",1);
 	}
 	$pdf->cell(18,$alt,db_formatar($totalgform,"f"),"RTB",1,"R",1);
 
@@ -684,7 +684,7 @@ if($tipoarq == 'pdf') {
 
       	}else if(isset($testar)){
 
-	        fputs($rFile, $$testar);
+	        fputs($rFile, ${$testar});
 	        fputs($rFile, "\n");
 	        fputs($rFile, "TOTAL DE REGISTROS");
 
@@ -716,7 +716,7 @@ if($tipoarq == 'pdf') {
       	}
       	if($mudapag == true && !isset($sototais)){
 					//$pdf->cell((93+(18 * count($arr_rubricas))),$alt,$$testar,1,1,"L",1);
-					fputs($rFile, $$testar);
+					fputs($rFile, ${$testar});
 					fputs($rFile, "\n");
       	}
     	}
@@ -754,11 +754,11 @@ if($tipoarq == 'pdf') {
 			$rubrica   = $arr_rubricas[$index]." ".$arr_quantval[$index];
 			$qualrub   = 'rub'.($ii+1);
 			$qualtot   = 'totalrub'.($ii+1);
-			$$qualtot += $$qualrub;
+			${$qualtot} += ${$qualrub};
 			$qualtotg  = 'totalgrub'.($ii+1);
-			$$qualtotg+= $$qualrub;
+			${$qualtotg}+= ${$qualrub};
 			if(!isset($sototais)){
-				fputs($rFile, trim(db_formatar($$qualrub,"f")));
+				fputs($rFile, trim(db_formatar(${$qualrub},"f")));
 				fputs($rFile, ";");
 			}
 			next($arr_rubricas);

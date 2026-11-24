@@ -43,10 +43,10 @@ class cl_necessidadetipoatendimento
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed186_sequencial = ($this->ed186_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed186_sequencial"]:$this->ed186_sequencial);
+       $this->ed186_sequencial = ($this->ed186_sequencial === 0 || $this->ed186_sequencial === 0.0 || $this->ed186_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed186_sequencial"]:$this->ed186_sequencial);
        $this->ed186_descricao = ($this->ed186_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed186_descricao"]:$this->ed186_descricao);
      }else{
-       $this->ed186_sequencial = ($this->ed186_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed186_sequencial"]:$this->ed186_sequencial);
+       $this->ed186_sequencial = ($this->ed186_sequencial === 0 || $this->ed186_sequencial === 0.0 || $this->ed186_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed186_sequencial"]:$this->ed186_sequencial);
      }
    }
 
@@ -86,7 +86,7 @@ class cl_necessidadetipoatendimento
          $this->ed186_sequencial = $ed186_sequencial; 
        }
      }
-     if(($this->ed186_sequencial == null) || ($this->ed186_sequencial == "") ){ 
+     if(($this->ed186_sequencial == null) || ($this->ed186_sequencial === 0 || $this->ed186_sequencial === 0.0 || $this->ed186_sequencial == "") ){ 
        $this->erro_sql = " Campo ed186_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -275,7 +275,7 @@ $sql1 = "SELECT min(ed17_h_inicio)||'|'||max(ed17_h_fim) as horario,
          ORDER BY inicio,termino
         ";
 $result1 = db_query($sql1);
-$linhas1 = pg_num_rows($result1);
+$linhas1 = ($result1 ? pg_num_rows($result1) : null);
 $pdf->cell(50, 4, "  Horário de Funcionamento", "BR", 0, "L", 0);
 $pdf->cell(50, 4, "  Educação Infantil Creche", "BR", 0, "L", 0);
 $pdf->cell(50, 4, "  Educação Infantil Pré-escola", "BR", 0, "L", 0);
@@ -390,7 +390,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
            AND extract(year from ed47_d_nasc) > $x
           ";
         $result1 = db_query($sql1);
-        $linhas1 = pg_num_rows($result1);
+        $linhas1 = ($result1 ? pg_num_rows($result1) : null);
         db_fieldsmemory($result1, 0);
         $pdf->cell(70, 4, "      ".($qtdmais==0?"--":$qtdmais), "BR", 0, "L", 0);
         $s_cont_ens6 += $qtdmais;
@@ -406,7 +406,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
            AND extract(year from ed47_d_nasc) > $x
           ";
         $result2 = db_query($sql2);
-        $linhas2 = pg_num_rows($result2);
+        $linhas2 = ($result2 ? pg_num_rows($result2) : null);
         db_fieldsmemory($result2, 0);
         $pdf->cell(70, 4, "      ".($qtdmais==0?"--":$qtdmais), "B", 1, "L", 0);
         $s_cont_ens1 += $qtdmais;
@@ -425,7 +425,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
           AND extract(year from ed47_d_nasc) = $x
          ";
     $result3 = db_query($sql3);
-    $linhas3 = pg_num_rows($result3);
+    $linhas3 = ($result3 ? pg_num_rows($result3) : null);
     db_fieldsmemory($result3, 0);
     $pdf->cell(70, 4, "      ".($qtdigual==0?"--":$qtdigual), "BR", 0, "L", 0);
     $s_cont_ens6 += $qtdigual;
@@ -441,7 +441,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
           AND extract(year from ed47_d_nasc) = $x
          ";
     $result4 = db_query($sql4);
-    $linhas4 = pg_num_rows($result4);
+    $linhas4 = ($result4 ? pg_num_rows($result4) : null);
     db_fieldsmemory($result4, 0);
     $pdf->cell(70, 4, "      ".($qtdigual==0?"--":$qtdigual), "B", 1, "L", 0);
     $s_cont_ens1 += $qtdigual;
@@ -460,7 +460,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
            AND extract(year from ed47_d_nasc) < $x
           ";
         $result1 = db_query($sql1);
-        $linhas1 = pg_num_rows($result1);
+        $linhas1 = ($result1 ? pg_num_rows($result1) : null);
         db_fieldsmemory($result1, 0);
         $pdf->cell(70, 4, "      ".($qtdmenos==0?"--":$qtdmenos), "BR", 0, "L", 0);
         $s_cont_ens6 += $qtdmenos;
@@ -476,7 +476,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
            AND extract(year from ed47_d_nasc) < $x
           ";
         $result2 = db_query($sql2);
-        $linhas2 = pg_num_rows($result2);
+        $linhas2 = ($result2 ? pg_num_rows($result2) : null);
         db_fieldsmemory($result2, 0);
         $pdf->cell(70, 4, "      ".($qtdmenos==0?"--":$qtdmenos), "B", 1, "L", 0);
         $s_cont_ens1 += $qtdmenos;
@@ -525,7 +525,7 @@ for($x=0;$x<count($racas);$x++){
           ORDER BY ed11_i_ensino DESC
          ";
     $result1 = db_query($sql1);
-    $linhas1 = pg_num_rows($result1);
+    $linhas1 = ($result1 ? pg_num_rows($result1) : null);
     if($linhas1==0) {
         $pdf->cell(30, 4, "      ", "R", 0, "L", 0);
         $pdf->cell(40, 4, "      $racas[$x]", "BR", 0, "L", 0);
@@ -570,7 +570,7 @@ for($x=0;$x<count($racas);$x++){
           ORDER BY ed11_i_ensino DESC
          ";
     $result1 = db_query($sql1);
-    $linhas1 = pg_num_rows($result1);
+    $linhas1 = ($result1 ? pg_num_rows($result1) : null);
     if($linhas1==0) {
         $pdf->cell(30, 4, "      ", "R", 0, "L", 0);
         $pdf->cell(40, 4, "      $racas[$x]", "BR", 0, "L", 0);
@@ -634,7 +634,7 @@ for($x=0;$x<count($situacao);$x++){
           ORDER BY ed11_i_ensino DESC
          ";
     $result1 = db_query($sql1);
-    $linhas1 = pg_num_rows($result1);
+    $linhas1 = ($result1 ? pg_num_rows($result1) : null);
     if($linhas1==0) {
         $pdf->cell(70, 4, "  $descrsit[$x]", "BR", 0, "L", 0);
         $pdf->cell(60, 4, "      --", "BR", 0, "L", 0);
@@ -694,7 +694,7 @@ $sql1 = "SELECT min(ed17_h_inicio) as inicio,
          ORDER BY inicio,termino
         ";
 $result1 = db_query($sql1);
-$linhas1 = pg_num_rows($result1);
+$linhas1 = ($result1 ? pg_num_rows($result1) : null);
 $pdf->setfont('arial', '', 8);
 $inic = $pdf->getY();
 $pdf->cell(30, 2, "  Horário de", "R", 2, "L", 0);
@@ -709,7 +709,7 @@ $sql2 = "SELECT ed11_i_codigo as codserie,ed11_c_descr
          LIMIT 8
         ";
 $result2 = db_query($sql2);
-$linhas2 = pg_num_rows($result2);
+$linhas2 = ($result2 ? pg_num_rows($result2) : null);
 for($x=0;$x<$linhas2;$x++){
     db_fieldsmemory($result2, $x);
     if($x==($linhas2-1)) {
@@ -832,7 +832,7 @@ $sql_s = "SELECT ed11_i_codigo as codserie,ed11_c_descr
          LIMIT 8
         ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     if($x==($linhas_s-1)) {
@@ -1009,7 +1009,7 @@ $sql_s = "SELECT ed11_i_codigo as codserie,ed11_c_descr
          LIMIT 8
         ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     if($x==($linhas_s-1)) {
@@ -1423,7 +1423,7 @@ $sql_s = "SELECT ed11_i_codigo as codserie,ed11_c_descr
           LIMIT 8
          ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     if($x==($linhas_s-1)) {
@@ -1555,7 +1555,7 @@ $sql_s = "SELECT ed11_i_codigo as codserie,ed11_c_descr
           LIMIT 8
          ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     if($x==($linhas_s-1)) {
@@ -1924,7 +1924,7 @@ $sql_s = "SELECT ed11_i_codigo,ed11_c_descr
           LIMIT 8
          ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     $pdf->cell(18, 4, "  $ed11_c_descr", "BL", 0, "L", 0);
@@ -1937,7 +1937,7 @@ $sql_si = "SELECT ed11_i_codigo as codsi,ed11_c_descr as descrsi,ed11_i_sequenci
           LIMIT 8
          ";
 $result_si = db_query($sql_si);
-$linhas_si = pg_num_rows($result_si);
+$linhas_si = ($result_si ? pg_num_rows($result_si) : null);
 for($x=0;$x<$linhas_si;$x++){
     $pdf->cell(190, 2, "", 0, 1, "L", 0);
     db_fieldsmemory($result_si, $x);
@@ -2017,7 +2017,7 @@ $sql_s = "SELECT ed11_i_codigo as codserie,ed11_c_descr
           LIMIT 8
          ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     if($x==($linhas_s-1)) {
@@ -2390,7 +2390,7 @@ $sql_s = "SELECT ed11_i_codigo,ed11_c_descr
           LIMIT 8
          ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     $pdf->cell(18, 4, "  $ed11_c_descr", "BL", 0, "L", 0);
@@ -2403,7 +2403,7 @@ $sql_si = "SELECT ed11_i_codigo as codsi,ed11_c_descr as descrsi,ed11_i_sequenci
            LIMIT 8
          ";
 $result_si = db_query($sql_si);
-$linhas_si = pg_num_rows($result_si);
+$linhas_si = ($result_si ? pg_num_rows($result_si) : null);
 for($x=0;$x<$linhas_si;$x++){
     $pdf->cell(190, 2, "", 0, 1, "L", 0);
     db_fieldsmemory($result_si, $x);
@@ -2512,7 +2512,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
            ORDER BY ed47_v_sexo desc
           ";
         $result1 = db_query($sql1);
-        $linhas1 = pg_num_rows($result1);
+        $linhas1 = ($result1 ? pg_num_rows($result1) : null);
         if($linhas1==0) {
             $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
             $pdf->cell(30, 4, "--", "BLR", 0, "C", 0);
@@ -2542,7 +2542,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
            ORDER BY ed47_v_sexo desc
           ";
         $result1 = db_query($sql1);
-        $linhas1 = pg_num_rows($result1);
+        $linhas1 = ($result1 ? pg_num_rows($result1) : null);
         if($linhas1==0) {
             $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
             $pdf->cell(30, 4, "--", "BLR", 1, "C", 0);
@@ -2572,7 +2572,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
           ORDER BY ed47_v_sexo desc
          ";
     $result1 = db_query($sql1);
-    $linhas1 = pg_num_rows($result1);
+    $linhas1 = ($result1 ? pg_num_rows($result1) : null);
     if($linhas1==0) {
         $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
         $pdf->cell(30, 4, "--", "BLR", 0, "C", 0);
@@ -2602,7 +2602,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
           ORDER BY ed47_v_sexo desc
          ";
     $result1 = db_query($sql1);
-    $linhas1 = pg_num_rows($result1);
+    $linhas1 = ($result1 ? pg_num_rows($result1) : null);
     if($linhas1==0) {
         $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
         $pdf->cell(30, 4, "--", "BLR", 1, "C", 0);
@@ -2642,7 +2642,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
              ORDER BY ed47_v_sexo desc
             ";
             $result1 = db_query($sql1);
-            $linhas1 = pg_num_rows($result1);
+            $linhas1 = ($result1 ? pg_num_rows($result1) : null);
             if($linhas1==0) {
                 $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
                 $pdf->cell(30, 4, "--", "BLR", 0, "C", 0);
@@ -2672,7 +2672,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
              ORDER BY ed47_v_sexo desc
             ";
             $result1 = db_query($sql1);
-            $linhas1 = pg_num_rows($result1);
+            $linhas1 = ($result1 ? pg_num_rows($result1) : null);
             if($linhas1==0) {
                 $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
                 $pdf->cell(30, 4, "--", "BLR", 1, "C", 0);
@@ -2705,7 +2705,7 @@ $sql1 = "SELECT count(ed61_i_codigo) as qtd,ed47_v_sexo
          ORDER BY ed47_v_sexo desc
         ";
 $result1 = db_query($sql1);
-$linhas1 = pg_num_rows($result1);
+$linhas1 = ($result1 ? pg_num_rows($result1) : null);
 if($linhas1==0) {
     $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
     $pdf->cell(30, 4, "--", "BLR", 0, "C", 0);
@@ -2734,7 +2734,7 @@ $sql1 = "SELECT count(ed61_i_codigo) as qtd,ed47_v_sexo
          ORDER BY ed47_v_sexo desc
         ";
 $result1 = db_query($sql1);
-$linhas1 = pg_num_rows($result1);
+$linhas1 = ($result1 ? pg_num_rows($result1) : null);
 if($linhas1==0) {
     $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
     $pdf->cell(30, 4, "--", "BLR", 1, "C", 0);
@@ -2780,7 +2780,7 @@ $sql1 = "SELECT min(ed17_h_inicio) as inicio,
          ORDER BY inicio,termino
         ";
 $result1 = db_query($sql1);
-$linhas1 = pg_num_rows($result1);
+$linhas1 = ($result1 ? pg_num_rows($result1) : null);
 $pdf->setfont('arial', '', 8);
 $pdf->cell(55, 4, "  Horário de Funcionamento", "BR", 0, "L", 0);
 $pdf->setfont('arial', '', 9);
@@ -2791,7 +2791,7 @@ $sql2 = "SELECT ed11_i_codigo as codserie,ed11_c_descr
          LIMIT 9
         ";
 $result2 = db_query($sql2);
-$linhas2 = pg_num_rows($result2);
+$linhas2 = ($result2 ? pg_num_rows($result2) : null);
 for($x=0;$x<$linhas2;$x++){
     db_fieldsmemory($result2, $x);
     if($x==($linhas2-1)) {
@@ -2914,7 +2914,7 @@ $sql_s = "SELECT ed11_i_codigo as codserie,ed11_c_descr
          LIMIT 9
         ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     if($x==($linhas_s-1)) {
@@ -3092,7 +3092,7 @@ $sql_s = "SELECT ed11_i_codigo as codserie,ed11_c_descr
          LIMIT 9
         ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     if($x==($linhas_s-1)) {
@@ -3506,7 +3506,7 @@ $sql_s = "SELECT ed11_i_codigo as codserie,ed11_c_descr
           LIMIT 9
          ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     if($x==($linhas_s-1)) {
@@ -3638,7 +3638,7 @@ $sql_s = "SELECT ed11_i_codigo as codserie,ed11_c_descr
           LIMIT 9
          ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     if($x==($linhas_s-1)) {
@@ -4009,7 +4009,7 @@ $sql_s = "SELECT ed11_i_codigo,ed11_c_descr
           LIMIT 9
          ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     $pdf->cell(15, 4, "  $ed11_c_descr", "BL", 0, "L", 0);
@@ -4022,7 +4022,7 @@ $sql_si = "SELECT ed11_i_codigo as codsi,ed11_c_descr as descrsi,ed11_i_sequenci
           LIMIT 9
          ";
 $result_si = db_query($sql_si);
-$linhas_si = pg_num_rows($result_si);
+$linhas_si = ($result_si ? pg_num_rows($result_si) : null);
 for($x=0;$x<$linhas_si;$x++){
     $pdf->cell(190, 2, "", 0, 1, "L", 0);
     db_fieldsmemory($result_si, $x);
@@ -4102,7 +4102,7 @@ $sql_s = "SELECT ed11_i_codigo as codserie,ed11_c_descr
           LIMIT 9
          ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     if($x==($linhas_s-1)) {
@@ -4473,7 +4473,7 @@ $sql_s = "SELECT ed11_i_codigo,ed11_c_descr
           LIMIT 9
          ";
 $result_s = db_query($sql_s);
-$linhas_s = pg_num_rows($result_s);
+$linhas_s = ($result_s ? pg_num_rows($result_s) : null);
 for($x=0;$x<$linhas_s;$x++){
     db_fieldsmemory($result_s, $x);
     $pdf->cell(15, 4, "  $ed11_c_descr", "BL", 0, "L", 0);
@@ -4486,7 +4486,7 @@ $sql_si = "SELECT ed11_i_codigo as codsi,ed11_c_descr as descrsi,ed11_i_sequenci
           LIMIT 9
          ";
 $result_si = db_query($sql_si);
-$linhas_si = pg_num_rows($result_si);
+$linhas_si = ($result_si ? pg_num_rows($result_si) : null);
 for($x=0;$x<$linhas_si;$x++){
     $pdf->cell(190, 2, "", 0, 1, "L", 0);
     db_fieldsmemory($result_si, $x);
@@ -4595,7 +4595,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
            ORDER BY ed47_v_sexo desc
           ";
         $result1 = db_query($sql1);
-        $linhas1 = pg_num_rows($result1);
+        $linhas1 = ($result1 ? pg_num_rows($result1) : null);
         if($linhas1==0) {
             $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
             $pdf->cell(30, 4, "--", "BLR", 0, "C", 0);
@@ -4625,7 +4625,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
            ORDER BY ed47_v_sexo desc
           ";
         $result1 = db_query($sql1);
-        $linhas1 = pg_num_rows($result1);
+        $linhas1 = ($result1 ? pg_num_rows($result1) : null);
         if($linhas1==0) {
             $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
             $pdf->cell(30, 4, "--", "BLR", 1, "C", 0);
@@ -4655,7 +4655,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
           ORDER BY ed47_v_sexo desc
          ";
     $result1 = db_query($sql1);
-    $linhas1 = pg_num_rows($result1);
+    $linhas1 = ($result1 ? pg_num_rows($result1) : null);
     if($linhas1==0) {
         $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
         $pdf->cell(30, 4, "--", "BLR", 0, "C", 0);
@@ -4685,7 +4685,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
           ORDER BY ed47_v_sexo desc
          ";
     $result1 = db_query($sql1);
-    $linhas1 = pg_num_rows($result1);
+    $linhas1 = ($result1 ? pg_num_rows($result1) : null);
     if($linhas1==0) {
         $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
         $pdf->cell(30, 4, "--", "BLR", 1, "C", 0);
@@ -4725,7 +4725,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
              ORDER BY ed47_v_sexo desc
             ";
             $result1 = db_query($sql1);
-            $linhas1 = pg_num_rows($result1);
+            $linhas1 = ($result1 ? pg_num_rows($result1) : null);
             if($linhas1==0) {
                 $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
                 $pdf->cell(30, 4, "--", "BLR", 0, "C", 0);
@@ -4755,7 +4755,7 @@ for($x=$ano_inicio;$x>=$ano_fim;$x--){
              ORDER BY ed47_v_sexo desc
             ";
             $result1 = db_query($sql1);
-            $linhas1 = pg_num_rows($result1);
+            $linhas1 = ($result1 ? pg_num_rows($result1) : null);
             if($linhas1==0) {
                 $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
                 $pdf->cell(30, 4, "--", "BLR", 1, "C", 0);
@@ -4788,7 +4788,7 @@ $sql1 = "SELECT count(ed61_i_codigo) as qtd,ed47_v_sexo
          ORDER BY ed47_v_sexo desc
         ";
 $result1 = db_query($sql1);
-$linhas1 = pg_num_rows($result1);
+$linhas1 = ($result1 ? pg_num_rows($result1) : null);
 if($linhas1==0) {
     $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
     $pdf->cell(30, 4, "--", "BLR", 0, "C", 0);
@@ -4817,7 +4817,7 @@ $sql1 = "SELECT count(ed61_i_codigo) as qtd,ed47_v_sexo
          ORDER BY ed47_v_sexo desc
         ";
 $result1 = db_query($sql1);
-$linhas1 = pg_num_rows($result1);
+$linhas1 = ($result1 ? pg_num_rows($result1) : null);
 if($linhas1==0) {
     $pdf->cell(30, 4, "--", "BL", 0, "C", 0);
     $pdf->cell(30, 4, "--", "BLR", 1, "C", 0);

@@ -67,8 +67,8 @@ class cl_autoracervo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi21_acervo = ($this->bi21_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_acervo"]:$this->bi21_acervo);
-       $this->bi21_autor = ($this->bi21_autor == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_autor"]:$this->bi21_autor);
+       $this->bi21_acervo = ($this->bi21_acervo === 0 || $this->bi21_acervo === 0.0 || $this->bi21_acervo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_acervo"]:$this->bi21_acervo);
+       $this->bi21_autor = ($this->bi21_autor === 0 || $this->bi21_autor === 0.0 || $this->bi21_autor == ""?@$GLOBALS["HTTP_POST_VARS"]["bi21_autor"]:$this->bi21_autor);
      }else{
      }
    }

@@ -74,13 +74,13 @@ class cl_bncceducacaoinfantiloriginal
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed167_sequencial = ($this->ed167_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed167_sequencial"] : $this->ed167_sequencial);
+            $this->ed167_sequencial = ($this->ed167_sequencial === 0 || $this->ed167_sequencial === 0.0 || $this->ed167_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed167_sequencial"] : $this->ed167_sequencial);
             $this->ed167_disciplina = ($this->ed167_disciplina == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed167_disciplina"] : $this->ed167_disciplina);
             $this->ed167_faixa_etaria = ($this->ed167_faixa_etaria == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed167_faixa_etaria"] : $this->ed167_faixa_etaria);
             $this->ed167_codigo = ($this->ed167_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed167_codigo"] : $this->ed167_codigo);
             $this->ed167_habilidade = ($this->ed167_habilidade == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed167_habilidade"] : $this->ed167_habilidade);
         } else {
-            $this->ed167_sequencial = ($this->ed167_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed167_sequencial"] : $this->ed167_sequencial);
+            $this->ed167_sequencial = ($this->ed167_sequencial === 0 || $this->ed167_sequencial === 0.0 || $this->ed167_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed167_sequencial"] : $this->ed167_sequencial);
         }
     }
 
@@ -147,7 +147,7 @@ class cl_bncceducacaoinfantiloriginal
                 $this->ed167_sequencial = $ed167_sequencial;
             }
         }
-        if (($this->ed167_sequencial == null) || ($this->ed167_sequencial == "")) {
+        if (($this->ed167_sequencial == null) || ($this->ed167_sequencial === 0 || $this->ed167_sequencial === 0.0 || $this->ed167_sequencial == "")) {
             $this->erro_sql = " Campo ed167_sequencial não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -480,7 +480,7 @@ class cl_bncceducacaoinfantiloriginal
         return $sql;
     }
 
-    public function sql_query_completa($ed167_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "", $ano)
+    public function sql_query_completa($ed167_sequencial = null, $campos = "*", $ordem = null, $dbwhere = "", $ano = null)
     {
         $sql = "
         select {$campos}

@@ -88,7 +88,7 @@ class cl_far_arquivohiperdia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa56_i_codigo = ($this->fa56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_i_codigo"]:$this->fa56_i_codigo);
+       $this->fa56_i_codigo = ($this->fa56_i_codigo === 0 || $this->fa56_i_codigo === 0.0 || $this->fa56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_i_codigo"]:$this->fa56_i_codigo);
        if($this->fa56_d_dataini == ""){
          $this->fa56_d_dataini_dia = ($this->fa56_d_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_d_dataini_dia"]:$this->fa56_d_dataini_dia);
          $this->fa56_d_dataini_mes = ($this->fa56_d_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_d_dataini_mes"]:$this->fa56_d_dataini_mes);
@@ -106,8 +106,8 @@ class cl_far_arquivohiperdia {
          }
        }
        $this->fa56_c_nomearquivo = ($this->fa56_c_nomearquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_c_nomearquivo"]:$this->fa56_c_nomearquivo);
-       $this->fa56_o_arquivo = ($this->fa56_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_o_arquivo"]:$this->fa56_o_arquivo);
-       $this->fa56_i_login = ($this->fa56_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_i_login"]:$this->fa56_i_login);
+       $this->fa56_o_arquivo = ($this->fa56_o_arquivo === 0 || $this->fa56_o_arquivo === 0.0 || $this->fa56_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_o_arquivo"]:$this->fa56_o_arquivo);
+       $this->fa56_i_login = ($this->fa56_i_login === 0 || $this->fa56_i_login === 0.0 || $this->fa56_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_i_login"]:$this->fa56_i_login);
        if($this->fa56_d_datasistema == ""){
          $this->fa56_d_datasistema_dia = ($this->fa56_d_datasistema_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_d_datasistema_dia"]:$this->fa56_d_datasistema_dia);
          $this->fa56_d_datasistema_mes = ($this->fa56_d_datasistema_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_d_datasistema_mes"]:$this->fa56_d_datasistema_mes);
@@ -118,7 +118,7 @@ class cl_far_arquivohiperdia {
        }
        $this->fa56_c_horasistema = ($this->fa56_c_horasistema == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_c_horasistema"]:$this->fa56_c_horasistema);
      }else{
-       $this->fa56_i_codigo = ($this->fa56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_i_codigo"]:$this->fa56_i_codigo);
+       $this->fa56_i_codigo = ($this->fa56_i_codigo === 0 || $this->fa56_i_codigo === 0.0 || $this->fa56_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa56_i_codigo"]:$this->fa56_i_codigo);
      }
    }
    // funcao para inclusao
@@ -211,7 +211,7 @@ class cl_far_arquivohiperdia {
          $this->fa56_i_codigo = $fa56_i_codigo;
        }
      }
-     if(($this->fa56_i_codigo == null) || ($this->fa56_i_codigo == "") ){
+     if(($this->fa56_i_codigo == null) || ($this->fa56_i_codigo === 0 || $this->fa56_i_codigo === 0.0 || $this->fa56_i_codigo == "") ){
        $this->erro_sql = " Campo fa56_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

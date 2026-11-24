@@ -110,7 +110,7 @@ class AreaHistoricoRedeRepository extends Repository
      */
     public function salvarAreaDisciplina(
         AreaHistoricoRede $areaHistoricoRede = null,
-        DisciplinaHistoricoRede $disciplinaHistoricoRede
+        ?DisciplinaHistoricoRede $disciplinaHistoricoRede = null
     ) {
         $codigo = $disciplinaHistoricoRede->getCodigo();
         db_query("delete from areahistmpsdisc where ed171_histmpsdisc = {$codigo}");

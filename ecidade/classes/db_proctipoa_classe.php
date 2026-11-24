@@ -67,8 +67,8 @@ class cl_proctipoa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd20_i_procedimento = ($this->sd20_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd20_i_procedimento"]:$this->sd20_i_procedimento);
-       $this->sd20_i_tipoatend = ($this->sd20_i_tipoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["sd20_i_tipoatend"]:$this->sd20_i_tipoatend);
+       $this->sd20_i_procedimento = ($this->sd20_i_procedimento === 0 || $this->sd20_i_procedimento === 0.0 || $this->sd20_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd20_i_procedimento"]:$this->sd20_i_procedimento);
+       $this->sd20_i_tipoatend = ($this->sd20_i_tipoatend === 0 || $this->sd20_i_tipoatend === 0.0 || $this->sd20_i_tipoatend == ""?@$GLOBALS["HTTP_POST_VARS"]["sd20_i_tipoatend"]:$this->sd20_i_tipoatend);
      }else{
      }
    }

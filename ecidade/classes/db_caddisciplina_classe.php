@@ -75,14 +75,14 @@ class cl_caddisciplina {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed232_i_codigo = ($this->ed232_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_i_codigo"]:$this->ed232_i_codigo);
+       $this->ed232_i_codigo = ($this->ed232_i_codigo === 0 || $this->ed232_i_codigo === 0.0 || $this->ed232_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_i_codigo"]:$this->ed232_i_codigo);
        $this->ed232_areaconhecimento = ($this->ed232_areaconhecimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_areaconhecimento"]:$this->ed232_areaconhecimento);
        $this->ed232_c_descr = ($this->ed232_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_c_descr"]:$this->ed232_c_descr);
        $this->ed232_c_abrev = ($this->ed232_c_abrev == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_c_abrev"]:$this->ed232_c_abrev);
        $this->ed232_c_descrcompleta = ($this->ed232_c_descrcompleta == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_c_descrcompleta"]:$this->ed232_c_descrcompleta);
        $this->ed232_corhtml = ($this->ed232_corhtml == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_corhtml"]:$this->ed232_corhtml);
      }else{
-       $this->ed232_i_codigo = ($this->ed232_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_i_codigo"]:$this->ed232_i_codigo);
+       $this->ed232_i_codigo = ($this->ed232_i_codigo === 0 || $this->ed232_i_codigo === 0.0 || $this->ed232_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed232_i_codigo"]:$this->ed232_i_codigo);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_caddisciplina {
          $this->ed232_i_codigo = $ed232_i_codigo;
        }
      }
-     if(($this->ed232_i_codigo == null) || ($this->ed232_i_codigo == "") ){
+     if(($this->ed232_i_codigo == null) || ($this->ed232_i_codigo === 0 || $this->ed232_i_codigo === 0.0 || $this->ed232_i_codigo == "") ){
        $this->erro_sql = " Campo ed232_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usu�rio: \\n\\n ".$this->erro_sql." \\n\\n";

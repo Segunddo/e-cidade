@@ -78,9 +78,9 @@ class cl_impexemplar {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi24_codigo = ($this->bi24_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_codigo"]:$this->bi24_codigo);
-       $this->bi24_biblioteca = ($this->bi24_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_biblioteca"]:$this->bi24_biblioteca);
-       $this->bi24_usuario = ($this->bi24_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_usuario"]:$this->bi24_usuario);
+       $this->bi24_codigo = ($this->bi24_codigo === 0 || $this->bi24_codigo === 0.0 || $this->bi24_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_codigo"]:$this->bi24_codigo);
+       $this->bi24_biblioteca = ($this->bi24_biblioteca === 0 || $this->bi24_biblioteca === 0.0 || $this->bi24_biblioteca == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_biblioteca"]:$this->bi24_biblioteca);
+       $this->bi24_usuario = ($this->bi24_usuario === 0 || $this->bi24_usuario === 0.0 || $this->bi24_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_usuario"]:$this->bi24_usuario);
        if($this->bi24_data == ""){
          $this->bi24_data_dia = ($this->bi24_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_data_dia"]:$this->bi24_data_dia);
          $this->bi24_data_mes = ($this->bi24_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_data_mes"]:$this->bi24_data_mes);
@@ -92,7 +92,7 @@ class cl_impexemplar {
        $this->bi24_hora = ($this->bi24_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_hora"]:$this->bi24_hora);
        $this->bi24_modelo = ($this->bi24_modelo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_modelo"]:$this->bi24_modelo);
      }else{
-       $this->bi24_codigo = ($this->bi24_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_codigo"]:$this->bi24_codigo);
+       $this->bi24_codigo = ($this->bi24_codigo === 0 || $this->bi24_codigo === 0.0 || $this->bi24_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi24_codigo"]:$this->bi24_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_impexemplar {
          $this->bi24_codigo = $bi24_codigo;
        }
      }
-     if(($this->bi24_codigo == null) || ($this->bi24_codigo == "") ){
+     if(($this->bi24_codigo == null) || ($this->bi24_codigo === 0 || $this->bi24_codigo === 0.0 || $this->bi24_codigo == "") ){
        $this->erro_sql = " Campo bi24_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

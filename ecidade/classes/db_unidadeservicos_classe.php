@@ -79,9 +79,9 @@ class cl_unidadeservicos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s126_i_codigo = ($this->s126_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s126_i_codigo"]:$this->s126_i_codigo);
-       $this->s126_i_unidade = ($this->s126_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s126_i_unidade"]:$this->s126_i_unidade);
-       $this->s126_i_servico = ($this->s126_i_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["s126_i_servico"]:$this->s126_i_servico);
+       $this->s126_i_codigo = ($this->s126_i_codigo === 0 || $this->s126_i_codigo === 0.0 || $this->s126_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s126_i_codigo"]:$this->s126_i_codigo);
+       $this->s126_i_unidade = ($this->s126_i_unidade === 0 || $this->s126_i_unidade === 0.0 || $this->s126_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s126_i_unidade"]:$this->s126_i_unidade);
+       $this->s126_i_servico = ($this->s126_i_servico === 0 || $this->s126_i_servico === 0.0 || $this->s126_i_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["s126_i_servico"]:$this->s126_i_servico);
        if($this->s126_d_ativado == ""){
          $this->s126_d_ativado_dia = ($this->s126_d_ativado_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s126_d_ativado_dia"]:$this->s126_d_ativado_dia);
          $this->s126_d_ativado_mes = ($this->s126_d_ativado_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s126_d_ativado_mes"]:$this->s126_d_ativado_mes);
@@ -99,7 +99,7 @@ class cl_unidadeservicos {
          }
        }
      }else{
-       $this->s126_i_codigo = ($this->s126_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s126_i_codigo"]:$this->s126_i_codigo);
+       $this->s126_i_codigo = ($this->s126_i_codigo === 0 || $this->s126_i_codigo === 0.0 || $this->s126_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s126_i_codigo"]:$this->s126_i_codigo);
      }
    }
    // funcao para inclusao
@@ -153,7 +153,7 @@ class cl_unidadeservicos {
          $this->s126_i_codigo = $s126_i_codigo;
        }
      }
-     if(($this->s126_i_codigo == null) || ($this->s126_i_codigo == "") ){
+     if(($this->s126_i_codigo == null) || ($this->s126_i_codigo === 0 || $this->s126_i_codigo === 0.0 || $this->s126_i_codigo == "") ){
        $this->erro_sql = " Campo s126_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

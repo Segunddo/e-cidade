@@ -94,10 +94,10 @@ class cl_sau_agendaexterna {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s118_i_codigo = ($this->s118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_codigo"]:$this->s118_i_codigo);
-       $this->s118_i_numcgs = ($this->s118_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_numcgs"]:$this->s118_i_numcgs);
+       $this->s118_i_codigo = ($this->s118_i_codigo === 0 || $this->s118_i_codigo === 0.0 || $this->s118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_codigo"]:$this->s118_i_codigo);
+       $this->s118_i_numcgs = ($this->s118_i_numcgs === 0 || $this->s118_i_numcgs === 0.0 || $this->s118_i_numcgs == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_numcgs"]:$this->s118_i_numcgs);
        $this->s118_c_tipoagenda = ($this->s118_c_tipoagenda == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_c_tipoagenda"]:$this->s118_c_tipoagenda);
-       $this->s118_i_prestador = ($this->s118_i_prestador == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_prestador"]:$this->s118_i_prestador);
+       $this->s118_i_prestador = ($this->s118_i_prestador === 0 || $this->s118_i_prestador === 0.0 || $this->s118_i_prestador == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_prestador"]:$this->s118_i_prestador);
        if($this->s118_d_preferencia == ""){
          $this->s118_d_preferencia_dia = ($this->s118_d_preferencia_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_d_preferencia_dia"]:$this->s118_d_preferencia_dia);
          $this->s118_d_preferencia_mes = ($this->s118_d_preferencia_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_d_preferencia_mes"]:$this->s118_d_preferencia_mes);
@@ -125,9 +125,9 @@ class cl_sau_agendaexterna {
             $this->s118_d_data = $this->s118_d_data_ano."-".$this->s118_d_data_mes."-".$this->s118_d_data_dia;
          }
        }
-       $this->s118_i_login = ($this->s118_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_login"]:$this->s118_i_login);
+       $this->s118_i_login = ($this->s118_i_login === 0 || $this->s118_i_login === 0.0 || $this->s118_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_login"]:$this->s118_i_login);
      }else{
-       $this->s118_i_codigo = ($this->s118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_codigo"]:$this->s118_i_codigo);
+       $this->s118_i_codigo = ($this->s118_i_codigo === 0 || $this->s118_i_codigo === 0.0 || $this->s118_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s118_i_codigo"]:$this->s118_i_codigo);
      }
    }
    // funcao para inclusao
@@ -208,7 +208,7 @@ class cl_sau_agendaexterna {
          $this->s118_i_codigo = $s118_i_codigo;
        }
      }
-     if(($this->s118_i_codigo == null) || ($this->s118_i_codigo == "") ){
+     if(($this->s118_i_codigo == null) || ($this->s118_i_codigo === 0 || $this->s118_i_codigo === 0.0 || $this->s118_i_codigo == "") ){
        $this->erro_sql = " Campo s118_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

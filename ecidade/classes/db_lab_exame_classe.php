@@ -83,12 +83,12 @@ class cl_lab_exame
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->la08_i_codigo = ($this->la08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_codigo"]:$this->la08_i_codigo);
+       $this->la08_i_codigo = ($this->la08_i_codigo === 0 || $this->la08_i_codigo === 0.0 || $this->la08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_codigo"]:$this->la08_i_codigo);
        $this->la08_c_sigla = ($this->la08_c_sigla == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_c_sigla"]:$this->la08_c_sigla);
        $this->la08_c_descr = ($this->la08_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_c_descr"]:$this->la08_c_descr);
-       $this->la08_i_idademax = ($this->la08_i_idademax == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_idademax"]:$this->la08_i_idademax);
-       $this->la08_i_idademin = ($this->la08_i_idademin == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_idademin"]:$this->la08_i_idademin);
-       $this->la08_i_sexo = ($this->la08_i_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_sexo"]:$this->la08_i_sexo);
+       $this->la08_i_idademax = ($this->la08_i_idademax === 0 || $this->la08_i_idademax === 0.0 || $this->la08_i_idademax == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_idademax"]:$this->la08_i_idademax);
+       $this->la08_i_idademin = ($this->la08_i_idademin === 0 || $this->la08_i_idademin === 0.0 || $this->la08_i_idademin == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_idademin"]:$this->la08_i_idademin);
+       $this->la08_i_sexo = ($this->la08_i_sexo === 0 || $this->la08_i_sexo === 0.0 || $this->la08_i_sexo == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_sexo"]:$this->la08_i_sexo);
        if($this->la08_d_inicio == ""){
          $this->la08_d_inicio_dia = ($this->la08_d_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_d_inicio_dia"]:$this->la08_d_inicio_dia);
          $this->la08_d_inicio_mes = ($this->la08_d_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_d_inicio_mes"]:$this->la08_d_inicio_mes);
@@ -105,12 +105,12 @@ class cl_lab_exame
             $this->la08_d_fim = $this->la08_d_fim_ano."-".$this->la08_d_fim_mes."-".$this->la08_d_fim_dia;
          }
        }
-       $this->la08_i_dias = ($this->la08_i_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_dias"]:$this->la08_i_dias);
+       $this->la08_i_dias = ($this->la08_i_dias === 0 || $this->la08_i_dias === 0.0 || $this->la08_i_dias == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_dias"]:$this->la08_i_dias);
        $this->la08_t_interferencia = ($this->la08_t_interferencia == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_t_interferencia"]:$this->la08_t_interferencia);
-       $this->la08_i_gerar = ($this->la08_i_gerar == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_gerar"]:$this->la08_i_gerar);
-       $this->la08_i_undidadeini = ($this->la08_i_undidadeini == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_undidadeini"]:$this->la08_i_undidadeini);
-       $this->la08_i_undidadefim = ($this->la08_i_undidadefim == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_undidadefim"]:$this->la08_i_undidadefim);
-       $this->la08_i_ativo = ($this->la08_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_ativo"]:$this->la08_i_ativo);
+       $this->la08_i_gerar = ($this->la08_i_gerar === 0 || $this->la08_i_gerar === 0.0 || $this->la08_i_gerar == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_gerar"]:$this->la08_i_gerar);
+       $this->la08_i_undidadeini = ($this->la08_i_undidadeini === 0 || $this->la08_i_undidadeini === 0.0 || $this->la08_i_undidadeini == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_undidadeini"]:$this->la08_i_undidadeini);
+       $this->la08_i_undidadefim = ($this->la08_i_undidadefim === 0 || $this->la08_i_undidadefim === 0.0 || $this->la08_i_undidadefim == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_undidadefim"]:$this->la08_i_undidadefim);
+       $this->la08_i_ativo = ($this->la08_i_ativo === 0 || $this->la08_i_ativo === 0.0 || $this->la08_i_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_ativo"]:$this->la08_i_ativo);
        $this->la08_observacao = ($this->la08_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_observacao"]:$this->la08_observacao);
 
        $this->la08_obriga_volumeamostra = ($this->la08_obriga_volumeamostra == "f"
@@ -129,7 +129,7 @@ class cl_lab_exame
              ? (@$GLOBALS["HTTP_POST_VARS"]["la08_exibehistoricoresultados"] === null ? 'f' : @$GLOBALS["HTTP_POST_VARS"]["la08_exibehistoricoresultados"])
              :$this->la08_exibehistoricoresultados);
      }else{
-       $this->la08_i_codigo = ($this->la08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_codigo"]:$this->la08_i_codigo);
+       $this->la08_i_codigo = ($this->la08_i_codigo === 0 || $this->la08_i_codigo === 0.0 || $this->la08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la08_i_codigo"]:$this->la08_i_codigo);
      }
    }
 
@@ -268,7 +268,7 @@ class cl_lab_exame
          $this->la08_i_codigo = $la08_i_codigo;
        }
      }
-     if(($this->la08_i_codigo == null) || ($this->la08_i_codigo == "") ){
+     if(($this->la08_i_codigo == null) || ($this->la08_i_codigo === 0 || $this->la08_i_codigo === 0.0 || $this->la08_i_codigo == "") ){
        $this->erro_sql = " Campo la08_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

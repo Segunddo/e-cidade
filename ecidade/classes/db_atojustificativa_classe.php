@@ -69,11 +69,11 @@ class cl_atojustificativa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed07_i_codigo = ($this->ed07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_codigo"]:$this->ed07_i_codigo);
-       $this->ed07_i_ato = ($this->ed07_i_ato == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_ato"]:$this->ed07_i_ato);
-       $this->ed07_i_justificativa = ($this->ed07_i_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_justificativa"]:$this->ed07_i_justificativa);
+       $this->ed07_i_codigo = ($this->ed07_i_codigo === 0 || $this->ed07_i_codigo === 0.0 || $this->ed07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_codigo"]:$this->ed07_i_codigo);
+       $this->ed07_i_ato = ($this->ed07_i_ato === 0 || $this->ed07_i_ato === 0.0 || $this->ed07_i_ato == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_ato"]:$this->ed07_i_ato);
+       $this->ed07_i_justificativa = ($this->ed07_i_justificativa === 0 || $this->ed07_i_justificativa === 0.0 || $this->ed07_i_justificativa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_justificativa"]:$this->ed07_i_justificativa);
      }else{
-       $this->ed07_i_codigo = ($this->ed07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_codigo"]:$this->ed07_i_codigo);
+       $this->ed07_i_codigo = ($this->ed07_i_codigo === 0 || $this->ed07_i_codigo === 0.0 || $this->ed07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed07_i_codigo"]:$this->ed07_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_atojustificativa {
          $this->ed07_i_codigo = $ed07_i_codigo;
        }
      }
-     if(($this->ed07_i_codigo == null) || ($this->ed07_i_codigo == "") ){
+     if(($this->ed07_i_codigo == null) || ($this->ed07_i_codigo === 0 || $this->ed07_i_codigo === 0.0 || $this->ed07_i_codigo == "") ){
        $this->erro_sql = " Campo ed07_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

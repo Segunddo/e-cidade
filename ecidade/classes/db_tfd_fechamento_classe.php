@@ -92,10 +92,10 @@ class cl_tfd_fechamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf32_i_codigo = ($this->tf32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_codigo"]:$this->tf32_i_codigo);
-       $this->tf32_i_login = ($this->tf32_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_login"]:$this->tf32_i_login);
-       $this->tf32_i_mescompetencia = ($this->tf32_i_mescompetencia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_mescompetencia"]:$this->tf32_i_mescompetencia);
-       $this->tf32_i_anocompetencia = ($this->tf32_i_anocompetencia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_anocompetencia"]:$this->tf32_i_anocompetencia);
+       $this->tf32_i_codigo = ($this->tf32_i_codigo === 0 || $this->tf32_i_codigo === 0.0 || $this->tf32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_codigo"]:$this->tf32_i_codigo);
+       $this->tf32_i_login = ($this->tf32_i_login === 0 || $this->tf32_i_login === 0.0 || $this->tf32_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_login"]:$this->tf32_i_login);
+       $this->tf32_i_mescompetencia = ($this->tf32_i_mescompetencia === 0 || $this->tf32_i_mescompetencia === 0.0 || $this->tf32_i_mescompetencia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_mescompetencia"]:$this->tf32_i_mescompetencia);
+       $this->tf32_i_anocompetencia = ($this->tf32_i_anocompetencia === 0 || $this->tf32_i_anocompetencia === 0.0 || $this->tf32_i_anocompetencia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_anocompetencia"]:$this->tf32_i_anocompetencia);
        if($this->tf32_d_datainicio == ""){
          $this->tf32_d_datainicio_dia = ($this->tf32_d_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_d_datainicio_dia"]:$this->tf32_d_datainicio_dia);
          $this->tf32_d_datainicio_mes = ($this->tf32_d_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_d_datainicio_mes"]:$this->tf32_d_datainicio_mes);
@@ -122,9 +122,9 @@ class cl_tfd_fechamento {
        }
        $this->tf32_c_horasistema = ($this->tf32_c_horasistema == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_c_horasistema"]:$this->tf32_c_horasistema);
        $this->tf32_c_descr = ($this->tf32_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_c_descr"]:$this->tf32_c_descr);
-       $this->tf32_i_financiamento = ($this->tf32_i_financiamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_financiamento"]:$this->tf32_i_financiamento);
+       $this->tf32_i_financiamento = ($this->tf32_i_financiamento === 0 || $this->tf32_i_financiamento === 0.0 || $this->tf32_i_financiamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_financiamento"]:$this->tf32_i_financiamento);
      }else{
-       $this->tf32_i_codigo = ($this->tf32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_codigo"]:$this->tf32_i_codigo);
+       $this->tf32_i_codigo = ($this->tf32_i_codigo === 0 || $this->tf32_i_codigo === 0.0 || $this->tf32_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf32_i_codigo"]:$this->tf32_i_codigo);
      }
    }
    // funcao para inclusao
@@ -235,7 +235,7 @@ class cl_tfd_fechamento {
          $this->tf32_i_codigo = $tf32_i_codigo;
        }
      }
-     if(($this->tf32_i_codigo == null) || ($this->tf32_i_codigo == "") ){
+     if(($this->tf32_i_codigo == null) || ($this->tf32_i_codigo === 0 || $this->tf32_i_codigo === 0.0 || $this->tf32_i_codigo == "") ){
        $this->erro_sql = " Campo tf32_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

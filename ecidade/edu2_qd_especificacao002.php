@@ -143,7 +143,7 @@ $sql   .= "  and ed11_i_ensino in ($nivelensino) ";
 $sql   .= "  limit 1 ";
 
 $result = db_query($sql);
-$linhas = pg_num_rows($result);
+$linhas = ($result ? pg_num_rows($result) : null);
 if ($linhas == 0) {?>
 
   <table width='100%'>
@@ -209,7 +209,7 @@ for ($x = 0; $x < count($codensinos); $x++) {
     );
     db_fieldsmemory($result10, 0);
     $cabecalho  = "head".($x+6);
-    $$cabecalho = "-> ".$codigo_ensino." - ".$descrensino;
+    ${$cabecalho} = "-> ".$codigo_ensino." - ".$descrensino;
 
 }
 

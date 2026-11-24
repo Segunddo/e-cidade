@@ -81,7 +81,7 @@ require_once(modification("libs/db_utils.php"));
     $sSqlBuscaInfo .= "           and ed18_i_codigo = $iEscola ";
     $sSqlBuscaInfo .= "           and ed52_i_ano = $ed52_i_ano"; 
     $rsBuscaInfo    = db_query($sSqlBuscaInfo);
-    $iLinhas        = pg_num_rows($rsBuscaInfo);
+    $iLinhas        = ($rsBuscaInfo ? pg_num_rows($rsBuscaInfo) : null);
 
     if ($iLinhas == 0) {
 

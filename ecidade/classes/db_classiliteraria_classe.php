@@ -67,10 +67,10 @@ class cl_classiliteraria {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi03_codigo = ($this->bi03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi03_codigo"]:$this->bi03_codigo);
+       $this->bi03_codigo = ($this->bi03_codigo === 0 || $this->bi03_codigo === 0.0 || $this->bi03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi03_codigo"]:$this->bi03_codigo);
        $this->bi03_classificacao = ($this->bi03_classificacao == ""?@$GLOBALS["HTTP_POST_VARS"]["bi03_classificacao"]:$this->bi03_classificacao);
      }else{
-       $this->bi03_codigo = ($this->bi03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi03_codigo"]:$this->bi03_codigo);
+       $this->bi03_codigo = ($this->bi03_codigo === 0 || $this->bi03_codigo === 0.0 || $this->bi03_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi03_codigo"]:$this->bi03_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_classiliteraria {
          $this->bi03_codigo = $bi03_codigo;
        }
      }
-     if(($this->bi03_codigo == null) || ($this->bi03_codigo == "") ){
+     if(($this->bi03_codigo == null) || ($this->bi03_codigo === 0 || $this->bi03_codigo === 0.0 || $this->bi03_codigo == "") ){
        $this->erro_sql = " Campo bi03_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

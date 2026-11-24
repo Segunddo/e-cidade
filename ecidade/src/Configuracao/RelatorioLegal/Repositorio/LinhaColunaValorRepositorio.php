@@ -25,7 +25,7 @@ class LinhaColunaValorRepositorio extends Repositorio
      * @param LinhaColunaValor|null $linhaColunaValor
      * @throws Exception
      */
-    public function delete(LinhaColunaValor $linhaColunaValor = null)
+    public function delete(?LinhaColunaValor $linhaColunaValor = null)
     {
         $id = $linhaColunaValor instanceof LinhaColunaValor ? $linhaColunaValor->getSequencial() : null;
 

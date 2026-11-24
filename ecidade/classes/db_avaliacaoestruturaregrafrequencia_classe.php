@@ -69,11 +69,11 @@ class cl_avaliacaoestruturaregrafrequencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed329_sequencial = ($this->ed329_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_sequencial"]:$this->ed329_sequencial);
-       $this->ed329_avaliacaoestruturafrequencia = ($this->ed329_avaliacaoestruturafrequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_avaliacaoestruturafrequencia"]:$this->ed329_avaliacaoestruturafrequencia);
-       $this->ed329_regraarredondamento = ($this->ed329_regraarredondamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_regraarredondamento"]:$this->ed329_regraarredondamento);
+       $this->ed329_sequencial = ($this->ed329_sequencial === 0 || $this->ed329_sequencial === 0.0 || $this->ed329_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_sequencial"]:$this->ed329_sequencial);
+       $this->ed329_avaliacaoestruturafrequencia = ($this->ed329_avaliacaoestruturafrequencia === 0 || $this->ed329_avaliacaoestruturafrequencia === 0.0 || $this->ed329_avaliacaoestruturafrequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_avaliacaoestruturafrequencia"]:$this->ed329_avaliacaoestruturafrequencia);
+       $this->ed329_regraarredondamento = ($this->ed329_regraarredondamento === 0 || $this->ed329_regraarredondamento === 0.0 || $this->ed329_regraarredondamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_regraarredondamento"]:$this->ed329_regraarredondamento);
      }else{
-       $this->ed329_sequencial = ($this->ed329_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_sequencial"]:$this->ed329_sequencial);
+       $this->ed329_sequencial = ($this->ed329_sequencial === 0 || $this->ed329_sequencial === 0.0 || $this->ed329_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed329_sequencial"]:$this->ed329_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_avaliacaoestruturaregrafrequencia {
          $this->ed329_sequencial = $ed329_sequencial;
        }
      }
-     if(($this->ed329_sequencial == null) || ($this->ed329_sequencial == "") ){
+     if(($this->ed329_sequencial == null) || ($this->ed329_sequencial === 0 || $this->ed329_sequencial === 0.0 || $this->ed329_sequencial == "") ){
        $this->erro_sql = " Campo ed329_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

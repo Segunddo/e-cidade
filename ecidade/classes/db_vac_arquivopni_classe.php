@@ -78,7 +78,7 @@ class cl_vac_arquivopni {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc27_i_codigo = ($this->vc27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_i_codigo"]:$this->vc27_i_codigo);
+       $this->vc27_i_codigo = ($this->vc27_i_codigo === 0 || $this->vc27_i_codigo === 0.0 || $this->vc27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_i_codigo"]:$this->vc27_i_codigo);
        if($this->vc27_d_data == ""){
          $this->vc27_d_data_dia = ($this->vc27_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_d_data_dia"]:$this->vc27_d_data_dia);
          $this->vc27_d_data_mes = ($this->vc27_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_d_data_mes"]:$this->vc27_d_data_mes);
@@ -89,10 +89,10 @@ class cl_vac_arquivopni {
        }
        $this->vc27_c_hora = ($this->vc27_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_c_hora"]:$this->vc27_c_hora);
        $this->vc27_c_nome = ($this->vc27_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_c_nome"]:$this->vc27_c_nome);
-       $this->vc27_o_arquivo = ($this->vc27_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_o_arquivo"]:$this->vc27_o_arquivo);
-       $this->vc27_i_situacao = ($this->vc27_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_i_situacao"]:$this->vc27_i_situacao);
+       $this->vc27_o_arquivo = ($this->vc27_o_arquivo === 0 || $this->vc27_o_arquivo === 0.0 || $this->vc27_o_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_o_arquivo"]:$this->vc27_o_arquivo);
+       $this->vc27_i_situacao = ($this->vc27_i_situacao === 0 || $this->vc27_i_situacao === 0.0 || $this->vc27_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_i_situacao"]:$this->vc27_i_situacao);
      }else{
-       $this->vc27_i_codigo = ($this->vc27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_i_codigo"]:$this->vc27_i_codigo);
+       $this->vc27_i_codigo = ($this->vc27_i_codigo === 0 || $this->vc27_i_codigo === 0.0 || $this->vc27_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc27_i_codigo"]:$this->vc27_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_vac_arquivopni {
          $this->vc27_i_codigo = $vc27_i_codigo;
        }
      }
-     if(($this->vc27_i_codigo == null) || ($this->vc27_i_codigo == "") ){
+     if(($this->vc27_i_codigo == null) || ($this->vc27_i_codigo === 0 || $this->vc27_i_codigo === 0.0 || $this->vc27_i_codigo == "") ){
        $this->erro_sql = " Campo vc27_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

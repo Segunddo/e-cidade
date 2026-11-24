@@ -83,18 +83,18 @@ class cl_escola_sequencias {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed129_i_codigo = ($this->ed129_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_codigo"]:$this->ed129_i_codigo);
-       $this->ed129_i_escola = ($this->ed129_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_escola"]:$this->ed129_i_escola);
-       $this->ed129_i_inicio = ($this->ed129_i_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_inicio"]:$this->ed129_i_inicio);
-       $this->ed129_i_final = ($this->ed129_i_final == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_final"]:$this->ed129_i_final);
-       $this->ed129_i_ultatualizse = ($this->ed129_i_ultatualizse == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_ultatualizse"]:$this->ed129_i_ultatualizse);
-       $this->ed129_i_ultatualizes = ($this->ed129_i_ultatualizes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_ultatualizes"]:$this->ed129_i_ultatualizes);
-       $this->ed129_i_numinicio = ($this->ed129_i_numinicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_numinicio"]:$this->ed129_i_numinicio);
-       $this->ed129_i_numfinal = ($this->ed129_i_numfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_numfinal"]:$this->ed129_i_numfinal);
+       $this->ed129_i_codigo = ($this->ed129_i_codigo === 0 || $this->ed129_i_codigo === 0.0 || $this->ed129_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_codigo"]:$this->ed129_i_codigo);
+       $this->ed129_i_escola = ($this->ed129_i_escola === 0 || $this->ed129_i_escola === 0.0 || $this->ed129_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_escola"]:$this->ed129_i_escola);
+       $this->ed129_i_inicio = ($this->ed129_i_inicio === 0 || $this->ed129_i_inicio === 0.0 || $this->ed129_i_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_inicio"]:$this->ed129_i_inicio);
+       $this->ed129_i_final = ($this->ed129_i_final === 0 || $this->ed129_i_final === 0.0 || $this->ed129_i_final == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_final"]:$this->ed129_i_final);
+       $this->ed129_i_ultatualizse = ($this->ed129_i_ultatualizse === 0 || $this->ed129_i_ultatualizse === 0.0 || $this->ed129_i_ultatualizse == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_ultatualizse"]:$this->ed129_i_ultatualizse);
+       $this->ed129_i_ultatualizes = ($this->ed129_i_ultatualizes === 0 || $this->ed129_i_ultatualizes === 0.0 || $this->ed129_i_ultatualizes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_ultatualizes"]:$this->ed129_i_ultatualizes);
+       $this->ed129_i_numinicio = ($this->ed129_i_numinicio === 0 || $this->ed129_i_numinicio === 0.0 || $this->ed129_i_numinicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_numinicio"]:$this->ed129_i_numinicio);
+       $this->ed129_i_numfinal = ($this->ed129_i_numfinal === 0 || $this->ed129_i_numfinal === 0.0 || $this->ed129_i_numfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_numfinal"]:$this->ed129_i_numfinal);
        $this->ed129_c_ativo = ($this->ed129_c_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_c_ativo"]:$this->ed129_c_ativo);
        $this->ed129_c_ulttransacao = ($this->ed129_c_ulttransacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_c_ulttransacao"]:$this->ed129_c_ulttransacao);
      }else{
-       $this->ed129_i_codigo = ($this->ed129_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_codigo"]:$this->ed129_i_codigo);
+       $this->ed129_i_codigo = ($this->ed129_i_codigo === 0 || $this->ed129_i_codigo === 0.0 || $this->ed129_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed129_i_codigo"]:$this->ed129_i_codigo);
      }
    }
    // funcao para inclusao
@@ -205,7 +205,7 @@ class cl_escola_sequencias {
          $this->ed129_i_codigo = $ed129_i_codigo;
        }
      }
-     if(($this->ed129_i_codigo == null) || ($this->ed129_i_codigo == "") ){
+     if(($this->ed129_i_codigo == null) || ($this->ed129_i_codigo === 0 || $this->ed129_i_codigo === 0.0 || $this->ed129_i_codigo == "") ){
        $this->erro_sql = " Campo ed129_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

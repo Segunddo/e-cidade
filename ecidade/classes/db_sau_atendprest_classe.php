@@ -67,10 +67,10 @@ class cl_sau_atendprest {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd46_i_codigio = ($this->sd46_i_codigio == ""?@$GLOBALS["HTTP_POST_VARS"]["sd46_i_codigio"]:$this->sd46_i_codigio);
+       $this->sd46_i_codigio = ($this->sd46_i_codigio === 0 || $this->sd46_i_codigio === 0.0 || $this->sd46_i_codigio == ""?@$GLOBALS["HTTP_POST_VARS"]["sd46_i_codigio"]:$this->sd46_i_codigio);
        $this->sd46_v_descricao = ($this->sd46_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd46_v_descricao"]:$this->sd46_v_descricao);
      }else{
-       $this->sd46_i_codigio = ($this->sd46_i_codigio == ""?@$GLOBALS["HTTP_POST_VARS"]["sd46_i_codigio"]:$this->sd46_i_codigio);
+       $this->sd46_i_codigio = ($this->sd46_i_codigio === 0 || $this->sd46_i_codigio === 0.0 || $this->sd46_i_codigio == ""?@$GLOBALS["HTTP_POST_VARS"]["sd46_i_codigio"]:$this->sd46_i_codigio);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sau_atendprest {
        return false;
      }
        $this->sd46_i_codigio = $sd46_i_codigio;
-     if(($this->sd46_i_codigio == null) || ($this->sd46_i_codigio == "") ){
+     if(($this->sd46_i_codigio == null) || ($this->sd46_i_codigio === 0 || $this->sd46_i_codigio === 0.0 || $this->sd46_i_codigio == "") ){
        $this->erro_sql = " Campo sd46_i_codigio nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

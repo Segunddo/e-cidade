@@ -134,7 +134,9 @@ input {
 	  fputs($fd,'include(modification("dbforms/db_funcoes.php"));'."\n");
       fputs($fd,'include(modification("classes/db_'.trim(pg_result($result,$i,'nomearq')).'_classe.php");'."\n");
       fputs($fd,'db_postmemory($HTTP_POST_VARS);'."\n");
-      fputs($fd,'parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);'."\n");
+      fputs($fd, 'parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? "", $queryString);' . "\n");
+      fputs($fd, 'unset($queryString["this"], $queryString["GLOBALS"]);' . "\n");
+      fputs($fd, 'extract($queryString);' . "\n");
       fputs($fd,'$cl'.trim(pg_result($result,$i,'nomearq')).' = new cl_'.trim(pg_result($result,$i,'nomearq')).';'."\n");
 	  $varpk = ""; 
       $pk = db_query("select a.nomearq,c.nomecam,c.tamanho,c.conteudo,p.sequen,p.camiden,d.nomecam as campoca, d.tamanho as catamanho

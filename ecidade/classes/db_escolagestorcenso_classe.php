@@ -71,12 +71,12 @@ class cl_escolagestorcenso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed325_sequencial = ($this->ed325_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_sequencial"]:$this->ed325_sequencial);
-       $this->ed325_escola = ($this->ed325_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_escola"]:$this->ed325_escola);
-       $this->ed325_rechumano = ($this->ed325_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_rechumano"]:$this->ed325_rechumano);
+       $this->ed325_sequencial = ($this->ed325_sequencial === 0 || $this->ed325_sequencial === 0.0 || $this->ed325_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_sequencial"]:$this->ed325_sequencial);
+       $this->ed325_escola = ($this->ed325_escola === 0 || $this->ed325_escola === 0.0 || $this->ed325_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_escola"]:$this->ed325_escola);
+       $this->ed325_rechumano = ($this->ed325_rechumano === 0 || $this->ed325_rechumano === 0.0 || $this->ed325_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_rechumano"]:$this->ed325_rechumano);
        $this->ed325_email = ($this->ed325_email == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_email"]:$this->ed325_email);
      }else{
-       $this->ed325_sequencial = ($this->ed325_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_sequencial"]:$this->ed325_sequencial);
+       $this->ed325_sequencial = ($this->ed325_sequencial === 0 || $this->ed325_sequencial === 0.0 || $this->ed325_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed325_sequencial"]:$this->ed325_sequencial);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_escolagestorcenso {
          $this->ed325_sequencial = $ed325_sequencial;
        }
      }
-     if(($this->ed325_sequencial == null) || ($this->ed325_sequencial == "") ){
+     if(($this->ed325_sequencial == null) || ($this->ed325_sequencial === 0 || $this->ed325_sequencial === 0.0 || $this->ed325_sequencial == "") ){
        $this->erro_sql = " Campo ed325_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

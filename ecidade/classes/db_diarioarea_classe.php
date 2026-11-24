@@ -45,11 +45,11 @@ class cl_diarioarea
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed162_codigo = ($this->ed162_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed162_codigo"] : $this->ed162_codigo);
-            $this->ed162_areaconhecimento = ($this->ed162_areaconhecimento == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed162_areaconhecimento"] : $this->ed162_areaconhecimento);
-            $this->ed162_diarioaluno = ($this->ed162_diarioaluno == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed162_diarioaluno"] : $this->ed162_diarioaluno);
+            $this->ed162_codigo = ($this->ed162_codigo === 0 || $this->ed162_codigo === 0.0 || $this->ed162_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed162_codigo"] : $this->ed162_codigo);
+            $this->ed162_areaconhecimento = ($this->ed162_areaconhecimento === 0 || $this->ed162_areaconhecimento === 0.0 || $this->ed162_areaconhecimento == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed162_areaconhecimento"] : $this->ed162_areaconhecimento);
+            $this->ed162_diarioaluno = ($this->ed162_diarioaluno === 0 || $this->ed162_diarioaluno === 0.0 || $this->ed162_diarioaluno == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed162_diarioaluno"] : $this->ed162_diarioaluno);
         } else {
-            $this->ed162_codigo = ($this->ed162_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed162_codigo"] : $this->ed162_codigo);
+            $this->ed162_codigo = ($this->ed162_codigo === 0 || $this->ed162_codigo === 0.0 || $this->ed162_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed162_codigo"] : $this->ed162_codigo);
         }
     }
 
@@ -98,7 +98,7 @@ class cl_diarioarea
                 $this->ed162_codigo = $ed162_codigo;
             }
         }
-        if (($this->ed162_codigo == null) || ($this->ed162_codigo == "")) {
+        if (($this->ed162_codigo == null) || ($this->ed162_codigo === 0 || $this->ed162_codigo === 0.0 || $this->ed162_codigo == "")) {
             $this->erro_sql = " Campo ed162_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

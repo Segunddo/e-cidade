@@ -85,10 +85,10 @@ class cl_docenteausencia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed321_sequencial = ($this->ed321_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_sequencial"]:$this->ed321_sequencial);
-       $this->ed321_rechumano = ($this->ed321_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_rechumano"]:$this->ed321_rechumano);
-       $this->ed321_tipoausencia = ($this->ed321_tipoausencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_tipoausencia"]:$this->ed321_tipoausencia);
-       $this->ed321_usuario = ($this->ed321_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_usuario"]:$this->ed321_usuario);
+       $this->ed321_sequencial = ($this->ed321_sequencial === 0 || $this->ed321_sequencial === 0.0 || $this->ed321_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_sequencial"]:$this->ed321_sequencial);
+       $this->ed321_rechumano = ($this->ed321_rechumano === 0 || $this->ed321_rechumano === 0.0 || $this->ed321_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_rechumano"]:$this->ed321_rechumano);
+       $this->ed321_tipoausencia = ($this->ed321_tipoausencia === 0 || $this->ed321_tipoausencia === 0.0 || $this->ed321_tipoausencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_tipoausencia"]:$this->ed321_tipoausencia);
+       $this->ed321_usuario = ($this->ed321_usuario === 0 || $this->ed321_usuario === 0.0 || $this->ed321_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_usuario"]:$this->ed321_usuario);
        if($this->ed321_inicio == ""){
          $this->ed321_inicio_dia = ($this->ed321_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_inicio_dia"]:$this->ed321_inicio_dia);
          $this->ed321_inicio_mes = ($this->ed321_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_inicio_mes"]:$this->ed321_inicio_mes);
@@ -106,9 +106,9 @@ class cl_docenteausencia {
          }
        }
        $this->ed321_observacao = ($this->ed321_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_observacao"]:$this->ed321_observacao);
-       $this->ed321_escola = ($this->ed321_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_escola"]:$this->ed321_escola);
+       $this->ed321_escola = ($this->ed321_escola === 0 || $this->ed321_escola === 0.0 || $this->ed321_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_escola"]:$this->ed321_escola);
      }else{
-       $this->ed321_sequencial = ($this->ed321_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_sequencial"]:$this->ed321_sequencial);
+       $this->ed321_sequencial = ($this->ed321_sequencial === 0 || $this->ed321_sequencial === 0.0 || $this->ed321_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed321_sequencial"]:$this->ed321_sequencial);
      }
    }
    // funcao para inclusao
@@ -186,7 +186,7 @@ class cl_docenteausencia {
          $this->ed321_sequencial = $ed321_sequencial;
        }
      }
-     if(($this->ed321_sequencial == null) || ($this->ed321_sequencial == "") ){
+     if(($this->ed321_sequencial == null) || ($this->ed321_sequencial === 0 || $this->ed321_sequencial === 0.0 || $this->ed321_sequencial == "") ){
        $this->erro_sql = " Campo ed321_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

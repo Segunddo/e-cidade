@@ -69,11 +69,11 @@ class cl_farcomprovantetermicaconfig {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa57_sequencial = ($this->fa57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_sequencial"]:$this->fa57_sequencial);
-       $this->fa57_coddepto = ($this->fa57_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_coddepto"]:$this->fa57_coddepto);
+       $this->fa57_sequencial = ($this->fa57_sequencial === 0 || $this->fa57_sequencial === 0.0 || $this->fa57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_sequencial"]:$this->fa57_sequencial);
+       $this->fa57_coddepto = ($this->fa57_coddepto === 0 || $this->fa57_coddepto === 0.0 || $this->fa57_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_coddepto"]:$this->fa57_coddepto);
        $this->fa57_mensagem = ($this->fa57_mensagem == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_mensagem"]:$this->fa57_mensagem);
      }else{
-       $this->fa57_sequencial = ($this->fa57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_sequencial"]:$this->fa57_sequencial);
+       $this->fa57_sequencial = ($this->fa57_sequencial === 0 || $this->fa57_sequencial === 0.0 || $this->fa57_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["fa57_sequencial"]:$this->fa57_sequencial);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_farcomprovantetermicaconfig {
          $this->fa57_sequencial = $fa57_sequencial;
        }
      }
-     if(($this->fa57_sequencial == null) || ($this->fa57_sequencial == "") ){
+     if(($this->fa57_sequencial == null) || ($this->fa57_sequencial === 0 || $this->fa57_sequencial === 0.0 || $this->fa57_sequencial == "") ){
        $this->erro_sql = " Campo fa57_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

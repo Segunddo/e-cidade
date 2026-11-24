@@ -93,7 +93,7 @@ for ($w = 1; $w <= 2; $w++) {
   }
   $oPdf->ln(2);
   $oPdf->setfont('arial','b',7);
-  $oPdf->Cell(190, 4, "Total de ítens: " . count($oDadosEmprestimos->aAcervos), "T", 1) ;
+  $oPdf->Cell(190, 4, "Total de ítens: " . count((array)$oDadosEmprestimos->aAcervos), "T", 1) ;
 
   $oPdf->setY($iMeiaPagina - 20);
 

@@ -240,7 +240,7 @@ abstract class FormaObtencao {
    * @param AvaliacaoPeriodica $oPeriodoRecuperacao
    * @return bool
    */
-  protected function aplicarJulgamentoMenorNotaDoPeriodo(AvaliacaoPeriodica $oPeriodoRecuperacao = null, array $aNotasPeriodo) {
+  protected function aplicarJulgamentoMenorNotaDoPeriodo(AvaliacaoPeriodica $oPeriodoRecuperacao = null, array $aNotasPeriodo = []) {
 
     if (empty($oPeriodoRecuperacao)) {
       return $aNotasPeriodo;

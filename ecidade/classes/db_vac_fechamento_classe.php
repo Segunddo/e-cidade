@@ -77,7 +77,7 @@ class cl_vac_fechamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc20_i_codigo = ($this->vc20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_codigo"]:$this->vc20_i_codigo);
+       $this->vc20_i_codigo = ($this->vc20_i_codigo === 0 || $this->vc20_i_codigo === 0.0 || $this->vc20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_codigo"]:$this->vc20_i_codigo);
        if($this->vc20_d_dataini == ""){
          $this->vc20_d_dataini_dia = ($this->vc20_d_dataini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_d_dataini_dia"]:$this->vc20_d_dataini_dia);
          $this->vc20_d_dataini_mes = ($this->vc20_d_dataini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_d_dataini_mes"]:$this->vc20_d_dataini_mes);
@@ -94,9 +94,9 @@ class cl_vac_fechamento {
             $this->vc20_d_datafim = $this->vc20_d_datafim_ano."-".$this->vc20_d_datafim_mes."-".$this->vc20_d_datafim_dia;
          }
        }
-       $this->vc20_i_usuario = ($this->vc20_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_usuario"]:$this->vc20_i_usuario);
+       $this->vc20_i_usuario = ($this->vc20_i_usuario === 0 || $this->vc20_i_usuario === 0.0 || $this->vc20_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_usuario"]:$this->vc20_i_usuario);
      }else{
-       $this->vc20_i_codigo = ($this->vc20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_codigo"]:$this->vc20_i_codigo);
+       $this->vc20_i_codigo = ($this->vc20_i_codigo === 0 || $this->vc20_i_codigo === 0.0 || $this->vc20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc20_i_codigo"]:$this->vc20_i_codigo);
      }
    }
    // funcao para inclusao
@@ -153,7 +153,7 @@ class cl_vac_fechamento {
          $this->vc20_i_codigo = $vc20_i_codigo;
        }
      }
-     if(($this->vc20_i_codigo == null) || ($this->vc20_i_codigo == "") ){
+     if(($this->vc20_i_codigo == null) || ($this->vc20_i_codigo === 0 || $this->vc20_i_codigo === 0.0 || $this->vc20_i_codigo == "") ){
        $this->erro_sql = " Campo vc20_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

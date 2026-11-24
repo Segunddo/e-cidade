@@ -78,8 +78,8 @@ class cl_prontanulado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd57_i_codigo = ($this->sd57_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_i_codigo"]:$this->sd57_i_codigo);
-       $this->sd57_i_prontuario = ($this->sd57_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_i_prontuario"]:$this->sd57_i_prontuario);
+       $this->sd57_i_codigo = ($this->sd57_i_codigo === 0 || $this->sd57_i_codigo === 0.0 || $this->sd57_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_i_codigo"]:$this->sd57_i_codigo);
+       $this->sd57_i_prontuario = ($this->sd57_i_prontuario === 0 || $this->sd57_i_prontuario === 0.0 || $this->sd57_i_prontuario == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_i_prontuario"]:$this->sd57_i_prontuario);
        if($this->sd57_d_data == ""){
          $this->sd57_d_data_dia = ($this->sd57_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_d_data_dia"]:$this->sd57_d_data_dia);
          $this->sd57_d_data_mes = ($this->sd57_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_d_data_mes"]:$this->sd57_d_data_mes);
@@ -89,10 +89,10 @@ class cl_prontanulado {
          }
        }
        $this->sd57_c_hora = ($this->sd57_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_c_hora"]:$this->sd57_c_hora);
-       $this->sd57_i_login = ($this->sd57_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_i_login"]:$this->sd57_i_login);
+       $this->sd57_i_login = ($this->sd57_i_login === 0 || $this->sd57_i_login === 0.0 || $this->sd57_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_i_login"]:$this->sd57_i_login);
        $this->sd57_t_obs = ($this->sd57_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_t_obs"]:$this->sd57_t_obs);
      }else{
-       $this->sd57_i_codigo = ($this->sd57_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_i_codigo"]:$this->sd57_i_codigo);
+       $this->sd57_i_codigo = ($this->sd57_i_codigo === 0 || $this->sd57_i_codigo === 0.0 || $this->sd57_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd57_i_codigo"]:$this->sd57_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_prontanulado {
          $this->sd57_i_codigo = $sd57_i_codigo;
        }
      }
-     if(($this->sd57_i_codigo == null) || ($this->sd57_i_codigo == "") ){
+     if(($this->sd57_i_codigo == null) || ($this->sd57_i_codigo === 0 || $this->sd57_i_codigo === 0.0 || $this->sd57_i_codigo == "") ){
        $this->erro_sql = " Campo sd57_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

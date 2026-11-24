@@ -76,9 +76,9 @@ class cl_proginterrompe {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed123_i_codigo = ($this->ed123_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_i_codigo"]:$this->ed123_i_codigo);
-       $this->ed123_i_progmatricula = ($this->ed123_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_i_progmatricula"]:$this->ed123_i_progmatricula);
-       $this->ed123_i_usuario = ($this->ed123_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_i_usuario"]:$this->ed123_i_usuario);
+       $this->ed123_i_codigo = ($this->ed123_i_codigo === 0 || $this->ed123_i_codigo === 0.0 || $this->ed123_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_i_codigo"]:$this->ed123_i_codigo);
+       $this->ed123_i_progmatricula = ($this->ed123_i_progmatricula === 0 || $this->ed123_i_progmatricula === 0.0 || $this->ed123_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_i_progmatricula"]:$this->ed123_i_progmatricula);
+       $this->ed123_i_usuario = ($this->ed123_i_usuario === 0 || $this->ed123_i_usuario === 0.0 || $this->ed123_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_i_usuario"]:$this->ed123_i_usuario);
        if($this->ed123_d_data == ""){
          $this->ed123_d_data_dia = ($this->ed123_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_d_data_dia"]:$this->ed123_d_data_dia);
          $this->ed123_d_data_mes = ($this->ed123_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_d_data_mes"]:$this->ed123_d_data_mes);
@@ -89,7 +89,7 @@ class cl_proginterrompe {
        }
        $this->ed123_t_motivo = ($this->ed123_t_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_t_motivo"]:$this->ed123_t_motivo);
      }else{
-       $this->ed123_i_codigo = ($this->ed123_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_i_codigo"]:$this->ed123_i_codigo);
+       $this->ed123_i_codigo = ($this->ed123_i_codigo === 0 || $this->ed123_i_codigo === 0.0 || $this->ed123_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed123_i_codigo"]:$this->ed123_i_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_proginterrompe {
          $this->ed123_i_codigo = $ed123_i_codigo;
        }
      }
-     if(($this->ed123_i_codigo == null) || ($this->ed123_i_codigo == "") ){
+     if(($this->ed123_i_codigo == null) || ($this->ed123_i_codigo === 0 || $this->ed123_i_codigo === 0.0 || $this->ed123_i_codigo == "") ){
        $this->erro_sql = " Campo ed123_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

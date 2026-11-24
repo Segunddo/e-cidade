@@ -97,25 +97,25 @@ class cl_procvalores {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd10_i_procedimento = ($this->sd10_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_i_procedimento"]:$this->sd10_i_procedimento);
-       $this->sd10_c_sala = ($this->sd10_c_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_c_sala"]:$this->sd10_c_sala);
-       $this->sd10_f_valor = ($this->sd10_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_valor"]:$this->sd10_f_valor);
-       $this->sd10_f_servico = ($this->sd10_f_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_servico"]:$this->sd10_f_servico);
-       $this->sd10_f_anestesia = ($this->sd10_f_anestesia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_anestesia"]:$this->sd10_f_anestesia);
-       $this->sd10_f_material = ($this->sd10_f_material == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_material"]:$this->sd10_f_material);
-       $this->sd10_f_contraste = ($this->sd10_f_contraste == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_contraste"]:$this->sd10_f_contraste);
-       $this->sd10_f_filme = ($this->sd10_f_filme == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_filme"]:$this->sd10_f_filme);
-       $this->sd10_f_gesso = ($this->sd10_f_gesso == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_gesso"]:$this->sd10_f_gesso);
-       $this->sd10_f_quimio = ($this->sd10_f_quimio == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_quimio"]:$this->sd10_f_quimio);
-       $this->sd10_f_dialise = ($this->sd10_f_dialise == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_dialise"]:$this->sd10_f_dialise);
-       $this->sd10_f_sadtrat = ($this->sd10_f_sadtrat == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_sadtrat"]:$this->sd10_f_sadtrat);
-       $this->sd10_f_sadtpc = ($this->sd10_f_sadtpc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_sadtpc"]:$this->sd10_f_sadtpc);
-       $this->sd10_f_sadtout = ($this->sd10_f_sadtout == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_sadtout"]:$this->sd10_f_sadtout);
-       $this->sd10_f_outro = ($this->sd10_f_outro == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_outro"]:$this->sd10_f_outro);
-       $this->sd10_f_filme2 = ($this->sd10_f_filme2 == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_filme2"]:$this->sd10_f_filme2);
-       $this->sd10_f_total = ($this->sd10_f_total == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_total"]:$this->sd10_f_total);
+       $this->sd10_i_procedimento = ($this->sd10_i_procedimento === 0 || $this->sd10_i_procedimento === 0.0 || $this->sd10_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_i_procedimento"]:$this->sd10_i_procedimento);
+       $this->sd10_c_sala = ($this->sd10_c_sala === 0 || $this->sd10_c_sala === 0.0 || $this->sd10_c_sala == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_c_sala"]:$this->sd10_c_sala);
+       $this->sd10_f_valor = ($this->sd10_f_valor === 0 || $this->sd10_f_valor === 0.0 || $this->sd10_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_valor"]:$this->sd10_f_valor);
+       $this->sd10_f_servico = ($this->sd10_f_servico === 0 || $this->sd10_f_servico === 0.0 || $this->sd10_f_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_servico"]:$this->sd10_f_servico);
+       $this->sd10_f_anestesia = ($this->sd10_f_anestesia === 0 || $this->sd10_f_anestesia === 0.0 || $this->sd10_f_anestesia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_anestesia"]:$this->sd10_f_anestesia);
+       $this->sd10_f_material = ($this->sd10_f_material === 0 || $this->sd10_f_material === 0.0 || $this->sd10_f_material == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_material"]:$this->sd10_f_material);
+       $this->sd10_f_contraste = ($this->sd10_f_contraste === 0 || $this->sd10_f_contraste === 0.0 || $this->sd10_f_contraste == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_contraste"]:$this->sd10_f_contraste);
+       $this->sd10_f_filme = ($this->sd10_f_filme === 0 || $this->sd10_f_filme === 0.0 || $this->sd10_f_filme == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_filme"]:$this->sd10_f_filme);
+       $this->sd10_f_gesso = ($this->sd10_f_gesso === 0 || $this->sd10_f_gesso === 0.0 || $this->sd10_f_gesso == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_gesso"]:$this->sd10_f_gesso);
+       $this->sd10_f_quimio = ($this->sd10_f_quimio === 0 || $this->sd10_f_quimio === 0.0 || $this->sd10_f_quimio == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_quimio"]:$this->sd10_f_quimio);
+       $this->sd10_f_dialise = ($this->sd10_f_dialise === 0 || $this->sd10_f_dialise === 0.0 || $this->sd10_f_dialise == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_dialise"]:$this->sd10_f_dialise);
+       $this->sd10_f_sadtrat = ($this->sd10_f_sadtrat === 0 || $this->sd10_f_sadtrat === 0.0 || $this->sd10_f_sadtrat == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_sadtrat"]:$this->sd10_f_sadtrat);
+       $this->sd10_f_sadtpc = ($this->sd10_f_sadtpc === 0 || $this->sd10_f_sadtpc === 0.0 || $this->sd10_f_sadtpc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_sadtpc"]:$this->sd10_f_sadtpc);
+       $this->sd10_f_sadtout = ($this->sd10_f_sadtout === 0 || $this->sd10_f_sadtout === 0.0 || $this->sd10_f_sadtout == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_sadtout"]:$this->sd10_f_sadtout);
+       $this->sd10_f_outro = ($this->sd10_f_outro === 0 || $this->sd10_f_outro === 0.0 || $this->sd10_f_outro == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_outro"]:$this->sd10_f_outro);
+       $this->sd10_f_filme2 = ($this->sd10_f_filme2 === 0 || $this->sd10_f_filme2 === 0.0 || $this->sd10_f_filme2 == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_filme2"]:$this->sd10_f_filme2);
+       $this->sd10_f_total = ($this->sd10_f_total === 0 || $this->sd10_f_total === 0.0 || $this->sd10_f_total == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_f_total"]:$this->sd10_f_total);
      }else{
-       $this->sd10_i_procedimento = ($this->sd10_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_i_procedimento"]:$this->sd10_i_procedimento);
+       $this->sd10_i_procedimento = ($this->sd10_i_procedimento === 0 || $this->sd10_i_procedimento === 0.0 || $this->sd10_i_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["sd10_i_procedimento"]:$this->sd10_i_procedimento);
      }
    }
    // funcao para inclusao
@@ -170,7 +170,7 @@ class cl_procvalores {
        $this->sd10_f_total = "0";
      }
        $this->sd10_i_procedimento = $sd10_i_procedimento;
-     if(($this->sd10_i_procedimento == null) || ($this->sd10_i_procedimento == "") ){
+     if(($this->sd10_i_procedimento == null) || ($this->sd10_i_procedimento === 0 || $this->sd10_i_procedimento === 0.0 || $this->sd10_i_procedimento == "") ){
        $this->erro_sql = " Campo sd10_i_procedimento nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

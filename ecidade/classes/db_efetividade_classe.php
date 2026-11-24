@@ -85,19 +85,19 @@ class cl_efetividade {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed97_i_codigo = ($this->ed97_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_codigo"]:$this->ed97_i_codigo);
-       $this->ed97_i_efetividaderh = ($this->ed97_i_efetividaderh == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_efetividaderh"]:$this->ed97_i_efetividaderh);
-       $this->ed97_i_rechumano = ($this->ed97_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_rechumano"]:$this->ed97_i_rechumano);
-       $this->ed97_i_diasletivos = ($this->ed97_i_diasletivos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_diasletivos"]:$this->ed97_i_diasletivos);
-       $this->ed97_i_faltaabon = ($this->ed97_i_faltaabon == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_faltaabon"]:$this->ed97_i_faltaabon);
-       $this->ed97_i_faltanjust = ($this->ed97_i_faltanjust == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_faltanjust"]:$this->ed97_i_faltanjust);
+       $this->ed97_i_codigo = ($this->ed97_i_codigo === 0 || $this->ed97_i_codigo === 0.0 || $this->ed97_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_codigo"]:$this->ed97_i_codigo);
+       $this->ed97_i_efetividaderh = ($this->ed97_i_efetividaderh === 0 || $this->ed97_i_efetividaderh === 0.0 || $this->ed97_i_efetividaderh == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_efetividaderh"]:$this->ed97_i_efetividaderh);
+       $this->ed97_i_rechumano = ($this->ed97_i_rechumano === 0 || $this->ed97_i_rechumano === 0.0 || $this->ed97_i_rechumano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_rechumano"]:$this->ed97_i_rechumano);
+       $this->ed97_i_diasletivos = ($this->ed97_i_diasletivos === 0 || $this->ed97_i_diasletivos === 0.0 || $this->ed97_i_diasletivos == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_diasletivos"]:$this->ed97_i_diasletivos);
+       $this->ed97_i_faltaabon = ($this->ed97_i_faltaabon === 0 || $this->ed97_i_faltaabon === 0.0 || $this->ed97_i_faltaabon == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_faltaabon"]:$this->ed97_i_faltaabon);
+       $this->ed97_i_faltanjust = ($this->ed97_i_faltanjust === 0 || $this->ed97_i_faltanjust === 0.0 || $this->ed97_i_faltanjust == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_faltanjust"]:$this->ed97_i_faltanjust);
        $this->ed97_t_licenca = ($this->ed97_t_licenca == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_t_licenca"]:$this->ed97_t_licenca);
        $this->ed97_t_horario = ($this->ed97_t_horario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_t_horario"]:$this->ed97_t_horario);
-       $this->ed97_i_horacinq = ($this->ed97_i_horacinq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_horacinq"]:$this->ed97_i_horacinq);
-       $this->ed97_i_horacem = ($this->ed97_i_horacem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_horacem"]:$this->ed97_i_horacem);
+       $this->ed97_i_horacinq = ($this->ed97_i_horacinq === 0 || $this->ed97_i_horacinq === 0.0 || $this->ed97_i_horacinq == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_horacinq"]:$this->ed97_i_horacinq);
+       $this->ed97_i_horacem = ($this->ed97_i_horacem === 0 || $this->ed97_i_horacem === 0.0 || $this->ed97_i_horacem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_horacem"]:$this->ed97_i_horacem);
        $this->ed97_t_obs = ($this->ed97_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_t_obs"]:$this->ed97_t_obs);
      }else{
-       $this->ed97_i_codigo = ($this->ed97_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_codigo"]:$this->ed97_i_codigo);
+       $this->ed97_i_codigo = ($this->ed97_i_codigo === 0 || $this->ed97_i_codigo === 0.0 || $this->ed97_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed97_i_codigo"]:$this->ed97_i_codigo);
      }
    }
    // funcao para inclusao
@@ -160,7 +160,7 @@ class cl_efetividade {
          $this->ed97_i_codigo = $ed97_i_codigo;
        }
      }
-     if(($this->ed97_i_codigo == null) || ($this->ed97_i_codigo == "") ){
+     if(($this->ed97_i_codigo == null) || ($this->ed97_i_codigo === 0 || $this->ed97_i_codigo === 0.0 || $this->ed97_i_codigo == "") ){
        $this->erro_sql = " Campo ed97_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -282,7 +282,7 @@ class LinhaRepositorio extends Repositorio
      * @param Linha|null $linha
      * @throws Exception
      */
-    public function delete(Linha $linha = null)
+    public function delete(?Linha $linha = null)
     {
         $codigoRelatorio = null;
         $codigoLinha = null;

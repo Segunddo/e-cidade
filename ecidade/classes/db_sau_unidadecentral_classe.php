@@ -67,10 +67,10 @@ class cl_sau_unidadecentral {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s115_i_codigo = ($this->s115_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s115_i_codigo"]:$this->s115_i_codigo);
-       $this->s115_i_unidade = ($this->s115_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s115_i_unidade"]:$this->s115_i_unidade);
+       $this->s115_i_codigo = ($this->s115_i_codigo === 0 || $this->s115_i_codigo === 0.0 || $this->s115_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s115_i_codigo"]:$this->s115_i_codigo);
+       $this->s115_i_unidade = ($this->s115_i_unidade === 0 || $this->s115_i_unidade === 0.0 || $this->s115_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["s115_i_unidade"]:$this->s115_i_unidade);
      }else{
-       $this->s115_i_codigo = ($this->s115_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s115_i_codigo"]:$this->s115_i_codigo);
+       $this->s115_i_codigo = ($this->s115_i_codigo === 0 || $this->s115_i_codigo === 0.0 || $this->s115_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s115_i_codigo"]:$this->s115_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_unidadecentral {
          $this->s115_i_codigo = $s115_i_codigo;
        }
      }
-     if(($this->s115_i_codigo == null) || ($this->s115_i_codigo == "") ){
+     if(($this->s115_i_codigo == null) || ($this->s115_i_codigo === 0 || $this->s115_i_codigo === 0.0 || $this->s115_i_codigo == "") ){
        $this->erro_sql = " Campo s115_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

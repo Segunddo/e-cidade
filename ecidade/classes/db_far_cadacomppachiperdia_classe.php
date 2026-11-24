@@ -81,17 +81,17 @@ class cl_far_cadacomppachiperdia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa50_i_codigo = ($this->fa50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_codigo"]:$this->fa50_i_codigo);
-       $this->fa50_i_triagem = ($this->fa50_i_triagem == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_triagem"]:$this->fa50_i_triagem);
-       $this->fa50_i_cgsund = ($this->fa50_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_cgsund"]:$this->fa50_i_cgsund);
-       $this->fa50_i_outrosmedicamentos = ($this->fa50_i_outrosmedicamentos == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_outrosmedicamentos"]:$this->fa50_i_outrosmedicamentos);
-       $this->fa50_i_tipo = ($this->fa50_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_tipo"]:$this->fa50_i_tipo);
-       $this->fa50_i_naomedicamentoso = ($this->fa50_i_naomedicamentoso == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_naomedicamentoso"]:$this->fa50_i_naomedicamentoso);
-       $this->fa50_i_diabetesacomp = ($this->fa50_i_diabetesacomp == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_diabetesacomp"]:$this->fa50_i_diabetesacomp);
-       $this->fa50_i_hipertensaoacomp = ($this->fa50_i_hipertensaoacomp == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_hipertensaoacomp"]:$this->fa50_i_hipertensaoacomp);
-       $this->fa50_i_exportado = ($this->fa50_i_exportado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_exportado"]:$this->fa50_i_exportado);
+       $this->fa50_i_codigo = ($this->fa50_i_codigo === 0 || $this->fa50_i_codigo === 0.0 || $this->fa50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_codigo"]:$this->fa50_i_codigo);
+       $this->fa50_i_triagem = ($this->fa50_i_triagem === 0 || $this->fa50_i_triagem === 0.0 || $this->fa50_i_triagem == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_triagem"]:$this->fa50_i_triagem);
+       $this->fa50_i_cgsund = ($this->fa50_i_cgsund === 0 || $this->fa50_i_cgsund === 0.0 || $this->fa50_i_cgsund == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_cgsund"]:$this->fa50_i_cgsund);
+       $this->fa50_i_outrosmedicamentos = ($this->fa50_i_outrosmedicamentos === 0 || $this->fa50_i_outrosmedicamentos === 0.0 || $this->fa50_i_outrosmedicamentos == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_outrosmedicamentos"]:$this->fa50_i_outrosmedicamentos);
+       $this->fa50_i_tipo = ($this->fa50_i_tipo === 0 || $this->fa50_i_tipo === 0.0 || $this->fa50_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_tipo"]:$this->fa50_i_tipo);
+       $this->fa50_i_naomedicamentoso = ($this->fa50_i_naomedicamentoso === 0 || $this->fa50_i_naomedicamentoso === 0.0 || $this->fa50_i_naomedicamentoso == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_naomedicamentoso"]:$this->fa50_i_naomedicamentoso);
+       $this->fa50_i_diabetesacomp = ($this->fa50_i_diabetesacomp === 0 || $this->fa50_i_diabetesacomp === 0.0 || $this->fa50_i_diabetesacomp == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_diabetesacomp"]:$this->fa50_i_diabetesacomp);
+       $this->fa50_i_hipertensaoacomp = ($this->fa50_i_hipertensaoacomp === 0 || $this->fa50_i_hipertensaoacomp === 0.0 || $this->fa50_i_hipertensaoacomp == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_hipertensaoacomp"]:$this->fa50_i_hipertensaoacomp);
+       $this->fa50_i_exportado = ($this->fa50_i_exportado === 0 || $this->fa50_i_exportado === 0.0 || $this->fa50_i_exportado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_exportado"]:$this->fa50_i_exportado);
      }else{
-       $this->fa50_i_codigo = ($this->fa50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_codigo"]:$this->fa50_i_codigo);
+       $this->fa50_i_codigo = ($this->fa50_i_codigo === 0 || $this->fa50_i_codigo === 0.0 || $this->fa50_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa50_i_codigo"]:$this->fa50_i_codigo);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_far_cadacomppachiperdia {
          $this->fa50_i_codigo = $fa50_i_codigo;
        }
      }
-     if(($this->fa50_i_codigo == null) || ($this->fa50_i_codigo == "") ){
+     if(($this->fa50_i_codigo == null) || ($this->fa50_i_codigo === 0 || $this->fa50_i_codigo === 0.0 || $this->fa50_i_codigo == "") ){
        $this->erro_sql = " Campo fa50_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

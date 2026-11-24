@@ -85,17 +85,17 @@ class cl_formacao
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed27_i_codigo = ($this->ed27_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_codigo"] : $this->ed27_i_codigo);
-            $this->ed27_i_rechumano = ($this->ed27_i_rechumano == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_rechumano"] : $this->ed27_i_rechumano);
-            $this->ed27_i_cursoformacao = ($this->ed27_i_cursoformacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_cursoformacao"] : $this->ed27_i_cursoformacao);
+            $this->ed27_i_codigo = ($this->ed27_i_codigo === 0 || $this->ed27_i_codigo === 0.0 || $this->ed27_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_codigo"] : $this->ed27_i_codigo);
+            $this->ed27_i_rechumano = ($this->ed27_i_rechumano === 0 || $this->ed27_i_rechumano === 0.0 || $this->ed27_i_rechumano == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_rechumano"] : $this->ed27_i_rechumano);
+            $this->ed27_i_cursoformacao = ($this->ed27_i_cursoformacao === 0 || $this->ed27_i_cursoformacao === 0.0 || $this->ed27_i_cursoformacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_cursoformacao"] : $this->ed27_i_cursoformacao);
             $this->ed27_c_situacao = ($this->ed27_c_situacao == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_c_situacao"] : $this->ed27_c_situacao);
-            $this->ed27_i_licenciatura = ($this->ed27_i_licenciatura == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_licenciatura"] : $this->ed27_i_licenciatura);
-            $this->ed27_i_anoconclusao = ($this->ed27_i_anoconclusao == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_anoconclusao"] : $this->ed27_i_anoconclusao);
-            $this->ed27_i_censoinstsuperior = ($this->ed27_i_censoinstsuperior == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_censoinstsuperior"] : $this->ed27_i_censoinstsuperior);
-            $this->ed27_i_anoinicio = ($this->ed27_i_anoinicio == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_anoinicio"] : $this->ed27_i_anoinicio);
-            $this->ed27_i_formacaopedag = ($this->ed27_i_formacaopedag == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_formacaopedag"] : $this->ed27_i_formacaopedag);
+            $this->ed27_i_licenciatura = ($this->ed27_i_licenciatura === 0 || $this->ed27_i_licenciatura === 0.0 || $this->ed27_i_licenciatura == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_licenciatura"] : $this->ed27_i_licenciatura);
+            $this->ed27_i_anoconclusao = ($this->ed27_i_anoconclusao === 0 || $this->ed27_i_anoconclusao === 0.0 || $this->ed27_i_anoconclusao == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_anoconclusao"] : $this->ed27_i_anoconclusao);
+            $this->ed27_i_censoinstsuperior = ($this->ed27_i_censoinstsuperior === 0 || $this->ed27_i_censoinstsuperior === 0.0 || $this->ed27_i_censoinstsuperior == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_censoinstsuperior"] : $this->ed27_i_censoinstsuperior);
+            $this->ed27_i_anoinicio = ($this->ed27_i_anoinicio === 0 || $this->ed27_i_anoinicio === 0.0 || $this->ed27_i_anoinicio == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_anoinicio"] : $this->ed27_i_anoinicio);
+            $this->ed27_i_formacaopedag = ($this->ed27_i_formacaopedag === 0 || $this->ed27_i_formacaopedag === 0.0 || $this->ed27_i_formacaopedag == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_formacaopedag"] : $this->ed27_i_formacaopedag);
         } else {
-            $this->ed27_i_codigo = ($this->ed27_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_codigo"] : $this->ed27_i_codigo);
+            $this->ed27_i_codigo = ($this->ed27_i_codigo === 0 || $this->ed27_i_codigo === 0.0 || $this->ed27_i_codigo == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed27_i_codigo"] : $this->ed27_i_codigo);
         }
     }
 
@@ -180,7 +180,7 @@ class cl_formacao
                 $this->ed27_i_codigo = $ed27_i_codigo;
             }
         }
-        if (($this->ed27_i_codigo == null) || ($this->ed27_i_codigo == "")) {
+        if (($this->ed27_i_codigo == null) || ($this->ed27_i_codigo === 0 || $this->ed27_i_codigo === 0.0 || $this->ed27_i_codigo == "")) {
             $this->erro_sql = " Campo ed27_i_codigo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

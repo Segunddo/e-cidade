@@ -69,11 +69,11 @@ class cl_mer_itemunisaida {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me20_i_codigo = ($this->me20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me20_i_codigo"]:$this->me20_i_codigo);
-       $this->me20_i_unidade = ($this->me20_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me20_i_unidade"]:$this->me20_i_unidade);
-       $this->me20_i_item = ($this->me20_i_item == ""?@$GLOBALS["HTTP_POST_VARS"]["me20_i_item"]:$this->me20_i_item);
+       $this->me20_i_codigo = ($this->me20_i_codigo === 0 || $this->me20_i_codigo === 0.0 || $this->me20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me20_i_codigo"]:$this->me20_i_codigo);
+       $this->me20_i_unidade = ($this->me20_i_unidade === 0 || $this->me20_i_unidade === 0.0 || $this->me20_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["me20_i_unidade"]:$this->me20_i_unidade);
+       $this->me20_i_item = ($this->me20_i_item === 0 || $this->me20_i_item === 0.0 || $this->me20_i_item == ""?@$GLOBALS["HTTP_POST_VARS"]["me20_i_item"]:$this->me20_i_item);
      }else{
-       $this->me20_i_codigo = ($this->me20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me20_i_codigo"]:$this->me20_i_codigo);
+       $this->me20_i_codigo = ($this->me20_i_codigo === 0 || $this->me20_i_codigo === 0.0 || $this->me20_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me20_i_codigo"]:$this->me20_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_mer_itemunisaida {
          $this->me20_i_codigo = $me20_i_codigo;
        }
      }
-     if(($this->me20_i_codigo == null) || ($this->me20_i_codigo == "") ){
+     if(($this->me20_i_codigo == null) || ($this->me20_i_codigo === 0 || $this->me20_i_codigo === 0.0 || $this->me20_i_codigo == "") ){
        $this->erro_sql = " Campo me20_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

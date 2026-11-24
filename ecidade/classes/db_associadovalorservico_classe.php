@@ -76,9 +76,9 @@ class cl_associadovalorservico
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->fm13_codigo = ($this->fm13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm13_codigo"]:$this->fm13_codigo);
-       $this->fm13_servico = ($this->fm13_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["fm13_servico"]:$this->fm13_servico);
-       $this->fm13_valor = ($this->fm13_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["fm13_valor"]:$this->fm13_valor);
+       $this->fm13_codigo = ($this->fm13_codigo === 0 || $this->fm13_codigo === 0.0 || $this->fm13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm13_codigo"]:$this->fm13_codigo);
+       $this->fm13_servico = ($this->fm13_servico === 0 || $this->fm13_servico === 0.0 || $this->fm13_servico == ""?@$GLOBALS["HTTP_POST_VARS"]["fm13_servico"]:$this->fm13_servico);
+       $this->fm13_valor = ($this->fm13_valor === 0 || $this->fm13_valor === 0.0 || $this->fm13_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["fm13_valor"]:$this->fm13_valor);
        if($this->fm13_vigencia == ""){
          $this->fm13_vigencia_dia = ($this->fm13_vigencia_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["fm13_vigencia_dia"]:$this->fm13_vigencia_dia);
          $this->fm13_vigencia_mes = ($this->fm13_vigencia_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["fm13_vigencia_mes"]:$this->fm13_vigencia_mes);
@@ -88,7 +88,7 @@ class cl_associadovalorservico
          }
        }
      }else{
-       $this->fm13_codigo = ($this->fm13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm13_codigo"]:$this->fm13_codigo);
+       $this->fm13_codigo = ($this->fm13_codigo === 0 || $this->fm13_codigo === 0.0 || $this->fm13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fm13_codigo"]:$this->fm13_codigo);
      }
    }
 
@@ -137,7 +137,7 @@ class cl_associadovalorservico
          $this->fm13_codigo = $fm13_codigo; 
        }
      }
-     if(($this->fm13_codigo == null) || ($this->fm13_codigo == "") ){ 
+     if(($this->fm13_codigo == null) || ($this->fm13_codigo === 0 || $this->fm13_codigo === 0.0 || $this->fm13_codigo == "") ){ 
        $this->erro_sql = " Campo fm13_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

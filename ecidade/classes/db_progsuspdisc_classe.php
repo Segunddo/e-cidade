@@ -76,9 +76,9 @@ class cl_progsuspdisc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed119_i_codigo = ($this->ed119_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_codigo"]:$this->ed119_i_codigo);
-       $this->ed119_i_progmatricula = ($this->ed119_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_progmatricula"]:$this->ed119_i_progmatricula);
-       $this->ed119_i_usuario = ($this->ed119_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_usuario"]:$this->ed119_i_usuario);
+       $this->ed119_i_codigo = ($this->ed119_i_codigo === 0 || $this->ed119_i_codigo === 0.0 || $this->ed119_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_codigo"]:$this->ed119_i_codigo);
+       $this->ed119_i_progmatricula = ($this->ed119_i_progmatricula === 0 || $this->ed119_i_progmatricula === 0.0 || $this->ed119_i_progmatricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_progmatricula"]:$this->ed119_i_progmatricula);
+       $this->ed119_i_usuario = ($this->ed119_i_usuario === 0 || $this->ed119_i_usuario === 0.0 || $this->ed119_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_usuario"]:$this->ed119_i_usuario);
        if($this->ed119_d_data == ""){
          $this->ed119_d_data_dia = ($this->ed119_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_d_data_dia"]:$this->ed119_d_data_dia);
          $this->ed119_d_data_mes = ($this->ed119_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_d_data_mes"]:$this->ed119_d_data_mes);
@@ -89,7 +89,7 @@ class cl_progsuspdisc {
        }
        $this->ed119_t_obs = ($this->ed119_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_t_obs"]:$this->ed119_t_obs);
      }else{
-       $this->ed119_i_codigo = ($this->ed119_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_codigo"]:$this->ed119_i_codigo);
+       $this->ed119_i_codigo = ($this->ed119_i_codigo === 0 || $this->ed119_i_codigo === 0.0 || $this->ed119_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed119_i_codigo"]:$this->ed119_i_codigo);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_progsuspdisc {
          $this->ed119_i_codigo = $ed119_i_codigo;
        }
      }
-     if(($this->ed119_i_codigo == null) || ($this->ed119_i_codigo == "") ){
+     if(($this->ed119_i_codigo == null) || ($this->ed119_i_codigo === 0 || $this->ed119_i_codigo === 0.0 || $this->ed119_i_codigo == "") ){
        $this->erro_sql = " Campo ed119_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

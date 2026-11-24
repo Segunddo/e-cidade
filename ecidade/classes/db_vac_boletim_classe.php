@@ -83,18 +83,18 @@ class cl_vac_boletim {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc13_i_codigo = ($this->vc13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_codigo"]:$this->vc13_i_codigo);
-       $this->vc13_i_vacina = ($this->vc13_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_vacina"]:$this->vc13_i_vacina);
+       $this->vc13_i_codigo = ($this->vc13_i_codigo === 0 || $this->vc13_i_codigo === 0.0 || $this->vc13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_codigo"]:$this->vc13_i_codigo);
+       $this->vc13_i_vacina = ($this->vc13_i_vacina === 0 || $this->vc13_i_vacina === 0.0 || $this->vc13_i_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_vacina"]:$this->vc13_i_vacina);
        $this->vc13_c_descr = ($this->vc13_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_c_descr"]:$this->vc13_c_descr);
-       $this->vc13_i_diaini = ($this->vc13_i_diaini == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_diaini"]:$this->vc13_i_diaini);
-       $this->vc13_i_mesini = ($this->vc13_i_mesini == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_mesini"]:$this->vc13_i_mesini);
-       $this->vc13_i_anoini = ($this->vc13_i_anoini == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_anoini"]:$this->vc13_i_anoini);
-       $this->vc13_i_diafim = ($this->vc13_i_diafim == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_diafim"]:$this->vc13_i_diafim);
-       $this->vc13_i_mesfim = ($this->vc13_i_mesfim == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_mesfim"]:$this->vc13_i_mesfim);
-       $this->vc13_i_anofim = ($this->vc13_i_anofim == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_anofim"]:$this->vc13_i_anofim);
-       $this->vc13_i_situacao = ($this->vc13_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_situacao"]:$this->vc13_i_situacao);
+       $this->vc13_i_diaini = ($this->vc13_i_diaini === 0 || $this->vc13_i_diaini === 0.0 || $this->vc13_i_diaini == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_diaini"]:$this->vc13_i_diaini);
+       $this->vc13_i_mesini = ($this->vc13_i_mesini === 0 || $this->vc13_i_mesini === 0.0 || $this->vc13_i_mesini == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_mesini"]:$this->vc13_i_mesini);
+       $this->vc13_i_anoini = ($this->vc13_i_anoini === 0 || $this->vc13_i_anoini === 0.0 || $this->vc13_i_anoini == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_anoini"]:$this->vc13_i_anoini);
+       $this->vc13_i_diafim = ($this->vc13_i_diafim === 0 || $this->vc13_i_diafim === 0.0 || $this->vc13_i_diafim == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_diafim"]:$this->vc13_i_diafim);
+       $this->vc13_i_mesfim = ($this->vc13_i_mesfim === 0 || $this->vc13_i_mesfim === 0.0 || $this->vc13_i_mesfim == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_mesfim"]:$this->vc13_i_mesfim);
+       $this->vc13_i_anofim = ($this->vc13_i_anofim === 0 || $this->vc13_i_anofim === 0.0 || $this->vc13_i_anofim == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_anofim"]:$this->vc13_i_anofim);
+       $this->vc13_i_situacao = ($this->vc13_i_situacao === 0 || $this->vc13_i_situacao === 0.0 || $this->vc13_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_situacao"]:$this->vc13_i_situacao);
      }else{
-       $this->vc13_i_codigo = ($this->vc13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_codigo"]:$this->vc13_i_codigo);
+       $this->vc13_i_codigo = ($this->vc13_i_codigo === 0 || $this->vc13_i_codigo === 0.0 || $this->vc13_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc13_i_codigo"]:$this->vc13_i_codigo);
      }
    }
    // funcao para inclusao
@@ -199,7 +199,7 @@ class cl_vac_boletim {
          $this->vc13_i_codigo = $vc13_i_codigo;
        }
      }
-     if(($this->vc13_i_codigo == null) || ($this->vc13_i_codigo == "") ){
+     if(($this->vc13_i_codigo == null) || ($this->vc13_i_codigo === 0 || $this->vc13_i_codigo === 0.0 || $this->vc13_i_codigo == "") ){
        $this->erro_sql = " Campo vc13_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

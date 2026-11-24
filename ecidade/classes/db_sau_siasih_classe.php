@@ -75,14 +75,14 @@ class cl_sau_siasih {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd92_i_codigo = ($this->sd92_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_codigo"]:$this->sd92_i_codigo);
+       $this->sd92_i_codigo = ($this->sd92_i_codigo === 0 || $this->sd92_i_codigo === 0.0 || $this->sd92_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_codigo"]:$this->sd92_i_codigo);
        $this->sd92_c_siasih = ($this->sd92_c_siasih == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_c_siasih"]:$this->sd92_c_siasih);
        $this->sd92_c_nome = ($this->sd92_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_c_nome"]:$this->sd92_c_nome);
-       $this->sd92_i_tipoproc = ($this->sd92_i_tipoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_tipoproc"]:$this->sd92_i_tipoproc);
-       $this->sd92_i_anocomp = ($this->sd92_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_anocomp"]:$this->sd92_i_anocomp);
-       $this->sd92_i_mescomp = ($this->sd92_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_mescomp"]:$this->sd92_i_mescomp);
+       $this->sd92_i_tipoproc = ($this->sd92_i_tipoproc === 0 || $this->sd92_i_tipoproc === 0.0 || $this->sd92_i_tipoproc == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_tipoproc"]:$this->sd92_i_tipoproc);
+       $this->sd92_i_anocomp = ($this->sd92_i_anocomp === 0 || $this->sd92_i_anocomp === 0.0 || $this->sd92_i_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_anocomp"]:$this->sd92_i_anocomp);
+       $this->sd92_i_mescomp = ($this->sd92_i_mescomp === 0 || $this->sd92_i_mescomp === 0.0 || $this->sd92_i_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_mescomp"]:$this->sd92_i_mescomp);
      }else{
-       $this->sd92_i_codigo = ($this->sd92_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_codigo"]:$this->sd92_i_codigo);
+       $this->sd92_i_codigo = ($this->sd92_i_codigo === 0 || $this->sd92_i_codigo === 0.0 || $this->sd92_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd92_i_codigo"]:$this->sd92_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_sau_siasih {
          $this->sd92_i_codigo = $sd92_i_codigo;
        }
      }
-     if(($this->sd92_i_codigo == null) || ($this->sd92_i_codigo == "") ){
+     if(($this->sd92_i_codigo == null) || ($this->sd92_i_codigo === 0 || $this->sd92_i_codigo === 0.0 || $this->sd92_i_codigo == "") ){
        $this->erro_sql = " Campo sd92_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

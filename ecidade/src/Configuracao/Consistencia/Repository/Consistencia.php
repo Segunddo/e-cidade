@@ -87,7 +87,7 @@ class Consistencia extends \BaseClassRepository
      * @throws \DBException
      * @throws \ParameterException
      */
-    public function executarConsistencia($idConsistencia, array $filtros = null)
+    public function executarConsistencia($idConsistencia, ?array $filtros = null)
     {
         if (empty($idConsistencia)) {
             throw new \ParameterException("Código da consistência não informado.");

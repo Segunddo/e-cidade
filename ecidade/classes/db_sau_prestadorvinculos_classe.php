@@ -71,12 +71,12 @@ class cl_sau_prestadorvinculos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s111_i_codigo = ($this->s111_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s111_i_codigo"]:$this->s111_i_codigo);
-       $this->s111_i_prestador = ($this->s111_i_prestador == ""?@$GLOBALS["HTTP_POST_VARS"]["s111_i_prestador"]:$this->s111_i_prestador);
-       $this->s111_procedimento = ($this->s111_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["s111_procedimento"]:$this->s111_procedimento);
+       $this->s111_i_codigo = ($this->s111_i_codigo === 0 || $this->s111_i_codigo === 0.0 || $this->s111_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s111_i_codigo"]:$this->s111_i_codigo);
+       $this->s111_i_prestador = ($this->s111_i_prestador === 0 || $this->s111_i_prestador === 0.0 || $this->s111_i_prestador == ""?@$GLOBALS["HTTP_POST_VARS"]["s111_i_prestador"]:$this->s111_i_prestador);
+       $this->s111_procedimento = ($this->s111_procedimento === 0 || $this->s111_procedimento === 0.0 || $this->s111_procedimento == ""?@$GLOBALS["HTTP_POST_VARS"]["s111_procedimento"]:$this->s111_procedimento);
        $this->s111_c_situacao = ($this->s111_c_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["s111_c_situacao"]:$this->s111_c_situacao);
      }else{
-       $this->s111_i_codigo = ($this->s111_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s111_i_codigo"]:$this->s111_i_codigo);
+       $this->s111_i_codigo = ($this->s111_i_codigo === 0 || $this->s111_i_codigo === 0.0 || $this->s111_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s111_i_codigo"]:$this->s111_i_codigo);
      }
    }
    // funcao para Inclusão
@@ -133,7 +133,7 @@ class cl_sau_prestadorvinculos {
          $this->s111_i_codigo = $s111_i_codigo; 
        }
      }
-     if(($this->s111_i_codigo == null) || ($this->s111_i_codigo == "") ){ 
+     if(($this->s111_i_codigo == null) || ($this->s111_i_codigo === 0 || $this->s111_i_codigo === 0.0 || $this->s111_i_codigo == "") ){ 
        $this->erro_sql = " Campo s111_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -52,9 +52,9 @@ if(isset($retorno)){
 		  where c.codcam = $retorno";
   $result = db_query($sql);
   if(isset($HTTP_POST_VARS["modulo"]) && $HTTP_POST_VARS["modulo"] == "")
-    $HTTP_POST_VARS["modulo"] = pg_result($result,0,"codmod");
+    $HTTP_POST_VARS["modulo"] = pg_fetch_result($result,0,"codmod");
   if(isset($HTTP_POST_VARS["tabela"]) && $HTTP_POST_VARS["tabela"] == "")
-    $HTTP_POST_VARS["tabela"] = pg_result($result,0,"tabela");
+    $HTTP_POST_VARS["tabela"] = pg_fetch_result($result,0,"tabela");
   db_fieldsmemory($result,0);
 
   if(isset($campodefault)){
@@ -90,7 +90,7 @@ if(isset($HTTP_POST_VARS["incluir"])) {
   if(isset($vautocompl)) $autocompl = 't';
   else $autocompl = 'f';
   $result = db_query("select nextval('db_syscampo_codcam_seq')");
-  $codcam = pg_result($result,0,0);
+  $codcam = pg_fetch_result($result,0,0);
   if((substr($conteudo,0,4)=="date") && empty($valorinicial)){
     $valorinicial = "null";
   }
@@ -439,7 +439,7 @@ input {
 
                   $sql="Select nomecam as nom,codcampai as pai from db_syscampodep inner join db_syscampo on db_syscampo.codcam=codcampai  where db_syscampodep.codcam = $codcam";
                   $result = db_query($sql);
-  	              if(pg_numrows($result)>0){
+                  if(pg_num_rows($result)>0){
 
 		                db_fieldsmemory($result,0);
                     echo "<option selected value='$pai'>$nom</option>";
@@ -491,9 +491,9 @@ input {
                       <?php
 					  if(isset($retorno)){
 				        $result = db_query("select * from db_syscampodef where codcam = ".$retorno);
-					    $numrows = pg_numrows($result);
+					    $numrows = pg_num_rows($result);
 					    for($i = 0;$i < $numrows;$i++)
-					      echo "<option value=\"".pg_result($result,$i,"defcampo")."#&".pg_result($result,$i,"defdescr")."\">".pg_result($result,$i,"defcampo")."</option>\n";
+					      echo "<option value=\"".pg_fetch_result($result,$i,"defcampo")."#&".pg_fetch_result($result,$i,"defdescr")."\">".pg_fetch_result($result,$i,"defcampo")."</option>\n";
 					  }
 				      ?>
                     </select> </td>

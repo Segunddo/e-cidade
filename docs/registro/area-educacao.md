@@ -354,3 +354,228 @@ Correções: 104 guardas `== <literal>`, 34 `split` → `preg_split` (todos `#`)
 4 `parse_str`+`extract`. O Rector aplicou só regras já vetadas — **denylist inalterada (29)**.
 Entre os alvos estão `db_turma_classe.php` e `db_matricula_classe.php`, duas das quatro classes
 em que a branch do TCC de referência deixou as guardas `0 == ""` de fora.
+
+## 🔁 Refeita sobre a `base-php74` (19/11/2026)
+
+Com o PR #8 da DBSeller, a referência passou a ser o **PHP 7.4** (`:8080`), não mais o 5.6. A
+área foi refeita do zero a partir de `982a95fb5` (`base-php74`), mantendo a regra de sempre: **reproduzir o 7.4, não corrigir bugs antigos**.
+
+### Escopo
+
+Universo de 3.028 arquivos da Educação: telas `edu/esc/rel/sec/tre/bib/mer`, classes, `forms` e
+`func_` das tabelas dos esquemas `escola`, `merenda`, `biblioteca` e `transporteescolar`,
+`model/educacao` e `src/Educacao`. Núcleo (`std/`, `libs/`, `dbforms/`, `fpdf151/`, classes
+compartilhadas), `scratchpad/`, `composer*`, `vendor/` e Laravel ficaram de fora — o que
+apareceu neles virou anotação para o dono (abaixo).
+
+### Commits e pull requests
+
+Um único PR para `base-php85` (a branch que recebe o código migrado), ligado à issue da área, a partir da branch
+`educacao/php85-migrado`. Ela parte da `base-php85` de 21/11/2026 (`111125fb5`, que já traz o núcleo migrado e os PRs
+do Tributário, Financeiro, Gestor, Cidadão, Integrações e Assistência Social, além da correção de `parse_str` do grupo
+para todas as áreas). Commits do Rector e manuais nunca misturados: primeiro vêm os do Rector, depois os manuais, para
+que a revisão possa ir commit a commit.
+
+| Grupo de commits (em ordem) | Conteúdo | Arquivos |
+| --- | --- | --- |
+| Rector nas classes | classes das tabelas; classes que ficaram fora dos alvos (guarda `0 == ""`); 50 classes `ed*`/`bi*` achadas pela regressão | 343 |
+| Rector em telas, `model` e `src` | `model/educacao` e `src/Educacao`; ternário aninhado em 2 telas; `$$x` → `${$x}` em 11 telas | 23 |
+| Correções manuais | correções fiéis ao 7.4; guardas achadas na regressão final; este registro. **Revisar linha a linha** | 104 |
+
+No total são 464 arquivos. Os três grupos foram preparados antes como PRs separados e independentes, cada um aplicando
+direto na base. Depois foram juntados num PR só sem mudar nenhum arquivo: a árvore final é a mesma.
+
+O trabalho foi feito sobre `982a95fb5`. Nas telas e nas `func_`, `parse_str` com um argumento usava a forma decidida
+pelo grupo em 19/11/2026 (decisão 3): `parse_str(x, $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);`,
+numa linha, com o espaçamento original de `x`, igual byte a byte à correção do grupo. Quando essa correção entrou na
+`base-php85`, 509 telas e todas as 258 janelas `func_` da Educação ficaram **idênticas** às nossas, e 4 classes
+ficaram idênticas pelo PR do Financeiro. Depois, o PR da Assistência Social levou à base mais 134 classes de dados que
+as telas `soc` usam, com o mesmo Rector: ficaram **idênticas** às nossas, sem conflito. Esses arquivos saíram do PR,
+incluindo todas as `func_`. No `edu2_certconclusao002.php` ficou só a linha do ternário: o Rector tinha tirado os espaços do fim de 64 linhas em
+branco, sem efeito na saída.
+
+### O que o 7.4 faz e o 8.5 não (medido nos dois containers)
+
+| Expressão | 7.4 | 8.5 | Correção fiel |
+| --- | --- | --- | --- |
+| `pg_num_rows(false)` e afins | aviso, `NULL` | `TypeError` | `($r ? pg_x($r) : null)` — 148 linhas, 65 arquivos |
+| `x / 0` | aviso, `INF`/`-INF`/`NAN` | `DivisionByZeroError` | devolve o mesmo `INF`/`-INF`/`NAN` (2 arquivos) |
+| `0 != ""` | `false` | `true` | `($x != "" && $x !== 0 && $x !== 0.0)` (5 classes BNCC) |
+| `file_get_contents("")` | `false` | `ValueError` | guarda (3) |
+| propriedade em `null` | cria `stdClass` | `Error` | `new stdClass` explícito (1) |
+| `count(null)` | 0 com aviso | `TypeError` | `count((array)$x)` (1) |
+| `array_unique(null)` / `natsort(null)` | aviso, `NULL` | `TypeError` | `is_array` antes (1) |
+| `"" + 1`, `"07:30" <= 1800` | aviso; converte o número inicial | `TypeError` / compara como texto | cast `(int)`/`(float)` (2) |
+| `pg_last_error()` sem conexão | `false` | erro | `try/catch` (1) |
+| assinatura incompatível com a mãe | aviso | fatal | parâmetros opcionais iguais aos da mãe (4) |
+
+Mantida a versão da DBSeller (sem portar a correção antiga): `bib1_reserva004` (octal),
+`edu1_matricula003`, `edu1_avaliacaoestruturanota001`, `edu4_avaliacaoestruturafrequencia001/002`,
+`edu2_historico002`, `ProgressaoParcialVinculoDisciplina` e os `forms` com constante indefinida.
+
+### Verificação
+
+Verificação por lote, contra `982a95fb5` (universo de 3.029 arquivos, 437 classes):
+
+| Passo | Antes das correções | Final | Observação |
+| --- | --- | --- | --- |
+| 5 `php -l` nos dois runtimes | 0 erros novos | 0 erros novos | 4 pré-existentes, falham também no 7.4 |
+| 5b carga (LSP) | 7 só no 8.5 | 5 só no 8.5 | os 5 são `RelatorioDiarioClasse*`, que herdam de `fpdf151/pdf.php` (núcleo) |
+| 6 instanciar classes | OK | OK | 437 classes |
+| 6b caminho de escrita | 110 linhas | 6 linhas | as 6 são de `db_linhacolunavalorinformacaocomplementar` (Financeiro) |
+| 6c forma negada | 30 | 3 | as 3 são da mesma classe do Financeiro |
+
+Além disso: HTML inline idêntico ao da base em 1.279 arquivos (`token_get_all`, `T_INLINE_HTML`),
+codificação ISO-8859-1 preservada, fim de arquivo restaurado onde o Rector acrescentou uma quebra de linha.
+A conferência de funções novas acusa `extract`, `is_array` e `preg_split` porque ainda compara com o 5.6; as
+três existem no 7.4. A bateria byte a byte (passo 7) não rodou: depende do núcleo portado.
+
+### Regressão no ambiente `e74` (19/11/2026)
+
+Bateria PHP da suíte `regressao/` (branch `regressao-php74`), referência 7.4 (:8074) × alvo 8.5 (:8185), sobre as
+1.570 telas `bib/edu/esc/mer/rel/sec/tre`, as classes que elas usam e a sintaxe. Mesma baseline do banco nas duas
+rodadas (dump local gerado pela seção 2 do README da regressão, não o v2 do time: os números valem como comparação
+antes × depois, não como baseline oficial).
+
+| Bloco | Antes (base) idêntico / diverge | Depois (4 PRs) idêntico / diverge |
+| --- | --- | --- |
+| Classes (320) | 1 / 317 | 279 / 39 |
+| Sintaxe (1.569) | 1.563 / 2 | 1.565 / 0 |
+| Telas (1.570) | 650 / 851 | 1.064 / 382 |
+
+**Nenhum caso que era idêntico passou a divergir.** 694 casos passaram de "diverge" para "idêntico". Das 39 classes
+que ainda divergiam, 36 são de outras áreas (material, RH, CGM, configuração, saúde, veículos) usadas pelas telas da
+Educação; as outras 3 levaram à correção das 51 classes `ed*`/`bi*` (commit próprio no PR `educacao/classes`). Das
+telas que ainda divergem, quase todas são HTTP 500 só no 8.5, o padrão dos defeitos do núcleo listados abaixo.
+
+### Telas `mat` e `pro` do menu da Educação (20/11/2026)
+
+A issue da área lista, além dos prefixos próprios, 22 telas `mat` (almoxarifado: requisição, estoque, transferência)
+e 1 `pro` (`pro1_tipoarq002.php`) que o menu da Educação também abre. As `mat` são compartilhadas com o Patrimonial
+(uma também com a Saúde). Medido sobre os PRs da Educação:
+
+- Rector do grupo (`rector-curado.php`): **0 arquivos** a alterar nas 23; `php -l` limpo no 7.4 e no 8.5.
+- Regressão do grupo (e74), 7.4 × 8.5: **21 idênticas**. As outras 2 (`mat1_atendrequi001.php` e
+  `mat1_matestoquesai001.php`) dão 500 só no 8.5 por `pg_num_rows(false)` em `libs/db_utils.php:186`
+  (`getCollectionByRecord`), ou seja, no núcleo, não na tela. Com a guarda dos wrappers do núcleo da decisão 2a
+  (`PHP8-31`, branch do `parse_str`) as duas ficam **idênticas** ao 7.4. Essa guarda já está na `base-php85`.
+
+Conclusão: nenhuma das 23 precisa de alteração da Educação; nenhum arquivo delas entra nos PRs.
+
+### Regressão final e causa de cada tela que ainda diverge (20/11/2026)
+
+Nova rodada completa da bateria do grupo (e74, mesmo universo de 1.570 telas) com o código final, seguida da
+classificação **tela a tela** das que ainda divergiam: para cada uma, a mensagem real do erro no 8.5 foi lida com o
+modo de depuração ligado só na sessão de teste, e o 7.4 foi lido com a sessão restaurada, como faz a bateria.
+
+| Bloco | Antes (base) idêntico / diverge | Final idêntico / diverge |
+| --- | --- | --- |
+| Classes (320) | 1 / 317 | 282 / 36 |
+| Sintaxe (1.569) | 1.563 / 2 | 1.565 / 0 |
+| Telas (1.570) | 650 / 851 | 1.072 / 420 |
+
+**Nenhum caso que era idêntico passou a divergir.** A classificação achou 23 arquivos da Educação que ainda lançavam
+erro só no 8.5, onde o 7.4 só avisava e seguia (alguns só apareciam como página cortada no meio, com HTTP 200).
+Corrigidos num commit próprio, cada forma medida nos dois runtimes:
+
+| Expressão | 7.4 | 8.5 | Correção fiel | Arquivos |
+| --- | --- | --- | --- | --- |
+| `pg_num_rows`/`pg_result`/`pg_fetch_assoc` recebendo `false` | aviso, `NULL` | `TypeError` | forma da decisão 2a; chamada aninhada `pg_x(db_query(...))` ganha uma variável | 18 (29 linhas) |
+| `count(null)` | 0 com aviso | `TypeError` | `count((array)$x)` | 3 |
+| `mktime` com `substr` de data vazia | aviso, `false` | `TypeError` | `(is_numeric(ano) ? mktime((int)...) : false)` | 1 (5 linhas) |
+| `$GLOBALS[Sed47_x]` fora de string | aviso, usa o texto | `Error` (constante indefinida) | chave entre aspas | 1 (2 linhas) |
+
+**Prova com o núcleo corrigido** (só no ambiente de teste, desfeita no fim): aplicando as correções de núcleo que já
+existem em outras branches — guardas da decisão 2a em `libs/db_stdlib.php` e `libs/db_utils.php` (`PHP8-31`), e
+`fpdf151/fpdf.php`, `libs/JSON.php`, `dbforms/db_funcoes.php`, `dbforms/db_classesgenericas.php` da
+`nucleo/correcoes-transversais` — mais a assinatura do tratador de erros (abaixo), **347 das 428 telas que divergiam
+ficam idênticas**. Das 20 que sobram, **nenhuma é da Educação**:
+
+- 16 quebram **também no 7.4** (bug antigo, registrado e não corrigido): `bib3_leitorcons002`,
+  `edu1_diarioavaliacao001`, `edu1_diarioavaliacaoobs001`, `mer1_mer_desper_und003` (não compilam);
+  `edu1_grauensino001/002/003` (classe `cl_grauensino` inexistente); `edu1_matriculadependecia002/003` (arquivo de
+  classe inexistente); `edu2_avaliacoesperiodo004`; `edu2_relacaonominal002` (classe de exceção inexistente em
+  `src/Educacao`); `edu3_consultafuncaoexercida003`; `mer1_mer_cardapionutri002/003`; `mer1_mer_cardapioturma002/003`.
+  Divergem só porque a página de erro tem tamanho diferente.
+- 4 param no núcleo: `libs/db_libsys.php:146` e `libs/db_stdlibwebseller.php:437` (`pg_*` com `false`) e
+  `std/DBDate.php:497` (`cal_days_in_month` com mês 0: aviso no 7.4, `ValueError` no 8.5), em 2 telas.
+
+As 61 restantes são inconclusivas (página de erro idêntica nos dois lados ou resposta vazia): a tela não foi exercitada.
+
+Estas medições foram feitas sobre `982a95fb5`. Desde então a `base-php85` recebeu as guardas da decisão 2a em
+`libs/db_stdlib.php`, `libs/db_utils.php`, `libs/db_libsys.php` e `dbforms/db_classesgenericas.php`. Os PRs foram
+refeitos sobre ela sem mudar nenhuma linha de código da Educação (fora os espaços do `edu2_certconclusao002.php`).
+`php -l` dos 597 arquivos alterados, já juntos com a base nova: 0 erros no 7.4 e no 8.5.
+
+### Regressão sobre a `base-php85` nova (20/11/2026)
+
+A bateria foi repetida duas vezes sobre `6d881031b`, no mesmo ambiente e universo: a base sozinha (referência) e a
+base com os 3 PRs juntos.
+
+| Bloco | `base-php85` idêntico / diverge | `base-php85` + 3 PRs idêntico / diverge |
+| --- | --- | --- |
+| Classes (320) | 12 / 306 | 291 / 27 |
+| Sintaxe (1.569) | 1.563 / 2 | 1.565 / 0 |
+| Telas (1.570) | 1.095 / 390 | 1.164 / 320 |
+
+- **350 casos de diverge → idêntico** com os PRs; **nenhum caso que era idêntico na base passou a divergir**.
+- Um caso foi de diverge para inconclusivo (`mer4_mer_subitem_ajax004.php`: resposta vazia nos dois lados).
+- As 27 classes que ainda divergem são de outras áreas (`mat`, `rh`, `veic`, `sau`, `lab`, `tfd`, `cidadao`, `db_uf`),
+  todas com o mesmo padrão (código gerado vira `0` no 8.5); ficam para os donos.
+- Comparado com a rodada final sobre a base antiga (mesmo código da Educação): mais 101 casos idênticos, graças às
+  guardas de núcleo que entraram na base, e nenhum caso que era idêntico deixou de ser.
+
+Em 21/11/2026 a `base-php85` foi para `111125fb5` (núcleo migrado e mais quatro áreas). Os 3 PRs foram refeitos sobre
+ela, de novo sem mudar nenhuma linha de código da Educação: só saíram as 134 classes que já chegaram idênticas.
+Nenhum arquivo dos PRs foi tocado de forma diferente pela base. `php -l` dos 463 arquivos `.php`, já juntos com a
+base: 0 erros no 7.4 e no 8.5.
+
+### Regressão sobre a `base-php85` de 21/11/2026 (`111125fb5`)
+
+Bateria repetida em 23/11/2026 no mesmo ambiente e universo: a base sozinha e a base com os 3 PRs juntos (a mesma
+árvore do PR único de `educacao/php85-migrado`).
+
+| Bloco | `base-php85` idêntico / diverge | `base-php85` + 3 PRs idêntico / diverge |
+| --- | --- | --- |
+| Classes (320) | 112 / 206 | 310 / 8 |
+| Sintaxe (1.569) | 1.563 / 2 | 1.565 / 0 |
+| Telas (1.570) | 1.322 / 111 | 1.415 / 16 |
+
+- **293 casos de diverge → idêntico** com os PRs; **nenhum caso que era idêntico na base passou a divergir**.
+- As **16 telas** que ainda divergem são exatamente as 16 da regressão final que quebram **também no 7.4** (HTTP 500
+  nos dois lados; só o tamanho da página de erro muda). Bug antigo, registrado e não corrigido. As 4 que paravam no
+  núcleo deixaram de divergir com o núcleo da base.
+- As **8 classes** que ainda divergem são de outras áreas (`lab`, `rh`, `sau`, `tfd`, `veic`).
+- Duas telas foram de diverge para inconclusivo (resposta vazia nos dois lados): `edu2_gfcoescfreqseries002.php` e
+  `mer4_mer_subitem_ajax004.php`.
+- Comparado com a rodada de 20/11 com os PRs: mais 270 casos idênticos, e nenhum que era idêntico deixou de ser. Os
+  inconclusivos subiram de 78 para 131 telas: são telas que agora dão a mesma página de erro (ou resposta vazia) nos
+  dois runtimes, ou seja, o 8.5 passou a responder como o 7.4, mas a bateria não consegue exercitá-las.
+
+### Fora da Educação (anotado para os donos)
+
+- `libs/db_app.utils.php:39` (`DB_VERSION` indefinida com a sessão da API) e o retorno
+  antecipado do `db_conecta` — núcleo; a `base-php85` já usa `defined()` desde 21/11.
+- `fpdf151/fpdf.php`: `ParseError` no 8.5 — derrubava **todo** relatório em PDF (inclusive os
+  `RelatorioDiarioClasse*` da Educação, que só falham por herdarem dele). Corrigido na `base-php85` em 21/11.
+- Tabela `configuracoes.itens_menu_usuario_favoritos` ausente no banco de teste.
+- Sessão de login real recusada pelas telas legadas na `base-php74`; só a sessão da API serve.
+- A verificação por lote ainda confere as funções novas contra o 5.6 (`extract`, `is_array`, `preg_split`
+  existem no 7.4: falso alarme).
+- Rector por lote: em máquina com pouca RAM a execução paralela estoura o tempo (lotes de 80
+  resolvem) e duas execuções no mesmo minuto sobrescrevem a pasta de saída.
+- A enumeração dos alvos deixa arquivos de fora (ternário aninhado, classes sem a guarda, arquivos só
+  com correção manual) — achados pela sintaxe e pelos testes de escrita.
+- Sugestão para a configuração oficial do Rector: banir `ThisCallOnStaticMethodToStaticCallRector` e aceitar
+  `FinalPrivateToPrivateVisibilityRector` na configuração oficial.
+- `db_linhacolunavalorinformacaocomplementar_classe.php` (Financeiro): divergências no 6c.
+- 4 arquivos não compilam nem no 7.4 (pré-existentes): `bib3_leitorcons002`,
+  `edu1_diarioavaliacao001` (`<?php` duplicado), `edu1_diarioavaliacaoobs001`,
+  `mer1_mer_desper_und003`.
+- `src/V3/Error/Handler/Error.php`: `_handle` e `handle` exigem 5 parâmetros (`$context`), mas o PHP 8 chama o
+  tratador de erros com 4. Todo aviso vira `ArgumentCountError` e a página para no meio (HTTP 200 cortado ou 500).
+  Ainda sem correção na `base-php85` de 21/11; com `$context = null` o comportamento volta ao do 7.4.
+- `libs/db_stdlibwebseller.php:437`, `std/DBDate.php:497` e `libs/db_libsys.php:146`: ver a regressão final acima.
+  Os três já estão corrigidos na `base-php85`.
+- Bateria byte a byte (passo 7) bloqueada até o núcleo ser portado; roteamento no nginx
+  deliberadamente **não** feito.

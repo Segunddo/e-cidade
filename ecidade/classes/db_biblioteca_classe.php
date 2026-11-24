@@ -69,11 +69,11 @@ class cl_biblioteca {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi17_codigo = ($this->bi17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi17_codigo"]:$this->bi17_codigo);
+       $this->bi17_codigo = ($this->bi17_codigo === 0 || $this->bi17_codigo === 0.0 || $this->bi17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi17_codigo"]:$this->bi17_codigo);
        $this->bi17_nome = ($this->bi17_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["bi17_nome"]:$this->bi17_nome);
-       $this->bi17_coddepto = ($this->bi17_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["bi17_coddepto"]:$this->bi17_coddepto);
+       $this->bi17_coddepto = ($this->bi17_coddepto === 0 || $this->bi17_coddepto === 0.0 || $this->bi17_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["bi17_coddepto"]:$this->bi17_coddepto);
      }else{
-       $this->bi17_codigo = ($this->bi17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi17_codigo"]:$this->bi17_codigo);
+       $this->bi17_codigo = ($this->bi17_codigo === 0 || $this->bi17_codigo === 0.0 || $this->bi17_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi17_codigo"]:$this->bi17_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_biblioteca {
          $this->bi17_codigo = $bi17_codigo;
        }
      }
-     if(($this->bi17_codigo == null) || ($this->bi17_codigo == "") ){
+     if(($this->bi17_codigo == null) || ($this->bi17_codigo === 0 || $this->bi17_codigo === 0.0 || $this->bi17_codigo == "") ){
        $this->erro_sql = " Campo bi17_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

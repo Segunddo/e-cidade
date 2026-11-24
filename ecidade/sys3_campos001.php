@@ -90,15 +90,16 @@ if (isset($tabelacod)) {
     <tr>
         <td height="100%" align="left" valign="top" bgcolor="#CCCCCC">
             <?php
+            $codigoTabelaSql = $tabela ?? 'NULL';
             $codseq = 0;
             $result = db_query("select c.codcam,c.nomecam,c.conteudo,c.descricao,c.rotulo,c.tamanho,c.nulo,c.valorinicial,ar.codsequencia
                        from db_syscampo c
                        inner join db_sysarqcamp ar
                        on ar.codcam = c.codcam
-                       where ar.codarq = $tabela
+                       where ar.codarq = $codigoTabelaSql
                        order by ar.seqarq");
-            $nometab = db_query("select nomearq from db_sysarquivo where codarq = $tabela");
-            $nometab = pg_result($nometab, 0, 0);
+            $nometab = db_query("select nomearq from db_sysarquivo where codarq = $codigoTabelaSql");
+            $nometab = pg_fetch_result($nometab, 0, 0);
             ?><br>
             <h3>Tabela: <?= $tabela . " - " . $nometab ?></h3><br>
             <?php
@@ -130,7 +131,7 @@ if (isset($tabelacod)) {
                 $cor1 = "#FEA27A";
                 $cor2 = "#FFDBBF";
                 $cor = "";
-                $numrows = pg_numrows($result);
+                $numrows = pg_num_rows($result);
                 for ($i = 0; $i < $numrows; $i++) {
                     db_fieldsmemory($result, $i);
                     echo "<tr bgcolor=\"" . ($cor = $cor == $cor1 ? $cor2 : $cor1) . "\">\n";
@@ -160,7 +161,7 @@ if (isset($tabelacod)) {
                        from db_syscampo c
                        inner join db_sysprikey p
                        on p.codcam = c.codcam
-                       where p.codarq = $tabela
+                       where p.codarq = $codigoTabelaSql
                        order by p.sequen");
 
             if (isset($tabelacod)) {
@@ -169,12 +170,12 @@ if (isset($tabelacod)) {
                 echo "<strong>Chave Primária:</strong>\n";
             }
 
-            $numrows = pg_numrows($result);
+            $numrows = pg_num_rows($result);
             if ($numrows == 0) {
                 echo "Sem chave primaria\n";
             } else {
                 for ($i = 0; $i < $numrows; $i++) {
-                    echo pg_result($result, $i, "nomecam");
+                    echo pg_fetch_result($result, $i, "nomecam");
                 }
             }
 
@@ -183,9 +184,9 @@ if (isset($tabelacod)) {
 
             $result = db_query("select referen 
                        from db_sysforkey 
-                       where codarq = $tabela
+                       where codarq = $codigoTabelaSql
                        group by(referen)");
-            $numrows = pg_numrows($result);
+            $numrows = pg_num_rows($result);
             echo "<table border=\"0\">\n";
             if ($numrows == 0) {
                 if (isset($tabelacod)) {
@@ -204,23 +205,23 @@ if (isset($tabelacod)) {
                          from db_sysarquivo a,db_syscampo c,db_sysforkey f
                          where a.codarq = f.referen
                          and c.codcam = f.codcam
-                         and f.codarq = $tabela
-                         and f.referen = " . pg_result($result, $j, "referen") . " 
+                         and f.codarq = $codigoTabelaSql
+                         and f.referen = " . pg_fetch_result($result, $j, "referen") . "
                          order by f.sequen");
-                    $numfork = pg_numrows($fork);
+                    $numfork = pg_num_rows($fork);
                     echo "<tr><td></td><td>\n";
                     for ($i = 0; $i < $numfork; $i++) {
-                        echo pg_result($fork, $i, "nomecam") . " ";
+                        echo pg_fetch_result($fork, $i, "nomecam") . " ";
                     }
                     echo "<font color=\"#cc7272\">Referente a:&nbsp;&nbsp;</font> ";
                     if (isset($tabelacod)) {
-                        echo "<a href=\"sys4_chaveestrangeira001.php?" . base64_encode("tabela=$tabela&ref=" . pg_result(
+                        echo "<a href=\"sys4_chaveestrangeira001.php?" . base64_encode("tabela=$tabela&ref=" . pg_fetch_result(
                             $result,
                             $j,
                             "referen"
-                        )) . "\">" . pg_result($fork, 0, "nomearq") . "</a>\n";
+                        )) . "\">" . pg_fetch_result($fork, 0, "nomearq") . "</a>\n";
                     } else {
-                        echo pg_result($fork, 0, "nomearq");
+                        echo pg_fetch_result($fork, 0, "nomearq");
                     }
                     echo "</td></tr>\n";
                 }
@@ -232,9 +233,9 @@ if (isset($tabelacod)) {
 
             $result = db_query("select codind,nomeind,campounico
                        from db_sysindices
-                       where codarq = $tabela");
+                       where codarq = $codigoTabelaSql");
             echo "<table>\n";
-            $numrows = pg_numrows($result);
+            $numrows = pg_num_rows($result);
             if ($numrows == 0) {
                 if (isset($tabelacod)) {
                     echo "<tr><td><a href=\"sys4_indices001.php?" . base64_encode("tabela=$tabela") . "\">Indices:</a></td><td>Sem Indice</td></tr>\n";
@@ -243,7 +244,7 @@ if (isset($tabelacod)) {
                 }
             } else {
                 if (isset($tabelacod)) {
-                    echo "<tr><td><a href=\"sys4_indices001.php?" . base64_encode("tabela=$tabela") . "\">Indices:</a></td><td><a href=\"sys4_indices001.php?" . base64_encode("tabela=$tabela&ind=" . pg_result(
+                    echo "<tr><td><a href=\"sys4_indices001.php?" . base64_encode("tabela=$tabela") . "\">Indices:</a></td><td><a href=\"sys4_indices001.php?" . base64_encode("tabela=$tabela&ind=" . pg_fetch_result(
                         $result,
                         0,
                         "codind"
@@ -256,27 +257,27 @@ if (isset($tabelacod)) {
                        from db_sysindices i
                             inner join db_syscadind c on c.codind = i.codind
                             inner join db_syscampo a on a.codcam = c.codcam 
-                       where codarq = $tabela and i.codind = " . pg_result($result, $i, 0) . " order by c.sequen");
-                    $numro = pg_numrows($result_ind);
+                       where codarq = $codigoTabelaSql and i.codind = " . pg_fetch_result($result, $i, 0) . " order by c.sequen");
+                    $numro = pg_num_rows($result_ind);
                     $qcamp = "( ";
                     $separador = "";
                     for ($ii = 0; $ii < $numro; $ii++) {
-                        $qcamp .= $separador . pg_result($result_ind, $ii, 0);
+                        $qcamp .= $separador . pg_fetch_result($result_ind, $ii, 0);
                         $separador = ",";
                     }
                     $qcamp .= ")";
                     if (isset($tabelacod)) {
-                        echo "<tr><td></td><td><a href=\"sys4_indices001.php?" . base64_encode("tabela=$tabela&ind=" . pg_result(
+                        echo "<tr><td></td><td><a href=\"sys4_indices001.php?" . base64_encode("tabela=$tabela&ind=" . pg_fetch_result(
                             $result,
                             $i,
                             "codind"
-                        )) . "\">" . pg_result($result, $i, "nomeind") . (pg_result(
+                        )) . "\">" . pg_fetch_result($result, $i, "nomeind") . (pg_fetch_result(
                             $result,
                             $i,
                             "campounico"
                         ) == "1" ? "(unique)" : "") . "</a></td></tr>\n";
                     } else {
-                        echo "<tr><td></td><td>" . pg_result($result, $i, "nomeind") . (pg_result(
+                        echo "<tr><td></td><td>" . pg_fetch_result($result, $i, "nomeind") . (pg_fetch_result(
                             $result,
                             $i,
                             "campounico"
@@ -299,41 +300,41 @@ if (isset($tabelacod)) {
                        where codsequencia = $codseq");
                 echo "<hr align='left' style='width:750px'>";
                 echo "<table>\n";
-                $numrows = pg_numrows($result);
+                $numrows = pg_num_rows($result);
                 if ($numrows == 0) {
                     echo "<tr><td><strong>Sequencia:</strong></td><td>Não Encontrada.</td></tr>\n";
                 } else {
-                    echo "<tr><td><strong>Sequencia:</strong></td><td>" . pg_result(
+                    echo "<tr><td><strong>Sequencia:</strong></td><td>" . pg_fetch_result(
                         $result,
                         0,
                         "codsequencia"
                     ) . "</td></tr>\n";
-                    echo "<tr><td><strong>Nome:</strong></td><td>" . pg_result(
+                    echo "<tr><td><strong>Nome:</strong></td><td>" . pg_fetch_result(
                         $result,
                         0,
                         "nomesequencia"
                     ) . "</td></tr>\n";
-                    echo "<tr><td><strong>Incremento:</strong></td><td>" . pg_result(
+                    echo "<tr><td><strong>Incremento:</strong></td><td>" . pg_fetch_result(
                         $result,
                         0,
                         "incrseq"
                     ) . "</td></tr>\n";
-                    echo "<tr><td><strong>Valor Mínimo:</strong></td><td>" . pg_result(
+                    echo "<tr><td><strong>Valor Mínimo:</strong></td><td>" . pg_fetch_result(
                         $result,
                         0,
                         "minvalueseq"
                     ) . "</td></tr>\n";
-                    echo "<tr><td><strong>Valor Máximo:</strong></td><td>" . pg_result(
+                    echo "<tr><td><strong>Valor Máximo:</strong></td><td>" . pg_fetch_result(
                         $result,
                         0,
                         "maxvalueseq"
                     ) . "</td></tr>\n";
-                    echo "<tr><td><strong>Inicio Sequencia:</strong></td><td>" . pg_result(
+                    echo "<tr><td><strong>Inicio Sequencia:</strong></td><td>" . pg_fetch_result(
                         $result,
                         0,
                         "startseq"
                     ) . "</td></tr>\n";
-                    echo "<tr><td><strong>Cache Sequencia:</strong></td><td>" . pg_result(
+                    echo "<tr><td><strong>Cache Sequencia:</strong></td><td>" . pg_fetch_result(
                         $result,
                         0,
                         "cacheseq"

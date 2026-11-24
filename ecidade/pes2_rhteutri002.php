@@ -76,7 +76,7 @@ if (trim($grupo) != '' && trim($grupo) != 'todos') {
 }
 
 $result = $clrhteutri->sql_record($clrhteutri->sql_query(null, "*", $xordem, $where));
-$xxnum = pg_num_rows($result);
+$xxnum = ($result ? pg_num_rows($result) : null);
 
 if ($xxnum == 0) {
     db_redireciona("db_erros.php?fechar=true&db_erro=Não existem Vales Cadastrados para o tipo " . $rh68_sequencial . " - " . $rh68_descr . ". Verifique!");

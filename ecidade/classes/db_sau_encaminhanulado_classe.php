@@ -78,8 +78,8 @@ class cl_sau_encaminhanulado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s149_i_codigo = ($this->s149_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_i_codigo"]:$this->s149_i_codigo);
-       $this->s149_i_encaminhamento = ($this->s149_i_encaminhamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_i_encaminhamento"]:$this->s149_i_encaminhamento);
+       $this->s149_i_codigo = ($this->s149_i_codigo === 0 || $this->s149_i_codigo === 0.0 || $this->s149_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_i_codigo"]:$this->s149_i_codigo);
+       $this->s149_i_encaminhamento = ($this->s149_i_encaminhamento === 0 || $this->s149_i_encaminhamento === 0.0 || $this->s149_i_encaminhamento == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_i_encaminhamento"]:$this->s149_i_encaminhamento);
        if($this->s149_d_data == ""){
          $this->s149_d_data_dia = ($this->s149_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_d_data_dia"]:$this->s149_d_data_dia);
          $this->s149_d_data_mes = ($this->s149_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_d_data_mes"]:$this->s149_d_data_mes);
@@ -89,10 +89,10 @@ class cl_sau_encaminhanulado {
          }
        }
        $this->s149_c_hora = ($this->s149_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_c_hora"]:$this->s149_c_hora);
-       $this->s149_i_login = ($this->s149_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_i_login"]:$this->s149_i_login);
+       $this->s149_i_login = ($this->s149_i_login === 0 || $this->s149_i_login === 0.0 || $this->s149_i_login == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_i_login"]:$this->s149_i_login);
        $this->s149_t_obs = ($this->s149_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_t_obs"]:$this->s149_t_obs);
      }else{
-       $this->s149_i_codigo = ($this->s149_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_i_codigo"]:$this->s149_i_codigo);
+       $this->s149_i_codigo = ($this->s149_i_codigo === 0 || $this->s149_i_codigo === 0.0 || $this->s149_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s149_i_codigo"]:$this->s149_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_sau_encaminhanulado {
          $this->s149_i_codigo = $s149_i_codigo;
        }
      }
-     if(($this->s149_i_codigo == null) || ($this->s149_i_codigo == "") ){
+     if(($this->s149_i_codigo == null) || ($this->s149_i_codigo === 0 || $this->s149_i_codigo === 0.0 || $this->s149_i_codigo == "") ){
        $this->erro_sql = " Campo s149_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

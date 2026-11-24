@@ -67,10 +67,10 @@ class cl_sau_parametrosagendamento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s165_sequencial = ($this->s165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_sequencial"]:$this->s165_sequencial);
-       $this->s165_formatocomprovanteagend = ($this->s165_formatocomprovanteagend == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_formatocomprovanteagend"]:$this->s165_formatocomprovanteagend);
+       $this->s165_sequencial = ($this->s165_sequencial === 0 || $this->s165_sequencial === 0.0 || $this->s165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_sequencial"]:$this->s165_sequencial);
+       $this->s165_formatocomprovanteagend = ($this->s165_formatocomprovanteagend === 0 || $this->s165_formatocomprovanteagend === 0.0 || $this->s165_formatocomprovanteagend == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_formatocomprovanteagend"]:$this->s165_formatocomprovanteagend);
      }else{
-       $this->s165_sequencial = ($this->s165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_sequencial"]:$this->s165_sequencial);
+       $this->s165_sequencial = ($this->s165_sequencial === 0 || $this->s165_sequencial === 0.0 || $this->s165_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s165_sequencial"]:$this->s165_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_sau_parametrosagendamento {
          $this->s165_sequencial = $s165_sequencial;
        }
      }
-     if(($this->s165_sequencial == null) || ($this->s165_sequencial == "") ){
+     if(($this->s165_sequencial == null) || ($this->s165_sequencial === 0 || $this->s165_sequencial === 0.0 || $this->s165_sequencial == "") ){
        $this->erro_sql = " Campo s165_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,12 +71,12 @@ class cl_linhatransportehorario {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre07_sequencial = ($this->tre07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_sequencial"]:$this->tre07_sequencial);
-       $this->tre07_linhatransporteitinerario = ($this->tre07_linhatransporteitinerario == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_linhatransporteitinerario"]:$this->tre07_linhatransporteitinerario);
+       $this->tre07_sequencial = ($this->tre07_sequencial === 0 || $this->tre07_sequencial === 0.0 || $this->tre07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_sequencial"]:$this->tre07_sequencial);
+       $this->tre07_linhatransporteitinerario = ($this->tre07_linhatransporteitinerario === 0 || $this->tre07_linhatransporteitinerario === 0.0 || $this->tre07_linhatransporteitinerario == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_linhatransporteitinerario"]:$this->tre07_linhatransporteitinerario);
        $this->tre07_horasaida = ($this->tre07_horasaida == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_horasaida"]:$this->tre07_horasaida);
        $this->tre07_horachegada = ($this->tre07_horachegada == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_horachegada"]:$this->tre07_horachegada);
      }else{
-       $this->tre07_sequencial = ($this->tre07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_sequencial"]:$this->tre07_sequencial);
+       $this->tre07_sequencial = ($this->tre07_sequencial === 0 || $this->tre07_sequencial === 0.0 || $this->tre07_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre07_sequencial"]:$this->tre07_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_linhatransportehorario {
          $this->tre07_sequencial = $tre07_sequencial;
        }
      }
-     if(($this->tre07_sequencial == null) || ($this->tre07_sequencial == "") ){
+     if(($this->tre07_sequencial == null) || ($this->tre07_sequencial === 0 || $this->tre07_sequencial === 0.0 || $this->tre07_sequencial == "") ){
        $this->erro_sql = " Campo tre07_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

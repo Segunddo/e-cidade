@@ -440,7 +440,7 @@ if ($afastado == 'n') {
 $sql_dados1 .= " order by {$orderBY}";
 
 $result_dados = db_query($sql_dados1);
-$numrows_dados = pg_num_rows($result_dados);
+$numrows_dados = ($result_dados ? pg_num_rows($result_dados) : null);
 if ($numrows_dados == 0) {
     db_redireciona('db_erros.php?fechar=true&db_erro=Não existem lançamentos no período de '.$mes.' / '.$ano);
 }

@@ -67,10 +67,10 @@ class cl_grupoatend {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd15_i_codigo = ($this->sd15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd15_i_codigo"]:$this->sd15_i_codigo);
+       $this->sd15_i_codigo = ($this->sd15_i_codigo === 0 || $this->sd15_i_codigo === 0.0 || $this->sd15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd15_i_codigo"]:$this->sd15_i_codigo);
        $this->sd15_c_descr = ($this->sd15_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["sd15_c_descr"]:$this->sd15_c_descr);
      }else{
-       $this->sd15_i_codigo = ($this->sd15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd15_i_codigo"]:$this->sd15_i_codigo);
+       $this->sd15_i_codigo = ($this->sd15_i_codigo === 0 || $this->sd15_i_codigo === 0.0 || $this->sd15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd15_i_codigo"]:$this->sd15_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_grupoatend {
          $this->sd15_i_codigo = $sd15_i_codigo;
        }
      }
-     if(($this->sd15_i_codigo == null) || ($this->sd15_i_codigo == "") ){
+     if(($this->sd15_i_codigo == null) || ($this->sd15_i_codigo === 0 || $this->sd15_i_codigo === 0.0 || $this->sd15_i_codigo == "") ){
        $this->erro_sql = " Campo sd15_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

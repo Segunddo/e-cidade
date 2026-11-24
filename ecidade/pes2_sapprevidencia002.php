@@ -48,7 +48,7 @@ $sql1 = "select r06_codigo,
 //echo $sql1;exit;
 $result1 = db_query($sql1);
 db_fieldsmemory($result1,0);
-if (pg_numrows($result1) == 0){
+if (($result1 ? pg_numrows($result1) : null) == 0){
    db_redireciona('db_erros.php?fechar=true&db_erro=Rubrica não cadastrada no período de '.$mes.' / '.$ano);
 }
 

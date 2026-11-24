@@ -112,7 +112,7 @@ function js_redireciona(chave){
        FROM aluno
        inner join alunopassagem on alunopassagem.ed215_i_aluno= aluno.ed47_i_codigo */
       $result1 = db_query($sql);
-      $linhas1 = pg_num_rows($result1);
+      $linhas1 = ($result1 ? pg_num_rows($result1) : null);
       ?>
       <select name="chave_ed226_i_escola" style="font-size:10px;width:300px">
        <option value=''></option>

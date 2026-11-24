@@ -89,21 +89,21 @@ class cl_vac_vacina {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->vc06_i_codigo = ($this->vc06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_codigo"]:$this->vc06_i_codigo);
+       $this->vc06_i_codigo = ($this->vc06_i_codigo === 0 || $this->vc06_i_codigo === 0.0 || $this->vc06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_codigo"]:$this->vc06_i_codigo);
        $this->vc06_c_descr = ($this->vc06_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_c_descr"]:$this->vc06_c_descr);
-       $this->vc06_i_basico = ($this->vc06_i_basico == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_basico"]:$this->vc06_i_basico);
+       $this->vc06_i_basico = ($this->vc06_i_basico === 0 || $this->vc06_i_basico === 0.0 || $this->vc06_i_basico == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_basico"]:$this->vc06_i_basico);
        $this->vc06_t_administacao = ($this->vc06_t_administacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_t_administacao"]:$this->vc06_t_administacao);
        $this->vc06_c_codpni = ($this->vc06_c_codpni == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_c_codpni"]:$this->vc06_c_codpni);
-       $this->vc06_i_tipovacina = ($this->vc06_i_tipovacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_tipovacina"]:$this->vc06_i_tipovacina);
-       $this->vc06_i_situacao = ($this->vc06_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_situacao"]:$this->vc06_i_situacao);
-       $this->vc06_i_orden = ($this->vc06_i_orden == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_orden"]:$this->vc06_i_orden);
+       $this->vc06_i_tipovacina = ($this->vc06_i_tipovacina === 0 || $this->vc06_i_tipovacina === 0.0 || $this->vc06_i_tipovacina == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_tipovacina"]:$this->vc06_i_tipovacina);
+       $this->vc06_i_situacao = ($this->vc06_i_situacao === 0 || $this->vc06_i_situacao === 0.0 || $this->vc06_i_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_situacao"]:$this->vc06_i_situacao);
+       $this->vc06_i_orden = ($this->vc06_i_orden === 0 || $this->vc06_i_orden === 0.0 || $this->vc06_i_orden == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_orden"]:$this->vc06_i_orden);
        $this->vc06_t_material = ($this->vc06_t_material == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_t_material"]:$this->vc06_t_material);
-       $this->vc06_n_quant = ($this->vc06_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_n_quant"]:$this->vc06_n_quant);
+       $this->vc06_n_quant = ($this->vc06_n_quant === 0 || $this->vc06_n_quant === 0.0 || $this->vc06_n_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_n_quant"]:$this->vc06_n_quant);
        $this->vc06_t_obs = ($this->vc06_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_t_obs"]:$this->vc06_t_obs);
-       $this->vc06_i_tipo = ($this->vc06_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_tipo"]:$this->vc06_i_tipo);
+       $this->vc06_i_tipo = ($this->vc06_i_tipo === 0 || $this->vc06_i_tipo === 0.0 || $this->vc06_i_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_tipo"]:$this->vc06_i_tipo);
        $this->vc06_c_prazo = ($this->vc06_c_prazo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_c_prazo"]:$this->vc06_c_prazo);
      }else{
-       $this->vc06_i_codigo = ($this->vc06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_codigo"]:$this->vc06_i_codigo);
+       $this->vc06_i_codigo = ($this->vc06_i_codigo === 0 || $this->vc06_i_codigo === 0.0 || $this->vc06_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["vc06_i_codigo"]:$this->vc06_i_codigo);
      }
    }
    // funcao para inclusao
@@ -193,7 +193,7 @@ class cl_vac_vacina {
          $this->vc06_i_codigo = $vc06_i_codigo;
        }
      }
-     if(($this->vc06_i_codigo == null) || ($this->vc06_i_codigo == "") ){
+     if(($this->vc06_i_codigo == null) || ($this->vc06_i_codigo === 0 || $this->vc06_i_codigo === 0.0 || $this->vc06_i_codigo == "") ){
        $this->erro_sql = " Campo vc06_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

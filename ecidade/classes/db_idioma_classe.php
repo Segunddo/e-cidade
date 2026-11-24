@@ -41,10 +41,10 @@ class cl_idioma {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi22_sequencial = ($this->bi22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi22_sequencial"]:$this->bi22_sequencial);
+       $this->bi22_sequencial = ($this->bi22_sequencial === 0 || $this->bi22_sequencial === 0.0 || $this->bi22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi22_sequencial"]:$this->bi22_sequencial);
        $this->bi22_idioma = ($this->bi22_idioma == ""?@$GLOBALS["HTTP_POST_VARS"]["bi22_idioma"]:$this->bi22_idioma);
      }else{
-       $this->bi22_sequencial = ($this->bi22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi22_sequencial"]:$this->bi22_sequencial);
+       $this->bi22_sequencial = ($this->bi22_sequencial === 0 || $this->bi22_sequencial === 0.0 || $this->bi22_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["bi22_sequencial"]:$this->bi22_sequencial);
      }
    }
    // funcao para Inclusão
@@ -83,7 +83,7 @@ class cl_idioma {
          $this->bi22_sequencial = $bi22_sequencial; 
        }
      }
-     if(($this->bi22_sequencial == null) || ($this->bi22_sequencial == "") ){ 
+     if(($this->bi22_sequencial == null) || ($this->bi22_sequencial === 0 || $this->bi22_sequencial === 0.0 || $this->bi22_sequencial == "") ){ 
        $this->erro_sql = " Campo bi22_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

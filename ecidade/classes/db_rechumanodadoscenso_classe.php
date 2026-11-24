@@ -76,11 +76,11 @@ class cl_rechumanodadoscenso
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->ed309_sequencial = ($this->ed309_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed309_sequencial"] : $this->ed309_sequencial);
-            $this->ed309_avaliacaogruporesposta = ($this->ed309_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed309_avaliacaogruporesposta"] : $this->ed309_avaliacaogruporesposta);
-            $this->ed309_rechumano = ($this->ed309_rechumano == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed309_rechumano"] : $this->ed309_rechumano);
+            $this->ed309_sequencial = ($this->ed309_sequencial === 0 || $this->ed309_sequencial === 0.0 || $this->ed309_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed309_sequencial"] : $this->ed309_sequencial);
+            $this->ed309_avaliacaogruporesposta = ($this->ed309_avaliacaogruporesposta === 0 || $this->ed309_avaliacaogruporesposta === 0.0 || $this->ed309_avaliacaogruporesposta == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed309_avaliacaogruporesposta"] : $this->ed309_avaliacaogruporesposta);
+            $this->ed309_rechumano = ($this->ed309_rechumano === 0 || $this->ed309_rechumano === 0.0 || $this->ed309_rechumano == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed309_rechumano"] : $this->ed309_rechumano);
         } else {
-            $this->ed309_sequencial = ($this->ed309_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed309_sequencial"] : $this->ed309_sequencial);
+            $this->ed309_sequencial = ($this->ed309_sequencial === 0 || $this->ed309_sequencial === 0.0 || $this->ed309_sequencial == "" ? @$GLOBALS["HTTP_POST_VARS"]["ed309_sequencial"] : $this->ed309_sequencial);
         }
     }
 
@@ -130,7 +130,7 @@ class cl_rechumanodadoscenso
                 $this->ed309_sequencial = $ed309_sequencial;
             }
         }
-        if (($this->ed309_sequencial == null) || ($this->ed309_sequencial == "")) {
+        if (($this->ed309_sequencial == null) || ($this->ed309_sequencial === 0 || $this->ed309_sequencial === 0.0 || $this->ed309_sequencial == "")) {
             $this->erro_sql = " Campo ed309_sequencial nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

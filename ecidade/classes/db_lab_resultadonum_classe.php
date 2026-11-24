@@ -73,13 +73,13 @@ class cl_lab_resultadonum {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la41_i_codigo = ($this->la41_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_codigo"]:$this->la41_i_codigo);
-       $this->la41_i_result = ($this->la41_i_result == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_result"]:$this->la41_i_result);
-       $this->la41_f_valor = ($this->la41_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_f_valor"]:$this->la41_f_valor);
-       $this->la41_valorpercentual = ($this->la41_valorpercentual == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_valorpercentual"]:$this->la41_valorpercentual);
-       $this->la41_faixaescolhida = ($this->la41_faixaescolhida == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_faixaescolhida"]:$this->la41_faixaescolhida);
+       $this->la41_i_codigo = ($this->la41_i_codigo === 0 || $this->la41_i_codigo === 0.0 || $this->la41_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_codigo"]:$this->la41_i_codigo);
+       $this->la41_i_result = ($this->la41_i_result === 0 || $this->la41_i_result === 0.0 || $this->la41_i_result == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_result"]:$this->la41_i_result);
+       $this->la41_f_valor = ($this->la41_f_valor === 0 || $this->la41_f_valor === 0.0 || $this->la41_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_f_valor"]:$this->la41_f_valor);
+       $this->la41_valorpercentual = ($this->la41_valorpercentual === 0 || $this->la41_valorpercentual === 0.0 || $this->la41_valorpercentual == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_valorpercentual"]:$this->la41_valorpercentual);
+       $this->la41_faixaescolhida = ($this->la41_faixaescolhida === 0 || $this->la41_faixaescolhida === 0.0 || $this->la41_faixaescolhida == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_faixaescolhida"]:$this->la41_faixaescolhida);
      }else{
-       $this->la41_i_codigo = ($this->la41_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_codigo"]:$this->la41_i_codigo);
+       $this->la41_i_codigo = ($this->la41_i_codigo === 0 || $this->la41_i_codigo === 0.0 || $this->la41_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la41_i_codigo"]:$this->la41_i_codigo);
      }
    }
    // funcao para inclusao
@@ -94,7 +94,7 @@ class cl_lab_resultadonum {
        $this->erro_status = "0";
        return false;
      }
-     if ($this->la41_f_valor == '' ){
+     if ($this->la41_f_valor === 0 || $this->la41_f_valor === 0.0 || $this->la41_f_valor == '' ){
        $this->la41_f_valor = "null";
      }
      if($this->la41_valorpercentual == null ){
@@ -127,7 +127,7 @@ class cl_lab_resultadonum {
          $this->la41_i_codigo = $la41_i_codigo;
        }
      }
-     if(($this->la41_i_codigo == null) || ($this->la41_i_codigo == "") ){
+     if(($this->la41_i_codigo == null) || ($this->la41_i_codigo === 0 || $this->la41_i_codigo === 0.0 || $this->la41_i_codigo == "") ){
        $this->erro_sql = " Campo la41_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

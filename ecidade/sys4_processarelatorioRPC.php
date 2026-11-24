@@ -141,7 +141,7 @@ if ( !$lErro ) {
 	          } else {
 	            $sValor = $oVariavel->sValor;
 	          }
-	          $api->setParameter($oVariavel->sNome,utf8_decode($sValor));
+	          $api->setParameter($oVariavel->sNome,mb_convert_encoding($sValor ?? '', 'ISO-8859-1', 'UTF-8'));
 	        }
 	      }
 	    }

@@ -82,7 +82,7 @@ if(isset($oPost->incluir)){
     }
     if (!$lSqlErro){
      
-      $dataInformada                = implode(array_reverse($dataAux));
+      $dataInformada                = implode('', array_reverse($dataAux));
       $clportaria->h31_portariatipo = $oTipoPortaria->h30_sequencial;
       $clportaria->h31_amparolegal  = $oTipoPortaria->h30_amparolegal;
       $clportaria->h31_anousu       = $dataAux[2];

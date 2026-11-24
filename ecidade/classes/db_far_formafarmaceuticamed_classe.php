@@ -69,11 +69,11 @@ class cl_far_formafarmaceuticamed {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa33_i_codigo = ($this->fa33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa33_i_codigo"]:$this->fa33_i_codigo);
-       $this->fa33_i_medanvisa = ($this->fa33_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa33_i_medanvisa"]:$this->fa33_i_medanvisa);
-       $this->fa33_i_formafarmaceutica = ($this->fa33_i_formafarmaceutica == ""?@$GLOBALS["HTTP_POST_VARS"]["fa33_i_formafarmaceutica"]:$this->fa33_i_formafarmaceutica);
+       $this->fa33_i_codigo = ($this->fa33_i_codigo === 0 || $this->fa33_i_codigo === 0.0 || $this->fa33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa33_i_codigo"]:$this->fa33_i_codigo);
+       $this->fa33_i_medanvisa = ($this->fa33_i_medanvisa === 0 || $this->fa33_i_medanvisa === 0.0 || $this->fa33_i_medanvisa == ""?@$GLOBALS["HTTP_POST_VARS"]["fa33_i_medanvisa"]:$this->fa33_i_medanvisa);
+       $this->fa33_i_formafarmaceutica = ($this->fa33_i_formafarmaceutica === 0 || $this->fa33_i_formafarmaceutica === 0.0 || $this->fa33_i_formafarmaceutica == ""?@$GLOBALS["HTTP_POST_VARS"]["fa33_i_formafarmaceutica"]:$this->fa33_i_formafarmaceutica);
      }else{
-       $this->fa33_i_codigo = ($this->fa33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa33_i_codigo"]:$this->fa33_i_codigo);
+       $this->fa33_i_codigo = ($this->fa33_i_codigo === 0 || $this->fa33_i_codigo === 0.0 || $this->fa33_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa33_i_codigo"]:$this->fa33_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_far_formafarmaceuticamed {
          $this->fa33_i_codigo = $fa33_i_codigo;
        }
      }
-     if(($this->fa33_i_codigo == null) || ($this->fa33_i_codigo == "") ){
+     if(($this->fa33_i_codigo == null) || ($this->fa33_i_codigo === 0 || $this->fa33_i_codigo === 0.0 || $this->fa33_i_codigo == "") ){
        $this->erro_sql = " Campo fa33_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

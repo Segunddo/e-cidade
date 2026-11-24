@@ -83,18 +83,18 @@ class cl_histmpsadap {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed66_i_codigo = ($this->ed66_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_codigo"]:$this->ed66_i_codigo);
-       $this->ed66_i_historicomps = ($this->ed66_i_historicomps == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_historicomps"]:$this->ed66_i_historicomps);
-       $this->ed66_i_disciplina = ($this->ed66_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_disciplina"]:$this->ed66_i_disciplina);
-       $this->ed66_i_anoadap = ($this->ed66_i_anoadap == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_anoadap"]:$this->ed66_i_anoadap);
-       $this->ed66_i_periodoadap = ($this->ed66_i_periodoadap == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_periodoadap"]:$this->ed66_i_periodoadap);
+       $this->ed66_i_codigo = ($this->ed66_i_codigo === 0 || $this->ed66_i_codigo === 0.0 || $this->ed66_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_codigo"]:$this->ed66_i_codigo);
+       $this->ed66_i_historicomps = ($this->ed66_i_historicomps === 0 || $this->ed66_i_historicomps === 0.0 || $this->ed66_i_historicomps == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_historicomps"]:$this->ed66_i_historicomps);
+       $this->ed66_i_disciplina = ($this->ed66_i_disciplina === 0 || $this->ed66_i_disciplina === 0.0 || $this->ed66_i_disciplina == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_disciplina"]:$this->ed66_i_disciplina);
+       $this->ed66_i_anoadap = ($this->ed66_i_anoadap === 0 || $this->ed66_i_anoadap === 0.0 || $this->ed66_i_anoadap == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_anoadap"]:$this->ed66_i_anoadap);
+       $this->ed66_i_periodoadap = ($this->ed66_i_periodoadap === 0 || $this->ed66_i_periodoadap === 0.0 || $this->ed66_i_periodoadap == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_periodoadap"]:$this->ed66_i_periodoadap);
        $this->ed66_c_tiporesultado = ($this->ed66_c_tiporesultado == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_c_tiporesultado"]:$this->ed66_c_tiporesultado);
-       $this->ed66_i_qtdch = ($this->ed66_i_qtdch == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_qtdch"]:$this->ed66_i_qtdch);
+       $this->ed66_i_qtdch = ($this->ed66_i_qtdch === 0 || $this->ed66_i_qtdch === 0.0 || $this->ed66_i_qtdch == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_qtdch"]:$this->ed66_i_qtdch);
        $this->ed66_t_resultobtido = ($this->ed66_t_resultobtido == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_t_resultobtido"]:$this->ed66_t_resultobtido);
        $this->ed66_c_resultadofinal = ($this->ed66_c_resultadofinal == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_c_resultadofinal"]:$this->ed66_c_resultadofinal);
        $this->ed66_c_tipoadap = ($this->ed66_c_tipoadap == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_c_tipoadap"]:$this->ed66_c_tipoadap);
      }else{
-       $this->ed66_i_codigo = ($this->ed66_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_codigo"]:$this->ed66_i_codigo);
+       $this->ed66_i_codigo = ($this->ed66_i_codigo === 0 || $this->ed66_i_codigo === 0.0 || $this->ed66_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed66_i_codigo"]:$this->ed66_i_codigo);
      }
    }
    // funcao para inclusao
@@ -199,7 +199,7 @@ class cl_histmpsadap {
          $this->ed66_i_codigo = $ed66_i_codigo;
        }
      }
-     if(($this->ed66_i_codigo == null) || ($this->ed66_i_codigo == "") ){
+     if(($this->ed66_i_codigo == null) || ($this->ed66_i_codigo === 0 || $this->ed66_i_codigo === 0.0 || $this->ed66_i_codigo == "") ){
        $this->erro_sql = " Campo ed66_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

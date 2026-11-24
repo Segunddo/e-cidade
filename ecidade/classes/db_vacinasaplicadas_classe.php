@@ -75,8 +75,8 @@ class cl_vacinasaplicadas {
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->sd08_c_vacina = ($this->sd08_c_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_c_vacina"]:$this->sd08_c_vacina);
-       $this->sd08_i_unidade = ($this->sd08_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_unidade"]:$this->sd08_i_unidade);
-       $this->sd08_i_cgm = ($this->sd08_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_cgm"]:$this->sd08_i_cgm);
+       $this->sd08_i_unidade = ($this->sd08_i_unidade === 0 || $this->sd08_i_unidade === 0.0 || $this->sd08_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_unidade"]:$this->sd08_i_unidade);
+       $this->sd08_i_cgm = ($this->sd08_i_cgm === 0 || $this->sd08_i_cgm === 0.0 || $this->sd08_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_cgm"]:$this->sd08_i_cgm);
        if($this->sd08_d_data == ""){
          $this->sd08_d_data_dia = ($this->sd08_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_d_data_dia"]:$this->sd08_d_data_dia);
          $this->sd08_d_data_mes = ($this->sd08_d_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_d_data_mes"]:$this->sd08_d_data_mes);
@@ -87,8 +87,8 @@ class cl_vacinasaplicadas {
        }
      }else{
        $this->sd08_c_vacina = ($this->sd08_c_vacina == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_c_vacina"]:$this->sd08_c_vacina);
-       $this->sd08_i_unidade = ($this->sd08_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_unidade"]:$this->sd08_i_unidade);
-       $this->sd08_i_cgm = ($this->sd08_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_cgm"]:$this->sd08_i_cgm);
+       $this->sd08_i_unidade = ($this->sd08_i_unidade === 0 || $this->sd08_i_unidade === 0.0 || $this->sd08_i_unidade == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_unidade"]:$this->sd08_i_unidade);
+       $this->sd08_i_cgm = ($this->sd08_i_cgm === 0 || $this->sd08_i_cgm === 0.0 || $this->sd08_i_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_i_cgm"]:$this->sd08_i_cgm);
        $this->sd08_d_data = ($this->sd08_d_data == ""?@$GLOBALS["HTTP_POST_VARS"]["sd08_d_data_ano"]."-".@$GLOBALS["HTTP_POST_VARS"]["sd08_d_data_mes"]."-".@$GLOBALS["HTTP_POST_VARS"]["sd08_d_data_dia"]:$this->sd08_d_data);
      }
    }
@@ -107,7 +107,7 @@ class cl_vacinasaplicadas {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sd08_i_unidade == null) || ($this->sd08_i_unidade == "") ){
+     if(($this->sd08_i_unidade == null) || ($this->sd08_i_unidade === 0 || $this->sd08_i_unidade === 0.0 || $this->sd08_i_unidade == "") ){
        $this->erro_sql = " Campo sd08_i_unidade nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -115,7 +115,7 @@ class cl_vacinasaplicadas {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->sd08_i_cgm == null) || ($this->sd08_i_cgm == "") ){
+     if(($this->sd08_i_cgm == null) || ($this->sd08_i_cgm === 0 || $this->sd08_i_cgm === 0.0 || $this->sd08_i_cgm == "") ){
        $this->erro_sql = " Campo sd08_i_cgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

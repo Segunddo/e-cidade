@@ -88,10 +88,10 @@ class cl_alunopassagemqtd {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed227_i_usuario = ($this->ed227_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_usuario"]:$this->ed227_i_usuario);
-       $this->ed227_i_alunopassagem = ($this->ed227_i_alunopassagem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_alunopassagem"]:$this->ed227_i_alunopassagem);
-       $this->ed227_i_valorpassagem = ($this->ed227_i_valorpassagem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_valorpassagem"]:$this->ed227_i_valorpassagem);
-       $this->ed227_i_qtde = ($this->ed227_i_qtde == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_qtde"]:$this->ed227_i_qtde);
+       $this->ed227_i_usuario = ($this->ed227_i_usuario === 0 || $this->ed227_i_usuario === 0.0 || $this->ed227_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_usuario"]:$this->ed227_i_usuario);
+       $this->ed227_i_alunopassagem = ($this->ed227_i_alunopassagem === 0 || $this->ed227_i_alunopassagem === 0.0 || $this->ed227_i_alunopassagem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_alunopassagem"]:$this->ed227_i_alunopassagem);
+       $this->ed227_i_valorpassagem = ($this->ed227_i_valorpassagem === 0 || $this->ed227_i_valorpassagem === 0.0 || $this->ed227_i_valorpassagem == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_valorpassagem"]:$this->ed227_i_valorpassagem);
+       $this->ed227_i_qtde = ($this->ed227_i_qtde === 0 || $this->ed227_i_qtde === 0.0 || $this->ed227_i_qtde == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_qtde"]:$this->ed227_i_qtde);
        if($this->ed227_d_datainicio == ""){
          $this->ed227_d_datainicio_dia = ($this->ed227_d_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_d_datainicio_dia"]:$this->ed227_d_datainicio_dia);
          $this->ed227_d_datainicio_mes = ($this->ed227_d_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_d_datainicio_mes"]:$this->ed227_d_datainicio_mes);
@@ -116,9 +116,9 @@ class cl_alunopassagemqtd {
             $this->ed227_d_datacad = $this->ed227_d_datacad_ano."-".$this->ed227_d_datacad_mes."-".$this->ed227_d_datacad_dia;
          }
        }
-       $this->ed227_i_codigo = ($this->ed227_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_codigo"]:$this->ed227_i_codigo);
+       $this->ed227_i_codigo = ($this->ed227_i_codigo === 0 || $this->ed227_i_codigo === 0.0 || $this->ed227_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_codigo"]:$this->ed227_i_codigo);
      }else{
-       $this->ed227_i_codigo = ($this->ed227_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_codigo"]:$this->ed227_i_codigo);
+       $this->ed227_i_codigo = ($this->ed227_i_codigo === 0 || $this->ed227_i_codigo === 0.0 || $this->ed227_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed227_i_codigo"]:$this->ed227_i_codigo);
      }
    }
    // funcao para inclusao
@@ -211,7 +211,7 @@ class cl_alunopassagemqtd {
          $this->ed227_i_codigo = $ed227_i_codigo;
        }
      }
-     if(($this->ed227_i_codigo == null) || ($this->ed227_i_codigo == "") ){
+     if(($this->ed227_i_codigo == null) || ($this->ed227_i_codigo === 0 || $this->ed227_i_codigo === 0.0 || $this->ed227_i_codigo == "") ){
        $this->erro_sql = " Campo ed227_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

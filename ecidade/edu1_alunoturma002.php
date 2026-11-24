@@ -43,6 +43,7 @@ $clmatricula              = new cl_matricula;
 $escola                   = db_getsession("DB_coddepto");
 $oConfig                  = loadConfig('edu_parametros', 'ed233_i_escola = '.$escola);
 if ($oConfig == null) {
+if ($oConfig === null || $oConfig === false || $oConfig === "") $oConfig = new stdClass(); // o 7.4 criava sozinho (com aviso); o 8 lanca Error
   $oConfig->ed233_i_habilitaordemalfabeticaturma = 2; // N�o habilita (n�o exibe o bot�o)
 }
 if (isset($atualizar)) {

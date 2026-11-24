@@ -67,10 +67,10 @@ class cl_lab_valorreferenciasel {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la28_i_codigo = ($this->la28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la28_i_codigo"]:$this->la28_i_codigo);
+       $this->la28_i_codigo = ($this->la28_i_codigo === 0 || $this->la28_i_codigo === 0.0 || $this->la28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la28_i_codigo"]:$this->la28_i_codigo);
        $this->la28_c_descr = ($this->la28_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la28_c_descr"]:$this->la28_c_descr);
      }else{
-       $this->la28_i_codigo = ($this->la28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la28_i_codigo"]:$this->la28_i_codigo);
+       $this->la28_i_codigo = ($this->la28_i_codigo === 0 || $this->la28_i_codigo === 0.0 || $this->la28_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la28_i_codigo"]:$this->la28_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_lab_valorreferenciasel {
          $this->la28_i_codigo = $la28_i_codigo;
        }
      }
-     if(($this->la28_i_codigo == null) || ($this->la28_i_codigo == "") ){
+     if(($this->la28_i_codigo == null) || ($this->la28_i_codigo === 0 || $this->la28_i_codigo === 0.0 || $this->la28_i_codigo == "") ){
        $this->erro_sql = " Campo la28_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

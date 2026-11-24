@@ -150,8 +150,8 @@ if( isset( $incluir ) ) {
     $codprocedaval   = "ed220_i_procedimento" . $arr_campos[2];
     $aprovautomatica = "ed220_c_aprovauto" . $arr_campos[2];
 
-    $clturmaserieregimemat->ed220_i_procedimento   = $$codprocedaval;
-    $clturmaserieregimemat->ed220_c_aprovauto      = $$aprovautomatica;
+    $clturmaserieregimemat->ed220_i_procedimento   = ${$codprocedaval};
+    $clturmaserieregimemat->ed220_c_aprovauto      = ${$aprovautomatica};
     $clturmaserieregimemat->ed220_i_serieregimemat = $arr_campos[0];
     $clturmaserieregimemat->ed220_c_historico      = $arr_campos[1];
     $clturmaserieregimemat->ed220_i_turma          = $ultimo;
@@ -214,7 +214,7 @@ if( isset( $incluir ) ) {
         $clregencia->ed59_lancarhistorico      = $ed34_lancarhistorico      == 't' ? 'true' : 'false';
         $clregencia->ed59_caracterreprobatorio = $ed34_caracterreprobatorio == 't' ? 'true' : 'false';
         $clregencia->ed59_basecomum            = $ed34_basecomum            == 't' ? 'true' : 'false';
-        $clregencia->ed59_procedimento         = $$codprocedaval;
+        $clregencia->ed59_procedimento         = ${$codprocedaval};
         $clregencia->ed59_areaconhecimento     = $ed34_areaconhecimento;
         $clregencia->ed59_tipobase             = $ed34_tipobase;
 

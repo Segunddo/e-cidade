@@ -43,8 +43,8 @@ if(isset($HTTP_POST_VARS["atualizar"])) {
                        from db_sysarqcamp
                       where codsequencia != 0
                         and codarq = $dbh_tabela");
-  if(pg_numrows($result)>0){
-    for($i=0;$i<pg_numrows($result);$i++){
+  if(pg_num_rows($result)>0){
+    for($i=0;$i<pg_num_rows($result);$i++){
       db_fieldsmemory($result,$i);
       $matcam[$i] = $codcam;
       $matseq[$i] = $codsequencia;
@@ -192,8 +192,8 @@ input {
                       <?php
 										  echo '<option value="0">Nenhum...</option>';
 										  $result = db_query("select codmod,nomemod from db_sysmodulo order by nomemod");
-										  for($i=0;$i<pg_numrows($result);$i++){
-										    echo '<option value="'.pg_result($result,$i,"codmod").'" '.(isset($HTTP_POST_VARS["dbh_modulo"]) && $HTTP_POST_VARS["dbh_modulo"] == pg_result($result,$i,"codmod")?"selected":"").'>'.pg_result($result,$i,"nomemod").'</option>';
+										  for($i=0;$i<pg_num_rows($result);$i++){
+										    echo '<option value="'.pg_fetch_result($result,$i,"codmod").'" '.(isset($HTTP_POST_VARS["dbh_modulo"]) && $HTTP_POST_VARS["dbh_modulo"] == pg_fetch_result($result,$i,"codmod")?"selected":"").'>'.pg_fetch_result($result,$i,"nomemod").'</option>';
 										  }
 										  ?>
                     </select>
@@ -215,8 +215,8 @@ input {
                         }
                         $sql .= " order by nomearq";
                         $result = db_query($sql);
-                        for($i=0;$i<pg_numrows($result);$i++){
-                          echo '<option value="'.pg_result($result,$i,"codarq").'" '.(isset($HTTP_POST_VARS["dbh_tabela"]) && $HTTP_POST_VARS["dbh_tabela"] == pg_result($result,$i,"codarq")?"selected":"").'>'.pg_result($result,$i,"nomearq").'</option>';
+                        for($i=0;$i<pg_num_rows($result);$i++){
+                          echo '<option value="'.pg_fetch_result($result,$i,"codarq").'" '.(isset($HTTP_POST_VARS["dbh_tabela"]) && $HTTP_POST_VARS["dbh_tabela"] == pg_fetch_result($result,$i,"codarq")?"selected":"").'>'.pg_fetch_result($result,$i,"nomearq").'</option>';
                         }
                       ?>
                     </select>
@@ -245,10 +245,10 @@ input {
 					   where substr(db_syscampo.nomecam,1,2) != 'DB' and db_sysarqcamp.codcam is null
                                            order by db_syscampo.codcam desc
  				          ");
-                $numrows = pg_numrows($result);
+                $numrows = pg_num_rows($result);
 		        if($numrows > 0) {
 		          for($i = 0;$i < $numrows;$i++) {
-			        echo "<option value=\"".pg_result($result,$i,"codcam")."\">".pg_result($result,$i,"nomecam")."</option>\n";
+			        echo "<option value=\"".pg_fetch_result($result,$i,"codcam")."\">".pg_fetch_result($result,$i,"nomecam")."</option>\n";
 			      }
 		        }
 		        ?>
@@ -258,10 +258,10 @@ input {
               <?php
 		      if(isset($HTTP_POST_VARS["dbh_tabela"])) {
 		        $result = db_query("select c.codcam,c.nomecam from db_syscampo c inner join db_sysarqcamp ac on ac.codcam = c.codcam where ac.codarq = $dbh_tabela order by ac.seqarq");
-                $numrows = pg_numrows($result);
+                $numrows = pg_num_rows($result);
 		        if($numrows > 0) {
 		          for($i = 0;$i < $numrows;$i++) {
-			        echo "<option value=\"".pg_result($result,$i,"codcam")."\">".pg_result($result,$i,"nomecam")."</option>\n";
+			        echo "<option value=\"".pg_fetch_result($result,$i,"codcam")."\">".pg_fetch_result($result,$i,"nomecam")."</option>\n";
 			      }
 		       }
 		     }

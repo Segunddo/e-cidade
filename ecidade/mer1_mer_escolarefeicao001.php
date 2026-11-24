@@ -86,7 +86,7 @@ $clmer_tpcardapioturma = new cl_mer_tpcardapioturma;
                  ";
         $rsEscola = db_query($sSql);
         //db_criatabela($result);
-        $iLinhas = pg_num_rows($rsEscola);
+        $iLinhas = ($rsEscola ? pg_num_rows($rsEscola) : null);
         if ($iLinhas>0) {
 
           $cor1 = "#dbdbdb";

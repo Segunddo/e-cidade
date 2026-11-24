@@ -49,8 +49,8 @@ if(isset($incluir)){
   $ed117_i_questaoaval = "ed117_i_questaoaval".$t;
   $ed117_i_opcaoquestao = "ed117_i_opcaoquestao".$t;
   db_inicio_transacao();
-  $clprogavalpedag->ed117_i_questaoaval = $$ed117_i_questaoaval;
-  $clprogavalpedag->ed117_i_opcaoquestao = $$ed117_i_opcaoquestao;
+  $clprogavalpedag->ed117_i_questaoaval = ${$ed117_i_questaoaval};
+  $clprogavalpedag->ed117_i_opcaoquestao = ${$ed117_i_opcaoquestao};
   $clprogavalpedag->ed117_i_usuario = db_getsession("DB_id_usuario");
   $clprogavalpedag->incluir(null);
   db_fim_transacao();

@@ -65,7 +65,7 @@ class cl_numatend {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd23_i_seq = ($this->sd23_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_seq"]:$this->sd23_i_seq);
+       $this->sd23_i_seq = ($this->sd23_i_seq === 0 || $this->sd23_i_seq === 0.0 || $this->sd23_i_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["sd23_i_seq"]:$this->sd23_i_seq);
      }else{
      }
    }

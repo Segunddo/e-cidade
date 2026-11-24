@@ -89,7 +89,7 @@ $clrotulo->label("me01_c_nome");
                                                                                                 between me27_d_inicio and me27_d_fim))"
                                                                                          ));
        
-       $linhas = pg_num_rows($result);
+       $linhas = ($result ? pg_num_rows($result) : null);
        for ($x=0;$x<$linhas;$x++) {
 
          db_fieldsmemory($result,$x);

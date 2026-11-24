@@ -45,11 +45,11 @@ class cl_necessidadealunobpc
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed190_sequencial = ($this->ed190_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed190_sequencial"]:$this->ed190_sequencial);
-       $this->ed190_aluno = ($this->ed190_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed190_aluno"]:$this->ed190_aluno);
-       $this->ed190_necessidade = ($this->ed190_necessidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed190_necessidade"]:$this->ed190_necessidade);
+       $this->ed190_sequencial = ($this->ed190_sequencial === 0 || $this->ed190_sequencial === 0.0 || $this->ed190_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed190_sequencial"]:$this->ed190_sequencial);
+       $this->ed190_aluno = ($this->ed190_aluno === 0 || $this->ed190_aluno === 0.0 || $this->ed190_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["ed190_aluno"]:$this->ed190_aluno);
+       $this->ed190_necessidade = ($this->ed190_necessidade === 0 || $this->ed190_necessidade === 0.0 || $this->ed190_necessidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed190_necessidade"]:$this->ed190_necessidade);
      }else{
-       $this->ed190_sequencial = ($this->ed190_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed190_sequencial"]:$this->ed190_sequencial);
+       $this->ed190_sequencial = ($this->ed190_sequencial === 0 || $this->ed190_sequencial === 0.0 || $this->ed190_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed190_sequencial"]:$this->ed190_sequencial);
      }
    }
 
@@ -98,7 +98,7 @@ class cl_necessidadealunobpc
          $this->ed190_sequencial = $ed190_sequencial; 
        }
      }
-     if(($this->ed190_sequencial == null) || ($this->ed190_sequencial == "") ){ 
+     if(($this->ed190_sequencial == null) || ($this->ed190_sequencial === 0 || $this->ed190_sequencial === 0.0 || $this->ed190_sequencial == "") ){ 
        $this->erro_sql = " Campo ed190_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

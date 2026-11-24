@@ -73,13 +73,13 @@ class cl_salas {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed08_i_codigo = ($this->ed08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_i_codigo"]:$this->ed08_i_codigo);
-       $this->ed08_i_matricula = ($this->ed08_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_i_matricula"]:$this->ed08_i_matricula);
-       $this->ed08_f_comportamento = ($this->ed08_f_comportamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_f_comportamento"]:$this->ed08_f_comportamento);
-       $this->ed08_f_nota = ($this->ed08_f_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_f_nota"]:$this->ed08_f_nota);
-       $this->ed08_f_frequencia = ($this->ed08_f_frequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_f_frequencia"]:$this->ed08_f_frequencia);
+       $this->ed08_i_codigo = ($this->ed08_i_codigo === 0 || $this->ed08_i_codigo === 0.0 || $this->ed08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_i_codigo"]:$this->ed08_i_codigo);
+       $this->ed08_i_matricula = ($this->ed08_i_matricula === 0 || $this->ed08_i_matricula === 0.0 || $this->ed08_i_matricula == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_i_matricula"]:$this->ed08_i_matricula);
+       $this->ed08_f_comportamento = ($this->ed08_f_comportamento === 0 || $this->ed08_f_comportamento === 0.0 || $this->ed08_f_comportamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_f_comportamento"]:$this->ed08_f_comportamento);
+       $this->ed08_f_nota = ($this->ed08_f_nota === 0 || $this->ed08_f_nota === 0.0 || $this->ed08_f_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_f_nota"]:$this->ed08_f_nota);
+       $this->ed08_f_frequencia = ($this->ed08_f_frequencia === 0 || $this->ed08_f_frequencia === 0.0 || $this->ed08_f_frequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_f_frequencia"]:$this->ed08_f_frequencia);
      }else{
-       $this->ed08_i_codigo = ($this->ed08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_i_codigo"]:$this->ed08_i_codigo);
+       $this->ed08_i_codigo = ($this->ed08_i_codigo === 0 || $this->ed08_i_codigo === 0.0 || $this->ed08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed08_i_codigo"]:$this->ed08_i_codigo);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_salas {
          $this->ed08_i_matricula = $ed08_i_matricula;
        }
      }
-     if(($this->ed08_i_codigo == null) || ($this->ed08_i_codigo == "") ){
+     if(($this->ed08_i_codigo == null) || ($this->ed08_i_codigo === 0 || $this->ed08_i_codigo === 0.0 || $this->ed08_i_codigo == "") ){
        $this->erro_sql = " Campo ed08_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

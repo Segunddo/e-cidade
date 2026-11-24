@@ -89,21 +89,21 @@ class cl_progconfig {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed110_i_codigo = ($this->ed110_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_codigo"]:$this->ed110_i_codigo);
-       $this->ed110_i_usuario = ($this->ed110_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_usuario"]:$this->ed110_i_usuario);
-       $this->ed110_i_inicio = ($this->ed110_i_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_inicio"]:$this->ed110_i_inicio);
-       $this->ed110_i_intervalo = ($this->ed110_i_intervalo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_intervalo"]:$this->ed110_i_intervalo);
-       $this->ed110_i_ptgeral = ($this->ed110_i_ptgeral == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptgeral"]:$this->ed110_i_ptgeral);
-       $this->ed110_i_ptantiguidade = ($this->ed110_i_ptantiguidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptantiguidade"]:$this->ed110_i_ptantiguidade);
-       $this->ed110_i_ptconvocacao = ($this->ed110_i_ptconvocacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptconvocacao"]:$this->ed110_i_ptconvocacao);
-       $this->ed110_i_ptavaladmin = ($this->ed110_i_ptavaladmin == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptavaladmin"]:$this->ed110_i_ptavaladmin);
-       $this->ed110_i_ptavalpedag = ($this->ed110_i_ptavalpedag == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptavalpedag"]:$this->ed110_i_ptavalpedag);
-       $this->ed110_i_ptconhecimento = ($this->ed110_i_ptconhecimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptconhecimento"]:$this->ed110_i_ptconhecimento);
-       $this->ed110_i_numfaltas = ($this->ed110_i_numfaltas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_numfaltas"]:$this->ed110_i_numfaltas);
-       $this->ed110_i_numsuspdisc = ($this->ed110_i_numsuspdisc == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_numsuspdisc"]:$this->ed110_i_numsuspdisc);
-       $this->ed110_i_numadvert = ($this->ed110_i_numadvert == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_numadvert"]:$this->ed110_i_numadvert);
+       $this->ed110_i_codigo = ($this->ed110_i_codigo === 0 || $this->ed110_i_codigo === 0.0 || $this->ed110_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_codigo"]:$this->ed110_i_codigo);
+       $this->ed110_i_usuario = ($this->ed110_i_usuario === 0 || $this->ed110_i_usuario === 0.0 || $this->ed110_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_usuario"]:$this->ed110_i_usuario);
+       $this->ed110_i_inicio = ($this->ed110_i_inicio === 0 || $this->ed110_i_inicio === 0.0 || $this->ed110_i_inicio == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_inicio"]:$this->ed110_i_inicio);
+       $this->ed110_i_intervalo = ($this->ed110_i_intervalo === 0 || $this->ed110_i_intervalo === 0.0 || $this->ed110_i_intervalo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_intervalo"]:$this->ed110_i_intervalo);
+       $this->ed110_i_ptgeral = ($this->ed110_i_ptgeral === 0 || $this->ed110_i_ptgeral === 0.0 || $this->ed110_i_ptgeral == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptgeral"]:$this->ed110_i_ptgeral);
+       $this->ed110_i_ptantiguidade = ($this->ed110_i_ptantiguidade === 0 || $this->ed110_i_ptantiguidade === 0.0 || $this->ed110_i_ptantiguidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptantiguidade"]:$this->ed110_i_ptantiguidade);
+       $this->ed110_i_ptconvocacao = ($this->ed110_i_ptconvocacao === 0 || $this->ed110_i_ptconvocacao === 0.0 || $this->ed110_i_ptconvocacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptconvocacao"]:$this->ed110_i_ptconvocacao);
+       $this->ed110_i_ptavaladmin = ($this->ed110_i_ptavaladmin === 0 || $this->ed110_i_ptavaladmin === 0.0 || $this->ed110_i_ptavaladmin == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptavaladmin"]:$this->ed110_i_ptavaladmin);
+       $this->ed110_i_ptavalpedag = ($this->ed110_i_ptavalpedag === 0 || $this->ed110_i_ptavalpedag === 0.0 || $this->ed110_i_ptavalpedag == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptavalpedag"]:$this->ed110_i_ptavalpedag);
+       $this->ed110_i_ptconhecimento = ($this->ed110_i_ptconhecimento === 0 || $this->ed110_i_ptconhecimento === 0.0 || $this->ed110_i_ptconhecimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_ptconhecimento"]:$this->ed110_i_ptconhecimento);
+       $this->ed110_i_numfaltas = ($this->ed110_i_numfaltas === 0 || $this->ed110_i_numfaltas === 0.0 || $this->ed110_i_numfaltas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_numfaltas"]:$this->ed110_i_numfaltas);
+       $this->ed110_i_numsuspdisc = ($this->ed110_i_numsuspdisc === 0 || $this->ed110_i_numsuspdisc === 0.0 || $this->ed110_i_numsuspdisc == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_numsuspdisc"]:$this->ed110_i_numsuspdisc);
+       $this->ed110_i_numadvert = ($this->ed110_i_numadvert === 0 || $this->ed110_i_numadvert === 0.0 || $this->ed110_i_numadvert == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_numadvert"]:$this->ed110_i_numadvert);
      }else{
-       $this->ed110_i_codigo = ($this->ed110_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_codigo"]:$this->ed110_i_codigo);
+       $this->ed110_i_codigo = ($this->ed110_i_codigo === 0 || $this->ed110_i_codigo === 0.0 || $this->ed110_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed110_i_codigo"]:$this->ed110_i_codigo);
      }
    }
    // funcao para inclusao
@@ -199,7 +199,7 @@ class cl_progconfig {
          $this->ed110_i_codigo = $ed110_i_codigo;
        }
      }
-     if(($this->ed110_i_codigo == null) || ($this->ed110_i_codigo == "") ){
+     if(($this->ed110_i_codigo == null) || ($this->ed110_i_codigo === 0 || $this->ed110_i_codigo === 0.0 || $this->ed110_i_codigo == "") ){
        $this->erro_sql = " Campo ed110_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

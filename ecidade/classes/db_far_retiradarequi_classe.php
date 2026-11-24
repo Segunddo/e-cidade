@@ -69,11 +69,11 @@ class cl_far_retiradarequi {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa07_i_codigo = ($this->fa07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa07_i_codigo"]:$this->fa07_i_codigo);
-       $this->fa07_i_retirada = ($this->fa07_i_retirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa07_i_retirada"]:$this->fa07_i_retirada);
-       $this->fa07_i_matrequi = ($this->fa07_i_matrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["fa07_i_matrequi"]:$this->fa07_i_matrequi);
+       $this->fa07_i_codigo = ($this->fa07_i_codigo === 0 || $this->fa07_i_codigo === 0.0 || $this->fa07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa07_i_codigo"]:$this->fa07_i_codigo);
+       $this->fa07_i_retirada = ($this->fa07_i_retirada === 0 || $this->fa07_i_retirada === 0.0 || $this->fa07_i_retirada == ""?@$GLOBALS["HTTP_POST_VARS"]["fa07_i_retirada"]:$this->fa07_i_retirada);
+       $this->fa07_i_matrequi = ($this->fa07_i_matrequi === 0 || $this->fa07_i_matrequi === 0.0 || $this->fa07_i_matrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["fa07_i_matrequi"]:$this->fa07_i_matrequi);
      }else{
-       $this->fa07_i_codigo = ($this->fa07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa07_i_codigo"]:$this->fa07_i_codigo);
+       $this->fa07_i_codigo = ($this->fa07_i_codigo === 0 || $this->fa07_i_codigo === 0.0 || $this->fa07_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa07_i_codigo"]:$this->fa07_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_far_retiradarequi {
          $this->fa07_i_codigo = $fa07_i_codigo;
        }
      }
-     if(($this->fa07_i_codigo == null) || ($this->fa07_i_codigo == "") ){
+     if(($this->fa07_i_codigo == null) || ($this->fa07_i_codigo === 0 || $this->fa07_i_codigo === 0.0 || $this->fa07_i_codigo == "") ){
        $this->erro_sql = " Campo fa07_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

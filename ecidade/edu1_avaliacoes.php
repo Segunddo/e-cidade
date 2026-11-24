@@ -180,7 +180,7 @@ $result_d = $clprocavaliacao->sql_record($clprocavaliacao->sql_query("","ed41_i_
         $cliframe_alterar_excluir->formulario = false;
         $cliframe_alterar_excluir->iframe_alterar_excluir(1);
         $result3 = db_query($sql);
-        $linhas3 = pg_num_rows($result3);
+        $linhas3 = ($result3 ? pg_num_rows($result3) : null);
         if ($linhas3==0) {
          ?>
          <script>
@@ -361,7 +361,7 @@ function AvalResult($nome,$procedimento,$tamanho,$tipo,$ordem,$disabled,$linhabr
         ";
  $query = db_query($sql);
  $query1 = db_query($sql);
- $linhas = pg_num_rows($query);
+ $linhas = ($query ? pg_num_rows($query) : null);
  ?>
  <table cellspacing="0" cellpading="0" >
   <tr>

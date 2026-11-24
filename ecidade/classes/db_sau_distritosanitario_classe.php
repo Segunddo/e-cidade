@@ -47,12 +47,12 @@ class cl_sau_distritosanitario
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->s153_i_codigo = ($this->s153_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s153_i_codigo"]:$this->s153_i_codigo);
+       $this->s153_i_codigo = ($this->s153_i_codigo === 0 || $this->s153_i_codigo === 0.0 || $this->s153_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s153_i_codigo"]:$this->s153_i_codigo);
        $this->s153_c_codigo = ($this->s153_c_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s153_c_codigo"]:$this->s153_c_codigo);
        $this->s153_c_descr = ($this->s153_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["s153_c_descr"]:$this->s153_c_descr);
        $this->s153_ativo = ($this->s153_ativo == ""?@$GLOBALS["HTTP_POST_VARS"]["s153_ativo"]:$this->s153_ativo);
      }else{
-       $this->s153_i_codigo = ($this->s153_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s153_i_codigo"]:$this->s153_i_codigo);
+       $this->s153_i_codigo = ($this->s153_i_codigo === 0 || $this->s153_i_codigo === 0.0 || $this->s153_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["s153_i_codigo"]:$this->s153_i_codigo);
      }
    }
 
@@ -110,7 +110,7 @@ class cl_sau_distritosanitario
          $this->s153_i_codigo = $s153_i_codigo; 
        }
      }
-     if(($this->s153_i_codigo == null) || ($this->s153_i_codigo == "") ){ 
+     if(($this->s153_i_codigo == null) || ($this->s153_i_codigo === 0 || $this->s153_i_codigo === 0.0 || $this->s153_i_codigo == "") ){ 
        $this->erro_sql = " Campo s153_i_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

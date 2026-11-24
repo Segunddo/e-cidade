@@ -69,11 +69,11 @@ class cl_veiculotransportemunicipalterceiro {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre03_sequencial = ($this->tre03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre03_sequencial"]:$this->tre03_sequencial);
-       $this->tre03_cgm = ($this->tre03_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["tre03_cgm"]:$this->tre03_cgm);
-       $this->tre03_veiculotransportemunicipal = ($this->tre03_veiculotransportemunicipal == ""?@$GLOBALS["HTTP_POST_VARS"]["tre03_veiculotransportemunicipal"]:$this->tre03_veiculotransportemunicipal);
+       $this->tre03_sequencial = ($this->tre03_sequencial === 0 || $this->tre03_sequencial === 0.0 || $this->tre03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre03_sequencial"]:$this->tre03_sequencial);
+       $this->tre03_cgm = ($this->tre03_cgm === 0 || $this->tre03_cgm === 0.0 || $this->tre03_cgm == ""?@$GLOBALS["HTTP_POST_VARS"]["tre03_cgm"]:$this->tre03_cgm);
+       $this->tre03_veiculotransportemunicipal = ($this->tre03_veiculotransportemunicipal === 0 || $this->tre03_veiculotransportemunicipal === 0.0 || $this->tre03_veiculotransportemunicipal == ""?@$GLOBALS["HTTP_POST_VARS"]["tre03_veiculotransportemunicipal"]:$this->tre03_veiculotransportemunicipal);
      }else{
-       $this->tre03_sequencial = ($this->tre03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre03_sequencial"]:$this->tre03_sequencial);
+       $this->tre03_sequencial = ($this->tre03_sequencial === 0 || $this->tre03_sequencial === 0.0 || $this->tre03_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre03_sequencial"]:$this->tre03_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_veiculotransportemunicipalterceiro {
          $this->tre03_sequencial = $tre03_sequencial;
        }
      }
-     if(($this->tre03_sequencial == null) || ($this->tre03_sequencial == "") ){
+     if(($this->tre03_sequencial == null) || ($this->tre03_sequencial === 0 || $this->tre03_sequencial === 0.0 || $this->tre03_sequencial == "") ){
        $this->erro_sql = " Campo tre03_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

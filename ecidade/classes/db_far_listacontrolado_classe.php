@@ -67,10 +67,10 @@ class cl_far_listacontrolado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->fa15_i_codigo = ($this->fa15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa15_i_codigo"]:$this->fa15_i_codigo);
+       $this->fa15_i_codigo = ($this->fa15_i_codigo === 0 || $this->fa15_i_codigo === 0.0 || $this->fa15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa15_i_codigo"]:$this->fa15_i_codigo);
        $this->fa15_c_listacontrolado = ($this->fa15_c_listacontrolado == ""?@$GLOBALS["HTTP_POST_VARS"]["fa15_c_listacontrolado"]:$this->fa15_c_listacontrolado);
      }else{
-       $this->fa15_i_codigo = ($this->fa15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa15_i_codigo"]:$this->fa15_i_codigo);
+       $this->fa15_i_codigo = ($this->fa15_i_codigo === 0 || $this->fa15_i_codigo === 0.0 || $this->fa15_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["fa15_i_codigo"]:$this->fa15_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_far_listacontrolado {
          $this->fa15_i_codigo = $fa15_i_codigo;
        }
      }
-     if(($this->fa15_i_codigo == null) || ($this->fa15_i_codigo == "") ){
+     if(($this->fa15_i_codigo == null) || ($this->fa15_i_codigo === 0 || $this->fa15_i_codigo === 0.0 || $this->fa15_i_codigo == "") ){
        $this->erro_sql = " Campo fa15_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

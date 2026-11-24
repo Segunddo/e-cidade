@@ -97,7 +97,7 @@ if (trim($opcao) != '') {
 }
 $result = db_query($sql);
 
-$numrows = pg_numrows($result); 
+$numrows = ($result ? pg_numrows($result) : null); 
 if($numrows == 0){
   db_redireciona("db_erros.php?fechar=true&db_erro=Nenhum registro encontrado");
 }

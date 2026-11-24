@@ -59,10 +59,10 @@ $sql = "SELECT ed44_i_codigo,
         ORDER BY ed41_i_sequencia
        ";
 $query = db_query($sql);
-$linhas = pg_num_rows($query);
+$linhas = ($query ? pg_num_rows($query) : null);
 $sql11 = "SELECT max(ed281_i_alternativa) FROM procavalalternativa WHERE ed281_i_procresultado = $ed281_i_procresultado";
 $query11 = db_query($sql11);
-$novaalternativa = pg_result($query11,0)+1;
+$novaalternativa = ($query11 ? pg_result($query11,0) : null)+1;
 ?>
 <form name="form1" method="post" action="">
 <center>

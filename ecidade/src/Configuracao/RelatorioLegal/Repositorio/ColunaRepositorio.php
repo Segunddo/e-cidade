@@ -113,7 +113,7 @@ class ColunaRepositorio extends Repositorio
      * @param Coluna $coluna
      * @throws Exception
      */
-    public function delete(Coluna $coluna = null)
+    public function delete(?Coluna $coluna = null)
     {
         $id = $coluna instanceof Coluna ? $coluna->getSequencial() : null;
 

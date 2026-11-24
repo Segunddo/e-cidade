@@ -93,7 +93,7 @@ $sql_turma =
 
 
 $rs_turma = db_query($sql_turma);
-$linhas_turma = pg_num_rows($rs_turma);
+$linhas_turma = ($rs_turma ? pg_num_rows($rs_turma) : null);
 
 
 for ($x = 0; $x < $linhas_turma; $x++) {

@@ -69,11 +69,11 @@ class cl_mer_restrinutri {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me26_i_codigo = ($this->me26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_codigo"]:$this->me26_i_codigo);
-       $this->me26_i_restricao = ($this->me26_i_restricao == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_restricao"]:$this->me26_i_restricao);
-       $this->me26_i_nutriente = ($this->me26_i_nutriente == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_nutriente"]:$this->me26_i_nutriente);
+       $this->me26_i_codigo = ($this->me26_i_codigo === 0 || $this->me26_i_codigo === 0.0 || $this->me26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_codigo"]:$this->me26_i_codigo);
+       $this->me26_i_restricao = ($this->me26_i_restricao === 0 || $this->me26_i_restricao === 0.0 || $this->me26_i_restricao == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_restricao"]:$this->me26_i_restricao);
+       $this->me26_i_nutriente = ($this->me26_i_nutriente === 0 || $this->me26_i_nutriente === 0.0 || $this->me26_i_nutriente == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_nutriente"]:$this->me26_i_nutriente);
      }else{
-       $this->me26_i_codigo = ($this->me26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_codigo"]:$this->me26_i_codigo);
+       $this->me26_i_codigo = ($this->me26_i_codigo === 0 || $this->me26_i_codigo === 0.0 || $this->me26_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me26_i_codigo"]:$this->me26_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_mer_restrinutri {
          $this->me26_i_codigo = $me26_i_codigo;
        }
      }
-     if(($this->me26_i_codigo == null) || ($this->me26_i_codigo == "") ){
+     if(($this->me26_i_codigo == null) || ($this->me26_i_codigo === 0 || $this->me26_i_codigo === 0.0 || $this->me26_i_codigo == "") ){
        $this->erro_sql = " Campo me26_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

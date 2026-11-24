@@ -174,7 +174,7 @@ if (isset($concluir)) {
                 ORDER BY ed47_v_nome
                ";
    $result_hist = db_query($sql_hist);
-   $linhas_hist = pg_num_rows($result_hist);
+   $linhas_hist = ($result_hist ? pg_num_rows($result_hist) : null);
    if($linhas_hist==0){
     $erro1 = "OK";
     $result_alu = $claluno->sql_record($claluno->sql_query("","ed47_v_nome",""," ed47_i_codigo = $codaluno[$x]"));

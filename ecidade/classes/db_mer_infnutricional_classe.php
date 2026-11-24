@@ -71,12 +71,12 @@ class cl_mer_infnutricional {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me08_i_codigo = ($this->me08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me08_i_codigo"]:$this->me08_i_codigo);
-       $this->me08_i_nutriente = ($this->me08_i_nutriente == ""?@$GLOBALS["HTTP_POST_VARS"]["me08_i_nutriente"]:$this->me08_i_nutriente);
-       $this->me08_i_alimento = ($this->me08_i_alimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me08_i_alimento"]:$this->me08_i_alimento);
-       $this->me08_f_quant = ($this->me08_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me08_f_quant"]:$this->me08_f_quant);
+       $this->me08_i_codigo = ($this->me08_i_codigo === 0 || $this->me08_i_codigo === 0.0 || $this->me08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me08_i_codigo"]:$this->me08_i_codigo);
+       $this->me08_i_nutriente = ($this->me08_i_nutriente === 0 || $this->me08_i_nutriente === 0.0 || $this->me08_i_nutriente == ""?@$GLOBALS["HTTP_POST_VARS"]["me08_i_nutriente"]:$this->me08_i_nutriente);
+       $this->me08_i_alimento = ($this->me08_i_alimento === 0 || $this->me08_i_alimento === 0.0 || $this->me08_i_alimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me08_i_alimento"]:$this->me08_i_alimento);
+       $this->me08_f_quant = ($this->me08_f_quant === 0 || $this->me08_f_quant === 0.0 || $this->me08_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me08_f_quant"]:$this->me08_f_quant);
      }else{
-       $this->me08_i_codigo = ($this->me08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me08_i_codigo"]:$this->me08_i_codigo);
+       $this->me08_i_codigo = ($this->me08_i_codigo === 0 || $this->me08_i_codigo === 0.0 || $this->me08_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me08_i_codigo"]:$this->me08_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_mer_infnutricional {
          $this->me08_i_codigo = $me08_i_codigo;
        }
      }
-     if(($this->me08_i_codigo == null) || ($this->me08_i_codigo == "") ){
+     if(($this->me08_i_codigo == null) || ($this->me08_i_codigo === 0 || $this->me08_i_codigo === 0.0 || $this->me08_i_codigo == "") ){
        $this->erro_sql = " Campo me08_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

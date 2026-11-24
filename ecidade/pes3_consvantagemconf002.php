@@ -304,7 +304,7 @@ if (isset($atualizar)) {
                         $res = pg_query($sql);
 
 
-                        for ($i = 0; $i < pg_num_rows($res); $i++) {
+                        for ($i = 0; $i < ($res ? pg_num_rows($res) : null); $i++) {
 
                                 $tipo = pg_result($res, $i, 'h88_condicao');
                                 $form = pg_result($res, $i, 'h88_resultado');

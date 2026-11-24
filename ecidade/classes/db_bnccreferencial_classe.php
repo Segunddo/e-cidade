@@ -80,16 +80,16 @@ class cl_bnccreferencial
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ed168_codigo = ($this->ed168_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_codigo"]:$this->ed168_codigo);
+       $this->ed168_codigo = ($this->ed168_codigo === 0 || $this->ed168_codigo === 0.0 || $this->ed168_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_codigo"]:$this->ed168_codigo);
        $this->ed168_ensino = ($this->ed168_ensino == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_ensino"]:$this->ed168_ensino);
        $this->ed168_etapa = ($this->ed168_etapa == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_etapa"]:$this->ed168_etapa);
        $this->ed168_codigohabilidade = ($this->ed168_codigohabilidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_codigohabilidade"]:$this->ed168_codigohabilidade);
        $this->ed168_codigoreferencial = ($this->ed168_codigoreferencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_codigoreferencial"]:$this->ed168_codigoreferencial);
        $this->ed168_habilidade = ($this->ed168_habilidade == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_habilidade"]:$this->ed168_habilidade);
-       $this->ed168_ano = ($this->ed168_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_ano"]:$this->ed168_ano);
+       $this->ed168_ano = ($this->ed168_ano === 0 || $this->ed168_ano === 0.0 || $this->ed168_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_ano"]:$this->ed168_ano);
        $this->ed168_objeto_conhecimento = ($this->ed168_objeto_conhecimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_objeto_conhecimento"]:$this->ed168_objeto_conhecimento);
      }else{
-       $this->ed168_codigo = ($this->ed168_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_codigo"]:$this->ed168_codigo);
+       $this->ed168_codigo = ($this->ed168_codigo === 0 || $this->ed168_codigo === 0.0 || $this->ed168_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed168_codigo"]:$this->ed168_codigo);
      }
    }
 
@@ -165,7 +165,7 @@ class cl_bnccreferencial
          $this->ed168_codigo = $ed168_codigo; 
        }
      }
-     if(($this->ed168_codigo == null) || ($this->ed168_codigo == "") ){ 
+     if(($this->ed168_codigo == null) || ($this->ed168_codigo === 0 || $this->ed168_codigo === 0.0 || $this->ed168_codigo == "") ){ 
        $this->erro_sql = " Campo ed168_codigo não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

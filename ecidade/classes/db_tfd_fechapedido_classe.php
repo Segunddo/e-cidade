@@ -69,11 +69,11 @@ class cl_tfd_fechapedido {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tf35_i_codigo = ($this->tf35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf35_i_codigo"]:$this->tf35_i_codigo);
-       $this->tf35_i_fechamento = ($this->tf35_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf35_i_fechamento"]:$this->tf35_i_fechamento);
-       $this->tf35_i_procpedidotfd = ($this->tf35_i_procpedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf35_i_procpedidotfd"]:$this->tf35_i_procpedidotfd);
+       $this->tf35_i_codigo = ($this->tf35_i_codigo === 0 || $this->tf35_i_codigo === 0.0 || $this->tf35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf35_i_codigo"]:$this->tf35_i_codigo);
+       $this->tf35_i_fechamento = ($this->tf35_i_fechamento === 0 || $this->tf35_i_fechamento === 0.0 || $this->tf35_i_fechamento == ""?@$GLOBALS["HTTP_POST_VARS"]["tf35_i_fechamento"]:$this->tf35_i_fechamento);
+       $this->tf35_i_procpedidotfd = ($this->tf35_i_procpedidotfd === 0 || $this->tf35_i_procpedidotfd === 0.0 || $this->tf35_i_procpedidotfd == ""?@$GLOBALS["HTTP_POST_VARS"]["tf35_i_procpedidotfd"]:$this->tf35_i_procpedidotfd);
      }else{
-       $this->tf35_i_codigo = ($this->tf35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf35_i_codigo"]:$this->tf35_i_codigo);
+       $this->tf35_i_codigo = ($this->tf35_i_codigo === 0 || $this->tf35_i_codigo === 0.0 || $this->tf35_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["tf35_i_codigo"]:$this->tf35_i_codigo);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_tfd_fechapedido {
          $this->tf35_i_codigo = $tf35_i_codigo;
        }
      }
-     if(($this->tf35_i_codigo == null) || ($this->tf35_i_codigo == "") ){
+     if(($this->tf35_i_codigo == null) || ($this->tf35_i_codigo === 0 || $this->tf35_i_codigo === 0.0 || $this->tf35_i_codigo == "") ){
        $this->erro_sql = " Campo tf35_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

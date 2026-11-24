@@ -1153,8 +1153,8 @@ if ($habilitarCamposTransescolar == 'S') {
             }
 
             <?php } ?>
-            Vemailresp = "<?=@$GLOBALS[Sed47_c_emailresp]?>";
-            Vemail = "<?=@$GLOBALS[Sed47_v_email]?>";
+            Vemailresp = "<?=@$GLOBALS['Sed47_c_emailresp']?>";
+            Vemail = "<?=@$GLOBALS['Sed47_v_email']?>";
             if(jsValidaEmail(document.form1.ed47_c_emailresp.value,Vemailresp)==false){
                 return false;
             }

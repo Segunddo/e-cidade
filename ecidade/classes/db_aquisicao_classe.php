@@ -67,10 +67,10 @@ class cl_aquisicao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi04_codigo = ($this->bi04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi04_codigo"]:$this->bi04_codigo);
+       $this->bi04_codigo = ($this->bi04_codigo === 0 || $this->bi04_codigo === 0.0 || $this->bi04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi04_codigo"]:$this->bi04_codigo);
        $this->bi04_forma = ($this->bi04_forma == ""?@$GLOBALS["HTTP_POST_VARS"]["bi04_forma"]:$this->bi04_forma);
      }else{
-       $this->bi04_codigo = ($this->bi04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi04_codigo"]:$this->bi04_codigo);
+       $this->bi04_codigo = ($this->bi04_codigo === 0 || $this->bi04_codigo === 0.0 || $this->bi04_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi04_codigo"]:$this->bi04_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_aquisicao {
          $this->bi04_codigo = $bi04_codigo;
        }
      }
-     if(($this->bi04_codigo == null) || ($this->bi04_codigo == "") ){
+     if(($this->bi04_codigo == null) || ($this->bi04_codigo === 0 || $this->bi04_codigo === 0.0 || $this->bi04_codigo == "") ){
        $this->erro_sql = " Campo bi04_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

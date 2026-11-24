@@ -71,12 +71,12 @@ class cl_lab_metodologia {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->la16_i_codigo = ($this->la16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la16_i_codigo"]:$this->la16_i_codigo);
-       $this->la16_i_materialcoleta = ($this->la16_i_materialcoleta == ""?@$GLOBALS["HTTP_POST_VARS"]["la16_i_materialcoleta"]:$this->la16_i_materialcoleta);
+       $this->la16_i_codigo = ($this->la16_i_codigo === 0 || $this->la16_i_codigo === 0.0 || $this->la16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la16_i_codigo"]:$this->la16_i_codigo);
+       $this->la16_i_materialcoleta = ($this->la16_i_materialcoleta === 0 || $this->la16_i_materialcoleta === 0.0 || $this->la16_i_materialcoleta == ""?@$GLOBALS["HTTP_POST_VARS"]["la16_i_materialcoleta"]:$this->la16_i_materialcoleta);
        $this->la16_c_descr = ($this->la16_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["la16_c_descr"]:$this->la16_c_descr);
        $this->la16_t_preparo = ($this->la16_t_preparo == ""?@$GLOBALS["HTTP_POST_VARS"]["la16_t_preparo"]:$this->la16_t_preparo);
      }else{
-       $this->la16_i_codigo = ($this->la16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la16_i_codigo"]:$this->la16_i_codigo);
+       $this->la16_i_codigo = ($this->la16_i_codigo === 0 || $this->la16_i_codigo === 0.0 || $this->la16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["la16_i_codigo"]:$this->la16_i_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_lab_metodologia {
          $this->la16_i_codigo = $la16_i_codigo;
        }
      }
-     if(($this->la16_i_codigo == null) || ($this->la16_i_codigo == "") ){
+     if(($this->la16_i_codigo == null) || ($this->la16_i_codigo === 0 || $this->la16_i_codigo === 0.0 || $this->la16_i_codigo == "") ){
        $this->erro_sql = " Campo la16_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_sau_modvinculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd52_i_vinculacao = ($this->sd52_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd52_i_vinculacao"]:$this->sd52_i_vinculacao);
+       $this->sd52_i_vinculacao = ($this->sd52_i_vinculacao === 0 || $this->sd52_i_vinculacao === 0.0 || $this->sd52_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd52_i_vinculacao"]:$this->sd52_i_vinculacao);
        $this->sd52_v_descricao = ($this->sd52_v_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd52_v_descricao"]:$this->sd52_v_descricao);
      }else{
-       $this->sd52_i_vinculacao = ($this->sd52_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd52_i_vinculacao"]:$this->sd52_i_vinculacao);
+       $this->sd52_i_vinculacao = ($this->sd52_i_vinculacao === 0 || $this->sd52_i_vinculacao === 0.0 || $this->sd52_i_vinculacao == ""?@$GLOBALS["HTTP_POST_VARS"]["sd52_i_vinculacao"]:$this->sd52_i_vinculacao);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_sau_modvinculo {
        return false;
      }
        $this->sd52_i_vinculacao = $sd52_i_vinculacao;
-     if(($this->sd52_i_vinculacao == null) || ($this->sd52_i_vinculacao == "") ){
+     if(($this->sd52_i_vinculacao == null) || ($this->sd52_i_vinculacao === 0 || $this->sd52_i_vinculacao === 0.0 || $this->sd52_i_vinculacao == "") ){
        $this->erro_sql = " Campo sd52_i_vinculacao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -185,7 +185,7 @@ class Session extends RequestBag
             return $this->writeable;
         }
 
-        $this->writeable = (boolean) $writeable;
+        $this->writeable = (bool) $writeable;
         return $this;
     }
 

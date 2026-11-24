@@ -579,8 +579,8 @@ class Services_JSON
                     // return (float)$str;
 
                     // Return float or int, as appropriate
-                    return ((float)$str == (integer)$str)
-                        ? (integer)$str
+                    return ((float)$str == (int)$str)
+                        ? (int)$str
                         : (float)$str;
                 } elseif (preg_match('/^("|\').*(\1)$/s', $str, $m) && $m[1] == $m[2]) {
                     // STRINGS RETURNED IN UTF-8 FORMAT
@@ -1014,7 +1014,7 @@ class JSON
      * @param bool $addEmpty
      * @return mixed
      */
-    public static function requestParameters(array $definitions = null, $addEmpty = true)
+    public static function requestParameters(?array $definitions = null, $addEmpty = true)
     {
         $files = $_FILES;
         $get = (array) filter_input_array(INPUT_GET);

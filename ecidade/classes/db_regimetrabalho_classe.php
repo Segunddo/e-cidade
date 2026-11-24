@@ -69,11 +69,11 @@ class cl_regimetrabalho {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed24_i_codigo = ($this->ed24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_i_codigo"]:$this->ed24_i_codigo);
+       $this->ed24_i_codigo = ($this->ed24_i_codigo === 0 || $this->ed24_i_codigo === 0.0 || $this->ed24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_i_codigo"]:$this->ed24_i_codigo);
        $this->ed24_c_descr = ($this->ed24_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_c_descr"]:$this->ed24_c_descr);
        $this->ed24_horas = ($this->ed24_horas == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_horas"]:$this->ed24_horas);
      }else{
-       $this->ed24_i_codigo = ($this->ed24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_i_codigo"]:$this->ed24_i_codigo);
+       $this->ed24_i_codigo = ($this->ed24_i_codigo === 0 || $this->ed24_i_codigo === 0.0 || $this->ed24_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed24_i_codigo"]:$this->ed24_i_codigo);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_regimetrabalho {
          $this->ed24_i_codigo = $ed24_i_codigo;
        }
      }
-     if(($this->ed24_i_codigo == null) || ($this->ed24_i_codigo == "") ){
+     if(($this->ed24_i_codigo == null) || ($this->ed24_i_codigo === 0 || $this->ed24_i_codigo === 0.0 || $this->ed24_i_codigo == "") ){
        $this->erro_sql = " Campo ed24_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

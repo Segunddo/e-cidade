@@ -75,14 +75,14 @@ class cl_mer_modpreparo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me05_i_codigo = ($this->me05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_codigo"]:$this->me05_i_codigo);
-       $this->me05_f_porcao = ($this->me05_f_porcao == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_f_porcao"]:$this->me05_f_porcao);
+       $this->me05_i_codigo = ($this->me05_i_codigo === 0 || $this->me05_i_codigo === 0.0 || $this->me05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_codigo"]:$this->me05_i_codigo);
+       $this->me05_f_porcao = ($this->me05_f_porcao === 0 || $this->me05_f_porcao === 0.0 || $this->me05_f_porcao == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_f_porcao"]:$this->me05_f_porcao);
        $this->me05_c_natureza = ($this->me05_c_natureza == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_c_natureza"]:$this->me05_c_natureza);
        $this->me05_t_obs = ($this->me05_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_t_obs"]:$this->me05_t_obs);
-       $this->me05_i_cardapio = ($this->me05_i_cardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_cardapio"]:$this->me05_i_cardapio);
-       $this->me05_i_alimento = ($this->me05_i_alimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_alimento"]:$this->me05_i_alimento);
+       $this->me05_i_cardapio = ($this->me05_i_cardapio === 0 || $this->me05_i_cardapio === 0.0 || $this->me05_i_cardapio == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_cardapio"]:$this->me05_i_cardapio);
+       $this->me05_i_alimento = ($this->me05_i_alimento === 0 || $this->me05_i_alimento === 0.0 || $this->me05_i_alimento == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_alimento"]:$this->me05_i_alimento);
      }else{
-       $this->me05_i_codigo = ($this->me05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_codigo"]:$this->me05_i_codigo);
+       $this->me05_i_codigo = ($this->me05_i_codigo === 0 || $this->me05_i_codigo === 0.0 || $this->me05_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me05_i_codigo"]:$this->me05_i_codigo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_mer_modpreparo {
          $this->me05_i_codigo = $me05_i_codigo;
        }
      }
-     if(($this->me05_i_codigo == null) || ($this->me05_i_codigo == "") ){
+     if(($this->me05_i_codigo == null) || ($this->me05_i_codigo === 0 || $this->me05_i_codigo === 0.0 || $this->me05_i_codigo == "") ){
        $this->erro_sql = " Campo me05_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

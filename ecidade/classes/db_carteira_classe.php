@@ -83,10 +83,10 @@ class cl_carteira {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi16_codigo = ($this->bi16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_codigo"]:$this->bi16_codigo);
-       $this->bi16_leitor = ($this->bi16_leitor == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_leitor"]:$this->bi16_leitor);
-       $this->bi16_leitorcategoria = ($this->bi16_leitorcategoria == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_leitorcategoria"]:$this->bi16_leitorcategoria);
-       $this->bi16_usuario = ($this->bi16_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_usuario"]:$this->bi16_usuario);
+       $this->bi16_codigo = ($this->bi16_codigo === 0 || $this->bi16_codigo === 0.0 || $this->bi16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_codigo"]:$this->bi16_codigo);
+       $this->bi16_leitor = ($this->bi16_leitor === 0 || $this->bi16_leitor === 0.0 || $this->bi16_leitor == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_leitor"]:$this->bi16_leitor);
+       $this->bi16_leitorcategoria = ($this->bi16_leitorcategoria === 0 || $this->bi16_leitorcategoria === 0.0 || $this->bi16_leitorcategoria == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_leitorcategoria"]:$this->bi16_leitorcategoria);
+       $this->bi16_usuario = ($this->bi16_usuario === 0 || $this->bi16_usuario === 0.0 || $this->bi16_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_usuario"]:$this->bi16_usuario);
        if($this->bi16_inclusao == ""){
          $this->bi16_inclusao_dia = ($this->bi16_inclusao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_inclusao_dia"]:$this->bi16_inclusao_dia);
          $this->bi16_inclusao_mes = ($this->bi16_inclusao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_inclusao_mes"]:$this->bi16_inclusao_mes);
@@ -105,7 +105,7 @@ class cl_carteira {
        }
        $this->bi16_valida = ($this->bi16_valida == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_valida"]:$this->bi16_valida);
      }else{
-       $this->bi16_codigo = ($this->bi16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_codigo"]:$this->bi16_codigo);
+       $this->bi16_codigo = ($this->bi16_codigo === 0 || $this->bi16_codigo === 0.0 || $this->bi16_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi16_codigo"]:$this->bi16_codigo);
      }
    }
    // funcao para inclusao
@@ -189,7 +189,7 @@ class cl_carteira {
          $this->bi16_codigo = $bi16_codigo;
        }
      }
-     if(($this->bi16_codigo == null) || ($this->bi16_codigo == "") ){
+     if(($this->bi16_codigo == null) || ($this->bi16_codigo === 0 || $this->bi16_codigo === 0.0 || $this->bi16_codigo == "") ){
        $this->erro_sql = " Campo bi16_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -730,7 +730,7 @@ class cl_carteira {
     return $sql;
   }
 
-  public function sql_query_ultima_carteira( $id = null, $campos = "*", $ordem = null, $dbwhere = "", $iDepartamento, $iCategoria = null ) {
+  public function sql_query_ultima_carteira( $id = null, $campos = "*", $ordem = null, $dbwhere = "", $iDepartamento = null, $iCategoria = null ) {
 
     $sql  = "select {$campos} ";
     $sql .= "  from ( ";

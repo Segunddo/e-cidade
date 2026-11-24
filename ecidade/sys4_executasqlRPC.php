@@ -50,7 +50,7 @@ if (isset($oPost->sql) && trim($oPost->sql) != '') {
     db_inicio_transacao();
 
 
-    $sSql = str_replace("\\", "", utf8_decode($oPost->sql));
+    $sSql = str_replace("\\", "", mb_convert_encoding($oPost->sql ?? '', 'ISO-8859-1', 'UTF-8'));
 
     if (DBSqlValidador::sqlAlteraDadosOuEstrutura($sSql)) {
         $lErro = true;

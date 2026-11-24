@@ -74,13 +74,13 @@ class cl_linhatransportepontoparadaaluno {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->tre12_sequencial = ($this->tre12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_sequencial"]:$this->tre12_sequencial);
-       $this->tre12_linhatransportepontoparada = ($this->tre12_linhatransportepontoparada == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_linhatransportepontoparada"]:$this->tre12_linhatransportepontoparada);
-       $this->tre12_linhatransportehorarioveiculo = ($this->tre12_linhatransportehorarioveiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_linhatransportehorarioveiculo"]:$this->tre12_linhatransportehorarioveiculo);
-       $this->tre12_aluno = ($this->tre12_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_aluno"]:$this->tre12_aluno);
+       $this->tre12_sequencial = ($this->tre12_sequencial === 0 || $this->tre12_sequencial === 0.0 || $this->tre12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_sequencial"]:$this->tre12_sequencial);
+       $this->tre12_linhatransportepontoparada = ($this->tre12_linhatransportepontoparada === 0 || $this->tre12_linhatransportepontoparada === 0.0 || $this->tre12_linhatransportepontoparada == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_linhatransportepontoparada"]:$this->tre12_linhatransportepontoparada);
+       $this->tre12_linhatransportehorarioveiculo = ($this->tre12_linhatransportehorarioveiculo === 0 || $this->tre12_linhatransportehorarioveiculo === 0.0 || $this->tre12_linhatransportehorarioveiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_linhatransportehorarioveiculo"]:$this->tre12_linhatransportehorarioveiculo);
+       $this->tre12_aluno = ($this->tre12_aluno === 0 || $this->tre12_aluno === 0.0 || $this->tre12_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_aluno"]:$this->tre12_aluno);
        $this->tre12_observacao = ($this->tre12_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_observacao"]:$this->tre12_observacao);
      }else{
-       $this->tre12_sequencial = ($this->tre12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_sequencial"]:$this->tre12_sequencial);
+       $this->tre12_sequencial = ($this->tre12_sequencial === 0 || $this->tre12_sequencial === 0.0 || $this->tre12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["tre12_sequencial"]:$this->tre12_sequencial);
      }
    }
    // funcao para inclusao
@@ -137,7 +137,7 @@ class cl_linhatransportepontoparadaaluno {
          $this->tre12_sequencial = $tre12_sequencial;
        }
      }
-     if(($this->tre12_sequencial == null) || ($this->tre12_sequencial == "") ){
+     if(($this->tre12_sequencial == null) || ($this->tre12_sequencial === 0 || $this->tre12_sequencial === 0.0 || $this->tre12_sequencial == "") ){
        $this->erro_sql = " Campo tre12_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

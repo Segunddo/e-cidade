@@ -50,9 +50,9 @@ class cl_sau_triagemavulsaagravo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->s167_sequencial = ($this->s167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s167_sequencial"]:$this->s167_sequencial);
-       $this->s167_sau_triagemavulsa = ($this->s167_sau_triagemavulsa == ""?@$GLOBALS["HTTP_POST_VARS"]["s167_sau_triagemavulsa"]:$this->s167_sau_triagemavulsa);
-       $this->s167_sau_cid = ($this->s167_sau_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["s167_sau_cid"]:$this->s167_sau_cid);
+       $this->s167_sequencial = ($this->s167_sequencial === 0 || $this->s167_sequencial === 0.0 || $this->s167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s167_sequencial"]:$this->s167_sequencial);
+       $this->s167_sau_triagemavulsa = ($this->s167_sau_triagemavulsa === 0 || $this->s167_sau_triagemavulsa === 0.0 || $this->s167_sau_triagemavulsa == ""?@$GLOBALS["HTTP_POST_VARS"]["s167_sau_triagemavulsa"]:$this->s167_sau_triagemavulsa);
+       $this->s167_sau_cid = ($this->s167_sau_cid === 0 || $this->s167_sau_cid === 0.0 || $this->s167_sau_cid == ""?@$GLOBALS["HTTP_POST_VARS"]["s167_sau_cid"]:$this->s167_sau_cid);
        if($this->s167_datasintoma == ""){
          $this->s167_datasintoma_dia = ($this->s167_datasintoma_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["s167_datasintoma_dia"]:$this->s167_datasintoma_dia);
          $this->s167_datasintoma_mes = ($this->s167_datasintoma_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["s167_datasintoma_mes"]:$this->s167_datasintoma_mes);
@@ -63,7 +63,7 @@ class cl_sau_triagemavulsaagravo {
        }
        $this->s167_gestante = ($this->s167_gestante == "f"?@$GLOBALS["HTTP_POST_VARS"]["s167_gestante"]:$this->s167_gestante);
      }else{
-       $this->s167_sequencial = ($this->s167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s167_sequencial"]:$this->s167_sequencial);
+       $this->s167_sequencial = ($this->s167_sequencial === 0 || $this->s167_sequencial === 0.0 || $this->s167_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["s167_sequencial"]:$this->s167_sequencial);
      }
    }
    // funcao para inclusao
@@ -129,7 +129,7 @@ class cl_sau_triagemavulsaagravo {
          $this->s167_sequencial = $s167_sequencial;
        }
      }
-     if(($this->s167_sequencial == null) || ($this->s167_sequencial == "") ){
+     if(($this->s167_sequencial == null) || ($this->s167_sequencial === 0 || $this->s167_sequencial === 0.0 || $this->s167_sequencial == "") ){
        $this->erro_sql = " Campo s167_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

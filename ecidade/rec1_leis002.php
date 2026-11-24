@@ -39,7 +39,7 @@ $db_botao = false;
 if(isset($alterar)){
   db_inicio_transacao();
   $db_opcao = 2;
-  $arr_dados_iframe =explode("|", $anos_perc_inf);
+  $arr_dados_iframe = preg_split("#\|#m", $anos_perc_inf);
   for($i=0; $i<count($arr_dados_iframe); $i++){
     $arr_valores =explode("-", $arr_dados_iframe[$i]);
     $anos = $arr_valores[0];

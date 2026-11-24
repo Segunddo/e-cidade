@@ -71,10 +71,10 @@ class cl_notaavaliacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed241_i_codigo = ($this->ed241_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed241_i_codigo"]:$this->ed241_i_codigo);
-       $this->ed241_f_nota = ($this->ed241_f_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed241_f_nota"]:$this->ed241_f_nota);
-       $this->ed241_i_avaliacao = ($this->ed241_i_avaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed241_i_avaliacao"]:$this->ed241_i_avaliacao);
-       $this->ed241_i_diarioavaliacao = ($this->ed241_i_diarioavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed241_i_diarioavaliacao"]:$this->ed241_i_diarioavaliacao);
+       $this->ed241_i_codigo = ($this->ed241_i_codigo === 0 || $this->ed241_i_codigo === 0.0 || $this->ed241_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed241_i_codigo"]:$this->ed241_i_codigo);
+       $this->ed241_f_nota = ($this->ed241_f_nota === 0 || $this->ed241_f_nota === 0.0 || $this->ed241_f_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["ed241_f_nota"]:$this->ed241_f_nota);
+       $this->ed241_i_avaliacao = ($this->ed241_i_avaliacao === 0 || $this->ed241_i_avaliacao === 0.0 || $this->ed241_i_avaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed241_i_avaliacao"]:$this->ed241_i_avaliacao);
+       $this->ed241_i_diarioavaliacao = ($this->ed241_i_diarioavaliacao === 0 || $this->ed241_i_diarioavaliacao === 0.0 || $this->ed241_i_diarioavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed241_i_diarioavaliacao"]:$this->ed241_i_diarioavaliacao);
      }else{
      }
    }

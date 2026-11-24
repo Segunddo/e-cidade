@@ -67,10 +67,10 @@ class cl_atendtipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->sd14_i_codigo = ($this->sd14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd14_i_codigo"]:$this->sd14_i_codigo);
+       $this->sd14_i_codigo = ($this->sd14_i_codigo === 0 || $this->sd14_i_codigo === 0.0 || $this->sd14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd14_i_codigo"]:$this->sd14_i_codigo);
        $this->sd14_c_descr = ($this->sd14_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["sd14_c_descr"]:$this->sd14_c_descr);
      }else{
-       $this->sd14_i_codigo = ($this->sd14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd14_i_codigo"]:$this->sd14_i_codigo);
+       $this->sd14_i_codigo = ($this->sd14_i_codigo === 0 || $this->sd14_i_codigo === 0.0 || $this->sd14_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["sd14_i_codigo"]:$this->sd14_i_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_atendtipo {
          $this->sd14_i_codigo = $sd14_i_codigo;
        }
      }
-     if(($this->sd14_i_codigo == null) || ($this->sd14_i_codigo == "") ){
+     if(($this->sd14_i_codigo == null) || ($this->sd14_i_codigo === 0 || $this->sd14_i_codigo === 0.0 || $this->sd14_i_codigo == "") ){
        $this->erro_sql = " Campo sd14_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

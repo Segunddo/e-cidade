@@ -65,9 +65,9 @@ class cl_leitor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi10_codigo = ($this->bi10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi10_codigo"]:$this->bi10_codigo);
+       $this->bi10_codigo = ($this->bi10_codigo === 0 || $this->bi10_codigo === 0.0 || $this->bi10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi10_codigo"]:$this->bi10_codigo);
      }else{
-       $this->bi10_codigo = ($this->bi10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi10_codigo"]:$this->bi10_codigo);
+       $this->bi10_codigo = ($this->bi10_codigo === 0 || $this->bi10_codigo === 0.0 || $this->bi10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["bi10_codigo"]:$this->bi10_codigo);
      }
    }
    // funcao para inclusao
@@ -97,7 +97,7 @@ class cl_leitor {
          $this->bi10_codigo = $bi10_codigo;
        }
      }
-     if(($this->bi10_codigo == null) || ($this->bi10_codigo == "") ){
+     if(($this->bi10_codigo == null) || ($this->bi10_codigo === 0 || $this->bi10_codigo === 0.0 || $this->bi10_codigo == "") ){
        $this->erro_sql = " Campo bi10_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -119,7 +119,7 @@ $sqlBairrosTotal = "SELECT count(distinct(ed18_i_bairro))
                           WHERE ed52_i_ano = " . db_getsession("DB_anousu") . "
                             AND j13_codi NOT IN (0)";
 
-$numBairrosTotal = pg_result(db_query($sqlBairrosTotal), 0);
+$numBairrosTotal = (($rsBairrosTotal = db_query($sqlBairrosTotal)) ? pg_result($rsBairrosTotal, 0) : null);
 if (($numBairrosTotal) == $numBairrosSel) {
     $nBairros = "TODOS";
 }

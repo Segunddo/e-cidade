@@ -138,8 +138,8 @@ if ( $oPost->tipo == "consultaCampos" ) {
 	foreach ($aObjCampos as $oCampos){
 
 		$oColunaRelatorio = new dbColunaRelatorio( $oCampos->iId,
-	                                             utf8_decode($oCampos->sNome),
-	                                             utf8_decode($oCampos->sAlias),
+	                                             mb_convert_encoding($oCampos->sNome ?? '', 'ISO-8859-1', 'UTF-8'),
+	                                             mb_convert_encoding($oCampos->sAlias ?? '', 'ISO-8859-1', 'UTF-8'),
 	                                             $oCampos->iLargura,
 	                                             $oCampos->sAlinhamento,
 	                                             $oCampos->sAlinhamentoCab,
@@ -187,8 +187,8 @@ if ( $oPost->tipo == "consultaCampos" ) {
   	$objCampo = $oJson->decode(str_replace($aReplace,"",$oPost->objCampo));
 
   	$oColuna  = new dbColunaRelatorio( $objCampo->iId,
-  	                                   utf8_decode($objCampo->sNome),
-  	                                   utf8_decode($objCampo->sAlias),
+                                       mb_convert_encoding($objCampo->sNome ?? '', 'ISO-8859-1', 'UTF-8'),
+                                       mb_convert_encoding($objCampo->sAlias ?? '', 'ISO-8859-1', 'UTF-8'),
   	                                   $objCampo->iLargura,
   	                                   $objCampo->sAlinhamento,
   	                                   $objCampo->sAlinhamentoCab,
@@ -315,11 +315,11 @@ if ( $oPost->tipo == "consultaCampos" ) {
 
 		unset($oXML->aVariaveis[$oPostVariavel->sNome]);
 
-		$oVariavel     = new dbVariaveisRelatorio( utf8_decode($oPostVariavel->sNome),
-				  								                     utf8_decode($oPostVariavel->sLabel),
-			                  										   utf8_decode($oPostVariavel->sValor),
-															   utf8_decode($oPostVariavel->sTipoDado),
-															   utf8_decode($oPostVariavel->sSql));
+		$oVariavel     = new dbVariaveisRelatorio( mb_convert_encoding($oPostVariavel->sNome ?? '', 'ISO-8859-1', 'UTF-8'),
+                                                                     mb_convert_encoding($oPostVariavel->sLabel ?? '', 'ISO-8859-1', 'UTF-8'),
+                                                                       mb_convert_encoding($oPostVariavel->sValor ?? '', 'ISO-8859-1', 'UTF-8'),
+															   mb_convert_encoding($oPostVariavel->sTipoDado ?? '', 'ISO-8859-1', 'UTF-8'),
+															   mb_convert_encoding($oPostVariavel->sSql ?? '', 'ISO-8859-1', 'UTF-8'));
 
 		$oXML->addVariavel($oPostVariavel->sNome,$oVariavel);
 
@@ -946,11 +946,11 @@ if ( $oPost->tipo == "consultaCampos" ) {
   	foreach ( $aVariaveis as $sInd => $objVariavel ){
 
   	  $objRetornoVariavel = new stdClass();
-  	  $objRetornoVariavel->sNome     = utf8_encode($objVariavel->getNome());
-  	  $objRetornoVariavel->sLabel    = utf8_encode($objVariavel->getLabel());
-  	  $objRetornoVariavel->sValor    = utf8_encode($objVariavel->getValor());
-      $objRetornoVariavel->sTipoDado = utf8_encode($objVariavel->getTipoDado());
-      $objRetornoVariavel->sSql = utf8_encode($objVariavel->getSql());
+      $objRetornoVariavel->sNome     = mb_convert_encoding($objVariavel->getNome() ?? '', 'UTF-8', 'ISO-8859-1');
+      $objRetornoVariavel->sLabel    = mb_convert_encoding($objVariavel->getLabel() ?? '', 'UTF-8', 'ISO-8859-1');
+      $objRetornoVariavel->sValor    = mb_convert_encoding($objVariavel->getValor() ?? '', 'UTF-8', 'ISO-8859-1');
+      $objRetornoVariavel->sTipoDado = mb_convert_encoding($objVariavel->getTipoDado() ?? '', 'UTF-8', 'ISO-8859-1');
+      $objRetornoVariavel->sSql = mb_convert_encoding($objVariavel->getSql() ?? '', 'UTF-8', 'ISO-8859-1');
   	  $aRetorno[] = $objRetornoVariavel;
     }
 

@@ -63,7 +63,7 @@ $sSqlEscola   = $clescola->sql_query("", $sCamposEscola, "", $sWhereEscola);
 $result       = $clescola->sql_record($sSqlEscola);
 
 $sqlParametros = "select ed290_habilitarcampostransescolar from secretariadeeducacao.sec_parametros";
-$resultHabilitarCamposTransescolar = pg_fetch_assoc(db_query($sqlParametros));
+$resultHabilitarCamposTransescolar = (($rsParametros = db_query($sqlParametros)) ? pg_fetch_assoc($rsParametros) : null);
 $habilitarCamposTransescolar = $resultHabilitarCamposTransescolar['ed290_habilitarcampostransescolar']  == 't' ? 'S' : 'N';
 
 if( $clescola->numrows > 0 ) {

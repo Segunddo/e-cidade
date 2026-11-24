@@ -30,7 +30,19 @@ require(modification("libs/db_conecta.php"));
 include(modification("libs/db_sessoes.php"));
 include(modification("libs/db_usuariosonline.php"));
 
-parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? '', $queryString);
+if (isset($queryString['qual_arquivo'])) {
+  $qual_arquivo = $queryString['qual_arquivo'];
+}
+if (isset($queryString['qual_modulo'])) {
+  $qual_modulo = $queryString['qual_modulo'];
+}
+if (isset($queryString['tipodif'])) {
+  $tipodif = $queryString['tipodif'];
+}
+if (isset($queryString['tipo'])) {
+  $tipo = $queryString['tipo'];
+}
 
 ?>
 <html>

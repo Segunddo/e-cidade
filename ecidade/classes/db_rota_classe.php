@@ -78,7 +78,7 @@ class cl_rota {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed217_i_codigo = ($this->ed217_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_codigo"]:$this->ed217_i_codigo);
+       $this->ed217_i_codigo = ($this->ed217_i_codigo === 0 || $this->ed217_i_codigo === 0.0 || $this->ed217_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_codigo"]:$this->ed217_i_codigo);
        if($this->ed217_d_datacad == ""){
          $this->ed217_d_datacad_dia = ($this->ed217_d_datacad_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_d_datacad_dia"]:$this->ed217_d_datacad_dia);
          $this->ed217_d_datacad_mes = ($this->ed217_d_datacad_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_d_datacad_mes"]:$this->ed217_d_datacad_mes);
@@ -87,12 +87,12 @@ class cl_rota {
             $this->ed217_d_datacad = $this->ed217_d_datacad_ano."-".$this->ed217_d_datacad_mes."-".$this->ed217_d_datacad_dia;
          }
        }
-       $this->ed217_f_kmdia = ($this->ed217_f_kmdia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_f_kmdia"]:$this->ed217_f_kmdia);
-       $this->ed217_i_usuario = ($this->ed217_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_usuario"]:$this->ed217_i_usuario);
+       $this->ed217_f_kmdia = ($this->ed217_f_kmdia === 0 || $this->ed217_f_kmdia === 0.0 || $this->ed217_f_kmdia == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_f_kmdia"]:$this->ed217_f_kmdia);
+       $this->ed217_i_usuario = ($this->ed217_i_usuario === 0 || $this->ed217_i_usuario === 0.0 || $this->ed217_i_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_usuario"]:$this->ed217_i_usuario);
        $this->ed217_c_nome = ($this->ed217_c_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_c_nome"]:$this->ed217_c_nome);
        $this->ed217_c_descr = ($this->ed217_c_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_c_descr"]:$this->ed217_c_descr);
      }else{
-       $this->ed217_i_codigo = ($this->ed217_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_codigo"]:$this->ed217_i_codigo);
+       $this->ed217_i_codigo = ($this->ed217_i_codigo === 0 || $this->ed217_i_codigo === 0.0 || $this->ed217_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ed217_i_codigo"]:$this->ed217_i_codigo);
      }
    }
    // funcao para inclusao
@@ -167,7 +167,7 @@ class cl_rota {
          $this->ed217_i_codigo = $ed217_i_codigo;
        }
      }
-     if(($this->ed217_i_codigo == null) || ($this->ed217_i_codigo == "") ){
+     if(($this->ed217_i_codigo == null) || ($this->ed217_i_codigo === 0 || $this->ed217_i_codigo === 0.0 || $this->ed217_i_codigo == "") ){
        $this->erro_sql = " Campo ed217_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

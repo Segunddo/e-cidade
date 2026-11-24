@@ -102,7 +102,7 @@ if (DBPessoal::utilizaFiltroLotacoesPorUsuario()) {
 $sql_cad = $cl_rhpessoalmov->sql_query_rescisao_afastamento($anofolha, $mesfolha, $dbwhere);
 $result_cad = db_query($sql_cad);
 
-$xxnum = pg_num_rows($result_cad);
+$xxnum = ($result_cad ? pg_num_rows($result_cad) : null);
 if ($xxnum == 0) {
   db_redireciona('db_erros.php?fechar=true&db_erro=Não existe rescisões para os funcionarios escolhidos no período de ' . $mesfolha . ' / ' . $anofolha);
 }

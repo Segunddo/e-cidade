@@ -117,9 +117,9 @@ if (isset($incluir)) {
     for ($x = 0; $x < $contp; $x++) {
       for ($y = 0; $y < $contd; $y++) {
         $valores  = "valorQ".$x.$y;
-        $valores  = $$valores;
+        $valores  = ${$valores};
         $marcados = "marcadoQ".$x.$y;
-        $marcados = $$marcados;
+        $marcados = ${$marcados};
 
         if (trim($valores) != "" && trim($marcados) == "") {
           $dados        = explode("|",$valores);

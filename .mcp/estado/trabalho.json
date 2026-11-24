@@ -19793,6 +19793,30 @@
       "quando": "2026-11-20T04:57:36Z",
       "quem": "Gustavo"
     },
+    "ecidade/con1_cadenderbairrocadenderrua001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183512-php-399d.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:37:12Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_cadendermunicipiosistema002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_cadendermunicipiosistema003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:38Z",
+      "quem": "maria-julia"
+    },
     "ecidade/con1_cadinst.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -19804,6 +19828,14 @@
       "padroes": [],
       "quando": "2026-11-19T22:49:52Z",
       "quem": "Segundo"
+    },
+    "ecidade/con1_caditens003.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-184448-php-452f.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:47:04Z",
+      "quem": "maria-julia"
     },
     "ecidade/con1_cadusu.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -19823,17 +19855,553 @@
       "quando": "2026-11-19T22:49:52Z",
       "quem": "Segundo"
     },
+    "ecidade/con1_db_arquivos002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_arquivos003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_cadhelp002.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO em 20261123-140318-php-c099. Falhas preexistentes em classes inalteradas desconsideradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:06:52Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_cadhelp003.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO em 20261123-140318-php-c099. Falhas preexistentes em classes inalteradas desconsideradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:06:52Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_departender002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_departender003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_depusuemp002.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO em 20261123-140318-php-c099. Falhas preexistentes em classes inalteradas desconsideradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:06:52Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_depusuemp003.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO em 20261123-140318-php-c099. Falhas preexistentes em classes inalteradas desconsideradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:06:52Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_documentotemplate003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_documentotemplatepadrao002.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_documentotemplatepadrao003.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_estrutura002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_estrutura006.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-184448-php-452f.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:47:04Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_estruturanivel002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_estruturanivel003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_formulas002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_formulas003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_layoutcampos001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-184448-php-452f.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:47:04Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_layoutformat002.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_layoutformat003.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_layoutlinha001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-184448-php-452f.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:47:04Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_layouttxtgrupo002.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_layouttxtgrupo003.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_layouttxtgrupotipo002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_layouttxtgrupotipo003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_relatcabec001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-184448-php-452f.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:47:04Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_relatfiltros001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185028-php-ea22.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:52:44Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_relatquebra001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185028-php-ea22.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:52:44Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_relatselecionados001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185028-php-ea22.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:52:44Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_relatsoma001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185028-php-ea22.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:52:44Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_relattabelas001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185028-php-ea22.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:52:44Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_syscadproceditem001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183212-php-9f16.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:34:14Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_sysfuncoescliente002.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO em 20261123-140318-php-c099. Falhas preexistentes em classes inalteradas desconsideradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:06:52Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_sysfuncoescliente003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_sysfuncoesparam001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183212-php-9f16.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:34:14Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_sysprocedarq001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183212-php-9f16.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:34:14Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_sysprocedarq002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_sysprocedarq003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_sysregrasacessocanc001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183212-php-9f16.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:34:14Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_sysregrasacessoip001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183212-php-9f16.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:34:14Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_sysregrasacessousu001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183212-php-9f16.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:34:14Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_tarefas002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:40Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_tarefasit002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:40Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_tarefasit003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:40Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_tipodoc002.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_tipodoc003.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_tipohelp002.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO em 20261123-140318-php-c099. Falhas preexistentes em classes inalteradas desconsideradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:06:52Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_tipohelp003.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO em 20261123-140318-php-c099. Falhas preexistentes em classes inalteradas desconsideradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:06:52Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_tipoinstit002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_tipoinstit003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_usupermemp002.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO em 20261123-140318-php-c099. Falhas preexistentes em classes inalteradas desconsideradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:06:52Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_usupermemp003.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO em 20261123-140318-php-c099. Falhas preexistentes em classes inalteradas desconsideradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:06:52Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versao004.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183212-php-9f16.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:34:14Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaoant002.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaoant003.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaoclientes002.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaoclientes003.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:54:39Z",
+      "quem": "maria-julia"
+    },
     "ecidade/con1_db_versaoclientes_001.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-19T22:49:52Z",
       "quem": "Segundo"
     },
+    "ecidade/con1_db_versaocpd002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaocpd003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaocpdarq001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183212-php-9f16.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:34:14Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaocpdarq002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaocpdarq003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaousu002.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaousu003.php": {
+      "observacao": "Lint PHP 7.4/8.5 e GET direto IDENTICO na rodada 20261123-141356-php-8873. Classes legadas inalteradas conferidas na referencia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T17:18:39Z",
+      "quem": "maria-julia"
+    },
     "ecidade/con1_divulga_informacao.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-19T22:49:52Z",
       "quem": "Segundo"
+    },
+    "ecidade/con1_help001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185028-php-ea22.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:52:44Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_help003.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185028-php-ea22.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:52:44Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_help004.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185028-php-ea22.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:52:44Z",
+      "quem": "maria-julia"
     },
     "ecidade/con2_acomporc002.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -20231,6 +20799,94 @@
       "quando": "2026-11-19T22:49:53Z",
       "quem": "Segundo"
     },
+    "ecidade/con3_db_syscampo001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183512-php-399d.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:37:12Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_db_syscampo002.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183512-php-399d.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:37:12Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_db_syscampo003.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183512-php-399d.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:37:12Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_usuonline003.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185646-php-4ad1.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:58:47Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_usuonline004.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185646-php-4ad1.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:58:47Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_usuonline013.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183724-php-0e5a.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:39:25Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_usuonline113.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183724-php-0e5a.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:39:25Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_versao001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183724-php-0e5a.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:39:25Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_versao002.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183724-php-0e5a.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:39:25Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_versao003.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183724-php-0e5a.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:39:25Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_versao004.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-183724-php-0e5a.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:39:25Z",
+      "quem": "maria-julia"
+    },
     "ecidade/con4_carnes004.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -20261,11 +20917,51 @@
       "quando": "2026-11-19T22:49:53Z",
       "quem": "Segundo"
     },
+    "ecidade/con4_docpadrao003.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185646-php-4ad1.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:58:47Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con4_docpadrao008.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185646-php-4ad1.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:58:47Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con4_docparag008.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185646-php-4ad1.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:58:47Z",
+      "quem": "maria-julia"
+    },
     "ecidade/con4_lancamentosSlip001.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
       "quando": "2026-11-19T23:16:22Z",
       "quem": "Segundo"
+    },
+    "ecidade/con4_orgitens002.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185646-php-4ad1.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:58:47Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/con4_orgitens003.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET direto IDENTICO na rodada 20261123-185646-php-4ad1.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:58:47Z",
+      "quem": "maria-julia"
     },
     "ecidade/con4_padbver_ant.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -20308,6 +21004,14 @@
       "padroes": [],
       "quando": "2026-11-19T22:49:53Z",
       "quem": "Segundo"
+    },
+    "ecidade/con4_registrosinconsistentes.RPC.php": {
+      "observacao": "Lint 7.4/8.5 e GET identico 20261123-135043-php-536b. Falhas reproduzidas em classes legadas inalteradas.",
+      "padroes": [
+        "utf8_encode_decode"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
     },
     "ecidade/con4_trocadata.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
@@ -30946,6 +31650,102 @@
       "quando": "2026-11-21T23:34:56Z",
       "quem": "Thiago432544"
     },
+    "ecidade/src/Configuracao/Consistencia/Repository/Consistencia.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. Regressao direcionada 20261122-232902-php-430d: 14 IDENTICO, 0 DIVERGE, 0 INCONCLUSIVO e 0 ERRO_AMBIENTE.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:31:07Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/RelatorioLegal/Repositorio/ColunaEstruturalRepositorio.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. Regressao direcionada 20261122-232902-php-430d: 14 IDENTICO, 0 DIVERGE, 0 INCONCLUSIVO e 0 ERRO_AMBIENTE.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:31:07Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/RelatorioLegal/Repositorio/ColunaRepositorio.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. Regressao direcionada 20261122-232902-php-430d: 14 IDENTICO, 0 DIVERGE, 0 INCONCLUSIVO e 0 ERRO_AMBIENTE.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:31:07Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/RelatorioLegal/Repositorio/LinhaColunaRepositorio.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. Regressao direcionada 20261122-232902-php-430d: 14 IDENTICO, 0 DIVERGE, 0 INCONCLUSIVO e 0 ERRO_AMBIENTE.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:31:07Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/RelatorioLegal/Repositorio/LinhaColunaValorRepositorio.php": {
+      "observacao": "Tipo anulavel explicito em delete(); lint PHP 7.4/8.5 OK; regressao 20261122-233550-php-9e96: 14 IDENTICO (7 lint e 7 GET), sem divergencias.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:38:11Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/RelatorioLegal/Repositorio/LinhaFiltroPadraoRepositorio.php": {
+      "observacao": "Tipo anulavel explicito em delete(); lint PHP 7.4/8.5 OK; regressao 20261122-233550-php-9e96: 14 IDENTICO (7 lint e 7 GET), sem divergencias.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:38:11Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/RelatorioLegal/Repositorio/LinhaInformacaoComplementarRepositorio.php": {
+      "observacao": "Tipo anulavel explicito em delete(); lint PHP 7.4/8.5 OK; regressao 20261122-233550-php-9e96: 14 IDENTICO (7 lint e 7 GET), sem divergencias.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:38:11Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/RelatorioLegal/Repositorio/LinhaRepositorio.php": {
+      "observacao": "Tipo anulavel explicito em delete(); lint PHP 7.4/8.5 OK; regressao 20261122-233550-php-9e96: 14 IDENTICO (7 lint e 7 GET), sem divergencias.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:38:11Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/RelatorioLegal/Repositorio/RelatorioPeriodoRepositorio.php": {
+      "observacao": "Lint PHP 7.4/8.5 OK; rodada 20261122-234454-php-f817: os 5 RPCs diretos tiveram sintaxe e GET IDENTICO. Aceite restrito aos RPCs diretos conforme orientacao da responsavel.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:53:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/RelatorioLegal/Repositorio/RelatorioRepositorio.php": {
+      "observacao": "Lint PHP 7.4/8.5 OK; rodada 20261122-234454-php-f817: os 5 RPCs diretos tiveram sintaxe e GET IDENTICO. Aceite restrito aos RPCs diretos conforme orientacao da responsavel.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:53:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/RelatorioLegal/Servico/LinhaServico.php": {
+      "observacao": "Lint PHP 7.4/8.5 OK; rodada 20261122-234454-php-f817: os 5 RPCs diretos tiveram sintaxe e GET IDENTICO. Aceite restrito aos RPCs diretos conforme orientacao da responsavel.",
+      "padroes": [
+        "nulo_implicito"
+      ],
+      "quando": "2026-11-23T02:53:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/src/Configuracao/Relatorios/RelatorioAcessosAuditoria.php": {
+      "observacao": "Lint PHP 7.4/8.5 OK; rodada 20261122-234454-php-f817: os 5 RPCs diretos tiveram sintaxe e GET IDENTICO. Aceite restrito aos RPCs diretos conforme orientacao da responsavel.",
+      "padroes": [
+        "utf8_encode_decode"
+      ],
+      "quando": "2026-11-23T02:53:10Z",
+      "quem": "maria-julia"
+    },
     "ecidade/src/Financeiro/Contabilidade/ExercicioContabil/Abertura.php": {
       "observacao": "PHP8-40: migracao 7.4 -> 8.5 do Financeiro (ver commits PHP8-40)",
       "padroes": [],
@@ -31038,6 +31838,294 @@
       ],
       "quando": "2026-11-20T19:25:00Z",
       "quem": "Gustavo"
+    },
+    "ecidade/sys1_campos001.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "pg_aliases"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys1_campos002.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "pg_aliases"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys1_campos003.php": {
+      "observacao": "Lint 7.4/8.5 e 6 GETs SYS identicos na rodada 20261123-125435-php-719d; 3 falhas preexistentes em classes legadas fora do escopo.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T15:57:33Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys1_camposnovo.RPC.php": {
+      "observacao": "Lint 7.4/8.5 aprovado; RPC de campos e tela direta identicos em 20261123-132616-php-d01f apos corrigir o ParseError de JSON.",
+      "padroes": [
+        "utf8_encode_decode"
+      ],
+      "quando": "2026-11-23T16:29:01Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys1_funcoes001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado; GET direto IDENTICO na rodada 20261123-123839-php-c942; divergencias preexistentes em classes legadas fora do escopo.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T15:42:09Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys1_funcoes002.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-180627-php-cfcc.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:09:20Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys1_modulos001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado; GET direto IDENTICO na rodada 20261123-123839-php-c942; divergencias preexistentes em classes legadas fora do escopo.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T15:42:09Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys1_tabelas001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado; GET direto IDENTICO na rodada 20261123-123839-php-c942; divergencias preexistentes em classes legadas fora do escopo.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T15:42:09Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys1_triggers001.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado; GET direto IDENTICO na rodada 20261123-123839-php-c942; divergencias preexistentes em classes legadas fora do escopo.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T15:42:09Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys3_campos001.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "pg_aliases"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys3_modulos001.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "pg_aliases"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys3_proced002.php": {
+      "observacao": "Lint 7.4/8.5 e 6 GETs SYS identicos na rodada 20261123-125435-php-719d; 3 falhas preexistentes em classes legadas fora do escopo.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T15:57:33Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys3_tabelas001.php": {
+      "observacao": "Lint 7.4/8.5 e 6 GETs SYS identicos na rodada 20261123-125435-php-719d; 3 falhas preexistentes em classes legadas fora do escopo.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T15:57:33Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_cadclasse001.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_chaveestrangeira001.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "pg_aliases"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_chaveprim001.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "pg_aliases"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_chaveprim002.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "pg_aliases"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_consultaviewRPC.php": {
+      "observacao": "Lint 7.4/8.5 e rodada 20261123-134413-php-1110; GET sem dados. POSTs de inclusao e consulta de variavel temporaria com acentos devolveram conteudo identico nos dois PHPs.",
+      "padroes": [
+        "utf8_encode_decode"
+      ],
+      "quando": "2026-11-23T16:54:39Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_criaestrutura.php": {
+      "observacao": "Lint 7.4/8.5, GET identico 20261123-135043-php-536b e POST com SQL temporario identico.",
+      "padroes": [
+        "each"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_criaestrutura_er.php": {
+      "observacao": "Lint 7.4/8.5, GET identico 20261123-135043-php-536b e POST com SQL temporario identico.",
+      "padroes": [
+        "each"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_criaestrutura_nova.php": {
+      "observacao": "Lint 7.4/8.5, GET identico 20261123-135043-php-536b e POST com SQL temporario identico.",
+      "padroes": [
+        "each"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_criaestrutura_nova_er.php": {
+      "observacao": "Lint 7.4/8.5, GET identico 20261123-135043-php-536b e POST com SQL temporario identico.",
+      "padroes": [
+        "each"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_criaestrutura_nova_semer.php": {
+      "observacao": "Lint 7.4/8.5, GET identico 20261123-135043-php-536b e POST com SQL temporario identico.",
+      "padroes": [
+        "each"
+      ],
+      "quando": "2026-11-23T16:54:38Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_criafuncao.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-184448-php-452f. Trecho efetivamente emitido executado em memória nos dois PHPs com consulta preenchida e vazia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:50:34Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_criafuncao_geral.php": {
+      "observacao": "Lint PHP 7.4 e 8.5 aprovado. GET direto IDENTICO na rodada 20261123-184448-php-452f. Trecho efetivamente emitido executado em memória nos dois PHPs com consulta preenchida e vazia.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:50:34Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_executasqlRPC.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "utf8_encode_decode"
+      ],
+      "quando": "2026-11-23T16:36:09Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_imprimerelatorio001.php": {
+      "observacao": "Lint PHP 7.4 e 8.5. GET da impressao e tela de relatorios IDENTICO em 20261123-134413-php-1110. Fluxo de emissao nao exercitado.",
+      "padroes": [
+        "utf8_encode_decode"
+      ],
+      "quando": "2026-11-23T16:47:06Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_indices001.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "pg_aliases"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_mostraMenus001.php": {
+      "observacao": "Lint 7.4/8.5 e 6 GETs SYS identicos na rodada 20261123-125435-php-719d; 3 falhas preexistentes em classes legadas fora do escopo.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T15:57:33Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_processa003.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET parametrizado com resposta 200 idêntica nos dois PHPs: codarq=-1, sem geração de arquivos.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:41:27Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_processa005.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET parametrizado com resposta 200 idêntica nos dois PHPs: codarq=-1, sem geração de arquivos. GET sem codarq falha em consulta SQL no PHP 8.5.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:41:27Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_processa006.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET parametrizado com resposta 200 idêntica nos dois PHPs: codarq=639, tabela dependente. Templates de alteração e exclusão validados em memória em ambos os PHPs. GET sem codarq falha em consulta SQL.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:41:27Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_processa007.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET parametrizado com resposta 200 idêntica nos dois PHPs: codarq=11, item cadastrado. GET sem codarq falha em consulta SQL.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:41:27Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_salvaXML.RPC.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "utf8_encode_decode"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_sequencias001.php": {
+      "observacao": "Lint 7.4/8.5 e GET direto IDENTICO na rodada 20261123-133242-php-2ef9. Divergencia preexistente de classe legada inalterada desconsiderada.",
+      "padroes": [
+        "pg_aliases"
+      ],
+      "quando": "2026-11-23T16:36:10Z",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_verifica002.php": {
+      "observacao": "Lint PHP 7.4/8.5 aprovado. GET parametrizado com resposta 200 idêntica nos dois PHPs: qual_arquivo=140, tipo=1 e tipodif=false. GET sem qual_arquivo falha em consulta SQL.",
+      "padroes": [
+        "parse_str_1_arg"
+      ],
+      "quando": "2026-11-23T21:41:27Z",
+      "quem": "maria-julia"
     },
     "ecidade/tests/sistema/defeitos-laravel/01_cache_ttl.php": {
       "observacao": "time Laravel",
@@ -31908,6 +32996,131 @@
       "quem": "Thiago432544"
     }
   },
-  "reivindicacoes": {},
+  "reivindicacoes": {
+    "ecidade/con1_caditens004.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:44:12Z",
+      "expira": "2026-11-24T01:44:12Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_config005.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:30:33Z",
+      "expira": "2026-11-24T01:30:33Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_config006.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:30:33Z",
+      "expira": "2026-11-24T01:30:33Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_depart002.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:30:33Z",
+      "expira": "2026-11-24T01:30:33Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_depart003.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:30:33Z",
+      "expira": "2026-11-24T01:30:33Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_permemp003.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:30:33Z",
+      "expira": "2026-11-24T01:30:33Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_db_versaotarefa_001.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:30:33Z",
+      "expira": "2026-11-24T01:30:33Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_tipoempresa002.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T22:58:28Z",
+      "expira": "2026-11-24T02:58:28Z",
+      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
+      "quem": "maria-julia"
+    },
+    "ecidade/con1_tipoempresa003.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T22:58:28Z",
+      "expira": "2026-11-24T02:58:28Z",
+      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
+      "quem": "maria-julia"
+    },
+    "ecidade/con2_relmenus001.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T22:58:28Z",
+      "expira": "2026-11-24T02:58:28Z",
+      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_usuonline013.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T22:58:28Z",
+      "expira": "2026-11-24T02:58:28Z",
+      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_versao005.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:30:33Z",
+      "expira": "2026-11-24T01:30:33Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con3_versao006.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:30:33Z",
+      "expira": "2026-11-24T01:30:33Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con4_docpadrao010.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:44:12Z",
+      "expira": "2026-11-24T01:44:12Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con4_docparag010.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T21:44:12Z",
+      "expira": "2026-11-24T01:44:12Z",
+      "motivo": "Configuração administrativa, parse_str_1_arg",
+      "quem": "maria-julia"
+    },
+    "ecidade/con4_registrosinconsistentes003.php": {
+      "area": "financeiro",
+      "desde": "2026-11-23T22:58:28Z",
+      "expira": "2026-11-24T02:58:28Z",
+      "motivo": "Correcoes pontuais de compatibilidade da PR #44",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys3_modulos002.php": {
+      "desde": "2026-11-23T21:02:28Z",
+      "expira": "2026-11-24T01:02:28Z",
+      "motivo": "parse_str_1_arg em Configuração",
+      "quem": "maria-julia"
+    },
+    "ecidade/sys4_processa008.php": {
+      "desde": "2026-11-23T21:07:36Z",
+      "expira": "2026-11-24T01:07:36Z",
+      "motivo": "parse_str_1_arg em Configuração",
+      "quem": "maria-julia"
+    }
+  },
   "versao": 1
 }

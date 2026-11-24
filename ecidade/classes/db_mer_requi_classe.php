@@ -80,7 +80,7 @@ class cl_mer_requi {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me16_i_codigo = ($this->me16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_codigo"]:$this->me16_i_codigo);
+       $this->me16_i_codigo = ($this->me16_i_codigo === 0 || $this->me16_i_codigo === 0.0 || $this->me16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_codigo"]:$this->me16_i_codigo);
        $this->me16_t_obs = ($this->me16_t_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_t_obs"]:$this->me16_t_obs);
        if($this->me16_d_data == ""){
          $this->me16_d_data_dia = ($this->me16_d_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_d_data_dia"]:$this->me16_d_data_dia);
@@ -92,10 +92,10 @@ class cl_mer_requi {
        }
        $this->me16_c_hora = ($this->me16_c_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_c_hora"]:$this->me16_c_hora);
        $this->me16_c_tiposaida = ($this->me16_c_tiposaida == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_c_tiposaida"]:$this->me16_c_tiposaida);
-       $this->me16_i_escola = ($this->me16_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_escola"]:$this->me16_i_escola);
-       $this->me16_i_dbusuario = ($this->me16_i_dbusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_dbusuario"]:$this->me16_i_dbusuario);
+       $this->me16_i_escola = ($this->me16_i_escola === 0 || $this->me16_i_escola === 0.0 || $this->me16_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_escola"]:$this->me16_i_escola);
+       $this->me16_i_dbusuario = ($this->me16_i_dbusuario === 0 || $this->me16_i_dbusuario === 0.0 || $this->me16_i_dbusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_dbusuario"]:$this->me16_i_dbusuario);
      }else{
-       $this->me16_i_codigo = ($this->me16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_codigo"]:$this->me16_i_codigo);
+       $this->me16_i_codigo = ($this->me16_i_codigo === 0 || $this->me16_i_codigo === 0.0 || $this->me16_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me16_i_codigo"]:$this->me16_i_codigo);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_mer_requi {
          $this->me16_i_codigo = $me16_i_codigo;
        }
      }
-     if(($this->me16_i_codigo == null) || ($this->me16_i_codigo == "") ){
+     if(($this->me16_i_codigo == null) || ($this->me16_i_codigo === 0 || $this->me16_i_codigo === 0.0 || $this->me16_i_codigo == "") ){
        $this->erro_sql = " Campo me16_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -41,7 +41,10 @@ include(modification("libs/db_usuariosonline.php"));
 </head>
 <body bgcolor=#CCCCCC leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onLoad="a=1" >
 <?php
-  parse_str($HTTP_SERVER_VARS["QUERY_STRING"], $__qs); unset($__qs['this'], $__qs['GLOBALS']); extract($__qs);
+  parse_str($HTTP_SERVER_VARS["QUERY_STRING"] ?? '', $queryString);
+  if (isset($queryString['codarq'])) {
+    $codarq = $queryString['codarq'];
+  }
   // Tabelas
 
   $sql = "select nomearq as nometab, tipotabela
@@ -211,7 +214,22 @@ include(modification("libs/db_usuariosonline.php"));
 	      fputs($fd2, "require_once(modification(\"classes/db_{$sNomeArquivo}_classe.php\"));\n");
 	      fputs($fd2, "require_once(modification(\"dbforms/db_funcoes.php\"));\n\n");
 
-	      fputs($fd2, 'parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);' . "\n");
+	      fputs($fd2, "parse_str(\$HTTP_SERVER_VARS[\"QUERY_STRING\"] ?? '', \$queryString);\n");
+	      $queryKeys = ['alterar', 'chavepesquisa'];
+	      if (pg_numrows($pk) === 0) {
+	        $queryKeys[] = 'oid';
+	      }
+	      for ($iQueryKey = 0; $iQueryKey < pg_numrows($pk); $iQueryKey++) {
+	        $queryKeys[] = trim(pg_result($pk, $iQueryKey, 'nomecam'));
+	        if ($iQueryKey > 0) {
+	          $queryKeys[] = 'chavepesquisa' . $iQueryKey;
+	        }
+	      }
+	      foreach ($queryKeys as $queryKey) {
+	        $queryIndex = var_export($queryKey, true);
+	        fputs($fd2, "if (isset(\$queryString[{$queryIndex}])) {\n");
+	        fputs($fd2, "  \${$queryKey} = \$queryString[{$queryIndex}];\n}\n");
+	      }
 	      fputs($fd2, 'db_postmemory($HTTP_POST_VARS);'."\n\n");
 	      fputs($fd2, '$oDao' . ucfirst($sNomeArquivo) . " = new cl_{$sNomeArquivo};\n");
 	      fputs($fd2, '$db_opcao    = 22;'."\n");
@@ -327,7 +345,22 @@ include(modification("libs/db_usuariosonline.php"));
 	      fputs($fd3, "require_once(modification(\"classes/db_{$sNomeArquivo}_classe.php\"));\n");
 	      fputs($fd3, "require_once(modification(\"dbforms/db_funcoes.php\"));\n\n");
 
-	      fputs($fd3, 'parse_str($HTTP_SERVER_VARS["QUERY_STRING"]);'."\n");
+	      fputs($fd3, "parse_str(\$HTTP_SERVER_VARS[\"QUERY_STRING\"] ?? '', \$queryString);\n");
+	      $queryKeys = ['excluir', 'chavepesquisa'];
+	      if (pg_numrows($pk) === 0) {
+	        $queryKeys[] = 'oid';
+	      }
+	      for ($iQueryKey = 0; $iQueryKey < pg_numrows($pk); $iQueryKey++) {
+	        $queryKeys[] = trim(pg_result($pk, $iQueryKey, 'nomecam'));
+	        if ($iQueryKey > 0) {
+	          $queryKeys[] = 'chavepesquisa' . $iQueryKey;
+	        }
+	      }
+	      foreach ($queryKeys as $queryKey) {
+	        $queryIndex = var_export($queryKey, true);
+	        fputs($fd3, "if (isset(\$queryString[{$queryIndex}])) {\n");
+	        fputs($fd3, "  \${$queryKey} = \$queryString[{$queryIndex}];\n}\n");
+	      }
 	      fputs($fd3, 'db_postmemory($HTTP_POST_VARS);'."\n\n");
 
 	      fputs($fd3, '$oDao' . ucfirst($sNomeArquivo) . " = new cl_{$sNomeArquivo};\n");

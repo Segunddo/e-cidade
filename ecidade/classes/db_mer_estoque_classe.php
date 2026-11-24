@@ -75,14 +75,14 @@ class cl_mer_estoque {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->me18_i_codigo = ($this->me18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codigo"]:$this->me18_i_codigo);
-       $this->me18_f_quant = ($this->me18_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_f_quant"]:$this->me18_f_quant);
-       $this->me18_f_valor = ($this->me18_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_f_valor"]:$this->me18_f_valor);
-       $this->me18_i_calendario = ($this->me18_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_calendario"]:$this->me18_i_calendario);
-       $this->me18_i_escola = ($this->me18_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_escola"]:$this->me18_i_escola);
-       $this->me18_i_codmater = ($this->me18_i_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codmater"]:$this->me18_i_codmater);
+       $this->me18_i_codigo = ($this->me18_i_codigo === 0 || $this->me18_i_codigo === 0.0 || $this->me18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codigo"]:$this->me18_i_codigo);
+       $this->me18_f_quant = ($this->me18_f_quant === 0 || $this->me18_f_quant === 0.0 || $this->me18_f_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_f_quant"]:$this->me18_f_quant);
+       $this->me18_f_valor = ($this->me18_f_valor === 0 || $this->me18_f_valor === 0.0 || $this->me18_f_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_f_valor"]:$this->me18_f_valor);
+       $this->me18_i_calendario = ($this->me18_i_calendario === 0 || $this->me18_i_calendario === 0.0 || $this->me18_i_calendario == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_calendario"]:$this->me18_i_calendario);
+       $this->me18_i_escola = ($this->me18_i_escola === 0 || $this->me18_i_escola === 0.0 || $this->me18_i_escola == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_escola"]:$this->me18_i_escola);
+       $this->me18_i_codmater = ($this->me18_i_codmater === 0 || $this->me18_i_codmater === 0.0 || $this->me18_i_codmater == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codmater"]:$this->me18_i_codmater);
      }else{
-       $this->me18_i_codigo = ($this->me18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codigo"]:$this->me18_i_codigo);
+       $this->me18_i_codigo = ($this->me18_i_codigo === 0 || $this->me18_i_codigo === 0.0 || $this->me18_i_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["me18_i_codigo"]:$this->me18_i_codigo);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_mer_estoque {
          $this->me18_i_codigo = $me18_i_codigo;
        }
      }
-     if(($this->me18_i_codigo == null) || ($this->me18_i_codigo == "") ){
+     if(($this->me18_i_codigo == null) || ($this->me18_i_codigo === 0 || $this->me18_i_codigo === 0.0 || $this->me18_i_codigo == "") ){
        $this->erro_sql = " Campo me18_i_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -277,7 +277,7 @@ for($i=0; $i < $clrhpessoal->numrows; $i++){
                                  r14_rubric
                        ";
   $result_dados_gerfs = db_query($sql_dados_gerfs);
-  $numrows_dados_gerfs = pg_numrows($result_dados_gerfs);
+  $numrows_dados_gerfs = ($result_dados_gerfs ? pg_numrows($result_dados_gerfs) : null);
   $mes_anterior = "";
   $ano_anterior = "";
   $contaIarray  = 1;

@@ -67,8 +67,8 @@ class cl_leitoraluno {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->bi11_leitor = ($this->bi11_leitor == ""?@$GLOBALS["HTTP_POST_VARS"]["bi11_leitor"]:$this->bi11_leitor);
-       $this->bi11_aluno = ($this->bi11_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["bi11_aluno"]:$this->bi11_aluno);
+       $this->bi11_leitor = ($this->bi11_leitor === 0 || $this->bi11_leitor === 0.0 || $this->bi11_leitor == ""?@$GLOBALS["HTTP_POST_VARS"]["bi11_leitor"]:$this->bi11_leitor);
+       $this->bi11_aluno = ($this->bi11_aluno === 0 || $this->bi11_aluno === 0.0 || $this->bi11_aluno == ""?@$GLOBALS["HTTP_POST_VARS"]["bi11_aluno"]:$this->bi11_aluno);
      }else{
      }
    }

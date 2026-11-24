@@ -91,7 +91,7 @@ $sSqlAluno .= "WHERE ed60_i_codigo IN ($alunos) ";
 $sSqlAluno .= "AND ed11_i_codigo = $etapa ";
 
 $rsAluno = db_query($sSqlAluno);
-$iLinhasAluno = pg_num_rows($rsAluno);
+$iLinhasAluno = ($rsAluno ? pg_num_rows($rsAluno) : null);
 $sSqlMunic = "SELECT munic FROM db_config WHERE codigo = $iInstituicao ";
 $rsMunic = db_query($sSqlMunic);
 $Munic = ucfirst(mb_strtolower(pg_result($rsMunic, 0)));

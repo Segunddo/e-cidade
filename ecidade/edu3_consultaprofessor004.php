@@ -76,7 +76,7 @@ $clrotulo = new rotulocampo;
                   and ed58_ativo is true
                 ORDER BY ed18_c_nome DESC";
        $result = db_query($sql);
-       $linhas = pg_num_rows($result);
+       $linhas = ($result ? pg_num_rows($result) : null);
        if(!isset($escola) && $linhas>0){
          $escola = pg_result( $result, 0, 'ed18_i_codigo' );
        }
@@ -113,7 +113,7 @@ $clrotulo = new rotulocampo;
                    and ed58_ativo is true
                  ORDER BY ed52_i_ano DESC";
        $result1 = db_query($sql1);
-       $linhas1 = pg_num_rows($result1);
+       $linhas1 = ($result1 ? pg_num_rows($result1) : null);
        if( !isset( $ano ) && $linhas1 > 0 ) {
          $ano = pg_result( $result1, 0, 'ed52_i_ano' );
        }

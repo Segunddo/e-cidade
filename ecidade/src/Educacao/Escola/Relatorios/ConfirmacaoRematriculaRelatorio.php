@@ -72,7 +72,7 @@ class ConfirmacaoRematriculaRelatorio
     /**
      *
      */
-    final private function inicializarPdf()
+    private function inicializarPdf()
     {
         $pdf = new PDFDocument();
         $pdf->Open();

@@ -36,7 +36,7 @@ require_once(modification("dbforms/db_funcoes.php"));
 
 $oDados      = db_utils::postMemory($_GET);
 $oJson       = new Services_JSON();
-$oLogArquivo = $oJson->decode(file_get_contents($oDados->sArquivo));
+$oLogArquivo = $oJson->decode((string)$oDados->sArquivo !== "" ? file_get_contents($oDados->sArquivo) : false);
 
 $oPdf = new FpdfMultiCellBorder();
 $oPdf->exibeHeader(true);

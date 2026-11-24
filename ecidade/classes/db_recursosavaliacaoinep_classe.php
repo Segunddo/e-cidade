@@ -67,10 +67,10 @@ class cl_recursosavaliacaoinep {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ed326_sequencial = ($this->ed326_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed326_sequencial"]:$this->ed326_sequencial);
+       $this->ed326_sequencial = ($this->ed326_sequencial === 0 || $this->ed326_sequencial === 0.0 || $this->ed326_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed326_sequencial"]:$this->ed326_sequencial);
        $this->ed326_descricao = ($this->ed326_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["ed326_descricao"]:$this->ed326_descricao);
      }else{
-       $this->ed326_sequencial = ($this->ed326_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed326_sequencial"]:$this->ed326_sequencial);
+       $this->ed326_sequencial = ($this->ed326_sequencial === 0 || $this->ed326_sequencial === 0.0 || $this->ed326_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ed326_sequencial"]:$this->ed326_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_recursosavaliacaoinep {
          $this->ed326_sequencial = $ed326_sequencial;
        }
      }
-     if(($this->ed326_sequencial == null) || ($this->ed326_sequencial == "") ){
+     if(($this->ed326_sequencial == null) || ($this->ed326_sequencial === 0 || $this->ed326_sequencial === 0.0 || $this->ed326_sequencial == "") ){
        $this->erro_sql = " Campo ed326_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
