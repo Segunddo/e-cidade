@@ -33021,6 +33021,12 @@
       "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_cgm_classe.php": {
+      "desde": "2026-11-24T15:06:19Z",
+      "expira": "2026-11-24T19:06:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-05): correcoes da verificacao",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_cgmdocumento_classe.php": {
       "desde": "2026-11-24T14:34:19Z",
       "expira": "2026-11-24T18:34:19Z",
@@ -33033,6 +33039,12 @@
       "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
       "quem": "Segundo"
     },
+    "ecidade/classes/db_empagemovslips_classe.php": {
+      "desde": "2026-11-24T15:06:19Z",
+      "expira": "2026-11-24T19:06:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-05): correcoes da verificacao",
+      "quem": "Segundo"
+    },
     "ecidade/classes/db_formareclamacao_classe.php": {
       "desde": "2026-11-24T14:34:19Z",
       "expira": "2026-11-24T18:34:19Z",
@@ -33043,6 +33055,12 @@
       "desde": "2026-11-24T14:34:19Z",
       "expira": "2026-11-24T18:34:19Z",
       "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/classes/db_orcparamseq_classe.php": {
+      "desde": "2026-11-24T15:06:19Z",
+      "expira": "2026-11-24T19:06:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-05): correcoes da verificacao",
       "quem": "Segundo"
     },
     "ecidade/classes/db_ouvidor_classe.php": {
@@ -33481,6 +33499,36 @@
       "desde": "2026-11-24T14:34:23Z",
       "expira": "2026-11-24T18:34:23Z",
       "motivo": "Patrimonial lote 1 (PHP8-NN): guarda 0 == literal",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmacordo.php": {
+      "desde": "2026-11-24T15:06:19Z",
+      "expira": "2026-11-24T19:06:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-05): correcoes da verificacao",
+      "quem": "Segundo"
+    },
+    "ecidade/forms/db_frmvincatendprocpesquisa.php": {
+      "desde": "2026-11-24T15:06:19Z",
+      "expira": "2026-11-24T19:06:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-05): correcoes da verificacao",
+      "quem": "Segundo"
+    },
+    "ecidade/prot1_cidadaocgmdetalhe.php": {
+      "desde": "2026-11-24T15:06:19Z",
+      "expira": "2026-11-24T19:06:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-05): correcoes da verificacao",
+      "quem": "Segundo"
+    },
+    "ecidade/prot2_movcgm002.php": {
+      "desde": "2026-11-24T15:06:19Z",
+      "expira": "2026-11-24T19:06:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-05): correcoes da verificacao",
+      "quem": "Segundo"
+    },
+    "ecidade/src/Patrimonial/Protocolo/Container.php": {
+      "desde": "2026-11-24T15:06:19Z",
+      "expira": "2026-11-24T19:06:19Z",
+      "motivo": "Patrimonial lote 1 (PHP8-05): correcoes da verificacao",
       "quem": "Segundo"
     }
   },
