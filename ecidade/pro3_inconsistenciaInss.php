@@ -58,7 +58,7 @@ $pdf->cell(115,  $iAlturalinha, "DETALHE",  "TBL",  1, "C", 1);
  * e a variavel $iInconsistencia passa para 1
  */
 $aInconsistencia  = db_getsession("aInconsistencia");
-rsort($aInconsistencia);
+is_array($aInconsistencia) && rsort($aInconsistencia);
 
 foreach ($aInconsistencia as $oIndiceDados => $oValorDados) {
 
