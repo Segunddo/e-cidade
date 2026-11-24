@@ -69,11 +69,11 @@ class cl_db_projetosclientes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at64_sequencial = ($this->at64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_sequencial"]:$this->at64_sequencial);
-       $this->at64_projeto = ($this->at64_projeto == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_projeto"]:$this->at64_projeto);
-       $this->at64_cliente = ($this->at64_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_cliente"]:$this->at64_cliente);
+       $this->at64_sequencial = ($this->at64_sequencial === 0 || $this->at64_sequencial === 0.0 || $this->at64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_sequencial"]:$this->at64_sequencial);
+       $this->at64_projeto = ($this->at64_projeto === 0 || $this->at64_projeto === 0.0 || $this->at64_projeto == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_projeto"]:$this->at64_projeto);
+       $this->at64_cliente = ($this->at64_cliente === 0 || $this->at64_cliente === 0.0 || $this->at64_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_cliente"]:$this->at64_cliente);
      }else{
-       $this->at64_sequencial = ($this->at64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_sequencial"]:$this->at64_sequencial);
+       $this->at64_sequencial = ($this->at64_sequencial === 0 || $this->at64_sequencial === 0.0 || $this->at64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_sequencial"]:$this->at64_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_projetosclientes {
          $this->at64_sequencial = $at64_sequencial;
        }
      }
-     if(($this->at64_sequencial == null) || ($this->at64_sequencial == "") ){
+     if(($this->at64_sequencial == null) || ($this->at64_sequencial === 0 || $this->at64_sequencial === 0.0 || $this->at64_sequencial == "") ){
        $this->erro_sql = " Campo at64_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

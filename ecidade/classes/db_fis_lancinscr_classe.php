@@ -67,10 +67,10 @@ class cl_fis_lancinscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl04_codlanc = ($this->nl04_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl04_codlanc"]:$this->nl04_codlanc);
-       $this->nl04_inscr = ($this->nl04_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["nl04_inscr"]:$this->nl04_inscr);
+       $this->nl04_codlanc = ($this->nl04_codlanc === 0 || $this->nl04_codlanc === 0.0 || $this->nl04_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl04_codlanc"]:$this->nl04_codlanc);
+       $this->nl04_inscr = ($this->nl04_inscr === 0 || $this->nl04_inscr === 0.0 || $this->nl04_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["nl04_inscr"]:$this->nl04_inscr);
      }else{
-       $this->nl04_codlanc = ($this->nl04_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl04_codlanc"]:$this->nl04_codlanc);
+       $this->nl04_codlanc = ($this->nl04_codlanc === 0 || $this->nl04_codlanc === 0.0 || $this->nl04_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl04_codlanc"]:$this->nl04_codlanc);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_fis_lancinscr {
        return false;
      }
        $this->nl04_codlanc = $nl04_codlanc;
-     if(($this->nl04_codlanc == null) || ($this->nl04_codlanc == "") ){
+     if(($this->nl04_codlanc == null) || ($this->nl04_codlanc === 0 || $this->nl04_codlanc === 0.0 || $this->nl04_codlanc == "") ){
        $this->erro_sql = " Campo nl04_codlanc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

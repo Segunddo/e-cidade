@@ -81,8 +81,8 @@ class cl_rhpromocao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h72_sequencial = ($this->h72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h72_sequencial"]:$this->h72_sequencial);
-       $this->h72_regist = ($this->h72_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["h72_regist"]:$this->h72_regist);
+       $this->h72_sequencial = ($this->h72_sequencial === 0 || $this->h72_sequencial === 0.0 || $this->h72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h72_sequencial"]:$this->h72_sequencial);
+       $this->h72_regist = ($this->h72_regist === 0 || $this->h72_regist === 0.0 || $this->h72_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["h72_regist"]:$this->h72_regist);
        if($this->h72_dtinicial == ""){
          $this->h72_dtinicial_dia = ($this->h72_dtinicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h72_dtinicial_dia"]:$this->h72_dtinicial_dia);
          $this->h72_dtinicial_mes = ($this->h72_dtinicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h72_dtinicial_mes"]:$this->h72_dtinicial_mes);
@@ -102,7 +102,7 @@ class cl_rhpromocao {
        $this->h72_ativo = ($this->h72_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["h72_ativo"]:$this->h72_ativo);
        $this->h72_observacao = ($this->h72_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["h72_observacao"]:$this->h72_observacao);
      }else{
-       $this->h72_sequencial = ($this->h72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h72_sequencial"]:$this->h72_sequencial);
+       $this->h72_sequencial = ($this->h72_sequencial === 0 || $this->h72_sequencial === 0.0 || $this->h72_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h72_sequencial"]:$this->h72_sequencial);
      }
    }
    // funcao para inclusao
@@ -160,7 +160,7 @@ class cl_rhpromocao {
          $this->h72_sequencial = $h72_sequencial;
        }
      }
-     if(($this->h72_sequencial == null) || ($this->h72_sequencial == "") ){
+     if(($this->h72_sequencial == null) || ($this->h72_sequencial === 0 || $this->h72_sequencial === 0.0 || $this->h72_sequencial == "") ){
        $this->erro_sql = " Campo h72_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

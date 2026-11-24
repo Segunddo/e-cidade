@@ -67,10 +67,10 @@ class cl_rhtipoatras {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh60_codigo = ($this->rh60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh60_codigo"]:$this->rh60_codigo);
+       $this->rh60_codigo = ($this->rh60_codigo === 0 || $this->rh60_codigo === 0.0 || $this->rh60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh60_codigo"]:$this->rh60_codigo);
        $this->rh60_descr = ($this->rh60_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh60_descr"]:$this->rh60_descr);
      }else{
-       $this->rh60_codigo = ($this->rh60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh60_codigo"]:$this->rh60_codigo);
+       $this->rh60_codigo = ($this->rh60_codigo === 0 || $this->rh60_codigo === 0.0 || $this->rh60_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh60_codigo"]:$this->rh60_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_rhtipoatras {
          $this->rh60_codigo = $rh60_codigo;
        }
      }
-     if(($this->rh60_codigo == null) || ($this->rh60_codigo == "") ){
+     if(($this->rh60_codigo == null) || ($this->rh60_codigo === 0 || $this->rh60_codigo === 0.0 || $this->rh60_codigo == "") ){
        $this->erro_sql = " Campo rh60_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

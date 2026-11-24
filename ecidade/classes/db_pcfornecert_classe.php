@@ -74,8 +74,8 @@ class cl_pcfornecert {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc61_numcgm = ($this->pc61_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_numcgm"]:$this->pc61_numcgm);
-       $this->pc61_certif = ($this->pc61_certif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_certif"]:$this->pc61_certif);
+       $this->pc61_numcgm = ($this->pc61_numcgm === 0 || $this->pc61_numcgm === 0.0 || $this->pc61_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_numcgm"]:$this->pc61_numcgm);
+       $this->pc61_certif = ($this->pc61_certif === 0 || $this->pc61_certif === 0.0 || $this->pc61_certif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_certif"]:$this->pc61_certif);
        if($this->pc61_vencim == ""){
          $this->pc61_vencim_dia = ($this->pc61_vencim_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_vencim_dia"]:$this->pc61_vencim_dia);
          $this->pc61_vencim_mes = ($this->pc61_vencim_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_vencim_mes"]:$this->pc61_vencim_mes);
@@ -86,8 +86,8 @@ class cl_pcfornecert {
        }
        $this->pc61_obs = ($this->pc61_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_obs"]:$this->pc61_obs);
      }else{
-       $this->pc61_numcgm = ($this->pc61_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_numcgm"]:$this->pc61_numcgm);
-       $this->pc61_certif = ($this->pc61_certif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_certif"]:$this->pc61_certif);
+       $this->pc61_numcgm = ($this->pc61_numcgm === 0 || $this->pc61_numcgm === 0.0 || $this->pc61_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_numcgm"]:$this->pc61_numcgm);
+       $this->pc61_certif = ($this->pc61_certif === 0 || $this->pc61_certif === 0.0 || $this->pc61_certif == ""?@$GLOBALS["HTTP_POST_VARS"]["pc61_certif"]:$this->pc61_certif);
      }
    }
    // funcao para inclusao
@@ -104,7 +104,7 @@ class cl_pcfornecert {
      }
        $this->pc61_numcgm = $pc61_numcgm;
        $this->pc61_certif = $pc61_certif;
-     if(($this->pc61_numcgm == null) || ($this->pc61_numcgm == "") ){
+     if(($this->pc61_numcgm == null) || ($this->pc61_numcgm === 0 || $this->pc61_numcgm === 0.0 || $this->pc61_numcgm == "") ){
        $this->erro_sql = " Campo pc61_numcgm nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -112,7 +112,7 @@ class cl_pcfornecert {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pc61_certif == null) || ($this->pc61_certif == "") ){
+     if(($this->pc61_certif == null) || ($this->pc61_certif === 0 || $this->pc61_certif === 0.0 || $this->pc61_certif == "") ){
        $this->erro_sql = " Campo pc61_certif nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

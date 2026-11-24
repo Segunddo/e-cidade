@@ -74,11 +74,11 @@ class cl_db_sysarqarq
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao == false) {
-            $this->codarqpai = ($this->codarqpai == "" ? @$GLOBALS["HTTP_POST_VARS"]["codarqpai"] : $this->codarqpai);
-            $this->codarq = ($this->codarq == "" ? @$GLOBALS["HTTP_POST_VARS"]["codarq"] : $this->codarq);
+            $this->codarqpai = ($this->codarqpai === 0 || $this->codarqpai === 0.0 || $this->codarqpai == "" ? @$GLOBALS["HTTP_POST_VARS"]["codarqpai"] : $this->codarqpai);
+            $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == "" ? @$GLOBALS["HTTP_POST_VARS"]["codarq"] : $this->codarq);
         } else {
-            $this->codarqpai = ($this->codarqpai == "" ? @$GLOBALS["HTTP_POST_VARS"]["codarqpai"] : $this->codarqpai);
-            $this->codarq = ($this->codarq == "" ? @$GLOBALS["HTTP_POST_VARS"]["codarq"] : $this->codarq);
+            $this->codarqpai = ($this->codarqpai === 0 || $this->codarqpai === 0.0 || $this->codarqpai == "" ? @$GLOBALS["HTTP_POST_VARS"]["codarqpai"] : $this->codarqpai);
+            $this->codarq = ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == "" ? @$GLOBALS["HTTP_POST_VARS"]["codarq"] : $this->codarq);
         }
     }
 
@@ -88,7 +88,7 @@ class cl_db_sysarqarq
         $this->atualizacampos();
         $this->codarqpai = $codarqpai;
         $this->codarq = $codarq;
-        if (($this->codarqpai == null) || ($this->codarqpai == "")) {
+        if (($this->codarqpai == null) || ($this->codarqpai === 0 || $this->codarqpai === 0.0 || $this->codarqpai == "")) {
             $this->erro_sql = " Campo codarqpai nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";
@@ -100,7 +100,7 @@ class cl_db_sysarqarq
             $this->erro_status = "0";
             return false;
         }
-        if (($this->codarq == null) || ($this->codarq == "")) {
+        if (($this->codarq == null) || ($this->codarq === 0 || $this->codarq === 0.0 || $this->codarq == "")) {
             $this->erro_sql = " Campo codarq nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg = "Usuário: \\n\\n " . $this->erro_sql . " \\n\\n";

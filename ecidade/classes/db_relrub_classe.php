@@ -73,14 +73,14 @@ class cl_relrub {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh45_instit = ($this->rh45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_instit"]:$this->rh45_instit);
-       $this->rh45_codigo = ($this->rh45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_codigo"]:$this->rh45_codigo);
+       $this->rh45_instit = ($this->rh45_instit === 0 || $this->rh45_instit === 0.0 || $this->rh45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_instit"]:$this->rh45_instit);
+       $this->rh45_codigo = ($this->rh45_codigo === 0 || $this->rh45_codigo === 0.0 || $this->rh45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_codigo"]:$this->rh45_codigo);
        $this->rh45_descr = ($this->rh45_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_descr"]:$this->rh45_descr);
-       $this->rh45_selecao = ($this->rh45_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_selecao"]:$this->rh45_selecao);
+       $this->rh45_selecao = ($this->rh45_selecao === 0 || $this->rh45_selecao === 0.0 || $this->rh45_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_selecao"]:$this->rh45_selecao);
        $this->rh45_form = ($this->rh45_form == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_form"]:$this->rh45_form);
      }else{
-       $this->rh45_instit = ($this->rh45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_instit"]:$this->rh45_instit);
-       $this->rh45_codigo = ($this->rh45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_codigo"]:$this->rh45_codigo);
+       $this->rh45_instit = ($this->rh45_instit === 0 || $this->rh45_instit === 0.0 || $this->rh45_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_instit"]:$this->rh45_instit);
+       $this->rh45_codigo = ($this->rh45_codigo === 0 || $this->rh45_codigo === 0.0 || $this->rh45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh45_codigo"]:$this->rh45_codigo);
      }
    }
    // funcao para inclusao
@@ -122,7 +122,7 @@ class cl_relrub {
          $this->rh45_codigo = $rh45_codigo;
        }
      }
-     if(($this->rh45_codigo == null) || ($this->rh45_codigo == "") ){
+     if(($this->rh45_codigo == null) || ($this->rh45_codigo === 0 || $this->rh45_codigo === 0.0 || $this->rh45_codigo == "") ){
        $this->erro_sql = " Campo rh45_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -130,7 +130,7 @@ class cl_relrub {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh45_instit == null) || ($this->rh45_instit == "") ){
+     if(($this->rh45_instit == null) || ($this->rh45_instit === 0 || $this->rh45_instit === 0.0 || $this->rh45_instit == "") ){
        $this->erro_sql = " Campo rh45_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -76,16 +76,16 @@ class cl_rhgeracaofolhareg {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh104_sequencial = ($this->rh104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_sequencial"]:$this->rh104_sequencial);
-       $this->rh104_seqpes = ($this->rh104_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_seqpes"]:$this->rh104_seqpes);
-       $this->rh104_instit = ($this->rh104_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_instit"]:$this->rh104_instit);
-       $this->rh104_rhgeracaofolha = ($this->rh104_rhgeracaofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_rhgeracaofolha"]:$this->rh104_rhgeracaofolha);
-       $this->rh104_vlrsalario = ($this->rh104_vlrsalario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_vlrsalario"]:$this->rh104_vlrsalario);
-       $this->rh104_vlrliquido = ($this->rh104_vlrliquido == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_vlrliquido"]:$this->rh104_vlrliquido);
-       $this->rh104_vlrprovento = ($this->rh104_vlrprovento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_vlrprovento"]:$this->rh104_vlrprovento);
-       $this->rh104_vlrdesconto = ($this->rh104_vlrdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_vlrdesconto"]:$this->rh104_vlrdesconto);
+       $this->rh104_sequencial = ($this->rh104_sequencial === 0 || $this->rh104_sequencial === 0.0 || $this->rh104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_sequencial"]:$this->rh104_sequencial);
+       $this->rh104_seqpes = ($this->rh104_seqpes === 0 || $this->rh104_seqpes === 0.0 || $this->rh104_seqpes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_seqpes"]:$this->rh104_seqpes);
+       $this->rh104_instit = ($this->rh104_instit === 0 || $this->rh104_instit === 0.0 || $this->rh104_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_instit"]:$this->rh104_instit);
+       $this->rh104_rhgeracaofolha = ($this->rh104_rhgeracaofolha === 0 || $this->rh104_rhgeracaofolha === 0.0 || $this->rh104_rhgeracaofolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_rhgeracaofolha"]:$this->rh104_rhgeracaofolha);
+       $this->rh104_vlrsalario = ($this->rh104_vlrsalario === 0 || $this->rh104_vlrsalario === 0.0 || $this->rh104_vlrsalario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_vlrsalario"]:$this->rh104_vlrsalario);
+       $this->rh104_vlrliquido = ($this->rh104_vlrliquido === 0 || $this->rh104_vlrliquido === 0.0 || $this->rh104_vlrliquido == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_vlrliquido"]:$this->rh104_vlrliquido);
+       $this->rh104_vlrprovento = ($this->rh104_vlrprovento === 0 || $this->rh104_vlrprovento === 0.0 || $this->rh104_vlrprovento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_vlrprovento"]:$this->rh104_vlrprovento);
+       $this->rh104_vlrdesconto = ($this->rh104_vlrdesconto === 0 || $this->rh104_vlrdesconto === 0.0 || $this->rh104_vlrdesconto == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_vlrdesconto"]:$this->rh104_vlrdesconto);
      }else{
-       $this->rh104_sequencial = ($this->rh104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_sequencial"]:$this->rh104_sequencial);
+       $this->rh104_sequencial = ($this->rh104_sequencial === 0 || $this->rh104_sequencial === 0.0 || $this->rh104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh104_sequencial"]:$this->rh104_sequencial);
      }
    }
    // funcao para inclusao
@@ -178,7 +178,7 @@ class cl_rhgeracaofolhareg {
          $this->rh104_sequencial = $rh104_sequencial;
        }
      }
-     if(($this->rh104_sequencial == null) || ($this->rh104_sequencial == "") ){
+     if(($this->rh104_sequencial == null) || ($this->rh104_sequencial === 0 || $this->rh104_sequencial === 0.0 || $this->rh104_sequencial == "") ){
        $this->erro_sql = " Campo rh104_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

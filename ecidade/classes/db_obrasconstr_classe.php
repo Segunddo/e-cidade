@@ -72,14 +72,14 @@ class cl_obrasconstr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob08_codconstr = ($this->ob08_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codconstr"]:$this->ob08_codconstr);
-       $this->ob08_codobra = ($this->ob08_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codobra"]:$this->ob08_codobra);
-       $this->ob08_ocupacao = ($this->ob08_ocupacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_ocupacao"]:$this->ob08_ocupacao);
-       $this->ob08_tipoconstr = ($this->ob08_tipoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_tipoconstr"]:$this->ob08_tipoconstr);
-       $this->ob08_area = ($this->ob08_area == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_area"]:$this->ob08_area);
-       $this->ob08_tipolanc = ($this->ob08_tipolanc == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_tipolanc"]:$this->ob08_tipolanc);
+       $this->ob08_codconstr = ($this->ob08_codconstr === 0 || $this->ob08_codconstr === 0.0 || $this->ob08_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codconstr"]:$this->ob08_codconstr);
+       $this->ob08_codobra = ($this->ob08_codobra === 0 || $this->ob08_codobra === 0.0 || $this->ob08_codobra == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codobra"]:$this->ob08_codobra);
+       $this->ob08_ocupacao = ($this->ob08_ocupacao === 0 || $this->ob08_ocupacao === 0.0 || $this->ob08_ocupacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_ocupacao"]:$this->ob08_ocupacao);
+       $this->ob08_tipoconstr = ($this->ob08_tipoconstr === 0 || $this->ob08_tipoconstr === 0.0 || $this->ob08_tipoconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_tipoconstr"]:$this->ob08_tipoconstr);
+       $this->ob08_area = ($this->ob08_area === 0 || $this->ob08_area === 0.0 || $this->ob08_area == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_area"]:$this->ob08_area);
+       $this->ob08_tipolanc = ($this->ob08_tipolanc === 0 || $this->ob08_tipolanc === 0.0 || $this->ob08_tipolanc == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_tipolanc"]:$this->ob08_tipolanc);
      }else{
-       $this->ob08_codconstr = ($this->ob08_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codconstr"]:$this->ob08_codconstr);
+       $this->ob08_codconstr = ($this->ob08_codconstr === 0 || $this->ob08_codconstr === 0.0 || $this->ob08_codconstr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob08_codconstr"]:$this->ob08_codconstr);
      }
    }
    // funcao para inclusao
@@ -154,7 +154,7 @@ class cl_obrasconstr {
          $this->ob08_codconstr = $ob08_codconstr;
        }
      }
-     if(($this->ob08_codconstr == null) || ($this->ob08_codconstr == "") ){
+     if(($this->ob08_codconstr == null) || ($this->ob08_codconstr === 0 || $this->ob08_codconstr === 0.0 || $this->ob08_codconstr == "") ){
        $this->erro_sql = " Campo ob08_codconstr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -75,14 +75,14 @@ class cl_pcsubgrupo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc04_codsubgrupo = ($this->pc04_codsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codsubgrupo"]:$this->pc04_codsubgrupo);
+       $this->pc04_codsubgrupo = ($this->pc04_codsubgrupo === 0 || $this->pc04_codsubgrupo === 0.0 || $this->pc04_codsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codsubgrupo"]:$this->pc04_codsubgrupo);
        $this->pc04_descrsubgrupo = ($this->pc04_descrsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_descrsubgrupo"]:$this->pc04_descrsubgrupo);
-       $this->pc04_codgrupo = ($this->pc04_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codgrupo"]:$this->pc04_codgrupo);
-       $this->pc04_codtipo = ($this->pc04_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codtipo"]:$this->pc04_codtipo);
+       $this->pc04_codgrupo = ($this->pc04_codgrupo === 0 || $this->pc04_codgrupo === 0.0 || $this->pc04_codgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codgrupo"]:$this->pc04_codgrupo);
+       $this->pc04_codtipo = ($this->pc04_codtipo === 0 || $this->pc04_codtipo === 0.0 || $this->pc04_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codtipo"]:$this->pc04_codtipo);
        $this->pc04_ativo = ($this->pc04_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc04_ativo"]:$this->pc04_ativo);
-       $this->pc04_tipoutil = ($this->pc04_tipoutil == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_tipoutil"]:$this->pc04_tipoutil);
+       $this->pc04_tipoutil = ($this->pc04_tipoutil === 0 || $this->pc04_tipoutil === 0.0 || $this->pc04_tipoutil == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_tipoutil"]:$this->pc04_tipoutil);
      }else{
-       $this->pc04_codsubgrupo = ($this->pc04_codsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codsubgrupo"]:$this->pc04_codsubgrupo);
+       $this->pc04_codsubgrupo = ($this->pc04_codsubgrupo === 0 || $this->pc04_codsubgrupo === 0.0 || $this->pc04_codsubgrupo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc04_codsubgrupo"]:$this->pc04_codsubgrupo);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_pcsubgrupo {
          $this->pc04_codsubgrupo = $pc04_codsubgrupo;
        }
      }
-     if(($this->pc04_codsubgrupo == null) || ($this->pc04_codsubgrupo == "") ){
+     if(($this->pc04_codsubgrupo == null) || ($this->pc04_codsubgrupo === 0 || $this->pc04_codsubgrupo === 0.0 || $this->pc04_codsubgrupo == "") ){
        $this->erro_sql = " Campo pc04_codsubgrupo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

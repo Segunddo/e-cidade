@@ -67,11 +67,11 @@ public function erro($mostra,$retorna) {
    // funcao para atualizar campos
 public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y49_codnoti = ($this->y49_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codnoti"]:$this->y49_codnoti);
-       $this->y49_codandam = ($this->y49_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codandam"]:$this->y49_codandam);
+       $this->y49_codnoti = ($this->y49_codnoti === 0 || $this->y49_codnoti === 0.0 || $this->y49_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codnoti"]:$this->y49_codnoti);
+       $this->y49_codandam = ($this->y49_codandam === 0 || $this->y49_codandam === 0.0 || $this->y49_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codandam"]:$this->y49_codandam);
      }else{
-       $this->y49_codnoti = ($this->y49_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codnoti"]:$this->y49_codnoti);
-       $this->y49_codandam = ($this->y49_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codandam"]:$this->y49_codandam);
+       $this->y49_codnoti = ($this->y49_codnoti === 0 || $this->y49_codnoti === 0.0 || $this->y49_codnoti == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codnoti"]:$this->y49_codnoti);
+       $this->y49_codandam = ($this->y49_codandam === 0 || $this->y49_codandam === 0.0 || $this->y49_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["y49_codandam"]:$this->y49_codandam);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ public function incluir ($y49_codnoti,$y49_codandam){
       $this->atualizacampos();
        $this->y49_codnoti = $y49_codnoti;
        $this->y49_codandam = $y49_codandam;
-     if(($this->y49_codnoti == null) || ($this->y49_codnoti == "") ){
+     if(($this->y49_codnoti == null) || ($this->y49_codnoti === 0 || $this->y49_codnoti === 0.0 || $this->y49_codnoti == "") ){
        $this->erro_sql = " Campo y49_codnoti nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ public function incluir ($y49_codnoti,$y49_codandam){
        $this->erro_status = "0";
        return false;
      }
-     if(($this->y49_codandam == null) || ($this->y49_codandam == "") ){
+     if(($this->y49_codandam == null) || ($this->y49_codandam === 0 || $this->y49_codandam === 0.0 || $this->y49_codandam == "") ){
        $this->erro_sql = " Campo y49_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

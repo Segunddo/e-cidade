@@ -73,13 +73,13 @@ class cl_atendusucliproced {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at82_seq = ($this->at82_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_seq"]:$this->at82_seq);
-       $this->at82_usucliitem = ($this->at82_usucliitem == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_usucliitem"]:$this->at82_usucliitem);
-       $this->at82_id_item = ($this->at82_id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_id_item"]:$this->at82_id_item);
-       $this->at82_id_item_filho = ($this->at82_id_item_filho == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_id_item_filho"]:$this->at82_id_item_filho);
-       $this->at82_modulo = ($this->at82_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_modulo"]:$this->at82_modulo);
+       $this->at82_seq = ($this->at82_seq === 0 || $this->at82_seq === 0.0 || $this->at82_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_seq"]:$this->at82_seq);
+       $this->at82_usucliitem = ($this->at82_usucliitem === 0 || $this->at82_usucliitem === 0.0 || $this->at82_usucliitem == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_usucliitem"]:$this->at82_usucliitem);
+       $this->at82_id_item = ($this->at82_id_item === 0 || $this->at82_id_item === 0.0 || $this->at82_id_item == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_id_item"]:$this->at82_id_item);
+       $this->at82_id_item_filho = ($this->at82_id_item_filho === 0 || $this->at82_id_item_filho === 0.0 || $this->at82_id_item_filho == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_id_item_filho"]:$this->at82_id_item_filho);
+       $this->at82_modulo = ($this->at82_modulo === 0 || $this->at82_modulo === 0.0 || $this->at82_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_modulo"]:$this->at82_modulo);
      }else{
-       $this->at82_seq = ($this->at82_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_seq"]:$this->at82_seq);
+       $this->at82_seq = ($this->at82_seq === 0 || $this->at82_seq === 0.0 || $this->at82_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at82_seq"]:$this->at82_seq);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_atendusucliproced {
          $this->at82_seq = $at82_seq;
        }
      }
-     if(($this->at82_seq == null) || ($this->at82_seq == "") ){
+     if(($this->at82_seq == null) || ($this->at82_seq === 0 || $this->at82_seq === 0.0 || $this->at82_seq == "") ){
        $this->erro_sql = " Campo at82_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

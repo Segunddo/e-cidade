@@ -67,7 +67,7 @@ class cl_tipoarq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p66_codarq = ($this->p66_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["p66_codarq"]:$this->p66_codarq);
+       $this->p66_codarq = ($this->p66_codarq === 0 || $this->p66_codarq === 0.0 || $this->p66_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["p66_codarq"]:$this->p66_codarq);
        $this->p66_descr = ($this->p66_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["p66_descr"]:$this->p66_descr);
      }else{
      }

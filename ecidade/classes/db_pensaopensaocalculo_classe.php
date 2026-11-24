@@ -75,14 +75,14 @@ class cl_pensaopensaocalculo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh118_sequencial = ($this->rh118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_sequencial"]:$this->rh118_sequencial);
-       $this->rh118_anousu = ($this->rh118_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_anousu"]:$this->rh118_anousu);
-       $this->rh118_mesusu = ($this->rh118_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_mesusu"]:$this->rh118_mesusu);
-       $this->rh118_regist = ($this->rh118_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_regist"]:$this->rh118_regist);
-       $this->rh118_numcgm = ($this->rh118_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_numcgm"]:$this->rh118_numcgm);
-       $this->rh118_pensaocalculo = ($this->rh118_pensaocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_pensaocalculo"]:$this->rh118_pensaocalculo);
+       $this->rh118_sequencial = ($this->rh118_sequencial === 0 || $this->rh118_sequencial === 0.0 || $this->rh118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_sequencial"]:$this->rh118_sequencial);
+       $this->rh118_anousu = ($this->rh118_anousu === 0 || $this->rh118_anousu === 0.0 || $this->rh118_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_anousu"]:$this->rh118_anousu);
+       $this->rh118_mesusu = ($this->rh118_mesusu === 0 || $this->rh118_mesusu === 0.0 || $this->rh118_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_mesusu"]:$this->rh118_mesusu);
+       $this->rh118_regist = ($this->rh118_regist === 0 || $this->rh118_regist === 0.0 || $this->rh118_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_regist"]:$this->rh118_regist);
+       $this->rh118_numcgm = ($this->rh118_numcgm === 0 || $this->rh118_numcgm === 0.0 || $this->rh118_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_numcgm"]:$this->rh118_numcgm);
+       $this->rh118_pensaocalculo = ($this->rh118_pensaocalculo === 0 || $this->rh118_pensaocalculo === 0.0 || $this->rh118_pensaocalculo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_pensaocalculo"]:$this->rh118_pensaocalculo);
      }else{
-       $this->rh118_sequencial = ($this->rh118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_sequencial"]:$this->rh118_sequencial);
+       $this->rh118_sequencial = ($this->rh118_sequencial === 0 || $this->rh118_sequencial === 0.0 || $this->rh118_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh118_sequencial"]:$this->rh118_sequencial);
      }
    }
    // funcao para inclusao
@@ -157,7 +157,7 @@ class cl_pensaopensaocalculo {
          $this->rh118_sequencial = $rh118_sequencial;
        }
      }
-     if(($this->rh118_sequencial == null) || ($this->rh118_sequencial == "") ){
+     if(($this->rh118_sequencial == null) || ($this->rh118_sequencial === 0 || $this->rh118_sequencial === 0.0 || $this->rh118_sequencial == "") ){
        $this->erro_sql = " Campo rh118_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

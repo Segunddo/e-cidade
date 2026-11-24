@@ -82,9 +82,9 @@ class cl_veicmanutencaomedida {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve66_sequencial = ($this->ve66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_sequencial"]:$this->ve66_sequencial);
-       $this->ve66_veiculo = ($this->ve66_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_veiculo"]:$this->ve66_veiculo);
-       $this->ve66_medidaanterior = ($this->ve66_medidaanterior == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_medidaanterior"]:$this->ve66_medidaanterior);
+       $this->ve66_sequencial = ($this->ve66_sequencial === 0 || $this->ve66_sequencial === 0.0 || $this->ve66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_sequencial"]:$this->ve66_sequencial);
+       $this->ve66_veiculo = ($this->ve66_veiculo === 0 || $this->ve66_veiculo === 0.0 || $this->ve66_veiculo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_veiculo"]:$this->ve66_veiculo);
+       $this->ve66_medidaanterior = ($this->ve66_medidaanterior === 0 || $this->ve66_medidaanterior === 0.0 || $this->ve66_medidaanterior == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_medidaanterior"]:$this->ve66_medidaanterior);
        if($this->ve66_data == ""){
          $this->ve66_data_dia = ($this->ve66_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_data_dia"]:$this->ve66_data_dia);
          $this->ve66_data_mes = ($this->ve66_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_data_mes"]:$this->ve66_data_mes);
@@ -94,11 +94,11 @@ class cl_veicmanutencaomedida {
          }
        }
        $this->ve66_hora = ($this->ve66_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_hora"]:$this->ve66_hora);
-       $this->ve66_usuario = ($this->ve66_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_usuario"]:$this->ve66_usuario);
+       $this->ve66_usuario = ($this->ve66_usuario === 0 || $this->ve66_usuario === 0.0 || $this->ve66_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_usuario"]:$this->ve66_usuario);
        $this->ve66_motivo = ($this->ve66_motivo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_motivo"]:$this->ve66_motivo);
        $this->ve66_ativo = ($this->ve66_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["ve66_ativo"]:$this->ve66_ativo);
      }else{
-       $this->ve66_sequencial = ($this->ve66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_sequencial"]:$this->ve66_sequencial);
+       $this->ve66_sequencial = ($this->ve66_sequencial === 0 || $this->ve66_sequencial === 0.0 || $this->ve66_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve66_sequencial"]:$this->ve66_sequencial);
      }
    }
    // funcao para inclusao
@@ -191,7 +191,7 @@ class cl_veicmanutencaomedida {
          $this->ve66_sequencial = $ve66_sequencial;
        }
      }
-     if(($this->ve66_sequencial == null) || ($this->ve66_sequencial == "") ){
+     if(($this->ve66_sequencial == null) || ($this->ve66_sequencial === 0 || $this->ve66_sequencial === 0.0 || $this->ve66_sequencial == "") ){
        $this->erro_sql = " Campo ve66_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

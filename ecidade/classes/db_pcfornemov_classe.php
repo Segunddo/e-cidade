@@ -76,8 +76,8 @@ class cl_pcfornemov {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc62_codmov = ($this->pc62_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_codmov"]:$this->pc62_codmov);
-       $this->pc62_numcgm = ($this->pc62_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_numcgm"]:$this->pc62_numcgm);
+       $this->pc62_codmov = ($this->pc62_codmov === 0 || $this->pc62_codmov === 0.0 || $this->pc62_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_codmov"]:$this->pc62_codmov);
+       $this->pc62_numcgm = ($this->pc62_numcgm === 0 || $this->pc62_numcgm === 0.0 || $this->pc62_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_numcgm"]:$this->pc62_numcgm);
        if($this->pc62_dtlanc == ""){
          $this->pc62_dtlanc_dia = ($this->pc62_dtlanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_dtlanc_dia"]:$this->pc62_dtlanc_dia);
          $this->pc62_dtlanc_mes = ($this->pc62_dtlanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_dtlanc_mes"]:$this->pc62_dtlanc_mes);
@@ -87,9 +87,9 @@ class cl_pcfornemov {
          }
        }
        $this->pc62_hist = ($this->pc62_hist == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_hist"]:$this->pc62_hist);
-       $this->pc62_id_usuario = ($this->pc62_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_id_usuario"]:$this->pc62_id_usuario);
+       $this->pc62_id_usuario = ($this->pc62_id_usuario === 0 || $this->pc62_id_usuario === 0.0 || $this->pc62_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_id_usuario"]:$this->pc62_id_usuario);
      }else{
-       $this->pc62_codmov = ($this->pc62_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_codmov"]:$this->pc62_codmov);
+       $this->pc62_codmov = ($this->pc62_codmov === 0 || $this->pc62_codmov === 0.0 || $this->pc62_codmov == ""?@$GLOBALS["HTTP_POST_VARS"]["pc62_codmov"]:$this->pc62_codmov);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_pcfornemov {
          $this->pc62_codmov = $pc62_codmov;
        }
      }
-     if(($this->pc62_codmov == null) || ($this->pc62_codmov == "") ){
+     if(($this->pc62_codmov == null) || ($this->pc62_codmov === 0 || $this->pc62_codmov === 0.0 || $this->pc62_codmov == "") ){
        $this->erro_sql = " Campo pc62_codmov nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

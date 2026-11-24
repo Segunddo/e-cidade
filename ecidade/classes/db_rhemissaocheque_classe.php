@@ -76,9 +76,9 @@ class cl_rhemissaocheque {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r15_sequencial = ($this->r15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r15_sequencial"]:$this->r15_sequencial);
+       $this->r15_sequencial = ($this->r15_sequencial === 0 || $this->r15_sequencial === 0.0 || $this->r15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r15_sequencial"]:$this->r15_sequencial);
        $this->r15_descricao = ($this->r15_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["r15_descricao"]:$this->r15_descricao);
-       $this->r15_idusuario = ($this->r15_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["r15_idusuario"]:$this->r15_idusuario);
+       $this->r15_idusuario = ($this->r15_idusuario === 0 || $this->r15_idusuario === 0.0 || $this->r15_idusuario == ""?@$GLOBALS["HTTP_POST_VARS"]["r15_idusuario"]:$this->r15_idusuario);
        if($this->r15_dtgeracao == ""){
          $this->r15_dtgeracao_dia = ($this->r15_dtgeracao_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["r15_dtgeracao_dia"]:$this->r15_dtgeracao_dia);
          $this->r15_dtgeracao_mes = ($this->r15_dtgeracao_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["r15_dtgeracao_mes"]:$this->r15_dtgeracao_mes);
@@ -89,7 +89,7 @@ class cl_rhemissaocheque {
        }
        $this->r15_hora = ($this->r15_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["r15_hora"]:$this->r15_hora);
      }else{
-       $this->r15_sequencial = ($this->r15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r15_sequencial"]:$this->r15_sequencial);
+       $this->r15_sequencial = ($this->r15_sequencial === 0 || $this->r15_sequencial === 0.0 || $this->r15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["r15_sequencial"]:$this->r15_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_rhemissaocheque {
          $this->r15_sequencial = $r15_sequencial;
        }
      }
-     if(($this->r15_sequencial == null) || ($this->r15_sequencial == "") ){
+     if(($this->r15_sequencial == null) || ($this->r15_sequencial === 0 || $this->r15_sequencial === 0.0 || $this->r15_sequencial == "") ){
        $this->erro_sql = " Campo r15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

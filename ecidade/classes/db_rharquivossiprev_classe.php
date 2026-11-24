@@ -69,11 +69,11 @@ class cl_rharquivossiprev {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh94_sequencial = ($this->rh94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_sequencial"]:$this->rh94_sequencial);
+       $this->rh94_sequencial = ($this->rh94_sequencial === 0 || $this->rh94_sequencial === 0.0 || $this->rh94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_sequencial"]:$this->rh94_sequencial);
        $this->rh94_descricao = ($this->rh94_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_descricao"]:$this->rh94_descricao);
        $this->rh94_nomeclasse = ($this->rh94_nomeclasse == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_nomeclasse"]:$this->rh94_nomeclasse);
      }else{
-       $this->rh94_sequencial = ($this->rh94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_sequencial"]:$this->rh94_sequencial);
+       $this->rh94_sequencial = ($this->rh94_sequencial === 0 || $this->rh94_sequencial === 0.0 || $this->rh94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh94_sequencial"]:$this->rh94_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_rharquivossiprev {
          $this->rh94_sequencial = $rh94_sequencial;
        }
      }
-     if(($this->rh94_sequencial == null) || ($this->rh94_sequencial == "") ){
+     if(($this->rh94_sequencial == null) || ($this->rh94_sequencial === 0 || $this->rh94_sequencial === 0.0 || $this->rh94_sequencial == "") ){
        $this->erro_sql = " Campo rh94_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

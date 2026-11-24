@@ -87,9 +87,9 @@ class cl_tarefa_lancprorrog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at58_sequencial = ($this->at58_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_sequencial"]:$this->at58_sequencial);
-       $this->at58_tarefalanc = ($this->at58_tarefalanc == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_tarefalanc"]:$this->at58_tarefalanc);
-       $this->at58_tarefa = ($this->at58_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_tarefa"]:$this->at58_tarefa);
+       $this->at58_sequencial = ($this->at58_sequencial === 0 || $this->at58_sequencial === 0.0 || $this->at58_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_sequencial"]:$this->at58_sequencial);
+       $this->at58_tarefalanc = ($this->at58_tarefalanc === 0 || $this->at58_tarefalanc === 0.0 || $this->at58_tarefalanc == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_tarefalanc"]:$this->at58_tarefalanc);
+       $this->at58_tarefa = ($this->at58_tarefa === 0 || $this->at58_tarefa === 0.0 || $this->at58_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_tarefa"]:$this->at58_tarefa);
        if($this->at58_diaini == ""){
          $this->at58_diaini_dia = ($this->at58_diaini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_diaini_dia"]:$this->at58_diaini_dia);
          $this->at58_diaini_mes = ($this->at58_diaini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_diaini_mes"]:$this->at58_diaini_mes);
@@ -106,12 +106,12 @@ class cl_tarefa_lancprorrog {
             $this->at58_diafim = $this->at58_diafim_ano."-".$this->at58_diafim_mes."-".$this->at58_diafim_dia;
          }
        }
-       $this->at58_previsao = ($this->at58_previsao == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_previsao"]:$this->at58_previsao);
+       $this->at58_previsao = ($this->at58_previsao === 0 || $this->at58_previsao === 0.0 || $this->at58_previsao == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_previsao"]:$this->at58_previsao);
        $this->at58_tipoprevisao = ($this->at58_tipoprevisao == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_tipoprevisao"]:$this->at58_tipoprevisao);
        $this->at58_horainidia = ($this->at58_horainidia == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_horainidia"]:$this->at58_horainidia);
        $this->at58_horafim = ($this->at58_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_horafim"]:$this->at58_horafim);
      }else{
-       $this->at58_sequencial = ($this->at58_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_sequencial"]:$this->at58_sequencial);
+       $this->at58_sequencial = ($this->at58_sequencial === 0 || $this->at58_sequencial === 0.0 || $this->at58_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at58_sequencial"]:$this->at58_sequencial);
      }
    }
    // funcao para inclusao
@@ -168,7 +168,7 @@ class cl_tarefa_lancprorrog {
          $this->at58_sequencial = $at58_sequencial;
        }
      }
-     if(($this->at58_sequencial == null) || ($this->at58_sequencial == "") ){
+     if(($this->at58_sequencial == null) || ($this->at58_sequencial === 0 || $this->at58_sequencial === 0.0 || $this->at58_sequencial == "") ){
        $this->erro_sql = " Campo at58_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

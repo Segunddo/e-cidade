@@ -59,18 +59,18 @@ class cl_parprojetos
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->ob21_anousu = ($this->ob21_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_anousu"]:$this->ob21_anousu);
-       $this->ob21_numeracaohabite = ($this->ob21_numeracaohabite == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_numeracaohabite"]:$this->ob21_numeracaohabite);
-       $this->ob21_ultnumerohabite = ($this->ob21_ultnumerohabite == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_ultnumerohabite"]:$this->ob21_ultnumerohabite);
-       $this->ob21_grupotipoocupacao = ($this->ob21_grupotipoocupacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_grupotipoocupacao"]:$this->ob21_grupotipoocupacao);
-       $this->ob21_grupotipoconstrucao = ($this->ob21_grupotipoconstrucao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_grupotipoconstrucao"]:$this->ob21_grupotipoconstrucao);
-       $this->ob21_grupotipolancamento = ($this->ob21_grupotipolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_grupotipolancamento"]:$this->ob21_grupotipolancamento);
-       $this->ob21_tipocartaalvara = ($this->ob21_tipocartaalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_tipocartaalvara"]:$this->ob21_tipocartaalvara);
-       $this->ob21_tipocartahabite = ($this->ob21_tipocartahabite == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_tipocartahabite"]:$this->ob21_tipocartahabite);
+       $this->ob21_anousu = ($this->ob21_anousu === 0 || $this->ob21_anousu === 0.0 || $this->ob21_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_anousu"]:$this->ob21_anousu);
+       $this->ob21_numeracaohabite = ($this->ob21_numeracaohabite === 0 || $this->ob21_numeracaohabite === 0.0 || $this->ob21_numeracaohabite == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_numeracaohabite"]:$this->ob21_numeracaohabite);
+       $this->ob21_ultnumerohabite = ($this->ob21_ultnumerohabite === 0 || $this->ob21_ultnumerohabite === 0.0 || $this->ob21_ultnumerohabite == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_ultnumerohabite"]:$this->ob21_ultnumerohabite);
+       $this->ob21_grupotipoocupacao = ($this->ob21_grupotipoocupacao === 0 || $this->ob21_grupotipoocupacao === 0.0 || $this->ob21_grupotipoocupacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_grupotipoocupacao"]:$this->ob21_grupotipoocupacao);
+       $this->ob21_grupotipoconstrucao = ($this->ob21_grupotipoconstrucao === 0 || $this->ob21_grupotipoconstrucao === 0.0 || $this->ob21_grupotipoconstrucao == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_grupotipoconstrucao"]:$this->ob21_grupotipoconstrucao);
+       $this->ob21_grupotipolancamento = ($this->ob21_grupotipolancamento === 0 || $this->ob21_grupotipolancamento === 0.0 || $this->ob21_grupotipolancamento == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_grupotipolancamento"]:$this->ob21_grupotipolancamento);
+       $this->ob21_tipocartaalvara = ($this->ob21_tipocartaalvara === 0 || $this->ob21_tipocartaalvara === 0.0 || $this->ob21_tipocartaalvara == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_tipocartaalvara"]:$this->ob21_tipocartaalvara);
+       $this->ob21_tipocartahabite = ($this->ob21_tipocartahabite === 0 || $this->ob21_tipocartahabite === 0.0 || $this->ob21_tipocartahabite == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_tipocartahabite"]:$this->ob21_tipocartahabite);
        $this->ob21_localcertificadoa1 = ($this->ob21_localcertificadoa1 == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_localcertificadoa1"]:$this->ob21_localcertificadoa1);
        $this->ob21_senhacertificadoa1 = ($this->ob21_senhacertificadoa1 == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_senhacertificadoa1"]:$this->ob21_senhacertificadoa1);
      }else{
-       $this->ob21_anousu = ($this->ob21_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_anousu"]:$this->ob21_anousu);
+       $this->ob21_anousu = ($this->ob21_anousu === 0 || $this->ob21_anousu === 0.0 || $this->ob21_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["ob21_anousu"]:$this->ob21_anousu);
      }
    }
 
@@ -144,7 +144,7 @@ class cl_parprojetos
        $this->ob21_senhacertificadoa1 = "0";
      }
        $this->ob21_anousu = $ob21_anousu; 
-     if(($this->ob21_anousu == null) || ($this->ob21_anousu == "") ){ 
+     if(($this->ob21_anousu == null) || ($this->ob21_anousu === 0 || $this->ob21_anousu === 0.0 || $this->ob21_anousu == "") ){ 
        $this->erro_sql = " Campo ob21_anousu não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

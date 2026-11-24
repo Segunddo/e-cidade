@@ -67,10 +67,10 @@ public function erro($mostra,$retorna) {
    // funcao para atualizar campos
 public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y62_codlev = ($this->y62_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y62_codlev"]:$this->y62_codlev);
-       $this->y62_inscr = ($this->y62_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y62_inscr"]:$this->y62_inscr);
+       $this->y62_codlev = ($this->y62_codlev === 0 || $this->y62_codlev === 0.0 || $this->y62_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y62_codlev"]:$this->y62_codlev);
+       $this->y62_inscr = ($this->y62_inscr === 0 || $this->y62_inscr === 0.0 || $this->y62_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y62_inscr"]:$this->y62_inscr);
      }else{
-       $this->y62_codlev = ($this->y62_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y62_codlev"]:$this->y62_codlev);
+       $this->y62_codlev = ($this->y62_codlev === 0 || $this->y62_codlev === 0.0 || $this->y62_codlev == ""?@$GLOBALS["HTTP_POST_VARS"]["y62_codlev"]:$this->y62_codlev);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ public function incluir ($y62_codlev){
        return false;
      }
        $this->y62_codlev = $y62_codlev;
-     if(($this->y62_codlev == null) || ($this->y62_codlev == "") ){
+     if(($this->y62_codlev == null) || ($this->y62_codlev === 0 || $this->y62_codlev === 0.0 || $this->y62_codlev == "") ){
        $this->erro_sql = " Campo y62_codlev nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

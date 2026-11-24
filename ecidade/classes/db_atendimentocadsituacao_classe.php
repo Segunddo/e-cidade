@@ -67,10 +67,10 @@ class cl_atendimentocadsituacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at15_sequencial = ($this->at15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at15_sequencial"]:$this->at15_sequencial);
+       $this->at15_sequencial = ($this->at15_sequencial === 0 || $this->at15_sequencial === 0.0 || $this->at15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at15_sequencial"]:$this->at15_sequencial);
        $this->at15_descr = ($this->at15_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at15_descr"]:$this->at15_descr);
      }else{
-       $this->at15_sequencial = ($this->at15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at15_sequencial"]:$this->at15_sequencial);
+       $this->at15_sequencial = ($this->at15_sequencial === 0 || $this->at15_sequencial === 0.0 || $this->at15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at15_sequencial"]:$this->at15_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_atendimentocadsituacao {
          $this->at15_sequencial = $at15_sequencial;
        }
      }
-     if(($this->at15_sequencial == null) || ($this->at15_sequencial == "") ){
+     if(($this->at15_sequencial == null) || ($this->at15_sequencial === 0 || $this->at15_sequencial === 0.0 || $this->at15_sequencial == "") ){
        $this->erro_sql = " Campo at15_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

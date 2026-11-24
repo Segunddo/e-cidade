@@ -67,11 +67,11 @@ class cl_fis_lancandam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl19_codlanc = ($this->nl19_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl19_codlanc"]:$this->nl19_codlanc);
-       $this->nl19_codandam = ($this->nl19_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["nl19_codandam"]:$this->nl19_codandam);
+       $this->nl19_codlanc = ($this->nl19_codlanc === 0 || $this->nl19_codlanc === 0.0 || $this->nl19_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl19_codlanc"]:$this->nl19_codlanc);
+       $this->nl19_codandam = ($this->nl19_codandam === 0 || $this->nl19_codandam === 0.0 || $this->nl19_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["nl19_codandam"]:$this->nl19_codandam);
      }else{
-       $this->nl19_codlanc = ($this->nl19_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl19_codlanc"]:$this->nl19_codlanc);
-       $this->nl19_codandam = ($this->nl19_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["nl19_codandam"]:$this->nl19_codandam);
+       $this->nl19_codlanc = ($this->nl19_codlanc === 0 || $this->nl19_codlanc === 0.0 || $this->nl19_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl19_codlanc"]:$this->nl19_codlanc);
+       $this->nl19_codandam = ($this->nl19_codandam === 0 || $this->nl19_codandam === 0.0 || $this->nl19_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["nl19_codandam"]:$this->nl19_codandam);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_fis_lancandam {
       $this->atualizacampos();
        $this->nl19_codlanc = $nl19_codlanc;
        $this->nl19_codandam = $nl19_codandam;
-     if(($this->nl19_codlanc == null) || ($this->nl19_codlanc == "") ){
+     if(($this->nl19_codlanc == null) || ($this->nl19_codlanc === 0 || $this->nl19_codlanc === 0.0 || $this->nl19_codlanc == "") ){
        $this->erro_sql = " Campo nl19_codlanc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_fis_lancandam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->nl19_codandam == null) || ($this->nl19_codandam == "") ){
+     if(($this->nl19_codandam == null) || ($this->nl19_codandam === 0 || $this->nl19_codandam === 0.0 || $this->nl19_codandam == "") ){
        $this->erro_sql = " Campo nl19_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

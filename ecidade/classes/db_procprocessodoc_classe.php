@@ -69,12 +69,12 @@ class cl_procprocessodoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p81_codproc = ($this->p81_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p81_codproc"]:$this->p81_codproc);
-       $this->p81_coddoc = ($this->p81_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p81_coddoc"]:$this->p81_coddoc);
+       $this->p81_codproc = ($this->p81_codproc === 0 || $this->p81_codproc === 0.0 || $this->p81_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p81_codproc"]:$this->p81_codproc);
+       $this->p81_coddoc = ($this->p81_coddoc === 0 || $this->p81_coddoc === 0.0 || $this->p81_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p81_coddoc"]:$this->p81_coddoc);
        $this->p81_doc = ($this->p81_doc == "f"?@$GLOBALS["HTTP_POST_VARS"]["p81_doc"]:$this->p81_doc);
      }else{
-       $this->p81_codproc = ($this->p81_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p81_codproc"]:$this->p81_codproc);
-       $this->p81_coddoc = ($this->p81_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p81_coddoc"]:$this->p81_coddoc);
+       $this->p81_codproc = ($this->p81_codproc === 0 || $this->p81_codproc === 0.0 || $this->p81_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["p81_codproc"]:$this->p81_codproc);
+       $this->p81_coddoc = ($this->p81_coddoc === 0 || $this->p81_coddoc === 0.0 || $this->p81_coddoc == ""?@$GLOBALS["HTTP_POST_VARS"]["p81_coddoc"]:$this->p81_coddoc);
      }
    }
    // funcao para inclusao
@@ -91,7 +91,7 @@ class cl_procprocessodoc {
      }
        $this->p81_codproc = $p81_codproc;
        $this->p81_coddoc = $p81_coddoc;
-     if(($this->p81_codproc == null) || ($this->p81_codproc == "") ){
+     if(($this->p81_codproc == null) || ($this->p81_codproc === 0 || $this->p81_codproc === 0.0 || $this->p81_codproc == "") ){
        $this->erro_sql = " Campo p81_codproc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -99,7 +99,7 @@ class cl_procprocessodoc {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->p81_coddoc == null) || ($this->p81_coddoc == "") ){
+     if(($this->p81_coddoc == null) || ($this->p81_coddoc === 0 || $this->p81_coddoc === 0.0 || $this->p81_coddoc == "") ){
        $this->erro_sql = " Campo p81_coddoc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

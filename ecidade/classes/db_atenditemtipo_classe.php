@@ -67,7 +67,7 @@ class cl_atenditemtipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at06_tipo = ($this->at06_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_tipo"]:$this->at06_tipo);
+       $this->at06_tipo = ($this->at06_tipo === 0 || $this->at06_tipo === 0.0 || $this->at06_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_tipo"]:$this->at06_tipo);
        $this->at06_descr = ($this->at06_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_descr"]:$this->at06_descr);
      }else{
      }

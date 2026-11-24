@@ -80,9 +80,9 @@ class cl_tarefa_lanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at36_sequencia = ($this->at36_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_sequencia"]:$this->at36_sequencia);
-       $this->at36_tarefa = ($this->at36_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_tarefa"]:$this->at36_tarefa);
-       $this->at36_usuario = ($this->at36_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_usuario"]:$this->at36_usuario);
+       $this->at36_sequencia = ($this->at36_sequencia === 0 || $this->at36_sequencia === 0.0 || $this->at36_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_sequencia"]:$this->at36_sequencia);
+       $this->at36_tarefa = ($this->at36_tarefa === 0 || $this->at36_tarefa === 0.0 || $this->at36_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_tarefa"]:$this->at36_tarefa);
+       $this->at36_usuario = ($this->at36_usuario === 0 || $this->at36_usuario === 0.0 || $this->at36_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_usuario"]:$this->at36_usuario);
        if($this->at36_data == ""){
          $this->at36_data_dia = ($this->at36_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_data_dia"]:$this->at36_data_dia);
          $this->at36_data_mes = ($this->at36_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_data_mes"]:$this->at36_data_mes);
@@ -95,7 +95,7 @@ class cl_tarefa_lanc {
        $this->at36_ip = ($this->at36_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_ip"]:$this->at36_ip);
        $this->at36_tipo = ($this->at36_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_tipo"]:$this->at36_tipo);
      }else{
-       $this->at36_sequencia = ($this->at36_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_sequencia"]:$this->at36_sequencia);
+       $this->at36_sequencia = ($this->at36_sequencia === 0 || $this->at36_sequencia === 0.0 || $this->at36_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at36_sequencia"]:$this->at36_sequencia);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_tarefa_lanc {
          $this->at36_sequencia = $at36_sequencia;
        }
      }
-     if(($this->at36_sequencia == null) || ($this->at36_sequencia == "") ){
+     if(($this->at36_sequencia == null) || ($this->at36_sequencia === 0 || $this->at36_sequencia === 0.0 || $this->at36_sequencia == "") ){
        $this->erro_sql = " Campo at36_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

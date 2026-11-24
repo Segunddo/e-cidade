@@ -82,9 +82,9 @@ class cl_matestoquedev {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m45_codigo = ($this->m45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codigo"]:$this->m45_codigo);
-       $this->m45_codmatrequi = ($this->m45_codmatrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codmatrequi"]:$this->m45_codmatrequi);
-       $this->m45_codatendrequi = ($this->m45_codatendrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codatendrequi"]:$this->m45_codatendrequi);
+       $this->m45_codigo = ($this->m45_codigo === 0 || $this->m45_codigo === 0.0 || $this->m45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codigo"]:$this->m45_codigo);
+       $this->m45_codmatrequi = ($this->m45_codmatrequi === 0 || $this->m45_codmatrequi === 0.0 || $this->m45_codmatrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codmatrequi"]:$this->m45_codmatrequi);
+       $this->m45_codatendrequi = ($this->m45_codatendrequi === 0 || $this->m45_codatendrequi === 0.0 || $this->m45_codatendrequi == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codatendrequi"]:$this->m45_codatendrequi);
        if($this->m45_data == ""){
          $this->m45_data_dia = ($this->m45_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_data_dia"]:$this->m45_data_dia);
          $this->m45_data_mes = ($this->m45_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_data_mes"]:$this->m45_data_mes);
@@ -94,11 +94,11 @@ class cl_matestoquedev {
          }
        }
        $this->m45_hora = ($this->m45_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_hora"]:$this->m45_hora);
-       $this->m45_login = ($this->m45_login == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_login"]:$this->m45_login);
-       $this->m45_depto = ($this->m45_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_depto"]:$this->m45_depto);
+       $this->m45_login = ($this->m45_login === 0 || $this->m45_login === 0.0 || $this->m45_login == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_login"]:$this->m45_login);
+       $this->m45_depto = ($this->m45_depto === 0 || $this->m45_depto === 0.0 || $this->m45_depto == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_depto"]:$this->m45_depto);
        $this->m45_obs = ($this->m45_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_obs"]:$this->m45_obs);
      }else{
-       $this->m45_codigo = ($this->m45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codigo"]:$this->m45_codigo);
+       $this->m45_codigo = ($this->m45_codigo === 0 || $this->m45_codigo === 0.0 || $this->m45_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["m45_codigo"]:$this->m45_codigo);
      }
    }
    // funcao para inclusao
@@ -182,7 +182,7 @@ class cl_matestoquedev {
          $this->m45_codigo = $m45_codigo;
        }
      }
-     if(($this->m45_codigo == null) || ($this->m45_codigo == "") ){
+     if(($this->m45_codigo == null) || ($this->m45_codigo === 0 || $this->m45_codigo === 0.0 || $this->m45_codigo == "") ){
        $this->erro_sql = " Campo m45_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

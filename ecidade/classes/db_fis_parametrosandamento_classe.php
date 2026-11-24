@@ -73,12 +73,12 @@ class cl_fis_parametrosandamento {
     // funcao para atualizar campos
     public function atualizacampos($exclusao=false) {
         if($exclusao==false){
-            $this->sequencial = ($this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
+            $this->sequencial = ($this->sequencial === 0 || $this->sequencial === 0.0 || $this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
             $this->tem_data_ciencia = ($this->tem_data_ciencia == "f"?@$GLOBALS["HTTP_POST_VARS"]["tem_data_ciencia"]:$this->tem_data_ciencia);
-            $this->tipoandam = ($this->tipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["tipoandam"]:$this->tipoandam);
+            $this->tipoandam = ($this->tipoandam === 0 || $this->tipoandam === 0.0 || $this->tipoandam == ""?@$GLOBALS["HTTP_POST_VARS"]["tipoandam"]:$this->tipoandam);
 	    $this->tem_data_recurso = ($this->tem_data_recurso == "f"?@$GLOBALS["HTTP_POST_VARS"]["tem_data_recurso"]:$this->tem_data_recurso);
         }else{
-            $this->sequencial = ($this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
+            $this->sequencial = ($this->sequencial === 0 || $this->sequencial === 0.0 || $this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
         }
     }
 

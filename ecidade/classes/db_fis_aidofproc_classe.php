@@ -73,11 +73,11 @@ class cl_fis_aidofproc
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y02_codigo = ($this->y02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
-            $this->y02_aidof = ($this->y02_aidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_aidof"]:$this->y02_aidof);
-            $this->y02_codproc = ($this->y02_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codproc"]:$this->y02_codproc);
+            $this->y02_codigo = ($this->y02_codigo === 0 || $this->y02_codigo === 0.0 || $this->y02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
+            $this->y02_aidof = ($this->y02_aidof === 0 || $this->y02_aidof === 0.0 || $this->y02_aidof == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_aidof"]:$this->y02_aidof);
+            $this->y02_codproc = ($this->y02_codproc === 0 || $this->y02_codproc === 0.0 || $this->y02_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codproc"]:$this->y02_codproc);
         } else {
-            $this->y02_codigo = ($this->y02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
+            $this->y02_codigo = ($this->y02_codigo === 0 || $this->y02_codigo === 0.0 || $this->y02_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y02_codigo"]:$this->y02_codigo);
         }
     }
    // funcao para inclusao

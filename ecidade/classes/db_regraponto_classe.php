@@ -73,13 +73,13 @@ class cl_regraponto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh123_sequencial = ($this->rh123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_sequencial"]:$this->rh123_sequencial);
+       $this->rh123_sequencial = ($this->rh123_sequencial === 0 || $this->rh123_sequencial === 0.0 || $this->rh123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_sequencial"]:$this->rh123_sequencial);
        $this->rh123_descricao = ($this->rh123_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_descricao"]:$this->rh123_descricao);
-       $this->rh123_selecao = ($this->rh123_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_selecao"]:$this->rh123_selecao);
-       $this->rh123_instit = ($this->rh123_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_instit"]:$this->rh123_instit);
-       $this->rh123_comportamento = ($this->rh123_comportamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_comportamento"]:$this->rh123_comportamento);
+       $this->rh123_selecao = ($this->rh123_selecao === 0 || $this->rh123_selecao === 0.0 || $this->rh123_selecao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_selecao"]:$this->rh123_selecao);
+       $this->rh123_instit = ($this->rh123_instit === 0 || $this->rh123_instit === 0.0 || $this->rh123_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_instit"]:$this->rh123_instit);
+       $this->rh123_comportamento = ($this->rh123_comportamento === 0 || $this->rh123_comportamento === 0.0 || $this->rh123_comportamento == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_comportamento"]:$this->rh123_comportamento);
      }else{
-       $this->rh123_sequencial = ($this->rh123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_sequencial"]:$this->rh123_sequencial);
+       $this->rh123_sequencial = ($this->rh123_sequencial === 0 || $this->rh123_sequencial === 0.0 || $this->rh123_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh123_sequencial"]:$this->rh123_sequencial);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_regraponto {
          $this->rh123_sequencial = $rh123_sequencial;
        }
      }
-     if(($this->rh123_sequencial == null) || ($this->rh123_sequencial == "") ){
+     if(($this->rh123_sequencial == null) || ($this->rh123_sequencial === 0 || $this->rh123_sequencial === 0.0 || $this->rh123_sequencial == "") ){
        $this->erro_sql = " Campo rh123_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

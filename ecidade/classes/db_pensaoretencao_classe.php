@@ -78,15 +78,15 @@ class cl_pensaoretencao
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh77_sequencial = ($this->rh77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_sequencial"]:$this->rh77_sequencial);
-       $this->rh77_numcgm = ($this->rh77_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_numcgm"]:$this->rh77_numcgm);
-       $this->rh77_regist = ($this->rh77_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_regist"]:$this->rh77_regist);
-       $this->rh77_anousu = ($this->rh77_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_anousu"]:$this->rh77_anousu);
-       $this->rh77_mesusu = ($this->rh77_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_mesusu"]:$this->rh77_mesusu);
-       $this->rh77_retencaotiporec = ($this->rh77_retencaotiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_retencaotiporec"]:$this->rh77_retencaotiporec);
-       $this->rh77_cgmalimentado = ($this->rh77_cgmalimentado == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_cgmalimentado"]:$this->rh77_cgmalimentado);
+       $this->rh77_sequencial = ($this->rh77_sequencial === 0 || $this->rh77_sequencial === 0.0 || $this->rh77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_sequencial"]:$this->rh77_sequencial);
+       $this->rh77_numcgm = ($this->rh77_numcgm === 0 || $this->rh77_numcgm === 0.0 || $this->rh77_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_numcgm"]:$this->rh77_numcgm);
+       $this->rh77_regist = ($this->rh77_regist === 0 || $this->rh77_regist === 0.0 || $this->rh77_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_regist"]:$this->rh77_regist);
+       $this->rh77_anousu = ($this->rh77_anousu === 0 || $this->rh77_anousu === 0.0 || $this->rh77_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_anousu"]:$this->rh77_anousu);
+       $this->rh77_mesusu = ($this->rh77_mesusu === 0 || $this->rh77_mesusu === 0.0 || $this->rh77_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_mesusu"]:$this->rh77_mesusu);
+       $this->rh77_retencaotiporec = ($this->rh77_retencaotiporec === 0 || $this->rh77_retencaotiporec === 0.0 || $this->rh77_retencaotiporec == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_retencaotiporec"]:$this->rh77_retencaotiporec);
+       $this->rh77_cgmalimentado = ($this->rh77_cgmalimentado === 0 || $this->rh77_cgmalimentado === 0.0 || $this->rh77_cgmalimentado == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_cgmalimentado"]:$this->rh77_cgmalimentado);
      }else{
-       $this->rh77_sequencial = ($this->rh77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_sequencial"]:$this->rh77_sequencial);
+       $this->rh77_sequencial = ($this->rh77_sequencial === 0 || $this->rh77_sequencial === 0.0 || $this->rh77_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh77_sequencial"]:$this->rh77_sequencial);
      }
    }
 
@@ -172,7 +172,7 @@ class cl_pensaoretencao
          $this->rh77_sequencial = $rh77_sequencial; 
        }
      }
-     if(($this->rh77_sequencial == null) || ($this->rh77_sequencial == "") ){ 
+     if(($this->rh77_sequencial == null) || ($this->rh77_sequencial === 0 || $this->rh77_sequencial === 0.0 || $this->rh77_sequencial == "") ){ 
        $this->erro_sql = " Campo rh77_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

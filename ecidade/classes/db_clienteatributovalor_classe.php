@@ -71,12 +71,12 @@ class cl_clienteatributovalor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at94_sequencial = ($this->at94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at94_sequencial"]:$this->at94_sequencial);
-       $this->at94_cliente = ($this->at94_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at94_cliente"]:$this->at94_cliente);
-       $this->at94_clienteatributo = ($this->at94_clienteatributo == ""?@$GLOBALS["HTTP_POST_VARS"]["at94_clienteatributo"]:$this->at94_clienteatributo);
+       $this->at94_sequencial = ($this->at94_sequencial === 0 || $this->at94_sequencial === 0.0 || $this->at94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at94_sequencial"]:$this->at94_sequencial);
+       $this->at94_cliente = ($this->at94_cliente === 0 || $this->at94_cliente === 0.0 || $this->at94_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at94_cliente"]:$this->at94_cliente);
+       $this->at94_clienteatributo = ($this->at94_clienteatributo === 0 || $this->at94_clienteatributo === 0.0 || $this->at94_clienteatributo == ""?@$GLOBALS["HTTP_POST_VARS"]["at94_clienteatributo"]:$this->at94_clienteatributo);
        $this->at94_valor = ($this->at94_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["at94_valor"]:$this->at94_valor);
      }else{
-       $this->at94_sequencial = ($this->at94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at94_sequencial"]:$this->at94_sequencial);
+       $this->at94_sequencial = ($this->at94_sequencial === 0 || $this->at94_sequencial === 0.0 || $this->at94_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at94_sequencial"]:$this->at94_sequencial);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_clienteatributovalor {
          $this->at94_sequencial = $at94_sequencial;
        }
      }
-     if(($this->at94_sequencial == null) || ($this->at94_sequencial == "") ){
+     if(($this->at94_sequencial == null) || ($this->at94_sequencial === 0 || $this->at94_sequencial === 0.0 || $this->at94_sequencial == "") ){
        $this->erro_sql = " Campo at94_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

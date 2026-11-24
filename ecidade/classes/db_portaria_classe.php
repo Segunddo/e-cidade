@@ -255,7 +255,7 @@ class cl_portaria {
          $this->h31_sequencial = $h31_sequencial;
        }
      }
-     if(($this->h31_sequencial == null) || ($this->h31_sequencial == "") ){
+     if(($this->h31_sequencial == null) || ($this->h31_sequencial === 0 || $this->h31_sequencial === 0.0 || $this->h31_sequencial == "") ){
        $this->erro_sql = " Campo h31_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

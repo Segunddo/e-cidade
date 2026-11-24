@@ -67,10 +67,10 @@ class cl_minutatemplategeral {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l42_sequencial = ($this->l42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l42_sequencial"]:$this->l42_sequencial);
-       $this->l42_db_documentotemplate = ($this->l42_db_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["l42_db_documentotemplate"]:$this->l42_db_documentotemplate);
+       $this->l42_sequencial = ($this->l42_sequencial === 0 || $this->l42_sequencial === 0.0 || $this->l42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l42_sequencial"]:$this->l42_sequencial);
+       $this->l42_db_documentotemplate = ($this->l42_db_documentotemplate === 0 || $this->l42_db_documentotemplate === 0.0 || $this->l42_db_documentotemplate == ""?@$GLOBALS["HTTP_POST_VARS"]["l42_db_documentotemplate"]:$this->l42_db_documentotemplate);
      }else{
-       $this->l42_sequencial = ($this->l42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l42_sequencial"]:$this->l42_sequencial);
+       $this->l42_sequencial = ($this->l42_sequencial === 0 || $this->l42_sequencial === 0.0 || $this->l42_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["l42_sequencial"]:$this->l42_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_minutatemplategeral {
          $this->l42_sequencial = $l42_sequencial;
        }
      }
-     if(($this->l42_sequencial == null) || ($this->l42_sequencial == "") ){
+     if(($this->l42_sequencial == null) || ($this->l42_sequencial === 0 || $this->l42_sequencial === 0.0 || $this->l42_sequencial == "") ){
        $this->erro_sql = " Campo l42_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

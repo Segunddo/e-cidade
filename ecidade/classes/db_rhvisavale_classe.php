@@ -77,15 +77,15 @@ class cl_rhvisavale {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh47_instit = ($this->rh47_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_instit"]:$this->rh47_instit);
+       $this->rh47_instit = ($this->rh47_instit === 0 || $this->rh47_instit === 0.0 || $this->rh47_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_instit"]:$this->rh47_instit);
        $this->rh47_rubric = ($this->rh47_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_rubric"]:$this->rh47_rubric);
-       $this->rh47_contrato = ($this->rh47_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_contrato"]:$this->rh47_contrato);
-       $this->rh47_tipovale = ($this->rh47_tipovale == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_tipovale"]:$this->rh47_tipovale);
-       $this->rh47_perc = ($this->rh47_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_perc"]:$this->rh47_perc);
-       $this->rh47_diasuteis = ($this->rh47_diasuteis == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_diasuteis"]:$this->rh47_diasuteis);
-       $this->rh47_db_sysfuncoes = ($this->rh47_db_sysfuncoes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_db_sysfuncoes"]:$this->rh47_db_sysfuncoes);
+       $this->rh47_contrato = ($this->rh47_contrato === 0 || $this->rh47_contrato === 0.0 || $this->rh47_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_contrato"]:$this->rh47_contrato);
+       $this->rh47_tipovale = ($this->rh47_tipovale === 0 || $this->rh47_tipovale === 0.0 || $this->rh47_tipovale == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_tipovale"]:$this->rh47_tipovale);
+       $this->rh47_perc = ($this->rh47_perc === 0 || $this->rh47_perc === 0.0 || $this->rh47_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_perc"]:$this->rh47_perc);
+       $this->rh47_diasuteis = ($this->rh47_diasuteis === 0 || $this->rh47_diasuteis === 0.0 || $this->rh47_diasuteis == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_diasuteis"]:$this->rh47_diasuteis);
+       $this->rh47_db_sysfuncoes = ($this->rh47_db_sysfuncoes === 0 || $this->rh47_db_sysfuncoes === 0.0 || $this->rh47_db_sysfuncoes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_db_sysfuncoes"]:$this->rh47_db_sysfuncoes);
      }else{
-       $this->rh47_instit = ($this->rh47_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_instit"]:$this->rh47_instit);
+       $this->rh47_instit = ($this->rh47_instit === 0 || $this->rh47_instit === 0.0 || $this->rh47_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh47_instit"]:$this->rh47_instit);
      }
    }
    // funcao para inclusao
@@ -146,7 +146,7 @@ class cl_rhvisavale {
        return false;
      }
        $this->rh47_instit = $rh47_instit;
-     if(($this->rh47_instit == null) || ($this->rh47_instit == "") ){
+     if(($this->rh47_instit == null) || ($this->rh47_instit === 0 || $this->rh47_instit === 0.0 || $this->rh47_instit == "") ){
        $this->erro_sql = " Campo rh47_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -81,17 +81,17 @@ class cl_ouvidoriaatendimentoretornoender {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov12_sequencial = ($this->ov12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_sequencial"]:$this->ov12_sequencial);
-       $this->ov12_ouvidoriaantendimento = ($this->ov12_ouvidoriaantendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_ouvidoriaantendimento"]:$this->ov12_ouvidoriaantendimento);
+       $this->ov12_sequencial = ($this->ov12_sequencial === 0 || $this->ov12_sequencial === 0.0 || $this->ov12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_sequencial"]:$this->ov12_sequencial);
+       $this->ov12_ouvidoriaantendimento = ($this->ov12_ouvidoriaantendimento === 0 || $this->ov12_ouvidoriaantendimento === 0.0 || $this->ov12_ouvidoriaantendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_ouvidoriaantendimento"]:$this->ov12_ouvidoriaantendimento);
        $this->ov12_endereco = ($this->ov12_endereco == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_endereco"]:$this->ov12_endereco);
-       $this->ov12_numero = ($this->ov12_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_numero"]:$this->ov12_numero);
+       $this->ov12_numero = ($this->ov12_numero === 0 || $this->ov12_numero === 0.0 || $this->ov12_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_numero"]:$this->ov12_numero);
        $this->ov12_compl = ($this->ov12_compl == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_compl"]:$this->ov12_compl);
        $this->ov12_munic = ($this->ov12_munic == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_munic"]:$this->ov12_munic);
        $this->ov12_bairro = ($this->ov12_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_bairro"]:$this->ov12_bairro);
        $this->ov12_uf = ($this->ov12_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_uf"]:$this->ov12_uf);
        $this->ov12_cep = ($this->ov12_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_cep"]:$this->ov12_cep);
      }else{
-       $this->ov12_sequencial = ($this->ov12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_sequencial"]:$this->ov12_sequencial);
+       $this->ov12_sequencial = ($this->ov12_sequencial === 0 || $this->ov12_sequencial === 0.0 || $this->ov12_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov12_sequencial"]:$this->ov12_sequencial);
      }
    }
    // funcao para inclusao
@@ -175,7 +175,7 @@ class cl_ouvidoriaatendimentoretornoender {
          $this->ov12_sequencial = $ov12_sequencial;
        }
      }
-     if(($this->ov12_sequencial == null) || ($this->ov12_sequencial == "") ){
+     if(($this->ov12_sequencial == null) || ($this->ov12_sequencial === 0 || $this->ov12_sequencial === 0.0 || $this->ov12_sequencial == "") ){
        $this->erro_sql = " Campo ov12_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

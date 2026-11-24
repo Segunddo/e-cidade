@@ -69,11 +69,11 @@ class cl_db_procedgrupos {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at52_sequencial = ($this->at52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at52_sequencial"]:$this->at52_sequencial);
-       $this->at52_grupo = ($this->at52_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["at52_grupo"]:$this->at52_grupo);
-       $this->at52_proced = ($this->at52_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["at52_proced"]:$this->at52_proced);
+       $this->at52_sequencial = ($this->at52_sequencial === 0 || $this->at52_sequencial === 0.0 || $this->at52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at52_sequencial"]:$this->at52_sequencial);
+       $this->at52_grupo = ($this->at52_grupo === 0 || $this->at52_grupo === 0.0 || $this->at52_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["at52_grupo"]:$this->at52_grupo);
+       $this->at52_proced = ($this->at52_proced === 0 || $this->at52_proced === 0.0 || $this->at52_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["at52_proced"]:$this->at52_proced);
      }else{
-       $this->at52_sequencial = ($this->at52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at52_sequencial"]:$this->at52_sequencial);
+       $this->at52_sequencial = ($this->at52_sequencial === 0 || $this->at52_sequencial === 0.0 || $this->at52_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at52_sequencial"]:$this->at52_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_procedgrupos {
          $this->at52_sequencial = $at52_sequencial;
        }
      }
-     if(($this->at52_sequencial == null) || ($this->at52_sequencial == "") ){
+     if(($this->at52_sequencial == null) || ($this->at52_sequencial === 0 || $this->at52_sequencial === 0.0 || $this->at52_sequencial == "") ){
        $this->erro_sql = " Campo at52_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

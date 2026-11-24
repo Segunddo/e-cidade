@@ -67,10 +67,10 @@ class cl_pcandpadraodepto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc46_pcandpadrao = ($this->pc46_pcandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_pcandpadrao"]:$this->pc46_pcandpadrao);
-       $this->pc46_depart = ($this->pc46_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_depart"]:$this->pc46_depart);
+       $this->pc46_pcandpadrao = ($this->pc46_pcandpadrao === 0 || $this->pc46_pcandpadrao === 0.0 || $this->pc46_pcandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_pcandpadrao"]:$this->pc46_pcandpadrao);
+       $this->pc46_depart = ($this->pc46_depart === 0 || $this->pc46_depart === 0.0 || $this->pc46_depart == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_depart"]:$this->pc46_depart);
      }else{
-       $this->pc46_pcandpadrao = ($this->pc46_pcandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_pcandpadrao"]:$this->pc46_pcandpadrao);
+       $this->pc46_pcandpadrao = ($this->pc46_pcandpadrao === 0 || $this->pc46_pcandpadrao === 0.0 || $this->pc46_pcandpadrao == ""?@$GLOBALS["HTTP_POST_VARS"]["pc46_pcandpadrao"]:$this->pc46_pcandpadrao);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_pcandpadraodepto {
        return false;
      }
        $this->pc46_pcandpadrao = $pc46_pcandpadrao;
-     if(($this->pc46_pcandpadrao == null) || ($this->pc46_pcandpadrao == "") ){
+     if(($this->pc46_pcandpadrao == null) || ($this->pc46_pcandpadrao === 0 || $this->pc46_pcandpadrao === 0.0 || $this->pc46_pcandpadrao == "") ){
        $this->erro_sql = " Campo pc46_pcandpadrao nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

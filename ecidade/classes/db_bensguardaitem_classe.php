@@ -83,9 +83,9 @@ class cl_bensguardaitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t22_codigo = ($this->t22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_codigo"]:$this->t22_codigo);
-       $this->t22_bensguarda = ($this->t22_bensguarda == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_bensguarda"]:$this->t22_bensguarda);
-       $this->t22_bem = ($this->t22_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_bem"]:$this->t22_bem);
+       $this->t22_codigo = ($this->t22_codigo === 0 || $this->t22_codigo === 0.0 || $this->t22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_codigo"]:$this->t22_codigo);
+       $this->t22_bensguarda = ($this->t22_bensguarda === 0 || $this->t22_bensguarda === 0.0 || $this->t22_bensguarda == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_bensguarda"]:$this->t22_bensguarda);
+       $this->t22_bem = ($this->t22_bem === 0 || $this->t22_bem === 0.0 || $this->t22_bem == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_bem"]:$this->t22_bem);
        if($this->t22_dtini == ""){
          $this->t22_dtini_dia = ($this->t22_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_dtini_dia"]:$this->t22_dtini_dia);
          $this->t22_dtini_mes = ($this->t22_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_dtini_mes"]:$this->t22_dtini_mes);
@@ -103,9 +103,9 @@ class cl_bensguardaitem {
          }
        }
        $this->t22_obs = ($this->t22_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_obs"]:$this->t22_obs);
-       $this->t22_usuario = ($this->t22_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_usuario"]:$this->t22_usuario);
+       $this->t22_usuario = ($this->t22_usuario === 0 || $this->t22_usuario === 0.0 || $this->t22_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_usuario"]:$this->t22_usuario);
      }else{
-       $this->t22_codigo = ($this->t22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_codigo"]:$this->t22_codigo);
+       $this->t22_codigo = ($this->t22_codigo === 0 || $this->t22_codigo === 0.0 || $this->t22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t22_codigo"]:$this->t22_codigo);
      }
    }
    // funcao para inclusao
@@ -174,7 +174,7 @@ class cl_bensguardaitem {
          $this->t22_codigo = $t22_codigo;
        }
      }
-     if(($this->t22_codigo == null) || ($this->t22_codigo == "") ){
+     if(($this->t22_codigo == null) || ($this->t22_codigo === 0 || $this->t22_codigo === 0.0 || $this->t22_codigo == "") ){
        $this->erro_sql = " Campo t22_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -76,8 +76,8 @@ class cl_tarefa_autcanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at38_tarefaaut = ($this->at38_tarefaaut == ""?@$GLOBALS["HTTP_POST_VARS"]["at38_tarefaaut"]:$this->at38_tarefaaut);
-       $this->at38_usuario = ($this->at38_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at38_usuario"]:$this->at38_usuario);
+       $this->at38_tarefaaut = ($this->at38_tarefaaut === 0 || $this->at38_tarefaaut === 0.0 || $this->at38_tarefaaut == ""?@$GLOBALS["HTTP_POST_VARS"]["at38_tarefaaut"]:$this->at38_tarefaaut);
+       $this->at38_usuario = ($this->at38_usuario === 0 || $this->at38_usuario === 0.0 || $this->at38_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at38_usuario"]:$this->at38_usuario);
        if($this->at38_data == ""){
          $this->at38_data_dia = ($this->at38_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at38_data_dia"]:$this->at38_data_dia);
          $this->at38_data_mes = ($this->at38_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at38_data_mes"]:$this->at38_data_mes);
@@ -89,7 +89,7 @@ class cl_tarefa_autcanc {
        $this->at38_hora = ($this->at38_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["at38_hora"]:$this->at38_hora);
        $this->at38_ip = ($this->at38_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["at38_ip"]:$this->at38_ip);
      }else{
-       $this->at38_tarefaaut = ($this->at38_tarefaaut == ""?@$GLOBALS["HTTP_POST_VARS"]["at38_tarefaaut"]:$this->at38_tarefaaut);
+       $this->at38_tarefaaut = ($this->at38_tarefaaut === 0 || $this->at38_tarefaaut === 0.0 || $this->at38_tarefaaut == ""?@$GLOBALS["HTTP_POST_VARS"]["at38_tarefaaut"]:$this->at38_tarefaaut);
      }
    }
    // funcao para inclusao
@@ -132,7 +132,7 @@ class cl_tarefa_autcanc {
        return false;
      }
        $this->at38_tarefaaut = $at38_tarefaaut;
-     if(($this->at38_tarefaaut == null) || ($this->at38_tarefaaut == "") ){
+     if(($this->at38_tarefaaut == null) || ($this->at38_tarefaaut === 0 || $this->at38_tarefaaut === 0.0 || $this->at38_tarefaaut == "") ){
        $this->erro_sql = " Campo at38_tarefaaut nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

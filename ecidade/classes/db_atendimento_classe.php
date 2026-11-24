@@ -89,9 +89,9 @@ class cl_atendimento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at02_codatend = ($this->at02_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_codatend"]:$this->at02_codatend);
-       $this->at02_codcli = ($this->at02_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_codcli"]:$this->at02_codcli);
-       $this->at02_codtipo = ($this->at02_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_codtipo"]:$this->at02_codtipo);
+       $this->at02_codatend = ($this->at02_codatend === 0 || $this->at02_codatend === 0.0 || $this->at02_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_codatend"]:$this->at02_codatend);
+       $this->at02_codcli = ($this->at02_codcli === 0 || $this->at02_codcli === 0.0 || $this->at02_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_codcli"]:$this->at02_codcli);
+       $this->at02_codtipo = ($this->at02_codtipo === 0 || $this->at02_codtipo === 0.0 || $this->at02_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_codtipo"]:$this->at02_codtipo);
        $this->at02_solicitado = ($this->at02_solicitado == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_solicitado"]:$this->at02_solicitado);
        $this->at02_feito = ($this->at02_feito == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_feito"]:$this->at02_feito);
        if($this->at02_dataini == ""){
@@ -114,7 +114,7 @@ class cl_atendimento {
        $this->at02_horafim = ($this->at02_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_horafim"]:$this->at02_horafim);
        $this->at02_observacao = ($this->at02_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_observacao"]:$this->at02_observacao);
      }else{
-       $this->at02_codatend = ($this->at02_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_codatend"]:$this->at02_codatend);
+       $this->at02_codatend = ($this->at02_codatend === 0 || $this->at02_codatend === 0.0 || $this->at02_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at02_codatend"]:$this->at02_codatend);
      }
    }
    // funcao para inclusao
@@ -168,7 +168,7 @@ class cl_atendimento {
          $this->at02_codatend = $at02_codatend;
        }
      }
-     if(($this->at02_codatend == null) || ($this->at02_codatend == "") ){
+     if(($this->at02_codatend == null) || ($this->at02_codatend === 0 || $this->at02_codatend === 0.0 || $this->at02_codatend == "") ){
        $this->erro_sql = " Campo at02_codatend nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

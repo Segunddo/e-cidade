@@ -76,8 +76,8 @@ class cl_apolice {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t81_codapo = ($this->t81_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t81_codapo"]:$this->t81_codapo);
-       $this->t81_codseg = ($this->t81_codseg == ""?@$GLOBALS["HTTP_POST_VARS"]["t81_codseg"]:$this->t81_codseg);
+       $this->t81_codapo = ($this->t81_codapo === 0 || $this->t81_codapo === 0.0 || $this->t81_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t81_codapo"]:$this->t81_codapo);
+       $this->t81_codseg = ($this->t81_codseg === 0 || $this->t81_codseg === 0.0 || $this->t81_codseg == ""?@$GLOBALS["HTTP_POST_VARS"]["t81_codseg"]:$this->t81_codseg);
        $this->t81_apolice = ($this->t81_apolice == ""?@$GLOBALS["HTTP_POST_VARS"]["t81_apolice"]:$this->t81_apolice);
        if($this->t81_venc == ""){
          $this->t81_venc_dia = ($this->t81_venc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t81_venc_dia"]:$this->t81_venc_dia);
@@ -87,9 +87,9 @@ class cl_apolice {
             $this->t81_venc = $this->t81_venc_ano."-".$this->t81_venc_mes."-".$this->t81_venc_dia;
          }
        }
-       $this->t81_instit = ($this->t81_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t81_instit"]:$this->t81_instit);
+       $this->t81_instit = ($this->t81_instit === 0 || $this->t81_instit === 0.0 || $this->t81_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["t81_instit"]:$this->t81_instit);
      }else{
-       $this->t81_codapo = ($this->t81_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t81_codapo"]:$this->t81_codapo);
+       $this->t81_codapo = ($this->t81_codapo === 0 || $this->t81_codapo === 0.0 || $this->t81_codapo == ""?@$GLOBALS["HTTP_POST_VARS"]["t81_codapo"]:$this->t81_codapo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_apolice {
          $this->t81_codapo = $t81_codapo;
        }
      }
-     if(($this->t81_codapo == null) || ($this->t81_codapo == "") ){
+     if(($this->t81_codapo == null) || ($this->t81_codapo === 0 || $this->t81_codapo === 0.0 || $this->t81_codapo == "") ){
        $this->erro_sql = " Campo t81_codapo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

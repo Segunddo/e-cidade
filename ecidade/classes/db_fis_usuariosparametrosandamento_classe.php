@@ -66,11 +66,11 @@ class cl_fis_usuariosparametrosandamento {
     // funcao para atualizar campos
     public function atualizacampos($exclusao=false) {
         if($exclusao==false){
-            $this->sequencial = ($this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
-            $this->parametrosandamento = ($this->parametrosandamento == ""?@$GLOBALS["HTTP_POST_VARS"]["parametrosandamento"]:$this->parametrosandamento);
-            $this->db_usuarios = ($this->db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["db_usuarios"]:$this->db_usuarios);
+            $this->sequencial = ($this->sequencial === 0 || $this->sequencial === 0.0 || $this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
+            $this->parametrosandamento = ($this->parametrosandamento === 0 || $this->parametrosandamento === 0.0 || $this->parametrosandamento == ""?@$GLOBALS["HTTP_POST_VARS"]["parametrosandamento"]:$this->parametrosandamento);
+            $this->db_usuarios = ($this->db_usuarios === 0 || $this->db_usuarios === 0.0 || $this->db_usuarios == ""?@$GLOBALS["HTTP_POST_VARS"]["db_usuarios"]:$this->db_usuarios);
         }else{
-            $this->sequencial = ($this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
+            $this->sequencial = ($this->sequencial === 0 || $this->sequencial === 0.0 || $this->sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["sequencial"]:$this->sequencial);
         }
     }
 

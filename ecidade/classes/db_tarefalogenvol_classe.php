@@ -71,12 +71,12 @@ class cl_tarefalogenvol {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at35_sequencia = ($this->at35_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at35_sequencia"]:$this->at35_sequencia);
-       $this->at35_tarefalog = ($this->at35_tarefalog == ""?@$GLOBALS["HTTP_POST_VARS"]["at35_tarefalog"]:$this->at35_tarefalog);
-       $this->at35_usuario = ($this->at35_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at35_usuario"]:$this->at35_usuario);
-       $this->at35_perc = ($this->at35_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["at35_perc"]:$this->at35_perc);
+       $this->at35_sequencia = ($this->at35_sequencia === 0 || $this->at35_sequencia === 0.0 || $this->at35_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at35_sequencia"]:$this->at35_sequencia);
+       $this->at35_tarefalog = ($this->at35_tarefalog === 0 || $this->at35_tarefalog === 0.0 || $this->at35_tarefalog == ""?@$GLOBALS["HTTP_POST_VARS"]["at35_tarefalog"]:$this->at35_tarefalog);
+       $this->at35_usuario = ($this->at35_usuario === 0 || $this->at35_usuario === 0.0 || $this->at35_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at35_usuario"]:$this->at35_usuario);
+       $this->at35_perc = ($this->at35_perc === 0 || $this->at35_perc === 0.0 || $this->at35_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["at35_perc"]:$this->at35_perc);
      }else{
-       $this->at35_sequencia = ($this->at35_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at35_sequencia"]:$this->at35_sequencia);
+       $this->at35_sequencia = ($this->at35_sequencia === 0 || $this->at35_sequencia === 0.0 || $this->at35_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at35_sequencia"]:$this->at35_sequencia);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_tarefalogenvol {
          $this->at35_sequencia = $at35_sequencia;
        }
      }
-     if(($this->at35_sequencia == null) || ($this->at35_sequencia == "") ){
+     if(($this->at35_sequencia == null) || ($this->at35_sequencia === 0 || $this->at35_sequencia === 0.0 || $this->at35_sequencia == "") ){
        $this->erro_sql = " Campo at35_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

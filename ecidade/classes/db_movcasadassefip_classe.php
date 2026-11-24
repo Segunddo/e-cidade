@@ -71,13 +71,13 @@ class cl_movcasadassefip {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r67_anousu = ($this->r67_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_anousu"]:$this->r67_anousu);
-       $this->r67_mesusu = ($this->r67_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_mesusu"]:$this->r67_mesusu);
+       $this->r67_anousu = ($this->r67_anousu === 0 || $this->r67_anousu === 0.0 || $this->r67_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_anousu"]:$this->r67_anousu);
+       $this->r67_mesusu = ($this->r67_mesusu === 0 || $this->r67_mesusu === 0.0 || $this->r67_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_mesusu"]:$this->r67_mesusu);
        $this->r67_afast = ($this->r67_afast == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_afast"]:$this->r67_afast);
        $this->r67_reto = ($this->r67_reto == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_reto"]:$this->r67_reto);
      }else{
-       $this->r67_anousu = ($this->r67_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_anousu"]:$this->r67_anousu);
-       $this->r67_mesusu = ($this->r67_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_mesusu"]:$this->r67_mesusu);
+       $this->r67_anousu = ($this->r67_anousu === 0 || $this->r67_anousu === 0.0 || $this->r67_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_anousu"]:$this->r67_anousu);
+       $this->r67_mesusu = ($this->r67_mesusu === 0 || $this->r67_mesusu === 0.0 || $this->r67_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_mesusu"]:$this->r67_mesusu);
        $this->r67_afast = ($this->r67_afast == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_afast"]:$this->r67_afast);
        $this->r67_reto = ($this->r67_reto == ""?@$GLOBALS["HTTP_POST_VARS"]["r67_reto"]:$this->r67_reto);
      }
@@ -89,7 +89,7 @@ class cl_movcasadassefip {
        $this->r67_mesusu = $r67_mesusu;
        $this->r67_afast = $r67_afast;
        $this->r67_reto = $r67_reto;
-     if(($this->r67_anousu == null) || ($this->r67_anousu == "") ){
+     if(($this->r67_anousu == null) || ($this->r67_anousu === 0 || $this->r67_anousu === 0.0 || $this->r67_anousu == "") ){
        $this->erro_sql = " Campo r67_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -97,7 +97,7 @@ class cl_movcasadassefip {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r67_mesusu == null) || ($this->r67_mesusu == "") ){
+     if(($this->r67_mesusu == null) || ($this->r67_mesusu === 0 || $this->r67_mesusu === 0.0 || $this->r67_mesusu == "") ){
        $this->erro_sql = " Campo r67_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

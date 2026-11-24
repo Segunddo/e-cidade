@@ -86,11 +86,11 @@ class cl_atenditem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at05_seq = ($this->at05_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_seq"]:$this->at05_seq);
-       $this->at05_codatend = ($this->at05_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_codatend"]:$this->at05_codatend);
+       $this->at05_seq = ($this->at05_seq === 0 || $this->at05_seq === 0.0 || $this->at05_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_seq"]:$this->at05_seq);
+       $this->at05_codatend = ($this->at05_codatend === 0 || $this->at05_codatend === 0.0 || $this->at05_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_codatend"]:$this->at05_codatend);
        $this->at05_solicitado = ($this->at05_solicitado == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_solicitado"]:$this->at05_solicitado);
        $this->at05_feito = ($this->at05_feito == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_feito"]:$this->at05_feito);
-       $this->at05_tipo = ($this->at05_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_tipo"]:$this->at05_tipo);
+       $this->at05_tipo = ($this->at05_tipo === 0 || $this->at05_tipo === 0.0 || $this->at05_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_tipo"]:$this->at05_tipo);
        if($this->at05_data == ""){
          $this->at05_data_dia = ($this->at05_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_data_dia"]:$this->at05_data_dia);
          $this->at05_data_mes = ($this->at05_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_data_mes"]:$this->at05_data_mes);
@@ -99,13 +99,13 @@ class cl_atenditem {
             $this->at05_data = $this->at05_data_ano."-".$this->at05_data_mes."-".$this->at05_data_dia;
          }
        }
-       $this->at05_perc = ($this->at05_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_perc"]:$this->at05_perc);
+       $this->at05_perc = ($this->at05_perc === 0 || $this->at05_perc === 0.0 || $this->at05_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_perc"]:$this->at05_perc);
        $this->at05_horafim = ($this->at05_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_horafim"]:$this->at05_horafim);
        $this->at05_horaini = ($this->at05_horaini == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_horaini"]:$this->at05_horaini);
-       $this->at05_prioridade = ($this->at05_prioridade == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_prioridade"]:$this->at05_prioridade);
+       $this->at05_prioridade = ($this->at05_prioridade === 0 || $this->at05_prioridade === 0.0 || $this->at05_prioridade == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_prioridade"]:$this->at05_prioridade);
      }else{
-       $this->at05_seq = ($this->at05_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_seq"]:$this->at05_seq);
-       $this->at05_codatend = ($this->at05_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_codatend"]:$this->at05_codatend);
+       $this->at05_seq = ($this->at05_seq === 0 || $this->at05_seq === 0.0 || $this->at05_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_seq"]:$this->at05_seq);
+       $this->at05_codatend = ($this->at05_codatend === 0 || $this->at05_codatend === 0.0 || $this->at05_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at05_codatend"]:$this->at05_codatend);
      }
    }
    // funcao para inclusao
@@ -192,7 +192,7 @@ class cl_atenditem {
          $this->at05_seq = $at05_seq;
        }
      }
-     if(($this->at05_seq == null) || ($this->at05_seq == "") ){
+     if(($this->at05_seq == null) || ($this->at05_seq === 0 || $this->at05_seq === 0.0 || $this->at05_seq == "") ){
        $this->erro_sql = " Campo at05_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -200,7 +200,7 @@ class cl_atenditem {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->at05_codatend == null) || ($this->at05_codatend == "") ){
+     if(($this->at05_codatend == null) || ($this->at05_codatend === 0 || $this->at05_codatend === 0.0 || $this->at05_codatend == "") ){
        $this->erro_sql = " Campo at05_codatend nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -69,11 +69,11 @@ class cl_matparamconsulta {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m38_instit = ($this->m38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_instit"]:$this->m38_instit);
-       $this->m38_visualizacaoitens = ($this->m38_visualizacaoitens == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_visualizacaoitens"]:$this->m38_visualizacaoitens);
+       $this->m38_instit = ($this->m38_instit === 0 || $this->m38_instit === 0.0 || $this->m38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_instit"]:$this->m38_instit);
+       $this->m38_visualizacaoitens = ($this->m38_visualizacaoitens === 0 || $this->m38_visualizacaoitens === 0.0 || $this->m38_visualizacaoitens == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_visualizacaoitens"]:$this->m38_visualizacaoitens);
        $this->m38_visualizacaomatestoque = ($this->m38_visualizacaomatestoque == "f"?@$GLOBALS["HTTP_POST_VARS"]["m38_visualizacaomatestoque"]:$this->m38_visualizacaomatestoque);
      }else{
-       $this->m38_instit = ($this->m38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_instit"]:$this->m38_instit);
+       $this->m38_instit = ($this->m38_instit === 0 || $this->m38_instit === 0.0 || $this->m38_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["m38_instit"]:$this->m38_instit);
      }
    }
    // funcao para inclusao
@@ -98,7 +98,7 @@ class cl_matparamconsulta {
        return false;
      }
        $this->m38_instit = $m38_instit;
-     if(($this->m38_instit == null) || ($this->m38_instit == "") ){
+     if(($this->m38_instit == null) || ($this->m38_instit === 0 || $this->m38_instit === 0.0 || $this->m38_instit == "") ){
        $this->erro_sql = " Campo m38_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

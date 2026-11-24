@@ -67,17 +67,17 @@ class cl_fis_processosfiscais {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pf01_procfiscal = ($this->pf01_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["pf01_procfiscal"]:$this->pf01_procfiscal);
-       $this->pf01_processo = ($this->pf01_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["pf01_processo"]:$this->pf01_processo);
+       $this->pf01_procfiscal = ($this->pf01_procfiscal === 0 || $this->pf01_procfiscal === 0.0 || $this->pf01_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["pf01_procfiscal"]:$this->pf01_procfiscal);
+       $this->pf01_processo = ($this->pf01_processo === 0 || $this->pf01_processo === 0.0 || $this->pf01_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["pf01_processo"]:$this->pf01_processo);
      }else{
-       $this->pf01_procfiscal = ($this->pf01_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["pf01_procfiscal"]:$this->pf01_procfiscal);
-       $this->pf01_processo = ($this->pf01_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["pf01_processo"]:$this->pf01_processo);
+       $this->pf01_procfiscal = ($this->pf01_procfiscal === 0 || $this->pf01_procfiscal === 0.0 || $this->pf01_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["pf01_procfiscal"]:$this->pf01_procfiscal);
+       $this->pf01_processo = ($this->pf01_processo === 0 || $this->pf01_processo === 0.0 || $this->pf01_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["pf01_processo"]:$this->pf01_processo);
      }
    }
    // funcao para inclusao
    public function incluir (){
       $this->atualizacampos();
-     if(($this->pf01_procfiscal == null) || ($this->pf01_procfiscal == "") ){
+     if(($this->pf01_procfiscal == null) || ($this->pf01_procfiscal === 0 || $this->pf01_procfiscal === 0.0 || $this->pf01_procfiscal == "") ){
        $this->erro_sql    = " Campo pf01_procfiscal nao declarado.";
        $this->erro_banco  = " Chave Estrangeira zerada.";
        $this->erro_msg    = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -85,7 +85,7 @@ class cl_fis_processosfiscais {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pf01_processo == null) || ($this->pf01_processo == "") ){
+     if(($this->pf01_processo == null) || ($this->pf01_processo === 0 || $this->pf01_processo === 0.0 || $this->pf01_processo == "") ){
        $this->erro_sql    = " Campo pf01_processo nao declarado.";
        $this->erro_banco  = "Chave Primaria zerada.";
        $this->erro_msg    = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

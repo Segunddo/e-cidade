@@ -67,10 +67,10 @@ class cl_db_procedsituacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at32_codigo = ($this->at32_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at32_codigo"]:$this->at32_codigo);
+       $this->at32_codigo = ($this->at32_codigo === 0 || $this->at32_codigo === 0.0 || $this->at32_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at32_codigo"]:$this->at32_codigo);
        $this->at32_descr = ($this->at32_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at32_descr"]:$this->at32_descr);
      }else{
-       $this->at32_codigo = ($this->at32_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at32_codigo"]:$this->at32_codigo);
+       $this->at32_codigo = ($this->at32_codigo === 0 || $this->at32_codigo === 0.0 || $this->at32_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at32_codigo"]:$this->at32_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_db_procedsituacao {
          $this->at32_codigo = $at32_codigo;
        }
      }
-     if(($this->at32_codigo == null) || ($this->at32_codigo == "") ){
+     if(($this->at32_codigo == null) || ($this->at32_codigo === 0 || $this->at32_codigo === 0.0 || $this->at32_codigo == "") ){
        $this->erro_sql = " Campo at32_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -81,9 +81,9 @@ class cl_db_projetoscliente {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at60_codproj = ($this->at60_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codproj"]:$this->at60_codproj);
-       $this->at60_codcli = ($this->at60_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codcli"]:$this->at60_codcli);
-       $this->at60_codproced = ($this->at60_codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codproced"]:$this->at60_codproced);
+       $this->at60_codproj = ($this->at60_codproj === 0 || $this->at60_codproj === 0.0 || $this->at60_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codproj"]:$this->at60_codproj);
+       $this->at60_codcli = ($this->at60_codcli === 0 || $this->at60_codcli === 0.0 || $this->at60_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codcli"]:$this->at60_codcli);
+       $this->at60_codproced = ($this->at60_codproced === 0 || $this->at60_codproced === 0.0 || $this->at60_codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codproced"]:$this->at60_codproced);
        if($this->at60_inicio == ""){
          $this->at60_inicio_dia = ($this->at60_inicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_inicio_dia"]:$this->at60_inicio_dia);
          $this->at60_inicio_mes = ($this->at60_inicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_inicio_mes"]:$this->at60_inicio_mes);
@@ -102,7 +102,7 @@ class cl_db_projetoscliente {
        }
        $this->at60_descricao = ($this->at60_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_descricao"]:$this->at60_descricao);
      }else{
-       $this->at60_codproj = ($this->at60_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codproj"]:$this->at60_codproj);
+       $this->at60_codproj = ($this->at60_codproj === 0 || $this->at60_codproj === 0.0 || $this->at60_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["at60_codproj"]:$this->at60_codproj);
      }
    }
    // funcao para inclusao
@@ -168,7 +168,7 @@ class cl_db_projetoscliente {
          $this->at60_codproj = $at60_codproj;
        }
      }
-     if(($this->at60_codproj == null) || ($this->at60_codproj == "") ){
+     if(($this->at60_codproj == null) || ($this->at60_codproj === 0 || $this->at60_codproj === 0.0 || $this->at60_codproj == "") ){
        $this->erro_sql = " Campo at60_codproj nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

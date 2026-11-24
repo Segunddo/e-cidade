@@ -95,14 +95,14 @@ class cl_tarefalog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at43_sequencial = ($this->at43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_sequencial"]:$this->at43_sequencial);
-       $this->at43_tarefa = ($this->at43_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_tarefa"]:$this->at43_tarefa);
+       $this->at43_sequencial = ($this->at43_sequencial === 0 || $this->at43_sequencial === 0.0 || $this->at43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_sequencial"]:$this->at43_sequencial);
+       $this->at43_tarefa = ($this->at43_tarefa === 0 || $this->at43_tarefa === 0.0 || $this->at43_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_tarefa"]:$this->at43_tarefa);
        $this->at43_descr = ($this->at43_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_descr"]:$this->at43_descr);
        $this->at43_obs = ($this->at43_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_obs"]:$this->at43_obs);
        $this->at43_problema = ($this->at43_problema == "f"?@$GLOBALS["HTTP_POST_VARS"]["at43_problema"]:$this->at43_problema);
-       $this->at43_avisar = ($this->at43_avisar == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_avisar"]:$this->at43_avisar);
-       $this->at43_progresso = ($this->at43_progresso == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_progresso"]:$this->at43_progresso);
-       $this->at43_usuario = ($this->at43_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_usuario"]:$this->at43_usuario);
+       $this->at43_avisar = ($this->at43_avisar === 0 || $this->at43_avisar === 0.0 || $this->at43_avisar == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_avisar"]:$this->at43_avisar);
+       $this->at43_progresso = ($this->at43_progresso === 0 || $this->at43_progresso === 0.0 || $this->at43_progresso == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_progresso"]:$this->at43_progresso);
+       $this->at43_usuario = ($this->at43_usuario === 0 || $this->at43_usuario === 0.0 || $this->at43_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_usuario"]:$this->at43_usuario);
        if($this->at43_diaini == ""){
          $this->at43_diaini_dia = ($this->at43_diaini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_diaini_dia"]:$this->at43_diaini_dia);
          $this->at43_diaini_mes = ($this->at43_diaini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_diaini_mes"]:$this->at43_diaini_mes);
@@ -121,9 +121,9 @@ class cl_tarefalog {
        }
        $this->at43_horainidia = ($this->at43_horainidia == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_horainidia"]:$this->at43_horainidia);
        $this->at43_horafim = ($this->at43_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_horafim"]:$this->at43_horafim);
-       $this->at43_tipomov = ($this->at43_tipomov == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_tipomov"]:$this->at43_tipomov);
+       $this->at43_tipomov = ($this->at43_tipomov === 0 || $this->at43_tipomov === 0.0 || $this->at43_tipomov == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_tipomov"]:$this->at43_tipomov);
      }else{
-       $this->at43_sequencial = ($this->at43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_sequencial"]:$this->at43_sequencial);
+       $this->at43_sequencial = ($this->at43_sequencial === 0 || $this->at43_sequencial === 0.0 || $this->at43_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at43_sequencial"]:$this->at43_sequencial);
      }
    }
    // funcao para inclusao
@@ -252,7 +252,7 @@ class cl_tarefalog {
          $this->at43_sequencial = $at43_sequencial;
        }
      }
-     if(($this->at43_sequencial == null) || ($this->at43_sequencial == "") ){
+     if(($this->at43_sequencial == null) || ($this->at43_sequencial === 0 || $this->at43_sequencial === 0.0 || $this->at43_sequencial == "") ){
        $this->erro_sql = " Campo at43_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

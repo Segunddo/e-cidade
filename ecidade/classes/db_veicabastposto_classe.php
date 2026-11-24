@@ -71,12 +71,12 @@ class cl_veicabastposto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve71_codigo = ($this->ve71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_codigo"]:$this->ve71_codigo);
-       $this->ve71_veicabast = ($this->ve71_veicabast == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_veicabast"]:$this->ve71_veicabast);
-       $this->ve71_veiccadposto = ($this->ve71_veiccadposto == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_veiccadposto"]:$this->ve71_veiccadposto);
+       $this->ve71_codigo = ($this->ve71_codigo === 0 || $this->ve71_codigo === 0.0 || $this->ve71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_codigo"]:$this->ve71_codigo);
+       $this->ve71_veicabast = ($this->ve71_veicabast === 0 || $this->ve71_veicabast === 0.0 || $this->ve71_veicabast == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_veicabast"]:$this->ve71_veicabast);
+       $this->ve71_veiccadposto = ($this->ve71_veiccadposto === 0 || $this->ve71_veiccadposto === 0.0 || $this->ve71_veiccadposto == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_veiccadposto"]:$this->ve71_veiccadposto);
        $this->ve71_nota = ($this->ve71_nota == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_nota"]:$this->ve71_nota);
      }else{
-       $this->ve71_codigo = ($this->ve71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_codigo"]:$this->ve71_codigo);
+       $this->ve71_codigo = ($this->ve71_codigo === 0 || $this->ve71_codigo === 0.0 || $this->ve71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve71_codigo"]:$this->ve71_codigo);
      }
    }
    // funcao para inclusao
@@ -124,7 +124,7 @@ class cl_veicabastposto {
          $this->ve71_codigo = $ve71_codigo;
        }
      }
-     if(($this->ve71_codigo == null) || ($this->ve71_codigo == "") ){
+     if(($this->ve71_codigo == null) || ($this->ve71_codigo === 0 || $this->ve71_codigo === 0.0 || $this->ve71_codigo == "") ){
        $this->erro_sql = " Campo ve71_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

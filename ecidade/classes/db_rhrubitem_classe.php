@@ -68,7 +68,7 @@ class cl_rhrubitem {
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
        $this->rh13_rubric = ($this->rh13_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_rubric"]:$this->rh13_rubric);
-       $this->rh13_item = ($this->rh13_item == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_item"]:$this->rh13_item);
+       $this->rh13_item = ($this->rh13_item === 0 || $this->rh13_item === 0.0 || $this->rh13_item == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_item"]:$this->rh13_item);
      }else{
        $this->rh13_rubric = ($this->rh13_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["rh13_rubric"]:$this->rh13_rubric);
      }

@@ -67,7 +67,7 @@ class cl_rhtipoparticipacaocurso {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h67_sequencial = ($this->h67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h67_sequencial"]:$this->h67_sequencial);
+       $this->h67_sequencial = ($this->h67_sequencial === 0 || $this->h67_sequencial === 0.0 || $this->h67_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["h67_sequencial"]:$this->h67_sequencial);
        $this->h67_descricao = ($this->h67_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["h67_descricao"]:$this->h67_descricao);
      }else{
        $this->h67_descricao = ($this->h67_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["h67_descricao"]:$this->h67_descricao);

@@ -73,11 +73,11 @@ class cl_fis_procfiscallevanta
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y112_sequencial = ($this->y112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_sequencial"]:$this->y112_sequencial);
-            $this->y112_procfiscal = ($this->y112_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_procfiscal"]:$this->y112_procfiscal);
-            $this->y112_levanta = ($this->y112_levanta == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_levanta"]:$this->y112_levanta);
+            $this->y112_sequencial = ($this->y112_sequencial === 0 || $this->y112_sequencial === 0.0 || $this->y112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_sequencial"]:$this->y112_sequencial);
+            $this->y112_procfiscal = ($this->y112_procfiscal === 0 || $this->y112_procfiscal === 0.0 || $this->y112_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_procfiscal"]:$this->y112_procfiscal);
+            $this->y112_levanta = ($this->y112_levanta === 0 || $this->y112_levanta === 0.0 || $this->y112_levanta == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_levanta"]:$this->y112_levanta);
         } else {
-            $this->y112_sequencial = ($this->y112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_sequencial"]:$this->y112_sequencial);
+            $this->y112_sequencial = ($this->y112_sequencial === 0 || $this->y112_sequencial === 0.0 || $this->y112_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y112_sequencial"]:$this->y112_sequencial);
         }
     }
    // funcao para inclusao

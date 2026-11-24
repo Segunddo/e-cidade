@@ -67,10 +67,10 @@ class cl_atendrespcli {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at84_seq = ($this->at84_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_seq"]:$this->at84_seq);
-       $this->at84_id_usuario = ($this->at84_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_id_usuario"]:$this->at84_id_usuario);
+       $this->at84_seq = ($this->at84_seq === 0 || $this->at84_seq === 0.0 || $this->at84_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_seq"]:$this->at84_seq);
+       $this->at84_id_usuario = ($this->at84_id_usuario === 0 || $this->at84_id_usuario === 0.0 || $this->at84_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_id_usuario"]:$this->at84_id_usuario);
      }else{
-       $this->at84_seq = ($this->at84_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_seq"]:$this->at84_seq);
+       $this->at84_seq = ($this->at84_seq === 0 || $this->at84_seq === 0.0 || $this->at84_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["at84_seq"]:$this->at84_seq);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_atendrespcli {
          $this->at84_seq = $at84_seq;
        }
      }
-     if(($this->at84_seq == null) || ($this->at84_seq == "") ){
+     if(($this->at84_seq == null) || ($this->at84_seq === 0 || $this->at84_seq === 0.0 || $this->at84_seq == "") ){
        $this->erro_sql = " Campo at84_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

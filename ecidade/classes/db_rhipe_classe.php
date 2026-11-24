@@ -85,9 +85,9 @@ class cl_rhipe {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh14_instit = ($this->rh14_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_instit"]:$this->rh14_instit);
-       $this->rh14_sequencia = ($this->rh14_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_sequencia"]:$this->rh14_sequencia);
-       $this->rh14_matipe = ($this->rh14_matipe == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_matipe"]:$this->rh14_matipe);
+       $this->rh14_instit = ($this->rh14_instit === 0 || $this->rh14_instit === 0.0 || $this->rh14_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_instit"]:$this->rh14_instit);
+       $this->rh14_sequencia = ($this->rh14_sequencia === 0 || $this->rh14_sequencia === 0.0 || $this->rh14_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_sequencia"]:$this->rh14_sequencia);
+       $this->rh14_matipe = ($this->rh14_matipe === 0 || $this->rh14_matipe === 0.0 || $this->rh14_matipe == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_matipe"]:$this->rh14_matipe);
        if($this->rh14_dtvinc == ""){
          $this->rh14_dtvinc_dia = ($this->rh14_dtvinc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_dtvinc_dia"]:$this->rh14_dtvinc_dia);
          $this->rh14_dtvinc_mes = ($this->rh14_dtvinc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_dtvinc_mes"]:$this->rh14_dtvinc_mes);
@@ -105,10 +105,10 @@ class cl_rhipe {
             $this->rh14_dtalt = $this->rh14_dtalt_ano."-".$this->rh14_dtalt_mes."-".$this->rh14_dtalt_dia;
          }
        }
-       $this->rh14_contrato = ($this->rh14_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_contrato"]:$this->rh14_contrato);
-       $this->rh14_valor = ($this->rh14_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_valor"]:$this->rh14_valor);
+       $this->rh14_contrato = ($this->rh14_contrato === 0 || $this->rh14_contrato === 0.0 || $this->rh14_contrato == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_contrato"]:$this->rh14_contrato);
+       $this->rh14_valor = ($this->rh14_valor === 0 || $this->rh14_valor === 0.0 || $this->rh14_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_valor"]:$this->rh14_valor);
      }else{
-       $this->rh14_sequencia = ($this->rh14_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_sequencia"]:$this->rh14_sequencia);
+       $this->rh14_sequencia = ($this->rh14_sequencia === 0 || $this->rh14_sequencia === 0.0 || $this->rh14_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh14_sequencia"]:$this->rh14_sequencia);
      }
    }
    // funcao para inclusao
@@ -174,7 +174,7 @@ class cl_rhipe {
          $this->rh14_sequencia = $rh14_sequencia;
        }
      }
-     if(($this->rh14_sequencia == null) || ($this->rh14_sequencia == "") ){
+     if(($this->rh14_sequencia == null) || ($this->rh14_sequencia === 0 || $this->rh14_sequencia === 0.0 || $this->rh14_sequencia == "") ){
        $this->erro_sql = " Campo rh14_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

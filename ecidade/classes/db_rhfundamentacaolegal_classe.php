@@ -57,9 +57,9 @@ class cl_rhfundamentacaolegal {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh137_sequencial = ($this->rh137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_sequencial"]:$this->rh137_sequencial);
-       $this->rh137_tipodocumentacao = ($this->rh137_tipodocumentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_tipodocumentacao"]:$this->rh137_tipodocumentacao);
-       $this->rh137_numero = ($this->rh137_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_numero"]:$this->rh137_numero);
+       $this->rh137_sequencial = ($this->rh137_sequencial === 0 || $this->rh137_sequencial === 0.0 || $this->rh137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_sequencial"]:$this->rh137_sequencial);
+       $this->rh137_tipodocumentacao = ($this->rh137_tipodocumentacao === 0 || $this->rh137_tipodocumentacao === 0.0 || $this->rh137_tipodocumentacao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_tipodocumentacao"]:$this->rh137_tipodocumentacao);
+       $this->rh137_numero = ($this->rh137_numero === 0 || $this->rh137_numero === 0.0 || $this->rh137_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_numero"]:$this->rh137_numero);
        if($this->rh137_datainicio == ""){
          $this->rh137_datainicio_dia = ($this->rh137_datainicio_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_datainicio_dia"]:$this->rh137_datainicio_dia);
          $this->rh137_datainicio_mes = ($this->rh137_datainicio_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_datainicio_mes"]:$this->rh137_datainicio_mes);
@@ -77,9 +77,9 @@ class cl_rhfundamentacaolegal {
          }
        }
        $this->rh137_descricao = ($this->rh137_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_descricao"]:$this->rh137_descricao);
-       $this->rh137_instituicao = ($this->rh137_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_instituicao"]:$this->rh137_instituicao);
+       $this->rh137_instituicao = ($this->rh137_instituicao === 0 || $this->rh137_instituicao === 0.0 || $this->rh137_instituicao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_instituicao"]:$this->rh137_instituicao);
      }else{
-       $this->rh137_sequencial = ($this->rh137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_sequencial"]:$this->rh137_sequencial);
+       $this->rh137_sequencial = ($this->rh137_sequencial === 0 || $this->rh137_sequencial === 0.0 || $this->rh137_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh137_sequencial"]:$this->rh137_sequencial);
      }
    }
    // funcao para inclusao
@@ -142,7 +142,7 @@ class cl_rhfundamentacaolegal {
          $this->rh137_sequencial = $rh137_sequencial; 
        }
      }
-     if(($this->rh137_sequencial == null) || ($this->rh137_sequencial == "") ){ 
+     if(($this->rh137_sequencial == null) || ($this->rh137_sequencial === 0 || $this->rh137_sequencial === 0.0 || $this->rh137_sequencial == "") ){ 
        $this->erro_sql = " Campo rh137_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

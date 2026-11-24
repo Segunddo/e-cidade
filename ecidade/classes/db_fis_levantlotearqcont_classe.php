@@ -116,34 +116,34 @@ class cl_fis_levantlotearqcont {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y123_codigo = ($this->y123_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_codigo"]:$this->y123_codigo);
-       $this->y123_levantlotearq = ($this->y123_levantlotearq == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_levantlotearq"]:$this->y123_levantlotearq);
-       $this->y123_inscr = ($this->y123_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_inscr"]:$this->y123_inscr);
+       $this->y123_codigo = ($this->y123_codigo === 0 || $this->y123_codigo === 0.0 || $this->y123_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_codigo"]:$this->y123_codigo);
+       $this->y123_levantlotearq = ($this->y123_levantlotearq === 0 || $this->y123_levantlotearq === 0.0 || $this->y123_levantlotearq == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_levantlotearq"]:$this->y123_levantlotearq);
+       $this->y123_inscr = ($this->y123_inscr === 0 || $this->y123_inscr === 0.0 || $this->y123_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_inscr"]:$this->y123_inscr);
        $this->y123_processo = ($this->y123_processo == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_processo"]:$this->y123_processo);
-       $this->y123_acaofiscal = ($this->y123_acaofiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_acaofiscal"]:$this->y123_acaofiscal);
+       $this->y123_acaofiscal = ($this->y123_acaofiscal === 0 || $this->y123_acaofiscal === 0.0 || $this->y123_acaofiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_acaofiscal"]:$this->y123_acaofiscal);
        $this->y123_codfiscal = ($this->y123_codfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_codfiscal"]:$this->y123_codfiscal);
        $this->y123_levcontato = ($this->y123_levcontato == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_levcontato"]:$this->y123_levcontato);
        $this->y123_dtlevanta = ($this->y123_dtlevanta == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_dtlevanta"]:$this->y123_dtlevanta);
        $this->y123_perinicial = ($this->y123_perinicial == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_perinicial"]:$this->y123_perinicial);
        $this->y123_perfinal = ($this->y123_perfinal == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_perfinal"]:$this->y123_perfinal);
-       $this->y123_anocomp = ($this->y123_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_anocomp"]:$this->y123_anocomp);
-       $this->y123_mescomp = ($this->y123_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_mescomp"]:$this->y123_mescomp);
-       $this->y123_bruto = ($this->y123_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_bruto"]:$this->y123_bruto);
-       $this->y123_aliquota = ($this->y123_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_aliquota"]:$this->y123_aliquota);
-       $this->y123_pago = ($this->y123_pago == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_pago"]:$this->y123_pago);
+       $this->y123_anocomp = ($this->y123_anocomp === 0 || $this->y123_anocomp === 0.0 || $this->y123_anocomp == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_anocomp"]:$this->y123_anocomp);
+       $this->y123_mescomp = ($this->y123_mescomp === 0 || $this->y123_mescomp === 0.0 || $this->y123_mescomp == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_mescomp"]:$this->y123_mescomp);
+       $this->y123_bruto = ($this->y123_bruto === 0 || $this->y123_bruto === 0.0 || $this->y123_bruto == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_bruto"]:$this->y123_bruto);
+       $this->y123_aliquota = ($this->y123_aliquota === 0 || $this->y123_aliquota === 0.0 || $this->y123_aliquota == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_aliquota"]:$this->y123_aliquota);
+       $this->y123_pago = ($this->y123_pago === 0 || $this->y123_pago === 0.0 || $this->y123_pago == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_pago"]:$this->y123_pago);
        $this->y123_dtpago = ($this->y123_dtpago == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_dtpago"]:$this->y123_dtpago);
        $this->y123_descricao = ($this->y123_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_descricao"]:$this->y123_descricao);
-       $this->y123_tprespons = ($this->y123_tprespons == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_tprespons"]:$this->y123_tprespons);
+       $this->y123_tprespons = ($this->y123_tprespons === 0 || $this->y123_tprespons === 0.0 || $this->y123_tprespons == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_tprespons"]:$this->y123_tprespons);
        $this->y123_nomecomple = ($this->y123_nomecomple == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_nomecomple"]:$this->y123_nomecomple);
        $this->y123_cgccpf = ($this->y123_cgccpf == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_cgccpf"]:$this->y123_cgccpf);
        $this->y123_ender = ($this->y123_ender == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_ender"]:$this->y123_ender);
-       $this->y123_numero = ($this->y123_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_numero"]:$this->y123_numero);
+       $this->y123_numero = ($this->y123_numero === 0 || $this->y123_numero === 0.0 || $this->y123_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_numero"]:$this->y123_numero);
        $this->y123_bairro = ($this->y123_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_bairro"]:$this->y123_bairro);
        $this->y123_munic = ($this->y123_munic == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_munic"]:$this->y123_munic);
        $this->y123_uf = ($this->y123_uf == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_uf"]:$this->y123_uf);
        $this->y123_cep = ($this->y123_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_cep"]:$this->y123_cep);
      }else{
-       $this->y123_codigo = ($this->y123_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_codigo"]:$this->y123_codigo);
+       $this->y123_codigo = ($this->y123_codigo === 0 || $this->y123_codigo === 0.0 || $this->y123_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y123_codigo"]:$this->y123_codigo);
      }
    }
    // funcao para inclusao
@@ -286,7 +286,7 @@ class cl_fis_levantlotearqcont {
          $this->y123_codigo = $y123_codigo;
        }
      }
-     if(($this->y123_codigo == null) || ($this->y123_codigo == "") ){
+     if(($this->y123_codigo == null) || ($this->y123_codigo === 0 || $this->y123_codigo === 0.0 || $this->y123_codigo == "") ){
        $this->erro_sql = " Campo y123_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

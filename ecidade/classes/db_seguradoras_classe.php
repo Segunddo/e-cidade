@@ -69,11 +69,11 @@ class cl_seguradoras {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t80_segura = ($this->t80_segura == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_segura"]:$this->t80_segura);
-       $this->t80_numcgm = ($this->t80_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_numcgm"]:$this->t80_numcgm);
+       $this->t80_segura = ($this->t80_segura === 0 || $this->t80_segura === 0.0 || $this->t80_segura == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_segura"]:$this->t80_segura);
+       $this->t80_numcgm = ($this->t80_numcgm === 0 || $this->t80_numcgm === 0.0 || $this->t80_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_numcgm"]:$this->t80_numcgm);
        $this->t80_contato = ($this->t80_contato == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_contato"]:$this->t80_contato);
      }else{
-       $this->t80_segura = ($this->t80_segura == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_segura"]:$this->t80_segura);
+       $this->t80_segura = ($this->t80_segura === 0 || $this->t80_segura === 0.0 || $this->t80_segura == ""?@$GLOBALS["HTTP_POST_VARS"]["t80_segura"]:$this->t80_segura);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_seguradoras {
          $this->t80_segura = $t80_segura;
        }
      }
-     if(($this->t80_segura == null) || ($this->t80_segura == "") ){
+     if(($this->t80_segura == null) || ($this->t80_segura === 0 || $this->t80_segura === 0.0 || $this->t80_segura == "") ){
        $this->erro_sql = " Campo t80_segura nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

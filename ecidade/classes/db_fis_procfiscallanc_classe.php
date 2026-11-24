@@ -69,11 +69,11 @@ class cl_fis_procfiscallanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl09_sequencial = ($this->nl09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["nl09_sequencial"]:$this->nl09_sequencial);
-       $this->nl09_procfiscal = ($this->nl09_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["nl09_procfiscal"]:$this->nl09_procfiscal);
-       $this->nl09_lanc = ($this->nl09_lanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl09_lanc"]:$this->nl09_lanc);
+       $this->nl09_sequencial = ($this->nl09_sequencial === 0 || $this->nl09_sequencial === 0.0 || $this->nl09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["nl09_sequencial"]:$this->nl09_sequencial);
+       $this->nl09_procfiscal = ($this->nl09_procfiscal === 0 || $this->nl09_procfiscal === 0.0 || $this->nl09_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["nl09_procfiscal"]:$this->nl09_procfiscal);
+       $this->nl09_lanc = ($this->nl09_lanc === 0 || $this->nl09_lanc === 0.0 || $this->nl09_lanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl09_lanc"]:$this->nl09_lanc);
      }else{
-       $this->nl09_sequencial = ($this->nl09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["nl09_sequencial"]:$this->nl09_sequencial);
+       $this->nl09_sequencial = ($this->nl09_sequencial === 0 || $this->nl09_sequencial === 0.0 || $this->nl09_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["nl09_sequencial"]:$this->nl09_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_fis_procfiscallanc {
          $this->nl09_sequencial = $nl09_sequencial;
        }
      }
-     if(($this->nl09_sequencial == null) || ($this->nl09_sequencial == "") ){
+     if(($this->nl09_sequencial == null) || ($this->nl09_sequencial === 0 || $this->nl09_sequencial === 0.0 || $this->nl09_sequencial == "") ){
        $this->erro_sql = " Campo nl09_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

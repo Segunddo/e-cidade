@@ -47,12 +47,12 @@ class cl_isencaocalc
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->v46_sequencial = ($this->v46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v46_sequencial"]:$this->v46_sequencial);
-       $this->v46_isencao = ($this->v46_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["v46_isencao"]:$this->v46_isencao);
-       $this->v46_cadcalc = ($this->v46_cadcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["v46_cadcalc"]:$this->v46_cadcalc);
-       $this->v46_percentual = ($this->v46_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["v46_percentual"]:$this->v46_percentual);
+       $this->v46_sequencial = ($this->v46_sequencial === 0 || $this->v46_sequencial === 0.0 || $this->v46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v46_sequencial"]:$this->v46_sequencial);
+       $this->v46_isencao = ($this->v46_isencao === 0 || $this->v46_isencao === 0.0 || $this->v46_isencao == ""?@$GLOBALS["HTTP_POST_VARS"]["v46_isencao"]:$this->v46_isencao);
+       $this->v46_cadcalc = ($this->v46_cadcalc === 0 || $this->v46_cadcalc === 0.0 || $this->v46_cadcalc == ""?@$GLOBALS["HTTP_POST_VARS"]["v46_cadcalc"]:$this->v46_cadcalc);
+       $this->v46_percentual = ($this->v46_percentual === 0 || $this->v46_percentual === 0.0 || $this->v46_percentual == ""?@$GLOBALS["HTTP_POST_VARS"]["v46_percentual"]:$this->v46_percentual);
      }else{
-       $this->v46_sequencial = ($this->v46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v46_sequencial"]:$this->v46_sequencial);
+       $this->v46_sequencial = ($this->v46_sequencial === 0 || $this->v46_sequencial === 0.0 || $this->v46_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["v46_sequencial"]:$this->v46_sequencial);
      }
    }
 
@@ -87,7 +87,7 @@ class cl_isencaocalc
        return false;
      }
        $this->v46_sequencial = $v46_sequencial; 
-     if(($this->v46_sequencial == null) || ($this->v46_sequencial == "") ){ 
+     if(($this->v46_sequencial == null) || ($this->v46_sequencial === 0 || $this->v46_sequencial === 0.0 || $this->v46_sequencial == "") ){ 
        $this->erro_sql = " Campo v46_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

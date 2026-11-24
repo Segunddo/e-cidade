@@ -67,10 +67,10 @@ class cl_tarefaitem {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at44_tarefa = ($this->at44_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at44_tarefa"]:$this->at44_tarefa);
-       $this->at44_atenditem = ($this->at44_atenditem == ""?@$GLOBALS["HTTP_POST_VARS"]["at44_atenditem"]:$this->at44_atenditem);
+       $this->at44_tarefa = ($this->at44_tarefa === 0 || $this->at44_tarefa === 0.0 || $this->at44_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at44_tarefa"]:$this->at44_tarefa);
+       $this->at44_atenditem = ($this->at44_atenditem === 0 || $this->at44_atenditem === 0.0 || $this->at44_atenditem == ""?@$GLOBALS["HTTP_POST_VARS"]["at44_atenditem"]:$this->at44_atenditem);
      }else{
-       $this->at44_tarefa = ($this->at44_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at44_tarefa"]:$this->at44_tarefa);
+       $this->at44_tarefa = ($this->at44_tarefa === 0 || $this->at44_tarefa === 0.0 || $this->at44_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at44_tarefa"]:$this->at44_tarefa);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_tarefaitem {
        return false;
      }
        $this->at44_tarefa = $at44_tarefa;
-     if(($this->at44_tarefa == null) || ($this->at44_tarefa == "") ){
+     if(($this->at44_tarefa == null) || ($this->at44_tarefa === 0 || $this->at44_tarefa === 0.0 || $this->at44_tarefa == "") ){
        $this->erro_sql = " Campo at44_tarefa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

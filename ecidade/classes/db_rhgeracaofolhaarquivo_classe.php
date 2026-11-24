@@ -84,7 +84,7 @@ class cl_rhgeracaofolhaarquivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh105_sequencial = ($this->rh105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_sequencial"]:$this->rh105_sequencial);
+       $this->rh105_sequencial = ($this->rh105_sequencial === 0 || $this->rh105_sequencial === 0.0 || $this->rh105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_sequencial"]:$this->rh105_sequencial);
        if($this->rh105_dtgeracao == ""){
          $this->rh105_dtgeracao_dia = @$GLOBALS["HTTP_POST_VARS"]["rh105_dtgeracao_dia"];
          $this->rh105_dtgeracao_mes = @$GLOBALS["HTTP_POST_VARS"]["rh105_dtgeracao_mes"];
@@ -101,14 +101,14 @@ class cl_rhgeracaofolhaarquivo {
             $this->rh105_dtdeposito = $this->rh105_dtdeposito_ano."-".$this->rh105_dtdeposito_mes."-".$this->rh105_dtdeposito_dia;
          }
        }
-       $this->rh105_codarq = ($this->rh105_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_codarq"]:$this->rh105_codarq);
+       $this->rh105_codarq = ($this->rh105_codarq === 0 || $this->rh105_codarq === 0.0 || $this->rh105_codarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_codarq"]:$this->rh105_codarq);
        $this->rh105_codbcofebraban = ($this->rh105_codbcofebraban == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_codbcofebraban"]:$this->rh105_codbcofebraban);
-       $this->rh105_tipoarq = ($this->rh105_tipoarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_tipoarq"]:$this->rh105_tipoarq);
-       $this->rh105_folha = ($this->rh105_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_folha"]:$this->rh105_folha);
+       $this->rh105_tipoarq = ($this->rh105_tipoarq === 0 || $this->rh105_tipoarq === 0.0 || $this->rh105_tipoarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_tipoarq"]:$this->rh105_tipoarq);
+       $this->rh105_folha = ($this->rh105_folha === 0 || $this->rh105_folha === 0.0 || $this->rh105_folha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_folha"]:$this->rh105_folha);
        $this->rh105_arquivotxt = ($this->rh105_arquivotxt == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_arquivotxt"]:$this->rh105_arquivotxt);
-       $this->rh105_instit = ($this->rh105_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_instit"]:$this->rh105_instit);
+       $this->rh105_instit = ($this->rh105_instit === 0 || $this->rh105_instit === 0.0 || $this->rh105_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_instit"]:$this->rh105_instit);
      }else{
-       $this->rh105_sequencial = ($this->rh105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_sequencial"]:$this->rh105_sequencial);
+       $this->rh105_sequencial = ($this->rh105_sequencial === 0 || $this->rh105_sequencial === 0.0 || $this->rh105_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh105_sequencial"]:$this->rh105_sequencial);
      }
    }
    // funcao para inclusao
@@ -201,7 +201,7 @@ class cl_rhgeracaofolhaarquivo {
          $this->rh105_sequencial = $rh105_sequencial;
        }
      }
-     if(($this->rh105_sequencial == null) || ($this->rh105_sequencial == "") ){
+     if(($this->rh105_sequencial == null) || ($this->rh105_sequencial === 0 || $this->rh105_sequencial === 0.0 || $this->rh105_sequencial == "") ){
        $this->erro_sql = " Campo rh105_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

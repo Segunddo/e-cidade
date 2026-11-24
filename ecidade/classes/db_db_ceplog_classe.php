@@ -77,15 +77,15 @@ class cl_db_ceplog {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->db11_codlog = ($this->db11_codlog == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codlog"]:$this->db11_codlog);
-       $this->db11_codigo = ($this->db11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codigo"]:$this->db11_codigo);
+       $this->db11_codlog = ($this->db11_codlog === 0 || $this->db11_codlog === 0.0 || $this->db11_codlog == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codlog"]:$this->db11_codlog);
+       $this->db11_codigo = ($this->db11_codigo === 0 || $this->db11_codigo === 0.0 || $this->db11_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codigo"]:$this->db11_codigo);
        $this->db11_tipo = ($this->db11_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_tipo"]:$this->db11_tipo);
        $this->db11_logradouro = ($this->db11_logradouro == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_logradouro"]:$this->db11_logradouro);
        $this->db11_logsemacento = ($this->db11_logsemacento == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_logsemacento"]:$this->db11_logsemacento);
        $this->db11_bairro = ($this->db11_bairro == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_bairro"]:$this->db11_bairro);
        $this->db11_cep = ($this->db11_cep == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_cep"]:$this->db11_cep);
      }else{
-       $this->db11_codlog = ($this->db11_codlog == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codlog"]:$this->db11_codlog);
+       $this->db11_codlog = ($this->db11_codlog === 0 || $this->db11_codlog === 0.0 || $this->db11_codlog == ""?@$GLOBALS["HTTP_POST_VARS"]["db11_codlog"]:$this->db11_codlog);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_db_ceplog {
          $this->db11_codlog = $db11_codlog;
        }
      }
-     if(($this->db11_codlog == null) || ($this->db11_codlog == "") ){
+     if(($this->db11_codlog == null) || ($this->db11_codlog === 0 || $this->db11_codlog === 0.0 || $this->db11_codlog == "") ){
        $this->erro_sql = " Campo db11_codlog nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -83,20 +83,20 @@ class cl_pontof13 {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r34_anousu = ($this->r34_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_anousu"]:$this->r34_anousu);
-       $this->r34_mesusu = ($this->r34_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_mesusu"]:$this->r34_mesusu);
-       $this->r34_regist = ($this->r34_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_regist"]:$this->r34_regist);
+       $this->r34_anousu = ($this->r34_anousu === 0 || $this->r34_anousu === 0.0 || $this->r34_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_anousu"]:$this->r34_anousu);
+       $this->r34_mesusu = ($this->r34_mesusu === 0 || $this->r34_mesusu === 0.0 || $this->r34_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_mesusu"]:$this->r34_mesusu);
+       $this->r34_regist = ($this->r34_regist === 0 || $this->r34_regist === 0.0 || $this->r34_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_regist"]:$this->r34_regist);
        $this->r34_rubric = ($this->r34_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_rubric"]:$this->r34_rubric);
-       $this->r34_valor = ($this->r34_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_valor"]:$this->r34_valor);
-       $this->r34_quant = ($this->r34_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_quant"]:$this->r34_quant);
+       $this->r34_valor = ($this->r34_valor === 0 || $this->r34_valor === 0.0 || $this->r34_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_valor"]:$this->r34_valor);
+       $this->r34_quant = ($this->r34_quant === 0 || $this->r34_quant === 0.0 || $this->r34_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_quant"]:$this->r34_quant);
        $this->r34_lotac = ($this->r34_lotac == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_lotac"]:$this->r34_lotac);
-       $this->r34_media = ($this->r34_media == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_media"]:$this->r34_media);
-       $this->r34_calc = ($this->r34_calc == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_calc"]:$this->r34_calc);
-       $this->r34_instit = ($this->r34_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_instit"]:$this->r34_instit);
+       $this->r34_media = ($this->r34_media === 0 || $this->r34_media === 0.0 || $this->r34_media == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_media"]:$this->r34_media);
+       $this->r34_calc = ($this->r34_calc === 0 || $this->r34_calc === 0.0 || $this->r34_calc == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_calc"]:$this->r34_calc);
+       $this->r34_instit = ($this->r34_instit === 0 || $this->r34_instit === 0.0 || $this->r34_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_instit"]:$this->r34_instit);
      }else{
-       $this->r34_anousu = ($this->r34_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_anousu"]:$this->r34_anousu);
-       $this->r34_mesusu = ($this->r34_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_mesusu"]:$this->r34_mesusu);
-       $this->r34_regist = ($this->r34_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_regist"]:$this->r34_regist);
+       $this->r34_anousu = ($this->r34_anousu === 0 || $this->r34_anousu === 0.0 || $this->r34_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_anousu"]:$this->r34_anousu);
+       $this->r34_mesusu = ($this->r34_mesusu === 0 || $this->r34_mesusu === 0.0 || $this->r34_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_mesusu"]:$this->r34_mesusu);
+       $this->r34_regist = ($this->r34_regist === 0 || $this->r34_regist === 0.0 || $this->r34_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_regist"]:$this->r34_regist);
        $this->r34_rubric = ($this->r34_rubric == ""?@$GLOBALS["HTTP_POST_VARS"]["r34_rubric"]:$this->r34_rubric);
      }
    }
@@ -161,7 +161,7 @@ class cl_pontof13 {
        $this->r34_mesusu = $r34_mesusu;
        $this->r34_regist = $r34_regist;
        $this->r34_rubric = $r34_rubric;
-     if(($this->r34_anousu == null) || ($this->r34_anousu == "") ){
+     if(($this->r34_anousu == null) || ($this->r34_anousu === 0 || $this->r34_anousu === 0.0 || $this->r34_anousu == "") ){
        $this->erro_sql = " Campo r34_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -169,7 +169,7 @@ class cl_pontof13 {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r34_mesusu == null) || ($this->r34_mesusu == "") ){
+     if(($this->r34_mesusu == null) || ($this->r34_mesusu === 0 || $this->r34_mesusu === 0.0 || $this->r34_mesusu == "") ){
        $this->erro_sql = " Campo r34_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -177,7 +177,7 @@ class cl_pontof13 {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r34_regist == null) || ($this->r34_regist == "") ){
+     if(($this->r34_regist == null) || ($this->r34_regist === 0 || $this->r34_regist === 0.0 || $this->r34_regist == "") ){
        $this->erro_sql = " Campo r34_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

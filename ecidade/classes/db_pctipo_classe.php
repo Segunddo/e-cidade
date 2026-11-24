@@ -51,7 +51,7 @@ class cl_pctipo {
                  pc05_natureza = int8 = Natureza
                  ";
    //funcao construtor da classe
-   function cl_pctipo() {
+   function __construct() {
      //classes dos rotulos dos campos
      $this->rotulo = new rotulo("pctipo");
      $this->pagina_retorno =  basename($GLOBALS["HTTP_SERVER_VARS"]["PHP_SELF"]);
@@ -68,12 +68,12 @@ class cl_pctipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc05_codtipo = ($this->pc05_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc05_codtipo"]:$this->pc05_codtipo);
+       $this->pc05_codtipo = ($this->pc05_codtipo === 0 || $this->pc05_codtipo === 0.0 || $this->pc05_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc05_codtipo"]:$this->pc05_codtipo);
        $this->pc05_descr = ($this->pc05_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["pc05_descr"]:$this->pc05_descr);
        $this->pc05_ativo = ($this->pc05_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["pc05_ativo"]:$this->pc05_ativo);
-       $this->pc05_natureza = ($this->pc05_natureza == ""?@$GLOBALS["HTTP_POST_VARS"]["pc05_natureza"]:$this->pc05_natureza);
+       $this->pc05_natureza = ($this->pc05_natureza === 0 || $this->pc05_natureza === 0.0 || $this->pc05_natureza == ""?@$GLOBALS["HTTP_POST_VARS"]["pc05_natureza"]:$this->pc05_natureza);
      }else{
-       $this->pc05_codtipo = ($this->pc05_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc05_codtipo"]:$this->pc05_codtipo);
+       $this->pc05_codtipo = ($this->pc05_codtipo === 0 || $this->pc05_codtipo === 0.0 || $this->pc05_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc05_codtipo"]:$this->pc05_codtipo);
      }
    }
    // funcao para inclusao
@@ -130,7 +130,7 @@ class cl_pctipo {
          $this->pc05_codtipo = $pc05_codtipo;
        }
      }
-     if(($this->pc05_codtipo == null) || ($this->pc05_codtipo == "") ){
+     if(($this->pc05_codtipo == null) || ($this->pc05_codtipo === 0 || $this->pc05_codtipo === 0.0 || $this->pc05_codtipo == "") ){
        $this->erro_sql = " Campo pc05_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

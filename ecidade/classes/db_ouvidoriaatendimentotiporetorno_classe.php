@@ -69,11 +69,11 @@ class cl_ouvidoriaatendimentotiporetorno {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov17_sequencial = ($this->ov17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov17_sequencial"]:$this->ov17_sequencial);
-       $this->ov17_tiporetorno = ($this->ov17_tiporetorno == ""?@$GLOBALS["HTTP_POST_VARS"]["ov17_tiporetorno"]:$this->ov17_tiporetorno);
-       $this->ov17_ouvidoriaatendimento = ($this->ov17_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov17_ouvidoriaatendimento"]:$this->ov17_ouvidoriaatendimento);
+       $this->ov17_sequencial = ($this->ov17_sequencial === 0 || $this->ov17_sequencial === 0.0 || $this->ov17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov17_sequencial"]:$this->ov17_sequencial);
+       $this->ov17_tiporetorno = ($this->ov17_tiporetorno === 0 || $this->ov17_tiporetorno === 0.0 || $this->ov17_tiporetorno == ""?@$GLOBALS["HTTP_POST_VARS"]["ov17_tiporetorno"]:$this->ov17_tiporetorno);
+       $this->ov17_ouvidoriaatendimento = ($this->ov17_ouvidoriaatendimento === 0 || $this->ov17_ouvidoriaatendimento === 0.0 || $this->ov17_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov17_ouvidoriaatendimento"]:$this->ov17_ouvidoriaatendimento);
      }else{
-       $this->ov17_sequencial = ($this->ov17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov17_sequencial"]:$this->ov17_sequencial);
+       $this->ov17_sequencial = ($this->ov17_sequencial === 0 || $this->ov17_sequencial === 0.0 || $this->ov17_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov17_sequencial"]:$this->ov17_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_ouvidoriaatendimentotiporetorno {
          $this->ov17_sequencial = $ov17_sequencial;
        }
      }
-     if(($this->ov17_sequencial == null) || ($this->ov17_sequencial == "") ){
+     if(($this->ov17_sequencial == null) || ($this->ov17_sequencial === 0 || $this->ov17_sequencial === 0.0 || $this->ov17_sequencial == "") ){
        $this->erro_sql = " Campo ov17_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_pctipoandam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc44_codigo = ($this->pc44_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc44_codigo"]:$this->pc44_codigo);
+       $this->pc44_codigo = ($this->pc44_codigo === 0 || $this->pc44_codigo === 0.0 || $this->pc44_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc44_codigo"]:$this->pc44_codigo);
        $this->pc44_descr = ($this->pc44_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["pc44_descr"]:$this->pc44_descr);
      }else{
-       $this->pc44_codigo = ($this->pc44_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc44_codigo"]:$this->pc44_codigo);
+       $this->pc44_codigo = ($this->pc44_codigo === 0 || $this->pc44_codigo === 0.0 || $this->pc44_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc44_codigo"]:$this->pc44_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_pctipoandam {
          $this->pc44_codigo = $pc44_codigo;
        }
      }
-     if(($this->pc44_codigo == null) || ($this->pc44_codigo == "") ){
+     if(($this->pc44_codigo == null) || ($this->pc44_codigo === 0 || $this->pc44_codigo === 0.0 || $this->pc44_codigo == "") ){
        $this->erro_sql = " Campo pc44_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

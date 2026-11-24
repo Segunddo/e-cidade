@@ -67,8 +67,8 @@ class cl_certidaoinscr {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p48_sequencial = ($this->p48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p48_sequencial"]:$this->p48_sequencial);
-       $this->p48_inscr = ($this->p48_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["p48_inscr"]:$this->p48_inscr);
+       $this->p48_sequencial = ($this->p48_sequencial === 0 || $this->p48_sequencial === 0.0 || $this->p48_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["p48_sequencial"]:$this->p48_sequencial);
+       $this->p48_inscr = ($this->p48_inscr === 0 || $this->p48_inscr === 0.0 || $this->p48_inscr == ""?@$GLOBALS["HTTP_POST_VARS"]["p48_inscr"]:$this->p48_inscr);
      }else{
      }
    }

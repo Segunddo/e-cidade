@@ -91,11 +91,11 @@ class cl_lotacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r13_anousu = ($this->r13_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_anousu"]:$this->r13_anousu);
-       $this->r13_mesusu = ($this->r13_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_mesusu"]:$this->r13_mesusu);
+       $this->r13_anousu = ($this->r13_anousu === 0 || $this->r13_anousu === 0.0 || $this->r13_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_anousu"]:$this->r13_anousu);
+       $this->r13_mesusu = ($this->r13_mesusu === 0 || $this->r13_mesusu === 0.0 || $this->r13_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_mesusu"]:$this->r13_mesusu);
        $this->r13_codigo = ($this->r13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_codigo"]:$this->r13_codigo);
        $this->r13_descr = ($this->r13_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_descr"]:$this->r13_descr);
-       $this->r13_reduz = ($this->r13_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_reduz"]:$this->r13_reduz);
+       $this->r13_reduz = ($this->r13_reduz === 0 || $this->r13_reduz === 0.0 || $this->r13_reduz == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_reduz"]:$this->r13_reduz);
        $this->r13_proati = ($this->r13_proati == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_proati"]:$this->r13_proati);
        $this->r13_painat = ($this->r13_painat == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_painat"]:$this->r13_painat);
        $this->r13_descro = ($this->r13_descro == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_descro"]:$this->r13_descro);
@@ -104,10 +104,10 @@ class cl_lotacao {
        $this->r13_calend = ($this->r13_calend == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_calend"]:$this->r13_calend);
        $this->r13_rproat = ($this->r13_rproat == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_rproat"]:$this->r13_rproat);
        $this->r13_rpaina = ($this->r13_rpaina == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_rpaina"]:$this->r13_rpaina);
-       $this->r13_instit = ($this->r13_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_instit"]:$this->r13_instit);
+       $this->r13_instit = ($this->r13_instit === 0 || $this->r13_instit === 0.0 || $this->r13_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_instit"]:$this->r13_instit);
      }else{
-       $this->r13_anousu = ($this->r13_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_anousu"]:$this->r13_anousu);
-       $this->r13_mesusu = ($this->r13_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_mesusu"]:$this->r13_mesusu);
+       $this->r13_anousu = ($this->r13_anousu === 0 || $this->r13_anousu === 0.0 || $this->r13_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_anousu"]:$this->r13_anousu);
+       $this->r13_mesusu = ($this->r13_mesusu === 0 || $this->r13_mesusu === 0.0 || $this->r13_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_mesusu"]:$this->r13_mesusu);
        $this->r13_codigo = ($this->r13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["r13_codigo"]:$this->r13_codigo);
      }
    }
@@ -216,7 +216,7 @@ class cl_lotacao {
        $this->r13_anousu = $r13_anousu;
        $this->r13_mesusu = $r13_mesusu;
        $this->r13_codigo = $r13_codigo;
-     if(($this->r13_anousu == null) || ($this->r13_anousu == "") ){
+     if(($this->r13_anousu == null) || ($this->r13_anousu === 0 || $this->r13_anousu === 0.0 || $this->r13_anousu == "") ){
        $this->erro_sql = " Campo r13_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -224,7 +224,7 @@ class cl_lotacao {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r13_mesusu == null) || ($this->r13_mesusu == "") ){
+     if(($this->r13_mesusu == null) || ($this->r13_mesusu === 0 || $this->r13_mesusu === 0.0 || $this->r13_mesusu == "") ){
        $this->erro_sql = " Campo r13_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

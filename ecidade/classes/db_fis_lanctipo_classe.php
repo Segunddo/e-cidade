@@ -79,14 +79,14 @@ class cl_fis_lanctipo
     public function atualizacampos($exclusao = false)
     {
         if ($exclusao==false) {
-            $this->nl18_codigo = ($this->nl18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_codigo"]:$this->nl18_codigo);
-            $this->nl18_codlanc = ($this->nl18_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_codlanc"]:$this->nl18_codlanc);
-            $this->nl18_codtipo = ($this->nl18_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_codtipo"]:$this->nl18_codtipo);
-            $this->nl18_valor = ($this->nl18_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_valor"]:$this->nl18_valor);
-            $this->nl18_tipo = ($this->nl18_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_tipo"]:$this->nl18_tipo);
-            $this->nl18_fator = ($this->nl18_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_fator"]:$this->nl18_fator);
+            $this->nl18_codigo = ($this->nl18_codigo === 0 || $this->nl18_codigo === 0.0 || $this->nl18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_codigo"]:$this->nl18_codigo);
+            $this->nl18_codlanc = ($this->nl18_codlanc === 0 || $this->nl18_codlanc === 0.0 || $this->nl18_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_codlanc"]:$this->nl18_codlanc);
+            $this->nl18_codtipo = ($this->nl18_codtipo === 0 || $this->nl18_codtipo === 0.0 || $this->nl18_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_codtipo"]:$this->nl18_codtipo);
+            $this->nl18_valor = ($this->nl18_valor === 0 || $this->nl18_valor === 0.0 || $this->nl18_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_valor"]:$this->nl18_valor);
+            $this->nl18_tipo = ($this->nl18_tipo === 0 || $this->nl18_tipo === 0.0 || $this->nl18_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_tipo"]:$this->nl18_tipo);
+            $this->nl18_fator = ($this->nl18_fator === 0 || $this->nl18_fator === 0.0 || $this->nl18_fator == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_fator"]:$this->nl18_fator);
         } else {
-            $this->nl18_codigo = ($this->nl18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_codigo"]:$this->nl18_codigo);
+            $this->nl18_codigo = ($this->nl18_codigo === 0 || $this->nl18_codigo === 0.0 || $this->nl18_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl18_codigo"]:$this->nl18_codigo);
         }
     }
    // funcao para inclusao
@@ -162,7 +162,7 @@ class cl_fis_lanctipo
                 $this->nl18_codigo = $nl18_codigo;
             }
         }
-        if (($this->nl18_codigo == null) || ($this->nl18_codigo == "")) {
+        if (($this->nl18_codigo == null) || ($this->nl18_codigo === 0 || $this->nl18_codigo === 0.0 || $this->nl18_codigo == "")) {
             $this->erro_sql = " Campo nl18_codigo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

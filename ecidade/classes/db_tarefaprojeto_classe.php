@@ -67,11 +67,11 @@ class cl_tarefaprojeto {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at41_tarefa = ($this->at41_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_tarefa"]:$this->at41_tarefa);
-       $this->at41_projeto = ($this->at41_projeto == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_projeto"]:$this->at41_projeto);
+       $this->at41_tarefa = ($this->at41_tarefa === 0 || $this->at41_tarefa === 0.0 || $this->at41_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_tarefa"]:$this->at41_tarefa);
+       $this->at41_projeto = ($this->at41_projeto === 0 || $this->at41_projeto === 0.0 || $this->at41_projeto == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_projeto"]:$this->at41_projeto);
      }else{
-       $this->at41_tarefa = ($this->at41_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_tarefa"]:$this->at41_tarefa);
-       $this->at41_projeto = ($this->at41_projeto == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_projeto"]:$this->at41_projeto);
+       $this->at41_tarefa = ($this->at41_tarefa === 0 || $this->at41_tarefa === 0.0 || $this->at41_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_tarefa"]:$this->at41_tarefa);
+       $this->at41_projeto = ($this->at41_projeto === 0 || $this->at41_projeto === 0.0 || $this->at41_projeto == ""?@$GLOBALS["HTTP_POST_VARS"]["at41_projeto"]:$this->at41_projeto);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_tarefaprojeto {
       $this->atualizacampos();
        $this->at41_tarefa = $at41_tarefa;
        $this->at41_projeto = $at41_projeto;
-     if(($this->at41_tarefa == null) || ($this->at41_tarefa == "") ){
+     if(($this->at41_tarefa == null) || ($this->at41_tarefa === 0 || $this->at41_tarefa === 0.0 || $this->at41_tarefa == "") ){
        $this->erro_sql = " Campo at41_tarefa nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_tarefaprojeto {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->at41_projeto == null) || ($this->at41_projeto == "") ){
+     if(($this->at41_projeto == null) || ($this->at41_projeto === 0 || $this->at41_projeto === 0.0 || $this->at41_projeto == "") ){
        $this->erro_sql = " Campo at41_projeto nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

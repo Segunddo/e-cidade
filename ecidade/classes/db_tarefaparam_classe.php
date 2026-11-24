@@ -73,7 +73,7 @@ class cl_tarefaparam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at53_horasdia = ($this->at53_horasdia == ""?@$GLOBALS["HTTP_POST_VARS"]["at53_horasdia"]:$this->at53_horasdia);
+       $this->at53_horasdia = ($this->at53_horasdia === 0 || $this->at53_horasdia === 0.0 || $this->at53_horasdia == ""?@$GLOBALS["HTTP_POST_VARS"]["at53_horasdia"]:$this->at53_horasdia);
        $this->at53_horaini_manha = ($this->at53_horaini_manha == ""?@$GLOBALS["HTTP_POST_VARS"]["at53_horaini_manha"]:$this->at53_horaini_manha);
        $this->at53_horafim_manha = ($this->at53_horafim_manha == ""?@$GLOBALS["HTTP_POST_VARS"]["at53_horafim_manha"]:$this->at53_horafim_manha);
        $this->at53_horaini_tarde = ($this->at53_horaini_tarde == ""?@$GLOBALS["HTTP_POST_VARS"]["at53_horaini_tarde"]:$this->at53_horaini_tarde);

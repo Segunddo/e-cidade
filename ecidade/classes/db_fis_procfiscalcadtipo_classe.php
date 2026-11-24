@@ -76,7 +76,7 @@ class cl_fis_procfiscalcadtipo
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y33_sequencial = ($this->y33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_sequencial"]:$this->y33_sequencial);
+            $this->y33_sequencial = ($this->y33_sequencial === 0 || $this->y33_sequencial === 0.0 || $this->y33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_sequencial"]:$this->y33_sequencial);
             $this->y33_descricao = ($this->y33_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_descricao"]:$this->y33_descricao);
             if ($this->y33_validade == "") {
                 $this->y33_validade_dia = ($this->y33_validade_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_validade_dia"]:$this->y33_validade_dia);
@@ -87,7 +87,7 @@ class cl_fis_procfiscalcadtipo
                 }
             }
         } else {
-            $this->y33_sequencial = ($this->y33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_sequencial"]:$this->y33_sequencial);
+            $this->y33_sequencial = ($this->y33_sequencial === 0 || $this->y33_sequencial === 0.0 || $this->y33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y33_sequencial"]:$this->y33_sequencial);
         }
     }
    // funcao para inclusao

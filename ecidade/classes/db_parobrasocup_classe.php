@@ -65,7 +65,7 @@ class cl_parobrasocup {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob11_grupo = ($this->ob11_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob11_grupo"]:$this->ob11_grupo);
+       $this->ob11_grupo = ($this->ob11_grupo === 0 || $this->ob11_grupo === 0.0 || $this->ob11_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob11_grupo"]:$this->ob11_grupo);
      }else{
      }
    }

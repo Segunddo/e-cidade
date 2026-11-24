@@ -83,9 +83,9 @@ class cl_db_projetosativcli {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at64_sequencial = ($this->at64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_sequencial"]:$this->at64_sequencial);
-       $this->at64_codproj = ($this->at64_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_codproj"]:$this->at64_codproj);
-       $this->at64_codativ = ($this->at64_codativ == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_codativ"]:$this->at64_codativ);
+       $this->at64_sequencial = ($this->at64_sequencial === 0 || $this->at64_sequencial === 0.0 || $this->at64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_sequencial"]:$this->at64_sequencial);
+       $this->at64_codproj = ($this->at64_codproj === 0 || $this->at64_codproj === 0.0 || $this->at64_codproj == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_codproj"]:$this->at64_codproj);
+       $this->at64_codativ = ($this->at64_codativ === 0 || $this->at64_codativ === 0.0 || $this->at64_codativ == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_codativ"]:$this->at64_codativ);
        if($this->at64_dtini == ""){
          $this->at64_dtini_dia = ($this->at64_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_dtini_dia"]:$this->at64_dtini_dia);
          $this->at64_dtini_mes = ($this->at64_dtini_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_dtini_mes"]:$this->at64_dtini_mes);
@@ -102,10 +102,10 @@ class cl_db_projetosativcli {
             $this->at64_dtfim = $this->at64_dtfim_ano."-".$this->at64_dtfim_mes."-".$this->at64_dtfim_dia;
          }
        }
-       $this->at64_situacao = ($this->at64_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_situacao"]:$this->at64_situacao);
+       $this->at64_situacao = ($this->at64_situacao === 0 || $this->at64_situacao === 0.0 || $this->at64_situacao == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_situacao"]:$this->at64_situacao);
        $this->at64_descricao = ($this->at64_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_descricao"]:$this->at64_descricao);
      }else{
-       $this->at64_sequencial = ($this->at64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_sequencial"]:$this->at64_sequencial);
+       $this->at64_sequencial = ($this->at64_sequencial === 0 || $this->at64_sequencial === 0.0 || $this->at64_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at64_sequencial"]:$this->at64_sequencial);
      }
    }
    // funcao para inclusao
@@ -180,7 +180,7 @@ class cl_db_projetosativcli {
          $this->at64_sequencial = $at64_sequencial;
        }
      }
-     if(($this->at64_sequencial == null) || ($this->at64_sequencial == "") ){
+     if(($this->at64_sequencial == null) || ($this->at64_sequencial === 0 || $this->at64_sequencial === 0.0 || $this->at64_sequencial == "") ){
        $this->erro_sql = " Campo at64_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

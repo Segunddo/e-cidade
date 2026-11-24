@@ -73,14 +73,14 @@ class cl_rhfopag {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh66_regist = ($this->rh66_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_regist"]:$this->rh66_regist);
+       $this->rh66_regist = ($this->rh66_regist === 0 || $this->rh66_regist === 0.0 || $this->rh66_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_regist"]:$this->rh66_regist);
        $this->rh66_pis = ($this->rh66_pis == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_pis"]:$this->rh66_pis);
-       $this->rh66_valor = ($this->rh66_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_valor"]:$this->rh66_valor);
-       $this->rh66_proces = ($this->rh66_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_proces"]:$this->rh66_proces);
-       $this->rh66_instit = ($this->rh66_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_instit"]:$this->rh66_instit);
+       $this->rh66_valor = ($this->rh66_valor === 0 || $this->rh66_valor === 0.0 || $this->rh66_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_valor"]:$this->rh66_valor);
+       $this->rh66_proces = ($this->rh66_proces === 0 || $this->rh66_proces === 0.0 || $this->rh66_proces == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_proces"]:$this->rh66_proces);
+       $this->rh66_instit = ($this->rh66_instit === 0 || $this->rh66_instit === 0.0 || $this->rh66_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_instit"]:$this->rh66_instit);
      }else{
-       $this->rh66_regist = ($this->rh66_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_regist"]:$this->rh66_regist);
-       $this->rh66_instit = ($this->rh66_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_instit"]:$this->rh66_instit);
+       $this->rh66_regist = ($this->rh66_regist === 0 || $this->rh66_regist === 0.0 || $this->rh66_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_regist"]:$this->rh66_regist);
+       $this->rh66_instit = ($this->rh66_instit === 0 || $this->rh66_instit === 0.0 || $this->rh66_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh66_instit"]:$this->rh66_instit);
      }
    }
    // funcao para inclusao
@@ -115,7 +115,7 @@ class cl_rhfopag {
      }
        $this->rh66_regist = $rh66_regist;
        $this->rh66_instit = $rh66_instit;
-     if(($this->rh66_regist == null) || ($this->rh66_regist == "") ){
+     if(($this->rh66_regist == null) || ($this->rh66_regist === 0 || $this->rh66_regist === 0.0 || $this->rh66_regist == "") ){
        $this->erro_sql = " Campo rh66_regist nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -123,7 +123,7 @@ class cl_rhfopag {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->rh66_instit == null) || ($this->rh66_instit == "") ){
+     if(($this->rh66_instit == null) || ($this->rh66_instit === 0 || $this->rh66_instit === 0.0 || $this->rh66_instit == "") ){
        $this->erro_sql = " Campo rh66_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

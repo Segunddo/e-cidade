@@ -69,11 +69,11 @@ class cl_pcdoccertif {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc71_codigo = ($this->pc71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc71_codigo"]:$this->pc71_codigo);
+       $this->pc71_codigo = ($this->pc71_codigo === 0 || $this->pc71_codigo === 0.0 || $this->pc71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc71_codigo"]:$this->pc71_codigo);
        $this->pc71_descr = ($this->pc71_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["pc71_descr"]:$this->pc71_descr);
        $this->pc71_obs = ($this->pc71_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["pc71_obs"]:$this->pc71_obs);
      }else{
-       $this->pc71_codigo = ($this->pc71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc71_codigo"]:$this->pc71_codigo);
+       $this->pc71_codigo = ($this->pc71_codigo === 0 || $this->pc71_codigo === 0.0 || $this->pc71_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc71_codigo"]:$this->pc71_codigo);
      }
    }
    // funcao para inclusao
@@ -112,7 +112,7 @@ class cl_pcdoccertif {
          $this->pc71_codigo = $pc71_codigo;
        }
      }
-     if(($this->pc71_codigo == null) || ($this->pc71_codigo == "") ){
+     if(($this->pc71_codigo == null) || ($this->pc71_codigo === 0 || $this->pc71_codigo === 0.0 || $this->pc71_codigo == "") ){
        $this->erro_sql = " Campo pc71_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

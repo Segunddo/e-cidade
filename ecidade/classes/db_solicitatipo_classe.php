@@ -69,11 +69,11 @@ class cl_solicitatipo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc12_numero = ($this->pc12_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["pc12_numero"]:$this->pc12_numero);
-       $this->pc12_vlrap = ($this->pc12_vlrap == ""?@$GLOBALS["HTTP_POST_VARS"]["pc12_vlrap"]:$this->pc12_vlrap);
-       $this->pc12_tipo = ($this->pc12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc12_tipo"]:$this->pc12_tipo);
+       $this->pc12_numero = ($this->pc12_numero === 0 || $this->pc12_numero === 0.0 || $this->pc12_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["pc12_numero"]:$this->pc12_numero);
+       $this->pc12_vlrap = ($this->pc12_vlrap === 0 || $this->pc12_vlrap === 0.0 || $this->pc12_vlrap == ""?@$GLOBALS["HTTP_POST_VARS"]["pc12_vlrap"]:$this->pc12_vlrap);
+       $this->pc12_tipo = ($this->pc12_tipo === 0 || $this->pc12_tipo === 0.0 || $this->pc12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc12_tipo"]:$this->pc12_tipo);
      }else{
-       $this->pc12_numero = ($this->pc12_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["pc12_numero"]:$this->pc12_numero);
+       $this->pc12_numero = ($this->pc12_numero === 0 || $this->pc12_numero === 0.0 || $this->pc12_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["pc12_numero"]:$this->pc12_numero);
      }
    }
    // funcao para inclusao
@@ -92,7 +92,7 @@ class cl_solicitatipo {
        return false;
      }
        $this->pc12_numero = $pc12_numero;
-     if(($this->pc12_numero == null) || ($this->pc12_numero == "") ){
+     if(($this->pc12_numero == null) || ($this->pc12_numero === 0 || $this->pc12_numero === 0.0 || $this->pc12_numero == "") ){
        $this->erro_sql = " Campo pc12_numero nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

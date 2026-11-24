@@ -49,13 +49,13 @@ class cl_db_geradorrelatoriotemplate
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->db15_sequencial = ($this->db15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_sequencial"]:$this->db15_sequencial);
-       $this->db15_db_relatorio = ($this->db15_db_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_db_relatorio"]:$this->db15_db_relatorio);
-       $this->db15_documento = ($this->db15_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_documento"]:$this->db15_documento);
+       $this->db15_sequencial = ($this->db15_sequencial === 0 || $this->db15_sequencial === 0.0 || $this->db15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_sequencial"]:$this->db15_sequencial);
+       $this->db15_db_relatorio = ($this->db15_db_relatorio === 0 || $this->db15_db_relatorio === 0.0 || $this->db15_db_relatorio == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_db_relatorio"]:$this->db15_db_relatorio);
+       $this->db15_documento = ($this->db15_documento === 0 || $this->db15_documento === 0.0 || $this->db15_documento == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_documento"]:$this->db15_documento);
        $this->db15_extensao_arquivo = ($this->db15_extensao_arquivo == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_extensao_arquivo"]:$this->db15_extensao_arquivo);
-       $this->db15_estorage = ($this->db15_estorage == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_estorage"]:$this->db15_estorage);
+       $this->db15_estorage = ($this->db15_estorage === 0 || $this->db15_estorage === 0.0 || $this->db15_estorage == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_estorage"]:$this->db15_estorage);
      }else{
-       $this->db15_sequencial = ($this->db15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_sequencial"]:$this->db15_sequencial);
+       $this->db15_sequencial = ($this->db15_sequencial === 0 || $this->db15_sequencial === 0.0 || $this->db15_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["db15_sequencial"]:$this->db15_sequencial);
      }
    }
 
@@ -116,7 +116,7 @@ class cl_db_geradorrelatoriotemplate
          $this->db15_sequencial = $db15_sequencial;
        }
      }
-     if(($this->db15_sequencial == null) || ($this->db15_sequencial == "") ){
+     if(($this->db15_sequencial == null) || ($this->db15_sequencial === 0 || $this->db15_sequencial === 0.0 || $this->db15_sequencial == "") ){
        $this->erro_sql = " Campo db15_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

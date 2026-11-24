@@ -77,15 +77,15 @@ class cl_rhpagatra {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh57_seq = ($this->rh57_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_seq"]:$this->rh57_seq);
-       $this->rh57_ano = ($this->rh57_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_ano"]:$this->rh57_ano);
-       $this->rh57_mes = ($this->rh57_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_mes"]:$this->rh57_mes);
-       $this->rh57_regist = ($this->rh57_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_regist"]:$this->rh57_regist);
-       $this->rh57_valorini = ($this->rh57_valorini == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_valorini"]:$this->rh57_valorini);
-       $this->rh57_saldo = ($this->rh57_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_saldo"]:$this->rh57_saldo);
-       $this->rh57_tipoatra = ($this->rh57_tipoatra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_tipoatra"]:$this->rh57_tipoatra);
+       $this->rh57_seq = ($this->rh57_seq === 0 || $this->rh57_seq === 0.0 || $this->rh57_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_seq"]:$this->rh57_seq);
+       $this->rh57_ano = ($this->rh57_ano === 0 || $this->rh57_ano === 0.0 || $this->rh57_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_ano"]:$this->rh57_ano);
+       $this->rh57_mes = ($this->rh57_mes === 0 || $this->rh57_mes === 0.0 || $this->rh57_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_mes"]:$this->rh57_mes);
+       $this->rh57_regist = ($this->rh57_regist === 0 || $this->rh57_regist === 0.0 || $this->rh57_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_regist"]:$this->rh57_regist);
+       $this->rh57_valorini = ($this->rh57_valorini === 0 || $this->rh57_valorini === 0.0 || $this->rh57_valorini == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_valorini"]:$this->rh57_valorini);
+       $this->rh57_saldo = ($this->rh57_saldo === 0 || $this->rh57_saldo === 0.0 || $this->rh57_saldo == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_saldo"]:$this->rh57_saldo);
+       $this->rh57_tipoatra = ($this->rh57_tipoatra === 0 || $this->rh57_tipoatra === 0.0 || $this->rh57_tipoatra == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_tipoatra"]:$this->rh57_tipoatra);
      }else{
-       $this->rh57_seq = ($this->rh57_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_seq"]:$this->rh57_seq);
+       $this->rh57_seq = ($this->rh57_seq === 0 || $this->rh57_seq === 0.0 || $this->rh57_seq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh57_seq"]:$this->rh57_seq);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_rhpagatra {
          $this->rh57_seq = $rh57_seq;
        }
      }
-     if(($this->rh57_seq == null) || ($this->rh57_seq == "") ){
+     if(($this->rh57_seq == null) || ($this->rh57_seq === 0 || $this->rh57_seq === 0.0 || $this->rh57_seq == "") ){
        $this->erro_sql = " Campo rh57_seq nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -612,7 +612,7 @@ class cl_rhpagatra {
      }
      return $sql;
   }
-   public function sql_query_relatorio ( $rh57_seq=null,$campos="*",$ordem=null,$dbwhere="",$dbhaving="",$dbgroupby=null,$ano, $mes){
+   public function sql_query_relatorio ( $rh57_seq=null,$campos="*",$ordem=null,$dbwhere="",$dbhaving="",$dbgroupby=null,$ano = null, $mes = null){
      $sql = "select ";
      if($campos != "*" ){
        $campos_sql = explode("#",$campos);

@@ -76,8 +76,8 @@ class cl_tarefa_agenda {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at13_sequencial = ($this->at13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at13_sequencial"]:$this->at13_sequencial);
-       $this->at13_tarefa = ($this->at13_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at13_tarefa"]:$this->at13_tarefa);
+       $this->at13_sequencial = ($this->at13_sequencial === 0 || $this->at13_sequencial === 0.0 || $this->at13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at13_sequencial"]:$this->at13_sequencial);
+       $this->at13_tarefa = ($this->at13_tarefa === 0 || $this->at13_tarefa === 0.0 || $this->at13_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at13_tarefa"]:$this->at13_tarefa);
        if($this->at13_dia == ""){
          $this->at13_dia_dia = ($this->at13_dia_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at13_dia_dia"]:$this->at13_dia_dia);
          $this->at13_dia_mes = ($this->at13_dia_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at13_dia_mes"]:$this->at13_dia_mes);
@@ -89,7 +89,7 @@ class cl_tarefa_agenda {
        $this->at13_horaini = ($this->at13_horaini == ""?@$GLOBALS["HTTP_POST_VARS"]["at13_horaini"]:$this->at13_horaini);
        $this->at13_horafim = ($this->at13_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["at13_horafim"]:$this->at13_horafim);
      }else{
-       $this->at13_sequencial = ($this->at13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at13_sequencial"]:$this->at13_sequencial);
+       $this->at13_sequencial = ($this->at13_sequencial === 0 || $this->at13_sequencial === 0.0 || $this->at13_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at13_sequencial"]:$this->at13_sequencial);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_tarefa_agenda {
          $this->at13_sequencial = $at13_sequencial;
        }
      }
-     if(($this->at13_sequencial == null) || ($this->at13_sequencial == "") ){
+     if(($this->at13_sequencial == null) || ($this->at13_sequencial === 0 || $this->at13_sequencial === 0.0 || $this->at13_sequencial == "") ){
        $this->erro_sql = " Campo at13_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

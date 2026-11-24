@@ -73,11 +73,11 @@ class cl_fis_procfiscalmatric
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y102_sequencial = ($this->y102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_sequencial"]:$this->y102_sequencial);
-            $this->y102_procfiscal = ($this->y102_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_procfiscal"]:$this->y102_procfiscal);
-            $this->y102_matric = ($this->y102_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_matric"]:$this->y102_matric);
+            $this->y102_sequencial = ($this->y102_sequencial === 0 || $this->y102_sequencial === 0.0 || $this->y102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_sequencial"]:$this->y102_sequencial);
+            $this->y102_procfiscal = ($this->y102_procfiscal === 0 || $this->y102_procfiscal === 0.0 || $this->y102_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_procfiscal"]:$this->y102_procfiscal);
+            $this->y102_matric = ($this->y102_matric === 0 || $this->y102_matric === 0.0 || $this->y102_matric == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_matric"]:$this->y102_matric);
         } else {
-            $this->y102_sequencial = ($this->y102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_sequencial"]:$this->y102_sequencial);
+            $this->y102_sequencial = ($this->y102_sequencial === 0 || $this->y102_sequencial === 0.0 || $this->y102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y102_sequencial"]:$this->y102_sequencial);
         }
     }
    // funcao para inclusao

@@ -69,11 +69,11 @@ class cl_habitformaavaliacaousuario {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ht08_sequencial = ($this->ht08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht08_sequencial"]:$this->ht08_sequencial);
-       $this->ht08_habitformaavaliacao = ($this->ht08_habitformaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht08_habitformaavaliacao"]:$this->ht08_habitformaavaliacao);
-       $this->ht08_id_usuario = ($this->ht08_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ht08_id_usuario"]:$this->ht08_id_usuario);
+       $this->ht08_sequencial = ($this->ht08_sequencial === 0 || $this->ht08_sequencial === 0.0 || $this->ht08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht08_sequencial"]:$this->ht08_sequencial);
+       $this->ht08_habitformaavaliacao = ($this->ht08_habitformaavaliacao === 0 || $this->ht08_habitformaavaliacao === 0.0 || $this->ht08_habitformaavaliacao == ""?@$GLOBALS["HTTP_POST_VARS"]["ht08_habitformaavaliacao"]:$this->ht08_habitformaavaliacao);
+       $this->ht08_id_usuario = ($this->ht08_id_usuario === 0 || $this->ht08_id_usuario === 0.0 || $this->ht08_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ht08_id_usuario"]:$this->ht08_id_usuario);
      }else{
-       $this->ht08_sequencial = ($this->ht08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht08_sequencial"]:$this->ht08_sequencial);
+       $this->ht08_sequencial = ($this->ht08_sequencial === 0 || $this->ht08_sequencial === 0.0 || $this->ht08_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ht08_sequencial"]:$this->ht08_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_habitformaavaliacaousuario {
          $this->ht08_sequencial = $ht08_sequencial;
        }
      }
-     if(($this->ht08_sequencial == null) || ($this->ht08_sequencial == "") ){
+     if(($this->ht08_sequencial == null) || ($this->ht08_sequencial === 0 || $this->ht08_sequencial === 0.0 || $this->ht08_sequencial == "") ){
        $this->erro_sql = " Campo ht08_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,8 +67,8 @@ class cl_obrashabiteprot {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob19_codhab = ($this->ob19_codhab == ""?@$GLOBALS["HTTP_POST_VARS"]["ob19_codhab"]:$this->ob19_codhab);
-       $this->ob19_codproc = ($this->ob19_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ob19_codproc"]:$this->ob19_codproc);
+       $this->ob19_codhab = ($this->ob19_codhab === 0 || $this->ob19_codhab === 0.0 || $this->ob19_codhab == ""?@$GLOBALS["HTTP_POST_VARS"]["ob19_codhab"]:$this->ob19_codhab);
+       $this->ob19_codproc = ($this->ob19_codproc === 0 || $this->ob19_codproc === 0.0 || $this->ob19_codproc == ""?@$GLOBALS["HTTP_POST_VARS"]["ob19_codproc"]:$this->ob19_codproc);
      }else{
      }
    }

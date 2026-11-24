@@ -103,9 +103,9 @@ class cl_assmeio {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h22_codigo = ($this->h22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_codigo"]:$this->h22_codigo);
-       $this->h22_regist = ($this->h22_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_regist"]:$this->h22_regist);
-       $this->h22_assent = ($this->h22_assent == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_assent"]:$this->h22_assent);
+       $this->h22_codigo = ($this->h22_codigo === 0 || $this->h22_codigo === 0.0 || $this->h22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_codigo"]:$this->h22_codigo);
+       $this->h22_regist = ($this->h22_regist === 0 || $this->h22_regist === 0.0 || $this->h22_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_regist"]:$this->h22_regist);
+       $this->h22_assent = ($this->h22_assent === 0 || $this->h22_assent === 0.0 || $this->h22_assent == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_assent"]:$this->h22_assent);
        if($this->h22_dtconc == ""){
          $this->h22_dtconc_dia = ($this->h22_dtconc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_dtconc_dia"]:$this->h22_dtconc_dia);
          $this->h22_dtconc_mes = ($this->h22_dtconc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_dtconc_mes"]:$this->h22_dtconc_mes);
@@ -118,8 +118,8 @@ class cl_assmeio {
        $this->h22_hist2 = ($this->h22_hist2 == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_hist2"]:$this->h22_hist2);
        $this->h22_nrport = ($this->h22_nrport == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_nrport"]:$this->h22_nrport);
        $this->h22_atofic = ($this->h22_atofic == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_atofic"]:$this->h22_atofic);
-       $this->h22_quant = ($this->h22_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_quant"]:$this->h22_quant);
-       $this->h22_perc = ($this->h22_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_perc"]:$this->h22_perc);
+       $this->h22_quant = ($this->h22_quant === 0 || $this->h22_quant === 0.0 || $this->h22_quant == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_quant"]:$this->h22_quant);
+       $this->h22_perc = ($this->h22_perc === 0 || $this->h22_perc === 0.0 || $this->h22_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_perc"]:$this->h22_perc);
        if($this->h22_dtterm == ""){
          $this->h22_dtterm_dia = ($this->h22_dtterm_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_dtterm_dia"]:$this->h22_dtterm_dia);
          $this->h22_dtterm_mes = ($this->h22_dtterm_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_dtterm_mes"]:$this->h22_dtterm_mes);
@@ -128,7 +128,7 @@ class cl_assmeio {
             $this->h22_dtterm = $this->h22_dtterm_ano."-".$this->h22_dtterm_mes."-".$this->h22_dtterm_dia;
          }
        }
-       $this->h22_login = ($this->h22_login == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_login"]:$this->h22_login);
+       $this->h22_login = ($this->h22_login === 0 || $this->h22_login === 0.0 || $this->h22_login == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_login"]:$this->h22_login);
        if($this->h22_dtlanc == ""){
          $this->h22_dtlanc_dia = ($this->h22_dtlanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_dtlanc_dia"]:$this->h22_dtlanc_dia);
          $this->h22_dtlanc_mes = ($this->h22_dtlanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_dtlanc_mes"]:$this->h22_dtlanc_mes);
@@ -146,7 +146,7 @@ class cl_assmeio {
          }
        }
      }else{
-       $this->h22_codigo = ($this->h22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_codigo"]:$this->h22_codigo);
+       $this->h22_codigo = ($this->h22_codigo === 0 || $this->h22_codigo === 0.0 || $this->h22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h22_codigo"]:$this->h22_codigo);
      }
    }
    // funcao para inclusao
@@ -251,7 +251,7 @@ class cl_assmeio {
          $this->h22_codigo = $h22_codigo;
        }
      }
-     if(($this->h22_codigo == null) || ($this->h22_codigo == "") ){
+     if(($this->h22_codigo == null) || ($this->h22_codigo === 0 || $this->h22_codigo === 0.0 || $this->h22_codigo == "") ){
        $this->erro_sql = " Campo h22_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

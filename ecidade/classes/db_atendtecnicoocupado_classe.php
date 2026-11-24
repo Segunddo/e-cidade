@@ -80,9 +80,9 @@ class cl_atendtecnicoocupado {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at72_id = ($this->at72_id == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_id"]:$this->at72_id);
-       $this->at72_id_usuario = ($this->at72_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_id_usuario"]:$this->at72_id_usuario);
-       $this->at72_codtipo = ($this->at72_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_codtipo"]:$this->at72_codtipo);
+       $this->at72_id = ($this->at72_id === 0 || $this->at72_id === 0.0 || $this->at72_id == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_id"]:$this->at72_id);
+       $this->at72_id_usuario = ($this->at72_id_usuario === 0 || $this->at72_id_usuario === 0.0 || $this->at72_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_id_usuario"]:$this->at72_id_usuario);
+       $this->at72_codtipo = ($this->at72_codtipo === 0 || $this->at72_codtipo === 0.0 || $this->at72_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_codtipo"]:$this->at72_codtipo);
        if($this->at72_data == ""){
          $this->at72_data_dia = ($this->at72_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_data_dia"]:$this->at72_data_dia);
          $this->at72_data_mes = ($this->at72_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_data_mes"]:$this->at72_data_mes);
@@ -92,10 +92,10 @@ class cl_atendtecnicoocupado {
          }
        }
        $this->at72_hora = ($this->at72_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_hora"]:$this->at72_hora);
-       $this->at72_codatend = ($this->at72_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_codatend"]:$this->at72_codatend);
-       $this->at72_tarefa = ($this->at72_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_tarefa"]:$this->at72_tarefa);
+       $this->at72_codatend = ($this->at72_codatend === 0 || $this->at72_codatend === 0.0 || $this->at72_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_codatend"]:$this->at72_codatend);
+       $this->at72_tarefa = ($this->at72_tarefa === 0 || $this->at72_tarefa === 0.0 || $this->at72_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_tarefa"]:$this->at72_tarefa);
      }else{
-       $this->at72_id = ($this->at72_id == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_id"]:$this->at72_id);
+       $this->at72_id = ($this->at72_id === 0 || $this->at72_id === 0.0 || $this->at72_id == ""?@$GLOBALS["HTTP_POST_VARS"]["at72_id"]:$this->at72_id);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_atendtecnicoocupado {
          $this->at72_id = $at72_id;
        }
      }
-     if(($this->at72_id == null) || ($this->at72_id == "") ){
+     if(($this->at72_id == null) || ($this->at72_id === 0 || $this->at72_id === 0.0 || $this->at72_id == "") ){
        $this->erro_sql = " Campo at72_id nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

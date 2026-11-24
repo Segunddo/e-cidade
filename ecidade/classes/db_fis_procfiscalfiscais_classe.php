@@ -75,12 +75,12 @@ class cl_fis_procfiscalfiscais
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y106_sequencial = ($this->y106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_sequencial"]:$this->y106_sequencial);
-            $this->y106_procfiscal = ($this->y106_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_procfiscal"]:$this->y106_procfiscal);
-            $this->y106_cadfiscais = ($this->y106_cadfiscais == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_cadfiscais"]:$this->y106_cadfiscais);
+            $this->y106_sequencial = ($this->y106_sequencial === 0 || $this->y106_sequencial === 0.0 || $this->y106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_sequencial"]:$this->y106_sequencial);
+            $this->y106_procfiscal = ($this->y106_procfiscal === 0 || $this->y106_procfiscal === 0.0 || $this->y106_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_procfiscal"]:$this->y106_procfiscal);
+            $this->y106_cadfiscais = ($this->y106_cadfiscais === 0 || $this->y106_cadfiscais === 0.0 || $this->y106_cadfiscais == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_cadfiscais"]:$this->y106_cadfiscais);
             $this->y106_principal = ($this->y106_principal == "f"?@$GLOBALS["HTTP_POST_VARS"]["y106_principal"]:$this->y106_principal);
         } else {
-            $this->y106_sequencial = ($this->y106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_sequencial"]:$this->y106_sequencial);
+            $this->y106_sequencial = ($this->y106_sequencial === 0 || $this->y106_sequencial === 0.0 || $this->y106_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y106_sequencial"]:$this->y106_sequencial);
         }
     }
    // funcao para inclusao

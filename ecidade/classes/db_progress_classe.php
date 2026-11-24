@@ -85,25 +85,25 @@ class cl_progress {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->r24_instit = ($this->r24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_instit"]:$this->r24_instit);
-       $this->r24_anousu = ($this->r24_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_anousu"]:$this->r24_anousu);
-       $this->r24_mesusu = ($this->r24_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_mesusu"]:$this->r24_mesusu);
-       $this->r24_regime = ($this->r24_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_regime"]:$this->r24_regime);
+       $this->r24_instit = ($this->r24_instit === 0 || $this->r24_instit === 0.0 || $this->r24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_instit"]:$this->r24_instit);
+       $this->r24_anousu = ($this->r24_anousu === 0 || $this->r24_anousu === 0.0 || $this->r24_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_anousu"]:$this->r24_anousu);
+       $this->r24_mesusu = ($this->r24_mesusu === 0 || $this->r24_mesusu === 0.0 || $this->r24_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_mesusu"]:$this->r24_mesusu);
+       $this->r24_regime = ($this->r24_regime === 0 || $this->r24_regime === 0.0 || $this->r24_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_regime"]:$this->r24_regime);
        $this->r24_progr = ($this->r24_progr == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_progr"]:$this->r24_progr);
        $this->r24_descr = ($this->r24_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_descr"]:$this->r24_descr);
-       $this->r24_perc = ($this->r24_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_perc"]:$this->r24_perc);
-       $this->r24_ano = ($this->r24_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_ano"]:$this->r24_ano);
+       $this->r24_perc = ($this->r24_perc === 0 || $this->r24_perc === 0.0 || $this->r24_perc == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_perc"]:$this->r24_perc);
+       $this->r24_ano = ($this->r24_ano === 0 || $this->r24_ano === 0.0 || $this->r24_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_ano"]:$this->r24_ano);
        $this->r24_padrao = ($this->r24_padrao == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_padrao"]:$this->r24_padrao);
-       $this->r24_meses = ($this->r24_meses == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_meses"]:$this->r24_meses);
-       $this->r24_valor = ($this->r24_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_valor"]:$this->r24_valor);
+       $this->r24_meses = ($this->r24_meses === 0 || $this->r24_meses === 0.0 || $this->r24_meses == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_meses"]:$this->r24_meses);
+       $this->r24_valor = ($this->r24_valor === 0 || $this->r24_valor === 0.0 || $this->r24_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_valor"]:$this->r24_valor);
      }else{
-       $this->r24_instit = ($this->r24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_instit"]:$this->r24_instit);
-       $this->r24_anousu = ($this->r24_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_anousu"]:$this->r24_anousu);
-       $this->r24_mesusu = ($this->r24_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_mesusu"]:$this->r24_mesusu);
-       $this->r24_regime = ($this->r24_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_regime"]:$this->r24_regime);
-       $this->r24_ano = ($this->r24_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_ano"]:$this->r24_ano);
+       $this->r24_instit = ($this->r24_instit === 0 || $this->r24_instit === 0.0 || $this->r24_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_instit"]:$this->r24_instit);
+       $this->r24_anousu = ($this->r24_anousu === 0 || $this->r24_anousu === 0.0 || $this->r24_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_anousu"]:$this->r24_anousu);
+       $this->r24_mesusu = ($this->r24_mesusu === 0 || $this->r24_mesusu === 0.0 || $this->r24_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_mesusu"]:$this->r24_mesusu);
+       $this->r24_regime = ($this->r24_regime === 0 || $this->r24_regime === 0.0 || $this->r24_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_regime"]:$this->r24_regime);
+       $this->r24_ano = ($this->r24_ano === 0 || $this->r24_ano === 0.0 || $this->r24_ano == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_ano"]:$this->r24_ano);
        $this->r24_padrao = ($this->r24_padrao == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_padrao"]:$this->r24_padrao);
-       $this->r24_meses = ($this->r24_meses == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_meses"]:$this->r24_meses);
+       $this->r24_meses = ($this->r24_meses === 0 || $this->r24_meses === 0.0 || $this->r24_meses == ""?@$GLOBALS["HTTP_POST_VARS"]["r24_meses"]:$this->r24_meses);
      }
    }
    // funcao para inclusao
@@ -151,7 +151,7 @@ class cl_progress {
        $this->r24_padrao = $r24_padrao;
        $this->r24_meses = $r24_meses;
        $this->r24_instit = $r24_instit;
-     if(($this->r24_anousu == null) || ($this->r24_anousu == "") ){
+     if(($this->r24_anousu == null) || ($this->r24_anousu === 0 || $this->r24_anousu === 0.0 || $this->r24_anousu == "") ){
        $this->erro_sql = " Campo r24_anousu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -159,7 +159,7 @@ class cl_progress {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r24_mesusu == null) || ($this->r24_mesusu == "") ){
+     if(($this->r24_mesusu == null) || ($this->r24_mesusu === 0 || $this->r24_mesusu === 0.0 || $this->r24_mesusu == "") ){
        $this->erro_sql = " Campo r24_mesusu nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -167,7 +167,7 @@ class cl_progress {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r24_regime == null) || ($this->r24_regime == "") ){
+     if(($this->r24_regime == null) || ($this->r24_regime === 0 || $this->r24_regime === 0.0 || $this->r24_regime == "") ){
        $this->erro_sql = " Campo r24_regime nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -183,7 +183,7 @@ class cl_progress {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r24_meses == null) || ($this->r24_meses == "") ){
+     if(($this->r24_meses == null) || ($this->r24_meses === 0 || $this->r24_meses === 0.0 || $this->r24_meses == "") ){
        $this->erro_sql = " Campo r24_meses nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -191,7 +191,7 @@ class cl_progress {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->r24_instit == null) || ($this->r24_instit == "") ){
+     if(($this->r24_instit == null) || ($this->r24_instit === 0 || $this->r24_instit === 0.0 || $this->r24_instit == "") ){
        $this->erro_sql = " Campo r24_instit nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

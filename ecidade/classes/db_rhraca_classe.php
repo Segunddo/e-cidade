@@ -67,10 +67,10 @@ class cl_rhraca {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh18_raca = ($this->rh18_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["rh18_raca"]:$this->rh18_raca);
+       $this->rh18_raca = ($this->rh18_raca === 0 || $this->rh18_raca === 0.0 || $this->rh18_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["rh18_raca"]:$this->rh18_raca);
        $this->rh18_descr = ($this->rh18_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh18_descr"]:$this->rh18_descr);
      }else{
-       $this->rh18_raca = ($this->rh18_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["rh18_raca"]:$this->rh18_raca);
+       $this->rh18_raca = ($this->rh18_raca === 0 || $this->rh18_raca === 0.0 || $this->rh18_raca == ""?@$GLOBALS["HTTP_POST_VARS"]["rh18_raca"]:$this->rh18_raca);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhraca {
        return false;
      }
        $this->rh18_raca = $rh18_raca;
-     if(($this->rh18_raca == null) || ($this->rh18_raca == "") ){
+     if(($this->rh18_raca == null) || ($this->rh18_raca === 0 || $this->rh18_raca === 0.0 || $this->rh18_raca == "") ){
        $this->erro_sql = " Campo rh18_raca nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

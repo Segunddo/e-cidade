@@ -67,11 +67,11 @@ class cl_fis_lancultandam {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl20_codlanc = ($this->nl20_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl20_codlanc"]:$this->nl20_codlanc);
-       $this->nl20_codandam = ($this->nl20_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["nl20_codandam"]:$this->nl20_codandam);
+       $this->nl20_codlanc = ($this->nl20_codlanc === 0 || $this->nl20_codlanc === 0.0 || $this->nl20_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl20_codlanc"]:$this->nl20_codlanc);
+       $this->nl20_codandam = ($this->nl20_codandam === 0 || $this->nl20_codandam === 0.0 || $this->nl20_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["nl20_codandam"]:$this->nl20_codandam);
      }else{
-       $this->nl20_codlanc = ($this->nl20_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl20_codlanc"]:$this->nl20_codlanc);
-       $this->nl20_codandam = ($this->nl20_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["nl20_codandam"]:$this->nl20_codandam);
+       $this->nl20_codlanc = ($this->nl20_codlanc === 0 || $this->nl20_codlanc === 0.0 || $this->nl20_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl20_codlanc"]:$this->nl20_codlanc);
+       $this->nl20_codandam = ($this->nl20_codandam === 0 || $this->nl20_codandam === 0.0 || $this->nl20_codandam == ""?@$GLOBALS["HTTP_POST_VARS"]["nl20_codandam"]:$this->nl20_codandam);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_fis_lancultandam {
       $this->atualizacampos();
        $this->nl20_codlanc = $nl20_codlanc;
        $this->nl20_codandam = $nl20_codandam;
-     if(($this->nl20_codlanc == null) || ($this->nl20_codlanc == "") ){
+     if(($this->nl20_codlanc == null) || ($this->nl20_codlanc === 0 || $this->nl20_codlanc === 0.0 || $this->nl20_codlanc == "") ){
        $this->erro_sql = " Campo nl20_codlanc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_fis_lancultandam {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->nl20_codandam == null) || ($this->nl20_codandam == "") ){
+     if(($this->nl20_codandam == null) || ($this->nl20_codandam === 0 || $this->nl20_codandam === 0.0 || $this->nl20_codandam == "") ){
        $this->erro_sql = " Campo nl20_codandam nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

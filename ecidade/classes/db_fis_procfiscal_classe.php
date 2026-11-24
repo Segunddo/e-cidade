@@ -87,10 +87,10 @@ class cl_fis_procfiscal
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y100_sequencial = ($this->y100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_sequencial"]:$this->y100_sequencial);
-            $this->y100_coddepto = ($this->y100_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_coddepto"]:$this->y100_coddepto);
-            $this->y100_instit = ($this->y100_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_instit"]:$this->y100_instit);
-            $this->y100_procfiscalcadtipo = ($this->y100_procfiscalcadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_procfiscalcadtipo"]:$this->y100_procfiscalcadtipo);
+            $this->y100_sequencial = ($this->y100_sequencial === 0 || $this->y100_sequencial === 0.0 || $this->y100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_sequencial"]:$this->y100_sequencial);
+            $this->y100_coddepto = ($this->y100_coddepto === 0 || $this->y100_coddepto === 0.0 || $this->y100_coddepto == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_coddepto"]:$this->y100_coddepto);
+            $this->y100_instit = ($this->y100_instit === 0 || $this->y100_instit === 0.0 || $this->y100_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_instit"]:$this->y100_instit);
+            $this->y100_procfiscalcadtipo = ($this->y100_procfiscalcadtipo === 0 || $this->y100_procfiscalcadtipo === 0.0 || $this->y100_procfiscalcadtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_procfiscalcadtipo"]:$this->y100_procfiscalcadtipo);
             if ($this->y100_dtinicial == "") {
                 $this->y100_dtinicial_dia = ($this->y100_dtinicial_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_dtinicial_dia"]:$this->y100_dtinicial_dia);
                 $this->y100_dtinicial_mes = ($this->y100_dtinicial_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_dtinicial_mes"]:$this->y100_dtinicial_mes);
@@ -109,7 +109,7 @@ class cl_fis_procfiscal
             }
             $this->y100_obs = ($this->y100_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_obs"]:$this->y100_obs);
         } else {
-            $this->y100_sequencial = ($this->y100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_sequencial"]:$this->y100_sequencial);
+            $this->y100_sequencial = ($this->y100_sequencial === 0 || $this->y100_sequencial === 0.0 || $this->y100_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y100_sequencial"]:$this->y100_sequencial);
         }
     }
    // funcao para inclusao

@@ -53,15 +53,15 @@ class cl_pensaocontabancaria
     public function atualizacampos($exclusao = false)
     {
      if($exclusao==false){
-       $this->rh139_sequencial = ($this->rh139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_sequencial"]:$this->rh139_sequencial);
-       $this->rh139_regist = ($this->rh139_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_regist"]:$this->rh139_regist);
-       $this->rh139_numcgm = ($this->rh139_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_numcgm"]:$this->rh139_numcgm);
-       $this->rh139_anousu = ($this->rh139_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_anousu"]:$this->rh139_anousu);
-       $this->rh139_mesusu = ($this->rh139_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_mesusu"]:$this->rh139_mesusu);
-       $this->rh139_contabancaria = ($this->rh139_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_contabancaria"]:$this->rh139_contabancaria);
-       $this->rh139_cgmalimentado = ($this->rh139_cgmalimentado == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_cgmalimentado"]:$this->rh139_cgmalimentado);
+       $this->rh139_sequencial = ($this->rh139_sequencial === 0 || $this->rh139_sequencial === 0.0 || $this->rh139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_sequencial"]:$this->rh139_sequencial);
+       $this->rh139_regist = ($this->rh139_regist === 0 || $this->rh139_regist === 0.0 || $this->rh139_regist == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_regist"]:$this->rh139_regist);
+       $this->rh139_numcgm = ($this->rh139_numcgm === 0 || $this->rh139_numcgm === 0.0 || $this->rh139_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_numcgm"]:$this->rh139_numcgm);
+       $this->rh139_anousu = ($this->rh139_anousu === 0 || $this->rh139_anousu === 0.0 || $this->rh139_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_anousu"]:$this->rh139_anousu);
+       $this->rh139_mesusu = ($this->rh139_mesusu === 0 || $this->rh139_mesusu === 0.0 || $this->rh139_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_mesusu"]:$this->rh139_mesusu);
+       $this->rh139_contabancaria = ($this->rh139_contabancaria === 0 || $this->rh139_contabancaria === 0.0 || $this->rh139_contabancaria == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_contabancaria"]:$this->rh139_contabancaria);
+       $this->rh139_cgmalimentado = ($this->rh139_cgmalimentado === 0 || $this->rh139_cgmalimentado === 0.0 || $this->rh139_cgmalimentado == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_cgmalimentado"]:$this->rh139_cgmalimentado);
      }else{
-       $this->rh139_sequencial = ($this->rh139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_sequencial"]:$this->rh139_sequencial);
+       $this->rh139_sequencial = ($this->rh139_sequencial === 0 || $this->rh139_sequencial === 0.0 || $this->rh139_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh139_sequencial"]:$this->rh139_sequencial);
      }
    }
 
@@ -117,7 +117,7 @@ class cl_pensaocontabancaria
        return false;
      }
        $this->rh139_sequencial = $rh139_sequencial; 
-     if(($this->rh139_sequencial == null) || ($this->rh139_sequencial == "") ){ 
+     if(($this->rh139_sequencial == null) || ($this->rh139_sequencial === 0 || $this->rh139_sequencial === 0.0 || $this->rh139_sequencial == "") ){ 
        $this->erro_sql = " Campo rh139_sequencial não declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

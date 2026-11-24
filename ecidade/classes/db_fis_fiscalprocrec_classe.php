@@ -53,16 +53,16 @@ class cl_fis_fiscalprocrec
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y45_codtipo = ($this->y45_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_codtipo"]:$this->y45_codtipo);
-            $this->y45_receit = ($this->y45_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_receit"]:$this->y45_receit);
-            $this->y45_valor = ($this->y45_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_valor"]:$this->y45_valor);
+            $this->y45_codtipo = ($this->y45_codtipo === 0 || $this->y45_codtipo === 0.0 || $this->y45_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_codtipo"]:$this->y45_codtipo);
+            $this->y45_receit = ($this->y45_receit === 0 || $this->y45_receit === 0.0 || $this->y45_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_receit"]:$this->y45_receit);
+            $this->y45_valor = ($this->y45_valor === 0 || $this->y45_valor === 0.0 || $this->y45_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_valor"]:$this->y45_valor);
             $this->y45_descr = ($this->y45_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_descr"]:$this->y45_descr);
             $this->y45_vlrfixo = ($this->y45_vlrfixo == "f"?@$GLOBALS["HTTP_POST_VARS"]["y45_vlrfixo"]:$this->y45_vlrfixo);
-            $this->y45_tipo = ($this->y45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_tipo"]:$this->y45_tipo);
+            $this->y45_tipo = ($this->y45_tipo === 0 || $this->y45_tipo === 0.0 || $this->y45_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_tipo"]:$this->y45_tipo);
             $this->y45_percentual = ($this->y45_percentual == "f"?@$GLOBALS["HTTP_POST_VARS"]["y45_percentual"]:$this->y45_percentual);
         } else {
-            $this->y45_codtipo = ($this->y45_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_codtipo"]:$this->y45_codtipo);
-            $this->y45_receit = ($this->y45_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_receit"]:$this->y45_receit);
+            $this->y45_codtipo = ($this->y45_codtipo === 0 || $this->y45_codtipo === 0.0 || $this->y45_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_codtipo"]:$this->y45_codtipo);
+            $this->y45_receit = ($this->y45_receit === 0 || $this->y45_receit === 0.0 || $this->y45_receit == ""?@$GLOBALS["HTTP_POST_VARS"]["y45_receit"]:$this->y45_receit);
         }
     }
 
@@ -83,7 +83,7 @@ class cl_fis_fiscalprocrec
         }
         $this->y45_codtipo = $y45_codtipo;
         $this->y45_receit = $y45_receit;
-        if (($this->y45_codtipo == null) || ($this->y45_codtipo == "")) {
+        if (($this->y45_codtipo == null) || ($this->y45_codtipo === 0 || $this->y45_codtipo === 0.0 || $this->y45_codtipo == "")) {
             $this->erro_sql = " Campo y45_codtipo não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -91,7 +91,7 @@ class cl_fis_fiscalprocrec
             $this->erro_status = "0";
             return false;
         }
-        if (($this->y45_receit == null) || ($this->y45_receit == "")) {
+        if (($this->y45_receit == null) || ($this->y45_receit === 0 || $this->y45_receit === 0.0 || $this->y45_receit == "")) {
             $this->erro_sql = " Campo y45_receit não declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

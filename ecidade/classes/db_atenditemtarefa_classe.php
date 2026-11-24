@@ -69,11 +69,11 @@ class cl_atenditemtarefa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at18_sequencial = ($this->at18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at18_sequencial"]:$this->at18_sequencial);
-       $this->at18_atenditem = ($this->at18_atenditem == ""?@$GLOBALS["HTTP_POST_VARS"]["at18_atenditem"]:$this->at18_atenditem);
-       $this->at18_tarefa = ($this->at18_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at18_tarefa"]:$this->at18_tarefa);
+       $this->at18_sequencial = ($this->at18_sequencial === 0 || $this->at18_sequencial === 0.0 || $this->at18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at18_sequencial"]:$this->at18_sequencial);
+       $this->at18_atenditem = ($this->at18_atenditem === 0 || $this->at18_atenditem === 0.0 || $this->at18_atenditem == ""?@$GLOBALS["HTTP_POST_VARS"]["at18_atenditem"]:$this->at18_atenditem);
+       $this->at18_tarefa = ($this->at18_tarefa === 0 || $this->at18_tarefa === 0.0 || $this->at18_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at18_tarefa"]:$this->at18_tarefa);
      }else{
-       $this->at18_sequencial = ($this->at18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at18_sequencial"]:$this->at18_sequencial);
+       $this->at18_sequencial = ($this->at18_sequencial === 0 || $this->at18_sequencial === 0.0 || $this->at18_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at18_sequencial"]:$this->at18_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_atenditemtarefa {
          $this->at18_sequencial = $at18_sequencial;
        }
      }
-     if(($this->at18_sequencial == null) || ($this->at18_sequencial == "") ){
+     if(($this->at18_sequencial == null) || ($this->at18_sequencial === 0 || $this->at18_sequencial === 0.0 || $this->at18_sequencial == "") ){
        $this->erro_sql = " Campo at18_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

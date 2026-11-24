@@ -71,12 +71,12 @@ class cl_ouvidoriaatendimentodoc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov19_sequencial = ($this->ov19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov19_sequencial"]:$this->ov19_sequencial);
-       $this->ov19_procdoc = ($this->ov19_procdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["ov19_procdoc"]:$this->ov19_procdoc);
-       $this->ov19_ouvidoriaatendimento = ($this->ov19_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov19_ouvidoriaatendimento"]:$this->ov19_ouvidoriaatendimento);
+       $this->ov19_sequencial = ($this->ov19_sequencial === 0 || $this->ov19_sequencial === 0.0 || $this->ov19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov19_sequencial"]:$this->ov19_sequencial);
+       $this->ov19_procdoc = ($this->ov19_procdoc === 0 || $this->ov19_procdoc === 0.0 || $this->ov19_procdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["ov19_procdoc"]:$this->ov19_procdoc);
+       $this->ov19_ouvidoriaatendimento = ($this->ov19_ouvidoriaatendimento === 0 || $this->ov19_ouvidoriaatendimento === 0.0 || $this->ov19_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov19_ouvidoriaatendimento"]:$this->ov19_ouvidoriaatendimento);
        $this->ov19_entregue = ($this->ov19_entregue == "f"?@$GLOBALS["HTTP_POST_VARS"]["ov19_entregue"]:$this->ov19_entregue);
      }else{
-       $this->ov19_sequencial = ($this->ov19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov19_sequencial"]:$this->ov19_sequencial);
+       $this->ov19_sequencial = ($this->ov19_sequencial === 0 || $this->ov19_sequencial === 0.0 || $this->ov19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov19_sequencial"]:$this->ov19_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_ouvidoriaatendimentodoc {
          $this->ov19_sequencial = $ov19_sequencial;
        }
      }
-     if(($this->ov19_sequencial == null) || ($this->ov19_sequencial == "") ){
+     if(($this->ov19_sequencial == null) || ($this->ov19_sequencial === 0 || $this->ov19_sequencial === 0.0 || $this->ov19_sequencial == "") ){
        $this->erro_sql = " Campo ov19_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

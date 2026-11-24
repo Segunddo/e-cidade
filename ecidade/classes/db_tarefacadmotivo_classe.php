@@ -71,12 +71,12 @@ class cl_tarefacadmotivo {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at54_sequencial = ($this->at54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at54_sequencial"]:$this->at54_sequencial);
+       $this->at54_sequencial = ($this->at54_sequencial === 0 || $this->at54_sequencial === 0.0 || $this->at54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at54_sequencial"]:$this->at54_sequencial);
        $this->at54_descr = ($this->at54_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at54_descr"]:$this->at54_descr);
-       $this->at54_tipo = ($this->at54_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at54_tipo"]:$this->at54_tipo);
+       $this->at54_tipo = ($this->at54_tipo === 0 || $this->at54_tipo === 0.0 || $this->at54_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at54_tipo"]:$this->at54_tipo);
        $this->at54_nome = ($this->at54_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["at54_nome"]:$this->at54_nome);
      }else{
-       $this->at54_sequencial = ($this->at54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at54_sequencial"]:$this->at54_sequencial);
+       $this->at54_sequencial = ($this->at54_sequencial === 0 || $this->at54_sequencial === 0.0 || $this->at54_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at54_sequencial"]:$this->at54_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_tarefacadmotivo {
          $this->at54_sequencial = $at54_sequencial;
        }
      }
-     if(($this->at54_sequencial == null) || ($this->at54_sequencial == "") ){
+     if(($this->at54_sequencial == null) || ($this->at54_sequencial === 0 || $this->at54_sequencial === 0.0 || $this->at54_sequencial == "") ){
        $this->erro_sql = " Campo at54_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

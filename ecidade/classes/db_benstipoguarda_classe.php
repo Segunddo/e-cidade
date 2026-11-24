@@ -67,10 +67,10 @@ class cl_benstipoguarda {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t20_codigo = ($this->t20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t20_codigo"]:$this->t20_codigo);
+       $this->t20_codigo = ($this->t20_codigo === 0 || $this->t20_codigo === 0.0 || $this->t20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t20_codigo"]:$this->t20_codigo);
        $this->t20_descr = ($this->t20_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["t20_descr"]:$this->t20_descr);
      }else{
-       $this->t20_codigo = ($this->t20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t20_codigo"]:$this->t20_codigo);
+       $this->t20_codigo = ($this->t20_codigo === 0 || $this->t20_codigo === 0.0 || $this->t20_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["t20_codigo"]:$this->t20_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_benstipoguarda {
          $this->t20_codigo = $t20_codigo;
        }
      }
-     if(($this->t20_codigo == null) || ($this->t20_codigo == "") ){
+     if(($this->t20_codigo == null) || ($this->t20_codigo === 0 || $this->t20_codigo === 0.0 || $this->t20_codigo == "") ){
        $this->erro_sql = " Campo t20_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

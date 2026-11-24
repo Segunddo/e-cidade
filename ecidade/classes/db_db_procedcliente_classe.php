@@ -69,11 +69,11 @@ class cl_db_procedcliente {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at50_sequencial = ($this->at50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at50_sequencial"]:$this->at50_sequencial);
-       $this->at50_cliente = ($this->at50_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at50_cliente"]:$this->at50_cliente);
-       $this->at50_proced = ($this->at50_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["at50_proced"]:$this->at50_proced);
+       $this->at50_sequencial = ($this->at50_sequencial === 0 || $this->at50_sequencial === 0.0 || $this->at50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at50_sequencial"]:$this->at50_sequencial);
+       $this->at50_cliente = ($this->at50_cliente === 0 || $this->at50_cliente === 0.0 || $this->at50_cliente == ""?@$GLOBALS["HTTP_POST_VARS"]["at50_cliente"]:$this->at50_cliente);
+       $this->at50_proced = ($this->at50_proced === 0 || $this->at50_proced === 0.0 || $this->at50_proced == ""?@$GLOBALS["HTTP_POST_VARS"]["at50_proced"]:$this->at50_proced);
      }else{
-       $this->at50_sequencial = ($this->at50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at50_sequencial"]:$this->at50_sequencial);
+       $this->at50_sequencial = ($this->at50_sequencial === 0 || $this->at50_sequencial === 0.0 || $this->at50_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at50_sequencial"]:$this->at50_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_db_procedcliente {
          $this->at50_sequencial = $at50_sequencial;
        }
      }
-     if(($this->at50_sequencial == null) || ($this->at50_sequencial == "") ){
+     if(($this->at50_sequencial == null) || ($this->at50_sequencial === 0 || $this->at50_sequencial === 0.0 || $this->at50_sequencial == "") ){
        $this->erro_sql = " Campo at50_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

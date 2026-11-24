@@ -77,15 +77,15 @@ class cl_ouvidoriaatendimentoretornotelefone {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov14_sequencial = ($this->ov14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_sequencial"]:$this->ov14_sequencial);
-       $this->ov14_ouvidoriaatendimento = ($this->ov14_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_ouvidoriaatendimento"]:$this->ov14_ouvidoriaatendimento);
+       $this->ov14_sequencial = ($this->ov14_sequencial === 0 || $this->ov14_sequencial === 0.0 || $this->ov14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_sequencial"]:$this->ov14_sequencial);
+       $this->ov14_ouvidoriaatendimento = ($this->ov14_ouvidoriaatendimento === 0 || $this->ov14_ouvidoriaatendimento === 0.0 || $this->ov14_ouvidoriaatendimento == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_ouvidoriaatendimento"]:$this->ov14_ouvidoriaatendimento);
        $this->ov14_numero = ($this->ov14_numero == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_numero"]:$this->ov14_numero);
-       $this->ov14_tipotelefone = ($this->ov14_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_tipotelefone"]:$this->ov14_tipotelefone);
+       $this->ov14_tipotelefone = ($this->ov14_tipotelefone === 0 || $this->ov14_tipotelefone === 0.0 || $this->ov14_tipotelefone == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_tipotelefone"]:$this->ov14_tipotelefone);
        $this->ov14_ddd = ($this->ov14_ddd == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_ddd"]:$this->ov14_ddd);
        $this->ov14_ramal = ($this->ov14_ramal == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_ramal"]:$this->ov14_ramal);
        $this->ov14_obs = ($this->ov14_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_obs"]:$this->ov14_obs);
      }else{
-       $this->ov14_sequencial = ($this->ov14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_sequencial"]:$this->ov14_sequencial);
+       $this->ov14_sequencial = ($this->ov14_sequencial === 0 || $this->ov14_sequencial === 0.0 || $this->ov14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov14_sequencial"]:$this->ov14_sequencial);
      }
    }
    // funcao para inclusao
@@ -148,7 +148,7 @@ class cl_ouvidoriaatendimentoretornotelefone {
          $this->ov14_sequencial = $ov14_sequencial;
        }
      }
-     if(($this->ov14_sequencial == null) || ($this->ov14_sequencial == "") ){
+     if(($this->ov14_sequencial == null) || ($this->ov14_sequencial === 0 || $this->ov14_sequencial === 0.0 || $this->ov14_sequencial == "") ){
        $this->erro_sql = " Campo ov14_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

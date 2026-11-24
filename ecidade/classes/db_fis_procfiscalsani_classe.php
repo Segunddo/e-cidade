@@ -73,11 +73,11 @@ class cl_fis_procfiscalsani
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y104_sequencial = ($this->y104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y104_sequencial"]:$this->y104_sequencial);
-            $this->y104_codsani = ($this->y104_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y104_codsani"]:$this->y104_codsani);
-            $this->y104_procfiscal = ($this->y104_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y104_procfiscal"]:$this->y104_procfiscal);
+            $this->y104_sequencial = ($this->y104_sequencial === 0 || $this->y104_sequencial === 0.0 || $this->y104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y104_sequencial"]:$this->y104_sequencial);
+            $this->y104_codsani = ($this->y104_codsani === 0 || $this->y104_codsani === 0.0 || $this->y104_codsani == ""?@$GLOBALS["HTTP_POST_VARS"]["y104_codsani"]:$this->y104_codsani);
+            $this->y104_procfiscal = ($this->y104_procfiscal === 0 || $this->y104_procfiscal === 0.0 || $this->y104_procfiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y104_procfiscal"]:$this->y104_procfiscal);
         } else {
-            $this->y104_sequencial = ($this->y104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y104_sequencial"]:$this->y104_sequencial);
+            $this->y104_sequencial = ($this->y104_sequencial === 0 || $this->y104_sequencial === 0.0 || $this->y104_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["y104_sequencial"]:$this->y104_sequencial);
         }
     }
     // funcao para inclusao

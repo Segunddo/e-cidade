@@ -71,12 +71,12 @@ class cl_matestoqueinimeipm {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->m89_sequencial = ($this->m89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_sequencial"]:$this->m89_sequencial);
-       $this->m89_matestoqueinimei = ($this->m89_matestoqueinimei == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_matestoqueinimei"]:$this->m89_matestoqueinimei);
-       $this->m89_precomedio = ($this->m89_precomedio == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_precomedio"]:$this->m89_precomedio);
-       $this->m89_valorunitario = ($this->m89_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_valorunitario"]:$this->m89_valorunitario);
+       $this->m89_sequencial = ($this->m89_sequencial === 0 || $this->m89_sequencial === 0.0 || $this->m89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_sequencial"]:$this->m89_sequencial);
+       $this->m89_matestoqueinimei = ($this->m89_matestoqueinimei === 0 || $this->m89_matestoqueinimei === 0.0 || $this->m89_matestoqueinimei == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_matestoqueinimei"]:$this->m89_matestoqueinimei);
+       $this->m89_precomedio = ($this->m89_precomedio === 0 || $this->m89_precomedio === 0.0 || $this->m89_precomedio == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_precomedio"]:$this->m89_precomedio);
+       $this->m89_valorunitario = ($this->m89_valorunitario === 0 || $this->m89_valorunitario === 0.0 || $this->m89_valorunitario == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_valorunitario"]:$this->m89_valorunitario);
      }else{
-       $this->m89_sequencial = ($this->m89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_sequencial"]:$this->m89_sequencial);
+       $this->m89_sequencial = ($this->m89_sequencial === 0 || $this->m89_sequencial === 0.0 || $this->m89_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["m89_sequencial"]:$this->m89_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_matestoqueinimeipm {
          $this->m89_sequencial = $m89_sequencial;
        }
      }
-     if(($this->m89_sequencial == null) || ($this->m89_sequencial == "") ){
+     if(($this->m89_sequencial == null) || ($this->m89_sequencial === 0 || $this->m89_sequencial === 0.0 || $this->m89_sequencial == "") ){
        $this->erro_sql = " Campo m89_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

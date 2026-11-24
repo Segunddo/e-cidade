@@ -76,9 +76,9 @@ class cl_clientesmodulosproc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at75_sequen = ($this->at75_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_sequen"]:$this->at75_sequen);
-       $this->at75_seqclimod = ($this->at75_seqclimod == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_seqclimod"]:$this->at75_seqclimod);
-       $this->at75_codproced = ($this->at75_codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_codproced"]:$this->at75_codproced);
+       $this->at75_sequen = ($this->at75_sequen === 0 || $this->at75_sequen === 0.0 || $this->at75_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_sequen"]:$this->at75_sequen);
+       $this->at75_seqclimod = ($this->at75_seqclimod === 0 || $this->at75_seqclimod === 0.0 || $this->at75_seqclimod == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_seqclimod"]:$this->at75_seqclimod);
+       $this->at75_codproced = ($this->at75_codproced === 0 || $this->at75_codproced === 0.0 || $this->at75_codproced == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_codproced"]:$this->at75_codproced);
        if($this->at75_data == ""){
          $this->at75_data_dia = ($this->at75_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_data_dia"]:$this->at75_data_dia);
          $this->at75_data_mes = ($this->at75_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_data_mes"]:$this->at75_data_mes);
@@ -89,7 +89,7 @@ class cl_clientesmodulosproc {
        }
        $this->at75_obs = ($this->at75_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_obs"]:$this->at75_obs);
      }else{
-       $this->at75_sequen = ($this->at75_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_sequen"]:$this->at75_sequen);
+       $this->at75_sequen = ($this->at75_sequen === 0 || $this->at75_sequen === 0.0 || $this->at75_sequen == ""?@$GLOBALS["HTTP_POST_VARS"]["at75_sequen"]:$this->at75_sequen);
      }
    }
    // funcao para inclusao
@@ -140,7 +140,7 @@ class cl_clientesmodulosproc {
          $this->at75_sequen = $at75_sequen;
        }
      }
-     if(($this->at75_sequen == null) || ($this->at75_sequen == "") ){
+     if(($this->at75_sequen == null) || ($this->at75_sequen === 0 || $this->at75_sequen === 0.0 || $this->at75_sequen == "") ){
        $this->erro_sql = " Campo at75_sequen nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

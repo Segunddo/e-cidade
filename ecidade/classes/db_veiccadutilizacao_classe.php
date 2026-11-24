@@ -67,10 +67,10 @@ class cl_veiccadutilizacao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve14_sequencial = ($this->ve14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve14_sequencial"]:$this->ve14_sequencial);
+       $this->ve14_sequencial = ($this->ve14_sequencial === 0 || $this->ve14_sequencial === 0.0 || $this->ve14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve14_sequencial"]:$this->ve14_sequencial);
        $this->ve14_descr = ($this->ve14_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve14_descr"]:$this->ve14_descr);
      }else{
-       $this->ve14_sequencial = ($this->ve14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve14_sequencial"]:$this->ve14_sequencial);
+       $this->ve14_sequencial = ($this->ve14_sequencial === 0 || $this->ve14_sequencial === 0.0 || $this->ve14_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ve14_sequencial"]:$this->ve14_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_veiccadutilizacao {
          $this->ve14_sequencial = $ve14_sequencial;
        }
      }
-     if(($this->ve14_sequencial == null) || ($this->ve14_sequencial == "") ){
+     if(($this->ve14_sequencial == null) || ($this->ve14_sequencial === 0 || $this->ve14_sequencial === 0.0 || $this->ve14_sequencial == "") ){
        $this->erro_sql = " Campo ve14_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -75,13 +75,13 @@ class cl_fis_vistoriaslotevist
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y05_vistoriaslotevist = ($this->y05_vistoriaslotevist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
-            $this->y05_vistoriaslote = ($this->y05_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
-            $this->y05_codvist = ($this->y05_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_codvist"]:$this->y05_codvist);
-            $this->y05_codmsg = ($this->y05_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_codmsg"]:$this->y05_codmsg);
+            $this->y05_vistoriaslotevist = ($this->y05_vistoriaslotevist === 0 || $this->y05_vistoriaslotevist === 0.0 || $this->y05_vistoriaslotevist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
+            $this->y05_vistoriaslote = ($this->y05_vistoriaslote === 0 || $this->y05_vistoriaslote === 0.0 || $this->y05_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
+            $this->y05_codvist = ($this->y05_codvist === 0 || $this->y05_codvist === 0.0 || $this->y05_codvist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_codvist"]:$this->y05_codvist);
+            $this->y05_codmsg = ($this->y05_codmsg === 0 || $this->y05_codmsg === 0.0 || $this->y05_codmsg == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_codmsg"]:$this->y05_codmsg);
         } else {
-            $this->y05_vistoriaslotevist = ($this->y05_vistoriaslotevist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
-            $this->y05_vistoriaslote = ($this->y05_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
+            $this->y05_vistoriaslotevist = ($this->y05_vistoriaslotevist === 0 || $this->y05_vistoriaslotevist === 0.0 || $this->y05_vistoriaslotevist == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslotevist"]:$this->y05_vistoriaslotevist);
+            $this->y05_vistoriaslote = ($this->y05_vistoriaslote === 0 || $this->y05_vistoriaslote === 0.0 || $this->y05_vistoriaslote == ""?@$GLOBALS["HTTP_POST_VARS"]["y05_vistoriaslote"]:$this->y05_vistoriaslote);
         }
     }
     // funcao para inclusao

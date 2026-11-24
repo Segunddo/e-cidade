@@ -82,9 +82,9 @@ class cl_rhgeracaofolha {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh102_sequencial = ($this->rh102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_sequencial"]:$this->rh102_sequencial);
+       $this->rh102_sequencial = ($this->rh102_sequencial === 0 || $this->rh102_sequencial === 0.0 || $this->rh102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_sequencial"]:$this->rh102_sequencial);
        $this->rh102_descricao = ($this->rh102_descricao == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_descricao"]:$this->rh102_descricao);
-       $this->rh102_usuario = ($this->rh102_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_usuario"]:$this->rh102_usuario);
+       $this->rh102_usuario = ($this->rh102_usuario === 0 || $this->rh102_usuario === 0.0 || $this->rh102_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_usuario"]:$this->rh102_usuario);
        if($this->rh102_dtproc == ""){
          $this->rh102_dtproc_dia = ($this->rh102_dtproc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_dtproc_dia"]:$this->rh102_dtproc_dia);
          $this->rh102_dtproc_mes = ($this->rh102_dtproc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_dtproc_mes"]:$this->rh102_dtproc_mes);
@@ -94,11 +94,11 @@ class cl_rhgeracaofolha {
          }
        }
        $this->rh102_ativo = ($this->rh102_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh102_ativo"]:$this->rh102_ativo);
-       $this->rh102_mesusu = ($this->rh102_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_mesusu"]:$this->rh102_mesusu);
-       $this->rh102_anousu = ($this->rh102_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_anousu"]:$this->rh102_anousu);
-       $this->rh102_instit = ($this->rh102_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_instit"]:$this->rh102_instit);
+       $this->rh102_mesusu = ($this->rh102_mesusu === 0 || $this->rh102_mesusu === 0.0 || $this->rh102_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_mesusu"]:$this->rh102_mesusu);
+       $this->rh102_anousu = ($this->rh102_anousu === 0 || $this->rh102_anousu === 0.0 || $this->rh102_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_anousu"]:$this->rh102_anousu);
+       $this->rh102_instit = ($this->rh102_instit === 0 || $this->rh102_instit === 0.0 || $this->rh102_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_instit"]:$this->rh102_instit);
      }else{
-       $this->rh102_sequencial = ($this->rh102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_sequencial"]:$this->rh102_sequencial);
+       $this->rh102_sequencial = ($this->rh102_sequencial === 0 || $this->rh102_sequencial === 0.0 || $this->rh102_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh102_sequencial"]:$this->rh102_sequencial);
      }
    }
    // funcao para inclusao
@@ -191,7 +191,7 @@ class cl_rhgeracaofolha {
          $this->rh102_sequencial = $rh102_sequencial;
        }
      }
-     if(($this->rh102_sequencial == null) || ($this->rh102_sequencial == "") ){
+     if(($this->rh102_sequencial == null) || ($this->rh102_sequencial === 0 || $this->rh102_sequencial === 0.0 || $this->rh102_sequencial == "") ){
        $this->erro_sql = " Campo rh102_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

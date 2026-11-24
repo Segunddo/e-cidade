@@ -74,7 +74,7 @@ class cl_benscorlanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->t62_codcor = ($this->t62_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcor"]:$this->t62_codcor);
+       $this->t62_codcor = ($this->t62_codcor === 0 || $this->t62_codcor === 0.0 || $this->t62_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcor"]:$this->t62_codcor);
        if($this->t62_data == ""){
          $this->t62_data_dia = ($this->t62_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_data_dia"]:$this->t62_data_dia);
          $this->t62_data_mes = ($this->t62_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_data_mes"]:$this->t62_data_mes);
@@ -84,9 +84,9 @@ class cl_benscorlanc {
          }
        }
        $this->t62_obs = ($this->t62_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_obs"]:$this->t62_obs);
-       $this->t62_codcom = ($this->t62_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcom"]:$this->t62_codcom);
+       $this->t62_codcom = ($this->t62_codcom === 0 || $this->t62_codcom === 0.0 || $this->t62_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcom"]:$this->t62_codcom);
      }else{
-       $this->t62_codcor = ($this->t62_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcor"]:$this->t62_codcor);
+       $this->t62_codcor = ($this->t62_codcor === 0 || $this->t62_codcor === 0.0 || $this->t62_codcor == ""?@$GLOBALS["HTTP_POST_VARS"]["t62_codcor"]:$this->t62_codcor);
      }
    }
    // funcao para inclusao
@@ -134,7 +134,7 @@ class cl_benscorlanc {
          $this->t62_codcor = $t62_codcor;
        }
      }
-     if(($this->t62_codcor == null) || ($this->t62_codcor == "") ){
+     if(($this->t62_codcor == null) || ($this->t62_codcor === 0 || $this->t62_codcor === 0.0 || $this->t62_codcor == "") ){
        $this->erro_sql = " Campo t62_codcor nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

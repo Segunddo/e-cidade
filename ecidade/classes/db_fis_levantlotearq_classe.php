@@ -88,8 +88,8 @@ class cl_fis_levantlotearq {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->y122_codigo = ($this->y122_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_codigo"]:$this->y122_codigo);
-       $this->y122_pecafiscal = ($this->y122_pecafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_pecafiscal"]:$this->y122_pecafiscal);
+       $this->y122_codigo = ($this->y122_codigo === 0 || $this->y122_codigo === 0.0 || $this->y122_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_codigo"]:$this->y122_codigo);
+       $this->y122_pecafiscal = ($this->y122_pecafiscal === 0 || $this->y122_pecafiscal === 0.0 || $this->y122_pecafiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_pecafiscal"]:$this->y122_pecafiscal);
        if($this->y122_data == ""){
          $this->y122_data_dia = ($this->y122_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_data_dia"]:$this->y122_data_dia);
          $this->y122_data_mes = ($this->y122_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_data_mes"]:$this->y122_data_mes);
@@ -99,16 +99,16 @@ class cl_fis_levantlotearq {
          }
        }
        $this->y122_hora = ($this->y122_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_hora"]:$this->y122_hora);
-       $this->y122_tipofiscal = ($this->y122_tipofiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_tipofiscal"]:$this->y122_tipofiscal);
-       $this->y122_usuario = ($this->y122_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_usuario"]:$this->y122_usuario);
+       $this->y122_tipofiscal = ($this->y122_tipofiscal === 0 || $this->y122_tipofiscal === 0.0 || $this->y122_tipofiscal == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_tipofiscal"]:$this->y122_tipofiscal);
+       $this->y122_usuario = ($this->y122_usuario === 0 || $this->y122_usuario === 0.0 || $this->y122_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_usuario"]:$this->y122_usuario);
        $this->y122_observacao = ($this->y122_observacao == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_observacao"]:$this->y122_observacao);
-       $this->y122_procedencia = ($this->y122_procedencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_procedencia"]:$this->y122_procedencia);
-       $this->y122_valor = ($this->y122_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_valor"]:$this->y122_valor);
-       $this->y122_instit = ($this->y122_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_instit"]:$this->y122_instit);
+       $this->y122_procedencia = ($this->y122_procedencia === 0 || $this->y122_procedencia === 0.0 || $this->y122_procedencia == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_procedencia"]:$this->y122_procedencia);
+       $this->y122_valor = ($this->y122_valor === 0 || $this->y122_valor === 0.0 || $this->y122_valor == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_valor"]:$this->y122_valor);
+       $this->y122_instit = ($this->y122_instit === 0 || $this->y122_instit === 0.0 || $this->y122_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_instit"]:$this->y122_instit);
        $this->y122_nomearq = ($this->y122_nomearq == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_nomearq"]:$this->y122_nomearq);
        $this->y122_md5 = ($this->y122_md5 == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_md5"]:$this->y122_md5);
      }else{
-       $this->y122_codigo = ($this->y122_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_codigo"]:$this->y122_codigo);
+       $this->y122_codigo = ($this->y122_codigo === 0 || $this->y122_codigo === 0.0 || $this->y122_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["y122_codigo"]:$this->y122_codigo);
      }
    }
    // funcao para inclusao
@@ -242,7 +242,7 @@ class cl_fis_levantlotearq {
          $this->y122_codigo = $y122_codigo;
        }
      }
-     if(($this->y122_codigo == null) || ($this->y122_codigo == "") ){
+     if(($this->y122_codigo == null) || ($this->y122_codigo === 0 || $this->y122_codigo === 0.0 || $this->y122_codigo == "") ){
        $this->erro_sql = " Campo y122_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -77,7 +77,7 @@ class cl_tarefasemana {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at19_sequencial = ($this->at19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at19_sequencial"]:$this->at19_sequencial);
+       $this->at19_sequencial = ($this->at19_sequencial === 0 || $this->at19_sequencial === 0.0 || $this->at19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at19_sequencial"]:$this->at19_sequencial);
        $this->at19_descr = ($this->at19_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at19_descr"]:$this->at19_descr);
        if($this->at19_dtini == ""){
          $this->at19_dtini_dia = ($this->at19_dtini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at19_dtini_dia"]:$this->at19_dtini_dia);
@@ -96,7 +96,7 @@ class cl_tarefasemana {
          }
        }
      }else{
-       $this->at19_sequencial = ($this->at19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at19_sequencial"]:$this->at19_sequencial);
+       $this->at19_sequencial = ($this->at19_sequencial === 0 || $this->at19_sequencial === 0.0 || $this->at19_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at19_sequencial"]:$this->at19_sequencial);
      }
    }
    // funcao para inclusao
@@ -153,7 +153,7 @@ class cl_tarefasemana {
          $this->at19_sequencial = $at19_sequencial;
        }
      }
-     if(($this->at19_sequencial == null) || ($this->at19_sequencial == "") ){
+     if(($this->at19_sequencial == null) || ($this->at19_sequencial === 0 || $this->at19_sequencial === 0.0 || $this->at19_sequencial == "") ){
        $this->erro_sql = " Campo at19_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -65,7 +65,7 @@ class cl_parobrastipolanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob13_grupo = ($this->ob13_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob13_grupo"]:$this->ob13_grupo);
+       $this->ob13_grupo = ($this->ob13_grupo === 0 || $this->ob13_grupo === 0.0 || $this->ob13_grupo == ""?@$GLOBALS["HTTP_POST_VARS"]["ob13_grupo"]:$this->ob13_grupo);
      }else{
      }
    }

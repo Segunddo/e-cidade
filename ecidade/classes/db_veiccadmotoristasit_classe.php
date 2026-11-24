@@ -67,10 +67,10 @@ class cl_veiccadmotoristasit {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ve33_codigo = ($this->ve33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve33_codigo"]:$this->ve33_codigo);
+       $this->ve33_codigo = ($this->ve33_codigo === 0 || $this->ve33_codigo === 0.0 || $this->ve33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve33_codigo"]:$this->ve33_codigo);
        $this->ve33_descr = ($this->ve33_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ve33_descr"]:$this->ve33_descr);
      }else{
-       $this->ve33_codigo = ($this->ve33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve33_codigo"]:$this->ve33_codigo);
+       $this->ve33_codigo = ($this->ve33_codigo === 0 || $this->ve33_codigo === 0.0 || $this->ve33_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["ve33_codigo"]:$this->ve33_codigo);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_veiccadmotoristasit {
          $this->ve33_codigo = $ve33_codigo;
        }
      }
-     if(($this->ve33_codigo == null) || ($this->ve33_codigo == "") ){
+     if(($this->ve33_codigo == null) || ($this->ve33_codigo === 0 || $this->ve33_codigo === 0.0 || $this->ve33_codigo == "") ){
        $this->erro_sql = " Campo ve33_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

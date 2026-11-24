@@ -67,8 +67,8 @@ class cl_atendimentomod {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at08_atend = ($this->at08_atend == ""?@$GLOBALS["HTTP_POST_VARS"]["at08_atend"]:$this->at08_atend);
-       $this->at08_modulo = ($this->at08_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["at08_modulo"]:$this->at08_modulo);
+       $this->at08_atend = ($this->at08_atend === 0 || $this->at08_atend === 0.0 || $this->at08_atend == ""?@$GLOBALS["HTTP_POST_VARS"]["at08_atend"]:$this->at08_atend);
+       $this->at08_modulo = ($this->at08_modulo === 0 || $this->at08_modulo === 0.0 || $this->at08_modulo == ""?@$GLOBALS["HTTP_POST_VARS"]["at08_modulo"]:$this->at08_modulo);
      }else{
      }
    }

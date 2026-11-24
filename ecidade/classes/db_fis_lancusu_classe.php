@@ -69,12 +69,12 @@ class cl_fis_lancusu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->nl14_codlanc = ($this->nl14_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl14_codlanc"]:$this->nl14_codlanc);
-       $this->nl14_id_usuario = ($this->nl14_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["nl14_id_usuario"]:$this->nl14_id_usuario);
+       $this->nl14_codlanc = ($this->nl14_codlanc === 0 || $this->nl14_codlanc === 0.0 || $this->nl14_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl14_codlanc"]:$this->nl14_codlanc);
+       $this->nl14_id_usuario = ($this->nl14_id_usuario === 0 || $this->nl14_id_usuario === 0.0 || $this->nl14_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["nl14_id_usuario"]:$this->nl14_id_usuario);
        $this->nl14_obs = ($this->nl14_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["nl14_obs"]:$this->nl14_obs);
      }else{
-       $this->nl14_codlanc = ($this->nl14_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl14_codlanc"]:$this->nl14_codlanc);
-       $this->nl14_id_usuario = ($this->nl14_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["nl14_id_usuario"]:$this->nl14_id_usuario);
+       $this->nl14_codlanc = ($this->nl14_codlanc === 0 || $this->nl14_codlanc === 0.0 || $this->nl14_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl14_codlanc"]:$this->nl14_codlanc);
+       $this->nl14_id_usuario = ($this->nl14_id_usuario === 0 || $this->nl14_id_usuario === 0.0 || $this->nl14_id_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["nl14_id_usuario"]:$this->nl14_id_usuario);
      }
    }
    // funcao para inclusao
@@ -82,7 +82,7 @@ class cl_fis_lancusu {
       $this->atualizacampos();
        $this->nl14_codlanc = $nl14_codlanc;
        $this->nl14_id_usuario = $nl14_id_usuario;
-     if(($this->nl14_codlanc == null) || ($this->nl14_codlanc == "") ){
+     if(($this->nl14_codlanc == null) || ($this->nl14_codlanc === 0 || $this->nl14_codlanc === 0.0 || $this->nl14_codlanc == "") ){
        $this->erro_sql = " Campo nl14_codlanc nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -90,7 +90,7 @@ class cl_fis_lancusu {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->nl14_id_usuario == null) || ($this->nl14_id_usuario == "") ){
+     if(($this->nl14_id_usuario == null) || ($this->nl14_id_usuario === 0 || $this->nl14_id_usuario === 0.0 || $this->nl14_id_usuario == "") ){
        $this->erro_sql = " Campo nl14_id_usuario nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

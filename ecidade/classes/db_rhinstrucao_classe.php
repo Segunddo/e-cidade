@@ -67,10 +67,10 @@ class cl_rhinstrucao {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh21_instru = ($this->rh21_instru == ""?@$GLOBALS["HTTP_POST_VARS"]["rh21_instru"]:$this->rh21_instru);
+       $this->rh21_instru = ($this->rh21_instru === 0 || $this->rh21_instru === 0.0 || $this->rh21_instru == ""?@$GLOBALS["HTTP_POST_VARS"]["rh21_instru"]:$this->rh21_instru);
        $this->rh21_descr = ($this->rh21_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["rh21_descr"]:$this->rh21_descr);
      }else{
-       $this->rh21_instru = ($this->rh21_instru == ""?@$GLOBALS["HTTP_POST_VARS"]["rh21_instru"]:$this->rh21_instru);
+       $this->rh21_instru = ($this->rh21_instru === 0 || $this->rh21_instru === 0.0 || $this->rh21_instru == ""?@$GLOBALS["HTTP_POST_VARS"]["rh21_instru"]:$this->rh21_instru);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_rhinstrucao {
        return false;
      }
        $this->rh21_instru = $rh21_instru;
-     if(($this->rh21_instru == null) || ($this->rh21_instru == "") ){
+     if(($this->rh21_instru == null) || ($this->rh21_instru === 0 || $this->rh21_instru === 0.0 || $this->rh21_instru == "") ){
        $this->erro_sql = " Campo rh21_instru nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

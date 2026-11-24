@@ -80,7 +80,7 @@ class cl_rhbases {
        $this->rh32_calqua = ($this->rh32_calqua == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh32_calqua"]:$this->rh32_calqua);
        $this->rh32_mesant = ($this->rh32_mesant == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh32_mesant"]:$this->rh32_mesant);
        $this->rh32_pfixo = ($this->rh32_pfixo == "f"?@$GLOBALS["HTTP_POST_VARS"]["rh32_pfixo"]:$this->rh32_pfixo);
-       $this->rh32_instit = ($this->rh32_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh32_instit"]:$this->rh32_instit);
+       $this->rh32_instit = ($this->rh32_instit === 0 || $this->rh32_instit === 0.0 || $this->rh32_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh32_instit"]:$this->rh32_instit);
      }else{
        $this->rh32_base = ($this->rh32_base == ""?@$GLOBALS["HTTP_POST_VARS"]["rh32_base"]:$this->rh32_base);
      }

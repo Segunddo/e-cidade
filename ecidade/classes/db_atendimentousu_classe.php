@@ -69,11 +69,11 @@ class cl_atendimentousu {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at20_sequencial = ($this->at20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at20_sequencial"]:$this->at20_sequencial);
-       $this->at20_codatend = ($this->at20_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at20_codatend"]:$this->at20_codatend);
-       $this->at20_usuario = ($this->at20_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at20_usuario"]:$this->at20_usuario);
+       $this->at20_sequencial = ($this->at20_sequencial === 0 || $this->at20_sequencial === 0.0 || $this->at20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at20_sequencial"]:$this->at20_sequencial);
+       $this->at20_codatend = ($this->at20_codatend === 0 || $this->at20_codatend === 0.0 || $this->at20_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at20_codatend"]:$this->at20_codatend);
+       $this->at20_usuario = ($this->at20_usuario === 0 || $this->at20_usuario === 0.0 || $this->at20_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at20_usuario"]:$this->at20_usuario);
      }else{
-       $this->at20_sequencial = ($this->at20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at20_sequencial"]:$this->at20_sequencial);
+       $this->at20_sequencial = ($this->at20_sequencial === 0 || $this->at20_sequencial === 0.0 || $this->at20_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at20_sequencial"]:$this->at20_sequencial);
      }
    }
    // funcao para inclusao
@@ -121,7 +121,7 @@ class cl_atendimentousu {
          $this->at20_sequencial = $at20_sequencial;
        }
      }
-     if(($this->at20_sequencial == null) || ($this->at20_sequencial == "") ){
+     if(($this->at20_sequencial == null) || ($this->at20_sequencial === 0 || $this->at20_sequencial === 0.0 || $this->at20_sequencial == "") ){
        $this->erro_sql = " Campo at20_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

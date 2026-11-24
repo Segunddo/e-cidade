@@ -73,13 +73,13 @@ class cl_fis_lancrespons
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->nl12_codlanc = ($this->nl12_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_codlanc"]:$this->nl12_codlanc);
-            $this->nl12_numcgm = ($this->nl12_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_numcgm"]:$this->nl12_numcgm);
-            $this->nl12_tipo = ($this->nl12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_tipo"]:$this->nl12_tipo);
+            $this->nl12_codlanc = ($this->nl12_codlanc === 0 || $this->nl12_codlanc === 0.0 || $this->nl12_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_codlanc"]:$this->nl12_codlanc);
+            $this->nl12_numcgm = ($this->nl12_numcgm === 0 || $this->nl12_numcgm === 0.0 || $this->nl12_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_numcgm"]:$this->nl12_numcgm);
+            $this->nl12_tipo = ($this->nl12_tipo === 0 || $this->nl12_tipo === 0.0 || $this->nl12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_tipo"]:$this->nl12_tipo);
         } else {
-            $this->nl12_codlanc = ($this->nl12_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_codlanc"]:$this->nl12_codlanc);
-            $this->nl12_numcgm = ($this->nl12_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_numcgm"]:$this->nl12_numcgm);
-            $this->nl12_tipo = ($this->nl12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_tipo"]:$this->nl12_tipo);
+            $this->nl12_codlanc = ($this->nl12_codlanc === 0 || $this->nl12_codlanc === 0.0 || $this->nl12_codlanc == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_codlanc"]:$this->nl12_codlanc);
+            $this->nl12_numcgm = ($this->nl12_numcgm === 0 || $this->nl12_numcgm === 0.0 || $this->nl12_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_numcgm"]:$this->nl12_numcgm);
+            $this->nl12_tipo = ($this->nl12_tipo === 0 || $this->nl12_tipo === 0.0 || $this->nl12_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["nl12_tipo"]:$this->nl12_tipo);
         }
     }
    // funcao para inclusao
@@ -88,7 +88,7 @@ class cl_fis_lancrespons
         $this->atualizacampos();
         $this->nl12_codlanc = $nl12_codlanc;
         $this->nl12_numcgm = $nl12_numcgm;
-        if (($this->nl12_codlanc == null) || ($this->nl12_codlanc == "")) {
+        if (($this->nl12_codlanc == null) || ($this->nl12_codlanc === 0 || $this->nl12_codlanc === 0.0 || $this->nl12_codlanc == "")) {
             $this->erro_sql = " Campo nl12_codlanc nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -96,7 +96,7 @@ class cl_fis_lancrespons
             $this->erro_status = "0";
             return false;
         }
-        if (($this->nl12_numcgm == null) || ($this->nl12_numcgm == "")) {
+        if (($this->nl12_numcgm == null) || ($this->nl12_numcgm === 0 || $this->nl12_numcgm === 0.0 || $this->nl12_numcgm == "")) {
             $this->erro_sql = " Campo nl12_numcgm nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -104,7 +104,7 @@ class cl_fis_lancrespons
             $this->erro_status = "0";
             return false;
         }
-        if (($this->nl12_tipo == null) || ($this->nl12_tipo == "") || ($this->nl12_tipo == 0)) {
+        if (($this->nl12_tipo == null) || ($this->nl12_tipo === 0 || $this->nl12_tipo === 0.0 || $this->nl12_tipo == "") || ($this->nl12_tipo == 0)) {
             $this->erro_sql = " Campo nl12_tipo nao declarado.";
             $this->erro_banco = "Chave Primaria zerada.";
             $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -67,10 +67,10 @@ class cl_ouvidor {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ov21_sequencial = ($this->ov21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov21_sequencial"]:$this->ov21_sequencial);
-       $this->ov21_db_usuario = ($this->ov21_db_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ov21_db_usuario"]:$this->ov21_db_usuario);
+       $this->ov21_sequencial = ($this->ov21_sequencial === 0 || $this->ov21_sequencial === 0.0 || $this->ov21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov21_sequencial"]:$this->ov21_sequencial);
+       $this->ov21_db_usuario = ($this->ov21_db_usuario === 0 || $this->ov21_db_usuario === 0.0 || $this->ov21_db_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["ov21_db_usuario"]:$this->ov21_db_usuario);
      }else{
-       $this->ov21_sequencial = ($this->ov21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov21_sequencial"]:$this->ov21_sequencial);
+       $this->ov21_sequencial = ($this->ov21_sequencial === 0 || $this->ov21_sequencial === 0.0 || $this->ov21_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["ov21_sequencial"]:$this->ov21_sequencial);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_ouvidor {
          $this->ov21_sequencial = $ov21_sequencial;
        }
      }
-     if(($this->ov21_sequencial == null) || ($this->ov21_sequencial == "") ){
+     if(($this->ov21_sequencial == null) || ($this->ov21_sequencial === 0 || $this->ov21_sequencial === 0.0 || $this->ov21_sequencial == "") ){
        $this->erro_sql = " Campo ov21_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

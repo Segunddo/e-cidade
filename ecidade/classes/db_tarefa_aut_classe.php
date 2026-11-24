@@ -80,7 +80,7 @@ class cl_tarefa_aut {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at39_sequencia = ($this->at39_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_sequencia"]:$this->at39_sequencia);
+       $this->at39_sequencia = ($this->at39_sequencia === 0 || $this->at39_sequencia === 0.0 || $this->at39_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_sequencia"]:$this->at39_sequencia);
        if($this->at39_data == ""){
          $this->at39_data_dia = ($this->at39_data_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_data_dia"]:$this->at39_data_dia);
          $this->at39_data_mes = ($this->at39_data_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_data_mes"]:$this->at39_data_mes);
@@ -91,11 +91,11 @@ class cl_tarefa_aut {
        }
        $this->at39_hora = ($this->at39_hora == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_hora"]:$this->at39_hora);
        $this->at39_ip = ($this->at39_ip == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_ip"]:$this->at39_ip);
-       $this->at39_tarefa = ($this->at39_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_tarefa"]:$this->at39_tarefa);
-       $this->at39_usuario = ($this->at39_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_usuario"]:$this->at39_usuario);
+       $this->at39_tarefa = ($this->at39_tarefa === 0 || $this->at39_tarefa === 0.0 || $this->at39_tarefa == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_tarefa"]:$this->at39_tarefa);
+       $this->at39_usuario = ($this->at39_usuario === 0 || $this->at39_usuario === 0.0 || $this->at39_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_usuario"]:$this->at39_usuario);
        $this->at39_cancelada = ($this->at39_cancelada == "f"?@$GLOBALS["HTTP_POST_VARS"]["at39_cancelada"]:$this->at39_cancelada);
      }else{
-       $this->at39_sequencia = ($this->at39_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_sequencia"]:$this->at39_sequencia);
+       $this->at39_sequencia = ($this->at39_sequencia === 0 || $this->at39_sequencia === 0.0 || $this->at39_sequencia == ""?@$GLOBALS["HTTP_POST_VARS"]["at39_sequencia"]:$this->at39_sequencia);
      }
    }
    // funcao para inclusao
@@ -179,7 +179,7 @@ class cl_tarefa_aut {
          $this->at39_sequencia = $at39_sequencia;
        }
      }
-     if(($this->at39_sequencia == null) || ($this->at39_sequencia == "") ){
+     if(($this->at39_sequencia == null) || ($this->at39_sequencia === 0 || $this->at39_sequencia === 0.0 || $this->at39_sequencia == "") ){
        $this->erro_sql = " Campo at39_sequencia nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

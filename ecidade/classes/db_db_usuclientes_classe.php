@@ -73,13 +73,13 @@ class cl_db_usuclientes {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at10_codigo = ($this->at10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at10_codigo"]:$this->at10_codigo);
-       $this->at10_codcli = ($this->at10_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at10_codcli"]:$this->at10_codcli);
-       $this->at10_usuario = ($this->at10_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at10_usuario"]:$this->at10_usuario);
+       $this->at10_codigo = ($this->at10_codigo === 0 || $this->at10_codigo === 0.0 || $this->at10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at10_codigo"]:$this->at10_codigo);
+       $this->at10_codcli = ($this->at10_codcli === 0 || $this->at10_codcli === 0.0 || $this->at10_codcli == ""?@$GLOBALS["HTTP_POST_VARS"]["at10_codcli"]:$this->at10_codcli);
+       $this->at10_usuario = ($this->at10_usuario === 0 || $this->at10_usuario === 0.0 || $this->at10_usuario == ""?@$GLOBALS["HTTP_POST_VARS"]["at10_usuario"]:$this->at10_usuario);
        $this->at10_login = ($this->at10_login == ""?@$GLOBALS["HTTP_POST_VARS"]["at10_login"]:$this->at10_login);
        $this->at10_nome = ($this->at10_nome == ""?@$GLOBALS["HTTP_POST_VARS"]["at10_nome"]:$this->at10_nome);
      }else{
-       $this->at10_codigo = ($this->at10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at10_codigo"]:$this->at10_codigo);
+       $this->at10_codigo = ($this->at10_codigo === 0 || $this->at10_codigo === 0.0 || $this->at10_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["at10_codigo"]:$this->at10_codigo);
      }
    }
    // funcao para inclusao
@@ -145,7 +145,7 @@ class cl_db_usuclientes {
          $this->at10_codigo = $at10_codigo;
        }
      }
-     if(($this->at10_codigo == null) || ($this->at10_codigo == "") ){
+     if(($this->at10_codigo == null) || ($this->at10_codigo === 0 || $this->at10_codigo === 0.0 || $this->at10_codigo == "") ){
        $this->erro_sql = " Campo at10_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

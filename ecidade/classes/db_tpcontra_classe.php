@@ -71,12 +71,12 @@ class cl_tpcontra {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->h13_codigo = ($this->h13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_codigo"]:$this->h13_codigo);
-       $this->h13_regime = ($this->h13_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_regime"]:$this->h13_regime);
+       $this->h13_codigo = ($this->h13_codigo === 0 || $this->h13_codigo === 0.0 || $this->h13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_codigo"]:$this->h13_codigo);
+       $this->h13_regime = ($this->h13_regime === 0 || $this->h13_regime === 0.0 || $this->h13_regime == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_regime"]:$this->h13_regime);
        $this->h13_tpcont = ($this->h13_tpcont == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_tpcont"]:$this->h13_tpcont);
        $this->h13_descr = ($this->h13_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_descr"]:$this->h13_descr);
      }else{
-       $this->h13_codigo = ($this->h13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_codigo"]:$this->h13_codigo);
+       $this->h13_codigo = ($this->h13_codigo === 0 || $this->h13_codigo === 0.0 || $this->h13_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["h13_codigo"]:$this->h13_codigo);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_tpcontra {
          $this->h13_codigo = $h13_codigo;
        }
      }
-     if(($this->h13_codigo == null) || ($this->h13_codigo == "") ){
+     if(($this->h13_codigo == null) || ($this->h13_codigo === 0 || $this->h13_codigo === 0.0 || $this->h13_codigo == "") ){
        $this->erro_sql = " Campo h13_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

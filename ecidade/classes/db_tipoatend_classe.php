@@ -67,10 +67,10 @@ class cl_tipoatend {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at04_codtipo = ($this->at04_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at04_codtipo"]:$this->at04_codtipo);
+       $this->at04_codtipo = ($this->at04_codtipo === 0 || $this->at04_codtipo === 0.0 || $this->at04_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at04_codtipo"]:$this->at04_codtipo);
        $this->at04_descr = ($this->at04_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at04_descr"]:$this->at04_descr);
      }else{
-       $this->at04_codtipo = ($this->at04_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at04_codtipo"]:$this->at04_codtipo);
+       $this->at04_codtipo = ($this->at04_codtipo === 0 || $this->at04_codtipo === 0.0 || $this->at04_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at04_codtipo"]:$this->at04_codtipo);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_tipoatend {
        return false;
      }
        $this->at04_codtipo = $at04_codtipo;
-     if(($this->at04_codtipo == null) || ($this->at04_codtipo == "") ){
+     if(($this->at04_codtipo == null) || ($this->at04_codtipo === 0 || $this->at04_codtipo === 0.0 || $this->at04_codtipo == "") ){
        $this->erro_sql = " Campo at04_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

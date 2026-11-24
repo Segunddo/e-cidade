@@ -67,11 +67,11 @@ class cl_pctipoelemento {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->pc06_codtipo = ($this->pc06_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc06_codtipo"]:$this->pc06_codtipo);
-       $this->pc06_codele = ($this->pc06_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc06_codele"]:$this->pc06_codele);
+       $this->pc06_codtipo = ($this->pc06_codtipo === 0 || $this->pc06_codtipo === 0.0 || $this->pc06_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc06_codtipo"]:$this->pc06_codtipo);
+       $this->pc06_codele = ($this->pc06_codele === 0 || $this->pc06_codele === 0.0 || $this->pc06_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc06_codele"]:$this->pc06_codele);
      }else{
-       $this->pc06_codtipo = ($this->pc06_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc06_codtipo"]:$this->pc06_codtipo);
-       $this->pc06_codele = ($this->pc06_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc06_codele"]:$this->pc06_codele);
+       $this->pc06_codtipo = ($this->pc06_codtipo === 0 || $this->pc06_codtipo === 0.0 || $this->pc06_codtipo == ""?@$GLOBALS["HTTP_POST_VARS"]["pc06_codtipo"]:$this->pc06_codtipo);
+       $this->pc06_codele = ($this->pc06_codele === 0 || $this->pc06_codele === 0.0 || $this->pc06_codele == ""?@$GLOBALS["HTTP_POST_VARS"]["pc06_codele"]:$this->pc06_codele);
      }
    }
    // funcao para inclusao
@@ -79,7 +79,7 @@ class cl_pctipoelemento {
       $this->atualizacampos();
        $this->pc06_codtipo = $pc06_codtipo;
        $this->pc06_codele = $pc06_codele;
-     if(($this->pc06_codtipo == null) || ($this->pc06_codtipo == "") ){
+     if(($this->pc06_codtipo == null) || ($this->pc06_codtipo === 0 || $this->pc06_codtipo === 0.0 || $this->pc06_codtipo == "") ){
        $this->erro_sql = " Campo pc06_codtipo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
@@ -87,7 +87,7 @@ class cl_pctipoelemento {
        $this->erro_status = "0";
        return false;
      }
-     if(($this->pc06_codele == null) || ($this->pc06_codele == "") ){
+     if(($this->pc06_codele == null) || ($this->pc06_codele === 0 || $this->pc06_codele === 0.0 || $this->pc06_codele == "") ){
        $this->erro_sql = " Campo pc06_codele nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

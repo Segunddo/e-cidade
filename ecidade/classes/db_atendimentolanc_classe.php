@@ -74,8 +74,8 @@ class cl_atendimentolanc {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at06_codatend = ($this->at06_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_codatend"]:$this->at06_codatend);
-       $this->at06_usuariolanc = ($this->at06_usuariolanc == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_usuariolanc"]:$this->at06_usuariolanc);
+       $this->at06_codatend = ($this->at06_codatend === 0 || $this->at06_codatend === 0.0 || $this->at06_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_codatend"]:$this->at06_codatend);
+       $this->at06_usuariolanc = ($this->at06_usuariolanc === 0 || $this->at06_usuariolanc === 0.0 || $this->at06_usuariolanc == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_usuariolanc"]:$this->at06_usuariolanc);
        if($this->at06_datalanc == ""){
          $this->at06_datalanc_dia = ($this->at06_datalanc_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_datalanc_dia"]:$this->at06_datalanc_dia);
          $this->at06_datalanc_mes = ($this->at06_datalanc_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_datalanc_mes"]:$this->at06_datalanc_mes);
@@ -86,7 +86,7 @@ class cl_atendimentolanc {
        }
        $this->at06_horalanc = ($this->at06_horalanc == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_horalanc"]:$this->at06_horalanc);
      }else{
-       $this->at06_codatend = ($this->at06_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_codatend"]:$this->at06_codatend);
+       $this->at06_codatend = ($this->at06_codatend === 0 || $this->at06_codatend === 0.0 || $this->at06_codatend == ""?@$GLOBALS["HTTP_POST_VARS"]["at06_codatend"]:$this->at06_codatend);
      }
    }
    // funcao para inclusao
@@ -120,7 +120,7 @@ class cl_atendimentolanc {
        return false;
      }
        $this->at06_codatend = $at06_codatend;
-     if(($this->at06_codatend == null) || ($this->at06_codatend == "") ){
+     if(($this->at06_codatend == null) || ($this->at06_codatend === 0 || $this->at06_codatend === 0.0 || $this->at06_codatend == "") ){
        $this->erro_sql = " Campo at06_codatend nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

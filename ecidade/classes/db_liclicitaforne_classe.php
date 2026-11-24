@@ -76,9 +76,9 @@ class cl_liclicitaforne {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->l22_codigo = ($this->l22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_codigo"]:$this->l22_codigo);
-       $this->l22_codliclicita = ($this->l22_codliclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_codliclicita"]:$this->l22_codliclicita);
-       $this->l22_numcgm = ($this->l22_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_numcgm"]:$this->l22_numcgm);
+       $this->l22_codigo = ($this->l22_codigo === 0 || $this->l22_codigo === 0.0 || $this->l22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_codigo"]:$this->l22_codigo);
+       $this->l22_codliclicita = ($this->l22_codliclicita === 0 || $this->l22_codliclicita === 0.0 || $this->l22_codliclicita == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_codliclicita"]:$this->l22_codliclicita);
+       $this->l22_numcgm = ($this->l22_numcgm === 0 || $this->l22_numcgm === 0.0 || $this->l22_numcgm == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_numcgm"]:$this->l22_numcgm);
        if($this->l22_dtretira == ""){
          $this->l22_dtretira_dia = ($this->l22_dtretira_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_dtretira_dia"]:$this->l22_dtretira_dia);
          $this->l22_dtretira_mes = ($this->l22_dtretira_mes == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_dtretira_mes"]:$this->l22_dtretira_mes);
@@ -89,7 +89,7 @@ class cl_liclicitaforne {
        }
        $this->l22_nomeretira = ($this->l22_nomeretira == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_nomeretira"]:$this->l22_nomeretira);
      }else{
-       $this->l22_codigo = ($this->l22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_codigo"]:$this->l22_codigo);
+       $this->l22_codigo = ($this->l22_codigo === 0 || $this->l22_codigo === 0.0 || $this->l22_codigo == ""?@$GLOBALS["HTTP_POST_VARS"]["l22_codigo"]:$this->l22_codigo);
      }
    }
    // funcao para inclusao
@@ -155,7 +155,7 @@ class cl_liclicitaforne {
          $this->l22_codigo = $l22_codigo;
        }
      }
-     if(($this->l22_codigo == null) || ($this->l22_codigo == "") ){
+     if(($this->l22_codigo == null) || ($this->l22_codigo === 0 || $this->l22_codigo === 0.0 || $this->l22_codigo == "") ){
        $this->erro_sql = " Campo l22_codigo nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

@@ -71,12 +71,12 @@ class cl_rhlocaltrabcustoplano {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh86_sequencial = ($this->rh86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh86_sequencial"]:$this->rh86_sequencial);
-       $this->rh86_criteriorateio = ($this->rh86_criteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["rh86_criteriorateio"]:$this->rh86_criteriorateio);
-       $this->rh86_rhlocaltrab = ($this->rh86_rhlocaltrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh86_rhlocaltrab"]:$this->rh86_rhlocaltrab);
-       $this->rh86_instit = ($this->rh86_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh86_instit"]:$this->rh86_instit);
+       $this->rh86_sequencial = ($this->rh86_sequencial === 0 || $this->rh86_sequencial === 0.0 || $this->rh86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh86_sequencial"]:$this->rh86_sequencial);
+       $this->rh86_criteriorateio = ($this->rh86_criteriorateio === 0 || $this->rh86_criteriorateio === 0.0 || $this->rh86_criteriorateio == ""?@$GLOBALS["HTTP_POST_VARS"]["rh86_criteriorateio"]:$this->rh86_criteriorateio);
+       $this->rh86_rhlocaltrab = ($this->rh86_rhlocaltrab === 0 || $this->rh86_rhlocaltrab === 0.0 || $this->rh86_rhlocaltrab == ""?@$GLOBALS["HTTP_POST_VARS"]["rh86_rhlocaltrab"]:$this->rh86_rhlocaltrab);
+       $this->rh86_instit = ($this->rh86_instit === 0 || $this->rh86_instit === 0.0 || $this->rh86_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh86_instit"]:$this->rh86_instit);
      }else{
-       $this->rh86_sequencial = ($this->rh86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh86_sequencial"]:$this->rh86_sequencial);
+       $this->rh86_sequencial = ($this->rh86_sequencial === 0 || $this->rh86_sequencial === 0.0 || $this->rh86_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh86_sequencial"]:$this->rh86_sequencial);
      }
    }
    // funcao para inclusao
@@ -133,7 +133,7 @@ class cl_rhlocaltrabcustoplano {
          $this->rh86_sequencial = $rh86_sequencial;
        }
      }
-     if(($this->rh86_sequencial == null) || ($this->rh86_sequencial == "") ){
+     if(($this->rh86_sequencial == null) || ($this->rh86_sequencial === 0 || $this->rh86_sequencial === 0.0 || $this->rh86_sequencial == "") ){
        $this->erro_sql = " Campo rh86_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

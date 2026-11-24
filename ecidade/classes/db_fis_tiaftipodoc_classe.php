@@ -74,10 +74,10 @@ class cl_fis_tiaftipodoc
     public function atualizacampos($exclusao = false)
     {
         if (!$exclusao) {
-            $this->y98_tiafdoc = ($this->y98_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
+            $this->y98_tiafdoc = ($this->y98_tiafdoc === 0 || $this->y98_tiafdoc === 0.0 || $this->y98_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
             $this->y98_descr = ($this->y98_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_descr"]:$this->y98_descr);
         } else {
-            $this->y98_tiafdoc = ($this->y98_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
+            $this->y98_tiafdoc = ($this->y98_tiafdoc === 0 || $this->y98_tiafdoc === 0.0 || $this->y98_tiafdoc == ""?@$GLOBALS["HTTP_POST_VARS"]["y98_tiafdoc"]:$this->y98_tiafdoc);
         }
     }
 

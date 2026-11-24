@@ -77,15 +77,15 @@ class cl_rhsolicita {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->rh33_sequencial = ($this->rh33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_sequencial"]:$this->rh33_sequencial);
-       $this->rh33_solicita = ($this->rh33_solicita == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_solicita"]:$this->rh33_solicita);
-       $this->rh33_anousu = ($this->rh33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_anousu"]:$this->rh33_anousu);
-       $this->rh33_mesusu = ($this->rh33_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_mesusu"]:$this->rh33_mesusu);
+       $this->rh33_sequencial = ($this->rh33_sequencial === 0 || $this->rh33_sequencial === 0.0 || $this->rh33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_sequencial"]:$this->rh33_sequencial);
+       $this->rh33_solicita = ($this->rh33_solicita === 0 || $this->rh33_solicita === 0.0 || $this->rh33_solicita == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_solicita"]:$this->rh33_solicita);
+       $this->rh33_anousu = ($this->rh33_anousu === 0 || $this->rh33_anousu === 0.0 || $this->rh33_anousu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_anousu"]:$this->rh33_anousu);
+       $this->rh33_mesusu = ($this->rh33_mesusu === 0 || $this->rh33_mesusu === 0.0 || $this->rh33_mesusu == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_mesusu"]:$this->rh33_mesusu);
        $this->rh33_siglaarq = ($this->rh33_siglaarq == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_siglaarq"]:$this->rh33_siglaarq);
-       $this->rh33_seqfolha = ($this->rh33_seqfolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_seqfolha"]:$this->rh33_seqfolha);
-       $this->rh33_instit = ($this->rh33_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_instit"]:$this->rh33_instit);
+       $this->rh33_seqfolha = ($this->rh33_seqfolha === 0 || $this->rh33_seqfolha === 0.0 || $this->rh33_seqfolha == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_seqfolha"]:$this->rh33_seqfolha);
+       $this->rh33_instit = ($this->rh33_instit === 0 || $this->rh33_instit === 0.0 || $this->rh33_instit == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_instit"]:$this->rh33_instit);
      }else{
-       $this->rh33_sequencial = ($this->rh33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_sequencial"]:$this->rh33_sequencial);
+       $this->rh33_sequencial = ($this->rh33_sequencial === 0 || $this->rh33_sequencial === 0.0 || $this->rh33_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["rh33_sequencial"]:$this->rh33_sequencial);
      }
    }
    // funcao para inclusao
@@ -169,7 +169,7 @@ class cl_rhsolicita {
          $this->rh33_sequencial = $rh33_sequencial;
        }
      }
-     if(($this->rh33_sequencial == null) || ($this->rh33_sequencial == "") ){
+     if(($this->rh33_sequencial == null) || ($this->rh33_sequencial === 0 || $this->rh33_sequencial === 0.0 || $this->rh33_sequencial == "") ){
        $this->erro_sql = " Campo rh33_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

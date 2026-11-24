@@ -101,8 +101,8 @@ class cl_tarefa {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->at40_sequencial = ($this->at40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_sequencial"]:$this->at40_sequencial);
-       $this->at40_responsavel = ($this->at40_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_responsavel"]:$this->at40_responsavel);
+       $this->at40_sequencial = ($this->at40_sequencial === 0 || $this->at40_sequencial === 0.0 || $this->at40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_sequencial"]:$this->at40_sequencial);
+       $this->at40_responsavel = ($this->at40_responsavel === 0 || $this->at40_responsavel === 0.0 || $this->at40_responsavel == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_responsavel"]:$this->at40_responsavel);
        $this->at40_descr = ($this->at40_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_descr"]:$this->at40_descr);
        if($this->at40_diaini == ""){
          $this->at40_diaini_dia = ($this->at40_diaini_dia == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_diaini_dia"]:$this->at40_diaini_dia);
@@ -120,19 +120,19 @@ class cl_tarefa {
             $this->at40_diafim = $this->at40_diafim_ano."-".$this->at40_diafim_mes."-".$this->at40_diafim_dia;
          }
        }
-       $this->at40_previsao = ($this->at40_previsao == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_previsao"]:$this->at40_previsao);
+       $this->at40_previsao = ($this->at40_previsao === 0 || $this->at40_previsao === 0.0 || $this->at40_previsao == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_previsao"]:$this->at40_previsao);
        $this->at40_tipoprevisao = ($this->at40_tipoprevisao == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_tipoprevisao"]:$this->at40_tipoprevisao);
        $this->at40_horainidia = ($this->at40_horainidia == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_horainidia"]:$this->at40_horainidia);
        $this->at40_horafim = ($this->at40_horafim == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_horafim"]:$this->at40_horafim);
-       $this->at40_progresso = ($this->at40_progresso == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_progresso"]:$this->at40_progresso);
-       $this->at40_prioridade = ($this->at40_prioridade == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_prioridade"]:$this->at40_prioridade);
+       $this->at40_progresso = ($this->at40_progresso === 0 || $this->at40_progresso === 0.0 || $this->at40_progresso == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_progresso"]:$this->at40_progresso);
+       $this->at40_prioridade = ($this->at40_prioridade === 0 || $this->at40_prioridade === 0.0 || $this->at40_prioridade == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_prioridade"]:$this->at40_prioridade);
        $this->at40_obs = ($this->at40_obs == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_obs"]:$this->at40_obs);
        $this->at40_autorizada = ($this->at40_autorizada == "f"?@$GLOBALS["HTTP_POST_VARS"]["at40_autorizada"]:$this->at40_autorizada);
-       $this->at40_tipo = ($this->at40_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_tipo"]:$this->at40_tipo);
+       $this->at40_tipo = ($this->at40_tipo === 0 || $this->at40_tipo === 0.0 || $this->at40_tipo == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_tipo"]:$this->at40_tipo);
        $this->at40_ativo = ($this->at40_ativo == "f"?@$GLOBALS["HTTP_POST_VARS"]["at40_ativo"]:$this->at40_ativo);
-       $this->at40_urgente = ($this->at40_urgente == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_urgente"]:$this->at40_urgente);
+       $this->at40_urgente = ($this->at40_urgente === 0 || $this->at40_urgente === 0.0 || $this->at40_urgente == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_urgente"]:$this->at40_urgente);
      }else{
-       $this->at40_sequencial = ($this->at40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_sequencial"]:$this->at40_sequencial);
+       $this->at40_sequencial = ($this->at40_sequencial === 0 || $this->at40_sequencial === 0.0 || $this->at40_sequencial == ""?@$GLOBALS["HTTP_POST_VARS"]["at40_sequencial"]:$this->at40_sequencial);
      }
    }
    // funcao para inclusao
@@ -234,7 +234,7 @@ class cl_tarefa {
          $this->at40_sequencial = $at40_sequencial;
        }
      }
-     if(($this->at40_sequencial == null) || ($this->at40_sequencial == "") ){
+     if(($this->at40_sequencial == null) || ($this->at40_sequencial === 0 || $this->at40_sequencial === 0.0 || $this->at40_sequencial == "") ){
        $this->erro_sql = " Campo at40_sequencial nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

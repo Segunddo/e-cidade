@@ -67,10 +67,10 @@ class cl_obrastiporesp {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->ob02_cod = ($this->ob02_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["ob02_cod"]:$this->ob02_cod);
+       $this->ob02_cod = ($this->ob02_cod === 0 || $this->ob02_cod === 0.0 || $this->ob02_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["ob02_cod"]:$this->ob02_cod);
        $this->ob02_descr = ($this->ob02_descr == ""?@$GLOBALS["HTTP_POST_VARS"]["ob02_descr"]:$this->ob02_descr);
      }else{
-       $this->ob02_cod = ($this->ob02_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["ob02_cod"]:$this->ob02_cod);
+       $this->ob02_cod = ($this->ob02_cod === 0 || $this->ob02_cod === 0.0 || $this->ob02_cod == ""?@$GLOBALS["HTTP_POST_VARS"]["ob02_cod"]:$this->ob02_cod);
      }
    }
    // funcao para inclusao
@@ -109,7 +109,7 @@ class cl_obrastiporesp {
          $this->ob02_cod = $ob02_cod;
        }
      }
-     if(($this->ob02_cod == null) || ($this->ob02_cod == "") ){
+     if(($this->ob02_cod == null) || ($this->ob02_cod === 0 || $this->ob02_cod === 0.0 || $this->ob02_cod == "") ){
        $this->erro_sql = " Campo ob02_cod nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";

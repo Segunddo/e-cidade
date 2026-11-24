@@ -67,10 +67,10 @@ class cl_pccontrcompra {
    // funcao para atualizar campos
    public function atualizacampos($exclusao=false) {
      if($exclusao==false){
-       $this->p72_codcontr = ($this->p72_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcontr"]:$this->p72_codcontr);
-       $this->p72_codcom = ($this->p72_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcom"]:$this->p72_codcom);
+       $this->p72_codcontr = ($this->p72_codcontr === 0 || $this->p72_codcontr === 0.0 || $this->p72_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcontr"]:$this->p72_codcontr);
+       $this->p72_codcom = ($this->p72_codcom === 0 || $this->p72_codcom === 0.0 || $this->p72_codcom == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcom"]:$this->p72_codcom);
      }else{
-       $this->p72_codcontr = ($this->p72_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcontr"]:$this->p72_codcontr);
+       $this->p72_codcontr = ($this->p72_codcontr === 0 || $this->p72_codcontr === 0.0 || $this->p72_codcontr == ""?@$GLOBALS["HTTP_POST_VARS"]["p72_codcontr"]:$this->p72_codcontr);
      }
    }
    // funcao para inclusao
@@ -86,7 +86,7 @@ class cl_pccontrcompra {
        return false;
      }
        $this->p72_codcontr = $p72_codcontr;
-     if(($this->p72_codcontr == null) || ($this->p72_codcontr == "") ){
+     if(($this->p72_codcontr == null) || ($this->p72_codcontr === 0 || $this->p72_codcontr === 0.0 || $this->p72_codcontr == "") ){
        $this->erro_sql = " Campo p72_codcontr nao declarado.";
        $this->erro_banco = "Chave Primaria zerada.";
        $this->erro_msg   = "Usuário: \\n\\n ".$this->erro_sql." \\n\\n";
