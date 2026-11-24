@@ -333,3 +333,23 @@ mãe) e as classes `db_iptuconstr`, `db_parissqn`, `db_isscalc`, `db_setorloc` (
 
 Pendentes do lote: nível 3 (o `escrita_post.py` não enxerga o SQL com o log do banco grande; zerar o log antes) e o
 roteamento (passo 8), deixados para quando o proxy da pilha da raiz estiver disponível.
+
+### Lote 2 — `pat`, `mat`, `lic`, `com` (24/11/2026, EM ANDAMENTO)
+
+- Rector em **109 classes** (534 linhas; construtor de `cl_pctipo`; `= null` em
+  `cl_estoquemovimentacaobnafar::sql_query_estoquemovimentacoesbnafar`, sem filhas).
+- `verifica_lote.py pat-l2` (4.387 arquivos, 1.127 classes): 4b e 5 OK; 5b/6/6b/6c só com os arquivos do Tributário
+  do lote 1; **7: 1.042/1.081 idênticas, 39 divergentes.**
+- `guarda_ciclo.py` nas 39: guarda `pg_*` em **23 arquivos**.
+
+**Onde paramos (falta):**
+1. 5 casos à mão: `com1_pcfornemov001.php:86` (`pg_result(db_query(...))`, argumento é chamada),
+   `forms/db_frmseldotac.php:53` (`null - string`), `mat2_controlest011.php:93` (propriedade em `null`),
+   `pat2_solicitacoesliberadas002.php:125` e `pat4_criteriumexportaarquivos002.php:68` (`count(null)`).
+2. Reconferir as "silenciosas" (200 nos dois, conteúdo diferente): `com1_pcfornecon001`, `com1_solicitem001`,
+   `com1_solicitemiframe001`, `lic1_trocpcorcamtroca001`, `pat1_bens004/005`, `pat1_bensaltlote001/005`,
+   `pat1_bensglobal001`, `pat2_classifbens001` — várias tinham `pg_*` num formulário incluído e podem ter sido
+   resolvidas pelas guardas.
+3. Rodar `verifica_lote.py pat-l2 pat mat lic com` de novo.
+4. Lote 3 (112 telas do `map`: `TELAS=@ecidade/tmp/pat/lote3_telas.txt enumera.py patl3` → 13 classes `== literal`).
+5. Bateria de regressão do grupo, nível 3, envio e texto do PR (como no Financeiro).
