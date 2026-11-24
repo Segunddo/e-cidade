@@ -1,0 +1,839 @@
+situacao	tipo	arquivo_ou_caso	areas	detalhe
+DIVERGE	post	pes1_relrub004.php	financeiro,recursoshumanos	SQL de escrita diverge
+DIVERGE	post	pes1_rhipe001.php	financeiro,recursoshumanos	SQL de escrita diverge
+DIVERGE	post	pes1_vtfempr001.php	financeiro,recursoshumanos	SQL de escrita diverge
+DIVERGE	post	rec1_flegal001.php	assistenciasocial,recursoshumanos,tributario	SQL de escrita diverge
+DIVERGE	post	rec1_rhestagio004.php	assistenciasocial,recursoshumanos,tributario	SQL de escrita diverge
+DIVERGE	post	rec1_rhestagioagenda004.php	assistenciasocial,recursoshumanos,tributario	SQL de escrita diverge
+DIVERGE	post	rec1_rhestagioperiodo004.php	assistenciasocial,recursoshumanos,tributario	SQL de escrita diverge
+DIVERGE	post	rec1_rhestagioquesitopergunta004.php	assistenciasocial,recursoshumanos,tributario	SQL de escrita diverge
+DIVERGE	post	rec1_rhtipoperda004.php	assistenciasocial,recursoshumanos,tributario	SQL de escrita diverge
+DIVERGE	relatorio	agu2_relconsumo002.php	tributario	codigo HTTP diverge: ref=200 8.5=500; inicio ref=b'%PDF-1.3\n0.00 841.89 m 566.93 841.89 l S q 0 g BT 2.83 833.8' 8.5=b'<html>\n<head>\n<title>Notifica\xe7\xe3o
+DIVERGE	relatorio	cad2_loteam002.php	financeiro,patrimonial,tributario	codigo HTTP diverge: ref=200 8.5=500; inicio ref=b'%PDF-1.3\n3 0 obj\n<</Type /Page\n/Parent 1 0 R\n/Resources 2 0 ' 8.5=b'<html>\n<head>\n<title>Notifica\xe7\x
+DIVERGE	relatorio	con2_contasrecdesp002.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	codigo HTTP diverge: ref=200 8.5=500; inicio ref=b'%PDF-1.3\n3 0 obj\n<</Type /Page\n/Parent 1 0 R\n/Resources 2 0 ' 8.5=b'<html>\n<head>\n<title>Notifica\xe7\x
+DIVERGE	relatorio	div2_resumogeraldivida002.php	financeiro,tributario	codigo HTTP diverge: ref=200 8.5=500; inicio ref=b'%PDF-1.3\n3 0 obj\n<</Type /Page\n/Parent 1 0 R\n/Resources 2 0 ' 8.5=b'<html>\n<head>\n<title>Notifica\xe7\x
+DIVERGE	relatorio	orc2_desppessoal002.php	configuracao,financeiro,patrimonial	codigo HTTP diverge: ref=200 8.5=500; inicio ref=b'%PDF-1.3\n3 0 obj\n<</Type /Page\n/Parent 1 0 R\n/Resources 2 0 ' 8.5=b'<html>\n<head>\n<title>Notifica\xe7\x
+DIVERGE	tela	aco1_acordo004.php	patrimonial	ref=200/77337B  85=200/12571B
+DIVERGE	tela	aco1_acordo005.php	patrimonial	ref=200/77108B  85=200/12576B
+DIVERGE	tela	aco1_acordo006.php	patrimonial	ref=200/77451B  85=200/11770B
+DIVERGE	tela	agu1_aguaconsumo999.php	tributario	ref=200/0B  85=500/3723B
+DIVERGE	tela	agu1_aguahidromatricfichatroca002.php	tributario	ref=200/94B  85=500/3737B
+DIVERGE	tela	agu2_compleituras002.php	tributario	ref=200/90B  85=500/3724B
+DIVERGE	tela	agu2_hidrometro002.php	tributario	ref=200/102B  85=500/3722B
+DIVERGE	tela	agu2_relconsumo002.php	tributario	ref=200/18591B  85=500/3722B
+DIVERGE	tela	agu2_relimobiliarias002.php	tributario	ref=200/18540B  85=500/3727B
+DIVERGE	tela	agu2_relimoveiscar002.php	tributario	ref=200/101B  85=500/3725B
+DIVERGE	tela	agu2_situacaohidro002.php	tributario	ref=200/101B  85=500/3725B
+DIVERGE	tela	agu3_conscadastro_relatorio.php	tributario	ref=200/18260B  85=500/3731B
+DIVERGE	tela	agu4_cancelaleituras_classe.php	tributario	ref=302/0B  85=500/3731B
+DIVERGE	tela	agu4_relcorte.php	tributario	ref=200/18548B  85=500/3717B
+DIVERGE	tela	agu4_relleituras002.php	tributario	ref=200/94B  85=500/3723B
+DIVERGE	tela	arr2_rellistadqd002.php	tributario	ref=200/101B  85=500/3723B
+DIVERGE	tela	ate1_clientesmodulosproc002.php	configuracao	ref=200/1554B  85=500/4717B
+DIVERGE	tela	ate1_tarefa004.php	configuracao	ref=200/24543B  85=200/24542B
+DIVERGE	tela	ate1_tarefa006.php	configuracao	ref=200/19453B  85=200/19452B
+DIVERGE	tela	ate1_tarefa010.php	configuracao	ref=200/24B  85=500/3718B
+DIVERGE	tela	ate1_tarefaagenda002.php	configuracao	ref=200/7658B  85=200/4878B
+DIVERGE	tela	ate1_tarefalogand002.php	configuracao	ref=200/20314B  85=200/13996B
+DIVERGE	tela	ate1_tarefaobs001.php	configuracao	ref=200/1723B  85=500/3721B
+DIVERGE	tela	ate2_relatendnaolanc002.php	configuracao	ref=200/18524B  85=500/3727B
+DIVERGE	tela	ate2_relatorio001.php	configuracao	ref=200/18661B  85=500/3721B
+DIVERGE	tela	ate2_relclienteproced002.php	configuracao	ref=200/18317B  85=500/3728B
+DIVERGE	tela	ate2_reltarefaagenda002.php	configuracao	ref=200/18434B  85=500/3727B
+DIVERGE	tela	ate3_atendimento002.php	configuracao	ref=200/6978B  85=500/4370B
+DIVERGE	tela	ate3_constarefaanexos.php	configuracao	ref=200/1792B  85=500/5501B
+DIVERGE	tela	ate3_consultaacesso002.php	configuracao	ref=200/5212B  85=500/4646B
+DIVERGE	tela	ate3_consultaacesso003.php	configuracao	ref=200/5007B  85=500/4442B
+DIVERGE	tela	ate3_consultaacesso004.php	configuracao	ref=200/4668B  85=500/4179B
+DIVERGE	tela	ate3_consultacalendario_agenda.php	configuracao	ref=200/29143B  85=200/15595B
+DIVERGE	tela	ate4_atend002.php	configuracao	ref=200/9427B  85=500/5520B
+DIVERGE	tela	ate4_atendsup001.php	configuracao	ref=200/11877B  85=200/6029B
+DIVERGE	tela	ate4_pesquisatarefacod.RPC.php	configuracao	ref=200/2B  85=500/3730B
+DIVERGE	tela	ate4_pesquisatarefadescr.RPC.php	configuracao	ref=200/2B  85=500/3732B
+DIVERGE	tela	bib1_emprestimo002.php	educacao	ref=200/782B  85=500/3809B
+DIVERGE	tela	bib1_leitor005.php	educacao	ref=200/7952B  85=200/6826B
+DIVERGE	tela	bib2_comprovantemodelo_80mm.php	educacao	ref=200/2073B  85=500/3731B
+DIVERGE	tela	bib2_comprovantemodelo_a4.php	educacao	ref=200/1681B  85=500/3729B
+DIVERGE	tela	bib2_racervos002.php	educacao	ref=200/2301B  85=500/3720B
+DIVERGE	tela	bib2_rmaisempres002.php	educacao	ref=200/248B  85=500/3723B
+DIVERGE	tela	cad2_carnesiptu002.php	financeiro,patrimonial,tributario	ref=200/98B  85=500/3722B
+DIVERGE	tela	cad2_comparaiptu002.php	financeiro,patrimonial,tributario	ref=200/18553B  85=500/3723B
+DIVERGE	tela	cad2_compcaract002.php	financeiro,patrimonial,tributario	ref=200/115B  85=500/3722B
+DIVERGE	tela	cad2_descconced002.php	financeiro,patrimonial,tributario	ref=200/94B  85=500/3722B
+DIVERGE	tela	cad2_emissaobic_002.php	financeiro,patrimonial,tributario	ref=500/3623B  85=500/3723B
+DIVERGE	tela	cad2_iptulancpago002.php	financeiro,patrimonial,tributario	ref=200/2323B  85=500/3724B
+DIVERGE	tela	cad2_listaiptucalc_003.php	financeiro,patrimonial,tributario	ref=200/116B  85=500/3726B
+DIVERGE	tela	cad2_loteam002.php	financeiro,patrimonial,tributario	ref=200/18628B  85=500/3718B
+DIVERGE	tela	cad2_loteamentomatric002.php	financeiro,patrimonial,tributario	ref=200/120B  85=500/3728B
+DIVERGE	tela	cad2_loteamentos002.php	financeiro,patrimonial,tributario	ref=200/94B  85=500/3723B
+DIVERGE	tela	cad2_matricnaoproc002.php	financeiro,patrimonial,tributario	ref=200/101B  85=500/3725B
+DIVERGE	tela	cad2_posicaoiptu002.php	financeiro,patrimonial,tributario	ref=200/18516B  85=500/3723B
+DIVERGE	tela	cad2_relaverbacao002.php	financeiro,patrimonial,tributario	ref=200/94B  85=500/3724B
+DIVERGE	tela	cad2_reldemo002.php	financeiro,patrimonial,tributario	ref=200/116B  85=500/3719B
+DIVERGE	tela	cad2_relisentos002.php	financeiro,patrimonial,tributario	ref=200/128B  85=500/3722B
+DIVERGE	tela	cad2_relmassafalida002.php	financeiro,patrimonial,tributario	ref=200/18559B  85=500/3726B
+DIVERGE	tela	cad2_setor002.php	financeiro,patrimonial,tributario	ref=200/118B  85=500/3717B
+DIVERGE	tela	cad3_conscadastro_relatorio.php	financeiro,patrimonial,tributario	ref=200/18259B  85=500/3731B
+DIVERGE	tela	cad3_conscadastrodetalhesmodelonovo002.php	financeiro,patrimonial,tributario	ref=200/101B  85=500/3742B
+DIVERGE	tela	cad3_iptupago002_original.php	financeiro,patrimonial,tributario	ref=200/20839B  85=500/3729B
+DIVERGE	tela	cad3_relzonafiscal002.php	financeiro,patrimonial,tributario	ref=200/18544B  85=500/3725B
+DIVERGE	tela	cad3_relzonafiscaltaxa002.php	financeiro,patrimonial,tributario	ref=200/18580B  85=500/3729B
+DIVERGE	tela	cad4_geracarneiptutxt.php	financeiro,patrimonial,tributario	ref=200/2646B  85=500/6288B
+DIVERGE	tela	cad4_geracarneiptutxt_arapiraca.php	financeiro,patrimonial,tributario	ref=200/4314B  85=500/6209B
+DIVERGE	tela	cad4_geracarneiptutxt_eldorado.php	financeiro,patrimonial,tributario	ref=200/4318B  85=500/6208B
+DIVERGE	tela	cad4_geracarneiptutxt_guaiba.php	financeiro,patrimonial,tributario	ref=200/4375B  85=500/6213B
+DIVERGE	tela	cad4_geracarnesiptu_geral.php	financeiro,patrimonial,tributario	ref=200/67900B  85=500/3729B
+DIVERGE	tela	cad4_recadastramentorelatorio.php	financeiro,patrimonial,tributario	ref=200/18467B  85=500/3733B
+DIVERGE	tela	cai3_gerfinanc003.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/156B  85=500/3721B
+DIVERGE	tela	cem2_edital002.php	tributario	ref=200/258B  85=500/3718B
+DIVERGE	tela	com1_pcfornecon001.php	financeiro,patrimonial	ref=200/23754B  85=200/10520B
+DIVERGE	tela	com1_pcfornemov001.php	financeiro,patrimonial	ref=200/9365B  85=500/3722B
+DIVERGE	tela	com1_pctipo001.php	financeiro,patrimonial	ref=200/8149B  85=500/4443B
+DIVERGE	tela	com1_pctipo002.php	financeiro,patrimonial	ref=200/6430B  85=500/4470B
+DIVERGE	tela	com1_pctipo003.php	financeiro,patrimonial	ref=200/6400B  85=500/4443B
+DIVERGE	tela	com1_seldotac001.php	financeiro,patrimonial	ref=200/8534B  85=500/4911B
+DIVERGE	tela	com1_solicitem001.php	financeiro,patrimonial	ref=200/35434B  85=200/35435B
+DIVERGE	tela	com1_solicitemiframe001.php	financeiro,patrimonial	ref=200/22870B  85=200/22751B
+DIVERGE	tela	com2_procreservasaldo002.php	financeiro,patrimonial	ref=200/106B  85=500/3728B
+DIVERGE	tela	com2_solorc002.php	financeiro,patrimonial	ref=200/124B  85=500/3718B
+DIVERGE	tela	com3_pcforne006.php	financeiro,patrimonial	ref=200/768B  85=500/4382B
+DIVERGE	tela	com4_altdotacsol001.php	financeiro,patrimonial	ref=200/2317B  85=500/5302B
+DIVERGE	tela	com4_despsol002.php	financeiro,patrimonial	ref=200/5521B  85=500/4780B
+DIVERGE	tela	con2_anexo11_002.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/88B  85=500/3720B
+DIVERGE	tela	con2_anexo17_002_2011.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/107B  85=500/3725B
+DIVERGE	tela	con2_anexo_i_2014.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/40B  85=500/3721B
+DIVERGE	tela	con2_anexo_ii_2014.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/40B  85=500/3722B
+DIVERGE	tela	con2_anexodemonstrativofuncaosubfuncao002_2015.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/20640B  85=200/20641B
+DIVERGE	tela	con2_balancoorcamentario_2014.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/107B  85=500/3733B
+DIVERGE	tela	con2_contasrecdesp002.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/18496B  85=500/3725B
+DIVERGE	tela	con2_lrfanexoxvii002_2010.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/44386B  85=500/3729B
+DIVERGE	tela	con2_lrfbalorc002_2015.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/95B  85=500/3726B
+DIVERGE	tela	con2_lrfdemalienataplicrecursos002_2010.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/107B  85=500/3743B
+DIVERGE	tela	con2_lrfdivida002_2010.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/44876B  85=500/3726B
+DIVERGE	tela	con2_lrfdivida002_2015.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/47286B  85=500/3726B
+DIVERGE	tela	con2_lrfgarantias002_2010.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/41062B  85=500/3729B
+DIVERGE	tela	con2_lrfgarantias002_2015.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/41282B  85=500/3729B
+DIVERGE	tela	con2_lrflimites002_2010.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/37042B  85=500/3727B
+DIVERGE	tela	con2_lrflimites002_2015.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/538B  85=500/3727B
+DIVERGE	tela	con2_lrfreceitacorrente002_2010.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/47320B  85=500/3735B
+DIVERGE	tela	con2_lrfreceitacorrente002_2018.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/88B  85=500/3735B
+DIVERGE	tela	con2_opercredito002_2010.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/42222B  85=500/3728B
+DIVERGE	tela	con2_opercredito002_2012.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/42756B  85=500/3728B
+DIVERGE	tela	con2_opercredito002_2015.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	ref=200/42672B  85=500/3728B
+DIVERGE	tela	div2_diviano002.php	financeiro,tributario	ref=200/87B  85=500/3719B
+DIVERGE	tela	div2_exercdivida002.php	financeiro,tributario	ref=200/112B  85=500/3723B
+DIVERGE	tela	div2_parcel002.php	financeiro,tributario	ref=200/93B  85=500/3718B
+DIVERGE	tela	div2_posicaoparc002.php	financeiro,tributario	ref=200/101B  85=500/3723B
+DIVERGE	tela	div2_procedexerc_002.php	financeiro,tributario	ref=200/19159B  85=500/3724B
+DIVERGE	tela	div2_resumogeraldivida002.php	financeiro,tributario	ref=200/19857B  85=500/3729B
+DIVERGE	tela	dv02_loteamentos002.php	tributario	ref=200/119B  85=500/3723B
+DIVERGE	tela	dvr2_capaloteamento002.php	tributario	ref=200/108B  85=500/3726B
+DIVERGE	tela	dvr3_procedper002.php	tributario	ref=200/18714B  85=500/3721B
+DIVERGE	tela	dvr4_parclote004.php	tributario	ref=200/869B  85=200/0B
+DIVERGE	tela	dvr4_parclote005.php	tributario	ref=200/18510B  85=500/3720B
+DIVERGE	tela	edu1_abonofalta001.php	configuracao,educacao	ref=200/3947B  85=500/4463B
+DIVERGE	tela	edu1_alunocurso002.php	configuracao,educacao	ref=200/12026B  85=500/5297B
+DIVERGE	tela	edu1_alunodados001.php	configuracao,educacao	ref=200/159216B  85=200/6826B
+DIVERGE	tela	edu1_alunodados002.php	configuracao,educacao	ref=200/127433B  85=200/6826B
+DIVERGE	tela	edu1_alunodados003.php	configuracao,educacao	ref=200/126658B  85=200/85408B
+DIVERGE	tela	edu1_alunodados004.php	configuracao,educacao	ref=200/7951B  85=200/6826B
+DIVERGE	tela	edu1_alunoturma002.php	configuracao,educacao	ref=200/9955B  85=500/3722B
+DIVERGE	tela	edu1_avalcompoeres001.php	configuracao,educacao	ref=200/10112B  85=200/7469B
+DIVERGE	tela	edu1_avaliacoes.php	configuracao,educacao	ref=200/7917B  85=500/5986B
+DIVERGE	tela	edu1_basemps001.php	configuracao,educacao	ref=200/8299B  85=500/4319B
+DIVERGE	tela	edu1_basemps002.php	configuracao,educacao	ref=200/8927B  85=500/4576B
+DIVERGE	tela	edu1_basemps003.php	configuracao,educacao	ref=200/8927B  85=500/4576B
+DIVERGE	tela	edu1_baseorddischistmps001.php	configuracao,educacao	ref=200/2675B  85=500/4458B
+DIVERGE	tela	edu1_baseorddischistmpsfora001.php	configuracao,educacao	ref=200/2673B  85=500/4462B
+DIVERGE	tela	edu1_baseordenardisciplina001.php	configuracao,educacao	ref=200/2675B  85=500/4461B
+DIVERGE	tela	edu1_conceito001.php	configuracao,educacao	ref=200/5971B  85=500/7588B
+DIVERGE	tela	edu1_conceito002.php	configuracao,educacao	ref=200/6717B  85=200/4111B
+DIVERGE	tela	edu1_conceito003.php	configuracao,educacao	ref=200/6717B  85=200/4111B
+DIVERGE	tela	edu1_conclusao002.php	configuracao,educacao	ref=200/1963B  85=500/5005B
+DIVERGE	tela	edu1_diarioclasse005.php	configuracao,educacao	ref=200/8322B  85=500/3724B
+DIVERGE	tela	edu1_efetividade001.php	configuracao,educacao	ref=200/7814B  85=500/4569B
+DIVERGE	tela	edu1_escola002.php	configuracao,educacao	ref=200/63138B  85=200/6826B
+DIVERGE	tela	edu1_historicodisciplinafora.php	configuracao,educacao	ref=200/1884B  85=500/4628B
+DIVERGE	tela	edu1_matriculatransf002.php	configuracao,educacao	ref=200/31320B  85=200/9029B
+DIVERGE	tela	edu1_matriculatransffora002.php	configuracao,educacao	ref=200/13196B  85=500/5522B
+DIVERGE	tela	edu1_pareceraval001.php	configuracao,educacao	ref=200/3988B  85=500/6593B
+DIVERGE	tela	edu1_pareceraval002.php	configuracao,educacao	ref=200/3540B  85=500/6371B
+DIVERGE	tela	edu1_parecerresult001.php	configuracao,educacao	ref=200/3365B  85=500/6268B
+DIVERGE	tela	edu1_procavalalternativa001.php	configuracao,educacao	ref=200/3936B  85=500/4536B
+DIVERGE	tela	edu1_procavalalternativa002.php	configuracao,educacao	ref=200/4601B  85=500/4581B
+DIVERGE	tela	edu1_procavalalternativa003.php	configuracao,educacao	ref=200/4573B  85=500/4581B
+DIVERGE	tela	edu1_procresultado003.php	configuracao,educacao	ref=200/17047B  85=200/7629B
+DIVERGE	tela	edu1_rechumanoescola001.php	configuracao,educacao	ref=200/8392B  85=500/3727B
+DIVERGE	tela	edu1_regenciaperiodo001.php	configuracao,educacao	ref=200/4710B  85=500/3727B
+DIVERGE	tela	edu1_remanejarturma001.php	configuracao,educacao	ref=200/7969B  85=500/4085B
+DIVERGE	tela	edu1_remanejarturmaac001.php	configuracao,educacao	ref=200/7949B  85=500/4109B
+DIVERGE	tela	edu1_serieequiv001.php	configuracao,educacao	ref=200/4672B  85=500/4713B
+DIVERGE	tela	edu1_turno001.php	configuracao,educacao	ref=200/7386B  85=500/7009B
+DIVERGE	tela	edu2_alunoavaliadoparecer002.php	configuracao,educacao	ref=200/18452B  85=500/3732B
+DIVERGE	tela	edu2_alunoespecialquantiquali002.php	configuracao,educacao	ref=200/18511B  85=500/3736B
+DIVERGE	tela	edu2_alunomatriculado002.php	configuracao,educacao	ref=200/19072B  85=500/3728B
+DIVERGE	tela	edu2_alunonecessidade002.php	configuracao,educacao	ref=200/123B  85=500/3728B
+DIVERGE	tela	edu2_alunonecessidadegeral002.php	configuracao,educacao	ref=200/123B  85=500/3733B
+DIVERGE	tela	edu2_ataclassificacao002.php	configuracao,educacao	ref=200/2632B  85=500/3728B
+DIVERGE	tela	edu2_atageral002.php	configuracao,educacao	ref=200/2294B  85=500/3720B
+DIVERGE	tela	edu2_atareclassificacoes002.php	configuracao,educacao	ref=200/2631B  85=500/3731B
+DIVERGE	tela	edu2_censoescolar002.php	configuracao,educacao	ref=200/43728B  85=500/3724B
+DIVERGE	tela	edu2_cerconclusao002.php	configuracao,educacao	ref=200/714B  85=500/3724B
+DIVERGE	tela	edu2_certconclusao002.php	configuracao,educacao	ref=200/283B  85=500/3725B
+DIVERGE	tela	edu2_docpendente002.php	configuracao,educacao	ref=200/243B  85=500/3723B
+DIVERGE	tela	edu2_gfcoaprovturgeral003.php	configuracao,educacao	ref=200/18341B  85=200/18340B
+DIVERGE	tela	edu2_gfcoescaprovgeral002.php	configuracao,educacao	ref=200/254B  85=500/3729B
+DIVERGE	tela	edu2_gfcoescaprovseries002.php	configuracao,educacao	ref=200/243B  85=500/3730B
+DIVERGE	tela	edu2_gfcoescfreqseries002.php	configuracao,educacao	ref=200/0B  85=500/3729B
+DIVERGE	tela	edu2_gfcofreqcompara002.php	configuracao,educacao	ref=200/172B  85=500/3727B
+DIVERGE	tela	edu2_guiatransf002.php	configuracao,educacao	ref=200/82B  85=500/3722B
+DIVERGE	tela	edu2_horarioprofessor001.php	configuracao,educacao	ref=200/3388B  85=500/4304B
+DIVERGE	tela	edu2_horarioprofessor002.php	configuracao,educacao	ref=200/19052B  85=500/3728B
+DIVERGE	tela	edu2_listacandidatos002.php	configuracao,educacao	ref=200/255B  85=500/3727B
+DIVERGE	tela	edu2_logatualizacaodiario.php	configuracao,educacao	ref=200/18126B  85=500/3729B
+DIVERGE	tela	edu2_qd_especificacao002.php	configuracao,educacao	ref=200/257B  85=500/3728B
+DIVERGE	tela	edu2_rechumano002.php	configuracao,educacao	ref=200/94B  85=500/3721B
+DIVERGE	tela	edu2_rechumano003.php	configuracao,educacao	ref=200/340B  85=500/3721B
+DIVERGE	tela	edu2_relatanual002.php	configuracao,educacao	ref=200/339B  85=500/3722B
+DIVERGE	tela	edu2_relescolasporbairro002.php	configuracao,educacao	ref=200/94B  85=500/3731B
+DIVERGE	tela	edu3_alunomatriculado002.php	configuracao,educacao	ref=200/1607B  85=500/4724B
+DIVERGE	tela	edu3_alunopassagem001.php	configuracao,educacao	ref=200/3564B  85=500/6203B
+DIVERGE	tela	edu3_consultaprofessor004.php	configuracao,educacao	ref=200/1774B  85=500/4564B
+DIVERGE	tela	edu3_custorota001.php	configuracao,educacao	ref=200/6248B  85=500/6803B
+DIVERGE	tela	edu3_quadrogeraldehorarioshtml002.php	configuracao,educacao	ref=200/2925B  85=500/3737B
+DIVERGE	tela	edu3_rota000.php	configuracao,educacao	ref=200/6183B  85=500/6784B
+DIVERGE	tela	edu3_turmaencerrada002.php	configuracao,educacao	ref=200/1319B  85=500/4560B
+DIVERGE	tela	edu4_aprovtransfescolafora002.php	configuracao,educacao	ref=200/9481B  85=500/4973B
+DIVERGE	tela	edu4_geraalunoPdf.php	configuracao,educacao	ref=200/381B  85=500/3721B
+DIVERGE	tela	edu4_geratxtaluno.php	configuracao,educacao	ref=200/309B  85=500/3721B
+DIVERGE	tela	edu4_importacaosituacaoaluno002.php	configuracao,educacao	ref=200/229B  85=500/3735B
+DIVERGE	tela	edu4_inativarvinculoprofessor001.php	configuracao,educacao	ref=200/194B  85=500/3870B
+DIVERGE	tela	edu4_logexportarsituacaoaluno002.php	configuracao,educacao	ref=200/152B  85=500/3736B
+DIVERGE	tela	edu4_trocaserieimportacao001.php	configuracao,educacao	ref=200/23633B  85=200/9369B
+DIVERGE	tela	edu4_verifexportcenso003.php	configuracao,educacao	ref=200/857B  85=500/3728B
+DIVERGE	tela	far2_distribuicao002.php	saude	ref=200/19262B  85=500/3724B
+DIVERGE	tela	far2_historicopaciente002.php	saude	ref=200/285B  85=500/3729B
+DIVERGE	tela	far2_historicoprogmedicamento002.php	saude	ref=200/342B  85=500/3736B
+DIVERGE	tela	far2_historicoprogpaciente002.php	saude	ref=200/342B  85=500/3733B
+DIVERGE	tela	far2_mapaconsolidado003.php	saude	ref=200/30B  85=500/3727B
+DIVERGE	tela	far2_pacienteprogramatica002.php	saude	ref=200/343B  85=500/3732B
+DIVERGE	tela	fis1_fis_procfiscalfinalizacao002.php	tributario	ref=200/9154B  85=200/19727B
+DIVERGE	tela	fis1_fis_sanitario004.php	tributario	ref=500/4887B  85=500/3725B
+DIVERGE	tela	fis1_sanitario004.php	tributario	ref=500/4890B  85=500/3721B
+DIVERGE	tela	fis2_emiteaidof002.php	tributario	ref=200/708B  85=500/3722B
+DIVERGE	tela	fis2_fis_levantamentolote002.php	tributario	ref=200/18135B  85=500/3732B
+DIVERGE	tela	fis2_fis_levantamentomassa002.php	tributario	ref=200/18150B  85=500/3733B
+DIVERGE	tela	fis2_fis_termofiscal003.php	tributario	ref=200/159B  85=500/3727B
+DIVERGE	tela	fis3_fis_consultaautoinf_imp.php	tributario	ref=200/18781B  85=500/3732B
+DIVERGE	tela	fis3_fis_imprimealvara.php	tributario	ref=200/111B  85=500/3726B
+DIVERGE	tela	fis3_fis_relatoriosani.php	tributario	ref=200/18598B  85=200/18594B
+DIVERGE	tela	fis3_relatoriosani.php	tributario	ref=200/18624B  85=200/18621B
+DIVERGE	tela	inf2_inflan002.php	financeiro,tributario	ref=200/115B  85=500/3718B
+DIVERGE	tela	iss2_calculadoepago002.php	financeiro,tributario	ref=200/18915B  85=500/3726B
+DIVERGE	tela	iss2_certibaixa002.php	financeiro,tributario	ref=200/123B  85=500/3722B
+DIVERGE	tela	iss2_inscrescrito002.php	financeiro,tributario	ref=200/18429B  85=500/3724B
+DIVERGE	tela	iss2_issqnpago002.php	financeiro,tributario	ref=200/19236B  85=500/3721B
+DIVERGE	tela	iss2_listinscrweb002.php	financeiro,tributario	ref=200/101B  85=500/3724B
+DIVERGE	tela	iss2_relarrec1002.php	financeiro,tributario	ref=200/1265B  85=500/3721B
+DIVERGE	tela	iss2_relatorioruas002.php	financeiro,tributario	ref=200/94B  85=500/3725B
+DIVERGE	tela	iss3_emissaoalvaraeventos001.php	financeiro,tributario	ref=200/101B  85=500/3732B
+DIVERGE	tela	iss3_emissaoalvaraveiculos001.php	financeiro,tributario	ref=200/138B  85=500/3733B
+DIVERGE	tela	iss3_emissaobicveiculos001.php	financeiro,tributario	ref=200/156B  85=500/3730B
+DIVERGE	tela	iss3_inconsistenciaSimples.php	financeiro,tributario	ref=200/18717B  85=500/3862B
+DIVERGE	tela	iss4_contativ003.php	financeiro,tributario	ref=200/128B  85=500/3720B
+DIVERGE	tela	iss4_contativ006.php	financeiro,tributario	ref=200/120B  85=500/3720B
+DIVERGE	tela	itb2_relsetorquadralote002.php	tributario	ref=200/117B  85=500/3730B
+DIVERGE	tela	itbi_simulacaoitbi002.php	tributario	ref=200/18952B  85=500/3725B
+DIVERGE	tela	jur2_geradoc.php	tributario	ref=200/18147B  85=500/3716B
+DIVERGE	tela	jur2_inicialquit002.php	tributario	ref=200/18152B  85=500/3723B
+DIVERGE	tela	jur2_relinicial002.php	tributario	ref=200/101B  85=500/3722B
+DIVERGE	tela	lab1_lab_laboratorio002.php	saude	ref=200/16760B  85=200/16771B
+DIVERGE	tela	lab1_lab_laboratorio003.php	saude	ref=200/16489B  85=200/16500B
+DIVERGE	tela	lab2_inconsistenciasimportacaoresultado002.php	saude	ref=200/18459B  85=500/3746B
+DIVERGE	tela	lab2_mapacoletaconsulta.php	saude	ref=200/0B  85=500/3727B
+DIVERGE	tela	lab2_pendenciastriagem001.php	saude	ref=200/20180B  85=200/4136B
+DIVERGE	tela	lab2_producao001.php	saude	ref=200/20939B  85=500/7759B
+DIVERGE	tela	lab2_producao002.php	saude	ref=200/278B  85=500/3720B
+DIVERGE	tela	lic1_trocpcorcamtroca001.php	patrimonial,recursoshumanos	ref=200/21844B  85=200/21842B
+DIVERGE	tela	mat2_anulacaoentradaordemcompra002.php	configuracao,educacao,patrimonial,saude	ref=200/94B  85=500/3738B
+DIVERGE	tela	mat2_controlest011.php	configuracao,educacao,patrimonial,saude	ref=200/3925B  85=500/4925B
+DIVERGE	tela	mat2_controlevalidade002.php	configuracao,educacao,patrimonial,saude	ref=200/285B  85=500/3728B
+DIVERGE	tela	mat2_devolucaomaterialalmoxarifado002.php	configuracao,educacao,patrimonial,saude	ref=200/94B  85=500/3741B
+DIVERGE	tela	mat2_relarqpit002.php	configuracao,educacao,patrimonial,saude	ref=200/102B  85=500/3721B
+DIVERGE	tela	mat2_relatorioentradasmateriasdepto002.php	configuracao,educacao,patrimonial,saude	ref=200/18845B  85=500/3742B
+DIVERGE	tela	mat2_relatoriosaidasmateriasdepto002.php	configuracao,educacao,patrimonial,saude	ref=200/123B  85=500/3740B
+DIVERGE	tela	mat2_relatoriosaidasmateriasdeptogrid002.php	configuracao,educacao,patrimonial,saude	ref=200/120B  85=500/3744B
+DIVERGE	tela	mat2_relatoriosaidasmateriasdeptosintetico002.php	configuracao,educacao,patrimonial,saude	ref=200/120B  85=500/3749B
+DIVERGE	tela	mat2_relsaida002.php	configuracao,educacao,patrimonial,saude	ref=200/102B  85=500/3720B
+DIVERGE	tela	mat3_consultamaterial002.php	configuracao,educacao,patrimonial,saude	ref=200/4518B  85=500/3728B
+DIVERGE	tela	mat3_consultamaterialimprimir002.php	configuracao,educacao,patrimonial,saude	ref=200/18668B  85=500/3736B
+DIVERGE	tela	mat3_controlevalidade002.php	configuracao,educacao,patrimonial,saude	ref=200/370B  85=500/3787B
+DIVERGE	tela	mat3_matconsulta002.php	configuracao,educacao,patrimonial,saude	ref=200/7247B  85=500/7169B
+DIVERGE	tela	mat4_entraMaterialLote002.php	configuracao,educacao,patrimonial,saude	ref=200/120684B  85=500/5015B
+DIVERGE	tela	mat4_reprocessararquivopit002.php	configuracao,educacao,patrimonial,saude	ref=200/541B  85=500/3733B
+DIVERGE	tela	mer1_mer_baixasemanal001.php	educacao	ref=200/6350B  85=500/4813B
+DIVERGE	tela	mer1_mer_escolarefeicao001.php	educacao	ref=200/1371B  85=500/4492B
+DIVERGE	tela	mer1_mer_relatdesperdicio002.php	educacao	ref=200/244B  85=500/3732B
+DIVERGE	tela	mer1_mer_tpcardapioturma002.php	educacao	ref=200/577B  85=500/4231B
+DIVERGE	tela	mer3_mer_nutricardapio001.php	educacao	ref=200/4150B  85=500/4852B
+DIVERGE	tela	mer4_mer_baixamanual002.php	educacao	ref=200/2623B  85=500/5059B
+DIVERGE	tela	mer4_mer_baixasemanal001.php	educacao	ref=200/6350B  85=500/4813B
+DIVERGE	tela	mer4_mer_cardapioaluno002.php	educacao	ref=200/2664B  85=500/5078B
+DIVERGE	tela	mer4_mer_cardapiodia_combo003.php	educacao	ref=200/26B  85=500/3733B
+DIVERGE	tela	mer4_mer_subitem_ajax004.php	educacao	ref=200/0B  85=500/3728B
+DIVERGE	tela	orc2_atividades002.php	configuracao,financeiro,patrimonial	ref=200/38040B  85=500/3722B
+DIVERGE	tela	orc2_desppessoal002.php	configuracao,financeiro,patrimonial	ref=200/18531B  85=500/3723B
+DIVERGE	tela	orc2_receitasDespesasPrevidenciariasServidores002.php	configuracao,financeiro,patrimonial	ref=200/23769B  85=200/23769B
+DIVERGE	tela	ouv1_aba3formularioJson004.php	patrimonial	ref=200/4248B  85=500/3730B
+DIVERGE	tela	ouv1_prorrogacaoprazo003.php	patrimonial	ref=200/18624B  85=500/3728B
+DIVERGE	tela	ouv1_tipoprocdepart008.php	patrimonial	ref=200/113B  85=500/3726B
+DIVERGE	tela	ouv4_cidadaocgmdetalhe.php	patrimonial	ref=200/3430B  85=500/3726B
+DIVERGE	tela	ouv4_ouvidoriapesqvincatendprocesso001.php	patrimonial	ref=200/8498B  85=500/4786B
+DIVERGE	tela	ouv4_solicitacaoprocessoeletronico.RPC.php	patrimonial	ref=200/0B  85=500/3742B
+DIVERGE	tela	pat1_bens004.php	configuracao,patrimonial	ref=200/31176B  85=200/5362B
+DIVERGE	tela	pat1_bens005.php	configuracao,patrimonial	ref=200/25005B  85=200/5346B
+DIVERGE	tela	pat1_bensaltlote001.php	configuracao,patrimonial	ref=200/34481B  85=200/8537B
+DIVERGE	tela	pat1_bensaltlote005.php	configuracao,patrimonial	ref=200/34302B  85=200/8406B
+DIVERGE	tela	pat1_bensglobal001.php	configuracao,patrimonial	ref=200/47662B  85=200/7849B
+DIVERGE	tela	pat2_bensfinanc002.php	configuracao,patrimonial	ref=200/96B  85=500/3722B
+DIVERGE	tela	pat2_benspordepartamento001.php	configuracao,patrimonial	ref=200/71076B  85=500/3731B
+DIVERGE	tela	pat2_classifbens001.php	configuracao,patrimonial	ref=200/10099B  85=200/5198B
+DIVERGE	tela	pat2_relbenstransf002.php	configuracao,patrimonial	ref=200/18950B  85=500/3725B
+DIVERGE	tela	pat2_solicitacoesliberadas002.php	configuracao,patrimonial	ref=200/125B  85=500/3733B
+DIVERGE	tela	pat4_criteriumexportaarquivos002.php	configuracao,patrimonial	ref=200/4715B  85=200/4516B
+DIVERGE	tela	pat4_exclusaohistoricoplaca003.php	configuracao,patrimonial	ref=200/7814B  85=500/3734B
+DIVERGE	tela	pes1_periodoaquisitivo002.php	financeiro,recursoshumanos	ref=200/15816B  85=500/3729B
+DIVERGE	tela	pes1_relac001.php	financeiro,recursoshumanos	ref=200/10991B  85=500/4569B
+DIVERGE	tela	pes1_relac002.php	financeiro,recursoshumanos	ref=200/10480B  85=500/4612B
+DIVERGE	tela	pes1_relac003.php	financeiro,recursoshumanos	ref=200/10421B  85=500/4569B
+DIVERGE	tela	pes1_rhcontasrec001.php	financeiro,recursoshumanos	ref=200/13717B  85=500/3723B
+DIVERGE	tela	pes1_rhcontasrec002.php	financeiro,recursoshumanos	ref=200/13693B  85=500/3723B
+DIVERGE	tela	pes1_rhcontasrec003.php	financeiro,recursoshumanos	ref=200/13692B  85=500/3723B
+DIVERGE	tela	pes1_rhteutri001.php	financeiro,recursoshumanos	ref=200/18002B  85=500/4691B
+DIVERGE	tela	pes1_rhteutri002.php	financeiro,recursoshumanos	ref=200/18402B  85=500/4692B
+DIVERGE	tela	pes1_rhteutri003.php	financeiro,recursoshumanos	ref=200/18293B  85=500/4615B
+DIVERGE	tela	pes2_RetornoConsignados002.php	financeiro,recursoshumanos	ref=200/113B  85=500/3730B
+DIVERGE	tela	pes2_acountponto002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_afastamentos002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3724B
+DIVERGE	tela	pes2_alebancos002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3721B
+DIVERGE	tela	pes2_alecal40002.php	financeiro,recursoshumanos	ref=200/104B  85=500/3720B
+DIVERGE	tela	pes2_aleconfipe002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3722B
+DIVERGE	tela	pes2_aleefetividade002.php	financeiro,recursoshumanos	ref=200/136B  85=500/3726B
+DIVERGE	tela	pes2_aleempenhos_fgts002.php	financeiro,recursoshumanos	ref=200/107B  85=500/3728B
+DIVERGE	tela	pes2_aleempenhos_fgts13002.php	financeiro,recursoshumanos	ref=200/107B  85=500/3730B
+DIVERGE	tela	pes2_aleempenhos_inss002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3728B
+DIVERGE	tela	pes2_aleempenhos_inss13002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3730B
+DIVERGE	tela	pes2_aleempenhos_rpps002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3728B
+DIVERGE	tela	pes2_aleempenhos_rpps13002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3730B
+DIVERGE	tela	pes2_alefunclocaltrab002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3728B
+DIVERGE	tela	pes2_alefuncpasep002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3724B
+DIVERGE	tela	pes2_aleimpacto002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3722B
+DIVERGE	tela	pes2_alelocaltrab002.php	financeiro,recursoshumanos	ref=200/138B  85=500/3724B
+DIVERGE	tela	pes2_alemenossm002.php	financeiro,recursoshumanos	ref=200/104B  85=500/3722B
+DIVERGE	tela	pes2_alepatronipe002.php	financeiro,recursoshumanos	ref=200/111B  85=500/3724B
+DIVERGE	tela	pes2_analitica002.php	financeiro,recursoshumanos	ref=200/108B  85=500/3721B
+DIVERGE	tela	pes2_aniversariantesmes002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3730B
+DIVERGE	tela	pes2_araboletim002.php	financeiro,recursoshumanos	ref=200/121B  85=500/3722B
+DIVERGE	tela	pes2_araconferencias002.php	financeiro,recursoshumanos	ref=200/19007B  85=500/3727B
+DIVERGE	tela	pes2_ararelconsignacao002.php	financeiro,recursoshumanos	ref=200/18901B  85=500/3729B
+DIVERGE	tela	pes2_ararelcontabilidade002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3731B
+DIVERGE	tela	pes2_ararelcontabilidade1002.php	financeiro,recursoshumanos	ref=200/18750B  85=500/3732B
+DIVERGE	tela	pes2_ararelfolhadepagamento002.php	financeiro,recursoshumanos	ref=200/18790B  85=500/3734B
+DIVERGE	tela	pes2_araresumogeral002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3726B
+DIVERGE	tela	pes2_araresumoporsecretaria002.php	financeiro,recursoshumanos	ref=200/18759B  85=500/3734B
+DIVERGE	tela	pes2_araresumototal002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3726B
+DIVERGE	tela	pes2_arrlporvinculo002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3726B
+DIVERGE	tela	pes2_bagefetividade002.php	financeiro,recursoshumanos	ref=200/138B  85=500/3726B
+DIVERGE	tela	pes2_bagrelconffunc002.php	financeiro,recursoshumanos	ref=200/108B  85=500/3726B
+DIVERGE	tela	pes2_bagrelfuncionarios002.php	financeiro,recursoshumanos	ref=200/121B  85=500/3730B
+DIVERGE	tela	pes2_banrisul240cnab002.php	financeiro,recursoshumanos	ref=200/80B  85=500/3727B
+DIVERGE	tela	pes2_bbconverte002.php	financeiro,recursoshumanos	ref=200/2427B  85=500/6023B
+DIVERGE	tela	pes2_cadferiasmes002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3724B
+DIVERGE	tela	pes2_cadipe002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3718B
+DIVERGE	tela	pes2_cadpadroes002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3722B
+DIVERGE	tela	pes2_cadpesdiver002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_cadprogres002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3722B
+DIVERGE	tela	pes2_cadrubricas002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_calcatua002.php	financeiro,recursoshumanos	ref=200/6129B  85=200/5979B
+DIVERGE	tela	pes2_canentregacontracheque002.php	financeiro,recursoshumanos	ref=200/107B  85=500/3734B
+DIVERGE	tela	pes2_cangastos30002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_canguiapatronal002.php	financeiro,recursoshumanos	ref=200/708B  85=500/3727B
+DIVERGE	tela	pes2_canreqferias002.php	financeiro,recursoshumanos	ref=200/102B  85=500/3724B
+DIVERGE	tela	pes2_canresumo_resumo_rec_empenhos002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3741B
+DIVERGE	tela	pes2_cardocfunc002.php	financeiro,recursoshumanos	ref=200/107B  85=500/3722B
+DIVERGE	tela	pes2_caremppatronal002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3726B
+DIVERGE	tela	pes2_carendereco002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_carnascimento002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3725B
+DIVERGE	tela	pes2_carrelfunsec002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3724B
+DIVERGE	tela	pes2_carsalbasefunc002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3726B
+DIVERGE	tela	pes2_codfinanc002.php	financeiro,recursoshumanos	ref=200/93B  85=500/3721B
+DIVERGE	tela	pes2_conferenciamapafolha002.php	financeiro,recursoshumanos	ref=200/18716B  85=500/3732B
+DIVERGE	tela	pes2_confferias002.php	financeiro,recursoshumanos	ref=200/122B  85=500/3722B
+DIVERGE	tela	pes2_consigpag002.php	financeiro,recursoshumanos	ref=200/102B  85=500/3721B
+DIVERGE	tela	pes2_consrhfuncao002.php	financeiro,recursoshumanos	ref=200/0B  85=500/3724B
+DIVERGE	tela	pes2_consrhfuncao003.php	financeiro,recursoshumanos	ref=200/93B  85=500/3724B
+DIVERGE	tela	pes2_contra_cheque.php	financeiro,recursoshumanos	ref=200/102B  85=500/3722B
+DIVERGE	tela	pes2_daebdependentes002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3727B
+DIVERGE	tela	pes2_demitidos002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3721B
+DIVERGE	tela	pes2_descsind002.php	financeiro,recursoshumanos	ref=200/124B  85=500/3720B
+DIVERGE	tela	pes2_eldadiantamento002.php	financeiro,recursoshumanos	ref=200/104B  85=500/3727B
+DIVERGE	tela	pes2_eldavisoferias002.php	financeiro,recursoshumanos	ref=200/102B  85=500/3726B
+DIVERGE	tela	pes2_eldavisoferias003.php	financeiro,recursoshumanos	ref=200/102B  85=500/3726B
+DIVERGE	tela	pes2_emitecontra001.php	financeiro,recursoshumanos	ref=200/34541B  85=500/3723B
+DIVERGE	tela	pes2_empenhospatronais002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3729B
+DIVERGE	tela	pes2_extratorpps002.php	financeiro,recursoshumanos	ref=200/708B  85=500/3723B
+DIVERGE	tela	pes2_feriasaviso002.php	financeiro,recursoshumanos	ref=200/294B  85=500/3723B
+DIVERGE	tela	pes2_feriasliquido002.php	financeiro,recursoshumanos	ref=200/122B  85=500/3725B
+DIVERGE	tela	pes2_feriasprogramadas002.php	financeiro,recursoshumanos	ref=200/294B  85=500/3729B
+DIVERGE	tela	pes2_func_e_depend002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3725B
+DIVERGE	tela	pes2_guaimportaguiabaprev002.php	financeiro,recursoshumanos	ref=200/68421B  85=500/6036B
+DIVERGE	tela	pes2_guarecargarefeisul002.php	financeiro,recursoshumanos	ref=200/113B  85=500/3730B
+DIVERGE	tela	pes2_guarelinf002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3721B
+DIVERGE	tela	pes2_historicocadastral002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3730B
+DIVERGE	tela	pes2_impactoorc002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3722B
+DIVERGE	tela	pes2_itaasemi002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3720B
+DIVERGE	tela	pes2_itaassoc002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3720B
+DIVERGE	tela	pes2_itacesta002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3720B
+DIVERGE	tela	pes2_itacesta1002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3721B
+DIVERGE	tela	pes2_itaempenhos_rpps002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3728B
+DIVERGE	tela	pes2_itatotaleducacao002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3728B
+DIVERGE	tela	pes2_lotacoes_ppp002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3724B
+DIVERGE	tela	pes2_margemconsignavel002.php	financeiro,recursoshumanos	ref=200/104B  85=500/3729B
+DIVERGE	tela	pes2_osoconsignacao002.php	financeiro,recursoshumanos	ref=200/104B  85=500/3726B
+DIVERGE	tela	pes2_osocontramatricial002.php	financeiro,recursoshumanos	ref=200/4196B  85=200/4151B
+DIVERGE	tela	pes2_osoempenhos_fgts002.php	financeiro,recursoshumanos	ref=200/107B  85=500/3728B
+DIVERGE	tela	pes2_osoempenhos_fgts13002.php	financeiro,recursoshumanos	ref=200/107B  85=500/3730B
+DIVERGE	tela	pes2_osoempenhos_inss002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3728B
+DIVERGE	tela	pes2_osoempenhos_inss13002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3730B
+DIVERGE	tela	pes2_osoempenhos_rpps002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3728B
+DIVERGE	tela	pes2_osoempenhos_rpps13002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3730B
+DIVERGE	tela	pes2_osoempenhosantigos002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3730B
+DIVERGE	tela	pes2_osoferias002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3721B
+DIVERGE	tela	pes2_pensalim002.php	financeiro,recursoshumanos	ref=200/106B  85=500/3720B
+DIVERGE	tela	pes2_previdencia002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3723B
+DIVERGE	tela	pes2_recadastramento_folha002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3733B
+DIVERGE	tela	pes2_relbasesrubricas002.php	financeiro,recursoshumanos	ref=200/123B  85=500/3728B
+DIVERGE	tela	pes2_relempenhoa002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_relempenhof002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_relempenhop002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_relfichafinanceira002.php	financeiro,recursoshumanos	ref=200/95B  85=500/3730B
+DIVERGE	tela	pes2_relfichafinanceiratxt002.php	financeiro,recursoshumanos	ref=200/98B  85=500/3733B
+DIVERGE	tela	pes2_relfuncaolotacaoorgao002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3733B
+DIVERGE	tela	pes2_relimpactofolha002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3727B
+DIVERGE	tela	pes2_relipe002.php	financeiro,recursoshumanos	ref=200/113B  85=500/3718B
+DIVERGE	tela	pes2_relpadroesanual002.php	financeiro,recursoshumanos	ref=200/120B  85=500/3727B
+DIVERGE	tela	pes2_relprevidencia002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3726B
+DIVERGE	tela	pes2_relprevidenciasint002.php	financeiro,recursoshumanos	ref=200/106B  85=500/3730B
+DIVERGE	tela	pes2_resumo002.php	financeiro,recursoshumanos	ref=200/19452B  85=500/3718B
+DIVERGE	tela	pes2_resumoporvinculo002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3728B
+DIVERGE	tela	pes2_resumorecursoempenhos002.php	financeiro,recursoshumanos	ref=200/115B  85=500/3733B
+DIVERGE	tela	pes2_rhpreponto002.php	financeiro,recursoshumanos	ref=200/94B  85=500/3722B
+DIVERGE	tela	pes2_rhteutri002.php	financeiro,recursoshumanos	ref=200/124B  85=500/3720B
+DIVERGE	tela	pes2_rhvisavalecad002.php	financeiro,recursoshumanos	ref=200/114B  85=500/3725B
+DIVERGE	tela	pes2_rubmesponto002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_rubricasanuais002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3726B
+DIVERGE	tela	pes2_saparqfunc_sind002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3727B
+DIVERGE	tela	pes2_sapcalcatua002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_sapcargahoraria002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3727B
+DIVERGE	tela	pes2_sapconfcaixa002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3724B
+DIVERGE	tela	pes2_sapconfreceitas002.php	financeiro,recursoshumanos	ref=200/105B  85=500/3727B
+DIVERGE	tela	pes2_sapcreches002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3722B
+DIVERGE	tela	pes2_sapdescontosind002.php	financeiro,recursoshumanos	ref=200/133B  85=500/3727B
+DIVERGE	tela	pes2_sapempenhos_fgts002.php	financeiro,recursoshumanos	ref=200/107B  85=500/3728B
+DIVERGE	tela	pes2_sapempenhos_fgts13002.php	financeiro,recursoshumanos	ref=200/105B  85=500/3730B
+DIVERGE	tela	pes2_sapempenhos_inss002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3728B
+DIVERGE	tela	pes2_sapempenhos_inss13002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3730B
+DIVERGE	tela	pes2_sapempenhos_rpps002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3728B
+DIVERGE	tela	pes2_sapempenhos_rpps13002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3730B
+DIVERGE	tela	pes2_sapemprestbanr002.php	financeiro,recursoshumanos	ref=200/133B  85=500/3726B
+DIVERGE	tela	pes2_sapemprestbb002.php	financeiro,recursoshumanos	ref=200/133B  85=500/3724B
+DIVERGE	tela	pes2_sapemprestcaixa002.php	financeiro,recursoshumanos	ref=200/133B  85=500/3727B
+DIVERGE	tela	pes2_sapestagioprob002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3726B
+DIVERGE	tela	pes2_sapetiquetaponto002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3728B
+DIVERGE	tela	pes2_sapetiquetaponto003.php	financeiro,recursoshumanos	ref=200/116B  85=500/3728B
+DIVERGE	tela	pes2_sapguiapatronal002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3727B
+DIVERGE	tela	pes2_saphorasextras002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3726B
+DIVERGE	tela	pes2_sapinatpens002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3723B
+DIVERGE	tela	pes2_sapinfracaotrans002.php	financeiro,recursoshumanos	ref=200/118B  85=500/3728B
+DIVERGE	tela	pes2_sapmensalidadesind002.php	financeiro,recursoshumanos	ref=200/133B  85=500/3730B
+DIVERGE	tela	pes2_sappadroes002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3722B
+DIVERGE	tela	pes2_sappensao002.php	financeiro,recursoshumanos	ref=200/108B  85=500/3721B
+DIVERGE	tela	pes2_sapprevidencia002.php	financeiro,recursoshumanos	ref=200/107B  85=500/3726B
+DIVERGE	tela	pes2_saprelclass002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3723B
+DIVERGE	tela	pes2_saprelfgts002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3722B
+DIVERGE	tela	pes2_saprelfuncao002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3724B
+DIVERGE	tela	pes2_saprelfuncionarios002.php	financeiro,recursoshumanos	ref=200/121B  85=500/3730B
+DIVERGE	tela	pes2_saprelprof002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3722B
+DIVERGE	tela	pes2_sapreqferias002.php	financeiro,recursoshumanos	ref=200/102B  85=500/3724B
+DIVERGE	tela	pes2_sapreqferias003.php	financeiro,recursoshumanos	ref=200/102B  85=500/3724B
+DIVERGE	tela	pes2_saprpa002.php	financeiro,recursoshumanos	ref=200/100B  85=500/3718B
+DIVERGE	tela	pes2_sapseg_uniao002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3724B
+DIVERGE	tela	pes2_sapsemconta002.php	financeiro,recursoshumanos	ref=200/119B  85=500/3723B
+DIVERGE	tela	pes2_sapsemvale002.php	financeiro,recursoshumanos	ref=200/129B  85=500/3722B
+DIVERGE	tela	pes2_sapservporsecr002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3726B
+DIVERGE	tela	pes2_saptotfuncao002.php	financeiro,recursoshumanos	ref=200/109B  85=500/3724B
+DIVERGE	tela	pes2_sapvale002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3719B
+DIVERGE	tela	pes2_sapvtrefeitorio002.php	financeiro,recursoshumanos	ref=200/117B  85=500/3727B
+DIVERGE	tela	pes2_sociossind002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3722B
+DIVERGE	tela	pes2_termorescisao002.php	financeiro,recursoshumanos	ref=200/137B  85=500/3725B
+DIVERGE	tela	pes2_trocavangemnomes002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3728B
+DIVERGE	tela	pes2_valetransp_anual002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3728B
+DIVERGE	tela	pes2_valetransp_entrega002.php	financeiro,recursoshumanos	ref=200/116B  85=500/3730B
+DIVERGE	tela	pes2_valproccomp002.php	financeiro,recursoshumanos	ref=200/114B  85=500/3723B
+DIVERGE	tela	pes3_conspessoal_impressao.php	financeiro,recursoshumanos	ref=200/116B  85=500/3730B
+DIVERGE	tela	pes3_conspessoal_impressaoalalterado.php	financeiro,recursoshumanos	ref=200/116B  85=500/3740B
+DIVERGE	tela	pes3_consrhfuncao021.php	financeiro,recursoshumanos	ref=200/3114B  85=500/3724B
+DIVERGE	tela	pes3_consvantagemconf002.php	financeiro,recursoshumanos	ref=200/28529B  85=500/5297B
+DIVERGE	tela	pes3_relchequesemitidos002.php	financeiro,recursoshumanos	ref=200/93B  85=500/3730B
+DIVERGE	tela	pes3_relcomparativofolha002.php	financeiro,recursoshumanos	ref=200/18372B  85=500/3731B
+DIVERGE	tela	pes4_differias002.php	financeiro,recursoshumanos	ref=200/2859B  85=500/6525B
+DIVERGE	tela	pes4_eventofinanceiroautomatico.RPC.php	financeiro,recursoshumanos	ref=200/29B  85=500/3739B
+DIVERGE	tela	pes4_geraarquivosmanad.php	financeiro,recursoshumanos	ref=200/334982B  85=200/2259B
+DIVERGE	tela	pes4_geraarquivosmanadnovo.php	financeiro,recursoshumanos	ref=200/223B  85=500/3730B
+DIVERGE	tela	pes4_geracaoarquivorefeisul.RPC.php	financeiro,recursoshumanos	ref=200/43B  85=500/3735B
+DIVERGE	tela	pes4_gerarEmpenhoFolhaRPC.php	financeiro,recursoshumanos	ref=200/36B  85=500/3729B
+DIVERGE	tela	pes4_gerfcom001.php	financeiro,recursoshumanos	ref=200/3686B  85=500/3719B
+DIVERGE	tela	pes4_liberarempenhosfolha002.php	financeiro,recursoshumanos	ref=200/5830B  85=500/3732B
+DIVERGE	tela	pes4_liberarempenhosfolha003.php	financeiro,recursoshumanos	ref=200/5927B  85=500/3732B
+DIVERGE	tela	pes4_relinconsistenciasiprev002.php	financeiro,recursoshumanos	ref=200/18419B  85=500/3735B
+DIVERGE	tela	pes4_rhfopag90002.php	financeiro,recursoshumanos	ref=200/2456B  85=500/6050B
+DIVERGE	tela	pes4_rhfopag95002.php	financeiro,recursoshumanos	ref=200/2447B  85=500/6030B
+DIVERGE	tela	pes4_rhfopag96002.php	financeiro,recursoshumanos	ref=200/2364B  85=500/6030B
+DIVERGE	tela	pro1_relduploscgm002.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/18525B  85=500/3724B
+DIVERGE	tela	pro2_relproc002.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/18258B  85=500/3719B
+DIVERGE	tela	pro2_ruasmunic002.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/18655B  85=200/18664B
+DIVERGE	tela	pro3_inconsistenciaInss.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/18695B  85=500/3852B
+DIVERGE	tela	pro4_aba1protprocesso001.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/26406B  85=500/3728B
+DIVERGE	tela	pro4_canceltransintlist.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/1658B  85=500/5275B
+DIVERGE	tela	pro4_canceltranslist.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/1584B  85=500/5222B
+DIVERGE	tela	pro4_consusuariodeptoRPC.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/51B  85=500/3728B
+DIVERGE	tela	pro4_mandespacho002.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/3801B  85=500/3723B
+DIVERGE	tela	pro4_parprojetos001.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/17818B  85=500/3723B
+DIVERGE	tela	pro4_protprocessovolume.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/21591B  85=500/3872B
+DIVERGE	tela	pro4_recebinterinfo.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/1129B  85=500/4741B
+DIVERGE	tela	pro4_termorecebimento.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	ref=200/101B  85=500/3725B
+DIVERGE	tela	prot1_cidadaocgmdetalhe.php	patrimonial,saude,tributario	ref=200/4987B  85=500/3727B
+DIVERGE	tela	prot2_movcgm002.php	patrimonial,saude,tributario	ref=200/101B  85=500/3719B
+DIVERGE	tela	rec1_protelac001.php	assistenciasocial,recursoshumanos,tributario	ref=200/31364B  85=500/4615B
+DIVERGE	tela	rec1_protelac002.php	assistenciasocial,recursoshumanos,tributario	ref=200/33772B  85=500/4691B
+DIVERGE	tela	rec1_protelac003.php	assistenciasocial,recursoshumanos,tributario	ref=200/33767B  85=500/4691B
+DIVERGE	tela	rec2_consafastfunc002.php	assistenciasocial,recursoshumanos,tributario	ref=200/116B  85=500/3725B
+DIVERGE	tela	rec2_consultagradeefetividade002.php	assistenciasocial,recursoshumanos,tributario	ref=200/106B  85=500/3736B
+DIVERGE	tela	rec2_emiteportaria002.php	assistenciasocial,recursoshumanos,tributario	ref=200/116B  85=500/3725B
+DIVERGE	tela	rec2_estagioBoletim002.php	assistenciasocial,recursoshumanos,tributario	ref=200/18166B  85=500/3748B
+DIVERGE	tela	rec2_novagradeefetividade002.php	assistenciasocial,recursoshumanos,tributario	ref=200/106B  85=500/3732B
+DIVERGE	tela	rec2_relassentaporperiodo002.php	assistenciasocial,recursoshumanos,tributario	ref=200/129B  85=500/3732B
+DIVERGE	tela	rec2_rhestagio002.php	assistenciasocial,recursoshumanos,tributario	ref=200/118B  85=500/3721B
+DIVERGE	tela	rec2_rhestagio003.php	assistenciasocial,recursoshumanos,tributario	ref=200/0B  85=500/3721B
+DIVERGE	tela	rec2_vantagens002.php	assistenciasocial,recursoshumanos,tributario	ref=200/353B  85=500/3721B
+DIVERGE	tela	rec3_estagioAta002.php	assistenciasocial,recursoshumanos,tributario	ref=200/18584B  85=500/3744B
+DIVERGE	tela	rec4_agendaassentamento.RPC.php	assistenciasocial,recursoshumanos,tributario	ref=200/40B  85=500/3731B
+DIVERGE	tela	rec4_pontoeletronicoimportacaoarquivo002.php	assistenciasocial,recursoshumanos,tributario	ref=200/68033B  85=500/5810B
+DIVERGE	tela	sau1_cgs_undoutros002.php	saude	ref=200/25005B  85=200/9511B
+DIVERGE	tela	sau1_valores001.php	saude	ref=200/179B  85=500/3889B
+DIVERGE	tela	sau2_agendaexterna003.php	saude	ref=200/20161B  85=500/3725B
+DIVERGE	tela	sau2_atendimentos002.php	saude	ref=200/243B  85=500/3724B
+DIVERGE	tela	sau2_boletim002.php	saude	ref=200/243B  85=500/3719B
+DIVERGE	tela	sau2_bpa001.php	saude	ref=200/18339B  85=500/3715B
+DIVERGE	tela	sau2_cgscorretos002.php	saude	ref=200/18523B  85=500/3723B
+DIVERGE	tela	sau2_especialidades002.php	saude	ref=200/243B  85=500/3726B
+DIVERGE	tela	sau2_faausuarios002.php	saude	ref=200/243B  85=500/3723B
+DIVERGE	tela	sau2_grafsaude002.php	saude	ref=200/246B  85=500/3721B
+DIVERGE	tela	sau2_indicemorb002.php	saude	ref=200/243B  85=500/3722B
+DIVERGE	tela	sau2_procedimentos002.php	saude	ref=200/366B  85=500/3725B
+DIVERGE	tela	sau2_procedimentos003.php	saude	ref=200/366B  85=500/3725B
+DIVERGE	tela	sau2_procmedicos002.php	saude	ref=200/243B  85=500/3723B
+DIVERGE	tela	sau2_progmun002.php	saude	ref=200/243B  85=500/3719B
+DIVERGE	tela	sau2_prontuarios002.php	saude	ref=200/18504B  85=500/3723B
+DIVERGE	tela	sau2_relatorioprocedimentos002.php	saude	ref=200/287B  85=500/3734B
+DIVERGE	tela	sau2_sitagendamentos002.php	saude	ref=200/243B  85=500/3727B
+DIVERGE	tela	sau2_unidades002.php	saude	ref=200/243B  85=500/3720B
+DIVERGE	tela	sau3_consultasaude003.php	saude	ref=200/243B  85=500/3725B
+DIVERGE	tela	sau4_consultamedica004.php	saude	ref=200/17189B  85=500/3726B
+DIVERGE	tela	sau4_prontuariomedico002.php	saude	ref=200/243B  85=500/3728B
+DIVERGE	tela	sau4_triagemproc001.php	saude	ref=200/48739B  85=200/6826B
+DIVERGE	tela	soc2_declaracaoinss002.php	assistenciasocial	ref=200/115B  85=200/154B
+DIVERGE	tela	sys3_campos001.php	configuracao,financeiro,tributario	ref=200/3105B  85=500/5074B
+DIVERGE	tela	sys3_tabelas001.php	configuracao,financeiro,tributario	ref=200/2383B  85=500/5102B
+DIVERGE	tela	sys4_chaveestrangeira001.php	configuracao,financeiro,tributario	ref=200/541096B  85=500/3728B
+DIVERGE	tela	sys4_chaveprim001.php	configuracao,financeiro,tributario	ref=200/3982B  85=500/3721B
+DIVERGE	tela	sys4_chaveprim002.php	configuracao,financeiro,tributario	ref=200/1751B  85=500/4119B
+DIVERGE	tela	sys4_consultaXML.RPC.php	configuracao,financeiro,tributario	ref=200/0B  85=500/3724B
+DIVERGE	tela	sys4_dumpmenus.php	configuracao,financeiro,tributario	ref=200/3121B  85=500/4533B
+DIVERGE	tela	sys4_indices001.php	configuracao,financeiro,tributario	ref=200/4407B  85=500/3719B
+DIVERGE	tela	sys4_libimpmax001.php	configuracao,financeiro,tributario	ref=200/7692B  85=200/4669B
+DIVERGE	tela	sys4_listaretornosql001.php	configuracao,financeiro,tributario	ref=200/1456B  85=500/4628B
+DIVERGE	tela	sys4_processa002.php	configuracao,financeiro,tributario	ref=200/639B  85=500/4164B
+DIVERGE	tela	sys4_processa004.php	configuracao,financeiro,tributario	ref=200/1050B  85=500/4578B
+DIVERGE	tela	sys4_processa007.php	configuracao,financeiro,tributario	ref=200/607B  85=500/4312B
+DIVERGE	tela	sys4_processa008.php	configuracao,financeiro,tributario	ref=200/607B  85=500/4174B
+DIVERGE	tela	sys4_verifica002.php	configuracao,financeiro,tributario	ref=200/11985B  85=500/4181B
+DIVERGE	tela	vei1_veicabast001.php	patrimonial	ref=200/34081B  85=500/4201B
+DIVERGE	tela	vei1_veicabast002.php	patrimonial	ref=200/33142B  85=500/4213B
+DIVERGE	tela	vei2_veiccentral002.php	patrimonial	ref=200/90B  85=500/3723B
+DIVERGE	tela	vei3_veicabast002.php	patrimonial	ref=200/15146B  85=500/3721B
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	agu2_avscortevlrdivida002.php	tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	agu4_senhaleiturista.RPC.php	tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	arr4_acertaparcelamento.RPC.php	tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	arr4_declquitacao.RPC.php	tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	arr4_manutencaoAbatimento.RPC.php	tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	arr4_numprebloqpag.RPC.php	tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	ate4_tarefaagenda.RPC.php	configuracao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	ate4_tarefas.RPC.php	configuracao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	bib1_exemplar002.php	educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	bib1_exemplar003.php	educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cad1_buscaexercicio.php	financeiro,patrimonial,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cad1_cadruas003.php	financeiro,patrimonial,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cad1_iptubaixa002.php	financeiro,patrimonial,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai1_caitransfseq003.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai1_extratolinha001.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai1_extratolinha002.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai1_extratolinha003.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai3_gerfinanc001.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai4_cancelabaixabancoRPC.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai4_gerazim.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai4_placaixaRPC.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai4_processaconciliacao.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai4_processaconciliacao_manual.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai4_remissbob003.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cai4_transferenciaNumpre.RPC.php	configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cem1_itenserv002.php	tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	com1_solicitaregistropreco002.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	com1_solicitaregistropreco003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	com1_solicitem002.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	com1_solicitem003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	com4_consabertregistro003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con1_conplanogrupoconta004.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con1_db_ordem003.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con1_db_permemp002.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con1_db_permemp003.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con1_db_syscampo002.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con1_db_syscampo003.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con1_db_tarefas003.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con2_anexodemonstrativofuncaosubfuncao002.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con2_planosys002.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con3_versao005.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con4_db_departRPC.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con4_endereco.RPC.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con4_geratcearqRPC.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con4_inscreverp002.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con4_mensagems.RPC.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con4_processaconsistencia.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	con4_processapad.php	cidadao,configuracao,financeiro,patrimonial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cus1_parcustos002.php	financeiro	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	cus1_parcustos003.php	financeiro	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	div4_buscatipoRPC.php	financeiro,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	div4_importa002.php	financeiro,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_aluno.RPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_aprovconselho002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_atividaderh002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_atividaderh003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_atoescola002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_atoescola003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_avalcompoeres002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_avalcompoeres003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_baseRPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_baseatoRPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_calendarioescola002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_calendarioescola003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_cursoatoRPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_dialetivo002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_dialetivo003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_disciplina002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_disciplina003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_docaluno002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_docaluno003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_efetividaderhRPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_escolabase002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_escolabase003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_feriado002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_feriado003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_ordenacaoniveisensinoRPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_parametrodependencia002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_parametrodependencia003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_pareceraval003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_parecerresult002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_parecerresult003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_parecerturma003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_periodocalendario002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_periodocalendario003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_procedimento004.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_procescola002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_procescola003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_rechumanoRPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_rechumanoescola002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_rechumanoescola003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_rechumanohoradisp002.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_rechumanohoradisp003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_rechumanohorario002.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_regencia002.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_regencia003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_relacaotrabalhoRPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_serieequiv002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_serieequiv003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_serieordenacaoRPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_telefoneescola002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_telefoneescola003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_transfescolafora002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_transfescolarede002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_turma004.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_turmaRPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_turmaac004.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_turno002.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu1_turno003.php	configuracao,educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu2_gfcoaprovalugeral002.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu2_gfcoaprovaluno002.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu2_gfcoaprovturgeral002.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu2_gfcoaprovturma002.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu2_gfcofreqaluno002.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu2_gfcofreqturma002.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu2_necessidadeEspecial.RPC.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	edu3_rechumanohorario002.php	configuracao,educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empageconf002.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empageconf003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empautidot002.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empautidot003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empautitem002.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empautitem003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empautoriza003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empautret002.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empautret003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empempenho003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empempitem002.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empempitem003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empempret002.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp1_empempret003.php	financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp4_agendaPagamentoRPC.php	financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp4_anularpagamentoRPC.php	financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp4_gerarslipRPC.php	financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp4_manutencaoPagamentoRPC.php	financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp4_migracaoNotasRPC.php	financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp4_ordemPagamentoRPC.php	financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp4_pagarpagamentoRPC.php	financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	emp4_retencaonotaRPC.php	financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	far1_far_devolucaomed002.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	far1_far_devolucaomed003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	far1_far_parametros002.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	far1_far_parametros003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	far1_far_retirada002.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	far1_far_retirada003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	far2_medicamentosatend002.php	saude	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	fis1_fis_saniatividade001.php	tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	fis1_fis_tiafprazoproc002.php	tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	fis1_fis_tiafprazoproc003.php	tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	fis1_saniatividade001.php	tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	fis1_tiafprazoproc002.php	tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	fis1_tiafprazoproc003.php	tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	iss1_ativid004.php	financeiro,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	iss2_relissret002.php	financeiro,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	iss2_relissvariavel002.php	financeiro,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	iss2_simples002.php	financeiro,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	itb1_itbiavalia002.php	tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	itb1_itbiavalia003.php	tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	itb1_itbidadosimovel003.php	tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	lab1_lab_paralizacao002.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	lab1_lab_paralizacao003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	lab1_lab_requisicao002.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	lab1_lab_requisicao003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mat4_atendsolicitacaoRPC.php	configuracao,educacao,patrimonial,saude	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mat4_matordemRPC.php	configuracao,educacao,patrimonial,saude	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mat4_requisicaoRPC.php	configuracao,educacao,patrimonial,saude	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer1_mer_baixamanual001.php	educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer1_mer_cardapio004.php	educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer1_mer_cardapiodia002.php	educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer1_mer_cardapiodia003.php	educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer1_mer_cardapionutri002.php	educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer1_mer_cardapionutri003.php	educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer1_mer_cardapioturma002.php	educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer1_mer_cardapioturma003.php	educacao	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer1_mer_tipocardapio004.php	educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer2_mer_refalunoRPC.php	educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer2_mer_relathorarioRPC.php	educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer2_quadrodesenvolvimentoRPC.php	educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer4_mer_baixamanualRPC.php	educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer4_mer_cardapioalunoRPC.php	educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer4_mer_cardapiodiaRPC.php	educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer4_mer_cardapioturma.RPC.php	educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	mer4_mer_infalunoRPC.php	educacao	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	orc1_orcparamrelopcre002.php	configuracao,financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	orc1_orcparamrelopcre003.php	configuracao,financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	orc1_orcsuplem005.php	configuracao,financeiro,patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	orc2_anexo2_resudespesa002.php	configuracao,financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	orc2_orcldorec002.php	configuracao,financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	orc4_ppaRPC.php	configuracao,financeiro,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	ouv1_atendimento.RPC.php	patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	ouv1_controleatendimento.RPC.php	patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	ouv1_localouvidoria.RPC.php	patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	ouv1_retornocliente.RPC.php	patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pat1_retseqplaca.php	configuracao,patrimonial	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes1_rhcadregime003.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes1_rhlotavincele002.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes1_rhlotavincele003.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes1_rhpagatra002.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes1_rhpagatra003.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes1_rhpessoalmov002.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes1_rhpessoalmov003.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes1_rhpessoalpontoRPC.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes2_emitebb200lay002.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes2_gerabbrasil001.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes2_guaemitebb200lay002.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes2_mppiemitearqbanco002.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes2_sapemitearqbanco002.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes2_sapemitebb200lay002.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes3_faixasSalariais002PDF.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_aberturacomplementar001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_aberturasuplementar001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_assentamentosubstituicao001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_cancelaaberturacomplementar001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_cancelaaberturasuplementar001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_cancelafechamentocomplementar001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_cancelafechamentosalario001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_cancelafechamentosuplementar001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_emissaochequesRPC.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_fechamentocomplementar001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_fechamentosuplementar001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_geraarqmanadRPC.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_ipe003.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_lancamentoassentamento001.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_manutencaocontratosconsignados.RPC.php	financeiro,recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pes4_rhfopag91002.php	financeiro,recursoshumanos	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pre4_email.php	cidadao,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pro1_camposdinamicosandamentopadrao.RPC.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pro1_cgmdoc002.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pro1_cgmdoc003.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pro1_obrasconstr002.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pro1_obrasconstr003.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pro1_procandamint002.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pro1_procandamint003.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pro1_protparamglobal003.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	pro4_obrashabiteRPC.php	assistenciasocial,configuracao,educacao,financeiro,patrimonial,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	prot1_cadastrocgm.php	patrimonial,saude,tributario	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	prot1_cadgeralmunic.RPC.php	patrimonial,saude,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	prot1_comparanomes.php	patrimonial,saude,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	prot4_tipo_processo.RPC.php	patrimonial,saude,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	rec1_assentadb_cadattdinamicovalorgrupo002.php	assistenciasocial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	rec1_assentadb_cadattdinamicovalorgrupo003.php	assistenciasocial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	rec1_portariasRPC.php	assistenciasocial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	rec1_tipoassedb_cadattdinamico002.php	assistenciasocial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	rec1_tipoassedb_cadattdinamico003.php	assistenciasocial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	rec4_pontoeletronico.RPC.php	assistenciasocial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	rec4_rpcexame.php	assistenciasocial,recursoshumanos,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	rh4_recadastramento.RPC.php	recursoshumanos	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sau1_ausencias003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sau1_cgs003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sau1_medicos005.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sau1_medicos006.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sau1_sau_lote002.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sau1_unidademedicos002.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sau1_unidademedicos003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sau4_fichaatendabas004_2.php	saude	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sys4_cadastrotemplateRPC.php	configuracao,financeiro,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sys4_consultaviewRPC.php	configuracao,financeiro,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	sys4_mostravariaveisdinamica.php	configuracao,financeiro,tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	tfd4_tfd_pedidotfd003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	tri4_carregadadosisencao.php	tributario	resposta vazia (0 bytes) nos dois lados
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	vac1_vac_dependencia002.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	vac1_vac_dependencia003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	vac1_vac_vacinadoserestricao002.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	vac1_vac_vacinadoserestricao003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
+ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	vei1_veicabast003.php	patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
