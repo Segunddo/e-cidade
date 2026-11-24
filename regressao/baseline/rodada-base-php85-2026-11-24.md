@@ -68,11 +68,19 @@ As áreas se sobrepõem em alguns prefixos, então a soma das linhas é maior qu
 - 6 arquivos não compilam em nenhum dos dois runtimes (defeito que já existe no 7.4; registrar e avisar
   o dono, não corrigir): `bib3_leitorcons002`, `edu1_diarioavaliacao001`, `edu1_diarioavaliacaoobs001`,
   `fis1_fis_vistorias003`, `mer1_mer_desper_und003`, `pes1_reajusteprog001`.
-- **Classes: 1.018 ainda divergem.** O padrão é o mesmo em todas: os campos da classe vêm com um código
-  (por exemplo `1013`) no 7.4 e com `0` no 8.5. A hipótese de construtor no estilo PHP 4 está
-  descartada (as classes já usam `__construct`). A causa ainda não foi isolada; pode ser a consulta de
-  rótulos ao banco, que responde diferente no 8.5, ou um efeito do próprio teste. Não tratar como
-  defeito de cada classe antes de diagnosticar.
+- **Classes: 1.018 ainda divergem — causa isolada e correção comprovada.** Não é o banco nem o teste: é a
+  mudança de semântica do PHP 8 em `0 == ""` (verdadeiro no 7.4, falso no 8). As classes de dados usam o idioma
+  `$this->campo == "" ? <valor do POST> : $this->campo` com campos que começam em `0`; no 8.5 a comparação
+  falha, o POST nunca é lido e o campo fica em `0` (o `1013` do 7.4). Todas as 1.018 têm o idioma (1.017 com
+  campo inicializado em 0) e nenhuma diverge sem ele. As 1.552 IDENTICO já têm a guarda da regra
+  `scratchpad/rector-rules/GuardaComparacaoLiteralRector.php`, que reescreve para
+  `($this->x === 0 || $this->x === 0.0 || $this->x == "" ? ... )` e preserva o comportamento antigo nos dois
+  runtimes. **Prova:** a regra foi aplicada a uma amostra de 20 das 1.018 (sorteio fixo, semente 7) e a bateria
+  de classes devolveu 20 de 20 IDENTICO; só essa regra disparou (115 linhas trocadas). A amostra foi revertida;
+  nada disso está aplicado na árvore. **Ação:** aplicar a regra às 1.018 num commit Rector separado do manual
+  (lista em `classes-sem-guarda-base-php85.txt`), um responsável só; `classes/` não tem dono de área
+  (`sem_area`), então precisa de decisão do coordenador. Depois, repetir a bateria e só então distribuir as
+  divergências restantes por área; parte dos 509 erros 500 das telas pode sumir junto.
 - 57 dos 59 INCONCLUSIVO em classes são "sem saída nos dois lados" (classe não exercitada).
 ## Como reproduzir
 
