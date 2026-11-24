@@ -99,7 +99,7 @@ function js_marca(obj){
                        inner join cgm on z01_numcgm = p58_numcgm
                  where p63_codtran = {$cod} {$where} ";
        $result  = db_query($sql);
-       $numrows = pg_numrows($result);
+       $numrows = ($result ? pg_numrows($result) : null);
        if($numrows>0){
           echo "
 	           <table style='border:2px inset white; width:100%;background-color:white' cellspacing='0'' cellpadding='0'>

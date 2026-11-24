@@ -41,8 +41,8 @@
 	 where protprocesso.p58_codproc=$processo  
        ";
  $res_proc = db_query($sql);
- $rows_proc = pg_numrows($res_proc);
- if (pg_numrows($res_proc) == 0){
+ $rows_proc = ($res_proc ? pg_numrows($res_proc) : null);
+ if (($res_proc ? pg_numrows($res_proc) : null) == 0){
      echo "zerado";
  }  
 
