@@ -1,0 +1,19 @@
+{
+    "name": "dbseller/e-cidade-laravel-boot-php85-test",
+    "description": "Isolated PHP 8.5 and Laravel 13 boot compatibility test for e-cidade",
+    "require": {
+        "php": "^8.5",
+        "laravel/framework": "13.43.0"
+    },
+    "config": {
+        "vendor-dir": "../../../../runtime-85/boot-vendor",
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "../../../app/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
