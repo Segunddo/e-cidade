@@ -121,7 +121,7 @@ $iRegistrosDisponivel  = $oDaoRecHumano->numrows;
       if (isset($pesquisa_chave) && !empty($pesquisa_chave)) {
 
         $rsRegente = db_query($sSqlRegenteDisponivel);
-        if (pg_num_rows($rsRegente) != 0) {
+        if (($rsRegente ? pg_num_rows($rsRegente) : null) != 0) {
 
           db_fieldsmemory($rsRegente, 0);
           echo "<script>".$oGet->funcao_js."('$z01_nome',false);</script>";
