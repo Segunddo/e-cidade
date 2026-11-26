@@ -1,0 +1,275 @@
+app/Domain/RecursosHumanos/Pessoal/Model/RhDepend.php	27	Carbon::parse	return Carbon::parse($this->attributes['rh31_dtnasc'])->age;
+app/Domain/RecursosHumanos/Pessoal/Services/AjudaCusto/AjudaCustoService.php	103	Carbon::create	$startDate = Carbon::create($ano, $mes, 1);
+app/Domain/RecursosHumanos/Pessoal/Services/AjudaCusto/AjudaCustoService.php	114	Carbon::create	$competenciaProcessada = Carbon::create($lancado->rh313_ano, $lancado->rh313_mes, 1);
+app/Domain/RecursosHumanos/Pessoal/Services/AjudaCusto/AjudaCustoService.php	246	Carbon::parse	$idadeLancamento = Carbon::parse($dependente->rh31_dtnasc)
+app/Domain/RecursosHumanos/Pessoal/Controller/RhDependController.php	73	Carbon::parse	$dependente->idade = Carbon::parse($dependente->rh31_dtnasc)->age;
+app/Domain/Financeiro/Contabilidade/Builder/PlanoOrcamentarioReceitaBuilder.php	41	Carbon::now	$dado['created_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PlanoOrcamentarioReceitaBuilder.php	42	Carbon::now	$dado['updated_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PcaspBuilder.php	131	Carbon::now	$dado['created_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PcaspBuilder.php	132	Carbon::now	$dado['updated_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PlanoOrcamentarioReceitaROBuilder.php	41	Carbon::now	$dado['created_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PlanoOrcamentarioReceitaROBuilder.php	42	Carbon::now	$dado['updated_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PlanoOrcamentarioReceitaRSBuilder.php	51	Carbon::now	$dado['created_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PlanoOrcamentarioReceitaRSBuilder.php	52	Carbon::now	$dado['updated_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PlanoOrcamentarioDespesaBuilder.php	43	Carbon::now	$dado['created_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PlanoOrcamentarioDespesaBuilder.php	44	Carbon::now	$dado['updated_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PlanoOrcamentarioDespesaRsBuilder.php	44	Carbon::now	$dado['created_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Builder/PlanoOrcamentarioDespesaRsBuilder.php	45	Carbon::now	$dado['updated_at'] = Carbon::now();
+app/Domain/Financeiro/Contabilidade/Models/EmissoesLrf.php	23	docblock	* @property Carbon $create_at
+app/Domain/Financeiro/Contabilidade/Models/EmissoesLrf.php	24	docblock	* @property Carbon $updated_at
+app/Domain/Financeiro/Contabilidade/Models/Lote.php	15	docblock	* @property Carbon $created_at
+app/Domain/Financeiro/Contabilidade/Models/Lote.php	16	docblock	* @property Carbon $updated_at
+app/Domain/Financeiro/Contabilidade/Models/LrfValorManual.php	18	docblock	* @property Carbon $created_at
+app/Domain/Financeiro/Contabilidade/Models/LrfValorManual.php	19	docblock	* @property Carbon $updated_at
+app/Domain/Financeiro/Contabilidade/Controllers/ContaCorrente.php	33	Carbon::createFromFormat	$data = Carbon::createFromFormat('Y-m-d', date("Y-m-d", $_SESSION["DB_datausu"]));
+app/Domain/Financeiro/Contabilidade/Repositories/OrigemComplementoRecursoRepository.php	22	docblock	* @param Carbon $data1
+app/Domain/Financeiro/Contabilidade/Repositories/OrigemComplementoRecursoRepository.php	23	docblock	* @param Carbon $data2
+app/Domain/Financeiro/Contabilidade/Repositories/OrigemComplementoRecursoRepository.php	183	docblock	* @param Carbon $data1
+app/Domain/Financeiro/Contabilidade/Repositories/OrigemComplementoRecursoRepository.php	184	docblock	* @param Carbon $data2
+app/Domain/Financeiro/Contabilidade/VO/LancamentoContabilVO.php	14	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/RelatorioBalanceteVerificacaoService.php	35	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/RelatorioBalanceteVerificacaoService.php	39	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/RelatorioBalanceteVerificacaoService.php	150	Carbon::createFromFormat	$this->filtroDataInicio = Carbon::createFromFormat('Y-m-d', $filtros['dataInicial']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/RelatorioBalanceteVerificacaoService.php	151	Carbon::createFromFormat	$this->filtroDataFinal = Carbon::createFromFormat('Y-m-d', $filtros['dataFinal']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/NovaLRF/AnexosService.php	97	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/NovaLRF/AnexosService.php	103	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/NovaLRF/AnexosService.php	213	Carbon::createFromFormat	$this->dataIncio = Carbon::createFromFormat('d/m/Y', $this->periodo->stringDataInicial($this->exerci
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/NovaLRF/AnexosService.php	214	Carbon::createFromFormat	$this->dataFim = Carbon::createFromFormat('d/m/Y', $this->periodo->stringDataFinal($this->exercicio)
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoReceitaService.php	34	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoReceitaService.php	39	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoReceitaService.php	120	Carbon::createFromFormat	$filtros['dataInicio'] = Carbon::createFromFormat('Y-m-d', $mesFinal->data_inicio)->format('d/m/Y');
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoReceitaService.php	121	Carbon::createFromFormat	$filtros['dataFinal'] = Carbon::createFromFormat('Y-m-d', $mesFinal->data_fim)->format('d/m/Y');
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoReceitaService.php	132	Carbon::createFromFormat	$filtros['dataInicio'] = Carbon::createFromFormat('Y-m-d', $mes->data_inicio)->format('d/m/Y');
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoReceitaService.php	133	Carbon::createFromFormat	$filtros['dataFinal'] = Carbon::createFromFormat('Y-m-d', $mes->data_fim)->format('d/m/Y');
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/RelatorioBalanceteDespesaService.php	76	Carbon::createFromFormat	$this->filtroDataInicio = Carbon::createFromFormat('d/m/Y', $filtros['dataInicio']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/RelatorioBalanceteDespesaService.php	77	Carbon::createFromFormat	$this->filtroDataFinal = Carbon::createFromFormat('d/m/Y', $filtros['dataFinal']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/MatrizService.php	14	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/MatrizService.php	19	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/MatrizService.php	51	Carbon::createFromFormat	$this->filtroDataInicio = Carbon::createFromFormat('Y-m-d', $di);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/MatrizService.php	52	Carbon::createFromFormat	$this->filtroDataFinal = Carbon::createFromFormat('Y-m-d', $df);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/BalanceteReceitaService.php	41	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/BalanceteReceitaService.php	46	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/BalanceteReceitaService.php	157	Carbon::createFromFormat	$this->filtroDataInicio = Carbon::createFromFormat('d/m/Y', $filtros['dataInicio']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/BalanceteReceitaService.php	158	Carbon::createFromFormat	$this->filtroDataFinal = Carbon::createFromFormat('d/m/Y', $filtros['dataFinal']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/BalanceteReceitaService.php	160	Carbon::createFromFormat	$this->filtroDataInicio = Carbon::createFromFormat('Y-m-d', $filtros['dataInicio']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/BalanceteReceitaService.php	161	Carbon::createFromFormat	$this->filtroDataFinal = Carbon::createFromFormat('Y-m-d', $filtros['dataFinal']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/SuperavitFinanceiroPorRecursoService.php	56	Carbon::createFromFormat	Carbon::createFromFormat('Y-m-d', $this->filtros['dataInicial'])->format('d/m/Y'),
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/SuperavitFinanceiroPorRecursoService.php	57	Carbon::createFromFormat	Carbon::createFromFormat('Y-m-d', $this->filtros['dataFinal'])->format('d/m/Y')
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/SuperavitFinanceiroPorRecursoService.php	60	new Carbon	$this->parser->addVariable('data_hora_emissao', (new Carbon())->format('d/m/Y H:i:s'));
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/SuperavitFinanceiroPorRecursoService.php	324	Carbon::createFromFormat	$servico->setFiltroDataInicio(Carbon::createFromFormat('Y-m-d', $this->filtros['dataInicial']));
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/SuperavitFinanceiroPorRecursoService.php	325	Carbon::createFromFormat	$servico->setFiltroDataFinal(Carbon::createFromFormat('Y-m-d', $this->filtros['dataFinal']));
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoDespesaService.php	23	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoDespesaService.php	28	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoDespesaService.php	229	Carbon::createFromFormat	->setFiltroDataInicio(Carbon::createFromFormat('Y-m-d', $mesFinal->data_inicio))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoDespesaService.php	230	Carbon::createFromFormat	->setFiltroDataFinal(Carbon::createFromFormat('Y-m-d', $mesFinal->data_fim))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoDespesaService.php	246	Carbon::createFromFormat	->setFiltroDataInicio(Carbon::createFromFormat('Y-m-d', $mes->data_inicio))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/EvolucaoDespesaService.php	247	Carbon::createFromFormat	->setFiltroDataFinal(Carbon::createFromFormat('Y-m-d', $mes->data_fim))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/Deliberacao/Modelos/ModeloCincoService.php	22	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/Deliberacao/Modelos/ModeloCincoService.php	26	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/Deliberacao/Modelos/ModeloCincoService.php	39	Carbon::createFromFormat	$this->dataInicialAnterior = Carbon::createFromFormat('Y-m-d', $filtros['dataInicial']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/Deliberacao/Modelos/ModeloCincoService.php	42	Carbon::createFromFormat	$this->dataFinalAnterior = Carbon::createFromFormat('Y-m-d', $filtros['dataFinal']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/LRF/RREO/AnexoOitoService.php	464	Carbon::createFromFormat	->setFiltroDataInicio(Carbon::createFromFormat('Y-m-d', "{$this->exercicio}-01-01"))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/LRF/RREO/AnexoOitoService.php	465	Carbon::createFromFormat	->setFiltroDataFinal(Carbon::createFromFormat('Y-m-d', "{$this->exercicio}-04-30"))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/LRF/RREO/AnexoOitoService.php	613	Carbon::createFromFormat	->setFiltroDataInicio(Carbon::createFromFormat('Y-m-d', "{$this->exercicio}-01-01"))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/LRF/RREO/AnexoOitoService.php	614	Carbon::createFromFormat	->setFiltroDataFinal(Carbon::createFromFormat('Y-m-d', $dataFim))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/LRF/RREO/AnexoOito/AnexoOitoService.php	454	Carbon::createFromFormat	->setFiltroDataInicio(Carbon::createFromFormat('Y-m-d', "{$this->exercicio}-01-01"))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/LRF/RREO/AnexoOito/AnexoOitoService.php	455	Carbon::createFromFormat	->setFiltroDataFinal(Carbon::createFromFormat('Y-m-d', "{$this->exercicio}-04-30"))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/LRF/RREO/AnexoOito/AnexoOitoService.php	612	Carbon::createFromFormat	->setFiltroDataInicio(Carbon::createFromFormat('Y-m-d', "{$this->exercicio}-01-01"))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/LRF/RREO/AnexoOito/AnexoOitoService.php	613	Carbon::createFromFormat	->setFiltroDataFinal(Carbon::createFromFormat('Y-m-d', $dataFim))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/LRF/AnexosService.php	518	Carbon::createFromFormat	->setFiltroDataInicio(Carbon::createFromFormat('Y-m-d', $dataInicio))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/LRF/AnexosService.php	519	Carbon::createFromFormat	->setFiltroDataFinal(Carbon::createFromFormat('Y-m-d', $dataFim))
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/BalanceteVerificacaoInformacaoComplementarService.php	18	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/BalanceteVerificacaoInformacaoComplementarService.php	22	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/BalanceteVerificacaoInformacaoComplementarService.php	71	Carbon::createFromFormat	$this->filtroDataInicio = Carbon::createFromFormat('Y-m-d', $filtros['dataInicial']);
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/BalanceteVerificacaoInformacaoComplementarService.php	72	Carbon::createFromFormat	$this->filtroDataFinal = Carbon::createFromFormat('Y-m-d', $filtros['dataFinal']);
+app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php	73	Carbon::create	$nomeMes = Carbon::create($ano, $mes, 1)->formatLocalized('%B');
+app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php	98	Carbon::create	$nomeMes = Carbon::create($apropriacao->c145_exercicio, $apropriacao->c145_mes, 1)->formatLocalized(
+app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php	377	Carbon::createFromTimestamp	$data = Carbon::createFromTimestamp(Storage::lastModified($fileLock));
+app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php	382	new Carbon	if ($data->diffInMinutes((new Carbon())) > 10) {
+app/Domain/Financeiro/Contabilidade/Services/BalancetesMensaisService.php	803	Carbon::createFromFormat	$balanceteDespesa->setFiltroDataInicio(Carbon::createFromFormat('d/m/Y', $dataInicial));
+app/Domain/Financeiro/Contabilidade/Services/BalancetesMensaisService.php	804	Carbon::createFromFormat	$balanceteDespesa->setFiltroDataFinal(Carbon::createFromFormat('d/m/Y', $dataFinal));
+app/Domain/Financeiro/Contabilidade/Services/BalanceteDespesaService.php	30	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/BalanceteDespesaService.php	34	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/BalanceteDespesaService.php	126	docblock	* @param Carbon $filtroDataInicio
+app/Domain/Financeiro/Contabilidade/Services/BalanceteDespesaService.php	136	docblock	* @param Carbon $filtroDataFinal
+app/Domain/Financeiro/Contabilidade/Services/ContaCorrente/TemplateDdr.php	16	docblock	* @var Carbon
+app/Domain/Financeiro/Contabilidade/Services/ContaCorrente/TemplateDdr.php	20	tipo em assinatura	public function __construct(Carbon $data)
+app/Domain/Financeiro/Tesouraria/Services/Relatorios/ExtratoContaBancaria/RelatorioExtratoContaBancariaService.php	21	Carbon::createFromFormat	$this->setAno(Carbon::createFromFormat('d/m/Y', $filtros['dataFinal'])->year);
+app/Domain/Financeiro/Tesouraria/Services/Relatorios/DecendioRelatorioService.php	48	Carbon::parse	'dataInicial' => Carbon::parse($dataInicial)->format("d/m/Y"),
+app/Domain/Financeiro/Tesouraria/Services/Relatorios/DecendioRelatorioService.php	49	Carbon::parse	'dataFinal' => Carbon::parse($dataFinal)->format("d/m/Y"),
+app/Domain/Financeiro/Tesouraria/Services/Relatorios/DecendioRelatorioService.php	67	Carbon::parse	'data' => Carbon::parse($decendio->k17_data)->format("d/m/Y"),
+app/Domain/Financeiro/Tesouraria/Services/GerarSlipsDecendioService.php	18	Carbon::parse	Carbon::parse($dataInicial)->format("d/m/Y"),
+app/Domain/Financeiro/Tesouraria/Services/GerarSlipsDecendioService.php	19	Carbon::parse	Carbon::parse($dataFinal)->format("d/m/Y")
+app/Domain/Financeiro/Planejamento/Services/Relatorios/AcompanhamentoService.php	131	Carbon::createFromFormat	->setFiltroDataInicio(Carbon::createFromFormat('Y-m-d', $dataInicio))
+app/Domain/Financeiro/Planejamento/Services/Relatorios/AcompanhamentoService.php	132	Carbon::createFromFormat	->setFiltroDataFinal(Carbon::createFromFormat('Y-m-d', $dataFim))
+app/Domain/Financeiro/Orcamento/Models/Recurso.php	18	docblock	* @property Carbon $o15_datalimite
+app/Domain/Financeiro/Orcamento/Models/Recurso.php	100	docblock	* @return Carbon
+app/Domain/Financeiro/Empenho/Services/RelatorioRetencoesEfdReinf/RelatorioRetencoesEfdReinfService.php	27	Carbon::createFromFormat	$filtrosRetencoesEfdReinf->setano(Carbon::createFromFormat('d/m/Y', $filtros['dataFinal'])->year);
+app/Domain/Core/Models/BatchJob.php	13	docblock	* @property Carbon $created_at
+app/Domain/Core/Models/BatchJob.php	14	docblock	* @property Carbon $updated_at
+app/Domain/Educacao/CentralMatriculas/Helpers/NoticicasHelper.php	66	new Carbon	$dados['data'] = (new Carbon($params['data']))->format('Y-m-d');
+app/Domain/Educacao/CentralMatriculas/Models/ObservacaoInscricao.php	42	docblock	* @property Carbon $created_at
+app/Domain/Educacao/CentralMatriculas/Models/ObservacaoInscricao.php	43	docblock	* @property Carbon $updated_at
+app/Domain/Educacao/CentralMatriculas/Models/ObservacaoInscricao.php	44	docblock	* @property Carbon $deleted_at
+app/Domain/Educacao/CentralMatriculas/Controllers/ProcessoInscricaoController.php	76	Carbon::create	$dataI = Carbon::create(
+app/Domain/Educacao/CentralMatriculas/Controllers/ProcessoInscricaoController.php	85	Carbon::create	$dataF = Carbon::create(
+app/Domain/Educacao/CentralMatriculas/Controllers/ProcessoInscricaoController.php	94	Carbon::now	if (Carbon::now()->between($dataI, $dataF)) {
+app/Domain/Educacao/CentralMatriculas/Services/ProcessoInscricaoService.php	49	new Carbon	$idade = $this->getIdade($fase->mo04_datacorte, new Carbon($data));
+app/Domain/Educacao/CentralMatriculas/Services/ProcessoInscricaoService.php	67	new Carbon	$idade = $this->getIdade($this->getDataCorte(), new Carbon($data));
+app/Domain/Educacao/CentralMatriculas/Services/ProcessoInscricaoService.php	83	Carbon::create	$dataI = Carbon::create(
+app/Domain/Educacao/CentralMatriculas/Services/ProcessoInscricaoService.php	92	Carbon::create	$dataF = Carbon::create(
+app/Domain/Educacao/CentralMatriculas/Services/ProcessoInscricaoService.php	101	Carbon::now	if (Carbon::now()->between($dataI, $dataF)) {
+app/Domain/Educacao/CentralMatriculas/Services/ProcessoInscricaoService.php	114	new Carbon	$idade = $this->getIdade($this->getDataCorte(), new Carbon($data));
+app/Domain/Educacao/CentralMatriculas/Services/ProcessoInscricaoService.php	455	Carbon::now	($alocado->mo13_data->format('Y') === Carbon::now()->format('Y'))) {
+app/Domain/Educacao/MatriculaOnline/Resources/CiclosResource.php	31	Carbon::createFromFormat	'mo09_dtcad' => Carbon::createFromFormat('d/m/Y', $ciclo['dataCadastro'])->format('Y-m-d'),
+app/Domain/Educacao/MatriculaOnline/Resources/FaseResource.php	39	Carbon::createFromFormat	'mo04_anousu' => Carbon::createFromFormat('d/m/Y', $parametros['dataCorte'])->year,
+app/Domain/Educacao/MatriculaOnline/Resources/FaseResource.php	40	Carbon::createFromFormat	'mo04_datacorte' => Carbon::createFromFormat('d/m/Y', $parametros['dataCorte'])
+app/Domain/Educacao/MatriculaOnline/Resources/FaseResource.php	42	Carbon::createFromFormat	'mo04_dtfim' =>  Carbon::createFromFormat('d/m/Y', $parametros['dataFim'])
+app/Domain/Educacao/MatriculaOnline/Resources/FaseResource.php	44	Carbon::createFromFormat	'mo04_dtini' =>  Carbon::createFromFormat('d/m/Y', $parametros['dataInicio'])
+app/Domain/Educacao/Escola/Models/TurmaEspecialMatricula.php	14	docblock	* @property Carbon $ed269_d_data
+app/Domain/Educacao/Escola/Models/TurmaEspecialMatricula.php	69	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Aluno.php	21	docblock	* @property Carbon $ed47_d_cadast
+app/Domain/Educacao/Escola/Models/Aluno.php	34	docblock	* @property Carbon $ed47_c_certidaodata
+app/Domain/Educacao/Escola/Models/Aluno.php	38	docblock	* @property Carbon $ed47_d_dtemissao
+app/Domain/Educacao/Escola/Models/Aluno.php	39	docblock	* @property Carbon $ed47_d_dthabilitacao
+app/Domain/Educacao/Escola/Models/Aluno.php	40	docblock	* @property Carbon $ed47_d_dtvencimento
+app/Domain/Educacao/Escola/Models/Aluno.php	41	docblock	* @property Carbon $ed47_d_nasc
+app/Domain/Educacao/Escola/Models/Aluno.php	42	docblock	* @property Carbon $ed47_d_ultalt
+app/Domain/Educacao/Escola/Models/Aluno.php	61	docblock	* @property Carbon $ed47_d_identdtexp
+app/Domain/Educacao/Escola/Models/Aluno.php	181	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Aluno.php	285	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Aluno.php	317	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Aluno.php	325	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Aluno.php	333	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Aluno.php	341	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Aluno.php	349	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Aluno.php	501	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Calendario.php	17	docblock	* @property Carbon $ed52_d_inicio
+app/Domain/Educacao/Escola/Models/Calendario.php	18	docblock	* @property Carbon $ed52_d_fim
+app/Domain/Educacao/Escola/Models/Calendario.php	19	docblock	* @property Carbon $ed52_d_resultfinal
+app/Domain/Educacao/Escola/Models/Calendario.php	84	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Calendario.php	91	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/Calendario.php	98	docblock	* @return Carbon
+app/Domain/Educacao/Escola/Models/ExcecaoBloqueioNota.php	15	docblock	* @property Carbon $ed363_datalimite
+app/Domain/Educacao/Escola/Resources/AtoLegalResource.php	26	new Carbon	'dataVigor' => new Carbon($ato->ed05_d_vigora),
+app/Domain/Educacao/Escola/Resources/AtoLegalResource.php	27	new Carbon	'dataAprovacao' => new Carbon($ato->ed05_d_aprovado),
+app/Domain/Educacao/Escola/Resources/AtoLegalResource.php	28	new Carbon	'dataPublicacao' => new Carbon($ato->ed05_d_publicado),
+app/Domain/Educacao/Escola/Controllers/AlunosController.php	307	Carbon::now	->where('ed52_i_ano', '=', Carbon::now()->year)
+app/Domain/Educacao/Escola/Controllers/RegistroAulaController.php	67	Carbon::createFromTimestamp	$dataSistema = Carbon::createFromTimestamp($request->get('DB_datausu'));
+app/Domain/Educacao/Escola/Controllers/RegistroAulaController.php	77	Carbon::createFromTimestamp	$filtros['dataSistema'] = Carbon::createFromTimestamp($request->get('DB_datausu'));
+app/Domain/Educacao/Escola/Controllers/CalendarioController.php	83	Carbon::createFromTimestamp	$dataSistema = Carbon::createFromTimestamp($request->get('DB_datausu'));
+app/Domain/Educacao/Escola/Repositories/ConteudoDesenvolvidoRepository.php	36	new Carbon	$query->where("ed155_data", new Carbon($filtro));
+app/Domain/Educacao/Escola/Repositories/ConteudoDesenvolvidoRepository.php	133	new Carbon	$query->where("ed155_data", new Carbon($filtro));
+app/Domain/Educacao/Escola/Repositories/ProfissionalEscolaRepository.php	113	tipo em assinatura	public function getTurmasRegente($cgm, $escola, Carbon $dataSistema = null, $periodos = false)
+app/Domain/Patrimonial/Licitacoes/Services/BncService.php	89	Carbon::parse	$paramsLicitacao['data'] = Carbon::parse($processo->DisputeStart);
+app/Domain/Patrimonial/Licitacoes/Services/BncService.php	110	Carbon::now	$params['data'] = Carbon::now();
+app/Domain/Patrimonial/Licitacoes/Services/BncService.php	197	Carbon::now	$params['dataAtual'] = Carbon::now();
+app/Domain/Patrimonial/Licitacoes/Services/BncService.php	198	Carbon::parse	$params['dataInicioDisputa'] = Carbon::parse($processo->DisputeStart);
+app/Domain/Patrimonial/Licitacoes/Services/BncService.php	199	Carbon::parse	$params['dataHomologacao'] = Carbon::parse($processo->HomologationDate);
+app/Domain/Patrimonial/Licitacoes/Services/BncService.php	200	Carbon::parse	$params['dataAdjudicacao'] = Carbon::parse($processo->AdjudicationDate);
+app/Domain/Patrimonial/Licitacoes/Services/BncService.php	575	Carbon::createFromFormat	$dataRecebimento = Carbon::createFromFormat('Y-m-d H:i', $dataRecebimento)->format('c');
+app/Domain/Patrimonial/Protocolo/Controller/DocumentoAndamentoController.php	324	Carbon::now	$documento->setDataAssinatura(Carbon::now());
+app/Domain/Patrimonial/Material/Controllers/ImplantacaoSaldoPlanilhaController.php	41	Carbon::createFromFormat	$date = Carbon::createFromFormat('D M d Y H:i:s e+', $request->date)->format('Y-m-d');
+app/Domain/Patrimonial/Material/Controllers/ImplantacaoSaldoPlanilhaController.php	42	Carbon::now	$currentDate = Carbon::now();
+app/Domain/Patrimonial/Material/Controllers/ImplantacaoSaldoPlanilhaController.php	44	Carbon::parse	if (Carbon::parse($date)->greaterThan($currentDate)) {
+app/Domain/Patrimonial/Material/Services/ImportarPlanilhaService.php	34	Carbon::now	'm80_hora' => Carbon::now()->format('H:i:s'),
+app/Domain/Saude/Laboratorio/Resources/TriagemLaboratorialResource.php	96	Carbon::createFromFormat	return Carbon::createFromFormat('Y-m-d', $data)->format('d/m/Y');
+app/Domain/Saude/Laboratorio/Repositories/TriagemLaboratorialRepository.php	176	Carbon::createFromFormat	$dataInicio = Carbon::createFromFormat('d/m/Y', $filtros['dataInicial'])->startOfDay();
+app/Domain/Saude/Laboratorio/Repositories/TriagemLaboratorialRepository.php	177	Carbon::createFromFormat	$dataFim = Carbon::createFromFormat('d/m/Y', $filtros['dataFinal'])->endOfDay();
+app/Domain/Saude/Farmacia/Services/BnafarQueueService.php	88	Carbon::now	$bnafarProtocolo->fa76_created_at = Carbon::now();
+app/Domain/Saude/Ambulatorial/Repositories/UnificacaoCgsRepository.php	223	Carbon::now	$this->modelCgsCorreto->s127_d_data = Carbon::now()->toDateString();
+app/Domain/Saude/Ambulatorial/Repositories/UnificacaoCgsRepository.php	224	Carbon::now	$this->modelCgsCorreto->s127_c_hora = Carbon::now()->format('H:i');
+app/Domain/Saude/Ambulatorial/Repositories/ProntuarioRepository.php	156	Carbon::parse	$dataInicial = Carbon::parse($filtros['dataInicial']);
+app/Domain/Saude/Ambulatorial/Repositories/ProntuarioRepository.php	157	Carbon::parse	$dataFinal = Carbon::parse($filtros['dataFinal']);
+app/Domain/Configuracao/GeradorRelatorio/Services/ImprimirRelatorioTemplateService.php	86	Carbon::now	$date = Carbon::now();
+app/Domain/Configuracao/Usuario/Models/Usuario.php	51	docblock	* @property Carbon $datatoken
+app/Domain/Configuracao/Usuario/Models/Usuario.php	52	docblock	* @property Carbon $dataexpira
+app/Domain/Configuracao/Usuario/Models/Usuario.php	262	docblock	* @return Carbon
+app/Domain/Configuracao/Usuario/Models/Usuario.php	270	docblock	* @param Carbon $datatoken
+app/Domain/Configuracao/Usuario/Models/Usuario.php	280	docblock	* @return Carbon
+app/Domain/Configuracao/Usuario/Models/Usuario.php	288	docblock	* @param Carbon $dataexpira
+app/Domain/Configuracao/Departamento/Models/Departamento.php	46	docblock	* @property Carbon $limite
+app/Domain/Configuracao/Departamento/Models/Departamento.php	159	docblock	* @return Carbon
+app/Domain/Configuracao/Departamento/Models/Departamento.php	167	docblock	* @param Carbon $limite
+app/Domain/Tributario/ITBI/Repositories/AnexoArquivoItbiRepository.php	68	Carbon::now	$anexo->it39_dataexclusao = Carbon::now();
+app/Domain/Tributario/ITBI/Repositories/AnexoArquivoItbiRepository.php	115	Carbon::now	$anexo->it39_data = Carbon::now();
+app/Domain/Tributario/ISSQN/Reports/Alvara/WordDocumentTemplateAlvara.php	26	docblock	* @var Carbon
+app/Domain/Tributario/ISSQN/Reports/Alvara/WordDocumentTemplateAlvara.php	34	Carbon::now	$this->currentDate = Carbon::now();
+app/Domain/Tributario/ISSQN/Reports/Alvara/WordDocumentTemplateAlvara.php	108	Carbon::createFromFormat	Carbon::createFromFormat(\DBDate::DATA_EN, $this->issBase->q02_dtinic)->format(\DBDate::DATA_PTBR)
+app/Domain/Tributario/ISSQN/Reports/Alvara/WordDocumentTemplateAlvara.php	112	Carbon::createFromFormat	Carbon::createFromFormat(\DBDate::DATA_EN, $this->issBase->q02_dtcada)->format(\DBDate::DATA_PTBR)
+app/Domain/Tributario/ISSQN/Reports/Alvara/WordDocumentTemplateAlvara.php	214	Carbon::createFromFormat	$startDate = Carbon::createFromFormat(
+app/Domain/Tributario/ISSQN/Reports/Alvara/AlvaraBaseReport.php	65	Carbon::now	$currentTimestamp = Carbon::now()->getTimestamp();
+app/Domain/Tributario/ISSQN/Repository/SalaoParceiro/SalaoParceiroRepository.php	92	Carbon::parse	$inscriData->q202_dtinicial ? Carbon::parse($inscriData->q202_dtinicial)->format('d/m/Y') : '',
+app/Domain/Tributario/ISSQN/Repository/SalaoParceiro/SalaoParceiroRepository.php	94	Carbon::parse	$inscriData->q202_dtfinal ? Carbon::parse($inscriData->q202_dtfinal)->format('d/m/Y') : '',
+app/Domain/Tributario/ISSQN/Repository/SalaoParceiro/SalaoParceiroRepository.php	104	Carbon::parse	$parceiro->q203_dtinicial ? Carbon::parse($parceiro->q203_dtinicial)->format('d/m/Y') : '',
+app/Domain/Tributario/ISSQN/Repository/SalaoParceiro/SalaoParceiroRepository.php	106	Carbon::parse	$parceiro->q203_dtfinal ? Carbon::parse($parceiro->q203_dtfinal)->format('d/m/Y') : '',
+app/Domain/Tributario/ISSQN/Parsers/Redesim/RedesimDadosSocioBaseParser.php	30	Carbon::createFromFormat	$birthDate = Carbon::createFromFormat("Ymd", $birthDate)->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/AlterarInscricao/RedesimDadosEmpresaParser.php	170	Carbon::createFromFormat	$startDate = Carbon::createFromFormat('Ymd', $data["dataInclusao"])->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/AlterarInscricao/RedesimDadosEmpresaParser.php	174	Carbon::createFromFormat	$endDate = Carbon::createFromFormat('Ymd', $endDate)->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/AlterarInscricao/RedesimDadosAtividadeParser.php	44	Carbon::createFromFormat	$activityStartDate = Carbon::createFromFormat('Ymd', $activityStartDate)->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/GerarInscricao/RedesimDadosEmpresaParser.php	22	Carbon::createFromFormat	$startDate = Carbon::createFromFormat('Ymd', $startDate)->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/GerarInscricao/RedesimDadosEmpresaParser.php	24	Carbon::now	$startDate = Carbon::now()->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/GerarInscricao/RedesimDadosEmpresaParser.php	49	Carbon::now	$data["q30_anousu"] = Carbon::now()->format("Y");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/GerarInscricao/RedesimDadosEmpresaParser.php	132	Carbon::createFromFormat	$startDate = Carbon::createFromFormat('Ymd', $data["dataInclusao"])->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/GerarInscricao/RedesimDadosEmpresaParser.php	136	Carbon::createFromFormat	$endDate = Carbon::createFromFormat('Ymd', $endDate)->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/RedesimDadosAtividadeBaseParser.php	23	Carbon::createFromFormat	$activityStartDate = Carbon::createFromFormat('Ymd', $activityStartDate)->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/RedesimDadosAtividadeBaseParser.php	28	Carbon::createFromFormat	$activityStartDate = Carbon::createFromFormat('Ymd', $activityStartDate)->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Parsers/Redesim/RedesimDadosAtividadeBaseParser.php	30	Carbon::now	$activityStartDate = Carbon::now()->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Model/Redesim/RedesimEvent.php	15	docblock	* @property \Illuminate\Support\Carbon|null $q191_created_at
+app/Domain/Tributario/ISSQN/Model/Redesim/RedesimEvent.php	16	docblock	* @property \Illuminate\Support\Carbon|null $q191_updated_at
+app/Domain/Tributario/ISSQN/Model/Redesim/ProcessedEstablishmentData.php	14	docblock	* @property \Carbon\Carbon|null $q193_created_at
+app/Domain/Tributario/ISSQN/Model/Redesim/ProcessedEstablishmentData.php	15	docblock	* @property \Carbon\Carbon|null $q193_updated_at
+app/Domain/Tributario/ISSQN/Model/Redesim/ProcessedEstablishment.php	18	docblock	* @property \Illuminate\Support\Carbon|null $q190_created_at
+app/Domain/Tributario/ISSQN/Model/Redesim/ProcessedEstablishment.php	19	docblock	* @property \Illuminate\Support\Carbon|null $q190_updated_at
+app/Domain/Tributario/ISSQN/Model/Redesim/EstablishmentUnprocessedEvent.php	13	docblock	* @property \Carbon\Carbon|null $q195_created_at
+app/Domain/Tributario/ISSQN/Model/Redesim/EstablishmentUnprocessedEvent.php	14	docblock	* @property \Carbon\Carbon|null $q195_updated_at
+app/Domain/Tributario/ISSQN/Model/Redesim/ProcessedEstablishmentEvent.php	14	docblock	* @property \Carbon\Carbon|null $q192_created_at
+app/Domain/Tributario/ISSQN/Model/Redesim/ProcessedEstablishmentEvent.php	15	docblock	* @property \Carbon\Carbon|null $q192_updated_at
+app/Domain/Tributario/ISSQN/Model/Redesim/AutomaticEstablishmentProcess.php	16	docblock	* @property \Carbon\Carbon|null $q194_created_at
+app/Domain/Tributario/ISSQN/Model/Redesim/AutomaticEstablishmentProcess.php	17	docblock	* @property \Carbon\Carbon|null $q194_updated_at
+app/Domain/Tributario/ISSQN/Model/Redesim/EstablishmentDataBatch.php	15	docblock	* @property \Illuminate\Support\Carbon|null $q189_created_at
+app/Domain/Tributario/ISSQN/Model/Redesim/EstablishmentDataBatch.php	16	docblock	* @property \Illuminate\Support\Carbon|null $q189_updated_at
+app/Domain/Tributario/ISSQN/Model/Base/IssAlvara.php	14	docblock	* @property Carbon $q123_dtinclusao
+app/Domain/Tributario/ISSQN/Model/Base/IssMovAlvara.php	14	docblock	* @property Carbon $q120_dtmov
+app/Domain/Tributario/ISSQN/Services/Redesim/AutomaticEstablishmentProcessService.php	125	Carbon::now	$alvaraReleaseDate = Carbon::now()->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Services/Redesim/Action/RedesimAlterarInscricaoService.php	396	Carbon::createFromFormat	$dueDate = Carbon::createFromFormat('Y-m-d', $this->issBase->q02_dtbaix)
+app/Domain/Tributario/ISSQN/Services/Base/IssBaseService.php	25	Carbon::now	$issBase->q02_dtcada = Carbon::now()->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Services/Base/IssBaseService.php	31	Carbon::now	$issBase->q02_ultalt = Carbon::now()->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Services/Base/IssBaseService.php	32	Carbon::now	$issBase->q02_dtalt = Carbon::now()->format("Y-m-d");
+app/Domain/Tributario/ISSQN/Services/AlvaraService.php	27	Carbon::now	$issAlvara->q123_dtinclusao = Carbon::now()->format("Y-m-d");
+app/Domain/Tributario/ISSQN/DTO/Redesim/ConfirmResponse/ConfirmResponseRequestDTO.php	52	Carbon::createFromFormat	$alvaraDateCreated = Carbon::createFromFormat("Y-m-d", $alvaraInfo->q123_dtinclusao);
+app/Helpers/Contabilidade/FuncoesRelatorios.php	42	docblock	* @param Carbon $dataInicio
+app/Helpers/Contabilidade/FuncoesRelatorios.php	43	docblock	* @param Carbon $dataFim
+app/Helpers/Contabilidade/FuncoesRelatorios.php	46	tipo em assinatura	function headerPeriodo(Carbon $dataInicio, Carbon $dataFim)
+app/Console/Commands/GenerateDataPayrolls.php	46	Carbon::now	$today = Carbon::now();
+app/Console/Commands/PruneOldTokens.php	33	Carbon::now	$query = Token::where('revoked', true)->orWhere('expires_at', '<=', Carbon::now()->subDay());
+app/Console/Commands/ClearPayrollData.php	38	Carbon::now	$today = Carbon::now();
+app/Providers/AuthServiceProvider.php	35	Carbon::now	Passport::tokensExpireIn(Carbon::now()->addDay());
+app/Providers/AuthServiceProvider.php	37	Carbon::now	Passport::refreshTokensExpireIn(Carbon::now()->addDays(2));
+classes/requisicaoMaterial.model.php	550	Carbon::now	$job->delay(Carbon::now()->addMinutes(1));
+database/migrations/2023_10_16_091816_m26025_acerto_tokens_passport.php	18	Carbon::now	\Laravel\Passport\Token::where('expires_at', '>', Carbon::now()->addDays(2))->delete();
+orc2_orcppa004.php	70	Carbon::createFromFormat	->setFiltroDataInicio(Carbon::createFromFormat('Y-m-d', $dataInicio))
+orc2_orcppa004.php	71	Carbon::createFromFormat	->setFiltroDataFinal(Carbon::createFromFormat('Y-m-d', $dataFim))
+prot3_consultacgmnovo008.php	101	Carbon::parse	\Carbon\Carbon::parse($result->data['createdAt'])->format("d/m/Y H:i:s")
+prot3_consultacgmnovo008.php	111	Carbon::parse	\Carbon\Carbon::parse($result->data['updatedAt'])->format("d/m/Y H:i:s")
+src/Financeiro/Contabilidade/Exportacao/Sigfis/Arquivos/v2024/ArquivoRPLiquidacaoFolhaPagamento.php	114	new Carbon	"AnoLiquidacaoRestosPagar" => (new Carbon($empenho->c70_data))->format('Y'),
+src/Financeiro/Contabilidade/Exportacao/Sigfis/Arquivos/v2024/ArquivoLiquidacaoRestosPagarNotaFiscal.php	109	new Carbon	'AnoLiquidacaoRestosPagar' => (new Carbon($empenho->c70_data))->format('Y'),
+src/Financeiro/Contabilidade/Exportacao/Sigfis/Arquivos/v2024/ArquivoLiquidacaoRestosPagarDocumentoDiverso.php	83	new Carbon	$dataLancamento = new Carbon($empenho->c70_data);
+src/Financeiro/Contabilidade/Exportacao/Sigfis/Arquivos/v2024/ArquivoRPCancelamento.php	72	new Carbon	'AnoCancelamento' => (new Carbon($empenho->e94_data))->format('Y'),
+src/Financeiro/Contabilidade/Exportacao/Sigfis/Arquivos/v2024/ArquivoLiquidacaoRestosPagarDiaria.php	121	new Carbon	"AnoLiquidacaoRestosPagar" => (new Carbon($empenho->c70_data))->format('Y'),
+src/Financeiro/Contabilidade/Exportacao/Sigfis/Arquivos/v2024/ArquivoRPLiquidacaoAdiantamento.php	91	new Carbon	'AnoLiquidacaoRestosPagar' =>  (new Carbon($empenho->c70_data))->format('Y'),
+src/Lib/Request/ProcessoEletronico/ProcessoEletronico.php	208	Carbon::now	$expiresAt = Carbon::now()->addMinutes(10);
+src/Educacao/Escola/Relatorios/DiarioClasse/DiarioClassePdf.php	362	Carbon::createFromTimestamp	$saidaAlunoUltimaTurma = \Carbon\Carbon::createFromTimestamp(
+src/Educacao/Escola/Relatorios/DiarioClasse/DiarioClassePdf.php	1076	new Carbon	$dataMatricula = new Carbon($matriculaAnterior->getDataModificacao()->getDate());
+src/Educacao/Escola/Relatorios/DiarioClasse/DiarioClassePdf.php	1110	Carbon::createFromTimestamp	$saidaAlunoUltimaTurma = \Carbon\Carbon::createFromTimestamp(
+src/Educacao/Escola/Relatorios/DiarioClasse/DiarioClassePdf.php	1116	Carbon::createFromTimestamp	$inicioDoDiario = \Carbon\Carbon::createFromTimestamp(
+src/Educacao/Escola/Relatorios/DiarioClasse/Model/AlunoDiarioClasse.php	60	docblock	* @var Carbon
+src/Educacao/Escola/Relatorios/DiarioClasse/Model/AlunoDiarioClasse.php	175	docblock	* @return Carbon
+src/Educacao/Escola/Relatorios/DiarioClasse/Model/AlunoDiarioClasse.php	183	docblock	* @param Carbon $dataNascimento
+src/Educacao/Escola/Relatorios/DiarioClasse/Model/AlunoDiarioClasse.php	186	tipo em assinatura	public function setDataNascimento(Carbon $dataNascimento)
+src/Educacao/Escola/Relatorios/DiarioClasse/Model/AlunoDiarioClasse.php	198	new Carbon	$interval = $this->dataNascimento->diff(new \Carbon\Carbon());
+src/Educacao/Escola/Relatorios/DiarioClasse/Service/TurmaRegularAtividadeComplementarSevice.php	102	new Carbon	->setDataNascimento(new Carbon($aluno->getDataNascimento()))
+src/Educacao/Escola/Relatorios/DiarioClasse/Service/TurmaEscolarizacaoService.php	217	Carbon::createFromFormat	$calendarioInicio = \Carbon\Carbon::createFromFormat(
+src/Educacao/Escola/Relatorios/DiarioClasse/Service/TurmaEscolarizacaoService.php	221	Carbon::createFromFormat	$calendarioFim = \Carbon\Carbon::createFromFormat(
+src/Educacao/Escola/Relatorios/DiarioClasse/Service/TurmaEscolarizacaoService.php	306	new Carbon	->setDataNascimento(new Carbon($aluno->getDataNascimento()))
+src/Educacao/Escola/Relatorios/DiarioClasse/Service/TurmaEspecialService.php	122	new Carbon	$dataNascimento = new Carbon($alunoVinculado["ed47_d_nasc"]);

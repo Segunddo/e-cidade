@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         setlocale(LC_TIME, config('app.locale'));
 
-        if (PHP_VERSION_ID < 74000) {
+        if (PHP_VERSION_ID < 90000) {
             setlocale(
                 LC_TIME,
                 [

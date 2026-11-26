@@ -58,7 +58,7 @@ class ApropriacaoDecimoFeriasService
             return [
                 "exercicio" => $paramentro->c01_data->format('Y'),
                 "mes" => $paramentro->c01_data->format('m'),
-                "nomeMes" => ucfirst($paramentro->c01_data->formatLocalized('%B')),
+                "nomeMes" => ucfirst(mb_convert_encoding($paramentro->c01_data->copy()->locale('pt_BR')->translatedFormat('F'), 'ISO-8859-1', 'UTF-8')),
             ];
         }
 
@@ -70,7 +70,7 @@ class ApropriacaoDecimoFeriasService
             $ano = $apropriacao->c145_exercicio + 1;
         }
 
-        $nomeMes = Carbon::create($ano, $mes, 1)->formatLocalized('%B');
+        $nomeMes = mb_convert_encoding(Carbon::create($ano, $mes, 1)->locale('pt_BR')->translatedFormat('F'), 'ISO-8859-1', 'UTF-8');
 
         return [
             "exercicio" => $ano,
@@ -95,7 +95,7 @@ class ApropriacaoDecimoFeriasService
         if (is_null($apropriacao)) {
             throw new Exception("Não existe nenhuma competência de Apropriação de 13ª ou férias processada.", 403);
         }
-        $nomeMes = Carbon::create($apropriacao->c145_exercicio, $apropriacao->c145_mes, 1)->formatLocalized('%B');
+        $nomeMes = mb_convert_encoding(Carbon::create($apropriacao->c145_exercicio, $apropriacao->c145_mes, 1)->locale('pt_BR')->translatedFormat('F'), 'ISO-8859-1', 'UTF-8');
         return [
             "exercicio" => $apropriacao->c145_exercicio,
             "mes" => $apropriacao->c145_mes,
@@ -379,7 +379,7 @@ SQL
         // Se passou de 10 minutos, deleta o arquivo e recria, pois provavelmente o sistema deu algum erro ou foi
         // fechada a rotina antes de concluir o processo.
         // Nesse caso, removemos o arquivo, pois é considerado que o processo ja concluiu.
-        if ($data->diffInMinutes((new Carbon())) > 10) {
+        if ($data->diffInMinutes((new Carbon()), true) > 10) {
             $this->removeLock();
             Storage::put($fileLock, 'Processando apropriação/estorno de décimo ou férias');
             return true;

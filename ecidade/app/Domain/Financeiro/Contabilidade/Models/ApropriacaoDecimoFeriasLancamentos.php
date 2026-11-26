@@ -21,9 +21,9 @@ class ApropriacaoDecimoFeriasLancamentos extends Model
 {
     protected $table = 'contabilidade.apropriacaodecimoferias_lancamentos';
 
-    protected $dates = [
-        'pl2_created_at',
-        'pl2_updated_at',
+    protected $casts = [
+        'pl2_created_at' => 'datetime',
+        'pl2_updated_at' => 'datetime',
     ];
 
     public function apropriacao()

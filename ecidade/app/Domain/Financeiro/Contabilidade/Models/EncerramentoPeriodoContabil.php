@@ -15,5 +15,5 @@ class EncerramentoPeriodoContabil extends Model
     protected $table = 'contabilidade.condataconf';
     public $timestamps = false;
 
-    protected $dates = ['c99_data'];
+    protected $casts = ['c99_data' => 'datetime'];
 }

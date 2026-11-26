@@ -80,7 +80,7 @@ class CalendarioController extends Controller
                 $isProfessor = in_array('PROFESSOR', $permissoes);
 
                 if (!$hasFullPermission && $isProfessor) {
-                    $dataSistema = Carbon::createFromTimestamp($request->get('DB_datausu'));
+                    $dataSistema = Carbon::createFromTimestamp($request->get('DB_datausu'), date_default_timezone_get());
                     $calendarios = $profissionalRepository
                         ->getCalendariosTurmasRegente($profissionalEscola->first(), $dataSistema);
                     return new DBJsonResponse($calendarios);

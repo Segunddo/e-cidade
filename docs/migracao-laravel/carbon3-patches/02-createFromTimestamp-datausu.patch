@@ -1,0 +1,35 @@
+diff --git a/ecidade/app/Domain/Educacao/Escola/Controllers/CalendarioController.php b/ecidade/app/Domain/Educacao/Escola/Controllers/CalendarioController.php
+index 5c18b81f8..7e06430fe 100644
+--- a/ecidade/app/Domain/Educacao/Escola/Controllers/CalendarioController.php
++++ b/ecidade/app/Domain/Educacao/Escola/Controllers/CalendarioController.php
+@@ -80,7 +80,7 @@ public function buscarCalendariosAtivosEscola(Request $request, $escola)
+                 $isProfessor = in_array('PROFESSOR', $permissoes);
+ 
+                 if (!$hasFullPermission && $isProfessor) {
+-                    $dataSistema = Carbon::createFromTimestamp($request->get('DB_datausu'));
++                    $dataSistema = Carbon::createFromTimestamp($request->get('DB_datausu'), date_default_timezone_get());
+                     $calendarios = $profissionalRepository
+                         ->getCalendariosTurmasRegente($profissionalEscola->first(), $dataSistema);
+                     return new DBJsonResponse($calendarios);
+diff --git a/ecidade/app/Domain/Educacao/Escola/Controllers/RegistroAulaController.php b/ecidade/app/Domain/Educacao/Escola/Controllers/RegistroAulaController.php
+index c0378c9bf..af7ee09ee 100644
+--- a/ecidade/app/Domain/Educacao/Escola/Controllers/RegistroAulaController.php
++++ b/ecidade/app/Domain/Educacao/Escola/Controllers/RegistroAulaController.php
+@@ -64,7 +64,7 @@ public function __construct(RegistroAulaService $service)
+      */
+     public function getDadosRegente(Request $request, $escola, $user)
+     {
+-        $dataSistema = Carbon::createFromTimestamp($request->get('DB_datausu'));
++        $dataSistema = Carbon::createFromTimestamp($request->get('DB_datausu'), date_default_timezone_get());
+         $periodos = !is_null($request->get('periodos'));
+         return new DBJsonResponse($this->service->getDadosRegente($user, $escola, $dataSistema, $periodos));
+     }
+@@ -74,7 +74,7 @@ public function getConteudosRegenteEscola(Request $request)
+         $escola = $request->get('DB_coddepto');
+         $linhas = $request->query('items') ? $request->query('items', 5) : null;
+         $filtros = $request->query();
+-        $filtros['dataSistema'] = Carbon::createFromTimestamp($request->get('DB_datausu'));
++        $filtros['dataSistema'] = Carbon::createFromTimestamp($request->get('DB_datausu'), date_default_timezone_get());
+ 
+         return new DBJsonResponse($this->service->getConteudosRegenteEscola($usuario, $escola, $linhas, $filtros));
+     }

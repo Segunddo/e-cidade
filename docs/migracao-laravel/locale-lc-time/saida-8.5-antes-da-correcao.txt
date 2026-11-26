@@ -1,0 +1,16 @@
+antes do boot LC_TIME='C'
+config(app.locale)=pt-br
+depois do boot LC_TIME='C'
+formatLocalized('%B') = March [4d61726368]
+strftime('%B')        = March [4d61726368]
+formatLocalized('%d de %B de %Y') = 01 de March de 2025 [3031206465204d617263682064652032303235]
+strftime('%d de %B de %Y')        = 01 de March de 2025 [3031206465204d617263682064652032303235]
+formatLocalized('%A') = Saturday [5361747572646179]
+strftime('%A')        = Saturday [5361747572646179]
+formatLocalized('%a %b') = Sat Mar [536174204d6172]
+strftime('%a %b')        = Sat Mar [536174204d6172]
+formatLocalized('%A, %d de %B') = Saturday, 01 de March [53617475726461792c203031206465204d61726368]
+strftime('%A, %d de %B')        = Saturday, 01 de March [53617475726461792c203031206465204d61726368]
+ucfirst(formatLocalized('%B')) (ApropriacaoDecimoFeriasService.php:61) = March [4d61726368]
+formatLocalized('%d de %B de %Y') (ImprimirRelatorioTemplateService.php:87) = 01 de March de 2025 [3031206465204d617263682064652032303235]
+date('F l') (nao depende do locale) = March Saturday

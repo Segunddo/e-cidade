@@ -1,0 +1,6 @@
+1544c1544
+< CONFIG chaves=307 grupos=17
+---
+> CONFIG chaves=308 grupos=17
+1765a1766
+> C logging.channels.deprecations : NULL

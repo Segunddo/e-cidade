@@ -1,0 +1,12 @@
+105c105
+<     corpo={"error":true,"message":"Undefined offset: 1"}
+---
+>     corpo={"error":true,"message":"Undefined array key 1"}
+158c158
+<     EXC ErrorException code=0 status=- msg=session_set_cookie_params(): Cannot change session cookie parameters when session is active
+---
+>     EXC ErrorException code=0 status=- msg=session_set_cookie_params(): Session cookie parameters cannot be changed when a session is active (started from /trecho/middlewares_trecho.php on line 147)
+175c175
+< LOG local.WARNING: [Api SIM] Erro: Undefined offset: 1 {"data":{"stdClass":{"remote_ip":"10.0.0.1","basic_token":true,"data_token":null}}} 
+---
+> LOG local.WARNING: [Api SIM] Erro: Undefined array key 1 {"data":{"stdClass":{"remote_ip":"10.0.0.1","basic_token":true,"data_token":null}}} 

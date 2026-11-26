@@ -1,0 +1,308 @@
+{
+    "name": "dbseller/e-cidade",
+    "description": "e-cidade GRP",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@github.com:DBSeller/Session.git"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "dompdf/dompdf",
+                "version": "v0.8.6",
+                "dist": {
+                    "type": "zip",
+                    "url": "https://api.github.com/repos/dompdf/dompdf/zipball/db91d81866c69a42dad1d2926f61515a1e3f42c5",
+                    "reference": "db91d81866c69a42dad1d2926f61515a1e3f42c5"
+                },
+                "require": {
+                    "php": "^7.1 || ^8.0",
+                    "ext-dom": "*",
+                    "ext-mbstring": "*",
+                    "phenx/php-font-lib": "^0.5.2",
+                    "phenx/php-svg-lib": "^0.3.3"
+                },
+                "autoload": {
+                    "psr-4": {
+                        "Dompdf\\": "src/"
+                    },
+                    "classmap": [
+                        "lib/"
+                    ]
+                },
+                "license": [
+                    "LGPL-2.1"
+                ]
+            }
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "ext-bcmath": "*",
+        "ext-calendar": "*",
+        "ext-curl": "*",
+        "ext-dom": "*",
+        "ext-fileinfo": "*",
+        "ext-json": "*",
+        "ext-openssl": "*",
+        "ext-pgsql": "*",
+        "ext-simplexml": "*",
+        "ext-soap": "*",
+        "ext-xmlwriter": "*",
+        "ext-zip": "*",
+        "aferrandini/phpqrcode": "^1.0",
+        "barryvdh/laravel-ide-helper": "^3.0",
+        "cweagans/composer-patches": "^1.7",
+        "dbseller/legacy": "^1.0",
+        "dbseller/sdk-api-pix-bb": "^2.0",
+        "dbseller/session": "dev-master",
+        "dompdf/dompdf": "^0.8.3",
+        "guzzlehttp/guzzle": "7.16.3 as 7.5.0",
+        "intervention/image": "^2.7",
+        "jeremeamia/superclosure": "^2.0",
+        "laravel/framework": "^13.0",
+        "laravel/passport": "^13.0",
+        "laravel/tinker": "^3.0",
+        "lcobucci/clock": "^3.0",
+        "lcobucci/jwt": "^5.6",
+        "league/fractal": "0.11.0",
+        "michelf/php-markdown": "^1.6",
+        "mormat/php-formula-interpreter": "1.0.0",
+        "mpdf/mpdf": "^8.0",
+        "nfephp-org/sped-common": "~5.1.1",
+        "phpmailer/phpmailer": "^6.5",
+        "phpoffice/phpspreadsheet": "^1.08",
+        "phpoffice/phpword": "v0.18.*",
+        "proner/phppimaco": "1.4.5",
+        "pusher/pusher-php-server": "7.2.2",
+        "symfony/console": "^7.4 || ^8.0",
+        "symfony/filesystem": "^7.4 || ^8.0",
+        "symfony/polyfill-php56": "^1.1",
+        "symfony/polyfill-php70": "^1.1",
+        "symfony/process": "^7.4 || ^8.0",
+        "symfony/yaml": "^7.4 || ^8.0",
+        "vlucas/valitron": "^1.4",
+        "zendframework/zend-eventmanager": "2.2.10",
+        "ncjoes/office-converter": "^1.0"
+    },
+    "require-dev": {
+        "barryvdh/laravel-ide-helper": "^3.0",
+        "fakerphp/faker": "^1.10",
+        "filp/whoops": "^2.5",
+        "mockery/mockery": "1.3.0",
+        "perftools/php-profiler": "^1.1",
+        "phpstan/phpstan": "^1.2",
+        "phpunit/phpunit": "^8.5",
+        "squizlabs/php_codesniffer": "^3.5"
+    },
+    "secure-http": false,
+    "autoload": {
+        "files": [
+            "app/Helpers/PostgresPls.php",
+            "app/Helpers/Functions.php",
+            "app/Helpers/Drive.php",
+            "app/Helpers/Orcamento/FiltrosOrcamento.php",
+            "app/Helpers/Orcamento/FuncoesOrcamento.php",
+            "app/Helpers/Planejamento/FiltrosDespesaPlanejamento.php",
+            "app/Helpers/Configuracao/VerificaEstado.php",
+            "app/Helpers/Configuracao/VerificaMunicipio.php",
+            "app/Helpers/Contabilidade/FuncoesContabilidade.php",
+            "app/Helpers/Contabilidade/FuncoesRelatorios.php",
+            "app/Helpers/Educacao/VerificaValidadeNumeroMatriculaCertidao.php"
+        ],
+        "classmap": [
+            "database"
+        ],
+        "psr-4": {
+            "App\\": ["app-85/", "app/"],
+            "Fpdf\\": "fpdf/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "patches": {
+            "dompdf/dompdf": {
+                "PHP 8: round(auto) no z-index e altura auto comparada com numero (2 linhas, resultado igual ao 7.4)": "patches/dompdf-0.8.6-php85.patch"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "merge-ecidade-3": [
+            "$(which php7.4) bin/console modification:refresh-metadata",
+            "$(which php7.4) bin/console modification:refresh-cache",
+            "echo 'DONE!'"
+        ],
+        "install-dbug": [
+            "$(which php7.4) bin/console extension:pack DBug",
+            "$(which php7.4) bin/console extension:unpack dbug-package.tar.gz --force",
+            "$(which php7.4) bin/console extension:install DBug"
+        ],
+        "configure-desktop": [
+            "App\\Domain\\Core\\Config\\Desktop::config"
+        ],
+        "sniff-check": [
+            "sniff_check() { $(which php7.4) -d memory_limit=-1 vendor/bin/phpcs --standard=ci/phpcs/ruleset.xml --colors \"$@\"; }; sniff_check"
+        ],
+        "psrcheck": [
+            "ci/scripts/sniff.sh"
+        ],
+        "post-root-package-install": [
+            "$(which php7.4) -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "$(which php7.4) artisan key:generate"
+        ],
+        "post-install-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postInstall"
+        ],
+        "post-update-cmd": [
+            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
+            "$(which php7.4) artisan ide-helper:generate",
+            "$(which php7.4) artisan ide-helper:meta"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "$(which php7.4) artisan package:discover"
+        ]
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "cweagans/composer-patches": true
+        },
+        "audit": {
+            "ignore": [
+                "PKSA-12sz-bcny-pk4m",
+                "PKSA-1q6p-sqkj-8mmj",
+                "PKSA-21fb-n1x5-5nf7",
+                "PKSA-24ph-xkrh-y79j",
+                "PKSA-285y-y5bt-kvd9",
+                "PKSA-2cx9-ynrq-qdk3",
+                "PKSA-2n2k-66v2-bwg3",
+                "PKSA-32g2-byr9-drtw",
+                "PKSA-365x-2zjk-pt47",
+                "PKSA-37cw-b473-k9np",
+                "PKSA-3dsp-r6t7-8xmz",
+                "PKSA-3gxv-7xhq-mgmz",
+                "PKSA-3r5d-mb8f-1qw9",
+                "PKSA-432p-hv1d-chf7",
+                "PKSA-4ckb-wpj6-c29d",
+                "PKSA-4jrs-y99s-q8j6",
+                "PKSA-4s4z-t146-6123",
+                "PKSA-5mzr-szzf-z6cn",
+                "PKSA-5vz3-q51h-7mg4",
+                "PKSA-64jn-3d9t-gncx",
+                "PKSA-6r8f-nxsb-67bq",
+                "PKSA-7f9v-sb8k-krfb",
+                "PKSA-7jd6-nb49-bz4v",
+                "PKSA-7qs6-zvnz-h66r",
+                "PKSA-7ztm-rpt3-qqzk",
+                "PKSA-872h-8556-2chm",
+                "PKSA-876w-myjj-h9h4",
+                "PKSA-8b16-mcgz-h4cz",
+                "PKSA-8cfg-tzhf-fr83",
+                "PKSA-8qx3-n5y5-vvnd",
+                "PKSA-8x19-j2j3-bn67",
+                "PKSA-93qv-9n9h-6k6p",
+                "PKSA-96jv-mtjg-g2v8",
+                "PKSA-99tj-gg5v-4g74",
+                "PKSA-9q1p-3s19-bp1q",
+                "PKSA-b14r-zh1d-vdrc",
+                "PKSA-b2gg-vk1g-6d5q",
+                "PKSA-b35n-565h-rs4q",
+                "PKSA-b41t-wbzk-9q51",
+                "PKSA-bbs6-q5q9-f3t4",
+                "PKSA-bcdd-5xc7-gwfb",
+                "PKSA-bcnb-9tc9-bjb8",
+                "PKSA-bf7t-jnpz-492k",
+                "PKSA-bjyb-w14t-61js",
+                "PKSA-cnw1-2ytm-cgr8",
+                "PKSA-cqd6-fg4n-nxpf",
+                "PKSA-csyb-yc4p-mnbs",
+                "PKSA-cv56-2228-pzr6",
+                "PKSA-cwpj-dtf9-6fg1",
+                "PKSA-d5tc-s1qs-h781",
+                "PKSA-dbrb-pvhs-h3st",
+                "PKSA-dqzt-yst9-1w9y",
+                "PKSA-dvbq-8ft2-ngrw",
+                "PKSA-dwsq-ppd2-mb1x",
+                "PKSA-dxd5-wy68-pq29",
+                "PKSA-fndg-qryc-dyc9",
+                "PKSA-ft77-7h5f-p3r6",
+                "PKSA-fy2t-3c5f-827y",
+                "PKSA-g499-cm4q-v35y",
+                "PKSA-gcrk-3vtt-1r14",
+                "PKSA-gh7h-hhy4-byg7",
+                "PKSA-gm5x-j3mz-71n9",
+                "PKSA-gst3-cdk3-bpqt",
+                "PKSA-gz3f-3cz3-3wsw",
+                "PKSA-h7cz-q7zq-mdkt",
+                "PKSA-hbk6-2vfz-8f8n",
+                "PKSA-hp6n-n4kz-21wk",
+                "PKSA-hznc-gbby-6w16",
+                "PKSA-jj5t-2zs1-dcfm",
+                "PKSA-jtdk-dcr5-f11n",
+                "PKSA-jw5c-q9nd-tzj9",
+                "PKSA-k22t-f949-t9g6",
+                "PKSA-kj9c-tr41-t8mj",
+                "PKSA-km2b-zc3b-mjm3",
+                "PKSA-m2dq-1fhr-29b1",
+                "PKSA-m4t9-vsgq-8khn",
+                "PKSA-m5cs-t1y6-qpcs",
+                "PKSA-m9cr-9614-rsf7",
+                "PKSA-mc58-w91n-f5gv",
+                "PKSA-mckv-s5hg-868k",
+                "PKSA-mwt3-h9tv-kx78",
+                "PKSA-njrm-6dtg-m2pc",
+                "PKSA-nktx-f1n1-b4yd",
+                "PKSA-nm34-xhtz-ww9p",
+                "PKSA-nv44-1b4d-6gjg",
+                "PKSA-p1pj-q951-6f1x",
+                "PKSA-p3w6-ybvq-zfbx",
+                "PKSA-pc52-dbxt-c1w6",
+                "PKSA-pwsk-hy21-4gby",
+                "PKSA-qstp-ffwg-8hp6",
+                "PKSA-qsyb-3psh-f1t3",
+                "PKSA-qxvb-2bpp-dnk6",
+                "PKSA-r15m-kszr-8n8q",
+                "PKSA-r22k-87hv-mfk4",
+                "PKSA-rdkp-vv9z-mjkg",
+                "PKSA-rkkf-636k-qjb3",
+                "PKSA-rqc2-tcc6-nc79",
+                "PKSA-s99r-9yxm-hjvt",
+                "PKSA-scnn-p8mm-jbft",
+                "PKSA-smrh-yx37-92ws",
+                "PKSA-t21r-vtr5-3mdz",
+                "PKSA-v5yj-8nmz-sk2q",
+                "PKSA-vznr-tgp9-fd7d",
+                "PKSA-w7xr-vk7n-rstm",
+                "PKSA-w9tt-7782-78jx",
+                "PKSA-wtxr-p26d-nn42",
+                "PKSA-wws7-mr54-jsny",
+                "PKSA-x13r-n4wc-4gcr",
+                "PKSA-x678-4z45-v3d5",
+                "PKSA-xk3k-rd1m-pxmg",
+                "PKSA-xmwy-rmx5-m7h4",
+                "PKSA-xz3r-9gp4-4m1z",
+                "PKSA-y2cr-5h3j-g3ys",
+                "PKSA-y8c5-1b7f-r1gj",
+                "PKSA-ybqb-vyrq-8pdt",
+                "PKSA-yc7t-91v9-99xs",
+                "PKSA-yxbx-3c9s-cjt9",
+                "PKSA-z3gr-8qht-p93v",
+                "PKSA-zh4j-by9m-7mz8",
+                "PKSA-zyf5-hrxv-hrd7"
+            ]
+        }
+    }
+}

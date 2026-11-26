@@ -51,6 +51,6 @@ class ConcessaoCalculo
             " . implode(" and ", $where) . "
             order by z01_nome,rh504_data";
 
-        return DB::select(DB::raw($sql));
+        return DB::select($sql);
     }
 }

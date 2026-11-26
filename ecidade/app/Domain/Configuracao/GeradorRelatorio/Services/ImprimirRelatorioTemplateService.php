@@ -84,7 +84,7 @@ class ImprimirRelatorioTemplateService
     {
         $instituicao = DBConfig::find(session('DB_instit'));
         $date = Carbon::now();
-        $dataAtualExtenso = $date->formatLocalized('%d de %B de %Y');
+        $dataAtualExtenso = mb_convert_encoding($date->locale('pt_BR')->translatedFormat('d \d\e F \d\e Y'), 'ISO-8859-1', 'UTF-8');
 
         return [
             'db_codigoinstit' => $instituicao->codigo,

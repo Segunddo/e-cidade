@@ -176,4 +176,16 @@ return [
 
     'http_only' => true,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Same-Site Cookies
+    |--------------------------------------------------------------------------
+    |
+    | Sem esta chave o Laravel 8 nao envia o atributo SameSite (null); o Laravel 11+
+    | passa a usar "lax" quando ela falta. null mantem o cookie como no 7.4.
+    |
+    */
+
+    'same_site' => null,
+
 ];

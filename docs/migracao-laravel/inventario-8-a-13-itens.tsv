@@ -1,0 +1,239 @@
+versao	item do guia	resultado	ocorrencias	arquivos	exemplos	tipo	padrao ou motivo	tarefa
+9.x	Upgrading To 9.0 From 8.x	NAO APLICA				manual	titulo de secao
+9.x	Estimated Upgrade Time: 30 Minutes	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+9.x	Updating Dependencies	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+9.x	PHP 8.0.2 Required	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+9.x	Composer Dependencies	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+9.x	PHP Return Types	NAO USA				manual	conferido a mao: so ha private function count em PodeTotalizar.php:9, usado por RelatorioPDF (extends Pdf) e RelatorioCSV (extends Dumper), nao por classe do Laravel
+9.x	Application	NAO APLICA				manual	titulo de grupo
+9.x	The Application Contract	NAO USA	0	0		uso	Contracts\\Foundation\\Application	
+9.x	Exception Handler ignore Method	NAO USA	0	0		uso	function\s+ignore\s*\(|->ignore\(	
+9.x	Exception Handler Contract Binding	USA	1	1	bootstrap/app.php:42	uso	Contracts\\Debug\\ExceptionHandler	PHP8-62
+9.x	Blade	NAO APLICA				manual	titulo de grupo
+9.x	Lazy Collections & The $loop Variable	NAO USA	0	0		uso	\$loop\b	
+9.x	Checked / Disabled / Selected Blade Directives	NAO USA	0	0		uso	@(checked|disabled|selected)\b	
+9.x	Collections	NAO APLICA				manual	titulo de grupo
+9.x	The Enumerable Contract	NAO USA	0	0		uso	Enumerable\b	
+9.x	The reduceWithKeys Method	NAO USA	0	0		uso	reduceWithKeys	
+9.x	The reduceMany Method	NAO USA	0	0		uso	reduceMany	
+9.x	Container	NAO APLICA				manual	titulo de grupo
+9.x	The Container Contract	NAO USA	0	0		uso	Contracts\\Container\\Container	
+9.x	The ContextualBindingBuilder Contract	NAO USA	0	0		uso	ContextualBindingBuilder	
+9.x	Database	NAO APLICA				manual	titulo de grupo
+9.x	Postgres "Schema" Configuration	NAO USA	0	0		config	'schema'\s*=>	
+9.x	Schema Builder registerCustomDoctrineType Method	NAO USA	0	0		uso	registerCustomDoctrineType	
+9.x	Eloquent	NAO APLICA				manual	titulo de grupo
+9.x	Custom Casts & null	NAO USA	0	0		uso	CastsAttributes|implements\s+[\w\\, ]*CastsInboundAttributes\b|use\s+[\w\\]*\\CastsInboundAttributes\s+as\s+\w+	
+9.x	Belongs To Many firstOrNew, firstOrCreate, and updateOrCreate Methods	USA	1	1	app/Domain/Educacao/Secretaria/Repositories/BaseDisciplinaRepository.php:29	sinal	->(firstOrNew|firstOrCreate|updateOrCreate)\(	PHP8-55
+9.x	The touch Method	NAO USA	0	0		sinal	->touch\(	
+9.x	Encryption	NAO APLICA				manual	titulo de grupo
+9.x	The Encrypter Contract	NAO USA	0	0		uso	Contracts\\Encryption\\Encrypter	
+9.x	Facades	NAO APLICA				manual	titulo de grupo
+9.x	The getFacadeAccessor Method	NAO USA	0	0		uso	getFacadeAccessor	
+9.x	Filesystem	NAO APLICA				manual	titulo de grupo
+9.x	The FILESYSTEM_DRIVER Environment Variable	USA	1	1	configuration/filesystems.php:16	uso	FILESYSTEM_DRIVER	PHP8-62
+9.x	The "Cloud" Disk	NAO USA	0	0		uso	Storage::cloud|disk\(.cloud	
+9.x	Flysystem 3.x	USA	7	3	app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php:371 app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php:372 app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php:377	uso	League\\Flysystem|Storage::	PHP8-77
+9.x	Driver Prerequisites	NAO USA	0	0		uso	flysystem|symfony/(mailer|mailgun|postmark|amazon)|mailgun|postmark|league/flysystem	
+9.x	Overwriting Existing Files	USA	2	1	app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php:372 app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php:384	uso	Storage::(put|putFile|copy|move)\s*\(	PHP8-77
+9.x	Write Exceptions	USA	2	1	app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php:372 app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php:384	uso	Storage::(put|putFile|append|prepend)\s*\(	PHP8-77
+9.x	Reading Missing Files	NAO USA	0	0		uso	Storage::(get|read|download)\s*\(	
+9.x	Deleting Missing Files	USA	1	1	app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php:399	uso	Storage::delete\s*\(	PHP8-77
+9.x	Cached Adapters	NAO USA	0	0		config	'cache'\s*=>|CachedAdapter	
+9.x	Custom Filesystems	NAO USA	0	0		uso	Storage::extend|Flysystem\\Filesystem	
+9.x	SFTP Private-Public Key Passphrase	NAO USA	0	0		config	sftp	
+9.x	Helpers	NAO APLICA				manual	titulo de grupo
+9.x	The data_get Helper & Iterable Objects	NAO USA	0	0		uso	(?<![\w>:$\\])data_get\s*\(	
+9.x	The str Helper	NAO USA	0	0		uso	(?<![\w>:$\\])str\s*\(	
+9.x	The when / unless Methods	USA	231	65	app/Domain/RecursosHumanos/Pessoal/Model/Jetom/ComissaoServidor.php:238 app/Domain/RecursosHumanos/Pessoal/Controller/Jetom/SessaoController.php:60 app/Domain/RecursosHumanos/Pessoal/Controller/Jetom/SessaoController.php:63	sinal	->(when|unless)\s*\(	PHP8-55
+9.x	HTTP Client	NAO APLICA				manual	titulo de grupo
+9.x	Default Timeout	NAO USA	0	0		uso	Http::	
+9.x	HTTP Fake & Middleware	NAO USA	0	0		uso	Http::fake	
+9.x	HTTP Fake & Dependency Injection	NAO USA	0	0		uso	Http::fake	
+9.x	Symfony Mailer	NAO APLICA				manual	titulo de grupo (ver itens)
+9.x	Driver Prerequisites	NAO USA	0	0		uso	flysystem|symfony/(mailer|mailgun|postmark|amazon)|mailgun|postmark|league/flysystem	
+9.x	Updated Return Types	NAO USA	0	0		uso	getSwiftMessage|Swift_	
+9.x	Renamed "Swift" Methods	NAO USA	0	0		uso	getSwiftMessage|withSwiftMessage|Swift_	
+9.x	Proxied Illuminate\Mail\Message Methods	NAO USA	0	0		uso	Illuminate\\Mail\\Message	
+9.x	Generated Messages IDs	NAO USA	0	0		uso	getMessageId|Message-ID|messageId	
+9.x	MessageSent Event Changes	NAO USA	0	0		uso	MessageSent	
+9.x	Forced Reconnections	NAO USA	0	0		uso	Mail::mailer|->mailer\(	
+9.x	SMTP Stream Options	NAO USA	0	0		config	'stream'	
+9.x	SMTP auth_mode	NAO USA	0	0		config	auth_mode	
+9.x	Failed Recipients	NAO USA	0	0		uso	Mail::failures|->failures\(	
+9.x	Packages	NAO APLICA				manual	titulo de grupo
+9.x	The lang Directory	NAO USA	0	0		uso	resources/lang|lang_path	
+9.x	Queue	NAO APLICA				manual	titulo de grupo
+9.x	The opis/closure Library	USA	1	1	composer.json:33	uso	opis/closure|SuperClosure|superclosure	PHP8-62
+9.x	The Failed Job Provider flush Method	NAO USA	0	0		uso	FailedJobProvider|failed\.flush	
+9.x	Session	NAO APLICA				manual	titulo de grupo
+9.x	The getSession Method	NAO USA	0	0		uso	->getSession\s*\(	
+9.x	Testing	NAO APLICA				manual	titulo de grupo
+9.x	The assertDeleted Method	NAO USA	0	0		uso	assertDeleted	
+9.x	Trusted Proxies	NAO USA	0	0		uso	Fideloper|TrustProxies	
+9.x	Validation	NAO APLICA				manual	titulo de grupo
+9.x	Form Request validated Method	NAO USA	0	0		uso	->validated\s*\(	
+9.x	The password Rule	NAO USA	0	0		sinal	password:|'password'\s*=>\s*'[^']*password	
+9.x	Unvalidated Array Keys	USA	82	37	app/Domain/RecursosHumanos/ESocial/Controller/ExameToxicologicoController.php:21 app/Domain/RecursosHumanos/Pessoal/Controller/ContraChequesController.php:119 app/Domain/Integracoes/EFDReinf/Controllers/ConfiguracaoController.php:37	sinal	->validated\s*\(|->validate\s*\(	PHP8-94
+9.x	Miscellaneous	MANUAL				manual	o guia so remete ao diff do esqueleto laravel/laravel entre versoes; nao ha lista de quebras para varrer
+10.x	Upgrading to 10.0 from 9.x	NAO APLICA				manual	titulo de secao
+10.x	Estimated Upgrade Time: 10 Minutes	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+10.x	Updating Dependencies	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+10.x	PHP 8.1.0 Required	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+10.x	Composer 2.2.0 Required	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+10.x	Composer Dependencies	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+10.x	Minimum Stability	USA	1	1	composer.json:96	config	minimum-stability	PHP8-62
+10.x	Application	NAO APLICA				manual	titulo de grupo
+10.x	Public Path Binding	NAO USA	0	0		uso	path\.public	
+10.x	Authorization	NAO APLICA				manual	titulo de grupo
+10.x	The registerPolicies Method	USA	1	1	app/Providers/AuthServiceProvider.php:29	uso	registerPolicies	PHP8-39
+10.x	Cache	NAO APLICA				manual	titulo de grupo
+10.x	Redis Cache Tags	NAO USA	0	0		uso	Cache::tags|->tags\(	
+10.x	Database	NAO APLICA				manual	titulo de grupo
+10.x	Database Expressions	USA	302	75	app/Domain/RecursosHumanos/Pessoal/Repository/TipoGuiaPrevidenciaRepository.php:217 app/Domain/RecursosHumanos/Pessoal/Repository/TipoGuiaPrevidenciaRepository.php:224 app/Domain/RecursosHumanos/Pessoal/Repository/TipoGuiaPrevidenciaRepository.php:225	uso	DB::raw|Expression	PHP8-77
+10.x	Query Exception Constructor	NAO USA	0	0		uso	new\s+\\?([\w\\]*\\)?QueryException\b	
+10.x	ULID Columns	USA	1	1	database/migrations/2022_10_24_103009_create_notifications_table.php:17	uso	->ulid\(|->uuid\(	PHP8-55
+10.x	Eloquent	NAO APLICA				manual	titulo de grupo
+10.x	Model "Dates" Property	NAO USA	0	0		uso	\$dates\s*=	
+10.x	Localization	NAO APLICA				manual	titulo de grupo
+10.x	The Language Directory	NAO USA	0	0		uso	resources/lang|lang_path	
+10.x	Logging	NAO APLICA				manual	titulo de grupo
+10.x	Monolog 3	USA	1	1	configuration/logging.php:3	uso	Monolog\\|configureMonologUsing	PHP8-62
+10.x	Queues	NAO APLICA				manual	titulo de grupo
+10.x	The Bus::dispatchNow Method	NAO USA	0	0		uso	dispatchNow|dispatch_now	
+10.x	The dispatch() Helper Return Value	USA	12	12	app/Domain/RecursosHumanos/Pessoal/Services/ContraChequeService.php:50 app/Domain/Financeiro/Contabilidade/Services/Relatorios/NovaLRF/EmiteControleVersaoService.php:22 app/Domain/Patrimonial/Protocolo/Services/NoticarAssinanteDocumentoService.php:43	uso	(?<![\w>:$\\])dispatch\s*\(	PHP8-51
+10.x	Routing	NAO APLICA				manual	titulo de grupo
+10.x	Middleware Aliases	USA	1	1	app/Http/Kernel.php:74	uso	\$routeMiddleware	PHP8-38
+10.x	Rate Limiter Return Values	NAO USA	0	0		uso	RateLimiter::(attempt|hit)	
+10.x	The Redirect::home Method	NAO USA	0	0		uso	Redirect::home|redirect\(\)->home	
+10.x	Testing	NAO APLICA				manual	titulo de grupo
+10.x	Service Mocking	USA	22	3	tests/TestCase.php:7 tests/TestCase.php:13 tests/Unit/RecursosHumanos/Pessoal/Service/ControleRubricasMatriculasServiceTest.php:13	uso	shouldReceive|->mock\(|Mockery	PHP8-71
+10.x	Validation	NAO APLICA				manual	titulo de grupo
+10.x	Closure Validation Rule Messages	USA	4	1	app/Domain/Saude/Laboratorio/Requests/TriagemLaboratorialRequest.php:59 app/Domain/Saude/Laboratorio/Requests/TriagemLaboratorialRequest.php:65 app/Domain/Saude/Laboratorio/Requests/TriagemLaboratorialRequest.php:80	uso	function\s*\(\$attribute,\s*\$value,\s*\$fail	PHP8-94
+10.x	Validation Messages and Closure Rules	USA	4	1	app/Domain/Saude/Laboratorio/Requests/TriagemLaboratorialRequest.php:59 app/Domain/Saude/Laboratorio/Requests/TriagemLaboratorialRequest.php:65 app/Domain/Saude/Laboratorio/Requests/TriagemLaboratorialRequest.php:80	uso	function\s*\(\$attribute,\s*\$value,\s*\$fail	PHP8-94
+10.x	Form Request After Method	NAO USA	0	0		uso	function\s+after\s*\(	
+10.x	Miscellaneous	MANUAL				manual	o guia so remete ao diff do esqueleto laravel/laravel entre versoes; nao ha lista de quebras para varrer
+11.x	Upgrading To 11.0 From 10.x	NAO APLICA				manual	titulo de secao
+11.x	Estimated Upgrade Time: 15 Minutes	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+11.x	Updating Dependencies	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+11.x	PHP 8.2.0 Required	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+11.x	curl 7.34.0 Required	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+11.x	Composer Dependencies	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+11.x	Application Structure	USA	4	2	app/Http/Kernel.php:19 app/Http/Kernel.php:45 app/Http/Kernel.php:74	uso	class\s+Kernel\b|\$middlewareGroups|\$routeMiddleware	PHP8-62
+11.x	Authentication	NAO APLICA				manual	titulo de grupo
+11.x	Password Rehashing	USA	1	1	app/Http/Controllers/Auth/RegisterController.php:68	sinal	Hash::|bcrypt\(|password_hash	PHP8-39
+11.x	The UserProvider Contract	NAO USA	0	0		uso	Contracts\\Auth\\UserProvider|implements\s+[\w\\, ]*UserProvider\b	
+11.x	The Authenticatable Contract	NAO USA	0	0		uso	implements\s+[\w\\, ]*Authenticatable\b|AuthenticatableContract	
+11.x	The AuthenticationException Class	USA	4	1	app/Exceptions/Handler.php:7 app/Exceptions/Handler.php:19 app/Exceptions/Handler.php:111	uso	AuthenticationException	PHP8-62
+11.x	Email Verification Notification on Registration	NAO USA	0	0		uso	event\(\s*new\s+Registered|Registered\b	
+11.x	Cache	NAO APLICA				manual	titulo de grupo
+11.x	Cache Key Prefixes	USA	1	1	configuration/cache.php:97	config	'prefix'\s*=>	PHP8-62
+11.x	Collections	NAO APLICA				manual	titulo de grupo
+11.x	The Enumerable Contract	NAO USA	0	0		uso	Enumerable\b	
+11.x	Database	NAO APLICA				manual	titulo de grupo
+11.x	SQLite 3.26.0+	NAO APLICA				manual	o e-Cidade so usa PostgreSQL
+11.x	Eloquent Model casts Method	USA	58	58	app/Domain/Financeiro/Contabilidade/Models/ParametroIntegracaoPatrimonial.php:13 app/Domain/Financeiro/Contabilidade/Models/EncerramentoPeriodoContabil.php:18 app/Domain/Financeiro/Contabilidade/Models/Lancamento.php:30	uso	\$casts\s*=	PHP8-55
+11.x	Modifying Columns	USA	3	2	database/migrations/2021_10_25_083540_alter_secret_to_oauth_clients.php:17 database/migrations/2021_10_25_083540_alter_secret_to_oauth_clients.php:29 database/migrations/2024_08_13_093320_M28685_ajuste_schema_tabela_mensageriaacordo.php:243	uso	->change\(\)	PHP8-55
+11.x	Floating-Point Types	USA	14	5	database/migrations/2024_08_08_094811_m28016_rotina_elaboracao_pca.php:93 database/migrations/2024_08_08_094811_m28016_rotina_elaboracao_pca.php:94 database/migrations/2024_08_08_094811_m28016_rotina_elaboracao_pca.php:95	uso	->(double|float|unsignedDouble|unsignedFloat|unsignedDecimal)\(	PHP8-55
+11.x	Dedicated MariaDB Driver	NAO APLICA				manual	o e-Cidade so usa PostgreSQL
+11.x	Spatial Types	NAO USA	0	0		uso	->(geometry|point|lineString|polygon|geography)\(	
+11.x	Doctrine DBAL Removal	USA	1	1	composer.json:29	uso	Doctrine\\DBAL|getDoctrineSchemaManager|getDoctrineConnection|getDoctrineColumn|doctrine/dbal	PHP8-62
+11.x	Deprecated Schema Methods	NAO USA	0	0		uso	Schema::(getAllTables|getAllViews|getAllTypes)|getColumnType|Schema::getColumnListing	
+11.x	Schema Builder getColumnType() Method	NAO USA	0	0		uso	getColumnType\s*\(	
+11.x	Database Connection Interface	NAO USA	0	0		uso	ConnectionInterface	
+11.x	Dates	NAO APLICA				manual	titulo de grupo
+11.x	Carbon 3	USA	256	100	app/Domain/RecursosHumanos/Pessoal/Model/RhDepend.php:5 app/Domain/RecursosHumanos/Pessoal/Model/RhDepend.php:27 app/Domain/RecursosHumanos/Pessoal/Services/Relatorios/TipoGuiaPrevidenciaService.php:7	uso	Carbon\\Carbon|Carbon::|\bnew\s+\\?Carbon\b|diffIn\w+\(	PHP8-55
+11.x	Mail	NAO APLICA				manual	titulo de grupo
+11.x	The Mailer Contract	NAO USA	0	0		uso	Contracts\\Mail\\Mailer	
+11.x	Packages	NAO APLICA				manual	titulo de grupo
+11.x	Publishing Service Providers to the Application	NAO APLICA				manual	o projeto nao publica service providers de pacotes (config/app.php proprio, sem vendor:publish)
+11.x	Queues	NAO APLICA				manual	titulo de grupo
+11.x	The BatchRepository Interface	NAO USA	0	0		uso	BatchRepository	
+11.x	Synchronous Jobs in Database Transactions	USA	3	1	configuration/queue.php:18 configuration/queue.php:33 configuration/queue.php:34	config	'sync'|QUEUE_CONNECTION=sync|QUEUE_DRIVER=sync	PHP8-51
+11.x	Rate Limiting	NAO APLICA				manual	titulo de grupo
+11.x	Per-Second Rate Limiting	NAO USA	0	0		uso	RateLimiter::for|Limit::per	
+11.x	Cashier Stripe	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+11.x	Updating Cashier Stripe	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+11.x	Spark (Stripe)	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+11.x	Updating Spark Stripe	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+11.x	Passport	NAO APLICA				manual	titulo de grupo (ver Updating Passport)
+11.x	Updating Passport	USA	13	9	app/User.php:8 app/Domain/Configuracao/Usuario/Models/Usuario.php:38 app/Http/Kernel.php:16	uso	Laravel\\Passport|Passport::	PHP8-39
+11.x	Sanctum	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+11.x	Updating Sanctum	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+11.x	Telescope	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+11.x	Updating Telescope	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+11.x	Spatie Once Package	NAO USA	0	0		uso	spatie/once	
+11.x	Miscellaneous	MANUAL				manual	o guia so remete ao diff do esqueleto laravel/laravel entre versoes; nao ha lista de quebras para varrer
+12.x	Upgrading To 12.0 From 11.x	NAO APLICA				manual	titulo de secao
+12.x	Estimated Upgrade Time: 5 Minutes	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+12.x	Updating Dependencies	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+12.x	Carbon 3	USA	256	100	app/Domain/RecursosHumanos/Pessoal/Model/RhDepend.php:5 app/Domain/RecursosHumanos/Pessoal/Model/RhDepend.php:27 app/Domain/RecursosHumanos/Pessoal/Services/Relatorios/TipoGuiaPrevidenciaService.php:7	uso	Carbon\\Carbon|Carbon::|\bnew\s+\\?Carbon\b|diffIn\w+\(	PHP8-55
+12.x	Updating the Laravel Installer	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+12.x	Authentication	NAO APLICA				manual	titulo de grupo
+12.x	Updated DatabaseTokenRepository Constructor Signature	NAO USA	0	0		uso	DatabaseTokenRepository	
+12.x	Concurrency	NAO APLICA				manual	titulo de grupo
+12.x	Concurrency Result Index Mapping	NAO USA	0	0		uso	Concurrency::	
+12.x	Container	NAO APLICA				manual	titulo de grupo
+12.x	Container Class Dependency Resolution	USA	8	6	app/Domain/Patrimonial/Protocolo/Services/ProcessoService.php:629 app/Domain/Patrimonial/Protocolo/Services/NotificarTransferenciaProcessoService.php:40 app/Domain/Tributario/Arrecadacao/Repositories/TermoRepository.php:241	sinal	app\(\s*[\w\\]+::class\s*\)|->make\(	PHP8-62
+12.x	Database	NAO APLICA				manual	titulo de grupo
+12.x	Multi-Schema Database Inspecting	NAO USA	0	0		uso	Schema::getTables|getTableListing|getViews|getTypes	
+12.x	Database Constructor Signature Changes	NAO USA	0	0		uso	new\s+\\?([\w\\]*\\)?\w*(Connection|Grammar|SchemaState)\(|extends\s+\\?(\w+\\)*(Connection|Grammar)\b	
+12.x	Eloquent	NAO APLICA				manual	titulo de grupo
+12.x	Models and UUIDv7	NAO USA	0	0		uso	HasUuids	
+12.x	Requests	NAO APLICA				manual	titulo de grupo
+12.x	Nested Array Request Merging	USA	2	2	app/Http/Middleware/SessionMiddleware.php:51 app/Http/Middleware/DBRequestMiddleware.php:30	sinal	->(mergeIfMissing|merge)\(	PHP8-38
+12.x	Routing	NAO APLICA				manual	titulo de grupo
+12.x	Route Precedence	USA	1407	73	routes/web/configuracao/configuracao.php:7 routes/web/configuracao/configuracao.php:15 routes/web/configuracao/configuracao.php:19	sinal	Route::(get|post|put|patch|delete|any)\(	PHP8-12
+12.x	Storage	NAO APLICA				manual	titulo de grupo
+12.x	Local Filesystem Disk Default Root Path	USA	3	1	configuration/filesystems.php:48 configuration/filesystems.php:53 configuration/filesystems.php:60	config	'root'\s*=>	PHP8-77
+12.x	Validation	NAO APLICA				manual	titulo de grupo
+12.x	Image Validation Now Excludes SVGs	NAO USA	0	0		sinal	\|image\b|'image'	
+12.x	Miscellaneous	MANUAL				manual	o guia so remete ao diff do esqueleto laravel/laravel entre versoes; nao ha lista de quebras para varrer
+13.x	Upgrading To 13.0 From 12.x	NAO APLICA				manual	titulo de secao
+13.x	Estimated Upgrade Time: 10 Minutes	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+13.x	Upgrading Using AI	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+13.x	Updating Dependencies	NAO APLICA				manual	versao de PHP/Composer/dependencias do composer.json: tratada na verificacao de ambiente/composer.json, nao e uso no codigo
+13.x	Updating the Laravel Installer	NAO APLICA				manual	ferramenta fora do sistema (instalador, Dusk, Pusher, Spark, Cashier, Sanctum, Telescope, Ide-helper): nao e codigo proprio do e-Cidade
+13.x	Cache	NAO APLICA				manual	titulo de grupo
+13.x	Cache Prefixes and Session Cookie Names	USA	7	4	configuration/database.php:39 configuration/database.php:52 configuration/database.php:65	config	'(cookie|prefix)'\s*=>	PHP8-62
+13.x	Store and Repository Contracts: touch	NAO USA	0	0		uso	Contracts\\Cache\\(Repository|Store)	
+13.x	Cache serializable_classes Configuration	NAO USA	0	0		config	serializable_classes	
+13.x	Container	NAO APLICA				manual	titulo de grupo
+13.x	Container::call and Nullable Class Defaults	NAO USA	0	0		sinal	->call\(\s*\[|app\(\)->call|Container::call	
+13.x	Contracts	NAO APLICA				manual	titulo de grupo
+13.x	Dispatcher Contract: dispatchAfterResponse	NAO USA	0	0		uso	Contracts\\Bus\\Dispatcher	
+13.x	ResponseFactory Contract: eventStream	NAO USA	0	0		uso	implements\s+[\w\\, ]*ResponseFactory\b	
+13.x	MustVerifyEmail Contract: markEmailAsUnverified	NAO USA	0	0		uso	MustVerifyEmail	
+13.x	Database	NAO APLICA				manual	titulo de grupo
+13.x	Database upsert With MySQL or MariaDB	NAO USA	0	0		uso	->upsert\(	
+13.x	MySQL DELETE Queries With JOIN, ORDER BY, and LIMIT	NAO USA	0	0		sinal	->delete\(\).*(join|orderBy|limit)|(join|orderBy|limit).*->delete\(\)	
+13.x	Eloquent	NAO APLICA				manual	titulo de grupo
+13.x	Model Booting and Nested Instantiation	NAO USA	0	0		uso	static\s+function\s+boot(ed)?\s*\(|function\s+boot[A-Z]\w*\(	
+13.x	Polymorphic Pivot Table Name Generation	NAO USA	0	0		uso	morphToMany|morphedByMany	
+13.x	Collection Model Serialization Restores Eager-Loaded Relations	USA	40	20	app/Notifications/UserNotificationAcordoVencimento.php:11 app/Notifications/UserNotificationAcordoVencimento.php:15 app/Notifications/EmissaoRelatorioLegalNotification.php:10	uso	SerializesModels	PHP8-51
+13.x	HTTP Client	NAO APLICA				manual	titulo de grupo
+13.x	HTTP Client Response::throw and throwIf Signatures	NAO USA	0	0		uso	->throw(If)?\s*\(	
+13.x	Notifications	NAO APLICA				manual	titulo de grupo
+13.x	Default Password Reset Subject	USA	1	1	app/Http/Controllers/Auth/ResetPasswordController.php:8	uso	ResetPassword|Reset Password Notification	PHP8-51
+13.x	Queued Notifications and Missing Models	USA	18	18	app/Notifications/UserNotificationAcordoVencimento.php:13 app/Notifications/EmissaoRelatorioLegalNotification.php:12 app/Jobs/RequisicaoAPIPixJob.php:21	uso	implements\s+[\w\\, ]*ShouldQueue\b|use\s+[\w\\]*\\ShouldQueue\s+as\s+\w+	PHP8-51
+13.x	Queue	NAO APLICA				manual	titulo de grupo
+13.x	JobAttempted Event Exception Payload	NAO USA	0	0		uso	JobAttempted	
+13.x	QueueBusy Event Property Rename	NAO USA	0	0		uso	QueueBusy	
+13.x	Queue Contract Method Additions	NAO USA	0	0		uso	implements\s+([\w\\]+\s*,\s*)*([\w\\]*\\)?Queue\s*(,|\{|$)	
+13.x	Routing	NAO APLICA				manual	titulo de grupo
+13.x	Domain Route Registration Precedence	NAO USA	0	0		uso	->domain\(|Route::domain|\'domain\'	
+13.x	Session	NAO APLICA				manual	titulo de grupo
+13.x	Session serialization Configuration	NAO USA	0	0		config	'serialization'	
+13.x	Scheduling	NAO APLICA				manual	titulo de grupo
+13.x	withScheduling Registration Timing	USA	1	1	app/Console/Kernel.php:51	uso	withScheduling|function\s+schedule\s*\(	PHP8-51
+13.x	Security	NAO APLICA				manual	titulo de grupo
+13.x	Request Forgery Protection	USA	3	2	app/Http/Kernel.php:52 app/Http/Middleware/VerifyCsrfToken.php:5 app/Http/Middleware/VerifyCsrfToken.php:7	uso	VerifyCsrfToken|ValidateCsrfToken|csrf	PHP8-38
+13.x	Support	NAO APLICA				manual	titulo de grupo
+13.x	Manager extend Callback Binding	NAO USA	0	0		uso	->extend\(function	
+13.x	Str Factories Reset Between Tests	NAO USA	0	0		uso	Str::(createUuidsUsing|createRandomStringsUsing|createUlidsUsing)	
+13.x	Js::from Uses Unescaped Unicode By Default	NAO USA	0	0		uso	Js::from	
+13.x	Utilities	NAO APLICA				manual	titulo de grupo
+13.x	Symfony PHP 8.5 Polyfill and Global Function Conflicts	NAO USA	0	0		uso	^\s*function\s+(array_first|array_last|array_find|array_find_key|array_any|array_all|mb_trim|mb_ltrim|mb_rtrim|mb_ucfirst|mb_lcfirst)\b	
+13.x	Views	NAO APLICA				manual	titulo de grupo
+13.x	Pagination Bootstrap View Names	NAO USA	0	0		uso	bootstrap-3|bootstrap-4|useBootstrap	
+13.x	Miscellaneous	MANUAL				manual	o guia so remete ao diff do esqueleto laravel/laravel entre versoes; nao ha lista de quebras para varrer

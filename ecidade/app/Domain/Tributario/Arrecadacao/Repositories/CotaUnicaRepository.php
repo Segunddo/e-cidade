@@ -35,7 +35,7 @@ class CotaUnicaRepository
                 k00_percdes;
 SQL;
 
-        return DB::select(DB::raw($sql));
+        return DB::select($sql);
     }
 
     /**

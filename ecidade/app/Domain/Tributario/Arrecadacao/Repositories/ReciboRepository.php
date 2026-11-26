@@ -63,7 +63,7 @@ class ReciboRepository
                 a.k00_numpre = {$k00_numpre};
 SQL;
 
-        $result = DB::select(DB::raw($sql));
+        $result = DB::select($sql);
 
         if (count($result) !== 1) {
             throw new Exception('Nenhum ou mais de um resultado foi encontrado');

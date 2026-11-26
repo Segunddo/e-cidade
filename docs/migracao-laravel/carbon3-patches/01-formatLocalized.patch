@@ -1,0 +1,44 @@
+diff --git a/ecidade/app/Domain/Configuracao/GeradorRelatorio/Services/ImprimirRelatorioTemplateService.php b/ecidade/app/Domain/Configuracao/GeradorRelatorio/Services/ImprimirRelatorioTemplateService.php
+index ce7fddb79..7ec87e387 100644
+--- a/ecidade/app/Domain/Configuracao/GeradorRelatorio/Services/ImprimirRelatorioTemplateService.php
++++ b/ecidade/app/Domain/Configuracao/GeradorRelatorio/Services/ImprimirRelatorioTemplateService.php
+@@ -84,7 +84,7 @@ private function getVariaveisGlobais()
+     {
+         $instituicao = DBConfig::find(session('DB_instit'));
+         $date = Carbon::now();
+-        $dataAtualExtenso = $date->formatLocalized('%d de %B de %Y');
++        $dataAtualExtenso = mb_convert_encoding($date->locale('pt_BR')->translatedFormat('d \d\e F \d\e Y'), 'ISO-8859-1', 'UTF-8');
+ 
+         return [
+             'db_codigoinstit' => $instituicao->codigo,
+diff --git a/ecidade/app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php b/ecidade/app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php
+index 7191757e8..bf651b78f 100644
+--- a/ecidade/app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php
++++ b/ecidade/app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php
+@@ -58,7 +58,7 @@ public static function proximaCompetenciaApropriar($idInstituicao)
+             return [
+                 "exercicio" => $paramentro->c01_data->format('Y'),
+                 "mes" => $paramentro->c01_data->format('m'),
+-                "nomeMes" => ucfirst($paramentro->c01_data->formatLocalized('%B')),
++                "nomeMes" => ucfirst(mb_convert_encoding($paramentro->c01_data->copy()->locale('pt_BR')->translatedFormat('F'), 'ISO-8859-1', 'UTF-8')),
+             ];
+         }
+ 
+@@ -70,7 +70,7 @@ public static function proximaCompetenciaApropriar($idInstituicao)
+             $ano = $apropriacao->c145_exercicio + 1;
+         }
+ 
+-        $nomeMes = Carbon::create($ano, $mes, 1)->formatLocalized('%B');
++        $nomeMes = mb_convert_encoding(Carbon::create($ano, $mes, 1)->locale('pt_BR')->translatedFormat('F'), 'ISO-8859-1', 'UTF-8');
+ 
+         return [
+             "exercicio" => $ano,
+@@ -95,7 +95,7 @@ public static function proximaCompetenciaExtornar($idInstituicao)
+         if (is_null($apropriacao)) {
+             throw new Exception("Não existe nenhuma competência de Apropriação de 13ª ou férias processada.", 403);
+         }
+-        $nomeMes = Carbon::create($apropriacao->c145_exercicio, $apropriacao->c145_mes, 1)->formatLocalized('%B');
++        $nomeMes = mb_convert_encoding(Carbon::create($apropriacao->c145_exercicio, $apropriacao->c145_mes, 1)->locale('pt_BR')->translatedFormat('F'), 'ISO-8859-1', 'UTF-8');
+         return [
+             "exercicio" => $apropriacao->c145_exercicio,
+             "mes" => $apropriacao->c145_mes,

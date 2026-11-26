@@ -21,14 +21,6 @@ class GetDetalhamentoDecendioRequest extends DBFormRequest
 
     public function messages()
     {
-        return [
-            'exercicio' => 'Você deve informar o exercício.',
-            'instituicao' => 'Você deve informar a instituição.',
-            'dataInicial' => 'Você deve informar a data inicial.',
-            'dataFinal' => 'Você deve informar a data final.',
-            'reduzidos' => 'Você deve informar o(s) reduzido(s).',
-            'desdobramento' => 'Você deve informar o desdobramento.',
-            'conta_pagadora' => 'Você deve informar a conta pagadora.',
-        ];
+        return [];
     }
 }

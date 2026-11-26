@@ -62,7 +62,7 @@ class Concessao
                 }
             }
         }
-        return DB::select(DB::raw(" select * from ($sql) as x order by ordem, h16_dtconc "));
+        return DB::select(" select * from ($sql) as x order by ordem, h16_dtconc ");
     }
 
 
@@ -79,12 +79,12 @@ class Concessao
         }
         $sql .= " ) as dataevento on data.dia = dataevento.dia_recebe";
 
-        return DB::select(DB::raw($sql));
+        return DB::select($sql);
     }
 
     public static function assentamentosenvolvidos($matricula, $assentamentos_envolvidos)
     {
-        return DB::select(DB::raw(
+        return DB::select(
             "select h16_codigo,
                 h16_regist,
                 h12_assent,
@@ -98,7 +98,7 @@ class Concessao
             where h16_regist = $matricula 
                 and h12_codigo in ($assentamentos_envolvidos)
             order by h16_dtconc"
-        ));
+        );
     }
 
     public static function pagamentosFolha($matricula, $rubrica)
@@ -118,7 +118,7 @@ class Concessao
                 inner join rhrubricas on rh27_rubric = r20_rubric
                     where r20_regist = $matricula and r20_rubric in ('$rubrica')) as x  
                 order by 1,2";
-        return DB::select(DB::raw($sql));
+        return DB::select($sql);
     }
 
     public static function assentamentoInicio($rh500_sequencial)

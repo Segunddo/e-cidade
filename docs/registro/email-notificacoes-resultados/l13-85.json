@@ -1,0 +1,151 @@
+{
+    "config_do_pr_sem_adaptar": {
+        "resolve": "Illuminate\\Mail\\Mailer"
+    },
+    "php": "8.5",
+    "laravel": "13.43.0",
+    "modo": "l13",
+    "config": {
+        "configuracao_do_pr": [
+            "driver",
+            "host",
+            "port",
+            "from",
+            "encryption",
+            "username",
+            "password",
+            "sendmail",
+            "markdown"
+        ],
+        "driver_do_pr": "smtp"
+    },
+    "mail_redesim": [
+        {
+            "assunto": "[ISO]Erro no processamento automatico da REDESIM: Prefeitura de São João",
+            "de": {
+                "sistema@exemplo.invalid": "[ISO]Prefeitura de São João"
+            },
+            "para": {
+                "erros@exemplo.invalid": "",
+                "outro@exemplo.invalid": ""
+            },
+            "cc": [],
+            "responder_a": [],
+            "tipo": "text/html",
+            "charset": "utf-8",
+            "corpo": "<h2>Error ao processar o estabelecimento da REDESIM</h2>\n<br>\n<h3>Identificador: 12.345.678/0001-90</h3>\n<br>\n<h4>Erro:</h4>\n<br>\nMensagem: Falha de exemplo: coluna inexistente<br>Arquivo: ARQ<br>Linha: N\n<br>\n<h4>Stacktrace:</h4>\n<br>\nTRACE",
+            "texto": "",
+            "partes": [],
+            "cabecalhos": [
+                "From",
+                "To",
+                "Subject"
+            ],
+            "bruto": "From: Prefeitura de =?utf-8?Q?S=3Fo_Jo?= <sistema@exemplo.invalid>\nTo: erros@exemplo.invalid, outro@exemplo.invalid\nSubject: Erro no processamento automatico da REDESIM: Prefeitura de\n =?utf-8?Q?S=3Fo_?=\n =?utf-8?Q?Jo?=\nMessage-ID: X\nMIME-Version: 1.0\nDate: X\nContent-Type: text/html; charset=utf-8\nContent-Transfer-Encoding: quoted-printable\n\n<h2>Error ao processar o estabelecimento da REDESIM</h2>\n<br>\n<h3>Ident=\nificador: 12.345.678/0001-90</h3>\n<br>\n<h4>Erro:</h4>\n<br>\nMensagem=\n: Falha de exemplo: coluna inexistente<br>Arquivo: /s/emails_render.php<br>=\nLinha: 194\n<br>\n<h4>Stacktrace: TRACE"
+        }
+    ],
+    "mail_redesim_sem_env": {
+        "EXCECAO": "Exception",
+        "mensagem": "[ISO]E-mail não pode ser enviado pois não foi feita a configuração."
+    },
+    "notificacao_acordo": {
+        "via": [
+            "database",
+            "mail"
+        ],
+        "toArray": {
+            "title": "Acordo 12/2026 vence em 5 dias",
+            "message": "O acordo nº 12/2026 (início 10/01/2026, fim 25/11/2026) vence em 5 dias. Ação necessária."
+        },
+        "emails": [
+            {
+                "assunto": "Acordo 12/2026 vence em 5 dias",
+                "de": {
+                    "sistema@exemplo.invalid": "e-Cidade"
+                },
+                "para": {
+                    "maria@exemplo.invalid": ""
+                },
+                "cc": [],
+                "responder_a": [],
+                "tipo": "text/html",
+                "charset": "utf-8",
+                "corpo": "<!doctype html>\n<html lang=\"pt-BR\" style=\"background-color: #efefef;\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\"\n          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n    <title>Document</title>\n\n    <style>\n        .cabecalho {\n            display: flex;\n            flex-direction: row;\n            align-items: center;\n            width: 100%;\n            height: 80px;\n            background-color: #7cb4df;\n            border-radius: 10px;\n        }\n\n        .logo-div {\n            display: flex;\n            justify-content: flex-end;\n            flex-grow: 1;\n            margin: 10px;\n        }\n\n        .corpo {\n            display: flex;\n            flex-direction: column;\n            margin-left: 50px;\n            margin-top: 50px;\n        }\n\n        b {\n            font-family: sans-serif;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"cabecalho\">\n        <b style=\"margin-left: 10px;font-size: 25px; color: white\">e-Cidade</b>\n        <div class=\"logo-div\">\n            <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==\" alt=\"logo\">\n        </div>\n    </div>\n    <div class=\"corpo\">\n        <b style=\"font-size: 25px;\">Olá, Vanderson Duarte Maciel</b>\n        <p>O acordo nº 12/2026 (início 10/01/2026, fim 25/11/2026) vence em 5 dias. Ação necessária.</p>\n    </div>\n</body>\n</html>\n",
+                "texto": "",
+                "partes": [],
+                "cabecalhos": [
+                    "From",
+                    "To",
+                    "Subject"
+                ],
+                "bruto": "From: e-Cidade <sistema@exemplo.invalid>\nTo: maria@exemplo.invalid\nSubject: Acordo 12/2026 vence em 5 dias\nMessage-ID: X\nMIME-Version: 1.0\nDate: X\nContent-Type: text/html; charset=utf-8\nContent-Transfer-Encoding: quoted-printable\n\n<!doctype html>\n<html lang=3D\"pt-BR\" style=3D\"background-color: #efefef;\"=\n>\n<head>\n    <meta charset=3D\"UTF-8\">\n    <meta name=3D\"viewport\"\n =\n         content=3D\"width=3Ddevice-width, user-scalable=3Dno, initial-scale=\n=3D1.0, maximum-scale=3D1.0, minimum-scale=3D1.0\">\n    <meta http-equiv=\n=3D\"X-UA-Compatible\" content=3D\"ie=3Dedge\">\n    <title>Document</title>=\n\n\n    <style>\n        .cabecalho {\n            display: flex;\n   =\n         flex-direction: row;\n            align-items: center;\n        =\n    width: 100%;\n            height: 80px;\n            background-color=\n: #7cb4df;\n            border-radius: 10px;\n        }\n\n        .log=\no-div {\n            display: flex;\n            justify-content: flex-en=\nd;\n            flex-grow: 1;\n            margin: 10px;\n        }\n=\n\n        .corpo {\n            display: flex;\n            flex-directi=\non: column;\n            margin-left: 50px;\n            margin-top: 50px=\n;\n        }\n\n        b {\n            font-family: sans-serif;\n   =\n     }\n    </style>\n</head>\n<body>\n    <div class=3D\"cabecalho\">\n=\n        <b style=3D\"margin-left: 10px;font-size: 25px; color: white\">e-Cida=\nde</b>\n        <div class=3D\"logo-div\">\n            <img src=3D\"data:im=\nage/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4=\nz8DwHwAFAAH/q842iQAAAABJRU5ErkJggg=3D=3D\" alt=3D\"logo\">\n        </div>\n=\n    </div>\n    <div class=3D\"corpo\">\n        <b style=3D\"font-size: 25p=\nx;\">Ol=C3=A1, Vanderson Duarte Maciel</b>\n        <p>O acordo n=C2=BA 12/=\n2026 (in=C3=ADcio 10/01/2026, fim 25/11/2026) vence em 5 dias. A=C3=A7=\n=C3=A3o necess=C3=A1ria.</p>\n    </div>\n</body>\n</html>\n"
+            }
+        ]
+    },
+    "notificacao_user": {
+        "via": [
+            "broadcast",
+            "database"
+        ],
+        "toArray": {
+            "title": "Título de exemplo",
+            "message": "Mensagem com acentuação"
+        },
+        "json": "{\"title\":\"Título de exemplo\",\"message\":\"Mensagem com acentuação\"}"
+    },
+    "notificacao_assinatura": {
+        "via": [
+            "broadcast",
+            "database"
+        ],
+        "toArray": {
+            "title": "Assinar documento",
+            "message": "[ISO]Há um documento para assinar",
+            "action": {
+                "action": "web/patrimonial/protocolo/assinatura",
+                "iInstitId": 1,
+                "iAreaId": 4,
+                "iModuloId": 604,
+                "lAtalhoDesktop": true
+            },
+            "menuName": "Assinatura Documentos"
+        },
+        "json": false
+    },
+    "notificacao_relatorio_legal": {
+        "via": [
+            "broadcast",
+            "database"
+        ],
+        "toArray": {
+            "title": null,
+            "message": "Emissão do Anexo 3 - RREO esta pronta.",
+            "action": {
+                "action": "web/financeiro/contabilidade/msc/lrf/anexo/rreo/3/0",
+                "iInstitId": 1,
+                "iAreaId": 2,
+                "iModuloId": 209,
+                "lAtalhoDesktop": true
+            },
+            "menuName": "Anexos da LRF",
+            "externalLinks": [
+                {
+                    "label": "PDF",
+                    "url": "http://localhost/v4/api/financeiro/contabilidade/relatorio-legal/emissao/download/a.pdf"
+                },
+                {
+                    "label": "XLS",
+                    "url": "http://localhost/v4/api/financeiro/contabilidade/relatorio-legal/emissao/download/a.xls"
+                }
+            ]
+        }
+    },
+    "imagem_base64": {
+        "prefixo": "data:image/png;base64,iVBORw0K",
+        "md5": "bcaf9536282b9b41925c135ec3c00fa9"
+    },
+    "deprecations": [
+        "Creation of dynamic property App\\Notifications\\EmissaoRelatorioLegalNotification::$titulo is deprecated @ app/Notifications/EmissaoRelatorioLegalNotification.php:49",
+        "Function utf8_encode() is deprecated since 8.2, visit the php.net documentation for various alternatives @ std/DBString.php:813"
+    ]
+}

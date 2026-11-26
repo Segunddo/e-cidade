@@ -121,7 +121,7 @@ class Parser
             $cellIterator->setIterateOnlyExistingCells(false);
 
             foreach ($cellIterator as $cell) {
-                $valorDaCelula = str_replace(' ', '', $cell->getValue());
+                $valorDaCelula = str_replace(' ', '', (string)$cell->getValue());
                 if (empty($valorDaCelula)) {
                     continue;
                 }
@@ -153,7 +153,7 @@ class Parser
             $cellIterator->setIterateOnlyExistingCells(false);
 
             foreach ($cellIterator as $cell) {
-                $valorDaCelula = str_replace(' ', '', $cell->getValue());
+                $valorDaCelula = str_replace(' ', '', (string)$cell->getValue());
                 if (empty($valorDaCelula)) {
                     continue;
                 }

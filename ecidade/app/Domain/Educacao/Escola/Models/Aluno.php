@@ -95,14 +95,14 @@ class Aluno extends Model
     public $timestamps = false;
     public $incrementing = false;
 
-    protected $dates = [
-        'ed47_d_cadast',
-        'ed47_d_dtemissao',
-        'ed47_d_dthabilitacao',
-        'ed47_d_dtvencimento',
-        'ed47_d_nasc',
-        'ed47_d_ultalt',
-        'ed47_d_identdtexp',
+    protected $casts = [
+        'ed47_d_cadast' => 'datetime',
+        'ed47_d_dtemissao' => 'datetime',
+        'ed47_d_dthabilitacao' => 'datetime',
+        'ed47_d_dtvencimento' => 'datetime',
+        'ed47_d_nasc' => 'datetime',
+        'ed47_d_ultalt' => 'datetime',
+        'ed47_d_identdtexp' => 'datetime',
     ];
 
     /**

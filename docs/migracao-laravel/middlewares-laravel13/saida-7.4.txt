@@ -1,0 +1,177 @@
+KERNEL middleware: ["App\\Http\\Middleware\\LogPhpActivities","Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode","Illuminate\\Foundation\\Http\\Middleware\\ValidatePostSize","App\\Http\\Middleware\\TrimStrings","Illuminate\\Foundation\\Http\\Middleware\\ConvertEmptyStringsToNull","App\\Http\\Middleware\\CorsMiddleware","App\\Http\\Middleware\\DBRequestMiddleware","App\\Http\\Middleware\\DatabaseMiddleware"]
+KERNEL middlewareGroups: {"web":["App\\Http\\Middleware\\EncryptCookies","Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse","Illuminate\\Session\\Middleware\\StartSession","Illuminate\\Session\\Middleware\\AuthenticateSession","Illuminate\\View\\Middleware\\ShareErrorsFromSession","App\\Http\\Middleware\\VerifyCsrfToken","Illuminate\\Routing\\Middleware\\SubstituteBindings","Laravel\\Passport\\Http\\Middleware\\CreateFreshApiToken","App\\Http\\Middleware\\StartWebSessionMiddleware"],"api":["throttle:2000,1","bindings","App\\Http\\Middleware\\SessionMiddleware","App\\Http\\Middleware\\LogPhpActivities"]}
+KERNEL routeMiddleware: {"auth":"Illuminate\\Auth\\Middleware\\Authenticate","auth.basic":"Illuminate\\Auth\\Middleware\\AuthenticateWithBasicAuth","bindings":"Illuminate\\Routing\\Middleware\\SubstituteBindings","can":"Illuminate\\Auth\\Middleware\\Authorize","guest":"App\\Http\\Middleware\\RedirectIfAuthenticated","throttle":"Illuminate\\Routing\\Middleware\\ThrottleRequests","legacySession":"App\\Http\\Middleware\\LegacySessionMiddleware","clientCredential":"Laravel\\Passport\\Http\\Middleware\\CheckClientCredentials","AuthSim":"App\\Http\\Middleware\\AuthSimMiddleware","AuthRedesim":"App\\Http\\Middleware\\AuthRedesimMiddleware","permissaoMenu":"App\\Http\\Middleware\\PermissoesMenuMiddleware"}
+CONFIG session: {"driver":"file","lifetime":120,"expire_on_close":false,"encrypt":false,"lottery":[2,100],"cookie":"laravel_session","path":"\/","domain":null,"secure":null,"http_only":true,"same_site":null}
+CONFIG cache.default=file auth.defaults={"guard":"web","passwords":"users"}
+CASO trim+vazio-para-null GET
+    status=200
+    h:Cache-Control=no-cache, private
+    corpo=ok:{"a":"oi","b":null,"c":["z"],"password":" s ","password_confirmation":" s "}
+CASO trim+vazio-para-null POST json
+    status=200
+    h:Cache-Control=no-cache, private
+    corpo=ok:{"a":"x","b":null,"n":5,"l":["y",null]}
+CASO cors origin=NULL ALLOWED=NULL
+    status=200
+    h:Access-Control-Allow-Credentials=true
+    h:Access-Control-Allow-Headers=Accept, Authorization, Content-Type, x-requested-with
+    h:Access-Control-Allow-Methods=PUT, POST, DELETE, GET, OPTIONS
+    h:Access-Control-Allow-Origin=*
+    h:Cache-Control=no-cache, private
+    h:Vary=Origin
+    corpo=ok:[]
+CASO cors origin='http://a.com' ALLOWED=NULL
+    status=200
+    h:Access-Control-Allow-Credentials=true
+    h:Access-Control-Allow-Headers=Accept, Authorization, Content-Type, x-requested-with
+    h:Access-Control-Allow-Methods=PUT, POST, DELETE, GET, OPTIONS
+    h:Access-Control-Allow-Origin=http://a.com
+    h:Cache-Control=no-cache, private
+    h:Vary=Origin
+    corpo=ok:[]
+CASO cors origin='http://a.com' ALLOWED='*'
+    status=200
+    h:Access-Control-Allow-Credentials=true
+    h:Access-Control-Allow-Headers=Accept, Authorization, Content-Type, x-requested-with
+    h:Access-Control-Allow-Methods=PUT, POST, DELETE, GET, OPTIONS
+    h:Access-Control-Allow-Origin=http://a.com
+    h:Cache-Control=no-cache, private
+    h:Vary=Origin
+    corpo=ok:[]
+CASO cors origin='http://a.com' ALLOWED='http://a.com,http://b.com'
+    status=200
+    h:Access-Control-Allow-Credentials=true
+    h:Access-Control-Allow-Headers=Accept, Authorization, Content-Type, x-requested-with
+    h:Access-Control-Allow-Methods=PUT, POST, DELETE, GET, OPTIONS
+    h:Access-Control-Allow-Origin=http://a.com
+    h:Cache-Control=no-cache, private
+    h:Vary=Origin
+    corpo=ok:[]
+CASO cors origin='http://c.com' ALLOWED='http://a.com,http://b.com'
+    status=200
+    h:Access-Control-Allow-Credentials=true
+    h:Access-Control-Allow-Headers=Accept, Authorization, Content-Type, x-requested-with
+    h:Access-Control-Allow-Methods=PUT, POST, DELETE, GET, OPTIONS
+    h:Access-Control-Allow-Origin=http://a.com
+    h:Cache-Control=no-cache, private
+    h:Vary=Origin
+    corpo=ok:[]
+CASO dbrequest utf8
+    status=200
+    h:Cache-Control=no-cache, private
+    corpo={"t":"hex:61e7e36f","n":"hex:3132","arr":{"0":"hex:61e7e36f","k":["hex:61e7e36f"]}}
+CASO dbrequest null+bool
+    status=200
+    h:Cache-Control=no-cache, private
+    corpo={"a":"hex:","b":true,"c":1.5,"d":"hex:","e":["hex:"]}
+CASO redesim header=NULL env=NULL
+    EXC Exception code=0 status=- msg=Header accessKeyId não informado.
+CASO redesim header='k1' env=NULL
+    EXC Exception code=0 status=- msg=Chave accessKeyId não configurada.
+CASO redesim header='k1' env='k1'
+    status=200
+    h:Cache-Control=no-cache, private
+    corpo=ok:[]
+CASO redesim header='k1' env='k2'
+    EXC Exception code=401 status=- msg=Credenciais inválidas.
+CASO authsim ip=10.0.0.1 auth=990246
+    status=200
+    h:Cache-Control=no-cache, private
+    corpo=ok:[]
+CASO authsim ip=10.0.0.9 auth=990246
+    status=403
+    h:Cache-Control=no-cache, private
+    h:Content-Type=application/json
+    corpo={"error":true,"message":"Acesso negado!"}
+CASO authsim ip=10.0.0.1 auth=nenhum
+    status=401
+    h:Cache-Control=no-cache, private
+    h:Content-Type=application/json
+    corpo={"error":true,"message":"Credenciais (usu\u00e1rio\/senha ou token) inv\u00e1lidos."}
+CASO authsim ip=10.0.0.1 auth=a94577
+    status=401
+    h:Cache-Control=no-cache, private
+    h:Content-Type=application/json
+    corpo={"error":true,"message":"Credenciais (usu\u00e1rio\/senha ou token) inv\u00e1lidos."}
+CASO authsim ip=10.0.0.1 auth=7d908b
+    status=401
+    h:Cache-Control=no-cache, private
+    h:Content-Type=application/json
+    corpo={"error":true,"message":"Credenciais (usu\u00e1rio\/senha ou token) inv\u00e1lidos."}
+CASO authsim ip=10.0.0.1 auth=68b305
+    status=500
+    h:Cache-Control=no-cache, private
+    h:Content-Type=application/json
+    corpo={"error":true,"message":"Undefined offset: 1"}
+CASO authsim sem env
+    status=403
+    h:Cache-Control=no-cache, private
+    h:Content-Type=application/json
+    corpo={"error":true,"message":"Acesso negado!"}
+CASO web GET
+    status=200
+    h:Cache-Control=no-cache, private
+    cookie:XSRF-TOKEN valor=<340 bytes> path=/ dominio=NULL secure=false httponly=false samesite=NULL minutos=120
+    cookie:laravel_session valor=<340 bytes> path=/ dominio=NULL secure=false httponly=true samesite=NULL minutos=120
+    corpo=ok:[]
+CASO web POST sem token
+    EXC Illuminate\Session\TokenMismatchException code=0 status=- msg=CSRF token mismatch.
+CASO web POST token invalido
+    EXC Illuminate\Session\TokenMismatchException code=0 status=- msg=CSRF token mismatch.
+CASO web GET cookie lixo
+    status=200
+    h:Cache-Control=no-cache, private
+    cookie:XSRF-TOKEN valor=<340 bytes> path=/ dominio=NULL secure=false httponly=false samesite=NULL minutos=120
+    cookie:laravel_session valor=<340 bytes> path=/ dominio=NULL secure=false httponly=true samesite=NULL minutos=120
+    corpo=ok:[]
+CASO api throttle 1
+    status=200
+    h:Cache-Control=no-cache, private
+    h:X-RateLimit-Limit=2000
+    h:X-RateLimit-Remaining=1999
+    corpo=ok:[]
+CASO api throttle 2
+    status=200
+    h:Cache-Control=no-cache, private
+    h:X-RateLimit-Limit=2000
+    h:X-RateLimit-Remaining=1998
+    corpo=ok:[]
+CASO api throttle limite 1,1 (2a)
+    status=200
+    h:Cache-Control=no-cache, private
+    h:X-RateLimit-Limit=1
+    h:X-RateLimit-Remaining=0
+    corpo=ok:[]
+CASO api throttle limite 1,1 (2a)
+    EXC Illuminate\Http\Exceptions\ThrottleRequestsException code=0 status=429 msg=Too Many Attempts.
+CASO guest sem usuario
+    status=200
+    h:Cache-Control=no-cache, private
+    corpo=ok:[]
+CASO window sem cabecalho
+    status=200
+    h:Cache-Control=no-cache, private
+    corpo=ok:[]
+CASO window com cabecalho X-Window-Session (sem sessao iniciada)
+    EXC ErrorException code=0 status=- msg=session_destroy(): Trying to destroy uninitialized session
+CASO window com cabecalho X-Window-Session (sessao iniciada)
+    EXC ErrorException code=0 status=- msg=session_set_cookie_params(): Cannot change session cookie parameters when session is active
+LOG local.WARNING: [REDESIM Middleware] Header accessKeyId não informado.  
+LOG local.WARNING: [REDESIM Middleware] Chave REDESIM_ACCESS_KEY_ID não configurada no arquivo .env!  
+LOG local.WARNING: [REDESIM Middleware] Credenciais inválidas [header accessKeyId: k1 / Chave REDESIM_ACCESS_KEY_ID: k2]  
+LOG local.INFO: [Api SIM] Acesso autorizado IP: 10.0.0.1  
+LOG local.ALERT: [Api SIM] Acesso Negado IP: 10.0.0.9  
+LOG local.WARNING: [Api SIM] Erro: Acesso negado! {"data":{"stdClass":{"remote_ip":"10.0.0.9","basic_token":true,"data_token":null}}} 
+LOG local.INFO: [Api SIM] Acesso autorizado IP: 10.0.0.1  
+LOG local.WARNING: [Api SIM] Credenciais não informadas  
+LOG local.WARNING: [Api SIM] Erro: Credenciais (usuário/senha ou token) inválidos. {"data":{"stdClass":{"remote_ip":"10.0.0.1","basic_token":false,"data_token":null}}} 
+LOG local.INFO: [Api SIM] Acesso autorizado IP: 10.0.0.1  
+LOG local.WARNING: [Api SIM] Usuário inválido  {"user":"x"} 
+LOG local.WARNING: [Api SIM] Erro: Credenciais (usuário/senha ou token) inválidos. {"data":{"stdClass":{"remote_ip":"10.0.0.1","basic_token":true,"data_token":{"user":"x","hash":"6407ac16d584c213c63a9da166f296a804978759174739ad1b03ce5183c76b48"}}}} 
+LOG local.INFO: [Api SIM] Acesso autorizado IP: 10.0.0.1  
+LOG local.WARNING: [Api SIM] Senha inválida:  {"hash":"errado"} 
+LOG local.WARNING: [Api SIM] Erro: Credenciais (usuário/senha ou token) inválidos. {"data":{"stdClass":{"remote_ip":"10.0.0.1","basic_token":true,"data_token":{"user":"u","hash":"errado"}}}} 
+LOG local.INFO: [Api SIM] Acesso autorizado IP: 10.0.0.1  
+LOG local.WARNING: [Api SIM] Erro: Undefined offset: 1 {"data":{"stdClass":{"remote_ip":"10.0.0.1","basic_token":true,"data_token":null}}} 
+LOG local.ALERT: [Api SIM] Acesso Negado IP: 10.0.0.1  
+LOG local.WARNING: [Api SIM] Erro: Acesso negado! {"data":{"stdClass":{"remote_ip":"10.0.0.1","basic_token":true,"data_token":null}}} 

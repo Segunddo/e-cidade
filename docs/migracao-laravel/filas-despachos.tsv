@@ -1,0 +1,30 @@
+arquivo:linha	forma	classe	fila (onQueue)	conexao (onConnection)	atraso	vai para
+app/Console/Commands/GenerateDataPayrolls.php:74	::dispatch	ProcessPayrollDataJob				fila
+app/Console/Commands/ReenvioLancamentosRequisicaoMaterial.php:62	dispatch()	ProcessarLancamentoContabilRequisicaoJob				fila
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/NovaLRF/AnexosService.php:157	->notify	EmissaoRelatorioLegalNotification				fila
+app/Domain/Financeiro/Contabilidade/Services/Relatorios/NovaLRF/EmiteControleVersaoService.php:22	dispatch()	EmissaoLrfJob				fila
+app/Domain/Patrimonial/Contratos/Services/NotificarAcordoVencimentoService.php:49	->notify	UserNotificationAcordoVencimento				fila
+app/Domain/Patrimonial/Ouvidoria/Services/SolicitacaoAssinaturaService.php:238	->notify	UserNotification				na hora (nao e ShouldQueue)
+app/Domain/Patrimonial/Protocolo/Services/MensageriaService.php:83	->notify	UserNotification				na hora (nao e ShouldQueue)
+app/Domain/Patrimonial/Protocolo/Services/NoticarAssinanteDocumentoService.php:43	dispatch()	NotificarEauth				fila
+app/Domain/Patrimonial/Protocolo/Services/NoticarAssinanteDocumentoService.php:101	->notify	SolicitacaoAssinaturaNotification				na hora (nao e ShouldQueue)
+app/Domain/Patrimonial/Protocolo/Services/NotificarTransferenciaProcessoService.php:19	dispatch()	NotificarTransferenciaProcessoJob				fila
+app/Domain/Patrimonial/Protocolo/Services/NotificarTransferenciaProcessoService.php:25	->notify	UserNotification				na hora (nao e ShouldQueue)
+app/Domain/RecursosHumanos/Pessoal/Controller/ContraChequesController.php:145	Queue::connection()->pushRaw	(payload guardado)				fila (reenvio)
+app/Domain/RecursosHumanos/Pessoal/Services/ContraChequeService.php:50	dispatch()	EmissaoContraChequeJob				fila
+app/Domain/RecursosHumanos/RH/ConcessaoDireitos/Controllers/ProcessamentoConcessaoController.php:114	::dispatch	ProcessamentoConcessao				fila
+app/Domain/RecursosHumanos/RH/ConcessaoDireitos/Services/ConcessaoDireitosService.php:481	->notify	UserNotification				na hora (nao e ShouldQueue)
+app/Domain/Saude/Farmacia/Services/ExportarBnafarService.php:51	dispatch()	ExportarLoteBnafarJob				fila
+app/Domain/Saude/Farmacia/Services/IntegracaoBnafarService.php:31	->notify	UserNotification				na hora (nao e ShouldQueue)
+app/Domain/Saude/Farmacia/Services/ProcedimentosBnafarService.php:85	dispatch()	ExportarBnafarJob				fila
+app/Domain/Saude/Farmacia/Services/ReprocessarProtocoloBnafarService.php:28	dispatch()	ProcessarProtocoloBnafarJob				fila
+app/Domain/Tributario/Arrecadacao/Controller/RequisicaoAPIPIXController.php:186	::dispatch	RequisicaoAPIPixEmissaoJob	ReciboRepository::QUEUE_CREATE_NAME			fila
+app/Domain/Tributario/Arrecadacao/Controllers/CancelamentoParcelamentoPorListaController.php:74	dispatch()	CancelamentoParcelamentoJob				fila
+app/Domain/Tributario/Juridico/Controllers/AnulacaoCDAPorListaController.php:82	dispatch()	CancelamentoCDALista				fila
+app/Domain/Tributario/Juridico/Controllers/IncluirInicialListaController.php:131	dispatch()	InclusaoInicialListaJob				fila
+app/Domain/Tributario/Juridico/Services/AnulaCDAServices.php:98	->notify	UserNotification				na hora (nao e ShouldQueue)
+app/Domain/Tributario/Juridico/Services/InclusaoInicialServices.php:79	->notify	UserNotification				na hora (nao e ShouldQueue)
+app/Jobs/RequisicaoAPIPixEmissaoJob.php:139	::dispatch	RequisicaoAPIPixJob	ReciboRepository::QUEUE_NAME			fila
+app/Jobs/Saude/Farmacia/ExportarBnafarJob.php:114	dispatch()	ProcessarProtocoloBnafarJob				fila
+app/Jobs/Saude/Farmacia/ExportarLoteBnafarJob.php:55	->notify	UserNotification				na hora (nao e ShouldQueue)
+classes/requisicaoMaterial.model.php:551	dispatch()	ProcessarLancamentoContabilRequisicaoJob			sim	fila

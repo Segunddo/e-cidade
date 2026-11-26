@@ -86,7 +86,7 @@ class AtualizaCadastroOptantesSimplesNacionalRepository
         $nextval = \DB::select("select nextval('isscadsimples_q38_sequencial_seq')")[0]
             ->nextval;
 
-        $sequencialIssCadSimples = \DB::select(\DB::raw(
+        $sequencialIssCadSimples = \DB::select(
             "insert into
                 isscadsimples (
                     q38_sequencial,
@@ -101,7 +101,7 @@ class AtualizaCadastroOptantesSimplesNacionalRepository
                     {$categoriaPorte},
                     'Inserido pela integração com Api da Receita Federal.'
                 ) returning q38_sequencial"
-        ))[0]->q38_sequencial;
+        )[0]->q38_sequencial;
 
         $sequencialIssCadAtualizacoes = $this->incluiLogIssCadSimplesAtualizacoes();
         $this->incluiLogIssCadSimplesAtualizacoesInclusao(
@@ -124,7 +124,7 @@ class AtualizaCadastroOptantesSimplesNacionalRepository
         $nextval = \DB::select("select nextval('isscadsimplebaixa_q39_sequencial_seq')")[0]
             ->nextval;
 
-        $sequencialIssCadSimplesBaixa = \DB::select(\DB::raw(
+        $sequencialIssCadSimplesBaixa = \DB::select(
             "insert into
                  isscadsimplesbaixa (
                      q39_sequencial,
@@ -141,7 +141,7 @@ class AtualizaCadastroOptantesSimplesNacionalRepository
                      3,
                      'Baixa realizada pela integração com Api da Receita Federal.'
                  ) returning q39_sequencial"
-        ))[0]->q39_sequencial;
+        )[0]->q39_sequencial;
 
         $sequencialIssCadAtualizacoes = $this->incluiLogIssCadSimplesAtualizacoes();
         $this->incluiLogIssCadSimplesAtualizacoesBaixa(
@@ -200,7 +200,7 @@ class AtualizaCadastroOptantesSimplesNacionalRepository
     {
         $dataHoje = (new DateTime('now'))->format('Y/m/d');
 
-        return \DB::select(\DB::raw(
+        return \DB::select(
             "insert into isscadsimplesatualizacoes
                   (
                     q186_data
@@ -209,7 +209,7 @@ class AtualizaCadastroOptantesSimplesNacionalRepository
                  (
                      '{$dataHoje}'
                  ) returning q186_sequencial"
-        ))[0]->q186_sequencial;
+        )[0]->q186_sequencial;
     }
 
     /**
@@ -221,7 +221,7 @@ class AtualizaCadastroOptantesSimplesNacionalRepository
         $sequencialIssCadSimples,
         $sequencialIssCadSimplesAtualizacoes
     ) {
-        return \DB::select(\DB::raw(
+        return \DB::select(
             "insert into isscadsimplesatualizacoesinclusao
                   (
                     q187_isscadsimplesatualizacoes,
@@ -232,7 +232,7 @@ class AtualizaCadastroOptantesSimplesNacionalRepository
                      {$sequencialIssCadSimplesAtualizacoes},
                      {$sequencialIssCadSimples}
                  ) returning q187_sequencial"
-        ))[0]->q187_sequencial;
+        )[0]->q187_sequencial;
     }
 
     /**
@@ -244,7 +244,7 @@ class AtualizaCadastroOptantesSimplesNacionalRepository
         $sequencialIssCadSimplesBaixa,
         $sequencialIssCadSimplesAtualizacoes
     ) {
-        return \DB::select(\DB::raw(
+        return \DB::select(
             "insert into isscadsimplesatualizacoesbaixa
                   (
                     q188_isscadsimplesatualizacoes,
@@ -255,6 +255,6 @@ class AtualizaCadastroOptantesSimplesNacionalRepository
                      {$sequencialIssCadSimplesAtualizacoes},
                      {$sequencialIssCadSimplesBaixa}
                  ) returning q188_sequencial"
-        ))[0]->q188_sequencial;
+        )[0]->q188_sequencial;
     }
 }

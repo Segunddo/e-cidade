@@ -10,5 +10,5 @@ class ParametroIntegracaoPatrimonial extends Model
     protected $primaryKey = 'c01_sequencial';
     public $timestamps = false;
 
-    protected $dates = ['c01_data'];
+    protected $casts = ['c01_data' => 'datetime'];
 }

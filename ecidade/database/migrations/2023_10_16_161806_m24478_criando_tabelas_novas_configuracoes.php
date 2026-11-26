@@ -19,7 +19,7 @@ class M24478CriandoTabelasNovasConfiguracoes extends Migration
         $this->buildComentarios();
         $schema = DB::table('information_schema.schemata')->where('schema_name', 'matriculaonline')->get();
         if($schema->count() === 0) {
-            DB::statement(\DB::raw("CREATE SCHEMA matriculaonline"));
+            DB::statement("CREATE SCHEMA matriculaonline");
         }
 
         DB::statement("ALTER EVENT TRIGGER evtg_dicionario_gatilho_ddl ENABLE;");

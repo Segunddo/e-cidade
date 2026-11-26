@@ -33,7 +33,7 @@ class TipoDebitoRepository
                 k00_descr;
 SQL;
 
-        return DB::select(DB::raw($sql));
+        return DB::select($sql);
     }
 
     public static function getTipoDebito($k00_tipo)
@@ -59,7 +59,7 @@ SQL;
             limit 1;
 SQL;
 
-        $result = DB::select(DB::raw($sql));
+        $result = DB::select($sql);
 
         if (count($result) === 0) {
             throw new Exception("Nenhum resultado foi encotrado.");

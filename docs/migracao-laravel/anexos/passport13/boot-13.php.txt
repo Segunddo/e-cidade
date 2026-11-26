@@ -1,0 +1,23 @@
+<?php
+// Boot do Laravel 13 (Testbench) com o AuthServiceProvider do PR. Uso: php boot.php [original|proposto]
+error_reporting(E_ALL & ~E_DEPRECATED);
+require '/w/vendor/autoload.php';
+$modo = $argv[1] ?? 'original';
+spl_autoload_register(function ($c) use ($modo) {
+    if (strpos($c, 'App\\') === 0) {
+        $rel = str_replace('\\', '/', substr($c, 4)) . '.php';
+        foreach (($modo === 'proposto' ? ['/s85/', '/pr/app/'] : ['/pr/app/']) as $d) { if (is_file($d . $rel)) { require $d . $rel; return; } }
+    }
+});
+$app = Orchestra\Testbench\Foundation\Application::create(options: ['load_environment_variables' => false]);
+$app['config']->set('auth.guards.api', ['driver' => 'passport', 'provider' => 'users']);
+$app['config']->set('auth.providers.users', ['driver' => 'eloquent', 'model' => App\Domain\Configuracao\Usuario\Models\Usuario::class]);
+try {
+    $app->register(App\Providers\AuthServiceProvider::class);
+    $app->register(Laravel\Passport\PassportServiceProvider::class);
+    $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+    echo "BOOT OK\n";
+    foreach ($app['router']->getRoutes() as $r) { if (str_contains($r->uri(), 'oauth')) { echo implode('|', $r->methods()), ' ', $r->uri(), "\n"; } }
+} catch (Throwable $e) {
+    echo "FALHA: ", get_class($e), ': ', $e->getMessage(), "\n  em ", str_replace(['/w/', '/pr/'], ['', 'ecidade/'], $e->getFile()), ':', $e->getLine(), "\n";
+}

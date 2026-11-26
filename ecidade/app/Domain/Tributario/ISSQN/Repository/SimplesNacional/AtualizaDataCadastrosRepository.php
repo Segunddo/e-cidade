@@ -35,11 +35,9 @@ class AtualizaDataCadastrosRepository
         $setters = trim($setFrequenciaAtualizacoes . $setDiaDoMes . $setDiaDaSemana . $setHorario, ',');
 
         $atualizado = \DB::select(
-            \DB::raw(
                 "update parissqn 
                  set
                     {$setters} returning *"
-            )
         );
 
         return $atualizado;
@@ -71,7 +69,7 @@ class AtualizaDataCadastrosRepository
      */
     public function validaUsuarioLogado($idUsuario)
     {
-        $resultado = \DB::select(\DB::raw("
+        $resultado = \DB::select("
             select
               case
                 when id is null then false
@@ -92,7 +90,7 @@ class AtualizaDataCadastrosRepository
                   and administrador = 1
                   and db_usuarios.id_usuario = {$idUsuario}
               ) as buscaUsuarios
-        "));
+        ");
 
         $usuarioAdministrador = count($resultado) > 0
             ? (property_exists($resultado[0], 'usuarioadministrador')

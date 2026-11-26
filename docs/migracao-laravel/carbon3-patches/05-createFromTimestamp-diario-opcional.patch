@@ -1,0 +1,32 @@
+diff --git a/ecidade/src/Educacao/Escola/Relatorios/DiarioClasse/DiarioClassePdf.php b/ecidade/src/Educacao/Escola/Relatorios/DiarioClasse/DiarioClassePdf.php
+index 5e706aaa0..d2e106397 100644
+--- a/ecidade/src/Educacao/Escola/Relatorios/DiarioClasse/DiarioClassePdf.php
++++ b/ecidade/src/Educacao/Escola/Relatorios/DiarioClasse/DiarioClassePdf.php
+@@ -360,7 +360,8 @@ protected function emitirCorpo(
+                             if ($matricula->getCodigo() === $matriculasDoAluno[$i]->getCodigo() &&
+                                 $matriculasDoAluno[$i - 1]->getSituacao() === 'TROCA DE TURMA') {
+                                 $saidaAlunoUltimaTurma = \Carbon\Carbon::createFromTimestamp(
+-                                    $matriculasDoAluno[$i - 1]->getDataEncerramento()->getTimestamp()
++                                    $matriculasDoAluno[$i - 1]->getDataEncerramento()->getTimestamp(),
++                                    date_default_timezone_get()
+                                 );
+ 
+                                 if (
+@@ -1108,13 +1109,15 @@ private function imprimeCelulasFrequencia($meses, Model\AlunoDiarioClasse $aluno
+                         $achouTrocaDeTurma = true;
+ 
+                         $saidaAlunoUltimaTurma = \Carbon\Carbon::createFromTimestamp(
+-                            $matriculasDoAluno[$i-1]->getDataEncerramento()->getTimestamp()
++                            $matriculasDoAluno[$i-1]->getDataEncerramento()->getTimestamp(),
++                            date_default_timezone_get()
+                         );
+                         $saidaAlunoUltimaTurmaMes = $saidaAlunoUltimaTurma->month;
+                         $saidaAlunoUltimaTurmaDia = $saidaAlunoUltimaTurma->day;
+ 
+                         $inicioDoDiario = \Carbon\Carbon::createFromTimestamp(
+-                            $meses->meses[array_keys($meses->meses)[0]]->dias[0]->data->getTimestamp()
++                            $meses->meses[array_keys($meses->meses)[0]]->dias[0]->data->getTimestamp(),
++                            date_default_timezone_get()
+                         );
+                         $inicioDoDiarioMes = $inicioDoDiario->month;
+                         $inicioDoDiarioDia = $inicioDoDiario->day;

@@ -1,0 +1,115 @@
+2,6c2,5
+<   TUDO json={"a_antes":"x","c142_data":"2021-03-15T13:20:30.000000Z","c142_validade":"2021-03-15T13:20:30.000000Z","z_depois":5}
+<   TUDO arr_chaves=a_antes,c142_data,c142_validade,z_depois
+<   c142_data d get=Illuminate\Support\Carbon|2021-03-15 00:00:00.000000 -03:00
+<   c142_data d arr='2021-03-15T03:00:00.000000Z'
+<   c142_data d json='2021-03-15T03:00:00.000000Z'
+---
+>   TUDO EXC Error: Call to undefined method DateTime::get()
+>   c142_data d get EXC Error: Call to undefined method DateTime::get()
+>   c142_data d arr EXC Error: Call to undefined method DateTime::get()
+>   c142_data d json EXC Error: Call to undefined method DateTime::get()
+8,10c7,9
+<   c142_data dh get=Illuminate\Support\Carbon|2021-03-15 10:20:30.000000 -03:00
+<   c142_data dh arr='2021-03-15T13:20:30.000000Z'
+<   c142_data dh json='2021-03-15T13:20:30.000000Z'
+---
+>   c142_data dh get EXC Error: Call to undefined method DateTime::get()
+>   c142_data dh arr EXC Error: Call to undefined method DateTime::get()
+>   c142_data dh json EXC Error: Call to undefined method DateTime::get()
+12,14c11,13
+<   c142_data us get=Illuminate\Support\Carbon|2021-03-15 10:20:30.123456 -03:00
+<   c142_data us arr='2021-03-15T13:20:30.123456Z'
+<   c142_data us json='2021-03-15T13:20:30.123456Z'
+---
+>   c142_data us get EXC Error: Call to undefined method DateTime::get()
+>   c142_data us arr EXC Error: Call to undefined method DateTime::get()
+>   c142_data us json EXC Error: Call to undefined method DateTime::get()
+16,22c15,21
+<   c142_data br get EXC Carbon\Exceptions\InvalidFormatException: Could not parse '15/03/2021': Failed to parse time string (15/03/2021) at position 0 (1): Unexpected character
+<   c142_data br arr EXC Carbon\Exceptions\InvalidFormatException: Could not parse '15/03/2021': Failed to parse time string (15/03/2021) at position 0 (1): Unexpected character
+<   c142_data br json EXC Carbon\Exceptions\InvalidFormatException: Could not parse '15/03/2021': Failed to parse time string (15/03/2021) at position 0 (1): Unexpected character
+<   c142_data br set EXC Carbon\Exceptions\InvalidFormatException: Could not parse '15/03/2021': Failed to parse time string (15/03/2021) at position 0 (1): Unexpected character
+<   c142_data ts get=Illuminate\Support\Carbon|2021-03-15 09:20:30.000000 -03:00
+<   c142_data ts arr='2021-03-15T12:20:30.000000Z'
+<   c142_data ts json='2021-03-15T12:20:30.000000Z'
+---
+>   c142_data br get EXC Error: Call to undefined method DateTime::get()
+>   c142_data br arr EXC Error: Call to undefined method DateTime::get()
+>   c142_data br json EXC Error: Call to undefined method DateTime::get()
+>   c142_data br set EXC Error: Call to undefined method DateTime::set()
+>   c142_data ts get EXC Error: Call to undefined method DateTime::get()
+>   c142_data ts arr EXC Error: Call to undefined method DateTime::get()
+>   c142_data ts json EXC Error: Call to undefined method DateTime::get()
+24,26c23,25
+<   c142_data nulo get=NULL
+<   c142_data nulo arr='(ausente)'
+<   c142_data nulo json='(ausente)'
+---
+>   c142_data nulo get EXC Error: Call to undefined method DateTime::get()
+>   c142_data nulo arr EXC Error: Call to undefined method DateTime::get()
+>   c142_data nulo json EXC Error: Call to undefined method DateTime::get()
+28,30c27,29
+<   c142_data vazio get=Illuminate\Support\Carbon|2030-01-01 12:00:00.000000 -03:00
+<   c142_data vazio arr='2030-01-01T15:00:00.000000Z'
+<   c142_data vazio json='2030-01-01T15:00:00.000000Z'
+---
+>   c142_data vazio get EXC Error: Call to undefined method DateTime::get()
+>   c142_data vazio arr EXC Error: Call to undefined method DateTime::get()
+>   c142_data vazio json EXC Error: Call to undefined method DateTime::get()
+34,36c33,35
+<   c142_validade d get=Illuminate\Support\Carbon|2021-03-15 00:00:00.000000 -03:00
+<   c142_validade d arr='2021-03-15T03:00:00.000000Z'
+<   c142_validade d json='2021-03-15T03:00:00.000000Z'
+---
+>   c142_validade d get EXC Error: Call to undefined method DateTime::get()
+>   c142_validade d arr EXC Error: Call to undefined method DateTime::get()
+>   c142_validade d json EXC Error: Call to undefined method DateTime::get()
+38,40c37,39
+<   c142_validade dh get=Illuminate\Support\Carbon|2021-03-15 10:20:30.000000 -03:00
+<   c142_validade dh arr='2021-03-15T13:20:30.000000Z'
+<   c142_validade dh json='2021-03-15T13:20:30.000000Z'
+---
+>   c142_validade dh get EXC Error: Call to undefined method DateTime::get()
+>   c142_validade dh arr EXC Error: Call to undefined method DateTime::get()
+>   c142_validade dh json EXC Error: Call to undefined method DateTime::get()
+42,44c41,43
+<   c142_validade us get=Illuminate\Support\Carbon|2021-03-15 10:20:30.123456 -03:00
+<   c142_validade us arr='2021-03-15T13:20:30.123456Z'
+<   c142_validade us json='2021-03-15T13:20:30.123456Z'
+---
+>   c142_validade us get EXC Error: Call to undefined method DateTime::get()
+>   c142_validade us arr EXC Error: Call to undefined method DateTime::get()
+>   c142_validade us json EXC Error: Call to undefined method DateTime::get()
+46,52c45,51
+<   c142_validade br get EXC Carbon\Exceptions\InvalidFormatException: Could not parse '15/03/2021': Failed to parse time string (15/03/2021) at position 0 (1): Unexpected character
+<   c142_validade br arr EXC Carbon\Exceptions\InvalidFormatException: Could not parse '15/03/2021': Failed to parse time string (15/03/2021) at position 0 (1): Unexpected character
+<   c142_validade br json EXC Carbon\Exceptions\InvalidFormatException: Could not parse '15/03/2021': Failed to parse time string (15/03/2021) at position 0 (1): Unexpected character
+<   c142_validade br set EXC Carbon\Exceptions\InvalidFormatException: Could not parse '15/03/2021': Failed to parse time string (15/03/2021) at position 0 (1): Unexpected character
+<   c142_validade ts get=Illuminate\Support\Carbon|2021-03-15 09:20:30.000000 -03:00
+<   c142_validade ts arr='2021-03-15T12:20:30.000000Z'
+<   c142_validade ts json='2021-03-15T12:20:30.000000Z'
+---
+>   c142_validade br get EXC Error: Call to undefined method DateTime::get()
+>   c142_validade br arr EXC Error: Call to undefined method DateTime::get()
+>   c142_validade br json EXC Error: Call to undefined method DateTime::get()
+>   c142_validade br set EXC Error: Call to undefined method DateTime::set()
+>   c142_validade ts get EXC Error: Call to undefined method DateTime::get()
+>   c142_validade ts arr EXC Error: Call to undefined method DateTime::get()
+>   c142_validade ts json EXC Error: Call to undefined method DateTime::get()
+54,56c53,55
+<   c142_validade nulo get=NULL
+<   c142_validade nulo arr='(ausente)'
+<   c142_validade nulo json='(ausente)'
+---
+>   c142_validade nulo get EXC Error: Call to undefined method DateTime::get()
+>   c142_validade nulo arr EXC Error: Call to undefined method DateTime::get()
+>   c142_validade nulo json EXC Error: Call to undefined method DateTime::get()
+58,60c57,59
+<   c142_validade vazio get=Illuminate\Support\Carbon|2030-01-01 12:00:00.000000 -03:00
+<   c142_validade vazio arr='2030-01-01T15:00:00.000000Z'
+<   c142_validade vazio json='2030-01-01T15:00:00.000000Z'
+---
+>   c142_validade vazio get EXC Error: Call to undefined method DateTime::get()
+>   c142_validade vazio arr EXC Error: Call to undefined method DateTime::get()
+>   c142_validade vazio json EXC Error: Call to undefined method DateTime::get()

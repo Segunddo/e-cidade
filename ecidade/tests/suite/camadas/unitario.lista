@@ -1,0 +1,11 @@
+# Entradas do PHPUnit que rodam sem banco (uma por linha, caminho a partir de ecidade/). Lacunas em lacunas.lista.
+tests/Unit/Configuracao
+tests/Unit/Core
+tests/Unit/Financeiro
+tests/Unit/Patrimonial
+tests/Unit/RecursosHumanos
+tests/Unit/Saude
+tests/Unit/Std
+tests/Unit/Tributario
+tests/Unit/ExampleTest.php
+tests/Unit/ValidateAnexoBase64eAdicionaCaminhoTemporarioTest.php

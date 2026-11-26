@@ -9,7 +9,7 @@ class Alocado extends Model
     protected $table = 'plugins.alocados';
     public $timestamps = false;
     protected $primaryKey = 'mo13_codigo';
-    protected $dates = ['mo13_data'];
+    protected $casts = ['mo13_data' => 'datetime'];
 
     public function situacao()
     {

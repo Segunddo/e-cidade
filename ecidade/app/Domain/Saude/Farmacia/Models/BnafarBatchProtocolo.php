@@ -19,7 +19,6 @@ class BnafarBatchProtocolo extends Model
     protected $table = 'farmacia.bnafarbatch_protocolo';
     protected $primaryKey = 'fa76_id';
 
-    public $dates = [ 'fa76_created_at', ];
     public $casts = [ 'fa76_created_at' => 'datetime',];
 
     public function bnafarBatch()

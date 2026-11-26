@@ -23,9 +23,6 @@ class UnidadesOrigemRequest extends DBFormRequest
      */
     public function messages()
     {
-        return [
-            'ativo' => 'O campo ativo é obrigatório e deve ser um logico',
-            'descricao' => 'O campo descrição é obrigatório e deve ser uma string'
-        ];
+        return [];
     }
 }

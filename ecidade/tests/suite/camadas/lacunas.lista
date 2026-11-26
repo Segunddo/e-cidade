@@ -1,0 +1,4 @@
+# O que a suite nao roda hoje, e por que.
+tests/Unit/V3: 14 arquivos estendem PHPUnit_Framework_TestCase (PHPUnit 4), que o PHPUnit 8.5 do composer nao tem: fatal em qualquer runtime; com o display_errors do sistema desligado o PHPUnit sai sem mensagem
+tests/Unit/Recadastramento.php: nome sem o sufixo Test.php, o phpunit.xml nao o seleciona
+tests/Feature: so tem .gitkeep

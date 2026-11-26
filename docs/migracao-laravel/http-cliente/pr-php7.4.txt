@@ -1,0 +1,82 @@
+== H01 | request GET + headers (ConsultaSituacaoContribuinteService: timeout dentro de headers)
+   recebido: {"metodo":"GET","uri":"/ok?x=1&y=a%20b","cabecalhos":{"accept":"application/xml","autenticacao":"tok","host":"HOST","timeout":"20","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":200,"razao":"OK","tipo":"application/json","corpo":"{\"ok\":true,\"acentuacao\":\"ação\"}","location":""}
+== H02 | get com verify=false (CertificadoPfxService)
+   recebido: {"metodo":"GET","uri":"/ok","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":200,"razao":"OK","tipo":"application/json","corpo":"{\"ok\":true,\"acentuacao\":\"ação\"}","location":""}
+== H03 | post form_params + headers (EAuth/PNCP/Redesim)
+   recebido: {"metodo":"POST","uri":"/criado","cabecalhos":{"accept":"application/json","content-length":"93","content-type":"application/x-www-form-urlencoded","host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":"grant_type=client_credentials&client_id=a+b&nome=A%C3%87%C3%83O&lista%5B0%5D=1&lista%5B1%5D=2"}
+   cliente : {"status":201,"razao":"Created","tipo":"application/json","corpo":"{\"id\":7}","location":"/ok"}
+== H04 | post json
+   recebido: {"metodo":"POST","uri":"/criado","cabecalhos":{"content-length":"73","content-type":"application/json","host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":"{\"cnpj\":\"12.345.678\\/0001-90\",\"itens\":[{\"n\":1}],\"texto\":\"a\\u00e7\\u00e3o\"}"}
+   cliente : {"status":201,"razao":"Created","tipo":"application/json","corpo":"{\"id\":7}","location":"/ok"}
+== H05 | post multipart (Storage\Curl\Post)
+   recebido: {"metodo":"POST","uri":"/criado","cabecalhos":{"accept":"application/json","authorization":"Bearer t","content-length":"346","content-type":"multipart/form-data; boundary=BOUNDARY","host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":201,"razao":"Created","tipo":"application/json","corpo":"{\"id\":7}","location":"/ok"}
+== H06 | auth basico
+   recebido: {"metodo":"GET","uri":"/ok","cabecalhos":{"authorization":"Basic dXN1YXJpbzpzZW5oYQ==","host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":200,"razao":"OK","tipo":"application/json","corpo":"{\"ok\":true,\"acentuacao\":\"ação\"}","location":""}
+== H07 | base_uri + URI relativa
+   recebido: {"metodo":"GET","uri":"/ok?z=2","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":200,"razao":"OK","tipo":"application/json","corpo":"{\"ok\":true,\"acentuacao\":\"ação\"}","location":""}
+== H08 | put
+   recebido: {"metodo":"PUT","uri":"/ok","cabecalhos":{"content-length":"7","content-type":"application/json","host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":"{\"a\":1}"}
+   cliente : {"status":200,"razao":"OK","tipo":"application/json","corpo":"{\"ok\":true,\"acentuacao\":\"ação\"}","location":""}
+== H09 | delete
+   recebido: {"metodo":"DELETE","uri":"/ok","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":200,"razao":"OK","tipo":"application/json","corpo":"{\"ok\":true,\"acentuacao\":\"ação\"}","location":""}
+== H10 | requestAsync POST ->wait() (PNCPClient)
+   recebido: {"metodo":"POST","uri":"/criado","cabecalhos":{"authorization":"tk","content-length":"7","content-type":"application/json","host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":"{\"a\":1}"}
+   cliente : {"status":201,"razao":"Created","tipo":"application/json","corpo":"{\"id\":7}","location":"/ok"}
+== H11 | requestAsync DELETE ->wait()
+   recebido: {"metodo":"DELETE","uri":"/ok","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":200,"razao":"OK","tipo":"application/json","corpo":"{\"ok\":true,\"acentuacao\":\"ação\"}","location":""}
+== H12 | requestAsync PUT ->wait()
+   recebido: {"metodo":"PUT","uri":"/ok","cabecalhos":{"content-length":"3","host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":"x=1"}
+   cliente : {"status":200,"razao":"OK","tipo":"application/json","corpo":"{\"ok\":true,\"acentuacao\":\"ação\"}","location":""}
+== H13e400 | erro: ClientException 400 com corpo JSON
+   recebido: {"metodo":"GET","uri":"/e400","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"excecao":"GuzzleHttp\\Exception\\ClientException","mensagem":"Client error: `GET http://HOST/e400` resulted in a `400 Bad Request` response: {\"erro\":\"requisicao invalida\",\"campo\":\"cnpj\"} ","resposta":{"status":400,"corpo":"{\"erro\":\"requisicao invalida\",\"campo\":\"cnpj\"}"}}
+== H13e401 | erro: 401
+   recebido: {"metodo":"GET","uri":"/e401","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"excecao":"GuzzleHttp\\Exception\\ClientException","mensagem":"Client error: `GET http://HOST/e401` resulted in a `401 Unauthorized` response: nao autorizado ","resposta":{"status":401,"corpo":"nao autorizado"}}
+== H13e404 | erro: 404 com corpo longo (300 bytes)
+   recebido: {"metodo":"GET","uri":"/e404","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"excecao":"GuzzleHttp\\Exception\\ClientException","mensagem":"Client error: `GET http://HOST/e404` resulted in a `404 Not Found` response: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (truncated...) ","resposta":{"status":404,"corpo":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
+== H13e500 | erro: ServerException 500
+   recebido: {"metodo":"GET","uri":"/e500","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"excecao":"GuzzleHttp\\Exception\\ServerException","mensagem":"Server error: `GET http://HOST/e500` resulted in a `500 Internal Server Error` response: falha interna ","resposta":{"status":500,"corpo":"falha interna"}}
+== H13e503 | erro: 503 vazio
+   recebido: {"metodo":"GET","uri":"/e503","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"excecao":"GuzzleHttp\\Exception\\ServerException","mensagem":"Server error: `GET http://HOST/e503` resulted in a `503 Service Unavailable` response","resposta":{"status":503,"corpo":""}}
+== H14 | http_errors=false em 500 (sem excecao)
+   recebido: {"metodo":"GET","uri":"/e500","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":500,"razao":"Internal Server Error","tipo":"text/html; charset=UTF-8","corpo":"falha interna","location":""}
+== H15 | requestAsync 404 ->wait(): excecao
+   recebido: {"metodo":"GET","uri":"/e404","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"excecao":"GuzzleHttp\\Exception\\ClientException","mensagem":"Client error: `GET http://HOST/e404` resulted in a `404 Not Found` response: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx (truncated...) ","resposta":{"status":404,"corpo":"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"}}
+== H16 | redirecionamento 302 (padrao: segue)
+   recebido: {"metodo":"GET","uri":"/ok","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":200,"razao":"OK","tipo":"application/json","corpo":"{\"ok\":true,\"acentuacao\":\"ação\"}","location":""}
+== H17 | resposta gzip (decode_content padrao)
+   recebido: {"metodo":"GET","uri":"/gz","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":200,"razao":"OK","tipo":"text/plain;charset=UTF-8","corpo":"texto comprimido","location":""}
+== H18 | resposta 204 vazia
+   recebido: {"metodo":"GET","uri":"/vazio","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":204,"razao":"No Content","tipo":"text/html; charset=UTF-8","corpo":"","location":""}
+== H19 | XML (SimpleXMLElement no codigo)
+   recebido: {"metodo":"GET","uri":"/xml","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"status":200,"razao":"OK","tipo":"application/xml","corpo":"<r><s>ok</s></r>","location":""}
+== H20 | timeout de 1 s numa resposta de 1,5 s (opcao timeout)
+   recebido: {"metodo":"GET","uri":"/lento","cabecalhos":{"host":"HOST","user-agent":"GuzzleHttp/7 <versao do curl e do PHP>"},"corpo":""}
+   cliente : {"excecao":"GuzzleHttp\\Exception\\ConnectException","mensagem":"cURL error 28: Operation timed out after N milliseconds with 0 bytes received (see curl) for URL"}
+== H21 | porta fechada: ConnectException
+   recebido: "(nenhum pedido)"
+   cliente : {"excecao":"GuzzleHttp\\Exception\\ConnectException","mensagem":"cURL error 7: Failed to connect to 127.0.0.1 port 9 after 0 ms: Connection refused (see curl) for URL"}
+== H22 | host que nao resolve: ConnectException
+   recebido: "(nenhum pedido)"
+   cliente : {"excecao":"GuzzleHttp\\Exception\\ConnectException","mensagem":"cURL error 6: Could not resolve host: servidor.invalido (see curl) for URL"}
+== H23 | ServerRequest/Response PSR-7 (AuthService)
+   cliente : {"metodo":"POST","uri":"/v4/login","ct":"application/json","corpo":"{\"a\":1}","resp":"ok","status":201}
+# php 7.4.33, curl 7.81.0, default_charset UTF-8
+# guzzle 7.5.0, psr7 2.7.0, promises 1.5.3

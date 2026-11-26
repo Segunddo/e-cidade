@@ -1,0 +1,76 @@
+U1 | boot original (PHP_VERSION_ID < 74000) [LC_TIME=pt_BR] c01_data=2025-03-01 ->formatLocalized('%B') => março [6d6172e76f]
+U2 | boot original (PHP_VERSION_ID < 74000) Carbon::create(2025,3,1)->formatLocalized('%B') => março [6d6172e76f]
+U3 | boot original (PHP_VERSION_ID < 74000) Carbon::now()->formatLocalized('%d de %B de %Y') => 01 de janeiro de 2030 [3031206465206a616e6569726f2064652032303330]
+U1 |   proposta B: strftime('%B', ts) => março [6d6172e76f]
+U3 |   proposta B: strftime('%d de %B de %Y', ts) => 01 de janeiro de 2030 [3031206465206a616e6569726f2064652032303330]
+U1 |   proposta C: locale('pt_BR')->translatedFormat('F') em ISO-8859-1 => março [6d6172e76f]
+U3 |   proposta C: locale('pt_BR')->translatedFormat('d \d\e F \d\e Y') em ISO-8859-1 => 01 de janeiro de 2030 [3031206465206a616e6569726f2064652032303330]
+U1 | boot com a T-139 (PHP_VERSION_ID < 90000) [LC_TIME=pt_BR] c01_data=2025-03-01 ->formatLocalized('%B') => março [6d6172e76f]
+U2 | boot com a T-139 (PHP_VERSION_ID < 90000) Carbon::create(2025,3,1)->formatLocalized('%B') => março [6d6172e76f]
+U3 | boot com a T-139 (PHP_VERSION_ID < 90000) Carbon::now()->formatLocalized('%d de %B de %Y') => 01 de janeiro de 2030 [3031206465206a616e6569726f2064652032303330]
+U1 |   proposta B: strftime('%B', ts) => março [6d6172e76f]
+U3 |   proposta B: strftime('%d de %B de %Y', ts) => 01 de janeiro de 2030 [3031206465206a616e6569726f2064652032303330]
+U1 |   proposta C: locale('pt_BR')->translatedFormat('F') em ISO-8859-1 => março [6d6172e76f]
+U3 |   proposta C: locale('pt_BR')->translatedFormat('d \d\e F \d\e Y') em ISO-8859-1 => 01 de janeiro de 2030 [3031206465206a616e6569726f2064652032303330]
+U5 | RegistroAulaController.php:67/77, CalendarioController.php:83: createFromTimestamp(time()=23:30 local)->format(Y-m-d) => '2030-01-01'
+U5 |   idem, objeto => Carbon\Carbon|2030-01-01 23:30:00 -03:00
+U5 |   proposta: createFromTimestamp($ts, date_default_timezone_get())->format(Y-m-d) => '2030-01-01'
+U6 | DiarioClassePdf.php:362/1110/1116: createFromTimestamp(meia-noite local de 2021-03-15) month/day => '3/15'
+U6 |   idem com 22:00 local => '3/15'
+U6 |   lt() entre o periodo do diario (2021-03-15 00:00 local) e a data de saida (createFromTimestamp) => false
+U7 | mtime 15 min no passado: createFromTimestamp->diffInMinutes(new Carbon()) > 10 => array (
+  0 => 15,
+  1 => true,
+)
+U7 | mtime 15 min no futuro (relogio atrasado) => array (
+  0 => 15,
+  1 => true,
+)
+U7 |   proposta: diffInMinutes(new Carbon(), true) no futuro => array (
+  0 => 15,
+  1 => true,
+)
+U7 |   proposta: diffInMinutes(new Carbon(), true) no passado => array (
+  0 => 15,
+  1 => true,
+)
+U8 | Carbon::parse('1990-05-20')->age => 39
+U8 |   proposta abs(Carbon::parse('1990-05-20')->age) => 39
+U8 | Carbon::parse('1990-05-20')->subMonth(6)->age (rh312_quantidade=6) => 40
+U8 | Carbon::parse('2012-12-31')->age => 17
+U8 |   proposta abs(Carbon::parse('2012-12-31')->age) => 17
+U8 | Carbon::parse('2012-12-31')->subMonth(6)->age (rh312_quantidade=6) => 17
+U8 | Carbon::parse('2031-06-01')->age => 1
+U8 |   proposta abs(Carbon::parse('2031-06-01')->age) => 1
+U8 | Carbon::parse('2031-06-01')->subMonth(6)->age (rh312_quantidade=6) => 0
+U9 | createFromFormat(Y-m-d, '2021-03-15') => Carbon\Carbon|2021-03-15 23:30:00 -03:00
+U9 | createFromFormat(Y-m-d, '2021-03-15 10:20:30') => EXC Carbon\Exceptions\InvalidFormatException: Trailing data
+U9 | createFromFormat(Y-m-d, '') => EXC Carbon\Exceptions\InvalidFormatException: Data missing
+U9 | createFromFormat(d/m/Y, '15/03/2021') => Carbon\Carbon|2021-03-15 23:30:00 -03:00
+U9 | createFromFormat(d/m/Y, '2021-03-15') => EXC Carbon\Exceptions\InvalidFormatException: The separation symbol could not be found Unexpected data found. Trailing data
+U9 | createFromFormat(Ymd, '20210315') => Carbon\Carbon|2021-03-15 23:30:00 -03:00
+U9 | createFromFormat(Y-m-d H:i, '2021-03-15 10:20') => Carbon\Carbon|2021-03-15 10:20:00 -03:00
+U9 | createFromFormat(Y-m-d, '2021-02-30') => Carbon\Carbon|2021-03-02 23:30:00 -03:00
+U9 | createFromFormat(Y-m-d, NULL) => EXC Carbon\Exceptions\InvalidFormatException: Data missing
+U10 | createFromFormat(Y-m-d,'2021-01-31')->addMonth(1)->firstOfMonth()->format(Y-m-d) => '2021-03-01'
+U10 | createFromFormat(Y-m-d,'2021-12-15')->addMonth(1)->firstOfMonth()->format(Y-m-d) => '2022-01-01'
+U10 | createFromFormat(Y-m-d,'2021-03-15')->addMonth(1)->firstOfMonth()->format(Y-m-d) => '2021-04-01'
+U11 | parse(2021-03-15)->startOfDay / endOfDay => array (
+  0 => '2021-03-15 00:00:00.000000',
+  1 => '2021-03-15 23:59:59.999999',
+)
+U11 | toDateString / getTimestamp => array (
+  0 => '2021-03-15',
+  1 => 1615813200,
+)
+U12 | between (ProcessoInscricaoController.php:94, ProcessoInscricaoService.php:101) => array (
+  0 => true,
+  1 => true,
+)
+U13 | AuthServiceProvider.php:35-37 Carbon::now()->addDay() / addDays(2): tipo devolvido => array (
+  0 => 'Carbon\\Carbon',
+  1 => '2030-01-02 23:30',
+  2 => '2030-01-03 23:30',
+)
+U14 | addMinutes(10) (ProcessoEletronico.php:208, requisicaoMaterial.model.php:550) => '2030-01-01 23:40:00'
+U15 | now()->subDay() (PruneOldTokens.php:33) => '2029-12-31 23:30:00'

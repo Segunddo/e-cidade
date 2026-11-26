@@ -30,10 +30,10 @@ class Fase extends Model
     public $timestamps = false;
     protected $primaryKey = 'mo04_codigo';
     public $incrementing = true;
-    protected $dates = [
-        'mo04_datacorte',
-        'mo04_dtfim',
-        'mo04_dtini'
+    protected $casts = [
+        'mo04_datacorte' => 'datetime',
+        'mo04_dtfim' => 'datetime',
+        'mo04_dtini' => 'datetime'
     ];
 
     protected $fillable = [

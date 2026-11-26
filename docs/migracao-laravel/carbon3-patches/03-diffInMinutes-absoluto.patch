@@ -1,0 +1,13 @@
+diff --git a/ecidade/app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php b/ecidade/app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php
+index 7191757e8..668ddffff 100644
+--- a/ecidade/app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php
++++ b/ecidade/app/Domain/Financeiro/Contabilidade/Services/ApropriacaoDecimoFeriasService.php
+@@ -379,7 +379,7 @@ private function validaLock()
+         // Se passou de 10 minutos, deleta o arquivo e recria, pois provavelmente o sistema deu algum erro ou foi
+         // fechada a rotina antes de concluir o processo.
+         // Nesse caso, removemos o arquivo, pois é considerado que o processo ja concluiu.
+-        if ($data->diffInMinutes((new Carbon())) > 10) {
++        if ($data->diffInMinutes((new Carbon()), true) > 10) {
+             $this->removeLock();
+             Storage::put($fileLock, 'Processando apropriação/estorno de décimo ou férias');
+             return true;

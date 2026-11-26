@@ -11,11 +11,11 @@ class Slip extends Model
 
     public $timestamps = false;
 
-    protected $dates = [
-        'k17_data',
-        'k17_dtaut',
-        'k17_dtanu',
-        'k17_dtestorno',
+    protected $casts = [
+        'k17_data' => 'datetime',
+        'k17_dtaut' => 'datetime',
+        'k17_dtanu' => 'datetime',
+        'k17_dtestorno' => 'datetime',
     ];
 
     public function decendio()

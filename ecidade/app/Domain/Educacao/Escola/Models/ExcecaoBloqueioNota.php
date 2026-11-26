@@ -23,7 +23,7 @@ class ExcecaoBloqueioNota extends Model
 {
     protected $table = 'escola.excecoesbloqueionota';
     protected $primaryKey = 'ed363_codigo';
-    protected $dates = ['ed363_datalimite'];
+    protected $casts = ['ed363_datalimite' => 'datetime'];
 
     public function turma()
     {

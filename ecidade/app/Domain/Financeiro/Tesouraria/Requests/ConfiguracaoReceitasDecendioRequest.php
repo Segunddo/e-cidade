@@ -19,7 +19,9 @@ class ConfiguracaoReceitasDecendioRequest extends DBFormRequest
     public function messages()
     {
         return [
-            'receitas.*' => 'Você deve informar as receitas.',
+            'receitas.required' => 'Você deve informar as receitas.',
+            'receitas.array' => 'Você deve informar as receitas.',
+            'receitas.min' => 'Você deve informar as receitas.',
             'desdobramentos.*' => 'Você deve informar os desdobramentos.',
             'exercicio.*' => 'Você deve informar o exercício.',
         ];

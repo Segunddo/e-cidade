@@ -1,0 +1,18 @@
+P01a ApropriacaoDecimoFeriasService:61 nomeMes (c01_data=2025-03-01) | Março [4d6172e76f]
+P01b ApropriacaoDecimoFeriasService:73 nomeMes proximaCompetenciaApropriar (2025-03) | março [6d6172e76f]
+P01c ApropriacaoDecimoFeriasService:98 nomeMes proximaCompetenciaExtornar (2025-03) | março [6d6172e76f]
+P01d ImprimirRelatorioTemplateService:87 dataAtualExtenso (agora = 2030-01-01) | 01 de janeiro de 2030 [3031206465206a616e6569726f2064652032303330]
+P02a RegistroAulaController:67 DB_datausu = time() as 23:30 locais | Carbon\Carbon|2030-01-01 23:30:00 -03:00
+P02b RegistroAulaController:77 DB_datausu | Carbon\Carbon|2030-01-01 23:30:00 -03:00
+P02c CalendarioController:83 DB_datausu | Carbon\Carbon|2030-01-01 23:30:00 -03:00
+P03 ApropriacaoDecimoFeriasService:382 diffInMinutes passado (trava de 15 min atras) | 15.0
+P03 ApropriacaoDecimoFeriasService:382 diffInMinutes futuro (relogio atrasado: 15 min a frente) | 15.0
+P04a RhDependController:73 idade nasc=1990-05-20 | 39
+P04b RhDepend:27 idade nasc=1990-05-20 | 39
+P04c AjudaCustoService:246 idadeLancamento nasc=1990-05-20, 1 mes | 39
+P04a RhDependController:73 idade nasc=2012-12-31 | 17
+P04b RhDepend:27 idade nasc=2012-12-31 | 17
+P04c AjudaCustoService:246 idadeLancamento nasc=2012-12-31, 1 mes | 17
+P04a RhDependController:73 idade nasc=2031-06-01 | 1
+P04b RhDepend:27 idade nasc=2031-06-01 | 1
+P04c AjudaCustoService:246 idadeLancamento nasc=2031-06-01, 1 mes | 1

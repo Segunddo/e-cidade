@@ -8,7 +8,7 @@ class AtividadeProfissionalEscola extends Model
 {
     protected $table = 'escola.rechumanoativ';
     protected $primaryKey = 'ed22_i_codigo';
-    protected $dates = ['ed22_datainicio', 'ed22_datafim'];
+    protected $casts = ['ed22_datainicio' => 'datetime', 'ed22_datafim' => 'datetime'];
     public $timestamps = false;
     public $incrementing = false;
 

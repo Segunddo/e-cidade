@@ -1,0 +1,24 @@
+diff -ru a/src/Css/Style.php b/src/Css/Style.php
+--- a/src/Css/Style.php	2026-11-20 01:40:56.209775662 -0300
++++ b/src/Css/Style.php	2026-11-20 01:40:56.212543022 -0300
+@@ -3301,7 +3301,7 @@
+         $this->_props_computed["z_index"] = null;
+         $this->_prop_cache["z_index"] = null;
+ 
+-        if (round($val) != $val && $val !== "auto") {
++        if (round((float)$val) != (float)$val && $val !== "auto") {
+             return;
+         }
+ 
+diff -ru a/src/FrameReflower/Block.php b/src/FrameReflower/Block.php
+--- a/src/FrameReflower/Block.php	2026-11-20 01:40:56.220214946 -0300
++++ b/src/FrameReflower/Block.php	2026-11-20 01:40:56.222459744 -0300
+@@ -375,7 +375,7 @@
+ 
+         } else {
+             // Expand the height if overflow is visible
+-            if ($height === "auto" && $content_height > $height /* && $style->overflow === "visible" */) {
++            if ($height === "auto" && $content_height > 0 /* && $style->overflow === "visible" */) {
+                 $height = $content_height;
+             }
+ 

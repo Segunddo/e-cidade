@@ -21,7 +21,6 @@ class ConferenciaExtraOrcamentariaRequest extends DBFormRequest
         return [
             'conta.required' => 'A data 1 deve ser informado.',
             'changed.required' => 'A data 2 deve ser informado.',
-            'tipo' => 'O tipo da conferencia deve ser informada.',
         ];
     }
 }

@@ -597,7 +597,7 @@ class ProjecaoDespesaService extends ProjecaoService
             'orctiporec.o15_recurso as subrecurso',
             'fonterecurso.codigo_siconfi as siconfi',
             'o15_complemento as complemento',
-            DB::raw("
+            "
             (SELECT json_agg(
                       json_build_object('ano', x.exercicio, 'percentual', x.percentual, 'deflator', x.deflator)
                     ) AS valores
@@ -610,7 +610,7 @@ class ProjecaoDespesaService extends ProjecaoService
                     ORDER BY pl7_exercicio
               ) AS x
             ) AS inflatores
-            ")
+            "
         ];
 
 

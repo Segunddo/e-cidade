@@ -36,9 +36,9 @@ class Matricula extends Model
     protected $appends = ['codigo'];
     protected $hidden = ['ed60_i_codigo'];
 
-    protected $dates = [
-        'ed60_d_datamatricula',
-        'ed60_d_datasaida'
+    protected $casts = [
+        'ed60_d_datamatricula' => 'datetime',
+        'ed60_d_datasaida' => 'datetime'
     ];
     /**
      * @var array

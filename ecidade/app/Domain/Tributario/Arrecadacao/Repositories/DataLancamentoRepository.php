@@ -88,7 +88,7 @@ class DataLancamentoRepository
                     )
                 ";
 
-        \DB::statement(\DB::raw($sql));
+        \DB::statement($sql);
 
         return;
     }
@@ -107,7 +107,7 @@ class DataLancamentoRepository
                 where k163_numpre = {$numpre}
                 ";
 
-        \DB::statement(\DB::raw($sql));
+        \DB::statement($sql);
 
         return;
     }

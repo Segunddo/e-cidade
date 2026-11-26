@@ -31,14 +31,11 @@ class Calendario extends Model
     public $timestamps = false;
     public $incrementing = false;
 
-    protected $dates = [
-        'ed52_d_inicio',
-        'ed52_d_fim',
-        'ed52_d_resultfinal',
-    ];
-
     protected $casts = [
-        'ed52_c_descr' => 'string'
+        'ed52_c_descr' => 'string',
+        'ed52_d_inicio' => 'datetime',
+        'ed52_d_fim' => 'datetime',
+        'ed52_d_resultfinal' => 'datetime',
     ];
     /**
      * @var []

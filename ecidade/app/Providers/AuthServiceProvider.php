@@ -28,9 +28,11 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Passport::routes(null, [
-            'prefix' => 'v4/oauth',
-        ]);
+        if (method_exists(Passport::class, 'routes')) {
+            Passport::routes(null, [
+                'prefix' => 'v4/oauth',
+            ]);
+        }
 
         Passport::tokensExpireIn(Carbon::now()->addDay());
 

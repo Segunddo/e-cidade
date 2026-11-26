@@ -243,8 +243,8 @@ class AjudaCustoService
                 throw new Exception("Dependente já atingiu a idade limite.", 400);
             }
 
-            $idadeLancamento = Carbon::parse($dependente->rh31_dtnasc)
-                ->subMonth($ajudaCusto->rh312_quantidade)->age;
+            $idadeLancamento = abs(Carbon::parse($dependente->rh31_dtnasc)
+                ->subMonth($ajudaCusto->rh312_quantidade)->age);
 
             if ($idadeLancamento > $configuracao->rh311_idademax) {
                 throw new Exception("Dependente irá atingir a idade limite no período informado.", 400);

@@ -379,6 +379,6 @@ class VinculosRecursoService extends Pdf
         ) as x
         ";
 
-        return DB::select(DB::raw($sql))[0]->count;
+        return DB::select($sql)[0]->count;
     }
 }

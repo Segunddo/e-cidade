@@ -43,7 +43,7 @@ class Candidato extends Model
     protected $table = 'plugins.mobase';
     public $timestamps = false;
     protected $primaryKey = 'mo01_codigo';
-    protected $dates = ["mo01_datacad", "mo01_dtnasc"];
+    protected $casts = ["mo01_datacad" => "datetime", "mo01_dtnasc" => "datetime"];
     protected $appends = ["opcoesEscola"];
     public function candidaturas()
     {

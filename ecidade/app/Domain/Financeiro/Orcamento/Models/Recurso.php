@@ -32,10 +32,6 @@ class Recurso extends Model
     public $timestamps = false;
     public $incrementing = false;
 
-    protected $dates = [
-        'o15_datalimite'
-    ];
-
     protected $casts = [
         'o15_codigo' => 'integer',
         'o15_tipo' => 'integer',
@@ -49,6 +45,7 @@ class Recurso extends Model
         'o15_finali' => 'string',
         'o15_codigosiconfi' => 'string',
         'o15_loaespecificacao' => 'string',
+        'o15_datalimite' => 'datetime',
     ];
 
     /**

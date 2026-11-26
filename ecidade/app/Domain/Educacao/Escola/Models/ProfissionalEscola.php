@@ -9,7 +9,7 @@ class ProfissionalEscola extends Model
 {
     protected $table = 'escola.rechumanoescola';
     protected $primaryKey = 'ed75_i_codigo';
-    protected $dates = ['ed75_d_ingresso', 'ed75_i_saidaescola'];
+    protected $casts = ['ed75_d_ingresso' => 'datetime', 'ed75_i_saidaescola' => 'datetime'];
     public $timestamps = false;
     public $incrementing = false;
 

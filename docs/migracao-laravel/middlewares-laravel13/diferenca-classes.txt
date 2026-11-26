@@ -1,0 +1,8 @@
+3c3
+< global   Illuminate\Foundation\Http\Middleware\ValidatePostSize existe=true
+---
+> global   Illuminate\Foundation\Http\Middleware\ValidatePostSize existe=true extends Illuminate\Http\Middleware\ValidatePostSize
+29c29
+< alias    clientCredential -> Laravel\Passport\Http\Middleware\CheckClientCredentials existe=true extends Laravel\Passport\Http\Middleware\CheckCredentials
+---
+> alias    clientCredential -> Laravel\Passport\Http\Middleware\CheckClientCredentials existe=false

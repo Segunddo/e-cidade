@@ -1,0 +1,196 @@
+rota	metodo	uri	corpo74
+20	POST	v4/api/client/auth/usuario	{"error":true,"message":"Call to undefined function pg_query()"}
+21	GET	v4/api/configuracao/relatorios-legais/lrf	{"error":true,"message":"Call to undefined function pg_query()"}
+22	GET	v4/api/configuracao/relatorios-legais/periodos/{relatorio}	{"error":true,"message":"Call to undefined function pg_query()"}
+23	POST	v4/api/configuracao/relatorios-legais/upload/template	{"error":true,"message":"Call to undefined function pg_query()"}
+31	GET	v4/api/educacao/escola/diario-classe/registro-aula/get-dados-regente/{escola}/{user}	{"error":true,"message":"could not find driver (SQL: select * from \"secretariadeeducacao\".\"sec_parametros\")"}
+32	GET	v4/api/educacao/escola/diario-classe/registro-aula/get-conteudos-regente-escola	{"error":true,"message":"could not find driver (SQL: select * from \"secretariadeeducacao\".\"sec_parametros\")"}
+33	POST	v4/api/educacao/escola/diario-classe/registro-aula/salvar-conteudo	{"error":true,"message":"could not find driver (SQL: select * from \"secretariadeeducacao\".\"sec_parametros\")"}
+34	POST	v4/api/educacao/escola/diario-classe/registro-aula/salvar-habilidade-desenvolvida	{"error":true,"message":"could not find driver (SQL: select * from \"secretariadeeducacao\".\"sec_parametros\")"}
+35	DELETE	v4/api/educacao/escola/diario-classe/registro-aula/excluir-conteudo/{codigo}	{"error":true,"message":"could not find driver (SQL: select * from \"secretariadeeducacao\".\"sec_parametros\")"}
+36	GET	v4/api/educacao/escola/diario-classe/registro-aula/get-disciplinas-bncc/{regencia}	{"error":true,"message":"could not find driver (SQL: select * from \"secretariadeeducacao\".\"sec_parametros\")"}
+37	GET	v4/api/educacao/escola/diario-classe/registro-aula/get-habilidades-bncc	{"error":true,"message":"could not find driver (SQL: select * from \"secretariadeeducacao\".\"sec_parametros\")"}
+38	GET	v4/api/educacao/escola/diario-classe/registro-aula/get-habilidades-desenvolvidas	{"error":true,"message":"could not find driver (SQL: select * from \"secretariadeeducacao\".\"sec_parametros\")"}
+39	POST	v4/api/educacao/escola/diario-classe/registro-aula/update-conteudos-lote	{"error":true,"message":"could not find driver (SQL: select * from \"secretariadeeducacao\".\"sec_parametros\")"}
+212	GET	v4/api/educacao/matricula-online/ciclos	{"error":true,"message":"Call to undefined function pg_query()"}
+213	POST	v4/api/educacao/matricula-online/ciclos/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+214	DELETE	v4/api/educacao/matricula-online/ciclos/{codigo}/excluir	{"error":true,"message":"Call to undefined function pg_query()"}
+215	GET	v4/api/educacao/matricula-online/etapas-por-fase/{codFase}	{"error":true,"message":"Call to undefined function pg_query()"}
+216	GET	v4/api/educacao/matricula-online/escolas-por-fase-etapa/{codFase}/{codEtapa}	{"error":true,"message":"Call to undefined function pg_query()"}
+217	GET	v4/api/educacao/matricula-online/fases	{"error":true,"message":"Call to undefined function pg_query()"}
+218	POST	v4/api/educacao/matricula-online/fases/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+219	DELETE	v4/api/educacao/matricula-online/fases/{codigo}/excluir	{"error":true,"message":"Call to undefined function pg_query()"}
+220	GET	v4/api/educacao/matricula-online/vagas/fases-abertas	{"error":true,"message":"Call to undefined function pg_query()"}
+221	POST	v4/api/educacao/matricula-online/vagas/etapas-fases-abertas	{"error":true,"message":"Call to undefined function pg_query()"}
+222	POST	v4/api/educacao/matricula-online/vagas/escolas-fases-abertas	{"error":true,"message":"Call to undefined function pg_query()"}
+223	POST	v4/api/educacao/matricula-online/vagas/turnos-fases-abertas	{"error":true,"message":"Call to undefined function pg_query()"}
+224	POST	v4/api/educacao/matricula-online/vagas/relatorio-vagas-parciais	{"error":true,"message":"Call to undefined function pg_query()"}
+225	POST	v4/api/educacao/matricula-online/relatorios/geral-inscricoes	{"error":true,"message":"Call to undefined function pg_query()"}
+226	POST	v4/api/educacao/matricula-online/relatorios/demanda-reprimida	{"error":true,"message":"Call to undefined function pg_query()"}
+227	GET	v4/api/educacao/matricula-online/configuracoes/duvidas-frequentes	{"error":true,"message":"Call to undefined function pg_query()"}
+228	POST	v4/api/educacao/matricula-online/configuracoes/duvidas-frequentes/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+229	DELETE	v4/api/educacao/matricula-online/configuracoes/duvidas-frequentes/{codigo}/excluir	{"error":true,"message":"Call to undefined function pg_query()"}
+230	GET	v4/api/educacao/matricula-online/configuracoes/mensagens-personalizadas	{"error":true,"message":"Call to undefined function pg_query()"}
+231	GET	v4/api/educacao/matricula-online/configuracoes/mensagens-personalizadas/tipos/{codigo}/mensagem	{"error":true,"message":"Call to undefined function pg_query()"}
+232	POST	v4/api/educacao/matricula-online/configuracoes/mensagens-personalizadas/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+233	GET	v4/api/educacao/matricula-online/configuracoes/documentos	{"error":true,"message":"Call to undefined function pg_query()"}
+234	POST	v4/api/educacao/matricula-online/configuracoes/documentos/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+235	GET	v4/api/educacao/matricula-online/configuracoes/noticias	{"error":true,"message":"Call to undefined function pg_query()"}
+236	POST	v4/api/educacao/matricula-online/configuracoes/noticias/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+237	DELETE	v4/api/educacao/matricula-online/configuracoes/noticias/{codigo}/excluir	{"error":true,"message":"Call to undefined function pg_query()"}
+238	GET	v4/api/educacao/matricula-online/configuracoes/imagens-personalizadas	{"error":true,"message":"Call to undefined function pg_query()"}
+239	GET	v4/api/educacao/matricula-online/configuracoes/imagens-personalizadas/{id}/download	{"error":true,"message":"Call to undefined function pg_query()"}
+240	GET	v4/api/educacao/matricula-online/configuracoes/imagens-personalizadas/tipos	{"error":true,"message":"Call to undefined function pg_query()"}
+241	POST	v4/api/educacao/matricula-online/configuracoes/imagens-personalizadas/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+242	DELETE	v4/api/educacao/matricula-online/configuracoes/imagens-personalizadas/{codigo}	{"error":true,"message":"Call to undefined function pg_query()"}
+243	GET	v4/api/educacao/matricula-online/configuracoes/cores-personalizadas	{"error":true,"message":"Call to undefined function pg_query()"}
+244	POST	v4/api/educacao/matricula-online/configuracoes/cores-personalizadas/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+245	GET	v4/api/educacao/matricula-online/configuracoes/campos-opcionais	{"error":true,"message":"Call to undefined function pg_query()"}
+246	POST	v4/api/educacao/matricula-online/configuracoes/campos-opcionais/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+247	GET	v4/api/educacao/matricula-online/configuracoes/parametros	{"error":true,"message":"Call to undefined function pg_query()"}
+248	POST	v4/api/educacao/matricula-online/configuracoes/parametros/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+251	GET	v4/api/educacao/matricula-online/configuracoes/zona-residencias	{"error":true,"message":"Call to undefined function pg_query()"}
+252	POST	v4/api/educacao/matricula-online/configuracoes/zona-residencias/salvar	{"error":true,"message":"Call to undefined function pg_query()"}
+253	GET	v4/api/educacao/central-de-matriculas/emissao-protocolo	{"error":true,"message":"Call to undefined function pg_query()"}
+254	GET	v4/api/educacao/central-de-matriculas/configuracoes/noticias	{"error":true,"message":"Call to undefined function pg_query()"}
+255	GET	v4/api/educacao/central-de-matriculas/configuracoes/cores	{"error":true,"message":"Call to undefined function pg_query()"}
+256	GET	v4/api/educacao/central-de-matriculas/configuracoes/imagens	{"error":true,"message":"Call to undefined function pg_query()"}
+257	GET	v4/api/educacao/central-de-matriculas/configuracoes/documentos	{"error":true,"message":"Call to undefined function pg_query()"}
+258	GET	v4/api/educacao/central-de-matriculas/configuracoes/duvidas-frequentes	{"error":true,"message":"Call to undefined function pg_query()"}
+259	GET	v4/api/educacao/central-de-matriculas/configuracoes/mensagens	{"error":true,"message":"Call to undefined function pg_query()"}
+260	GET	v4/api/educacao/central-de-matriculas/configuracoes/campos-opcionais	{"error":true,"message":"Call to undefined function pg_query()"}
+261	GET	v4/api/educacao/central-de-matriculas/configuracoes/configuracoes-gerais	{"error":true,"message":"Call to undefined function pg_query()"}
+262	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/escolas-por-bairro	{"error":true,"message":"Call to undefined function pg_query()"}
+263	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/dados-prefeitura	{"error":true,"message":"Call to undefined function pg_query()"}
+264	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/estados	{"error":true,"message":"Call to undefined function pg_query()"}
+265	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/paises	{"error":true,"message":"Call to undefined function pg_query()"}
+266	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/zonas	{"error":true,"message":"Call to undefined function pg_query()"}
+267	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/estados/{estado}/municipios	{"error":true,"message":"Call to undefined function pg_query()"}
+268	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/tem-fase-abeta	{"error":true,"message":"Call to undefined function pg_query()"}
+269	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/fases/{data}	{"error":true,"message":"Call to undefined function pg_query()"}
+270	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/fases-interno/{data}	{"error":true,"message":"Call to undefined function pg_query()"}
+271	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/fases/{fase}/etapas/get-por-data/{data}	{"error":true,"message":"Call to undefined function pg_query()"}
+272	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/fases/{fase}/etapas/{etapa}/escolas-disponiveis	{"error":true,"message":"Call to undefined function pg_query()"}
+273	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/redes-origem	{"error":true,"message":"Call to undefined function pg_query()"}
+274	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/escolas-origem	{"error":true,"message":"Call to undefined function pg_query()"}
+275	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/necessidades-especiais	{"error":true,"message":"Call to undefined function pg_query()"}
+276	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/necessidades-especiais/{necessidade}/subdivisoes	{"error":true,"message":"Call to undefined function pg_query()"}
+277	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/bairros	{"error":true,"message":"Call to undefined function pg_query()"}
+278	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/profissoes	{"error":true,"message":"Call to undefined function pg_query()"}
+279	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/tipos-ruas	{"error":true,"message":"Call to undefined function pg_query()"}
+280	POST	v4/api/educacao/central-de-matriculas/processo-inscricao/inscricao	{"error":true,"message":"Call to undefined function pg_query()"}
+281	DELETE	v4/api/educacao/central-de-matriculas/processo-inscricao/inscricao/{protocolo}	{"error":true,"message":"Call to undefined function pg_query()"}
+282	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/inscricao/consulta/{tipo}/{valor}	{"error":true,"message":"Call to undefined function pg_query()"}
+283	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/inscricao/consultaCpf/{cpfAluno}/{tipo}/{valor}	{"error":true,"message":"Call to undefined function pg_query()"}
+284	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/inscricao/consulta-candidato/{tipo}/{dado}/{nascimento}	{"error":true,"message":"Call to undefined function pg_query()"}
+285	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/renda-familiar	{"error":true,"message":"Call to undefined function pg_query()"}
+286	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/orgaos-emissores	{"error":true,"message":"Call to undefined function pg_query()"}
+287	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/aluno/cpf/{cpf}	{"error":true,"message":"Call to undefined function pg_query()"}
+288	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/aluno/escolacpf/{esocila}/{cpf}	{"error":true,"message":"Call to undefined function pg_query()"}
+289	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/aluno/visto/{visto}	{"error":true,"message":"Call to undefined function pg_query()"}
+290	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/aluno/rne/{rne}	{"error":true,"message":"Call to undefined function pg_query()"}
+291	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/fases/{fase}/candidato/cpf/{cpf}	{"error":true,"message":"Call to undefined function pg_query()"}
+292	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/fases/{fase}/candidato/visto/{visto}	{"error":true,"message":"Call to undefined function pg_query()"}
+293	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/fases/{fase}/candidato/rne/{rne}	{"error":true,"message":"Call to undefined function pg_query()"}
+294	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/aluno/{escola}/cpf/{cpf}	{"error":true,"message":"Call to undefined function pg_query()"}
+295	GET	v4/api/educacao/central-de-matriculas/processo-inscricao/cor-raca	{"error":true,"message":"Call to undefined function pg_query()"}
+296	GET	v4/api/educacao/central-de-matriculas/etapas-lista-espera	{"error":true,"message":"Call to undefined function pg_query()"}
+297	GET	v4/api/educacao/central-de-matriculas/escolas-lista-espera/{etapa}	{"error":true,"message":"Call to undefined function pg_query()"}
+298	GET	v4/api/educacao/central-de-matriculas/turnos-lista-espera/{etapa}/{escola}	{"error":true,"message":"Call to undefined function pg_query()"}
+299	GET	v4/api/educacao/central-de-matriculas/candidatos-lista-espera/{etapa}/{escola}/{turno}	{"error":true,"message":"Call to undefined function pg_query()"}
+300	GET	v4/api/educacao/central-de-matriculas/vagas-pcd	{"error":true,"message":"Call to undefined function pg_query()"}
+301	POST	v4/api/educacao/central-de-matriculas/vagas-pcd	{"error":true,"message":"Call to undefined function pg_query()"}
+302	GET	v4/api/educacao/central-de-matriculas/listas-impedidas	{"error":true,"message":"Call to undefined function pg_query()"}
+303	POST	v4/api/educacao/central-de-matriculas/processar-alocacoes	{"error":true,"message":"Call to undefined function pg_query()"}
+304	GET	v4/api/educacao/central-de-matriculas/observacoes-inscricao/{candidato}	{"error":true,"message":"Call to undefined function pg_query()"}
+305	POST	v4/api/educacao/central-de-matriculas/observacoes-inscricao/{candidato}	{"error":true,"message":"Call to undefined function pg_query()"}
+306	DELETE	v4/api/educacao/central-de-matriculas/observacoes-inscricao/{observacao}	{"error":true,"message":"could not find driver (SQL: select * from \"plugins\".\"observacaoinscricao\" where \"mo62_codigo\" = 1 and \"plugins\".\"observacaoinscricao\".\"deleted_at\" is null limit 1)
+307	GET	v4/api/educacao/files/campos-opcionais	{"error":true,"message":"Call to undefined function pg_query()"}
+308	GET	v4/api/educacao/files/duvidas	{"error":true,"message":"Call to undefined function pg_query()"}
+309	GET	v4/api/educacao/files/instituicao	{"error":true,"message":"Call to undefined function pg_query()"}
+310	GET	v4/api/educacao/files/mensagens	{"error":true,"message":"Call to undefined function pg_query()"}
+311	GET	v4/api/educacao/files/noticias	{"error":true,"message":"Call to undefined function pg_query()"}
+312	GET	v4/api/educacao/files/parametros	{"error":true,"message":"Call to undefined function pg_query()"}
+313	GET	v4/api/educacao/files/redes	{"error":true,"message":"Call to undefined function pg_query()"}
+314	GET	v4/api/educacao/files/zonas	{"error":true,"message":"Call to undefined function pg_query()"}
+315	GET	v4/api/educacao/files/cores	{"error":true,"message":"Call to undefined function pg_query()"}
+316	GET	v4/api/educacao/files/rendas	{"error":true,"message":"Call to undefined function pg_query()"}
+317	GET	v4/api/educacao/files/imagens	{"error":true,"message":"Call to undefined function pg_query()"}
+318	GET	v4/api/educacao/files/orgaos	{"error":true,"message":"Call to undefined function pg_query()"}
+631	GET	v4/api/financeiro/planejamento/configuracao	{"error":true,"message":"could not find driver (SQL: select * from \"planejamento\".\"planejamentoconfiguracao\" limit 1)"}
+632	POST	v4/api/financeiro/planejamento/configuracao/salvar	{"error":true,"message":"could not find driver (SQL: select * from \"planejamento\".\"planejamentoconfiguracao\" limit 1)"}
+675	GET	v4/api/financeiro/contabilidade/relatorio-legal/emissao/download/{codigo}	{"error":true,"message":"Call to undefined function pg_query()"}
+714	POST	v4/api/patrimonial/patrimonio/relatorio/transferencia-bens-aberto	{"error":true,"message":"Call to undefined function pg_query()"}
+715	POST	v4/api/patrimonial/patrimonio/etiquetas/imprimir	{"error":true,"message":"Call to undefined function pg_query()"}
+716	POST	v4/api/patrimonial/patrimonio/consulta/bem/buscar	{"error":true,"message":"Call to undefined function pg_query()"}
+729	GET	v4/api/patrimonial/protocolo/cgm-cpf-cnpj	{"error":true,"message":"Call to undefined function pg_query()"}
+730	GET	v4/api/patrimonial/protocolo/cgm	{"error":true,"message":"Call to undefined function pg_query()"}
+731	POST	v4/api/patrimonial/protocolo/pesquisa-geral-cgm	{"error":true,"message":"Call to undefined function pg_query()"}
+732	GET	v4/api/patrimonial/protocolo/rotulos-pesquisa-geral-cgm	{"error":true,"message":"Call to undefined function pg_query()"}
+733	GET	v4/api/patrimonial/protocolo/rua-cep	{"error":true,"message":"Call to undefined function pg_query()"}
+734	GET	v4/api/patrimonial/protocolo/rua-cep-municipio	{"error":true,"message":"Call to undefined function pg_query()"}
+735	GET	v4/api/patrimonial/protocolo/endereco-localidade-cep	{"error":true,"message":"Call to undefined function pg_query()"}
+736	POST	v4/api/patrimonial/protocolo/salvar-cgm	{"error":true,"message":"Call to undefined function pg_query()"}
+737	GET	v4/api/patrimonial/protocolo/verifica-cgm	{"error":true,"message":"Call to undefined function pg_query()"}
+756	POST	v4/api/patrimonial/protocolo/documentos/buscar-por-identificador	{"error":true,"message":"Call to undefined function pg_query()"}
+1007	GET	v4/api/saude/ambulatorial/cid	{"error":true,"message":"Call to undefined function pg_query()"}
+1008	POST	v4/api/saude/ambulatorial/cgs/find-or-create	{"error":true,"message":"Call to undefined function pg_query()"}
+1031	GET	v4/api/saude/laboratorio/exames/requisicao/{idRequisicao}	{"error":true,"message":"Call to undefined function pg_query()"}
+1032	GET	v4/api/saude/laboratorio/exames/resultado/{idRequisicaoExame}	{"error":true,"message":"Call to undefined function pg_query()"}
+1043	POST	v4/api/saude/laboratorio/triagem-laboratorial/buscar	{"error":true,"message":"Call to undefined function pg_query()"}
+1044	POST	v4/api/saude/laboratorio/triagem-laboratorial/buscar-requisicoes	{"error":true,"message":"Call to undefined function pg_query()"}
+1045	POST	v4/api/saude/laboratorio/triagem-laboratorial/exportar-pendencias	{"error":true,"message":"Call to undefined function pg_query()"}
+1046	POST	v4/api/saude/laboratorio/triagem-laboratorial/processar	{"error":true,"message":"Call to undefined function pg_query()"}
+1058	POST	v4/api/tributario/arrecadacao/tef/comprovante-desfazimento	{"error":true,"message":"Call to undefined function pg_query()"}
+1059	POST	v4/api/tributario/arrecadacao/tef/relatorio-pendentes	{"error":true,"message":"Call to undefined function pg_query()"}
+1060	POST	v4/api/tributario/arrecadacao/tef/operacoes-pendentes	{"error":true,"message":"Call to undefined function pg_query()"}
+1099	GET	v4/api/tributario/cadastro/dados-matricula	{"error":true,"message":"Call to undefined function pg_query()"}
+1100	GET	v4/api/tributario/cadastro/setor-registro-imoveis	{"error":true,"message":"Call to undefined function pg_query()"}
+1101	GET	v4/api/tributario/cadastro/localidade-rural	{"error":true,"message":"Call to undefined function pg_query()"}
+1102	GET	v4/api/tributario/cadastro/bairros	{"error":true,"message":"Call to undefined function pg_query()"}
+1103	GET	v4/api/tributario/cadastro/logradouros	{"error":true,"message":"Call to undefined function pg_query()"}
+1104	POST	v4/api/tributario/cadastro/buscar-imoveis	{"error":true,"message":"Call to undefined function pg_query()"}
+1105	GET	v4/api/tributario/cadastro/buscar-labels-imoveis	{"error":true,"message":"Call to undefined function pg_query()"}
+1106	GET	v4/api/tributario/cadastro/endereco-base-cliente	{"error":true,"message":"Call to undefined function pg_query()"}
+1107	GET	v4/api/tributario/cadastro/bairro-base-cliente	{"error":true,"message":"Call to undefined function pg_query()"}
+1108	GET	v4/api/tributario/cadastro/buscar-condominios	{"error":true,"message":"Call to undefined function pg_query()"}
+1109	GET	v4/api/tributario/cadastro/buscar-logradouro	{"error":true,"message":"Call to undefined function pg_query()"}
+1110	GET	v4/api/tributario/cadastro/buscar-loteamento	{"error":true,"message":"Call to undefined function pg_query()"}
+1111	GET	v4/api/tributario/cadastro/paises	{"error":true,"message":"Call to undefined function pg_query()"}
+1112	GET	v4/api/tributario/cadastro/estados	{"error":true,"message":"Call to undefined function pg_query()"}
+1113	GET	v4/api/tributario/cadastro/cidades	{"error":true,"message":"Call to undefined function pg_query()"}
+1114	GET	v4/api/tributario/cadastro/endereco-por-cep	{"error":true,"message":"Call to undefined function pg_query()"}
+1115	GET	v4/api/tributario/cadastro/escritorios-contabeis	{"error":true,"message":"Call to undefined function pg_query()"}
+1116	GET	v4/api/tributario/cadastro/atividade	{"error":true,"message":"Call to undefined function pg_query()"}
+1117	GET	v4/api/tributario/cadastro/zonas	{"error":true,"message":"Call to undefined function pg_query()"}
+1118	GET	v4/api/tributario/cadastro/dados-isencao/{id}	{"error":true,"message":"Call to undefined function pg_query()"}
+1133	GET	v4/api/tributario/diversos/rotulos-procedencia	{"error":true,"message":"Call to undefined function pg_query()"}
+1134	POST	v4/api/tributario/diversos/pesquisa-procedencias	{"error":true,"message":"Call to undefined function pg_query()"}
+1135	GET	v4/api/tributario/divida-ativa/lancamento-historico/dividas	{"error":true,"message":"Call to undefined function pg_query()"}
+1136	GET	v4/api/tributario/divida-ativa/lancamento-historico/dividas-exercicios	{"error":true,"message":"Call to undefined function pg_query()"}
+1137	GET	v4/api/tributario/divida-ativa/lancamento-historico/selecionar-todas-dividas	{"error":true,"message":"Call to undefined function pg_query()"}
+1138	POST	v4/api/tributario/divida-ativa/lancamento-historico/dividas	{"error":true,"message":"Call to undefined function pg_query()"}
+1169	POST	v4/api/tributario/issqn/redesim/inclusao-inscricao	{"error":true,"message":"Call to undefined function pg_query()"}
+1198	POST	v4/api/tributario/itbi/autenticacao	{"error":true,"message":"Call to undefined function pg_query()"}
+1199	POST	v4/api/tributario/itbi/emissao	{"error":true,"message":"Call to undefined function pg_query()"}
+1200	GET	v4/api/tributario/itbi/tipos	{"error":true,"message":"Call to undefined function pg_query()"}
+1201	GET	v4/api/tributario/itbi/situacao	{"error":true,"message":"Call to undefined function pg_query()"}
+1202	GET	v4/api/tributario/itbi/tipo-transacao	{"error":true,"message":"Call to undefined function pg_query()"}
+1203	GET	v4/api/tributario/itbi/forma-pagamento-tipo-transacao	{"error":true,"message":"Call to undefined function pg_query()"}
+1204	GET	v4/api/tributario/itbi/taxas-itbi	{"error":true,"message":"Call to undefined function pg_query()"}
+1205	GET	v4/api/tributario/itbi/rural/caracter	{"error":true,"message":"Call to undefined function pg_query()"}
+1206	GET	v4/api/tributario/itbi/transmitente-principal	{"error":true,"message":"Call to undefined function pg_query()"}
+1207	GET	v4/api/tributario/itbi/cartorios	{"error":true,"message":"Call to undefined function pg_query()"}
+1208	GET	v4/api/tributario/itbi/benfeitorias	{"error":true,"message":"Call to undefined function pg_query()"}
+1209	GET	v4/api/tributario/itbi/benfeitoria/tipo	{"error":true,"message":"Call to undefined function pg_query()"}
+1210	GET	v4/api/tributario/itbi/benfeitoria/especie	{"error":true,"message":"Call to undefined function pg_query()"}
+1211	GET	v4/api/tributario/itbi/benfeitoria/padrao-construtivo	{"error":true,"message":"Call to undefined function pg_query()"}
+1233	POST	v4/api/dbpref/dbpref-pix/gerar	{"error":true,"message":"Call to undefined function pg_query()"}
+1234	POST	v4/api/dbpref/dbpref-pix/validar	{"error":true,"message":"Call to undefined function pg_query()"}
+1285	GET	v4/api/configuracao/usuario/{idUsuario}/assinantes	{"error":true,"message":"could not find driver (SQL: select * from \"configuracoes\".\"assinantesdocumentos\" where \"db67_id_usuario\" = 1 order by \"db67_id_usuario\" desc)"}
+1295	GET	v4/api/configuracao/assinantes	{"error":true,"message":"could not find driver (SQL: select * from \"configuracoes\".\"assinantesdocumentos\" order by \"db67_codigo\" desc)"}
+1296	DELETE	v4/api/configuracao/assinantes/{file_id}	{"error":true,"message":"could not find driver (SQL: delete from \"configuracoes\".\"assinantesdocumentos\" where \"db67_codigo\" = 1)"}
+1297	POST	v4/api/configuracao/entrega-continua/migrate	{"error":true,"message":"Call to undefined function pg_query()"}
+1298	POST	v4/api/configuracao/plugin/getconfig	{"error":true,"message":"Call to undefined function pg_query()"}
+1299	GET	v4/api/configuracao/jobs/failed	{"error":true,"message":"could not find driver (SQL: select count(*) as aggregate from \"failed_jobs\")"}
+1306	GET	v4/api/configuracao/jobs	{"error":true,"message":"could not find driver (SQL: select count(*) as aggregate from \"jobs\")"}

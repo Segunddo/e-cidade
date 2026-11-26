@@ -1,0 +1,309 @@
+1c1
+< versao 8.73.2
+---
+> versao 13.43.0
+3c3
+< ROTAS 1427
+---
+> ROTAS 1422
+52,55c52,53
+< R DELETE v4/oauth/authorize nome=passport.authorizations.deny acao=\Laravel\Passport\Http\Controllers\DenyAuthorizationController@deny mw=auth,web dominio=-
+< R DELETE v4/oauth/clients/{client_id} nome=passport.clients.destroy acao=\Laravel\Passport\Http\Controllers\ClientController@destroy mw=auth,web dominio=-
+< R DELETE v4/oauth/personal-access-tokens/{token_id} nome=passport.personal.tokens.destroy acao=\Laravel\Passport\Http\Controllers\PersonalAccessTokenController@destroy mw=auth,web dominio=-
+< R DELETE v4/oauth/tokens/{token_id} nome=passport.tokens.destroy acao=\Laravel\Passport\Http\Controllers\AuthorizedAccessTokenController@destroy mw=auth,web dominio=-
+---
+> R DELETE v4/oauth/authorize nome=passport.authorizations.deny acao=Laravel\Passport\Http\Controllers\DenyAuthorizationController@deny mw=auth:web,web dominio=-
+> R DELETE v4/oauth/device/authorize nome=passport.device.authorizations.deny acao=Laravel\Passport\Http\Controllers\DenyDeviceAuthorizationController mw=auth:web,web dominio=-
+567,571c565,567
+< R GET|HEAD v4/oauth/authorize nome=passport.authorizations.authorize acao=\Laravel\Passport\Http\Controllers\AuthorizationController@authorize mw=auth,web dominio=-
+< R GET|HEAD v4/oauth/clients nome=passport.clients.index acao=\Laravel\Passport\Http\Controllers\ClientController@forUser mw=auth,web dominio=-
+< R GET|HEAD v4/oauth/personal-access-tokens nome=passport.personal.tokens.index acao=\Laravel\Passport\Http\Controllers\PersonalAccessTokenController@forUser mw=auth,web dominio=-
+< R GET|HEAD v4/oauth/scopes nome=passport.scopes.index acao=\Laravel\Passport\Http\Controllers\ScopeController@all mw=auth,web dominio=-
+< R GET|HEAD v4/oauth/tokens nome=passport.tokens.index acao=\Laravel\Passport\Http\Controllers\AuthorizedAccessTokenController@forUser mw=auth,web dominio=-
+---
+> R GET|HEAD v4/oauth/authorize nome=passport.authorizations.authorize acao=Laravel\Passport\Http\Controllers\AuthorizationController@authorize mw=web dominio=-
+> R GET|HEAD v4/oauth/device nome=passport.device acao=Laravel\Passport\Http\Controllers\DeviceUserCodeController mw=web dominio=-
+> R GET|HEAD v4/oauth/device/authorize nome=passport.device.authorizations.authorize acao=Laravel\Passport\Http\Controllers\DeviceAuthorizationController mw=auth:web,web dominio=-
+1418,1422c1414,1418
+< R POST v4/oauth/authorize nome=passport.authorizations.approve acao=\Laravel\Passport\Http\Controllers\ApproveAuthorizationController@approve mw=auth,web dominio=-
+< R POST v4/oauth/clients nome=passport.clients.store acao=\Laravel\Passport\Http\Controllers\ClientController@store mw=auth,web dominio=-
+< R POST v4/oauth/personal-access-tokens nome=passport.personal.tokens.store acao=\Laravel\Passport\Http\Controllers\PersonalAccessTokenController@store mw=auth,web dominio=-
+< R POST v4/oauth/token nome=passport.token acao=\Laravel\Passport\Http\Controllers\AccessTokenController@issueToken mw=throttle dominio=-
+< R POST v4/oauth/token/refresh nome=passport.token.refresh acao=\Laravel\Passport\Http\Controllers\TransientTokenController@refresh mw=auth,web dominio=-
+---
+> R POST v4/oauth/authorize nome=passport.authorizations.approve acao=Laravel\Passport\Http\Controllers\ApproveAuthorizationController@approve mw=auth:web,web dominio=-
+> R POST v4/oauth/device/authorize nome=passport.device.authorizations.approve acao=Laravel\Passport\Http\Controllers\ApproveDeviceAuthorizationController mw=auth:web,web dominio=-
+> R POST v4/oauth/device/code nome=passport.device.code acao=Laravel\Passport\Http\Controllers\DeviceCodeController mw=throttle dominio=-
+> R POST v4/oauth/token nome=passport.token acao=Laravel\Passport\Http\Controllers\AccessTokenController@issueToken mw=throttle dominio=-
+> R POST v4/oauth/token/refresh nome=passport.token.refresh acao=Laravel\Passport\Http\Controllers\TransientTokenController@refresh mw=auth:web,web dominio=-
+1430,1431c1426,1428
+< R PUT v4/oauth/clients/{client_id} nome=passport.clients.update acao=\Laravel\Passport\Http\Controllers\ClientController@update mw=auth,web dominio=-
+< COMANDOS 112
+---
+> COMANDOS 158
+> K _complete
+> K about
+1435a1433
+> K cache:prune-stale-tags
+1436a1435
+> K channel:list
+1437a1437
+> K completion
+1439a1440,1442
+> K config:make
+> K config:publish
+> K config:show
+1441a1445
+> K db:monitor
+1442a1447,1448
+> K db:show
+> K db:table
+1446a1453,1455
+> K dev
+> K dev:list
+> K docs
+1448a1458,1459
+> K env:decrypt
+> K env:encrypt
+1458a1470,1472
+> K install:api
+> K install:broadcasting
+> K invoke-serialized-closure
+1460a1475
+> K lang:publish
+1461a1477
+> K make:cache-table
+1463a1480
+> K make:class
+1465a1483
+> K make:config
+1466a1485
+> K make:enum
+1469a1489
+> K make:interface
+1470a1491
+> K make:job-middleware
+1476a1498
+> K make:notifications-table
+1479a1502,1504
+> K make:queue-batches-table
+> K make:queue-failed-table
+> K make:queue-table
+1482a1508
+> K make:scope
+1483a1510
+> K make:session-table
+1484a1512,1513
+> K make:trait
+> K make:view
+1493a1523
+> K model:show
+1506a1537
+> K queue:continue
+1512a1544
+> K queue:pause
+1515a1548
+> K queue:resume
+1519a1553
+> K reload
+1523a1558,1559
+> K schedule:clear-cache
+> K schedule:continue
+1524a1561
+> K schedule:interrupt
+1525a1563,1564
+> K schedule:pause
+> K schedule:resume
+1530a1570
+> K session:garbage-collect
+1532a1573
+> K storage:unlink
+1544c1585
+< CONFIG chaves=308 grupos=17
+---
+> CONFIG chaves=436 grupos=20
+1578a1620
+> C app.asset_url : NULL
+1581a1624
+> C app.faker_locale : string
+1582a1626
+> C app.frontend_url : string
+1584a1629,1630
+> C app.maintenance.driver : string
+> C app.maintenance.store : string
+1585a1632
+> C app.previous_keys : array(vazio)
+1626a1674
+> C auth.password_timeout : integer
+1631a1680,1681
+> C broadcasting.connections.ably.driver : string
+> C broadcasting.connections.ably.key : NULL
+1632a1683,1692
+> C broadcasting.connections.mercure.async : boolean
+> C broadcasting.connections.mercure.claims.client_id : string
+> C broadcasting.connections.mercure.claims.iss : NULL
+> C broadcasting.connections.mercure.cookie_name : NULL
+> C broadcasting.connections.mercure.driver : string
+> C broadcasting.connections.mercure.encryption_key : NULL
+> C broadcasting.connections.mercure.public_url : NULL
+> C broadcasting.connections.mercure.secret : NULL
+> C broadcasting.connections.mercure.subscribe_expiration : integer
+> C broadcasting.connections.mercure.url : NULL
+1644a1705,1713
+> C broadcasting.connections.reverb.app_id : NULL
+> C broadcasting.connections.reverb.client_options : array(vazio)
+> C broadcasting.connections.reverb.driver : string
+> C broadcasting.connections.reverb.key : NULL
+> C broadcasting.connections.reverb.options.host : NULL
+> C broadcasting.connections.reverb.options.port : integer
+> C broadcasting.connections.reverb.options.scheme : string
+> C broadcasting.connections.reverb.options.useTLS : boolean
+> C broadcasting.connections.reverb.secret : NULL
+1658a1728,1730
+> C cache.stores.failover.driver : string
+> C cache.stores.failover.stores.0 : string
+> C cache.stores.failover.stores.1 : string
+1668a1741
+> C cache.stores.octane.driver : string
+1670a1744,1774
+> C cache.stores.session.driver : string
+> C cache.stores.session.key : string
+> C cache.stores.storage.disk : NULL
+> C cache.stores.storage.driver : string
+> C cache.stores.storage.path : string
+> C concurrency.default : string
+> C cors.allowed_headers.0 : string
+> C cors.allowed_methods.0 : string
+> C cors.allowed_origins.0 : string
+> C cors.allowed_origins_patterns : array(vazio)
+> C cors.exposed_headers : array(vazio)
+> C cors.max_age : integer
+> C cors.paths.0 : string
+> C cors.paths.1 : string
+> C cors.supports_credentials : boolean
+> C database.connections.mariadb.charset : string
+> C database.connections.mariadb.collation : string
+> C database.connections.mariadb.database : string
+> C database.connections.mariadb.driver : string
+> C database.connections.mariadb.engine : NULL
+> C database.connections.mariadb.host : string
+> C database.connections.mariadb.mask_bindings_in_exception_messages : boolean
+> C database.connections.mariadb.options : array(vazio)
+> C database.connections.mariadb.password : string
+> C database.connections.mariadb.port : string
+> C database.connections.mariadb.prefix : string
+> C database.connections.mariadb.prefix_indexes : boolean
+> C database.connections.mariadb.strict : boolean
+> C database.connections.mariadb.unix_socket : string
+> C database.connections.mariadb.url : NULL
+> C database.connections.mariadb.username : string
+1726a1831
+> C filesystems.links./app/public/storage : string
+1731a1837
+> C hashing.rehash_on_login : boolean
+1734c1840
+< C ide-helper.custom_db_types : array(vazio)
+---
+> C ide-helper.enforce_nullable_relationships : boolean
+1740a1847
+> C ide-helper.helper_files.1 : string
+1743d1849
+< C ide-helper.include_factory_builders : boolean
+1746a1853
+> C ide-helper.macro_default_return_types.Illuminate\Http\Client\Factory : string
+1753a1861
+> C ide-helper.soft_deletes_force_nullable : boolean
+1760a1869,1870
+> C ide-helper.write_model_relation_exists_properties : boolean
+> C ide-helper.write_query_methods : boolean
+1761a1872
+> C images.default : string
+1765a1877,1879
+> C logging.channels.deprecations.driver : string
+> C logging.channels.deprecations.handler : string
+> C logging.channels.emergency.path : string
+1767a1882,1895
+> C logging.channels.monthly.driver : string
+> C logging.channels.monthly.level : string
+> C logging.channels.monthly.max_files : integer
+> C logging.channels.monthly.path : string
+> C logging.channels.monthly.replace_placeholders : boolean
+> C logging.channels.null.driver : string
+> C logging.channels.null.handler : string
+> C logging.channels.papertrail.driver : string
+> C logging.channels.papertrail.handler : string
+> C logging.channels.papertrail.handler_with.connectionString : string
+> C logging.channels.papertrail.handler_with.host : NULL
+> C logging.channels.papertrail.handler_with.port : NULL
+> C logging.channels.papertrail.level : string
+> C logging.channels.papertrail.processors.0 : string
+1783a1912,1914
+> C logging.deprecations.channel : string
+> C logging.deprecations.trace : boolean
+> C mail.default : string
+1788a1920,1944
+> C mail.mailers.array.transport : string
+> C mail.mailers.failover.mailers.0 : string
+> C mail.mailers.failover.mailers.1 : string
+> C mail.mailers.failover.retry_after : integer
+> C mail.mailers.failover.transport : string
+> C mail.mailers.log.channel : NULL
+> C mail.mailers.log.transport : string
+> C mail.mailers.postmark.transport : string
+> C mail.mailers.resend.transport : string
+> C mail.mailers.roundrobin.mailers.0 : string
+> C mail.mailers.roundrobin.mailers.1 : string
+> C mail.mailers.roundrobin.retry_after : integer
+> C mail.mailers.roundrobin.transport : string
+> C mail.mailers.sendmail.path : string
+> C mail.mailers.sendmail.transport : string
+> C mail.mailers.ses.transport : string
+> C mail.mailers.smtp.host : string
+> C mail.mailers.smtp.local_domain : string
+> C mail.mailers.smtp.password : NULL
+> C mail.mailers.smtp.port : string
+> C mail.mailers.smtp.scheme : NULL
+> C mail.mailers.smtp.timeout : NULL
+> C mail.mailers.smtp.transport : string
+> C mail.mailers.smtp.url : NULL
+> C mail.mailers.smtp.username : NULL
+1795c1951,1953
+< C passport.client_uuids : boolean
+---
+> C passport.connection : NULL
+> C passport.guard : string
+> C passport.middleware : array(vazio)
+1797,1798d1954
+< C passport.personal_access_client.id : NULL
+< C passport.personal_access_client.secret : NULL
+1801c1957,1959
+< C passport.storage.database.connection : string
+---
+> C queue.batching.database : string
+> C queue.batching.table : string
+> C queue.connections.background.driver : string
+1809a1968,1971
+> C queue.connections.deferred.driver : string
+> C queue.connections.failover.connections.0 : string
+> C queue.connections.failover.connections.1 : string
+> C queue.connections.failover.driver : string
+1825a1988,1989
+> C services.postmark.token : NULL
+> C services.resend.key : NULL
+1828a1993,1994
+> C services.slack.notifications.bot_user_oauth_token : NULL
+> C services.slack.notifications.channel : NULL
+1843a2010
+> C session.partitioned : boolean
+1844a2012
+> C session.same_site : string
+1850a2019
+> C tinker.trust_project : string
+1866c2035
+< PROVIDERS carregados=43 adiados=0 em_config=33
+---
+> PROVIDERS carregados=45 adiados=0 em_config=33
+1893a2063
+> P Illuminate\Log\Context\ContextServiceProvider
+1909a2080
+> P Termwind\Laravel\TermwindServiceProvider

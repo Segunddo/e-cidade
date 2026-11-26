@@ -1,0 +1,141 @@
+<?php
+// Password grant + refresh + Bearer no Laravel 13 / Passport 13 / oauth2-server 9, sem banco: repositorios em memoria.
+// Uso: php grant.php <original|proposto> ; AuthService do PR chamado por reflexao (requestToPassport).
+error_reporting(E_ALL & ~E_DEPRECATED);
+require '/w/vendor/autoload.php';
+$modo = $argv[1] ?? 'original';
+spl_autoload_register(function ($c) use ($modo) {
+    if (strpos($c, 'App\\') === 0) {
+        $rel = str_replace('\\', '/', substr($c, 4)) . '.php';
+        foreach (($modo === 'proposto' ? ['/s85/', '/pr/app/'] : ['/pr/app/']) as $d) { if (is_file($d . $rel)) { require $d . $rel; return; } }
+    }
+});
+use Laravel\Passport\Passport;
+use Laravel\Passport\Bridge;
+use App\Domain\Configuracao\Usuario\Models\Usuario;
+
+function passo($t, callable $f) { try { $r = $f(); echo "[ok]   $t", $r === null ? '' : " => $r", "\n"; return $r; } catch (Throwable $e) { echo "[FALHA] $t => ", get_class($e), ': ', substr(str_replace("\n", ' ', $e->getMessage()), 0, 170), ' @', basename($e->getFile()), ':', $e->getLine(), "\n"; return null; } }
+
+$app = Orchestra\Testbench\Foundation\Application::create(options: ['load_environment_variables' => false]);
+$app['config']->set('app.key', 'base64:' . base64_encode(random_bytes(32)));
+$app['config']->set('auth.guards.api', ['driver' => 'passport', 'provider' => 'users']);
+$app['config']->set('auth.providers.users', ['driver' => 'eloquent', 'model' => UsuarioMem::class]);
+$app['config']->set('auth.providers.mem', ['driver' => 'memoria', 'model' => UsuarioMem::class]);
+$app['env'] = 'local'; // validateForPassportPasswordGrant do PR devolve true em 'local' (nao precisa do Encriptacao legado)
+Passport::loadKeysFrom('/w/keys');
+
+// usuario do PR com a busca no banco trocada por memoria (so findForPassport; o resto e o codigo do PR)
+class UsuarioMem extends Usuario {
+    public function findForPassport($login) { if ($login !== 'dbseller') { return null; } $u = new static(); $u->forceFill(['id_usuario' => 1, 'login' => 'dbseller', 'senha' => 'x']); return $u; }
+}
+// cliente no esquema ANTIGO (id inteiro, segredo em texto puro, password_client) sem tocar o banco
+class ClienteMem extends Laravel\Passport\Client {
+    public function __construct() { $this->setRawAttributes(['id' => 9999999, 'name' => 'e-cidade', 'secret' => 'segredo-de-teste', 'redirect' => 'http://localhost', 'personal_access_client' => 0, 'password_client' => 1, 'revoked' => 0, 'provider' => null], true); }
+    public function getKeyType() { return 'int'; }
+    public function getIncrementing() { return true; }
+}
+class ClientePessoalMem extends Laravel\Passport\Client {
+    public function __construct() { $this->setRawAttributes(['id' => 9999998, 'name' => 'MatriculaOnline', 'secret' => 'segredo-pessoal', 'redirect' => '', 'personal_access_client' => 1, 'password_client' => 0, 'revoked' => 0, 'provider' => null], true); }
+    public function getKeyType() { return 'int'; }
+    public function getIncrementing() { return true; }
+}
+class ClientesMem extends Laravel\Passport\ClientRepository {
+    public function __construct() {}
+    public function personalAccessClient(string $provider): Laravel\Passport\Client { return new ClientePessoalMem(); }
+    public function findActive(string|int $id): ?Laravel\Passport\Client { return (string) $id === '9999999' ? new ClienteMem() : null; }
+}
+class AccessMem extends Bridge\AccessTokenRepository {
+    public static $vivos = [];
+    public function __construct() {}
+    public function persistNewAccessToken(League\OAuth2\Server\Entities\AccessTokenEntityInterface $t): void { static::$vivos[$t->getIdentifier()] = true; }
+    public function revokeAccessToken(string $id): void { unset(static::$vivos[$id]); }
+    public function isAccessTokenRevoked(string $id): bool { return !isset(static::$vivos[$id]); }
+}
+class RefreshMem extends Bridge\RefreshTokenRepository {
+    public static $vivos = [];
+    public function __construct() {}
+    public function persistNewRefreshToken(League\OAuth2\Server\Entities\RefreshTokenEntityInterface $t): void { static::$vivos[$t->getIdentifier()] = true; }
+    public function revokeRefreshToken(string $id): void { unset(static::$vivos[$id]); }
+    public function isRefreshTokenRevoked(string $id): bool { return !isset(static::$vivos[$id]); }
+}
+
+$app['router']->aliasMiddleware('clientCredential', Laravel\Passport\Http\Middleware\CheckClientCredentials::class); // como o Kernel do PR
+passo('registrar PassportServiceProvider + AuthServiceProvider do PR', function () use ($app) {
+    $app->register(App\Providers\AuthServiceProvider::class);
+    $app->register(Laravel\Passport\PassportServiceProvider::class);
+    $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
+});
+$app->singleton(Laravel\Passport\ClientRepository::class, fn () => new ClientesMem());
+$app->singleton(Bridge\AccessTokenRepository::class, fn () => new AccessMem());
+$app->singleton(Bridge\RefreshTokenRepository::class, fn () => new RefreshMem());
+$server = passo('AuthorizationServer pelo container', fn () => $app->make(League\OAuth2\Server\AuthorizationServer::class) ? 'ok' : null);
+if (!$server) { exit; }
+$srv = $app->make(League\OAuth2\Server\AuthorizationServer::class);
+$svc = new App\Domain\Configuracao\Usuario\Services\AuthService($srv);
+$req = new ReflectionMethod($svc, 'requestToPassport'); $req->setAccessible(true);
+$dados = ['grant_type' => 'password', 'username' => 'dbseller', 'password' => 'qualquer', 'client_id' => '9999999', 'client_secret' => 'segredo-de-teste'];
+$tok = passo('password grant (AuthService::requestToPassport do PR)', function () use ($req, $svc, $dados) { $r = $req->invoke($svc, $dados); return json_encode(['chaves' => array_keys($r), 'token_type' => $r['token_type'] ?? null, 'expires_in_ok' => ($r['expires_in'] ?? 0) > 80000 && ($r['expires_in'] ?? 0) <= 86400]); });
+$res = null;
+passo('refresh_token', function () use ($req, $svc, $dados, &$res) {
+    $r = $req->invoke($svc, $dados);
+    $n = $req->invoke($svc, ['grant_type' => 'refresh_token', 'refresh_token' => $r['refresh_token'], 'client_id' => '9999999', 'client_secret' => 'segredo-de-teste']);
+    return json_encode(['chaves' => array_keys($n), 'novo_access' => $n['access_token'] !== $r['access_token']]);
+});
+$res = $req->invoke($svc, $dados); // token novo (o refresh acima revogou o primeiro, como no oauth2-server 8)
+if ($res) {
+    echo "claims: ", json_encode((function ($j) { $c = json_decode(base64_decode(strtr(explode('.', $j)[1], '-_', '+/')), true); foreach (['iat', 'nbf', 'exp', 'jti'] as $k) { $c[$k] = 'x'; } ksort($c); return $c; })($res['access_token'])), "\n";
+    echo "cabecalho: ", json_encode(json_decode(base64_decode(strtr(explode('.', $res['access_token'])[0], '-_', '+/')), true)), "\n";
+    passo('Bearer valido (ResourceServer)', function () use ($app, $res) {
+        $rs = $app->make(League\OAuth2\Server\ResourceServer::class);
+        $r = $rs->validateAuthenticatedRequest((new GuzzleHttp\Psr7\ServerRequest('GET', '/'))->withHeader('Authorization', 'Bearer ' . $res['access_token']));
+        return 'user=' . $r->getAttribute('oauth_user_id') . ' client=' . $r->getAttribute('oauth_client_id');
+    });
+    passo('Bearer adulterado e recusado', function () use ($app, $res) {
+        $rs = $app->make(League\OAuth2\Server\ResourceServer::class);
+        try { $rs->validateAuthenticatedRequest((new GuzzleHttp\Psr7\ServerRequest('GET', '/'))->withHeader('Authorization', 'Bearer ' . substr($res['access_token'], 0, -3) . 'AAA')); return 'ACEITO (errado)'; }
+        catch (League\OAuth2\Server\Exception\OAuthServerException $e) { return 'recusado code=' . $e->getCode(); }
+    });
+}
+passo('segredo errado e recusado', function () use ($req, $svc, $dados) { try { $req->invoke($svc, ['client_secret' => 'errado'] + $dados); return 'ACEITO (errado)'; } catch (League\OAuth2\Server\Exception\OAuthServerException $e) { return 'recusado code=' . $e->getCode(); } });
+
+passo('getProviderName() do usuario do PR', fn () => (new UsuarioMem)->getProviderName());
+// ---- guard api: Bearer -> usuario (provider em memoria no lugar da consulta ao banco) ----
+$app['auth']->provider('memoria', fn ($app, $c) => new class($c['model']) extends Illuminate\Auth\EloquentUserProvider {
+    public function __construct($model) { $this->model = $model; }
+    public function retrieveById($id) { return (new $this->model)->findForPassport('dbseller'); }
+});
+$app['config']->set('auth.guards.api.provider', 'mem');
+passo('guard api: Bearer -> usuario do PR sem implements OAuthenticatable', function () use ($app, $res, $req, $svc, $dados) {
+    $r = $req->invoke($svc, $dados);
+    $request = Illuminate\Http\Request::create('/x', 'GET', [], [], [], ['HTTP_AUTHORIZATION' => 'Bearer ' . $r['access_token']]);
+    $u = $app['auth']->guard('api')->setRequest($request)->user();
+    return $u ? get_class($u) . ' token=' . get_class($u->token()) . ' revoke()=' . (method_exists($u->token(), 'revoke') ? 'existe' : 'FALTA') . ' implementa=' . var_export($u instanceof Laravel\Passport\Contracts\OAuthenticatable, true) : 'NULL';
+});
+passo('Passport::actingAs(usuario do PR)', function () { Passport::actingAs(new UsuarioMem); return 'ok'; });
+
+// ---- clientCredential: o alias vem do Kernel (antes do boot); o modo proposto o troca no provider ----
+$app['auth']->forgetGuards();
+$app['config']->set('app.debug', false);
+$cc = $req->invoke($svc, ['grant_type' => 'client_credentials', 'client_id' => '9999999', 'client_secret' => 'segredo-de-teste']);
+echo 'claims client_credentials: ', json_encode((function ($j) { $c = json_decode(base64_decode(strtr(explode('.', $j)[1], '-_', '+/')), true); foreach (['iat', 'nbf', 'exp', 'jti'] as $k) { $c[$k] = 'x'; } ksort($c); return $c; })($cc['access_token'])), "\n";
+echo "alias final de clientCredential: ", $app['router']->getMiddleware()['clientCredential'], "\n";
+$kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
+$n = 0;
+foreach (['token de cliente (client_credentials)' => $cc['access_token'] ?? '', 'token invalido' => 'x'] as $rot => $t) {
+    $uri = '/cc' . (++$n);
+    $app['router']->get($uri, fn () => 'passou')->middleware('clientCredential');
+    $app['auth']->forgetGuards();
+    passo("rota com clientCredential, $rot", function () use ($kernel, $t, $uri) {
+        $r = $kernel->handle(Illuminate\Http\Request::create($uri, 'GET', [], [], [], ['HTTP_AUTHORIZATION' => 'Bearer ' . $t, 'HTTP_ACCEPT' => 'application/json']));
+        return 'HTTP ' . $r->getStatusCode();
+    });
+}
+
+// ---- cliente pessoal: $usuario->createToken('tokenId') (ClientRepository.php:41 do PR) ----
+$app['auth']->forgetGuards();
+$app['config']->set('auth.guards.api.provider', 'users');
+passo("createToken('tokenId') do usuario do PR (cliente pessoal em memoria)", function () {
+    $r = (new UsuarioMem)->forceFill(['id_usuario' => 1])->createToken('tokenId');
+    $c = json_decode(base64_decode(strtr(explode('.', $r->accessToken)[1], '-_', '+/')), true);
+    return 'accessToken ' . (strlen($r->accessToken) > 100 ? 'emitido' : 'vazio') . ' aud=' . $c['aud'] . ' sub=' . $c['sub'];
+});

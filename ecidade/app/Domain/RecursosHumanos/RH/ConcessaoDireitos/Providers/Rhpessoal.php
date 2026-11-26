@@ -51,7 +51,7 @@ class Rhpessoal
 
     public static function admissrecis($inst, $matricula)
     {
-        $rhpessoalmov = DB::select(DB::raw("
+        $rhpessoalmov = DB::select("
         select rh01_admiss, rh05_recis
         from rhpessoal
         inner join rhpessoalmov on
@@ -59,7 +59,7 @@ class Rhpessoal
             and rh02_anousu = fc_anofolha(" . $inst . ")
             and rh02_mesusu = fc_mesfolha(" . $inst . ")
         left join rhpesrescisao on rhpesrescisao.rh05_seqpes = rhpessoalmov.rh02_seqpes
-        where rh01_regist = " . $matricula));
+        where rh01_regist = " . $matricula);
         return $rhpessoalmov;
     }
 }

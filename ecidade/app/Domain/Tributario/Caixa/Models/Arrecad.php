@@ -99,7 +99,7 @@ class Arrecad extends Model
                 i.j20_matric = {$j20_matric}
                 and a.k00_tipo = {$k00_tipo}
 SQL;
-        $result = DB::select(DB::raw($sql));
+        $result = DB::select($sql);
         $collection = new Collection();
 
         foreach ($result as $arrecad) {

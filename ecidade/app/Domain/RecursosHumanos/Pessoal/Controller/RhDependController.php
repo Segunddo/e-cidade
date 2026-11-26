@@ -70,7 +70,7 @@ class RhDependController extends Controller
 
         $dependentes = array_map(function ($dependente) {
             $dependente = (object) $dependente;
-            $dependente->idade = Carbon::parse($dependente->rh31_dtnasc)->age;
+            $dependente->idade = abs(Carbon::parse($dependente->rh31_dtnasc)->age);
             return $dependente;
         }, $listaDependentes);
 

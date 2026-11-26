@@ -38,11 +38,6 @@ class Planejamento extends Model
 
     protected $guarded = ['pl2_codigo'];
 
-    protected $dates = [
-        'pl2_created_at',
-        'pl2_updated_at',
-    ];
-
     protected $casts = [
         'pl2_codigo' => 'integer',
         'pl2_tipo' => 'string',
@@ -58,6 +53,8 @@ class Planejamento extends Model
         'pl2_missao' => 'string',
         'pl2_visao' => 'string',
         'pl2_valores' => 'string',
+        'pl2_created_at' => 'datetime',
+        'pl2_updated_at' => 'datetime',
     ];
 
     protected $storage = [];

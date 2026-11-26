@@ -64,7 +64,7 @@ class RegistroAulaController extends Controller
      */
     public function getDadosRegente(Request $request, $escola, $user)
     {
-        $dataSistema = Carbon::createFromTimestamp($request->get('DB_datausu'));
+        $dataSistema = Carbon::createFromTimestamp($request->get('DB_datausu'), date_default_timezone_get());
         $periodos = !is_null($request->get('periodos'));
         return new DBJsonResponse($this->service->getDadosRegente($user, $escola, $dataSistema, $periodos));
     }
@@ -74,7 +74,7 @@ class RegistroAulaController extends Controller
         $escola = $request->get('DB_coddepto');
         $linhas = $request->query('items') ? $request->query('items', 5) : null;
         $filtros = $request->query();
-        $filtros['dataSistema'] = Carbon::createFromTimestamp($request->get('DB_datausu'));
+        $filtros['dataSistema'] = Carbon::createFromTimestamp($request->get('DB_datausu'), date_default_timezone_get());
 
         return new DBJsonResponse($this->service->getConteudosRegenteEscola($usuario, $escola, $linhas, $filtros));
     }

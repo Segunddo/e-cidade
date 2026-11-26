@@ -24,6 +24,6 @@ class RhDepend extends Model
 
     public function idade()
     {
-        return Carbon::parse($this->attributes['rh31_dtnasc'])->age;
+        return abs(Carbon::parse($this->attributes['rh31_dtnasc'])->age);
     }
 }

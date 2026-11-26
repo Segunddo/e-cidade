@@ -63,8 +63,6 @@ class Departamento extends Model
     public $timestamps = false;
     public $incrementing = false;
 
-    protected $dates = ['limite'];
-
     protected $casts = [
         "coddepto" => "integer",
         "descrdepto" => "string",
@@ -76,6 +74,7 @@ class Departamento extends Model
         "ramaldepto" => "string",
         "instit" => "integer",
         "id_usuarioresp" => "integer",
+        'limite' => 'datetime',
     ];
 
     /**

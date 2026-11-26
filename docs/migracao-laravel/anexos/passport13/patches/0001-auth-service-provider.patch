@@ -1,0 +1,45 @@
+--- a/ecidade/app/Providers/AuthServiceProvider.php
++++ b/ecidade/app/Providers/AuthServiceProvider.php
+@@ -20,6 +20,24 @@
+     protected $policies = [];
+ 
+     /**
++     * Passport 13 nao tem Passport::routes(): as rotas vem do provider do pacote.
++     *
++     * @return void
++     */
++    public function register()
++    {
++        parent::register();
++
++        if (!method_exists(Passport::class, 'routes')) {
++            config(['passport.path' => 'v4/oauth']);
++
++            $this->app->when(\Laravel\Passport\Bridge\ClientRepository::class)
++                ->needs(\Illuminate\Contracts\Hashing\Hasher::class)
++                ->give(\App\Auth\SegredoClienteTextoPuro::class);
++        }
++    }
++
++    /**
+      * Register any authentication / authorization services.
+      *
+      * @return void
+@@ -28,9 +46,14 @@
+     {
+         $this->registerPolicies();
+ 
+-        Passport::routes(null, [
+-            'prefix' => 'v4/oauth',
+-        ]);
++        if (method_exists(Passport::class, 'routes')) {
++            Passport::routes(null, [
++                'prefix' => 'v4/oauth',
++            ]);
++        } else {
++            Passport::enablePasswordGrant();
++            $this->app['router']->aliasMiddleware('clientCredential', \Laravel\Passport\Http\Middleware\CheckToken::class);
++        }
+ 
+         Passport::tokensExpireIn(Carbon::now()->addDay());
+ 

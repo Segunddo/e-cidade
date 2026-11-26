@@ -28,9 +28,9 @@ class ApropriacaoDecimoFerias extends Model
 
     protected $guarded = ['id'];
 
-    protected $dates = [
-        'pl2_created_at',
-        'pl2_updated_at',
+    protected $casts = [
+        'pl2_created_at' => 'datetime',
+        'pl2_updated_at' => 'datetime',
     ];
 
     /**

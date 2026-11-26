@@ -1,0 +1,234 @@
+{
+    "config_do_pr_sem_adaptar": {
+        "resolve": "Illuminate\\Mail\\Mailer"
+    },
+    "php": "8.5",
+    "laravel": "8.73.2",
+    "modo": "l8",
+    "config": {
+        "configuracao_do_pr": [
+            "driver",
+            "host",
+            "port",
+            "from",
+            "encryption",
+            "username",
+            "password",
+            "sendmail",
+            "markdown"
+        ],
+        "driver_do_pr": "smtp"
+    },
+    "mail_redesim": [
+        {
+            "assunto": "[ISO]Erro no processamento automatico da REDESIM: Prefeitura de São João",
+            "de": {
+                "sistema@exemplo.invalid": "[ISO]Prefeitura de São João"
+            },
+            "para": {
+                "erros@exemplo.invalid": null,
+                "outro@exemplo.invalid": null
+            },
+            "cc": [],
+            "responder_a": [],
+            "tipo": "text/html",
+            "charset": "utf-8",
+            "corpo": "<h2>Error ao processar o estabelecimento da REDESIM</h2>\n<br>\n<h3>Identificador: 12.345.678/0001-90</h3>\n<br>\n<h4>Erro:</h4>\n<br>\nMensagem: Falha de exemplo: coluna inexistente<br>Arquivo: ARQ<br>Linha: N\n<br>\n<h4>Stacktrace:</h4>\n<br>\nTRACE",
+            "partes": [],
+            "cabecalhos": [
+                "Content-Transfer-Encoding",
+                "Content-Type",
+                "MIME-Version",
+                "Date",
+                "Message-ID",
+                "From",
+                "Subject",
+                "To"
+            ],
+            "bruto": "Message-ID: X\nDate: X\nSubject: Erro no processamento automatico da REDESIM: Prefeitura de\n =?utf-8?Q?S=3Fo_?=\n =?utf-8?Q?Jo?=\nFrom: Prefeitura de =?utf-8?Q?S=3Fo_Jo?= <sistema@exemplo.invalid>\nTo: erros@exemplo.invalid, outro@exemplo.invalid\nMIME-Version: 1.0\nContent-Type: text/html; charset=utf-8\nContent-Transfer-Encoding: quoted-printable\n\n<h2>Error ao processar o estabelecimento da REDESIM</h2>\n<br>\n<h3>Ident=\nificador: 12.345.678/0001-90</h3>\n<br>\n<h4>Erro:</h4>\n<br>\nMensagem=\n: Falha de exemplo: coluna inexistente<br>Arquivo: /s/emails_render.php<br>=\nLinha: 194\n<br>\n<h4>Stacktrace: TRACE",
+            "texto": null
+        }
+    ],
+    "mail_redesim_sem_env": {
+        "EXCECAO": "Exception",
+        "mensagem": "[ISO]E-mail não pode ser enviado pois não foi feita a configuração."
+    },
+    "notificacao_acordo": {
+        "via": [
+            "database",
+            "mail"
+        ],
+        "toArray": {
+            "title": "Acordo 12/2026 vence em 5 dias",
+            "message": "O acordo nº 12/2026 (início 10/01/2026, fim 25/11/2026) vence em 5 dias. Ação necessária."
+        },
+        "emails": [
+            {
+                "assunto": "Acordo 12/2026 vence em 5 dias",
+                "de": {
+                    "sistema@exemplo.invalid": "e-Cidade"
+                },
+                "para": {
+                    "maria@exemplo.invalid": null
+                },
+                "cc": [],
+                "responder_a": [],
+                "tipo": "text/html",
+                "charset": "utf-8",
+                "corpo": "<!doctype html>\n<html lang=\"pt-BR\" style=\"background-color: #efefef;\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\"\n          content=\"width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"ie=edge\">\n    <title>Document</title>\n\n    <style>\n        .cabecalho {\n            display: flex;\n            flex-direction: row;\n            align-items: center;\n            width: 100%;\n            height: 80px;\n            background-color: #7cb4df;\n            border-radius: 10px;\n        }\n\n        .logo-div {\n            display: flex;\n            justify-content: flex-end;\n            flex-grow: 1;\n            margin: 10px;\n        }\n\n        .corpo {\n            display: flex;\n            flex-direction: column;\n            margin-left: 50px;\n            margin-top: 50px;\n        }\n\n        b {\n            font-family: sans-serif;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"cabecalho\">\n        <b style=\"margin-left: 10px;font-size: 25px; color: white\">e-Cidade</b>\n        <div class=\"logo-div\">\n            <img src=\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4z8DwHwAFAAH/q842iQAAAABJRU5ErkJggg==\" alt=\"logo\">\n        </div>\n    </div>\n    <div class=\"corpo\">\n        <b style=\"font-size: 25px;\">Olá, Vanderson Duarte Maciel</b>\n        <p>O acordo nº 12/2026 (início 10/01/2026, fim 25/11/2026) vence em 5 dias. Ação necessária.</p>\n    </div>\n</body>\n</html>\n",
+                "partes": [],
+                "cabecalhos": [
+                    "Content-Transfer-Encoding",
+                    "Content-Type",
+                    "MIME-Version",
+                    "Date",
+                    "Message-ID",
+                    "From",
+                    "Subject",
+                    "To"
+                ],
+                "bruto": "Message-ID: X\nDate: X\nSubject: Acordo 12/2026 vence em 5 dias\nFrom: e-Cidade <sistema@exemplo.invalid>\nTo: maria@exemplo.invalid\nMIME-Version: 1.0\nContent-Type: text/html; charset=utf-8\nContent-Transfer-Encoding: quoted-printable\n\n<!doctype html>\n<html lang=3D\"pt-BR\" style=3D\"background-color: #efefef;\"=\n>\n<head>\n    <meta charset=3D\"UTF-8\">\n    <meta name=3D\"viewport\"\n =\n         content=3D\"width=3Ddevice-width, user-scalable=3Dno, initial-scale=\n=3D1.0, maximum-scale=3D1.0, minimum-scale=3D1.0\">\n    <meta http-equiv=\n=3D\"X-UA-Compatible\" content=3D\"ie=3Dedge\">\n    <title>Document</title>=\n\n\n    <style>\n        .cabecalho {\n            display: flex;\n   =\n         flex-direction: row;\n            align-items: center;\n        =\n    width: 100%;\n            height: 80px;\n            background-color=\n: #7cb4df;\n            border-radius: 10px;\n        }\n\n        .log=\no-div {\n            display: flex;\n            justify-content: flex-en=\nd;\n            flex-grow: 1;\n            margin: 10px;\n        }\n=\n\n        .corpo {\n            display: flex;\n            flex-directi=\non: column;\n            margin-left: 50px;\n            margin-top: 50px=\n;\n        }\n\n        b {\n            font-family: sans-serif;\n   =\n     }\n    </style>\n</head>\n<body>\n    <div class=3D\"cabecalho\">\n=\n        <b style=3D\"margin-left: 10px;font-size: 25px; color: white\">e-Cida=\nde</b>\n        <div class=3D\"logo-div\">\n            <img src=3D\"data:im=\nage/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGP4=\nz8DwHwAFAAH/q842iQAAAABJRU5ErkJggg=3D=3D\" alt=3D\"logo\">\n        </div>\n=\n    </div>\n    <div class=3D\"corpo\">\n        <b style=3D\"font-size: 25p=\nx;\">Ol=C3=A1, Vanderson Duarte Maciel</b>\n        <p>O acordo n=C2=BA 12/=\n2026 (in=C3=ADcio 10/01/2026, fim 25/11/2026) vence em 5 dias. A=C3=A7=\n=C3=A3o necess=C3=A1ria.</p>\n    </div>\n</body>\n</html>\n"
+            }
+        ]
+    },
+    "notificacao_user": {
+        "via": [
+            "broadcast",
+            "database"
+        ],
+        "toArray": {
+            "title": "Título de exemplo",
+            "message": "Mensagem com acentuação"
+        },
+        "json": "{\"title\":\"Título de exemplo\",\"message\":\"Mensagem com acentuação\"}"
+    },
+    "notificacao_assinatura": {
+        "via": [
+            "broadcast",
+            "database"
+        ],
+        "toArray": {
+            "title": "Assinar documento",
+            "message": "[ISO]Há um documento para assinar",
+            "action": {
+                "action": "web/patrimonial/protocolo/assinatura",
+                "iInstitId": 1,
+                "iAreaId": 4,
+                "iModuloId": 604,
+                "lAtalhoDesktop": true
+            },
+            "menuName": "Assinatura Documentos"
+        },
+        "json": false
+    },
+    "notificacao_relatorio_legal": {
+        "via": [
+            "broadcast",
+            "database"
+        ],
+        "toArray": {
+            "title": null,
+            "message": "Emissão do Anexo 3 - RREO esta pronta.",
+            "action": {
+                "action": "web/financeiro/contabilidade/msc/lrf/anexo/rreo/3/0",
+                "iInstitId": 1,
+                "iAreaId": 2,
+                "iModuloId": 209,
+                "lAtalhoDesktop": true
+            },
+            "menuName": "Anexos da LRF",
+            "externalLinks": [
+                {
+                    "label": "PDF",
+                    "url": "http://localhost/v4/api/financeiro/contabilidade/relatorio-legal/emissao/download/a.pdf"
+                },
+                {
+                    "label": "XLS",
+                    "url": "http://localhost/v4/api/financeiro/contabilidade/relatorio-legal/emissao/download/a.xls"
+                }
+            ]
+        }
+    },
+    "imagem_base64": {
+        "prefixo": "data:image/png;base64,iVBORw0K",
+        "md5": "bcaf9536282b9b41925c135ec3c00fa9"
+    },
+    "deprecations": [
+        "Callables of the form [\"Swift_Message\", \"Swift_Mime_SimpleMessage::__construct\"] are deprecated @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/Message.php:46",
+        "Creation of dynamic property App\\Notifications\\EmissaoRelatorioLegalNotification::$titulo is deprecated @ app/Notifications/EmissaoRelatorioLegalNotification.php:49",
+        "Function utf8_encode() is deprecated since 8.2, visit the php.net documentation for various alternatives @ std/DBString.php:813",
+        "GuzzleHttp\\Promise\\each(): Implicitly marking parameter $onFulfilled as nullable is deprecated, the explicit nullable type must be used instead @ vendor/guzzlehttp/promises/src/functions.php:262",
+        "GuzzleHttp\\Promise\\each(): Implicitly marking parameter $onRejected as nullable is deprecated, the explicit nullable type must be used instead @ vendor/guzzlehttp/promises/src/functions.php:263",
+        "GuzzleHttp\\Promise\\each_limit(): Implicitly marking parameter $onFulfilled as nullable is deprecated, the explicit nullable type must be used instead @ vendor/guzzlehttp/promises/src/functions.php:288",
+        "GuzzleHttp\\Promise\\each_limit(): Implicitly marking parameter $onRejected as nullable is deprecated, the explicit nullable type must be used instead @ vendor/guzzlehttp/promises/src/functions.php:289",
+        "GuzzleHttp\\Promise\\each_limit_all(): Implicitly marking parameter $onFulfilled as nullable is deprecated, the explicit nullable type must be used instead @ vendor/guzzlehttp/promises/src/functions.php:310",
+        "GuzzleHttp\\Promise\\queue(): Implicitly marking parameter $assign as nullable is deprecated, the explicit nullable type must be used instead @ vendor/guzzlehttp/promises/src/functions.php:24",
+        "Illuminate\\Bus\\Dispatcher::__construct(): Implicitly marking parameter $queueResolver as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Bus/Dispatcher.php:61",
+        "Illuminate\\Container\\Container::afterResolving(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Container/Container.php:1158",
+        "Illuminate\\Container\\Container::beforeResolving(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Container/Container.php:1118",
+        "Illuminate\\Container\\Container::resolving(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Container/Container.php:1138",
+        "Illuminate\\Container\\Container::setInstance(): Implicitly marking parameter $container as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Container/Container.php:1397",
+        "Illuminate\\Contracts\\Container\\Container::afterResolving(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Contracts/Container/Container.php:182",
+        "Illuminate\\Contracts\\Container\\Container::resolving(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Contracts/Container/Container.php:173",
+        "Illuminate\\Database\\Eloquent\\Concerns\\HasGlobalScopes::addGlobalScope(): Implicitly marking parameter $implementation as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasGlobalScopes.php:21",
+        "Illuminate\\Database\\Eloquent\\Model::replicate(): Implicitly marking parameter $except as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php:1566",
+        "Illuminate\\Events\\Dispatcher::__construct(): Implicitly marking parameter $container as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Events/Dispatcher.php:65",
+        "Illuminate\\Http\\Concerns\\InteractsWithInput::whenFilled(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithInput.php:199",
+        "Illuminate\\Http\\Concerns\\InteractsWithInput::whenHas(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithInput.php:121",
+        "Illuminate\\Http\\Request::duplicate(): Implicitly marking parameter $attributes as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Http/Request.php:462",
+        "Illuminate\\Http\\Request::duplicate(): Implicitly marking parameter $cookies as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Http/Request.php:462",
+        "Illuminate\\Http\\Request::duplicate(): Implicitly marking parameter $files as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Http/Request.php:462",
+        "Illuminate\\Http\\Request::duplicate(): Implicitly marking parameter $query as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Http/Request.php:462",
+        "Illuminate\\Http\\Request::duplicate(): Implicitly marking parameter $request as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Http/Request.php:462",
+        "Illuminate\\Http\\Request::duplicate(): Implicitly marking parameter $server as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Http/Request.php:462",
+        "Illuminate\\Mail\\Mailer::__construct(): Implicitly marking parameter $events as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Mail/Mailer.php:103",
+        "Illuminate\\Notifications\\ChannelManager::sendNow(): Implicitly marking parameter $channels as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Notifications/ChannelManager.php:50",
+        "Illuminate\\Notifications\\NotificationSender::sendNow(): Implicitly marking parameter $channels as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Notifications/NotificationSender.php:90",
+        "Illuminate\\Notifications\\RoutesNotifications::notifyNow(): Implicitly marking parameter $channels as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Notifications/RoutesNotifications.php:28",
+        "Illuminate\\Pipeline\\Pipeline::__construct(): Implicitly marking parameter $container as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Pipeline/Pipeline.php:47",
+        "Illuminate\\Routing\\Router::__construct(): Implicitly marking parameter $container as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Routing/Router.php:131",
+        "Illuminate\\Routing\\Router::model(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Routing/Router.php:995",
+        "Illuminate\\Support\\Arr::first(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Arr.php:166",
+        "Illuminate\\Support\\Arr::last(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Arr.php:195",
+        "Illuminate\\Support\\Collection::filter(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Collection.php:342",
+        "Illuminate\\Support\\Collection::first(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Collection.php:358",
+        "Illuminate\\Support\\Collection::last(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Collection.php:637",
+        "Illuminate\\Support\\Enumerable::filter(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:268",
+        "Illuminate\\Support\\Enumerable::first(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:432",
+        "Illuminate\\Support\\Enumerable::last(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:555",
+        "Illuminate\\Support\\Enumerable::times(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:28",
+        "Illuminate\\Support\\Enumerable::unless(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:306",
+        "Illuminate\\Support\\Enumerable::unlessEmpty(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:315",
+        "Illuminate\\Support\\Enumerable::unlessNotEmpty(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:324",
+        "Illuminate\\Support\\Enumerable::when(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:278",
+        "Illuminate\\Support\\Enumerable::whenEmpty(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:287",
+        "Illuminate\\Support\\Enumerable::whenNotEmpty(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Enumerable.php:296",
+        "Illuminate\\Support\\Str::createUuidsUsing(): Implicitly marking parameter $factory as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Support/Str.php:932",
+        "Illuminate\\Support\\Traits\\EnumeratesValues::times(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php:141",
+        "Illuminate\\Support\\Traits\\EnumeratesValues::unless(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php:519",
+        "Illuminate\\Support\\Traits\\EnumeratesValues::unlessEmpty(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php:531",
+        "Illuminate\\Support\\Traits\\EnumeratesValues::unlessNotEmpty(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php:543",
+        "Illuminate\\Support\\Traits\\EnumeratesValues::when(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php:472",
+        "Illuminate\\Support\\Traits\\EnumeratesValues::when(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php:472",
+        "Illuminate\\Support\\Traits\\EnumeratesValues::whenEmpty(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php:494",
+        "Illuminate\\Support\\Traits\\EnumeratesValues::whenNotEmpty(): Implicitly marking parameter $default as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Collections/Traits/EnumeratesValues.php:506",
+        "Illuminate\\View\\Engines\\CompilerEngine::__construct(): Implicitly marking parameter $files as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php:33",
+        "Illuminate\\View\\FileViewFinder::__construct(): Implicitly marking parameter $extensions as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/View/FileViewFinder.php:53",
+        "Illuminate\\View\\View::render(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/View/View.php:88",
+        "Opis\\Closure\\unserialize(): Implicitly marking parameter $options as nullable is deprecated, the explicit nullable type must be used instead @ vendor/opis/closure/functions.php:32",
+        "Swift_Encoder_QpEncoder::__construct(): Implicitly marking parameter $filter as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/Encoder/QpEncoder.php:109",
+        "Swift_KeyCache::getInputByteStream(): Implicitly marking parameter $is as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/KeyCache.php:59",
+        "Swift_KeyCache_DiskKeyCache::getInputByteStream(): Implicitly marking parameter $writeThrough as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/KeyCache/DiskKeyCache.php:131",
+        "Swift_KeyCache_SimpleKeyCacheInputStream::write(): Implicitly marking parameter $is as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/KeyCache/SimpleKeyCacheInputStream.php:52",
+        "Swift_Mime_ContentEncoder_QpContentEncoder::__construct(): Implicitly marking parameter $filter as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/ContentEncoder/QpContentEncoder.php:27",
+        "Swift_Mime_Headers_AbstractHeader::createPhrase(): Implicitly marking parameter $encoder as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/AbstractHeader.php:203",
+        "Swift_Mime_Headers_IdentificationHeader::__construct(): Implicitly marking parameter $addressEncoder as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/IdentificationHeader.php:45",
+        "Swift_Mime_Headers_MailboxHeader::__construct(): Implicitly marking parameter $addressEncoder as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/MailboxHeader.php:42",
+        "Swift_Mime_Headers_ParameterizedHeader::__construct(): Implicitly marking parameter $paramEncoder as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/Headers/ParameterizedHeader.php:44",
+        "Swift_Mime_SimpleHeaderFactory::__construct(): Implicitly marking parameter $addressEncoder as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleHeaderFactory.php:40",
+        "Swift_Mime_SimpleHeaderFactory::createDateHeader(): Implicitly marking parameter $dateTime as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleHeaderFactory.php:75",
+        "Swift_Mime_SimpleHeaderSet::addDateHeader(): Implicitly marking parameter $dateTime as nullable is deprecated, the explicit nullable type must be used instead @ vendor/swiftmailer/swiftmailer/lib/classes/Swift/Mime/SimpleHeaderSet.php:79",
+        "optional(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Support/helpers.php:184",
+        "with(): Implicitly marking parameter $callback as nullable is deprecated, the explicit nullable type must be used instead @ vendor/laravel/framework/src/Illuminate/Support/helpers.php:375"
+    ]
+}

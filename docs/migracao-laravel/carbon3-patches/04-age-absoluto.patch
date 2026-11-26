@@ -1,0 +1,40 @@
+diff --git a/ecidade/app/Domain/RecursosHumanos/Pessoal/Controller/RhDependController.php b/ecidade/app/Domain/RecursosHumanos/Pessoal/Controller/RhDependController.php
+index cd88d3429..a209ff9f9 100644
+--- a/ecidade/app/Domain/RecursosHumanos/Pessoal/Controller/RhDependController.php
++++ b/ecidade/app/Domain/RecursosHumanos/Pessoal/Controller/RhDependController.php
+@@ -70,7 +70,7 @@ public function getDependenteByServidor($servidor)
+ 
+         $dependentes = array_map(function ($dependente) {
+             $dependente = (object) $dependente;
+-            $dependente->idade = Carbon::parse($dependente->rh31_dtnasc)->age;
++            $dependente->idade = abs(Carbon::parse($dependente->rh31_dtnasc)->age);
+             return $dependente;
+         }, $listaDependentes);
+ 
+diff --git a/ecidade/app/Domain/RecursosHumanos/Pessoal/Model/RhDepend.php b/ecidade/app/Domain/RecursosHumanos/Pessoal/Model/RhDepend.php
+index a73aa3b9b..3caf4d056 100644
+--- a/ecidade/app/Domain/RecursosHumanos/Pessoal/Model/RhDepend.php
++++ b/ecidade/app/Domain/RecursosHumanos/Pessoal/Model/RhDepend.php
+@@ -24,6 +24,6 @@ public function ajuda()
+ 
+     public function idade()
+     {
+-        return Carbon::parse($this->attributes['rh31_dtnasc'])->age;
++        return abs(Carbon::parse($this->attributes['rh31_dtnasc'])->age);
+     }
+ }
+diff --git a/ecidade/app/Domain/RecursosHumanos/Pessoal/Services/AjudaCusto/AjudaCustoService.php b/ecidade/app/Domain/RecursosHumanos/Pessoal/Services/AjudaCusto/AjudaCustoService.php
+index 724371908..325d6b087 100644
+--- a/ecidade/app/Domain/RecursosHumanos/Pessoal/Services/AjudaCusto/AjudaCustoService.php
++++ b/ecidade/app/Domain/RecursosHumanos/Pessoal/Services/AjudaCusto/AjudaCustoService.php
+@@ -243,8 +243,8 @@ private function validaLancamento(AjudaCusto $ajudaCusto)
+                 throw new Exception("Dependente já atingiu a idade limite.", 400);
+             }
+ 
+-            $idadeLancamento = Carbon::parse($dependente->rh31_dtnasc)
+-                ->subMonth($ajudaCusto->rh312_quantidade)->age;
++            $idadeLancamento = abs(Carbon::parse($dependente->rh31_dtnasc)
++                ->subMonth($ajudaCusto->rh312_quantidade)->age);
+ 
+             if ($idadeLancamento > $configuracao->rh311_idademax) {
+                 throw new Exception("Dependente irá atingir a idade limite no período informado.", 400);

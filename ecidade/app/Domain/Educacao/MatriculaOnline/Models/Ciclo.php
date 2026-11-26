@@ -18,7 +18,7 @@ class Ciclo extends Model
         'mo09_sigla',
         'mo09_eja'
     ];
-    protected $dates = ['mo09_dtcad'];
+    protected $casts = ['mo09_dtcad' => 'datetime'];
 
     public function ciclosEnsino()
     {

@@ -27,8 +27,8 @@ class Lancamento extends Model
 
     use DeepReplicates;
 
-    protected $dates = [
-        'c70_data'
+    protected $casts = [
+        'c70_data' => 'datetime'
     ];
 
     public function documentoLancamento()

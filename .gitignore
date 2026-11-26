@@ -3,3 +3,6 @@
 # Entrou por engano num `git add -- docker/` e foi removido por amend.
 docker/database/ecidade_base.sql
 scratchpad/__pycache__/
+
+# vendor/, cache e storage do PHP 8.5 (docker/composer-85/composer-85.sh; docs/registro/estrutura-85.md)
+/runtime-85/
