@@ -61,26 +61,26 @@ As áreas se sobrepõem em alguns prefixos, então a soma das linhas é maior qu
 | Etapa | IDENTICO | DIVERGE | INCONCLUSIVO | Antes (DIVERGE) |
 |---|---|---|---|---|
 | Sintaxe | 13.057 | **2** | 6 | 4 |
-| Classes | 1.552 | **1.018** | 59 | 2.532 |
+| Classes (em `111125fb5`) | 1.552 | **1.018** | 59 | 2.532 |
+| Classes das 1.018 (em `ceef42c8d`) | 1.017 | **1** | 0 | 1.018 |
 
 - **Sintaxe: 2 arquivos ainda não compilam no 8.5 e compilam no 7.4:** `edu2_certconclusao002.php` e
   `edu4_verifexportcenso003.php`. São correção direta e pequena (erro de compilação).
 - 6 arquivos não compilam em nenhum dos dois runtimes (defeito que já existe no 7.4; registrar e avisar
   o dono, não corrigir): `bib3_leitorcons002`, `edu1_diarioavaliacao001`, `edu1_diarioavaliacaoobs001`,
   `fis1_fis_vistorias003`, `mer1_mer_desper_und003`, `pes1_reajusteprog001`.
-- **Classes: 1.018 ainda divergem — causa isolada e correção comprovada.** Não é o banco nem o teste: é a
-  mudança de semântica do PHP 8 em `0 == ""` (verdadeiro no 7.4, falso no 8). As classes de dados usam o idioma
+- **Classes: 1.018 divergiam; 1.017 já foram corrigidas na própria base-php85.** Causa isolada: a mudança de
+  semântica do PHP 8 em `0 == ""` (verdadeiro no 7.4, falso no 8). As classes de dados usam
   `$this->campo == "" ? <valor do POST> : $this->campo` com campos que começam em `0`; no 8.5 a comparação
-  falha, o POST nunca é lido e o campo fica em `0` (o `1013` do 7.4). Todas as 1.018 têm o idioma (1.017 com
-  campo inicializado em 0) e nenhuma diverge sem ele. As 1.552 IDENTICO já têm a guarda da regra
-  `scratchpad/rector-rules/GuardaComparacaoLiteralRector.php`, que reescreve para
-  `($this->x === 0 || $this->x === 0.0 || $this->x == "" ? ... )` e preserva o comportamento antigo nos dois
-  runtimes. **Prova:** a regra foi aplicada a uma amostra de 20 das 1.018 (sorteio fixo, semente 7) e a bateria
-  de classes devolveu 20 de 20 IDENTICO; só essa regra disparou (115 linhas trocadas). A amostra foi revertida;
-  nada disso está aplicado na árvore. **Ação:** aplicar a regra às 1.018 num commit Rector separado do manual
-  (lista em `classes-sem-guarda-base-php85.txt`), um responsável só; `classes/` não tem dono de área
-  (`sem_area`), então precisa de decisão do coordenador. Depois, repetir a bateria e só então distribuir as
-  divergências restantes por área; parte dos 509 erros 500 das telas pode sumir junto.
+  falha, o POST nunca é lido e o campo fica em `0` (o `1013` do 7.4). A regra
+  `scratchpad/rector-rules/GuardaComparacaoLiteralRector.php` reescreve o idioma e preserva o comportamento
+  antigo nos dois runtimes. Prova em amostra: 20 das 1.018 passaram a IDENTICO com só essa regra.
+  **Atualização de 2026-11-26:** a `guarda/classes-570` (PR #54) e os lotes do Patrimonial aplicaram a regra
+  e a bateria de classes, repetida sobre a base-php85 em `ceef42c8d`, deu **1.017 IDENTICO e 1 DIVERGE**
+  entre as 1.018 (as outras 1.611 não foram repetidas). A que sobrou:
+  `classes/db_iptuconstr_classe.php`, TypeError no 8.5 porque `getParametros()` chama
+  `pg_fetch_object($query)` com `$query` falso (no 7.4 é só aviso). É a mesma guarda `pg_*` sobre resultado
+  `false` que o grupo já aplica em outros arquivos; lista em `classes-pendentes-base-php85.txt`.
 - 57 dos 59 INCONCLUSIVO em classes são "sem saída nos dois lados" (classe não exercitada).
 ## Como reproduzir
 
@@ -91,3 +91,24 @@ python -m regressao.php.bateria --saida ~/rodadas/base85/<area> --area <area> --
 Áreas: gestor, integracoes, cidadao, assistenciasocial, educacao, saude, recursoshumanos, patrimonial,
 tributario, financeiro, configuracao. Cerca de 14 horas para as 11. Como ler o relatório:
 `regressao/COMO-USAR.md`.
+
+## Lint de toda a árvore (2026-11-26, base-php85 `ceef42c8d`)
+
+O lint da suite só recebia telas dos menus. Com `regressao/php/arvore.py` (etapa nova, rodada de todas as áreas),
+**23.676 `.php`** que as telas não cobrem (subpastas `app/`, `src/`, `forms/`, `model/`, `funcoes/`, `libs/`,
+`dbagata/`... e 3.441 telas da raiz fora de qualquer área) foram comparados nos dois runtimes em 168 s:
+23.661 IDENTICO, **8 DIVERGE**, 7 INCONCLUSIVO (não compilam em nenhum runtime: defeito que já existe no 7.4;
+registrar e avisar o dono, não corrigir).
+
+| Arquivo | Erro no 8.5 | Área |
+|---|---|---|
+| `app/Domain/Patrimonial/Protocolo/Controller/Processo/AndamentoPadrao/CamposDinamicosRespostaController.php` | nome qualificado inesperado (`\CamposDinamicosResposta`) | patrimonial |
+| `app/Domain/Patrimonial/Protocolo/Repository/Processo/AndamentoPadrao/CamposDinamicosRepository.php` | nome com namespace inesperado | patrimonial |
+| `app/Domain/Patrimonial/Protocolo/Transformers/Processo/AndamentoPadrao/CamposDinamicosResposta.php` | nome qualificado inesperado | patrimonial |
+| `dbagata/classes/jpgraph/jpgraph_gantt.php` | assinatura incompatível (`GetColWidth`) | sem_area |
+| `dbagata/classes/jpgraph/jpgraph_pie.php` | assinatura incompatível (`StrokeLabel`) | sem_area |
+| `ext/php/Michelf/Markdown.php`, `MarkdownExtra.php` | `{}` em offset de string (linhas 800 e 163) | sem_area |
+| `integracao_externa/gissonline/iss4_gissonline002.php` | `{}` em offset de string (linha 1767) | tributario |
+
+Os 3 de `AndamentoPadrao` estão em 6 rotas do inventário Laravel (`/v4/api/patrimonial/protocolo/processo/.../campos-dinamicos`):
+na bateria do Laravel elas só aparecerão como 500 no 8.5.

@@ -50,6 +50,8 @@ def amb(monkeypatch, tmp_path):
     m.setattr(bateria, "_metadados_ambiente", lambda: {"php_ref": "7.4.33", "php_85": "8.5.0",
                                                        "git_commit": "abc", "baseline_sha256": "ff"})
     m.setattr(bateria, "roda_lint", reg("lint", lambda arqs: [Caso(a, "php-sintaxe", V.IDENTICO) for a in arqs]))
+    m.setattr(bateria, "lista_arvore", lambda excluir: ["app/A.php", "ext/B.php"])  # fora da ordem de `reg`: etapa a parte
+    m.setattr(bateria, "roda_lint_arvore", lambda arqs: [Caso(a, "php-sintaxe", V.IDENTICO) for a in arqs])
     m.setattr(bateria, "roda_classes", reg("classes", lambda l: [Caso(c, "php-classes", V.IDENTICO) for c in l]))
     def fake_telas(sid, rx, a):
         nome = fake_lista(rx)[0]
@@ -432,3 +434,24 @@ def test_todo_prefixo_de_area_casa_algum_arquivo():
         for p in prefixos:
             rx = re.compile(bateria._regex_prefixo(p), re.I)
             assert any(rx.match(n) and n.endswith(".php") for n in nomes), f"{area}: prefixo {p} sem arquivo"
+
+
+def test_lint_da_arvore_so_roda_na_rodada_de_todas_as_areas(amb, tmp_path):
+    bateria.roda_bateria_php(tmp_path / "uma", ["tributario"])
+    assert not any(k.startswith("sintaxe:app/") for k in ids(tmp_path / "uma"))
+    bateria.roda_bateria_php(tmp_path / "todas")
+    assert ids(tmp_path / "todas")["sintaxe:app/A.php"] == "IDENTICO"
+    meta = le(tmp_path / "todas")["meta"]
+    assert meta["arvore_selecionada"] == 2 and "sintaxe_arvore_s" in meta["tempos_s"]
+
+
+def test_pular_sintaxe_tambem_pula_o_lint_da_arvore(amb, tmp_path):
+    bateria.roda_bateria_php(tmp_path, None, pular={"sintaxe"})
+    assert not any(k.startswith("sintaxe:") for k in ids(tmp_path))
+
+
+def test_defeito_na_arvore_aparece_como_diverge_e_nao_some(amb, monkeypatch, tmp_path):
+    monkeypatch.setattr(bateria, "roda_lint_arvore",
+                        lambda arqs: [Caso(a, "php-sintaxe", V.DIVERGE, "php8.5: Parse error") for a in arqs])
+    bateria.roda_bateria_php(tmp_path)
+    assert ids(tmp_path)["sintaxe:ext/B.php"] == "DIVERGE"

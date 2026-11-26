@@ -837,3 +837,12 @@ ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	vac1_vac_dependencia003.php	saude	pagina de 
 ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	vac1_vac_vacinadoserestricao002.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
 ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	vac1_vac_vacinadoserestricao003.php	saude	pagina de erro identica nos dois lados; tela nao exercitada
 ERA_DIVERGE_AGORA_INCONCLUSIVO	tela	vei1_veicabast003.php	patrimonial	pagina de erro identica nos dois lados; tela nao exercitada
+DIVERGE	sintaxe-arvore	app/Domain/Patrimonial/Protocolo/Controller/Processo/AndamentoPadrao/CamposDinamicosRespostaController.php	patrimonial	nome qualificado inesperado; compila no 7.4
+DIVERGE	sintaxe-arvore	app/Domain/Patrimonial/Protocolo/Repository/Processo/AndamentoPadrao/CamposDinamicosRepository.php	patrimonial	nome com namespace inesperado; compila no 7.4
+DIVERGE	sintaxe-arvore	app/Domain/Patrimonial/Protocolo/Transformers/Processo/AndamentoPadrao/CamposDinamicosResposta.php	patrimonial	nome qualificado inesperado; compila no 7.4
+DIVERGE	sintaxe-arvore	dbagata/classes/jpgraph/jpgraph_gantt.php	sem_area	assinatura incompativel (GetColWidth)
+DIVERGE	sintaxe-arvore	dbagata/classes/jpgraph/jpgraph_pie.php	sem_area	assinatura incompativel (StrokeLabel)
+DIVERGE	sintaxe-arvore	ext/php/Michelf/Markdown.php	sem_area	{} em offset de string, linha 800
+DIVERGE	sintaxe-arvore	ext/php/Michelf/MarkdownExtra.php	sem_area	{} em offset de string, linha 163
+DIVERGE	sintaxe-arvore	integracao_externa/gissonline/iss4_gissonline002.php	tributario	{} em offset de string, linha 1767
+DIVERGE	classe	classes/db_iptuconstr_classe.php	tributario	TypeError: pg_fetch_object() sobre resultado false em getParametros()

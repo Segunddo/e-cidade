@@ -5,7 +5,7 @@ sintaxe -> classes -> telas -> POSTs -> relatorios -> conhecidas -> escreve_roda
         [--prefixo REGEX ...] [--incluir-nao-verificados] [--sem-restaurar]
 
 Ids dos casos (namespace por etapa; chaves de conhecidas.tsv usam a mesma forma):
-sintaxe:<arq>, classe:<arq>, tela:<tela>, tela-run:<prefixo>:<id>, post:<tela>,
+sintaxe:<arq> (telas e, na rodada de todas as areas, todo .php fora delas: arvore.py), classe:<arq>, tela:<tela>, tela-run:<prefixo>:<id>, post:<tela>,
 relatorio:<tela>[?<query>], passo:<nome>. Duplicata residual ganha sufixo #2, #3...
 
 --prefixo REGEX (repetivel): areas nao sao pequenas (assistenciasocial 755 telas, configuracao
@@ -39,6 +39,7 @@ from regressao.php.posts import CATALOGO as CATALOGO_POSTS
 from regressao.php.posts import carrega_catalogo, roda_post
 from regressao.php.relatorios import CATALOGO as CATALOGO_RELATORIOS
 from regressao.php.relatorios import carrega_catalogo_relatorios, roda_relatorio
+from regressao.php.arvore import lista_arvore, roda_lint_arvore
 from regressao.php.sintaxe import roda_lint
 from regressao.php.telas import (Sessao, lista_telas, obtem_sid, renova_sessao, roda_telas,
                                  sessao_autenticada)
@@ -373,6 +374,15 @@ def _passos(termina, meta, tempos, sessao, nomes, prefixos, grupos, erros_lista,
     if "sintaxe" not in pular:
         casos += _ns(_cronometra(tempos, "sintaxe", lambda: _passo(
             "sintaxe", rotulo, lambda: roda_lint(telas_alvo))), "sintaxe")
+        if todas:
+            # Todo .php que as telas dos menus nao cobrem (subpastas e telas da raiz fora de area):
+            # so faz sentido na rodada de TODAS as areas, e o lint de telas acima ja cobriu as demais.
+            def _arvore():
+                lista = lista_arvore(set(telas_alvo))
+                meta["arvore_selecionada"] = len(lista)
+                return roda_lint_arvore(lista)
+            casos += _ns(_cronometra(tempos, "sintaxe_arvore", lambda: _passo(
+                "sintaxe-arvore", rotulo, _arvore)), "sintaxe")
 
     def _classes():
         lista = _classes_das_telas(telas_alvo)
