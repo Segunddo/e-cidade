@@ -84,7 +84,7 @@ $dataAtual = date('Y-m-d');
     
     $sGestor  = 'select * from fiscalizacao.fis_cadgestorfiscal where id_usuario = '.db_getsession('DB_id_usuario');
     $rsGestor = pg_query($sGestor);
-    $iGestor  = pg_num_rows($rsGestor);
+    $iGestor  = ($rsGestor ? pg_num_rows($rsGestor) : null);
 
     
     $where2 = "where ((fis_grupotipoandamento.sequencial IN (21,22,23)))";
