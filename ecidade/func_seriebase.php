@@ -108,7 +108,7 @@ $clserie->rotulo->label("ed11_c_descr");
           $sWhereHist = "";
           $sMsgUser   = "";
 
-          if ( pg_num_rows( $result_hist ) > 0 ) {
+          if ( ($result_hist ? pg_num_rows( $result_hist ) : null) > 0 ) {
 
             $ed62_c_resultadofinal = trim( pg_result( $result_hist, 0, 'ed62_c_resultadofinal' ) );
 

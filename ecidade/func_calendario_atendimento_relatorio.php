@@ -110,7 +110,7 @@ if ( $tipo_relatorio == "agendaoutros" ){
 
 $result = db_query($sql);
 
-if (pg_numrows($result)>0){
+if (($result ? pg_numrows($result) : null)>0){
  $arealista = "lista";
  for($i=0;$i<pg_numrows($result);$i++){
 

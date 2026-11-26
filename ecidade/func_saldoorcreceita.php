@@ -91,7 +91,7 @@ if (isset($dt_ini)) {
 } else {
     $result = db_receitasaldo(11, 1, $tipo_saldo, true, " o70_codrec= $codrec ", $anousu, date("Y-m-d", db_getsession("DB_datausu")), date("Y-m-d", db_getsession("DB_datausu")));
 }
-if (pg_numrows($result) > 0) {
+if (($result ? pg_numrows($result) : null) > 0) {
     db_fieldsmemory($result, 1);
 } else {
     // quando não encontra receita
@@ -149,7 +149,7 @@ if (pg_numrows($result) > 0) {
                     </tr>
 
                     <?php
-                    for ($i = 0; $i < pg_numrows($result); $i++) {
+                    for ($i = 0; $i < ($result ? pg_numrows($result) : null); $i++) {
                         db_fieldsmemory($result, $i);
                         ?>
                         <tr>

@@ -102,7 +102,7 @@ $dataAtual = date('Y-m-d');
       
 	$sGestor  = 'select * from fiscalizacao.fis_cadgestorfiscal where id_usuario = '.db_getsession('DB_id_usuario');
         $rsGestor = pg_query($sGestor);
-        $iGestor  = pg_num_rows($rsGestor);
+        $iGestor  = ($rsGestor ? pg_num_rows($rsGestor) : null);
 	
       	if(isset($intimacao) && $intimacao == 1){
         	$whereIntimacao  = ' and y30_codnoti in(select in01_codnoti from fiscalizacao.fis_fiscalintimacao where in01_intimacao = true) ';

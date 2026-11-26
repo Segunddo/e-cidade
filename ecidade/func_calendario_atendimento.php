@@ -248,14 +248,14 @@ class calendario{
              where at40_sequencial = ".$this->tarefa." 
                and at77_id_usuario = ".db_getsession("DB_id_usuario");
      $result = db_query($sql);
-     if( pg_numrows($result) > 0 ){
+     if( ($result ? pg_numrows($result) : null) > 0 ){
        $this->tarefadescricao = pg_result($result,0,'at40_descr');
        $this->observacao = pg_result($result,0,'at77_observacao');
        $this->hora = pg_result($result,0,'at77_hora');
      }
      $qual_dia_agenda=array();
      $tecnico_envol = array();
-     for($dd=0;$dd<pg_numrows($result);$dd++){
+     for($dd=0;$dd<($result ? pg_numrows($result) : null);$dd++){
        $diaagenda = pg_result($result,$dd,'at77_dataagenda');
        if( $diaagenda != '' && (substr($diaagenda,5,2)+0) == $mes && substr($diaagenda,0,4)==$ano ){
          $qual_dia_agenda[(substr($diaagenda,8,2))+0] = (substr($diaagenda,8,2)+0);
@@ -437,7 +437,7 @@ class calendario{
      $sSqlClientes .= "
      order by at01_nomecli";
      $rsClientes   = db_query($sSqlClientes);
-     for ($iCli=0; $iCli < pg_num_rows($rsClientes);$iCli++) {
+     for ($iCli=0; $iCli < ($rsClientes ? pg_num_rows($rsClientes) : null);$iCli++) {
        $oCliente = db_utils::fieldsMemory($rsClientes,$iCli);
        $str .= " <option value='{$oCliente->at01_codcli}'>{$oCliente->at01_nomecli}</option> ";
        
@@ -554,7 +554,7 @@ class calendario{
                and at77_usuenvolvido = ".db_getsession("DB_id_usuario");
      $result = db_query($sql);
       
-     if (pg_numrows($result)>0){
+     if (($result ? pg_numrows($result) : null)>0){
 
        for($i=0;$i<pg_numrows($result);$i++){
 
@@ -583,7 +583,7 @@ class calendario{
                order by nome ";
      $result = db_query($sql);
 
-     for($i=0;$i<pg_numrows($result);$i++){
+     for($i=0;$i<($result ? pg_numrows($result) : null);$i++){
        $idtec = pg_result($result,$i,'at27_usuarios');
        if( $idtec != db_getsession("DB_id_usuario") ){
 
@@ -630,7 +630,7 @@ class calendario{
 
      $result = db_query($sql);
       
-     if (pg_numrows($result)>0){
+     if (($result ? pg_numrows($result) : null)>0){
 
        for($i=0;$i<pg_numrows($result);$i++){
          $codtarefa = pg_result($result,$i,'at77_tarefa');

@@ -142,7 +142,7 @@ class calendario{
                      inner join db_depart on db_depart.coddepto = db_departpai.coddepto
                 where db_departpai.coddeptopai = $coddepto";
         $result = db_query($sql);
-        if ( pg_numrows($result) > 0 ){
+        if ( ($result ? pg_numrows($result) : null) > 0 ){
 
            for ($i=0;$i<pg_numrows($result);$i++){
               $coddepto = pg_result($result,$i,0);
@@ -180,7 +180,7 @@ class calendario{
                            and db_usuarios.usuarioativo = '1'
                          order by db_depusu.coddepto, responsavel desc, nome";
                  $resultm = db_query($sql);
-                 for ($m=0;$m<pg_numrows($resultm);$m++){
+                 for ($m=0;$m<($resultm ? pg_numrows($resultm) : null);$m++){
                     $responsavel = pg_result($resultm,$m,2);
                     $mostra_integrantes[$coddepto."-".pg_result($resultm,$m,0)] =  "$descrdepto:".pg_result($resultm,$m,1)." - ".( $responsavel == 't'?" Resp ":" Inte   " );
                  }
@@ -355,7 +355,7 @@ class calendario{
      $result = db_query($sql);
 
      $str = $stra;
-     if (pg_numrows($result)>0){
+     if (($result ? pg_numrows($result) : null)>0){
 
        $str .= "<table border='1'>";
        $str .= "<tr><td  nowrap><font size='1'><strong>Tarefa / Cliente</strong></font></td> <td> <font size='1'><strong> T</strong> </font></td> <td><font size='1'><strong>Técnico</strong></font></td></tr>";
@@ -522,7 +522,7 @@ class calendario{
 
      $result = db_query($sql);
 
-     if (pg_numrows($result)>0){
+     if (($result ? pg_numrows($result) : null)>0){
 
        // lista somente os lembretes
        $arealista = "lista";
@@ -669,7 +669,7 @@ class calendario{
      $resulthist = db_query($executa_sql);
 
      $txttexto = "";
-     if( pg_numrows($resulthist) > 0 ){
+     if( ($resulthist ? pg_numrows($resulthist) : null) > 0 ){
         for($hh=0;$hh<pg_numrows($resulthist);$hh++){
            $str .= "<tr><td title='".pg_result($resulthist,$hh,'dl_obs')."'><font size='1'>".pg_result($resulthist,$hh,'at02_codatend')." ".pg_result($resulthist,$hh,'dl_Contato_por')." ".pg_result($resulthist,$hh,'area')." ".db_formatar(pg_result($resulthist,$hh,'dl_data'),'d')." ".pg_result($resulthist,$hh,'dl_cliente')." </font></td></tr>";
         }

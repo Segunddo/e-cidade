@@ -86,7 +86,7 @@ $clppadotacao->rotulo->label("o08_elemento");
                                                                            or o123_tipointegracao <> 1))
                                                                          ");
                $rsPerspectivas   = $oDaoPPaVersao->sql_record($sSqlPerspectivas);
-               if (@pg_numrows($rsPerspectivas) == 0) {
+               if (@($rsPerspectivas ? pg_numrows($rsPerspectivas) : null) == 0) {
                	  echo "<strong> Nenhum Perspectiva válida encontrada <strong>";
                	  exit;
                }

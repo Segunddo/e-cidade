@@ -77,7 +77,7 @@ $clcadfiscais->rotulo->label("id_usuario");
       
       $sGestor  = 'select * from fiscalizacao.fis_cadgestorfiscal where id_usuario = '.db_getsession('DB_id_usuario');
       $rsGestor = pg_query( $sGestor );
-      $iGestor  = pg_num_rows( $rsGestor );
+      $iGestor  = ($rsGestor ? pg_num_rows( $rsGestor ) : null);
       
       if( $iGestor == 0 ){
         $where = "1=2";

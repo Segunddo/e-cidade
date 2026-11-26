@@ -68,7 +68,7 @@ if ($abatimentoOrigem != 'undefined') {
     WHERE abatimentotransferencia.k158_abatimentodestino = {$abatimento}
   ");
 
-  $usuarioDevolucao = pg_fetch_assoc($rsUsuarioDevolucao);
+  $usuarioDevolucao = ($rsUsuarioDevolucao ? pg_fetch_assoc($rsUsuarioDevolucao) : null);
 } else {
   $rsDadosAbatimento = $clAbatimento->sql_record($clAbatimento->sql_queryAbatimentoUtilizacao($abatimento));
 }

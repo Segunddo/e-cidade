@@ -139,8 +139,8 @@ function db_grid($sql,$data,$id_usuario,$vet_periodo_ini=null,$vet_periodo_fim=n
 
 
 	$result       = db_query($sql);
-	$NumRows      = pg_numrows($result);
-	$NumFields    = pg_numfields($result);
+	$NumRows      = ($result ? pg_numrows($result) : null);
+	$NumFields    = ($result ? pg_numfields($result) : null);
 
 	$vet_data     = explode("-",$data);
 

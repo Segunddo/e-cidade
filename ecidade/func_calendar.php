@@ -220,7 +220,7 @@ function gera_calendario($mes,$ano, &$vet_dia_semana) {
    for($i = 0; $i < $ult_dia; $i++) {
 	   $data_dia  = sprintf("%04d-%02d-%02d",$ano,$mes,$dia);
    	   $achou     = false;
-	   for($j = 0; $j < pg_numrows($rs_calend); $j++) {
+	   for($j = 0; $j < ($rs_calend ? pg_numrows($rs_calend) : null); $j++) {
 			db_fieldsmemory($rs_calend, $j);
 
 			if($data_dia == $k13_data) {

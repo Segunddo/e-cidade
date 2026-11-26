@@ -108,7 +108,7 @@ $clrotulo->label("j01_matric");
 	
 	$sGestor  = 'select * from fiscalizacao.fis_cadgestorfiscal where id_usuario = '.db_getsession('DB_id_usuario');
 	$rsGestor = pg_query($sGestor);
-	$iGestor  = pg_num_rows($rsGestor);
+	$iGestor  = ($rsGestor ? pg_num_rows($rsGestor) : null);
 
 	$where2 = " where (fis_grupotipoandamento.sequencial = 3 or y50_codauto not in (select y58_codauto from fiscalizacao.fis_autoandam)) ";
   

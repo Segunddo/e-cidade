@@ -332,7 +332,7 @@ if($bem_situac == "M"){
           
   $rsQueryPlaca = db_query($sQueryPlaca);
           
-  if(pg_num_rows($rsQueryPlaca) > 0){
+  if(($rsQueryPlaca ? pg_num_rows($rsQueryPlaca) : null) > 0){
     $placaidentificacao = "Sim";
   }
 ?>

@@ -222,7 +222,7 @@ for (iln = 0; iln < len; iln++)
           $sql .= " ORDER BY z01_nome";
           db_lovrot($sql,15,"()","",$funcao_js,"","NoMe",$repassa);
           $resul = db_query($sql);
-          if (pg_num_rows($resul) == 0) {
+          if (($resul ? pg_num_rows($resul) : null) == 0) {
 
             echo "<b>Nenhum professor com relações de trabalho cadastradas <br>ou nenhuma disponibilidade cadastrada.<br>
                   (Cadastros / Recursos Humanos / Alteração / Aba Relação de Trabalho)<br>
