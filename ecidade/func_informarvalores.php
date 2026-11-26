@@ -96,12 +96,12 @@ $clrotulo->label("e81_valor");
 		    	}
 	    	}
   		}else{
-	 	    $valor = trim(db_formatar(($total / $quantidade), 'p', '', 2));
+	 	    $valor = trim(db_formatar(((float)$quantidade == 0 && function_exists('fdiv') ? fdiv((float)$total, 0.0) : $total / $quantidade), 'p', '', 2));
 	      $valtt = 0;
   		}
   		*/
     }else{
- 	    $valor = trim(db_formatar(($total / $quantidade), 'p', '', 2));
+ 	    $valor = trim(db_formatar(((float)$quantidade == 0 && function_exists('fdiv') ? fdiv((float)$total, 0.0) : $total / $quantidade), 'p', '', 2));
       $valtt = 0;
     }
     if($mostraquant == true){

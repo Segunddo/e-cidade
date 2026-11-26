@@ -168,14 +168,14 @@ function mostra_calendario($cltarefa,$cols,$id_usuario,$mes,$ano,$cor_livre,$cor
 			$cor = $cor_livre;
 		}
 
-		for($j=0; $j < count($vet_periodo_ini); $j++) {
+		for($j=0; $j < count((array)$vet_periodo_ini); $j++) {
 			if(@$vet_datas[$i] == db_formatar(@$vet_periodo_ini[$j],'s','0',2,'e',0)) {
 				$cor = $cor_ocupado;
 				break;
 			}
 		}
 
-		for($j=0; $j < count($vet_periodo_fim); $j++) {
+		for($j=0; $j < count((array)$vet_periodo_fim); $j++) {
 			if(@$vet_datas[$i] == db_formatar(@$vet_periodo_fim[$j],'s','0',2,'e',0)) {
 				$cor = $cor_ocupado;
 				break;
@@ -190,7 +190,7 @@ function mostra_calendario($cltarefa,$cols,$id_usuario,$mes,$ano,$cor_livre,$cor
 				             where at13_dia = '$data_dia'
 	    	    	         order by at13_dia";
 		$rs_tarefa_agenda =  db_query($sql);
-		$tem_agenda       =  pg_numrows($rs_tarefa_agenda);
+		$tem_agenda       =  ($rs_tarefa_agenda ? pg_numrows($rs_tarefa_agenda) : null);
 
 		if($tem_agenda > 0) {
 			$cor = $cor_ocupado;
@@ -230,7 +230,7 @@ function gera_calendario($mes,$ano, &$vet_dia_semana) {
 	   }
 
    	   if($achou==false) {
-		   $data = getdate(mktime(0,0,0,$mes,$dia,$ano));
+		   $data = getdate(is_numeric(trim((string)$ano)) ? mktime(0,0,0,$mes,$dia,intval($ano)) : false);
 		   if($data["wday"] > 0&&$data["wday"] < 6) {
 	   	       $vet_datas[$contador] = db_formatar($dia,'s','0',2,'e',0);
 	   	       $contador++;
