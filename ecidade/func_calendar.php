@@ -205,7 +205,7 @@ function mostra_calendario($cltarefa,$cols,$id_usuario,$mes,$ano,$cor_livre,$cor
 function gera_calendario($mes,$ano, &$vet_dia_semana) {
    global $k13_data;
 
-   $data      = getdate(is_numeric(trim((string)$ano)) ? mktime(0,0,0,$mes+1,0,intval($ano)) : false);
+   $data      = getdate(is_numeric(trim((string)$ano)) ? mktime(0,0,0,(is_string($mes) && !is_numeric($mes) ? (int)$mes : $mes)+1,0,intval($ano)) : false);
    $ult_dia   = $data["mday"];
    $dia       = 1;
    $vet_datas = array();
@@ -230,7 +230,7 @@ function gera_calendario($mes,$ano, &$vet_dia_semana) {
 	   }
 
    	   if($achou==false) {
-		   $data = getdate(is_numeric(trim((string)$ano)) ? mktime(0,0,0,$mes,$dia,intval($ano)) : false);
+		   $data = getdate(is_numeric(trim((string)$ano)) && (!is_string($mes) || is_numeric(trim($mes))) ? mktime(0,0,0,(int)$mes,$dia,intval($ano)) : false);
 		   if($data["wday"] > 0&&$data["wday"] < 6) {
 	   	       $vet_datas[$contador] = db_formatar($dia,'s','0',2,'e',0);
 	   	       $contador++;

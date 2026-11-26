@@ -693,7 +693,7 @@ function retorna_data($ano, $mes, $dia, $executar) {
 			 $dia = retorna_diafinal($mes,$ano);
 	}
 
-	if((!is_string($ano) || is_numeric($ano)) && checkdate($mes,$dia,$ano)) {
+	if((!is_string($ano) || is_numeric($ano)) && (!is_string($mes) || is_numeric($mes)) && (!is_string($dia) || is_numeric($dia)) && checkdate($mes,$dia,$ano)) {
 	    $dia_semana = getdate(mktime(0,0,0,$mes,$dia,$ano));
 		while($dia_semana["wday"]==0||$dia_semana["wday"]==6) {
 			if($executar == "inc") {
@@ -775,7 +775,7 @@ function retorna_data($ano, $mes, $dia, $executar) {
 						 $dia = retorna_diafinal($mes,$ano);
 				}
 
-				if((!is_string($ano) || is_numeric($ano)) && checkdate($mes,$dia,$ano)) {
+				if((!is_string($ano) || is_numeric($ano)) && (!is_string($mes) || is_numeric($mes)) && (!is_string($dia) || is_numeric($dia)) && checkdate($mes,$dia,$ano)) {
 				    $dia_semana = getdate(mktime(0,0,0,$mes,$dia,$ano));
 					while($dia_semana["wday"]==0||$dia_semana["wday"]==6) {
 						if($executar == "inc") {
