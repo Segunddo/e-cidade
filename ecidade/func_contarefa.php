@@ -147,7 +147,7 @@ if (isset($at40_tarefaurgente) and $at40_tarefaurgente != 0) {
 
   global $at40_urgente_urg;
   $varurgente = "urgente_" . $at40_tarefaurgente;
-  if (isset($$varurgente)) {
+  if (isset(${$varurgente})) {
     $at40_urgente_urg = "1";
   } else {
     $at40_urgente_urg = "0";
@@ -409,7 +409,7 @@ for ($situacao=0; $situacao < $cltarefacadsituacao->numrows; $situacao++) {
   if (isset($at40_situacao)) {
 
     if (gettype(strpos($at40_situacao, $at46_codigo)) == "integer") {
-      $$varnamesituacao = $at46_codigo;
+      ${$varnamesituacao} = $at46_codigo;
     }
 
   }
@@ -417,7 +417,7 @@ for ($situacao=0; $situacao < $cltarefacadsituacao->numrows; $situacao++) {
   $array_disable = array(3,5,6);
 
   echo "
-  <input type='checkbox' name='$varnamesituacao' id='$varnamesituacao' ".(!isset($primeira)?(!in_array($at46_codigo,$array_disable)?" checked ":""):(isset($$varnamesituacao)?"checked":"")).">
+  <input type='checkbox' name='$varnamesituacao' id='$varnamesituacao' ".(!isset($primeira)?(!in_array($at46_codigo,$array_disable)?" checked ":""):(isset(${$varnamesituacao})?"checked":"")).">
   $at46_descr";
 
 }

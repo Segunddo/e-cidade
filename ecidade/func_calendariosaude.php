@@ -91,7 +91,7 @@ class calendario{
     return false;
   }
 
-	function cria($dia, $mes, $ano, $marca = 0, $sd27_i_codigo, $datafinal, $result_unidademedico, $fechar = false) {
+	function cria($dia, $mes, $ano, $marca = 0, $sd27_i_codigo = null, $datafinal = null, $result_unidademedico = null, $fechar = false) {
 
 		$this->inicializa();
 		$last  = date ("d", mktime (0,0,0,$mes+1,0,$ano));/*Inteiro do ultimo dia do mês*/

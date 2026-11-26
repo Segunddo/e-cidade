@@ -127,9 +127,9 @@ $clrotulo->label("e81_valor");
     	$db_opcao = 3;
       }
       $valorcheque  = "valche_".$i;
-      $$valorcheque = "0.00";
+      ${$valorcheque} = "0.00";
       if(isset($arr_cheques[$i])){
-        $$valorcheque = db_formatar($arr_cheques[$i],'p', '', 2);
+        ${$valorcheque} = db_formatar($arr_cheques[$i],'p', '', 2);
       }
       echo "
             <tr>

@@ -55,7 +55,7 @@ if(isset($valorvariavel) && trim($valorvariavel) != ""){
 	$camporecebe = $nomecam;
 	for($i=1;$i<count($arr_valorvariavel);$i++){
 		$qualcampo  = $camporecebe.$i;
-	  $$qualcampo = $arr_valorvariavel[$i];
+	  ${$qualcampo} = $arr_valorvariavel[$i];
 	}
 }
 ?>
@@ -142,42 +142,42 @@ js_retornavalor();
 <table border="0"  align="center" cellspacing="0" bgcolor="#CCCCCC">
   <form name="form1" method="post" action="">
   <tr>
-    <td nowrap title="<?=@$$Tnomecam?>">
-      <?=@$$Lnomecam?>
+    <td nowrap title="<?=@${$Tnomecam}?>">
+      <?=@${$Lnomecam}?>
     </td>
     <td>
 			<?php
 			if($conteudo != "text" && strpos($conteudo,"char") == "" && strpos($conteudo,"bool") == "" && $conteudo != "date"){
-			  db_input($nomecam."1",10,$$Inomecam,true,'text',1,"onchange='js_passaval();'");
+			  db_input($nomecam."1",10,${$Inomecam},true,'text',1,"onchange='js_passaval();'");
 			  echo "&nbsp;<b>a</b>&nbsp;";
-			  db_input($nomecam."2",10,$$Inomecam,true,'text',1);
+			  db_input($nomecam."2",10,${$Inomecam},true,'text',1);
 			}else if($conteudo == "date"){
 				$teste1 = $nomecam."1";
 				$dia = $nomecam."_dia";
 				$mes = $nomecam."_mes";
 				$ano = $nomecam."_ano";
-				if(isset($$teste1)){
-					$arr_teste1 =explode("-",$$teste1);
-					$$dia = $arr_teste1[2];
-					$$mes = $arr_teste1[1];
-					$$ano = $arr_teste1[0];
+				if(isset(${$teste1})){
+					$arr_teste1 =explode("-",${$teste1});
+					${$dia} = $arr_teste1[2];
+					${$mes} = $arr_teste1[1];
+					${$ano} = $arr_teste1[0];
 				}else{
-					$$dia = date("d",db_getsession("DB_datausu"));
-					$$mes = date("m",db_getsession("DB_datausu"));
-					$$ano = date("Y",db_getsession("DB_datausu"));
+					${$dia} = date("d",db_getsession("DB_datausu"));
+					${$mes} = date("m",db_getsession("DB_datausu"));
+					${$ano} = date("Y",db_getsession("DB_datausu"));
 				}
-				db_inputdata($nomecam."1",$$dia,$$mes,$$ano,true,'text',1);
+				db_inputdata($nomecam."1",${$dia},${$mes},${$ano},true,'text',1);
 			  echo "&nbsp;<b>a</b>&nbsp;";
 				$teste2 = $nomecam."2";
-				if(isset($$teste2)){
-					$arr_teste2 =explode("-",$$teste2);
-					$$dia = $arr_teste2[2];
-					$$mes = $arr_teste2[1];
-					$$ano = $arr_teste2[0];
+				if(isset(${$teste2})){
+					$arr_teste2 =explode("-",${$teste2});
+					${$dia} = $arr_teste2[2];
+					${$mes} = $arr_teste2[1];
+					${$ano} = $arr_teste2[0];
 				}
-				db_inputdata($nomecam."2",$$dia,$$mes,$$ano,true,'text',1);
+				db_inputdata($nomecam."2",${$dia},${$mes},${$ano},true,'text',1);
 			}else{
-			  db_input($nomecam."1",30,$$Inomecam,true,'text',1);
+			  db_input($nomecam."1",30,${$Inomecam},true,'text',1);
 			}
 			?>
     </td>

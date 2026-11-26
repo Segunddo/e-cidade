@@ -98,7 +98,7 @@ class calendario
         return false;
     }
 
-    function cria($dia, $mes, $ano, $marca = 0, $str_where, $result_diassemana, $fechar = false, $iQuantidade)
+    function cria($dia, $mes, $ano, $marca = 0, $str_where = null, $result_diassemana = null, $fechar = false, $iQuantidade = null)
     {
         $this->inicializa();
 

@@ -123,7 +123,7 @@ $oRotulo->label("m60_descr");
         }
         if (isset($datainicial) && $datainicial != "" and (isset($datafinal) && $datafinal == "")){
 
-          $datainicial  = implode(array_reverse(explode("/",$datainicial)));
+          $datainicial  = implode('', array_reverse(explode("/",$datainicial)));
           $sWhere      .= " and m80_data = '{$datainicial}'";
           
         }

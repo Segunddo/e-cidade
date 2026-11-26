@@ -167,7 +167,7 @@ $clrotulo->label("m60_descr");
         if ($oDaoMateEstoque->numrows > 0) {
 
           db_fieldsmemory($rsMateEstoque,0);
-          echo "<script>".$funcao_js."('" . $$sRetorno . "', false);</script>";
+          echo "<script>".$funcao_js."('" . ${$sRetorno} . "', false);</script>";
 
         } else {
           echo "<script>".$funcao_js."('Chave(".$pesquisa_chave.") não Encontrado',true);</script>";

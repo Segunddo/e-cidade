@@ -221,7 +221,7 @@ $clprotprocesso->rotulo->label("p58_numero");
               if ( !empty($oGet->sCampoRetorno) ) {
                 
                 $sCampoRetorno = $oGet->sCampoRetorno;
-                $sCampoRetorno = $$sCampoRetorno;
+                $sCampoRetorno = ${$sCampoRetorno};
               }
              	echo "<script>". $funcao_js . "('$sCampoRetorno', '$z01_nome', false); </script> ";
 	    			}   

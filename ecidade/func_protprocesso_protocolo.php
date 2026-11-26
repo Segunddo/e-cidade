@@ -412,7 +412,7 @@ $cl_acordoparam = new cl_acordoparam;
 
                             if (!empty($oGet->sCampoRetorno)) {
                                 $sCampoRetorno = $oGet->sCampoRetorno;
-                                $sCampoRetorno = $$sCampoRetorno;
+                                $sCampoRetorno = ${$sCampoRetorno};
                             }
 
                             if (!empty($oGet->anexardocumento)) {

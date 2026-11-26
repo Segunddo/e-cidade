@@ -76,7 +76,7 @@ class calendario{
     return false;
   }
 
-  function cria($dia, $mes, $ano, $marca=0, $str_where, $result_unidademedico ,$fechar=false ) {
+  function cria($dia, $mes, $ano, $marca=0, $str_where = null, $result_unidademedico = null ,$fechar=false ) {
 
     $this->inicializa();
     $last  = date("d", mktime (0,0,0,$mes+1,0,$ano));
