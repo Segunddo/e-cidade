@@ -10,8 +10,8 @@ Leia `regressao/README.md`, `regressao/baseline/triagem-divergencias.md`, `regre
 `regressao/baseline/lab-lar12-resultado.md` da fonte para o contexto histórico (lá o gabarito era PHP 5.6/Laravel 5.4).
 
 ## Global Constraints
-- Worktree `~/e-cidade-74`, branch `regressao-php74`; nunca `git add -A` (adicione caminhos); commits sem trailer
-  Co-Authored-By; sem push; não imprimir e-mail/segredos/hash de senha.
+- Worktree `~/e-cidade-74`, branch `regressao-php74`; nunca `git add -A` (adicione caminhos);
+  sem push; não imprimir e-mail/segredos/hash de senha.
 - Não tocar nos contêineres existentes (`ecidade_*` e os de outro projeto local na porta 8080) nem parar/religar esse projeto. Novo ambiente = projeto
   compose `e74`, nomes `ecidade74_*`, portas: referência 7.4 :8074, PHP 8.5 :8185, proxy :8190, lab Laravel 12 :8187,
   banco sem porta publicada (ou 55432). Memória do host curta (15 GB; Docker já caiu): `sync; echo 3 > /proc/sys/vm/drop_caches`
