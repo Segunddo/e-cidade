@@ -164,7 +164,7 @@ if (!isset($pesquisa_chave)) {
         $sql = $dao->sqlRubricas($campos, $where, $ordem);
         $result = $dao->sql_record($sql);
 
-        if (pg_num_rows($result) > 0) {
+        if (($result ? pg_num_rows($result) : null) > 0) {
             db_fieldsmemory($result, 0);
 
             if (isset($ret)) {

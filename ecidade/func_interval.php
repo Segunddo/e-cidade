@@ -68,7 +68,7 @@ if(isset($valorvariavel) && trim($valorvariavel) != ""){
 function js_enviarvalor(){
 	erro = 0;
 <?php
-if($conteudo != "text" && strpos($conteudo,"char") == "" && strpos($conteudo,"bool") == "" && $conteudo != "date"){
+if($conteudo != "text" && !strpos($conteudo,"char") && !strpos($conteudo,"bool") && $conteudo != "date"){
 ?>
 	if(document.form1.<?=$campofoco?>.value != "" || document.form1.<?=$camporecb?>.value != ""){
 		valor = "<?=$param?>#";
@@ -147,7 +147,7 @@ js_retornavalor();
     </td>
     <td>
 			<?php
-			if($conteudo != "text" && strpos($conteudo,"char") == "" && strpos($conteudo,"bool") == "" && $conteudo != "date"){
+			if($conteudo != "text" && !strpos($conteudo,"char") && !strpos($conteudo,"bool") && $conteudo != "date"){
 			  db_input($nomecam."1",10,${$Inomecam},true,'text',1,"onchange='js_passaval();'");
 			  echo "&nbsp;<b>a</b>&nbsp;";
 			  db_input($nomecam."2",10,${$Inomecam},true,'text',1);

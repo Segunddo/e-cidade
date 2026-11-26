@@ -131,8 +131,8 @@ class calendario{
      <tr ><td colspan='7' nowrap align=\"center\"><font size='1'><strong>Técnico: ".$this->tecnico_solicitado_nome."</strong></font></td></tr>
      <tr ><td colspan='7' nowrap align=\"center\"><font size='1'><strong>Colaboradores: ";
 
-     $mostra_integrantes = array();
      global $mostra_integrantes;
+     $mostra_integrantes = array();
      function busca_filho( $coddepto ){
 
         global $mostra_integrantes;

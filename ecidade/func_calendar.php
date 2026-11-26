@@ -205,7 +205,7 @@ function mostra_calendario($cltarefa,$cols,$id_usuario,$mes,$ano,$cor_livre,$cor
 function gera_calendario($mes,$ano, &$vet_dia_semana) {
    global $k13_data;
 
-   $data      = getdate(mktime(0,0,0,$mes+1,0,$ano));
+   $data      = getdate(is_numeric(trim((string)$ano)) ? mktime(0,0,0,$mes+1,0,intval($ano)) : false);
    $ult_dia   = $data["mday"];
    $dia       = 1;
    $vet_datas = array();

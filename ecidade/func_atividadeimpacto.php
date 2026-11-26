@@ -93,7 +93,7 @@ $clatividadeimpacto->rotulo->label("am03_descricao");
         echo '  </fieldset>';
         echo '</div>';
       }else{
-        if($pesquisa_chave==0){
+        if( (is_string($pesquisa_chave) ? (float)$pesquisa_chave : $pesquisa_chave) == 0 ){
           echo "<script>".$funcao_js."('Chave(".$pesquisa_chave.") não Encontrado',true);</script>";
         } else {
           if($pesquisa_chave!=null && $pesquisa_chave!=""){

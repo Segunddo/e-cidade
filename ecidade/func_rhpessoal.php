@@ -51,7 +51,7 @@ if (isset($filtro_lotacao)) {
       $sWhere = "r70_instit = " . db_getsession('DB_instit');
       $cldb_usuariosrhlotaSql = $cldb_usuariosrhlota->sql_query(null, $sCampos, null, $sWhere);
       $rsSqlUsaFiltroLotacao = $cldb_usuariosrhlota->sql_record($cldb_usuariosrhlotaSql);
-      if (is_resource($rsSqlUsaFiltroLotacao) && db_utils::fieldsMemory($rsSqlUsaFiltroLotacao, 0)->qtde_usuarios_permissao > 0) {
+      if ((is_resource($rsSqlUsaFiltroLotacao) || $rsSqlUsaFiltroLotacao instanceof \PgSql\Result) && db_utils::fieldsMemory($rsSqlUsaFiltroLotacao, 0)->qtde_usuarios_permissao > 0) {
          $lotelotacao = true;
       }
    }

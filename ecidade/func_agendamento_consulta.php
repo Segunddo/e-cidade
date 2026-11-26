@@ -267,7 +267,7 @@ if( $clausencias->numrows > 0 ){
 
 		<?php
 		for( $h=0; $h < $nro_fichas; $h++){
-		    $nro_ficha = str_pad($h,3,0,"str_pad_left");
+		    $nro_ficha = null;
 		    $id_ficha  = 0;
 		    $codigo    = 0;
 		    if($h>=$diferenca && $linha>=$linhas){

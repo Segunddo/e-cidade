@@ -48,7 +48,7 @@ if($linhas>0){
   $resultinc = db_query($sqlinc);
   $linhasinc = pg_num_rows($resultinc);
   if($linhasinc>0){
-    $areat="";
+    $areat = 0;
     for($i=0;$i<$linhasinc;$i++){
       db_fieldsmemory($resultinc,$i);
       $areat += $y83_area;
