@@ -1,0 +1,46 @@
+name: Lint PHP do lote
+
+on:
+  pull_request:
+    branches: [base-php74]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.5']
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Testar o seletor e a classificacao
+        run: python3 -m unittest discover -s ferramentas/testes-ci -p 'test_*.py'
+      - name: Preparar runtime
+        env:
+          PHP_VERSION: ${{ matrix.php }}
+        run: docker pull "php:${PHP_VERSION}-cli"
+      - name: Validar lint em PHP com exemplos sinteticos
+        env:
+          ECIDADE_LINT_IMAGE: php:${{ matrix.php }}-cli
+        run: python3 -m unittest discover -s ferramentas/testes-ci -p 'test_*.py'
+      - name: Conferir arquivos PHP alterados
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          PHP_VERSION: ${{ matrix.php }}
+        run: python3 ferramentas/testes-ci/lint_alterados.py --base "$BASE_SHA" --php "$PHP_VERSION" --out "relatorios-ci/lint-${PHP_VERSION}.json" --summary "$GITHUB_STEP_SUMMARY"
+      - name: Guardar relatorio
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-php-${{ matrix.php }}
+          path: relatorios-ci/
+          if-no-files-found: warn
+          retention-days: 14
