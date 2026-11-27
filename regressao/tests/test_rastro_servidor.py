@@ -35,7 +35,23 @@ def test_liga_vhost_e_idempotente(monkeypatch):
     assert not any("a2ensite" in c or c.startswith("cat >") for c in novas)   # nao reescreve nem recarrega
 
 
+def test_mascara_do_app_bate_com_as_constantes_do_php_nos_dois_contêineres():
+    """22517 = E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED & ~E_STRICT (config/application.php:27) em 7.4 e 8.5."""
+    import pytest
+    from regressao.nucleo.ambiente import containers_do_ambiente
+    from regressao.nucleo.banco import _docker as docker_real
+    c = containers_do_ambiente()
+    try:
+        saidas = [docker_real(["exec", n, "php", "-r",
+                               "echo E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED & ~E_STRICT;"], 20).decode()
+                  for n in (c.ref, c.php_novo)]
+    except Exception:
+        pytest.skip("contêineres docker indisponiveis")
+    assert saidas == [str(servidor.MASCARA_DO_APP)] * 2
+
+
 def test_vhost_usa_a_arvore_instrumentada_o_rt_e_nao_toca_na_porta_80():
+    assert f"SetEnv RASTRO_MASCARA {servidor.MASCARA_DO_APP}" in servidor.VHOST
     assert f"Listen {servidor.PORTA}" in servidor.VHOST and "VirtualHost *:80>" not in servidor.VHOST
     assert f"DocumentRoot {servidor.RAIZ}" in servidor.VHOST
     assert f"php_value auto_prepend_file {servidor.RAIZ}/rt.php" in servidor.VHOST

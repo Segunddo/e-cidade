@@ -11,6 +11,10 @@ RAIZ = "/var/www/html/tmp/ecidade-rastro"
 CONF = "/etc/apache2/sites-available/rastro.conf"
 TIMEOUT = 60
 
+# php.error_reporting do e-Cidade (config/application.php): E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED & ~E_STRICT.
+# E o conjunto de tipos que o handler da aplicacao recebe; o rt.php so o repassa para esses (o PHP nao expoe a mascara).
+MASCARA_DO_APP = 22517
+
 VHOST = f"""Listen {PORTA}
 <VirtualHost *:{PORTA}>
     DocumentRoot {RAIZ}
@@ -19,6 +23,7 @@ VHOST = f"""Listen {PORTA}
     Timeout 12000
     AddDefaultCharset ISO-8859-1
     SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
+    SetEnv RASTRO_MASCARA {MASCARA_DO_APP}
     <Directory {RAIZ}>
         Options +Indexes +FollowSymLinks +MultiViews
         AllowOverride All

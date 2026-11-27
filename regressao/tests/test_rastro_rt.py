@@ -71,6 +71,34 @@ def test_handler_anterior_continua_sendo_chamado(cs, i):
 
 
 @pytest.mark.parametrize("i", [0, 1])
+def test_handler_anterior_recebe_os_mesmos_argumentos_que_receberia_sem_o_rt(cs, i):
+    """O 7.4 entrega 5 argumentos ($errcontext) ao handler, o 8.x entrega 4. O rt tem que repassar IGUAL: o handler
+    do e-Cidade (Error::_handle) exige 5 e quebraria com ArgumentCountError se recebesse 4 no 7.4."""
+    handler = '<?php\nset_error_handler(function () { echo "n=" . func_num_args() . ";"; return true; });\n'
+    com_rt = handler + '__rt_a(2, "y", 2);\ntrigger_error("a", E_USER_WARNING);\n'
+    sem_rt = handler + 'trigger_error("a", E_USER_WARNING);\n'
+    saida_rt, _ = _roda(cs[i], "args_com", com_rt)
+    _envia(cs[i], f"{B}/args_sem", {"s.php": sem_rt.encode()})
+    saida_sem = _docker(["exec", cs[i], "sh", "-c", f"cd {B}/args_sem && php s.php 2>&1; true"], 30).decode()
+    assert saida_rt == saida_sem and saida_sem.startswith("n=")
+
+
+@pytest.mark.parametrize("i", [0, 1])
+def test_so_repassa_ao_handler_da_aplicacao_os_tipos_da_mascara_dela(cs, i):
+    """O handler do e-Cidade e registrado com uma mascara (php.error_reporting) e NAO recebe avisos. O rt, que fica
+    na frente, so pode repassar o que a mascara permite; os eventos 'w', porem, registram tudo."""
+    codigo = ('<?php\n__rt_a(1, "x", 1);\n'
+              'set_error_handler(function ($n, $m) { echo "app:$m;"; return true; }, E_ALL & ~E_USER_WARNING);\n'
+              '__rt_a(2, "y", 2);\ntrigger_error("fora", E_USER_WARNING);\ntrigger_error("dentro", E_USER_NOTICE);\n')
+    saida, ev = _roda(cs[i], "mascara", codigo, RASTRO_MASCARA=str(32767 & ~E_USER_WARNING))
+    assert "app:dentro;" in saida and "app:fora;" not in saida
+    assert {e["v"]["r"] for e in ev if e["k"] == "w"} == {"fora", "dentro"}
+
+
+E_USER_WARNING = 512
+
+
+@pytest.mark.parametrize("i", [0, 1])
 def test_erro_fatal_vira_evento_e_nao_perde_o_rastro_ja_gravado(cs, i):
     _, ev = _roda(cs[i], "fatal", '<?php\n__rt_a(1, "x", 1);\nfuncao_que_nao_existe();\n')
     assert [e["k"] for e in ev] == ["a", "e"]

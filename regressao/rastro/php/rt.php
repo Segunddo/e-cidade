@@ -18,6 +18,9 @@ final class RtRastro
     private static $anterior = null;
     private static $nProbes = 0;
     private static $prefixos = array('/var/www/html/tmp/ecidade-rastro/', '/var/www/html/');
+    // Tipos de erro que o handler da aplicacao receberia sem nos (o PHP nao expoe a mascara de um handler ja registrado).
+    // Padrao: todos. No vhost do rastro vem de RASTRO_MASCARA (= php.error_reporting do e-Cidade).
+    private static $mascara = E_ALL;
 
     public static function liga()
     {
@@ -33,6 +36,10 @@ final class RtRastro
         $teto = getenv('RASTRO_TETO');
         if ($teto !== false && ctype_digit($teto)) {
             self::$teto = (int) $teto;
+        }
+        $m = isset($_SERVER['RASTRO_MASCARA']) ? $_SERVER['RASTRO_MASCARA'] : getenv('RASTRO_MASCARA');
+        if (is_string($m) && ctype_digit($m)) {
+            self::$mascara = (int) $m;
         }
         $pref = getenv('RASTRO_PREFIXOS');
         if (is_string($pref) && $pref !== '') {
@@ -196,14 +203,16 @@ final class RtRastro
 
     public static function erro($no, $msg, $arq = '', $lin = 0)
     {
+        $recebidos = func_get_args();   // o 7.4 entrega 5 argumentos ($errcontext), o 8.x entrega 4: repassar IGUAL
         $rotulo = array(E_WARNING => 'warning', E_NOTICE => 'notice', E_DEPRECATED => 'deprecated',
             E_USER_WARNING => 'user_warning', E_USER_NOTICE => 'user_notice', E_USER_DEPRECATED => 'user_deprecated',
             E_USER_ERROR => 'user_error', E_STRICT => 'strict', E_RECOVERABLE_ERROR => 'recoverable');
         $v = array('t' => 'aviso', 'r' => self::utf8(substr((string) $msg, 0, 300)), 'h' => md5((string) $msg));
         $v['sup'] = !(error_reporting() & $no);
         self::evento('w', 0, isset($rotulo[$no]) ? $rotulo[$no] : (string) $no, $v, array(self::relativo((string) $arq), (int) $lin));
-        if (self::$anterior !== null) {
-            return call_user_func(self::$anterior, $no, $msg, $arq, $lin);
+        // So repassa o que o handler da aplicacao receberia sem nos (a mascara dele); o resto cai no tratamento padrao do PHP.
+        if (self::$anterior !== null && (self::$mascara & $no)) {
+            return call_user_func_array(self::$anterior, $recebidos);
         }
         return false;
     }
