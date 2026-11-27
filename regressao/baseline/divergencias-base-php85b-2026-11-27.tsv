@@ -1,17 +1,17 @@
 area	tela	estabilidade	grupo	tipo	mensagem	onde_corrigir
 assistenciasocial	soc2_declaracaoinss002.php	estavel	E1		resposta 200 nos dois lados, conteudo difere: -<script>location.href='db_erros.php?fechar=true&db_erro=Falhou ao determinar o tipo de arquivo! Retorno:'</sc // +<script>location.href='db_erros.php?fec	
 cidadao	con2_lrflimites002_2015.php	estavel	A6	TypeError	explode(): Argument #2 ($x) must be of type string, array given	libs/db_libcontabilidade.php:5935
-cidadao	con2_lrfanexoxvii002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+cidadao	con2_lrfanexoxvii002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 cidadao	con2_lrfdivida002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 cidadao	con2_lrfdivida002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-cidadao	con2_lrfgarantias002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-cidadao	con2_lrfgarantias002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+cidadao	con2_lrfgarantias002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+cidadao	con2_lrfgarantias002_2015.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 cidadao	con2_lrflimites002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-cidadao	con2_lrfreceitacorrente002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+cidadao	con2_lrfreceitacorrente002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 cidadao	con2_lrfreceitacorrente002_2018.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-cidadao	con2_opercredito002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-cidadao	con2_opercredito002_2012.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-cidadao	con2_opercredito002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+cidadao	con2_opercredito002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+cidadao	con2_opercredito002_2012.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+cidadao	con2_opercredito002_2015.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 cidadao	con2_anexo17_002_2011.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 cidadao	con2_anexo_i_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 cidadao	con2_anexo_ii_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
@@ -20,15 +20,149 @@ cidadao	con2_lrfbalorc002_2015.php	estavel	P2	TypeError	checkdate(): Argument #1
 cidadao	con2_lrfdemalienataplicrecursos002_2010.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 cidadao	con2_anexo11_002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:5355
 cidadao	con2_contasrecdesp002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:4989
+configuracao	sys4_listaretornosql001.php	estavel	A1	TypeError	array_keys(): Argument #1 ($x) must be of type array, null given	sys4_listaretornosql001.php:67
+configuracao	orc2_atividades002.php	estavel	A2	TypeError	Unsupported operand types: int + string	fpdf151/fpdf.php:932
+configuracao	sys4_consultaXML.RPC.php	estavel	A3	ValueError	Path must not be empty	sys4_consultaXML.RPC.php:39
+configuracao	sys4_processa004.php	estavel	A3	TypeError	fputs(): Argument #1 ($x) must be of type resource, false given	sys4_processa004.php:111
+configuracao	sys4_processa008.php	estavel	A3	TypeError	fputs(): Argument #1 ($x) must be of type resource, false given	sys4_processa008.php:100
+configuracao	con2_lrflimites002_2015.php	estavel	A6	TypeError	explode(): Argument #2 ($x) must be of type string, array given	libs/db_libcontabilidade.php:5935
+configuracao	ate1_tarefa004.php	estavel	C1		resposta 200 nos dois lados, conteudo difere: -js_OpenJanelaIframe('CurrentWindow.corpo.iframe_tarefa','db_iframe_tarefa','func_tarefa.php?aut=t&canc=&prorr // +js_OpenJanelaIframe('CurrentWindow.corp	
+configuracao	ate1_tarefa006.php	estavel	C1		resposta 200 nos dois lados, conteudo difere: -js_OpenJanelaIframe('CurrentWindow.corpo.iframe_tarefa','db_iframe_tarefa','func_tarefa.php?aut=t&canc=&prorr // +js_OpenJanelaIframe('CurrentWindow.corp	
+configuracao	ate1_tarefaagenda002.php	estavel	C1		resposta 200 nos dois lados, conteudo difere: -  </center> // -</form>	
+configuracao	ate1_tarefalogand002.php	estavel	C1		resposta 200 nos dois lados, conteudo difere: -                <select name="at48_situacao" id="at48_situacao" // -                    onchange="js_ProcCod_at48_situacao('at48_situacao','at48_situacao	
+configuracao	ate3_consultacalendario_agenda.php	estavel	C1		resposta 200 nos dois lados, conteudo difere: -                 <script> // -                  function js_abre_agendamento(tarefa) {	
+configuracao	ate4_atendsup001.php	estavel	C1		resposta 200 nos dois lados, conteudo difere: -              </b> // -      </td>	
+configuracao	con2_lrfanexoxvii002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_lrfdivida002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_lrfdivida002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_lrfgarantias002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_lrfgarantias002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_lrflimites002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_lrfreceitacorrente002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_lrfreceitacorrente002_2018.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_opercredito002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_opercredito002_2012.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_opercredito002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+configuracao	con2_anexo17_002_2011.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+configuracao	con2_anexo_i_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+configuracao	con2_anexo_ii_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+configuracao	con2_balancoorcamentario_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+configuracao	con2_lrfbalorc002_2015.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+configuracao	con2_lrfdemalienataplicrecursos002_2010.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+configuracao	ate1_clientesmodulosproc002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	forms/db_frmclientesmodulosproc.php:66
+configuracao	ate1_tarefa010.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	ate1_tarefa010.php:78
+configuracao	ate1_tarefaobs001.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	ate1_tarefaobs001.php:106
+configuracao	ate2_relatendnaolanc002.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	ate2_relatendnaolanc002.php:58
+configuracao	ate2_relatorio001.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	ate2_relatorio001.php:126
+configuracao	ate2_relclienteproced002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	ate2_relclienteproced002.php:242
+configuracao	ate2_reltarefaagenda002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	ate2_reltarefaagenda002.php:41
+configuracao	ate3_atendimento002.php	estavel	R1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	ate3_atendimento002.php:133
+configuracao	ate3_constarefaanexos.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	ate3_constarefaanexos.php:159
+configuracao	ate3_consultaacesso002.php	estavel	R1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	ate3_consultaacesso002.php:179
+configuracao	ate3_consultaacesso003.php	estavel	R1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	ate3_consultaacesso003.php:64
+configuracao	ate3_consultaacesso004.php	estavel	R1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	ate3_consultaacesso004.php:60
+configuracao	ate4_atend002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	forms/db_frmatend.php:84
+configuracao	ate4_pesquisatarefacod.RPC.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	ate4_pesquisatarefacod.RPC.php:50
+configuracao	ate4_pesquisatarefadescr.RPC.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	ate4_pesquisatarefadescr.RPC.php:50
+configuracao	sys4_processa002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	sys4_processa002.php:66
+configuracao	sys4_processa007.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	sys4_processa007.php:587
+configuracao	sys4_verifica002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	sys4_verifica002.php:100
+configuracao	cai3_gerfinanc003.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	model/regraEmissao.model.php:88
+configuracao	con2_anexo11_002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:5355
+configuracao	con2_contasrecdesp002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:4989
+configuracao	orc2_desppessoal002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:5355
+financeiro	cad2_emissaobic_002.php	estavel	A1	TypeError	sizeof(): Argument #1 ($x) must be of type Countable|array, null given	cad2_emissaobic_002.php:43
+financeiro	cad3_conscadastro_relatorio.php	ref-instavel	A1	TypeError	sizeof(): Argument #1 ($x) must be of type Countable|array, null given	cad3_conscadastro_relatorio.php:43
+financeiro	cad4_recadastramentorelatorio.php	estavel	A1	TypeError	array_chunk(): Argument #1 ($x) must be of type array, null given	cad4_recadastramentorelatorio.php:106
+financeiro	iss3_inconsistenciaSimples.php	estavel	A1	TypeError	rsort(): Argument #1 ($x) must be of type array, null given	iss3_inconsistenciaSimples.php:62
+financeiro	pes4_geraarquivosmanadnovo.php	estavel	A1	TypeError	implode(): If argument #1 ($x) is of type string, argument #2 ($x) must be of type array, null given	model/manad.model.php:129
+financeiro	sys4_listaretornosql001.php	estavel	A1	TypeError	array_keys(): Argument #1 ($x) must be of type array, null given	sys4_listaretornosql001.php:67
+financeiro	div2_resumogeraldivida002.php	ref-instavel	A2	TypeError	Unsupported operand types: string - int	classes/db_divida_classe.php:2378
+financeiro	iss2_relarrec1002.php	estavel	A2	TypeError	Unsupported operand types: string + int	iss2_relarrec1002.php:53
+financeiro	orc2_atividades002.php	ref-instavel	A2	TypeError	Unsupported operand types: int + string	fpdf151/fpdf.php:932
+financeiro	sys4_consultaXML.RPC.php	estavel	A3	ValueError	Path must not be empty	sys4_consultaXML.RPC.php:39
+financeiro	sys4_processa004.php	estavel	A3	TypeError	fputs(): Argument #1 ($x) must be of type resource, false given	sys4_processa004.php:111
+financeiro	sys4_processa008.php	estavel	A3	TypeError	fputs(): Argument #1 ($x) must be of type resource, false given	sys4_processa008.php:100
+financeiro	pes4_geracaoarquivorefeisul.RPC.php	estavel	A5		E_ERROR - Uncaught exception 'ParseError' with message 'syntax error, unexpected token "{", expecting ")"' in phar://ext/php/PHPExcel.phar/PHPExcel/Shared/Strin	
+financeiro	con2_lrflimites002_2015.php	estavel	A6	TypeError	explode(): Argument #2 ($x) must be of type string, array given	libs/db_libcontabilidade.php:5935
+financeiro	iss3_emissaoalvaraeventos001.php	estavel	A6	ArgumentCountError	Requires 2 or 3 arguments, 3 given	model/documentoTemplate.model.php:85
+financeiro	pes2_feriasaviso002.php	estavel	A6	ValueError	cal_days_in_month(): Argument #2 ($x) must be between 1 and 2147483646	pes2_feriasaviso002.php:112
+financeiro	con2_lrfanexoxvii002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_lrfdivida002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_lrfdivida002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_lrfgarantias002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_lrfgarantias002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_lrflimites002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_lrfreceitacorrente002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_lrfreceitacorrente002_2018.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_opercredito002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_opercredito002_2012.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_opercredito002_2015.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+financeiro	con2_anexo17_002_2011.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+financeiro	con2_anexo_i_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+financeiro	con2_anexo_ii_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+financeiro	con2_balancoorcamentario_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+financeiro	con2_lrfbalorc002_2015.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+financeiro	con2_lrfdemalienataplicrecursos002_2010.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
+financeiro	cad2_carnesiptu002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_carnesiptu002.php:57
+financeiro	cad2_comparaiptu002.php	ref-instavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_comparaiptu002.php:154
+financeiro	cad2_compcaract002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_compcaract002.php:124
+financeiro	cad2_descconced002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_descconced002.php:59
+financeiro	cad2_iptulancpago002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_iptulancpago002.php:60
+financeiro	cad2_listaiptucalc_003.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_listaiptucalc_003.php:41
+financeiro	cad2_loteam002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_loteam002.php:179
+financeiro	cad2_loteamentomatric002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_loteamentomatric002.php:80
+financeiro	cad2_loteamentos002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_loteamentos002.php:77
+financeiro	cad2_matricnaoproc002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_matricnaoproc002.php:74
+financeiro	cad2_posicaoiptu002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_posicaoiptu002.php:71
+financeiro	cad2_relaverbacao002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_relaverbacao002.php:155
+financeiro	cad2_reldemo002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_reldemo002.php:108
+financeiro	cad2_relisentos002.php	estavel	R1	TypeError	pg_fetch_assoc(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_relisentos002.php:46
+financeiro	cad2_relmassafalida002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_relmassafalida002.php:84
+financeiro	cad2_setor002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_setor002.php:79
+financeiro	cad3_conscadastrodetalhesmodelonovo002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_conscadastrodetalhesmodelonovo002.php:171
+financeiro	cad3_iptupago002_original.php	estavel	R1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_iptupago002_original.php:64
+financeiro	cad3_relzonafiscal002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_relzonafiscal002.php:62
+financeiro	cad3_relzonafiscaltaxa002.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_relzonafiscaltaxa002.php:63
+financeiro	cad4_geracarneiptutxt.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad4_geracarneiptutxt.php:754
+financeiro	cad4_geracarneiptutxt_arapiraca.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad4_geracarneiptutxt_arapiraca.php:170
+financeiro	cad4_geracarneiptutxt_eldorado.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad4_geracarneiptutxt_eldorado.php:167
+financeiro	cad4_geracarneiptutxt_guaiba.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad4_geracarneiptutxt_guaiba.php:169
+financeiro	cad4_geracarnesiptu_geral.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad4_geracarnesiptu_geral.php:60
+financeiro	div2_diviano002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	div2_diviano002.php:94
+financeiro	div2_exercdivida002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	div2_exercdivida002.php:392
+financeiro	div2_parcel002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	div2_parcel002.php:151
+financeiro	div2_posicaoparc002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	div2_posicaoparc002.php:247
+financeiro	div2_procedexerc_002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	div2_procedexerc_002.php:130
+financeiro	inf2_inflan002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	inf2_inflan002.php:126
+financeiro	iss2_calculadoepago002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_calculadoepago002.php:113
+financeiro	iss2_certibaixa002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_certibaixa002.php:55
+financeiro	iss2_inscrescrito002.php	ref-instavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_inscrescrito002.php:81
+financeiro	iss2_issqnpago002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_issqnpago002.php:67
+financeiro	iss2_listinscrweb002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_listinscrweb002.php:100
+financeiro	iss2_relatorioruas002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_relatorioruas002.php:179
+financeiro	iss3_emissaoalvaraveiculos001.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss3_emissaoalvaraveiculos001.php:64
+financeiro	iss3_emissaobicveiculos001.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss3_emissaobicveiculos001.php:63
+financeiro	iss4_contativ003.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss4_contativ003.php:222
+financeiro	iss4_contativ006.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss4_contativ006.php:86
+financeiro	pes2_rubmesponto002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	pes2_rubmesponto002.php:214
+financeiro	sys4_processa002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	sys4_processa002.php:66
+financeiro	sys4_processa007.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	sys4_processa007.php:587
+financeiro	sys4_verifica002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	sys4_verifica002.php:100
+financeiro	cai3_gerfinanc003.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	model/regraEmissao.model.php:88
+financeiro	con2_anexo11_002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:5355
+financeiro	con2_contasrecdesp002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:4989
+financeiro	orc2_desppessoal002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:5355
 patrimonial	cad2_emissaobic_002.php	estavel	A1	TypeError	sizeof(): Argument #1 ($x) must be of type Countable|array, null given	cad2_emissaobic_002.php:43
-patrimonial	cad3_conscadastro_relatorio.php	ref-instavel	A1	TypeError	sizeof(): Argument #1 ($x) must be of type Countable|array, null given	cad3_conscadastro_relatorio.php:43
+patrimonial	cad3_conscadastro_relatorio.php	estavel	A1	TypeError	sizeof(): Argument #1 ($x) must be of type Countable|array, null given	cad3_conscadastro_relatorio.php:43
 patrimonial	cad4_recadastramentorelatorio.php	estavel	A1	TypeError	array_chunk(): Argument #1 ($x) must be of type array, null given	cad4_recadastramentorelatorio.php:106
 patrimonial	orc2_atividades002.php	estavel	A2	TypeError	Unsupported operand types: int + string	fpdf151/fpdf.php:932
 patrimonial	con2_lrflimites002_2015.php	estavel	A6	TypeError	explode(): Argument #2 ($x) must be of type string, array given	libs/db_libcontabilidade.php:5935
-patrimonial	con4_docpadrao010.php	estavel	E1		resposta 200 nos dois lados, conteudo difere: -<</Filter /FlateDecode /Length 1199>> // +<</Filter /FlateDecode /Length 1198>>	
-patrimonial	orc2_receitasDespesasPrevidenciariasServidores002.php	ref-instavel	E1		resposta 200 nos dois lados, conteudo difere: -<</Filter /FlateDecode /Length 3916>> // +<</Filter /FlateDecode /Length 3915>>	
+patrimonial	con4_docpadrao010.php	estavel	C1		resposta 200 nos dois lados, conteudo difere: -0*8°÷t}¯íu¨}Àé#Þ3=vËÀÉs¼ÕAosÉæ]ÿ +ÄT1 // +0*8°÷t}¯íu¨}ÀõG¼g2,zì?çx«ÞæÍ7»þ,T2	
+patrimonial	orc2_receitasDespesasPrevidenciariasServidores002.php	ref-instavel	C1		resposta 200 nos dois lados, conteudo difere: -xËnÉ×ÑSYØ©Ü÷,h68D // -	
 patrimonial	con2_lrfanexoxvii002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 patrimonial	con2_lrfdivida002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+patrimonial	con2_lrfdivida002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 patrimonial	con2_lrfgarantias002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 patrimonial	con2_lrfgarantias002_2015.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 patrimonial	con2_lrflimites002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
@@ -36,16 +170,15 @@ patrimonial	con2_lrfreceitacorrente002_2010.php	estavel	P1	TypeError	pg_result()
 patrimonial	con2_lrfreceitacorrente002_2018.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 patrimonial	con2_opercredito002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 patrimonial	con2_opercredito002_2012.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-patrimonial	con2_opercredito002_2015.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+patrimonial	con2_opercredito002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 patrimonial	con2_anexo17_002_2011.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 patrimonial	con2_anexo_i_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 patrimonial	con2_anexo_ii_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 patrimonial	con2_balancoorcamentario_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 patrimonial	con2_lrfbalorc002_2015.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 patrimonial	con2_lrfdemalienataplicrecursos002_2010.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
-patrimonial	con2_lrfdivida002_2015.php	ref-instavel	P2		E_ERROR - Uncaught exception 'ParameterException' with message 'Data com formato inv�lido.	
 patrimonial	cad2_carnesiptu002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_carnesiptu002.php:57
-patrimonial	cad2_comparaiptu002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_comparaiptu002.php:154
+patrimonial	cad2_comparaiptu002.php	ref-instavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_comparaiptu002.php:154
 patrimonial	cad2_compcaract002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_compcaract002.php:124
 patrimonial	cad2_descconced002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_descconced002.php:59
 patrimonial	cad2_iptulancpago002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_iptulancpago002.php:60
@@ -54,7 +187,7 @@ patrimonial	cad2_loteam002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($
 patrimonial	cad2_loteamentomatric002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_loteamentomatric002.php:80
 patrimonial	cad2_loteamentos002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_loteamentos002.php:77
 patrimonial	cad2_matricnaoproc002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_matricnaoproc002.php:74
-patrimonial	cad2_posicaoiptu002.php	ref-instavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_posicaoiptu002.php:71
+patrimonial	cad2_posicaoiptu002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_posicaoiptu002.php:71
 patrimonial	cad2_relaverbacao002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_relaverbacao002.php:155
 patrimonial	cad2_reldemo002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_reldemo002.php:108
 patrimonial	cad2_relisentos002.php	estavel	R1	TypeError	pg_fetch_assoc(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_relisentos002.php:46
@@ -62,8 +195,8 @@ patrimonial	cad2_relmassafalida002.php	estavel	R1	TypeError	pg_numrows(): Argume
 patrimonial	cad2_setor002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_setor002.php:79
 patrimonial	cad3_conscadastrodetalhesmodelonovo002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_conscadastrodetalhesmodelonovo002.php:171
 patrimonial	cad3_iptupago002_original.php	estavel	R1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_iptupago002_original.php:64
-patrimonial	cad3_relzonafiscal002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_relzonafiscal002.php:62
-patrimonial	cad3_relzonafiscaltaxa002.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_relzonafiscaltaxa002.php:63
+patrimonial	cad3_relzonafiscal002.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_relzonafiscal002.php:62
+patrimonial	cad3_relzonafiscaltaxa002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_relzonafiscaltaxa002.php:63
 patrimonial	cad4_geracarneiptutxt.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad4_geracarneiptutxt.php:754
 patrimonial	cad4_geracarneiptutxt_arapiraca.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad4_geracarneiptutxt_arapiraca.php:170
 patrimonial	cad4_geracarneiptutxt_eldorado.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad4_geracarneiptutxt_eldorado.php:167
@@ -72,24 +205,25 @@ patrimonial	cad4_geracarnesiptu_geral.php	estavel	R1	TypeError	pg_num_rows(): Ar
 patrimonial	cai3_gerfinanc003.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	model/regraEmissao.model.php:88
 patrimonial	con2_anexo11_002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:5355
 patrimonial	con2_contasrecdesp002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:4989
-patrimonial	orc2_desppessoal002.php	ref-instavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:5355
+patrimonial	orc2_desppessoal002.php	estavel	R2	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	libs/db_libcontabilidade.php:5355
 recursoshumanos	pes4_geraarquivosmanadnovo.php	estavel	A1	TypeError	implode(): If argument #1 ($x) is of type string, argument #2 ($x) must be of type array, null given	model/manad.model.php:129
 recursoshumanos	pes4_geracaoarquivorefeisul.RPC.php	estavel	A5		E_ERROR - Uncaught exception 'ParseError' with message 'syntax error, unexpected token "{", expecting ")"' in phar://ext/php/PHPExcel.phar/PHPExcel/Shared/Strin	
 recursoshumanos	con2_lrflimites002_2015.php	estavel	A6	TypeError	explode(): Argument #2 ($x) must be of type string, array given	libs/db_libcontabilidade.php:5935
 recursoshumanos	pes2_feriasaviso002.php	estavel	A6	ValueError	cal_days_in_month(): Argument #2 ($x) must be between 1 and 2147483646	pes2_feriasaviso002.php:112
-recursoshumanos	lic1_trocpcorcamtroca001.php	ref-instavel	C1		resposta 200 nos dois lados, conteudo difere: -<script> Sfdump = window.Sfdump || (function (doc) { var refStyle = doc.createElement('style'), rxEsc = /([.* // -</pre><script>Sfdump("sf-dump-183380229	
+recursoshumanos	cai4_relinconsextrato002.php	ref-instavel	C1		resposta 200 nos dois lados, conteudo difere: -zhzÒ|PN%)ó*ùð.? // -þv--	
+recursoshumanos	lic1_trocpcorcamtroca001.php	ref-instavel	C1		resposta 200 nos dois lados, conteudo difere: -<script> Sfdump = window.Sfdump || (function (doc) { var refStyle = doc.createElement('style'), rxEsc = /([.* // -</pre><script>Sfdump("sf-dump-191616020	
 recursoshumanos	pes4_geraarquivosmanad.php	estavel	C1		resposta 200 nos dois lados, conteudo difere: -                </script><script>js_termo_termometro(0,'Processando Tabela : 0000')</script>                  // -LINE 8:                            and 	
 recursoshumanos	pes2_osocontramatricial002.php	ref-instavel	E1		resposta 200 nos dois lados, conteudo difere: -$HTTP_USER_AGENT = 'curl/7.81.0';<br> // +$HTTP_USER_AGENT = 'curl/8.14.1';<br>	
-recursoshumanos	con2_lrfanexoxvii002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+recursoshumanos	con2_lrfanexoxvii002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 recursoshumanos	con2_lrfdivida002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 recursoshumanos	con2_lrfdivida002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-recursoshumanos	con2_lrfgarantias002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+recursoshumanos	con2_lrfgarantias002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 recursoshumanos	con2_lrfgarantias002_2015.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 recursoshumanos	con2_lrflimites002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-recursoshumanos	con2_lrfreceitacorrente002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+recursoshumanos	con2_lrfreceitacorrente002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 recursoshumanos	con2_lrfreceitacorrente002_2018.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-recursoshumanos	con2_opercredito002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-recursoshumanos	con2_opercredito002_2012.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+recursoshumanos	con2_opercredito002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+recursoshumanos	con2_opercredito002_2012.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 recursoshumanos	con2_opercredito002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 recursoshumanos	con2_anexo17_002_2011.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 recursoshumanos	con2_anexo_i_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
@@ -114,7 +248,7 @@ saude	far2_historicoprogmedicamento002.php	estavel	R1	TypeError	pg_num_rows(): A
 saude	far2_historicoprogpaciente002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	far2_historicoprogpaciente002.php:136
 saude	far2_mapaconsolidado003.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	far2_mapaconsolidado003.php:58
 saude	far2_pacienteprogramatica002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	far2_pacienteprogramatica002.php:120
-saude	sau2_agendaexterna003.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	sau2_agendaexterna003.php:72
+saude	sau2_agendaexterna003.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	sau2_agendaexterna003.php:72
 saude	sau2_atendimentos002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	sau2_atendimentos002.php:76
 saude	sau2_boletim002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	sau2_boletim002.php:88
 saude	sau2_cgscorretos002.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	sau2_cgscorretos002.php:59
@@ -138,7 +272,7 @@ saude	lab2_inconsistenciasimportacaoresultado002.php	estavel	R2	TypeError	pg_num
 tributario	agu3_conscadastro_relatorio.php	estavel	A1	TypeError	sizeof(): Argument #1 ($x) must be of type Countable|array, null given	agu3_conscadastro_relatorio.php:37
 tributario	cad2_emissaobic_002.php	estavel	A1	TypeError	sizeof(): Argument #1 ($x) must be of type Countable|array, null given	cad2_emissaobic_002.php:43
 tributario	cad3_conscadastro_relatorio.php	estavel	A1	TypeError	sizeof(): Argument #1 ($x) must be of type Countable|array, null given	cad3_conscadastro_relatorio.php:43
-tributario	cad4_recadastramentorelatorio.php	estavel	A1	TypeError	array_chunk(): Argument #1 ($x) must be of type array, null given	cad4_recadastramentorelatorio.php:106
+tributario	cad4_recadastramentorelatorio.php	ref-instavel	A1	TypeError	array_chunk(): Argument #1 ($x) must be of type array, null given	cad4_recadastramentorelatorio.php:106
 tributario	iss3_inconsistenciaSimples.php	estavel	A1	TypeError	rsort(): Argument #1 ($x) must be of type array, null given	iss3_inconsistenciaSimples.php:62
 tributario	jur2_geradoc.php	ref-instavel	A1	TypeError	sizeof(): Argument #1 ($x) must be of type Countable|array, null given	jur2_geradoc.php:74
 tributario	jur2_inicialquit002.php	estavel	A1	TypeError	sizeof(): Argument #1 ($x) must be of type Countable|array, null given	jur2_inicialquit002.php:60
@@ -151,25 +285,26 @@ tributario	sys4_processa004.php	estavel	A3	TypeError	fputs(): Argument #1 ($x) m
 tributario	sys4_processa008.php	estavel	A3	TypeError	fputs(): Argument #1 ($x) must be of type resource, false given	sys4_processa008.php:100
 tributario	fis1_fis_sanitario004.php	estavel	A4	Error	Call to undefined function db_ancora()	fis1_fis_sanitario004.php:67
 tributario	fis1_sanitario004.php	estavel	A4	Error	Call to undefined function db_ancora()	fis1_sanitario004.php:67
-tributario	con2_lrflimites002_2015.php	estavel	A5		E_COMPILE_ERROR - require_once(): Failed opening required 'model/itemSolicitacaoExtends.model.php' (include_path='.:/usr/share/php') in com4_inserirdotacaosolic	
 tributario	agu1_aguaconsumo999.php	estavel	A6	Error	No PostgreSQL connection opened yet	std/label/RotuloCampoDB.php:37
 tributario	agu4_cancelaleituras_classe.php	estavel	A6	TypeError	array_key_exists(): Argument #2 ($x) must be of type array, null given	vendor/dbseller/legacy/src/PHP53/Emulate.php:110
+tributario	con2_lrflimites002_2015.php	estavel	A6	TypeError	explode(): Argument #2 ($x) must be of type string, array given	libs/db_libcontabilidade.php:5935
 tributario	fis1_fis_procfiscalfinalizacao002.php	estavel	A6		resposta 200 nos dois lados, conteudo difere: +<br /> // +<b>Deprecated</b>:  pg_query(): Automatic fetching of PostgreSQL connection is deprecated in <b>/var/www/html	
 tributario	iss3_emissaoalvaraeventos001.php	estavel	A6	ArgumentCountError	Requires 2 or 3 arguments, 3 given	model/documentoTemplate.model.php:85
+tributario	con2_anexodemonstrativofuncaosubfuncao002_2018.php	ref-instavel	C1		resposta 200 nos dois lados, conteudo difere: -s£K!ôXÅ¾ßíÑE\Á_ákÞÅÚë¿B@åC`ñºí¬ßü!ª Î!°ð¡d£ân_½¯ // +s£K!ôXÅ¾ßíÑE\Á_hÞÅÚë¿B@åC`ñºí¬ßü!ª Î!°ð¡d£ân_½¯	
 tributario	sys4_libimpmax001.php	estavel	C1		resposta 200 nos dois lados, conteudo difere: -                              </select> </td> // -          </tr>	
-tributario	fis3_fis_relatoriosani.php	estavel	E1		resposta 200 nos dois lados, conteudo difere: -<</Filter /FlateDecode /Length 864>> // +<</Filter /FlateDecode /Length 860>>	
-tributario	fis3_relatoriosani.php	ref-instavel	E1		resposta 200 nos dois lados, conteudo difere: -<</Filter /FlateDecode /Length 889>> // +<</Filter /FlateDecode /Length 886>>	
-tributario	con2_lrfanexoxvii002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+tributario	fis3_fis_relatoriosani.php	estavel	E1		resposta 200 nos dois lados, conteudo difere: -<</Filter /FlateDecode /Length 863>> // +<</Filter /FlateDecode /Length 860>>	
+tributario	fis3_relatoriosani.php	estavel	E1		resposta 200 nos dois lados, conteudo difere: -<</Filter /FlateDecode /Length 889>> // +<</Filter /FlateDecode /Length 887>>	
+tributario	con2_lrfanexoxvii002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 tributario	con2_lrfdivida002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 tributario	con2_lrfdivida002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-tributario	con2_lrfgarantias002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-tributario	con2_lrfgarantias002_2015.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+tributario	con2_lrfgarantias002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+tributario	con2_lrfgarantias002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 tributario	con2_lrflimites002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-tributario	con2_lrfreceitacorrente002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+tributario	con2_lrfreceitacorrente002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 tributario	con2_lrfreceitacorrente002_2018.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-tributario	con2_opercredito002_2010.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-tributario	con2_opercredito002_2012.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
-tributario	con2_opercredito002_2015.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+tributario	con2_opercredito002_2010.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+tributario	con2_opercredito002_2012.php	estavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
+tributario	con2_opercredito002_2015.php	ref-instavel	P1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	fpdf151/pdf.php:186
 tributario	con2_anexo17_002_2011.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 tributario	con2_anexo_i_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
 tributario	con2_anexo_ii_2014.php	estavel	P2	TypeError	checkdate(): Argument #1 ($x) must be of type int, string given	std/DBDate.php:203
@@ -179,11 +314,11 @@ tributario	con2_lrfdemalienataplicrecursos002_2010.php	estavel	P2	TypeError	chec
 tributario	agu1_aguahidromatricfichatroca002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu1_aguahidromatricfichatroca002.php:61
 tributario	agu2_compleituras002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu2_compleituras002.php:161
 tributario	agu2_hidrometro002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu2_hidrometro002.php:70
-tributario	agu2_relconsumo002.php	ref-instavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu2_relconsumo002.php:166
+tributario	agu2_relconsumo002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu2_relconsumo002.php:166
 tributario	agu2_relimobiliarias002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu2_relimobiliarias002.php:86
 tributario	agu2_relimoveiscar002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu2_relimoveiscar002.php:72
 tributario	agu2_situacaohidro002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu2_situacaohidro002.php:155
-tributario	agu4_relcorte.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu4_relcorte.php:36
+tributario	agu4_relcorte.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu4_relcorte.php:36
 tributario	agu4_relleituras002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	agu4_relleituras002.php:54
 tributario	arr2_rellistadqd002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	arr2_rellistadqd002.php:178
 tributario	cad2_carnesiptu002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_carnesiptu002.php:57
@@ -204,7 +339,7 @@ tributario	cad2_relmassafalida002.php	estavel	R1	TypeError	pg_numrows(): Argumen
 tributario	cad2_setor002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad2_setor002.php:79
 tributario	cad3_conscadastrodetalhesmodelonovo002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_conscadastrodetalhesmodelonovo002.php:171
 tributario	cad3_iptupago002_original.php	estavel	R1	TypeError	pg_result(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_iptupago002_original.php:64
-tributario	cad3_relzonafiscal002.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_relzonafiscal002.php:62
+tributario	cad3_relzonafiscal002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_relzonafiscal002.php:62
 tributario	cad3_relzonafiscaltaxa002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad3_relzonafiscaltaxa002.php:63
 tributario	cad4_geracarneiptutxt.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad4_geracarneiptutxt.php:754
 tributario	cad4_geracarneiptutxt_arapiraca.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	cad4_geracarneiptutxt_arapiraca.php:170
@@ -219,19 +354,19 @@ tributario	div2_posicaoparc002.php	estavel	R1	TypeError	pg_numrows(): Argument #
 tributario	div2_procedexerc_002.php	ref-instavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	div2_procedexerc_002.php:130
 tributario	dv02_loteamentos002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	dv02_loteamentos002.php:48
 tributario	dvr2_capaloteamento002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	dvr2_capaloteamento002.php:61
-tributario	dvr3_procedper002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	dvr3_procedper002.php:135
+tributario	dvr3_procedper002.php	ref-instavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	dvr3_procedper002.php:135
 tributario	dvr4_parclote004.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	dvr4_parclote004.php:74
 tributario	dvr4_parclote005.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	dvr4_parclote005.php:66
-tributario	fis2_emiteaidof002.php	ref-instavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	fis2_emiteaidof002.php:105
-tributario	fis2_fis_levantamentolote002.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	fis2_fis_levantamentolote002.php:245
-tributario	fis2_fis_levantamentomassa002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	fis2_fis_levantamentomassa002.php:168
+tributario	fis2_emiteaidof002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	fis2_emiteaidof002.php:105
+tributario	fis2_fis_levantamentolote002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	fis2_fis_levantamentolote002.php:245
+tributario	fis2_fis_levantamentomassa002.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	fis2_fis_levantamentomassa002.php:168
 tributario	fis2_fis_termofiscal003.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	fis2_fis_termofiscal003.php:122
-tributario	fis3_fis_consultaautoinf_imp.php	ref-instavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	fis3_fis_consultaautoinf_imp.php:57
+tributario	fis3_fis_consultaautoinf_imp.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	fis3_fis_consultaautoinf_imp.php:57
 tributario	fis3_fis_imprimealvara.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	fis3_fis_imprimealvara.php:64
 tributario	inf2_inflan002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	inf2_inflan002.php:126
 tributario	iss2_calculadoepago002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_calculadoepago002.php:113
 tributario	iss2_certibaixa002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_certibaixa002.php:55
-tributario	iss2_inscrescrito002.php	ref-instavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_inscrescrito002.php:81
+tributario	iss2_inscrescrito002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_inscrescrito002.php:81
 tributario	iss2_issqnpago002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_issqnpago002.php:67
 tributario	iss2_listinscrweb002.php	estavel	R1	TypeError	pg_numrows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_listinscrweb002.php:100
 tributario	iss2_relatorioruas002.php	estavel	R1	TypeError	pg_num_rows(): Argument #1 ($x) must be of type PgSql\Result, false given	iss2_relatorioruas002.php:179
