@@ -46,6 +46,15 @@ def test_evento_de_atribuicao_tem_tipo_repr_e_hash(cs, i):
 
 
 @pytest.mark.parametrize("i", [0, 1])
+def test_objeto_com_as_mesmas_propriedades_em_outra_ordem_tem_o_mesmo_resumo(cs, i):
+    """Propriedades de objeto saem em ordem diferente no 7.4 e no 8.x: o resumo ordena por nome."""
+    codigo = ('<?php\n$a = new stdClass; $a->b = 1; $a->a = 2; __rt_a(1, "a", $a);\n'
+              '$b = new stdClass; $b->a = 2; $b->b = 1; __rt_a(2, "b", $b);\n')
+    _, ev = _roda(cs[i], "objord", codigo)
+    assert ev[0]["v"]["h"] == ev[1]["v"]["h"] and ev[0]["v"]["r"] == ev[1]["v"]["r"]
+
+
+@pytest.mark.parametrize("i", [0, 1])
 def test_resource_nao_vaza_o_numero(cs, i):
     _, ev = _roda(cs[i], "res", '<?php\n$r = fopen("php://memory", "r"); __rt_a(1, "r", $r);\n')
     assert ev[0]["v"]["t"] == "resource:stream"

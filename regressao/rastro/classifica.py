@@ -27,7 +27,7 @@ def comportamental(d: Divergencia) -> bool:
 
 # Infraestrutura do e-Cidade/vendor: divergencias de INICIALIZACAO (ordem do autoloader, chaves novas de funcoes do PHP, objeto de
 # sessao) que quase nunca explicam uma diferenca de comportamento. Sem sintoma, nao podem ser apontadas como causa.
-INFRA = ("src/V3/", "src/Core/", "app.php", "FrontController.php", "definitions.php")
+INFRA = ("src/V3/", "src/Core/", "config/", "app.php", "FrontController.php", "definitions.php", "bootstrap.php")
 
 
 def e_infra(d: Divergencia) -> bool:

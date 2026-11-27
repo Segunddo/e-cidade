@@ -76,7 +76,11 @@ final class RtRastro
             elseif ($prof <= 0) { $t = $c . '{..}'; }
             else {
                 $partes = array();
-                foreach ((array) $v as $k => $x) {
+                // O PHP 7.4 e o 8.x ordenam as propriedades de um objeto de forma diferente no cast para array
+                // (herdadas x declaradas): ordenar por nome evita divergencia falsa em objetos identicos.
+                $props = (array) $v;
+                ksort($props);
+                foreach ($props as $k => $x) {
                     $partes[] = str_replace("\0", '.', (string) $k) . '=' . self::canon($x, $prof - 1, $orc);
                     if (count($partes) >= 40) { $partes[] = '..'; break; }
                 }
