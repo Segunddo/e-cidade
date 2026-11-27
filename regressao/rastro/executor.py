@@ -85,7 +85,7 @@ def roda_requisicao(sid: str, tela: str, id_rastro: str, container: str, instrum
     status, corpo = (int(saida[i + 3:]) if i >= 0 and saida[i + 3:].strip().isdigit() else 0), (saida[:i] if i >= 0 else saida)
     rastro: list[str] = []
     if instrumentado:
-        bruto = _docker(["exec", container, "sh", "-c", f"cat /tmp/rastro/{id_rastro}.jsonl 2>/dev/null; true"], 60).decode("utf-8", "replace")
+        bruto = _docker(["exec", container, "sh", "-c", f"cat /tmp/rastro/{id_rastro}.jsonl 2>/dev/null; rm -f /tmp/rastro/{id_rastro}.jsonl; true"], 120).decode("utf-8", "replace")
         rastro = [l for l in bruto.splitlines() if l.strip()]
     novo = _docker(["exec", container, "sh", "-c", f"tail -n +{antes + 1} {LOG_APP} 2>/dev/null | head -c 200000; true"], 30).decode("utf-8", "replace")
     return Execucao(status, corpo, rastro + eventos_do_log_da_aplicacao(novo))

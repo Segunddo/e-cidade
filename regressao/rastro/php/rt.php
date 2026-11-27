@@ -33,8 +33,8 @@ final class RtRastro
         }
         self::$arq = '/tmp/rastro/' . $id . '.jsonl';
         @file_put_contents(self::$arq, '');
-        $teto = getenv('RASTRO_TETO');
-        if ($teto !== false && ctype_digit($teto)) {
+        $teto = isset($_SERVER['RASTRO_TETO']) ? $_SERVER['RASTRO_TETO'] : getenv('RASTRO_TETO');
+        if (is_string($teto) && ctype_digit($teto)) {
             self::$teto = (int) $teto;
         }
         $m = isset($_SERVER['RASTRO_MASCARA']) ? $_SERVER['RASTRO_MASCARA'] : getenv('RASTRO_MASCARA');

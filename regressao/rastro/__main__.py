@@ -14,7 +14,7 @@ from regressao.nucleo.ambiente import containers_do_ambiente
 from regressao.nucleo.banco import _docker
 from regressao.php import telas as T
 from regressao.rastro import equivalencia, executor, servidor
-from regressao.rastro.classifica import classifica
+from regressao.rastro.classifica import Resultado, classifica
 from regressao.rastro.evento import le_rastro
 from regressao.rastro.relatorio import escreve_relatorio
 
@@ -44,12 +44,16 @@ def rastreia_telas(telas: list[str], saida: Path) -> dict:
     le = _leitor_de_mapas(c.php_novo)
     resultados, rastros = {}, {}
     for tela in telas:
-        a = executor.roda_requisicao(sid, tela, f"r74a_{tela}", c.ref)
-        b = executor.roda_requisicao(sid, tela, f"r74b_{tela}", c.ref)
-        n = executor.roda_requisicao(sid, tela, f"r85_{tela}", c.php_novo)
-        resultados[tela] = classifica(le_rastro(a.rastro), le_rastro(n.rastro), le_rastro(b.rastro),
-                                      (a.status, a.corpo), (n.status, n.corpo), le=le)
-        rastros[tela] = {"ref74": a.rastro, "ref74_2": b.rastro, "alvo85": n.rastro}
+        try:
+            a = executor.roda_requisicao(sid, tela, f"r74a_{tela}", c.ref)
+            b = executor.roda_requisicao(sid, tela, f"r74b_{tela}", c.ref)
+            n = executor.roda_requisicao(sid, tela, f"r85_{tela}", c.php_novo)
+            resultados[tela] = classifica(le_rastro(a.rastro), le_rastro(n.rastro), le_rastro(b.rastro),
+                                          (a.status, a.corpo), (n.status, n.corpo), le=le)
+            rastros[tela] = {"ref74": a.rastro, "ref74_2": b.rastro, "alvo85": n.rastro}
+        except Exception as e:     # uma tela com problema nao derruba as outras: fica INCONCLUSIVO com o motivo
+            resultados[tela] = Resultado("INCONCLUSIVO", nota=f"erro ao rastrear: {type(e).__name__}: {str(e)[:160]}")
+            rastros[tela] = {}
         print(f"{resultados[tela].veredito:24} {tela}", flush=True)
     arq = escreve_relatorio(resultados, saida, rastros)
     print("relatorio:", arq)

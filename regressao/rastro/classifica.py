@@ -71,6 +71,9 @@ def cadeia_causal(causal: Divergencia, alvo: list[Evento], le: Callable[[str, in
 def classifica(ref: list[Evento], alvo: list[Evento], ref2: list[Evento], resp_ref: tuple[int, bytes],
                resp_alvo: tuple[int, bytes], le: Callable[[str, int], list[str]] = lambda a, s: []) -> Resultado:
     truncado = any(e.tipo == "T" for e in (*ref, *alvo))
+    if truncado:   # nunca conclui nada: nem gasta tempo/memoria alinhando rastros que bateram no teto
+        return Resultado("INCONCLUSIVO", truncado=True,
+                         nota="rastro truncado (teto de eventos): nao da para concluir; a tela repete muito (laco longo)")
     divs, pares = alinha_completo(ref, alvo)
     chaves_ruido = {d.chave for d in alinha(ref, ref2)}
     ruido = [d for d in divs if d.chave in chaves_ruido]
@@ -79,9 +82,6 @@ def classifica(ref: list[Evento], alvo: list[Evento], ref2: list[Evento], resp_r
     reconv = [d for d in reais if _reconverge(d, pares)]
     sem_volta = [d for d in reais if d not in reconv]
 
-    if truncado:
-        return Resultado("INCONCLUSIVO", reconvergentes=reconv, ruido=ruido, truncado=True,
-                         nota="rastro truncado (teto de eventos): nao da para concluir")
     if not reais:
         if finais_iguais:
             return Resultado("IDENTICO", ruido=ruido)

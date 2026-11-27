@@ -52,6 +52,7 @@ def test_mascara_do_app_bate_com_as_constantes_do_php_nos_dois_contêineres():
 
 def test_vhost_usa_a_arvore_instrumentada_o_rt_e_nao_toca_na_porta_80():
     assert f"SetEnv RASTRO_MASCARA {servidor.MASCARA_DO_APP}" in servidor.VHOST
+    assert f"SetEnv RASTRO_TETO {servidor.TETO_EVENTOS}" in servidor.VHOST and servidor.TETO_EVENTOS <= 500_000
     assert f"Listen {servidor.PORTA}" in servidor.VHOST and "VirtualHost *:80>" not in servidor.VHOST
     assert f"DocumentRoot {servidor.RAIZ}" in servidor.VHOST
     assert f"php_value auto_prepend_file {servidor.RT}" in servidor.VHOST

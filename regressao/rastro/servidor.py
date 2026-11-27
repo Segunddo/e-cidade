@@ -16,6 +16,9 @@ TIMEOUT = 60
 # php.error_reporting do e-Cidade (config/application.php): E_ALL & ~E_NOTICE & ~E_WARNING & ~E_DEPRECATED & ~E_STRICT.
 # E o conjunto de tipos que o handler da aplicacao recebe; o rt.php so o repassa para esses (o PHP nao expoe a mascara).
 MASCARA_DO_APP = 22517
+# Teto de eventos por requisicao. Uma tela em laco (sys4_processa008.php) gerou 2.000.001 eventos = 340 MB so no 7.4; o
+# alinhador em Python chegou a 6 GB. Rastro que bate no teto e INCONCLUSIVO (nunca reconvergente), entao o teto so evita o custo.
+TETO_EVENTOS = 300_000
 
 VHOST = f"""Listen {PORTA}
 <VirtualHost *:{PORTA}>
@@ -26,6 +29,7 @@ VHOST = f"""Listen {PORTA}
     AddDefaultCharset ISO-8859-1
     SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
     SetEnv RASTRO_MASCARA {MASCARA_DO_APP}
+    SetEnv RASTRO_TETO {TETO_EVENTOS}
     <Directory {RAIZ}>
         Options +Indexes +FollowSymLinks +MultiViews
         AllowOverride All

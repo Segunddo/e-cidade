@@ -54,6 +54,21 @@ def test_telas_divergentes_le_so_telas_diverge_do_resultado(tmp_path):
     assert cli.telas_divergentes(tmp_path, "saude") == ["a.php", "b.php"]
 
 
+def test_uma_tela_com_erro_nao_derruba_as_outras(monkeypatch, tmp_path):
+    from regressao.rastro import executor
+    monkeypatch.setattr(cli, "servidor", type("S", (), {"liga_vhost": staticmethod(lambda c: None), "MAPAS": "/m"}))
+    monkeypatch.setattr(executor, "nova_sessao", lambda: "sid")
+    def roda(sid, tela, id_, cont, instrumentado=True):
+        if tela == "ruim.php":
+            raise RuntimeError("docker caiu")
+        return executor.Execucao(200, b"ok", [])
+    monkeypatch.setattr(executor, "roda_requisicao", roda)
+    monkeypatch.setattr(cli, "_docker", lambda *a, **k: b"{}")
+    r = cli.rastreia_telas(["ruim.php", "boa.php"], tmp_path)
+    assert r["ruim.php"].veredito == "INCONCLUSIVO" and "docker caiu" in r["ruim.php"].nota
+    assert r["boa.php"].veredito == "IDENTICO"
+
+
 def test_cli_rastreia_chama_rastreia_telas(monkeypatch, tmp_path):
     chamadas = []
     monkeypatch.setattr(cli, "rastreia_telas", lambda telas, saida: chamadas.append((telas, saida)))
