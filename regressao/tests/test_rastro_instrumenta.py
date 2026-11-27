@@ -103,7 +103,7 @@ def test_arquivo_removido_some_da_saida_e_do_manifesto(ctx):
     (ctx["raiz"] / "a.php").unlink()
     r = ctx["roda"]()
     assert r.removidos == 1 and r.total == 3
-    assert "a.php" in ctx["falso"].removidos and "a.php.map.json" in ctx["falso"].removidos
+    assert "a.php" in ctx["falso"].removidos and "a.php.json" in ctx["falso"].removidos     # o mapa fica em outra arvore
     assert "a.php" not in json.loads(ctx["estado"].read_text())["arquivos"]
 
 

@@ -8,6 +8,8 @@ from regressao.nucleo.banco import _docker
 
 PORTA = 8091
 RAIZ = "/var/www/html/tmp/ecidade-rastro"
+MAPAS = "/var/www/html/tmp/ecidade-rastro-mapas"          # fora da arvore: nenhum arquivo a mais em nenhum diretorio
+RT = "/var/www/html/tmp/rastro-rt.php"                      # idem: o rt.php nao aparece na listagem da raiz
 CONF = "/etc/apache2/sites-available/rastro.conf"
 TIMEOUT = 60
 
@@ -28,7 +30,7 @@ VHOST = f"""Listen {PORTA}
         Options +Indexes +FollowSymLinks +MultiViews
         AllowOverride All
         Require all granted
-        php_value auto_prepend_file {RAIZ}/rt.php
+        php_value auto_prepend_file {RT}
     </Directory>
     ErrorLog ${{APACHE_LOG_DIR}}/rastro_error.log
     CustomLog ${{APACHE_LOG_DIR}}/rastro_access.log combined

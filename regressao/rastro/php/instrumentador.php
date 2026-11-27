@@ -10,11 +10,13 @@ use PhpParser\Lexer\Emulative;
 use PhpParser\NodeTraverser;
 use PhpParser\ParserFactory;
 
-$o = getopt('', ['raiz:', 'saida:', 'funcoes::']);
+$o = getopt('', ['raiz:', 'saida:', 'mapas:', 'funcoes::']);
 $raiz = rtrim($o['raiz'] ?? '', '/');
 $saida = rtrim($o['saida'] ?? '', '/');
+// Os mapas ficam FORA da arvore instrumentada: um arquivo a mais num diretorio muda telas que listam diretorios.
+$mapas = rtrim($o['mapas'] ?? ($saida . '-mapas'), '/');
 if ($raiz === '' || $saida === '') {
-    fwrite(STDERR, "uso: php instrumentador.php --raiz=DIR --saida=DIR [--funcoes=ARQ]\n");
+    fwrite(STDERR, "uso: php instrumentador.php --raiz=DIR --saida=DIR [--mapas=DIR] [--funcoes=ARQ]\n");
     exit(2);
 }
 $arqFuncoes = $o['funcoes'] ?? (__DIR__ . '/../funcoes.txt');
@@ -70,7 +72,7 @@ while (($arq = fgets(STDIN)) !== false) {
             $saidaTexto = $v->aplica();
             $n = $v->sondas();
             if ($n > 0) {
-                grava("$saida/$arq.map.json", json_encode($v->mapa(), JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE));
+                grava("$mapas/$arq.json", json_encode($v->mapa(), JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE));
             }
         } catch (\Throwable $e) {
             $status = 'sem_parse';
@@ -80,6 +82,7 @@ while (($arq = fgets(STDIN)) !== false) {
         }
     }
     grava("$saida/$arq", $saidaTexto);
+    @chmod("$saida/$arq", fileperms("$raiz/$arq") & 0777);   // telas checam o modo dos arquivos (ex.: bin/ com 0754)
     $linha = ['arquivo' => $arq, 'status' => $status, 'sondas' => $n];
     if (isset($msg)) {
         $linha['msg'] = $msg;

@@ -21,6 +21,7 @@ from pathlib import Path
 from regressao.nucleo.ambiente import containers_do_ambiente
 from regressao.nucleo.banco import _docker
 from regressao.php import arvore
+from regressao.rastro.servidor import RT as RT_REMOTO
 
 AQUI = Path(__file__).resolve().parent
 PHP_DIR = AQUI / "php"
@@ -98,7 +99,8 @@ def _exec_stdin(container: str, comando: str, linhas: list[str]) -> str:
 
 def _roda_lote(container: str, saida_rel: str, lote: list[str]) -> list[dict]:
     cmd = (f"cd {RAIZ_CONTAINER} && php {DESTINO_SCRIPTS}/instrumentador.php --raiz={RAIZ_CONTAINER} "
-           f"--saida={_no_container(saida_rel)} --funcoes={DESTINO_SCRIPTS}/funcoes.txt")
+           f"--saida={_no_container(saida_rel)} --mapas={_no_container(saida_rel)}-mapas "
+           f"--funcoes={DESTINO_SCRIPTS}/funcoes.txt")
     saida = _exec_stdin(container, cmd, lote)
     return [json.loads(l) for l in saida.splitlines() if l.startswith("{")]
 
@@ -164,8 +166,9 @@ def instrumenta_arvore(raiz: Path, saida: Path, forcar: bool = False, versao: st
         novos.pop(a, None)
     resumo.removidos = len(removidos)
     if removidos:
-        _exec_stdin(container, f"cd {_no_container(saida_rel)} && xargs -d '\\n' rm -f --",
-                    [p for a in removidos for p in (a, a + ".map.json")])
+        _exec_stdin(container, f"cd {_no_container(saida_rel)} && xargs -d '\\n' rm -f --", removidos)
+        _exec_stdin(container, f"cd {_no_container(saida_rel)}-mapas && xargs -d '\\n' rm -f --",
+                    [a + ".json" for a in removidos])
 
     # links para o que nao e instrumentado
     desejados = sorted({*_nao_instrumentados(raiz, saida_rel, set(arquivos)), *LINKS_DE_TOPO})
@@ -175,7 +178,7 @@ def instrumenta_arvore(raiz: Path, saida: Path, forcar: bool = False, versao: st
         _exec_stdin(container, f"php {DESTINO_SCRIPTS}/liga.php --raiz={RAIZ_CONTAINER} "
                     f"--saida={_no_container(saida_rel)}", instrucoes)
     resumo.links = len(desejados)
-    _docker(["cp", str(PHP_DIR / "rt.php"), f"{container}:{_no_container(saida_rel)}/rt.php"], 30)
+    _docker(["cp", str(PHP_DIR / "rt.php"), f"{container}:{RT_REMOTO}"], 30)
 
     if lint and ok:
         resumo.falhas_lint, resumo.falhas_ja_no_original = confere_lint(saida_rel, ok, container)

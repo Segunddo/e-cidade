@@ -54,6 +54,7 @@ def test_vhost_usa_a_arvore_instrumentada_o_rt_e_nao_toca_na_porta_80():
     assert f"SetEnv RASTRO_MASCARA {servidor.MASCARA_DO_APP}" in servidor.VHOST
     assert f"Listen {servidor.PORTA}" in servidor.VHOST and "VirtualHost *:80>" not in servidor.VHOST
     assert f"DocumentRoot {servidor.RAIZ}" in servidor.VHOST
-    assert f"php_value auto_prepend_file {servidor.RAIZ}/rt.php" in servidor.VHOST
+    assert f"php_value auto_prepend_file {servidor.RT}" in servidor.VHOST
+    assert not servidor.RT.startswith(servidor.RAIZ + "/") and not servidor.MAPAS.startswith(servidor.RAIZ + "/")
     assert "AllowOverride All" in servidor.VHOST and "FollowSymLinks" in servidor.VHOST   # .htaccess e link simbolico
     assert servidor.url_rastro("c") == "http://localhost:8091"

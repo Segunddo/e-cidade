@@ -20,13 +20,16 @@ PAR = re.compile(rb" /\*R\*/.*? /\*R\*/", re.DOTALL)   # o espaco inicial faz pa
 ISO = b"<?php\n$s = 'a\xe7\xe3o';\n$n = strlen($s);\necho $n, \"\\n\";\n"
 
 
+MODOS = {"modo.php": 0o754}
+
+
 def _tar(arquivos: dict[str, bytes]) -> io.BytesIO:
     buf = io.BytesIO()
     with tarfile.open(fileobj=buf, mode="w") as t:
         for nome, dados in arquivos.items():
             info = tarfile.TarInfo(nome)
             info.size = len(dados)
-            info.mode = 0o644
+            info.mode = MODOS.get(nome, 0o644)
             t.addfile(info, io.BytesIO(dados))
     buf.seek(0)
     return buf
@@ -37,7 +40,8 @@ def _envia(container: str, destino: str, arquivos: dict[str, bytes]) -> None:
         f.write(_tar(arquivos).read())
         f.seek(0)
         _docker(["exec", "-i", "-u", "root", container, "sh", "-c",
-                 f"rm -rf {destino} && mkdir -p {destino} && tar x -C {destino} && chmod -R a+rwX {destino}"],
+                 f"rm -rf {destino} && mkdir -p {destino} && tar x -C {destino} && "
+                 f"find {destino} -type d -exec chmod a+rwx {{}} +"],      # so diretorios: o modo dos arquivos importa
                 60, stdin=f)
 
 
@@ -69,6 +73,7 @@ def amb():
         pytest.skip("contêineres docker indisponiveis")
     entradas = {p.name: p.read_bytes() for p in FIXTURES.glob("*.php") if p.name != "rt_stub.php"}
     entradas["iso.php"] = ISO
+    entradas["modo.php"] = b"<?php\n$m = 1;\necho $m, \"\\n\";\n"
     stub = (FIXTURES / "rt_stub.php").read_bytes()
     _envia(c.php_novo, f"{BASE}/in", entradas)
     scripts = {"php/" + p.name: p.read_bytes() for p in PHP_DIR.glob("*.php")}
@@ -79,25 +84,38 @@ def amb():
         f.write(lista.encode())
         f.seek(0)
         resp = _docker(["exec", "-i", c.php_novo, "sh", "-c",
-                        f"mkdir -p {BASE}/out && php {BASE}/ferr/php/instrumentador.php --raiz={BASE}/in "
-                        f"--saida={BASE}/out --funcoes={BASE}/ferr/funcoes.txt"], 120, stdin=f).decode()
+                        f"rm -rf {BASE}/out {BASE}/maps && mkdir -p {BASE}/out && php {BASE}/ferr/php/instrumentador.php "
+                        f"--raiz={BASE}/in --saida={BASE}/out --mapas={BASE}/maps --funcoes={BASE}/ferr/funcoes.txt"],
+                       120, stdin=f).decode()
     status = {}
     for linha in resp.splitlines():
         if linha.startswith("{"):
             j = json.loads(linha)
             status[j["arquivo"]] = j
     saidas = _baixa(c.php_novo, f"{BASE}/out")
+    mapas = _baixa(c.php_novo, f"{BASE}/maps")
+    modo = _docker(["exec", c.php_novo, "sh", "-c", f"stat -c %a {BASE}/out/modo.php"], 20).decode().strip()
     for nome in (c.ref, c.php_novo):
         _envia(nome, f"{BASE}/in", entradas)
         _envia(nome, f"{BASE}/stub", {"rt_stub.php": stub})
-        _envia(nome, f"{BASE}/out", {k: v for k, v in saidas.items() if not k.endswith(".map.json")})
-    return dict(c=c, entradas=entradas, saidas=saidas, status=status, resp=resp)
+        _envia(nome, f"{BASE}/out", saidas)
+    return dict(c=c, entradas=entradas, saidas=saidas, mapas=mapas, modo=modo, status=status, resp=resp)
 
 
 def test_remover_sondas_devolve_o_arquivo_original_byte_a_byte(amb):
     for nome, original in amb["entradas"].items():
         assert amb["status"][nome]["status"] in ("ok", "sem_parse"), (nome, amb["resp"][:500])
         assert PAR.sub(b"", amb["saidas"][nome]) == original, nome
+
+
+def test_nenhum_arquivo_a_mais_na_arvore_instrumentada(amb):
+    """Telas listam diretorios e conferem modos (pre1_leis001.php): a arvore nao pode ter mapas nem rt.php dentro."""
+    assert set(amb["saidas"]) == set(amb["entradas"])
+    assert amb["mapas"] and not any(k.endswith(".map.json") for k in amb["saidas"])
+
+
+def test_modo_do_arquivo_e_preservado(amb):
+    assert amb["modo"] == "754"
 
 
 def test_numero_de_linhas_nao_muda(amb):
@@ -107,7 +125,7 @@ def test_numero_de_linhas_nao_muda(amb):
 
 def test_basico_tem_sondas_de_todos_os_tipos(amb):
     assert amb["status"]["basico.php"]["status"] == "ok"
-    mapa = json.loads(amb["saidas"]["basico.php.map.json"])
+    mapa = json.loads(amb["mapas"]["basico.php.json"])
     tipos = {v["tipo"] for v in mapa.values()}
     assert {"atrib", "chamada", "ramo", "retorno", "excecao"} <= tipos
     assert PAR.sub(b"", amb["saidas"]["basico.php"]) == amb["entradas"]["basico.php"]
