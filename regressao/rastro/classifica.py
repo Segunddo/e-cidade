@@ -25,6 +25,30 @@ def comportamental(d: Divergencia) -> bool:
     return not (d.tipo == "w" and d.nome in AVISOS_INFORMATIVOS)
 
 
+# Infraestrutura do e-Cidade/vendor: divergencias de INICIALIZACAO (ordem do autoloader, chaves novas de funcoes do PHP, objeto de
+# sessao) que quase nunca explicam uma diferenca de comportamento. Sem sintoma, nao podem ser apontadas como causa.
+INFRA = ("src/V3/", "src/Core/", "app.php", "FrontController.php", "definitions.php")
+
+
+def e_infra(d: Divergencia) -> bool:
+    return d.arquivo.startswith(INFRA) or "vendor/" in d.arquivo
+
+
+def diferenca_da_resposta(resp_ref: tuple[int, bytes], resp_alvo: tuple[int, bytes], max_linhas: int = 6) -> list[str]:
+    """Primeiras linhas (normalizadas) em que a resposta do 7.4 e a do 8.5 diferem. `-` = so no 7.4, `+` = so no 8.5."""
+    import difflib
+    a = corpo_normalizado(resp_ref[1]).decode("latin-1").splitlines()
+    b = corpo_normalizado(resp_alvo[1]).decode("latin-1").splitlines()
+    saida = [f"HTTP {resp_ref[0]} (7.4) x {resp_alvo[0]} (8.5)"] if resp_ref[0] != resp_alvo[0] else []
+    for l in difflib.unified_diff(a, b, lineterm="", n=0):
+        if l.startswith(("---", "+++", "@@")):
+            continue
+        saida.append(l[:160])
+        if len(saida) >= max_linhas:
+            break
+    return saida
+
+
 @dataclass
 class Resultado:
     veredito: str                                   # IDENTICO | DIVERGE-RECONVERGENTE | DIVERGE-CAUSAL | INCONCLUSIVO
@@ -33,6 +57,7 @@ class Resultado:
     cadeia: list = field(default_factory=list)      # Evento (do alvo), em ordem cronologica
     reconvergentes: list = field(default_factory=list)
     outras: list = field(default_factory=list)      # divergencias que nao reconvergem mas nao ligam ao sintoma (informativo)
+    diff_resposta: list = field(default_factory=list)   # primeiras linhas em que a RESPOSTA difere (sem excecao a explicar)
     ruido: list = field(default_factory=list)
     truncado: bool = False
     nota: str = ""
@@ -108,9 +133,17 @@ def classifica(ref: list[Evento], alvo: list[Evento], ref2: list[Evento], resp_r
                     if sintoma.motivo == "aviso_x_excecao" else nota)
         return Resultado("DIVERGE-CAUSAL", causal=causal, sintoma=sintoma, cadeia=cadeia, reconvergentes=reconv,
                          ruido=ruido, outras=outras, nota=nota)
-    causal = candidatas[0]
+    # Sem excecao/fatal: a resposta difere "em silencio". So divergencias FORA da infraestrutura podem ser apontadas como causa.
+    do_codigo = [d for d in candidatas if not e_infra(d)]
+    if not do_codigo:
+        return Resultado("INCONCLUSIVO", reconvergentes=reconv, ruido=ruido, outras=candidatas,
+                         diff_resposta=diferenca_da_resposta(resp_ref, resp_alvo),
+                         nota="a resposta difere sem excecao e as divergencias do rastro sao so de infraestrutura "
+                              "(src/V3, src/Core, vendor), que nao explicam a diferenca: compare as linhas da resposta")
+    causal = do_codigo[0]
     return Resultado("DIVERGE-CAUSAL", causal=causal, cadeia=cadeia_causal(causal, alvo, le), reconvergentes=reconv,
-                     ruido=ruido, outras=[d for d in candidatas if d is not causal], nota=nota)
+                     ruido=ruido, outras=[d for d in candidatas if d is not causal],
+                     diff_resposta=diferenca_da_resposta(resp_ref, resp_alvo), nota=nota)
 
 
 def _nomes_lidos_na_linha(sintoma: Divergencia, ref: list[Evento], alvo: list[Evento], le: Callable[[str, int], list[str]]) -> set[str]:

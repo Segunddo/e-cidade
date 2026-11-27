@@ -56,6 +56,8 @@ def escreve_relatorio(resultados: dict[str, Resultado], destino: Path, rastros: 
             if r.cadeia:
                 L += ["", "**Cadeia de atribuicoes ate a linha causal (no 8.5, em ordem de execucao):**", ""]
                 L += [f"{i}. `{e.arquivo}:{e.linha}` `{e.nome}` = {_curto(e.valor)}" for i, e in enumerate(r.cadeia, 1)]
+            if r.diff_resposta:
+                L += ["", "**Onde a resposta difere** (`-` so no 7.4, `+` so no 8.5):", "", "```"] + r.diff_resposta + ["```"]
             if r.outras:
                 L += ["", f"Outras divergencias que nao reconvergem, sem ligacao com o sintoma ({len(r.outras)}; as 8 primeiras):", ""]
                 L += [f"- {descreve(d)}" for d in r.outras[:8]]

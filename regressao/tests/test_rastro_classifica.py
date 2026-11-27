@@ -100,6 +100,21 @@ def test_sem_divergencia_de_valor_a_causa_e_o_proprio_sintoma_e_a_cadeia_mostra_
     assert "endureceu" in r.nota and [d.nome for d in r.outras] == ["cookie"]
 
 
+def test_sem_excecao_divergencia_de_infraestrutura_nao_e_causa_e_a_resposta_e_mostrada():
+    ref = [ev(1, 1, 56, "a", "cookie", v(1), arq="src/V3/Window/Session.php"), ev(2, 2, 3, "a", "x", v(1))]
+    alvo = [ev(1, 1, 56, "a", "cookie", v(2), arq="src/V3/Window/Session.php"), ev(2, 2, 3, "a", "x", v(1))]
+    r = classifica(ref, alvo, list(ref), (200, b"<p>total 10</p>\n<p>fim</p>"), (200, b"<p>total 11</p>\n<p>fim</p>"))
+    assert r.veredito == "INCONCLUSIVO" and r.causal is None and "infraestrutura" in r.nota
+    assert "-<p>total 10</p>" in r.diff_resposta and "+<p>total 11</p>" in r.diff_resposta
+
+
+def test_sem_excecao_divergencia_no_codigo_da_tela_continua_sendo_a_causa():
+    ref = [ev(1, 1, 7, "a", "total", v(10), arq="cad9_x.php")]
+    alvo = [ev(1, 1, 7, "a", "total", v(11), arq="cad9_x.php")]
+    r = classifica(ref, alvo, list(ref), (200, b"a"), (200, b"b"))
+    assert r.veredito == "DIVERGE-CAUSAL" and (r.causal.arquivo, r.causal.linha) == ("cad9_x.php", 7)
+
+
 def test_texto_diferente_do_aviso_nao_e_divergencia():
     a74 = Evento(1, 0, "a.php", 3, "w", "warning", {"t": "aviso", "r": "supplied argument is not a valid resource"})
     a85 = Evento(1, 0, "a.php", 3, "w", "warning", {"t": "aviso", "r": "Argument must be of type X"})
