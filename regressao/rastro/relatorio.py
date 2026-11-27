@@ -17,7 +17,7 @@ TITULOS = {
 def _curto(v: dict | None, n: int = 110) -> str:
     if v is None:
         return "(nao ocorreu)"
-    return re.sub(r"\s+", " ", f"{v.get('t', '')}: {v.get('r', '')}")[:n].replace("|", "/")
+    return re.sub(r"\s+", " ", f"{v.get('t', '')}: {v.get('r', '')}")[:n]
 
 
 def descreve(d: Divergencia) -> str:
@@ -51,9 +51,14 @@ def escreve_relatorio(resultados: dict[str, Resultado], destino: Path, rastros: 
             L.append(f"### `{tela}`")
             if r.causal:
                 L += ["", f"**Linha causal:** {descreve(r.causal)}"]
+            if r.sintoma and r.sintoma != r.causal:
+                L += ["", f"**Sintoma (onde a execucao estourou):** {descreve(r.sintoma)}"]
             if r.cadeia:
                 L += ["", "**Cadeia de atribuicoes ate a linha causal (no 8.5, em ordem de execucao):**", ""]
                 L += [f"{i}. `{e.arquivo}:{e.linha}` `{e.nome}` = {_curto(e.valor)}" for i, e in enumerate(r.cadeia, 1)]
+            if r.outras:
+                L += ["", f"Outras divergencias que nao reconvergem, sem ligacao com o sintoma ({len(r.outras)}; as 8 primeiras):", ""]
+                L += [f"- {descreve(d)}" for d in r.outras[:8]]
             if r.reconvergentes:
                 L += ["", f"Divergencias que reconvergiram ({len(r.reconvergentes)}):", ""]
                 L += [f"- {descreve(d)}" for d in r.reconvergentes[:15]]

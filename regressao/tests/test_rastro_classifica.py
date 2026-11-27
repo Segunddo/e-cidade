@@ -56,6 +56,50 @@ def test_aviso_no_ref_e_excecao_no_alvo_na_mesma_linha_e_causal():
     assert r.veredito == "DIVERGE-CAUSAL" and r.causal.motivo == "aviso_x_excecao"
 
 
+def test_aviso_de_depreciacao_so_do_alvo_nunca_e_a_causa_mas_o_sintoma_aparece():
+    deprec = Evento(1, 0, "src/V3/Extension/ParameterBag.php", 133, "w", "deprecated", {"t": "aviso", "r": "Return type of ..."})
+    ref = [ev(2, 1, 3, "a", "x", v(1)), Evento(5, 0, "cad.php", 40, "w", "warning", {"t": "aviso", "r": "pg_num_rows()"})]
+    alvo = [deprec, ev(2, 1, 3, "a", "x", v(1)), Evento(6, 0, "cad.php", 40, "e", "excecao_app", {"t": "excecao", "r": "TypeError"})]
+    r = classifica(ref, alvo, list(ref), OK, OUTRA)
+    assert r.causal.motivo == "aviso_x_excecao" and (r.causal.arquivo, r.causal.linha) == ("cad.php", 40)
+    assert r.causal.arquivo != "src/V3/Extension/ParameterBag.php"                # a depreciacao nao e causa
+    assert r.sintoma == r.causal
+
+
+def test_sintoma_e_a_excecao_e_a_causa_e_o_valor_que_a_alimentou():
+    ref = [ev(1, 1, 3, "a", "rs", v("resource")), ev(2, 2, 9, "a", "n", v(0))]
+    alvo = [ev(1, 1, 3, "a", "rs", v("false", "bool")), Evento(7, 0, "t.php", 9, "e", "excecao_app", {"t": "excecao", "r": "TypeError"})]
+    le = {1: [], 2: ["rs"]}                                          # a linha 9 le `rs`
+    r = classifica(ref, alvo, list(ref), OK, OUTRA, le=lambda arq, s: le[s])
+    assert (r.causal.linha, r.causal.nome) == (3, "rs")            # onde o valor ficou errado
+    assert (r.sintoma.arquivo, r.sintoma.linha) == ("t.php", 9)    # onde estourou
+
+
+def test_a_causa_e_a_divergencia_que_alimenta_a_linha_que_estourou_e_nao_uma_anterior_sem_relacao():
+    # linha 1: cookie (sem relacao) diverge; linha 3: rs diverge; linha 9 estoura lendo rs
+    ref = [ev(1, 1, 1, "a", "cookie", v(1)), ev(2, 2, 3, "a", "rs", v("resource", "pgresult")), ev(3, 3, 9, "c", "pg_num_rows", v(0))]
+    alvo = [ev(1, 1, 1, "a", "cookie", v(2)), ev(2, 2, 3, "a", "rs", v("false", "bool")),
+            Evento(1000000007, 0, "t.php", 9, "e", "excecao_app", {"t": "excecao", "r": "TypeError"})]
+    le = {1: [], 2: [], 3: ["rs"]}
+    r = classifica(ref, alvo, list(ref), OK, OUTRA, le=lambda arq, s: le[s])
+    assert (r.causal.nome, r.causal.linha) == ("rs", 3)
+    assert (r.sintoma.arquivo, r.sintoma.linha) == ("t.php", 9)
+    assert [d.nome for d in r.outras] == ["cookie"]                      # a anterior sem relacao vira "outra", nao causa
+
+
+def test_sem_divergencia_de_valor_a_causa_e_o_proprio_sintoma_e_a_cadeia_mostra_o_dado():
+    aviso = Evento(5, 0, "t.php", 9, "w", "warning", {"t": "aviso", "r": "pg_num_rows() expects resource"})
+    exc = Evento(1000000001, 0, "t.php", 9, "e", "excecao_app", {"t": "excecao", "r": "TypeError: pg_num_rows()"})
+    falso = v("false", "bool")                                              # $rs e false nos DOIS lados: nao ha divergencia de valor
+    ref = [ev(1, 1, 1, "a", "cookie", v(1)), ev(2, 2, 3, "a", "rs", falso), ev(3, 3, 9, "c", "pg_num_rows", v(0)), aviso]
+    alvo = [ev(1, 1, 1, "a", "cookie", v(2)), ev(2, 2, 3, "a", "rs", falso), exc]
+    le = {1: [], 2: [], 3: ["rs"]}
+    r = classifica(ref, alvo, list(ref), OK, OUTRA, le=lambda arq, s: le[s])
+    assert r.causal.motivo == "aviso_x_excecao" and (r.causal.arquivo, r.causal.linha) == ("t.php", 9)
+    assert [(e.nome, e.valor["r"]) for e in r.cadeia] == [("rs", "false")]  # de onde veio o dado que quebrou
+    assert "endureceu" in r.nota and [d.nome for d in r.outras] == ["cookie"]
+
+
 def test_texto_diferente_do_aviso_nao_e_divergencia():
     a74 = Evento(1, 0, "a.php", 3, "w", "warning", {"t": "aviso", "r": "supplied argument is not a valid resource"})
     a85 = Evento(1, 0, "a.php", 3, "w", "warning", {"t": "aviso", "r": "Argument must be of type X"})

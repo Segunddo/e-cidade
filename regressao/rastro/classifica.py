@@ -17,14 +17,22 @@ from regressao.rastro.evento import Evento
 from regressao.rastro.executor import corpo_normalizado
 
 PROFUNDIDADE_CADEIA = 20
+# Avisos que nao mudam o comportamento (depreciacao, notice): informativos, nunca candidatos a causa.
+AVISOS_INFORMATIVOS = frozenset({"deprecated", "user_deprecated", "notice", "user_notice", "strict"})
+
+
+def comportamental(d: Divergencia) -> bool:
+    return not (d.tipo == "w" and d.nome in AVISOS_INFORMATIVOS)
 
 
 @dataclass
 class Resultado:
     veredito: str                                   # IDENTICO | DIVERGE-RECONVERGENTE | DIVERGE-CAUSAL | INCONCLUSIVO
     causal: Divergencia | None = None
+    sintoma: Divergencia | None = None              # primeira excecao/fatal so de um lado: onde a execucao ESTOUROU
     cadeia: list = field(default_factory=list)      # Evento (do alvo), em ordem cronologica
     reconvergentes: list = field(default_factory=list)
+    outras: list = field(default_factory=list)      # divergencias que nao reconvergem mas nao ligam ao sintoma (informativo)
     ruido: list = field(default_factory=list)
     truncado: bool = False
     nota: str = ""
@@ -81,6 +89,48 @@ def classifica(ref: list[Evento], alvo: list[Evento], ref2: list[Evento], resp_r
                          nota="a resposta difere mas o rastro e igual: a diferenca esta em codigo sem sonda")
     if finais_iguais:
         return Resultado("DIVERGE-RECONVERGENTE", reconvergentes=reais, ruido=ruido)
-    causal = (sem_volta or reais)[0]
+    candidatas = [d for d in sem_volta if comportamental(d)] or [d for d in reais if comportamental(d)] or reais
+    sintoma = next((d for d in reais if d.tipo == "e"), None)
+    nota = "" if sem_volta else "toda divergencia voltou a igualar; a primeira foi escolhida"
+    if sintoma is not None:
+        nomes = _nomes_lidos_na_linha(sintoma, ref, alvo, le)
+        # Segue os dados ATE o sintoma: a causa e a divergencia (que nao reconverge) numa variavel que alimenta a linha que estourou.
+        alimentam = [d for d in candidatas if d.tipo == "a" and d.arquivo == sintoma.arquivo and d.nome in nomes]
+        causal = alimentam[0] if alimentam else sintoma
+        cadeia = cadeia_de_nomes(nomes, alvo or ref, sintoma.arquivo, le)
+        # A chamada que lancou a excecao so aparece no 7.4 (no 8.5 ela nao chegou a retornar): e parte do sintoma, nao "outra".
+        outras = [d for d in candidatas if d is not causal and d is not sintoma
+                  and (d.arquivo, d.linha) != (sintoma.arquivo, sintoma.linha)]
+        # Mais relevantes primeiro: no mesmo arquivo do sintoma e mais perto dele (o ruido de inicializacao vem por ultimo).
+        outras.sort(key=lambda d: (d.arquivo != sintoma.arquivo, -d.ordem))
+        if not alimentam:
+            nota = ("a causa e o proprio sintoma: o 8.x endureceu esse erro; os dados que chegaram a ele estao na cadeia"
+                    if sintoma.motivo == "aviso_x_excecao" else nota)
+        return Resultado("DIVERGE-CAUSAL", causal=causal, sintoma=sintoma, cadeia=cadeia, reconvergentes=reconv,
+                         ruido=ruido, outras=outras, nota=nota)
+    causal = candidatas[0]
     return Resultado("DIVERGE-CAUSAL", causal=causal, cadeia=cadeia_causal(causal, alvo, le), reconvergentes=reconv,
-                     ruido=ruido, nota="" if sem_volta else "toda divergencia voltou a igualar; a primeira foi escolhida")
+                     ruido=ruido, outras=[d for d in candidatas if d is not causal], nota=nota)
+
+
+def _nomes_lidos_na_linha(sintoma: Divergencia, ref: list[Evento], alvo: list[Evento], le: Callable[[str, int], list[str]]) -> set[str]:
+    """Variaveis lidas pelas sondas que existem na linha do sintoma (em qualquer dos dois rastros)."""
+    nomes: set[str] = set()
+    for e in (*ref, *alvo):
+        if e.sonda and e.arquivo == sintoma.arquivo and e.linha == sintoma.linha:
+            nomes |= set(le(e.arquivo, e.sonda))
+    return nomes
+
+
+def cadeia_de_nomes(nomes: set[str], trace: list[Evento], arquivo: str, le: Callable[[str, int], list[str]]) -> list[Evento]:
+    """Ultima atribuicao de cada variavel em `nomes` (e, transitivamente, das que ela leu), em ordem cronologica."""
+    faltam = set(nomes)
+    cadeia: list[Evento] = []
+    for e in reversed([x for x in trace if x.arquivo == arquivo and x.tipo == "a"]):
+        if len(cadeia) >= PROFUNDIDADE_CADEIA or not faltam:
+            break
+        if e.nome in faltam:
+            cadeia.append(e)
+            faltam.discard(e.nome)
+            faltam |= set(le(e.arquivo, e.sonda))
+    return list(reversed(cadeia))
