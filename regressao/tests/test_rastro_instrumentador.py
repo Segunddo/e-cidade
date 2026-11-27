@@ -16,7 +16,7 @@ FIXTURES = AQUI / "fixtures" / "rastro"
 PHP_DIR = AQUI.parent / "rastro" / "php"
 FUNCOES = AQUI.parent / "rastro" / "funcoes.txt"
 BASE = "/tmp/rastro_t"
-PAR = re.compile(rb"/\*R\*/.*?/\*R\*/", re.DOTALL)
+PAR = re.compile(rb" /\*R\*/.*? /\*R\*/", re.DOTALL)   # o espaco inicial faz parte do marcador
 ISO = b"<?php\n$s = 'a\xe7\xe3o';\n$n = strlen($s);\necho $n, \"\\n\";\n"
 
 
@@ -129,7 +129,7 @@ def test_arquivo_que_nao_parseia_fica_sem_sonda_e_e_registrado(amb):
 
 
 @pytest.mark.parametrize("lado", ["ref", "php_novo"])
-@pytest.mark.parametrize("nome", ["basico.php", "dinamico.php", "efeito.php", "iso.php"])
+@pytest.mark.parametrize("nome", ["basico.php", "dinamico.php", "efeito.php", "iso.php", "divisao.php"])
 def test_comportamento_igual_ao_original(amb, lado, nome):
     c = getattr(amb["c"], lado)
     orig = _php(c, PREP, f"in/{nome}")

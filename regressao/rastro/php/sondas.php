@@ -12,7 +12,9 @@ use PhpParser\NodeVisitorAbstract;
 
 final class Sondas extends NodeVisitorAbstract
 {
-    const M = '/*R*/';
+    // O marcador comeca com ESPACO: sem ele, uma divisao sem espaco (`$a/count($b)`) viraria `//*R*/...`, que e um
+    // comentario de linha e engole o resto da linha. O espaco faz parte do marcador (sai junto com a sonda).
+    const M = ' /*R*/';
 
     /** @var array<int,array{0:int,1:int,2:string}> */
     private array $edits = [];

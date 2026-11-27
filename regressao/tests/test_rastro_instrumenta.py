@@ -124,6 +124,20 @@ def test_links_para_o_que_nao_e_instrumentado_so_na_primeira_vez(ctx):
     assert ctx["falso"].links == []
 
 
+def test_falha_de_lint_que_ja_existe_no_original_nao_e_defeito_nosso(ctx, monkeypatch):
+    def lint(c, arqs):
+        return {a: "erro" for a in arqs if a.endswith("a.php") or a.endswith("b.php")}   # instrumentados E originais de a e b
+    monkeypatch.setattr(instrumenta, "_lint", lint)
+    r = ctx["roda"]()
+    assert r.falhas_lint == [] and r.falhas_ja_no_original == ["a.php", "b.php"]
+
+
+def test_falha_de_lint_so_no_instrumentado_e_defeito_nosso(ctx, monkeypatch):
+    monkeypatch.setattr(instrumenta, "_lint", lambda c, arqs: {a: "erro" for a in arqs if a.startswith("tmp/ecidade-rastro/") and a.endswith("a.php")})
+    r = ctx["roda"]()
+    assert r.falhas_lint == ["a.php"] and r.falhas_ja_no_original == []
+
+
 def test_lint_so_dos_arquivos_reprocessados_e_com_prefixo_da_saida(ctx):
     ctx["roda"]()
     assert all(a.startswith("tmp/ecidade-rastro/") for a in ctx["lint"][0])

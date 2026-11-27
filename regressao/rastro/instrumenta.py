@@ -42,7 +42,8 @@ class Resumo:
     ignorados_cache: int = 0
     sem_parse: list = field(default_factory=list)
     removidos: int = 0
-    falhas_lint: list = field(default_factory=list)
+    falhas_lint: list = field(default_factory=list)          # instrumentado NAO compila e o original compila (defeito nosso)
+    falhas_ja_no_original: list = field(default_factory=list)  # nao compila nem o original (defeito que ja existia)
     links: int = 0
 
 
@@ -177,11 +178,25 @@ def instrumenta_arvore(raiz: Path, saida: Path, forcar: bool = False, versao: st
     _docker(["cp", str(PHP_DIR / "rt.php"), f"{container}:{_no_container(saida_rel)}/rt.php"], 30)
 
     if lint and ok:
-        ref = containers_do_ambiente().ref
-        prefixados = [f"{saida_rel}/{a}" for a in ok]
-        for c in {container, ref}:
-            resumo.falhas_lint += sorted(_lint(c, prefixados))
-        resumo.falhas_lint = sorted(set(resumo.falhas_lint))
+        resumo.falhas_lint, resumo.falhas_ja_no_original = confere_lint(saida_rel, ok, container)
 
     _grava(estado, {"arquivos": novos, "links": desejados, "versao": versao})
     return resumo
+
+
+def confere_lint(saida_rel: str, arquivos: list[str], container: str | None = None) -> tuple[list[str], list[str]]:
+    """`php -l` dos instrumentados nos DOIS PHP. Devolve (defeitos nossos, defeitos que ja existiam no original):
+    so e defeito nosso o arquivo cujo original compila no mesmo PHP e o instrumentado nao."""
+    container = container or containers_do_ambiente().php_novo
+    ref = containers_do_ambiente().ref
+    nossos: set[str] = set()
+    antigos: set[str] = set()
+    prefixados = [f"{saida_rel}/{a}" for a in arquivos]
+    for c in {container, ref}:
+        falhou = [p.removeprefix(f"{saida_rel}/") for p in _lint(c, prefixados)]
+        if not falhou:
+            continue
+        originais = set(_lint(c, falhou))
+        for a in falhou:
+            (antigos if a in originais else nossos).add(a)
+    return sorted(nossos), sorted(antigos - nossos)
