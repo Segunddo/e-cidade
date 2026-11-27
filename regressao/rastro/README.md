@@ -28,7 +28,19 @@ python -m regressao.rastro rastreia --de-rodada ~/rodadas/base85b --area patrimo
 
 Saida: `<saida>/relatorio.md` e `<saida>/rastro/<tela>/{ref74,ref74_2,alvo85}.jsonl`.
 
-## Como funciona
+## Dois backends (mesmo classificador e relatorio)
+
+| | `--backend sondas` (padrao) | `--backend xdebug` |
+|---|---|---|
+| Como | arvore instrumentada na porta 8091 | trace do Xdebug no codigo original (porta 80) |
+| Reinstrumentar | so o que mudou (cache por hash); mudar o instrumentador reprocessa tudo | **nunca** |
+| Condicoes, variaveis lidas, aviso do 7.4 | sim | nao (cadeia por proximidade) |
+| Custo fora do rastreio | zero | zero (a extensao e descarregada ao terminar) |
+
+No teste com as 179 telas DIVERGE da base85b o B apontou **a mesma linha causal que o A em 146 de 146** telas com excecao
+(`regressao/baseline/rastro-xdebug-2026-11-27.md`). O Xdebug e instalado e ligado/desligado sozinho pelo comando (`rastro/xdebug.py`).
+
+## Como funciona (backend de sondas)
 
 1. **Instrumentador** (`php/instrumentador.php`, `nikic/php-parser`): reescreve cada `.php` por **emenda de bytes** (nunca reimprime),
    inserindo sondas na mesma linha, entre marcadores ` /*R*/ ... /*R*/` (remover os marcadores devolve o original byte a byte).

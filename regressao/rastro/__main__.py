@@ -60,6 +60,44 @@ def rastreia_telas(telas: list[str], saida: Path) -> dict:
     return resultados
 
 
+def rastreia_telas_xdebug(telas: list[str], saida: Path) -> dict:
+    """Backend B: rastro pelo Xdebug (nada instrumentado). Mesmo classificador e relatorio."""
+    from regressao.rastro import xdebug
+    c = containers_do_ambiente()
+    for n in (c.ref, c.php_novo):
+        xdebug.prepara(n)                  # instala se faltar; deixa em mode=off
+        xdebug.modo(n, "trace")            # so durante o rastreio: o trace custa alguns ms por requisicao
+    try:
+        return _rastreia_xdebug(telas, saida, c, xdebug)
+    finally:
+        for n in (c.ref, c.php_novo):
+            xdebug.modo(n, "off")
+
+
+def _rastreia_xdebug(telas, saida, c, xdebug) -> dict:
+    sid = executor.nova_sessao()
+    funcoes = xdebug.funcoes_da_lista()
+    resultados, rastros = {}, {}
+    for tela in telas:
+        try:
+            a, ea = xdebug.roda_requisicao_xdebug(sid, tela, c.ref, funcoes)
+            b, eb = xdebug.roda_requisicao_xdebug(sid, tela, c.ref, funcoes)
+            n, en = xdebug.roda_requisicao_xdebug(sid, tela, c.php_novo, funcoes)
+            r = classifica(ea, en, eb, (a.status, a.corpo), (n.status, n.corpo))
+            if r.sintoma is not None and not r.cadeia:     # sem lista de variaveis lidas: contexto por proximidade
+                s = r.sintoma
+                r.cadeia = [e for e in en if e.tipo == "a" and e.arquivo == s.arquivo and s.linha - 12 <= e.linha <= s.linha][-6:]
+                r.nota = (r.nota + " | " if r.nota else "") + "cadeia = ultimas atribuicoes do arquivo nas 12 linhas antes do sintoma (backend Xdebug)"
+            resultados[tela] = r
+            rastros[tela] = {}
+        except Exception as e:
+            resultados[tela] = Resultado("INCONCLUSIVO", nota=f"erro ao rastrear: {type(e).__name__}: {str(e)[:160]}")
+            rastros[tela] = {}
+        print(f"{resultados[tela].veredito:24} {tela}", flush=True)
+    print("relatorio:", escreve_relatorio(resultados, saida, rastros))
+    return resultados
+
+
 def telas_divergentes(diretorio: Path, area: str | None) -> list[str]:
     arq = diretorio / area / "resultado.json" if area else diretorio / "resultado.json"
     casos = json.loads(arq.read_text(encoding="utf-8"))["casos"]
@@ -74,6 +112,8 @@ def main(argv: list[str] | None = None) -> int:
     r = sub.add_parser("rastreia")
     r.add_argument("telas", nargs="*"); r.add_argument("--saida", type=Path, default=SAIDA_PADRAO)
     r.add_argument("--de-rodada", type=Path); r.add_argument("--area")
+    r.add_argument("--backend", choices=("sondas", "xdebug"), default="sondas",
+                   help="sondas = arvore instrumentada (padrao); xdebug = trace do Xdebug, sem instrumentar nada")
     a = p.parse_args(argv)
 
     if a.cmd == "instrumenta":
@@ -92,7 +132,7 @@ def main(argv: list[str] | None = None) -> int:
     telas = list(a.telas) + (telas_divergentes(a.de_rodada, a.area) if a.de_rodada else [])
     if not telas:
         p.error("informe telas ou --de-rodada")
-    rastreia_telas(telas, a.saida)
+    (rastreia_telas_xdebug if a.backend == "xdebug" else rastreia_telas)(telas, a.saida)
     return 0
 
 

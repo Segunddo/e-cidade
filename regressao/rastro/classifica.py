@@ -70,7 +70,13 @@ def _reconverge(d: Divergencia, pares: list) -> bool:
     for r, a, ordem in pares:
         if ordem <= d.ordem or r.arquivo != d.arquivo or r.tipo != d.tipo:
             continue
-        if (d.tipo == "a" and r.nome == d.nome) or (d.tipo != "a" and r.sonda == d.sonda):
+        if d.tipo == "a":
+            mesmo = r.nome == d.nome
+        elif d.sonda:                                   # backend de sondas: a mesma sonda
+            mesmo = r.sonda == d.sonda
+        else:                                           # backend Xdebug (sem sonda): a mesma chamada na mesma linha
+            mesmo = (r.nome, r.linha) == (d.nome, d.linha)
+        if mesmo:
             return True
     return False
 
