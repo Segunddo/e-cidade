@@ -55,7 +55,7 @@ class DockerFalso:
     def __call__(self, args, timeout, stdin=None, stdout=None):
         cmd = args[-1]
         self.cmds.append(cmd)
-        if "phpversion('xdebug')" in " ".join(args):
+        if "phpversion(" in cmd:
             return self.versao.encode()
         if "test -d /etc/php/7.4" in cmd:
             return b"sim\n" if self.e74 else b""
@@ -74,6 +74,14 @@ def test_prepara_instala_no_74_por_apt_e_no_85_por_pecl_e_deixa_em_off(monkeypat
         assert xdebug.prepara("c") == "3.x"
         assert any(esperado in c for c in f.cmds)
         assert f.escritos[-1][1] == xdebug.CONF_OFF
+
+
+def test_a_deteccao_de_instalado_funciona_com_a_extensao_descarregada(monkeypatch):
+    f = DockerFalso(versao="3.5.3")
+    monkeypatch.setattr(xdebug, "_docker", f)
+    assert xdebug.versao_instalada("c") == "3.5.3"
+    cmd = next(c for c in f.cmds if "phpversion(" in c)
+    assert "-d zend_extension=xdebug.so" in cmd          # se a extensao nao esta carregada, carrega so para ler a versao
 
 
 def test_prepara_nao_reinstala_se_ja_ha_xdebug(monkeypatch):

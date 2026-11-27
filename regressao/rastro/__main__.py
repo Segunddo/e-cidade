@@ -75,19 +75,21 @@ def rastreia_telas_xdebug(telas: list[str], saida: Path) -> dict:
 
 
 def _rastreia_xdebug(telas, saida, c, xdebug) -> dict:
+    from regressao.rastro import estatica
     sid = executor.nova_sessao()
     funcoes = xdebug.funcoes_da_lista()
+    le_linha = estatica.leitor_de_linhas(c.php_novo)       # fase C: variaveis lidas por linha, para a cadeia por dependencia
     resultados, rastros = {}, {}
     for tela in telas:
         try:
             a, ea = xdebug.roda_requisicao_xdebug(sid, tela, c.ref, funcoes)
             b, eb = xdebug.roda_requisicao_xdebug(sid, tela, c.ref, funcoes)
             n, en = xdebug.roda_requisicao_xdebug(sid, tela, c.php_novo, funcoes)
-            r = classifica(ea, en, eb, (a.status, a.corpo), (n.status, n.corpo))
-            if r.sintoma is not None and not r.cadeia:     # sem lista de variaveis lidas: contexto por proximidade
+            r = classifica(ea, en, eb, (a.status, a.corpo), (n.status, n.corpo), le_linha=le_linha)
+            if r.sintoma is not None and not r.cadeia:     # a analise estatica nao achou o que a linha le: contexto por proximidade
                 s = r.sintoma
                 r.cadeia = [e for e in en if e.tipo == "a" and e.arquivo == s.arquivo and s.linha - 12 <= e.linha <= s.linha][-6:]
-                r.nota = (r.nota + " | " if r.nota else "") + "cadeia = ultimas atribuicoes do arquivo nas 12 linhas antes do sintoma (backend Xdebug)"
+                r.nota = (r.nota + " | " if r.nota else "") + "cadeia = ultimas atribuicoes do arquivo nas 12 linhas antes do sintoma (sem dependencia de dados)"
             resultados[tela] = r
             rastros[tela] = {}
         except Exception as e:
@@ -109,6 +111,8 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
     i = sub.add_parser("instrumenta"); i.add_argument("--forcar", action="store_true")
     e = sub.add_parser("equivalencia"); e.add_argument("--amostra", type=int, default=200)
+    s = sub.add_parser("estatica", help="fase C: lista, so lendo o codigo, os usos de resultado de consulta sem checagem")
+    s.add_argument("--saida", type=Path, default=Path("candidatos-estaticos.tsv"))
     r = sub.add_parser("rastreia")
     r.add_argument("telas", nargs="*"); r.add_argument("--saida", type=Path, default=SAIDA_PADRAO)
     r.add_argument("--de-rodada", type=Path); r.add_argument("--area")
@@ -129,6 +133,16 @@ def main(argv: list[str] | None = None) -> int:
         res = equivalencia.confere_equivalencia(executor.nova_sessao(), equivalencia.amostra_telas(a.amostra))
         print(f"{res.total} telas | diferentes: {res.diferentes} | instaveis: {len(res.instaveis)}")
         return 0 if not res.diferentes else 1
+    if a.cmd == "estatica":
+        from regressao.php.arvore import lista_arvore
+        from regressao.rastro import estatica
+        achados = estatica.candidatos(lista_arvore(frozenset(), T.DIR_TELAS))
+        linhas = ["arquivo\tlinha\tfuncao\tvariavel\torigem"]
+        linhas += [f"{arq}\t{c['linha']}\t{c['funcao']}\t{c['variavel']}\t{c['origem']}"
+                   for arq, cs in sorted(achados.items()) for c in sorted(cs, key=lambda c: c["linha"])]
+        a.saida.write_text("\n".join(linhas) + "\n", encoding="utf-8")
+        print(f"{len(linhas) - 1} candidatos em {len(achados)} arquivos -> {a.saida}")
+        return 0
     telas = list(a.telas) + (telas_divergentes(a.de_rodada, a.area) if a.de_rodada else [])
     if not telas:
         p.error("informe telas ou --de-rodada")

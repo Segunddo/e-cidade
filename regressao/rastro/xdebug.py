@@ -46,7 +46,10 @@ def _e_php74(container: str) -> bool:
 
 
 def versao_instalada(container: str) -> str:
-    return _docker(["exec", container, "php", "-r", "echo phpversion('xdebug') ?: '';"], 30).decode().strip()
+    """Versao do Xdebug INSTALADO, mesmo com a extensao descarregada (modo off): tenta a carregada e, se vazio, carrega so para ler."""
+    cmd = ("v=$(php -r 'echo phpversion(\"xdebug\");' 2>/dev/null); "
+           "[ -n \"$v\" ] || v=$(php -d zend_extension=xdebug.so -r 'echo phpversion(\"xdebug\");' 2>/dev/null); echo \"$v\"")
+    return _docker(["exec", container, "sh", "-c", cmd], 30).decode().strip()
 
 
 def prepara(container: str) -> str:

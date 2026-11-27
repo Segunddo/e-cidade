@@ -115,6 +115,28 @@ def test_sem_excecao_divergencia_no_codigo_da_tela_continua_sendo_a_causa():
     assert r.veredito == "DIVERGE-CAUSAL" and (r.causal.arquivo, r.causal.linha) == ("cad9_x.php", 7)
 
 
+def test_backend_xdebug_cadeia_por_dependencia_de_dados_usando_as_leituras_por_linha():
+    """Eventos do Xdebug (sonda 0): a cadeia vem das variaveis lidas por LINHA (analise estatica), nao por proximidade."""
+    def a(seq, linha, nome, val):
+        return Evento(seq, 0, "t.php", linha, "a", nome, {"t": "string", "r": val})
+    ref = [a(1, 10, "tabela", "'x'"), a(2, 11, "sql", "'select'"), a(3, 12, "rs", "RESOURCE"), a(4, 13, "outra", "1")]
+    alvo = [a(1, 10, "tabela", "'x'"), a(2, 11, "sql", "'select'"), a(3, 12, "rs", "FALSE"), a(4, 13, "outra", "1"),
+            Evento(10**9, 0, "t.php", 15, "e", "excecao_app", {"t": "excecao", "r": "TypeError"})]
+    lidas = {("t.php", 15): ["rs"], ("t.php", 12): ["sql"], ("t.php", 11): ["tabela"], ("t.php", 10): [], ("t.php", 13): []}
+    r = classifica(ref, alvo, list(ref), OK, OUTRA, le_linha=lambda arq, l: lidas.get((arq, l), []))
+    assert [e.nome for e in r.cadeia] == ["tabela", "sql", "rs"]          # rs <- sql <- tabela; `outra` fica de fora
+    assert r.cadeia[-1].valor["r"] == "FALSE"
+
+
+def test_atribuicao_que_so_existe_de_um_lado_nao_e_a_causa_do_sintoma_mesmo_lendo_a_mesma_variavel():
+    """O 8.5 executa uma atribuicao a mais de `mes` (contagem/fluxo); isso nao e um valor errado que alimentou a linha que estourou."""
+    ref = [ev(1, 0, 196, "a", "mes", v("01"), arq="d.php")]
+    alvo = [ev(1, 0, 196, "a", "mes", v("01"), arq="d.php"), ev(2, 0, 196, "a", "mes", v(""), arq="d.php"),
+            Evento(10**9, 0, "d.php", 203, "e", "excecao_app", {"t": "excecao", "r": "TypeError: checkdate()"})]
+    r = classifica(ref, alvo, list(ref), OK, OUTRA, le_linha=lambda arq, l: ["mes"] if l == 203 else [])
+    assert (r.causal.arquivo, r.causal.linha, r.causal.tipo) == ("d.php", 203, "e")
+
+
 def test_texto_diferente_do_aviso_nao_e_divergencia():
     a74 = Evento(1, 0, "a.php", 3, "w", "warning", {"t": "aviso", "r": "supplied argument is not a valid resource"})
     a85 = Evento(1, 0, "a.php", 3, "w", "warning", {"t": "aviso", "r": "Argument must be of type X"})

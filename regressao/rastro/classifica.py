@@ -100,7 +100,8 @@ def cadeia_causal(causal: Divergencia, alvo: list[Evento], le: Callable[[str, in
 
 
 def classifica(ref: list[Evento], alvo: list[Evento], ref2: list[Evento], resp_ref: tuple[int, bytes],
-               resp_alvo: tuple[int, bytes], le: Callable[[str, int], list[str]] = lambda a, s: []) -> Resultado:
+               resp_alvo: tuple[int, bytes], le: Callable[[str, int], list[str]] = lambda a, s: [],
+               le_linha: Callable[[str, int], list[str]] | None = None) -> Resultado:
     truncado = any(e.tipo == "T" for e in (*ref, *alvo))
     if truncado:   # nunca conclui nada: nem gasta tempo/memoria alinhando rastros que bateram no teto
         return Resultado("INCONCLUSIVO", truncado=True,
@@ -124,11 +125,13 @@ def classifica(ref: list[Evento], alvo: list[Evento], ref2: list[Evento], resp_r
     sintoma = next((d for d in reais if d.tipo == "e"), None)
     nota = "" if sem_volta else "toda divergencia voltou a igualar; a primeira foi escolhida"
     if sintoma is not None:
-        nomes = _nomes_lidos_na_linha(sintoma, ref, alvo, le)
+        nomes = _nomes_lidos_na_linha(sintoma, ref, alvo, le, le_linha)
         # Segue os dados ATE o sintoma: a causa e a divergencia (que nao reconverge) numa variavel que alimenta a linha que estourou.
-        alimentam = [d for d in candidatas if d.tipo == "a" and d.arquivo == sintoma.arquivo and d.nome in nomes]
+        # So conta diferenca de VALOR na mesma ocorrencia: uma atribuicao que so existe de um lado e diferenca de fluxo/contagem
+        # (e as vezes de versao do Xdebug), nao um valor errado que alimentou o sintoma.
+        alimentam = [d for d in candidatas if d.tipo == "a" and d.motivo == "valor" and d.arquivo == sintoma.arquivo and d.nome in nomes]
         causal = alimentam[0] if alimentam else sintoma
-        cadeia = cadeia_de_nomes(nomes, alvo or ref, sintoma.arquivo, le)
+        cadeia = cadeia_de_nomes(nomes, alvo or ref, sintoma.arquivo, le, le_linha)
         # A chamada que lancou a excecao so aparece no 7.4 (no 8.5 ela nao chegou a retornar): e parte do sintoma, nao "outra".
         outras = [d for d in candidatas if d is not causal and d is not sintoma
                   and (d.arquivo, d.linha) != (sintoma.arquivo, sintoma.linha)]
@@ -152,16 +155,27 @@ def classifica(ref: list[Evento], alvo: list[Evento], ref2: list[Evento], resp_r
                      diff_resposta=diferenca_da_resposta(resp_ref, resp_alvo), nota=nota)
 
 
-def _nomes_lidos_na_linha(sintoma: Divergencia, ref: list[Evento], alvo: list[Evento], le: Callable[[str, int], list[str]]) -> set[str]:
-    """Variaveis lidas pelas sondas que existem na linha do sintoma (em qualquer dos dois rastros)."""
+def _lidas(e: Evento, le: Callable[[str, int], list[str]], le_linha: Callable[[str, int], list[str]] | None) -> list[str]:
+    """Variaveis lidas por um evento: pela sonda (backend de sondas) ou pela LINHA, via analise estatica (backend Xdebug)."""
+    if e.sonda:
+        return le(e.arquivo, e.sonda)
+    return le_linha(e.arquivo, e.linha) if le_linha else []
+
+
+def _nomes_lidos_na_linha(sintoma: Divergencia, ref: list[Evento], alvo: list[Evento], le: Callable[[str, int], list[str]],
+                          le_linha: Callable[[str, int], list[str]] | None = None) -> set[str]:
+    """Variaveis lidas na linha do sintoma: pelas sondas que existem ali (em qualquer dos dois rastros) e/ou pela analise estatica."""
     nomes: set[str] = set()
     for e in (*ref, *alvo):
         if e.sonda and e.arquivo == sintoma.arquivo and e.linha == sintoma.linha:
             nomes |= set(le(e.arquivo, e.sonda))
+    if le_linha:
+        nomes |= set(le_linha(sintoma.arquivo, sintoma.linha))
     return nomes
 
 
-def cadeia_de_nomes(nomes: set[str], trace: list[Evento], arquivo: str, le: Callable[[str, int], list[str]]) -> list[Evento]:
+def cadeia_de_nomes(nomes: set[str], trace: list[Evento], arquivo: str, le: Callable[[str, int], list[str]],
+                    le_linha: Callable[[str, int], list[str]] | None = None) -> list[Evento]:
     """Ultima atribuicao de cada variavel em `nomes` (e, transitivamente, das que ela leu), em ordem cronologica."""
     faltam = set(nomes)
     cadeia: list[Evento] = []
@@ -171,5 +185,5 @@ def cadeia_de_nomes(nomes: set[str], trace: list[Evento], arquivo: str, le: Call
         if e.nome in faltam:
             cadeia.append(e)
             faltam.discard(e.nome)
-            faltam |= set(le(e.arquivo, e.sonda))
+            faltam |= set(_lidas(e, le, le_linha))
     return list(reversed(cadeia))
