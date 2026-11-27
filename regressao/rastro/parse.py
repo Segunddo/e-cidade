@@ -22,7 +22,8 @@ _CMD = ('cd /var/www/html && xargs -d "\\n" -P %d -n %d php %s' % (PARALELISMO, 
 
 def _copia_script(container: str) -> None:
     _docker(["exec", "-u", "root", container, "sh", "-c", "mkdir -p /tmp/rastro && chmod 777 /tmp/rastro"], 30)
-    _docker(["cp", str(SCRIPT_LOCAL), f"{container}:{SCRIPT_REMOTO}"], 30)
+    for nome in ("parse_todos.php", "autoload.php"):   # o script carrega o autoload ao lado dele
+        _docker(["cp", str(SCRIPT_LOCAL.parent / nome), f"{container}:/tmp/rastro/{nome}"], 30)
 
 
 def roda_parse(arquivos: list[str], container: str | None = None) -> dict:
