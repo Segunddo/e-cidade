@@ -63,7 +63,7 @@ def test_requisicao_normal_nao_envia_cabecalho_nem_le_rastro(falso):
 def test_usa_backup_de_sessao_proprio(falso):
     executor.roda_requisicao("sid1", "a.php", "x", "c85")
     restauracao = [c for c in falso.cmds if "sess_sid1" in c]
-    assert restauracao and all("_sess_rastro.bak" in c for c in restauracao)
+    assert restauracao and all("_sess_rastro_sid1.bak" in c for c in restauracao)    # um backup por SID
     assert not any("/tmp/_sess.bak" in c for c in falso.cmds)            # o backup da bateria nunca e tocado
 
 

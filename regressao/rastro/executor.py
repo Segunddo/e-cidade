@@ -20,7 +20,6 @@ from regressao.nucleo.normaliza import normaliza
 from regressao.php import telas as T
 from regressao.rastro.servidor import PORTA
 
-BACKUP_SESSAO = "/tmp/_sess_rastro.bak"
 LOG_APP = "/var/www/html/extension/log/error.log"
 TIMEOUT = 120
 _EXC = re.compile(r"^\[[\d\- :]+\] \w+: (?:E_\w+ - )?Uncaught exception '(\w+)' with message '(.*)' in (\S+) on line (\d+)", re.S)
@@ -33,18 +32,23 @@ class Execucao:
     rastro: list = field(default_factory=list)   # linhas JSON (rt.php + eventos do log da aplicacao)
 
 
+def backup_da_sessao(sid: str) -> str:
+    """Um backup POR SID (nunca o `/tmp/_sess.bak` da bateria): duas execucoes simultaneas nao se atropelam."""
+    return f"/tmp/_sess_rastro_{sid}.bak"
+
+
 def nova_sessao() -> str:
     """Login proprio + backup proprio. Devolve o SID."""
     sid = T.login_http()
     ref = containers_do_ambiente().ref
-    _docker(["exec", "-u", "root", ref, "sh", "-c", f"cp /var/lib/php/sessions/sess_{sid} {BACKUP_SESSAO}"], 30)
+    _docker(["exec", "-u", "root", ref, "sh", "-c", f"cp /var/lib/php/sessions/sess_{sid} {backup_da_sessao(sid)}"], 30)
     return sid
 
 
 def _restaura(sid: str) -> None:
     sess = f"/var/lib/php/sessions/sess_{sid}"
     _docker(["exec", "-u", "root", containers_do_ambiente().ref, "sh", "-c",
-             f"cp {BACKUP_SESSAO} {sess}; chown www-data:www-data {sess}"], 30)
+             f"cp {backup_da_sessao(sid)} {sess}; chown www-data:www-data {sess}"], 30)
 
 
 def _linhas_do_log(container: str) -> int:
