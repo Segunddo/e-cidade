@@ -1,6 +1,6 @@
 # Rastreador - causas por linha das telas DIVERGE da base-php85 (rodada base85b)
 
-**Regenerado em 2026-11-28** com a arvore realmente montada nos contêineres e o backend de sondas por linha (a versao de 2026-11-27 usava o backend Xdebug sobre outra arvore). Cada causa foi **cruzada com o backend Xdebug**: coluna `concordancia_xdebug` do TSV (163 telas com a mesma linha pelos dois caminhos; ver `rastro-linhas-todas-2026-11-28.md`).
+**Regenerado em 2026-11-28** com o backend de sondas por linha sobre a arvore realmente montada nos contêineres (a versao de 2026-11-27 e anterior a correcao da raiz do codigo e do portao de equivalencia). Cada causa foi **cruzada com o backend Xdebug**: coluna `concordancia_xdebug` do TSV (163 telas com a mesma linha pelos dois caminhos; ver `rastro-linhas-todas-2026-11-28.md`).
 
 O rastreador (`python -m regressao.rastro`) reexecutou **cada tela DIVERGE** da rodada nos dois PHP e apontou **onde o dado divergiu**. 182 telas distintas. Planilha completa: `rastro-causas-base-php85b-2026-11-27.tsv`.
 
