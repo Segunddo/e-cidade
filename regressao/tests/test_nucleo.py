@@ -18,6 +18,14 @@ def test_normaliza_caixa_do_warning_failed_to_open_stream_sem_esconder_o_resto()
     assert normaliza(a) != normaliza(b.replace(b"file_put_contents(x)", b"file_put_contents(y)"))
 
 
+def test_normaliza_versao_do_curl_que_a_tela_imprime_sem_esconder_outro_agente():
+    # pes2_osocontramatricial002 imprime $HTTP_USER_AGENT: o curl de um contêiner e 7.81.0 e o do outro 8.14.1 (artefato do ambiente)
+    a = b"-$HTTP_USER_AGENT = 'curl/7.81.0';<br>"
+    b = b"-$HTTP_USER_AGENT = 'curl/8.14.1';<br>"
+    assert normaliza(a) == normaliza(b)
+    assert normaliza(a) != normaliza(b.replace(b"curl/8.14.1", b"Mozilla/5.0"))      # outro agente continua diferente
+
+
 def test_codigo_saida_zero_sem_divergencia_nova():
     assert codigo_saida([c("1", Veredito.IDENTICO), c("2", Veredito.INCONCLUSIVO)]) == 0
 

@@ -31,6 +31,9 @@ REGRAS: list[tuple[str, re.Pattern[bytes], bytes]] = [
     # PHP 8 trocou a capitalizacao da mensagem do warning ("failed to open stream" -> "Failed to open stream"):
     # o mesmo warning sai nos dois runtimes (achado em pes2_contracheque_banrisul002, 200x200 so por isto).
     ("caixa de 'failed to open stream'", re.compile(rb"[Ff]ailed to open stream"), b"failed to open stream"),
+    # Telas que imprimem $HTTP_USER_AGENT mostram o curl do PROPRIO contêiner (7.81.0 num, 8.14.1 no outro): artefato do harness, nao de PHP
+    # (achado em pes2_osocontramatricial002, que era DIVERGE so por isto). Outro agente de usuario continua diferente.
+    ("versao do curl no user agent", re.compile(rb"curl/[0-9]+\.[0-9]+\.[0-9]+"), b"curl/X"),
 ]
 
 
