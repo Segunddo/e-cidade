@@ -65,6 +65,14 @@ def test_classifica_a_concordancia_de_cada_tela():
     assert c["t_inconclusiva.php"] == "sem-causa"
 
 
+def test_prefixo_de_caminho_nao_conta_como_arquivo_diferente():
+    a = {"t.php": dict(veredito="DIVERGE-CAUSAL", causal="/var/www/html/vendor/x/Emulate.php:110", sintoma=None),
+         "p.php": dict(veredito="DIVERGE-CAUSAL", causal="phar:///var/www/html/ext/P.phar/S.php:5", sintoma=None)}
+    b = {"t.php": dict(veredito="DIVERGE-CAUSAL", causal="vendor/x/Emulate.php:110", sintoma=None),
+         "p.php": dict(veredito="DIVERGE-CAUSAL", causal="phar://ext/P.phar/S.php:5", sintoma=None)}
+    assert {l["tela"]: l["concordancia"] for l in cruza.cruza(a, b)} == {"t.php": "mesma-linha", "p.php": "mesma-linha"}
+
+
 def test_resumo_conta_por_concordancia():
     r = cruza.resumo(cruza.cruza(cruza.le_relatorio(A), cruza.le_relatorio(B)))
     assert r == {"mesma-linha": 1, "mesmo-arquivo": 1, "so-A": 1, "so-B": 1, "sem-causa": 1}

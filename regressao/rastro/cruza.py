@@ -33,6 +33,11 @@ def le_relatorio(texto: str) -> dict[str, dict]:
     return r
 
 
+def _norm(pos: str | None) -> str | None:
+    """Os backends escrevem o mesmo arquivo de formas diferentes: `/var/www/html/x.php` (sondas) e `x.php` (Xdebug); `phar:///var/www/html/a.phar` e `phar://a.phar`."""
+    return pos.replace("phar:///var/www/html/", "phar://").replace("/var/www/html/", "") if pos else pos
+
+
 def _arquivo(pos: str | None) -> str | None:
     return pos.rsplit(":", 1)[0] if pos else None
 
@@ -41,7 +46,7 @@ def cruza(a: dict[str, dict], b: dict[str, dict]) -> list[dict]:
     linhas = []
     for tela in sorted(set(a) | set(b)):
         ra, rb = a.get(tela), b.get(tela)
-        ca, cb = (ra or {}).get("causal"), (rb or {}).get("causal")
+        ca, cb = _norm((ra or {}).get("causal")), _norm((rb or {}).get("causal"))
         if ca and cb:
             conc = "mesma-linha" if ca == cb else "mesmo-arquivo" if _arquivo(ca) == _arquivo(cb) else "arquivo-diferente"
         elif ca:

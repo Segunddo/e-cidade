@@ -127,3 +127,27 @@ def test_eventos_alinham_e_classificam_pelo_mesmo_pipeline_do_backend_de_sondas(
     r = classifica(ref, alvo + [exc], list(ref), (200, b"ok"), (500, b"erro"))
     assert r.veredito == "DIVERGE-CAUSAL"
     assert (r.sintoma.arquivo, r.sintoma.linha) == ("cad2_setor002.php", 79)
+
+
+def test_funcoes_sem_frame_no_php_85_nao_sao_observadas_no_trace():
+    # substr/strpos/strrpos sao 'frameless' desde o PHP 8.4: o trace do 8.5 nao as registra e o do 7.4 sim, o que criava uma
+    # divergencia fantasma 'so no 7.4' (causa falsa em libs/db_stdlib.php:818 em 12 telas). O backend de sondas as ve nas duas versoes.
+    f = xdebug.funcoes_da_lista()
+    assert not {'substr', 'strpos', 'strrpos'} & f
+    assert 'pg_query' in f and 'count' in f
+
+
+def test_atribuicao_com_funcao_sem_frame_so_no_74_e_artefato_do_trace(tmp_path):
+    from regressao.rastro.alinha import Divergencia
+    (tmp_path / 'a.php').write_text('<?php\n$x = 1;\n$u = "h" . substr(\n    $s,\n    0,\n    strrpos($s, "/") + 1\n);\n$y = trim($x);\n', encoding='utf-8')
+    art = xdebug.artefato_sem_frame(tmp_path)
+
+    def d(linha, motivo='so_ref', tipo='a'):
+        return Divergencia(sonda=0, ocorrencia=1, arquivo='a.php', linha=linha, tipo=tipo, nome='u', valor_ref=None, valor_alvo=None, motivo=motivo)
+    assert art(d(3))                       # a instrucao (linhas 3-7) le substr/strrpos: o 8.5 nao registra a atribuicao
+    assert not art(d(2))                   # $x = 1: sem funcao sem frame
+    assert not art(d(8))                   # trim() nao e sem frame
+    assert art(d(3, motivo='so_alvo'))     # o 8.5 registra a mesma atribuicao na primeira linha (7.4: na ultima)
+    assert art(d(6))                       # linha 6 (strrpos(...) + 1): a ultima linha da mesma instrucao
+    assert not art(d(3, motivo='valor'))   # valor diferente nas duas versoes e divergencia real
+    assert not art(d(3, tipo='c'))         # so atribuicoes

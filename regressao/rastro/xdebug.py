@@ -183,6 +183,41 @@ def roda_requisicao_xdebug(sid: str, tela: str, container: str, funcoes: set[str
     return exec_, le_trace(trace, funcoes) + le_rastro(exec_.rastro)
 
 
+# Funcoes internas 'frameless' no PHP 8.4+: o Xdebug nao as registra no trace do 8.5 (so no do 7.4). Observa-las criaria uma divergencia
+# fantasma 'so no 7.4'. Medido rodando as duas versoes sobre as mesmas chamadas. O backend de sondas as ve nas duas versoes.
+SEM_FRAME_NO_85 = {"substr", "strpos", "strrpos"}
+
+
+_SEM_FRAME = re.compile(r"\b(" + "|".join(sorted(SEM_FRAME_NO_85)) + r")\s*\(")
+
+
+def artefato_sem_frame(raiz):
+    """Filtro para o classificador: atribuicao que so aparece no trace do 7.4 e cuja instrucao le substr/strpos/strrpos NAO e divergencia real:
+    o Xdebug do 8.5 nao registra a atribuicao quando a expressao contem uma chamada sem frame (caso  em libs/db_stdlib.php:818,
+    que fazia 12 telas apontarem uma causa falsa). A instrucao vai da linha ate o primeiro  (no maximo 10 linhas). O backend de sondas nao tem o problema."""
+    cache: dict[str, list[str]] = {}
+
+    def instrucao(arquivo: str, linha: int) -> str:
+        if arquivo not in cache:
+            try:
+                cache[arquivo] = (raiz / arquivo).read_text(encoding="utf-8", errors="replace").splitlines()
+            except OSError:
+                cache[arquivo] = []
+        linhas = cache[arquivo]
+        trecho = []
+        for l in linhas[linha - 1: linha + 9]:
+            trecho.append(l)
+            if l.rstrip().endswith(";"):
+                break
+        return "\n".join(trecho)
+
+    def artefato(d) -> bool:
+        # so_ref E so_alvo: a mesma atribuicao de varias linhas e registrada na ULTIMA linha pelo 7.4 e na PRIMEIRA pelo 8.5
+        return d.motivo in ("so_ref", "so_alvo") and d.tipo == "a" and bool(_SEM_FRAME.search(instrucao(d.arquivo, d.linha)))
+    return artefato
+
+
 def funcoes_da_lista() -> set[str]:
     from regressao.rastro.instrumenta import FUNCOES
-    return {l.strip().lower() for l in FUNCOES.read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")}
+    lista = {l.strip().lower() for l in FUNCOES.read_text(encoding="utf-8").splitlines() if l.strip() and not l.startswith("#")}
+    return lista - SEM_FRAME_NO_85

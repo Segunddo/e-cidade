@@ -16,7 +16,10 @@ from regressao.php import telas as T
 from regressao.rastro import equivalencia, executor, servidor
 from regressao.rastro.classifica import Resultado, classifica
 from regressao.rastro.evento import le_rastro
+from regressao.rastro.limite import limite_de_tempo
 from regressao.rastro.raiz import raiz_montada
+
+LIMITE_POR_TELA = 300      # s: acima disso a tela vira INCONCLUSIVO e a corrida segue
 from regressao.rastro.relatorio import escreve_relatorio
 
 SAIDA_PADRAO = Path("rastro-saida")
@@ -46,16 +49,19 @@ def rastreia_telas(telas: list[str], saida: Path) -> dict:
     resultados, rastros = {}, {}
     for tela in telas:
         try:
-            a = executor.roda_requisicao(sid, tela, f"r74a_{tela}", c.ref)
-            b = executor.roda_requisicao(sid, tela, f"r74b_{tela}", c.ref)
-            n = executor.roda_requisicao(sid, tela, f"r85_{tela}", c.php_novo)
-            resultados[tela] = classifica(le_rastro(a.rastro), le_rastro(n.rastro), le_rastro(b.rastro),
-                                          (a.status, a.corpo), (n.status, n.corpo), le=le)
+            with limite_de_tempo(LIMITE_POR_TELA):
+                a = executor.roda_requisicao(sid, tela, f"r74a_{tela}", c.ref)
+                b = executor.roda_requisicao(sid, tela, f"r74b_{tela}", c.ref)
+                n = executor.roda_requisicao(sid, tela, f"r85_{tela}", c.php_novo)
+                resultados[tela] = classifica(le_rastro(a.rastro), le_rastro(n.rastro), le_rastro(b.rastro),
+                                              (a.status, a.corpo), (n.status, n.corpo), le=le)
             rastros[tela] = {"ref74": a.rastro, "ref74_2": b.rastro, "alvo85": n.rastro}
         except Exception as e:     # uma tela com problema nao derruba as outras: fica INCONCLUSIVO com o motivo
             resultados[tela] = Resultado("INCONCLUSIVO", nota=f"erro ao rastrear: {type(e).__name__}: {str(e)[:160]}")
             rastros[tela] = {}
         print(f"{resultados[tela].veredito:24} {tela}", flush=True)
+        if len(resultados) % 25 == 0:      # relatorio parcial: uma corrida de horas nao pode perder tudo se cair
+            escreve_relatorio(resultados, saida, rastros)
     arq = escreve_relatorio(resultados, saida, rastros)
     print("relatorio:", arq)
     return resultados
@@ -79,24 +85,28 @@ def _rastreia_xdebug(telas, saida, c, xdebug) -> dict:
     from regressao.rastro import estatica
     sid = executor.nova_sessao()
     funcoes = xdebug.funcoes_da_lista()
+    artefato = xdebug.artefato_sem_frame(raiz_montada(c.php_novo))
     le_linha = estatica.leitor_de_linhas(c.php_novo)       # fase C: variaveis lidas por linha, para a cadeia por dependencia
     resultados, rastros = {}, {}
     for tela in telas:
         try:
-            a, ea = xdebug.roda_requisicao_xdebug(sid, tela, c.ref, funcoes)
-            b, eb = xdebug.roda_requisicao_xdebug(sid, tela, c.ref, funcoes)
-            n, en = xdebug.roda_requisicao_xdebug(sid, tela, c.php_novo, funcoes)
-            r = classifica(ea, en, eb, (a.status, a.corpo), (n.status, n.corpo), le_linha=le_linha)
-            if r.sintoma is not None and not r.cadeia:     # a analise estatica nao achou o que a linha le: contexto por proximidade
-                s = r.sintoma
-                r.cadeia = [e for e in en if e.tipo == "a" and e.arquivo == s.arquivo and s.linha - 12 <= e.linha <= s.linha][-6:]
-                r.nota = (r.nota + " | " if r.nota else "") + "cadeia = ultimas atribuicoes do arquivo nas 12 linhas antes do sintoma (sem dependencia de dados)"
+            with limite_de_tempo(LIMITE_POR_TELA):
+                a, ea = xdebug.roda_requisicao_xdebug(sid, tela, c.ref, funcoes)
+                b, eb = xdebug.roda_requisicao_xdebug(sid, tela, c.ref, funcoes)
+                n, en = xdebug.roda_requisicao_xdebug(sid, tela, c.php_novo, funcoes)
+                r = classifica(ea, en, eb, (a.status, a.corpo), (n.status, n.corpo), le_linha=le_linha, artefato=artefato)
+                if r.sintoma is not None and not r.cadeia:     # a analise estatica nao achou o que a linha le: contexto por proximidade
+                    s = r.sintoma
+                    r.cadeia = [e for e in en if e.tipo == "a" and e.arquivo == s.arquivo and s.linha - 12 <= e.linha <= s.linha][-6:]
+                    r.nota = (r.nota + " | " if r.nota else "") + "cadeia = ultimas atribuicoes do arquivo nas 12 linhas antes do sintoma (sem dependencia de dados)"
             resultados[tela] = r
             rastros[tela] = {}
         except Exception as e:
             resultados[tela] = Resultado("INCONCLUSIVO", nota=f"erro ao rastrear: {type(e).__name__}: {str(e)[:160]}")
             rastros[tela] = {}
         print(f"{resultados[tela].veredito:24} {tela}", flush=True)
+        if len(resultados) % 25 == 0:
+            escreve_relatorio(resultados, saida, rastros)
     print("relatorio:", escreve_relatorio(resultados, saida, rastros))
     return resultados
 
