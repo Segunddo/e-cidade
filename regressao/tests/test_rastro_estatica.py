@@ -112,6 +112,13 @@ def test_comparacao_ja_protegida_contra_zero_nao_e_apontada(roda):
     assert vazios.get(46) == ''                       # $a1 = $max + 1; $a1 == '': `+ 1` nao produz 0, entra so no nivel geral
 
 
+def test_evidencia_nao_atravessa_case_diferente_nem_reatribuicao_nao_numerica_nem_date_menos_literal(roda):
+    r = {c['linha']: c['evidencia'] for c in roda('comparacoes', 'comparacoes.php')[0]['comparacoes'] if c['tipo'] == 'vazio'}
+    assert r[49] == ''        # $v1 = 0 no case 1; $v1 == '' no case 2: cases diferentes do mesmo switch nao se alcancam
+    assert r[53] == ''        # $v2 = $n * 100; $v2 = str_pad(...): a reatribuicao nao numerica anula a evidencia
+    assert r[55] == ''        # date('Y') - 1 nunca e 0
+
+
 def test_atribuicao_em_ramo_anterior_do_mesmo_if_nao_chega_ao_elseif(roda):
     r = {c['linha']: c['evidencia'] for c in roda('comparacoes', 'comparacoes.php')[0]['comparacoes']}
     assert r[31] == ''                                    # if (..) { $r = 0; } elseif ($r == 't'): ramos exclusivos

@@ -289,6 +289,12 @@ final class Analise extends NodeVisitorAbstract
         if ($n instanceof Node\Scalar\DNumber) {
             return $n->value == 0.0;
         }
+        // `date('Y') - 1`, `time() + 5`: calculo sobre data nunca e 0 na pratica
+        if (($n instanceof Expr\BinaryOp\Minus || $n instanceof Expr\BinaryOp\Plus)
+            && (($n->left instanceof Expr\FuncCall && in_array($this->nome($n->left), ['date', 'time', 'strtotime', 'mktime'], true))
+                || ($n->right instanceof Expr\FuncCall && in_array($this->nome($n->right), ['date', 'time', 'strtotime', 'mktime'], true)))) {
+            return false;
+        }
         // `$x + 1` / `1 + $x`: so e 0 se $x for -1; nos contadores e codigos do e-Cidade isso nao ocorre (heuristica declarada no baseline)
         if ($n instanceof Expr\BinaryOp\Plus && (($n->left instanceof Node\Scalar\LNumber && $n->left->value > 0)
                 || ($n->right instanceof Node\Scalar\LNumber && $n->right->value > 0))) {
@@ -303,6 +309,11 @@ final class Analise extends NodeVisitorAbstract
         $r = [];
         for ($i = 0; $i < count($this->pilha) - 1; $i++) {
             $p = $this->pilha[$i];
+            if ($p instanceof Stmt\Switch_) {   // cada `case` e um ramo (fallthrough e raro e nao e tratado)
+                $f = $this->pilha[$i + 1];
+                $r[spl_object_id($p)] = $f === $p->cond ? 'cond' : 'case' . (array_search($f, $p->cases, true) === false ? '?' : array_search($f, $p->cases, true));
+                continue;
+            }
             if (!($p instanceof Stmt\If_)) {
                 continue;
             }
@@ -339,7 +350,15 @@ final class Analise extends NodeVisitorAbstract
             return false;
         }
         $atual = $this->ramos();
-        foreach ($this->escopo()['inteiros'][$n->name] ?? [] as $ramos) {
+        // Do mais recente para o mais antigo: uma reatribuicao NAO numerica que sempre executa antes daqui (seus ramos estao todos em `$atual`)
+        // anula o que veio antes; uma atribuicao numerica em ramo que chega aqui e a evidencia.
+        foreach (array_reverse($this->escopo()['eventos'][$n->name] ?? []) as [$numero, $ramos]) {
+            if (!$numero) {
+                if (!array_diff_assoc($ramos, $atual)) {
+                    return false;
+                }
+                continue;
+            }
             if (!$this->exclusivos($ramos, $atual)) {
                 return true;
             }
@@ -442,13 +461,8 @@ final class Analise extends NodeVisitorAbstract
             array_pop($this->escopos);
         }
         if ($this->modo === 'comparacoes' && $n instanceof Expr\Assign && $n->var instanceof Expr\Variable && is_string($n->var->name)) {
-            $ramos = $this->ramos();
             $i = count($this->escopos) - 1;
-            if ($this->podeSerZero($n->expr)) {
-                $this->escopos[$i]['inteiros'][$n->var->name][] = $ramos;
-            } elseif (!$ramos) {
-                unset($this->escopos[$i]['inteiros'][$n->var->name]);   // atribuicao nao numerica fora de ramo: reinicia
-            }
+            $this->escopos[$i]['eventos'][$n->var->name][] = [$this->podeSerZero($n->expr), $this->ramos()];
         }
         if ($this->modo === 'candidatos' && $n instanceof Expr\Assign && $n->var instanceof Expr\Variable && is_string($n->var->name)) {
             $v = $n->var->name;

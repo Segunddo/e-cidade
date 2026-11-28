@@ -9,7 +9,7 @@
 ## Resultado (arvore inteira, ~50 s)
 
 - **172682** comparacoes em **18032** arquivos. Por tipo: texto **39138**, vazio (`''`) **85029**, zero (`0`) **48515**.
-- **Nivel de evidencia forte: 57 pontos em 28 arquivos** (texto 5, vazio 52): a mesma variavel recebeu um valor inteiro no mesmo escopo (`$k = 0; ... $k == 't'`, `count()`, `strlen()`, aritmetica, cast). E a lista para os migradores revisarem primeiro: `rastro-comparacoes-alta-2026-11-27.tsv`.
+- **Nivel de evidencia forte: 53 pontos em 25 arquivos** (texto 5, vazio 48): a mesma variavel recebeu um valor inteiro no mesmo escopo (`$k = 0; ... $k == 't'`, `count()`, `strlen()`, aritmetica, cast). E a lista para os migradores revisarem primeiro: `rastro-comparacoes-alta-2026-11-27.tsv`.
 - O restante e **inventario de risco**, nao lista de defeitos: sem evidencia o valor pode ser texto (vindo de formulario ou banco) e a comparacao continua igual.
 
 ### Padroes mais comuns (tipo texto, sem filtro)
@@ -30,7 +30,7 @@
 - Nao aponta quando o outro lado e sabidamente texto (`trim()`, `$_GET[..]`, concatenacao, `pg_result()`...).
 - Contra o literal `0` a evidencia de inteiro nao agrava (`$k = 0; $k == 0` e inocuo): esse tipo fica so no nivel geral.
 - A evidencia **nao segue o fluxo**: uma reatribuicao em ramo (`if`) nao anula a anterior e nao ha analise de lacos. A amostra de 20 foi sorteada com semente fixa; uma amostra maior pode achar novos padroes benignos.
-- **Confirmado por execucao: um caso** (`ate1_tarefa004.php`). Os 57 pontos fortes sao candidatos plausiveis, nao defeitos confirmados.
+- **Confirmado por execucao: um caso** (`ate1_tarefa004.php`). Os 53 pontos fortes sao candidatos plausiveis, nao defeitos confirmados.
 
 ## Conferencia por amostra (leitura do codigo, nao execucao)
 
@@ -43,7 +43,7 @@ A primeira versao do nivel forte tinha 134 pontos. Conferi 25 deles lendo a func
 | Padroes em que o zero ja e tratado | `$v==0 \|\| $v==''`, `$v != '' && $v !== 0`, `$v=='' ? 0 : $v`, `if ($v=='') { $v = 0; }`, `is_string($v) && ...`, `(int)$v == '' \|\| (int)$v == 0` | suprimidos |
 | `$x + 1` contava como possivel zero | `$cod = $max + 1; ... != ""` | `+` com literal positivo nao conta (heuristica: assume $x >= 0) |
 
-Resultado: **134 -> 103 -> 66 -> 57**. Na lista final, em 20 pontos sorteados, 19 pareciam candidatos plausiveis e 1 era benigno (um cast `(int)` em `cai1_lista001.php:566`). Depois, a familia do carne (25 dos 57 pontos, 11 dos 20 sorteados) foi conferida e **rebaixada a improvavel** (abaixo): sem ela restam **32 pontos**. Plausivel quer dizer: o valor `0` chega a comparacao e o resultado muda; **nao** quer dizer que a tela exercita esse caminho com `0`.
+Resultado: **134 -> 103 -> 66 -> 57 -> 53** (o ultimo passo veio da conferencia dos 32 restantes: `rastro-comparacoes-conferencia-2026-11-28.md`). Na lista de 57, em 20 pontos sorteados, 19 pareciam candidatos plausiveis e 1 era benigno (um cast `(int)` em `cai1_lista001.php:566`). Depois, a familia do carne (25 dos 53 pontos, 11 dos 20 sorteados) foi conferida e **rebaixada a improvavel** (abaixo): sem ela restam **28 pontos**. Plausivel quer dizer: o valor `0` chega a comparacao e o resultado muda; **nao** quer dizer que a tela exercita esse caminho com `0`.
 
 ### Padroes dos candidatos finais
 

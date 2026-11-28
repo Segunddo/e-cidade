@@ -44,3 +44,12 @@ if ($w == '') { $w = 0; }
 if (is_string($w) && $w == '') { echo 30; }
 $a1 = $max + 1;
 if ($a1 == '') { echo 31; }
+switch ($sw) {
+    case 1: $v1 = 0; break;
+    case 2: if ($v1 == '') { echo 32; } break;
+}
+$v2 = $n * 100;
+$v2 = str_pad($v2, 8, '0');
+if ($v2 == '') { echo 33; }
+$v3 = date('Y') - 1;
+if ($v3 == '') { echo 34; }
