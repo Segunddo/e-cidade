@@ -112,9 +112,45 @@ def _rastreia_xdebug(telas, saida, c, xdebug) -> dict:
 
 
 def telas_divergentes(diretorio: Path, area: str | None) -> list[str]:
-    arq = diretorio / area / "resultado.json" if area else diretorio / "resultado.json"
-    casos = json.loads(arq.read_text(encoding="utf-8"))["casos"]
-    return sorted({c["id"].split(":", 1)[1] for c in casos if c["veredito"] == "DIVERGE" and c["id"].startswith("tela:")})
+    """Telas DIVERGE de uma rodada. Sem `area`: o `resultado.json` da propria pasta ou, se nao houver, a uniao de todas as areas dela."""
+    if area:
+        arqs = [diretorio / area / "resultado.json"]
+    elif (diretorio / "resultado.json").exists():
+        arqs = [diretorio / "resultado.json"]
+    else:
+        arqs = sorted(diretorio.glob("*/resultado.json"))
+    telas: set[str] = set()
+    for arq in arqs:
+        for c in json.loads(arq.read_text(encoding="utf-8"))["casos"]:
+            if c["veredito"] == "DIVERGE" and c["id"].startswith("tela:"):
+                telas.add(c["id"].split(":", 1)[1])
+    return sorted(telas)
+
+
+def _instrumenta(forcar: bool = False) -> int:
+    """Instrumenta a arvore montada (incremental: so reprocessa o que mudou) e religa o vhost nos dois contêineres."""
+    from regressao.rastro.instrumenta import instrumenta_arvore
+    raiz = raiz_montada()
+    res = instrumenta_arvore(raiz, raiz / "tmp" / "ecidade-rastro", forcar=forcar)
+    print(res)
+    c = containers_do_ambiente()
+    for n in (c.ref, c.php_novo):
+        servidor.liga_vhost(n)
+    return 0 if not res.falhas_lint else 1
+
+
+def analisa(telas: list[str], saida: Path, instrumentar: bool = True) -> int:
+    """Analise completa num comando: instrumenta (incremental), rastreia nos DOIS backends e cruza as causas."""
+    from regressao.rastro import cruza
+    if instrumentar and _instrumenta():
+        print("a instrumentacao teve falhas de lint proprias: o backend de sondas nao e confiavel; siga so com o Xdebug", file=sys.stderr)
+    rastreia_telas(telas, saida / "sondas")
+    rastreia_telas_xdebug(telas, saida / "xdebug")
+    ler = lambda p: cruza.le_relatorio((p / "relatorio.md").read_text(encoding="utf-8", errors="replace"))
+    linhas = cruza.cruza(ler(saida / "sondas"), ler(saida / "xdebug"))
+    md, _ = cruza.escreve(linhas, saida / "cruzamento")
+    print(cruza.resumo(linhas), "->", md)
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -122,6 +158,10 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
     i = sub.add_parser("instrumenta"); i.add_argument("--forcar", action="store_true")
     e = sub.add_parser("equivalencia"); e.add_argument("--amostra", type=int, default=200)
+    n = sub.add_parser("analisa", help="analise completa: instrumenta (incremental), rastreia nos dois backends e cruza as causas")
+    n.add_argument("telas", nargs="*"); n.add_argument("--saida", type=Path, default=SAIDA_PADRAO)
+    n.add_argument("--de-rodada", type=Path, help="pasta de uma rodada da bateria; sem --area usa as telas DIVERGE de todas as areas")
+    n.add_argument("--area"); n.add_argument("--sem-instrumentar", action="store_true", help="pula o passo de instrumentacao (arvore ja atual)")
     c = sub.add_parser("cruza", help="compara os relatorios dos backends: sondas (A) x Xdebug (B)")
     c.add_argument("a", type=Path, help="pasta (ou relatorio.md) do backend de sondas")
     c.add_argument("b", type=Path, help="pasta (ou relatorio.md) do backend Xdebug")
@@ -138,14 +178,12 @@ def main(argv: list[str] | None = None) -> int:
     a = p.parse_args(argv)
 
     if a.cmd == "instrumenta":
-        from regressao.rastro.instrumenta import instrumenta_arvore
-        raiz = raiz_montada()
-        res = instrumenta_arvore(raiz, raiz / "tmp" / "ecidade-rastro", forcar=a.forcar)
-        print(res)
-        c = containers_do_ambiente()
-        for n in (c.ref, c.php_novo):
-            servidor.liga_vhost(n)
-        return 0 if not res.falhas_lint else 1
+        return _instrumenta(a.forcar)
+    if a.cmd == "analisa":
+        telas = list(a.telas) + (telas_divergentes(a.de_rodada, a.area) if a.de_rodada else [])
+        if not telas:
+            p.error("informe telas ou --de-rodada")
+        return analisa(telas, a.saida, instrumentar=not a.sem_instrumentar)
     if a.cmd == "equivalencia":
         res = equivalencia.confere_equivalencia(executor.nova_sessao(), equivalencia.amostra_telas(a.amostra))
         print(f"{res.total} telas | diferentes: {res.diferentes} | instaveis: {len(res.instaveis)}")

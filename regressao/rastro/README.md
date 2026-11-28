@@ -24,9 +24,16 @@ python -m regressao.rastro equivalencia --amostra 200
 # 3) rastreia telas (ou as DIVERGE de uma rodada da bateria)
 python -m regressao.rastro rastreia cad2_setor002.php con2_anexo_i_2014.php --saida rastro-saida
 python -m regressao.rastro rastreia --de-rodada ~/rodadas/base85b --area patrimonial --saida rastro-patrimonial
+
+# Tudo num comando: instrumenta (incremental) + sondas + Xdebug + cruzamento, nas telas DIVERGE de TODAS as areas da rodada
+python -m regressao.rastro analisa --de-rodada ~/rodadas/base85b --saida analise-base85b
+#   -> analise-base85b/{sondas,xdebug}/relatorio.md e analise-base85b/cruzamento/cruzamento.{md,tsv}
 ```
 
 Saida: `<saida>/relatorio.md` e `<saida>/rastro/<tela>/{ref74,ref74_2,alvo85}.jsonl`.
+
+Rodada de 2026-11-28 (182 telas DIVERGE, os dois backends): **163 com a mesma linha causal**; as discordancias estao explicadas em
+`regressao/baseline/rastro-linhas-todas-2026-11-28.md`. Cada tela tem limite de 300 s (`LIMITE_POR_TELA`): se estourar vira `INCONCLUSIVO` e a corrida segue.
 
 ## Dois backends (mesmo classificador e relatorio)
 
