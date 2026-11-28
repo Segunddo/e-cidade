@@ -92,3 +92,27 @@ def test_evidencia_de_inteiro_marca_so_quando_a_variavel_recebeu_numero(roda):
     assert r[26] == ''                                    # $s = 'texto' nao e numero
     assert r[2] == ''                                     # $aut sem atribuicao conhecida: so entra no nivel geral
     assert r[6] == ''                                     # $n == 0: contra o literal 0 a evidencia de inteiro nao agrava
+
+
+def test_literal_inteiro_diferente_de_zero_nao_e_evidencia(roda):
+    r = {c['linha']: c['evidencia'] for c in roda('comparacoes', 'comparacoes.php')[0]['comparacoes']}
+    assert r[28] == ''                                    # $p = 5; $p == 't': 5 == 't' e false no 7.4 e no 8.x
+
+
+def test_comparacao_ja_protegida_contra_zero_nao_e_apontada(roda):
+    todos = roda('comparacoes', 'comparacoes.php')[0]['comparacoes']
+    vazios = {c['linha']: c['evidencia'] for c in todos if c['tipo'] == 'vazio'}     # a metade `== ''` e a que deixa de ser apontada
+    assert 36 not in vazios and 37 not in vazios      # $w == 0 || $w == '' ; $w != '' && $w !== 0: o zero ja e tratado a parte
+    assert 38 not in vazios and 39 not in vazios      # $w == '' ? 0 : $w ; ? '0' : $w : devolve 0 nos dois casos
+    assert 41 not in vazios                           # $w != '' ? $w : 0
+    assert 42 not in vazios                           # (int) $w == '' || (int) $w == 0
+    assert vazios.get(40) == 'inteiro'                # ? 'x' : $w muda o resultado quando $w e 0
+    assert 43 not in vazios                           # if ($w == '') { $w = 0; }: repete o zero, o resultado e o mesmo
+    assert 44 not in vazios                           # is_string($w) && $w == '': o valor ja e garantidamente texto
+    assert vazios.get(46) == ''                       # $a1 = $max + 1; $a1 == '': `+ 1` nao produz 0, entra so no nivel geral
+
+
+def test_atribuicao_em_ramo_anterior_do_mesmo_if_nao_chega_ao_elseif(roda):
+    r = {c['linha']: c['evidencia'] for c in roda('comparacoes', 'comparacoes.php')[0]['comparacoes']}
+    assert r[31] == ''                                    # if (..) { $r = 0; } elseif ($r == 't'): ramos exclusivos
+    assert r[35] == 'inteiro'                             # if (..) { $w = 0; } if ($w == 't'): a atribuicao pode chegar

@@ -199,15 +199,152 @@ final class Analise extends NodeVisitorAbstract
             } elseif ($lit instanceof Node\Scalar\LNumber && $lit->value === 0) {
                 $tipo = 'zero';
             }
-            if ($tipo !== null && !$this->eLiteral($outro) && !$this->eSabidamenteString($outro)) {
+            if ($tipo !== null && !$this->eLiteral($outro) && !$this->eSabidamenteString($outro)
+                && !(($op === '==' || $op === '!=') && $this->protegida($op, $this->imprime($outro)))) {
                 // Evidencia de inteiro so agrava `texto`/`vazio` ($k = 0; $k == 't'). Contra o literal 0 ela e inocua ($k = 0; $k == 0).
-                $inteiro = $tipo !== 'zero' && ($this->eInteiro($outro) || ($outro instanceof Expr\Variable && is_string($outro->name)
-                    && isset($this->escopo()['origem'][$outro->name])));
+                $inteiro = $tipo !== 'zero' && ($this->podeSerZero($outro) || $this->atribuicaoAlcanca($outro));
                 $this->comparacoes[] = ['linha' => $linha, 'tipo' => $tipo, 'op' => $op, 'evidencia' => $inteiro ? 'inteiro' : '',
                                         'expressao' => $this->imprime($outro), 'literal' => $this->imprime($lit)];
                 return;
             }
         }
+    }
+
+    private function eZeroLiteral(?Node $n): bool
+    {
+        return ($n instanceof Node\Scalar\LNumber && $n->value === 0) || ($n instanceof Node\Scalar\DNumber && $n->value == 0.0)
+            || ($n instanceof Node\Scalar\String_ && $n->value === '0');
+    }
+
+    /**
+     * O resultado nao muda de forma observavel quando o zero ja e tratado: (a) `$v == '' ? 0 : $v` devolve 0 nos dois casos;
+     * (b) a mesma expressao e testada contra 0 na mesma condicao (`$v == 0 || $v == ''`, `$v != '' && $v !== 0`).
+     */
+    private function protegida(string $op, string $texto): bool
+    {
+        $cmp = $this->pilha[count($this->pilha) - 1];
+        $pai = $this->pilha[count($this->pilha) - 2] ?? null;
+        if ($pai instanceof Expr\Ternary && $pai->cond === $cmp && $pai->if !== null) {
+            [$zero, $resto] = $op === '==' ? [$pai->if, $pai->else] : [$pai->else, $pai->if];
+            if ($this->eZeroLiteral($zero) && $this->imprime($resto) === $texto) {
+                return true;
+            }
+        }
+        $raiz = $cmp;
+        $dono = null;
+        for ($i = count($this->pilha) - 2; $i >= 0; $i--) {
+            $p = $this->pilha[$i];
+            if ($p instanceof Expr\BinaryOp\BooleanOr || $p instanceof Expr\BinaryOp\BooleanAnd || $p instanceof Expr\BinaryOp\LogicalOr
+                || $p instanceof Expr\BinaryOp\LogicalAnd || $p instanceof Expr\BooleanNot) {
+                $raiz = $p;
+                continue;
+            }
+            $dono = $p;
+            break;
+        }
+        // (c) `if ($v == '') { $v = 0; }`: repete o zero, o resultado final e o mesmo
+        if ($op === '==' && ($dono instanceof Stmt\If_ || $dono instanceof Stmt\ElseIf_) && $dono->cond === $raiz) {
+            foreach ($dono->stmts as $s) {
+                $e = $s instanceof Stmt\Expression ? $s->expr : null;
+                if ($e instanceof Expr\Assign && $this->eZeroLiteral($e->expr) && $this->imprime($e->var) === $texto) {
+                    return true;
+                }
+            }
+        }
+        return $this->guardaZero($raiz, $texto, $cmp);
+    }
+
+    private function guardaZero(Node $n, string $texto, Node $exceto): bool
+    {
+        if ($n !== $exceto && ($n instanceof Expr\BinaryOp\Equal || $n instanceof Expr\BinaryOp\NotEqual || $n instanceof Expr\BinaryOp\Identical
+                || $n instanceof Expr\BinaryOp\NotIdentical)) {
+            foreach ([[$n->left, $n->right], [$n->right, $n->left]] as [$z, $x]) {
+                if ($this->eZeroLiteral($z) && $this->imprime($x) === $texto) {
+                    return true;
+                }
+            }
+        }
+        // (d) o tipo ja e testado na mesma condicao: `is_string($v) && $v == ''`, `gettype($v) == 'string' && ...`
+        if ($n instanceof Expr\FuncCall && in_array($this->nome($n), ['is_string', 'gettype', 'is_numeric', 'is_int', 'is_integer', 'ctype_digit'], true)
+            && isset($n->args[0]) && $this->imprime($n->args[0]->value) === $texto) {
+            return true;
+        }
+        foreach ($n->getSubNodeNames() as $sub) {
+            $v = $n->$sub;
+            foreach (is_array($v) ? $v : [$v] as $f) {
+                if ($f instanceof Node && $this->guardaZero($f, $texto, $exceto)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /** Numero que PODE ser 0: literal 0, ou expressao numerica nao literal (count(), aritmetica, cast...). `5` nunca muda de comportamento. */
+    private function podeSerZero(Node $n): bool
+    {
+        if ($n instanceof Node\Scalar\LNumber) {
+            return $n->value === 0;
+        }
+        if ($n instanceof Node\Scalar\DNumber) {
+            return $n->value == 0.0;
+        }
+        // `$x + 1` / `1 + $x`: so e 0 se $x for -1; nos contadores e codigos do e-Cidade isso nao ocorre (heuristica declarada no baseline)
+        if ($n instanceof Expr\BinaryOp\Plus && (($n->left instanceof Node\Scalar\LNumber && $n->left->value > 0)
+                || ($n->right instanceof Node\Scalar\LNumber && $n->right->value > 0))) {
+            return false;
+        }
+        return $this->eInteiro($n);
+    }
+
+    /** Ramos de `if/elseif/else` (por if) em que a pilha atual esta: {id do if => then|ei<N>|else|cond}. */
+    private function ramos(): array
+    {
+        $r = [];
+        for ($i = 0; $i < count($this->pilha) - 1; $i++) {
+            $p = $this->pilha[$i];
+            if (!($p instanceof Stmt\If_)) {
+                continue;
+            }
+            $f = $this->pilha[$i + 1];
+            $id = spl_object_id($p);
+            if ($f === $p->cond) {
+                $r[$id] = 'cond';
+            } elseif ($p->else !== null && $f === $p->else) {
+                $r[$id] = 'else';
+            } elseif (($k = array_search($f, $p->elseifs, true)) !== false) {
+                $r[$id] = 'ei' . $k;
+            } else {
+                $r[$id] = 'then';
+            }
+        }
+        return $r;
+    }
+
+    /** Duas posicoes em ramos DIFERENTES do mesmo if nunca executam na mesma passada: a atribuicao de um nao chega ao outro. */
+    private function exclusivos(array $a, array $b): bool
+    {
+        foreach ($a as $id => $ramo) {
+            if (isset($b[$id]) && $b[$id] !== $ramo && $ramo !== 'cond' && $b[$id] !== 'cond') {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /** A variavel recebeu, antes e em ramo que pode chegar aqui, um numero que pode ser 0 (`$k = 0; ... $k == 't'`). */
+    private function atribuicaoAlcanca(Node $n): bool
+    {
+        if (!($n instanceof Expr\Variable && is_string($n->name))) {
+            return false;
+        }
+        $atual = $this->ramos();
+        foreach ($this->escopo()['inteiros'][$n->name] ?? [] as $ramos) {
+            if (!$this->exclusivos($ramos, $atual)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /** Expressao que sabidamente produz inteiro/numero: literal, cast, aritmetica, count()/strlen()/pg_num_rows()... */
@@ -305,10 +442,12 @@ final class Analise extends NodeVisitorAbstract
             array_pop($this->escopos);
         }
         if ($this->modo === 'comparacoes' && $n instanceof Expr\Assign && $n->var instanceof Expr\Variable && is_string($n->var->name)) {
-            if ($this->eInteiro($n->expr)) {
-                $this->marca($n->var->name, 'origem', $n->getStartLine());
-            } else {
-                unset($this->escopos[count($this->escopos) - 1]['origem'][$n->var->name]);
+            $ramos = $this->ramos();
+            $i = count($this->escopos) - 1;
+            if ($this->podeSerZero($n->expr)) {
+                $this->escopos[$i]['inteiros'][$n->var->name][] = $ramos;
+            } elseif (!$ramos) {
+                unset($this->escopos[$i]['inteiros'][$n->var->name]);   // atribuicao nao numerica fora de ramo: reinicia
             }
         }
         if ($this->modo === 'candidatos' && $n instanceof Expr\Assign && $n->var instanceof Expr\Variable && is_string($n->var->name)) {

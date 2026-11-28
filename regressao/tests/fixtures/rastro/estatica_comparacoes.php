@@ -24,3 +24,23 @@ $c = count($lista);
 if ($c == 'abc') { echo 22; }
 $s = 'texto';
 if ($s == 't') { echo 23; }
+$p = 5;
+if ($p == 't') { echo 24; }
+if ($m) {
+    $r = 0;
+} elseif ($r == 't') {
+    echo 25;
+}
+if ($m) { $w = 0; }
+if ($w == 't') { echo 26; }
+if ($w == 0 || $w == '') { echo 27; }
+if ($w != '' && $w !== 0) { echo 28; }
+$z = $w == '' ? 0 : $w;
+$z = $w == '' ? '0' : $w;
+$z = $w == '' ? 'x' : $w;
+$z = $w != '' ? $w : 0;
+if ((int) $w == '' || (int) $w == 0) { echo 29; }
+if ($w == '') { $w = 0; }
+if (is_string($w) && $w == '') { echo 30; }
+$a1 = $max + 1;
+if ($a1 == '') { echo 31; }
