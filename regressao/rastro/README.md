@@ -79,4 +79,12 @@ No teste com as 179 telas DIVERGE da base85b o B apontou **a mesma linha causal 
 - A tela `pre1_leis001.php` confere o modo (0754) dos arquivos de `bin/`: a copia instrumentada precisa preservar modo e nao ter
   arquivos a mais nos diretorios. O portao de equivalencia achou isso.
 - **Fase C (analise estatica):** `python -m regressao.rastro estatica [--modo candidatos|comparacoes]` le o codigo sem executar nada. `candidatos` = usos de resultado de consulta sem checagem (`false` vira TypeError no 8.x); `comparacoes` = `==`/`!=`/switch com literal (`0 == 't'` mudou no 8.x). Resultados em `baseline/rastro-estatica-*.md` e `baseline/rastro-comparacoes-*.md`.
+- **A raiz do codigo e o que o contêiner monta, nao onde o pacote esta.** `T.DIR_TELAS` e `<pacote>/ecidade`; rodando de um worktree isso e um snapshot
+  diferente do `/var/www/html` servido (no caso: 11.692 arquivos com conteudo diferente e 29 a mais). O teste de existencia do cache olhava a outra
+  arvore, entao `instrumenta` reprocessava tudo (6 min) em vez de 3 s, e os hashes podiam dar por atual um arquivo que mudou. `raiz.py` resolve a raiz pelo
+  ponto de montagem (`docker inspect`). Se voce rodar a ferramenta de outro lugar, confira `python -c "from regressao.rastro.raiz import raiz_montada; print(raiz_montada())"`.
+- **`extension/log` e link de diretorio inteiro**, nao arquivo a arquivo: a aplicacao cria `error.log` em execucao; num diretorio real da arvore
+  instrumentada (criado pelo root, sem permissao para o `www-data`) o Logger do e-Cidade lanca excecao e a resposta vira 500 sem corpo. O portao de
+  equivalencia pegou (37 de 40 telas diferentes). `liga.php` troca um diretorio real que so tem links pelo link do diretorio.
+- Erros do PHP vao para `/var/log/php_errors.log`, nao para `/var/log/apache2/error.log` (que e um stream: `tail` nele trava).
 - O backend Xdebug pode apontar como causa uma chamada interna que aparece so num dos traces (`substr` em `libs/db_stdlib.php:818` no caso `ate1_tarefa004.php`); nas telas sem excecao confira a linha antes de agir.

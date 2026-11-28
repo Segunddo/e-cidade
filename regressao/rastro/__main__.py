@@ -112,6 +112,10 @@ def main(argv: list[str] | None = None) -> int:
     sub = p.add_subparsers(dest="cmd", required=True)
     i = sub.add_parser("instrumenta"); i.add_argument("--forcar", action="store_true")
     e = sub.add_parser("equivalencia"); e.add_argument("--amostra", type=int, default=200)
+    c = sub.add_parser("cruza", help="compara os relatorios dos backends: sondas (A) x Xdebug (B)")
+    c.add_argument("a", type=Path, help="pasta (ou relatorio.md) do backend de sondas")
+    c.add_argument("b", type=Path, help="pasta (ou relatorio.md) do backend Xdebug")
+    c.add_argument("--saida", type=Path, default=Path("cruzamento"))
     s = sub.add_parser("estatica", help="fase C: lista, so lendo o codigo, os usos de resultado de consulta sem checagem")
     s.add_argument("--saida", type=Path, default=None)
     s.add_argument("--modo", choices=("candidatos", "comparacoes"), default="candidatos",
@@ -136,6 +140,13 @@ def main(argv: list[str] | None = None) -> int:
         res = equivalencia.confere_equivalencia(executor.nova_sessao(), equivalencia.amostra_telas(a.amostra))
         print(f"{res.total} telas | diferentes: {res.diferentes} | instaveis: {len(res.instaveis)}")
         return 0 if not res.diferentes else 1
+    if a.cmd == "cruza":
+        from regressao.rastro import cruza
+        ler = lambda p: cruza.le_relatorio((p / "relatorio.md" if p.is_dir() else p).read_text(encoding="utf-8"))
+        linhas = cruza.cruza(ler(a.a), ler(a.b))
+        md, _ = cruza.escreve(linhas, a.saida)
+        print(cruza.resumo(linhas), "->", md)
+        return 0
     if a.cmd == "estatica":
         from regressao.php.arvore import lista_arvore
         from regressao.rastro import estatica
