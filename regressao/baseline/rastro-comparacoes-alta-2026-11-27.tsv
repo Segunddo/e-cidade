@@ -1,58 +1,58 @@
-arquivo	linha	tipo	op	expressao	literal
-cad4_geracarneiptutxt.php	2248	vazio	==	$utotal	''
-cad4_geracarneiptutxt.php	2674	vazio	==	$k00_numpar	''
-cad4_geracarneiptutxt.php	2674	vazio	==	$k00_valor	''
-cad4_geracarneiptutxt.php	3312	vazio	==	$k00_numpar	''
-cad4_geracarneiptutxt.php	3312	vazio	==	$k00_valor	''
-cad4_geracarneiptutxt_arapiraca.php	1060	vazio	==	$utotal	''
-cad4_geracarneiptutxt_arapiraca.php	1287	vazio	==	$k00_numpar	''
-cad4_geracarneiptutxt_arapiraca.php	1287	vazio	==	$k00_valor	''
-cad4_geracarneiptutxt_arapiraca.php	1752	vazio	==	$k00_numpar	''
-cad4_geracarneiptutxt_arapiraca.php	1752	vazio	==	$k00_valor	''
-cad4_geracarneiptutxt_cli.php	1980	vazio	==	$utotal	''
-cad4_geracarneiptutxt_cli.php	2341	vazio	==	$k00_numpar	''
-cad4_geracarneiptutxt_cli.php	2341	vazio	==	$k00_valor	''
-cad4_geracarneiptutxt_cli.php	2853	vazio	==	$k00_numpar	''
-cad4_geracarneiptutxt_cli.php	2853	vazio	==	$k00_valor	''
-cad4_geracarneiptutxt_eldorado.php	1046	vazio	!=	$utotal	''
-cad4_geracarneiptutxt_eldorado.php	1263	vazio	!=	$k00_numpar	''
-cad4_geracarneiptutxt_eldorado.php	1263	vazio	!=	$k00_valor	''
-cad4_geracarneiptutxt_eldorado.php	1280	vazio	==	$k00_numpar	''
-cad4_geracarneiptutxt_eldorado.php	1280	vazio	==	$k00_valor	''
-cad4_geracarneiptutxt_eldorado.php	1713	vazio	==	$k00_numpar	''
-cad4_geracarneiptutxt_eldorado.php	1713	vazio	==	$k00_valor	''
-cad4_geracarneiptutxt_guaiba.php	1061	vazio	==	$utotal	''
-cad4_geracarneiptutxt_guaiba.php	1779	vazio	==	$k00_numpar	''
-cad4_geracarneiptutxt_guaiba.php	1779	vazio	==	$k00_valor	''
-cai1_lista001.php	566	vazio	!=	$parcini	""
-cai2_emitenotif002.php	3344	vazio	==	$z01_numero	""
-cai3_gerfinanc003.php	1909	texto	==	$tipoidentificacao	"Matricula :"
-cai3_gerfinanc003.php	1913	texto	==	$tipoidentificacao	"Inscricao :"
-cai3_gerfinanc013.php	339	vazio	!=	strlen($exercicios)	""
-cai3_gerfinanc013.php	339	vazio	!=	strlen($exercicios)	""
-cai3_gerfinanc013.php	574	vazio	!=	strlen($exercicios)	""
-cai3_gerfinanc013.php	574	vazio	!=	strlen($exercicios)	""
-cai4_geraextrato.php	303	vazio	!=	$contaatual	''
-cai4_processadebconta001.php	746	vazio	!=	$debcta	""
-edu2_ataresultadofinal003.php	655	vazio	==	$nValorFaltas	''
-edu2_certconclusao002.php	729	vazio	==	$sResultado	""
-edu4_atualizacadastrocenso_2009_001.php	375	vazio	!=	$numero_escola	""
-edu4_exportarsituacaoaluno001.php	261	vazio	!=	$ed52_i_ano	""
-emp4_empageconflay002_ordem.php	201	vazio	==	$c63_banco	""
-forms/db_frmdespachoalt.php	224	vazio	!=	$p90_minchardesp	""
-forms/db_frmprocandamint.php	251	vazio	!=	$p90_minchardesp	""
-forms/db_frmsolicitem.php	484	vazio	!=	$pc11_vlrun	""
-forms/db_frmsolicitemiframe.php	395	vazio	!=	$pc13_codigo	""
-forms/db_frmsolicitemiframe.php	419	vazio	!=	$pc13_valor_limite	""
-forms/db_frmtarefa.php	976	texto	==	$aut	't'
-forms/db_frmtarefa.php	992	texto	==	$aut	't'
-forms/db_frmunidades.php	146	vazio	==	strlen($z01_cgccpf)	""
-libs/db_stdlib.php	1510	vazio	!=	$aux	""
-lic4_geraaut004.php	1179	vazio	!=	$quantidade_atendida	""
-lic4_geraaut004.php	1297	vazio	!=	$quantidade_atendida	""
-model/arrecadacao/boletos/RefactorImpressaoBoleto.model.php	1874	texto	==	$tipoidentificacao	"Matricula :"
-pes2_resumo002.php	934	vazio	!=	$lotaini	""
-pes2_resumo002.php	936	vazio	!=	$lotaini	""
-pes2_rubmesponto002.php	274	vazio	!=	$quebra	''
-pro4_geralayout.php	554	vazio	==	$ob07_areaatual	""
-pro4_geralayout.php	567	vazio	==	$ob07_areaatual	""
+arquivo	linha	tipo	op	expressao	literal	nota
+cad4_geracarneiptutxt.php	2248	vazio	==	$utotal	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt.php	2674	vazio	==	$k00_numpar	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt.php	2674	vazio	==	$k00_valor	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt.php	3312	vazio	==	$k00_numpar	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt.php	3312	vazio	==	$k00_valor	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_arapiraca.php	1060	vazio	==	$utotal	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_arapiraca.php	1287	vazio	==	$k00_numpar	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_arapiraca.php	1287	vazio	==	$k00_valor	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_arapiraca.php	1752	vazio	==	$k00_numpar	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_arapiraca.php	1752	vazio	==	$k00_valor	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_cli.php	1980	vazio	==	$utotal	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_cli.php	2341	vazio	==	$k00_numpar	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_cli.php	2341	vazio	==	$k00_valor	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_cli.php	2853	vazio	==	$k00_numpar	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_cli.php	2853	vazio	==	$k00_valor	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_eldorado.php	1046	vazio	!=	$utotal	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_eldorado.php	1263	vazio	!=	$k00_numpar	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_eldorado.php	1263	vazio	!=	$k00_valor	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_eldorado.php	1280	vazio	==	$k00_numpar	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_eldorado.php	1280	vazio	==	$k00_valor	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_eldorado.php	1713	vazio	==	$k00_numpar	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_eldorado.php	1713	vazio	==	$k00_valor	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_guaiba.php	1061	vazio	==	$utotal	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_guaiba.php	1779	vazio	==	$k00_numpar	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cad4_geracarneiptutxt_guaiba.php	1779	vazio	==	$k00_valor	''	carne: condicao improvavel (numpar 1..12, dtvenc/numpre so vazios no registro vazio); nao verificado por execucao
+cai1_lista001.php	566	vazio	!=	$parcini	""	
+cai2_emitenotif002.php	3344	vazio	==	$z01_numero	""	
+cai3_gerfinanc003.php	1909	texto	==	$tipoidentificacao	"Matricula :"	
+cai3_gerfinanc003.php	1913	texto	==	$tipoidentificacao	"Inscricao :"	
+cai3_gerfinanc013.php	339	vazio	!=	strlen($exercicios)	""	
+cai3_gerfinanc013.php	339	vazio	!=	strlen($exercicios)	""	
+cai3_gerfinanc013.php	574	vazio	!=	strlen($exercicios)	""	
+cai3_gerfinanc013.php	574	vazio	!=	strlen($exercicios)	""	
+cai4_geraextrato.php	303	vazio	!=	$contaatual	''	
+cai4_processadebconta001.php	746	vazio	!=	$debcta	""	
+edu2_ataresultadofinal003.php	655	vazio	==	$nValorFaltas	''	
+edu2_certconclusao002.php	729	vazio	==	$sResultado	""	
+edu4_atualizacadastrocenso_2009_001.php	375	vazio	!=	$numero_escola	""	
+edu4_exportarsituacaoaluno001.php	261	vazio	!=	$ed52_i_ano	""	
+emp4_empageconflay002_ordem.php	201	vazio	==	$c63_banco	""	
+forms/db_frmdespachoalt.php	224	vazio	!=	$p90_minchardesp	""	
+forms/db_frmprocandamint.php	251	vazio	!=	$p90_minchardesp	""	
+forms/db_frmsolicitem.php	484	vazio	!=	$pc11_vlrun	""	
+forms/db_frmsolicitemiframe.php	395	vazio	!=	$pc13_codigo	""	
+forms/db_frmsolicitemiframe.php	419	vazio	!=	$pc13_valor_limite	""	
+forms/db_frmtarefa.php	976	texto	==	$aut	't'	
+forms/db_frmtarefa.php	992	texto	==	$aut	't'	
+forms/db_frmunidades.php	146	vazio	==	strlen($z01_cgccpf)	""	
+libs/db_stdlib.php	1510	vazio	!=	$aux	""	
+lic4_geraaut004.php	1179	vazio	!=	$quantidade_atendida	""	
+lic4_geraaut004.php	1297	vazio	!=	$quantidade_atendida	""	
+model/arrecadacao/boletos/RefactorImpressaoBoleto.model.php	1874	texto	==	$tipoidentificacao	"Matricula :"	
+pes2_resumo002.php	934	vazio	!=	$lotaini	""	
+pes2_resumo002.php	936	vazio	!=	$lotaini	""	
+pes2_rubmesponto002.php	274	vazio	!=	$quebra	''	
+pro4_geralayout.php	554	vazio	==	$ob07_areaatual	""	
+pro4_geralayout.php	567	vazio	==	$ob07_areaatual	""	
