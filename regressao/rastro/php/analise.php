@@ -1,6 +1,7 @@
 <?php
 // Analise ESTATICA (fase C): le .php (caminhos em stdin, relativos a --raiz) e imprime UMA linha JSON por arquivo que tem algo a dizer.
 //   --modo=candidatos : usos de resultado de consulta (pode ser `false`) sem checagem        {"arquivo", "candidatos":[{linha, funcao, variavel, origem}]}
+//   --modo=comparacoes: `==`/`!=`/switch entre literal (texto nao numerico, '' ou 0) e outra expressao (muda no PHP 8: 0 == 't')  {"arquivo", "comparacoes":[{linha, tipo, op, expressao, literal}]}
 //   --modo=leituras   : variaveis lidas por linha (para a cadeia por dependencia do backend Xdebug)  {"arquivo", "leituras":{"<linha>":[vars]}}
 // Nao executa nada, nao instrumenta nada: por isso nao ha cache nem "reinstrumentar".
 require __DIR__ . '/autoload.php';
@@ -22,11 +23,19 @@ const SUMIDOUROS = ['pg_num_rows', 'pg_numrows', 'pg_fetch_assoc', 'pg_fetch_arr
     'db_fieldsmemory', 'fputs', 'fwrite', 'fclose', 'fgets', 'feof', 'readdir', 'closedir'];
 // Funcoes cujo argumento CONTA como checagem do valor (`is_resource($rs)`, `isset($rs)`...).
 const CHECAGENS = ['is_resource', 'is_bool', 'is_object', 'is_null', 'is_array', 'isset', 'empty', 'pg_last_error', 'is_a'];
+// Funcoes que devolvem inteiro/numero.
+const INTEIROS = ['count', 'sizeof', 'strlen', 'intval', 'floatval', 'pg_num_rows', 'pg_numrows', 'pg_affected_rows', 'pg_num_fields', 'array_sum',
+    'round', 'floor', 'ceil', 'abs', 'mktime', 'time', 'strtotime'];
+// Funcoes que sempre devolvem string: comparar o resultado com um literal nao muda de comportamento no PHP 8.
+const STRINGS = ['trim', 'ltrim', 'rtrim', 'strtolower', 'strtoupper', 'ucfirst', 'ucwords', 'substr', 'str_replace', 'str_pad', 'implode',
+    'sprintf', 'date', 'basename', 'dirname', 'pg_result', 'pg_fetch_result', 'pg_field_name', 'strval', 'json_encode', 'nl2br',
+    'htmlspecialchars', 'addslashes', 'md5', 'urlencode', 'utf8_decode', 'utf8_encode', 'number_format', 'db_formatar'];
 
 final class Analise extends NodeVisitorAbstract
 {
     public array $candidatos = [];
     public array $leituras = [];
+    public array $comparacoes = [];
     /** @var array<int,array{origem:array,guardada:array}> */
     private array $escopos = [];
     /** @var Node[] */
@@ -154,6 +163,16 @@ final class Analise extends NodeVisitorAbstract
                     }
                 }
             }
+        } elseif ($this->modo === 'comparacoes') {
+            if ($n instanceof Expr\BinaryOp\Equal || $n instanceof Expr\BinaryOp\NotEqual) {
+                $this->comparacao($n->left, $n->right, $n->getStartLine(), $n instanceof Expr\BinaryOp\Equal ? '==' : '!=');
+            } elseif ($n instanceof Stmt\Switch_) {
+                foreach ($n->cases as $c) {
+                    if ($c->cond !== null) {
+                        $this->comparacao($n->cond, $c->cond, $c->getStartLine(), 'switch');
+                    }
+                }
+            }
         } else {
             if ($n instanceof Expr\FuncCall || $n instanceof Expr\MethodCall || $n instanceof Expr\StaticCall || $n instanceof Expr\New_) {
                 $this->leCall($n);
@@ -164,6 +183,75 @@ final class Analise extends NodeVisitorAbstract
             }
         }
         return null;
+    }
+
+    /**
+     * `==`/`!=`/`switch` entre um LITERAL e outra expressao. O PHP 8 mudou o resultado quando um lado e inteiro (ou vazio/null) e o outro uma
+     * string nao numerica: `0 == 't'` era true no 7.4 e e false no 8.x (e `0 == ''` idem). Nao ha aviso nem excecao: so a resposta muda.
+     * Tipos: texto (literal nao numerico), vazio (''), zero (0). Nao aponta quando o outro lado e sabidamente string.
+     */
+    private function comparacao(Node $a, Node $b, int $linha, string $op): void
+    {
+        foreach ([[$a, $b], [$b, $a]] as [$lit, $outro]) {
+            $tipo = null;
+            if ($lit instanceof Node\Scalar\String_) {
+                $tipo = $lit->value === '' ? 'vazio' : (is_numeric($lit->value) ? null : 'texto');
+            } elseif ($lit instanceof Node\Scalar\LNumber && $lit->value === 0) {
+                $tipo = 'zero';
+            }
+            if ($tipo !== null && !$this->eLiteral($outro) && !$this->eSabidamenteString($outro)) {
+                // Evidencia de inteiro so agrava `texto`/`vazio` ($k = 0; $k == 't'). Contra o literal 0 ela e inocua ($k = 0; $k == 0).
+                $inteiro = $tipo !== 'zero' && ($this->eInteiro($outro) || ($outro instanceof Expr\Variable && is_string($outro->name)
+                    && isset($this->escopo()['origem'][$outro->name])));
+                $this->comparacoes[] = ['linha' => $linha, 'tipo' => $tipo, 'op' => $op, 'evidencia' => $inteiro ? 'inteiro' : '',
+                                        'expressao' => $this->imprime($outro), 'literal' => $this->imprime($lit)];
+                return;
+            }
+        }
+    }
+
+    /** Expressao que sabidamente produz inteiro/numero: literal, cast, aritmetica, count()/strlen()/pg_num_rows()... */
+    private function eInteiro(Node $n): bool
+    {
+        if ($n instanceof Node\Scalar\LNumber || $n instanceof Node\Scalar\DNumber || $n instanceof Expr\Cast\Int_ || $n instanceof Expr\Cast\Double) {
+            return true;
+        }
+        if ($n instanceof Expr\UnaryMinus || $n instanceof Expr\UnaryPlus) {
+            return $this->eInteiro($n->expr);
+        }
+        if ($n instanceof Expr\BinaryOp\Plus || $n instanceof Expr\BinaryOp\Minus || $n instanceof Expr\BinaryOp\Mul || $n instanceof Expr\BinaryOp\Mod) {
+            return true;
+        }
+        return $n instanceof Expr\FuncCall && in_array($this->nome($n), INTEIROS, true);
+    }
+
+    private function eLiteral(Node $n): bool
+    {
+        return $n instanceof Node\Scalar || $n instanceof Expr\ConstFetch || $n instanceof Expr\ClassConstFetch
+            || ($n instanceof Expr\Array_ && !$n->items);
+    }
+
+    private function eSabidamenteString(Node $n): bool
+    {
+        if ($n instanceof Expr\BinaryOp\Concat || $n instanceof Expr\Cast\String_) {
+            return true;
+        }
+        if ($n instanceof Expr\FuncCall) {
+            return in_array($this->nome($n), STRINGS, true);
+        }
+        if ($n instanceof Expr\ArrayDimFetch && $n->var instanceof Expr\Variable && is_string($n->var->name)) {
+            return in_array($n->var->name, ['_GET', '_POST', '_REQUEST', '_COOKIE', '_SERVER', 'HTTP_GET_VARS', 'HTTP_POST_VARS',
+                'HTTP_SERVER_VARS', 'HTTP_COOKIE_VARS'], true);
+        }
+        return false;
+    }
+
+    private function imprime(Node $n): string
+    {
+        static $p = null;
+        $p ??= new \PhpParser\PrettyPrinter\Standard();
+        $s = str_replace("\n", ' ', $p->prettyPrintExpr($n));
+        return strlen($s) > 80 ? substr($s, 0, 77) . '...' : $s;
     }
 
     /** A variavel (topo da pilha) e ALVO de uma atribuicao: `$x = ...` ou desestruturacao `list($a, $b) = ...` / `[$a, $b] = ...`. */
@@ -216,6 +304,13 @@ final class Analise extends NodeVisitorAbstract
         if ($n instanceof Stmt\Function_ || $n instanceof Stmt\ClassMethod || $n instanceof Expr\Closure || $n instanceof Expr\ArrowFunction) {
             array_pop($this->escopos);
         }
+        if ($this->modo === 'comparacoes' && $n instanceof Expr\Assign && $n->var instanceof Expr\Variable && is_string($n->var->name)) {
+            if ($this->eInteiro($n->expr)) {
+                $this->marca($n->var->name, 'origem', $n->getStartLine());
+            } else {
+                unset($this->escopos[count($this->escopos) - 1]['origem'][$n->var->name]);
+            }
+        }
         if ($this->modo === 'candidatos' && $n instanceof Expr\Assign && $n->var instanceof Expr\Variable && is_string($n->var->name)) {
             $v = $n->var->name;
             $this->pilha[] = $n;   // a pilha ainda deve conter o proprio Assign para dentroDeCondicao()
@@ -255,6 +350,10 @@ while (($arq = fgets(STDIN)) !== false) {
     }
     if ($modo === 'candidatos' && $a->candidatos) {
         echo json_encode(['arquivo' => $arq, 'candidatos' => $a->candidatos]) . "\n";
+    } elseif ($modo === 'comparacoes') {
+        if ($a->comparacoes) {
+            echo json_encode(['arquivo' => $arq, 'comparacoes' => $a->comparacoes]) . "\n";
+        }
     } elseif ($modo === 'leituras') {
         $l = [];
         foreach ($a->leituras as $linha => $vars) {

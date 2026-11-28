@@ -78,3 +78,5 @@ No teste com as 179 telas DIVERGE da base85b o B apontou **a mesma linha causal 
   nao dispara; fica registrado como risco latente em `src/V3/Error/Handler/Error.php:20`.
 - A tela `pre1_leis001.php` confere o modo (0754) dos arquivos de `bin/`: a copia instrumentada precisa preservar modo e nao ter
   arquivos a mais nos diretorios. O portao de equivalencia achou isso.
+- **Fase C (analise estatica):** `python -m regressao.rastro estatica [--modo candidatos|comparacoes]` le o codigo sem executar nada. `candidatos` = usos de resultado de consulta sem checagem (`false` vira TypeError no 8.x); `comparacoes` = `==`/`!=`/switch com literal (`0 == 't'` mudou no 8.x). Resultados em `baseline/rastro-estatica-*.md` e `baseline/rastro-comparacoes-*.md`.
+- O backend Xdebug pode apontar como causa uma chamada interna que aparece so num dos traces (`substr` em `libs/db_stdlib.php:818` no caso `ate1_tarefa004.php`); nas telas sem excecao confira a linha antes de agir.

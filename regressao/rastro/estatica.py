@@ -46,6 +46,17 @@ def candidatos(arquivos: list[str], container: str | None = None) -> dict[str, l
     return {r["arquivo"]: r["candidatos"] for p in partes for r in p}
 
 
+def comparacoes(arquivos: list[str], container: str | None = None) -> dict[str, list[dict]]:
+    """{arquivo: [{linha, tipo, op, expressao, literal}]}: //switch entre literal (texto, '' ou 0) e outra expressao.
+    O PHP 8 mudou o resultado quando um lado e inteiro e o outro e texto nao numerico (): nao ha aviso nem excecao."""
+    container = container or containers_do_ambiente().php_novo
+    _copia(container)
+    lotes = [arquivos[i:i + LOTE] for i in range(0, len(arquivos), LOTE)]
+    with ThreadPoolExecutor(max_workers=PARALELISMO) as pool:
+        partes = list(pool.map(lambda l: _roda(container, "comparacoes", l), lotes))
+    return {r["arquivo"]: r["comparacoes"] for p in partes for r in p}
+
+
 def leitor_de_linhas(container: str | None = None):
     """`le_linha(arquivo, linha) -> [variaveis lidas]`. Analisa o arquivo sob demanda (uma vez) e guarda em cache."""
     container = container or containers_do_ambiente().php_novo

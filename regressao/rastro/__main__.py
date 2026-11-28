@@ -112,7 +112,9 @@ def main(argv: list[str] | None = None) -> int:
     i = sub.add_parser("instrumenta"); i.add_argument("--forcar", action="store_true")
     e = sub.add_parser("equivalencia"); e.add_argument("--amostra", type=int, default=200)
     s = sub.add_parser("estatica", help="fase C: lista, so lendo o codigo, os usos de resultado de consulta sem checagem")
-    s.add_argument("--saida", type=Path, default=Path("candidatos-estaticos.tsv"))
+    s.add_argument("--saida", type=Path, default=None)
+    s.add_argument("--modo", choices=("candidatos", "comparacoes"), default="candidatos",
+                   help="candidatos = resultado de consulta sem checagem; comparacoes = == / != / switch com literal (0 == 't' mudou no PHP 8)")
     r = sub.add_parser("rastreia")
     r.add_argument("telas", nargs="*"); r.add_argument("--saida", type=Path, default=SAIDA_PADRAO)
     r.add_argument("--de-rodada", type=Path); r.add_argument("--area")
@@ -136,12 +138,21 @@ def main(argv: list[str] | None = None) -> int:
     if a.cmd == "estatica":
         from regressao.php.arvore import lista_arvore
         from regressao.rastro import estatica
-        achados = estatica.candidatos(lista_arvore(frozenset(), T.DIR_TELAS))
-        linhas = ["arquivo\tlinha\tfuncao\tvariavel\torigem"]
-        linhas += [f"{arq}\t{c['linha']}\t{c['funcao']}\t{c['variavel']}\t{c['origem']}"
-                   for arq, cs in sorted(achados.items()) for c in sorted(cs, key=lambda c: c["linha"])]
-        a.saida.write_text("\n".join(linhas) + "\n", encoding="utf-8")
-        print(f"{len(linhas) - 1} candidatos em {len(achados)} arquivos -> {a.saida}")
+        arquivos = lista_arvore(frozenset(), T.DIR_TELAS)
+        if a.modo == "comparacoes":
+            achados = estatica.comparacoes(arquivos)
+            saida = a.saida or Path("comparacoes-estaticas.tsv")
+            linhas = ["arquivo\tlinha\ttipo\tevidencia\top\texpressao\tliteral"]
+            linhas += [f"{arq}\t{c['linha']}\t{c['tipo']}\t{c['evidencia']}\t{c['op']}\t{c['expressao']}\t{c['literal']}"
+                       for arq, cs in sorted(achados.items()) for c in sorted(cs, key=lambda c: c["linha"])]
+        else:
+            achados = estatica.candidatos(arquivos)
+            saida = a.saida or Path("candidatos-estaticos.tsv")
+            linhas = ["arquivo\tlinha\tfuncao\tvariavel\torigem"]
+            linhas += [f"{arq}\t{c['linha']}\t{c['funcao']}\t{c['variavel']}\t{c['origem']}"
+                       for arq, cs in sorted(achados.items()) for c in sorted(cs, key=lambda c: c["linha"])]
+        saida.write_text("\n".join(linhas) + "\n", encoding="utf-8")
+        print(f"{len(linhas) - 1} {a.modo} em {len(achados)} arquivos -> {saida}")
         return 0
     telas = list(a.telas) + (telas_divergentes(a.de_rodada, a.area) if a.de_rodada else [])
     if not telas:

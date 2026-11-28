@@ -41,6 +41,12 @@ Em todos o 7.4 emite so um **aviso** e o 8.5 **lanca excecao** na mesma linha (`
 2. `fpdf151/pdf.php:185` `rsMenuAcess` = bool: false
 
 
+## `ate1_tarefa004.php`
+
+**Linha causal (confirmada a mao):** `forms/db_frmtarefa.php:976` e `:992` - `$aut=='t'?"t":"0"` com `$aut = 0;` (linhas 65 e 151). `0 == 't'` e `true` no 7.4 e `false` no 8.5, entao a resposta traz `aut=t` no 7.4 e `aut=0` no 8.5. Nao ha aviso nem excecao.
+
+**O rastreador apontou outra linha:** o backend Xdebug escolheu `libs/db_stdlib.php:818` (`substr` so no 7.4). Sondei a linha ao vivo nos dois contêineres e `$HTTP_SERVER_VARS`/`$DB_URL_ABS` saem identicos: e um artefato do trace (uma chamada interna que aparece num trace e no outro nao), nao a causa. Este e o caso das telas sem excecao, em que a linha causal tem confianca baixa. O detector de comparacao frouxa (`rastro-comparacoes-2026-11-27.md`) aponta a linha certa.
+
 ## Como ler
 
 - **Linha causal**: o 7.4 so avisa e o 8.5 lanca excecao. A correcao e **neste arquivo:linha** (proteger o valor antes de usa-lo).
