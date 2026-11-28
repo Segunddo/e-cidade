@@ -12,6 +12,37 @@ if ($raiz === '' || $saida === '') {
     exit(2);
 }
 $feitos = 0;
+
+/** O diretorio so contem links simbolicos (em qualquer nivel)? Nunca apagamos o que nao for link. */
+function soTemLinks(string $dir): bool
+{
+    foreach (scandir($dir) as $n) {
+        if ($n === '.' || $n === '..') {
+            continue;
+        }
+        $p = "$dir/$n";
+        if (is_link($p)) {
+            continue;
+        }
+        if (!is_dir($p) || !soTemLinks($p)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+function apagaLinks(string $dir): void
+{
+    foreach (scandir($dir) as $n) {
+        if ($n === '.' || $n === '..') {
+            continue;
+        }
+        $p = "$dir/$n";
+        is_link($p) ? @unlink($p) : apagaLinks($p);
+    }
+    @rmdir($dir);
+}
+
 while (($l = fgets(STDIN)) !== false) {
     $l = rtrim($l, "\r\n");
     if ($l === '') {
@@ -21,6 +52,9 @@ while (($l = fgets(STDIN)) !== false) {
     $rel = substr($l, 1);
     $dest = "$saida/$rel";
     if ($op === '+') {
+        if (is_dir($dest) && !is_link($dest) && soTemLinks($dest)) {
+            apagaLinks($dest);   // diretorio real so de links (herdado de uma versao anterior) cede lugar ao link do diretorio inteiro
+        }
         if (is_link($dest) || file_exists($dest)) {
             continue;
         }

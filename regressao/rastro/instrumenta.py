@@ -32,7 +32,7 @@ DESTINO_SCRIPTS = "/tmp/rastro/instr"
 LOTE = 200
 PARALELISMO = 8
 TIMEOUT = 3600
-LINKS_DE_TOPO = ("vendor", "tmp")      # diretorios inteiros que viram um unico link
+LINKS_DE_TOPO = ("vendor", "tmp", "extension/log")      # diretorios inteiros que viram um unico link (extension/log: a aplicacao cria arquivos nele em execucao)
 ARQUIVOS_DO_INSTRUMENTADOR = ("instrumentador.php", "sondas.php", "autoload.php")
 
 
@@ -115,8 +115,7 @@ def _nao_instrumentados(raiz: Path, saida_rel: str, php_instrumentados: set[str]
     achados = []
     for pasta, subs, arquivos in os.walk(raiz):
         rel = Path(pasta).relative_to(raiz)
-        if rel == Path("."):
-            subs[:] = [s for s in subs if s not in LINKS_DE_TOPO and s != ".git"]
+        subs[:] = [s for s in subs if (rel / s).as_posix() not in LINKS_DE_TOPO and (s != ".git" or rel == Path("."))]
         if rel.as_posix().startswith(saida_rel):
             subs[:] = []
             continue

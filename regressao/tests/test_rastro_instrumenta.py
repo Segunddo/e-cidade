@@ -124,6 +124,17 @@ def test_links_para_o_que_nao_e_instrumentado_so_na_primeira_vez(ctx):
     assert ctx["falso"].links == []
 
 
+def test_diretorio_de_log_da_aplicacao_e_link_inteiro_e_nao_arquivo_a_arquivo(ctx):
+    # a aplicacao cria `extension/log/error.log` depois da instrumentacao: com links por arquivo ele cairia num diretorio sem permissao
+    p = ctx["raiz"] / "extension" / "log" / ".gitignore"
+    p.parent.mkdir(parents=True)
+    p.write_text("*", encoding="utf-8")
+    ctx["roda"]()
+    links = ctx["falso"].links
+    assert "+extension/log" in links
+    assert not any(l.startswith("+extension/log/") for l in links)
+
+
 def test_falha_de_lint_que_ja_existe_no_original_nao_e_defeito_nosso(ctx, monkeypatch):
     def lint(c, arqs):
         return {a: "erro" for a in arqs if a.endswith("a.php") or a.endswith("b.php")}   # instrumentados E originais de a e b

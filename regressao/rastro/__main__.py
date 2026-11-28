@@ -16,6 +16,7 @@ from regressao.php import telas as T
 from regressao.rastro import equivalencia, executor, servidor
 from regressao.rastro.classifica import Resultado, classifica
 from regressao.rastro.evento import le_rastro
+from regressao.rastro.raiz import raiz_montada
 from regressao.rastro.relatorio import escreve_relatorio
 
 SAIDA_PADRAO = Path("rastro-saida")
@@ -124,7 +125,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if a.cmd == "instrumenta":
         from regressao.rastro.instrumenta import instrumenta_arvore
-        raiz = T.DIR_TELAS
+        raiz = raiz_montada()
         res = instrumenta_arvore(raiz, raiz / "tmp" / "ecidade-rastro", forcar=a.forcar)
         print(res)
         c = containers_do_ambiente()
@@ -138,7 +139,7 @@ def main(argv: list[str] | None = None) -> int:
     if a.cmd == "estatica":
         from regressao.php.arvore import lista_arvore
         from regressao.rastro import estatica
-        arquivos = lista_arvore(frozenset(), T.DIR_TELAS)
+        arquivos = lista_arvore(frozenset(), raiz_montada())
         if a.modo == "comparacoes":
             achados = estatica.comparacoes(arquivos)
             saida = a.saida or Path("comparacoes-estaticas.tsv")
