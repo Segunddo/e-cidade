@@ -55,7 +55,7 @@ $result = $clregencia->sql_record($clregencia->sql_query("","*","ed232_c_descr",
   <td align="center" valign="top">
    <br>
    <?php if(!isset($pesquisa_chave)){?>
-    <b>Disciplinas da Turma <?=pg_result($result,0,'ed57_c_descr')?> para marcar horários:</b>
+    <b>Disciplinas da Turma <?=($result ? pg_result($result,0,'ed57_c_descr') : null)?> para marcar horários:</b>
     <table border="1" cellspacing="1" cellpading="0">
      <tr>
       <td colspan="7">

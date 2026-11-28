@@ -90,7 +90,7 @@ $clrotulo->label("s115_c_cartaosus");
             $num = pg_num_rows($sql_result);
             $conta = "";
             while ($row = pg_fetch_array($sql_result)) {
-                $conta = $conta + 1;
+                $conta = (int)$conta + 1;
                 $cod_micro = $row["sd34_i_codigo"];
                 echo "new Array(\n";
                 $sub_sql = "SELECT sd35_i_codigo,sd33_v_descricao
@@ -106,7 +106,7 @@ $clrotulo->label("s115_c_cartaosus");
                     while ($rowx = pg_fetch_array($sub_result)) {
                         $codigo_fam = $rowx["sd35_i_codigo"];
                         $nome_fam = $rowx["sd33_v_descricao"];
-                        $conta_sub = $conta_sub + 1;
+                        $conta_sub = (int)$conta_sub + 1;
                         if ($conta_sub == $num_sub) {
                             echo "new Array(\"$nome_fam\", $codigo_fam)\n";
                             $conta_sub = "";

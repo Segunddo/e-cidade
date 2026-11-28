@@ -104,7 +104,7 @@ function js_atualiza(codigo,nome){
 
 $result = $cldb_usuclientes->sql_record($cldb_usuclientes->sql_query(null,"at10_usuario,at10_login,at10_nome","at10_nome"," at10_codcli = $cliente "));
 echo "<table>";
-for($i=0;$i<pg_numrows($result);$i+=2){
+for($i=0;$i<($result ? pg_numrows($result) : null);$i+=2){
   db_fieldsmemory($result,$i);
 
   $res = $clclientesmodulosprocusu->sql_record($clclientesmodulosprocusu->sql_query_file(null,"*",null," at76_seqproc = $at76_sequen and at76_usuario = $at10_usuario"));

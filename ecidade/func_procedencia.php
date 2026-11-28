@@ -214,7 +214,7 @@ $sSqlBaseProcedencias .= "   arretipo on arretipo.k00_tipo = procedarretipo.v06_
 
           $result = db_query($sSql);
 
-          if(is_resource($result) && pg_num_rows($result) > 0) {
+          if($result !== false && pg_num_rows($result) > 0) {
 
             db_fieldsmemory($result,0);
             echo "<script>".$funcao_js."($sequencial,'{$descricao}','{$db_tipo_procedencia}',false);</script>";

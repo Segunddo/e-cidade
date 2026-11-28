@@ -37,7 +37,7 @@ db_postmemory($HTTP_POST_VARS);
 $oSource = $oGet = db_utils::postMemory($_GET);
 $oPost = db_utils::postMemory($_POST);
 
-$campos = isset($oGet->campos) ? implode(explode('|', $oGet->campos), ', ') : 'escola.cboocupacao.*';
+$campos = isset($oGet->campos) ? implode(', ', explode('|', $oGet->campos)) : 'escola.cboocupacao.*';
 $funcao_js = isset($oGet->funcao_js) ? $oGet->funcao_js : '';
 
 if (get_object_vars($oPost)) {

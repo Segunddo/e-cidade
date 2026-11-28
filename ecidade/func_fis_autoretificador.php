@@ -107,7 +107,7 @@ $clrotulo->label("j01_matric");
         $loggedUser = " select * from db_usuarios where db_usuarios.id_usuario in (select id_usuario from fiscalizacao.fis_cadgestorfiscal) ";
         $loggedUser .= " and db_usuarios.id_usuario = ".db_getsession('DB_id_usuario');
         $resultUser = pg_query($loggedUser);
-        $rowsUser = pg_num_rows($resultUser);
+        $rowsUser = ($resultUser ? pg_num_rows($resultUser) : null);
         $dataAtual = date('Y-m-d');
 
         // Se o usuário logado for gestor roda as queries.

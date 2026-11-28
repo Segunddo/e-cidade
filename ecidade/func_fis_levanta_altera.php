@@ -109,10 +109,10 @@ $clrotulo->label("z01_nome");
       $userSql = "select * from db_usuarios where db_usuarios.id_usuario in (select * from fiscalizacao.fis_cadgestorfiscal) and db_usuarios.id_usuario = ".db_getsession('DB_id_usuario');
 
       $resultUser = pg_query($userSql);
-      $linhasUser = pg_num_rows($resultUser);
+      $linhasUser = ($resultUser ? pg_num_rows($resultUser) : null);
        $sGestor  = 'select * from fiscalizacao.fis_cadgestorfiscal where id_usuario = '.db_getsession('DB_id_usuario');
   $rsGestor = pg_query($sGestor);
-  $iGestor  = pg_num_rows($rsGestor);
+  $iGestor  = ($rsGestor ? pg_num_rows($rsGestor) : null);
   $where2 = "";   
  
         $where2 = '  where ' ;

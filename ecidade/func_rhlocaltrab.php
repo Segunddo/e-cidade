@@ -99,7 +99,7 @@ $clrhlocaltrab->rotulo->label("rh55_estrut");
           $sSql = "select count(*) as qtde_usuarios_permissao from db_usuariosrhlota";
           $rsSqlUsaFiltroLotacao = db_query($sSql);
 
-          if (is_resource($rsSqlUsaFiltroLotacao) && db_utils::fieldsMemory($rsSqlUsaFiltroLotacao, 0)->qtde_usuarios_permissao > 0) {
+          if ((is_resource($rsSqlUsaFiltroLotacao) || $rsSqlUsaFiltroLotacao instanceof \PgSql\Result) && db_utils::fieldsMemory($rsSqlUsaFiltroLotacao, 0)->qtde_usuarios_permissao > 0) {
 
              try {
 

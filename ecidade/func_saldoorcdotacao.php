@@ -178,7 +178,7 @@ if (!isset($nivel)) {
         date("Y-m-d", db_getsession("DB_datausu"))
     );
 }
-if (pg_num_rows($result) > 0) {
+if (($result ? pg_num_rows($result) : null) > 0) {
     db_fieldsmemory($result, 0, true);
 } else {
     $db_msg = "Dotação não cadastrada.";

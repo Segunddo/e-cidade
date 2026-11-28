@@ -139,8 +139,8 @@ function db_grid($sql,$data,$id_usuario,$vet_periodo_ini=null,$vet_periodo_fim=n
 
 
 	$result       = db_query($sql);
-	$NumRows      = pg_numrows($result);
-	$NumFields    = pg_numfields($result);
+	$NumRows      = ($result ? pg_numrows($result) : null);
+	$NumFields    = ($result ? pg_numfields($result) : null);
 
 	$vet_data     = explode("-",$data);
 
@@ -693,7 +693,7 @@ function retorna_data($ano, $mes, $dia, $executar) {
 			 $dia = retorna_diafinal($mes,$ano);
 	}
 
-	if(checkdate($mes,$dia,$ano)) {
+	if((!is_string($ano) || is_numeric($ano)) && (!is_string($mes) || is_numeric($mes)) && (!is_string($dia) || is_numeric($dia)) && checkdate($mes,$dia,$ano)) {
 	    $dia_semana = getdate(mktime(0,0,0,$mes,$dia,$ano));
 		while($dia_semana["wday"]==0||$dia_semana["wday"]==6) {
 			if($executar == "inc") {
@@ -775,7 +775,7 @@ function retorna_data($ano, $mes, $dia, $executar) {
 						 $dia = retorna_diafinal($mes,$ano);
 				}
 
-				if(checkdate($mes,$dia,$ano)) {
+				if((!is_string($ano) || is_numeric($ano)) && (!is_string($mes) || is_numeric($mes)) && (!is_string($dia) || is_numeric($dia)) && checkdate($mes,$dia,$ano)) {
 				    $dia_semana = getdate(mktime(0,0,0,$mes,$dia,$ano));
 					while($dia_semana["wday"]==0||$dia_semana["wday"]==6) {
 						if($executar == "inc") {

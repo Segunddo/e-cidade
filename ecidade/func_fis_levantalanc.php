@@ -109,7 +109,7 @@ $clrotulo->label("z01_nome");
       $userSql = "select * from db_usuarios where db_usuarios.id_usuario in (select * from fiscalizacao.fis_cadgestorfiscal) and db_usuarios.id_usuario = ".db_getsession("DB_id_usuario");
 
       $resultUser = pg_query($userSql);
-      $linhasUser = pg_num_rows($resultUser);
+      $linhasUser = ($resultUser ? pg_num_rows($resultUser) : null);
 
       if(!isset($pesquisa_chave)){
         if(isset($campos)==false){

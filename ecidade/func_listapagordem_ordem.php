@@ -75,11 +75,11 @@ $clrotulo->label("o56_elemento");
 	    db_fieldsmemory($result,$i);
                  
 	      $e="e53_vlrpag_$o56_codele";
-	      $$e = number_format($e53_vlrpag,"2",".","");		       
+	      ${$e} = number_format($e53_vlrpag,"2",".","");		       
 	      $e="e53_vlranu_$o56_codele";
-	      $$e = number_format($e53_vlranu,"2",".","");		       
+	      ${$e} = number_format($e53_vlranu,"2",".","");		       
 	      $e="e53_valor_$o56_codele";
-	      $$e = number_format($e53_valor,"2",".","");		       
+	      ${$e} = number_format($e53_valor,"2",".","");		       
 
 	    echo "<tr>	    
    	            <td align='center'><small>$o56_elemento </small></td>

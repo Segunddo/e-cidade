@@ -132,7 +132,7 @@ db_fieldsmemory($result,0);
     }
     db_lovrot($sql,15,"()","",$funcao_js);
     $res = db_query($sql);
-    if(pg_num_rows($res)==0){
+    if(($res ? pg_num_rows($res) : null)==0){
      echo "<b>
             <br>
             Todas salas ocupadas para o turno e calendário selecionados.<br><br>

@@ -42,7 +42,7 @@ $usuarioLogado = db_getsession("DB_id_usuario");
 $userSql = "select * from db_usuarios where db_usuarios.id_usuario in (select * from fiscalizacao.fis_cadgestorfiscal) and db_usuarios.id_usuario = {$usuarioLogado}";
 
 $resultUser = pg_query($userSql);
-$linhasUser = pg_num_rows($resultUser);
+$linhasUser = ($resultUser ? pg_num_rows($resultUser) : null);
 ?>
 <html>
 <head>
@@ -241,7 +241,7 @@ js_tabulacaoforms("form2","chave_y100_coddepto",true,1,"chave_y100_coddepto",tru
 <?php 
 
 $rs = pg_query($sql);
-$linhas = pg_num_rows($rs);
+$linhas = ($rs ? pg_num_rows($rs) : null);
 
 if($linhas==0){
 	if(isset($cgm) and $cgm!=""){

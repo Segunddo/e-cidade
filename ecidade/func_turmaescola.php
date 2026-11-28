@@ -55,7 +55,7 @@ $sql         .= "         AND  me32_i_escola = $codigo ";
 $sql         .= "   GROUP BY ed57_c_descr,ed57_i_codigo,ed15_c_nome,ed11_i_codigo ";
 $sql         .= "   ORDER BY ed57_c_descr ";
 $result       = db_query($sql);
-$linhas       = pg_num_rows($result);
+$linhas       = ($result ? pg_num_rows($result) : null);
 if ($linhas==0) {?>
   <table width='100%'>
    <tr>

@@ -297,7 +297,7 @@ function js_desmarcarTodos(){
 	             and o69_codseq = $o69_codseq 
               ";
 	$r = db_query($s);
-	if (pg_numrows($r)>0){
+	if (($r ? pg_numrows($r) : null)>0){
             db_fieldsmemory($r,0);
 	    echo  "<b>$o69_descr</b>";	
 	}  

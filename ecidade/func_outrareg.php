@@ -89,7 +89,7 @@ if(isset($disciplina_codigos)){
             ORDER BY ed59_i_ordenacao
            ";
    $result1 = db_query($sql1);
-   $linhas1 = pg_num_rows($result1);
+   $linhas1 = ($result1 ? pg_num_rows($result1) : null);
    ?>
    <select name="disciplinas[]" id="disciplinas" size="10" style="font-size:9px;width:330px;" multiple>
    <?php

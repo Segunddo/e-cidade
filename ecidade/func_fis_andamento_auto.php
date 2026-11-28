@@ -107,7 +107,7 @@ $clrotulo->label("j01_matric");
       	$dataAtual = date('Y-m-d');
         $sGestor  = 'select * from fiscalizacao.fis_cadgestorfiscal where id_usuario = '.db_getsession('DB_id_usuario');
 	$rsGestor = pg_query($sGestor);
-	$iGestor  = pg_num_rows($rsGestor);
+	$iGestor  = ($rsGestor ? pg_num_rows($rsGestor) : null);
 	$where2 = "";  	
 	if( $iGestor > 0 ){
 	    $where2 .= " AND CASE when y100_sequencial is not null then";
@@ -117,7 +117,7 @@ $clrotulo->label("j01_matric");
 
 	$sFiscal  = " SELECT * FROM fiscalizacao.fis_cadfiscais WHERE id_usuario =".db_getsession('DB_id_usuario');
 	$rsFiscal = pg_query($sFiscal);
-	$iFiscal  = pg_num_rows($rsFiscal);
+	$iFiscal  = ($rsFiscal ? pg_num_rows($rsFiscal) : null);
 
 	if ($iFiscal > 0 ){
 	   $fiscal = TRUE;

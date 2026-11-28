@@ -303,7 +303,7 @@ $sSqlNumpreNumbanco .= "                                   and arrejustreg.k28_r
 //die( $sSqlNumpreNumbanco );
 
 $rsNumpreNumbanco = db_query($sSqlNumpreNumbanco);
-$iNumRows         = pg_num_rows($rsNumpreNumbanco);
+$iNumRows         = ($rsNumpreNumbanco ? pg_num_rows($rsNumpreNumbanco) : null);
 if ($iNumRows > 0) {
 	$oNumpreNumBanco = db_utils::fieldsMemory($rsNumpreNumbanco,0);
 }

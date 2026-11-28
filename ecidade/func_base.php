@@ -141,7 +141,7 @@ $clbase->rotulo->label("ed31_c_descr");
 
       $rsBase = db_query( $sSqlBase );
 
-      if( !$rsBase && pg_num_rows($rsBase) > 0 ) {
+      if( !$rsBase && ($rsBase ? pg_num_rows($rsBase) : null) > 0 ) {
 
         db_fieldsmemory($rsBase, 0);
         echo "<script>".$funcao_js."('$ed31_c_descr','$ed218_c_nome',false);</script>";

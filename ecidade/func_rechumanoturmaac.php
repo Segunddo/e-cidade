@@ -89,7 +89,7 @@ $escola = db_getsession("DB_coddepto");
  $num = pg_num_rows($sql_result);
  $conta = "";
  while ($row=pg_fetch_array($sql_result)){
-  $conta = $conta+1;
+  $conta = (int)$conta+1;
   $cod_curso = $row["ed10_i_codigo"];
   echo "new Array(\n";
   $sub_sql = "SELECT DISTINCT ed12_i_codigo,ed232_c_descr
@@ -110,7 +110,7 @@ $escola = db_getsession("DB_coddepto");
    while ($rowx=pg_fetch_array($sub_result)){
     $codigo_base=$rowx["ed12_i_codigo"];
     $base_nome=$rowx["ed232_c_descr"];
-    $conta_sub=$conta_sub+1;
+    $conta_sub=(int)$conta_sub+1;
     if ($conta_sub==$num_sub){
      echo "new Array(\"$base_nome\", $codigo_base)\n";
      $conta_sub = "";

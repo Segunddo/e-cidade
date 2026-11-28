@@ -92,7 +92,7 @@ class calendario {
     return false;
   }
 
-  function cria($dia, $mes, $ano, $marca = 0, $s111_i_codigo, $fechar = false) {
+  function cria($dia, $mes, $ano, $marca = 0, $s111_i_codigo = null, $fechar = false) {
 
     $oDaoSauPrestadorHorarios = new cl_sau_prestadorhorarios();
     $oDaoAgendaExames         = new cl_sau_agendaexames();

@@ -125,7 +125,7 @@ db_input("at40_tarefalidologtarefa",10,@$at40_tarefalidologtarefa,true,'hidden',
 db_input("at40_tarefaurgente",10,@$at40_tarefaurgente,true,'hidden',2,"");
 db_input("item_proc",10,@$item_proc,true,'hidden',2,"");
 
-if (isset($at40_tarefaurgente) and $at40_tarefaurgente != 0) {
+if (isset($at40_tarefaurgente) and $at40_tarefaurgente !== "" and $at40_tarefaurgente != 0) {
   $result_tarefa = $cltarefa->sql_record($cltarefa->sql_query($at40_tarefaurgente,"at40_sequencial as at40_sequencial_urg, at40_responsavel as at40_responsavel_urg, at40_descr as at40_descr_urg, at40_diaini as at40_diaini_urg, at40_diafim as at40_diafim_urg, at40_previsao as at40_previsao_urg, at40_tipoprevisao as at40_tipoprevisao_urg, at40_horainidia as at40_horainidia_urg, at40_horafim as at40_horafim_urg, at40_progresso as at40_progresso_urg, at40_prioridade as at40_prioridade_urg, at40_obs as at40_obs_urg, at40_autorizada as at40_autorizada_urg, at40_tipo as at40_tipo_urg, at40_ativo as at40_ativo_urg"));
   db_fieldsmemory($result_tarefa, 0);
 
@@ -147,7 +147,7 @@ if (isset($at40_tarefaurgente) and $at40_tarefaurgente != 0) {
 
   global $at40_urgente_urg;
   $varurgente = "urgente_" . $at40_tarefaurgente;
-  if (isset($$varurgente)) {
+  if (isset(${$varurgente})) {
     $at40_urgente_urg = "1";
   } else {
     $at40_urgente_urg = "0";
@@ -162,7 +162,7 @@ if (isset($at40_tarefaurgente) and $at40_tarefaurgente != 0) {
 
 }
 
-if (isset($at40_tarefalidologtarefa) and $at40_tarefalidologtarefa != 0) {
+if (isset($at40_tarefalidologtarefa) and $at40_tarefalidologtarefa !== "" and $at40_tarefalidologtarefa != 0) {
 
   if ($at40_lido == "1") {
 
@@ -409,7 +409,7 @@ for ($situacao=0; $situacao < $cltarefacadsituacao->numrows; $situacao++) {
   if (isset($at40_situacao)) {
 
     if (gettype(strpos($at40_situacao, $at46_codigo)) == "integer") {
-      $$varnamesituacao = $at46_codigo;
+      ${$varnamesituacao} = $at46_codigo;
     }
 
   }
@@ -417,7 +417,7 @@ for ($situacao=0; $situacao < $cltarefacadsituacao->numrows; $situacao++) {
   $array_disable = array(3,5,6);
 
   echo "
-  <input type='checkbox' name='$varnamesituacao' id='$varnamesituacao' ".(!isset($primeira)?(!in_array($at46_codigo,$array_disable)?" checked ":""):(isset($$varnamesituacao)?"checked":"")).">
+  <input type='checkbox' name='$varnamesituacao' id='$varnamesituacao' ".(!isset($primeira)?(!in_array($at46_codigo,$array_disable)?" checked ":""):(isset(${$varnamesituacao})?"checked":"")).">
   $at46_descr";
 
 }

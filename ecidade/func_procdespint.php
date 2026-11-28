@@ -229,7 +229,7 @@ if ($reimprime == 1) {
 
                     if (!empty($oGet->sCampoRetorno)) {
                         $sCampoRetorno = $oGet->sCampoRetorno;
-                        $sCampoRetorno = $$sCampoRetorno;
+                        $sCampoRetorno = ${$sCampoRetorno};
                     }
 
                     echo "<script>" . $funcao_js . "('$sCampoRetorno' , '$p58_numcgm' , '$z01_nome',false);</script>";

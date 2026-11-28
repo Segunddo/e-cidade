@@ -102,7 +102,7 @@ $clturno->rotulo->label("ed15_c_nome");
     }
     db_lovrot($sql,15,"()","",$funcao_js);
     $resul = db_query($sql);
-    if(pg_num_rows($resul)==0){
+    if(($resul ? pg_num_rows($resul) : null)==0){
      echo "<b>Informe os turnos para o curso desta turma.<br>Cadastros / Cursos na Escola / Vincular curso / Aba Turnos</b>";
     }
    }else{

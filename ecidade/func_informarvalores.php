@@ -85,7 +85,7 @@ $clrotulo->label("e81_valor");
     $mostraquant = true;
     if(isset($ch) && trim($ch) != ""){
     	$arr_cheqsel =explode("-",$ch);
-    	$novaquant = $quantidade-count($arr_cheqsel);
+    	$novaquant = (is_string($quantidade) && !is_numeric($quantidade) ? (int)$quantidade : $quantidade)-count($arr_cheqsel);
   		// if($novaquant == 0 || $novaquant > 0){
 		    $mostraquant = false;
     		$arr_cheques = $arr_cheqsel;
@@ -101,7 +101,7 @@ $clrotulo->label("e81_valor");
   		}
   		*/
     }else{
- 	    $valor = trim(db_formatar(($total / $quantidade), 'p', '', 2));
+ 	    $valor = trim(db_formatar(((float)$quantidade == 0 && function_exists('fdiv') ? fdiv((float)$total, 0.0) : $total / $quantidade), 'p', '', 2));
       $valtt = 0;
     }
     if($mostraquant == true){
@@ -127,9 +127,9 @@ $clrotulo->label("e81_valor");
     	$db_opcao = 3;
       }
       $valorcheque  = "valche_".$i;
-      $$valorcheque = "0.00";
+      ${$valorcheque} = "0.00";
       if(isset($arr_cheques[$i])){
-        $$valorcheque = db_formatar($arr_cheques[$i],'p', '', 2);
+        ${$valorcheque} = db_formatar($arr_cheques[$i],'p', '', 2);
       }
       echo "
             <tr>
